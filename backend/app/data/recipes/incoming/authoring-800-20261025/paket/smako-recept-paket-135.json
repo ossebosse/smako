@@ -1,0 +1,1751 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-135",
+  "recipes": [
+    {
+      "base_id": "smako-swedish-breakfast-cold-cucumber-kefir-soup",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Kall gurk- och kefirsoppa med ostbröd – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "kall gurksoppa",
+      "primary": "gurka",
+      "method": "cold_assembly",
+      "side": "Ostbröd",
+      "flavor": [
+        "dill",
+        "citronjuice",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Mixer",
+        "Slickepott",
+        "Kniv",
+        "Skärbräda",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kall gurksoppa",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "kefir",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "ml",
+              "role": "primary",
+              "label": "Kefir, mängd som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ostbröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Kall gurksoppa: Skölj och ansa frukten eller grönsakerna och skär dem i bitar. Lägg gurka, kefir, dill, citronjuice och salt i mixerkannan. Mixa helt slätt och skrapa ner från kanterna så att hela mängden används.",
+          "uses": [
+            "gurka",
+            "kefir",
+            "dill",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Ostbröd: Skär och fördela ost på brödet.",
+          "uses": [
+            "bröd",
+            "ost"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ostbröd: Värm i uppvärmd ugn på 200 °C tills brödet är krispigt och fyllningen är genomvarm. Servera hela mängden fyllning tillsammans med brödet.",
+          "uses": [
+            "bröd",
+            "ost"
+          ],
+          "minutes": 8,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera kall gurksoppa och ostbröd tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "gurka",
+            "kefir",
+            "dill",
+            "citronjuice",
+            "salt",
+            "bröd",
+            "ost"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 10 minuter aktivt och 8 minuter huvudsakligen passiv väntan, cirka 18 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Gurka och syrad mjölk mixas till en kall drickbar soppa och serveras med separat varmt ostbröd. Granska skillnaden mellan soppa och yoghurtdipp; vattenhalt, mixad huvudgrönsak och måltidsstruktur ska ingå i bedömningen. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för kefir; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-cold-cucumber-kefir-soup",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Kall gurk- och kefirsoppa med ostbröd – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "kall gurksoppa",
+      "primary": "gurka",
+      "method": "cold_assembly",
+      "side": "Ostbröd, Rädisor och frön",
+      "flavor": [
+        "dill",
+        "citronjuice",
+        "salt",
+        "pumpafrön"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Mixer",
+        "Slickepott",
+        "Kniv",
+        "Skärbräda",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kall gurksoppa",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "kefir",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "ml",
+              "role": "primary",
+              "label": "Kefir, mängd som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ostbröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Rädisor och frön",
+          "ingredients": [
+            {
+              "name": "rädisa",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rädisa, rå ätlig vikt"
+            },
+            {
+              "name": "pumpafrön",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Pumpafrön, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Kall gurksoppa: Skölj och ansa frukten eller grönsakerna och skär dem i bitar. Lägg gurka, kefir, dill, citronjuice och salt i mixerkannan. Mixa helt slätt och skrapa ner från kanterna så att hela mängden används.",
+          "uses": [
+            "gurka",
+            "kefir",
+            "dill",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Ostbröd: Skär och fördela ost på brödet.",
+          "uses": [
+            "bröd",
+            "ost"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ostbröd: Värm i uppvärmd ugn på 200 °C tills brödet är krispigt och fyllningen är genomvarm. Servera hela mängden fyllning tillsammans med brödet.",
+          "uses": [
+            "bröd",
+            "ost"
+          ],
+          "minutes": 8,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Rädisor och frön: Skölj och ansa rädisa. Skär frukt och grönsaker i små bitar. Lägg upp rädisa och pumpafrön tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "rädisa",
+            "pumpafrön"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera kall gurksoppa, ostbröd och rädisor och frön tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "gurka",
+            "kefir",
+            "dill",
+            "citronjuice",
+            "salt",
+            "bröd",
+            "ost",
+            "rädisa",
+            "pumpafrön"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 14 minuter aktivt och 8 minuter huvudsakligen passiv väntan, cirka 22 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Gurka och syrad mjölk mixas till en kall drickbar soppa och serveras med separat varmt ostbröd. Granska skillnaden mellan soppa och yoghurtdipp; vattenhalt, mixad huvudgrönsak och måltidsstruktur ska ingå i bedömningen. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för kefir, pumpafrön och rädisa; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-cultured-rye-soda-loaf",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Filmjölkslimpa med frön och keso – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "filmjölkslimpa",
+      "primary": "grahamsmjöl",
+      "method": "bake",
+      "side": "Keso",
+      "flavor": [
+        "filmjölk",
+        "bikarbonat",
+        "solrosfrön",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Slev",
+        "Bakbord",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Plåt",
+        "Grytlappar",
+        "Liten brödform",
+        "Galler",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Liten filmjölkslimpa",
+          "ingredients": [
+            {
+              "name": "grahamsmjöl",
+              "form": "dry",
+              "quantity": 45,
+              "unit": "g",
+              "role": "primary",
+              "label": "Grahamsmjöl, torr vikt"
+            },
+            {
+              "name": "rågmjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Rågmjöl, torr vikt"
+            },
+            {
+              "name": "filmjölk",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Filmjölk, mängd som såld"
+            },
+            {
+              "name": "bikarbonat",
+              "form": "dry",
+              "quantity": 1.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Bikarbonat, torr vikt"
+            },
+            {
+              "name": "solrosfrön",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Solrosfrön, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Keso",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, mängd som såld utan extra avrinning"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Liten filmjölkslimpa: Blanda grahamsmjöl, rågmjöl, filmjölk, bikarbonat, solrosfrön och salt. Rör bara tills allt mjöl blivit fuktat. Massan ska vara mjuk och klibbig; undvik att knåda den som en jästdeg.",
+          "uses": [
+            "grahamsmjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "solrosfrön",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Liten filmjölkslimpa: Skeda den klibbiga smeten i en liten brödform med bakplåtspapper och jämna till med fuktad sked. Baka i uppvärmd ugn på 190 °C tills brödet är genomgräddat; låt svalna innan det skärs i skivor.",
+          "uses": [
+            "grahamsmjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "solrosfrön",
+            "salt"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Keso: Lägg upp keso tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera liten filmjölkslimpa och keso tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "grahamsmjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "solrosfrön",
+            "salt",
+            "keso"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 13 minuter aktivt och 35 minuter huvudsakligen passiv väntan, cirka 48 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Syrad mjölk och bikarbonat ger en kompakt råglimpa utan jästid; strukturen skiljer sig från jästa frallor. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bikarbonat, filmjölk, grahamsmjöl, rågmjöl och solrosfrön; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-cultured-rye-soda-loaf",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Filmjölkslimpa med frön och keso – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "filmjölkslimpa",
+      "primary": "grahamsmjöl",
+      "method": "bake",
+      "side": "Keso, Äpple och senap",
+      "flavor": [
+        "filmjölk",
+        "bikarbonat",
+        "solrosfrön",
+        "salt",
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Slev",
+        "Bakbord",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Plåt",
+        "Grytlappar",
+        "Liten brödform",
+        "Galler",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Liten filmjölkslimpa",
+          "ingredients": [
+            {
+              "name": "grahamsmjöl",
+              "form": "dry",
+              "quantity": 45,
+              "unit": "g",
+              "role": "primary",
+              "label": "Grahamsmjöl, torr vikt"
+            },
+            {
+              "name": "rågmjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Rågmjöl, torr vikt"
+            },
+            {
+              "name": "filmjölk",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Filmjölk, mängd som såld"
+            },
+            {
+              "name": "bikarbonat",
+              "form": "dry",
+              "quantity": 1.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Bikarbonat, torr vikt"
+            },
+            {
+              "name": "solrosfrön",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Solrosfrön, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Keso",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, mängd som såld utan extra avrinning"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Äpple och senap",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Liten filmjölkslimpa: Blanda grahamsmjöl, rågmjöl, filmjölk, bikarbonat, solrosfrön och salt. Rör bara tills allt mjöl blivit fuktat. Massan ska vara mjuk och klibbig; undvik att knåda den som en jästdeg.",
+          "uses": [
+            "grahamsmjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "solrosfrön",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Liten filmjölkslimpa: Skeda den klibbiga smeten i en liten brödform med bakplåtspapper och jämna till med fuktad sked. Baka i uppvärmd ugn på 190 °C tills brödet är genomgräddat; låt svalna innan det skärs i skivor.",
+          "uses": [
+            "grahamsmjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "solrosfrön",
+            "salt"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Keso: Lägg upp keso tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Äpple och senap: Skölj och ansa äpple. Skär frukt och grönsaker i små bitar. Lägg upp äpple och senap tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "äpple",
+            "senap"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera liten filmjölkslimpa, keso och äpple och senap tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "grahamsmjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "solrosfrön",
+            "salt",
+            "keso",
+            "äpple",
+            "senap"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 17 minuter aktivt och 35 minuter huvudsakligen passiv väntan, cirka 52 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Syrad mjölk och bikarbonat ger en kompakt råglimpa utan jästid; strukturen skiljer sig från jästa frallor. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bikarbonat, filmjölk, grahamsmjöl, rågmjöl och solrosfrön; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-egg-white-clouds-breakfast",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Äggmoln med ost och tomat – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "bakade äggskum",
+      "primary": "ägg",
+      "method": "oven",
+      "side": "Tomat och bröd",
+      "flavor": [
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Elvisp",
+        "Rivjärn",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bakade äggmoln",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomat och bröd",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Bakade äggmoln: Separera den uppvägda äggmängden i vita och gula. Vispa vitan fast med saltet. Riv osten och vänd försiktigt ner i vitan. Pensla bakplåtspapper med oljan.",
+          "uses": [
+            "ägg",
+            "salt",
+            "ost",
+            "rapsolja"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "För komponenten Bakade äggmoln: Klicka ut äggvitan i höga högar och gör en fördjupning. Fördela gulorna i mitten. Baka i uppvärmd ugn på 190 °C tills vitan fått färg och ägget är fast. Kontrollera minst 72 °C i den tjockaste delen.",
+          "uses": [
+            "ägg",
+            "ost"
+          ],
+          "minutes": 14,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Tomat och bröd: Skölj och ansa tomat. Skär frukt och grönsaker i små bitar. Lägg upp tomat och bröd tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "tomat",
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera bakade äggmoln och tomat och bröd tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "bröd"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 5 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 11 minuter aktivt och 14 minuter huvudsakligen passiv väntan, cirka 25 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Separat vispad äggvita ger en luftig bärande struktur kring gulan, till skillnad från blandad omelettsmet. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-egg-white-clouds-breakfast",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Äggmoln med ost och tomat – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "bakade äggskum",
+      "primary": "ägg",
+      "method": "oven",
+      "side": "Tomat och bröd, Örtkvarg",
+      "flavor": [
+        "salt",
+        "kvarg",
+        "gräslök",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Elvisp",
+        "Rivjärn",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Gaffel",
+        "Sked"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bakade äggmoln",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomat och bröd",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkvarg",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "gräslök",
+              "form": "raw_edible",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gräslök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Bakade äggmoln: Separera den uppvägda äggmängden i vita och gula. Vispa vitan fast med saltet. Riv osten och vänd försiktigt ner i vitan. Pensla bakplåtspapper med oljan.",
+          "uses": [
+            "ägg",
+            "salt",
+            "ost",
+            "rapsolja"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "För komponenten Bakade äggmoln: Klicka ut äggvitan i höga högar och gör en fördjupning. Fördela gulorna i mitten. Baka i uppvärmd ugn på 190 °C tills vitan fått färg och ägget är fast. Kontrollera minst 72 °C i den tjockaste delen.",
+          "uses": [
+            "ägg",
+            "ost"
+          ],
+          "minutes": 14,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Tomat och bröd: Skölj och ansa tomat. Skär frukt och grönsaker i små bitar. Lägg upp tomat och bröd tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "tomat",
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Örtkvarg: Finfördela fasta råvaror i komponenten och rör ihop kvarg, gräslök och citronjuice i en skål tills blandningen är jämn.",
+          "uses": [
+            "kvarg",
+            "gräslök",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera bakade äggmoln, tomat och bröd och örtkvarg tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "bröd",
+            "kvarg",
+            "gräslök",
+            "citronjuice"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 15 minuter aktivt och 14 minuter huvudsakligen passiv väntan, cirka 29 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Separat vispad äggvita ger en luftig bärande struktur kring gulan, till skillnad från blandad omelettsmet. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för gräslök; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-fruit-cottage-dumplings",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Kokta kesoknyten med bär – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "söta fyllda degknyten",
+      "primary": "vetemjöl",
+      "method": "pot",
+      "side": "Bär",
+      "flavor": [
+        "strösocker",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Kavel",
+        "Bakplåtspapper",
+        "Kastrull",
+        "Hålslev",
+        "Termometer",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kokta kesoknyten",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 65,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 35,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, mängd som såld utan extra avrinning"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bär",
+          "ingredients": [
+            {
+              "name": "jordgubbar",
+              "form": "raw_edible",
+              "quantity": 110,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Jordgubbar, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Kokta kesoknyten: Arbeta mjölet med hälften av ägget, saltet och 25 ml vatten till en smidig fast deg. Låt vila täckt. Blanda keson med resten av ägget och sockret.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "salt",
+            "keso",
+            "strösocker"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Kokta kesoknyten: Kavla degen tunt mellan bakplåtspapper. Skär rundlar, lägg fyllning på varje och vik ihop till halvmånar. Tryck kanterna ordentligt täta.",
+          "uses": [
+            "vetemjöl",
+            "keso"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Kokta kesoknyten: Sjud i 1500 ml vatten tills degen är mör och fyllningen genomvarm. Kontrollera minst 72 °C i en öppnad knytesfyllning. Lyft med hålslev.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "keso"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Bär: Skölj och ansa jordgubbar. Skär frukt och grönsaker i små bitar. Lägg upp jordgubbar tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "jordgubbar"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera kokta kesoknyten och bär tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "keso",
+            "strösocker",
+            "salt",
+            "jordgubbar"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 5 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 29 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 29 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Tunn deg fylls med söt kesomassa, försluts och sjuds till mjuka knyten. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för jordgubbar; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-fruit-cottage-dumplings",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Kokta kesoknyten med bär – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "söta fyllda degknyten",
+      "primary": "vetemjöl",
+      "method": "pot",
+      "side": "Bär, Vaniljkvarg, Mandel",
+      "flavor": [
+        "strösocker",
+        "salt",
+        "kvarg",
+        "vaniljpulver",
+        "mandel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Kavel",
+        "Bakplåtspapper",
+        "Kastrull",
+        "Hålslev",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Gaffel",
+        "Sked"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kokta kesoknyten",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 65,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 35,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, mängd som såld utan extra avrinning"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bär",
+          "ingredients": [
+            {
+              "name": "jordgubbar",
+              "form": "raw_edible",
+              "quantity": 110,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Jordgubbar, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Vaniljkvarg",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "vaniljpulver",
+              "form": "dry",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vaniljpulver, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Mandel",
+          "ingredients": [
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mandel, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Kokta kesoknyten: Arbeta mjölet med hälften av ägget, saltet och 25 ml vatten till en smidig fast deg. Låt vila täckt. Blanda keson med resten av ägget och sockret.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "salt",
+            "keso",
+            "strösocker"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Kokta kesoknyten: Kavla degen tunt mellan bakplåtspapper. Skär rundlar, lägg fyllning på varje och vik ihop till halvmånar. Tryck kanterna ordentligt täta.",
+          "uses": [
+            "vetemjöl",
+            "keso"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Kokta kesoknyten: Sjud i 1500 ml vatten tills degen är mör och fyllningen genomvarm. Kontrollera minst 72 °C i en öppnad knytesfyllning. Lyft med hålslev.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "keso"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Bär: Skölj och ansa jordgubbar. Skär frukt och grönsaker i små bitar. Lägg upp jordgubbar tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "jordgubbar"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Vaniljkvarg: Finfördela fasta råvaror i komponenten och rör ihop kvarg och vaniljpulver i en skål tills blandningen är jämn.",
+          "uses": [
+            "kvarg",
+            "vaniljpulver"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Mandel: Lägg upp mandel tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "mandel"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera kokta kesoknyten, bär, vaniljkvarg och mandel tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "keso",
+            "strösocker",
+            "salt",
+            "jordgubbar",
+            "kvarg",
+            "vaniljpulver",
+            "mandel"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 37 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 37 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Tunn deg fylls med söt kesomassa, försluts och sjuds till mjuka knyten. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för jordgubbar, mandel och vaniljpulver; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-granola-breakfast-quark",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Ugnsrostad granola med kvarg och plommon – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "granola",
+      "primary": "havregryn",
+      "method": "oven",
+      "side": "Kvarg och plommon",
+      "flavor": [
+        "solrosfrön",
+        "honung",
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Skål",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Granola",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 45,
+              "unit": "g",
+              "role": "side",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "solrosfrön",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Solrosfrön, mängd som såld"
+            },
+            {
+              "name": "honung",
+              "form": "as_sold",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Honung, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kvarg och plommon",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "plommon",
+              "form": "raw_edible",
+              "quantity": 110,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Plommon, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Granola: Blanda havregryn och solrosfrön med honung, olja och kanel. Sprid tunt på bakplåtspapper.",
+          "uses": [
+            "havregryn",
+            "solrosfrön",
+            "honung",
+            "rapsolja",
+            "kanel"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Granola: Rosta i uppvärmd ugn på 160 °C tills blandningen är torr och gyllene. Rör om efter halva tiden. Låt svalna så att granolan blir krispig.",
+          "uses": [
+            "havregryn",
+            "solrosfrön"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Kvarg och plommon: Skölj och ansa plommon. Skär frukt och grönsaker i små bitar. Lägg upp kvarg och plommon tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "kvarg",
+            "plommon"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera granola och kvarg och plommon tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "havregryn",
+            "solrosfrön",
+            "honung",
+            "rapsolja",
+            "kanel",
+            "kvarg",
+            "plommon"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 7 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 9 minuter aktivt och 25 minuter huvudsakligen passiv väntan, cirka 34 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Havre och frön rostas torra till en lös krispig granola före servering med kvarg och frukt. Närliggande rostad havre i befintligt mellanmål kräver granskning; honungsbunden granola får inte automatiskt räknas ny på grund av portionsstorlek. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för honung, plommon och solrosfrön; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-granola-breakfast-quark",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Ugnsrostad granola med kvarg och plommon – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "granola",
+      "primary": "havregryn",
+      "method": "oven",
+      "side": "Kvarg och plommon, Valnötter och russin",
+      "flavor": [
+        "solrosfrön",
+        "honung",
+        "kanel",
+        "valnötter",
+        "russin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Skål",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Granola",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 45,
+              "unit": "g",
+              "role": "side",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "solrosfrön",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Solrosfrön, mängd som såld"
+            },
+            {
+              "name": "honung",
+              "form": "as_sold",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Honung, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kvarg och plommon",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "plommon",
+              "form": "raw_edible",
+              "quantity": 110,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Plommon, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Valnötter och russin",
+          "ingredients": [
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Valnötter, mängd som såld"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Russin, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Granola: Blanda havregryn och solrosfrön med honung, olja och kanel. Sprid tunt på bakplåtspapper.",
+          "uses": [
+            "havregryn",
+            "solrosfrön",
+            "honung",
+            "rapsolja",
+            "kanel"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Granola: Rosta i uppvärmd ugn på 160 °C tills blandningen är torr och gyllene. Rör om efter halva tiden. Låt svalna så att granolan blir krispig.",
+          "uses": [
+            "havregryn",
+            "solrosfrön"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Kvarg och plommon: Skölj och ansa plommon. Skär frukt och grönsaker i små bitar. Lägg upp kvarg och plommon tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "kvarg",
+            "plommon"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Valnötter och russin: Lägg upp valnötter och russin tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "valnötter",
+            "russin"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera granola, kvarg och plommon och valnötter och russin tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "havregryn",
+            "solrosfrön",
+            "honung",
+            "rapsolja",
+            "kanel",
+            "kvarg",
+            "plommon",
+            "valnötter",
+            "russin"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 13 minuter aktivt och 25 minuter huvudsakligen passiv väntan, cirka 38 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Havre och frön rostas torra till en lös krispig granola före servering med kvarg och frukt. Närliggande rostad havre i befintligt mellanmål kräver granskning; honungsbunden granola får inte automatiskt räknas ny på grund av portionsstorlek. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för honung, plommon, russin, solrosfrön och valnötter; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    }
+  ]
+}

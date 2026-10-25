@@ -1,0 +1,3659 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-111",
+  "recipes": [
+    {
+      "base_id": "smako-swedish-hasselback-bean-mushroom",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Hasselbackspotatis med svamp- och bönragout – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "hasselback",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bakad potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1200,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 225 °C. Skrubba potatisen. Skär täta skåror nästan hela vägen igenom, men behåll en sammanhängande botten. Vänd potatisen i potatiskomponentens olja och salt.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Baka cirka 60 minuter tills potatisen är helt mjuk i mitten. Mindre potatisar kan bli klara tidigare. Håll varmt i ugnen på låg temperatur medan fyllningen görs.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 60,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär champinjoner i små bitar.",
+          "uses": [
+            "champinjoner",
+            "timjan"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg champinjoner i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "champinjoner"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vänd ner bönor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "bönor"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera den skårade potatisen med den varma huvudfyllningen vid sidan.",
+          "uses": [
+            "potatis",
+            "bönor"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "bönor",
+            "champinjoner",
+            "timjan",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 34 minuter och huvudsakligen passiva moment till 60 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 94 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Tunt skårad hel potatis bakas med sammanhängande botten och serveras med tjock bönragout. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-hasselback-bean-mushroom",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Hasselbackspotatis med svamp- och bönragout – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "hasselback",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "havregrädde",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "ml",
+              "role": "vegetable",
+              "label": "Naturell matlagningsprodukt av havre, som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bakad potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1200,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 225 °C. Skrubba potatisen. Skär täta skåror nästan hela vägen igenom, men behåll en sammanhängande botten. Vänd potatisen i potatiskomponentens olja och salt.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Baka cirka 60 minuter tills potatisen är helt mjuk i mitten. Mindre potatisar kan bli klara tidigare. Håll varmt i ugnen på låg temperatur medan fyllningen görs.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 60,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär champinjoner i små bitar; skala och finhacka gul lök.",
+          "uses": [
+            "champinjoner",
+            "timjan",
+            "gul lök",
+            "havregrädde"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg champinjoner och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "champinjoner",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vänd ner bönor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner havregrädde från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Låt vätskan avdunsta så att fyllningen blir fast och går att lägga i en hög.",
+          "uses": [
+            "havregrädde",
+            "bönor"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "bönor"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera den skårade potatisen med den varma huvudfyllningen vid sidan.",
+          "uses": [
+            "potatis",
+            "bönor"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "bönor",
+            "champinjoner",
+            "timjan",
+            "gul lök",
+            "havregrädde",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 36 minuter och huvudsakligen passiva moment till 60 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 96 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Tunt skårad hel potatis bakas med sammanhängande botten och serveras med tjock bönragout. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av havregrädde, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-hasselback-bean-mushroom",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Hasselbackspotatis med svamp- och bönragout – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "hasselback",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "havregrädde",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "ml",
+              "role": "vegetable",
+              "label": "Naturell matlagningsprodukt av havre, som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bakad potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1200,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: gurksallad med frön",
+          "ingredients": [
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella pumpakärnor, som sålda"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 225 °C. Skrubba potatisen. Skär täta skåror nästan hela vägen igenom, men behåll en sammanhängande botten. Vänd potatisen i potatiskomponentens olja och salt.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Baka cirka 60 minuter tills potatisen är helt mjuk i mitten. Mindre potatisar kan bli klara tidigare. Håll varmt i ugnen på låg temperatur medan fyllningen görs.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 60,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär champinjoner i små bitar; skala och finhacka gul lök.",
+          "uses": [
+            "champinjoner",
+            "timjan",
+            "gul lök",
+            "havregrädde"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg champinjoner och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "champinjoner",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vänd ner bönor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner havregrädde från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Låt vätskan avdunsta så att fyllningen blir fast och går att lägga i en hög.",
+          "uses": [
+            "havregrädde",
+            "bönor"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "bönor"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera den skårade potatisen med den varma huvudfyllningen vid sidan.",
+          "uses": [
+            "potatis",
+            "bönor"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: grovhacka pumpakärnor; ansa och skär gurka i små bitar; finhacka persilja.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda pumpakärnor, gurka, citronjuice, persilja och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "bönor",
+            "champinjoner",
+            "timjan",
+            "gul lök",
+            "havregrädde",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 45 minuter och huvudsakligen passiva moment till 60 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 105 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Tunt skårad hel potatis bakas med sammanhängande botten och serveras med tjock bönragout. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av havregrädde, pumpakärnor, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-hollow-puff-cases-chicken-corn",
+      "name": "Tomma smördegspastejer fyllda med kyckling och majs – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "separat bakade laminerade ring- och bottenskal fyllda efteråt",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "Kyckling- och majsstuvning",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Två runda utstickare eller glas i olika storlek",
+        "Kavel",
+        "Stekpanna",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomma smördegspastejer",
+          "ingredients": [
+            {
+              "name": "smördeg",
+              "form": "as_sold",
+              "quantity": 450,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kyld smördeg, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kyckling- och majsstuvning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C. Kavla degen lätt och stansa två stora cirklar per portion. Låt hälften vara bottnar. Stansa mindre hål ur den andra hälften så att ringar bildas. Lägg ringarna ovanpå bottnarna och pensla med uppvispat ägg. Lägg de mindre urstansade locken bredvid. Kavla degresterna, skär i små flarn och pensla även dem.",
+          "uses": [
+            "smördeg",
+            "ägg"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Baka de tomma skal, lock och flarn tills lagren rest sig och är genomgräddade, cirka 20 minuter. Tryck försiktigt ned mittdelen av varje botten om den rest sig, så att ett tydligt hålrum finns kvar. Håll skalen torra fram till fyllning.",
+          "uses": [
+            "smördeg",
+            "ägg"
+          ],
+          "minutes": 22,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kycklingen i små tärningar. Bryn i oljan med paprikapulvret. Rör ner mjölet och tillsätt mjölken gradvis under omrörning. Lägg i majs och salt. Sjud tills stuvningen är tjock, majsen genomvarm och kycklingen håller minst 74 °C.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "rökt paprikapulver",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fyll de färdigbakade smördegsskalen med varm stuvning strax före servering och lägg locken ovanpå. Servera allt som återstår av stuvningen och de små degflarnen bredvid.",
+          "uses": [
+            "smördeg",
+            "ägg",
+            "kyckling",
+            "majs",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "rökt paprikapulver",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "smördeg",
+            "ägg",
+            "kyckling",
+            "majs",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "rökt paprikapulver",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 8 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 41 minuter aktivt och 22 minuter huvudsakligen passiv väntan. Smördeg stansas till bottnar och ringar som bakas tomma till ihåliga behållare. Den tillagade stuvningen tillsätts efter gräddningen; ingen kycklingfärslimpa byter smaksättning. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av smördeg; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-hollow-puff-cases-chicken-corn",
+      "name": "Tomma smördegspastejer fyllda med kyckling och majs – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "separat bakade laminerade ring- och bottenskal fyllda efteråt",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "Kyckling- och majsstuvning",
+      "flavor": [
+        "rökt paprikapulver",
+        "senap",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Två runda utstickare eller glas i olika storlek",
+        "Kavel",
+        "Stekpanna",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomma smördegspastejer",
+          "ingredients": [
+            {
+              "name": "smördeg",
+              "form": "as_sold",
+              "quantity": 450,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kyld smördeg, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kyckling- och majsstuvning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C. Kavla degen lätt och stansa två stora cirklar per portion. Låt hälften vara bottnar. Stansa mindre hål ur den andra hälften så att ringar bildas. Lägg ringarna ovanpå bottnarna och pensla med uppvispat ägg. Lägg de mindre urstansade locken bredvid. Kavla degresterna, skär i små flarn och pensla även dem.",
+          "uses": [
+            "smördeg",
+            "ägg"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Baka de tomma skal, lock och flarn tills lagren rest sig och är genomgräddade, cirka 20 minuter. Tryck försiktigt ned mittdelen av varje botten om den rest sig, så att ett tydligt hålrum finns kvar. Håll skalen torra fram till fyllning.",
+          "uses": [
+            "smördeg",
+            "ägg"
+          ],
+          "minutes": 22,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kycklingen i små tärningar. Bryn i oljan med paprikapulvret. Rör ner mjölet och tillsätt mjölken gradvis under omrörning. Lägg i majs och salt. Sjud tills stuvningen är tjock, majsen genomvarm och kycklingen håller minst 74 °C.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "rökt paprikapulver",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fyll de färdigbakade smördegsskalen med varm stuvning strax före servering och lägg locken ovanpå. Servera allt som återstår av stuvningen och de små degflarnen bredvid.",
+          "uses": [
+            "smördeg",
+            "ägg",
+            "kyckling",
+            "majs",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "rökt paprikapulver",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "smördeg",
+            "ägg",
+            "kyckling",
+            "majs",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "rökt paprikapulver",
+            "salt",
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 11 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 45 minuter aktivt och 22 minuter huvudsakligen passiv väntan. Smördeg stansas till bottnar och ringar som bakas tomma till ihåliga behållare. Den tillagade stuvningen tillsätts efter gräddningen; ingen kycklingfärslimpa byter smaksättning. Kräver registergranskning av smördeg; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-hollow-puff-cases-chicken-corn",
+      "name": "Tomma smördegspastejer fyllda med kyckling och majs – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "separat bakade laminerade ring- och bottenskal fyllda efteråt",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "Kyckling- och majsstuvning",
+      "flavor": [
+        "rökt paprikapulver",
+        "senap",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Två runda utstickare eller glas i olika storlek",
+        "Kavel",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomma smördegspastejer",
+          "ingredients": [
+            {
+              "name": "smördeg",
+              "form": "as_sold",
+              "quantity": 450,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kyld smördeg, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kyckling- och majsstuvning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Äppel- och gurksallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "solroskärnor",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella solroskärnor, som sålda"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C. Kavla degen lätt och stansa två stora cirklar per portion. Låt hälften vara bottnar. Stansa mindre hål ur den andra hälften så att ringar bildas. Lägg ringarna ovanpå bottnarna och pensla med uppvispat ägg. Lägg de mindre urstansade locken bredvid. Kavla degresterna, skär i små flarn och pensla även dem.",
+          "uses": [
+            "smördeg",
+            "ägg"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Baka de tomma skal, lock och flarn tills lagren rest sig och är genomgräddade, cirka 20 minuter. Tryck försiktigt ned mittdelen av varje botten om den rest sig, så att ett tydligt hålrum finns kvar. Håll skalen torra fram till fyllning.",
+          "uses": [
+            "smördeg",
+            "ägg"
+          ],
+          "minutes": 22,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kycklingen i små tärningar. Bryn i oljan med paprikapulvret. Rör ner mjölet och tillsätt mjölken gradvis under omrörning. Lägg i majs och salt. Sjud tills stuvningen är tjock, majsen genomvarm och kycklingen håller minst 74 °C.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "rökt paprikapulver",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fyll de färdigbakade smördegsskalen med varm stuvning strax före servering och lägg locken ovanpå. Servera allt som återstår av stuvningen och de små degflarnen bredvid.",
+          "uses": [
+            "smördeg",
+            "ägg",
+            "kyckling",
+            "majs",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "rökt paprikapulver",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rosta solroskärnorna torrt under omrörning tills de doftar. Skölj äpple och gurka, kärna ur äpplet och skär båda i tunna skivor. Finhacka persiljan. Blanda och strö över kärnorna.",
+          "uses": [
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "smördeg",
+            "ägg",
+            "kyckling",
+            "majs",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "rökt paprikapulver",
+            "salt",
+            "yoghurt naturell",
+            "senap",
+            "dill",
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 15 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 52 minuter aktivt och 22 minuter huvudsakligen passiv väntan. Smördeg stansas till bottnar och ringar som bakas tomma till ihåliga behållare. Den tillagade stuvningen tillsätts efter gräddningen; ingen kycklingfärslimpa byter smaksättning. Kräver registergranskning av smördeg och solroskärnor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-hot-fat-risen-batter-cups-chicken",
+      "name": "Högt resta äggsmetsskålar med kycklingstuvning – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "tunn smet rest i heta oljade metallformar",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "Kycklingstuvning",
+      "flavor": [
+        "mild",
+        "kyckling"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Djup metallmuffinsform med två hål per portion",
+        "Visp",
+        "Kastrull",
+        "Stekpanna",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Högt resta äggsmetsskålar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kycklingstuvning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa mjöl, ägg, mjölk och smetens salt till en tunn slät smet. Låt vila 20 minuter. Fördela all formolja mellan muffinsformens hål och sätt in formen i ugnen medan ugnen värms till 230 °C. Formen och oljan ska vara ordentligt heta.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "passive": true
+        },
+        {
+          "text": "Ta försiktigt ut den heta formen och fördela smeten snabbt mellan hålen, högst halvfullt. Sätt genast tillbaka i ugnen. Baka 22 minuter utan att öppna luckan, sänk sedan till 180 °C och baka ytterligare fem minuter. Skålarna ska vara höga med torr fast kant och en fördjupning i mitten.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 27,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kyckling och svamp i små bitar. Bryn svampen i stuvningens olja och lägg i kycklingen. Strö över mjölet och rör runt. Häll ner stuvningens mjölk under omrörning och tillsätt saltet. Sjud tills stuvningen är tjock och kycklingen håller minst 74 °C.",
+          "uses": [
+            "kyckling",
+            "champinjoner",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lyft äggsmetsskålarna ur formen och fyll dem med varm kycklingstuvning precis före servering. Fördela hela stuvningen mellan skålarna och bredvid dem om det behövs.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "champinjoner"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "champinjoner"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 6 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 26 minuter aktivt och 52 minuter huvudsakligen passiv väntan. Ojäst flytande äggsmet hälls i mycket heta oljade formar och reser sig till djupa skålar som fylls efter gräddningen. Processen skiljer från jästa crumpets, bakade brödkoppar och kall kyckling-rissallad. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-hot-fat-risen-batter-cups-chicken",
+      "name": "Högt resta äggsmetsskålar med kycklingstuvning – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "tunn smet rest i heta oljade metallformar",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "Kycklingstuvning",
+      "flavor": [
+        "senap",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Djup metallmuffinsform med två hål per portion",
+        "Visp",
+        "Kastrull",
+        "Stekpanna",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Högt resta äggsmetsskålar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kycklingstuvning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa mjöl, ägg, mjölk och smetens salt till en tunn slät smet. Låt vila 20 minuter. Fördela all formolja mellan muffinsformens hål och sätt in formen i ugnen medan ugnen värms till 230 °C. Formen och oljan ska vara ordentligt heta.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "passive": true
+        },
+        {
+          "text": "Ta försiktigt ut den heta formen och fördela smeten snabbt mellan hålen, högst halvfullt. Sätt genast tillbaka i ugnen. Baka 22 minuter utan att öppna luckan, sänk sedan till 180 °C och baka ytterligare fem minuter. Skålarna ska vara höga med torr fast kant och en fördjupning i mitten.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 27,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kyckling och svamp i små bitar. Bryn svampen i stuvningens olja och lägg i kycklingen. Strö över mjölet och rör runt. Häll ner stuvningens mjölk under omrörning och tillsätt saltet. Sjud tills stuvningen är tjock och kycklingen håller minst 74 °C.",
+          "uses": [
+            "kyckling",
+            "champinjoner",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lyft äggsmetsskålarna ur formen och fyll dem med varm kycklingstuvning precis före servering. Fördela hela stuvningen mellan skålarna och bredvid dem om det behövs.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "champinjoner"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "champinjoner",
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 9 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 30 minuter aktivt och 52 minuter huvudsakligen passiv väntan. Ojäst flytande äggsmet hälls i mycket heta oljade formar och reser sig till djupa skålar som fylls efter gräddningen. Processen skiljer från jästa crumpets, bakade brödkoppar och kall kyckling-rissallad. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-hot-fat-risen-batter-cups-chicken",
+      "name": "Högt resta äggsmetsskålar med kycklingstuvning – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "tunn smet rest i heta oljade metallformar",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "Kycklingstuvning",
+      "flavor": [
+        "senap",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Djup metallmuffinsform med två hål per portion",
+        "Visp",
+        "Kastrull",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Högt resta äggsmetsskålar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kycklingstuvning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Äppel- och gurksallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "solroskärnor",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella solroskärnor, som sålda"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa mjöl, ägg, mjölk och smetens salt till en tunn slät smet. Låt vila 20 minuter. Fördela all formolja mellan muffinsformens hål och sätt in formen i ugnen medan ugnen värms till 230 °C. Formen och oljan ska vara ordentligt heta.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "passive": true
+        },
+        {
+          "text": "Ta försiktigt ut den heta formen och fördela smeten snabbt mellan hålen, högst halvfullt. Sätt genast tillbaka i ugnen. Baka 22 minuter utan att öppna luckan, sänk sedan till 180 °C och baka ytterligare fem minuter. Skålarna ska vara höga med torr fast kant och en fördjupning i mitten.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 27,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kyckling och svamp i små bitar. Bryn svampen i stuvningens olja och lägg i kycklingen. Strö över mjölet och rör runt. Häll ner stuvningens mjölk under omrörning och tillsätt saltet. Sjud tills stuvningen är tjock och kycklingen håller minst 74 °C.",
+          "uses": [
+            "kyckling",
+            "champinjoner",
+            "mjölk",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lyft äggsmetsskålarna ur formen och fyll dem med varm kycklingstuvning precis före servering. Fördela hela stuvningen mellan skålarna och bredvid dem om det behövs.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "champinjoner"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rosta solroskärnorna torrt under omrörning tills de doftar. Skölj äpple och gurka, kärna ur äpplet och skär båda i tunna skivor. Finhacka persiljan. Blanda och strö över kärnorna.",
+          "uses": [
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "champinjoner",
+            "yoghurt naturell",
+            "senap",
+            "dill",
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 13 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 37 minuter aktivt och 52 minuter huvudsakligen passiv väntan. Ojäst flytande äggsmet hälls i mycket heta oljade formar och reser sig till djupa skålar som fylls efter gräddningen. Processen skiljer från jästa crumpets, bakade brödkoppar och kall kyckling-rissallad. Kräver registergranskning av solroskärnor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-hydrated-tapioca-griddle-fish-folds",
+      "name": "Torra tapiokakakor med varmrökt fiskfyllning – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "fuktade stärkelsekorn sammanbundna direkt i torr panna",
+      "primary": "rökt lax",
+      "method": "pan",
+      "side": "Fiskfyllning",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Finmaskig sil",
+        "Stekpanna med släppbeläggning",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Torra tapiokakakor",
+          "ingredients": [
+            {
+              "name": "tapiokastärkelse",
+              "form": "dry",
+              "quantity": 300,
+              "unit": "g",
+              "role": "side",
+              "label": "Tapiokastärkelse, finmalen; inte hela tapiokapärlor"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fiskfyllning",
+          "ingredients": [
+            {
+              "name": "rökt lax",
+              "form": "as_sold",
+              "quantity": 550,
+              "unit": "g",
+              "role": "primary",
+              "label": "Varmrökt lax utan skinn och ben, som såld"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Stänk 150 ml vatten över tapiokastärkelsen lite i taget medan du gnider med fingrarna. Blanda in saltet. Massan ska bli fuktig och smulig, inte en rinnande smet. Låt stå tio minuter och gnid den sedan genom silen till jämna små fuktiga korn.",
+          "uses": [
+            "tapiokastärkelse",
+            "salt"
+          ],
+          "minutes": 18
+        },
+        {
+          "text": "Värm den torra pannan på medelvärme. Strö ett tunt jämnt lager av de fuktiga kornen över pannbotten och pressa lätt med stekspaden. Låt värmen binda kornen till en sammanhängande kaka, cirka två minuter. Vänd och värm den andra sidan 30 sekunder. Gör en kaka per portion och använd alla korn.",
+          "uses": [
+            "tapiokastärkelse",
+            "salt"
+          ],
+          "minutes": 14,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Använd färdig varmrökt lax enligt etiketten. Finfördela fisken och skär gurkan i små tärningar. Rör ihop med yoghurt och limejuice. Lägg fyllning på halva varje varm tapiokakaka, vik den andra halvan över och servera direkt.",
+          "uses": [
+            "rökt lax",
+            "yoghurt naturell",
+            "gurka",
+            "limejuice",
+            "tapiokastärkelse",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "tapiokastärkelse",
+            "salt",
+            "rökt lax",
+            "yoghurt naturell",
+            "gurka",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 5 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 42 minuter aktivt och 0 minuter huvudsakligen passiv väntan. Tapiokastärkelse hydratiseras till smulor och siktas; kornen binds sedan till ett elastiskt ark i torr panna. Höljet görs på plats utan degkavling, äggsmet eller färdig tortilla. Kräver registergranskning av rökt lax och tapiokastärkelse; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-hydrated-tapioca-griddle-fish-folds",
+      "name": "Torra tapiokakakor med varmrökt fiskfyllning – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "fuktade stärkelsekorn sammanbundna direkt i torr panna",
+      "primary": "rökt lax",
+      "method": "pan",
+      "side": "Fiskfyllning",
+      "flavor": [
+        "limejuice",
+        "senap",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Finmaskig sil",
+        "Stekpanna med släppbeläggning",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Torra tapiokakakor",
+          "ingredients": [
+            {
+              "name": "tapiokastärkelse",
+              "form": "dry",
+              "quantity": 300,
+              "unit": "g",
+              "role": "side",
+              "label": "Tapiokastärkelse, finmalen; inte hela tapiokapärlor"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fiskfyllning",
+          "ingredients": [
+            {
+              "name": "rökt lax",
+              "form": "as_sold",
+              "quantity": 550,
+              "unit": "g",
+              "role": "primary",
+              "label": "Varmrökt lax utan skinn och ben, som såld"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Stänk 150 ml vatten över tapiokastärkelsen lite i taget medan du gnider med fingrarna. Blanda in saltet. Massan ska bli fuktig och smulig, inte en rinnande smet. Låt stå tio minuter och gnid den sedan genom silen till jämna små fuktiga korn.",
+          "uses": [
+            "tapiokastärkelse",
+            "salt"
+          ],
+          "minutes": 18
+        },
+        {
+          "text": "Värm den torra pannan på medelvärme. Strö ett tunt jämnt lager av de fuktiga kornen över pannbotten och pressa lätt med stekspaden. Låt värmen binda kornen till en sammanhängande kaka, cirka två minuter. Vänd och värm den andra sidan 30 sekunder. Gör en kaka per portion och använd alla korn.",
+          "uses": [
+            "tapiokastärkelse",
+            "salt"
+          ],
+          "minutes": 14,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Använd färdig varmrökt lax enligt etiketten. Finfördela fisken och skär gurkan i små tärningar. Rör ihop med yoghurt och limejuice. Lägg fyllning på halva varje varm tapiokakaka, vik den andra halvan över och servera direkt.",
+          "uses": [
+            "rökt lax",
+            "yoghurt naturell",
+            "gurka",
+            "limejuice",
+            "tapiokastärkelse",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "tapiokastärkelse",
+            "salt",
+            "rökt lax",
+            "yoghurt naturell",
+            "gurka",
+            "limejuice",
+            "senap",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 7 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 46 minuter aktivt och 0 minuter huvudsakligen passiv väntan. Tapiokastärkelse hydratiseras till smulor och siktas; kornen binds sedan till ett elastiskt ark i torr panna. Höljet görs på plats utan degkavling, äggsmet eller färdig tortilla. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av rökt lax och tapiokastärkelse; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-hydrated-tapioca-griddle-fish-folds",
+      "name": "Torra tapiokakakor med varmrökt fiskfyllning – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "fuktade stärkelsekorn sammanbundna direkt i torr panna",
+      "primary": "rökt lax",
+      "method": "pan",
+      "side": "Fiskfyllning",
+      "flavor": [
+        "limejuice",
+        "senap",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Finmaskig sil",
+        "Stekpanna med släppbeläggning",
+        "Stekspade",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Torra tapiokakakor",
+          "ingredients": [
+            {
+              "name": "tapiokastärkelse",
+              "form": "dry",
+              "quantity": 300,
+              "unit": "g",
+              "role": "side",
+              "label": "Tapiokastärkelse, finmalen; inte hela tapiokapärlor"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fiskfyllning",
+          "ingredients": [
+            {
+              "name": "rökt lax",
+              "form": "as_sold",
+              "quantity": 550,
+              "unit": "g",
+              "role": "primary",
+              "label": "Varmrökt lax utan skinn och ben, som såld"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Äppel- och gurksallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "solroskärnor",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella solroskärnor, som sålda"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Stänk 150 ml vatten över tapiokastärkelsen lite i taget medan du gnider med fingrarna. Blanda in saltet. Massan ska bli fuktig och smulig, inte en rinnande smet. Låt stå tio minuter och gnid den sedan genom silen till jämna små fuktiga korn.",
+          "uses": [
+            "tapiokastärkelse",
+            "salt"
+          ],
+          "minutes": 18
+        },
+        {
+          "text": "Värm den torra pannan på medelvärme. Strö ett tunt jämnt lager av de fuktiga kornen över pannbotten och pressa lätt med stekspaden. Låt värmen binda kornen till en sammanhängande kaka, cirka två minuter. Vänd och värm den andra sidan 30 sekunder. Gör en kaka per portion och använd alla korn.",
+          "uses": [
+            "tapiokastärkelse",
+            "salt"
+          ],
+          "minutes": 14,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Använd färdig varmrökt lax enligt etiketten. Finfördela fisken och skär gurkan i små tärningar. Rör ihop med yoghurt och limejuice. Lägg fyllning på halva varje varm tapiokakaka, vik den andra halvan över och servera direkt.",
+          "uses": [
+            "rökt lax",
+            "yoghurt naturell",
+            "gurka",
+            "limejuice",
+            "tapiokastärkelse",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rosta solroskärnorna torrt under omrörning tills de doftar. Skölj äpple och gurka, kärna ur äpplet och skär båda i tunna skivor. Finhacka persiljan. Blanda och strö över kärnorna.",
+          "uses": [
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "tapiokastärkelse",
+            "salt",
+            "rökt lax",
+            "yoghurt naturell",
+            "gurka",
+            "limejuice",
+            "senap",
+            "dill",
+            "äpple",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 10 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 53 minuter aktivt och 0 minuter huvudsakligen passiv väntan. Tapiokastärkelse hydratiseras till smulor och siktas; kornen binds sedan till ett elastiskt ark i torr panna. Höljet görs på plats utan degkavling, äggsmet eller färdig tortilla. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av rökt lax, solroskärnor och tapiokastärkelse; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-kale-lentil-potato-soup",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grönkålssoppa med gröna linser och potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "soup",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kastrull med lock",
+        "Durkslag",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor gryta med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "grönkål",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Grönkålsblad utan grova stjälkar, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj gröna linser och lägg i kastrullen med 840 ml vatten. Koka upp och sjud under lock tills de är helt mjuka, cirka 30 minuter. Häll av eventuell vätska och låt ånga av före fyllning.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 30,
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: repa och strimla grönkålsbladen; skala och skär potatis i små jämna tärningar.",
+          "uses": [
+            "grönkål",
+            "potatis",
+            "senap"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i potatis och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg grönkål i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "grönkål"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner de färdigkokta gröna linser i pannan och fördela jämnt.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner senap från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "senap"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "gröna linser"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Flytta huvudrätten till en gryta och tillsätt 800 ml vatten. Rör från botten och koka upp.",
+          "uses": [
+            "gröna linser",
+            "grönkål",
+            "potatis",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sjud varsamt under lock tills alla grönsaker är helt mjuka och smakerna blandats.",
+          "uses": [
+            "gröna linser",
+            "grönkål",
+            "potatis",
+            "senap"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "gröna linser",
+            "grönkål",
+            "potatis",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 28 minuter och huvudsakligen passiva moment till 65 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 93 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela gröna linser, potatistärningar och strimlad kål ger en grov soppa utan puréstruktur. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av gröna linser, grönkål; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-kale-lentil-potato-soup",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grönkålssoppa med gröna linser och potatis – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "soup",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kastrull med lock",
+        "Durkslag",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor gryta med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "grönkål",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Grönkålsblad utan grova stjälkar, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj gröna linser och lägg i kastrullen med 840 ml vatten. Koka upp och sjud under lock tills de är helt mjuka, cirka 30 minuter. Häll av eventuell vätska och låt ånga av före fyllning.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 30,
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: repa och strimla grönkålsbladen; skala och skär potatis i små jämna tärningar; skala och finhacka gul lök; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "grönkål",
+            "potatis",
+            "senap",
+            "gul lök",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i potatis och morot och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "potatis",
+            "morot",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg grönkål och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "grönkål",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner de färdigkokta gröna linser i pannan och fördela jämnt.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner senap från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "senap"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "gröna linser"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Flytta huvudrätten till en gryta och tillsätt 800 ml vatten. Rör från botten och koka upp.",
+          "uses": [
+            "gröna linser",
+            "grönkål",
+            "potatis",
+            "senap",
+            "gul lök",
+            "morot",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sjud varsamt under lock tills alla grönsaker är helt mjuka och smakerna blandats.",
+          "uses": [
+            "gröna linser",
+            "grönkål",
+            "potatis",
+            "senap",
+            "gul lök",
+            "morot"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "gröna linser",
+            "grönkål",
+            "potatis",
+            "senap",
+            "gul lök",
+            "morot",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 32 minuter och huvudsakligen passiva moment till 65 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 97 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela gröna linser, potatistärningar och strimlad kål ger en grov soppa utan puréstruktur. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av gröna linser, grönkål; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-kale-lentil-potato-soup",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grönkålssoppa med gröna linser och potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "soup",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kastrull med lock",
+        "Durkslag",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor gryta med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "grönkål",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Grönkålsblad utan grova stjälkar, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tillbehör: gurksallad med frön",
+          "ingredients": [
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella pumpakärnor, som sålda"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj gröna linser och lägg i kastrullen med 840 ml vatten. Koka upp och sjud under lock tills de är helt mjuka, cirka 30 minuter. Häll av eventuell vätska och låt ånga av före fyllning.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 30,
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: repa och strimla grönkålsbladen; skala och skär potatis i små jämna tärningar; skala och finhacka gul lök; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "grönkål",
+            "potatis",
+            "senap",
+            "gul lök",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i potatis och morot och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "potatis",
+            "morot",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg grönkål och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "grönkål",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner de färdigkokta gröna linser i pannan och fördela jämnt.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner senap från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "senap"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "gröna linser"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Flytta huvudrätten till en gryta och tillsätt 800 ml vatten. Rör från botten och koka upp.",
+          "uses": [
+            "gröna linser",
+            "grönkål",
+            "potatis",
+            "senap",
+            "gul lök",
+            "morot",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sjud varsamt under lock tills alla grönsaker är helt mjuka och smakerna blandats.",
+          "uses": [
+            "gröna linser",
+            "grönkål",
+            "potatis",
+            "senap",
+            "gul lök",
+            "morot"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: grovhacka pumpakärnor; ansa och skär gurka i små bitar; finhacka persilja.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda pumpakärnor, gurka, citronjuice, persilja och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "gröna linser",
+            "grönkål",
+            "potatis",
+            "senap",
+            "gul lök",
+            "morot",
+            "rapsolja",
+            "salt",
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 41 minuter och huvudsakligen passiva moment till 65 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 106 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela gröna linser, potatistärningar och strimlad kål ger en grov soppa utan puréstruktur. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av gröna linser, grönkål, pumpakärnor; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    }
+  ]
+}

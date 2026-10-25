@@ -1,0 +1,4241 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-49",
+  "recipes": [
+    {
+      "base_id": "smako-mexican-chickpea-chilaquiles",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Tortillabitar i tomatsås med kikärter – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tortilla_sauce",
+      "primary": "kikärtor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Pensel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tortillabas",
+          "ingredients": [
+            {
+              "name": "tortillas",
+              "form": "as_sold",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Tortillas, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "krossade tomater",
+            "kikärtor"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kikärtor"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Skär tortillas i breda bitar, vänd med tortillabasens olja och bred ut på plåt. Rosta cirka åtta minuter tills kanterna blir krispiga.",
+          "uses": [
+            "tortillas",
+            "rapsolja"
+          ],
+          "minutes": 10,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd de rostade tortillabitarna i den varma huvudfyllningen precis före servering. Låt stå två minuter så att mitten mjuknar men vissa kanter behåller tuggmotstånd.",
+          "uses": [
+            "tortillas",
+            "kikärtor"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "krossade tomater",
+            "spiskummin",
+            "rapsolja",
+            "salt",
+            "tortillas"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 16 minuter och huvudsakligen passiva moment till 10 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 26 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Rostade tortillabitar vänds kort i sås så att de blir mjuka i mitten och knapriga i kanterna. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chickpea-chilaquiles",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Tortillabitar i tomatsås med kikärter – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tortilla_sauce",
+      "primary": "kikärtor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Pensel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tortillabas",
+          "ingredients": [
+            {
+              "name": "tortillas",
+              "form": "as_sold",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Tortillas, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "krossade tomater",
+            "spiskummin",
+            "rödlök",
+            "färsk koriander"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg rödlök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "rödlök"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "krossade tomater",
+            "kikärtor"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kikärtor"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Skär tortillas i breda bitar, vänd med tortillabasens olja och bred ut på plåt. Rosta cirka åtta minuter tills kanterna blir krispiga.",
+          "uses": [
+            "tortillas",
+            "rapsolja"
+          ],
+          "minutes": 10,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd de rostade tortillabitarna i den varma huvudfyllningen precis före servering. Låt stå två minuter så att mitten mjuknar men vissa kanter behåller tuggmotstånd.",
+          "uses": [
+            "tortillas",
+            "kikärtor"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "krossade tomater",
+            "spiskummin",
+            "rödlök",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "tortillas"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 30 minuter och huvudsakligen passiva moment till 10 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 40 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Rostade tortillabitar vänds kort i sås så att de blir mjuka i mitten och knapriga i kanterna. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chickpea-chilaquiles",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Tortillabitar i tomatsås med kikärter – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tortilla_sauce",
+      "primary": "kikärtor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Pensel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tortillabas",
+          "ingredients": [
+            {
+              "name": "tortillas",
+              "form": "as_sold",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Tortillas, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: avokadoröra",
+          "ingredients": [
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Avokadokött utan skal och kärna, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "krossade tomater",
+            "spiskummin",
+            "rödlök",
+            "färsk koriander"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg rödlök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "rödlök"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "krossade tomater",
+            "kikärtor"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kikärtor"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Skär tortillas i breda bitar, vänd med tortillabasens olja och bred ut på plåt. Rosta cirka åtta minuter tills kanterna blir krispiga.",
+          "uses": [
+            "tortillas",
+            "rapsolja"
+          ],
+          "minutes": 10,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd de rostade tortillabitarna i den varma huvudfyllningen precis före servering. Låt stå två minuter så att mitten mjuknar men vissa kanter behåller tuggmotstånd.",
+          "uses": [
+            "tortillas",
+            "kikärtor"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skär avokadoköttet i bitar; skala och finhacka vitlök.",
+          "uses": [
+            "avokado",
+            "limejuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Mosa avokadoköttet med limejuice, finriven vitlök och tillbehörets salt. Rör till en grov röra och servera direkt.",
+          "uses": [
+            "avokado",
+            "limejuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "krossade tomater",
+            "spiskummin",
+            "rödlök",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "tortillas",
+            "avokado",
+            "limejuice",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 10 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 37 minuter och huvudsakligen passiva moment till 10 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 47 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Rostade tortillabitar vänds kort i sås så att de blir mjuka i mitten och knapriga i kanterna. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av avokado, färsk koriander; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chickpea-stuffed-aubergine",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Auberginebåtar med kikärter – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "stuffedaubergine",
+      "primary": "kikärtor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Sked",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ätbart grönsaksskal",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Dela aubergine i stora portionsbitar och gröp ur så att de kan bära fyllning. Ta bort oätliga frön och stjälkfästen. Ätligt urgröpt fruktkött finhackas och läggs i huvudfyllningen.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Lägg grönsaksskalet i ugnsformen och fördela skalkomponentens olja och salt över det.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbaka grönsaksskalet cirka 15 minuter så att det börjar mjukna.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kikärtor"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fördela hela huvudfyllningen i eller mellan de förberedda grönsaksskalen. Häll 150 ml vatten i formens botten.",
+          "uses": [
+            "aubergine",
+            "kikärtor"
+          ],
+          "minutes": 7,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Täck formen och baka cirka 25 minuter tills grönsaksskalet är helt mjukt och fyllningen genomvarm. Ta av täckningen de sista fem minuterna.",
+          "uses": [
+            "aubergine",
+            "kikärtor"
+          ],
+          "minutes": 25,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "rökt paprikapulver",
+            "rapsolja",
+            "salt",
+            "aubergine"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 4 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 30 minuter och huvudsakligen passiva moment till 40 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 70 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Förbakad aubergine urholkas till skål; fruktköttet vänds in i en fast baljväxtfyllning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chickpea-stuffed-aubergine",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Auberginebåtar med kikärter – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "stuffedaubergine",
+      "primary": "kikärtor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Sked",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ätbart grönsaksskal",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Dela aubergine i stora portionsbitar och gröp ur så att de kan bära fyllning. Ta bort oätliga frön och stjälkfästen. Ätligt urgröpt fruktkött finhackas och läggs i huvudfyllningen.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Lägg grönsaksskalet i ugnsformen och fördela skalkomponentens olja och salt över det.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbaka grönsaksskalet cirka 15 minuter så att det börjar mjukna.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: skala och finhacka gul lök.",
+          "uses": [
+            "rökt paprikapulver",
+            "majs",
+            "gul lök"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg majs och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kikärtor"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Fördela hela huvudfyllningen i eller mellan de förberedda grönsaksskalen. Häll 150 ml vatten i formens botten.",
+          "uses": [
+            "aubergine",
+            "kikärtor"
+          ],
+          "minutes": 7,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Täck formen och baka cirka 25 minuter tills grönsaksskalet är helt mjukt och fyllningen genomvarm. Ta av täckningen de sista fem minuterna.",
+          "uses": [
+            "aubergine",
+            "kikärtor"
+          ],
+          "minutes": 25,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "rökt paprikapulver",
+            "majs",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "aubergine"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 6 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 41 minuter och huvudsakligen passiva moment till 40 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 81 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Förbakad aubergine urholkas till skål; fruktköttet vänds in i en fast baljväxtfyllning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chickpea-stuffed-aubergine",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Auberginebåtar med kikärter – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "stuffedaubergine",
+      "primary": "kikärtor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Sked",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ätbart grönsaksskal",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Dela aubergine i stora portionsbitar och gröp ur så att de kan bära fyllning. Ta bort oätliga frön och stjälkfästen. Ätligt urgröpt fruktkött finhackas och läggs i huvudfyllningen.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Lägg grönsaksskalet i ugnsformen och fördela skalkomponentens olja och salt över det.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbaka grönsaksskalet cirka 15 minuter så att det börjar mjukna.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: skala och finhacka gul lök.",
+          "uses": [
+            "rökt paprikapulver",
+            "majs",
+            "gul lök"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg majs och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kikärtor"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Fördela hela huvudfyllningen i eller mellan de förberedda grönsaksskalen. Häll 150 ml vatten i formens botten.",
+          "uses": [
+            "aubergine",
+            "kikärtor"
+          ],
+          "minutes": 7,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Täck formen och baka cirka 25 minuter tills grönsaksskalet är helt mjukt och fyllningen genomvarm. Ta av täckningen de sista fem minuterna.",
+          "uses": [
+            "aubergine",
+            "kikärtor"
+          ],
+          "minutes": 25,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär tomat i små bitar; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, limejuice, färsk koriander och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "rökt paprikapulver",
+            "majs",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "aubergine",
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 10 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 50 minuter och huvudsakligen passiva moment till 40 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 90 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Förbakad aubergine urholkas till skål; fruktköttet vänds in i en fast baljväxtfyllning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-cold-shrimp-tomato-lime-cocktail",
+      "name": "Kall räkskål med tomat, avokado och tortillakrisp – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "kall skaldjurscocktail i tunn tomatbas",
+      "primary": "räkor",
+      "method": "refrigerated_assembly",
+      "side": "Majs och tortillakrisp",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Stor skål",
+        "Kylskåp",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kall räkskål i tomat och lime",
+          "ingredients": [
+            {
+              "name": "räkor",
+              "form": "cooked_drained",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta skalade räkor, avrunnen ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Avokadokött utan skal och kärna, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Majs och tortillakrisp",
+          "ingredients": [
+            {
+              "name": "tortillas",
+              "form": "as_sold",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Tortillas, vikt eller volym som såld"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Använd färdigkokta skalade räkor. Skär gurkan i små tärningar. Dela avokadon, ta bort skal och kärna och tärna köttet. Rör krossade tomater, limejuice, salt och 150 ml vatten (kallt) till en kall tomatbas.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Vänd ner räkor, gurka och avokado i tomatbasen. Täck och ställ kallt i 20 minuter så att blandningen blir jämnt kyld. Räkorna ska behålla sin fasta struktur och behöver inte kokas igen.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Skär tortillas i trekanter och pensla med hälften av oljan. Lägg på bakplåtspapper och rosta cirka åtta minuter tills de är krispiga. Stek samtidigt majsen i resterande olja tills den är genomvarm och lätt brynt. Låt majsen svalna och vänd ner den i räkskålen.",
+          "uses": [
+            "tortillas",
+            "majs",
+            "rapsolja"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera den kalla räkskålen med tortillakrispet vid sidan så att det hålls torrt.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt",
+            "tortillas",
+            "majs",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt",
+            "tortillas",
+            "majs",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 8 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 29 minuter aktivt och 20 minuter huvudsakligen passiv väntan. Färdigkokta räkor och råa fasta grönsakstärningar kyls i en tunn tomat-limebas och äts med separat krisp. Den ersätter en andra potatis- och majschowder med annan krydda. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av avokado och räkor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-mexican-cold-shrimp-tomato-lime-cocktail",
+      "name": "Kall räkskål med tomat, avokado och tortillakrisp – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "kall skaldjurscocktail i tunn tomatbas",
+      "primary": "räkor",
+      "method": "refrigerated_assembly",
+      "side": "Majs och tortillakrisp",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Stor skål",
+        "Kylskåp",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kall räkskål i tomat och lime",
+          "ingredients": [
+            {
+              "name": "räkor",
+              "form": "cooked_drained",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta skalade räkor, avrunnen ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Avokadokött utan skal och kärna, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Majs och tortillakrisp",
+          "ingredients": [
+            {
+              "name": "tortillas",
+              "form": "as_sold",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Tortillas, vikt eller volym som såld"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Syrlig tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Använd färdigkokta skalade räkor. Skär gurkan i små tärningar. Dela avokadon, ta bort skal och kärna och tärna köttet. Rör krossade tomater, limejuice, salt och 150 ml vatten (kallt) till en kall tomatbas.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Vänd ner räkor, gurka och avokado i tomatbasen. Täck och ställ kallt i 20 minuter så att blandningen blir jämnt kyld. Räkorna ska behålla sin fasta struktur och behöver inte kokas igen.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Skär tortillas i trekanter och pensla med hälften av oljan. Lägg på bakplåtspapper och rosta cirka åtta minuter tills de är krispiga. Stek samtidigt majsen i resterande olja tills den är genomvarm och lätt brynt. Låt majsen svalna och vänd ner den i räkskålen.",
+          "uses": [
+            "tortillas",
+            "majs",
+            "rapsolja"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera den kalla räkskålen med tortillakrispet vid sidan så att det hålls torrt.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt",
+            "tortillas",
+            "majs",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skölj tomaten. Tärna tomat och rödlök fint och vänd ihop med salsans limejuice och salt. Låt stå medan huvudrätten avslutas.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt",
+            "tortillas",
+            "majs",
+            "rapsolja",
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 10 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 34 minuter aktivt och 20 minuter huvudsakligen passiv väntan. Färdigkokta räkor och råa fasta grönsakstärningar kyls i en tunn tomat-limebas och äts med separat krisp. Den ersätter en andra potatis- och majschowder med annan krydda. Kräver registergranskning av avokado och räkor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-mexican-cold-shrimp-tomato-lime-cocktail",
+      "name": "Kall räkskål med tomat, avokado och tortillakrisp – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "kall skaldjurscocktail i tunn tomatbas",
+      "primary": "räkor",
+      "method": "refrigerated_assembly",
+      "side": "Majs och tortillakrisp",
+      "flavor": [
+        "limejuice",
+        "färsk koriander",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Stor skål",
+        "Kylskåp",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kall räkskål i tomat och lime",
+          "ingredients": [
+            {
+              "name": "räkor",
+              "form": "cooked_drained",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta skalade räkor, avrunnen ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Avokadokött utan skal och kärna, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Majs och tortillakrisp",
+          "ingredients": [
+            {
+              "name": "tortillas",
+              "form": "as_sold",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Tortillas, vikt eller volym som såld"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Syrlig tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Kålkrisp med frön",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella pumpakärnor, som sålda"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Använd färdigkokta skalade räkor. Skär gurkan i små tärningar. Dela avokadon, ta bort skal och kärna och tärna köttet. Rör krossade tomater, limejuice, salt och 150 ml vatten (kallt) till en kall tomatbas.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Vänd ner räkor, gurka och avokado i tomatbasen. Täck och ställ kallt i 20 minuter så att blandningen blir jämnt kyld. Räkorna ska behålla sin fasta struktur och behöver inte kokas igen.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Skär tortillas i trekanter och pensla med hälften av oljan. Lägg på bakplåtspapper och rosta cirka åtta minuter tills de är krispiga. Stek samtidigt majsen i resterande olja tills den är genomvarm och lätt brynt. Låt majsen svalna och vänd ner den i räkskålen.",
+          "uses": [
+            "tortillas",
+            "majs",
+            "rapsolja"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera den kalla räkskålen med tortillakrispet vid sidan så att det hålls torrt.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt",
+            "tortillas",
+            "majs",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skölj tomaten. Tärna tomat och rödlök fint och vänd ihop med salsans limejuice och salt. Låt stå medan huvudrätten avslutas.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rosta pumpakärnorna i en torr panna under omrörning tills de doftar. Strimla vitkålen tunt och finhacka koriandern. Vänd kålen med koriander, tillbehörets olja och citronjuice. Strö över kärnorna vid servering.",
+          "uses": [
+            "vitkål",
+            "färsk koriander",
+            "pumpakärnor",
+            "rapsolja",
+            "citronjuice"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "räkor",
+            "krossade tomater",
+            "gurka",
+            "avokado",
+            "limejuice",
+            "salt",
+            "tortillas",
+            "majs",
+            "rapsolja",
+            "tomat",
+            "rödlök",
+            "vitkål",
+            "färsk koriander",
+            "pumpakärnor",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 14 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 41 minuter aktivt och 20 minuter huvudsakligen passiv väntan. Färdigkokta räkor och råa fasta grönsakstärningar kyls i en tunn tomat-limebas och äts med separat krisp. Den ersätter en andra potatis- och majschowder med annan krydda. Kräver registergranskning av avokado, färsk koriander, pumpakärnor och räkor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-mexican-corn-bean-bread-pudding",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Majs- och bönpudding med krispigt bröd – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "vegan_breadpudding",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Visp",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Brödpuddingens bindning",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "havregrädde",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Naturell matlagningsprodukt av havre, som såld"
+            },
+            {
+              "name": "potatismjöl",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatisstärkelse, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Lägg majs i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd ner bönor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "bönor"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med bindningens olja och skär brödet i små tärningar. Mosa en del av huvudkomponentens bönor och vispa havregrädde med potatismjöl och bindningens salt. Blanda med brödet och huvudfyllningen och lägg i formen.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "salt",
+            "havregrädde",
+            "potatismjöl",
+            "bönor"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Låt blandningen stå så att brödet tar upp vätska.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 10,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Baka cirka 30 minuter tills puddingen är sammanhållen och lätt brynt. Potatismjölsbindningen ska vara fast och helt genomvarm. Låt stå fem minuter före uppskärning.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "salt",
+            "havregrädde",
+            "potatismjöl",
+            "bönor"
+          ],
+          "minutes": 35,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "bönor",
+            "majs",
+            "spiskummin",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "havregrädde",
+            "potatismjöl"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 27 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 72 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Mosade bönor binder bröd och majs till en äggfri, skärbar ugnspudding. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av havregrädde, potatismjöl; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-corn-bean-bread-pudding",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Majs- och bönpudding med krispigt bröd – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "vegan_breadpudding",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Visp",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Brödpuddingens bindning",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "havregrädde",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Naturell matlagningsprodukt av havre, som såld"
+            },
+            {
+              "name": "potatismjöl",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatisstärkelse, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar; skala och finhacka rödlök.",
+          "uses": [
+            "majs",
+            "spiskummin",
+            "paprika",
+            "rödlök"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg majs, paprika och rödlök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "paprika",
+            "rödlök"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner bönor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "bönor"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med bindningens olja och skär brödet i små tärningar. Mosa en del av huvudkomponentens bönor och vispa havregrädde med potatismjöl och bindningens salt. Blanda med brödet och huvudfyllningen och lägg i formen.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "salt",
+            "havregrädde",
+            "potatismjöl",
+            "bönor"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Låt blandningen stå så att brödet tar upp vätska.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 10,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Baka cirka 30 minuter tills puddingen är sammanhållen och lätt brynt. Potatismjölsbindningen ska vara fast och helt genomvarm. Låt stå fem minuter före uppskärning.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "salt",
+            "havregrädde",
+            "potatismjöl",
+            "bönor"
+          ],
+          "minutes": 35,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "bönor",
+            "majs",
+            "spiskummin",
+            "paprika",
+            "rödlök",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "havregrädde",
+            "potatismjöl"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 9 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 31 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 76 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Mosade bönor binder bröd och majs till en äggfri, skärbar ugnspudding. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av havregrädde, potatismjöl; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-corn-bean-bread-pudding",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Majs- och bönpudding med krispigt bröd – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "vegan_breadpudding",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Visp",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Brödpuddingens bindning",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "havregrädde",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Naturell matlagningsprodukt av havre, som såld"
+            },
+            {
+              "name": "potatismjöl",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatisstärkelse, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar; skala och finhacka rödlök.",
+          "uses": [
+            "majs",
+            "spiskummin",
+            "paprika",
+            "rödlök"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg majs, paprika och rödlök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "paprika",
+            "rödlök"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner bönor som redan är tillagade och avrunna i pannan och fördela jämnt.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "bönor"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med bindningens olja och skär brödet i små tärningar. Mosa en del av huvudkomponentens bönor och vispa havregrädde med potatismjöl och bindningens salt. Blanda med brödet och huvudfyllningen och lägg i formen.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "salt",
+            "havregrädde",
+            "potatismjöl",
+            "bönor"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Låt blandningen stå så att brödet tar upp vätska.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 10,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Baka cirka 30 minuter tills puddingen är sammanhållen och lätt brynt. Potatismjölsbindningen ska vara fast och helt genomvarm. Låt stå fem minuter före uppskärning.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "salt",
+            "havregrädde",
+            "potatismjöl",
+            "bönor"
+          ],
+          "minutes": 35,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär tomat i små bitar; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, limejuice, färsk koriander och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "bönor",
+            "majs",
+            "spiskummin",
+            "paprika",
+            "rödlök",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "havregrädde",
+            "potatismjöl",
+            "tomat",
+            "limejuice",
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 12 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 40 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 85 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Mosade bönor binder bröd och majs till en äggfri, skärbar ugnspudding. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander, havregrädde, potatismjöl; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-corn-cheese-potato-waffles",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Potatisvåfflor med majs, keso och ost – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "waffle",
+      "primary": "keso",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Visp",
+        "Stekpanna med släppbeläggning",
+        "Digital kökstermometer",
+        "Våffeljärn",
+        "Rivjärn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Keso, vikt eller volym som såld"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Pannkaks- eller våffelsmet",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 220,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bakpulver"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: riv eller smula ost.",
+          "uses": [
+            "majs",
+            "ost",
+            "limejuice"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg majs i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd ner keso i pannan och fördela jämnt.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner ost och limejuice från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "ost",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "keso"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala och finriv potatisen till smeten. Pressa lätt ur vätskan.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Vispa smetens mjöl med mjölken och äggen till en jämn smet. Rör ner smetens salt, den rivna potatisen och bakpulvret. Håll smetens olja åt sidan till gräddningen.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "bakpulver"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Hetta upp våffeljärnet. Fördela smetens olja mellan gräddningarna och pensla järnet tunt. Grädda all smet i omgångar tills våfflorna är frasiga och potatisen helt tillagad, cirka fem minuter per omgång. Kontrollera minst 72 °C i mitten.",
+          "uses": [
+            "potatis",
+            "vetemjöl",
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Fördela den varma fyllningen över pannkakorna eller våfflorna och servera direkt.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "keso",
+            "majs",
+            "ost",
+            "limejuice",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "potatis",
+            "bakpulver"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 10 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 60 minuter och huvudsakligen passiva moment till 8 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 68 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela majskorn vänds i keso- och ostkräm som serveras till frasiga potatisvåfflor. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av bakpulver; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-corn-cheese-potato-waffles",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Potatisvåfflor med majs, keso och ost – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "waffle",
+      "primary": "keso",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Visp",
+        "Stekpanna med släppbeläggning",
+        "Digital kökstermometer",
+        "Våffeljärn",
+        "Rivjärn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Keso, vikt eller volym som såld"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Pannkaks- eller våffelsmet",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 220,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bakpulver"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: riv eller smula ost; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "majs",
+            "ost",
+            "limejuice",
+            "rödlök",
+            "färsk koriander"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg majs och rödlök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "rödlök"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd ner keso i pannan och fördela jämnt.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner ost, limejuice och färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "ost",
+            "limejuice",
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "keso"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala och finriv potatisen till smeten. Pressa lätt ur vätskan.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Vispa smetens mjöl med mjölken och äggen till en jämn smet. Rör ner smetens salt, den rivna potatisen och bakpulvret. Håll smetens olja åt sidan till gräddningen.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "bakpulver"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Hetta upp våffeljärnet. Fördela smetens olja mellan gräddningarna och pensla järnet tunt. Grädda all smet i omgångar tills våfflorna är frasiga och potatisen helt tillagad, cirka fem minuter per omgång. Kontrollera minst 72 °C i mitten.",
+          "uses": [
+            "potatis",
+            "vetemjöl",
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Fördela den varma fyllningen över pannkakorna eller våfflorna och servera direkt.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "keso",
+            "majs",
+            "ost",
+            "limejuice",
+            "rödlök",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "potatis",
+            "bakpulver"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 12 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 63 minuter och huvudsakligen passiva moment till 8 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 71 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela majskorn vänds i keso- och ostkräm som serveras till frasiga potatisvåfflor. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av bakpulver, färsk koriander; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-corn-cheese-potato-waffles",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Potatisvåfflor med majs, keso och ost – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "waffle",
+      "primary": "keso",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Visp",
+        "Stekpanna med släppbeläggning",
+        "Digital kökstermometer",
+        "Våffeljärn",
+        "Rivjärn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Keso, vikt eller volym som såld"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Pannkaks- eller våffelsmet",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 220,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bakpulver"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: riv eller smula ost; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "majs",
+            "ost",
+            "limejuice",
+            "rödlök",
+            "färsk koriander"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg majs och rödlök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "rödlök"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd ner keso i pannan och fördela jämnt.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner ost, limejuice och färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "ost",
+            "limejuice",
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "keso"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala och finriv potatisen till smeten. Pressa lätt ur vätskan.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Vispa smetens mjöl med mjölken och äggen till en jämn smet. Rör ner smetens salt, den rivna potatisen och bakpulvret. Håll smetens olja åt sidan till gräddningen.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "bakpulver"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Hetta upp våffeljärnet. Fördela smetens olja mellan gräddningarna och pensla järnet tunt. Grädda all smet i omgångar tills våfflorna är frasiga och potatisen helt tillagad, cirka fem minuter per omgång. Kontrollera minst 72 °C i mitten.",
+          "uses": [
+            "potatis",
+            "vetemjöl",
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Fördela den varma fyllningen över pannkakorna eller våfflorna och servera direkt.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär tomat i små bitar; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, limejuice, färsk koriander och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "keso",
+            "majs",
+            "ost",
+            "limejuice",
+            "rödlök",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "potatis",
+            "bakpulver",
+            "tomat"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 13 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 72 minuter och huvudsakligen passiva moment till 8 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 80 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela majskorn vänds i keso- och ostkräm som serveras till frasiga potatisvåfflor. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av bakpulver, färsk koriander; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    }
+  ]
+}

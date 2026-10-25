@@ -1,0 +1,4236 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-103",
+  "recipes": [
+    {
+      "base_id": "smako-swedish-chicken-dill-stew",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Dillkyckling med gröna ärtor och potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "braise",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            },
+            {
+              "name": "crème fraiche",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Crème fraiche, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Förbered råvarorna: finhacka dill.",
+          "uses": [
+            "ärtor",
+            "crème fraiche",
+            "dill"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg ärtor i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner crème fraiche från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "crème fraiche",
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner dill från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "ärtor",
+            "crème fraiche",
+            "dill",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 6 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 47 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 65 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Ljus, syrlig dillgryta med hela bitar av kyckling och ärtor; nära andra kycklinggrytor och ska granskas. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-dill-stew",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Dillkyckling med gröna ärtor och potatis – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "braise",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            },
+            {
+              "name": "crème fraiche",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Crème fraiche, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Förbered råvarorna: finhacka dill; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "ärtor",
+            "crème fraiche",
+            "dill",
+            "morot",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ärtor i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner crème fraiche från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "crème fraiche",
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner dill och citronjuice från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "ärtor",
+            "crème fraiche",
+            "dill",
+            "morot",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 8 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 47 minuter och huvudsakligen passiva moment till 38 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 85 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Ljus, syrlig dillgryta med hela bitar av kyckling och ärtor; nära andra kycklinggrytor och ska granskas. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-dill-stew",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Dillkyckling med gröna ärtor och potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "braise",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            },
+            {
+              "name": "crème fraiche",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Crème fraiche, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: äppel- och morotssallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Förbered råvarorna: finhacka dill; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "ärtor",
+            "crème fraiche",
+            "dill",
+            "morot",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ärtor i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner crème fraiche från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "crème fraiche",
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner dill och citronjuice från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: kärna ur och tärna äpplet; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "äpple",
+            "morot",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda äpple, morot, citronjuice och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "äpple",
+            "morot",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "ärtor",
+            "crème fraiche",
+            "dill",
+            "morot",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "äpple"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 9 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 54 minuter och huvudsakligen passiva moment till 38 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 92 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Ljus, syrlig dillgryta med hela bitar av kyckling och ärtor; nära andra kycklinggrytor och ska granskas. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-dumpling-soup",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Kycklingsoppa med mjölklimp och rotfrukter – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "soupdumpling",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stor gryta med lock",
+        "Digital kökstermometer",
+        "Stekpanna",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mjölklimp",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 220,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt.",
+          "uses": [
+            "morot",
+            "purjolök",
+            "timjan"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt.",
+          "uses": [
+            "morot",
+            "purjolök",
+            "timjan"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Vispa ihop klimpens mjölk, ägg, mjöl och salt till en tjock slät smet.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Tillsätt 1000 ml vatten till kycklingen och grönsakerna och låt koka upp. Sänk värmen så att soppan sjuder. Klicka små skedar av klimpsmeten direkt i soppan.",
+          "uses": [
+            "kyckling",
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Låt klimparna sjuda i cirka 10 minuter tills de är fasta och genomkokta, även i mitten. Kontrollera att äggklimpen når minst 72 °C.",
+          "uses": [
+            "ägg",
+            "vetemjöl"
+          ],
+          "minutes": 10,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "purjolök",
+            "timjan",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "mjölk"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 8 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 50 minuter och huvudsakligen passiva moment till 30 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 80 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Mjölklimpar får svälla direkt i en klar kyckling- och rotfruktssoppa. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-dumpling-soup",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Kycklingsoppa med mjölklimp och rotfrukter – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "soupdumpling",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stor gryta med lock",
+        "Digital kökstermometer",
+        "Stekpanna",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "rotselleri",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rotselleri, skalad rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mjölklimp",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 220,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt; skala och skär rotselleri i små jämna tärningar; finhacka persilja.",
+          "uses": [
+            "morot",
+            "purjolök",
+            "timjan",
+            "rotselleri",
+            "persilja"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt; skala och skär rotselleri i små jämna tärningar; finhacka persilja.",
+          "uses": [
+            "morot",
+            "purjolök",
+            "timjan",
+            "rotselleri",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och rotselleri och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rotselleri",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner persilja från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Vispa ihop klimpens mjölk, ägg, mjöl och salt till en tjock slät smet.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Tillsätt 1000 ml vatten till kycklingen och grönsakerna och låt koka upp. Sänk värmen så att soppan sjuder. Klicka små skedar av klimpsmeten direkt i soppan.",
+          "uses": [
+            "kyckling",
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Låt klimparna sjuda i cirka 10 minuter tills de är fasta och genomkokta, även i mitten. Kontrollera att äggklimpen når minst 72 °C.",
+          "uses": [
+            "ägg",
+            "vetemjöl"
+          ],
+          "minutes": 10,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "purjolök",
+            "timjan",
+            "rotselleri",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "mjölk"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 10 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 60 minuter och huvudsakligen passiva moment till 30 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 90 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Mjölklimpar får svälla direkt i en klar kyckling- och rotfruktssoppa. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök, rotselleri, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-dumpling-soup",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Kycklingsoppa med mjölklimp och rotfrukter – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "soupdumpling",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stor gryta med lock",
+        "Digital kökstermometer",
+        "Stekpanna",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "rotselleri",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rotselleri, skalad rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mjölklimp",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 220,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: gurksallad med frön",
+          "ingredients": [
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella pumpakärnor, som sålda"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt; skala och skär rotselleri i små jämna tärningar; finhacka persilja.",
+          "uses": [
+            "morot",
+            "purjolök",
+            "timjan",
+            "rotselleri",
+            "persilja"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt; skala och skär rotselleri i små jämna tärningar; finhacka persilja.",
+          "uses": [
+            "morot",
+            "purjolök",
+            "timjan",
+            "rotselleri",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och rotselleri och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rotselleri",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner persilja från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Vispa ihop klimpens mjölk, ägg, mjöl och salt till en tjock slät smet.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Tillsätt 1000 ml vatten till kycklingen och grönsakerna och låt koka upp. Sänk värmen så att soppan sjuder. Klicka små skedar av klimpsmeten direkt i soppan.",
+          "uses": [
+            "kyckling",
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Låt klimparna sjuda i cirka 10 minuter tills de är fasta och genomkokta, även i mitten. Kontrollera att äggklimpen når minst 72 °C.",
+          "uses": [
+            "ägg",
+            "vetemjöl"
+          ],
+          "minutes": 10,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: grovhacka pumpakärnor; ansa och skär gurka i små bitar; finhacka persilja.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Blanda pumpakärnor, gurka, citronjuice, persilja och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "purjolök",
+            "timjan",
+            "rotselleri",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "pumpakärnor",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            15
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 13 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 69 minuter och huvudsakligen passiva moment till 30 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 99 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Mjölklimpar får svälla direkt i en klar kyckling- och rotfruktssoppa. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av pumpakärnor, purjolök, rotselleri, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-grain-loaf",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Skivbar kyckling- och havrelimpa – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "meatloaf",
+      "primary": "kyckling",
+      "method": "bake",
+      "side": "potatis",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Bakplåtspapper",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Avlång ugnsform",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning och yta",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finriv morot.",
+          "uses": [
+            "morot",
+            "senap"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Finhacka den råa kycklingen till färs. Skala och finriv morot.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "senap"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda huvudkomponentens alla ingredienser med bindningens havregryn och vetemjöl samt 80 ml vatten. Arbeta ihop till en massa som håller samman. Håll bindningens olja åt sidan till form och stekning.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt massan stå så att havre och mjöl hinner ta upp vätska. Ställ den blandade massan i kylskåp under vilan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "kyckling"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj den avlånga formen med bindningens olja och pressa ner massan jämnt. Släta till ovansidan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "rapsolja",
+            "kyckling"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 40 minuter tills limpan är fast och lätt brynt. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Låt vila tio minuter före uppskärning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 50,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 29 minuter och huvudsakligen passiva moment till 78 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 107 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Finhackad kyckling och havre bakas till en sammanhängande limpa, med skivbar snarare än biffstruktur. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-grain-loaf",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Skivbar kyckling- och havrelimpa – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "meatloaf",
+      "primary": "kyckling",
+      "method": "bake",
+      "side": "potatis",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Bakplåtspapper",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Avlång ugnsform",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning och yta",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finriv morot; skölj purjolöken noga mellan bladen och skiva tunt; finhacka persilja.",
+          "uses": [
+            "morot",
+            "senap",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Finhacka den råa kycklingen till färs. Skala och finriv morot. Finhacka purjolök så att bitarna blir små nog för massan.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "senap",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda huvudkomponentens alla ingredienser med bindningens havregryn och vetemjöl samt 80 ml vatten. Arbeta ihop till en massa som håller samman. Håll bindningens olja åt sidan till form och stekning.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "senap",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt massan stå så att havre och mjöl hinner ta upp vätska. Ställ den blandade massan i kylskåp under vilan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "kyckling"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj den avlånga formen med bindningens olja och pressa ner massan jämnt. Släta till ovansidan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "rapsolja",
+            "kyckling"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 40 minuter tills limpan är fast och lätt brynt. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Låt vila tio minuter före uppskärning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 50,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "senap",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 9 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 32 minuter och huvudsakligen passiva moment till 78 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 110 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Finhackad kyckling och havre bakas till en sammanhängande limpa, med skivbar snarare än biffstruktur. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-grain-loaf",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Skivbar kyckling- och havrelimpa – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "meatloaf",
+      "primary": "kyckling",
+      "method": "bake",
+      "side": "potatis",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Bakplåtspapper",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Avlång ugnsform",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning och yta",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Tillbehör: rårörda lingon och gurka",
+          "ingredients": [
+            {
+              "name": "lingon",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta lingon utan tillsatt socker, vikt som sålda"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finriv morot; skölj purjolöken noga mellan bladen och skiva tunt; finhacka persilja.",
+          "uses": [
+            "morot",
+            "senap",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Finhacka den råa kycklingen till färs. Skala och finriv morot. Finhacka purjolök så att bitarna blir små nog för massan.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "senap",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda huvudkomponentens alla ingredienser med bindningens havregryn och vetemjöl samt 80 ml vatten. Arbeta ihop till en massa som håller samman. Håll bindningens olja åt sidan till form och stekning.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "senap",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt massan stå så att havre och mjöl hinner ta upp vätska. Ställ den blandade massan i kylskåp under vilan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "kyckling"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj den avlånga formen med bindningens olja och pressa ner massan jämnt. Släta till ovansidan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "rapsolja",
+            "kyckling"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 40 minuter tills limpan är fast och lätt brynt. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Låt vila tio minuter före uppskärning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 50,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär gurka i små bitar.",
+          "uses": [
+            "lingon",
+            "strösocker",
+            "gurka",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör lingonen med sockret och låt stå tills bären tinat; rör igen efter en stund. Skiva gurkan och blanda med tillbehörets salt. Servera lingon och gurka i två skålar.",
+          "uses": [
+            "lingon",
+            "strösocker",
+            "gurka",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "senap",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl",
+            "potatis",
+            "lingon",
+            "strösocker",
+            "gurka"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 12 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 35 minuter och huvudsakligen passiva moment till 88 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 123 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Finhackad kyckling och havre bakas till en sammanhängande limpa, med skivbar snarare än biffstruktur. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av lingon, purjolök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-hand-scraped-spaetzle",
+      "name": "Handskrapade mjölklimpar med kyckling och brynt svamp – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "kokta och brynta skrapklimpar",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "Kyckling, svamp och bryning",
+      "flavor": [
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Hålslev",
+        "Träslev",
+        "Liten skärbräda",
+        "Palettkniv",
+        "Stor stekpanna",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Skrapade mjölklimpar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 300,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kyckling, svamp och bryning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör, som sålt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa ihop mjöl, ägg, mjölk och klimpens salt. Slå smeten kraftigt med träslev tills den är seg och blank, tjockare än pannkakssmet. Låt vila.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 15,
+          "passive": true
+        },
+        {
+          "text": "Koka upp 2500 ml vatten och sänk till stadig sjudning. Bred lite smet på en fuktad skärbräda. Skrapa med palettkniven smala korta remsor direkt ner i vattnet. Arbeta i små omgångar; sjud varje omgång tre minuter efter att klimparna flyter. De ska vara fasta och helt genomkokta. Lyft med hålslev.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skiva champinjonerna och skär kycklingen i tunna bitar. Bryn svampen i hälften av smöret. Tillsätt kycklingen och saltet och stek tills kycklingen är genomlagad och håller minst 74 °C. Lägg på en tallrik.",
+          "uses": [
+            "kyckling",
+            "champinjoner",
+            "smör",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Smält resterande smör i samma panna. Lägg i de avrunna klimparna och bryn dem lätt på båda sidor. Vänd tillbaka kyckling och svamp och strö över hackad persilja. Servera genast.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt",
+            "kyckling",
+            "champinjoner",
+            "smör",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt",
+            "kyckling",
+            "champinjoner",
+            "smör",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 7 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 46 minuter aktivt och 15 minuter huvudsakligen passiv väntan. Seg flytande äggdeg skrapas till vattenkokta remsor och bryns sedan. Detta har en annan stärkelsestruktur än kokt korn med utbytt protein. Kräver registergranskning av smör; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-chicken-hand-scraped-spaetzle",
+      "name": "Handskrapade mjölklimpar med kyckling och brynt svamp – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "kokta och brynta skrapklimpar",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "Kyckling, svamp och bryning",
+      "flavor": [
+        "persilja",
+        "senap",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Hålslev",
+        "Träslev",
+        "Liten skärbräda",
+        "Palettkniv",
+        "Stor stekpanna",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Skrapade mjölklimpar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 300,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kyckling, svamp och bryning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör, som sålt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa ihop mjöl, ägg, mjölk och klimpens salt. Slå smeten kraftigt med träslev tills den är seg och blank, tjockare än pannkakssmet. Låt vila.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 15,
+          "passive": true
+        },
+        {
+          "text": "Koka upp 2500 ml vatten och sänk till stadig sjudning. Bred lite smet på en fuktad skärbräda. Skrapa med palettkniven smala korta remsor direkt ner i vattnet. Arbeta i små omgångar; sjud varje omgång tre minuter efter att klimparna flyter. De ska vara fasta och helt genomkokta. Lyft med hålslev.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skiva champinjonerna och skär kycklingen i tunna bitar. Bryn svampen i hälften av smöret. Tillsätt kycklingen och saltet och stek tills kycklingen är genomlagad och håller minst 74 °C. Lägg på en tallrik.",
+          "uses": [
+            "kyckling",
+            "champinjoner",
+            "smör",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Smält resterande smör i samma panna. Lägg i de avrunna klimparna och bryn dem lätt på båda sidor. Vänd tillbaka kyckling och svamp och strö över hackad persilja. Servera genast.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt",
+            "kyckling",
+            "champinjoner",
+            "smör",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt",
+            "kyckling",
+            "champinjoner",
+            "smör",
+            "persilja",
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 10 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 50 minuter aktivt och 15 minuter huvudsakligen passiv väntan. Seg flytande äggdeg skrapas till vattenkokta remsor och bryns sedan. Detta har en annan stärkelsestruktur än kokt korn med utbytt protein. Kräver registergranskning av smör; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-chicken-hand-scraped-spaetzle",
+      "name": "Handskrapade mjölklimpar med kyckling och brynt svamp – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "kokta och brynta skrapklimpar",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "Kyckling, svamp och bryning",
+      "flavor": [
+        "persilja",
+        "senap",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Hålslev",
+        "Träslev",
+        "Liten skärbräda",
+        "Palettkniv",
+        "Stor stekpanna",
+        "Digital kökstermometer",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Skrapade mjölklimpar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 300,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kyckling, svamp och bryning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör, som sålt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Äppel- och gurksallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "solroskärnor",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella solroskärnor, som sålda"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa ihop mjöl, ägg, mjölk och klimpens salt. Slå smeten kraftigt med träslev tills den är seg och blank, tjockare än pannkakssmet. Låt vila.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 15,
+          "passive": true
+        },
+        {
+          "text": "Koka upp 2500 ml vatten och sänk till stadig sjudning. Bred lite smet på en fuktad skärbräda. Skrapa med palettkniven smala korta remsor direkt ner i vattnet. Arbeta i små omgångar; sjud varje omgång tre minuter efter att klimparna flyter. De ska vara fasta och helt genomkokta. Lyft med hålslev.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skiva champinjonerna och skär kycklingen i tunna bitar. Bryn svampen i hälften av smöret. Tillsätt kycklingen och saltet och stek tills kycklingen är genomlagad och håller minst 74 °C. Lägg på en tallrik.",
+          "uses": [
+            "kyckling",
+            "champinjoner",
+            "smör",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Smält resterande smör i samma panna. Lägg i de avrunna klimparna och bryn dem lätt på båda sidor. Vänd tillbaka kyckling och svamp och strö över hackad persilja. Servera genast.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt",
+            "kyckling",
+            "champinjoner",
+            "smör",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rosta solroskärnorna torrt under omrörning tills de doftar. Skölj äpple och gurka, kärna ur äpplet och skär båda i tunna skivor. Finhacka persiljan. Blanda och strö över kärnorna.",
+          "uses": [
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt",
+            "kyckling",
+            "champinjoner",
+            "smör",
+            "persilja",
+            "yoghurt naturell",
+            "senap",
+            "dill",
+            "äpple",
+            "gurka",
+            "solroskärnor"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 13 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 57 minuter aktivt och 15 minuter huvudsakligen passiv väntan. Seg flytande äggdeg skrapas till vattenkokta remsor och bryns sedan. Detta har en annan stärkelsestruktur än kokt korn med utbytt protein. Kräver registergranskning av smör och solroskärnor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-chicken-homemade-emulsified-sausage",
+      "name": "Hemgjord ångad kycklingkorv med potatis och rödbeta – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "finemulgerad ångad korv",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "Kokt potatis, Finriven rödbeta och äpple",
+      "flavor": [
+        "kryddpeppar",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Matberedare",
+        "Kylskåp",
+        "Bakplåtspapper för matlagning",
+        "Aluminiumfolie",
+        "Ånginsats",
+        "Stor gryta med lock",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Hemgjord kycklingkorv",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "potatismjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatisstärkelse, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Finriven rödbeta och äpple",
+          "ingredients": [
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta, rå ätlig vikt"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kyl kyckling, mjölk och matberedarens bunke ordentligt. Skär kycklingen i små bitar. Mixa kyckling och salt tills massan binder. Tillsätt ägg, potatismjöl, kryddpeppar och den kalla mjölken lite i taget. Mixa kort till en slät klibbig massa; ställ kallt om den blir varm.",
+          "uses": [
+            "kyckling",
+            "mjölk",
+            "ägg",
+            "potatismjöl",
+            "salt",
+            "kryddpeppar"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Fördela massan till två korvar per portion på ark av bakplåtspapper. Rulla tätt till cirka tre centimeter tjocka cylindrar. Vrid ändarna och omslut varje papperspaket med folie för stadga. Folien ska inte ligga direkt mot maten. Koka upp 1000 ml vatten under ånginsatsen.",
+          "uses": [
+            "kyckling",
+            "ägg"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ånga korvarna under lock cirka 25 minuter. Öppna ett paket och mät minst 74 °C mitt i korven. Ånga längre om temperaturen inte nåtts. Låt därefter vila fem minuter innan omslagen tas av.",
+          "uses": [
+            "kyckling",
+            "ägg"
+          ],
+          "minutes": 30,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Torka korvarnas yta lätt. Hetta upp korvkomponentens olja i stekpanna och bryn korvarna runt om tills ytan fått färg.",
+          "uses": [
+            "kyckling",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skala potatisen och skär stora exemplar i jämna bitar. Lägg i kastrullen med saltet och 1500 ml vatten. Koka upp och sjud tills potatisen är mjuk, cirka 20 minuter. Häll av och håll varm.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj, ansa och skär tillbehörets frukt och grönsaker i små bitar. Blanda rödbeta, äpple och citronjuice. Fördela hela tillbehöret över portionerna.",
+          "uses": [
+            "rödbeta",
+            "äpple",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "kyckling",
+            "mjölk",
+            "ägg",
+            "potatismjöl",
+            "salt",
+            "kryddpeppar",
+            "rapsolja",
+            "potatis",
+            "rödbeta",
+            "äpple",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 10 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 37 minuter aktivt och 55 minuter huvudsakligen passiv väntan. Kall rå kyckling emulgeras med mjölk och ägg, formas i tillfälliga matlagningsomslag, ångas och bryns. Ingen grönsak fungerar som fyllt skal. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av kryddpeppar och potatismjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-chicken-homemade-emulsified-sausage",
+      "name": "Hemgjord ångad kycklingkorv med potatis och rödbeta – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "finemulgerad ångad korv",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "Kokt potatis, Finriven rödbeta och äpple",
+      "flavor": [
+        "kryddpeppar",
+        "citronjuice",
+        "senap",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Matberedare",
+        "Kylskåp",
+        "Bakplåtspapper för matlagning",
+        "Aluminiumfolie",
+        "Ånginsats",
+        "Stor gryta med lock",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Hemgjord kycklingkorv",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "potatismjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatisstärkelse, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Finriven rödbeta och äpple",
+          "ingredients": [
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta, rå ätlig vikt"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kyl kyckling, mjölk och matberedarens bunke ordentligt. Skär kycklingen i små bitar. Mixa kyckling och salt tills massan binder. Tillsätt ägg, potatismjöl, kryddpeppar och den kalla mjölken lite i taget. Mixa kort till en slät klibbig massa; ställ kallt om den blir varm.",
+          "uses": [
+            "kyckling",
+            "mjölk",
+            "ägg",
+            "potatismjöl",
+            "salt",
+            "kryddpeppar"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Fördela massan till två korvar per portion på ark av bakplåtspapper. Rulla tätt till cirka tre centimeter tjocka cylindrar. Vrid ändarna och omslut varje papperspaket med folie för stadga. Folien ska inte ligga direkt mot maten. Koka upp 1000 ml vatten under ånginsatsen.",
+          "uses": [
+            "kyckling",
+            "ägg"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ånga korvarna under lock cirka 25 minuter. Öppna ett paket och mät minst 74 °C mitt i korven. Ånga längre om temperaturen inte nåtts. Låt därefter vila fem minuter innan omslagen tas av.",
+          "uses": [
+            "kyckling",
+            "ägg"
+          ],
+          "minutes": 30,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Torka korvarnas yta lätt. Hetta upp korvkomponentens olja i stekpanna och bryn korvarna runt om tills ytan fått färg.",
+          "uses": [
+            "kyckling",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skala potatisen och skär stora exemplar i jämna bitar. Lägg i kastrullen med saltet och 1500 ml vatten. Koka upp och sjud tills potatisen är mjuk, cirka 20 minuter. Häll av och håll varm.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj, ansa och skär tillbehörets frukt och grönsaker i små bitar. Blanda rödbeta, äpple och citronjuice. Fördela hela tillbehöret över portionerna.",
+          "uses": [
+            "rödbeta",
+            "äpple",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "kyckling",
+            "mjölk",
+            "ägg",
+            "potatismjöl",
+            "salt",
+            "kryddpeppar",
+            "rapsolja",
+            "potatis",
+            "rödbeta",
+            "äpple",
+            "citronjuice",
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 13 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 41 minuter aktivt och 55 minuter huvudsakligen passiv väntan. Kall rå kyckling emulgeras med mjölk och ägg, formas i tillfälliga matlagningsomslag, ångas och bryns. Ingen grönsak fungerar som fyllt skal. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av kryddpeppar och potatismjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-chicken-homemade-emulsified-sausage",
+      "name": "Hemgjord ångad kycklingkorv med potatis och rödbeta – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "finemulgerad ångad korv",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "Kokt potatis, Finriven rödbeta och äpple",
+      "flavor": [
+        "kryddpeppar",
+        "citronjuice",
+        "senap",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Matberedare",
+        "Kylskåp",
+        "Bakplåtspapper för matlagning",
+        "Aluminiumfolie",
+        "Ånginsats",
+        "Stor gryta med lock",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Kastrull med lock",
+        "Durkslag",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Hemgjord kycklingkorv",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "potatismjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatisstärkelse, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Finriven rödbeta och äpple",
+          "ingredients": [
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta, rå ätlig vikt"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Äppel- och gurksallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "solroskärnor",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella solroskärnor, som sålda"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kyl kyckling, mjölk och matberedarens bunke ordentligt. Skär kycklingen i små bitar. Mixa kyckling och salt tills massan binder. Tillsätt ägg, potatismjöl, kryddpeppar och den kalla mjölken lite i taget. Mixa kort till en slät klibbig massa; ställ kallt om den blir varm.",
+          "uses": [
+            "kyckling",
+            "mjölk",
+            "ägg",
+            "potatismjöl",
+            "salt",
+            "kryddpeppar"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Fördela massan till två korvar per portion på ark av bakplåtspapper. Rulla tätt till cirka tre centimeter tjocka cylindrar. Vrid ändarna och omslut varje papperspaket med folie för stadga. Folien ska inte ligga direkt mot maten. Koka upp 1000 ml vatten under ånginsatsen.",
+          "uses": [
+            "kyckling",
+            "ägg"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ånga korvarna under lock cirka 25 minuter. Öppna ett paket och mät minst 74 °C mitt i korven. Ånga längre om temperaturen inte nåtts. Låt därefter vila fem minuter innan omslagen tas av.",
+          "uses": [
+            "kyckling",
+            "ägg"
+          ],
+          "minutes": 30,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Torka korvarnas yta lätt. Hetta upp korvkomponentens olja i stekpanna och bryn korvarna runt om tills ytan fått färg.",
+          "uses": [
+            "kyckling",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skala potatisen och skär stora exemplar i jämna bitar. Lägg i kastrullen med saltet och 1500 ml vatten. Koka upp och sjud tills potatisen är mjuk, cirka 20 minuter. Häll av och håll varm.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj, ansa och skär tillbehörets frukt och grönsaker i små bitar. Blanda rödbeta, äpple och citronjuice. Fördela hela tillbehöret över portionerna.",
+          "uses": [
+            "rödbeta",
+            "äpple",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rosta solroskärnorna torrt under omrörning tills de doftar. Skölj äpple och gurka, kärna ur äpplet och skär båda i tunna skivor. Finhacka persiljan. Blanda och strö över kärnorna.",
+          "uses": [
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "kyckling",
+            "mjölk",
+            "ägg",
+            "potatismjöl",
+            "salt",
+            "kryddpeppar",
+            "rapsolja",
+            "potatis",
+            "rödbeta",
+            "äpple",
+            "citronjuice",
+            "yoghurt naturell",
+            "senap",
+            "dill",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 16 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 48 minuter aktivt och 55 minuter huvudsakligen passiv väntan. Kall rå kyckling emulgeras med mjölk och ägg, formas i tillfälliga matlagningsomslag, ångas och bryns. Ingen grönsak fungerar som fyllt skal. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av kryddpeppar, potatismjöl och solroskärnor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant överstiger nuvarande standardfilter 10–15 och kräver ett högre maxantal.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    }
+  ]
+}

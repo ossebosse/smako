@@ -1,0 +1,4100 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-65",
+  "recipes": [
+    {
+      "base_id": "smako-indian-egg-mushroom-savoury-crepes",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade kikärtspannkakor med ägg och svamp – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "pancake",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "kikärtssmet",
+      "flavor": [
+        "malen koriander"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade kikärtspannkakor",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen koriander, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kikärtssmet",
+          "ingredients": [
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 6,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bakpulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Vispa lätt samman äggen i en skål; håll dem åtskilda från grönsakerna fram till tillagningen.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär champinjoner i små bitar.",
+          "uses": [
+            "champinjoner"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop kikärtsmjöl, bakpulver och salt med 360 ml vatten till en slät smet. Spara smetkomponentens olja till form eller stekning.",
+          "uses": [
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila i tio minuter så att mjölet hinner ta upp vattnet.",
+          "uses": [
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i pannan och stek champinjoner tills genomvarma och mjuka. Blanda in malen koriander och huvudkomponentens salt.",
+          "uses": [
+            "champinjoner",
+            "malen koriander",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner yoghurt naturell och låt koka ihop under omrörning tills fri vätska nästan helt avdunstat.",
+          "uses": [
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Häll de lättvispade äggen över grönsakerna. Rör till en fast sammanhängande äggröra.  Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "ägg",
+            "champinjoner"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "ägg",
+            "champinjoner"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm smetkomponentens olja lite i taget i en stekpanna. Häll i smet till tunna pannkakor och stek cirka två minuter per sida tills smeten är helt genomgräddad. Använd all smet och all uppmätt olja i omgångar. Fyll pannkakorna med huvudkomponenten.",
+          "uses": [
+            "kikärtsmjöl",
+            "bakpulver",
+            "rapsolja",
+            "salt",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "champinjoner",
+            "malen koriander",
+            "yoghurt naturell",
+            "rapsolja",
+            "salt",
+            "kikärtsmjöl",
+            "bakpulver"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Stek svampen torr innan äggen vänds ner. Fyll de färdiga kikärtspannkakorna med fast äggröra. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 48 minuter aktivt arbete och 18 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 66 minuter med angiven arbetsordning. Nyhetsmotiv: Kikärtsmjölsbaserade pannkakor med separat svampäggröra; skiljer från linsbaserad pilot men breda pannkaksfamiljen måste granskas. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för bakpulver (dry, g), kikärtsmjöl (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-egg-mushroom-savoury-crepes",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade kikärtspannkakor med ägg och svamp – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "pancake",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "kikärtssmet",
+      "flavor": [
+        "malen koriander"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade kikärtspannkakor",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen koriander, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kikärtssmet",
+          "ingredients": [
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 6,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bakpulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Vispa lätt samman äggen i en skål; håll dem åtskilda från grönsakerna fram till tillagningen.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär champinjoner i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop kikärtsmjöl, bakpulver och salt med 360 ml vatten till en slät smet. Spara smetkomponentens olja till form eller stekning.",
+          "uses": [
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila i tio minuter så att mjölet hinner ta upp vattnet.",
+          "uses": [
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i pannan och stek champinjoner, gul lök, vitlök och ingefära tills genomvarma och mjuka. Blanda in malen koriander och huvudkomponentens salt.",
+          "uses": [
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner yoghurt naturell och låt koka ihop under omrörning tills fri vätska nästan helt avdunstat.",
+          "uses": [
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Häll de lättvispade äggen över grönsakerna. Rör till en fast sammanhängande äggröra.  Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "ägg",
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "ägg",
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm smetkomponentens olja lite i taget i en stekpanna. Häll i smet till tunna pannkakor och stek cirka två minuter per sida tills smeten är helt genomgräddad. Använd all smet och all uppmätt olja i omgångar. Fyll pannkakorna med huvudkomponenten.",
+          "uses": [
+            "kikärtsmjöl",
+            "bakpulver",
+            "rapsolja",
+            "salt",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "yoghurt naturell",
+            "rapsolja",
+            "salt",
+            "kikärtsmjöl",
+            "bakpulver"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Stek svampen torr innan äggen vänds ner. Fyll de färdiga kikärtspannkakorna med fast äggröra. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 52 minuter aktivt arbete och 18 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 70 minuter med angiven arbetsordning. Nyhetsmotiv: Kikärtsmjölsbaserade pannkakor med separat svampäggröra; skiljer från linsbaserad pilot men breda pannkaksfamiljen måste granskas. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för bakpulver (dry, g), kikärtsmjöl (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-egg-mushroom-savoury-crepes",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade kikärtspannkakor med ägg och svamp – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "pancake",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "kikärtssmet",
+      "flavor": [
+        "malen koriander"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade kikärtspannkakor",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen koriander, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kikärtssmet",
+          "ingredients": [
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 6,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bakpulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Myntagurka med yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Vispa lätt samman äggen i en skål; håll dem åtskilda från grönsakerna fram till tillagningen.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär champinjoner i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop kikärtsmjöl, bakpulver och salt med 360 ml vatten till en slät smet. Spara smetkomponentens olja till form eller stekning.",
+          "uses": [
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila i tio minuter så att mjölet hinner ta upp vattnet.",
+          "uses": [
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i pannan och stek champinjoner, gul lök, vitlök och ingefära tills genomvarma och mjuka. Blanda in malen koriander och huvudkomponentens salt.",
+          "uses": [
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner yoghurt naturell och låt koka ihop under omrörning tills fri vätska nästan helt avdunstat.",
+          "uses": [
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Häll de lättvispade äggen över grönsakerna. Rör till en fast sammanhängande äggröra.  Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "ägg",
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "ägg",
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm smetkomponentens olja lite i taget i en stekpanna. Häll i smet till tunna pannkakor och stek cirka två minuter per sida tills smeten är helt genomgräddad. Använd all smet och all uppmätt olja i omgångar. Fyll pannkakorna med huvudkomponenten.",
+          "uses": [
+            "kikärtsmjöl",
+            "bakpulver",
+            "rapsolja",
+            "salt",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Gör myntagurka med yoghurt: Riv gurkan grovt, pressa lätt och blanda med yoghurten, hackad mynta och citronjuicen.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med myntagurka med yoghurt. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "yoghurt naturell",
+            "rapsolja",
+            "salt",
+            "kikärtsmjöl",
+            "bakpulver",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Stek svampen torr innan äggen vänds ner. Fyll de färdiga kikärtspannkakorna med fast äggröra. Fyra portioner. Lokalt härlett ingrediensantal 13; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 58 minuter aktivt arbete och 18 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 76 minuter med angiven arbetsordning. Nyhetsmotiv: Kikärtsmjölsbaserade pannkakor med separat svampäggröra; skiljer från linsbaserad pilot men breda pannkaksfamiljen måste granskas. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för bakpulver (dry, g), kikärtsmjöl (dry, g), mynta (raw_edible, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-egg-pepper-tamarind-pan",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad äggpanna i syrlig paprikasås – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "fried_egg_sauce",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad äggpanna i syrlig paprikasås",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tamarindpasta, vikt som såld"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Behåll gulorna hela och spara äggen i en skål.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär paprika i små bitar.",
+          "uses": [
+            "paprika"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 560 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Fräs paprika på medelvärme tills grönsakerna mjuknar. Blanda in spiskummin och huvudkomponentens salt.",
+          "uses": [
+            "paprika",
+            "spiskummin",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt tamarindpasta och krossade tomater och 100 ml vatten. Sjud under omrörning tills grönsakssåsen är tjock nog att göra fördjupningar i. Äggen sparas råa till nästa tillagningsmoment.",
+          "uses": [
+            "tamarindpasta",
+            "krossade tomater"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Gör små fördjupningar i den varma grönsakssåsen. Häll de uppvägda äggen i fördjupningarna och lägg på lock. Sjud försiktigt tills vitan och gulan är fasta och äggdelen når minst 72 °C.",
+          "uses": [
+            "ägg",
+            "paprika"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "paprika",
+            "spiskummin",
+            "tamarindpasta",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Äggen ska tillagas hela som separata fält i den syrliga såsen, inte vispas till en curry. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 24 minuter aktivt arbete och 30 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 54 minuter med angiven arbetsordning. Nyhetsmotiv: Ägg sätts i fördjupningar i en reducerad paprika-tamarindsås; jämför befintlig shakshuka och äggcurry särskilt. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för tamarindpasta (as_sold, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-egg-pepper-tamarind-pan",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad äggpanna i syrlig paprikasås – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "fried_egg_sauce",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad äggpanna i syrlig paprikasås",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tamarindpasta, vikt som såld"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Behåll gulorna hela och spara äggen i en skål.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär paprika i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "paprika",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 520 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Fräs paprika, gul lök, vitlök och ingefära på medelvärme tills grönsakerna mjuknar. Blanda in spiskummin och huvudkomponentens salt.",
+          "uses": [
+            "paprika",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt tamarindpasta och krossade tomater och 140 ml vatten. Sjud under omrörning tills grönsakssåsen är tjock nog att göra fördjupningar i. Äggen sparas råa till nästa tillagningsmoment.",
+          "uses": [
+            "tamarindpasta",
+            "krossade tomater"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Gör små fördjupningar i den varma grönsakssåsen. Häll de uppvägda äggen i fördjupningarna och lägg på lock. Sjud försiktigt tills vitan och gulan är fasta och äggdelen når minst 72 °C.",
+          "uses": [
+            "ägg",
+            "paprika",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "paprika",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "tamarindpasta",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Äggen ska tillagas hela som separata fält i den syrliga såsen, inte vispas till en curry. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 28 minuter aktivt arbete och 30 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 58 minuter med angiven arbetsordning. Nyhetsmotiv: Ägg sätts i fördjupningar i en reducerad paprika-tamarindsås; jämför befintlig shakshuka och äggcurry särskilt. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för tamarindpasta (as_sold, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-egg-pepper-tamarind-pan",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad äggpanna i syrlig paprikasås – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "fried_egg_sauce",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad äggpanna i syrlig paprikasås",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tamarindpasta, vikt som såld"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gurk- och tomatsallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Behåll gulorna hela och spara äggen i en skål.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär paprika i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "paprika",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 480 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Fräs paprika, gul lök, vitlök och ingefära på medelvärme tills grönsakerna mjuknar. Blanda in spiskummin och huvudkomponentens salt.",
+          "uses": [
+            "paprika",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt tamarindpasta och krossade tomater och 140 ml vatten. Sjud under omrörning tills grönsakssåsen är tjock nog att göra fördjupningar i. Äggen sparas råa till nästa tillagningsmoment.",
+          "uses": [
+            "tamarindpasta",
+            "krossade tomater"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Gör små fördjupningar i den varma grönsakssåsen. Häll de uppvägda äggen i fördjupningarna och lägg på lock. Sjud försiktigt tills vitan och gulan är fasta och äggdelen når minst 72 °C.",
+          "uses": [
+            "ägg",
+            "paprika",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör gurk- och tomatsallad: Skär gurka och tomat i små bitar, strimla rödlöken tunt och vänd med citronjuicen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med gurk- och tomatsallad. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "paprika",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "tamarindpasta",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "ris",
+            "gurka",
+            "tomat",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Äggen ska tillagas hela som separata fält i den syrliga såsen, inte vispas till en curry. Fyra portioner. Lokalt härlett ingrediensantal 14; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 34 minuter aktivt arbete och 30 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 64 minuter med angiven arbetsordning. Nyhetsmotiv: Ägg sätts i fördjupningar i en reducerad paprika-tamarindsås; jämför befintlig shakshuka och äggcurry särskilt. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för tamarindpasta (as_sold, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-egg-potato-bread-pudding",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad brödpudding med ägg och potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "bread_pudding",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "bröd",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad brödpudding",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 190 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Vispa lätt samman äggen i en skål; håll dem åtskilda från grönsakerna fram till tillagningen.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala och skär potatis i små tärningar, omkring 1 cm.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg huvudkomponentens förberedda potatis i kastrull med 800 ml vatten och koka upp.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sjud cirka 10 minuter tills bitarna är nästan mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skiva brödet och lägg åt sidan. Det används i serveringen enligt huvudstegen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek potatis tills de mjuknat. Blanda in garam masala och huvudkomponentens salt. Låt grönsakerna svalna till ljummet.",
+          "uses": [
+            "potatis",
+            "garam masala",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vispa de råa äggen med mjölk. Blanda i de ljumma grönsakerna utan att värma blandningen ytterligare.",
+          "uses": [
+            "ägg",
+            "mjölk",
+            "potatis"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 190 °C. Riv brödet i grova bitar och vänd ner det i huvudkomponenten. Packa löst i ugnsform; all sås ska följa med.",
+          "uses": [
+            "ägg",
+            "bröd",
+            "mjölk"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Baka mitt i ugnen cirka 25 minuter tills ytan fått färg och mitten är genomvarm.  Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "potatis",
+            "garam masala",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Förkoka potatistärningarna i 700 ml vatten i tio minuter och häll av. Brödet ska absorbera den råa äggmjölken före ugnsgräddning. Fyra portioner. Lokalt härlett ingrediensantal 6; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 32 minuter aktivt arbete och 35 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 67 minuter med angiven arbetsordning. Nyhetsmotiv: Salt brödpudding med äggstanning och potatis; skild struktur från omelett eller fattiga riddare. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för garam masala (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-egg-potato-bread-pudding",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad brödpudding med ägg och potatis – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "bread_pudding",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "bröd",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad brödpudding",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 190 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Vispa lätt samman äggen i en skål; håll dem åtskilda från grönsakerna fram till tillagningen.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala och skär potatis i små tärningar, omkring 1 cm; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg huvudkomponentens förberedda potatis i kastrull med 800 ml vatten och koka upp.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sjud cirka 10 minuter tills bitarna är nästan mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skiva brödet och lägg åt sidan. Det används i serveringen enligt huvudstegen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek potatis, gul lök, vitlök och ingefära tills de mjuknat. Blanda in garam masala och huvudkomponentens salt. Låt grönsakerna svalna till ljummet.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vispa de råa äggen med mjölk. Blanda i de ljumma grönsakerna utan att värma blandningen ytterligare.",
+          "uses": [
+            "ägg",
+            "mjölk",
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 190 °C. Riv brödet i grova bitar och vänd ner det i huvudkomponenten. Packa löst i ugnsform; all sås ska följa med.",
+          "uses": [
+            "ägg",
+            "bröd",
+            "mjölk"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Baka mitt i ugnen cirka 25 minuter tills ytan fått färg och mitten är genomvarm.  Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Förkoka potatistärningarna i 700 ml vatten i tio minuter och häll av. Brödet ska absorbera den råa äggmjölken före ugnsgräddning. Fyra portioner. Lokalt härlett ingrediensantal 9; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 36 minuter aktivt arbete och 35 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 71 minuter med angiven arbetsordning. Nyhetsmotiv: Salt brödpudding med äggstanning och potatis; skild struktur från omelett eller fattiga riddare. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för garam masala (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-egg-potato-bread-pudding",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad brödpudding med ägg och potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "bread_pudding",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "bröd",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad brödpudding",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gurk- och tomatsallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 190 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Vispa lätt samman äggen i en skål; håll dem åtskilda från grönsakerna fram till tillagningen.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala och skär potatis i små tärningar, omkring 1 cm; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg huvudkomponentens förberedda potatis i kastrull med 800 ml vatten och koka upp.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sjud cirka 10 minuter tills bitarna är nästan mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skiva brödet och lägg åt sidan. Det används i serveringen enligt huvudstegen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek potatis, gul lök, vitlök och ingefära tills de mjuknat. Blanda in garam masala och huvudkomponentens salt. Låt grönsakerna svalna till ljummet.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vispa de råa äggen med mjölk. Blanda i de ljumma grönsakerna utan att värma blandningen ytterligare.",
+          "uses": [
+            "ägg",
+            "mjölk",
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 190 °C. Riv brödet i grova bitar och vänd ner det i huvudkomponenten. Packa löst i ugnsform; all sås ska följa med.",
+          "uses": [
+            "ägg",
+            "bröd",
+            "mjölk"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Baka mitt i ugnen cirka 25 minuter tills ytan fått färg och mitten är genomvarm.  Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör gurk- och tomatsallad: Skär gurka och tomat i små bitar, strimla rödlöken tunt och vänd med citronjuicen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med gurk- och tomatsallad. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "gurka",
+            "tomat",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Förkoka potatistärningarna i 700 ml vatten i tio minuter och häll av. Brödet ska absorbera den råa äggmjölken före ugnsgräddning. Fyra portioner. Lokalt härlett ingrediensantal 13; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 42 minuter aktivt arbete och 35 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 77 minuter med angiven arbetsordning. Nyhetsmotiv: Salt brödpudding med äggstanning och potatis; skild struktur från omelett eller fattiga riddare. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för garam masala (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-fermented-rice-urad-crepes-mushrooms",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade fermenterade ris-uradcrêpes med svamp – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "råmalen ris-pulsjäsning och tunn pannkrust",
+      "primary": "uradlinser",
+      "method": "pan",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Mixer",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Rumstermometer",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Slev",
+        "Stor skål",
+        "Stor stekpanna",
+        "Två skålar",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fermenterade ris-uradcrêpes med svampfyllning",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "uradlinser",
+              "form": "dry",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Skalade uradlinser, torr vikt; används blötlagda och råmalda"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 50.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 7.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fermenterade ris-uradcrêpes med svampfyllning: Skölj ris och uradlinser var för sig. Lägg riset i 900 ml vatten och linserna i 500 ml vatten i två rena skålar och täck.",
+          "uses": [
+            "ris",
+            "uradlinser"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Blötlägg 6 timmar i kylskåp.",
+          "uses": [
+            "ris",
+            "uradlinser"
+          ],
+          "minutes": 360,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av blötläggningsvattnet. Mixa riset mycket slätt med 300 ml vatten. Mixa uradlinserna separat med 150 ml vatten till en ljus, luftig massa. Blanda båda i en stor ren skål med plats för fördubblad volym.",
+          "uses": [
+            "ris",
+            "uradlinser"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Täck löst och låt fermentera 8–12 timmar vid 25–28 °C tills smeten blivit tydligt bubblig, luftig och milt syrlig. Planerad väntetid är 10 timmar. Smet som inte visar tydlig jäsaktivitet efter 12 timmar eller luktar avvikande används inte. Rör därefter ner hälften av saltet.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "salt"
+          ],
+          "minutes": 600,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skiva svampen och hacka löken. Stek i hälften av oljan tills vätskan kokat bort och svampen fått färg. Lägg i fryst spenat och resterande salt och stek tills fyllningen är genomvarm och torr. Håll varm.",
+          "uses": [
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "spenat",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vispa ner 100 ml vatten i den fermenterade smeten. Värm en stor välfungerande stekpanna på medelvärme och pensla sparsamt med resterande olja. Bred en liten slev smet från mitten utåt till en mycket tunn crêpe. Stek 2–3 minuter tills ovansidan är torr och undersidan gyllene; vänd vid behov för att hela smeten ska bli tillagad.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "rapsolja"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela lite varm svampfyllning i varje crêpe och vik löst. Upprepa med hela smeten, oljan och fyllningen. Håll de färdiga crêpesen glest i 80 °C ugn tills måltidens tillbehör är klara.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "champinjoner",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera fermenterade ris-uradcrêpes med svampfyllning. Fördela hela mängden jämnt mellan fyra portioner.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "champinjoner",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat svenskt receptutkast med indisk inspiration; inte provlagat och inget påstående om traditionell autenticitet. Fyra portioner. 6 lokalt räknade ingredienser, efter avdrag för salt, svartpeppar och processvatten; samma råvara i flera komponenter räknas en gång. Antalet ligger utanför middagens standardfilter 10–15; filtergränserna behöver justeras för just denna variant. Sekventiell arbetsordning ger cirka 78 aktiva och 960 huvudsakligen passiva minuter, totalt 1038 minuter; tider behöver provlagas. Kulinariskt nyhetsmotiv: Separat råmalet ris och urad fermenteras före tunn gräddning, vilket är en annan smetprocess än pilotens direktmalda rödlinscrêpe. Svampfyllningen ersätter inte denna processskillnad som nyhetsmotiv. Kräver registergranskning av uradlinser; inte importklar. Inga krav- eller packkoder har uppfunnits. Fermenteringen är en central del av utkastet och kan inte hoppas över. Temperatur, jäsaktivitet och pannegenskaper behöver särskild provlagning. Ingen hållbarhet utlovas; laga direkt efter färdig jäsning. Produktval, köpbarhet, diet och allergener behöver bedömas per variant. Ingen näringsberäkning, Smako-validering eller import har utförts. Ny bas är en redaktionell kandidat, inte ett verifierat unikhetsbesked."
+    },
+    {
+      "base_id": "smako-indian-fermented-rice-urad-crepes-mushrooms",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade fermenterade ris-uradcrêpes med svamp – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "råmalen ris-pulsjäsning och tunn pannkrust",
+      "primary": "uradlinser",
+      "method": "pan",
+      "side": "kokos- och ärtkräm",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Kastrull",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Mixer",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Rumstermometer",
+        "Sil",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Slev",
+        "Stor skål",
+        "Stor stekpanna",
+        "Två skålar",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fermenterade ris-uradcrêpes med svampfyllning",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "uradlinser",
+              "form": "dry",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Skalade uradlinser, torr vikt; används blötlagda och råmalda"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 50.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 7.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokos- och ärtkräm",
+          "ingredients": [
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Osötade torkade kokosflingor"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt som såld"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fermenterade ris-uradcrêpes med svampfyllning: Skölj ris och uradlinser var för sig. Lägg riset i 900 ml vatten och linserna i 500 ml vatten i två rena skålar och täck.",
+          "uses": [
+            "ris",
+            "uradlinser"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Blötlägg 6 timmar i kylskåp.",
+          "uses": [
+            "ris",
+            "uradlinser"
+          ],
+          "minutes": 360,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av blötläggningsvattnet. Mixa riset mycket slätt med 300 ml vatten. Mixa uradlinserna separat med 150 ml vatten till en ljus, luftig massa. Blanda båda i en stor ren skål med plats för fördubblad volym.",
+          "uses": [
+            "ris",
+            "uradlinser"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Täck löst och låt fermentera 8–12 timmar vid 25–28 °C tills smeten blivit tydligt bubblig, luftig och milt syrlig. Planerad väntetid är 10 timmar. Smet som inte visar tydlig jäsaktivitet efter 12 timmar eller luktar avvikande används inte. Rör därefter ner hälften av saltet.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "salt"
+          ],
+          "minutes": 600,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kokos- och ärtkräm: Koka ärtorna i 500 ml vatten 4 minuter tills de är genomvarma. Häll av. Lägg kokosflingorna i en skål med 100 ml vatten (hett) och låt mjukna 10 minuter.",
+          "uses": [
+            "ärtor",
+            "kokosflingor"
+          ],
+          "minutes": 16,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala och riv ingefäran. Mixa ärtor, kokos med hela blötläggningsvätskan, ingefära, limejuice och salt till en grov kräm. Täck och ställ i kylskåp till serveringen.",
+          "uses": [
+            "kokosflingor",
+            "ärtor",
+            "limejuice",
+            "ingefära",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skiva svampen och hacka löken. Stek i hälften av oljan tills vätskan kokat bort och svampen fått färg. Lägg i fryst spenat och resterande salt och stek tills fyllningen är genomvarm och torr. Håll varm.",
+          "uses": [
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "spenat",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vispa ner 100 ml vatten i den fermenterade smeten. Värm en stor välfungerande stekpanna på medelvärme och pensla sparsamt med resterande olja. Bred en liten slev smet från mitten utåt till en mycket tunn crêpe. Stek 2–3 minuter tills ovansidan är torr och undersidan gyllene; vänd vid behov för att hela smeten ska bli tillagad.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "rapsolja"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fördela lite varm svampfyllning i varje crêpe och vik löst. Upprepa med hela smeten, oljan och fyllningen. Håll de färdiga crêpesen glest i 80 °C ugn tills måltidens tillbehör är klara.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "champinjoner",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera fermenterade ris-uradcrêpes med svampfyllning och kokos- och ärtkräm. Fördela hela mängden jämnt mellan fyra portioner.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "champinjoner",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "kokosflingor",
+            "ärtor",
+            "limejuice",
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat svenskt receptutkast med indisk inspiration; inte provlagat och inget påstående om traditionell autenticitet. Fyra portioner. 10 lokalt räknade ingredienser, efter avdrag för salt, svartpeppar och processvatten; samma råvara i flera komponenter räknas en gång. Antalet ligger preliminärt inom middagens 10–15-filter, utan garanti om val i Smako. Sekventiell arbetsordning ger cirka 99 aktiva och 960 huvudsakligen passiva minuter, totalt 1059 minuter; tider behöver provlagas. Kulinariskt nyhetsmotiv: Separat råmalet ris och urad fermenteras före tunn gräddning, vilket är en annan smetprocess än pilotens direktmalda rödlinscrêpe. Svampfyllningen ersätter inte denna processskillnad som nyhetsmotiv. Kräver registergranskning av kokosflingor och uradlinser; inte importklar. Inga krav- eller packkoder har uppfunnits. Fermenteringen är en central del av utkastet och kan inte hoppas över. Temperatur, jäsaktivitet och pannegenskaper behöver särskild provlagning. Ingen hållbarhet utlovas; laga direkt efter färdig jäsning. Produktval, köpbarhet, diet och allergener behöver bedömas per variant. Ingen näringsberäkning, Smako-validering eller import har utförts. Ny bas är en redaktionell kandidat, inte ett verifierat unikhetsbesked."
+    },
+    {
+      "base_id": "smako-indian-fermented-rice-urad-crepes-mushrooms",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade fermenterade ris-uradcrêpes med svamp – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "råmalen ris-pulsjäsning och tunn pannkrust",
+      "primary": "uradlinser",
+      "method": "pan",
+      "side": "kokos- och ärtkräm; syrlig kål med morot och sesam",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Kastrull",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Mixer",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Rivjärn",
+        "Rumstermometer",
+        "Sil",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Slev",
+        "Stekpanna",
+        "Stor skål",
+        "Stor stekpanna",
+        "Två skålar",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fermenterade ris-uradcrêpes med svampfyllning",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "uradlinser",
+              "form": "dry",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Skalade uradlinser, torr vikt; används blötlagda och råmalda"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 50.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 7.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokos- och ärtkräm",
+          "ingredients": [
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Osötade torkade kokosflingor"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt som såld"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Syrlig kål med morot och sesam",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt som såld"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sesamfrön, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fermenterade ris-uradcrêpes med svampfyllning: Skölj ris och uradlinser var för sig. Lägg riset i 900 ml vatten och linserna i 500 ml vatten i två rena skålar och täck.",
+          "uses": [
+            "ris",
+            "uradlinser"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Blötlägg 6 timmar i kylskåp.",
+          "uses": [
+            "ris",
+            "uradlinser"
+          ],
+          "minutes": 360,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av blötläggningsvattnet. Mixa riset mycket slätt med 300 ml vatten. Mixa uradlinserna separat med 150 ml vatten till en ljus, luftig massa. Blanda båda i en stor ren skål med plats för fördubblad volym.",
+          "uses": [
+            "ris",
+            "uradlinser"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Täck löst och låt fermentera 8–12 timmar vid 25–28 °C tills smeten blivit tydligt bubblig, luftig och milt syrlig. Planerad väntetid är 10 timmar. Smet som inte visar tydlig jäsaktivitet efter 12 timmar eller luktar avvikande används inte. Rör därefter ner hälften av saltet.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "salt"
+          ],
+          "minutes": 600,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kokos- och ärtkräm: Koka ärtorna i 500 ml vatten 4 minuter tills de är genomvarma. Häll av. Lägg kokosflingorna i en skål med 100 ml vatten (hett) och låt mjukna 10 minuter.",
+          "uses": [
+            "ärtor",
+            "kokosflingor"
+          ],
+          "minutes": 16,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala och riv ingefäran. Mixa ärtor, kokos med hela blötläggningsvätskan, ingefära, limejuice och salt till en grov kräm. Täck och ställ i kylskåp till serveringen.",
+          "uses": [
+            "kokosflingor",
+            "ärtor",
+            "limejuice",
+            "ingefära",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Syrlig kål med morot och sesam: Skölj och strimla kålen tunt. Skala och grovriv moroten. Massera grönsakerna med salt, limejuice och olja så att de mjuknar lätt.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "limejuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rosta sesamfröna i torr panna 2 minuter under omrörning och blanda ner i kålen. Täck och ställ i kylskåp till serveringen.",
+          "uses": [
+            "sesamfrön",
+            "vitkål",
+            "morot"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Skiva svampen och hacka löken. Stek i hälften av oljan tills vätskan kokat bort och svampen fått färg. Lägg i fryst spenat och resterande salt och stek tills fyllningen är genomvarm och torr. Håll varm.",
+          "uses": [
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "spenat",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Vispa ner 100 ml vatten i den fermenterade smeten. Värm en stor välfungerande stekpanna på medelvärme och pensla sparsamt med resterande olja. Bred en liten slev smet från mitten utåt till en mycket tunn crêpe. Stek 2–3 minuter tills ovansidan är torr och undersidan gyllene; vänd vid behov för att hela smeten ska bli tillagad.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "rapsolja"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Fördela lite varm svampfyllning i varje crêpe och vik löst. Upprepa med hela smeten, oljan och fyllningen. Håll de färdiga crêpesen glest i 80 °C ugn tills måltidens tillbehör är klara.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "champinjoner",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera fermenterade ris-uradcrêpes med svampfyllning, kokos- och ärtkräm och syrlig kål med morot och sesam. Fördela hela mängden jämnt mellan fyra portioner.",
+          "uses": [
+            "ris",
+            "uradlinser",
+            "champinjoner",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "kokosflingor",
+            "ärtor",
+            "limejuice",
+            "ingefära",
+            "vitkål",
+            "morot",
+            "sesamfrön"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat svenskt receptutkast med indisk inspiration; inte provlagat och inget påstående om traditionell autenticitet. Fyra portioner. 13 lokalt räknade ingredienser, efter avdrag för salt, svartpeppar och processvatten; samma råvara i flera komponenter räknas en gång. Antalet ligger preliminärt inom middagens 10–15-filter, utan garanti om val i Smako. Sekventiell arbetsordning ger cirka 109 aktiva och 960 huvudsakligen passiva minuter, totalt 1069 minuter; tider behöver provlagas. Kulinariskt nyhetsmotiv: Separat råmalet ris och urad fermenteras före tunn gräddning, vilket är en annan smetprocess än pilotens direktmalda rödlinscrêpe. Svampfyllningen ersätter inte denna processskillnad som nyhetsmotiv. Kräver registergranskning av kokosflingor och uradlinser; inte importklar. Inga krav- eller packkoder har uppfunnits. Fermenteringen är en central del av utkastet och kan inte hoppas över. Temperatur, jäsaktivitet och pannegenskaper behöver särskild provlagning. Ingen hållbarhet utlovas; laga direkt efter färdig jäsning. Produktval, köpbarhet, diet och allergener behöver bedömas per variant. Ingen näringsberäkning, Smako-validering eller import har utförts. Ny bas är en redaktionell kandidat, inte ett verifierat unikhetsbesked."
+    },
+    {
+      "base_id": "smako-indian-fish-coconut-bread-toast",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad fisktoast med kokos – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "toast",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "bröd",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad fisktoast",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "majsstärkelse",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Majsstärkelse, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att fisk är utan ben och oätliga delar. Skär i mycket små bitar och hacka därefter till en sammanhängande färs. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala och finriv morot.",
+          "uses": [
+            "morot"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skiva brödet och lägg åt sidan. Det används i serveringen enligt huvudstegen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda fisk, morot, spiskummin, kokosmjölk, salt, ägg och majsstärkelse till en sammanhängande smet. Arbeta med sked så att huvudråvaran binder de finhackade grönsakerna. Låt stå medan formen eller pannan görs i ordning.",
+          "uses": [
+            "fisk",
+            "morot",
+            "spiskummin",
+            "kokosmjölk",
+            "salt",
+            "ägg",
+            "majsstärkelse"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Bred smeten i ett jämnt lager, högst cirka 1 cm tjockt, över brödskivorna. Tryck fast så att fyllningen sitter mot brödet.",
+          "uses": [
+            "fisk",
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek bröden med fyllningen nedåt först, cirka fem minuter, och därefter brödsidan cirka tre minuter. Gör flera omgångar och fördela oljan mellan dem. Kontrollera med kökstermometer att fisken når minst 63 °C i mitten. Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "fisk",
+            "bröd",
+            "rapsolja"
+          ],
+          "minutes": 18,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fisk",
+            "morot",
+            "spiskummin",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "majsstärkelse",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Finriv moroten och hacka fisken till en klibbig rå massa. Lagret på brödet ska vara tunt och stekas först mot pannan. Fyra portioner. Lokalt härlett ingrediensantal 8; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 39 minuter aktivt arbete och 0 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 39 minuter med angiven arbetsordning. Nyhetsmotiv: Fiskfärs stekt direkt på brödets yta med kokos och grönsak; skiljer från lösa fiskbiffar. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för majsstärkelse (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-fish-coconut-bread-toast",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad fisktoast med kokos – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "toast",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "bröd",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad fisktoast",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "majsstärkelse",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Majsstärkelse, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att fisk är utan ben och oätliga delar. Skär i mycket små bitar och hacka därefter till en sammanhängande färs. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala och finriv morot; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skiva brödet och lägg åt sidan. Det används i serveringen enligt huvudstegen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda fisk, morot, gul lök, vitlök, ingefära, spiskummin, kokosmjölk, salt, ägg och majsstärkelse till en sammanhängande smet. Arbeta med sked så att huvudråvaran binder de finhackade grönsakerna. Låt stå medan formen eller pannan görs i ordning.",
+          "uses": [
+            "fisk",
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "kokosmjölk",
+            "salt",
+            "ägg",
+            "majsstärkelse"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Bred smeten i ett jämnt lager, högst cirka 1 cm tjockt, över brödskivorna. Tryck fast så att fyllningen sitter mot brödet.",
+          "uses": [
+            "fisk",
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek bröden med fyllningen nedåt först, cirka fem minuter, och därefter brödsidan cirka tre minuter. Gör flera omgångar och fördela oljan mellan dem. Kontrollera med kökstermometer att fisken når minst 63 °C i mitten. Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "fisk",
+            "bröd",
+            "rapsolja"
+          ],
+          "minutes": 18,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fisk",
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "majsstärkelse",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Finriv moroten och hacka fisken till en klibbig rå massa. Lagret på brödet ska vara tunt och stekas först mot pannan. Fyra portioner. Lokalt härlett ingrediensantal 11; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 43 minuter aktivt arbete och 0 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 43 minuter med angiven arbetsordning. Nyhetsmotiv: Fiskfärs stekt direkt på brödets yta med kokos och grönsak; skiljer från lösa fiskbiffar. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för majsstärkelse (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-fish-coconut-bread-toast",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad fisktoast med kokos – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "toast",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "bröd",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad fisktoast",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "majsstärkelse",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Majsstärkelse, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Myntagurka med yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att fisk är utan ben och oätliga delar. Skär i mycket små bitar och hacka därefter till en sammanhängande färs. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala och finriv morot; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skiva brödet och lägg åt sidan. Det används i serveringen enligt huvudstegen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda fisk, morot, gul lök, vitlök, ingefära, spiskummin, kokosmjölk, salt, ägg och majsstärkelse till en sammanhängande smet. Arbeta med sked så att huvudråvaran binder de finhackade grönsakerna. Låt stå medan formen eller pannan görs i ordning.",
+          "uses": [
+            "fisk",
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "kokosmjölk",
+            "salt",
+            "ägg",
+            "majsstärkelse"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Bred smeten i ett jämnt lager, högst cirka 1 cm tjockt, över brödskivorna. Tryck fast så att fyllningen sitter mot brödet.",
+          "uses": [
+            "fisk",
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek bröden med fyllningen nedåt först, cirka fem minuter, och därefter brödsidan cirka tre minuter. Gör flera omgångar och fördela oljan mellan dem. Kontrollera med kökstermometer att fisken når minst 63 °C i mitten. Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "fisk",
+            "bröd",
+            "rapsolja"
+          ],
+          "minutes": 18,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Gör myntagurka med yoghurt: Riv gurkan grovt, pressa lätt och blanda med yoghurten, hackad mynta och citronjuicen.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med myntagurka med yoghurt. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fisk",
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "majsstärkelse",
+            "bröd",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Finriv moroten och hacka fisken till en klibbig rå massa. Lagret på brödet ska vara tunt och stekas först mot pannan. Fyra portioner. Lokalt härlett ingrediensantal 15; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 49 minuter aktivt arbete och 0 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 49 minuter med angiven arbetsordning. Nyhetsmotiv: Fiskfärs stekt direkt på brödets yta med kokos och grönsak; skiljer från lösa fiskbiffar. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för majsstärkelse (dry, g), mynta (raw_edible, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    }
+  ]
+}

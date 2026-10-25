@@ -1,0 +1,4087 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-12",
+  "recipes": [
+    {
+      "base_id": "smako-greek-fish-chickpea-cakes-tomato-bulgur",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade fisk- och kikärtskakor med tomatbulgur – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fisk-baljväxtkakor",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "tomatbulgur",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kastrull med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fiskkikärtskakor",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatbulgur",
+          "ingredients": [
+            {
+              "name": "bulgur",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bulgur, torr vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fiskkikärtskakor: Låt kikärtor rinna av noga. Mosa kikärtor till en grov massa.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Finhacka fisk till en klibbig färs med kniv; håll råvaran kall och diska redskapen efteråt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda fisk, kikärtor, ströbröd, citronjuice och salt till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tomatbulgur: Skala och grovriv eventuella råa rotfrukter, och skär övriga grönsaker smått. Skölj bulgur. Lägg i kastrullen med 450 ml vatten och tomat, rapsolja och salt. Koka upp.",
+          "uses": [
+            "bulgur",
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 12 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "bulgur",
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "bulgur"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera fiskkikärtskakor och tomatbulgur. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "bulgur",
+            "tomat"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 75 minuter totalt, varav 43 aktivt och 32 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av bulgur; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Mager fisk binds med kikärtsmos till täta kakor och serveras med tomatkokta gryn; närliggande laxbiffar ska granskas som möjlig variantgrupp. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-chickpea-cakes-tomato-bulgur",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade fisk- och kikärtskakor med tomatbulgur – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fisk-baljväxtkakor",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "tomatbulgur",
+      "flavor": [
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kastrull med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fiskkikärtskakor",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatbulgur",
+          "ingredients": [
+            {
+              "name": "bulgur",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bulgur, torr vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fiskkikärtskakor: Ansa och finhacka vitlök. Låt kikärtor rinna av noga. Finhacka dill. Mosa kikärtor till en grov massa.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Finhacka fisk till en klibbig färs med kniv; håll råvaran kall och diska redskapen efteråt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda fisk, kikärtor, ströbröd, citronjuice, salt, dill och vitlök till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tomatbulgur: Skala och grovriv eventuella råa rotfrukter, och skär övriga grönsaker smått. Skölj bulgur. Lägg i kastrullen med 450 ml vatten och tomat, rapsolja och salt. Koka upp.",
+          "uses": [
+            "bulgur",
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 12 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "bulgur",
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "bulgur"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera fiskkikärtskakor och tomatbulgur. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök",
+            "bulgur",
+            "tomat"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 75 minuter totalt, varav 43 aktivt och 32 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av bulgur; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Mager fisk binds med kikärtsmos till täta kakor och serveras med tomatkokta gryn; närliggande laxbiffar ska granskas som möjlig variantgrupp. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-chickpea-cakes-tomato-bulgur",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade fisk- och kikärtskakor med tomatbulgur – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fisk-baljväxtkakor",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "tomatbulgur; kall yoghurtsås",
+      "flavor": [
+        "citronjuice",
+        "dill",
+        "mynta"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kastrull med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fiskkikärtskakor",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatbulgur",
+          "ingredients": [
+            {
+              "name": "bulgur",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bulgur, torr vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk mynta, blad"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fiskkikärtskakor: Ansa och finhacka vitlök. Låt kikärtor rinna av noga. Finhacka dill. Mosa kikärtor till en grov massa.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Finhacka fisk till en klibbig färs med kniv; håll råvaran kall och diska redskapen efteråt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda fisk, kikärtor, ströbröd, citronjuice, salt, dill och vitlök till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tomatbulgur: Skala och grovriv eventuella råa rotfrukter, och skär övriga grönsaker smått. Skölj bulgur. Lägg i kastrullen med 450 ml vatten och tomat, rapsolja, salt och rödlök. Koka upp.",
+          "uses": [
+            "bulgur",
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 12 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "bulgur",
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "bulgur"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, gurka, citronjuice, mynta och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "citronjuice",
+            "mynta",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera fiskkikärtskakor, tomatbulgur och kall yoghurtsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök",
+            "bulgur",
+            "tomat",
+            "rödlök",
+            "yoghurt naturell",
+            "gurka",
+            "mynta"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 47 aktivt och 32 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av bulgur och mynta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Mager fisk binds med kikärtsmos till täta kakor och serveras med tomatkokta gryn; närliggande laxbiffar ska granskas som möjlig variantgrupp. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-chickpea-filo-parcels",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade filopaket med fisk och kikärtor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fiskfilopaj",
+      "primary": "fisk",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fiskfilopaj",
+          "ingredients": [
+            {
+              "name": "filodeg",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Filodeg, vikt som såld; kontrollera ingredienser för avsedd diet"
+            },
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 55.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fiskfilopaj: Sätt ugnen på 200 °C över- och undervärme. Väg spenat frysta enligt komponenten. Låt kikärtor rinna av noga. Skär fisk i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Värm spenaten och pressa ur överskottsvätskan.",
+          "uses": [
+            "kikärtor",
+            "spenat"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Använd en tredjedel av oljan för att fräsa spenat och fisk tills grönsakerna mjuknar. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "rapsolja",
+            "spenat",
+            "fisk"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ta pannan från värmen och blanda ner kikärtor och salt. Låt fyllningen svalna så att den inte blöter sönder degen.",
+          "uses": [
+            "kikärtor",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg hälften av filodegsarken omlott i formen och pensla mellan arken med en del av resterande olja. Fördela fyllningen ovanpå, täck med återstående ark och vik in kanterna. Pensla ytan med all olja som återstår.",
+          "uses": [
+            "filodeg",
+            "rapsolja",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 30 minuter tills filodegen är frasig och gyllene. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "filodeg",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "filodeg",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera fiskfilopaj och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "filodeg",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 41 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av filodeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fisk och kikärtor bakas tillsammans i ett frasigt filohölje; skild från fisk bakad direkt i tomatsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-chickpea-filo-parcels",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade filopaket med fisk och kikärtor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fiskfilopaj",
+      "primary": "fisk",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "dill",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fiskfilopaj",
+          "ingredients": [
+            {
+              "name": "filodeg",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Filodeg, vikt som såld; kontrollera ingredienser för avsedd diet"
+            },
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 55.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fiskfilopaj: Sätt ugnen på 200 °C över- och undervärme. Ansa och finhacka vitlök. Väg spenat frysta enligt komponenten. Låt kikärtor rinna av noga. Skär fisk i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Finhacka dill. Värm spenaten och pressa ur överskottsvätskan.",
+          "uses": [
+            "kikärtor",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Använd en tredjedel av oljan för att fräsa vitlök, spenat och fisk tills grönsakerna mjuknar. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "rapsolja",
+            "vitlök",
+            "spenat",
+            "fisk"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ta pannan från värmen och blanda ner kikärtor, salt och dill. Låt fyllningen svalna så att den inte blöter sönder degen.",
+          "uses": [
+            "kikärtor",
+            "salt",
+            "dill"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg hälften av filodegsarken omlott i formen och pensla mellan arken med en del av resterande olja. Fördela fyllningen ovanpå, täck med återstående ark och vik in kanterna. Pensla ytan med all olja som återstår.",
+          "uses": [
+            "filodeg",
+            "rapsolja",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 30 minuter tills filodegen är frasig och gyllene. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "filodeg",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "filodeg",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera fiskfilopaj och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "filodeg",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "dill",
+            "vitlök",
+            "tomat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 41 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av filodeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fisk och kikärtor bakas tillsammans i ett frasigt filohölje; skild från fisk bakad direkt i tomatsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-chickpea-filo-parcels",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade filopaket med fisk och kikärtor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fiskfilopaj",
+      "primary": "fisk",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "dill",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fiskfilopaj",
+          "ingredients": [
+            {
+              "name": "filodeg",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Filodeg, vikt som såld; kontrollera ingredienser för avsedd diet"
+            },
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 55.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fiskfilopaj: Sätt ugnen på 200 °C över- och undervärme. Ansa och finhacka vitlök. Väg spenat frysta enligt komponenten. Låt kikärtor rinna av noga. Skär fisk i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Finhacka dill. Värm spenaten och pressa ur överskottsvätskan.",
+          "uses": [
+            "kikärtor",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Använd en tredjedel av oljan för att fräsa vitlök, spenat och fisk tills grönsakerna mjuknar. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "rapsolja",
+            "vitlök",
+            "spenat",
+            "fisk"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ta pannan från värmen och blanda ner kikärtor, salt och dill. Låt fyllningen svalna så att den inte blöter sönder degen.",
+          "uses": [
+            "kikärtor",
+            "salt",
+            "dill"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg hälften av filodegsarken omlott i formen och pensla mellan arken med en del av resterande olja. Fördela fyllningen ovanpå, täck med återstående ark och vik in kanterna. Pensla ytan med all olja som återstår.",
+          "uses": [
+            "filodeg",
+            "rapsolja",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 30 minuter tills filodegen är frasig och gyllene. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "filodeg",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "filodeg",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja, salt, gurka, rödlök, oliver och persilja i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera fiskfilopaj och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "filodeg",
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "dill",
+            "vitlök",
+            "tomat",
+            "citronjuice",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 41 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av filodeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fisk och kikärtor bakas tillsammans i ett frasigt filohölje; skild från fisk bakad direkt i tomatsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-potato-saffron-free-lemon-casserole",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad fisk med potatis och äggcitronspad – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "äggcitronredd fisk och potatis",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisfisk",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatisfisk: Ansa och finhacka gul lök. Skölj, ansa och skär potatis i små jämna bitar; skala rotfrukter före vägning. Skär fisk i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner potatis och salt och 650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 22 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "potatis",
+            "salt",
+            "fisk",
+            "gul lök"
+          ],
+          "minutes": 22,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär fisk i portionsbitar och sänk ner i den heta såsen. Låt sjuda varsamt cirka 8 minuter utan kraftig omrörning. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vispa ihop ägg och citronjuice i en skål. Vispa ner lite av det heta kokspadet, lite i taget, för att temperera blandningen. Rör tillbaka i grytan på låg värme. Värm till minst 72 °C utan stormkokning. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "ägg",
+            "citronjuice",
+            "fisk"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera potatisfisk. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "ägg",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 25 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas. Ägg och citronjuice ska vispas ihop, tempereras med varmt spad och röras ner sist på låg värme till 72 °C, utan stormkokning. Kulinarisk avgränsning: Fisk och potatis binds av syrlig äggredning i ett ljust spad; jämförs med gräddig laxsoppa och citronbakad fisk. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-potato-saffron-free-lemon-casserole",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad fisk med potatis och äggcitronspad – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "äggcitronredd fisk och potatis",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisfisk",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatisfisk: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär potatis och morot i små jämna bitar; skala rotfrukter före vägning. Skär fisk i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Finhacka dill.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "gul lök",
+            "morot",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner potatis, salt och morot och 650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "potatis",
+            "salt",
+            "morot"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 22 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "potatis",
+            "salt",
+            "morot",
+            "fisk",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 22,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär fisk i portionsbitar och sänk ner i den heta såsen. Låt sjuda varsamt cirka 8 minuter utan kraftig omrörning. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vispa ihop ägg och citronjuice i en skål. Vispa ner lite av det heta kokspadet, lite i taget, för att temperera blandningen. Rör tillbaka i grytan på låg värme. Värm till minst 72 °C utan stormkokning. Rör sist ner dill. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "ägg",
+            "citronjuice",
+            "dill",
+            "fisk"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera potatisfisk. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "ägg",
+            "citronjuice",
+            "salt",
+            "morot",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 25 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas. Ägg och citronjuice ska vispas ihop, tempereras med varmt spad och röras ner sist på låg värme till 72 °C, utan stormkokning. Kulinarisk avgränsning: Fisk och potatis binds av syrlig äggredning i ett ljust spad; jämförs med gräddig laxsoppa och citronbakad fisk. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-potato-saffron-free-lemon-casserole",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad fisk med potatis och äggcitronspad – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "äggcitronredd fisk och potatis",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisfisk",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatisfisk: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär potatis, morot och selleri i små jämna bitar; skala rotfrukter före vägning. Skär fisk i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Finhacka dill.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "gul lök",
+            "morot",
+            "vitlök",
+            "selleri"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner potatis, salt, morot och selleri och 650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "potatis",
+            "salt",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 22 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "potatis",
+            "salt",
+            "morot",
+            "selleri",
+            "fisk",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 22,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär fisk i portionsbitar och sänk ner i den heta såsen. Låt sjuda varsamt cirka 8 minuter utan kraftig omrörning. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vispa ihop ägg och citronjuice i en skål. Vispa ner lite av det heta kokspadet, lite i taget, för att temperera blandningen. Rör tillbaka i grytan på låg värme. Värm till minst 72 °C utan stormkokning. Rör sist ner dill. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "ägg",
+            "citronjuice",
+            "dill",
+            "fisk"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda gurka, tomat, oliver, persilja, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "oliver",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera potatisfisk och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "ägg",
+            "citronjuice",
+            "salt",
+            "morot",
+            "dill",
+            "vitlök",
+            "selleri",
+            "gurka",
+            "tomat",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 63 minuter totalt, varav 33 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas. Ägg och citronjuice ska vispas ihop, tempereras med varmt spad och röras ner sist på låg värme till 72 °C, utan stormkokning. Kulinarisk avgränsning: Fisk och potatis binds av syrlig äggredning i ett ljust spad; jämförs med gräddig laxsoppa och citronbakad fisk. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-spinach-chickpea-soup",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad spenat- och kikärtssoppa med fisk – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "grön fisk-baljväxtsoppa",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "varmt bröd",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Spenatfisksoppa",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Spenatfisksoppa: Ansa och finhacka gul lök. Väg spenat frysta enligt komponenten. Låt kikärtor rinna av noga. Skär fisk i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner kikärtor, spenat och salt och 1000 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "kikärtor",
+            "spenat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "kikärtor",
+            "spenat",
+            "salt",
+            "fisk",
+            "gul lök"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär fisk i portionsbitar och sänk ner i den heta såsen. Låt sjuda varsamt cirka 8 minuter utan kraftig omrörning. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera spenatfisksoppa och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 25 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Kikärtor och spenat ger en grön buljongsoppa där fisk sjuds sist; ingen kokos- eller tomatcurry. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-spinach-chickpea-soup",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad spenat- och kikärtssoppa med fisk – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "grön fisk-baljväxtsoppa",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "varmt bröd",
+      "flavor": [
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Spenatfisksoppa",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Spenatfisksoppa: Ansa och finhacka gul lök och vitlök. Väg spenat frysta enligt komponenten. Låt kikärtor rinna av noga. Skär fisk i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Finhacka dill.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner kikärtor, spenat och salt och 1000 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "kikärtor",
+            "spenat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "kikärtor",
+            "spenat",
+            "salt",
+            "fisk",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär fisk i portionsbitar och sänk ner i den heta såsen. Låt sjuda varsamt cirka 8 minuter utan kraftig omrörning. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice och dill precis före servering. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "citronjuice",
+            "dill",
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera spenatfisksoppa och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "citronjuice",
+            "dill",
+            "vitlök",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 25 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Kikärtor och spenat ger en grön buljongsoppa där fisk sjuds sist; ingen kokos- eller tomatcurry. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-spinach-chickpea-soup",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad spenat- och kikärtssoppa med fisk – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "grön fisk-baljväxtsoppa",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "varmt bröd; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Spenatfisksoppa",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Spenatfisksoppa: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär selleri och morot i små jämna bitar; skala rotfrukter före vägning. Väg spenat frysta enligt komponenten. Låt kikärtor rinna av noga. Skär fisk i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Finhacka dill.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "selleri",
+            "morot"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner kikärtor, spenat, salt, selleri och morot och 1150 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "kikärtor",
+            "spenat",
+            "salt",
+            "selleri",
+            "morot"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "kikärtor",
+            "spenat",
+            "salt",
+            "selleri",
+            "morot",
+            "fisk",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär fisk i portionsbitar och sänk ner i den heta såsen. Låt sjuda varsamt cirka 8 minuter utan kraftig omrörning. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice och dill precis före servering. Kontrollera minst 63 °C i fiskens tjockaste mitt.",
+          "uses": [
+            "citronjuice",
+            "dill",
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, persilja, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera spenatfisksoppa, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "kikärtor",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "citronjuice",
+            "dill",
+            "vitlök",
+            "selleri",
+            "morot",
+            "bröd",
+            "tomat",
+            "gurka",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 63 minuter totalt, varav 33 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Kikärtor och spenat ger en grön buljongsoppa där fisk sjuds sist; ingen kokos- eller tomatcurry. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-walnut-celery-oven-crumble",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad fisk med valnötstäcke och sellerimos – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fisk med nötkrisp",
+      "primary": "fisk",
+      "method": "oven",
+      "side": "selleripotatismos",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Valnötsfisk",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Selleripotatismos",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Valnötsfisk: Sätt ugnen på 200 °C över- och undervärme. Grovhacka valnötterna och blanda med ströbrödet. Lägg fisken i portionsbitar i formen och fördela nötblandningen ovanpå.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Låt portionsbitarna ligga stilla i ett lager i formen. Finhacka eventuella örter och vitlök. Blanda komponentens fett och kryddning med nöt- eller frösmulorna och ströbrödet, fördela all blandning på råvarans ovansida och tryck lätt så att täcket sitter fast. Fördela eventuell citronjuice runt bitarna.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 22 minuter. Låt smultäcket ligga ostört tills det får färg.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 22,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 63 °C i fiskens tjockaste mitt. Ta ut formen med grytlappar.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Selleripotatismos: Skala potatisen och selleri och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "selleri",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis",
+            "selleri"
+          ],
+          "minutes": 20,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa de kokta grönsakerna med varm mjölk och olja. Använd hela komponentens mjölk och rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "selleri",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera valnötsfisk och selleripotatismos. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "potatis",
+            "selleri",
+            "mjölk"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 70 minuter totalt, varav 28 aktivt och 42 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fiskfilé får ett torrt grovhackat nöt- och brödtäcke ovanpå en mjuk rotfruktspuré; ingen senaps- eller tomatsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-walnut-celery-oven-crumble",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad fisk med valnötstäcke och sellerimos – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fisk med nötkrisp",
+      "primary": "fisk",
+      "method": "oven",
+      "side": "selleripotatismos",
+      "flavor": [
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Valnötsfisk",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Selleripotatismos",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Valnötsfisk: Sätt ugnen på 200 °C över- och undervärme. Grovhacka valnötterna och blanda med ströbrödet. Lägg fisken i portionsbitar i formen och fördela nötblandningen ovanpå.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Låt portionsbitarna ligga stilla i ett lager i formen. Finhacka eventuella örter och vitlök. Blanda komponentens fett och kryddning med nöt- eller frösmulorna och ströbrödet, fördela all blandning på råvarans ovansida och tryck lätt så att täcket sitter fast. Fördela eventuell citronjuice runt bitarna.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 22 minuter. Låt smultäcket ligga ostört tills det får färg.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 22,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 63 °C i fiskens tjockaste mitt. Ta ut formen med grytlappar.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Selleripotatismos: Skala potatisen och selleri och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "selleri",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis",
+            "selleri"
+          ],
+          "minutes": 20,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa de kokta grönsakerna med varm mjölk och olja. Använd hela komponentens mjölk och rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "selleri",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera valnötsfisk och selleripotatismos. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "persilja",
+            "vitlök",
+            "potatis",
+            "selleri",
+            "mjölk"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 10 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 70 minuter totalt, varav 28 aktivt och 42 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fiskfilé får ett torrt grovhackat nöt- och brödtäcke ovanpå en mjuk rotfruktspuré; ingen senaps- eller tomatsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-fish-walnut-celery-oven-crumble",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad fisk med valnötstäcke och sellerimos – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fisk med nötkrisp",
+      "primary": "fisk",
+      "method": "oven",
+      "side": "selleripotatismos; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Valnötsfisk",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri vit fiskfilé, rå ätlig vikt"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Selleripotatismos",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Valnötsfisk: Sätt ugnen på 200 °C över- och undervärme. Grovhacka valnötterna och blanda med ströbrödet. Lägg fisken i portionsbitar i formen och fördela nötblandningen ovanpå.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Låt portionsbitarna ligga stilla i ett lager i formen. Finhacka eventuella örter och vitlök. Blanda komponentens fett och kryddning med nöt- eller frösmulorna och ströbrödet, fördela all blandning på råvarans ovansida och tryck lätt så att täcket sitter fast. Fördela eventuell citronjuice runt bitarna.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 22 minuter. Låt smultäcket ligga ostört tills det får färg.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 22,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 63 °C i fiskens tjockaste mitt. Ta ut formen med grytlappar.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Selleripotatismos: Skala potatisen och selleri och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "selleri",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis",
+            "selleri"
+          ],
+          "minutes": 20,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa de kokta grönsakerna med varm mjölk och olja. Använd hela komponentens mjölk och rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "selleri",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda gurka, tomat, rödlök, oliver, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök",
+            "oliver",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera valnötsfisk, selleripotatismos och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fisk",
+            "valnötter",
+            "ströbröd",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "persilja",
+            "vitlök",
+            "potatis",
+            "selleri",
+            "mjölk",
+            "gurka",
+            "tomat",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 78 minuter totalt, varav 36 aktivt och 42 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fiskfilé får ett torrt grovhackat nöt- och brödtäcke ovanpå en mjuk rotfruktspuré; ingen senaps- eller tomatsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

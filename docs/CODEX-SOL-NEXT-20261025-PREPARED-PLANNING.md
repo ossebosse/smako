@@ -1,5 +1,11 @@
 # Sol: nästa etapp efter PR #12 — förberett underlag och gemensam sökning
 
+Tillägg efter ägarens receptleverans 2026-10-25: läs först
+[receptuppdraget](CODEX-SOL-NEXT-20261025-RECIPE-INTAKE.md). Prioritera
+ingrediens-/innehållsarbete före stora skalprov och använd den verkliga
+granskade samlingen när den är tillgänglig. Nedanstående V2-riktning gäller
+fortsatt; benchmarkbudgeten delas med receptuppdraget och dubbleras inte.
+
 Utgångspunkt main `d27e0cf`; hämta aktuell main i `D:\Projects\Smako` utan
 att skriva över annat arbete. Följ `AGENTS.md`, `DEVELOPMENT.md` och aktuell
 `HANDOFF.md`. Läs först [produktmålet](PRODUCT-GOAL.md), därefter

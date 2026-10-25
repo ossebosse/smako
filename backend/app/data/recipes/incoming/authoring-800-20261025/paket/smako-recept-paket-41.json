@@ -1,0 +1,3995 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-41",
+  "recipes": [
+    {
+      "base_id": "smako-italian-spinach-whitebean-ravioli",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "fylld färsk pasta",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "enkel tomatsås",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Degskål",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bönspenatravioli",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Enkel tomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bönspenatravioli: Blanda vetemjöl och salt med 175 ml vatten. Knåda cirka 8 minuter till en smidig fast pastadeg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Låt pastadegen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka spenat. Värm med komponentens olja och 60 ml vatten i pannan tills grönsakerna mjuknat och vätskan kokat bort. Pressa ur spenat noga. ",
+          "uses": [
+            "spenat",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda bönor med den tillagade fyllningen. Mosa baljväxter och smula ostar till en fast massa; låt svalna till ljummen.",
+          "uses": [
+            "bönor",
+            "spenat"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Kavla degen mycket tunt och skär till fyrkanter. Lägg små klickar fyllning på hälften, fukta kanterna lätt, täck med återstående deg och pressa ut luften. Förslut kanterna noga med en gaffel.",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "spenat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Koka upp 2500 ml vatten. Sjud pastakuddarna i omgångar cirka 4–6 minuter tills degen är genomkokt och fyllningen het. Lyft upp med hålslev. ",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "spenat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Enkel tomatsås: Väg och fördela komponentens råvaror före tillagning.",
+          "uses": [],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Värm fettet varsamt utan att låta det ryka.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera bönspenatravioli och enkel tomatsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "krossade tomater"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 124 minuter totalt, varav 79 aktivt och 45 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Egen vattenbaserad pastadeg försluter en fast bön-spenatfyllning som kokas; skiljer sig från öppen pasta eller gratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-spinach-whitebean-ravioli",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "fylld färsk pasta",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "enkel tomatsås",
+      "flavor": [
+        "citronjuice",
+        "basilika"
+      ],
+      "equipment": [
+        "Degskål",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bönspenatravioli",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Enkel tomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bönspenatravioli: Blanda vetemjöl och salt med 175 ml vatten. Knåda cirka 8 minuter till en smidig fast pastadeg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Låt pastadegen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka spenat och vitlök. Värm med komponentens olja och 60 ml vatten i pannan tills grönsakerna mjuknat och vätskan kokat bort. Pressa ur spenat noga. ",
+          "uses": [
+            "spenat",
+            "vitlök",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda bönor och citronjuice med den tillagade fyllningen. Mosa baljväxter och smula ostar till en fast massa; låt svalna till ljummen.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Kavla degen mycket tunt och skär till fyrkanter. Lägg små klickar fyllning på hälften, fukta kanterna lätt, täck med återstående deg och pressa ut luften. Förslut kanterna noga med en gaffel.",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Koka upp 2500 ml vatten. Sjud pastakuddarna i omgångar cirka 4–6 minuter tills degen är genomkokt och fyllningen het. Lyft upp med hålslev. ",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice"
+          ],
+          "minutes": 12,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Enkel tomatsås: Finhacka basilika.",
+          "uses": [],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Värm fettet varsamt utan att låta det ryka.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner basilika precis före servering. ",
+          "uses": [
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera bönspenatravioli och enkel tomatsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "krossade tomater",
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 126 minuter totalt, varav 81 aktivt och 45 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Egen vattenbaserad pastadeg försluter en fast bön-spenatfyllning som kokas; skiljer sig från öppen pasta eller gratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-spinach-whitebean-ravioli",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "fylld färsk pasta",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "enkel tomatsås; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "basilika"
+      ],
+      "equipment": [
+        "Degskål",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bönspenatravioli",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Enkel tomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bönspenatravioli: Blanda vetemjöl och salt med 175 ml vatten. Knåda cirka 8 minuter till en smidig fast pastadeg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Låt pastadegen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka spenat och vitlök. Värm med komponentens olja och 60 ml vatten i pannan tills grönsakerna mjuknat och vätskan kokat bort. Pressa ur spenat noga. ",
+          "uses": [
+            "spenat",
+            "vitlök",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda bönor, citronjuice och valnötter med den tillagade fyllningen. Mosa baljväxter och smula ostar till en fast massa; låt svalna till ljummen.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "valnötter",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Kavla degen mycket tunt och skär till fyrkanter. Lägg små klickar fyllning på hälften, fukta kanterna lätt, täck med återstående deg och pressa ut luften. Förslut kanterna noga med en gaffel.",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "valnötter"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Koka upp 2500 ml vatten. Sjud pastakuddarna i omgångar cirka 4–6 minuter tills degen är genomkokt och fyllningen het. Lyft upp med hålslev. ",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "valnötter"
+          ],
+          "minutes": 12,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Enkel tomatsås: Finhacka basilika.",
+          "uses": [],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Värm fettet varsamt utan att låta det ryka.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner basilika precis före servering. ",
+          "uses": [
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Blanda gurka, tomat, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera bönspenatravioli, enkel tomatsås och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "spenat",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "valnötter",
+            "krossade tomater",
+            "basilika",
+            "gurka",
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            11,
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 134 minuter totalt, varav 89 aktivt och 45 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Egen vattenbaserad pastadeg försluter en fast bön-spenatfyllning som kokas; skiljer sig från öppen pasta eller gratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-steamed-bread-bean-dumplings",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade ångade brödknödel med bönor och spenat – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "ångade bröd-baljväxtknödel",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "varm tomatsås",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Bakplåtspapper",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ånginsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Brödknödel",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm tomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Brödknödel: Tärna brödet fint. Häll 150 ml vatten över och krama samman till en fuktig brödmassa. Mosa de väl avrunna bönorna separat.",
+          "uses": [
+            "bröd",
+            "bönor"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm spenaten i en panna tills den är genomvarm. Pressa ur överflödig vätska och hacka den. Blanda med bröd, bönmos, mjöl, olja och salt till en tät massa.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt massan vila 15 minuter och forma sedan två fasta knödel per portion med våta händer.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka upp 700 ml vatten under en ånginsats. Lägg knödel på perforerat bakplåtspapper i insatsen, täck med lock och ånga 25 minuter tills mjölet är tillagat och knödeln håller ihop. Vattenytan ska ligga under insatsen.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 28,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varm tomatsås: Väg och fördela komponentens råvaror före tillagning.",
+          "uses": [],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Värm fettet varsamt utan att låta det ryka.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera brödknödel och varm tomatsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "krossade tomater"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 103 minuter totalt, varav 60 aktivt och 43 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Blött bröd binds av mosad vit böna och mjöl till stora knödel som ångas, med separat tomatsås. Det är varken en kikärtsmjölsplatta eller en kokt brödgryta. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-steamed-bread-bean-dumplings",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade ångade brödknödel med bönor och spenat – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "ångade bröd-baljväxtknödel",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "varm tomatsås",
+      "flavor": [
+        "basilika"
+      ],
+      "equipment": [
+        "Bakplåtspapper",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ånginsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Brödknödel",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm tomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Brödknödel: Tärna brödet fint. Häll 150 ml vatten över och krama samman till en fuktig brödmassa. Mosa de väl avrunna bönorna separat.",
+          "uses": [
+            "bröd",
+            "bönor"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm spenaten i en panna tills den är genomvarm. Pressa ur överflödig vätska och hacka den. Blanda med bröd, bönmos, mjöl, olja och salt till en tät massa.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt massan vila 15 minuter och forma sedan två fasta knödel per portion med våta händer.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka upp 700 ml vatten under en ånginsats. Lägg knödel på perforerat bakplåtspapper i insatsen, täck med lock och ånga 25 minuter tills mjölet är tillagat och knödeln håller ihop. Vattenytan ska ligga under insatsen.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 28,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varm tomatsås: Ansa och finhacka gul lök och vitlök. Finhacka basilika.",
+          "uses": [
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner basilika precis före servering. ",
+          "uses": [
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera brödknödel och varm tomatsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "gul lök",
+            "vitlök",
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 105 minuter totalt, varav 62 aktivt och 43 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Blött bröd binds av mosad vit böna och mjöl till stora knödel som ångas, med separat tomatsås. Det är varken en kikärtsmjölsplatta eller en kokt brödgryta. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-steamed-bread-bean-dumplings",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade ångade brödknödel med bönor och spenat – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "ångade bröd-baljväxtknödel",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "varm tomatsås; fräsch sallad",
+      "flavor": [
+        "basilika",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Bakplåtspapper",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ånginsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Brödknödel",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm tomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Brödknödel: Tärna brödet fint. Häll 150 ml vatten över och krama samman till en fuktig brödmassa. Mosa de väl avrunna bönorna separat.",
+          "uses": [
+            "bröd",
+            "bönor"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm spenaten i en panna tills den är genomvarm. Pressa ur överflödig vätska och hacka den. Blanda med bröd, bönmos, mjöl, olja och salt till en tät massa.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt massan vila 15 minuter och forma sedan två fasta knödel per portion med våta händer.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka upp 700 ml vatten under en ånginsats. Lägg knödel på perforerat bakplåtspapper i insatsen, täck med lock och ånga 25 minuter tills mjölet är tillagat och knödeln håller ihop. Vattenytan ska ligga under insatsen.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 28,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varm tomatsås: Ansa och finhacka gul lök och vitlök. Finhacka basilika.",
+          "uses": [
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner basilika precis före servering. ",
+          "uses": [
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, oliver, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera brödknödel, varm tomatsås och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bröd",
+            "bönor",
+            "spenat",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "gul lök",
+            "vitlök",
+            "basilika",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            9,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 113 minuter totalt, varav 70 aktivt och 43 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Blött bröd binds av mosad vit böna och mjöl till stora knödel som ångas, med separat tomatsås. Det är varken en kikärtsmjölsplatta eller en kokt brödgryta. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tomato-bread-egg-mozzarella-slices",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tomatbrödkaka med mozzarella – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "tomat-ost-brödstanning",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatbrödstanning",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatbrödstanning: Sätt ugnen på 190 °C över- och undervärme. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Skär brödet i jämna små tärningar. Låt mozzarellan rinna av och dela den i små bitar.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs tomat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Skär brödet i tärningar. Vänd ner bröd och mozzarella. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "bröd",
+            "tomat",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "bröd",
+            "tomat",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tomatbrödstanning. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bröd",
+            "tomat",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 53 minuter totalt, varav 23 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mozzarella; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Bröd och färsk tomat binds med ägg och mozzarella till saftiga ugnsskivor; närgranne till andra brödpuddingar markeras. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tomato-bread-egg-mozzarella-slices",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tomatbrödkaka med mozzarella – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "tomat-ost-brödstanning",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "basilika"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatbrödstanning",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatbrödstanning: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka vitlök och gul lök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Skär brödet i jämna små tärningar. Låt mozzarellan rinna av och dela den i små bitar. Finhacka basilika.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "gul lök"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs vitlök, gul lök och tomat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "vitlök",
+            "gul lök",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Skär brödet i tärningar. Vänd ner bröd, mozzarella och basilika. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "salt",
+            "basilika"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "bröd",
+            "tomat",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "rapsolja",
+            "salt",
+            "basilika",
+            "vitlök",
+            "gul lök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "bröd",
+            "tomat",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "rapsolja",
+            "salt",
+            "basilika",
+            "vitlök",
+            "gul lök"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tomatbrödstanning. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bröd",
+            "tomat",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "rapsolja",
+            "salt",
+            "basilika",
+            "vitlök",
+            "gul lök"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 53 minuter totalt, varav 23 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mozzarella; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Bröd och färsk tomat binds med ägg och mozzarella till saftiga ugnsskivor; närgranne till andra brödpuddingar markeras. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tomato-bread-egg-mozzarella-slices",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tomatbrödkaka med mozzarella – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "tomat-ost-brödstanning",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "basilika",
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatbrödstanning",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatbrödstanning: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka vitlök och gul lök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Skär brödet i jämna små tärningar. Låt mozzarellan rinna av och dela den i små bitar. Finhacka basilika.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "gul lök"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs vitlök, gul lök och tomat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "vitlök",
+            "gul lök",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Skär brödet i tärningar. Vänd ner bröd, mozzarella och basilika. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "salt",
+            "basilika"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "bröd",
+            "tomat",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "rapsolja",
+            "salt",
+            "basilika",
+            "vitlök",
+            "gul lök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "bröd",
+            "tomat",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "rapsolja",
+            "salt",
+            "basilika",
+            "vitlök",
+            "gul lök"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda gurka, rödlök, oliver, persilja, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera tomatbrödstanning och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bröd",
+            "tomat",
+            "ägg",
+            "mjölk",
+            "mozzarella",
+            "rapsolja",
+            "salt",
+            "basilika",
+            "vitlök",
+            "gul lök",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 61 minuter totalt, varav 31 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mozzarella; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Bröd och färsk tomat binds med ägg och mozzarella till saftiga ugnsskivor; närgranne till andra brödpuddingar markeras. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tomato-ricotta-shortcrust-tart",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad ricottapaj med tomat – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "matpaj med ricottastanning",
+      "primary": "ricotta",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pajform",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ricottatomatpaj",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 90.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ricotta, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ricottatomatpaj: Blanda vetemjölet med två tredjedelar av oljan, en tredjedel av saltet och 70 ml vatten till deg. Tryck ut den jämnt i pajformen och nagga botten.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sätt ugnen på 190 °C. Förgrädda pajskalet cirka 12 minuter.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär tomat smått. Fräs i resterande olja tills grönsakerna mjuknat.  Lägg i pajskalet.",
+          "uses": [
+            "tomat",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vispa ihop ricotta, ägg och mjölk med resterande salt och häll över fyllningen.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 35 minuter tills fyllningen stelnat. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "tomat",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "tomat",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera ricottatomatpaj. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "tomat",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 24 aktivt och 55 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av ricotta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ett förgräddat pajskal fylls med ricotta-äggstanning och tomat; annan skorpa och fyllningsmatris än filopaj eller ugnspannkaka. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tomato-ricotta-shortcrust-tart",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad ricottapaj med tomat – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "matpaj med ricottastanning",
+      "primary": "ricotta",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "basilika"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pajform",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ricottatomatpaj",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 90.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ricotta, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ricottatomatpaj: Blanda vetemjölet med två tredjedelar av oljan, en tredjedel av saltet och 70 ml vatten till deg. Tryck ut den jämnt i pajformen och nagga botten.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sätt ugnen på 190 °C. Förgrädda pajskalet cirka 12 minuter.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär tomat och vitlök smått. Fräs i resterande olja tills grönsakerna mjuknat.  Lägg i pajskalet.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vispa ihop ricotta, ägg, mjölk, basilika och ost med resterande salt och häll över fyllningen.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "basilika",
+            "ost",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 35 minuter tills fyllningen stelnat. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "tomat",
+            "salt",
+            "basilika",
+            "vitlök",
+            "ost"
+          ],
+          "minutes": 35,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "tomat",
+            "salt",
+            "basilika",
+            "vitlök",
+            "ost"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera ricottatomatpaj. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "tomat",
+            "salt",
+            "basilika",
+            "vitlök",
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 24 aktivt och 55 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av ricotta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ett förgräddat pajskal fylls med ricotta-äggstanning och tomat; annan skorpa och fyllningsmatris än filopaj eller ugnspannkaka. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tomato-ricotta-shortcrust-tart",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad ricottapaj med tomat – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "matpaj med ricottastanning",
+      "primary": "ricotta",
+      "method": "pot",
+      "side": "fräsch sallad",
+      "flavor": [
+        "basilika",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pajform",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ricottatomatpaj",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 90.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ricotta, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ricottatomatpaj: Blanda vetemjölet med två tredjedelar av oljan, en tredjedel av saltet och 70 ml vatten till deg. Tryck ut den jämnt i pajformen och nagga botten.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sätt ugnen på 190 °C. Förgrädda pajskalet cirka 12 minuter.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär tomat och vitlök smått. Fräs i resterande olja tills grönsakerna mjuknat.  Lägg i pajskalet.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vispa ihop ricotta, ägg, mjölk, basilika och ost med resterande salt och häll över fyllningen.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "basilika",
+            "ost",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 35 minuter tills fyllningen stelnat. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "tomat",
+            "salt",
+            "basilika",
+            "vitlök",
+            "ost"
+          ],
+          "minutes": 35,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "tomat",
+            "salt",
+            "basilika",
+            "vitlök",
+            "ost"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda gurka, rödlök, oliver, citronjuice, persilja, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "citronjuice",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera ricottatomatpaj och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "tomat",
+            "salt",
+            "basilika",
+            "vitlök",
+            "ost",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 87 minuter totalt, varav 32 aktivt och 55 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av ricotta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ett förgräddat pajskal fylls med ricotta-äggstanning och tomat; annan skorpa och fyllningsmatris än filopaj eller ugnspannkaka. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tuna-mozzarella-calzone",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tonfiskcalzone med mozzarella – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "tonfiskfylld jästdeg",
+      "primary": "tonfisk",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Bakplåt",
+        "Bakplåtspapper",
+        "Degskål",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfiskcalzone",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "jäst",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Färsk jäst för matbröd"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfiskcalzone: Lös jästen i 240 ml vatten (ljummet), högst 37 °C. Blanda ner mjöl och salt samt hälften av oljan. Knåda till en smidig deg.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Låt degen jäsa täckt cirka 45 minuter tills den är luftig.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "salt"
+          ],
+          "minutes": 45,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka tomat. Värm med resterande olja och 60 ml vatten i pannan tills grönsakerna mjuknat och vätskan kokat bort. ",
+          "uses": [
+            "tomat",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda tonfisk och mozzarella med den tillagade fyllningen. Mosa baljväxter och smula ostar till en fast massa; låt svalna till ljummen.",
+          "uses": [
+            "tonfisk",
+            "mozzarella",
+            "tomat"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Dela degen till en portion per person och kavla till rundlar. Fördela fyllningen på ena halvan, vik över degen och förslut kanten noga. Lägg på plåt med bakplåtspapper.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "tonfisk",
+            "mozzarella",
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Grädda cirka 22 minuter tills den fyllda degen är genomgräddad och gyllene. ",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "tonfisk",
+            "mozzarella",
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 22,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tonfiskcalzone. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "tonfisk",
+            "mozzarella",
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 108 minuter totalt, varav 41 aktivt och 67 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av jäst och mozzarella; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Avrunnen tonfisk och smält ost omsluts av jästdeg; annan konstruktion än tonfiskpastasallad eller öppen pizza. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tuna-mozzarella-calzone",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tonfiskcalzone med mozzarella – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "tonfiskfylld jästdeg",
+      "primary": "tonfisk",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "oregano"
+      ],
+      "equipment": [
+        "Bakplåt",
+        "Bakplåtspapper",
+        "Degskål",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfiskcalzone",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "jäst",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Färsk jäst för matbröd"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfiskcalzone: Lös jästen i 240 ml vatten (ljummet), högst 37 °C. Blanda ner mjöl och salt samt hälften av oljan. Knåda till en smidig deg.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Låt degen jäsa täckt cirka 45 minuter tills den är luftig.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "salt"
+          ],
+          "minutes": 45,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka tomat och rödlök. Värm med resterande olja och 60 ml vatten i pannan tills grönsakerna mjuknat och vätskan kokat bort. ",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda tonfisk, mozzarella, kapris och oregano med den tillagade fyllningen. Mosa baljväxter och smula ostar till en fast massa; låt svalna till ljummen.",
+          "uses": [
+            "tonfisk",
+            "mozzarella",
+            "kapris",
+            "oregano",
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Dela degen till en portion per person och kavla till rundlar. Fördela fyllningen på ena halvan, vik över degen och förslut kanten noga. Lägg på plåt med bakplåtspapper.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "tonfisk",
+            "mozzarella",
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "kapris",
+            "oregano"
+          ],
+          "minutes": 12,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Grädda cirka 22 minuter tills den fyllda degen är genomgräddad och gyllene. ",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "tonfisk",
+            "mozzarella",
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "kapris",
+            "oregano"
+          ],
+          "minutes": 22,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tonfiskcalzone. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "tonfisk",
+            "mozzarella",
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "kapris",
+            "oregano"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 108 minuter totalt, varav 41 aktivt och 67 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av jäst och mozzarella; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Avrunnen tonfisk och smält ost omsluts av jästdeg; annan konstruktion än tonfiskpastasallad eller öppen pizza. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tuna-mozzarella-calzone",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tonfiskcalzone med mozzarella – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "tonfiskfylld jästdeg",
+      "primary": "tonfisk",
+      "method": "pot",
+      "side": "fräsch sallad",
+      "flavor": [
+        "oregano",
+        "basilika",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Bakplåt",
+        "Bakplåtspapper",
+        "Degskål",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfiskcalzone",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "jäst",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Färsk jäst för matbröd"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfiskcalzone: Lös jästen i 240 ml vatten (ljummet), högst 37 °C. Blanda ner mjöl och salt samt hälften av oljan. Knåda till en smidig deg.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Låt degen jäsa täckt cirka 45 minuter tills den är luftig.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "salt"
+          ],
+          "minutes": 45,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka tomat och rödlök. Värm med resterande olja och 60 ml vatten i pannan tills grönsakerna mjuknat och vätskan kokat bort. ",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda tonfisk, mozzarella, kapris och oregano med den tillagade fyllningen. Mosa baljväxter och smula ostar till en fast massa; låt svalna till ljummen.",
+          "uses": [
+            "tonfisk",
+            "mozzarella",
+            "kapris",
+            "oregano",
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Dela degen till en portion per person och kavla till rundlar. Fördela fyllningen på ena halvan, vik över degen och förslut kanten noga. Lägg på plåt med bakplåtspapper.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "tonfisk",
+            "mozzarella",
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "kapris",
+            "oregano"
+          ],
+          "minutes": 12,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Grädda cirka 22 minuter tills den fyllda degen är genomgräddad och gyllene. ",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "tonfisk",
+            "mozzarella",
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "kapris",
+            "oregano"
+          ],
+          "minutes": 22,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka basilika.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "oliver",
+            "basilika"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda gurka, tomat, oliver, basilika, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "oliver",
+            "basilika",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera tonfiskcalzone och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "jäst",
+            "tonfisk",
+            "mozzarella",
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "kapris",
+            "oregano",
+            "gurka",
+            "oliver",
+            "basilika",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 116 minuter totalt, varav 49 aktivt och 67 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av jäst och mozzarella; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Avrunnen tonfisk och smält ost omsluts av jästdeg; annan konstruktion än tonfiskpastasallad eller öppen pizza. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

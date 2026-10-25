@@ -54,6 +54,24 @@ Spårbara näringsuppskattningar får användas där befintligt kontrakt och
 användarval medger det, med korrekt livsmedelsform och tydlig status. Det
 innebär inte att okända allergener eller ekologiska egenskaper får antas.
 
+### Grundrätter med olika ingrediensantal
+
+Ägarens tillägg 2026-10-25: samma grundrätt ska där det är matmässigt rimligt
+ha en enkel, en vardaglig och en utökad variant med olika ingrediensantal.
+Exempelvis ska både enkel och mer utvecklad spaghetti med köttfärssås kunna
+konkurrera utifrån användarens gränser och veckans faktiska gemensamma
+inköpskostnad. Varje variant har egna kompletta mängder och instruktioner.
+Fler ingredienser är inget krav på högre kostnad eller ett automatiskt
+kvalitetsbetyg. Enbart höjt maxantal kräver inte att fler ingredienser väljs;
+minantalet uttrycker den gränsen. Inga ingredienser läggs till som utfyllnad.
+
+Varianter delar stabilt `base_id` med skilda `variant_id` och räknas som
+samma grundrätt vid upprepningsgränser. Kost, näring, allergener och köp
+kontrolleras för varje variants verkliga innehåll och produkter. Variantnamn
+ersätter varken ingrediensräkning eller det separata nivåfältet simple/crafted.
+Den mottagna [800-grundrättssamlingen](reviews/recipe-intake-800-20261025.md)
+är författarunderlag tills granskning och import är genomförda.
+
 ## Tid och skala
 
 **Målet är en färdig receptplan och inköpslista inom 30–60 sekunder även

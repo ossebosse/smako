@@ -1,0 +1,4081 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-98",
+  "recipes": [
+    {
+      "base_id": "smako-swedish-beef-cabbage-dolmas",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Kåldolmar med färs och ris – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "stuffedcabbage",
+      "primary": "nötfärs",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "kryddpeppar"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Sked",
+        "Stor kastrull",
+        "Hålslev",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Kastrull med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ätbart grönsaksskal",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ris i fyllningen",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lossa hela kålblad och skär ner den tjocka mittnerven. Sjud bladen i omgångar i 2000 ml vatten tills de är böjliga, cirka fyra minuter per omgång. Finhacka mindre bitar och lägg i huvudfyllningen.",
+          "uses": [
+            "vitkål"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Lägg grönsaksskalet i ugnsformen och fördela skalkomponentens olja och salt över det.",
+          "uses": [
+            "vitkål",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Smula färsen. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Färsen ska vara genomstekt och nå minst 72 °C i mitten. Dela därefter fint till fyllning.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rör ner kryddpeppar och låt fräsa kort under omrörning.",
+          "uses": [
+            "kryddpeppar"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vänd ner nötfärs i pannan och fördela jämnt.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "nötfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Koka fyllningens ris med risets salt och 360 ml vatten under lock på låg värme tills vattnet absorberats, cirka 15 minuter. Vänd ner riset i huvudfyllningen.",
+          "uses": [
+            "ris",
+            "salt",
+            "nötfärs"
+          ],
+          "minutes": 18,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg fyllning på varje kålblad, vik in sidorna och rulla ihop. Lägg med skarven nedåt i formen. Häll 150 ml vatten i formens botten.",
+          "uses": [
+            "vitkål",
+            "nötfärs"
+          ],
+          "minutes": 7,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Täck formen och baka cirka 25 minuter tills grönsaksskalet är helt mjukt och fyllningen genomvarm. Ta av täckningen de sista fem minuterna.",
+          "uses": [
+            "vitkål",
+            "nötfärs"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötfärs",
+            "kryddpeppar",
+            "rapsolja",
+            "salt",
+            "vitkål",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 49 minuter och huvudsakligen passiva moment till 43 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 92 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela kålblad fylls, rullas och bakas; jämför mot befintlig kål- och färsgryta samt linsdolmar. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av kryddpeppar; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-cabbage-dolmas",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Kåldolmar med färs och ris – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "stuffedcabbage",
+      "primary": "nötfärs",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "kryddpeppar"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Sked",
+        "Stor kastrull",
+        "Hålslev",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Kastrull med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ätbart grönsaksskal",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ris i fyllningen",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lossa hela kålblad och skär ner den tjocka mittnerven. Sjud bladen i omgångar i 2000 ml vatten tills de är böjliga, cirka fyra minuter per omgång. Finhacka mindre bitar och lägg i huvudfyllningen.",
+          "uses": [
+            "vitkål"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Lägg grönsaksskalet i ugnsformen och fördela skalkomponentens olja och salt över det.",
+          "uses": [
+            "vitkål",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Smula färsen. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Färsen ska vara genomstekt och nå minst 72 °C i mitten. Dela därefter fint till fyllning.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skala och finhacka gul lök; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "kryddpeppar",
+            "gul lök",
+            "morot"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner kryddpeppar och låt fräsa kort under omrörning.",
+          "uses": [
+            "kryddpeppar"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner nötfärs i pannan och fördela jämnt.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "nötfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Koka fyllningens ris med risets salt och 360 ml vatten under lock på låg värme tills vattnet absorberats, cirka 15 minuter. Vänd ner riset i huvudfyllningen.",
+          "uses": [
+            "ris",
+            "salt",
+            "nötfärs"
+          ],
+          "minutes": 18,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg fyllning på varje kålblad, vik in sidorna och rulla ihop. Lägg med skarven nedåt i formen. Häll 150 ml vatten i formens botten.",
+          "uses": [
+            "vitkål",
+            "nötfärs"
+          ],
+          "minutes": 7,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Täck formen och baka cirka 25 minuter tills grönsaksskalet är helt mjukt och fyllningen genomvarm. Ta av täckningen de sista fem minuterna.",
+          "uses": [
+            "vitkål",
+            "nötfärs"
+          ],
+          "minutes": 25,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötfärs",
+            "kryddpeppar",
+            "gul lök",
+            "morot",
+            "rapsolja",
+            "salt",
+            "vitkål",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 60 minuter och huvudsakligen passiva moment till 63 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 123 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela kålblad fylls, rullas och bakas; jämför mot befintlig kål- och färsgryta samt linsdolmar. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av kryddpeppar; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-cabbage-dolmas",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Kåldolmar med färs och ris – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "stuffedcabbage",
+      "primary": "nötfärs",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "kryddpeppar"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Sked",
+        "Stor kastrull",
+        "Hålslev",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Kastrull med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ätbart grönsaksskal",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ris i fyllningen",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Tillbehör: rårörda lingon och gurka",
+          "ingredients": [
+            {
+              "name": "lingon",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta lingon utan tillsatt socker, vikt som sålda"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lossa hela kålblad och skär ner den tjocka mittnerven. Sjud bladen i omgångar i 2000 ml vatten tills de är böjliga, cirka fyra minuter per omgång. Finhacka mindre bitar och lägg i huvudfyllningen.",
+          "uses": [
+            "vitkål"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Lägg grönsaksskalet i ugnsformen och fördela skalkomponentens olja och salt över det.",
+          "uses": [
+            "vitkål",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Smula färsen. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Färsen ska vara genomstekt och nå minst 72 °C i mitten. Dela därefter fint till fyllning.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skala och finhacka gul lök; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "kryddpeppar",
+            "gul lök",
+            "morot"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner kryddpeppar och låt fräsa kort under omrörning.",
+          "uses": [
+            "kryddpeppar"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner nötfärs i pannan och fördela jämnt.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "nötfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Koka fyllningens ris med risets salt och 360 ml vatten under lock på låg värme tills vattnet absorberats, cirka 15 minuter. Vänd ner riset i huvudfyllningen.",
+          "uses": [
+            "ris",
+            "salt",
+            "nötfärs"
+          ],
+          "minutes": 18,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg fyllning på varje kålblad, vik in sidorna och rulla ihop. Lägg med skarven nedåt i formen. Häll 150 ml vatten i formens botten.",
+          "uses": [
+            "vitkål",
+            "nötfärs"
+          ],
+          "minutes": 7,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Täck formen och baka cirka 25 minuter tills grönsaksskalet är helt mjukt och fyllningen genomvarm. Ta av täckningen de sista fem minuterna.",
+          "uses": [
+            "vitkål",
+            "nötfärs"
+          ],
+          "minutes": 25,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär gurka i små bitar.",
+          "uses": [
+            "lingon",
+            "strösocker",
+            "gurka",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Rör lingonen med sockret och låt stå tills bären tinat; rör igen efter en stund. Skiva gurkan och blanda med tillbehörets salt. Servera lingon och gurka i två skålar.",
+          "uses": [
+            "lingon",
+            "strösocker",
+            "gurka",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            14
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötfärs",
+            "kryddpeppar",
+            "gul lök",
+            "morot",
+            "rapsolja",
+            "salt",
+            "vitkål",
+            "ris",
+            "lingon",
+            "strösocker",
+            "gurka"
+          ],
+          "minutes": 2,
+          "after": [
+            15
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 10 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 63 minuter och huvudsakligen passiva moment till 73 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 136 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela kålblad fylls, rullas och bakas; jämför mot befintlig kål- och färsgryta samt linsdolmar. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av kryddpeppar, lingon; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-lindstrom",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Rödbetsbiffar av nötfärs med kapris – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "patty",
+      "primary": "nötfärs",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "kapris"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Bakplåtspapper",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Plåt",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 35.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning och yta",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finriv rödbeta.",
+          "uses": [
+            "rödbeta",
+            "kapris"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Skala och finriv rödbeta.",
+          "uses": [
+            "nötfärs",
+            "rödbeta",
+            "kapris"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda huvudkomponentens alla ingredienser med bindningens havregryn och vetemjöl samt 80 ml vatten. Arbeta ihop till en massa som håller samman. Håll bindningens olja åt sidan till form och stekning.",
+          "uses": [
+            "nötfärs",
+            "rödbeta",
+            "kapris",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt massan stå så att havre och mjöl hinner ta upp vätska. Ställ den blandade massan i kylskåp under vilan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "nötfärs"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Forma massan till jämnstora biffar, två per portion. Lägg på bakplåtspapper och pensla med bindningens uppmätta olja.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "rapsolja",
+            "nötfärs"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 25 minuter. Vänd försiktigt efter halva tiden och kontrollera att massan är fast och genomvarm. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 25,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötfärs",
+            "rödbeta",
+            "kapris",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 31 minuter och huvudsakligen passiva moment till 53 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 84 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Finhackad rödbeta och kapris arbetas in i färsen; nära pannbiff och kräver innehållsgranskning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-lindstrom",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Rödbetsbiffar av nötfärs med kapris – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "patty",
+      "primary": "nötfärs",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "kapris"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Bakplåtspapper",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Plåt",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 35.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning och yta",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finriv rödbeta; skala och finhacka gul lök.",
+          "uses": [
+            "rödbeta",
+            "kapris",
+            "gul lök",
+            "senap"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Skala och finriv rödbeta. Finhacka gul lök så att bitarna blir små nog för massan.",
+          "uses": [
+            "nötfärs",
+            "rödbeta",
+            "kapris",
+            "gul lök",
+            "senap"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda huvudkomponentens alla ingredienser med bindningens havregryn och vetemjöl samt 80 ml vatten. Arbeta ihop till en massa som håller samman. Håll bindningens olja åt sidan till form och stekning.",
+          "uses": [
+            "nötfärs",
+            "rödbeta",
+            "kapris",
+            "gul lök",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt massan stå så att havre och mjöl hinner ta upp vätska. Ställ den blandade massan i kylskåp under vilan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "nötfärs"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Forma massan till jämnstora biffar, två per portion. Lägg på bakplåtspapper och pensla med bindningens uppmätta olja.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "rapsolja",
+            "nötfärs"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 25 minuter. Vänd försiktigt efter halva tiden och kontrollera att massan är fast och genomvarm. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 25,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötfärs",
+            "rödbeta",
+            "kapris",
+            "gul lök",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 9 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 32 minuter och huvudsakligen passiva moment till 53 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 85 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Finhackad rödbeta och kapris arbetas in i färsen; nära pannbiff och kräver innehållsgranskning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-lindstrom",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Rödbetsbiffar av nötfärs med kapris – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "patty",
+      "primary": "nötfärs",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "kapris"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Bakplåtspapper",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Plåt",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 35.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning och yta",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Tillbehör: syrlig gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Äppelcidervinäger, som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finriv rödbeta; skala och finhacka gul lök.",
+          "uses": [
+            "rödbeta",
+            "kapris",
+            "gul lök",
+            "senap"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Skala och finriv rödbeta. Finhacka gul lök så att bitarna blir små nog för massan.",
+          "uses": [
+            "nötfärs",
+            "rödbeta",
+            "kapris",
+            "gul lök",
+            "senap"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda huvudkomponentens alla ingredienser med bindningens havregryn och vetemjöl samt 80 ml vatten. Arbeta ihop till en massa som håller samman. Håll bindningens olja åt sidan till form och stekning.",
+          "uses": [
+            "nötfärs",
+            "rödbeta",
+            "kapris",
+            "gul lök",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt massan stå så att havre och mjöl hinner ta upp vätska. Ställ den blandade massan i kylskåp under vilan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "nötfärs"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Forma massan till jämnstora biffar, två per portion. Lägg på bakplåtspapper och pensla med bindningens uppmätta olja.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "rapsolja",
+            "nötfärs"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Baka cirka 25 minuter. Vänd försiktigt efter halva tiden och kontrollera att massan är fast och genomvarm. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 25,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär gurka i små bitar; finhacka dill.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda gurka, äppelcidervinäger, strösocker, dill och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötfärs",
+            "rödbeta",
+            "kapris",
+            "gul lök",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl",
+            "potatis",
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 13 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 39 minuter och huvudsakligen passiva moment till 53 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 92 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Finhackad rödbeta och kapris arbetas in i färsen; nära pannbiff och kräver innehållsgranskning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av äppelcidervinäger; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-mushroom-pirog",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Färspiroger med svamp och purjolök – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "closed_pie",
+      "primary": "nötfärs",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Grytlappar",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Vetedeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 420,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens vetemjöl och salt. Arbeta in degens olja och 160 ml vatten till en sammanhängande deg. Knåda bara tills degen håller ihop.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Täck degen och låt den vila medan fyllningen förbereds.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Smula färsen. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Färsen ska vara genomstekt och nå minst 72 °C i mitten. Dela därefter fint till fyllning.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär champinjoner i små bitar.",
+          "uses": [
+            "champinjoner",
+            "timjan"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg champinjoner i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "champinjoner"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner nötfärs i pannan och fördela jämnt.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "nötfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 8,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Dela degen i jämnstora bitar, två piroger per portion. Kavla till runda plattor mellan bakplåtspapper. Lägg fyllning på ena halvan, vik över och tryck ihop kanterna noga.",
+          "uses": [
+            "vetemjöl",
+            "nötfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Lägg pirogerna på plåt med bakplåtspapper. Baka mitt i ugnen cirka 25 minuter tills degen är torr, genomgräddad och har fått färg.",
+          "uses": [
+            "vetemjöl",
+            "nötfärs"
+          ],
+          "minutes": 25,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "nötfärs",
+            "champinjoner",
+            "timjan"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 55 minuter och huvudsakligen passiva moment till 48 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 103 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Torr tillagad färsfyllning bakas i slutet degskal; ingen öppet gratinerad köttfärsrätt. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-mushroom-pirog",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Färspiroger med svamp och purjolök – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "closed_pie",
+      "primary": "nötfärs",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Grytlappar",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Vetedeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 420,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens vetemjöl och salt. Arbeta in degens olja och 160 ml vatten till en sammanhängande deg. Knåda bara tills degen håller ihop.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Täck degen och låt den vila medan fyllningen förbereds.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Smula färsen. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Färsen ska vara genomstekt och nå minst 72 °C i mitten. Dela därefter fint till fyllning.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär champinjoner i små bitar; skölj purjolöken noga mellan bladen och skiva tunt.",
+          "uses": [
+            "champinjoner",
+            "timjan",
+            "purjolök",
+            "senap"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg champinjoner och purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "champinjoner",
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner nötfärs i pannan och fördela jämnt.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner senap från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "senap"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "nötfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 8,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Dela degen i jämnstora bitar, två piroger per portion. Kavla till runda plattor mellan bakplåtspapper. Lägg fyllning på ena halvan, vik över och tryck ihop kanterna noga.",
+          "uses": [
+            "vetemjöl",
+            "nötfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Lägg pirogerna på plåt med bakplåtspapper. Baka mitt i ugnen cirka 25 minuter tills degen är torr, genomgräddad och har fått färg.",
+          "uses": [
+            "vetemjöl",
+            "nötfärs"
+          ],
+          "minutes": 25,
+          "after": [
+            13
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "nötfärs",
+            "champinjoner",
+            "timjan",
+            "purjolök",
+            "senap"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 58 minuter och huvudsakligen passiva moment till 48 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 106 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Torr tillagad färsfyllning bakas i slutet degskal; ingen öppet gratinerad köttfärsrätt. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-mushroom-pirog",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Färspiroger med svamp och purjolök – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "closed_pie",
+      "primary": "nötfärs",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Grytlappar",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Vetedeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 420,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: syrlig gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Äppelcidervinäger, som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens vetemjöl och salt. Arbeta in degens olja och 160 ml vatten till en sammanhängande deg. Knåda bara tills degen håller ihop.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Täck degen och låt den vila medan fyllningen förbereds.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Smula färsen. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Färsen ska vara genomstekt och nå minst 72 °C i mitten. Dela därefter fint till fyllning.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär champinjoner i små bitar; skölj purjolöken noga mellan bladen och skiva tunt.",
+          "uses": [
+            "champinjoner",
+            "timjan",
+            "purjolök",
+            "senap"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg champinjoner och purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "champinjoner",
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner nötfärs i pannan och fördela jämnt.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner senap från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "senap"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "nötfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 8,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Dela degen i jämnstora bitar, två piroger per portion. Kavla till runda plattor mellan bakplåtspapper. Lägg fyllning på ena halvan, vik över och tryck ihop kanterna noga.",
+          "uses": [
+            "vetemjöl",
+            "nötfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Lägg pirogerna på plåt med bakplåtspapper. Baka mitt i ugnen cirka 25 minuter tills degen är torr, genomgräddad och har fått färg.",
+          "uses": [
+            "vetemjöl",
+            "nötfärs"
+          ],
+          "minutes": 25,
+          "after": [
+            13
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär gurka i små bitar; finhacka dill.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Blanda gurka, äppelcidervinäger, strösocker, dill och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            15
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "nötfärs",
+            "champinjoner",
+            "timjan",
+            "purjolök",
+            "senap",
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            16
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 65 minuter och huvudsakligen passiva moment till 48 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 113 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Torr tillagad färsfyllning bakas i slutet degskal; ingen öppet gratinerad köttfärsrätt. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök, timjan, äppelcidervinäger; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-pepper-braise",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Långkokt nötkött med rotselleri och potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "longbraise",
+      "primary": "nötkött",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "kryddpeppar"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt nötkött, rå ätlig vikt; styckdetalj preciseras i receptet"
+            },
+            {
+              "name": "rotselleri",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rotselleri, skalad rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär rotselleri i små jämna tärningar; skala och finhacka gul lök.",
+          "uses": [
+            "rotselleri",
+            "gul lök",
+            "kryddpeppar"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Skär nötköttet i jämna grytbitar. Värm huvudkomponentens olja i grytan och bryn köttet i omgångar. Lägg tillbaka allt kött.",
+          "uses": [
+            "nötkött",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg i rotselleri, gul lök och kryddpeppar samt huvudkomponentens salt och 700 ml vatten. Koka upp och rör så att bottensmaken löses upp.",
+          "uses": [
+            "nötkött",
+            "rotselleri",
+            "gul lök",
+            "kryddpeppar",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud under lock på låg värme i cirka 100 minuter tills köttet lätt kan delas med gaffel. Rör om ett par gånger. Ta av locket mot slutet om såsen behöver koncentreras.",
+          "uses": [
+            "nötkött"
+          ],
+          "minutes": 100,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötkött",
+            "rotselleri",
+            "gul lök",
+            "kryddpeppar",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 6 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 30 minuter och huvudsakligen passiva moment till 118 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 148 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Stora bitar nötkött långkokas till trådigt möra bitar; skiljer från nötfärsgryta. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av kryddpeppar, nötkött, rotselleri; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-pepper-braise",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Långkokt nötkött med rotselleri och potatis – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "longbraise",
+      "primary": "nötkött",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "kryddpeppar"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt nötkött, rå ätlig vikt; styckdetalj preciseras i receptet"
+            },
+            {
+              "name": "rotselleri",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rotselleri, skalad rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär rotselleri i små jämna tärningar; skala och finhacka gul lök; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "rotselleri",
+            "gul lök",
+            "kryddpeppar",
+            "morot",
+            "timjan"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Skär nötköttet i jämna grytbitar. Värm huvudkomponentens olja i grytan och bryn köttet i omgångar. Lägg tillbaka allt kött.",
+          "uses": [
+            "nötkött",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg i rotselleri, gul lök, kryddpeppar, morot och timjan samt huvudkomponentens salt och 700 ml vatten. Koka upp och rör så att bottensmaken löses upp.",
+          "uses": [
+            "nötkött",
+            "rotselleri",
+            "gul lök",
+            "kryddpeppar",
+            "morot",
+            "timjan",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud under lock på låg värme i cirka 100 minuter tills köttet lätt kan delas med gaffel. Rör om ett par gånger. Ta av locket mot slutet om såsen behöver koncentreras.",
+          "uses": [
+            "nötkött"
+          ],
+          "minutes": 100,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötkött",
+            "rotselleri",
+            "gul lök",
+            "kryddpeppar",
+            "morot",
+            "timjan",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 8 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 32 minuter och huvudsakligen passiva moment till 118 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 150 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Stora bitar nötkött långkokas till trådigt möra bitar; skiljer från nötfärsgryta. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av kryddpeppar, nötkött, rotselleri, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-pepper-braise",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Långkokt nötkött med rotselleri och potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "longbraise",
+      "primary": "nötkött",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "kryddpeppar"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt nötkött, rå ätlig vikt; styckdetalj preciseras i receptet"
+            },
+            {
+              "name": "rotselleri",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rotselleri, skalad rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: syrlig gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Äppelcidervinäger, som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär rotselleri i små jämna tärningar; skala och finhacka gul lök; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "rotselleri",
+            "gul lök",
+            "kryddpeppar",
+            "morot",
+            "timjan"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Skär nötköttet i jämna grytbitar. Värm huvudkomponentens olja i grytan och bryn köttet i omgångar. Lägg tillbaka allt kött.",
+          "uses": [
+            "nötkött",
+            "rapsolja"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg i rotselleri, gul lök, kryddpeppar, morot och timjan samt huvudkomponentens salt och 700 ml vatten. Koka upp och rör så att bottensmaken löses upp.",
+          "uses": [
+            "nötkött",
+            "rotselleri",
+            "gul lök",
+            "kryddpeppar",
+            "morot",
+            "timjan",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud under lock på låg värme i cirka 100 minuter tills köttet lätt kan delas med gaffel. Rör om ett par gånger. Ta av locket mot slutet om såsen behöver koncentreras.",
+          "uses": [
+            "nötkött"
+          ],
+          "minutes": 100,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär gurka i små bitar; finhacka dill.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda gurka, äppelcidervinäger, strösocker, dill och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötkött",
+            "rotselleri",
+            "gul lök",
+            "kryddpeppar",
+            "morot",
+            "timjan",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 12 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 39 minuter och huvudsakligen passiva moment till 118 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 157 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Stora bitar nötkött långkokas till trådigt möra bitar; skiljer från nötfärsgryta. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av kryddpeppar, nötkött, rotselleri, timjan, äppelcidervinäger; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-vegetable-meatballs-soup",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Färsbullssoppa med rotsaker och potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "meatball_soup",
+      "primary": "nötfärs",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "kryddpeppar"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stor gryta med lock",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning till bullarna",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skala och skär potatis i små jämna tärningar.",
+          "uses": [
+            "morot",
+            "potatis",
+            "kryddpeppar"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Blanda huvudråvaran med bindningens havregryn och salt samt 60 ml vatten. Arbeta kort tills massan binder och forma små jämnstora bullar. Håll kallt medan soppan kokas.",
+          "uses": [
+            "nötfärs",
+            "havregryn",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Tillsätt morot, potatis och kryddpeppar och huvudkomponentens salt samt 1000 ml vatten. Sjud under lock tills de hårdaste grönsakerna börjar mjukna.",
+          "uses": [
+            "morot",
+            "potatis",
+            "kryddpeppar",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ner bullarna i den sjudande soppan. Sjud försiktigt cirka 12 minuter utan kraftig omrörning. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötfärs",
+            "morot",
+            "potatis",
+            "kryddpeppar",
+            "rapsolja",
+            "salt",
+            "havregryn"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 6 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 14 minuter och huvudsakligen passiva moment till 30 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 44 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Små råa färsbullar sjuds direkt i en klar rotfruktssoppa och ger annan servering än bullar i tomatsås. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av kryddpeppar; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-vegetable-meatballs-soup",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Färsbullssoppa med rotsaker och potatis – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "meatball_soup",
+      "primary": "nötfärs",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "kryddpeppar"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stor gryta med lock",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning till bullarna",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skala och skär potatis i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt; finhacka persilja.",
+          "uses": [
+            "morot",
+            "potatis",
+            "kryddpeppar",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda huvudråvaran med bindningens havregryn och salt samt 60 ml vatten. Arbeta kort tills massan binder och forma små jämnstora bullar. Håll kallt medan soppan kokas.",
+          "uses": [
+            "nötfärs",
+            "havregryn",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Tillsätt morot, potatis, kryddpeppar, purjolök och persilja och huvudkomponentens salt samt 1000 ml vatten. Sjud under lock tills de hårdaste grönsakerna börjar mjukna.",
+          "uses": [
+            "morot",
+            "potatis",
+            "kryddpeppar",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ner bullarna i den sjudande soppan. Sjud försiktigt cirka 12 minuter utan kraftig omrörning. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötfärs",
+            "morot",
+            "potatis",
+            "kryddpeppar",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "havregryn"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 8 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 18 minuter och huvudsakligen passiva moment till 30 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 48 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Små råa färsbullar sjuds direkt i en klar rotfruktssoppa och ger annan servering än bullar i tomatsås. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av kryddpeppar, purjolök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-beef-vegetable-meatballs-soup",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Färsbullssoppa med rotsaker och potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "meatball_soup",
+      "primary": "nötfärs",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "kryddpeppar"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stor gryta med lock",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kryddpeppar"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning till bullarna",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: gurksallad med frön",
+          "ingredients": [
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella pumpakärnor, som sålda"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skala och skär potatis i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt; finhacka persilja.",
+          "uses": [
+            "morot",
+            "potatis",
+            "kryddpeppar",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda huvudråvaran med bindningens havregryn och salt samt 60 ml vatten. Arbeta kort tills massan binder och forma små jämnstora bullar. Håll kallt medan soppan kokas.",
+          "uses": [
+            "nötfärs",
+            "havregryn",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Tillsätt morot, potatis, kryddpeppar, purjolök och persilja och huvudkomponentens salt samt 1000 ml vatten. Sjud under lock tills de hårdaste grönsakerna börjar mjukna.",
+          "uses": [
+            "morot",
+            "potatis",
+            "kryddpeppar",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ner bullarna i den sjudande soppan. Sjud försiktigt cirka 12 minuter utan kraftig omrörning. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: grovhacka pumpakärnor; ansa och skär gurka i små bitar; finhacka persilja.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Blanda pumpakärnor, gurka, citronjuice, persilja och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "nötfärs",
+            "morot",
+            "potatis",
+            "kryddpeppar",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "pumpakärnor",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 27 minuter och huvudsakligen passiva moment till 30 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 57 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Små råa färsbullar sjuds direkt i en klar rotfruktssoppa och ger annan servering än bullar i tomatsås. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av kryddpeppar, pumpakärnor, purjolök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    }
+  ]
+}

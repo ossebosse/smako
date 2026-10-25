@@ -1,0 +1,4375 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-63",
+  "recipes": [
+    {
+      "base_id": "smako-indian-chickpea-tomato-rice-crust",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad riskaka med kikärts- och tomattäcke – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "ricecake",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad riskaka",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna kikärtor"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Rundkornigt vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Väg den avrunna mängden kikärtor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär tomat i små bitar.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 560 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela huvudkomponentens olja i två lika delar: den första till huvudråvaran och den andra till form eller risrutor. Håll delarna åtskilda.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm den första halvan av huvudkomponentens olja i stekpannan. Stek kikärtor på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "kikärtor",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg tomat i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in garam masala och huvudkomponentens salt.",
+          "uses": [
+            "tomat",
+            "garam masala",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice och 100 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "kikärtor",
+            "tomat"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "kikärtor",
+            "tomat"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Pressa det kokta riset till ett två centimeter tjockt lager på ett fat. Låt svalna i kylskåp 25 minuter så att det blir lättare att skära. Skär i rutor.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Stek risrutorna i huvudkomponentens olja som sparats från stekningen tills de fått gyllene yta på båda sidor. Servera huvudkomponenten ovanpå.",
+          "uses": [
+            "ris",
+            "rapsolja",
+            "kikärtor"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "tomat",
+            "garam masala",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Spara halva huvudkomponentens olja till att steka de kylda risrutorna; kikärtsröran läggs på vid servering. Fyra portioner. Lokalt härlett ingrediensantal 6; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 45 minuter aktivt arbete och 53 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 98 minuter med angiven arbetsordning. Nyhetsmotiv: Pressat och stekt ris utgör bas under en koncentrerad kikärtsröra; riset är en frasig kaka snarare än löst gryn. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för garam masala (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chickpea-tomato-rice-crust",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad riskaka med kikärts- och tomattäcke – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "ricecake",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad riskaka",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna kikärtor"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Rundkornigt vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Väg den avrunna mängden kikärtor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär tomat i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 520 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela huvudkomponentens olja i två lika delar: den första till huvudråvaran och den andra till form eller risrutor. Håll delarna åtskilda.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm den första halvan av huvudkomponentens olja i stekpannan. Stek kikärtor på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "kikärtor",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg tomat, gul lök, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in garam masala och huvudkomponentens salt.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice och 140 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "kikärtor",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "kikärtor",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Pressa det kokta riset till ett två centimeter tjockt lager på ett fat. Låt svalna i kylskåp 25 minuter så att det blir lättare att skära. Skär i rutor.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Stek risrutorna i huvudkomponentens olja som sparats från stekningen tills de fått gyllene yta på båda sidor. Servera huvudkomponenten ovanpå.",
+          "uses": [
+            "ris",
+            "rapsolja",
+            "kikärtor"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Spara halva huvudkomponentens olja till att steka de kylda risrutorna; kikärtsröran läggs på vid servering. Fyra portioner. Lokalt härlett ingrediensantal 9; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 49 minuter aktivt arbete och 53 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 102 minuter med angiven arbetsordning. Nyhetsmotiv: Pressat och stekt ris utgör bas under en koncentrerad kikärtsröra; riset är en frasig kaka snarare än löst gryn. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för garam masala (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chickpea-tomato-rice-crust",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad riskaka med kikärts- och tomattäcke – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "ricecake",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad riskaka",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna kikärtor"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Rundkornigt vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citronkål med morot och sesam",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Sesamfrön, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Väg den avrunna mängden kikärtor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär tomat i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 480 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela huvudkomponentens olja i två lika delar: den första till huvudråvaran och den andra till form eller risrutor. Håll delarna åtskilda.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm den första halvan av huvudkomponentens olja i stekpannan. Stek kikärtor på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "kikärtor",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg tomat, gul lök, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in garam masala och huvudkomponentens salt.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice och 140 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "kikärtor",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "kikärtor",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Pressa det kokta riset till ett två centimeter tjockt lager på ett fat. Låt svalna i kylskåp 25 minuter så att det blir lättare att skära. Skär i rutor.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Stek risrutorna i huvudkomponentens olja som sparats från stekningen tills de fått gyllene yta på båda sidor. Servera huvudkomponenten ovanpå.",
+          "uses": [
+            "ris",
+            "rapsolja",
+            "kikärtor"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Gör citronkål med morot och sesam: Strimla kålen tunt och grovriv moroten. Massera med citronjuicen. Rosta sesamfröna i torr panna och strö över.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "citronjuice",
+            "sesamfrön"
+          ],
+          "minutes": 6,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med citronkål med morot och sesam. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "ris",
+            "vitkål",
+            "morot",
+            "sesamfrön"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Spara halva huvudkomponentens olja till att steka de kylda risrutorna; kikärtsröran läggs på vid servering. Fyra portioner. Lokalt härlett ingrediensantal 12; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 55 minuter aktivt arbete och 53 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 108 minuter med angiven arbetsordning. Nyhetsmotiv: Pressat och stekt ris utgör bas under en koncentrerad kikärtsröra; riset är en frasig kaka snarare än löst gryn. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för garam masala (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chickpea-vegetable-dry-pan",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad torr kikärtspanna med kokos och gröna bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "stirfry",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "senapsfrön"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Mortel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad torr kikärtspanna",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna kikärtor"
+            },
+            {
+              "name": "haricots verts",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella haricots verts, vikt som såld"
+            },
+            {
+              "name": "senapsfrön",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senapsfrön, torr vikt"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 60,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kokosflingor, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Väg den avrunna mängden kikärtor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll haricots verts frysta fram till tillagningen.",
+          "uses": [
+            "haricots verts"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Krossa senapsfröna grovt i mortel så att smaken frigörs vid tillagningen.",
+          "uses": [
+            "senapsfrön"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Hetta upp huvudkomponentens olja i en bred stekpanna. Stek kikärtor i omgångar under omrörning tills ytan fått färg.  Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg därefter upp på en ren tallrik och spara stekfettet i pannan.",
+          "uses": [
+            "kikärtor",
+            "rapsolja"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt haricots verts och stek under omrörning tills de är genomvarma men har lite tuggmotstånd kvar. Blanda in senapsfrön och huvudkomponentens salt.",
+          "uses": [
+            "haricots verts",
+            "senapsfrön",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner kokosflingor och citronjuice och 100 ml vatten. Låt puttra under omrörning tills vätskan täcker råvarorna som en lätt sås.",
+          "uses": [
+            "kokosflingor",
+            "citronjuice"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort utan att mosa bitarna.",
+          "uses": [
+            "kikärtor",
+            "haricots verts"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "haricots verts",
+            "senapsfrön",
+            "kokosflingor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Låt bönorna bli helt varma och kokosflingorna lätt rostade, men håll rätten ganska torr så att den får stekyta. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 36 minuter aktivt arbete och 20 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 56 minuter med angiven arbetsordning. Nyhetsmotiv: Torrostad baljväxt- och grönsakspanna med kokosstruktur och potatis, snarare än masala i tomatsås. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för kokosflingor (dry, g), senapsfrön (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chickpea-vegetable-dry-pan",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad torr kikärtspanna med kokos och gröna bönor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "stirfry",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "senapsfrön"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Mortel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad torr kikärtspanna",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna kikärtor"
+            },
+            {
+              "name": "haricots verts",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella haricots verts, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "senapsfrön",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senapsfrön, torr vikt"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 60,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kokosflingor, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Väg den avrunna mängden kikärtor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll haricots verts frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "haricots verts",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Krossa senapsfröna grovt i mortel så att smaken frigörs vid tillagningen.",
+          "uses": [
+            "senapsfrön"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Hetta upp huvudkomponentens olja i en bred stekpanna. Stek kikärtor i omgångar under omrörning tills ytan fått färg.  Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg därefter upp på en ren tallrik och spara stekfettet i pannan.",
+          "uses": [
+            "kikärtor",
+            "rapsolja"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt haricots verts, gul lök, vitlök och ingefära och stek under omrörning tills de är genomvarma men har lite tuggmotstånd kvar. Blanda in senapsfrön och huvudkomponentens salt.",
+          "uses": [
+            "haricots verts",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "senapsfrön",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner kokosflingor och citronjuice och 140 ml vatten. Låt puttra under omrörning tills vätskan täcker råvarorna som en lätt sås.",
+          "uses": [
+            "kokosflingor",
+            "citronjuice"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort utan att mosa bitarna.",
+          "uses": [
+            "kikärtor",
+            "haricots verts",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "haricots verts",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "senapsfrön",
+            "kokosflingor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Låt bönorna bli helt varma och kokosflingorna lätt rostade, men håll rätten ganska torr så att den får stekyta. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 40 minuter aktivt arbete och 20 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 60 minuter med angiven arbetsordning. Nyhetsmotiv: Torrostad baljväxt- och grönsakspanna med kokosstruktur och potatis, snarare än masala i tomatsås. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för kokosflingor (dry, g), senapsfrön (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chickpea-vegetable-dry-pan",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad torr kikärtspanna med kokos och gröna bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "stirfry",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "senapsfrön"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Mortel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad torr kikärtspanna",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna kikärtor"
+            },
+            {
+              "name": "haricots verts",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella haricots verts, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "senapsfrön",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senapsfrön, torr vikt"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 60,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kokosflingor, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citronkål med morot och sesam",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Sesamfrön, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Väg den avrunna mängden kikärtor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll haricots verts frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "haricots verts",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Krossa senapsfröna grovt i mortel så att smaken frigörs vid tillagningen.",
+          "uses": [
+            "senapsfrön"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Hetta upp huvudkomponentens olja i en bred stekpanna. Stek kikärtor i omgångar under omrörning tills ytan fått färg.  Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg därefter upp på en ren tallrik och spara stekfettet i pannan.",
+          "uses": [
+            "kikärtor",
+            "rapsolja"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt haricots verts, gul lök, vitlök och ingefära och stek under omrörning tills de är genomvarma men har lite tuggmotstånd kvar. Blanda in senapsfrön och huvudkomponentens salt.",
+          "uses": [
+            "haricots verts",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "senapsfrön",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner kokosflingor och citronjuice och 140 ml vatten. Låt puttra under omrörning tills vätskan täcker råvarorna som en lätt sås.",
+          "uses": [
+            "kokosflingor",
+            "citronjuice"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort utan att mosa bitarna.",
+          "uses": [
+            "kikärtor",
+            "haricots verts",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Gör citronkål med morot och sesam: Strimla kålen tunt och grovriv moroten. Massera med citronjuicen. Rosta sesamfröna i torr panna och strö över.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "citronjuice",
+            "sesamfrön"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med citronkål med morot och sesam. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "haricots verts",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "senapsfrön",
+            "kokosflingor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "vitkål",
+            "morot",
+            "sesamfrön"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Låt bönorna bli helt varma och kokosflingorna lätt rostade, men håll rätten ganska torr så att den får stekyta. Fyra portioner. Lokalt härlett ingrediensantal 13; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 46 minuter aktivt arbete och 20 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 66 minuter med angiven arbetsordning. Nyhetsmotiv: Torrostad baljväxt- och grönsakspanna med kokosstruktur och potatis, snarare än masala i tomatsås. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för kokosflingor (dry, g), senapsfrön (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-cooked-sprout-gravy-crisp-chickpea-bread",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad munggroddsgryta med kikärtskrisp och bröd – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "genomkokta groddade hela bönor under torrt baljväxtkrisp",
+      "primary": "groddade mungbönor",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Bakplåtspapper",
+        "Gryta",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Plåt",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Munggroddsgryta med rostad kikärta och bröd",
+          "ingredients": [
+            {
+              "name": "groddade mungbönor",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Köpta färska groddade hela mungbönor med korta groddar; vikt som såld, tillagas genomhettade"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Slät osötad tamarindpasta utan kärnor, vikt som såld; koncentration behöver produktgranskas"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 7.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Munggroddsgryta med rostad kikärta och bröd: Sätt ugnen på 220 °C. Låt kikärtorna rinna av och torka dem noga. Blanda med en tredjedel av oljan och en tredjedel av saltet på bakplåtspapper. Rosta 25 minuter och rör en gång tills ytan torkat och blivit krispig.",
+          "uses": [
+            "kikärtor",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "passive": true
+        },
+        {
+          "text": "Skölj de köpta kortgroddade mungbönorna. Tärna tomaten. Fräs spiskummin i en tredjedel av oljan, lägg i tomaten och koka 7 minuter tills den fallit ihop. Tillsätt mungbönorna, tamarind, resterande salt och 600 ml vatten.",
+          "uses": [
+            "groddade mungbönor",
+            "tomat",
+            "spiskummin",
+            "rapsolja",
+            "tamarindpasta",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Sjud under lock 20 minuter tills hela bönor och groddar är mjuka och genomhettade. Behåll gott om tunn tomatbuljong runt dem; detta ska inte bli en torr böna.",
+          "uses": [
+            "groddade mungbönor",
+            "tomat"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär brödet i portionsbitar och pensla med den sista tredjedelen olja. Rosta i torr panna 2 minuter per sida. Häll munggrytan i skålar, toppa med de torra rostade kikärtorna och servera brödet intill.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "kikärtor",
+            "groddade mungbönor"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera munggroddsgryta med rostad kikärta och bröd. Fördela hela mängden jämnt mellan fyra portioner.",
+          "uses": [
+            "groddade mungbönor",
+            "tomat",
+            "kikärtor",
+            "bröd",
+            "tamarindpasta",
+            "rapsolja",
+            "spiskummin",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat svenskt receptutkast med indisk inspiration; inte provlagat och inget påstående om traditionell autenticitet. Fyra portioner. 7 lokalt räknade ingredienser, efter avdrag för salt, svartpeppar och processvatten; samma råvara i flera komponenter räknas en gång. Antalet ligger utanför middagens standardfilter 10–15; filtergränserna behöver justeras för just denna variant. Sekventiell arbetsordning ger cirka 26 aktiva och 50 huvudsakligen passiva minuter, totalt 76 minuter; tider behöver provlagas. Kulinariskt nyhetsmotiv: Köpta groddade hela mungbönor tillagas i tunn syrlig buljong och får en separat torrrostad kikärtstoppning som mjuknar vid bordet. Hela groddade bönor, tunn vätska och torrt krisp är en sammanbyggd måltidsstruktur. Kräver registergranskning av groddade mungbönor och tamarindpasta; inte importklar. Inga krav- eller packkoder har uppfunnits. Köpta kortgroddade hela mungbönor efterfrågas. Receptet omfattar inte hemmagroddning; groddarna genomkokas. Produktval, köpbarhet, diet och allergener behöver bedömas per variant. Ingen näringsberäkning, Smako-validering eller import har utförts. Ny bas är en redaktionell kandidat, inte ett verifierat unikhetsbesked."
+    },
+    {
+      "base_id": "smako-indian-cooked-sprout-gravy-crisp-chickpea-bread",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad munggroddsgryta med kikärtskrisp och bröd – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "genomkokta groddade hela bönor under torrt baljväxtkrisp",
+      "primary": "groddade mungbönor",
+      "method": "pot",
+      "side": "gurka och rödlök med lime",
+      "flavor": [
+        "limejuice",
+        "persilja",
+        "spiskummin"
+      ],
+      "equipment": [
+        "Bakplåtspapper",
+        "Gryta",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Plåt",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Gurka och rödlök med lime",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 70.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Munggroddsgryta med rostad kikärta och bröd",
+          "ingredients": [
+            {
+              "name": "groddade mungbönor",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Köpta färska groddade hela mungbönor med korta groddar; vikt som såld, tillagas genomhettade"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Slät osötad tamarindpasta utan kärnor, vikt som såld; koncentration behöver produktgranskas"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 7.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Gurka och rödlök med lime: Skölj och tärna gurkan. Skala och strimla rödlöken, hacka persiljan och vänd allt med limejuice, olja och salt. Täck och ställ i kylskåp till serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "limejuice",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Munggroddsgryta med rostad kikärta och bröd: Sätt ugnen på 220 °C. Låt kikärtorna rinna av och torka dem noga. Blanda med en tredjedel av oljan och en tredjedel av saltet på bakplåtspapper. Rosta 25 minuter och rör en gång tills ytan torkat och blivit krispig.",
+          "uses": [
+            "kikärtor",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj de köpta kortgroddade mungbönorna. Tärna tomaten. Fräs spiskummin i en tredjedel av oljan, lägg i tomaten och koka 7 minuter tills den fallit ihop. Tillsätt mungbönorna, tamarind, resterande salt och 600 ml vatten.",
+          "uses": [
+            "groddade mungbönor",
+            "tomat",
+            "spiskummin",
+            "rapsolja",
+            "tamarindpasta",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud under lock 20 minuter tills hela bönor och groddar är mjuka och genomhettade. Behåll gott om tunn tomatbuljong runt dem; detta ska inte bli en torr böna.",
+          "uses": [
+            "groddade mungbönor",
+            "tomat"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär brödet i portionsbitar och pensla med den sista tredjedelen olja. Rosta i torr panna 2 minuter per sida. Häll munggrytan i skålar, toppa med de torra rostade kikärtorna och servera brödet intill.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "kikärtor",
+            "groddade mungbönor"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera gurka och rödlök med lime och munggroddsgryta med rostad kikärta och bröd. Fördela hela mängden jämnt mellan fyra portioner.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "limejuice",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "groddade mungbönor",
+            "tomat",
+            "kikärtor",
+            "bröd",
+            "tamarindpasta",
+            "spiskummin"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat svenskt receptutkast med indisk inspiration; inte provlagat och inget påstående om traditionell autenticitet. Fyra portioner. 11 lokalt räknade ingredienser, efter avdrag för salt, svartpeppar och processvatten; samma råvara i flera komponenter räknas en gång. Antalet ligger preliminärt inom middagens 10–15-filter, utan garanti om val i Smako. Sekventiell arbetsordning ger cirka 33 aktiva och 50 huvudsakligen passiva minuter, totalt 83 minuter; tider behöver provlagas. Kulinariskt nyhetsmotiv: Köpta groddade hela mungbönor tillagas i tunn syrlig buljong och får en separat torrrostad kikärtstoppning som mjuknar vid bordet. Hela groddade bönor, tunn vätska och torrt krisp är en sammanbyggd måltidsstruktur. Kräver registergranskning av groddade mungbönor och tamarindpasta; inte importklar. Inga krav- eller packkoder har uppfunnits. Köpta kortgroddade hela mungbönor efterfrågas. Receptet omfattar inte hemmagroddning; groddarna genomkokas. Produktval, köpbarhet, diet och allergener behöver bedömas per variant. Ingen näringsberäkning, Smako-validering eller import har utförts. Ny bas är en redaktionell kandidat, inte ett verifierat unikhetsbesked."
+    },
+    {
+      "base_id": "smako-indian-cooked-sprout-gravy-crisp-chickpea-bread",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad munggroddsgryta med kikärtskrisp och bröd – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "genomkokta groddade hela bönor under torrt baljväxtkrisp",
+      "primary": "groddade mungbönor",
+      "method": "pot",
+      "side": "gurka och rödlök med lime; lök och tamarind",
+      "flavor": [
+        "limejuice",
+        "persilja",
+        "spiskummin"
+      ],
+      "equipment": [
+        "Bakplåtspapper",
+        "Durkslag",
+        "Gryta",
+        "Gryta med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Plåt",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Slev",
+        "Stekpanna",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Gurka och rödlök med lime",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 70.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Lök och tamarind",
+          "ingredients": [
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Slät osötad tamarindpasta utan kärnor, vikt som såld; koncentration behöver produktgranskas"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Munggroddsgryta med rostad kikärta och bröd",
+          "ingredients": [
+            {
+              "name": "groddade mungbönor",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Köpta färska groddade hela mungbönor med korta groddar; vikt som såld, tillagas genomhettade"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Slät osötad tamarindpasta utan kärnor, vikt som såld; koncentration behöver produktgranskas"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 7.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Gurka och rödlök med lime: Skölj och tärna gurkan. Skala och strimla rödlöken, hacka persiljan och vänd allt med limejuice, olja och salt. Täck och ställ i kylskåp till serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "limejuice",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Lök och tamarind: Skala och strimla löken. Mjukstek i oljan 8 minuter. Tillsätt tamarindpasta, socker, salt och 80 ml vatten. Sjud 5 minuter tills löken är blank och vätskan sirapslik.",
+          "uses": [
+            "rödlök",
+            "tamarindpasta",
+            "strösocker",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Munggroddsgryta med rostad kikärta och bröd: Sätt ugnen på 220 °C. Låt kikärtorna rinna av och torka dem noga. Blanda med en tredjedel av oljan och en tredjedel av saltet på bakplåtspapper. Rosta 25 minuter och rör en gång tills ytan torkat och blivit krispig.",
+          "uses": [
+            "kikärtor",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj de köpta kortgroddade mungbönorna. Tärna tomaten. Fräs spiskummin i en tredjedel av oljan, lägg i tomaten och koka 7 minuter tills den fallit ihop. Tillsätt mungbönorna, tamarind, resterande salt och 600 ml vatten.",
+          "uses": [
+            "groddade mungbönor",
+            "tomat",
+            "spiskummin",
+            "rapsolja",
+            "tamarindpasta",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sjud under lock 20 minuter tills hela bönor och groddar är mjuka och genomhettade. Behåll gott om tunn tomatbuljong runt dem; detta ska inte bli en torr böna.",
+          "uses": [
+            "groddade mungbönor",
+            "tomat"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär brödet i portionsbitar och pensla med den sista tredjedelen olja. Rosta i torr panna 2 minuter per sida. Häll munggrytan i skålar, toppa med de torra rostade kikärtorna och servera brödet intill.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "kikärtor",
+            "groddade mungbönor"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera gurka och rödlök med lime, lök och tamarind och munggroddsgryta med rostad kikärta och bröd. Fördela hela mängden jämnt mellan fyra portioner.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "limejuice",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "tamarindpasta",
+            "strösocker",
+            "groddade mungbönor",
+            "tomat",
+            "kikärtor",
+            "bröd",
+            "spiskummin"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat svenskt receptutkast med indisk inspiration; inte provlagat och inget påstående om traditionell autenticitet. Fyra portioner. 12 lokalt räknade ingredienser, efter avdrag för salt, svartpeppar och processvatten; samma råvara i flera komponenter räknas en gång. Antalet ligger preliminärt inom middagens 10–15-filter, utan garanti om val i Smako. Sekventiell arbetsordning ger cirka 49 aktiva och 50 huvudsakligen passiva minuter, totalt 99 minuter; tider behöver provlagas. Kulinariskt nyhetsmotiv: Köpta groddade hela mungbönor tillagas i tunn syrlig buljong och får en separat torrrostad kikärtstoppning som mjuknar vid bordet. Hela groddade bönor, tunn vätska och torrt krisp är en sammanbyggd måltidsstruktur. Kräver registergranskning av groddade mungbönor och tamarindpasta; inte importklar. Inga krav- eller packkoder har uppfunnits. Köpta kortgroddade hela mungbönor efterfrågas. Receptet omfattar inte hemmagroddning; groddarna genomkokas. Produktval, köpbarhet, diet och allergener behöver bedömas per variant. Ingen näringsberäkning, Smako-validering eller import har utförts. Ny bas är en redaktionell kandidat, inte ett verifierat unikhetsbesked."
+    },
+    {
+      "base_id": "smako-indian-cottage-cheese-rice-bake",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad keso- och risgratäng med ärtor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "gratin",
+      "primary": "keso",
+      "method": "bake",
+      "side": "ris",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad keso- och risgratäng",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, vikt som såld"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella ärtor, vikt som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Väg keson som såld, med den vätska som följer med. Om rättens instruktion senare anger avrinning sker den först efter uppvägningen.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll ärtor frysta fram till tillagningen.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 560 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek keso på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "keso",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg ärtor i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in spiskummin och huvudkomponentens salt.",
+          "uses": [
+            "ärtor",
+            "spiskummin",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner yoghurt naturell och 100 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "yoghurt naturell"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "keso",
+            "ärtor"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "keso",
+            "ärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 210 °C. Vispa bindningens råa ägg och vänd ner dem i den ljumma fyllningen. Blanda eller varva det kokta riset med fyllningen i en ugnsform enligt rättens beskrivning. Pressa lätt till ett jämnt lager, högst fyra centimeter djupt.",
+          "uses": [
+            "keso",
+            "ris",
+            "ägg"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Baka mitt i ugnen cirka 25 minuter tills ytan fått färg och mitten är genomvarm.  Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "keso",
+            "ägg"
+          ],
+          "minutes": 25,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "keso",
+            "ärtor",
+            "spiskummin",
+            "yoghurt naturell",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Vänd riset genom den krämiga kesoblandningen och pressa bara lätt i formen, så att grynen finns kvar. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 37 minuter aktivt arbete och 53 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 90 minuter med angiven arbetsordning. Nyhetsmotiv: Fastare risgratäng med ostkorn och äggbindning, snarare än risotto eller gryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-cottage-cheese-rice-bake",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad keso- och risgratäng med ärtor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "gratin",
+      "primary": "keso",
+      "method": "bake",
+      "side": "ris",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad keso- och risgratäng",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, vikt som såld"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella ärtor, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Väg keson som såld, med den vätska som följer med. Om rättens instruktion senare anger avrinning sker den först efter uppvägningen.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll ärtor frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 520 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek keso på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "keso",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg ärtor, gul lök, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in spiskummin och huvudkomponentens salt.",
+          "uses": [
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner yoghurt naturell och 140 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "yoghurt naturell"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "keso",
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "keso",
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 210 °C. Vispa bindningens råa ägg och vänd ner dem i den ljumma fyllningen. Blanda eller varva det kokta riset med fyllningen i en ugnsform enligt rättens beskrivning. Pressa lätt till ett jämnt lager, högst fyra centimeter djupt.",
+          "uses": [
+            "keso",
+            "ris",
+            "ägg"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Baka mitt i ugnen cirka 25 minuter tills ytan fått färg och mitten är genomvarm.  Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "keso",
+            "ägg"
+          ],
+          "minutes": 25,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "keso",
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "yoghurt naturell",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Vänd riset genom den krämiga kesoblandningen och pressa bara lätt i formen, så att grynen finns kvar. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 41 minuter aktivt arbete och 53 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 94 minuter med angiven arbetsordning. Nyhetsmotiv: Fastare risgratäng med ostkorn och äggbindning, snarare än risotto eller gryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-cottage-cheese-rice-bake",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad keso- och risgratäng med ärtor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "gratin",
+      "primary": "keso",
+      "method": "bake",
+      "side": "ris",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad keso- och risgratäng",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, vikt som såld"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella ärtor, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gurk- och tomatsallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Väg keson som såld, med den vätska som följer med. Om rättens instruktion senare anger avrinning sker den först efter uppvägningen.",
+          "uses": [
+            "keso"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll ärtor frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 480 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek keso på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "keso",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg ärtor, gul lök, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in spiskummin och huvudkomponentens salt.",
+          "uses": [
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner yoghurt naturell och 140 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "yoghurt naturell"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "keso",
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "keso",
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 210 °C. Vispa bindningens råa ägg och vänd ner dem i den ljumma fyllningen. Blanda eller varva det kokta riset med fyllningen i en ugnsform enligt rättens beskrivning. Pressa lätt till ett jämnt lager, högst fyra centimeter djupt.",
+          "uses": [
+            "keso",
+            "ris",
+            "ägg"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Baka mitt i ugnen cirka 25 minuter tills ytan fått färg och mitten är genomvarm.  Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "keso",
+            "ägg"
+          ],
+          "minutes": 25,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör gurk- och tomatsallad: Skär gurka och tomat i små bitar, strimla rödlöken tunt och vänd med citronjuicen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med gurk- och tomatsallad. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "keso",
+            "ärtor",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "yoghurt naturell",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "ris",
+            "gurka",
+            "tomat",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Vänd riset genom den krämiga kesoblandningen och pressa bara lätt i formen, så att grynen finns kvar. Fyra portioner. Lokalt härlett ingrediensantal 14; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 47 minuter aktivt arbete och 53 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 100 minuter med angiven arbetsordning. Nyhetsmotiv: Fastare risgratäng med ostkorn och äggbindning, snarare än risotto eller gryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-covered-steamed-paneer-mustard-coconut-paste",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad ångad paneer i senaps-kokospasta – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "hela ostbitar i sluten ångkokt frö-yoghurtpasta",
+      "primary": "paneer",
+      "method": "pot",
+      "side": "kokt ris",
+      "flavor": [
+        "senapsfrön"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grund värmetålig form",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Lock eller folie",
+        "Mixer",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Slev",
+        "Stekpanna",
+        "Ånginsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kokt ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Paneerbitar i ångad senaps-kokospasta",
+          "ingredients": [
+            {
+              "name": "paneer",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fast naturell paneer, vikt som såld"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 75.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Osötade torkade kokosflingor"
+            },
+            {
+              "name": "senapsfrön",
+              "form": "dry",
+              "quantity": 18.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Hela gula eller bruna senapsfrön, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 6.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kokt ris: Skölj riset. Lägg i en kastrull med 500 ml vatten och salt och koka upp.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Sjud på låg värme under lock cirka 15 minuter tills riset är mjukt och vattnet absorberats; följ längre koktid på den valda förpackningen. Låt vila 5 minuter av värmen och fluffa med gaffel. Håll varmt under lock.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Paneerbitar i ångad senaps-kokospasta: Blötlägg kokosflingor och senapsfrön i 150 ml vatten (varmt) i 20 minuter. Skala och riv ingefäran. Mixa de blöta fröna och kokosen med hela vätskan och ingefäran till en fin, tjock pasta.",
+          "uses": [
+            "kokosflingor",
+            "senapsfrön",
+            "ingefära"
+          ],
+          "minutes": 26,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skär paneern i stora jämna kuber. Rör yoghurten, saltet och oljan med pastan. Vänd ner paneern och skrapa hela blandningen i en grund värmetålig form som ryms i ångkokaren. Täck formen tätt med ett lock eller folie.",
+          "uses": [
+            "paneer",
+            "yoghurt naturell",
+            "salt",
+            "rapsolja",
+            "kokosflingor",
+            "senapsfrön"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka upp 1000 ml vatten under ånginsatsen. Ställ formen ovanför vattenytan, lägg på grytlock och ånga 25 minuter. Paneerbitarna ska vara genomvarma och såsen tillagad runtom. Lyft formen försiktigt och öppna locket från ansiktet.",
+          "uses": [
+            "paneer",
+            "kokosflingor",
+            "senapsfrön",
+            "yoghurt naturell",
+            "ingefära",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd försiktigt runt paneerbitarna i den täta ångade såsen. Bitarna ska behålla sin form inne i den täta såsen. Skeda sås och paneer över riset.",
+          "uses": [
+            "paneer",
+            "kokosflingor",
+            "senapsfrön",
+            "yoghurt naturell",
+            "ingefära",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera kokt ris och paneerbitar i ångad senaps-kokospasta. Fördela hela mängden jämnt mellan fyra portioner.",
+          "uses": [
+            "ris",
+            "salt",
+            "paneer",
+            "kokosflingor",
+            "senapsfrön",
+            "yoghurt naturell",
+            "ingefära",
+            "rapsolja"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat svenskt receptutkast med indisk inspiration; inte provlagat och inget påstående om traditionell autenticitet. Fyra portioner. 7 lokalt räknade ingredienser, efter avdrag för salt, svartpeppar och processvatten; samma råvara i flera komponenter räknas en gång. Antalet ligger utanför middagens standardfilter 10–15; filtergränserna behöver justeras för just denna variant. Sekventiell arbetsordning ger cirka 46 aktiva och 50 huvudsakligen passiva minuter, totalt 96 minuter; tider behöver provlagas. Kulinariskt nyhetsmotiv: Hela paneerkuber ligger i en finmald senaps-kokos-yoghurtpasta som tillagas i en täckt form med ånga. Varken ostbitarna eller såsen binds av ägg; konstruktionen är ånginfuserade hela kuber, inte paneerkofta eller äggflan. Kräver registergranskning av kokosflingor, paneer och senapsfrön; inte importklar. Inga krav- eller packkoder har uppfunnits.  Produktval, köpbarhet, diet och allergener behöver bedömas per variant. Ingen näringsberäkning, Smako-validering eller import har utförts. Ny bas är en redaktionell kandidat, inte ett verifierat unikhetsbesked."
+    },
+    {
+      "base_id": "smako-indian-covered-steamed-paneer-mustard-coconut-paste",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad ångad paneer i senaps-kokospasta – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "hela ostbitar i sluten ångkokt frö-yoghurtpasta",
+      "primary": "paneer",
+      "method": "pot",
+      "side": "gurka och rödlök med lime; kokt ris",
+      "flavor": [
+        "limejuice",
+        "persilja",
+        "senapsfrön"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grund värmetålig form",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Lock eller folie",
+        "Mixer",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Slev",
+        "Stekpanna",
+        "Ånginsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Gurka och rödlök med lime",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 70.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Paneerbitar i ångad senaps-kokospasta",
+          "ingredients": [
+            {
+              "name": "paneer",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fast naturell paneer, vikt som såld"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 75.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Osötade torkade kokosflingor"
+            },
+            {
+              "name": "senapsfrön",
+              "form": "dry",
+              "quantity": 18.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Hela gula eller bruna senapsfrön, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 6.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Gurka och rödlök med lime: Skölj och tärna gurkan. Skala och strimla rödlöken, hacka persiljan och vänd allt med limejuice, olja och salt. Täck och ställ i kylskåp till serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "limejuice",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Kokt ris: Skölj riset. Lägg i en kastrull med 500 ml vatten och salt och koka upp.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under lock cirka 15 minuter tills riset är mjukt och vattnet absorberats; följ längre koktid på den valda förpackningen. Låt vila 5 minuter av värmen och fluffa med gaffel. Håll varmt under lock.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Paneerbitar i ångad senaps-kokospasta: Blötlägg kokosflingor och senapsfrön i 150 ml vatten (varmt) i 20 minuter. Skala och riv ingefäran. Mixa de blöta fröna och kokosen med hela vätskan och ingefäran till en fin, tjock pasta.",
+          "uses": [
+            "kokosflingor",
+            "senapsfrön",
+            "ingefära"
+          ],
+          "minutes": 26,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skär paneern i stora jämna kuber. Rör yoghurten, saltet och oljan med pastan. Vänd ner paneern och skrapa hela blandningen i en grund värmetålig form som ryms i ångkokaren. Täck formen tätt med ett lock eller folie.",
+          "uses": [
+            "paneer",
+            "yoghurt naturell",
+            "salt",
+            "rapsolja",
+            "kokosflingor",
+            "senapsfrön"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Koka upp 1000 ml vatten under ånginsatsen. Ställ formen ovanför vattenytan, lägg på grytlock och ånga 25 minuter. Paneerbitarna ska vara genomvarma och såsen tillagad runtom. Lyft formen försiktigt och öppna locket från ansiktet.",
+          "uses": [
+            "paneer",
+            "kokosflingor",
+            "senapsfrön",
+            "yoghurt naturell",
+            "ingefära",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd försiktigt runt paneerbitarna i den täta ångade såsen. Bitarna ska behålla sin form inne i den täta såsen. Skeda sås och paneer över riset.",
+          "uses": [
+            "paneer",
+            "kokosflingor",
+            "senapsfrön",
+            "yoghurt naturell",
+            "ingefära",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera gurka och rödlök med lime, kokt ris och paneerbitar i ångad senaps-kokospasta. Fördela hela mängden jämnt mellan fyra portioner.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "limejuice",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "ris",
+            "paneer",
+            "kokosflingor",
+            "senapsfrön",
+            "yoghurt naturell",
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat svenskt receptutkast med indisk inspiration; inte provlagat och inget påstående om traditionell autenticitet. Fyra portioner. 11 lokalt räknade ingredienser, efter avdrag för salt, svartpeppar och processvatten; samma råvara i flera komponenter räknas en gång. Antalet ligger preliminärt inom middagens 10–15-filter, utan garanti om val i Smako. Sekventiell arbetsordning ger cirka 53 aktiva och 50 huvudsakligen passiva minuter, totalt 103 minuter; tider behöver provlagas. Kulinariskt nyhetsmotiv: Hela paneerkuber ligger i en finmald senaps-kokos-yoghurtpasta som tillagas i en täckt form med ånga. Varken ostbitarna eller såsen binds av ägg; konstruktionen är ånginfuserade hela kuber, inte paneerkofta eller äggflan. Kräver registergranskning av kokosflingor, paneer och senapsfrön; inte importklar. Inga krav- eller packkoder har uppfunnits.  Produktval, köpbarhet, diet och allergener behöver bedömas per variant. Ingen näringsberäkning, Smako-validering eller import har utförts. Ny bas är en redaktionell kandidat, inte ett verifierat unikhetsbesked."
+    },
+    {
+      "base_id": "smako-indian-covered-steamed-paneer-mustard-coconut-paste",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad ångad paneer i senaps-kokospasta – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "hela ostbitar i sluten ångkokt frö-yoghurtpasta",
+      "primary": "paneer",
+      "method": "pot",
+      "side": "gurka och rödlök med lime; syrlig kål med morot och sesam; kokt ris",
+      "flavor": [
+        "limejuice",
+        "persilja",
+        "senapsfrön"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grund värmetålig form",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Lock eller folie",
+        "Mixer",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Slev",
+        "Stekpanna",
+        "Ånginsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Gurka och rödlök med lime",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 70.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Syrlig kål med morot och sesam",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt som såld"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sesamfrön, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Paneerbitar i ångad senaps-kokospasta",
+          "ingredients": [
+            {
+              "name": "paneer",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fast naturell paneer, vikt som såld"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 75.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Osötade torkade kokosflingor"
+            },
+            {
+              "name": "senapsfrön",
+              "form": "dry",
+              "quantity": 18.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Hela gula eller bruna senapsfrön, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 6.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Gurka och rödlök med lime: Skölj och tärna gurkan. Skala och strimla rödlöken, hacka persiljan och vänd allt med limejuice, olja och salt. Täck och ställ i kylskåp till serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "limejuice",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Syrlig kål med morot och sesam: Skölj och strimla kålen tunt. Skala och grovriv moroten. Massera grönsakerna med salt, limejuice och olja så att de mjuknar lätt.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "limejuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rosta sesamfröna i torr panna 2 minuter under omrörning och blanda ner i kålen. Täck och ställ i kylskåp till serveringen.",
+          "uses": [
+            "sesamfrön",
+            "vitkål",
+            "morot"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kokt ris: Skölj riset. Lägg i en kastrull med 500 ml vatten och salt och koka upp.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under lock cirka 15 minuter tills riset är mjukt och vattnet absorberats; följ längre koktid på den valda förpackningen. Låt vila 5 minuter av värmen och fluffa med gaffel. Håll varmt under lock.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Paneerbitar i ångad senaps-kokospasta: Blötlägg kokosflingor och senapsfrön i 150 ml vatten (varmt) i 20 minuter. Skala och riv ingefäran. Mixa de blöta fröna och kokosen med hela vätskan och ingefäran till en fin, tjock pasta.",
+          "uses": [
+            "kokosflingor",
+            "senapsfrön",
+            "ingefära"
+          ],
+          "minutes": 26,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skär paneern i stora jämna kuber. Rör yoghurten, saltet och oljan med pastan. Vänd ner paneern och skrapa hela blandningen i en grund värmetålig form som ryms i ångkokaren. Täck formen tätt med ett lock eller folie.",
+          "uses": [
+            "paneer",
+            "yoghurt naturell",
+            "salt",
+            "rapsolja",
+            "kokosflingor",
+            "senapsfrön"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Koka upp 1000 ml vatten under ånginsatsen. Ställ formen ovanför vattenytan, lägg på grytlock och ånga 25 minuter. Paneerbitarna ska vara genomvarma och såsen tillagad runtom. Lyft formen försiktigt och öppna locket från ansiktet.",
+          "uses": [
+            "paneer",
+            "kokosflingor",
+            "senapsfrön",
+            "yoghurt naturell",
+            "ingefära",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd försiktigt runt paneerbitarna i den täta ångade såsen. Bitarna ska behålla sin form inne i den täta såsen. Skeda sås och paneer över riset.",
+          "uses": [
+            "paneer",
+            "kokosflingor",
+            "senapsfrön",
+            "yoghurt naturell",
+            "ingefära",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera gurka och rödlök med lime, syrlig kål med morot och sesam, kokt ris och paneerbitar i ångad senaps-kokospasta. Fördela hela mängden jämnt mellan fyra portioner.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "limejuice",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "vitkål",
+            "morot",
+            "sesamfrön",
+            "ris",
+            "paneer",
+            "kokosflingor",
+            "senapsfrön",
+            "yoghurt naturell",
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat svenskt receptutkast med indisk inspiration; inte provlagat och inget påstående om traditionell autenticitet. Fyra portioner. 14 lokalt räknade ingredienser, efter avdrag för salt, svartpeppar och processvatten; samma råvara i flera komponenter räknas en gång. Antalet ligger preliminärt inom middagens 10–15-filter, utan garanti om val i Smako. Sekventiell arbetsordning ger cirka 63 aktiva och 50 huvudsakligen passiva minuter, totalt 113 minuter; tider behöver provlagas. Kulinariskt nyhetsmotiv: Hela paneerkuber ligger i en finmald senaps-kokos-yoghurtpasta som tillagas i en täckt form med ånga. Varken ostbitarna eller såsen binds av ägg; konstruktionen är ånginfuserade hela kuber, inte paneerkofta eller äggflan. Kräver registergranskning av kokosflingor, paneer och senapsfrön; inte importklar. Inga krav- eller packkoder har uppfunnits.  Produktval, köpbarhet, diet och allergener behöver bedömas per variant. Ingen näringsberäkning, Smako-validering eller import har utförts. Ny bas är en redaktionell kandidat, inte ett verifierat unikhetsbesked."
+    }
+  ]
+}

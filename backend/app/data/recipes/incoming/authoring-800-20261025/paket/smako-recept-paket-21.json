@@ -1,0 +1,4514 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-21",
+  "recipes": [
+    {
+      "base_id": "smako-greek-vine-leaf-lentil-rice-parcels",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade vinbladspaket med gröna linser och ris – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fyllda vinblad",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "varma vinblad",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Lock",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Vid kastrull"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Linsrisfyllning",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 160.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varma vinblad",
+          "ingredients": [
+            {
+              "name": "vinblad",
+              "form": "preserved_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade vinblad, sköljd och avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Linsrisfyllning: Ansa och finhacka gul lök.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, ris och salt och 950 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. ",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varma vinblad: Skölj vinbladen och behåll dem hela. Lägg vinblad, rapsolja, citronjuice och salt i kastrullen med 200 ml vatten. Koka upp och sjud varsamt i 10 minuter.",
+          "uses": [
+            "vinblad",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt vinbladen rinna av och bred ut dem med den släta sidan nedåt. Fördela linsrisfyllningen över bladen, vik in sidorna och rulla till täta små paket. Lägg trasiga blad dubbla och använd hela fyllningen.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "gul lök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "vinblad"
+          ],
+          "minutes": 15,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera linsrisfyllning och varma vinblad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "gul lök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "vinblad"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            6,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 84 minuter totalt, varav 49 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och vinblad; inte importklar. Inga nya produkt- eller pack-koder har skapats. Linsriset ska fördelas i de sköljda, varma vinbladen och rullas med invikta kanter före servering. Behåll hela blad; trasiga blad läggs dubbla. Kulinarisk avgränsning: Kokta små vinblad fylls med linsris och rullas till portionspaket; bladen har annan syrlighet och format än stora kåldolmar. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-vine-leaf-lentil-rice-parcels",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade vinbladspaket med gröna linser och ris – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fyllda vinblad",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "varma vinblad; vit bönkräm",
+      "flavor": [
+        "citronjuice",
+        "dill",
+        "mynta"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Lock",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade",
+        "Vid kastrull"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Linsrisfyllning",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 160.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk mynta, blad"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varma vinblad",
+          "ingredients": [
+            {
+              "name": "vinblad",
+              "form": "preserved_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade vinblad, sköljd och avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Vit bönkräm",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Linsrisfyllning: Ansa och finhacka gul lök. Finhacka dill och mynta.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, ris och salt och 950 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice, dill och mynta precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "dill",
+            "mynta"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varma vinblad: Skölj vinbladen och behåll dem hela. Lägg vinblad, rapsolja, citronjuice och salt i kastrullen med 200 ml vatten. Koka upp och sjud varsamt i 10 minuter.",
+          "uses": [
+            "vinblad",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vit bönkräm: Lägg bönor, citronjuice, rapsolja och salt i mixerkärlet med 60 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Låt vinbladen rinna av och bred ut dem med den släta sidan nedåt. Fördela linsrisfyllningen över bladen, vik in sidorna och rulla till täta små paket. Lägg trasiga blad dubbla och använd hela fyllningen.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "gul lök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "mynta",
+            "vinblad"
+          ],
+          "minutes": 15,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera linsrisfyllning, varma vinblad och vit bönkräm. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "gul lök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "mynta",
+            "vinblad",
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 89 minuter totalt, varav 54 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser, mynta och vinblad; inte importklar. Inga nya produkt- eller pack-koder har skapats. Linsriset ska fördelas i de sköljda, varma vinbladen och rullas med invikta kanter före servering. Behåll hela blad; trasiga blad läggs dubbla. Kulinarisk avgränsning: Kokta små vinblad fylls med linsris och rullas till portionspaket; bladen har annan syrlighet och format än stora kåldolmar. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-vine-leaf-lentil-rice-parcels",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade vinbladspaket med gröna linser och ris – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fyllda vinblad",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "varma vinblad; vit bönkräm; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "dill",
+        "mynta"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Lock",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade",
+        "Vid kastrull"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Linsrisfyllning",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 160.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk mynta, blad"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varma vinblad",
+          "ingredients": [
+            {
+              "name": "vinblad",
+              "form": "preserved_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade vinblad, sköljd och avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Vit bönkräm",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Linsrisfyllning: Ansa och finhacka gul lök. Finhacka dill och mynta.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, ris och salt och 950 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice, dill och mynta precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "dill",
+            "mynta"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varma vinblad: Skölj vinbladen och behåll dem hela. Lägg vinblad, rapsolja, citronjuice och salt i kastrullen med 200 ml vatten. Koka upp och sjud varsamt i 10 minuter.",
+          "uses": [
+            "vinblad",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vit bönkräm: Lägg bönor, citronjuice, rapsolja och salt i mixerkärlet med 60 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Låt vinbladen rinna av och bred ut dem med den släta sidan nedåt. Fördela linsrisfyllningen över bladen, vik in sidorna och rulla till täta små paket. Lägg trasiga blad dubbla och använd hela fyllningen.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "gul lök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "mynta",
+            "vinblad"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera linsrisfyllning, varma vinblad, vit bönkräm och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gröna linser",
+            "ris",
+            "gul lök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "mynta",
+            "vinblad",
+            "bönor",
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            6,
+            7,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 97 minuter totalt, varav 62 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser, mynta och vinblad; inte importklar. Inga nya produkt- eller pack-koder har skapats. Linsriset ska fördelas i de sköljda, varma vinbladen och rullas med invikta kanter före servering. Behåll hela blad; trasiga blad läggs dubbla. Kulinarisk avgränsning: Kokta små vinblad fylls med linsris och rullas till portionspaket; bladen har annan syrlighet och format än stora kåldolmar. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-walnut-lentil-spread-roast-pepper",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad lins- och valnötskräm med varm paprika och bröd – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "varm baljväxt-nötkräm",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "valnötskräm; varm paprika; varmt bröd",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuka gröna linser",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Valnötskräm",
+          "ingredients": [
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varm paprika",
+          "ingredients": [
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mjuka gröna linser: Ansa och finhacka gul lök.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser och salt och 950 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Valnötskräm: Lägg valnötter, citronjuice, rapsolja och salt i mixerkärlet med 120 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "valnötter",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varm paprika: Sätt ugnen på 220 °C över- och undervärme. Skölj, ansa och skär paprika i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "paprika"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela paprika, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa de mjuka linserna tillsammans med hela valnötskrämen till en tjock bredbar massa. Skrapa ur båda kärlen. Servera krämen under den varma paprikan med brödet intill.",
+          "uses": [
+            "gröna linser",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "valnötter",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera mjuka gröna linser, valnötskräm, varm paprika och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gröna linser",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "valnötter",
+            "citronjuice",
+            "paprika",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            9,
+            11,
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 112 minuter totalt, varav 45 aktivt och 67 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats. Mixa den mjuka linskomponenten tillsammans med valnötskrämen efter att båda beretts; den färdiga krämen ska vara tjock nog att breda på bröd. Kulinarisk avgränsning: Mixad nöt- och linskräm utgör huvudrätten tillsammans med stora rostade paprikabitar och bröd; ingen linsgryta med ett litet nötströssel. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-walnut-lentil-spread-roast-pepper",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad lins- och valnötskräm med varm paprika och bröd – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "varm baljväxt-nötkräm",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "valnötskräm; varm paprika; varmt bröd",
+      "flavor": [
+        "oregano",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuka gröna linser",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Valnötskräm",
+          "ingredients": [
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varm paprika",
+          "ingredients": [
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mjuka gröna linser: Ansa och finhacka gul lök och vitlök.",
+          "uses": [
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, salt och oregano och 950 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "salt",
+            "oregano",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Valnötskräm: Lägg valnötter, citronjuice, rapsolja och salt i mixerkärlet med 120 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "valnötter",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varm paprika: Sätt ugnen på 220 °C över- och undervärme. Skölj, ansa och skär paprika i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "paprika"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela paprika, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa de mjuka linserna tillsammans med hela valnötskrämen till en tjock bredbar massa. Skrapa ur båda kärlen. Servera krämen under den varma paprikan med brödet intill.",
+          "uses": [
+            "gröna linser",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "valnötter",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera mjuka gröna linser, valnötskräm, varm paprika och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gröna linser",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "valnötter",
+            "citronjuice",
+            "paprika",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            9,
+            11,
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 112 minuter totalt, varav 45 aktivt och 67 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats. Mixa den mjuka linskomponenten tillsammans med valnötskrämen efter att båda beretts; den färdiga krämen ska vara tjock nog att breda på bröd. Kulinarisk avgränsning: Mixad nöt- och linskräm utgör huvudrätten tillsammans med stora rostade paprikabitar och bröd; ingen linsgryta med ett litet nötströssel. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-walnut-lentil-spread-roast-pepper",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad lins- och valnötskräm med varm paprika och bröd – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "varm baljväxt-nötkräm",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "valnötskräm; varm paprika; varmt bröd; fräsch sallad",
+      "flavor": [
+        "oregano",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuka gröna linser",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Valnötskräm",
+          "ingredients": [
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varm paprika",
+          "ingredients": [
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mjuka gröna linser: Ansa och finhacka gul lök och vitlök.",
+          "uses": [
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, salt och oregano och 950 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "salt",
+            "oregano",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Valnötskräm: Lägg valnötter, citronjuice, rapsolja och salt i mixerkärlet med 120 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "valnötter",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varm paprika: Sätt ugnen på 220 °C över- och undervärme. Skölj, ansa och skär paprika i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "paprika"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela paprika, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Blanda gurka, tomat, persilja, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "persilja",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Mixa de mjuka linserna tillsammans med hela valnötskrämen till en tjock bredbar massa. Skrapa ur båda kärlen. Servera krämen under den varma paprikan med brödet intill.",
+          "uses": [
+            "gröna linser",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "valnötter",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera mjuka gröna linser, valnötskräm, varm paprika, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gröna linser",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "valnötter",
+            "citronjuice",
+            "paprika",
+            "bröd",
+            "gurka",
+            "tomat",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            9,
+            11,
+            13,
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 120 minuter totalt, varav 53 aktivt och 67 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats. Mixa den mjuka linskomponenten tillsammans med valnötskrämen efter att båda beretts; den färdiga krämen ska vara tjock nog att breda på bröd. Kulinarisk avgränsning: Mixad nöt- och linskräm utgör huvudrätten tillsammans med stora rostade paprikabitar och bröd; ingen linsgryta med ett litet nötströssel. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-warm-wheat-chickpea-salad",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad matvetesallad med kikärtor och rostad pumpa – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "varm helkornssallad",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "pumpakikärtor; fräsch sallad",
+      "flavor": [
+        "oregano",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Matvete",
+          "ingredients": [
+            {
+              "name": "matvete",
+              "form": "dry",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Matvete, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Pumpakikärtor",
+          "ingredients": [
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Matvete: Skölj matvete. Lägg i kastrullen med 780 ml vatten och rapsolja och salt. Koka upp.",
+          "uses": [
+            "matvete",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Sjud under lock cirka 20 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "matvete",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "matvete"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Pumpakikärtor: Sätt ugnen på 220 °C över- och undervärme. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning. Låt kikärtor rinna av noga.",
+          "uses": [
+            "pumpa",
+            "kikärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela pumpa, kikärtor, rapsolja, oregano och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 30 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda gurka, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera matvete, pumpakikärtor och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "matvete",
+            "rapsolja",
+            "salt",
+            "pumpa",
+            "kikärtor",
+            "oregano",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 82 minuter totalt, varav 27 aktivt och 55 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av matvete och pumpa; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Tuggigt helt matvete och rostad pumpa ger en sallad med stora varma bitar och kall gurka; väsentligt annan struktur än couscous med en kall bönröra. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-warm-wheat-chickpea-salad",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad matvetesallad med kikärtor och rostad pumpa – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "varm helkornssallad",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "pumpakikärtor; fräsch sallad",
+      "flavor": [
+        "oregano",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Matvete",
+          "ingredients": [
+            {
+              "name": "matvete",
+              "form": "dry",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Matvete, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Pumpakikärtor",
+          "ingredients": [
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Matvete: Skölj matvete. Lägg i kastrullen med 780 ml vatten och rapsolja och salt. Koka upp.",
+          "uses": [
+            "matvete",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Sjud under lock cirka 20 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "matvete",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "matvete"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Pumpakikärtor: Sätt ugnen på 220 °C över- och undervärme. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning. Låt kikärtor rinna av noga.",
+          "uses": [
+            "pumpa",
+            "kikärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela pumpa, kikärtor, rapsolja, oregano och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 30 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda gurka, citronjuice, rapsolja, salt, persilja och rödlök i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera matvete, pumpakikärtor och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "matvete",
+            "rapsolja",
+            "salt",
+            "pumpa",
+            "kikärtor",
+            "oregano",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 82 minuter totalt, varav 27 aktivt och 55 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av matvete och pumpa; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Tuggigt helt matvete och rostad pumpa ger en sallad med stora varma bitar och kall gurka; väsentligt annan struktur än couscous med en kall bönröra. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-warm-wheat-chickpea-salad",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad matvetesallad med kikärtor och rostad pumpa – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "varm helkornssallad",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "pumpakikärtor; fräsch sallad",
+      "flavor": [
+        "oregano",
+        "citronjuice",
+        "persilja",
+        "mynta"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Matvete",
+          "ingredients": [
+            {
+              "name": "matvete",
+              "form": "dry",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Matvete, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Pumpakikärtor",
+          "ingredients": [
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk mynta, blad"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Matvete: Skölj matvete. Lägg i kastrullen med 780 ml vatten och rapsolja och salt. Koka upp.",
+          "uses": [
+            "matvete",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Sjud under lock cirka 20 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "matvete",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "matvete"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Pumpakikärtor: Sätt ugnen på 220 °C över- och undervärme. Ansa och finhacka vitlök. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning. Låt kikärtor rinna av noga.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela pumpa, kikärtor, rapsolja, oregano, salt och vitlök i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 30 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "pumpa",
+            "kikärtor",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja och mynta.",
+          "uses": [
+            "gurka",
+            "persilja",
+            "rödlök",
+            "tomat",
+            "oliver",
+            "mynta"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda gurka, citronjuice, rapsolja, salt, persilja, rödlök, tomat, oliver och mynta i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "persilja",
+            "rödlök",
+            "tomat",
+            "oliver",
+            "mynta"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera matvete, pumpakikärtor och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "matvete",
+            "rapsolja",
+            "salt",
+            "pumpa",
+            "kikärtor",
+            "oregano",
+            "vitlök",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "rödlök",
+            "tomat",
+            "oliver",
+            "mynta"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 82 minuter totalt, varav 27 aktivt och 55 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av matvete, mynta och pumpa; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Tuggigt helt matvete och rostad pumpa ger en sallad med stora varma bitar och kall gurka; väsentligt annan struktur än couscous med en kall bönröra. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-whole-cauliflower-bean-skordalia",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad helbakad blomkål på bönskordalia – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "stor rostningsdetalj på baljväxtkräm",
+      "primary": "bönor",
+      "method": "oven",
+      "side": "bönskordalia; varmt bröd",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Blomkålsklyftor",
+          "ingredients": [
+            {
+              "name": "blomkål",
+              "form": "raw_edible",
+              "quantity": 1100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blomkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bönskordalia",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blomkålsklyftor: Sätt ugnen på 220 °C över- och undervärme. Skär blomkålshuvudet i stora klyftor genom stammen så att buketterna hålls samman. Lägg tätt i ugnsform.",
+          "uses": [
+            "blomkål"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela blomkål, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 40 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 40,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Bönskordalia: Lägg bönor, vitlök, citronjuice, rapsolja och salt i mixerkärlet med 100 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "vitlök",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera blomkålsklyftor, bönskordalia och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "bönor",
+            "vitlök",
+            "citronjuice",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 70 minuter totalt, varav 23 aktivt och 47 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Stora sammanhållna blomkålsklyftor bildar huvudformat ovanpå vit bön- och vitlökskräm, i stället för en panna med små blandade rostade grönsaker. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-whole-cauliflower-bean-skordalia",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad helbakad blomkål på bönskordalia – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "stor rostningsdetalj på baljväxtkräm",
+      "primary": "bönor",
+      "method": "oven",
+      "side": "bönskordalia; varmt bröd",
+      "flavor": [
+        "paprikapulver",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Blomkålsklyftor",
+          "ingredients": [
+            {
+              "name": "blomkål",
+              "form": "raw_edible",
+              "quantity": 1100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blomkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "paprikapulver",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Paprikapulver, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bönskordalia",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blomkålsklyftor: Sätt ugnen på 220 °C över- och undervärme. Skär blomkålshuvudet i stora klyftor genom stammen så att buketterna hålls samman. Lägg tätt i ugnsform.",
+          "uses": [
+            "blomkål"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela blomkål, rapsolja, salt och paprikapulver i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 40 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver"
+          ],
+          "minutes": 40,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Bönskordalia: Lägg bönor, vitlök, citronjuice, rapsolja, salt och persilja i mixerkärlet med 100 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "vitlök",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera blomkålsklyftor, bönskordalia och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver",
+            "bönor",
+            "vitlök",
+            "citronjuice",
+            "persilja",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 70 minuter totalt, varav 23 aktivt och 47 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Stora sammanhållna blomkålsklyftor bildar huvudformat ovanpå vit bön- och vitlökskräm, i stället för en panna med små blandade rostade grönsaker. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-whole-cauliflower-bean-skordalia",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad helbakad blomkål på bönskordalia – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "stor rostningsdetalj på baljväxtkräm",
+      "primary": "bönor",
+      "method": "oven",
+      "side": "bönskordalia; varmt bröd; fräsch sallad",
+      "flavor": [
+        "paprikapulver",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Blomkålsklyftor",
+          "ingredients": [
+            {
+              "name": "blomkål",
+              "form": "raw_edible",
+              "quantity": 1100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blomkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "paprikapulver",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Paprikapulver, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bönskordalia",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blomkålsklyftor: Sätt ugnen på 220 °C över- och undervärme. Skär blomkålshuvudet i stora klyftor genom stammen så att buketterna hålls samman. Lägg tätt i ugnsform.",
+          "uses": [
+            "blomkål"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela blomkål, rapsolja, salt och paprikapulver i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 40 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver"
+          ],
+          "minutes": 40,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Bönskordalia: Lägg bönor, vitlök, citronjuice, rapsolja, salt och persilja i mixerkärlet med 100 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "vitlök",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, oliver, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera blomkålsklyftor, bönskordalia, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver",
+            "bönor",
+            "vitlök",
+            "citronjuice",
+            "persilja",
+            "bröd",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 78 minuter totalt, varav 31 aktivt och 47 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Stora sammanhållna blomkålsklyftor bildar huvudformat ovanpå vit bön- och vitlökskräm, i stället för en panna med små blandade rostade grönsaker. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-whole-squid-bodies-loose-rice-stuffing",
+      "name": "Hela bläckfiskkroppar med lös risfyllning i tomatspad – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "hel ätlig bläckfiskvägg omsluter ris och sjuds mör",
+      "primary": "bläckfisk",
+      "method": "pot",
+      "side": "Tomatspad",
+      "flavor": [
+        "oregano",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Stekpanna",
+        "Tandpetare",
+        "Vid gryta med lock",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Löst fyllda bläckfiskkroppar",
+          "ingredients": [
+            {
+              "name": "bläckfisk",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "primary",
+              "label": "Små hela bläckfiskkroppar med tentakler, rensad rå ätlig vikt"
+            },
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 160,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Spenat, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatspad",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 650,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Välj rensade små hela bläckfiskkroppar med tillhörande tentakler. Skölj och torka kropparna. Hacka tentaklerna smått. Hacka löken. Koka riset med hälften av saltet och 320 ml vatten tills det är mjukt, cirka 16 minuter. Låt ånga av.",
+          "uses": [
+            "bläckfisk",
+            "gul lök",
+            "ris",
+            "salt"
+          ],
+          "minutes": 25
+        },
+        {
+          "text": "Fräs löken i hälften av oljan. Lägg i hackade tentakler och spenat och stek tills spenaten är upptinad och vätskan kokat bort. Blanda med det kokta riset och resterande salt. Låt svalna något.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fyll kropparna löst till högst två tredjedelar med risblandningen eftersom de drar ihop sig vid tillagning. Förslut öppningarna med tandpetare. Spara all risfyllning som inte ryms till såsen.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm resten av huvudkomponentens olja i grytan. Lägg ner de fyllda kropparna och vänd dem försiktigt någon minut. Tillsätt tomater, oregano och 250 ml vatten. Lägg eventuell överbliven risfyllning i spadet. Sjud mycket försiktigt under lock cirka 40 minuter tills bläckfisken är mör och minst 63 °C.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "oregano",
+            "citronjuice"
+          ],
+          "minutes": 45,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta bort samtliga tandpetare. Rör ner citronjuicen i spadet och servera hela eller uppskurna bläckfiskkroppar med allt tomatspad och ris.",
+          "uses": [
+            "bläckfisk",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera de färdiga huvudkomponenterna och samtliga ätliga tillbehör tillsammans. Fördela maten över det angivna antalet portioner. Processmaterial som enligt tidigare steg ska avlägsnas eller kasseras ingår inte i serveringen.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "oregano",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 8 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 55 minuter aktivt och 45 minuter huvudsakligen passiv väntan. Rensade hela bläckfiskkroppar fylls löst, försluts och långsjuda med hänsyn till att den ätliga väggen drar ihop sig. Det är en annan animalisk behållare och tillagning än fyllda grönsaker eller panerad fisk. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av bläckfisk; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Kräver registergranskning av de exakta identiteterna bläckfisk/raw_edible/g; inte importklar. Identiteter med ett redan känt namn men annan form får inte matchas tyst mot den befintliga formen. Varianten ligger under nuvarande standardfilter 10–15 räknade ingredienser och kräver att filtrets minimiantal sänks för att kunna väljas.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-greek-whole-squid-bodies-loose-rice-stuffing",
+      "name": "Hela bläckfiskkroppar med lös risfyllning i tomatspad – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "hel ätlig bläckfiskvägg omsluter ris och sjuds mör",
+      "primary": "bläckfisk",
+      "method": "pot",
+      "side": "Tomatspad",
+      "flavor": [
+        "oregano",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Stekpanna",
+        "Tandpetare",
+        "Vid gryta med lock",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Löst fyllda bläckfiskkroppar",
+          "ingredients": [
+            {
+              "name": "bläckfisk",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "primary",
+              "label": "Små hela bläckfiskkroppar med tentakler, rensad rå ätlig vikt"
+            },
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 160,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Spenat, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatspad",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 650,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citron- och örtdressing",
+          "ingredients": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Välj rensade små hela bläckfiskkroppar med tillhörande tentakler. Skölj och torka kropparna. Hacka tentaklerna smått. Hacka löken. Koka riset med hälften av saltet och 320 ml vatten tills det är mjukt, cirka 16 minuter. Låt ånga av.",
+          "uses": [
+            "bläckfisk",
+            "gul lök",
+            "ris",
+            "salt"
+          ],
+          "minutes": 25
+        },
+        {
+          "text": "Fräs löken i hälften av oljan. Lägg i hackade tentakler och spenat och stek tills spenaten är upptinad och vätskan kokat bort. Blanda med det kokta riset och resterande salt. Låt svalna något.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fyll kropparna löst till högst två tredjedelar med risblandningen eftersom de drar ihop sig vid tillagning. Förslut öppningarna med tandpetare. Spara all risfyllning som inte ryms till såsen.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm resten av huvudkomponentens olja i grytan. Lägg ner de fyllda kropparna och vänd dem försiktigt någon minut. Tillsätt tomater, oregano och 250 ml vatten. Lägg eventuell överbliven risfyllning i spadet. Sjud mycket försiktigt under lock cirka 40 minuter tills bläckfisken är mör och minst 63 °C.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "oregano",
+            "citronjuice"
+          ],
+          "minutes": 45,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta bort samtliga tandpetare. Rör ner citronjuicen i spadet och servera hela eller uppskurna bläckfiskkroppar med allt tomatspad och ris.",
+          "uses": [
+            "bläckfisk",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Finhacka persiljan och rör ihop med dressingens citronjuice och olja. Fördela hela dressingen över huvudrätten eller tillbehöret vid serveringen.",
+          "uses": [
+            "citronjuice",
+            "rapsolja",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera de färdiga huvudkomponenterna och samtliga ätliga tillbehör tillsammans. Fördela maten över det angivna antalet portioner. Processmaterial som enligt tidigare steg ska avlägsnas eller kasseras ingår inte i serveringen.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "oregano",
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 9 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 59 minuter aktivt och 45 minuter huvudsakligen passiv väntan. Rensade hela bläckfiskkroppar fylls löst, försluts och långsjuda med hänsyn till att den ätliga väggen drar ihop sig. Det är en annan animalisk behållare och tillagning än fyllda grönsaker eller panerad fisk. Kräver registergranskning av bläckfisk; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Kräver registergranskning av de exakta identiteterna bläckfisk/raw_edible/g; inte importklar. Identiteter med ett redan känt namn men annan form får inte matchas tyst mot den befintliga formen. Varianten ligger under nuvarande standardfilter 10–15 räknade ingredienser och kräver att filtrets minimiantal sänks för att kunna väljas.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-greek-whole-squid-bodies-loose-rice-stuffing",
+      "name": "Hela bläckfiskkroppar med lös risfyllning i tomatspad – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "hel ätlig bläckfiskvägg omsluter ris och sjuds mör",
+      "primary": "bläckfisk",
+      "method": "pot",
+      "side": "Tomatspad",
+      "flavor": [
+        "oregano",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Stekpanna",
+        "Tandpetare",
+        "Vid gryta med lock",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Löst fyllda bläckfiskkroppar",
+          "ingredients": [
+            {
+              "name": "bläckfisk",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "primary",
+              "label": "Små hela bläckfiskkroppar med tentakler, rensad rå ätlig vikt"
+            },
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 160,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Spenat, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatspad",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 650,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citron- och örtdressing",
+          "ingredients": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Färsk krispig sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Färsk mynta, bladens råa ätliga vikt"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sesamfrön, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Välj rensade små hela bläckfiskkroppar med tillhörande tentakler. Skölj och torka kropparna. Hacka tentaklerna smått. Hacka löken. Koka riset med hälften av saltet och 320 ml vatten tills det är mjukt, cirka 16 minuter. Låt ånga av.",
+          "uses": [
+            "bläckfisk",
+            "gul lök",
+            "ris",
+            "salt"
+          ],
+          "minutes": 25
+        },
+        {
+          "text": "Fräs löken i hälften av oljan. Lägg i hackade tentakler och spenat och stek tills spenaten är upptinad och vätskan kokat bort. Blanda med det kokta riset och resterande salt. Låt svalna något.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fyll kropparna löst till högst två tredjedelar med risblandningen eftersom de drar ihop sig vid tillagning. Förslut öppningarna med tandpetare. Spara all risfyllning som inte ryms till såsen.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm resten av huvudkomponentens olja i grytan. Lägg ner de fyllda kropparna och vänd dem försiktigt någon minut. Tillsätt tomater, oregano och 250 ml vatten. Lägg eventuell överbliven risfyllning i spadet. Sjud mycket försiktigt under lock cirka 40 minuter tills bläckfisken är mör och minst 63 °C.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "oregano",
+            "citronjuice"
+          ],
+          "minutes": 45,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta bort samtliga tandpetare. Rör ner citronjuicen i spadet och servera hela eller uppskurna bläckfiskkroppar med allt tomatspad och ris.",
+          "uses": [
+            "bläckfisk",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Finhacka persiljan och rör ihop med dressingens citronjuice och olja. Fördela hela dressingen över huvudrätten eller tillbehöret vid serveringen.",
+          "uses": [
+            "citronjuice",
+            "rapsolja",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skölj gurkan och skala moroten. Skär båda i tunna stavar och hacka myntan. Blanda och strö över sesamfröna. Servera hela salladen till huvudkomponenten.",
+          "uses": [
+            "gurka",
+            "morot",
+            "mynta",
+            "sesamfrön"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera de färdiga huvudkomponenterna och samtliga ätliga tillbehör tillsammans. Fördela maten över det angivna antalet portioner. Processmaterial som enligt tidigare steg ska avlägsnas eller kasseras ingår inte i serveringen.",
+          "uses": [
+            "bläckfisk",
+            "ris",
+            "spenat",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "oregano",
+            "citronjuice",
+            "persilja",
+            "gurka",
+            "morot",
+            "mynta",
+            "sesamfrön"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 13 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 66 minuter aktivt och 45 minuter huvudsakligen passiv väntan. Rensade hela bläckfiskkroppar fylls löst, försluts och långsjuda med hänsyn till att den ätliga väggen drar ihop sig. Det är en annan animalisk behållare och tillagning än fyllda grönsaker eller panerad fisk. Kräver registergranskning av bläckfisk och mynta; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Kräver registergranskning av de exakta identiteterna bläckfisk/raw_edible/g, mynta/raw_edible/g; inte importklar. Identiteter med ett redan känt namn men annan form får inte matchas tyst mot den befintliga formen.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    }
+  ]
+}

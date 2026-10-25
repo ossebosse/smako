@@ -1,0 +1,1810 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-140",
+  "recipes": [
+    {
+      "base_id": "smako-swedish-breakfast-set-quark-breakfast-pudding",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Kall kvargpudding med frukt och knäckebröd – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "kall kvargpudding",
+      "primary": "kvarg",
+      "method": "refrigerated_assembly",
+      "side": "Päron och knäckebröd",
+      "flavor": [
+        "mjölk",
+        "gelatinblad",
+        "honung"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull",
+        "Skål",
+        "Visp",
+        "Kylskåp",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Satt kvargpudding",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 160,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "gelatinblad",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Gelatinblad, mängd som såld"
+            },
+            {
+              "name": "honung",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Honung, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Päron och knäckebröd",
+          "ingredients": [
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 110,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Päron, rå ätlig vikt"
+            },
+            {
+              "name": "knäckebröd",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Knäckebröd, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Satt kvargpudding: Lägg gelatinet i 150 ml vatten (kallt) tills mjukt. Värm mjölk och honung till varmt utan att koka. Krama ur gelatinet och lös i mjölken.",
+          "uses": [
+            "gelatinblad",
+            "mjölk",
+            "honung"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Satt kvargpudding: Vispa ner mjölkblandningen lite i taget i kvargen. Häll i portionsskål och kyl tills helt satt. Följ gelatinproduktens doseringsråd vid registergranskning.",
+          "uses": [
+            "kvarg",
+            "mjölk",
+            "gelatinblad"
+          ],
+          "minutes": 180,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Päron och knäckebröd: Skölj och ansa päron. Skär frukt och grönsaker i små bitar. Lägg upp päron och knäckebröd tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "päron",
+            "knäckebröd"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera satt kvargpudding och päron och knäckebröd tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "kvarg",
+            "mjölk",
+            "gelatinblad",
+            "honung",
+            "päron",
+            "knäckebröd"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 12 minuter aktivt och 180 minuter huvudsakligen passiv väntan, cirka 192 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Kvarg sätts kallt med gelatin och får en skärbar puddingstruktur utan ägg eller ugnsgräddning. Gelatinstyrka varierar mellan produkter. Jämför mot kall pannacotta i mellanmålen; gemensam huvudstruktur kan kräva samgruppering. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för gelatinblad, honung, knäckebröd och päron; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-set-quark-breakfast-pudding",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Kall kvargpudding med frukt och knäckebröd – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "kall kvargpudding",
+      "primary": "kvarg",
+      "method": "refrigerated_assembly",
+      "side": "Päron och knäckebröd, Bär och mandel",
+      "flavor": [
+        "mjölk",
+        "gelatinblad",
+        "honung",
+        "mandel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull",
+        "Skål",
+        "Visp",
+        "Kylskåp",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Satt kvargpudding",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 160,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "gelatinblad",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Gelatinblad, mängd som såld"
+            },
+            {
+              "name": "honung",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Honung, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Päron och knäckebröd",
+          "ingredients": [
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 110,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Päron, rå ätlig vikt"
+            },
+            {
+              "name": "knäckebröd",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Knäckebröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Bär och mandel",
+          "ingredients": [
+            {
+              "name": "blåbär",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blåbär, rå ätlig vikt"
+            },
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mandel, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Satt kvargpudding: Lägg gelatinet i 150 ml vatten (kallt) tills mjukt. Värm mjölk och honung till varmt utan att koka. Krama ur gelatinet och lös i mjölken.",
+          "uses": [
+            "gelatinblad",
+            "mjölk",
+            "honung"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Satt kvargpudding: Vispa ner mjölkblandningen lite i taget i kvargen. Häll i portionsskål och kyl tills helt satt. Följ gelatinproduktens doseringsråd vid registergranskning.",
+          "uses": [
+            "kvarg",
+            "mjölk",
+            "gelatinblad"
+          ],
+          "minutes": 180,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Päron och knäckebröd: Skölj och ansa päron. Skär frukt och grönsaker i små bitar. Lägg upp päron och knäckebröd tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "päron",
+            "knäckebröd"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Bär och mandel: Skölj och ansa blåbär. Skär frukt och grönsaker i små bitar. Lägg upp blåbär och mandel tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "blåbär",
+            "mandel"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera satt kvargpudding, päron och knäckebröd och bär och mandel tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "kvarg",
+            "mjölk",
+            "gelatinblad",
+            "honung",
+            "päron",
+            "knäckebröd",
+            "blåbär",
+            "mandel"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 16 minuter aktivt och 180 minuter huvudsakligen passiv väntan, cirka 196 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Kvarg sätts kallt med gelatin och får en skärbar puddingstruktur utan ägg eller ugnsgräddning. Gelatinstyrka varierar mellan produkter. Jämför mot kall pannacotta i mellanmålen; gemensam huvudstruktur kan kräva samgruppering. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för blåbär, gelatinblad, honung, knäckebröd, mandel och päron; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-small-pancake-layer-cake",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Liten pannkakstårta med yoghurt och bär – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "pannkakstårta",
+      "primary": "vetemjöl",
+      "method": "pan",
+      "side": "Bärfyllning",
+      "flavor": [
+        "mjölk",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Visp",
+        "Skärbräda",
+        "Kniv",
+        "Rivjärn",
+        "Stekpanna",
+        "Stekspade",
+        "Digital kökstermometer",
+        "Gaffel",
+        "Sked"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tunna pannkakor",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 45,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bärfyllning",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 130,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "jordgubbar",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Jordgubbar, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Tunna pannkakor: Vispa samman ägg och mjölk. Rör ner vetemjöl och salt tills smeten är jämn.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Tunna pannkakor: Låt smeten vila så att mjölet hinner svälla. Rör om innan den tillagas.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Tunna pannkakor: Värm en stekpanna med släppbeläggning på medelvärme. Fördela stekfettet över omgångarna. Häll ett tunt lager smet, luta pannan och grädda cirka två minuter på första sidan. Vänd när ytan stelnat och grädda ytterligare ungefär en minut. Fortsätt tills hela smeten och det uppmätta fettet använts.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Tunna pannkakor: Kontrollera i den tjockaste delen att äggsmeten är helt stelnad och har nått minst 72 °C. Tillaga längre på måttlig värme om det behövs.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Bärfyllning: Mosa yoghurt naturell noggrant med en gaffel. Finfördela övriga fasta råvaror och arbeta ihop med jordgubbar. Fördela hela mängden i serveringsskålen.",
+          "uses": [
+            "yoghurt naturell",
+            "jordgubbar"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt pannkakorna svalna så att fyllningen håller sin konsistens. Varva samtliga pannkakor med hela bärfyllningen till en liten tårta. Fördela övriga färdiga komponenter ovanpå och servera genast.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "yoghurt naturell",
+            "jordgubbar"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 25 minuter aktivt och 10 minuter huvudsakligen passiv väntan, cirka 35 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Tunna pannkakor svalnar och varvas med kall bärfyllning till en liten skiktad tårta. Granska mot vanliga pannkakor med topping; skiktning och vila kan vara variantförändringar och räcker inte automatiskt som ny grundrätt. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för jordgubbar; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-small-pancake-layer-cake",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Liten pannkakstårta med yoghurt och bär – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "pannkakstårta",
+      "primary": "vetemjöl",
+      "method": "pan",
+      "side": "Bärfyllning, Nötter och banan",
+      "flavor": [
+        "mjölk",
+        "salt",
+        "hasselnötter"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Visp",
+        "Skärbräda",
+        "Kniv",
+        "Rivjärn",
+        "Stekpanna",
+        "Stekspade",
+        "Digital kökstermometer",
+        "Gaffel",
+        "Sked"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tunna pannkakor",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 45,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bärfyllning",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 130,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "jordgubbar",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Jordgubbar, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Nötter och banan",
+          "ingredients": [
+            {
+              "name": "hasselnötter",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Hasselnötter, mängd som såld"
+            },
+            {
+              "name": "banan",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Banan, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Tunna pannkakor: Vispa samman ägg och mjölk. Rör ner vetemjöl och salt tills smeten är jämn.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Tunna pannkakor: Låt smeten vila så att mjölet hinner svälla. Rör om innan den tillagas.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Tunna pannkakor: Värm en stekpanna med släppbeläggning på medelvärme. Fördela stekfettet över omgångarna. Häll ett tunt lager smet, luta pannan och grädda cirka två minuter på första sidan. Vänd när ytan stelnat och grädda ytterligare ungefär en minut. Fortsätt tills hela smeten och det uppmätta fettet använts.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Tunna pannkakor: Kontrollera i den tjockaste delen att äggsmeten är helt stelnad och har nått minst 72 °C. Tillaga längre på måttlig värme om det behövs.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Bärfyllning: Mosa yoghurt naturell noggrant med en gaffel. Finfördela övriga fasta råvaror och arbeta ihop med jordgubbar. Fördela hela mängden i serveringsskålen.",
+          "uses": [
+            "yoghurt naturell",
+            "jordgubbar"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Nötter och banan: Skölj och ansa banan. Skär frukt och grönsaker i små bitar. Lägg upp hasselnötter och banan tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "hasselnötter",
+            "banan"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt pannkakorna svalna så att fyllningen håller sin konsistens. Varva samtliga pannkakor med hela bärfyllningen till en liten tårta. Fördela övriga färdiga komponenter ovanpå och servera genast.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "yoghurt naturell",
+            "jordgubbar",
+            "hasselnötter",
+            "banan"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 29 minuter aktivt och 10 minuter huvudsakligen passiv väntan, cirka 39 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Tunna pannkakor svalnar och varvas med kall bärfyllning till en liten skiktad tårta. Granska mot vanliga pannkakor med topping; skiktning och vila kan vara variantförändringar och räcker inte automatiskt som ny grundrätt. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för banan, hasselnötter och jordgubbar; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-souffle-pancake-breakfast",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Fluffiga äggplättar med päronkvarg – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "sufflépannkakor",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "Äggskumsplättar",
+      "flavor": [
+        "mjölk",
+        "strösocker",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Gaffel",
+        "Sked",
+        "Elvisp",
+        "Två skålar",
+        "Stekpanna med lock",
+        "Pensel",
+        "Stekspade",
+        "Termometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Päronkvarg",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Päron, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Äggskumsplättar",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Päronkvarg: Mosa kvarg noggrant med en gaffel. Finfördela övriga fasta råvaror och arbeta ihop med päron. Fördela hela mängden i serveringsskålen.",
+          "uses": [
+            "kvarg",
+            "päron"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Äggskumsplättar: Separera den uppvägda äggmängden. Vispa gulor med mjölk och mjöl. Vispa vitorna med socker och salt till fast skum och vänd försiktigt ihop smeterna.",
+          "uses": [
+            "ägg",
+            "vetemjöl",
+            "mjölk",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Äggskumsplättar: Pensla pannan med oljan och klicka ut höga små plättar. Grädda på låg värme under lock tills de håller ihop, vänd varsamt och grädda färdigt. Kontrollera minst 72 °C i mitten och servera direkt.",
+          "uses": [
+            "rapsolja",
+            "ägg",
+            "vetemjöl"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera päronkvarg och äggskumsplättar tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "kvarg",
+            "päron",
+            "ägg",
+            "vetemjöl",
+            "mjölk",
+            "rapsolja",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 7 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 24 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 24 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Separat vispat äggskum ger höga mjuka pannkakor; luftningen sker mekaniskt, utan jäst. Granska inom pannkaksfamiljen; den bärande äggskumstekniken måste vara en verklig skillnad, inte endast namnet fluffig. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för päron; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-souffle-pancake-breakfast",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Fluffiga äggplättar med päronkvarg – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "sufflépannkakor",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "Mandel och kanel, Äggskumsplättar",
+      "flavor": [
+        "mandel",
+        "kanel",
+        "mjölk",
+        "strösocker",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Gaffel",
+        "Sked",
+        "Skärbräda",
+        "Kniv",
+        "Elvisp",
+        "Två skålar",
+        "Stekpanna med lock",
+        "Pensel",
+        "Stekspade",
+        "Termometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Päronkvarg",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Päron, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mandel och kanel",
+          "ingredients": [
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mandel, mängd som såld"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Äggskumsplättar",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Päronkvarg: Mosa kvarg noggrant med en gaffel. Finfördela övriga fasta råvaror och arbeta ihop med päron. Fördela hela mängden i serveringsskålen.",
+          "uses": [
+            "kvarg",
+            "päron"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Mandel och kanel: Lägg upp mandel och kanel tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "mandel",
+            "kanel"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Äggskumsplättar: Separera den uppvägda äggmängden. Vispa gulor med mjölk och mjöl. Vispa vitorna med socker och salt till fast skum och vänd försiktigt ihop smeterna.",
+          "uses": [
+            "ägg",
+            "vetemjöl",
+            "mjölk",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Äggskumsplättar: Pensla pannan med oljan och klicka ut höga små plättar. Grädda på låg värme under lock tills de håller ihop, vänd varsamt och grädda färdigt. Kontrollera minst 72 °C i mitten och servera direkt.",
+          "uses": [
+            "rapsolja",
+            "ägg",
+            "vetemjöl"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera päronkvarg, mandel och kanel och äggskumsplättar tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "kvarg",
+            "päron",
+            "mandel",
+            "kanel",
+            "ägg",
+            "vetemjöl",
+            "mjölk",
+            "rapsolja",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 28 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 28 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Separat vispat äggskum ger höga mjuka pannkakor; luftningen sker mekaniskt, utan jäst. Granska inom pannkaksfamiljen; den bärande äggskumstekniken måste vara en verklig skillnad, inte endast namnet fluffig. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för mandel och päron; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-whipped-blueberry-semolina-porridge",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Vispad blåbärsgröt med mjölk och keso – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "vispad bärgröt",
+      "primary": "blåbär",
+      "method": "pot",
+      "side": "Mjölk och keso",
+      "flavor": [
+        "strösocker",
+        "salt",
+        "mjölk"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull",
+        "Slev",
+        "Visp",
+        "Vid skål",
+        "Elvisp",
+        "Större skål för vattenbad",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Vispad blåbärsgröt",
+          "ingredients": [
+            {
+              "name": "blåbär",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blåbär, rå ätlig vikt"
+            },
+            {
+              "name": "mannagryn",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "side",
+              "label": "Mannagryn, torr vikt"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mjölk och keso",
+          "ingredients": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, mängd som såld utan extra avrinning"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Vispad blåbärsgröt: Lägg blåbär, socker, salt och 220 ml vatten i en kastrull. Koka upp och mosa bären med en slev.",
+          "uses": [
+            "blåbär",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Vispad blåbärsgröt: Vispa ner mannagrynen och sjud på låg värme under omrörning tills en helt genomkokt tjock gröt har bildats.",
+          "uses": [
+            "mannagryn"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Vispad blåbärsgröt: Häll gröten i en vid skål. Ställ skålen i kallt vattenbad med 600 ml vatten och rör då och då tills gröten är sval. Låt inget vatten komma i gröten.",
+          "uses": [
+            "mannagryn",
+            "blåbär"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Vispad blåbärsgröt: Vispa den svala gröten med elvisp tills färgen ljusnar och konsistensen blir luftig. Skrapa ner sidorna och vispa jämnt.",
+          "uses": [
+            "mannagryn",
+            "blåbär"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Mjölk och keso: Lägg keson bredvid den vispade gröten och häll mjölken runt om först vid servering.",
+          "uses": [
+            "mjölk",
+            "keso"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera vispad blåbärsgröt och mjölk och keso tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "blåbär",
+            "mannagryn",
+            "strösocker",
+            "salt",
+            "mjölk",
+            "keso"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 5 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 23 minuter aktivt och 20 minuter huvudsakligen passiv väntan, cirka 43 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Bärkokt mannagrynsgröt svalnar och vispas till en luftig kall gröt, med tydligt annan struktur och arbetsgång än varm mjölkgröt. Den kalla vispningen är bärande. Bärsort och mjölkservering ska betraktas som varianter inom denna grundrätt. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för blåbär och mannagryn; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-whipped-blueberry-semolina-porridge",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Vispad blåbärsgröt med mjölk och keso – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "vispad bärgröt",
+      "primary": "blåbär",
+      "method": "pot",
+      "side": "Mjölk och keso, Päron och mandel",
+      "flavor": [
+        "strösocker",
+        "salt",
+        "mjölk",
+        "mandel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull",
+        "Slev",
+        "Visp",
+        "Vid skål",
+        "Elvisp",
+        "Större skål för vattenbad",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Vispad blåbärsgröt",
+          "ingredients": [
+            {
+              "name": "blåbär",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blåbär, rå ätlig vikt"
+            },
+            {
+              "name": "mannagryn",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "side",
+              "label": "Mannagryn, torr vikt"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mjölk och keso",
+          "ingredients": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, mängd som såld utan extra avrinning"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Päron och mandel",
+          "ingredients": [
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Päron, rå ätlig vikt"
+            },
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mandel, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Vispad blåbärsgröt: Lägg blåbär, socker, salt och 220 ml vatten i en kastrull. Koka upp och mosa bären med en slev.",
+          "uses": [
+            "blåbär",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Vispad blåbärsgröt: Vispa ner mannagrynen och sjud på låg värme under omrörning tills en helt genomkokt tjock gröt har bildats.",
+          "uses": [
+            "mannagryn"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Vispad blåbärsgröt: Häll gröten i en vid skål. Ställ skålen i kallt vattenbad med 600 ml vatten och rör då och då tills gröten är sval. Låt inget vatten komma i gröten.",
+          "uses": [
+            "mannagryn",
+            "blåbär"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Vispad blåbärsgröt: Vispa den svala gröten med elvisp tills färgen ljusnar och konsistensen blir luftig. Skrapa ner sidorna och vispa jämnt.",
+          "uses": [
+            "mannagryn",
+            "blåbär"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Mjölk och keso: Lägg keson bredvid den vispade gröten och häll mjölken runt om först vid servering.",
+          "uses": [
+            "mjölk",
+            "keso"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Päron och mandel: Skölj och ansa päron. Skär frukt och grönsaker i små bitar. Lägg upp päron och mandel tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "päron",
+            "mandel"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera vispad blåbärsgröt, mjölk och keso och päron och mandel tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "blåbär",
+            "mannagryn",
+            "strösocker",
+            "salt",
+            "mjölk",
+            "keso",
+            "päron",
+            "mandel"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 7 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 27 minuter aktivt och 20 minuter huvudsakligen passiv väntan, cirka 47 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Bärkokt mannagrynsgröt svalnar och vispas till en luftig kall gröt, med tydligt annan struktur och arbetsgång än varm mjölkgröt. Den kalla vispningen är bärande. Bärsort och mjölkservering ska betraktas som varianter inom denna grundrätt. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för blåbär, mandel, mannagryn och päron; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-whole-buckwheat-kefir",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Hela bovetegryn med varmt päron och kefir – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "helgrynsfrukost",
+      "primary": "bovete",
+      "method": "pot",
+      "side": "Varmt päron, Kefir",
+      "flavor": [
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull med lock",
+        "Slev",
+        "Finmaskig sil",
+        "Kastrull",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuka bovetegryn",
+          "ingredients": [
+            {
+              "name": "bovete",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "primary",
+              "label": "Bovete, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt päron",
+          "ingredients": [
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Päron, rå ätlig vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kefir",
+          "ingredients": [
+            {
+              "name": "kefir",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "ml",
+              "role": "primary",
+              "label": "Kefir, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Mjuka bovetegryn: Skölj grynen i en finmaskig sil. Lägg bovete i kastrullen med 180 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bovete"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Mjuka bovetegryn: Sänk till låg värme. Sjud under lock tills grynen är mjuka och vätskan absorberad. Låt vätska som återstår ånga bort kort utan lock. Tillagningstiden är ungefärlig; grynen ska vara mjuka före servering.",
+          "uses": [
+            "bovete"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Mjuka bovetegryn: Rör ner salt och blanda jämnt. Skär eventuella fruktbitar små före tillsättningen.",
+          "uses": [
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Varmt päron: Skölj och kärna ur eller skala päron. Skär i tunna skivor.",
+          "uses": [
+            "päron"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Varmt päron: Lägg päron och smör i en liten kastrull med 20 ml vatten. Sjud under omrörning tills frukten mjuknar och vätskan blir en tunn sås. Skrapa med all sås vid servering.",
+          "uses": [
+            "päron",
+            "smör"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Kefir: Lägg upp kefir tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "kefir"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera mjuka bovetegryn, varmt päron och kefir tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "bovete",
+            "salt",
+            "päron",
+            "smör",
+            "kefir"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 4 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 21 minuter aktivt och 15 minuter huvudsakligen passiv väntan, cirka 36 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Separatkokta hela bovetegryn behåller tuggmotstånd och serveras med varm frukt och kall syrad mjölk; grynen kokas inte till en jämn gröt. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bovete, kefir, päron och smör; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-whole-buckwheat-kefir",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Hela bovetegryn med varmt päron och kefir – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "helgrynsfrukost",
+      "primary": "bovete",
+      "method": "pot",
+      "side": "Varmt päron, Kefir, Frö- och kanelströssel",
+      "flavor": [
+        "salt",
+        "solrosfrön",
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull med lock",
+        "Slev",
+        "Finmaskig sil",
+        "Kastrull",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuka bovetegryn",
+          "ingredients": [
+            {
+              "name": "bovete",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "primary",
+              "label": "Bovete, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt päron",
+          "ingredients": [
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Päron, rå ätlig vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kefir",
+          "ingredients": [
+            {
+              "name": "kefir",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "ml",
+              "role": "primary",
+              "label": "Kefir, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Frö- och kanelströssel",
+          "ingredients": [
+            {
+              "name": "solrosfrön",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Solrosfrön, mängd som såld"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Mjuka bovetegryn: Skölj grynen i en finmaskig sil. Lägg bovete i kastrullen med 180 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bovete"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Mjuka bovetegryn: Sänk till låg värme. Sjud under lock tills grynen är mjuka och vätskan absorberad. Låt vätska som återstår ånga bort kort utan lock. Tillagningstiden är ungefärlig; grynen ska vara mjuka före servering.",
+          "uses": [
+            "bovete"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Mjuka bovetegryn: Rör ner salt och blanda jämnt. Skär eventuella fruktbitar små före tillsättningen.",
+          "uses": [
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Varmt päron: Skölj och kärna ur eller skala päron. Skär i tunna skivor.",
+          "uses": [
+            "päron"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Varmt päron: Lägg päron och smör i en liten kastrull med 20 ml vatten. Sjud under omrörning tills frukten mjuknar och vätskan blir en tunn sås. Skrapa med all sås vid servering.",
+          "uses": [
+            "päron",
+            "smör"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Kefir: Lägg upp kefir tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "kefir"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "För komponenten Frö- och kanelströssel: Lägg upp solrosfrön och kanel tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "solrosfrön",
+            "kanel"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera mjuka bovetegryn, varmt päron, kefir och frö- och kanelströssel tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "bovete",
+            "salt",
+            "päron",
+            "smör",
+            "kefir",
+            "solrosfrön",
+            "kanel"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 25 minuter aktivt och 15 minuter huvudsakligen passiv väntan, cirka 40 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Separatkokta hela bovetegryn behåller tuggmotstånd och serveras med varm frukt och kall syrad mjölk; grynen kokas inte till en jämn gröt. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bovete, kefir, päron, smör och solrosfrön; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    }
+  ]
+}

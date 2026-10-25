@@ -1,0 +1,4103 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-83",
+  "recipes": [
+    {
+      "base_id": "smako-thai-crisp-fried-egg-herb-salad",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Krispigt stekta ägg i syrlig örtsallad – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "crisp-fried-egg-herb-salad",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "Syrlig grönsakssallad, Ris",
+      "flavor": [
+        "salt",
+        "limejuice",
+        "sojasås",
+        "strösocker"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Skål",
+        "Stekpanna",
+        "Stekspade",
+        "Kniv",
+        "Termometer",
+        "Skärbräda",
+        "Kastrull med lock",
+        "Sil",
+        "Gaffel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Krispiga äggbitar",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 480,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Syrlig grönsakssallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Krispiga äggbitar: Knäck den uppvägda äggmängden i en skål utan att vispa samman allt. Värm en del av oljan i en panna och stek ägget i mindre omgångar med hela gulor så långt det går. Fördela all olja över omgångarna.",
+          "uses": [
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "För komponenten Krispiga äggbitar: Låt vitornas kanter bubbla och bli gyllene. Vänd varsamt och tillaga till fasta gulor och minst 72 °C. Salta och skär de färdiga äggen i grova bitar.",
+          "uses": [
+            "ägg",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Syrlig grönsakssallad: Skär tomat i klyftor, selleri i tunna skivor och rödlök i fina strimlor. Rör limejuice, soja och socker tills sockret lösts. Vänd ner grönsakerna och sedan de nystekta äggbitarna precis före servering.",
+          "uses": [
+            "tomat",
+            "selleri",
+            "rödlök",
+            "limejuice",
+            "sojasås",
+            "strösocker"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Skölj riset i sil. Lägg det i en kastrull med 504 ml vatten och salt. Koka upp, lägg på lock och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Sjud tills riset är mjukt och kokvattnet har absorberats. Ta från värmen och låt stå under lock före uppluckring med gaffel.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera den nyblandade äggsalladen med varmt ris så snart äggbitarna vänts ner. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "ägg",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "selleri",
+            "rödlök",
+            "limejuice",
+            "sojasås",
+            "strösocker",
+            "ris"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Thailändskt inspirerad konstruktion utan traditionsanspråk. Hela ägg med krispigt stekta vitor skärs grovt och vänds sist i en rå syrlig sallad. Äggen är inte en omelettsmet eller kokta i en sås. Jämför med andra äggsallader. De krispiga nyfriterade vitornas struktur och att dressingen tillsätts sist är avsedda skillnader från kall hackad äggsallad. Fyra portioner. 9 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 31 minuter aktivt arbete och 22 minuter huvudsakligen passiv väntan, totalt 53 minuter. Tiderna är inte verifierade genom provlagning. Avsteg från variantens riktmärke: den bärande tillagningsstrukturen och kompletta måltiden behålls; inga fyllnadsingredienser har lagts till för att nå ett antal. Utanför nuvarande standardfilter 10–15 ingredienser; kräver att användaren ändrar minantalet. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-thai-crisp-fried-egg-herb-salad",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Krispigt stekta ägg i syrlig örtsallad – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "crisp-fried-egg-herb-salad",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "Syrlig grönsakssallad, Ris, Mynta",
+      "flavor": [
+        "salt",
+        "limejuice",
+        "sojasås",
+        "strösocker",
+        "mynta"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Skål",
+        "Stekpanna",
+        "Stekspade",
+        "Kniv",
+        "Termometer",
+        "Skärbräda",
+        "Kastrull med lock",
+        "Sil",
+        "Gaffel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Krispiga äggbitar",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 480,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Syrlig grönsakssallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Mynta",
+          "ingredients": [
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mynta, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Krispiga äggbitar: Knäck den uppvägda äggmängden i en skål utan att vispa samman allt. Värm en del av oljan i en panna och stek ägget i mindre omgångar med hela gulor så långt det går. Fördela all olja över omgångarna.",
+          "uses": [
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "För komponenten Krispiga äggbitar: Låt vitornas kanter bubbla och bli gyllene. Vänd varsamt och tillaga till fasta gulor och minst 72 °C. Salta och skär de färdiga äggen i grova bitar.",
+          "uses": [
+            "ägg",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Syrlig grönsakssallad: Skär tomat i klyftor, selleri i tunna skivor och rödlök i fina strimlor. Rör limejuice, soja och socker tills sockret lösts. Vänd ner grönsakerna och sedan de nystekta äggbitarna precis före servering.",
+          "uses": [
+            "tomat",
+            "selleri",
+            "rödlök",
+            "limejuice",
+            "sojasås",
+            "strösocker"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Skölj riset i sil. Lägg det i en kastrull med 504 ml vatten och salt. Koka upp, lägg på lock och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Sjud tills riset är mjukt och kokvattnet har absorberats. Ta från värmen och låt stå under lock före uppluckring med gaffel.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Mynta: Skölj och ansa mynta. Skär frukt och grönsaker i små bitar. Lägg upp mynta tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "mynta"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera den nyblandade äggsalladen med varmt ris så snart äggbitarna vänts ner. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "ägg",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "selleri",
+            "rödlök",
+            "limejuice",
+            "sojasås",
+            "strösocker",
+            "ris",
+            "mynta"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Thailändskt inspirerad konstruktion utan traditionsanspråk. Hela ägg med krispigt stekta vitor skärs grovt och vänds sist i en rå syrlig sallad. Äggen är inte en omelettsmet eller kokta i en sås. Jämför med andra äggsallader. De krispiga nyfriterade vitornas struktur och att dressingen tillsätts sist är avsedda skillnader från kall hackad äggsallad. Fyra portioner. 10 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 35 minuter aktivt arbete och 22 minuter huvudsakligen passiv väntan, totalt 57 minuter. Tiderna är inte verifierade genom provlagning. Kräver registergranskning för mynta; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-thai-crisp-fried-egg-herb-salad",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Krispigt stekta ägg i syrlig örtsallad – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "crisp-fried-egg-herb-salad",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "Syrlig grönsakssallad, Ris, Mynta, Gurka och jordnötter",
+      "flavor": [
+        "salt",
+        "limejuice",
+        "sojasås",
+        "strösocker",
+        "mynta",
+        "jordnötter"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Skål",
+        "Stekpanna",
+        "Stekspade",
+        "Kniv",
+        "Termometer",
+        "Skärbräda",
+        "Kastrull med lock",
+        "Sil",
+        "Gaffel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Krispiga äggbitar",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 480,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Syrlig grönsakssallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Mynta",
+          "ingredients": [
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mynta, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Gurka och jordnötter",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Jordnötter, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Krispiga äggbitar: Knäck den uppvägda äggmängden i en skål utan att vispa samman allt. Värm en del av oljan i en panna och stek ägget i mindre omgångar med hela gulor så långt det går. Fördela all olja över omgångarna.",
+          "uses": [
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "För komponenten Krispiga äggbitar: Låt vitornas kanter bubbla och bli gyllene. Vänd varsamt och tillaga till fasta gulor och minst 72 °C. Salta och skär de färdiga äggen i grova bitar.",
+          "uses": [
+            "ägg",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Syrlig grönsakssallad: Skär tomat i klyftor, selleri i tunna skivor och rödlök i fina strimlor. Rör limejuice, soja och socker tills sockret lösts. Vänd ner grönsakerna och sedan de nystekta äggbitarna precis före servering.",
+          "uses": [
+            "tomat",
+            "selleri",
+            "rödlök",
+            "limejuice",
+            "sojasås",
+            "strösocker"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Skölj riset i sil. Lägg det i en kastrull med 504 ml vatten och salt. Koka upp, lägg på lock och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Sjud tills riset är mjukt och kokvattnet har absorberats. Ta från värmen och låt stå under lock före uppluckring med gaffel.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Mynta: Skölj och ansa mynta. Skär frukt och grönsaker i små bitar. Lägg upp mynta tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "mynta"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "För komponenten Gurka och jordnötter: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka och jordnötter tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka",
+            "jordnötter"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera den nyblandade äggsalladen med varmt ris så snart äggbitarna vänts ner. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "ägg",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "selleri",
+            "rödlök",
+            "limejuice",
+            "sojasås",
+            "strösocker",
+            "ris",
+            "mynta",
+            "gurka",
+            "jordnötter"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Thailändskt inspirerad konstruktion utan traditionsanspråk. Hela ägg med krispigt stekta vitor skärs grovt och vänds sist i en rå syrlig sallad. Äggen är inte en omelettsmet eller kokta i en sås. Jämför med andra äggsallader. De krispiga nyfriterade vitornas struktur och att dressingen tillsätts sist är avsedda skillnader från kall hackad äggsallad. Fyra portioner. 12 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 39 minuter aktivt arbete och 22 minuter huvudsakligen passiv väntan, totalt 61 minuter. Tiderna är inte verifierade genom provlagning. Kräver registergranskning för mynta; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-thai-crisp-starch-mussel-egg-pan",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Musslor i tunn krispig stärkelserock med ägg – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "crisp-starch-mussel-egg-pan",
+      "primary": "musslor",
+      "method": "pan",
+      "side": "Ris",
+      "flavor": [
+        "sojasås",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Durkslag",
+        "Hushållspapper",
+        "Två skålar",
+        "Visp",
+        "Stor stekpanna",
+        "Stekspade",
+        "Termometer",
+        "Kastrull med lock",
+        "Sil",
+        "Gaffel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Krispig mussel- och äggpanna",
+          "ingredients": [
+            {
+              "name": "musslor",
+              "form": "cooked_drained",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Musslor, tillagad avrunnen vikt"
+            },
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 120,
+              "unit": "g",
+              "role": "side",
+              "label": "Rismjöl, torr vikt"
+            },
+            {
+              "name": "tapiokastärkelse",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "side",
+              "label": "Tapiokastärkelse, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 240,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "böngroddar",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Böngroddar, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Krispig mussel- och äggpanna: Låt det tillagade musselköttet rinna av mycket väl och torka lätt. Vispa rismjöl, tapiokastärkelse och soja med 300 ml vatten till en tunn smet. Vispa ägget separat.",
+          "uses": [
+            "musslor",
+            "rismjöl",
+            "tapiokastärkelse",
+            "sojasås",
+            "ägg"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Krispig mussel- och äggpanna: Dela ingredienserna i fyra omgångar. Värm motsvarande olja i en stor panna, fördela musslorna glest och häll en fjärdedel av stärkelsesmeten tunt runt om. Låt den bubbla och få krispiga kanter.",
+          "uses": [
+            "rapsolja",
+            "musslor",
+            "rismjöl",
+            "tapiokastärkelse"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Krispig mussel- och äggpanna: Häll motsvarande äggmängd över varje nästan färdig botten och vänd varsamt så att ägget stelnar helt till minst 72 °C. Skjut åt sidan och fräs en fjärdedel av böngroddarna kort i den kvarvarande oljan tills genomvarma. Fortsätt tills alla ingredienser är tillagade.",
+          "uses": [
+            "ägg",
+            "böngroddar"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Skölj riset i sil. Lägg det i en kastrull med 324 ml vatten och salt. Koka upp, lägg på lock och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Sjud tills riset är mjukt och kokvattnet har absorberats. Ta från värmen och låt stå under lock före uppluckring med gaffel.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg den krispiga musselpannan över böngroddarna och servera genast med ris och alla färdiga tillbehör. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "musslor",
+            "rismjöl",
+            "tapiokastärkelse",
+            "ägg",
+            "rapsolja",
+            "sojasås",
+            "böngroddar",
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Thailändskt inspirerad konstruktion utan traditionsanspråk. En tunn stärkelsesmet bildar en spröd sammanhängande botten runt hela musslor. Ägget gräddas som ett andra lager och böngroddarna fräses separat. Skaldjur, inte egentlig fisk. Bokför separat vid kontroll av fiskmålet. Den tillagade avrunnna musselidentiteten kräver registergranskning och får inte bytas mot rå vikt. Fyra portioner. 8 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 38 minuter aktivt arbete och 22 minuter huvudsakligen passiv väntan, totalt 60 minuter. Tiderna är inte verifierade genom provlagning. Avsteg från variantens riktmärke: den bärande tillagningsstrukturen och kompletta måltiden behålls; inga fyllnadsingredienser har lagts till för att nå ett antal. Utanför nuvarande standardfilter 10–15 ingredienser; kräver att användaren ändrar minantalet. Kräver registergranskning för böngroddar, musslor, rismjöl och tapiokastärkelse; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-thai-crisp-starch-mussel-egg-pan",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Musslor i tunn krispig stärkelserock med ägg – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "crisp-starch-mussel-egg-pan",
+      "primary": "musslor",
+      "method": "pan",
+      "side": "Ris, Lime och gurka",
+      "flavor": [
+        "sojasås",
+        "salt",
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Durkslag",
+        "Hushållspapper",
+        "Två skålar",
+        "Visp",
+        "Stor stekpanna",
+        "Stekspade",
+        "Termometer",
+        "Kastrull med lock",
+        "Sil",
+        "Gaffel",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Krispig mussel- och äggpanna",
+          "ingredients": [
+            {
+              "name": "musslor",
+              "form": "cooked_drained",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Musslor, tillagad avrunnen vikt"
+            },
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 120,
+              "unit": "g",
+              "role": "side",
+              "label": "Rismjöl, torr vikt"
+            },
+            {
+              "name": "tapiokastärkelse",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "side",
+              "label": "Tapiokastärkelse, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 240,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "böngroddar",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Böngroddar, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Lime och gurka",
+          "ingredients": [
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Krispig mussel- och äggpanna: Låt det tillagade musselköttet rinna av mycket väl och torka lätt. Vispa rismjöl, tapiokastärkelse och soja med 300 ml vatten till en tunn smet. Vispa ägget separat.",
+          "uses": [
+            "musslor",
+            "rismjöl",
+            "tapiokastärkelse",
+            "sojasås",
+            "ägg"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Krispig mussel- och äggpanna: Dela ingredienserna i fyra omgångar. Värm motsvarande olja i en stor panna, fördela musslorna glest och häll en fjärdedel av stärkelsesmeten tunt runt om. Låt den bubbla och få krispiga kanter.",
+          "uses": [
+            "rapsolja",
+            "musslor",
+            "rismjöl",
+            "tapiokastärkelse"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Krispig mussel- och äggpanna: Häll motsvarande äggmängd över varje nästan färdig botten och vänd varsamt så att ägget stelnar helt till minst 72 °C. Skjut åt sidan och fräs en fjärdedel av böngroddarna kort i den kvarvarande oljan tills genomvarma. Fortsätt tills alla ingredienser är tillagade.",
+          "uses": [
+            "ägg",
+            "böngroddar"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Skölj riset i sil. Lägg det i en kastrull med 324 ml vatten och salt. Koka upp, lägg på lock och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Sjud tills riset är mjukt och kokvattnet har absorberats. Ta från värmen och låt stå under lock före uppluckring med gaffel.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Lime och gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp limejuice och gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "limejuice",
+            "gurka"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg den krispiga musselpannan över böngroddarna och servera genast med ris och alla färdiga tillbehör. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "musslor",
+            "rismjöl",
+            "tapiokastärkelse",
+            "ägg",
+            "rapsolja",
+            "sojasås",
+            "böngroddar",
+            "ris",
+            "salt",
+            "limejuice",
+            "gurka"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Thailändskt inspirerad konstruktion utan traditionsanspråk. En tunn stärkelsesmet bildar en spröd sammanhängande botten runt hela musslor. Ägget gräddas som ett andra lager och böngroddarna fräses separat. Skaldjur, inte egentlig fisk. Bokför separat vid kontroll av fiskmålet. Den tillagade avrunnna musselidentiteten kräver registergranskning och får inte bytas mot rå vikt. Fyra portioner. 10 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 42 minuter aktivt arbete och 22 minuter huvudsakligen passiv väntan, totalt 64 minuter. Tiderna är inte verifierade genom provlagning. Kräver registergranskning för böngroddar, musslor, rismjöl och tapiokastärkelse; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-thai-crisp-starch-mussel-egg-pan",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Musslor i tunn krispig stärkelserock med ägg – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "crisp-starch-mussel-egg-pan",
+      "primary": "musslor",
+      "method": "pan",
+      "side": "Ris, Lime och gurka, Örter och chili",
+      "flavor": [
+        "sojasås",
+        "salt",
+        "limejuice",
+        "koriander",
+        "chiliflakes"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Durkslag",
+        "Hushållspapper",
+        "Två skålar",
+        "Visp",
+        "Stor stekpanna",
+        "Stekspade",
+        "Termometer",
+        "Kastrull med lock",
+        "Sil",
+        "Gaffel",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Krispig mussel- och äggpanna",
+          "ingredients": [
+            {
+              "name": "musslor",
+              "form": "cooked_drained",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Musslor, tillagad avrunnen vikt"
+            },
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 120,
+              "unit": "g",
+              "role": "side",
+              "label": "Rismjöl, torr vikt"
+            },
+            {
+              "name": "tapiokastärkelse",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "side",
+              "label": "Tapiokastärkelse, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 240,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "böngroddar",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Böngroddar, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Lime och gurka",
+          "ingredients": [
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Örter och chili",
+          "ingredients": [
+            {
+              "name": "salladslök",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Salladslök, rå ätlig vikt"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Koriander, rå ätlig vikt"
+            },
+            {
+              "name": "chiliflakes",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Chiliflakes, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Krispig mussel- och äggpanna: Låt det tillagade musselköttet rinna av mycket väl och torka lätt. Vispa rismjöl, tapiokastärkelse och soja med 300 ml vatten till en tunn smet. Vispa ägget separat.",
+          "uses": [
+            "musslor",
+            "rismjöl",
+            "tapiokastärkelse",
+            "sojasås",
+            "ägg"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Krispig mussel- och äggpanna: Dela ingredienserna i fyra omgångar. Värm motsvarande olja i en stor panna, fördela musslorna glest och häll en fjärdedel av stärkelsesmeten tunt runt om. Låt den bubbla och få krispiga kanter.",
+          "uses": [
+            "rapsolja",
+            "musslor",
+            "rismjöl",
+            "tapiokastärkelse"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Krispig mussel- och äggpanna: Häll motsvarande äggmängd över varje nästan färdig botten och vänd varsamt så att ägget stelnar helt till minst 72 °C. Skjut åt sidan och fräs en fjärdedel av böngroddarna kort i den kvarvarande oljan tills genomvarma. Fortsätt tills alla ingredienser är tillagade.",
+          "uses": [
+            "ägg",
+            "böngroddar"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Skölj riset i sil. Lägg det i en kastrull med 324 ml vatten och salt. Koka upp, lägg på lock och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Sjud tills riset är mjukt och kokvattnet har absorberats. Ta från värmen och låt stå under lock före uppluckring med gaffel.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Lime och gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp limejuice och gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "limejuice",
+            "gurka"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "För komponenten Örter och chili: Skölj och ansa salladslök och koriander. Skär frukt och grönsaker i små bitar. Lägg upp salladslök, koriander och chiliflakes tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "salladslök",
+            "koriander",
+            "chiliflakes"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg den krispiga musselpannan över böngroddarna och servera genast med ris och alla färdiga tillbehör. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "musslor",
+            "rismjöl",
+            "tapiokastärkelse",
+            "ägg",
+            "rapsolja",
+            "sojasås",
+            "böngroddar",
+            "ris",
+            "salt",
+            "limejuice",
+            "gurka",
+            "salladslök",
+            "koriander",
+            "chiliflakes"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Thailändskt inspirerad konstruktion utan traditionsanspråk. En tunn stärkelsesmet bildar en spröd sammanhängande botten runt hela musslor. Ägget gräddas som ett andra lager och böngroddarna fräses separat. Skaldjur, inte egentlig fisk. Bokför separat vid kontroll av fiskmålet. Den tillagade avrunnna musselidentiteten kräver registergranskning och får inte bytas mot rå vikt. Fyra portioner. 13 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 46 minuter aktivt arbete och 22 minuter huvudsakligen passiv väntan, totalt 68 minuter. Tiderna är inte verifierade genom provlagning. Kräver registergranskning för böngroddar, koriander, musslor, rismjöl, salladslök och tapiokastärkelse; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-thai-crispy-bean-sprout-rolls",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Thailändskinspirerade krispiga bön- och grönsaksrullar – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "springroll",
+      "primary": "bönor",
+      "method": "oven",
+      "side": "rispapper",
+      "flavor": [
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Thailändskinspirerade krispiga bön- och grönsaksrullar",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna bönor"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "böngroddar",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Böngroddar, vikt som såld"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Rispapper",
+          "ingredients": [
+            {
+              "name": "rispapper",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Rispapper, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Väg den avrunna mängden bönor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär vitkål i små bitar; skölj eller ansa och skär böngroddar i små bitar.",
+          "uses": [
+            "vitkål",
+            "böngroddar"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered smaksättningen: skala och finriv ingefära.",
+          "uses": [
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg fram rispapper. Håll arken täckta så att de inte torkar medan fyllningen tillagas.",
+          "uses": [
+            "rispapper"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek bönor på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "bönor",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg vitkål och böngroddar i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in ingefära och huvudkomponentens salt.",
+          "uses": [
+            "vitkål",
+            "böngroddar",
+            "ingefära",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner sojasås och 100 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "sojasås"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "bönor",
+            "vitkål",
+            "böngroddar"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "bönor",
+            "vitkål",
+            "böngroddar"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll 900 ml vatten, ljummet, i en vid form. Doppa ett rispapper i taget kort tills det går att böja, och lägg på en fuktig skärbräda. Fördela fyllningen på arken, vik in sidorna och rulla tätt. Arbeta med ett ark i taget så att det inte klibbar ihop.",
+          "uses": [
+            "rispapper",
+            "bönor",
+            "vitkål",
+            "böngroddar"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Lägg rullarna med skarven nedåt på bakplåtspapper. Baka i 210 °C cirka 20 minuter tills ytan fått färg och är fast. Vänd försiktigt halvvägs.",
+          "uses": [
+            "rispapper",
+            "bönor"
+          ],
+          "minutes": 20,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "bönor",
+            "vitkål",
+            "böngroddar",
+            "ingefära",
+            "sojasås",
+            "rapsolja",
+            "salt",
+            "rispapper"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Thailändskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Böngroddarna ska bli helt genomvarma i pannan. Fyllningen reduceras torr och rullarna bakas med skarven nedåt. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 50 minuter aktivt arbete och 28 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 78 minuter med angiven arbetsordning. Nyhetsmotiv: Bakat rispappershölje med mjuk bönmassa och genomlagade groddar; kontrast mot färska tofurullar. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för böngroddar (as_sold, g), rispapper (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-thai-crispy-bean-sprout-rolls",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Thailändskinspirerade krispiga bön- och grönsaksrullar – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "springroll",
+      "primary": "bönor",
+      "method": "oven",
+      "side": "rispapper",
+      "flavor": [
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Thailändskinspirerade krispiga bön- och grönsaksrullar",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna bönor"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "böngroddar",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Böngroddar, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "salladslök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Salladslök, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Rispapper",
+          "ingredients": [
+            {
+              "name": "rispapper",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Rispapper, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Väg den avrunna mängden bönor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär vitkål i små bitar; skölj eller ansa och skär böngroddar i små bitar; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka salladslök; skala och skär morot i små tärningar, omkring 1 cm.",
+          "uses": [
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered smaksättningen: skala och finriv ingefära.",
+          "uses": [
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg fram rispapper. Håll arken täckta så att de inte torkar medan fyllningen tillagas.",
+          "uses": [
+            "rispapper"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek bönor på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "bönor",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg vitkål, böngroddar, vitlök, salladslök och morot i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in ingefära och huvudkomponentens salt.",
+          "uses": [
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot",
+            "ingefära",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner sojasås och 140 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "sojasås"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "bönor",
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "bönor",
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll 900 ml vatten, ljummet, i en vid form. Doppa ett rispapper i taget kort tills det går att böja, och lägg på en fuktig skärbräda. Fördela fyllningen på arken, vik in sidorna och rulla tätt. Arbeta med ett ark i taget så att det inte klibbar ihop.",
+          "uses": [
+            "rispapper",
+            "bönor",
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Lägg rullarna med skarven nedåt på bakplåtspapper. Baka i 210 °C cirka 20 minuter tills ytan fått färg och är fast. Vänd försiktigt halvvägs.",
+          "uses": [
+            "rispapper",
+            "bönor"
+          ],
+          "minutes": 20,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "bönor",
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot",
+            "ingefära",
+            "sojasås",
+            "rapsolja",
+            "salt",
+            "rispapper"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Thailändskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Böngroddarna ska bli helt genomvarma i pannan. Fyllningen reduceras torr och rullarna bakas med skarven nedåt. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 56 minuter aktivt arbete och 28 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 84 minuter med angiven arbetsordning. Nyhetsmotiv: Bakat rispappershölje med mjuk bönmassa och genomlagade groddar; kontrast mot färska tofurullar. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för böngroddar (as_sold, g), rispapper (dry, g), salladslök (raw_edible, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-thai-crispy-bean-sprout-rolls",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Thailändskinspirerade krispiga bön- och grönsaksrullar – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "springroll",
+      "primary": "bönor",
+      "method": "oven",
+      "side": "rispapper",
+      "flavor": [
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Thailändskinspirerade krispiga bön- och grönsaksrullar",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna bönor"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "böngroddar",
+              "form": "as_sold",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Böngroddar, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "salladslök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Salladslök, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Rispapper",
+          "ingredients": [
+            {
+              "name": "rispapper",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Rispapper, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Mango- och gurksallad",
+          "ingredients": [
+            {
+              "name": "mango",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mango, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Jordnötter, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Väg den avrunna mängden bönor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "bönor"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär vitkål i små bitar; skölj eller ansa och skär böngroddar i små bitar; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka salladslök; skala och skär morot i små tärningar, omkring 1 cm.",
+          "uses": [
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered smaksättningen: skala och finriv ingefära.",
+          "uses": [
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg fram rispapper. Håll arken täckta så att de inte torkar medan fyllningen tillagas.",
+          "uses": [
+            "rispapper"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek bönor på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "bönor",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg vitkål, böngroddar, vitlök, salladslök och morot i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in ingefära och huvudkomponentens salt.",
+          "uses": [
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot",
+            "ingefära",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner sojasås och 140 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "sojasås"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "bönor",
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "bönor",
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll 900 ml vatten, ljummet, i en vid form. Doppa ett rispapper i taget kort tills det går att böja, och lägg på en fuktig skärbräda. Fördela fyllningen på arken, vik in sidorna och rulla tätt. Arbeta med ett ark i taget så att det inte klibbar ihop.",
+          "uses": [
+            "rispapper",
+            "bönor",
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Lägg rullarna med skarven nedåt på bakplåtspapper. Baka i 210 °C cirka 20 minuter tills ytan fått färg och är fast. Vänd försiktigt halvvägs.",
+          "uses": [
+            "rispapper",
+            "bönor"
+          ],
+          "minutes": 20,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör mango- och gurksallad: Skala mangon och skär fruktköttet och gurkan i små bitar. Vänd med limejuicen och strö över grovhackade jordnötter.",
+          "uses": [
+            "mango",
+            "gurka",
+            "limejuice",
+            "jordnötter"
+          ],
+          "minutes": 6,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med mango- och gurksallad. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "bönor",
+            "vitkål",
+            "böngroddar",
+            "vitlök",
+            "salladslök",
+            "morot",
+            "ingefära",
+            "sojasås",
+            "rapsolja",
+            "salt",
+            "rispapper",
+            "mango",
+            "gurka",
+            "limejuice",
+            "jordnötter"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Thailändskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Böngroddarna ska bli helt genomvarma i pannan. Fyllningen reduceras torr och rullarna bakas med skarven nedåt. Fyra portioner. Lokalt härlett ingrediensantal 14; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 62 minuter aktivt arbete och 28 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 90 minuter med angiven arbetsordning. Nyhetsmotiv: Bakat rispappershölje med mjuk bönmassa och genomlagade groddar; kontrast mot färska tofurullar. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för böngroddar (as_sold, g), mango (raw_edible, g), rispapper (dry, g), salladslök (raw_edible, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-thai-double-cooked-eggs-tamarind",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Först fasta sedan stekta ägg med tamarindsås – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "double-cooked-eggs-tamarind",
+      "primary": "kokta ägg",
+      "method": "pan",
+      "side": "Reducerad tamarindsås, Ris, Gurka",
+      "flavor": [
+        "tamarindpasta",
+        "strösocker",
+        "sojasås",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Stekpanna",
+        "Tång",
+        "Rent hushållspapper",
+        "Kniv",
+        "Kastrull",
+        "Slev",
+        "Kastrull med lock",
+        "Sil",
+        "Gaffel",
+        "Skärbräda",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fasta och därefter stekta ägg",
+          "ingredients": [
+            {
+              "name": "kokta ägg",
+              "form": "cooked_drained",
+              "quantity": 480,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta ägg, tillagad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Reducerad tamarindsås",
+          "ingredients": [
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Tamarindpasta, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fasta och därefter stekta ägg: Använd kylda genomkokta skalade ägg enligt den angivna tillagade ätliga vikten. Torka ytan noggrant. Värm oljan i en liten stekpanna och stek äggen under varsam vändning tills en gyllene hinna bildats runt om. Dela först efter stekningen.",
+          "uses": [
+            "kokta ägg",
+            "rapsolja"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "För komponenten Reducerad tamarindsås: Skiva rödlöken tunt. Lägg lök, tamarind, socker och soja med 150 ml vatten i en kastrull. Sjud tills löken är mjuk och såsen är tjock nog att lägga sig som ett blankt lager på äggen.",
+          "uses": [
+            "rödlök",
+            "tamarindpasta",
+            "strösocker",
+            "sojasås"
+          ],
+          "minutes": 14,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Skölj riset i sil. Lägg det i en kastrull med 504 ml vatten och salt. Koka upp, lägg på lock och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Sjud tills riset är mjukt och kokvattnet har absorberats. Ta från värmen och låt stå under lock före uppluckring med gaffel.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg ägghalvorna på riset och skeda den reducerade såsen över. Servera hela mängden gurka och övriga tillbehör. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "kokta ägg",
+            "rapsolja",
+            "tamarindpasta",
+            "strösocker",
+            "sojasås",
+            "rödlök",
+            "ris",
+            "salt",
+            "gurka"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Thailändskt inspirerad konstruktion utan traditionsanspråk. Redan genomkokta fasta ägg steks hela så att utsidan får en tunn segspröd hinna. En separat reducerad syrlig sås läggs över efter delning. Den föreslagna identiteten kokta ägg avser tillagad avrunnen vikt. Rå äggvikt får inte sättas in oförändrad. Jämför med råa ägg som steks eller pocheras direkt i sås. Fyra portioner. 8 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 37 minuter aktivt arbete och 22 minuter huvudsakligen passiv väntan, totalt 59 minuter. Tiderna är inte verifierade genom provlagning. Avsteg från variantens riktmärke: den bärande tillagningsstrukturen och kompletta måltiden behålls; inga fyllnadsingredienser har lagts till för att nå ett antal. Utanför nuvarande standardfilter 10–15 ingredienser; kräver att användaren ändrar minantalet. Kräver registergranskning för kokta ägg och tamarindpasta; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-thai-double-cooked-eggs-tamarind",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Först fasta sedan stekta ägg med tamarindsås – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "double-cooked-eggs-tamarind",
+      "primary": "kokta ägg",
+      "method": "pan",
+      "side": "Reducerad tamarindsås, Ris, Gurka, Koriander och chili",
+      "flavor": [
+        "tamarindpasta",
+        "strösocker",
+        "sojasås",
+        "salt",
+        "koriander",
+        "chiliflakes"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Stekpanna",
+        "Tång",
+        "Rent hushållspapper",
+        "Kniv",
+        "Kastrull",
+        "Slev",
+        "Kastrull med lock",
+        "Sil",
+        "Gaffel",
+        "Skärbräda",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fasta och därefter stekta ägg",
+          "ingredients": [
+            {
+              "name": "kokta ägg",
+              "form": "cooked_drained",
+              "quantity": 480,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta ägg, tillagad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Reducerad tamarindsås",
+          "ingredients": [
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Tamarindpasta, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Koriander och chili",
+          "ingredients": [
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Koriander, rå ätlig vikt"
+            },
+            {
+              "name": "chiliflakes",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Chiliflakes, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fasta och därefter stekta ägg: Använd kylda genomkokta skalade ägg enligt den angivna tillagade ätliga vikten. Torka ytan noggrant. Värm oljan i en liten stekpanna och stek äggen under varsam vändning tills en gyllene hinna bildats runt om. Dela först efter stekningen.",
+          "uses": [
+            "kokta ägg",
+            "rapsolja"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "För komponenten Reducerad tamarindsås: Skiva rödlöken tunt. Lägg lök, tamarind, socker och soja med 150 ml vatten i en kastrull. Sjud tills löken är mjuk och såsen är tjock nog att lägga sig som ett blankt lager på äggen.",
+          "uses": [
+            "rödlök",
+            "tamarindpasta",
+            "strösocker",
+            "sojasås"
+          ],
+          "minutes": 14,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Skölj riset i sil. Lägg det i en kastrull med 504 ml vatten och salt. Koka upp, lägg på lock och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Sjud tills riset är mjukt och kokvattnet har absorberats. Ta från värmen och låt stå under lock före uppluckring med gaffel.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Koriander och chili: Skölj och ansa koriander. Skär frukt och grönsaker i små bitar. Lägg upp koriander och chiliflakes tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "koriander",
+            "chiliflakes"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg ägghalvorna på riset och skeda den reducerade såsen över. Servera hela mängden gurka och övriga tillbehör. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "kokta ägg",
+            "rapsolja",
+            "tamarindpasta",
+            "strösocker",
+            "sojasås",
+            "rödlök",
+            "ris",
+            "salt",
+            "gurka",
+            "koriander",
+            "chiliflakes"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Thailändskt inspirerad konstruktion utan traditionsanspråk. Redan genomkokta fasta ägg steks hela så att utsidan får en tunn segspröd hinna. En separat reducerad syrlig sås läggs över efter delning. Den föreslagna identiteten kokta ägg avser tillagad avrunnen vikt. Rå äggvikt får inte sättas in oförändrad. Jämför med råa ägg som steks eller pocheras direkt i sås. Fyra portioner. 10 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 41 minuter aktivt arbete och 22 minuter huvudsakligen passiv väntan, totalt 63 minuter. Tiderna är inte verifierade genom provlagning. Kräver registergranskning för kokta ägg, koriander och tamarindpasta; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-thai-double-cooked-eggs-tamarind",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Först fasta sedan stekta ägg med tamarindsås – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "double-cooked-eggs-tamarind",
+      "primary": "kokta ägg",
+      "method": "pan",
+      "side": "Reducerad tamarindsås, Ris, Gurka, Koriander och chili, Rättika och sesam",
+      "flavor": [
+        "tamarindpasta",
+        "strösocker",
+        "sojasås",
+        "salt",
+        "koriander",
+        "chiliflakes",
+        "sesamfrön",
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Stekpanna",
+        "Tång",
+        "Rent hushållspapper",
+        "Kniv",
+        "Kastrull",
+        "Slev",
+        "Kastrull med lock",
+        "Sil",
+        "Gaffel",
+        "Skärbräda",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fasta och därefter stekta ägg",
+          "ingredients": [
+            {
+              "name": "kokta ägg",
+              "form": "cooked_drained",
+              "quantity": 480,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta ägg, tillagad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Reducerad tamarindsås",
+          "ingredients": [
+            {
+              "name": "tamarindpasta",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Tamarindpasta, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Koriander och chili",
+          "ingredients": [
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Koriander, rå ätlig vikt"
+            },
+            {
+              "name": "chiliflakes",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Chiliflakes, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c6",
+          "name": "Rättika och sesam",
+          "ingredients": [
+            {
+              "name": "rättika",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rättika, rå ätlig vikt"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Sesamfrön, mängd som såld"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fasta och därefter stekta ägg: Använd kylda genomkokta skalade ägg enligt den angivna tillagade ätliga vikten. Torka ytan noggrant. Värm oljan i en liten stekpanna och stek äggen under varsam vändning tills en gyllene hinna bildats runt om. Dela först efter stekningen.",
+          "uses": [
+            "kokta ägg",
+            "rapsolja"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "För komponenten Reducerad tamarindsås: Skiva rödlöken tunt. Lägg lök, tamarind, socker och soja med 150 ml vatten i en kastrull. Sjud tills löken är mjuk och såsen är tjock nog att lägga sig som ett blankt lager på äggen.",
+          "uses": [
+            "rödlök",
+            "tamarindpasta",
+            "strösocker",
+            "sojasås"
+          ],
+          "minutes": 14,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Skölj riset i sil. Lägg det i en kastrull med 504 ml vatten och salt. Koka upp, lägg på lock och sänk värmen.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Ris: Sjud tills riset är mjukt och kokvattnet har absorberats. Ta från värmen och låt stå under lock före uppluckring med gaffel.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Koriander och chili: Skölj och ansa koriander. Skär frukt och grönsaker i små bitar. Lägg upp koriander och chiliflakes tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "koriander",
+            "chiliflakes"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "För komponenten Rättika och sesam: Skölj och ansa rättika. Skär frukt och grönsaker i små bitar. Lägg upp rättika, sesamfrön och limejuice tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "rättika",
+            "sesamfrön",
+            "limejuice"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg ägghalvorna på riset och skeda den reducerade såsen över. Servera hela mängden gurka och övriga tillbehör. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "kokta ägg",
+            "rapsolja",
+            "tamarindpasta",
+            "strösocker",
+            "sojasås",
+            "rödlök",
+            "ris",
+            "salt",
+            "gurka",
+            "koriander",
+            "chiliflakes",
+            "rättika",
+            "sesamfrön",
+            "limejuice"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Thailändskt inspirerad konstruktion utan traditionsanspråk. Redan genomkokta fasta ägg steks hela så att utsidan får en tunn segspröd hinna. En separat reducerad syrlig sås läggs över efter delning. Den föreslagna identiteten kokta ägg avser tillagad avrunnen vikt. Rå äggvikt får inte sättas in oförändrad. Jämför med råa ägg som steks eller pocheras direkt i sås. Fyra portioner. 13 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 45 minuter aktivt arbete och 22 minuter huvudsakligen passiv väntan, totalt 67 minuter. Tiderna är inte verifierade genom provlagning. Kräver registergranskning för kokta ägg, koriander, rättika och tamarindpasta; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-thai-egg-bamboo-open-yeast-boats",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Thailändskinspirerade öppna äggbröd med bambu – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "open_bread_egg",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "jästdeg",
+      "flavor": [
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Thailändskinspirerade öppna äggbröd med bambu",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "bambuskott",
+              "form": "preserved_drained",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Bambuskott, konserverad avrunnen vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Jästdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Torrjäst, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Behåll gulorna hela och spara äggen i en skål.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: låt bambuskott rinna av och strimla.",
+          "uses": [
+            "bambuskott"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered smaksättningen: skala och finriv ingefära.",
+          "uses": [
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda degens vetemjöl, salt, torrjäst, olja och 210 ml vatten till en mjuk deg. Knåda på arbetsbänken utan extra mjöl tills den är jämn; degen ska vara mjuk men gå att forma.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Täck degen och låt jäsa cirka 45 minuter, tills den blivit tydligt luftigare.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 45,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja och stek bambuskott tills genomvarma och fri vätska avdunstat. Rör ner ingefära, sojasås och huvudkomponentens salt.",
+          "uses": [
+            "bambuskott",
+            "ingefära",
+            "rapsolja",
+            "sojasås",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Låt bambufyllningen svalna tills den är ljummen.",
+          "uses": [
+            "bambuskott"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela jästdegen i en bit per portion. Kavla till ovala bottnar mellan ark av bakplåtspapper. Vik upp höga kanter och nyp ihop ändarna så att varje bit blir en öppen båt.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 10,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Lägg båtarna på plåt med bakplåtspapper. Fördela grönsaksfyllningen i botten och häll de uppvägda råa äggen ovanpå inom degen; fördela hela äggmängden.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "bambuskott"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Baka i 210 °C cirka 22 minuter tills brödet är genomgräddat och äggfyllningen är fast och når minst 72 °C.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 22,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "bambuskott",
+            "ingefära",
+            "sojasås",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "torrjäst"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Thailändskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Jästdegen formas till öppna båtar med höga kanter. Först läggs en torr bambufyllning i, därefter råa uppvägda ägg som stelnar under ugnsgräddning. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 42 minuter aktivt arbete och 75 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 117 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter en proteinbytesklon av slutna ångbröd: öppna ugnsbakade jästbåtar med ägg som tillagas synligt ovanpå grönsaksfyllningen. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för bambuskott (preserved_drained, g), torrjäst (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-thai-egg-bamboo-open-yeast-boats",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Thailändskinspirerade öppna äggbröd med bambu – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "open_bread_egg",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "jästdeg",
+      "flavor": [
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Thailändskinspirerade öppna äggbröd med bambu",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "bambuskott",
+              "form": "preserved_drained",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Bambuskott, konserverad avrunnen vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "salladslök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Salladslök, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Jästdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Torrjäst, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Behåll gulorna hela och spara äggen i en skål.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: låt bambuskott rinna av och strimla; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka salladslök; skala och skär morot i små tärningar, omkring 1 cm.",
+          "uses": [
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered smaksättningen: skala och finriv ingefära.",
+          "uses": [
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda degens vetemjöl, salt, torrjäst, olja och 210 ml vatten till en mjuk deg. Knåda på arbetsbänken utan extra mjöl tills den är jämn; degen ska vara mjuk men gå att forma.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Täck degen och låt jäsa cirka 45 minuter, tills den blivit tydligt luftigare.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 45,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja och stek bambuskott, vitlök, salladslök och morot tills genomvarma och fri vätska avdunstat. Rör ner ingefära, sojasås och huvudkomponentens salt.",
+          "uses": [
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot",
+            "ingefära",
+            "rapsolja",
+            "sojasås",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Låt bambufyllningen svalna tills den är ljummen.",
+          "uses": [
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela jästdegen i en bit per portion. Kavla till ovala bottnar mellan ark av bakplåtspapper. Vik upp höga kanter och nyp ihop ändarna så att varje bit blir en öppen båt.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 10,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Lägg båtarna på plåt med bakplåtspapper. Fördela grönsaksfyllningen i botten och häll de uppvägda råa äggen ovanpå inom degen; fördela hela äggmängden.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Baka i 210 °C cirka 22 minuter tills brödet är genomgräddat och äggfyllningen är fast och når minst 72 °C.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 22,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot",
+            "ingefära",
+            "sojasås",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "torrjäst"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Thailändskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Jästdegen formas till öppna båtar med höga kanter. Först läggs en torr bambufyllning i, därefter råa uppvägda ägg som stelnar under ugnsgräddning. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 46 minuter aktivt arbete och 75 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 121 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter en proteinbytesklon av slutna ångbröd: öppna ugnsbakade jästbåtar med ägg som tillagas synligt ovanpå grönsaksfyllningen. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för bambuskott (preserved_drained, g), salladslök (raw_edible, g), torrjäst (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-thai-egg-bamboo-open-yeast-boats",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Thailändskinspirerade öppna äggbröd med bambu – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "thai",
+      "family": "open_bread_egg",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "jästdeg",
+      "flavor": [
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Thailändskinspirerade öppna äggbröd med bambu",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "bambuskott",
+              "form": "preserved_drained",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Bambuskott, konserverad avrunnen vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "salladslök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Salladslök, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Jästdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Torrjäst, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Morots- och gurksallad med sesam",
+          "ingredients": [
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Sesamfrön, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Knäck äggen och väg den råa ätliga mängden utan skal. Behåll gulorna hela och spara äggen i en skål.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: låt bambuskott rinna av och strimla; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka salladslök; skala och skär morot i små tärningar, omkring 1 cm.",
+          "uses": [
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered smaksättningen: skala och finriv ingefära.",
+          "uses": [
+            "ingefära"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda degens vetemjöl, salt, torrjäst, olja och 210 ml vatten till en mjuk deg. Knåda på arbetsbänken utan extra mjöl tills den är jämn; degen ska vara mjuk men gå att forma.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Täck degen och låt jäsa cirka 45 minuter, tills den blivit tydligt luftigare.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 45,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja och stek bambuskott, vitlök, salladslök och morot tills genomvarma och fri vätska avdunstat. Rör ner ingefära, sojasås och huvudkomponentens salt.",
+          "uses": [
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot",
+            "ingefära",
+            "rapsolja",
+            "sojasås",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Låt bambufyllningen svalna tills den är ljummen.",
+          "uses": [
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela jästdegen i en bit per portion. Kavla till ovala bottnar mellan ark av bakplåtspapper. Vik upp höga kanter och nyp ihop ändarna så att varje bit blir en öppen båt.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 10,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Lägg båtarna på plåt med bakplåtspapper. Fördela grönsaksfyllningen i botten och häll de uppvägda råa äggen ovanpå inom degen; fördela hela äggmängden.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Baka i 210 °C cirka 22 minuter tills brödet är genomgräddat och äggfyllningen är fast och når minst 72 °C.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 22,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör morots- och gurksallad med sesam: Grovriv moroten, skär gurkan tunt och vänd med limejuicen. Rosta sesamfröna i torr panna och strö över.",
+          "uses": [
+            "morot",
+            "gurka",
+            "limejuice",
+            "sesamfrön"
+          ],
+          "minutes": 6,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med morots- och gurksallad med sesam. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "ägg",
+            "bambuskott",
+            "vitlök",
+            "salladslök",
+            "morot",
+            "ingefära",
+            "sojasås",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "torrjäst",
+            "gurka",
+            "limejuice",
+            "sesamfrön"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Thailändskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Jästdegen formas till öppna båtar med höga kanter. Först läggs en torr bambufyllning i, därefter råa uppvägda ägg som stelnar under ugnsgräddning. Fyra portioner. Lokalt härlett ingrediensantal 13; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 52 minuter aktivt arbete och 75 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 127 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter en proteinbytesklon av slutna ångbröd: öppna ugnsbakade jästbåtar med ägg som tillagas synligt ovanpå grönsaksfyllningen. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för bambuskott (preserved_drained, g), salladslök (raw_edible, g), torrjäst (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    }
+  ]
+}

@@ -1,0 +1,3928 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-38",
+  "recipes": [
+    {
+      "base_id": "smako-italian-pulled-chicken-tomato-wide-pasta",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad långsamt sjuden kycklingragu – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "strimlad långkokt kycklingragu",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "kokt pasta",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Strimlad kycklingragu",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 340.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Strimlad kycklingragu: Lägg kycklingen i stora benfria bitar. Finhacka löken.",
+          "uses": [
+            "kyckling",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och kyckling under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 300 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 40 minuter under lock. Rör då och då. Kycklingen ska vara genomtillagad och så mjuk att den kan dras isär med två gafflar.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "kyckling",
+            "gul lök"
+          ],
+          "minutes": 40,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Dela den mjukkokta kycklingen i tunna trådar med två gafflar och rör ner dem i hela tomatsåsen. Vänd den färdigkokta pastan med ragun.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "pasta"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera strimlad kycklingragu och kokt pasta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "pasta"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 84 minuter totalt, varav 34 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Kyckling sjuds länge och dras isär till trådar som binder tomatsåsen; möjlig variant av befintlig tomatbräserad kyckling ska granskas. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pulled-chicken-tomato-wide-pasta",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad långsamt sjuden kycklingragu – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "strimlad långkokt kycklingragu",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "kokt pasta",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Strimlad kycklingragu",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 340.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Strimlad kycklingragu: Lägg kycklingen i stora benfria bitar. Finhacka löken.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "morot",
+            "selleri",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och kyckling under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater, salt, morot och selleri och 300 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 40 minuter under lock. Rör då och då. Kycklingen ska vara genomtillagad och så mjuk att den kan dras isär med två gafflar.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "morot",
+            "selleri",
+            "kyckling",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 40,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Dela den mjukkokta kycklingen i tunna trådar med två gafflar och rör ner dem i hela tomatsåsen. Vänd den färdigkokta pastan med ragun.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "morot",
+            "selleri",
+            "vitlök",
+            "pasta"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera strimlad kycklingragu och kokt pasta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "morot",
+            "selleri",
+            "vitlök",
+            "pasta"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 84 minuter totalt, varav 34 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Kyckling sjuds länge och dras isär till trådar som binder tomatsåsen; möjlig variant av befintlig tomatbräserad kyckling ska granskas. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pulled-chicken-tomato-wide-pasta",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad långsamt sjuden kycklingragu – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "strimlad långkokt kycklingragu",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "kokt pasta; fräsch sallad",
+      "flavor": [
+        "oregano",
+        "basilika",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Strimlad kycklingragu",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 340.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Strimlad kycklingragu: Lägg kycklingen i stora benfria bitar. Finhacka löken.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "morot",
+            "selleri",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och kyckling under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater, salt, morot, selleri, tomatpuré och oregano och 300 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "morot",
+            "selleri",
+            "tomatpuré",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 40 minuter under lock. Rör då och då. Kycklingen ska vara genomtillagad och så mjuk att den kan dras isär med två gafflar.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "morot",
+            "selleri",
+            "tomatpuré",
+            "oregano",
+            "kyckling",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 40,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner basilika precis före servering. Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "basilika",
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda gurka, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Dela den mjukkokta kycklingen i tunna trådar med två gafflar och rör ner dem i hela tomatsåsen. Vänd den färdigkokta pastan med ragun.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "morot",
+            "selleri",
+            "vitlök",
+            "tomatpuré",
+            "oregano",
+            "basilika",
+            "pasta"
+          ],
+          "minutes": 5,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera strimlad kycklingragu, kokt pasta och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "morot",
+            "selleri",
+            "vitlök",
+            "tomatpuré",
+            "oregano",
+            "basilika",
+            "pasta",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            10,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 92 minuter totalt, varav 42 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Kyckling sjuds länge och dras isär till trådar som binder tomatsåsen; möjlig variant av befintlig tomatbräserad kyckling ska granskas. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pumpkin-chickpea-risotto",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad pumpa- och kikärtsrisotto – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "pumparedd risotto",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pumpakikärtsrisotto",
+          "ingredients": [
+            {
+              "name": "risottoris",
+              "form": "dry",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Risottoris, torr vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pumpakikärtsrisotto: Ansa och finhacka gul lök. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning. Låt kikärtor rinna av noga.",
+          "uses": [
+            "kikärtor",
+            "pumpa",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner risottoriset och kikärtor, pumpa och salt. Låt riset bli blankt under omrörning.",
+          "uses": [
+            "risottoris",
+            "kikärtor",
+            "pumpa",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Tillsätt 1000 ml vatten i flera omgångar under omkring 20 minuter. Rör regelbundet och låt nästan all vätska sugas upp före nästa omgång. Riset ska bli mjukt med lätt kärna och rätten krämig, inte torr.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera pumpakikärtsrisotto. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "risottoris",
+            "kikärtor",
+            "pumpa",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 39 minuter totalt, varav 39 aktivt och 0 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pumpa och risottoris; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Pumpan kokas delvis sönder i äkta risottoris som rörs krämigt med hela kikärtor; jämförs med svamp-linsris men har annan bärande råvara och textur. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pumpkin-chickpea-risotto",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad pumpa- och kikärtsrisotto – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "pumparedd risotto",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "rosmarin",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pumpakikärtsrisotto",
+          "ingredients": [
+            {
+              "name": "risottoris",
+              "form": "dry",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Risottoris, torr vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pumpakikärtsrisotto: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning. Låt kikärtor rinna av noga.",
+          "uses": [
+            "kikärtor",
+            "pumpa",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner risottoriset och kikärtor, pumpa, salt och rosmarin. Låt riset bli blankt under omrörning.",
+          "uses": [
+            "risottoris",
+            "kikärtor",
+            "pumpa",
+            "salt",
+            "rosmarin"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Tillsätt 1000 ml vatten i flera omgångar under omkring 20 minuter. Rör regelbundet och låt nästan all vätska sugas upp före nästa omgång. Riset ska bli mjukt med lätt kärna och rätten krämig, inte torr.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ta grytan från värmen och rör ner citronjuice.",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera pumpakikärtsrisotto. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "risottoris",
+            "kikärtor",
+            "pumpa",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "rosmarin",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 41 minuter totalt, varav 41 aktivt och 0 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pumpa, risottoris och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Pumpan kokas delvis sönder i äkta risottoris som rörs krämigt med hela kikärtor; jämförs med svamp-linsris men har annan bärande råvara och textur. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pumpkin-chickpea-risotto",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad pumpa- och kikärtsrisotto – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "pumparedd risotto",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "fräsch sallad",
+      "flavor": [
+        "rosmarin",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pumpakikärtsrisotto",
+          "ingredients": [
+            {
+              "name": "risottoris",
+              "form": "dry",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Risottoris, torr vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pumpakikärtsrisotto: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning. Väg spenat frysta enligt komponenten. Låt kikärtor rinna av noga. Finhacka persilja.",
+          "uses": [
+            "kikärtor",
+            "pumpa",
+            "gul lök",
+            "vitlök",
+            "spenat"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner risottoriset och kikärtor, pumpa, salt, rosmarin och spenat. Låt riset bli blankt under omrörning.",
+          "uses": [
+            "risottoris",
+            "kikärtor",
+            "pumpa",
+            "salt",
+            "rosmarin",
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Tillsätt 1000 ml vatten i flera omgångar under omkring 20 minuter. Rör regelbundet och låt nästan all vätska sugas upp före nästa omgång. Riset ska bli mjukt med lätt kärna och rätten krämig, inte torr.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ta grytan från värmen och rör ner citronjuice och persilja.",
+          "uses": [
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera pumpakikärtsrisotto och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "risottoris",
+            "kikärtor",
+            "pumpa",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "rosmarin",
+            "citronjuice",
+            "spenat",
+            "persilja",
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 49 minuter totalt, varav 49 aktivt och 0 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pumpa, risottoris och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Pumpan kokas delvis sönder i äkta risottoris som rörs krämigt med hela kikärtor; jämförs med svamp-linsris men har annan bärande råvara och textur. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-raw-tomatoes-tuna-bean-filling",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade råa tomatskålar med tonfisk och bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "råa grönsaksskal med kall konservfiskfyllning",
+      "primary": "tonfisk",
+      "method": "cold_assembly",
+      "side": "varmt bröd",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sil",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatskålar med kall tonfiskfyllning",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 1200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 550.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatskålar med kall tonfiskfyllning: Välj stora fasta tomater. Skär av små lock och gröp ur kärnhusen med sked utan att skada väggarna. Hacka lock och urgröpt fruktkött. Sila överflödig tomatsaft och spara den.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Låt tonfisk och bönor rinna av. Mosa hälften av bönorna och blanda med hela bönor, tonfisk, hackad tomat, citronjuice, olja och salt till fast röra.",
+          "uses": [
+            "tomat",
+            "tonfisk",
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fyll de råa tomatskålarna med hela röran och ställ tätt på ett fat. Servera genast. Använd den silade tomatsaften som dressing till brödet; ingen ätlig tomatdel ska kasseras.",
+          "uses": [
+            "tomat",
+            "tonfisk",
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tomatskålar med kall tonfiskfyllning och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "tomat",
+            "tonfisk",
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 38 minuter totalt, varav 31 aktivt och 7 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Råa fasta tomater behåller sin struktur som kalla matskålar och fylls med tjock tonfisk-bönmassa; urgröpt tomatsaft används till brödet. Ingen risboll, panering eller ugnsbakning ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-raw-tomatoes-tuna-bean-filling",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade råa tomatskålar med tonfisk och bönor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "råa grönsaksskal med kall konservfiskfyllning",
+      "primary": "tonfisk",
+      "method": "cold_assembly",
+      "side": "varmt bröd",
+      "flavor": [
+        "citronjuice",
+        "basilika"
+      ],
+      "equipment": [
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sil",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatskålar med kall tonfiskfyllning",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 1200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 550.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatskålar med kall tonfiskfyllning: Välj stora fasta tomater. Skär av små lock och gröp ur kärnhusen med sked utan att skada väggarna. Hacka lock och urgröpt fruktkött. Sila överflödig tomatsaft och spara den.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Låt tonfisk och bönor rinna av. Mosa hälften av bönorna och blanda med hela bönor, tonfisk, hackad tomat, citronjuice, olja och salt till fast röra.",
+          "uses": [
+            "tomat",
+            "tonfisk",
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fyll de råa tomatskålarna med hela röran och ställ tätt på ett fat. Servera genast. Använd den silade tomatsaften som dressing till brödet; ingen ätlig tomatdel ska kasseras.",
+          "uses": [
+            "tomat",
+            "tonfisk",
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd",
+            "basilika",
+            "vitlök",
+            "kapris"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd",
+            "basilika",
+            "vitlök",
+            "kapris"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tomatskålar med kall tonfiskfyllning och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "tomat",
+            "tonfisk",
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "basilika",
+            "vitlök",
+            "kapris"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 38 minuter totalt, varav 31 aktivt och 7 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Råa fasta tomater behåller sin struktur som kalla matskålar och fylls med tjock tonfisk-bönmassa; urgröpt tomatsaft används till brödet. Ingen risboll, panering eller ugnsbakning ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-raw-tomatoes-tuna-bean-filling",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade råa tomatskålar med tonfisk och bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "råa grönsaksskal med kall konservfiskfyllning",
+      "primary": "tonfisk",
+      "method": "cold_assembly",
+      "side": "varmt bröd; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "basilika",
+        "persilja"
+      ],
+      "equipment": [
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sil",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatskålar med kall tonfiskfyllning",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 1200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 550.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatskålar med kall tonfiskfyllning: Välj stora fasta tomater. Skär av små lock och gröp ur kärnhusen med sked utan att skada väggarna. Hacka lock och urgröpt fruktkött. Sila överflödig tomatsaft och spara den.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Låt tonfisk och bönor rinna av. Mosa hälften av bönorna och blanda med hela bönor, tonfisk, hackad tomat, citronjuice, olja och salt till fast röra.",
+          "uses": [
+            "tomat",
+            "tonfisk",
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fyll de råa tomatskålarna med hela röran och ställ tätt på ett fat. Servera genast. Använd den silade tomatsaften som dressing till brödet; ingen ätlig tomatdel ska kasseras.",
+          "uses": [
+            "tomat",
+            "tonfisk",
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd",
+            "basilika",
+            "vitlök",
+            "kapris"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd",
+            "basilika",
+            "vitlök",
+            "kapris"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda gurka, rödlök, oliver, persilja, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera tomatskålar med kall tonfiskfyllning, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "tomat",
+            "tonfisk",
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "basilika",
+            "vitlök",
+            "kapris",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 46 minuter totalt, varav 39 aktivt och 7 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Råa fasta tomater behåller sin struktur som kalla matskålar och fylls med tjock tonfisk-bönmassa; urgröpt tomatsaft används till brödet. Ingen risboll, panering eller ugnsbakning ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-ricotta-waterbath-flans-lentil-broth",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade ricottaflan i varm linsbuljong – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "vattenbadsstelnad ostkräm i baljväxtbuljong",
+      "primary": "ricotta",
+      "method": "bake",
+      "side": "linsbuljong",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Djup ugnsform",
+        "Fyra portionsformar",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixer",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ricottaflan",
+          "ingredients": [
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ricotta, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Linsbuljong",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ricottaflan: Sätt ugnen på 160 °C. Pensla fyra stora portionsformar med all olja. Mixa ricotta, ägg, mjölk och salt helt slätt utan att vispa in mycket luft. Fördela i formarna.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Ställ portionsformarna i en djup ugnsform. Häll 1200 ml vatten (hett) runt dem till ungefär halva formhöjden. Baka 35 minuter tills krämen stelnat och mitten når 72 °C. Vattnet ska ligga runt, inte i portionsformarna.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lyft formarna ur vattenbadet och låt vila 10 minuter. Lossa försiktigt kanterna med en tunn kniv och stjälp varje flan i en djup tallrik.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Linsbuljong: Skölj, ansa och skär morot i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Lägg i morot och fräs på medelvärme.",
+          "uses": [
+            "rapsolja",
+            "morot"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, morot och salt och 1300 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "morot",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 40 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "morot",
+            "salt"
+          ],
+          "minutes": 40,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll den heta linsbuljongen runt de uppstjälpta ricottaflanen i djupa tallrikar; flanen ska ligga som fasta mjuka öar i soppan.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "morot"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera ricottaflan och linsbuljong. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "morot"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 118 minuter totalt, varav 43 aktivt och 75 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och ricotta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ricotta-äggkräm koagulerar varsamt i individuella vattenbad och stjälps som släta flan i linsbuljong. Ingen risotto, grynbindning eller stekt ostklimp ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-ricotta-waterbath-flans-lentil-broth",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade ricottaflan i varm linsbuljong – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "vattenbadsstelnad ostkräm i baljväxtbuljong",
+      "primary": "ricotta",
+      "method": "bake",
+      "side": "linsbuljong",
+      "flavor": [
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Djup ugnsform",
+        "Fyra portionsformar",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixer",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ricottaflan",
+          "ingredients": [
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ricotta, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Linsbuljong",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ricottaflan: Sätt ugnen på 160 °C. Pensla fyra stora portionsformar med all olja. Mixa ricotta, ägg, mjölk och salt helt slätt utan att vispa in mycket luft. Fördela i formarna.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Ställ portionsformarna i en djup ugnsform. Häll 1200 ml vatten (hett) runt dem till ungefär halva formhöjden. Baka 35 minuter tills krämen stelnat och mitten når 72 °C. Vattnet ska ligga runt, inte i portionsformarna.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lyft formarna ur vattenbadet och låt vila 10 minuter. Lossa försiktigt kanterna med en tunn kniv och stjälp varje flan i en djup tallrik.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Linsbuljong: Ansa och finhacka gul lök. Skölj, ansa och skär morot i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "morot",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, morot och salt och 1300 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "morot",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 40 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "morot",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 40,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner persilja och citronjuice precis före servering. ",
+          "uses": [
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Häll den heta linsbuljongen runt de uppstjälpta ricottaflanen i djupa tallrikar; flanen ska ligga som fasta mjuka öar i soppan.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "morot",
+            "gul lök",
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera ricottaflan och linsbuljong. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "morot",
+            "gul lök",
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 120 minuter totalt, varav 45 aktivt och 75 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och ricotta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ricotta-äggkräm koagulerar varsamt i individuella vattenbad och stjälps som släta flan i linsbuljong. Ingen risotto, grynbindning eller stekt ostklimp ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-ricotta-waterbath-flans-lentil-broth",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade ricottaflan i varm linsbuljong – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "vattenbadsstelnad ostkräm i baljväxtbuljong",
+      "primary": "ricotta",
+      "method": "bake",
+      "side": "linsbuljong; fräsch sallad",
+      "flavor": [
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Djup ugnsform",
+        "Fyra portionsformar",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixer",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ricottaflan",
+          "ingredients": [
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ricotta, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Linsbuljong",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ricottaflan: Sätt ugnen på 160 °C. Pensla fyra stora portionsformar med all olja. Mixa ricotta, ägg, mjölk och salt helt slätt utan att vispa in mycket luft. Fördela i formarna.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Ställ portionsformarna i en djup ugnsform. Häll 1200 ml vatten (hett) runt dem till ungefär halva formhöjden. Baka 35 minuter tills krämen stelnat och mitten når 72 °C. Vattnet ska ligga runt, inte i portionsformarna.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lyft formarna ur vattenbadet och låt vila 10 minuter. Lossa försiktigt kanterna med en tunn kniv och stjälp varje flan i en djup tallrik.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Linsbuljong: Ansa och finhacka gul lök. Skölj, ansa och skär morot i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "morot",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, morot och salt och 1300 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "morot",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 40 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "morot",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 40,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner persilja och citronjuice precis före servering. ",
+          "uses": [
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, oliver, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Häll den heta linsbuljongen runt de uppstjälpta ricottaflanen i djupa tallrikar; flanen ska ligga som fasta mjuka öar i soppan.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "morot",
+            "gul lök",
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 3,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera ricottaflan, linsbuljong och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "ricotta",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "morot",
+            "gul lök",
+            "persilja",
+            "citronjuice",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            10,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 128 minuter totalt, varav 53 aktivt och 75 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och ricotta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ricotta-äggkräm koagulerar varsamt i individuella vattenbad och stjälps som släta flan i linsbuljong. Ingen risotto, grynbindning eller stekt ostklimp ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-roast-pepper-ricotta-stuffed-pasta-shells",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad paprikaricotta med pastasnäckor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "pasta med mixad grönsaks-färskostkräm",
+      "primary": "ricotta",
+      "method": "pot",
+      "side": "paprikaricottakräm",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 340.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Paprikaricottakräm",
+          "ingredients": [
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ricotta, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Paprikaricottakräm: Ansa och finhacka gul lök. Skölj, ansa och skär paprika i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "paprika",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner paprika och salt och 200 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "paprika",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 18 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "paprika",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 18,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa soppan slät med stavmixer; håll mixerklockan under ytan för att undvika stänk.",
+          "uses": [
+            "paprika",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner ricotta precis före servering. ",
+          "uses": [
+            "ricotta"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda den färdigkokta pastan med hela paprikaricottakrämen. Vänd flera gånger så att krämen fördelas både runt och i pastabitarna.",
+          "uses": [
+            "pasta",
+            "salt",
+            "paprika",
+            "ricotta",
+            "gul lök",
+            "rapsolja"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera kokt pasta och paprikaricottakräm. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "pasta",
+            "salt",
+            "paprika",
+            "ricotta",
+            "gul lök",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 63 minuter totalt, varav 35 aktivt och 28 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av ricotta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Mjuk paprika mixas med ricotta till tjock kräm som samlas i kort pasta; annan såsstruktur än svampragu. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-roast-pepper-ricotta-stuffed-pasta-shells",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad paprikaricotta med pastasnäckor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "pasta med mixad grönsaks-färskostkräm",
+      "primary": "ricotta",
+      "method": "pot",
+      "side": "paprikaricottakräm",
+      "flavor": [
+        "basilika"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 340.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Paprikaricottakräm",
+          "ingredients": [
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ricotta, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Paprikaricottakräm: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär paprika i små jämna bitar; skala rotfrukter före vägning. Riv den fasta osten. Finhacka basilika.",
+          "uses": [
+            "paprika",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner paprika och salt och 200 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "paprika",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 18 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "paprika",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 18,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa soppan slät med stavmixer; håll mixerklockan under ytan för att undvika stänk.",
+          "uses": [
+            "paprika",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner ricotta, basilika och ost precis före servering. ",
+          "uses": [
+            "ricotta",
+            "basilika",
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda den färdigkokta pastan med hela paprikaricottakrämen. Vänd flera gånger så att krämen fördelas både runt och i pastabitarna.",
+          "uses": [
+            "pasta",
+            "salt",
+            "paprika",
+            "ricotta",
+            "gul lök",
+            "rapsolja",
+            "vitlök",
+            "basilika",
+            "ost"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera kokt pasta och paprikaricottakräm. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "pasta",
+            "salt",
+            "paprika",
+            "ricotta",
+            "gul lök",
+            "rapsolja",
+            "vitlök",
+            "basilika",
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 63 minuter totalt, varav 35 aktivt och 28 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av ricotta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Mjuk paprika mixas med ricotta till tjock kräm som samlas i kort pasta; annan såsstruktur än svampragu. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-roast-pepper-ricotta-stuffed-pasta-shells",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad paprikaricotta med pastasnäckor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "pasta med mixad grönsaks-färskostkräm",
+      "primary": "ricotta",
+      "method": "pot",
+      "side": "paprikaricottakräm; fräsch sallad",
+      "flavor": [
+        "basilika",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 340.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Paprikaricottakräm",
+          "ingredients": [
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "ricotta",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ricotta, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Paprikaricottakräm: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär paprika i små jämna bitar; skala rotfrukter före vägning. Riv den fasta osten. Finhacka basilika.",
+          "uses": [
+            "paprika",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner paprika och salt och 200 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "paprika",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 18 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "paprika",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 18,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa soppan slät med stavmixer; håll mixerklockan under ytan för att undvika stänk.",
+          "uses": [
+            "paprika",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner ricotta, basilika och ost precis före servering. ",
+          "uses": [
+            "ricotta",
+            "basilika",
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "oliver",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, oliver, rödlök, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "oliver",
+            "rödlök",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda den färdigkokta pastan med hela paprikaricottakrämen. Vänd flera gånger så att krämen fördelas både runt och i pastabitarna.",
+          "uses": [
+            "pasta",
+            "salt",
+            "paprika",
+            "ricotta",
+            "gul lök",
+            "rapsolja",
+            "vitlök",
+            "basilika",
+            "ost"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera kokt pasta, paprikaricottakräm och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "pasta",
+            "salt",
+            "paprika",
+            "ricotta",
+            "gul lök",
+            "rapsolja",
+            "vitlök",
+            "basilika",
+            "ost",
+            "tomat",
+            "gurka",
+            "oliver",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            9,
+            11,
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 71 minuter totalt, varav 43 aktivt och 28 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av ricotta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Mjuk paprika mixas med ricotta till tjock kräm som samlas i kort pasta; annan såsstruktur än svampragu. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

@@ -1,0 +1,4464 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-59",
+  "recipes": [
+    {
+      "base_id": "smako-indian-cabbage-chickpea-layered-bake",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kål- och kikärtsgratäng med ris – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "rice_bake",
+      "primary": "kikärtor",
+      "method": "bake",
+      "side": "ris",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kål- och kikärtsgratäng",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna kikärtor"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 500,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Väg den avrunna mängden kikärtor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär vitkål i små bitar.",
+          "uses": [
+            "vitkål"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 560 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek kikärtor på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "kikärtor",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg vitkål i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in kanel och huvudkomponentens salt.",
+          "uses": [
+            "vitkål",
+            "kanel",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och 100 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "krossade tomater"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "kikärtor",
+            "vitkål"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "kikärtor",
+            "vitkål"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 210 °C. Blanda eller varva det kokta riset med fyllningen i en ugnsform enligt rättens beskrivning. Pressa lätt till ett jämnt lager, högst fyra centimeter djupt.",
+          "uses": [
+            "kikärtor",
+            "ris"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Baka mitt i ugnen cirka 25 minuter tills ytan fått färg och mitten är genomvarm. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 25,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "vitkål",
+            "kanel",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Varva det kokta riset och kålfyllningen i tunna lager och pressa lätt, så att gratängen går att skopa i sammanhållna portioner. Fyra portioner. Lokalt härlett ingrediensantal 6; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 37 minuter aktivt arbete och 53 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 90 minuter med angiven arbetsordning. Nyhetsmotiv: Skiktad kål, kikärtor och ris i tomatbas; tydlig gratängstruktur som behöver avgränsas från kåldolmar och kålgryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-cabbage-chickpea-layered-bake",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kål- och kikärtsgratäng med ris – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "rice_bake",
+      "primary": "kikärtor",
+      "method": "bake",
+      "side": "ris",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kål- och kikärtsgratäng",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna kikärtor"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 500,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Väg den avrunna mängden kikärtor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär vitkål i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 520 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek kikärtor på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "kikärtor",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg vitkål, gul lök, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in kanel och huvudkomponentens salt.",
+          "uses": [
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och 140 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "krossade tomater"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "kikärtor",
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "kikärtor",
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 210 °C. Blanda eller varva det kokta riset med fyllningen i en ugnsform enligt rättens beskrivning. Pressa lätt till ett jämnt lager, högst fyra centimeter djupt.",
+          "uses": [
+            "kikärtor",
+            "ris"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Baka mitt i ugnen cirka 25 minuter tills ytan fått färg och mitten är genomvarm. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 25,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Varva det kokta riset och kålfyllningen i tunna lager och pressa lätt, så att gratängen går att skopa i sammanhållna portioner. Fyra portioner. Lokalt härlett ingrediensantal 9; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 41 minuter aktivt arbete och 53 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 94 minuter med angiven arbetsordning. Nyhetsmotiv: Skiktad kål, kikärtor och ris i tomatbas; tydlig gratängstruktur som behöver avgränsas från kåldolmar och kålgryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-cabbage-chickpea-layered-bake",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kål- och kikärtsgratäng med ris – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "rice_bake",
+      "primary": "kikärtor",
+      "method": "bake",
+      "side": "ris",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kål- och kikärtsgratäng",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta avrunna kikärtor"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 500,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citronkål med morot och sesam",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Sesamfrön, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Väg den avrunna mängden kikärtor. Lossa försiktigt eventuella klumpar.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär vitkål i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 480 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek kikärtor på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "kikärtor",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg vitkål, gul lök, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in kanel och huvudkomponentens salt.",
+          "uses": [
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och 140 ml vatten. Låt koka ihop tills fyllningen är saftig men inte rinnig; merparten av det fria vattnet ska avdunsta.",
+          "uses": [
+            "krossade tomater"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "kikärtor",
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "kikärtor",
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 210 °C. Blanda eller varva det kokta riset med fyllningen i en ugnsform enligt rättens beskrivning. Pressa lätt till ett jämnt lager, högst fyra centimeter djupt.",
+          "uses": [
+            "kikärtor",
+            "ris"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Baka mitt i ugnen cirka 25 minuter tills ytan fått färg och mitten är genomvarm. Kontrollera att huvudkomponenten är genomvarm och att grönsakerna har den beskrivna konsistensen.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 25,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör citronkål med morot och sesam: Strimla kålen tunt och grovriv moroten. Massera med citronjuicen. Rosta sesamfröna i torr panna och strö över.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "citronjuice",
+            "sesamfrön"
+          ],
+          "minutes": 6,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med citronkål med morot och sesam. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kikärtor",
+            "vitkål",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "ris",
+            "morot",
+            "citronjuice",
+            "sesamfrön"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Varva det kokta riset och kålfyllningen i tunna lager och pressa lätt, så att gratängen går att skopa i sammanhållna portioner. Fyra portioner. Lokalt härlett ingrediensantal 12; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 47 minuter aktivt arbete och 53 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 100 minuter med angiven arbetsordning. Nyhetsmotiv: Skiktad kål, kikärtor och ris i tomatbas; tydlig gratängstruktur som behöver avgränsas från kåldolmar och kålgryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-apricot-like-raisin-braise",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kyckling med russin och kanel – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "braise",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kyckling",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Russin, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i jämna bitar omkring 2 cm. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala eller ansa och finhacka gul lök.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Fräs gul lök på medelvärme under omrörning så att grönsakerna mjuknar utan att brännas. Blanda in kanel och huvudkomponentens salt.",
+          "uses": [
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "kanel"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt krossade tomater och russin och 100 ml vatten. Koka upp.",
+          "uses": [
+            "krossade tomater",
+            "russin"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg ner kyckling i grytan. Rör varsamt så att det fördelas jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud på låg värme cirka 15 minuter tills huvudråvaran är färdig och grönsakerna mjuka. Rör då och då. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten.",
+          "uses": [
+            "kyckling",
+            "gul lök"
+          ],
+          "minutes": 15,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "kanel",
+            "krossade tomater",
+            "russin",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Kycklingen skärs i större jämna bitar, medan löken får mjukna länge; russinen ska svälla i den tjocka såsen. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 31 minuter aktivt arbete och 35 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 66 minuter med angiven arbetsordning. Nyhetsmotiv: Lökig tomatbräsering med fruktsötma och potatis; möjlig grannskap till cacciatore redovisas. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för russin (as_sold, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-apricot-like-raisin-braise",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kyckling med russin och kanel – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "braise",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kyckling",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Russin, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i jämna bitar omkring 2 cm. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära; skala och skär morot i små tärningar, omkring 1 cm.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Fräs gul lök, vitlök, ingefära och morot på medelvärme under omrörning så att grönsakerna mjuknar utan att brännas. Blanda in kanel och huvudkomponentens salt.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "morot",
+            "rapsolja",
+            "salt",
+            "kanel"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt krossade tomater och russin och 140 ml vatten. Koka upp.",
+          "uses": [
+            "krossade tomater",
+            "russin"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg ner kyckling i grytan. Rör varsamt så att det fördelas jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud på låg värme cirka 15 minuter tills huvudråvaran är färdig och grönsakerna mjuka. Rör då och då. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "morot"
+          ],
+          "minutes": 15,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "morot",
+            "kanel",
+            "krossade tomater",
+            "russin",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Kycklingen skärs i större jämna bitar, medan löken får mjukna länge; russinen ska svälla i den tjocka såsen. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 35 minuter aktivt arbete och 35 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 70 minuter med angiven arbetsordning. Nyhetsmotiv: Lökig tomatbräsering med fruktsötma och potatis; möjlig grannskap till cacciatore redovisas. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för russin (as_sold, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-apricot-like-raisin-braise",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kyckling med russin och kanel – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "braise",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kyckling",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 350,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Russin, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Myntagurka med yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i jämna bitar omkring 2 cm. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära; skala och skär morot i små tärningar, omkring 1 cm.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "morot"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Fräs gul lök, vitlök, ingefära och morot på medelvärme under omrörning så att grönsakerna mjuknar utan att brännas. Blanda in kanel och huvudkomponentens salt.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "morot",
+            "rapsolja",
+            "salt",
+            "kanel"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt krossade tomater och russin och 140 ml vatten. Koka upp.",
+          "uses": [
+            "krossade tomater",
+            "russin"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg ner kyckling i grytan. Rör varsamt så att det fördelas jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud på låg värme cirka 15 minuter tills huvudråvaran är färdig och grönsakerna mjuka. Rör då och då. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "morot"
+          ],
+          "minutes": 15,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör myntagurka med yoghurt: Riv gurkan grovt, pressa lätt och blanda med yoghurten, hackad mynta och citronjuicen.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med myntagurka med yoghurt. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "morot",
+            "kanel",
+            "krossade tomater",
+            "russin",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Kycklingen skärs i större jämna bitar, medan löken får mjukna länge; russinen ska svälla i den tjocka såsen. Fyra portioner. Lokalt härlett ingrediensantal 14; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 41 minuter aktivt arbete och 35 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 76 minuter med angiven arbetsordning. Nyhetsmotiv: Lökig tomatbräsering med fruktsötma och potatis; möjlig grannskap till cacciatore redovisas. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för mynta (raw_edible, g), russin (as_sold, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-cashew-velvet",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kyckling i slät cashew-tomatsås – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "puree_stew",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Stavmixer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kyckling i slät cashew-tomatsås",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "cashewnötter",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Cashewnötter, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i jämna bitar omkring 2 cm. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär tomat i små bitar.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka cashewnötter grovt; i rätter med slät sås mixas de senare tillsammans med såsen.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Häll 300 ml vatten, upphettat till kokpunkten, över cashewnötterna i en värmetålig skål.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt cashewnötterna dra tio minuter. Häll sedan av vattnet; de uppmjukade nötterna går i såsen.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 560 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Fräs tomat på medelvärme under omrörning så att grönsakerna mjuknar utan att brännas. Blanda in garam masala och huvudkomponentens salt.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt",
+            "garam masala"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt cashewnötter och 100 ml vatten. Mixa såsen försiktigt slät med stavmixer och sätt tillbaka grytan på värmen.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Lägg ner kyckling i grytan. Rör varsamt så att det fördelas jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sjud på låg värme cirka 15 minuter tills huvudråvaran är färdig och grönsakerna mjuka. Rör då och då. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten.",
+          "uses": [
+            "kyckling",
+            "tomat"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "tomat",
+            "garam masala",
+            "cashewnötter",
+            "rapsolja",
+            "salt",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Blötlägg cashewnötterna i 300 ml vatten, upphettat till kokpunkten i tio minuter och häll av före mixning. Tomaterna ska stekas mjuka. Fyra portioner. Lokalt härlett ingrediensantal 6; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 31 minuter aktivt arbete och 45 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 76 minuter med angiven arbetsordning. Nyhetsmotiv: Kycklingbitar sjudna i slät nötbaserad tomatsås; skillnaden mot befintlig korma måste granskas. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för cashewnötter (as_sold, g), garam masala (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-cashew-velvet",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kyckling i slät cashew-tomatsås – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "puree_stew",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Stavmixer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kyckling i slät cashew-tomatsås",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "cashewnötter",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Cashewnötter, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i jämna bitar omkring 2 cm. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär tomat i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka cashewnötter grovt; i rätter med slät sås mixas de senare tillsammans med såsen.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Häll 300 ml vatten, upphettat till kokpunkten, över cashewnötterna i en värmetålig skål.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt cashewnötterna dra tio minuter. Häll sedan av vattnet; de uppmjukade nötterna går i såsen.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 520 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Fräs tomat, gul lök, vitlök och ingefära på medelvärme under omrörning så att grönsakerna mjuknar utan att brännas. Blanda in garam masala och huvudkomponentens salt.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "rapsolja",
+            "salt",
+            "garam masala"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt cashewnötter och 140 ml vatten. Mixa såsen försiktigt slät med stavmixer och sätt tillbaka grytan på värmen.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Lägg ner kyckling i grytan. Rör varsamt så att det fördelas jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sjud på låg värme cirka 15 minuter tills huvudråvaran är färdig och grönsakerna mjuka. Rör då och då. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten.",
+          "uses": [
+            "kyckling",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "cashewnötter",
+            "rapsolja",
+            "salt",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Blötlägg cashewnötterna i 300 ml vatten, upphettat till kokpunkten i tio minuter och häll av före mixning. Tomaterna ska stekas mjuka. Fyra portioner. Lokalt härlett ingrediensantal 9; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 35 minuter aktivt arbete och 45 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 80 minuter med angiven arbetsordning. Nyhetsmotiv: Kycklingbitar sjudna i slät nötbaserad tomatsås; skillnaden mot befintlig korma måste granskas. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för cashewnötter (as_sold, g), garam masala (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-cashew-velvet",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kyckling i slät cashew-tomatsås – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "puree_stew",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Stavmixer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kyckling i slät cashew-tomatsås",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "cashewnötter",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Cashewnötter, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gurk- och tomatsallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i jämna bitar omkring 2 cm. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär tomat i små bitar; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka cashewnötter grovt; i rätter med slät sås mixas de senare tillsammans med såsen.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Häll 300 ml vatten, upphettat till kokpunkten, över cashewnötterna i en värmetålig skål.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt cashewnötterna dra tio minuter. Häll sedan av vattnet; de uppmjukade nötterna går i såsen.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 480 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Fräs tomat, gul lök, vitlök och ingefära på medelvärme under omrörning så att grönsakerna mjuknar utan att brännas. Blanda in garam masala och huvudkomponentens salt.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "rapsolja",
+            "salt",
+            "garam masala"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt cashewnötter och 140 ml vatten. Mixa såsen försiktigt slät med stavmixer och sätt tillbaka grytan på värmen.",
+          "uses": [
+            "cashewnötter"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Lägg ner kyckling i grytan. Rör varsamt så att det fördelas jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sjud på låg värme cirka 15 minuter tills huvudråvaran är färdig och grönsakerna mjuka. Rör då och då. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten.",
+          "uses": [
+            "kyckling",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör gurk- och tomatsallad: Skär gurka och tomat i små bitar, strimla rödlöken tunt och vänd med citronjuicen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med gurk- och tomatsallad. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "garam masala",
+            "cashewnötter",
+            "rapsolja",
+            "salt",
+            "ris",
+            "gurka",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Blötlägg cashewnötterna i 300 ml vatten, upphettat till kokpunkten i tio minuter och häll av före mixning. Tomaterna ska stekas mjuka. Fyra portioner. Lokalt härlett ingrediensantal 12; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 41 minuter aktivt arbete och 45 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 86 minuter med angiven arbetsordning. Nyhetsmotiv: Kycklingbitar sjudna i slät nötbaserad tomatsås; skillnaden mot befintlig korma måste granskas. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för cashewnötter (as_sold, g), garam masala (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-coconut-parcels",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade kycklingpaket med kokos och spenat – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "parcel",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "potatis",
+      "flavor": [
+        "gurkmeja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade kycklingpaket",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i jämntjocka portionsbitar, högst cirka 2 cm tjocka. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll spenat frysta fram till tillagningen.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg huvudkomponentens frysta spenat i den lilla kastrullen med 50 ml vatten. Värm under omrörning tills den är helt tinad och genomvarm.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Pressa spenaten i en finmaskig sil med en sked så att överskottsvätskan rinner av. Den angivna mängden avser fryst vikt som såld före denna urpressning.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme. Blanda gurkmeja, kokosmjölk, rapsolja och salt i en skål. Vänd ner kyckling så att hela ytan täcks.",
+          "uses": [
+            "kyckling",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fördela kyckling, spenat och all kryddblandning på bakplåtspapper, ett paket per portion. Vik ihop med skarven uppåt så att vätskan stannar i paketet. Lägg på plåt.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Tillaga mitt i ugnen cirka 25 minuter. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten. Fortsätt några minuter och kontrollera på nytt om det behövs.",
+          "uses": [
+            "kyckling",
+            "spenat"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Tina spenaten och pressa lätt före paketering; varje paket innehåller sin egen vätska och kryddad kyckling. Fyra portioner. Lokalt härlett ingrediensantal 6; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 38 minuter aktivt arbete och 45 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 83 minuter med angiven arbetsordning. Nyhetsmotiv: Portionspaket som ångbakas slutna med kokos och spenat, serverade med potatis istället för en öppen currygryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-coconut-parcels",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade kycklingpaket med kokos och spenat – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "parcel",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "potatis",
+      "flavor": [
+        "gurkmeja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade kycklingpaket",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i jämntjocka portionsbitar, högst cirka 2 cm tjocka. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll spenat frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg huvudkomponentens frysta spenat i den lilla kastrullen med 50 ml vatten. Värm under omrörning tills den är helt tinad och genomvarm.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Pressa spenaten i en finmaskig sil med en sked så att överskottsvätskan rinner av. Den angivna mängden avser fryst vikt som såld före denna urpressning.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme. Blanda gurkmeja, kokosmjölk, rapsolja och salt i en skål. Vänd ner kyckling så att hela ytan täcks.",
+          "uses": [
+            "kyckling",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fördela kyckling, spenat, gul lök, vitlök och ingefära och all kryddblandning på bakplåtspapper, ett paket per portion. Vik ihop med skarven uppåt så att vätskan stannar i paketet. Lägg på plåt.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Tillaga mitt i ugnen cirka 25 minuter. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten. Fortsätt några minuter och kontrollera på nytt om det behövs.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Tina spenaten och pressa lätt före paketering; varje paket innehåller sin egen vätska och kryddad kyckling. Fyra portioner. Lokalt härlett ingrediensantal 9; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 42 minuter aktivt arbete och 45 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 87 minuter med angiven arbetsordning. Nyhetsmotiv: Portionspaket som ångbakas slutna med kokos och spenat, serverade med potatis istället för en öppen currygryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-coconut-parcels",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade kycklingpaket med kokos och spenat – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "parcel",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "potatis",
+      "flavor": [
+        "gurkmeja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade kycklingpaket",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Myntagurka med yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i jämntjocka portionsbitar, högst cirka 2 cm tjocka. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll spenat frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg huvudkomponentens frysta spenat i den lilla kastrullen med 50 ml vatten. Värm under omrörning tills den är helt tinad och genomvarm.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Pressa spenaten i en finmaskig sil med en sked så att överskottsvätskan rinner av. Den angivna mängden avser fryst vikt som såld före denna urpressning.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme. Blanda gurkmeja, kokosmjölk, rapsolja och salt i en skål. Vänd ner kyckling så att hela ytan täcks.",
+          "uses": [
+            "kyckling",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fördela kyckling, spenat, gul lök, vitlök och ingefära och all kryddblandning på bakplåtspapper, ett paket per portion. Vik ihop med skarven uppåt så att vätskan stannar i paketet. Lägg på plåt.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Tillaga mitt i ugnen cirka 25 minuter. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten. Fortsätt några minuter och kontrollera på nytt om det behövs.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör myntagurka med yoghurt: Riv gurkan grovt, pressa lätt och blanda med yoghurten, hackad mynta och citronjuicen.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med myntagurka med yoghurt. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Tina spenaten och pressa lätt före paketering; varje paket innehåller sin egen vätska och kryddad kyckling. Fyra portioner. Lokalt härlett ingrediensantal 13; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 48 minuter aktivt arbete och 45 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 93 minuter med angiven arbetsordning. Nyhetsmotiv: Portionspaket som ångbakas slutna med kokos och spenat, serverade med potatis istället för en öppen currygryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för mynta (raw_edible, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-corn-steamed-custard",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kyckling- och majsstanning – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "custard",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "gurkmeja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ånginsats med lock",
+        "Värmetåliga portionsformar",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kyckling- och majsstanning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell majs, vikt som såld"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i mycket små bitar och hacka därefter till en sammanhängande färs. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll majs frysta fram till tillagningen.",
+          "uses": [
+            "majs"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm majs i den lilla kastrullen med 60 ml vatten tills helt tinade och genomvarma. Häll av noga. Grovhacka hälften av majskornen.",
+          "uses": [
+            "majs"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 560 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela huvudkomponentens olja i två lika delar: den första till huvudråvaran och den andra till form eller risrutor. Håll delarna åtskilda.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm den första halvan av huvudkomponentens olja i stekpannan. Stek majs under omrörning tills mjuka. Blanda in gurkmeja och huvudkomponentens salt.",
+          "uses": [
+            "majs",
+            "gurkmeja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vispa samman kyckling, kokosmjölk och ägg. Vänd ner de stekta grönsakerna.",
+          "uses": [
+            "kyckling",
+            "kokosmjölk",
+            "ägg",
+            "majs"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Smörj värmetåliga portionsformar med den andra halvan av huvudkomponentens olja som sparats från stekningen. Fyll till högst tre centimeters djup och ställ i ånginsats över 700 ml vatten. Täck med lock.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ånga cirka 25 minuter tills blandningen är fast i mitten. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten. Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "ägg"
+          ],
+          "minutes": 25,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Kycklingen finhackas till en rå färs; majsen grovhackas. Hela stanningen ska nå kycklingens temperaturmål. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 35 minuter aktivt arbete och 45 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 80 minuter med angiven arbetsordning. Nyhetsmotiv: Ångad fågel- och äggstanning med hela majskorn; skiljer från kycklingbitar i gryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-corn-steamed-custard",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kyckling- och majsstanning – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "custard",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "gurkmeja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ånginsats med lock",
+        "Värmetåliga portionsformar",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kyckling- och majsstanning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell majs, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i mycket små bitar och hacka därefter till en sammanhängande färs. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll majs frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm majs i den lilla kastrullen med 60 ml vatten tills helt tinade och genomvarma. Häll av noga. Grovhacka hälften av majskornen.",
+          "uses": [
+            "majs"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 520 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela huvudkomponentens olja i två lika delar: den första till huvudråvaran och den andra till form eller risrutor. Håll delarna åtskilda.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm den första halvan av huvudkomponentens olja i stekpannan. Stek majs, gul lök, vitlök och ingefära under omrörning tills mjuka. Blanda in gurkmeja och huvudkomponentens salt.",
+          "uses": [
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vispa samman kyckling, kokosmjölk och ägg. Vänd ner de stekta grönsakerna.",
+          "uses": [
+            "kyckling",
+            "kokosmjölk",
+            "ägg",
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Smörj värmetåliga portionsformar med den andra halvan av huvudkomponentens olja som sparats från stekningen. Fyll till högst tre centimeters djup och ställ i ånginsats över 700 ml vatten. Täck med lock.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ånga cirka 25 minuter tills blandningen är fast i mitten. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten. Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "ägg"
+          ],
+          "minutes": 25,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Kycklingen finhackas till en rå färs; majsen grovhackas. Hela stanningen ska nå kycklingens temperaturmål. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 39 minuter aktivt arbete och 45 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 84 minuter med angiven arbetsordning. Nyhetsmotiv: Ångad fågel- och äggstanning med hela majskorn; skiljer från kycklingbitar i gryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-chicken-corn-steamed-custard",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad kyckling- och majsstanning – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "custard",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "gurkmeja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ånginsats med lock",
+        "Värmetåliga portionsformar",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad kyckling- och majsstanning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfri kycklingfilé, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell majs, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Myntagurka med yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att kyckling är utan ben och oätliga delar. Skär i mycket små bitar och hacka därefter till en sammanhängande färs. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll majs frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm majs i den lilla kastrullen med 60 ml vatten tills helt tinade och genomvarma. Häll av noga. Grovhacka hälften av majskornen.",
+          "uses": [
+            "majs"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 480 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela huvudkomponentens olja i två lika delar: den första till huvudråvaran och den andra till form eller risrutor. Håll delarna åtskilda.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm den första halvan av huvudkomponentens olja i stekpannan. Stek majs, gul lök, vitlök och ingefära under omrörning tills mjuka. Blanda in gurkmeja och huvudkomponentens salt.",
+          "uses": [
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vispa samman kyckling, kokosmjölk och ägg. Vänd ner de stekta grönsakerna.",
+          "uses": [
+            "kyckling",
+            "kokosmjölk",
+            "ägg",
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Smörj värmetåliga portionsformar med den andra halvan av huvudkomponentens olja som sparats från stekningen. Fyll till högst tre centimeters djup och ställ i ånginsats över 700 ml vatten. Täck med lock.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ånga cirka 25 minuter tills blandningen är fast i mitten. Kontrollera med kökstermometer att kycklingen når minst 74 °C i mitten. Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "ägg"
+          ],
+          "minutes": 25,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör myntagurka med yoghurt: Riv gurkan grovt, pressa lätt och blanda med yoghurten, hackad mynta och citronjuicen.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med myntagurka med yoghurt. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "gurkmeja",
+            "kokosmjölk",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "ris",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Kycklingen finhackas till en rå färs; majsen grovhackas. Hela stanningen ska nå kycklingens temperaturmål. Fyra portioner. Lokalt härlett ingrediensantal 14; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 45 minuter aktivt arbete och 45 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 90 minuter med angiven arbetsordning. Nyhetsmotiv: Ångad fågel- och äggstanning med hela majskorn; skiljer från kycklingbitar i gryta. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för mynta (raw_edible, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    }
+  ]
+}

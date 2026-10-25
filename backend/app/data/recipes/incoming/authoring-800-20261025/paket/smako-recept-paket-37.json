@@ -1,0 +1,4336 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-37",
+  "recipes": [
+    {
+      "base_id": "smako-italian-pork-fennel-pasta-ragu",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad fläskfärsragu med fänkål – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "ljus mjölk-fänkålsragu",
+      "primary": "fläskfärs",
+      "method": "pot",
+      "side": "kokt pasta",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fänkålsfärsragu",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "fänkål",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fänkål, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 340.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fänkålsfärsragu: Ansa och finhacka gul lök. Skölj, ansa och skär fänkål i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "fläskfärs",
+            "fänkål",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och fläskfärs under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "fläskfärs"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner fänkål, mjölk och salt och 200 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "fänkål",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 25 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "fänkål",
+            "mjölk",
+            "salt",
+            "fläskfärs",
+            "gul lök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera fänkålsfärsragu och kokt pasta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskfärs",
+            "fänkål",
+            "gul lök",
+            "rapsolja",
+            "mjölk",
+            "salt",
+            "pasta"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 64 minuter totalt, varav 29 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av fänkål; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ljus fläskfärsragu där fänkål och mjölk bildar sås utan tomat; behöver jämföras med vanlig köttfärssås för faktisk kulinarisk avgränsning. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pork-fennel-pasta-ragu",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad fläskfärsragu med fänkål – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "ljus mjölk-fänkålsragu",
+      "primary": "fläskfärs",
+      "method": "pot",
+      "side": "kokt pasta",
+      "flavor": [
+        "rosmarin"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fänkålsfärsragu",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "fänkål",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fänkål, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 80.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 340.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fänkålsfärsragu: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär fänkål i små jämna bitar; skala rotfrukter före vägning. Riv den fasta osten.",
+          "uses": [
+            "fläskfärs",
+            "fänkål",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och fläskfärs under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "fläskfärs"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner fänkål, mjölk, salt och rosmarin och 200 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "fänkål",
+            "mjölk",
+            "salt",
+            "rosmarin"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 25 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "fänkål",
+            "mjölk",
+            "salt",
+            "rosmarin",
+            "fläskfärs",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner ost precis före servering. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "ost",
+            "fläskfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera fänkålsfärsragu och kokt pasta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskfärs",
+            "fänkål",
+            "gul lök",
+            "rapsolja",
+            "mjölk",
+            "salt",
+            "vitlök",
+            "rosmarin",
+            "ost",
+            "pasta"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 64 minuter totalt, varav 29 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av fänkål och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ljus fläskfärsragu där fänkål och mjölk bildar sås utan tomat; behöver jämföras med vanlig köttfärssås för faktisk kulinarisk avgränsning. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pork-fennel-pasta-ragu",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad fläskfärsragu med fänkål – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "ljus mjölk-fänkålsragu",
+      "primary": "fläskfärs",
+      "method": "pot",
+      "side": "kokt pasta; fräsch sallad",
+      "flavor": [
+        "rosmarin",
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fänkålsfärsragu",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "fänkål",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fänkål, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 80.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 340.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fänkålsfärsragu: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär fänkål och morot i små jämna bitar; skala rotfrukter före vägning. Riv den fasta osten. Finhacka persilja.",
+          "uses": [
+            "fläskfärs",
+            "fänkål",
+            "gul lök",
+            "vitlök",
+            "morot"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och fläskfärs under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "fläskfärs"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner fänkål, mjölk, salt, rosmarin och morot och 200 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "fänkål",
+            "mjölk",
+            "salt",
+            "rosmarin",
+            "morot"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 25 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "fänkål",
+            "mjölk",
+            "salt",
+            "rosmarin",
+            "morot",
+            "fläskfärs",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner ost, persilja och citronjuice precis före servering. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "ost",
+            "persilja",
+            "citronjuice",
+            "fläskfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera fänkålsfärsragu, kokt pasta och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskfärs",
+            "fänkål",
+            "gul lök",
+            "rapsolja",
+            "mjölk",
+            "salt",
+            "vitlök",
+            "rosmarin",
+            "ost",
+            "morot",
+            "persilja",
+            "citronjuice",
+            "pasta",
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 15 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 72 minuter totalt, varav 37 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av fänkål och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ljus fläskfärsragu där fänkål och mjölk bildar sås utan tomat; behöver jämföras med vanlig köttfärssås för faktisk kulinarisk avgränsning. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pork-potato-rosemary-bean-tray",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad fläskplåt med potatis och bönkräm – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "rostad köttplåt på baljväxtkräm",
+      "primary": "fläskkött",
+      "method": "oven",
+      "side": "vit bönkräm",
+      "flavor": [
+        "rosmarin",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Rosmarinfläsk och potatis",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Vit bönkräm",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Rosmarinfläsk och potatis: Sätt ugnen på 220 °C över- och undervärme. Välj benfritt fläskkött avsett för snabb tillagning och skär i 2 cm bitar. Skär potatisen i 1,5 cm tärningar.",
+          "uses": [
+            "fläskkött",
+            "potatis"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela fläskkött, potatis, rapsolja, rosmarin och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "rapsolja",
+            "rosmarin",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 35 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "rapsolja",
+            "rosmarin",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten. Ta ut formen med grytlappar.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vit bönkräm: Lägg bönor, citronjuice, rapsolja och salt i mixerkärlet med 100 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera rosmarinfläsk och potatis och vit bönkräm. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "rapsolja",
+            "rosmarin",
+            "salt",
+            "bönor",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 20 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Rostade fläsk- och potatisbitar serveras på en separat vit bönkräm; ingen tomatrisgryta eller brödwrap. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pork-potato-rosemary-bean-tray",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad fläskplåt med potatis och bönkräm – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "rostad köttplåt på baljväxtkräm",
+      "primary": "fläskkött",
+      "method": "oven",
+      "side": "vit bönkräm",
+      "flavor": [
+        "rosmarin",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Rosmarinfläsk och potatis",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Vit bönkräm",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Rosmarinfläsk och potatis: Sätt ugnen på 220 °C över- och undervärme. Välj benfritt fläskkött avsett för snabb tillagning och skär i 2 cm bitar. Skär potatisen i 1,5 cm tärningar.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela fläskkött, potatis, rapsolja, rosmarin, salt och vitlök i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "rapsolja",
+            "rosmarin",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 35 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "rapsolja",
+            "rosmarin",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten. Ta ut formen med grytlappar.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vit bönkräm: Lägg bönor, citronjuice, rapsolja, salt och persilja i mixerkärlet med 100 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera rosmarinfläsk och potatis och vit bönkräm. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "rapsolja",
+            "rosmarin",
+            "salt",
+            "vitlök",
+            "bönor",
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 20 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Rostade fläsk- och potatisbitar serveras på en separat vit bönkräm; ingen tomatrisgryta eller brödwrap. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pork-potato-rosemary-bean-tray",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad fläskplåt med potatis och bönkräm – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "rostad köttplåt på baljväxtkräm",
+      "primary": "fläskkött",
+      "method": "oven",
+      "side": "vit bönkräm; fräsch sallad",
+      "flavor": [
+        "rosmarin",
+        "citronjuice",
+        "persilja",
+        "basilika"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Rosmarinfläsk och potatis",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Vit bönkräm",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Rosmarinfläsk och potatis: Sätt ugnen på 220 °C över- och undervärme. Välj benfritt fläskkött avsett för snabb tillagning och skär i 2 cm bitar. Skär potatisen i 1,5 cm tärningar.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela fläskkött, potatis, rapsolja, rosmarin, salt och vitlök i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "rapsolja",
+            "rosmarin",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 35 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "rapsolja",
+            "rosmarin",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten. Ta ut formen med grytlappar.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vit bönkräm: Lägg bönor, citronjuice, rapsolja, salt och persilja i mixerkärlet med 100 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka basilika.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "basilika"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, oliver, basilika, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera rosmarinfläsk och potatis, vit bönkräm och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "potatis",
+            "rapsolja",
+            "rosmarin",
+            "salt",
+            "vitlök",
+            "bönor",
+            "citronjuice",
+            "persilja",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 63 minuter totalt, varav 28 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Rostade fläsk- och potatisbitar serveras på en separat vit bönkräm; ingen tomatrisgryta eller brödwrap. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pork-roast-yeast-bread-crust",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad fläskstek i jäst brödskorpa – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "hel köttdetalj stekt i jäst brödskorpa",
+      "primary": "fläskkött",
+      "method": "bake",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Bakplåtspapper",
+        "Degskål",
+        "Digital kökstermometer",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fläskstek i brödhölje",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "jäst",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Färsk jäst för matbröd"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Senap, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 6.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fläskstek i brödhölje: Välj en jämntjock benfri fläskfilé eller liten putsad fläskytterfilé. Torka ytan och bryn runtom i hälften av oljan. Krydda med hälften av saltet och bred senapen över. Låt svalna medan degen jäser.",
+          "uses": [
+            "fläskkött",
+            "rapsolja",
+            "salt",
+            "senap"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Värm mjölken till högst 37 °C och lös jästen i den. Tillsätt mjöl, resten av oljan och saltet samt 40 ml vatten. Knåda till en smidig deg.",
+          "uses": [
+            "mjölk",
+            "jäst",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt degen jäsa täckt 45 minuter tills luftig.",
+          "uses": [
+            "vetemjöl",
+            "jäst"
+          ],
+          "minutes": 45,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Kavla degen till en rektangel på bakplåtspapper. Lägg det brynta köttet mittpå, vik degen runt och förslut skarvarna väl. Lägg med skarven nedåt på plåt.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Baka 40–50 minuter tills brödskorpan är genomgräddad och mitten av köttet når minst 72 °C. Förläng vid behov; täck brödet löst med bakplåtspapper om det får för mycket färg.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 50,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt steken vila 10 minuter innan den skärs tvärs igenom bröd och kött till tjocka skivor.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 13,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera fläskstek i brödhölje. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 146 minuter totalt, varav 51 aktivt och 95 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av jäst; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: En hel brynt köttdetalj omsluts av jäst bröd och ugnssteks för att sedan skivas genom både skorpa och sammanhängande kött. Den har inget malet calzonefyllning eller ostcentrum. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pork-roast-yeast-bread-crust",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad fläskstek i jäst brödskorpa – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "hel köttdetalj stekt i jäst brödskorpa",
+      "primary": "fläskkött",
+      "method": "bake",
+      "side": "varm bönsallad",
+      "flavor": [
+        "rosmarin"
+      ],
+      "equipment": [
+        "Bakplåtspapper",
+        "Degskål",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fläskstek i brödhölje",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "jäst",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Färsk jäst för matbröd"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Senap, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 6.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm bönsallad",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fläskstek i brödhölje: Välj en jämntjock benfri fläskfilé eller liten putsad fläskytterfilé. Torka ytan och bryn runtom i hälften av oljan. Krydda med hälften av saltet och bred senapen över. Låt svalna medan degen jäser.",
+          "uses": [
+            "fläskkött",
+            "rapsolja",
+            "salt",
+            "senap"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Värm mjölken till högst 37 °C och lös jästen i den. Tillsätt mjöl, resten av oljan och saltet samt 40 ml vatten. Knåda till en smidig deg.",
+          "uses": [
+            "mjölk",
+            "jäst",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt degen jäsa täckt 45 minuter tills luftig.",
+          "uses": [
+            "vetemjöl",
+            "jäst"
+          ],
+          "minutes": 45,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Kavla degen till en rektangel på bakplåtspapper. Lägg det brynta köttet mittpå, vik degen runt och förslut skarvarna väl. Lägg med skarven nedåt på plåt.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Baka 40–50 minuter tills brödskorpan är genomgräddad och mitten av köttet når minst 72 °C. Förläng vid behov; täck brödet löst med bakplåtspapper om det får för mycket färg.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 50,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt steken vila 10 minuter innan den skärs tvärs igenom bröd och kött till tjocka skivor.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 13,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Varm bönsallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga.",
+          "uses": [
+            "bönor",
+            "tomat"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Lägg i tomat och fräs på medelvärme.",
+          "uses": [
+            "rapsolja",
+            "tomat"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner bönor, tomat, rosmarin och salt och 150 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "tomat",
+            "rosmarin",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "bönor",
+            "tomat",
+            "rosmarin",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera fläskstek i brödhölje och varm bönsallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt",
+            "bönor",
+            "tomat",
+            "rosmarin"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 179 minuter totalt, varav 69 aktivt och 110 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av jäst och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: En hel brynt köttdetalj omsluts av jäst bröd och ugnssteks för att sedan skivas genom både skorpa och sammanhängande kött. Den har inget malet calzonefyllning eller ostcentrum. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-pork-roast-yeast-bread-crust",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad fläskstek i jäst brödskorpa – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "hel köttdetalj stekt i jäst brödskorpa",
+      "primary": "fläskkött",
+      "method": "bake",
+      "side": "varm bönsallad; persilja-citrondressing; fräsch sallad",
+      "flavor": [
+        "rosmarin",
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Bakplåtspapper",
+        "Degskål",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fläskstek i brödhölje",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "jäst",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Färsk jäst för matbröd"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Senap, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 6.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm bönsallad",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Persilja-citrondressing",
+          "ingredients": [
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fläskstek i brödhölje: Välj en jämntjock benfri fläskfilé eller liten putsad fläskytterfilé. Torka ytan och bryn runtom i hälften av oljan. Krydda med hälften av saltet och bred senapen över. Låt svalna medan degen jäser.",
+          "uses": [
+            "fläskkött",
+            "rapsolja",
+            "salt",
+            "senap"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Värm mjölken till högst 37 °C och lös jästen i den. Tillsätt mjöl, resten av oljan och saltet samt 40 ml vatten. Knåda till en smidig deg.",
+          "uses": [
+            "mjölk",
+            "jäst",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt degen jäsa täckt 45 minuter tills luftig.",
+          "uses": [
+            "vetemjöl",
+            "jäst"
+          ],
+          "minutes": 45,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Kavla degen till en rektangel på bakplåtspapper. Lägg det brynta köttet mittpå, vik degen runt och förslut skarvarna väl. Lägg med skarven nedåt på plåt.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Baka 40–50 minuter tills brödskorpan är genomgräddad och mitten av köttet når minst 72 °C. Förläng vid behov; täck brödet löst med bakplåtspapper om det får för mycket färg.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 50,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt steken vila 10 minuter innan den skärs tvärs igenom bröd och kött till tjocka skivor.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 13,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Varm bönsallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga.",
+          "uses": [
+            "bönor",
+            "tomat"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Lägg i tomat och fräs på medelvärme.",
+          "uses": [
+            "rapsolja",
+            "tomat"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner bönor, tomat, rosmarin och salt och 150 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "tomat",
+            "rosmarin",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "bönor",
+            "tomat",
+            "rosmarin",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Persilja-citrondressing: Finhacka fasta bitar och färska örter. Rör ihop persilja, citronjuice, vitlök, rapsolja och salt till en jämn röra.",
+          "uses": [
+            "persilja",
+            "citronjuice",
+            "vitlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Blanda gurka, rödlök, oliver, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera fläskstek i brödhölje, varm bönsallad, persilja-citrondressing och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "vetemjöl",
+            "jäst",
+            "mjölk",
+            "senap",
+            "rapsolja",
+            "salt",
+            "bönor",
+            "tomat",
+            "rosmarin",
+            "persilja",
+            "citronjuice",
+            "vitlök",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            10,
+            11,
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 15 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 191 minuter totalt, varav 81 aktivt och 110 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av jäst och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: En hel brynt köttdetalj omsluts av jäst bröd och ugnssteks för att sedan skivas genom både skorpa och sammanhängande kött. Den har inget malet calzonefyllning eller ostcentrum. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-potato-mozzarella-egg-gateau",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad potatiskaka med mozzarella och spenat – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "fylld potatismoskaka",
+      "primary": "mozzarella",
+      "method": "pot",
+      "side": "mozzarellastanning",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatismos",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1200.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mozzarellastanning",
+          "ingredients": [
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatismos: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatisen med varm mjölk och olja. Låt svalna till ljummen. Använd hela komponentens mjölk och rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Mozzarellastanning: Sätt ugnen på 190 °C över- och undervärme. Väg spenat frysta enligt komponenten. Låt mozzarellan rinna av och dela den i små bitar. Värm spenaten och pressa ur överskottsvätskan.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs spenat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "spenat"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fördela det färdiga potatismoset jämnt i formen runt den tillagade spenaten. Gör grunda fördjupningar så att ost- och äggstanningen i nästa steg kan tränga ner och binda ihop hela potatiskakan.",
+          "uses": [
+            "potatis",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg och salt. Vänd ner mozzarella. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "mozzarella",
+            "ägg",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "mozzarella",
+            "spenat",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "mozzarella",
+            "spenat",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera potatismos och mozzarellastanning. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "mozzarella",
+            "spenat",
+            "ägg"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 89 minuter totalt, varav 39 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mozzarella; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Potatismos och ost-spenatstanning byggs till en tjock, skärbar potatiskaka med smält kärna; ingen mosgratäng över bönsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-potato-mozzarella-egg-gateau",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad potatiskaka med mozzarella och spenat – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "fylld potatismoskaka",
+      "primary": "mozzarella",
+      "method": "pot",
+      "side": "mozzarellastanning",
+      "flavor": [
+        "persilja"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatismos",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1200.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mozzarellastanning",
+          "ingredients": [
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatismos: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatisen med varm mjölk och olja. Låt svalna till ljummen. Använd hela komponentens mjölk och rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Mozzarellastanning: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka vitlök. Väg spenat frysta enligt komponenten. Riv den fasta osten. Låt mozzarellan rinna av och dela den i små bitar. Finhacka persilja. Värm spenaten och pressa ur överskottsvätskan.",
+          "uses": [
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs vitlök och spenat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "vitlök",
+            "spenat"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fördela det färdiga potatismoset jämnt i formen runt den tillagade spenaten. Gör grunda fördjupningar så att ost- och äggstanningen i nästa steg kan tränga ner och binda ihop hela potatiskakan.",
+          "uses": [
+            "potatis",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg och salt. Vänd ner mozzarella, ost och persilja. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "mozzarella",
+            "ägg",
+            "salt",
+            "ost",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "mozzarella",
+            "spenat",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "ost",
+            "persilja"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "mozzarella",
+            "spenat",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "ost",
+            "persilja"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera potatismos och mozzarellastanning. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "mozzarella",
+            "spenat",
+            "ägg",
+            "vitlök",
+            "ost",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 89 minuter totalt, varav 39 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mozzarella; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Potatismos och ost-spenatstanning byggs till en tjock, skärbar potatiskaka med smält kärna; ingen mosgratäng över bönsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-potato-mozzarella-egg-gateau",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad potatiskaka med mozzarella och spenat – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "fylld potatismoskaka",
+      "primary": "mozzarella",
+      "method": "pot",
+      "side": "mozzarellastanning; fräsch sallad",
+      "flavor": [
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatismos",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1200.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mozzarellastanning",
+          "ingredients": [
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatismos: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatisen med varm mjölk och olja. Låt svalna till ljummen. Använd hela komponentens mjölk och rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Mozzarellastanning: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka vitlök. Väg spenat frysta enligt komponenten. Riv den fasta osten. Låt mozzarellan rinna av och dela den i små bitar. Finhacka persilja. Värm spenaten och pressa ur överskottsvätskan.",
+          "uses": [
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs vitlök och spenat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "vitlök",
+            "spenat"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fördela det färdiga potatismoset jämnt i formen runt den tillagade spenaten. Gör grunda fördjupningar så att ost- och äggstanningen i nästa steg kan tränga ner och binda ihop hela potatiskakan.",
+          "uses": [
+            "potatis",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg och salt. Vänd ner mozzarella, ost och persilja. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "mozzarella",
+            "ägg",
+            "salt",
+            "ost",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "mozzarella",
+            "spenat",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "ost",
+            "persilja"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "mozzarella",
+            "spenat",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "ost",
+            "persilja"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, oliver, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera potatismos, mozzarellastanning och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "mozzarella",
+            "spenat",
+            "ägg",
+            "vitlök",
+            "ost",
+            "persilja",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            9,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 97 minuter totalt, varav 47 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mozzarella; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Potatismos och ost-spenatstanning byggs till en tjock, skärbar potatiskaka med smält kärna; ingen mosgratäng över bönsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-potato-whitebean-olive-terrine",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad potatis- och bönterrine med oliver – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "potatis-baljväxtterrine",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "ugnstomat",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisbönmassa",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ugnstomat",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatisbönmassa: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatis och bönor noga med oljan. Finhacka oliverna och blanda in dem. Tryck massan i en bakpappersklädd form. Använd hela komponentens bönor, rapsolja och oliver i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Ugnstomat: Sätt ugnen på 220 °C över- och undervärme. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela tomat, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Jämna till ytan på potatisbönmassan i den bakpappersklädda formen.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Baka terrinen cirka 25 minuter tills den är genomvarm och ytan har stelnat.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt terrinen vila 10 minuter och skär sedan i tjocka skivor. Den äggfria massan är mjukare än en äggbunden limpa; lyft skivorna varsamt.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera potatisbönmassa och ugnstomat. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "tomat"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 110 minuter totalt, varav 30 aktivt och 80 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Potatis och vit böna mosas till en fast massa med olivbitar, bakas och skärs till terrinskivor; inte potatismos ovanpå en bönsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-potato-whitebean-olive-terrine",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad potatis- och bönterrine med oliver – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "potatis-baljväxtterrine",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "ugnstomat",
+      "flavor": [
+        "persilja"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisbönmassa",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ugnstomat",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatisbönmassa: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatis och bönor noga med oljan. Finhacka oliverna och blanda in dem. Tryck massan i en bakpappersklädd form. Använd hela komponentens bönor, rapsolja, oliver, persilja och vitlök i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Ugnstomat: Sätt ugnen på 220 °C över- och undervärme. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela tomat, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Jämna till ytan på potatisbönmassan i den bakpappersklädda formen.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Baka terrinen cirka 25 minuter tills den är genomvarm och ytan har stelnat.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt terrinen vila 10 minuter och skär sedan i tjocka skivor. Den äggfria massan är mjukare än en äggbunden limpa; lyft skivorna varsamt.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 10,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera potatisbönmassa och ugnstomat. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök",
+            "tomat"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 110 minuter totalt, varav 30 aktivt och 80 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Potatis och vit böna mosas till en fast massa med olivbitar, bakas och skärs till terrinskivor; inte potatismos ovanpå en bönsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-potato-whitebean-olive-terrine",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad potatis- och bönterrine med oliver – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "potatis-baljväxtterrine",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "ugnstomat; fräsch sallad",
+      "flavor": [
+        "persilja",
+        "oregano",
+        "citronjuice",
+        "basilika"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisbönmassa",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ugnstomat",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatisbönmassa: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatis och bönor noga med oljan. Finhacka oliverna och blanda in dem. Tryck massan i en bakpappersklädd form. Använd hela komponentens bönor, rapsolja, oliver, persilja och vitlök i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Ugnstomat: Sätt ugnen på 220 °C över- och undervärme. Ansa och finhacka rödlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela tomat, rapsolja, salt, rödlök och oregano i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "oregano"
+          ],
+          "minutes": 25,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "oregano"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka basilika.",
+          "uses": [
+            "gurka",
+            "basilika"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda gurka, citronjuice, basilika, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Jämna till ytan på potatisbönmassan i den bakpappersklädda formen.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Baka terrinen cirka 25 minuter tills den är genomvarm och ytan har stelnat.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt terrinen vila 10 minuter och skär sedan i tjocka skivor. Den äggfria massan är mjukare än en äggbunden limpa; lyft skivorna varsamt.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 10,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera potatisbönmassa, ugnstomat och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "oliver",
+            "salt",
+            "persilja",
+            "vitlök",
+            "tomat",
+            "rödlök",
+            "oregano",
+            "gurka",
+            "citronjuice",
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            9,
+            10,
+            11,
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 118 minuter totalt, varav 38 aktivt och 80 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Potatis och vit böna mosas till en fast massa med olivbitar, bakas och skärs till terrinskivor; inte potatismos ovanpå en bönsås. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

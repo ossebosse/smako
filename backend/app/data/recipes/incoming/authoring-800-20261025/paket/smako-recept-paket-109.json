@@ -1,0 +1,4440 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-109",
+  "recipes": [
+    {
+      "base_id": "smako-swedish-filled-panbread-egg",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Pannbröd med ägg- och ärtfyllning – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "flatbread",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "gräslök"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kavel",
+        "Torr stekpanna",
+        "Bakplåtspapper",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pannbrödsdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 420,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            },
+            {
+              "name": "gräslök",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk gräslök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl och salt med 260 ml vatten och degens olja. Knåda till en smidig deg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Låt degen vila medan fyllningen förbereds.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: finhacka gräslök.",
+          "uses": [
+            "ärtor",
+            "gräslök"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg ärtor i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vispa huvudkomponentens ägg i en skål. Häll dem i den varma grönsakspannan och rör långsamt tills äggen stelnat helt. Kontrollera minst 72 °C i äggmassan.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner gräslök från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "gräslök"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela pannbrödsdegen i jämnstora bitar, två per portion. Kavla tunt mellan bakplåtspapper. Lägg fyllning på ena halvan, vik över och tryck ihop kanterna.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 10,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Värm en torr stekpanna på medelvärme. Grädda de fyllda bröden i omgångar cirka fyra minuter på varje sida tills degen är genomgräddad och har bruna fläckar. Håll färdiga bröd under en ren handduk.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 28,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "ärtor",
+            "gräslök"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 72 minuter och huvudsakligen passiva moment till 23 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 95 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hembakad tunn bröddeg omsluter en tillagad ägg- och ärtfyllning och gräddas i panna. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av gräslök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-filled-panbread-egg",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Pannbröd med ägg- och ärtfyllning – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "flatbread",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "gräslök"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kavel",
+        "Torr stekpanna",
+        "Bakplåtspapper",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pannbrödsdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 420,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            },
+            {
+              "name": "gräslök",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk gräslök, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Spenat, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl och salt med 260 ml vatten och degens olja. Knåda till en smidig deg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Låt degen vila medan fyllningen förbereds.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: finhacka gräslök; riv eller smula ost; låt den frysta spenaten ligga kvar fryst tills den värms.",
+          "uses": [
+            "ärtor",
+            "gräslök",
+            "ost",
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg ärtor och spenat i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "ärtor",
+            "spenat"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vispa huvudkomponentens ägg i en skål. Häll dem i den varma grönsakspannan och rör långsamt tills äggen stelnat helt. Kontrollera minst 72 °C i äggmassan.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner gräslök och ost från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "gräslök",
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela pannbrödsdegen i jämnstora bitar, två per portion. Kavla tunt mellan bakplåtspapper. Lägg fyllning på ena halvan, vik över och tryck ihop kanterna.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 10,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Värm en torr stekpanna på medelvärme. Grädda de fyllda bröden i omgångar cirka fyra minuter på varje sida tills degen är genomgräddad och har bruna fläckar. Håll färdiga bröd under en ren handduk.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 28,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "ärtor",
+            "gräslök",
+            "ost",
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 75 minuter och huvudsakligen passiva moment till 23 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 98 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hembakad tunn bröddeg omsluter en tillagad ägg- och ärtfyllning och gräddas i panna. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av gräslök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-filled-panbread-egg",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Pannbröd med ägg- och ärtfyllning – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "flatbread",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "gräslök"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kavel",
+        "Torr stekpanna",
+        "Bakplåtspapper",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pannbrödsdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 420,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            },
+            {
+              "name": "gräslök",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk gräslök, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Spenat, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: tomatsallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl och salt med 260 ml vatten och degens olja. Knåda till en smidig deg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Låt degen vila medan fyllningen förbereds.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: finhacka gräslök; riv eller smula ost; låt den frysta spenaten ligga kvar fryst tills den värms.",
+          "uses": [
+            "ärtor",
+            "gräslök",
+            "ost",
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg ärtor och spenat i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "ärtor",
+            "spenat"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vispa huvudkomponentens ägg i en skål. Häll dem i den varma grönsakspannan och rör långsamt tills äggen stelnat helt. Kontrollera minst 72 °C i äggmassan.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner gräslök och ost från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "gräslök",
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela pannbrödsdegen i jämnstora bitar, två per portion. Kavla tunt mellan bakplåtspapper. Lägg fyllning på ena halvan, vik över och tryck ihop kanterna.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 10,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Värm en torr stekpanna på medelvärme. Grädda de fyllda bröden i omgångar cirka fyra minuter på varje sida tills degen är genomgräddad och har bruna fläckar. Håll färdiga bröd under en ren handduk.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 28,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär tomat i små bitar; skala och finhacka rödlök; finhacka persilja.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "persilja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, persilja, citronjuice och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "persilja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "ärtor",
+            "gräslök",
+            "ost",
+            "spenat",
+            "tomat",
+            "rödlök",
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 84 minuter och huvudsakligen passiva moment till 23 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 107 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hembakad tunn bröddeg omsluter en tillagad ägg- och ärtfyllning och gräddas i panna. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av gräslök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-chowder-corn",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Fisk- och majssoppa med potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "soup",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Liten kastrull med lock",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor gryta med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg fisken i den lilla kastrullen med 150 ml vatten. Sjud varsamt under lock i ungefär 8–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Häll av vätskan och dela fisken i små bitar till fyllning.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Förbered råvarorna: skala och skär potatis i små jämna tärningar; finhacka dill.",
+          "uses": [
+            "potatis",
+            "majs",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i potatis och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg majs i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade fisk i pannan och fördela jämnt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner dill från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "fisk"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Flytta huvudrätten till en gryta och tillsätt 800 ml vatten. Rör från botten och koka upp.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "majs",
+            "dill",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sjud varsamt under lock tills alla grönsaker är helt mjuka och smakerna blandats.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "majs",
+            "dill"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "majs",
+            "dill",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 38 minuter och huvudsakligen passiva moment till 35 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 73 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Grov mjölkig soppa med fisk, majs och potatistärningar; granska mot befintlig laxsoppa. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-chowder-corn",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Fisk- och majssoppa med potatis – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "soup",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Liten kastrull med lock",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor gryta med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "ml",
+              "role": "vegetable",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg fisken i den lilla kastrullen med 150 ml vatten. Sjud varsamt under lock i ungefär 8–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Häll av vätskan och dela fisken i små bitar till fyllning.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Förbered råvarorna: skala och skär potatis i små jämna tärningar; finhacka dill; skölj purjolöken noga mellan bladen och skiva tunt.",
+          "uses": [
+            "potatis",
+            "majs",
+            "dill",
+            "purjolök",
+            "mjölk"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i potatis och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg majs och purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade fisk i pannan och fördela jämnt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner mjölk från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "mjölk",
+            "fisk"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner dill från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "fisk"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Flytta huvudrätten till en gryta och tillsätt 800 ml vatten. Rör från botten och koka upp.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "majs",
+            "dill",
+            "purjolök",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sjud varsamt under lock tills alla grönsaker är helt mjuka och smakerna blandats.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "majs",
+            "dill",
+            "purjolök",
+            "mjölk"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "majs",
+            "dill",
+            "purjolök",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 41 minuter och huvudsakligen passiva moment till 35 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 76 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Grov mjölkig soppa med fisk, majs och potatistärningar; granska mot befintlig laxsoppa. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-chowder-corn",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Fisk- och majssoppa med potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "soup",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Liten kastrull med lock",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor gryta med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "ml",
+              "role": "vegetable",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tillbehör: gurksallad med frön",
+          "ingredients": [
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella pumpakärnor, som sålda"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg fisken i den lilla kastrullen med 150 ml vatten. Sjud varsamt under lock i ungefär 8–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Häll av vätskan och dela fisken i små bitar till fyllning.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Förbered råvarorna: skala och skär potatis i små jämna tärningar; finhacka dill; skölj purjolöken noga mellan bladen och skiva tunt.",
+          "uses": [
+            "potatis",
+            "majs",
+            "dill",
+            "purjolök",
+            "mjölk"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i potatis och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg majs och purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade fisk i pannan och fördela jämnt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner mjölk från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "mjölk",
+            "fisk"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner dill från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "fisk"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Flytta huvudrätten till en gryta och tillsätt 800 ml vatten. Rör från botten och koka upp.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "majs",
+            "dill",
+            "purjolök",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sjud varsamt under lock tills alla grönsaker är helt mjuka och smakerna blandats.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "majs",
+            "dill",
+            "purjolök",
+            "mjölk"
+          ],
+          "minutes": 15,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: grovhacka pumpakärnor; ansa och skär gurka i små bitar; finhacka persilja.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda pumpakärnor, gurka, citronjuice, persilja och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "fisk",
+            "potatis",
+            "majs",
+            "dill",
+            "purjolök",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "pumpakärnor",
+            "gurka",
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 50 minuter och huvudsakligen passiva moment till 35 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 85 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Grov mjölkig soppa med fisk, majs och potatistärningar; granska mot befintlig laxsoppa. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av pumpakärnor, purjolök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-corn-fritters",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Fisk- och majsplättar med kokt potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "patty",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Liten kastrull med lock",
+        "Digital kökstermometer",
+        "Ugn",
+        "Bakplåtspapper",
+        "Kylskåp",
+        "Plåt",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning och yta",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg fisken i den lilla kastrullen med 150 ml vatten. Sjud varsamt under lock i ungefär 8–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Häll av vätskan och dela fisken i små bitar till fyllning.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Förbered råvarorna: finhacka dill.",
+          "uses": [
+            "majs",
+            "dill"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Finfördela den redan tillagade fisken med en gaffel. Värm majs i en kastrull med 50 ml vatten tills allt är helt upptinat och genomvarmt. Häll av noga och låt svalna före blandning.",
+          "uses": [
+            "fisk",
+            "majs",
+            "dill"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda huvudkomponentens alla ingredienser med bindningens havregryn och vetemjöl samt 80 ml vatten. Arbeta ihop till en massa som håller samman. Håll bindningens olja åt sidan till form och stekning.",
+          "uses": [
+            "fisk",
+            "majs",
+            "dill",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt massan stå så att havre och mjöl hinner ta upp vätska. Ställ den blandade massan i kylskåp under vilan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "fisk"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Forma massan till jämnstora biffar, två per portion. Lägg på bakplåtspapper och pensla med bindningens uppmätta olja.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "rapsolja",
+            "fisk"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Baka cirka 25 minuter. Vänd försiktigt efter halva tiden och kontrollera att massan är fast och genomvarm. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "fisk",
+            "majs",
+            "dill",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 41 minuter och huvudsakligen passiva moment till 53 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 94 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Tillagad fisk och majs binds till små plättar; jämför mot pilotens råa laxbiffar innan nyhetsbedömning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-corn-fritters",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Fisk- och majsplättar med kokt potatis – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "patty",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Liten kastrull med lock",
+        "Digital kökstermometer",
+        "Ugn",
+        "Bakplåtspapper",
+        "Kylskåp",
+        "Plåt",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning och yta",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg fisken i den lilla kastrullen med 150 ml vatten. Sjud varsamt under lock i ungefär 8–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Häll av vätskan och dela fisken i små bitar till fyllning.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Förbered råvarorna: finhacka dill; skölj purjolöken noga mellan bladen och skiva tunt.",
+          "uses": [
+            "majs",
+            "dill",
+            "purjolök",
+            "senap"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Finfördela den redan tillagade fisken med en gaffel. Finhacka purjolök så att bitarna blir små nog för massan. Värm majs i en kastrull med 50 ml vatten tills allt är helt upptinat och genomvarmt. Häll av noga och låt svalna före blandning.",
+          "uses": [
+            "fisk",
+            "majs",
+            "dill",
+            "purjolök",
+            "senap"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda huvudkomponentens alla ingredienser med bindningens havregryn och vetemjöl samt 80 ml vatten. Arbeta ihop till en massa som håller samman. Håll bindningens olja åt sidan till form och stekning.",
+          "uses": [
+            "fisk",
+            "majs",
+            "dill",
+            "purjolök",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt massan stå så att havre och mjöl hinner ta upp vätska. Ställ den blandade massan i kylskåp under vilan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "fisk"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Forma massan till jämnstora biffar, två per portion. Lägg på bakplåtspapper och pensla med bindningens uppmätta olja.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "rapsolja",
+            "fisk"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Baka cirka 25 minuter. Vänd försiktigt efter halva tiden och kontrollera att massan är fast och genomvarm. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "fisk",
+            "majs",
+            "dill",
+            "purjolök",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 9 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 42 minuter och huvudsakligen passiva moment till 53 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 95 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Tillagad fisk och majs binds till små plättar; jämför mot pilotens råa laxbiffar innan nyhetsbedömning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-corn-fritters",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Fisk- och majsplättar med kokt potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "patty",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Liten kastrull med lock",
+        "Digital kökstermometer",
+        "Ugn",
+        "Bakplåtspapper",
+        "Kylskåp",
+        "Plåt",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning och yta",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Tillbehör: syrlig gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Äppelcidervinäger, som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg fisken i den lilla kastrullen med 150 ml vatten. Sjud varsamt under lock i ungefär 8–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Häll av vätskan och dela fisken i små bitar till fyllning.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Förbered råvarorna: finhacka dill; skölj purjolöken noga mellan bladen och skiva tunt.",
+          "uses": [
+            "majs",
+            "dill",
+            "purjolök",
+            "senap"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Finfördela den redan tillagade fisken med en gaffel. Finhacka purjolök så att bitarna blir små nog för massan. Värm majs i en kastrull med 50 ml vatten tills allt är helt upptinat och genomvarmt. Häll av noga och låt svalna före blandning.",
+          "uses": [
+            "fisk",
+            "majs",
+            "dill",
+            "purjolök",
+            "senap"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda huvudkomponentens alla ingredienser med bindningens havregryn och vetemjöl samt 80 ml vatten. Arbeta ihop till en massa som håller samman. Håll bindningens olja åt sidan till form och stekning.",
+          "uses": [
+            "fisk",
+            "majs",
+            "dill",
+            "purjolök",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt massan stå så att havre och mjöl hinner ta upp vätska. Ställ den blandade massan i kylskåp under vilan.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "fisk"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Forma massan till jämnstora biffar, två per portion. Lägg på bakplåtspapper och pensla med bindningens uppmätta olja.",
+          "uses": [
+            "havregryn",
+            "vetemjöl",
+            "rapsolja",
+            "fisk"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Baka cirka 25 minuter. Vänd försiktigt efter halva tiden och kontrollera att massan är fast och genomvarm. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär gurka i små bitar; finhacka dill.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Blanda gurka, äppelcidervinäger, strösocker, dill och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "fisk",
+            "majs",
+            "dill",
+            "purjolök",
+            "senap",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "vetemjöl",
+            "potatis",
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 12 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 49 minuter och huvudsakligen passiva moment till 53 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 102 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Tillagad fisk och majs binds till små plättar; jämför mot pilotens råa laxbiffar innan nyhetsbedömning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök, äppelcidervinäger; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-mustard-crust",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Senapspanerad vit fisk med rödbeta och potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "breaded",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Digital kökstermometer",
+        "Tre tallrikar",
+        "Stekpanna med släppbeläggning",
+        "Stekspade",
+        "Liten kastrull",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Panering och stekning",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär rödbeta i små jämna tärningar.",
+          "uses": [
+            "rödbeta",
+            "senap"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Skär huvudråvaran i jämntjocka skivor. Behåll huvudråvaran i något tjockare portionsbitar så att paneringen kan hålla ihop runt den. Blanda paneringens mjöl och salt på en tallrik, vispa paneringens ägg på en annan och lägg ströbrödet på en tredje.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "fisk"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd huvudråvaran i mjöl, sedan ägg och sist ströbröd. Tryck fast paneringen. Fördela all panering mellan bitarna; ägg och smulor som återstår trycks fast som ett tunt extra lager.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "fisk"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fördela paneringens olja mellan stekomgångarna. Stek på medelvärme cirka fyra minuter per sida tills paneringen är gyllene och mitten genomlagad. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Äggpaneringen ska vara helt stelnad.",
+          "uses": [
+            "fisk",
+            "rapsolja",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg rödbeta och senap samt huvudkomponentens salt och huvudkomponentens olja i en liten kastrull med 100 ml vatten. Värm varsamt tills grönsakerna är mjuka och vätskan nästan avdunstat. Servera detta till huvudråvaran.",
+          "uses": [
+            "rödbeta",
+            "senap",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "fisk",
+            "rödbeta",
+            "senap",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "ströbröd",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 8 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 63 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 81 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Fiskfiléer dubbelpaneras och steks; rödbeta och kapris ger ett matigt tillbehör utan gratäng. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-mustard-crust",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Senapspanerad vit fisk med rödbeta och potatis – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "breaded",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Digital kökstermometer",
+        "Tre tallrikar",
+        "Stekpanna med släppbeläggning",
+        "Stekspade",
+        "Liten kastrull",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Panering och stekning",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär rödbeta i små jämna tärningar; finhacka persilja.",
+          "uses": [
+            "rödbeta",
+            "senap",
+            "kapris",
+            "persilja"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Skär huvudråvaran i jämntjocka skivor. Behåll huvudråvaran i något tjockare portionsbitar så att paneringen kan hålla ihop runt den. Blanda paneringens mjöl och salt på en tallrik, vispa paneringens ägg på en annan och lägg ströbrödet på en tredje.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "fisk"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd huvudråvaran i mjöl, sedan ägg och sist ströbröd. Tryck fast paneringen. Fördela all panering mellan bitarna; ägg och smulor som återstår trycks fast som ett tunt extra lager.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "fisk"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fördela paneringens olja mellan stekomgångarna. Stek på medelvärme cirka fyra minuter per sida tills paneringen är gyllene och mitten genomlagad. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Äggpaneringen ska vara helt stelnad.",
+          "uses": [
+            "fisk",
+            "rapsolja",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg rödbeta, senap, kapris och persilja samt huvudkomponentens salt och huvudkomponentens olja i en liten kastrull med 100 ml vatten. Värm varsamt tills grönsakerna är mjuka och vätskan nästan avdunstat. Servera detta till huvudråvaran.",
+          "uses": [
+            "rödbeta",
+            "senap",
+            "kapris",
+            "persilja",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "fisk",
+            "rödbeta",
+            "senap",
+            "kapris",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "ströbröd",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 10 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 64 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 82 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Fiskfiléer dubbelpaneras och steks; rödbeta och kapris ger ett matigt tillbehör utan gratäng. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-mustard-crust",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Senapspanerad vit fisk med rödbeta och potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "breaded",
+      "primary": "fisk",
+      "method": "pan",
+      "side": "potatis",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Digital kökstermometer",
+        "Tre tallrikar",
+        "Stekpanna med släppbeläggning",
+        "Stekspade",
+        "Liten kastrull",
+        "Kastrull med lock",
+        "Durkslag"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta, rå ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Panering och stekning",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Tillbehör: dillyoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär rödbeta i små jämna tärningar; finhacka persilja.",
+          "uses": [
+            "rödbeta",
+            "senap",
+            "kapris",
+            "persilja"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Skär huvudråvaran i jämntjocka skivor. Behåll huvudråvaran i något tjockare portionsbitar så att paneringen kan hålla ihop runt den. Blanda paneringens mjöl och salt på en tallrik, vispa paneringens ägg på en annan och lägg ströbrödet på en tredje.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "fisk"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd huvudråvaran i mjöl, sedan ägg och sist ströbröd. Tryck fast paneringen. Fördela all panering mellan bitarna; ägg och smulor som återstår trycks fast som ett tunt extra lager.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "fisk"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fördela paneringens olja mellan stekomgångarna. Stek på medelvärme cirka fyra minuter per sida tills paneringen är gyllene och mitten genomlagad. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Äggpaneringen ska vara helt stelnad.",
+          "uses": [
+            "fisk",
+            "rapsolja",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg rödbeta, senap, kapris och persilja samt huvudkomponentens salt och huvudkomponentens olja i en liten kastrull med 100 ml vatten. Värm varsamt tills grönsakerna är mjuka och vätskan nästan avdunstat. Servera detta till huvudråvaran.",
+          "uses": [
+            "rödbeta",
+            "senap",
+            "kapris",
+            "persilja",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala potatis och skär i jämna bitar. Lägg i en kastrull med tillbehörets salt och 1400 ml vatten. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud under lock tills bitarna är mjuka, cirka 18 minuter. Häll av och håll varmt till servering.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: finhacka dill.",
+          "uses": [
+            "yoghurt naturell",
+            "dill",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda yoghurt naturell, dill, citronjuice och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "yoghurt naturell",
+            "dill",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "fisk",
+            "rödbeta",
+            "senap",
+            "kapris",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "ströbröd",
+            "potatis",
+            "yoghurt naturell",
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 13 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 70 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 88 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Fiskfiléer dubbelpaneras och steks; rödbeta och kapris ger ett matigt tillbehör utan gratäng. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-potato-dumplings",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Potatisknyten med fisk och dill – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "dumpling",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Rivjärn",
+        "Kastrull med lock",
+        "Durkslag",
+        "Potatisstöt",
+        "Liten kastrull med lock",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor kastrull",
+        "Hålslev"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisbas",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 850,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg till potatisdegen, rå uppvägd vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skala potatisen till potatisbasen och skär i jämna bitar. Lägg i kastrullen med 1400 ml vatten. Koka upp och sjud cirka 18 minuter tills den är helt mjuk. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 23,
+          "passive": true
+        },
+        {
+          "text": "Stöt potatisen fint och låt moset svalna tills det är ljummet.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Arbeta in vetemjöl, salt och ägg från potatisbasen i det ljumma moset. Blanda kort till en fast massa. Håll stekolja och ströbröd åtskilda när de ingår.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "ägg",
+            "potatis"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg fisken i den lilla kastrullen med 150 ml vatten. Sjud varsamt under lock i ungefär 8–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Häll av vätskan och dela fisken i små bitar till fyllning.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skölj purjolöken noga mellan bladen och skiva tunt; finhacka dill.",
+          "uses": [
+            "purjolök",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade fisk i pannan och fördela jämnt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner dill från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "fisk"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Dela potatisdegen i jämnstora bitar, två per portion. Platta ut varje bit med fuktade händer, lägg fyllning i mitten och slut degen helt kring fyllningen. Fördela all deg och all fyllning.",
+          "uses": [
+            "potatis",
+            "vetemjöl",
+            "fisk"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Koka upp 3000 ml vatten i den stora kastrullen och sänk till sjudning. Sänk ner knytena försiktigt. Sjud utan häftig kokning i cirka 12 minuter för degen av kokt potatis. Dela ett knyte och kontrollera att degen är genomkokt utan rå mjölig kärna.",
+          "uses": [
+            "potatis",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "fisk"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera att knytets ägghaltiga deg har nått minst 72 °C. Lyft upp knytena med hålslev.",
+          "uses": [
+            "ägg",
+            "potatis"
+          ],
+          "minutes": 1,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "potatis",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "fisk",
+            "purjolök",
+            "dill",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 52 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 97 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Förlagad fisk omsluts av kokt potatisdeg och sjuds i knyten. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-potato-dumplings",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Potatisknyten med fisk och dill – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "dumpling",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Rivjärn",
+        "Kastrull med lock",
+        "Durkslag",
+        "Potatisstöt",
+        "Liten kastrull med lock",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor kastrull",
+        "Hålslev"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisbas",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 850,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg till potatisdegen, rå uppvägd vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "crème fraiche",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Crème fraiche, vikt eller volym som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skala potatisen till potatisbasen och skär i jämna bitar. Lägg i kastrullen med 1400 ml vatten. Koka upp och sjud cirka 18 minuter tills den är helt mjuk. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 23,
+          "passive": true
+        },
+        {
+          "text": "Stöt potatisen fint och låt moset svalna tills det är ljummet.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Arbeta in vetemjöl, salt och ägg från potatisbasen i det ljumma moset. Blanda kort till en fast massa. Håll stekolja och ströbröd åtskilda när de ingår.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "ägg",
+            "potatis"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg fisken i den lilla kastrullen med 150 ml vatten. Sjud varsamt under lock i ungefär 8–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Häll av vätskan och dela fisken i små bitar till fyllning.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skölj purjolöken noga mellan bladen och skiva tunt; finhacka dill.",
+          "uses": [
+            "purjolök",
+            "dill",
+            "crème fraiche",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade fisk i pannan och fördela jämnt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner crème fraiche från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Låt vätskan avdunsta så att fyllningen blir fast och går att lägga i en hög.",
+          "uses": [
+            "crème fraiche",
+            "fisk"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner dill och citronjuice från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "fisk"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Dela potatisdegen i jämnstora bitar, två per portion. Platta ut varje bit med fuktade händer, lägg fyllning i mitten och slut degen helt kring fyllningen. Fördela all deg och all fyllning.",
+          "uses": [
+            "potatis",
+            "vetemjöl",
+            "fisk"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Koka upp 3000 ml vatten i den stora kastrullen och sänk till sjudning. Sänk ner knytena försiktigt. Sjud utan häftig kokning i cirka 12 minuter för degen av kokt potatis. Dela ett knyte och kontrollera att degen är genomkokt utan rå mjölig kärna.",
+          "uses": [
+            "potatis",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "fisk"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera att knytets ägghaltiga deg har nått minst 72 °C. Lyft upp knytena med hålslev.",
+          "uses": [
+            "ägg",
+            "potatis"
+          ],
+          "minutes": 1,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "potatis",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "fisk",
+            "purjolök",
+            "dill",
+            "crème fraiche",
+            "citronjuice",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 9 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 53 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 98 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Förlagad fisk omsluts av kokt potatisdeg och sjuds i knyten. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-fish-potato-dumplings",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Potatisknyten med fisk och dill – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "dumpling",
+      "primary": "fisk",
+      "method": "pot",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Rivjärn",
+        "Kastrull med lock",
+        "Durkslag",
+        "Potatisstöt",
+        "Liten kastrull med lock",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor kastrull",
+        "Hålslev"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisbas",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 850,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg till potatisdegen, rå uppvägd vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fisk",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fisk, rå ätlig vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "crème fraiche",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Crème fraiche, vikt eller volym som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: syrlig gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Äppelcidervinäger, som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skala potatisen till potatisbasen och skär i jämna bitar. Lägg i kastrullen med 1400 ml vatten. Koka upp och sjud cirka 18 minuter tills den är helt mjuk. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 23,
+          "passive": true
+        },
+        {
+          "text": "Stöt potatisen fint och låt moset svalna tills det är ljummet.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Arbeta in vetemjöl, salt och ägg från potatisbasen i det ljumma moset. Blanda kort till en fast massa. Håll stekolja och ströbröd åtskilda när de ingår.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "ägg",
+            "potatis"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg fisken i den lilla kastrullen med 150 ml vatten. Sjud varsamt under lock i ungefär 8–10 minuter. Kontrollera med termometer att fiskens tjockaste del når minst 63 °C. Häll av vätskan och dela fisken i små bitar till fyllning.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skölj purjolöken noga mellan bladen och skiva tunt; finhacka dill.",
+          "uses": [
+            "purjolök",
+            "dill",
+            "crème fraiche",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade fisk i pannan och fördela jämnt.",
+          "uses": [
+            "fisk"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner crème fraiche från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Låt vätskan avdunsta så att fyllningen blir fast och går att lägga i en hög.",
+          "uses": [
+            "crème fraiche",
+            "fisk"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner dill och citronjuice från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "fisk"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Dela potatisdegen i jämnstora bitar, två per portion. Platta ut varje bit med fuktade händer, lägg fyllning i mitten och slut degen helt kring fyllningen. Fördela all deg och all fyllning.",
+          "uses": [
+            "potatis",
+            "vetemjöl",
+            "fisk"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Koka upp 3000 ml vatten i den stora kastrullen och sänk till sjudning. Sänk ner knytena försiktigt. Sjud utan häftig kokning i cirka 12 minuter för degen av kokt potatis. Dela ett knyte och kontrollera att degen är genomkokt utan rå mjölig kärna.",
+          "uses": [
+            "potatis",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "fisk"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera att knytets ägghaltiga deg har nått minst 72 °C. Lyft upp knytena med hålslev.",
+          "uses": [
+            "ägg",
+            "potatis"
+          ],
+          "minutes": 1,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär gurka i små bitar; finhacka dill.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Blanda gurka, äppelcidervinäger, strösocker, dill och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker",
+            "dill",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            15
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "potatis",
+            "salt",
+            "vetemjöl",
+            "ägg",
+            "fisk",
+            "purjolök",
+            "dill",
+            "crème fraiche",
+            "citronjuice",
+            "rapsolja",
+            "gurka",
+            "äppelcidervinäger",
+            "strösocker"
+          ],
+          "minutes": 2,
+          "after": [
+            16
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 12 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 60 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 105 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Förlagad fisk omsluts av kokt potatisdeg och sjuds i knyten. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök, äppelcidervinäger; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    }
+  ]
+}

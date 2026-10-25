@@ -1,0 +1,4759 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-72",
+  "recipes": [
+    {
+      "base_id": "smako-indian-pork-cabbage-stuffed-onion-shells",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade fyllda lökskal med fläskfärs och kål – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "onion_shell",
+      "primary": "fläskfärs",
+      "method": "oven",
+      "side": "ris",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade fyllda lökskal med fläskfärs och kål",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ätligt hölje",
+          "ingredients": [
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär vitkål i små bitar.",
+          "uses": [
+            "vitkål"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 560 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek fläskfärs på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att färsen är genomstekt och når minst 72 °C. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg vitkål i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in kanel och huvudkomponentens salt.",
+          "uses": [
+            "vitkål",
+            "kanel",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "fläskfärs",
+            "vitkål"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "fläskfärs",
+            "vitkål"
+          ],
+          "minutes": 8,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala höljeskomponentens stora lökar. Skär ett längsgående snitt till mitten i varje lök. Koka upp 1600 ml vatten och lägg i lökarna.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sjud lökarna cirka tio minuter tills de yttre lagren mjuknat så att de kan lossas utan att gå sönder.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 10,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lyft upp lökarna. Lossa de stora lagren; finhacka små innerlager och vänd in dem i fyllningen. Lägg fyllning på de stora löklagren och vik eller rulla slutna.",
+          "uses": [
+            "gul lök",
+            "fläskfärs",
+            "vitkål"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Blanda de krossade tomaterna med 200 ml vatten i en ugnsform. Lägg lökknytena tätt med skarvarna nedåt i såsen.",
+          "uses": [
+            "krossade tomater",
+            "gul lök",
+            "fläskfärs"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Baka i 210 °C cirka 30 minuter tills löklagren är mjuka och fyllningen varm. Färsen ska vara genomstekt och nå minst 72 °C. Servera med det separat kokta riset.",
+          "uses": [
+            "gul lök",
+            "fläskfärs",
+            "ris"
+          ],
+          "minutes": 30,
+          "after": [
+            13
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "vitkål",
+            "kanel",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "ris",
+            "gul lök"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Stora mjukgjorda löklager omsluter en torr, genomstekt färs- och kålfyllning. Tomatsåsen bakas runt lökknytena och riset serveras separat. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 47 minuter aktivt arbete och 68 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 115 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter risgratäng med proteinsubstitution: mjukgjorda lökblad blir ätligt hölje, fylls och bakas i sås; riset ingår inte i en gratäng. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-cabbage-stuffed-onion-shells",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade fyllda lökskal med fläskfärs och kål – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "onion_shell",
+      "primary": "fläskfärs",
+      "method": "oven",
+      "side": "ris",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade fyllda lökskal med fläskfärs och kål",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ätligt hölje",
+          "ingredients": [
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär vitkål i små bitar; skala och skär morot i små tärningar, omkring 1 cm; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 520 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek fläskfärs på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att färsen är genomstekt och når minst 72 °C. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg vitkål, morot, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in kanel och huvudkomponentens salt.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "fläskfärs",
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "fläskfärs",
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala höljeskomponentens stora lökar. Skär ett längsgående snitt till mitten i varje lök. Koka upp 1600 ml vatten och lägg i lökarna.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sjud lökarna cirka tio minuter tills de yttre lagren mjuknat så att de kan lossas utan att gå sönder.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 10,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lyft upp lökarna. Lossa de stora lagren; finhacka små innerlager och vänd in dem i fyllningen. Lägg fyllning på de stora löklagren och vik eller rulla slutna.",
+          "uses": [
+            "gul lök",
+            "fläskfärs",
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Blanda de krossade tomaterna med 200 ml vatten i en ugnsform. Lägg lökknytena tätt med skarvarna nedåt i såsen.",
+          "uses": [
+            "krossade tomater",
+            "gul lök",
+            "fläskfärs"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Baka i 210 °C cirka 30 minuter tills löklagren är mjuka och fyllningen varm. Färsen ska vara genomstekt och nå minst 72 °C. Servera med det separat kokta riset.",
+          "uses": [
+            "gul lök",
+            "fläskfärs",
+            "ris"
+          ],
+          "minutes": 30,
+          "after": [
+            13
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "ris",
+            "gul lök"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Stora mjukgjorda löklager omsluter en torr, genomstekt färs- och kålfyllning. Tomatsåsen bakas runt lökknytena och riset serveras separat. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 51 minuter aktivt arbete och 68 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 119 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter risgratäng med proteinsubstitution: mjukgjorda lökblad blir ätligt hölje, fylls och bakas i sås; riset ingår inte i en gratäng. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-cabbage-stuffed-onion-shells",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade fyllda lökskal med fläskfärs och kål – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "onion_shell",
+      "primary": "fläskfärs",
+      "method": "oven",
+      "side": "ris",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade fyllda lökskal med fläskfärs och kål",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ätligt hölje",
+          "ingredients": [
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Myntagurka med yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skölj eller ansa och skär vitkål i små bitar; skala och skär morot i små tärningar, omkring 1 cm; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 480 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek fläskfärs på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att färsen är genomstekt och når minst 72 °C. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg vitkål, morot, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in kanel och huvudkomponentens salt.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "fläskfärs",
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "fläskfärs",
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala höljeskomponentens stora lökar. Skär ett längsgående snitt till mitten i varje lök. Koka upp 1600 ml vatten och lägg i lökarna.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sjud lökarna cirka tio minuter tills de yttre lagren mjuknat så att de kan lossas utan att gå sönder.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 10,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lyft upp lökarna. Lossa de stora lagren; finhacka små innerlager och vänd in dem i fyllningen. Lägg fyllning på de stora löklagren och vik eller rulla slutna.",
+          "uses": [
+            "gul lök",
+            "fläskfärs",
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Blanda de krossade tomaterna med 200 ml vatten i en ugnsform. Lägg lökknytena tätt med skarvarna nedåt i såsen.",
+          "uses": [
+            "krossade tomater",
+            "gul lök",
+            "fläskfärs"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Baka i 210 °C cirka 30 minuter tills löklagren är mjuka och fyllningen varm. Färsen ska vara genomstekt och nå minst 72 °C. Servera med det separat kokta riset.",
+          "uses": [
+            "gul lök",
+            "fläskfärs",
+            "ris"
+          ],
+          "minutes": 30,
+          "after": [
+            13
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör myntagurka med yoghurt: Riv gurkan grovt, pressa lätt och blanda med yoghurten, hackad mynta och citronjuicen.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med myntagurka med yoghurt. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "vitkål",
+            "morot",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "ris",
+            "gul lök",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            15
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Stora mjukgjorda löklager omsluter en torr, genomstekt färs- och kålfyllning. Tomatsåsen bakas runt lökknytena och riset serveras separat. Fyra portioner. Lokalt härlett ingrediensantal 14; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 57 minuter aktivt arbete och 68 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 125 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter risgratäng med proteinsubstitution: mjukgjorda lökblad blir ätligt hölje, fylls och bakas i sås; riset ingår inte i en gratäng. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för mynta (raw_edible, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-coconut-mince-skewers",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade färsspett med kokos och morot – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "mince_skewer",
+      "primary": "fläskfärs",
+      "method": "oven",
+      "side": "ris",
+      "flavor": [
+        "malen koriander"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar",
+        "Metallspett"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade färsspett med kokos och morot",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen koriander, torr vikt"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kokosflingor, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kikärtsmjöl, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala och finriv morot.",
+          "uses": [
+            "morot"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 560 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finriv moroten. Blanda den råa fläskfärsen med alla huvudkomponentens ingredienser utom oljan. Arbeta med sked till en sammanhängande fast färs.",
+          "uses": [
+            "fläskfärs",
+            "morot",
+            "malen koriander",
+            "kokosflingor",
+            "salt",
+            "ägg",
+            "kikärtsmjöl"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Forma färsen till avlånga stycken kring metallspett, två per portion. Gör dem högst cirka tre centimeter tjocka. Lägg på bakplåtspapper och pensla runt om med huvudkomponentens hela oljemängd.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ugnsstek i 210 °C cirka tjugo minuter. Vänd försiktigt halvvägs. Färs och ägg ska vara helt genomstekta och nå minst 72 °C i mitten.",
+          "uses": [
+            "fläskfärs",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "morot",
+            "malen koriander",
+            "kokosflingor",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "kikärtsmjöl",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Finriven morot, kokos och rå fläskfärs arbetas till en fast massa som formas direkt kring metallspett och ugnssteks. Fyra portioner. Lokalt härlett ingrediensantal 8; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 24 minuter aktivt arbete och 40 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 64 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter en proteinbytesklon av kålpaket: rå arbetad färsmassa formas på spett och rostas utan något blad- eller deghölje. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för kikärtsmjöl (dry, g), kokosflingor (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-coconut-mince-skewers",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade färsspett med kokos och morot – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "mince_skewer",
+      "primary": "fläskfärs",
+      "method": "oven",
+      "side": "ris",
+      "flavor": [
+        "malen koriander"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar",
+        "Metallspett"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade färsspett med kokos och morot",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen koriander, torr vikt"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kokosflingor, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kikärtsmjöl, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala och finriv morot; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 520 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finriv moroten. Blanda den råa fläskfärsen med alla huvudkomponentens ingredienser utom oljan. Arbeta med sked till en sammanhängande fast färs.",
+          "uses": [
+            "fläskfärs",
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "kokosflingor",
+            "salt",
+            "ägg",
+            "kikärtsmjöl"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Forma färsen till avlånga stycken kring metallspett, två per portion. Gör dem högst cirka tre centimeter tjocka. Lägg på bakplåtspapper och pensla runt om med huvudkomponentens hela oljemängd.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ugnsstek i 210 °C cirka tjugo minuter. Vänd försiktigt halvvägs. Färs och ägg ska vara helt genomstekta och nå minst 72 °C i mitten.",
+          "uses": [
+            "fläskfärs",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "kokosflingor",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "kikärtsmjöl",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Finriven morot, kokos och rå fläskfärs arbetas till en fast massa som formas direkt kring metallspett och ugnssteks. Fyra portioner. Lokalt härlett ingrediensantal 11; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 28 minuter aktivt arbete och 40 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 68 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter en proteinbytesklon av kålpaket: rå arbetad färsmassa formas på spett och rostas utan något blad- eller deghölje. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för kikärtsmjöl (dry, g), kokosflingor (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-coconut-mince-skewers",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade färsspett med kokos och morot – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "mince_skewer",
+      "primary": "fläskfärs",
+      "method": "oven",
+      "side": "ris",
+      "flavor": [
+        "malen koriander"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Grytlappar",
+        "Metallspett"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade färsspett med kokos och morot",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen koriander, torr vikt"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kokosflingor, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kikärtsmjöl, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Myntagurka med yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 210 °C över- och undervärme så att den värms medan övriga moment förbereds.",
+          "uses": [],
+          "minutes": 1
+        },
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala och finriv morot; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 480 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finriv moroten. Blanda den råa fläskfärsen med alla huvudkomponentens ingredienser utom oljan. Arbeta med sked till en sammanhängande fast färs.",
+          "uses": [
+            "fläskfärs",
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "kokosflingor",
+            "salt",
+            "ägg",
+            "kikärtsmjöl"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Forma färsen till avlånga stycken kring metallspett, två per portion. Gör dem högst cirka tre centimeter tjocka. Lägg på bakplåtspapper och pensla runt om med huvudkomponentens hela oljemängd.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ugnsstek i 210 °C cirka tjugo minuter. Vänd försiktigt halvvägs. Färs och ägg ska vara helt genomstekta och nå minst 72 °C i mitten.",
+          "uses": [
+            "fläskfärs",
+            "ägg"
+          ],
+          "minutes": 20,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör myntagurka med yoghurt: Riv gurkan grovt, pressa lätt och blanda med yoghurten, hackad mynta och citronjuicen.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med myntagurka med yoghurt. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "morot",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "kokosflingor",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "kikärtsmjöl",
+            "ris",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Finriven morot, kokos och rå fläskfärs arbetas till en fast massa som formas direkt kring metallspett och ugnssteks. Fyra portioner. Lokalt härlett ingrediensantal 15; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 34 minuter aktivt arbete och 40 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 74 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter en proteinbytesklon av kålpaket: rå arbetad färsmassa formas på spett och rostas utan något blad- eller deghölje. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för kikärtsmjöl (dry, g), kokosflingor (dry, g), mynta (raw_edible, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-potato-fritters",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade fläsk- och potatisfritters – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "fritter",
+      "primary": "fläskfärs",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Potatisstöt"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade fläsk- och potatisfritters",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala eller ansa och finhacka gul lök.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala bindningens potatis och skär i små bitar. Lägg i den lilla kastrullen med 700 ml vatten och koka upp.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka bindningspotatisen helt mjuk, cirka 18 minuter.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av, låt ånga av och mosa potatisen helt slät med gaffel.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Bred moset tunt på en ren tallrik och låt svalna cirka tio minuter innan det blandas med resten av smeten.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 560 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Blanda fläskfärs, gul lök, garam masala, yoghurt naturell, salt, potatis, kikärtsmjöl och ägg till en sammanhängande smet. Arbeta med sked så att huvudråvaran binder de finhackade grönsakerna. Låt stå medan formen eller pannan görs i ordning.",
+          "uses": [
+            "fläskfärs",
+            "gul lök",
+            "garam masala",
+            "yoghurt naturell",
+            "salt",
+            "potatis",
+            "kikärtsmjöl",
+            "ägg"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Forma smeten till platta biffar, cirka 1,5 cm tjocka med fuktade händer eller två skedar.",
+          "uses": [
+            "fläskfärs",
+            "gul lök"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i en bred stekpanna. Stek i omgångar på medelvärme, cirka fyra minuter på varje sida. Använd hela mängden stekolja fördelad över omgångarna. Vänd först när en sammanhängande stekyta bildats. Kontrollera att färsen är genomstekt och når minst 72 °C. Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 18,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "gul lök",
+            "garam masala",
+            "yoghurt naturell",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "kikärtsmjöl",
+            "ägg",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Koka bindningens potatis mjuk i 700 ml vatten, häll av och mosa. Låt svalna helt före blandning med rå färs. Fyra portioner. Lokalt härlett ingrediensantal 9; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 45 minuter aktivt arbete och 48 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 93 minuter med angiven arbetsordning. Nyhetsmotiv: Potatisbundna små fläskfritters med lök, jämfört med färsbiffar med brödpanad. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för garam masala (dry, g), kikärtsmjöl (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-potato-fritters",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade fläsk- och potatisfritters – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "fritter",
+      "primary": "fläskfärs",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Potatisstöt"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade fläsk- och potatisfritters",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella ärtor, vikt som såld"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära; håll ärtor frysta fram till tillagningen.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "ärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm ärtor i den lilla kastrullen med 60 ml vatten tills helt tinade och genomvarma. Häll av noga. Mosa hälften av ärtorna grovt.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skala bindningens potatis och skär i små bitar. Lägg i den lilla kastrullen med 700 ml vatten och koka upp.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka bindningspotatisen helt mjuk, cirka 18 minuter.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av, låt ånga av och mosa potatisen helt slät med gaffel.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Bred moset tunt på en ren tallrik och låt svalna cirka tio minuter innan det blandas med resten av smeten.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 520 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Blanda fläskfärs, gul lök, vitlök, ingefära, ärtor, garam masala, yoghurt naturell, salt, potatis, kikärtsmjöl och ägg till en sammanhängande smet. Arbeta med sked så att huvudråvaran binder de finhackade grönsakerna. Låt stå medan formen eller pannan görs i ordning.",
+          "uses": [
+            "fläskfärs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "ärtor",
+            "garam masala",
+            "yoghurt naturell",
+            "salt",
+            "potatis",
+            "kikärtsmjöl",
+            "ägg"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Forma smeten till platta biffar, cirka 1,5 cm tjocka med fuktade händer eller två skedar.",
+          "uses": [
+            "fläskfärs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "ärtor"
+          ],
+          "minutes": 5,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i en bred stekpanna. Stek i omgångar på medelvärme, cirka fyra minuter på varje sida. Använd hela mängden stekolja fördelad över omgångarna. Vänd först när en sammanhängande stekyta bildats. Kontrollera att färsen är genomstekt och når minst 72 °C. Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 18,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "ärtor",
+            "garam masala",
+            "yoghurt naturell",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "kikärtsmjöl",
+            "ägg",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Koka bindningens potatis mjuk i 700 ml vatten, häll av och mosa. Låt svalna helt före blandning med rå färs. Fyra portioner. Lokalt härlett ingrediensantal 12; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 55 minuter aktivt arbete och 48 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 103 minuter med angiven arbetsordning. Nyhetsmotiv: Potatisbundna små fläskfritters med lök, jämfört med färsbiffar med brödpanad. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för garam masala (dry, g), kikärtsmjöl (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-potato-fritters",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade fläsk- och potatisfritters – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "fritter",
+      "primary": "fläskfärs",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "garam masala"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Potatisstöt"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerade fläsk- och potatisfritters",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella ärtor, vikt som såld"
+            },
+            {
+              "name": "garam masala",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Garam masala, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gurk- och tomatsallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära; håll ärtor frysta fram till tillagningen.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "ärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm ärtor i den lilla kastrullen med 60 ml vatten tills helt tinade och genomvarma. Häll av noga. Mosa hälften av ärtorna grovt.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skala bindningens potatis och skär i små bitar. Lägg i den lilla kastrullen med 700 ml vatten och koka upp.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka bindningspotatisen helt mjuk, cirka 18 minuter.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av, låt ånga av och mosa potatisen helt slät med gaffel.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Bred moset tunt på en ren tallrik och låt svalna cirka tio minuter innan det blandas med resten av smeten.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj riset och lägg det i en kastrull med tillbehörets salt och 480 ml vatten. Koka upp under lock. Rismängden vägs torr.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud riset under lock cirka 15 minuter tills vattnet tagits upp. Följ en längre koktid om risförpackningen kräver det. Ta från värmen och låt vila under lock i fem minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Blanda fläskfärs, gul lök, vitlök, ingefära, ärtor, garam masala, yoghurt naturell, salt, potatis, kikärtsmjöl och ägg till en sammanhängande smet. Arbeta med sked så att huvudråvaran binder de finhackade grönsakerna. Låt stå medan formen eller pannan görs i ordning.",
+          "uses": [
+            "fläskfärs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "ärtor",
+            "garam masala",
+            "yoghurt naturell",
+            "salt",
+            "potatis",
+            "kikärtsmjöl",
+            "ägg"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Forma smeten till platta biffar, cirka 1,5 cm tjocka med fuktade händer eller två skedar.",
+          "uses": [
+            "fläskfärs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "ärtor"
+          ],
+          "minutes": 5,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i en bred stekpanna. Stek i omgångar på medelvärme, cirka fyra minuter på varje sida. Använd hela mängden stekolja fördelad över omgångarna. Vänd först när en sammanhängande stekyta bildats. Kontrollera att färsen är genomstekt och når minst 72 °C. Äggblandningen ska vara helt stelnad och hela äggfyllningen nå minst 72 °C.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 18,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Gör gurk- och tomatsallad: Skär gurka och tomat i små bitar, strimla rödlöken tunt och vänd med citronjuicen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med gurk- och tomatsallad. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "ärtor",
+            "garam masala",
+            "yoghurt naturell",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "kikärtsmjöl",
+            "ägg",
+            "ris",
+            "gurka",
+            "tomat",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Koka bindningens potatis mjuk i 700 ml vatten, häll av och mosa. Låt svalna helt före blandning med rå färs. Fyra portioner. Lokalt härlett ingrediensantal 16; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger över nuvarande standardfilter för middag på 10–15 ingredienser; maxantalet behöver höjas. Instruktionernas uppskattade tider är 61 minuter aktivt arbete och 48 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 109 minuter med angiven arbetsordning. Nyhetsmotiv: Potatisbundna små fläskfritters med lök, jämfört med färsbiffar med brödpanad. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för garam masala (dry, g), kikärtsmjöl (dry, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-spinach-dumpling-soup",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad soppa med fläsk- och spenatknyten – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "dumpling_soup",
+      "primary": "fläskfärs",
+      "method": "pot",
+      "side": "deg",
+      "flavor": [
+        "malen koriander"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Kavel",
+        "Bakplåtspapper",
+        "Hålslev"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad soppa med fläsk- och spenatknyten",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen koriander, torr vikt"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Deg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll spenat frysta fram till tillagningen.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg huvudkomponentens frysta spenat i den lilla kastrullen med 50 ml vatten. Värm under omrörning tills den är helt tinad och genomvarm.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Pressa spenaten i en finmaskig sil med en sked så att överskottsvätskan rinner av. Den angivna mängden avser fryst vikt som såld före denna urpressning.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda degens vetemjöl, salt, olja och 210 ml vatten till en mjuk deg. Knåda på arbetsbänken utan extra mjöl tills den är jämn; degen ska vara mjuk men gå att forma.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Täck degen och låt vila 20 minuter så att den går att kavla tunt.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek fläskfärs på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att färsen är genomstekt och når minst 72 °C. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg spenat i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in malen koriander och huvudkomponentens salt.",
+          "uses": [
+            "spenat",
+            "malen koriander",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "fläskfärs",
+            "spenat"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "fläskfärs",
+            "spenat"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i fyra bitar per portion. Kavla tunt mellan ark av bakplåtspapper. Fördela färs- och spenatfyllningen på bitarna, vik till små halvmånar och nyp ihop alla kanter.",
+          "uses": [
+            "vetemjöl",
+            "fläskfärs",
+            "spenat"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Vispa tomatpurén med 1500 ml vatten i den stora kastrullen. Koka upp och sänk till lugn sjudning. Smaksättningen i fyllningen och tomaten ger buljongen smak; inget oangivet buljongmedel tillsätts.",
+          "uses": [
+            "tomatpuré"
+          ],
+          "minutes": 4,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Lägg i knytena och sjud försiktigt cirka tolv minuter tills degen är genomkokt. Rör bara mycket varsamt så att de inte spricker. Färsfyllningen ska vara genomvarm och minst 72 °C.",
+          "uses": [
+            "vetemjöl",
+            "fläskfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fördela buljong och samtliga degknyten i djupa skålar.",
+          "uses": [
+            "tomatpuré",
+            "vetemjöl",
+            "fläskfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "spenat",
+            "malen koriander",
+            "tomatpuré",
+            "rapsolja",
+            "salt",
+            "vetemjöl"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Små tunna degknyten med genomstekt färs och pressad spenat sjuds direkt i en tomat- och korianderbuljong och serveras i buljongen. Fyra portioner. Lokalt härlett ingrediensantal 6; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 60 minuter aktivt arbete och 40 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 100 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter en proteinbytesklon av ångade laxknyten: mindre vattenkokta knyten ingår i en full soppa med tomatbuljong i stället för ångning och separat servering. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-spinach-dumpling-soup",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad soppa med fläsk- och spenatknyten – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "dumpling_soup",
+      "primary": "fläskfärs",
+      "method": "pot",
+      "side": "deg",
+      "flavor": [
+        "malen koriander"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Kavel",
+        "Bakplåtspapper",
+        "Hålslev"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad soppa med fläsk- och spenatknyten",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen koriander, torr vikt"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Deg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll spenat frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg huvudkomponentens frysta spenat i den lilla kastrullen med 50 ml vatten. Värm under omrörning tills den är helt tinad och genomvarm.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Pressa spenaten i en finmaskig sil med en sked så att överskottsvätskan rinner av. Den angivna mängden avser fryst vikt som såld före denna urpressning.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda degens vetemjöl, salt, olja och 210 ml vatten till en mjuk deg. Knåda på arbetsbänken utan extra mjöl tills den är jämn; degen ska vara mjuk men gå att forma.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Täck degen och låt vila 20 minuter så att den går att kavla tunt.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek fläskfärs på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att färsen är genomstekt och når minst 72 °C. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg spenat, gul lök, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in malen koriander och huvudkomponentens salt.",
+          "uses": [
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "fläskfärs",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "fläskfärs",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i fyra bitar per portion. Kavla tunt mellan ark av bakplåtspapper. Fördela färs- och spenatfyllningen på bitarna, vik till små halvmånar och nyp ihop alla kanter.",
+          "uses": [
+            "vetemjöl",
+            "fläskfärs",
+            "spenat"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Vispa tomatpurén med 1500 ml vatten i den stora kastrullen. Koka upp och sänk till lugn sjudning. Smaksättningen i fyllningen och tomaten ger buljongen smak; inget oangivet buljongmedel tillsätts.",
+          "uses": [
+            "tomatpuré"
+          ],
+          "minutes": 4,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Lägg i knytena och sjud försiktigt cirka tolv minuter tills degen är genomkokt. Rör bara mycket varsamt så att de inte spricker. Färsfyllningen ska vara genomvarm och minst 72 °C.",
+          "uses": [
+            "vetemjöl",
+            "fläskfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fördela buljong och samtliga degknyten i djupa skålar.",
+          "uses": [
+            "tomatpuré",
+            "vetemjöl",
+            "fläskfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "tomatpuré",
+            "rapsolja",
+            "salt",
+            "vetemjöl"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Små tunna degknyten med genomstekt färs och pressad spenat sjuds direkt i en tomat- och korianderbuljong och serveras i buljongen. Fyra portioner. Lokalt härlett ingrediensantal 9; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 64 minuter aktivt arbete och 40 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 104 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter en proteinbytesklon av ångade laxknyten: mindre vattenkokta knyten ingår i en full soppa med tomatbuljong i stället för ångning och separat servering. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-spinach-dumpling-soup",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerad soppa med fläsk- och spenatknyten – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "dumpling_soup",
+      "primary": "fläskfärs",
+      "method": "pot",
+      "side": "deg",
+      "flavor": [
+        "malen koriander"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Kavel",
+        "Bakplåtspapper",
+        "Hålslev"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerad soppa med fläsk- och spenatknyten",
+          "ingredients": [
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen koriander, torr vikt"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Deg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Myntagurka med yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Ta fram färsen och håll den kall medan grönsakerna förbereds. Diska redskap som kommer i kontakt med rå färs innan de används till färdiga tillbehör.",
+          "uses": [
+            "fläskfärs"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: håll spenat frysta fram till tillagningen; skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära.",
+          "uses": [
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg huvudkomponentens frysta spenat i den lilla kastrullen med 50 ml vatten. Värm under omrörning tills den är helt tinad och genomvarm.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Pressa spenaten i en finmaskig sil med en sked så att överskottsvätskan rinner av. Den angivna mängden avser fryst vikt som såld före denna urpressning.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda degens vetemjöl, salt, olja och 210 ml vatten till en mjuk deg. Knåda på arbetsbänken utan extra mjöl tills den är jämn; degen ska vara mjuk men gå att forma.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Täck degen och låt vila 20 minuter så att den går att kavla tunt.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Stek fläskfärs på medelvärme under omrörning tills genomvarm och färdig. Kontrollera att färsen är genomstekt och når minst 72 °C. Lägg på en ren tallrik och låt fettet vara kvar i pannan.",
+          "uses": [
+            "fläskfärs",
+            "rapsolja"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg spenat, gul lök, vitlök och ingefära i samma panna. Stek under omrörning tills grönsakerna mjuknar. Blanda in malen koriander och huvudkomponentens salt.",
+          "uses": [
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd tillbaka den färdiga huvudråvaran i grönsaksblandningen och värm igenom kort.",
+          "uses": [
+            "fläskfärs",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred ut fyllningen på en tallrik och låt svalna tills den är ljummen och går att hantera.",
+          "uses": [
+            "fläskfärs",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i fyra bitar per portion. Kavla tunt mellan ark av bakplåtspapper. Fördela färs- och spenatfyllningen på bitarna, vik till små halvmånar och nyp ihop alla kanter.",
+          "uses": [
+            "vetemjöl",
+            "fläskfärs",
+            "spenat"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Vispa tomatpurén med 1500 ml vatten i den stora kastrullen. Koka upp och sänk till lugn sjudning. Smaksättningen i fyllningen och tomaten ger buljongen smak; inget oangivet buljongmedel tillsätts.",
+          "uses": [
+            "tomatpuré"
+          ],
+          "minutes": 4,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Lägg i knytena och sjud försiktigt cirka tolv minuter tills degen är genomkokt. Rör bara mycket varsamt så att de inte spricker. Färsfyllningen ska vara genomvarm och minst 72 °C.",
+          "uses": [
+            "vetemjöl",
+            "fläskfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fördela buljong och samtliga degknyten i djupa skålar.",
+          "uses": [
+            "tomatpuré",
+            "vetemjöl",
+            "fläskfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Gör myntagurka med yoghurt: Riv gurkan grovt, pressa lätt och blanda med yoghurten, hackad mynta och citronjuicen.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med myntagurka med yoghurt. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskfärs",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "malen koriander",
+            "tomatpuré",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            15
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Små tunna degknyten med genomstekt färs och pressad spenat sjuds direkt i en tomat- och korianderbuljong och serveras i buljongen. Fyra portioner. Lokalt härlett ingrediensantal 13; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 70 minuter aktivt arbete och 40 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 110 minuter med angiven arbetsordning. Nyhetsmotiv: Ersätter en proteinbytesklon av ångade laxknyten: mindre vattenkokta knyten ingår i en full soppa med tomatbuljong i stället för ångning och separat servering. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för mynta (raw_edible, g); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-vindaloo-inspired",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerat syrligt fläsk med potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "braise",
+      "primary": "fläskkött",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerat syrligt fläsk",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "risvinäger",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Risvinäger, vikt som såld"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att fläskkött är utan ben och oätliga delar. Skär i jämna bitar omkring 2 cm. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala eller ansa och finhacka gul lök.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Fräs gul lök på medelvärme under omrörning så att grönsakerna mjuknar utan att brännas. Blanda in spiskummin och huvudkomponentens salt.",
+          "uses": [
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "spiskummin"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt risvinäger och tomatpuré och 100 ml vatten. Koka upp.",
+          "uses": [
+            "risvinäger",
+            "tomatpuré"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg ner fläskkött i grytan. Rör varsamt så att det fördelas jämnt.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud på låg värme cirka 55 minuter tills huvudråvaran är färdig och grönsakerna mjuka. Rör då och då. Tillaga köttbitarna tills de är genomvarma och når minst 72 °C i mitten; vid långkok ska köttet dessutom vara mört.",
+          "uses": [
+            "fläskkött",
+            "gul lök"
+          ],
+          "minutes": 55,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "spiskummin",
+            "risvinäger",
+            "tomatpuré",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Fläsket ska skäras i jämna grytbitar och löken ska mjukna helt i den syrliga såsen. Fyra portioner. Lokalt härlett ingrediensantal 7; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser; minantalet behöver sänkas. Instruktionernas uppskattade tider är 31 minuter aktivt arbete och 75 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 106 minuter med angiven arbetsordning. Nyhetsmotiv: Syrlig långbräserad helköttsrätt med koncentrerad lökbas och potatis; skiljer från stroganoff. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för risvinäger (as_sold, ml); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-vindaloo-inspired",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerat syrligt fläsk med potatis – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "braise",
+      "primary": "fläskkött",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerat syrligt fläsk",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "risvinäger",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Risvinäger, vikt som såld"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att fläskkött är utan ben och oätliga delar. Skär i jämna bitar omkring 2 cm. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära; skölj eller ansa och skär paprika i små bitar.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "paprika"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Fräs gul lök, vitlök, ingefära och paprika på medelvärme under omrörning så att grönsakerna mjuknar utan att brännas. Blanda in spiskummin och huvudkomponentens salt.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "paprika",
+            "rapsolja",
+            "salt",
+            "spiskummin"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt risvinäger och tomatpuré och 140 ml vatten. Koka upp.",
+          "uses": [
+            "risvinäger",
+            "tomatpuré"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg ner fläskkött i grytan. Rör varsamt så att det fördelas jämnt.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud på låg värme cirka 55 minuter tills huvudråvaran är färdig och grönsakerna mjuka. Rör då och då. Tillaga köttbitarna tills de är genomvarma och når minst 72 °C i mitten; vid långkok ska köttet dessutom vara mört.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "paprika"
+          ],
+          "minutes": 55,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "paprika",
+            "spiskummin",
+            "risvinäger",
+            "tomatpuré",
+            "rapsolja",
+            "salt",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Fläsket ska skäras i jämna grytbitar och löken ska mjukna helt i den syrliga såsen. Fyra portioner. Lokalt härlett ingrediensantal 10; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 35 minuter aktivt arbete och 75 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 110 minuter med angiven arbetsordning. Nyhetsmotiv: Syrlig långbräserad helköttsrätt med koncentrerad lökbas och potatis; skiljer från stroganoff. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för risvinäger (as_sold, ml); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-pork-vindaloo-inspired",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerat syrligt fläsk med potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "braise",
+      "primary": "fläskkött",
+      "method": "pot",
+      "side": "potatis",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Skärbräda",
+        "Kniv",
+        "Tre skålar",
+        "Sked och gaffel",
+        "Visp",
+        "Stor kastrull med lock",
+        "Liten kastrull med lock",
+        "Bred släppbelagd stekpanna",
+        "Stekspade",
+        "Durkslag och finmaskig sil",
+        "Rivjärn",
+        "Serveringsfat och tallrik",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Indiskinspirerat syrligt fläsk",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "risvinäger",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Risvinäger, vikt som såld"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Myntagurka med yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att fläskkött är utan ben och oätliga delar. Skär i jämna bitar omkring 2 cm. Håll kallt. Tvätta händerna och diska kniv och skärbräda innan de används till tillbehören.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Förbered huvudkomponentens grönsaker: skala eller ansa och finhacka gul lök; skala eller ansa och finhacka vitlök; skala eller ansa och finhacka ingefära; skölj eller ansa och skär paprika i små bitar.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "paprika"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och skär tillbehörets potatis i jämna bitar. Lägg i en kastrull med 1400 ml vatten och tillbehörets salt. Koka upp.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka potatisen mjuk under lock, cirka 20 minuter. Häll av och låt ånga av.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den varma potatisen med tillbehörets olja och håll den varm under lock.",
+          "uses": [
+            "potatis",
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Fräs gul lök, vitlök, ingefära och paprika på medelvärme under omrörning så att grönsakerna mjuknar utan att brännas. Blanda in spiskummin och huvudkomponentens salt.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "paprika",
+            "rapsolja",
+            "salt",
+            "spiskummin"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt risvinäger och tomatpuré och 140 ml vatten. Koka upp.",
+          "uses": [
+            "risvinäger",
+            "tomatpuré"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg ner fläskkött i grytan. Rör varsamt så att det fördelas jämnt.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud på låg värme cirka 55 minuter tills huvudråvaran är färdig och grönsakerna mjuka. Rör då och då. Tillaga köttbitarna tills de är genomvarma och når minst 72 °C i mitten; vid långkok ska köttet dessutom vara mört.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "paprika"
+          ],
+          "minutes": 55,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Gör myntagurka med yoghurt: Riv gurkan grovt, pressa lätt och blanda med yoghurten, hackad mynta och citronjuicen.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera den färdiga huvudrätten med hela det angivna tillbehöret tillsammans med myntagurka med yoghurt. Fördela samtliga tillbehör och såser mellan portionerna.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "vitlök",
+            "ingefära",
+            "paprika",
+            "spiskummin",
+            "risvinäger",
+            "tomatpuré",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad egen utformning utan påstående om traditionell autenticitet. Rättens konsistensmål och arbetsprincip: Fläsket ska skäras i jämna grytbitar och löken ska mjukna helt i den syrliga såsen. Fyra portioner. Lokalt härlett ingrediensantal 14; salt, peppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger preliminärt inom nuvarande standardfilter 10–15; Smako räknar slutligt. Instruktionernas uppskattade tider är 41 minuter aktivt arbete och 75 minuter huvudsakligen passiva moment. Stegen är medvetet sekventiella; totalt cirka 116 minuter med angiven arbetsordning. Nyhetsmotiv: Syrlig långbräserad helköttsrätt med koncentrerad lökbas och potatis; skiljer från stroganoff. Kulinarisk avgränsning mot andra rätter är en redaktionell bedömning och måste granskas, särskilt när huvudfamiljen återkommer. Kräver registergranskning för mynta (raw_edible, g), risvinäger (as_sold, ml); inte importklar. Mängder, bindning, stek- och koktider samt smakbalans behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Diet, allergener, näring och köpbarhet ska prövas separat för just denna variant mot valda produkter."
+    }
+  ]
+}

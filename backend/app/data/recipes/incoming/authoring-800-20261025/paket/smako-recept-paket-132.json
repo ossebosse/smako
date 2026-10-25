@@ -1,0 +1,1824 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-132",
+  "recipes": [
+    {
+      "base_id": "smako-thai-breakfast-steamed-sticky-rice-mango",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Ångat klibbigt ris med mango och yoghurt – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "ångat klibbigt ris",
+      "primary": "klibbigt ris",
+      "method": "pot",
+      "side": "Mango och yoghurt",
+      "flavor": [
+        "kokosmjölk",
+        "strösocker",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kylskåp",
+        "Skål",
+        "Kastrull med lock",
+        "Finmaskig ånginsats",
+        "Liten kastrull",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ångat kokosris",
+          "ingredients": [
+            {
+              "name": "klibbigt ris",
+              "form": "dry",
+              "quantity": 60,
+              "unit": "g",
+              "role": "side",
+              "label": "Klibbigt ris, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mango och yoghurt",
+          "ingredients": [
+            {
+              "name": "mango",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mango, rå ätlig vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Ångat kokosris: Skölj riset och blötlägg i 400 ml vatten i kylskåp tills grynen är jämnt svällda.",
+          "uses": [
+            "klibbigt ris"
+          ],
+          "minutes": 360,
+          "passive": true
+        },
+        {
+          "text": "För komponenten Ångat kokosris: Häll av. Lägg riset i en finmaskig ånginsats ovanför 1000 ml vatten. Ånga under lock tills grynen är mjuka och klibbiga; vänd runt en gång.",
+          "uses": [
+            "klibbigt ris"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ångat kokosris: Värm kokosmjölk, socker och salt utan häftig kokning. Vänd ner i det varma riset och låt stå tills vätskan tagits upp.",
+          "uses": [
+            "kokosmjölk",
+            "strösocker",
+            "salt",
+            "klibbigt ris"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Mango och yoghurt: Skölj och ansa mango. Skär frukt och grönsaker i små bitar. Lägg upp mango och yoghurt naturell tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "mango",
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera ångat kokosris och mango och yoghurt tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "klibbigt ris",
+            "kokosmjölk",
+            "strösocker",
+            "salt",
+            "mango",
+            "yoghurt naturell"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 5 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 11 minuter aktivt och 385 minuter huvudsakligen passiv väntan, cirka 396 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Särskilt klibbigt ris blötläggs och ångas, därefter absorberar det kokosmjölk; detta kräver en annan produkt och process än vanligt kokt ris. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för klibbigt ris och mango; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-steamed-sticky-rice-mango",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Ångat klibbigt ris med mango och yoghurt – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "ångat klibbigt ris",
+      "primary": "klibbigt ris",
+      "method": "pot",
+      "side": "Mango och yoghurt, Kokos och sesam",
+      "flavor": [
+        "kokosmjölk",
+        "strösocker",
+        "salt",
+        "kokosflingor",
+        "sesamfrön"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kylskåp",
+        "Skål",
+        "Kastrull med lock",
+        "Finmaskig ånginsats",
+        "Liten kastrull",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ångat kokosris",
+          "ingredients": [
+            {
+              "name": "klibbigt ris",
+              "form": "dry",
+              "quantity": 60,
+              "unit": "g",
+              "role": "side",
+              "label": "Klibbigt ris, torr vikt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Mango och yoghurt",
+          "ingredients": [
+            {
+              "name": "mango",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mango, rå ätlig vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokos och sesam",
+          "ingredients": [
+            {
+              "name": "kokosflingor",
+              "form": "as_sold",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kokosflingor, mängd som såld"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Sesamfrön, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Ångat kokosris: Skölj riset och blötlägg i 400 ml vatten i kylskåp tills grynen är jämnt svällda.",
+          "uses": [
+            "klibbigt ris"
+          ],
+          "minutes": 360,
+          "passive": true
+        },
+        {
+          "text": "För komponenten Ångat kokosris: Häll av. Lägg riset i en finmaskig ånginsats ovanför 1000 ml vatten. Ånga under lock tills grynen är mjuka och klibbiga; vänd runt en gång.",
+          "uses": [
+            "klibbigt ris"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ångat kokosris: Värm kokosmjölk, socker och salt utan häftig kokning. Vänd ner i det varma riset och låt stå tills vätskan tagits upp.",
+          "uses": [
+            "kokosmjölk",
+            "strösocker",
+            "salt",
+            "klibbigt ris"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Mango och yoghurt: Skölj och ansa mango. Skär frukt och grönsaker i små bitar. Lägg upp mango och yoghurt naturell tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "mango",
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Kokos och sesam: Lägg upp kokosflingor och sesamfrön tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "kokosflingor",
+            "sesamfrön"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera ångat kokosris, mango och yoghurt och kokos och sesam tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "klibbigt ris",
+            "kokosmjölk",
+            "strösocker",
+            "salt",
+            "mango",
+            "yoghurt naturell",
+            "kokosflingor",
+            "sesamfrön"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 7 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 15 minuter aktivt och 385 minuter huvudsakligen passiv väntan, cirka 400 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Särskilt klibbigt ris blötläggs och ångas, därefter absorberar det kokosmjölk; detta kräver en annan produkt och process än vanligt kokt ris. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för klibbigt ris, kokosflingor och mango; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-warm-silken-tofu-coconut",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Varm silkestofu med kokos och frukt – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "varm tofupudding",
+      "primary": "silkestofu",
+      "method": "pot",
+      "side": "Banan och jordnötter",
+      "flavor": [
+        "kokosmjölk",
+        "ingefära",
+        "strösocker"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Liten kastrull",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Varm silkestofu",
+          "ingredients": [
+            {
+              "name": "silkestofu",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "primary",
+              "label": "Silkestofu, mängd som såld"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, mängd som såld"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Banan och jordnötter",
+          "ingredients": [
+            {
+              "name": "banan",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Banan, rå ätlig vikt"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "g",
+              "role": "primary",
+              "label": "Jordnötter, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Varm silkestofu: Finriv ingefäran och värm med kokosmjölk, socker och 25 ml vatten tills sockret löst sig. Skeda ner silkestofun i stora mjuka bitar.",
+          "uses": [
+            "ingefära",
+            "kokosmjölk",
+            "strösocker",
+            "silkestofu"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Varm silkestofu: Värm på låg värme utan kraftig omrörning tills tofun är genomvarm. Behåll den mjuka skedätbara strukturen.",
+          "uses": [
+            "silkestofu"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Banan och jordnötter: Skölj och ansa banan. Skär frukt och grönsaker i små bitar. Lägg upp banan och jordnötter tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "banan",
+            "jordnötter"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera varm silkestofu och banan och jordnötter tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "silkestofu",
+            "kokosmjölk",
+            "ingefära",
+            "strösocker",
+            "banan",
+            "jordnötter"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 14 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 14 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Silkestofu värms försiktigt som mjuk pudding i kokosvätska; fast stekt tofu är inte en likvärdig ersättning. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för banan och silkestofu; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-warm-silken-tofu-coconut",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Varm silkestofu med kokos och frukt – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "varm tofupudding",
+      "primary": "silkestofu",
+      "method": "pot",
+      "side": "Banan och jordnötter, Lime och mynta",
+      "flavor": [
+        "kokosmjölk",
+        "ingefära",
+        "strösocker",
+        "limejuice",
+        "mynta",
+        "kokosflingor"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Liten kastrull",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Varm silkestofu",
+          "ingredients": [
+            {
+              "name": "silkestofu",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "primary",
+              "label": "Silkestofu, mängd som såld"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, mängd som såld"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Banan och jordnötter",
+          "ingredients": [
+            {
+              "name": "banan",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Banan, rå ätlig vikt"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "g",
+              "role": "primary",
+              "label": "Jordnötter, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Lime och mynta",
+          "ingredients": [
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kokosflingor, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Varm silkestofu: Finriv ingefäran och värm med kokosmjölk, socker och 25 ml vatten tills sockret löst sig. Skeda ner silkestofun i stora mjuka bitar.",
+          "uses": [
+            "ingefära",
+            "kokosmjölk",
+            "strösocker",
+            "silkestofu"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Varm silkestofu: Värm på låg värme utan kraftig omrörning tills tofun är genomvarm. Behåll den mjuka skedätbara strukturen.",
+          "uses": [
+            "silkestofu"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Banan och jordnötter: Skölj och ansa banan. Skär frukt och grönsaker i små bitar. Lägg upp banan och jordnötter tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "banan",
+            "jordnötter"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Lime och mynta: Skölj och ansa mynta. Skär frukt och grönsaker i små bitar. Lägg upp limejuice, mynta och kokosflingor tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "limejuice",
+            "mynta",
+            "kokosflingor"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera varm silkestofu, banan och jordnötter och lime och mynta tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "silkestofu",
+            "kokosmjölk",
+            "ingefära",
+            "strösocker",
+            "banan",
+            "jordnötter",
+            "limejuice",
+            "mynta",
+            "kokosflingor"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 18 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 18 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Silkestofu värms försiktigt som mjuk pudding i kokosvätska; fast stekt tofu är inte en likvärdig ersättning. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för banan, kokosflingor, mynta och silkestofu; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-baked-rice-egg-pudding",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Bakad rispudding med bär – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "rispudding",
+      "primary": "ris",
+      "method": "bake",
+      "side": "Bär",
+      "flavor": [
+        "mjölk",
+        "strösocker",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull",
+        "Slev",
+        "Visp",
+        "Ugn",
+        "Grund form",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bakad rispudding",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bär",
+          "ingredients": [
+            {
+              "name": "jordgubbar",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Jordgubbar, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Bakad rispudding: Koka riset med mjölken, saltet och 100 ml vatten på låg värme under omrörning tills grynen är mjuka och blandningen tjock.",
+          "uses": [
+            "ris",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 30
+        },
+        {
+          "text": "För komponenten Bakad rispudding: Låt gröten svalna något. Vispa ägg och socker och rör ner. Smörj en grund portionsform med oljan och häll i smeten.",
+          "uses": [
+            "ägg",
+            "strösocker",
+            "rapsolja",
+            "ris"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Bakad rispudding: Baka i uppvärmd ugn på 180 °C tills puddingen har stelnat och når minst 72 °C i mitten.",
+          "uses": [
+            "ägg",
+            "ris"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Bär: Skölj och ansa jordgubbar. Skär frukt och grönsaker i små bitar. Lägg upp jordgubbar tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "jordgubbar"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera bakad rispudding och bär tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "ris",
+            "mjölk",
+            "ägg",
+            "rapsolja",
+            "strösocker",
+            "salt",
+            "jordgubbar"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 40 minuter aktivt och 25 minuter huvudsakligen passiv väntan, cirka 65 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Mjukkokt ris binds med ägg och bakas till en skärbar pudding; slutstrukturen skiljer sig från risgrynsgröten. Granska rispudding och risgrynsgröt tillsammans; bakad äggstanning är den avsedda huvudskillnaden. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för jordgubbar; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-baked-rice-egg-pudding",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Bakad rispudding med bär – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "rispudding",
+      "primary": "ris",
+      "method": "bake",
+      "side": "Bär, Vaniljyoghurt, Mandel",
+      "flavor": [
+        "mjölk",
+        "strösocker",
+        "salt",
+        "yoghurt naturell",
+        "vaniljpulver",
+        "mandel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull",
+        "Slev",
+        "Visp",
+        "Ugn",
+        "Grund form",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Gaffel",
+        "Sked"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bakad rispudding",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bär",
+          "ingredients": [
+            {
+              "name": "jordgubbar",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Jordgubbar, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Vaniljyoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "vaniljpulver",
+              "form": "dry",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vaniljpulver, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Mandel",
+          "ingredients": [
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mandel, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Bakad rispudding: Koka riset med mjölken, saltet och 100 ml vatten på låg värme under omrörning tills grynen är mjuka och blandningen tjock.",
+          "uses": [
+            "ris",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 30
+        },
+        {
+          "text": "För komponenten Bakad rispudding: Låt gröten svalna något. Vispa ägg och socker och rör ner. Smörj en grund portionsform med oljan och häll i smeten.",
+          "uses": [
+            "ägg",
+            "strösocker",
+            "rapsolja",
+            "ris"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Bakad rispudding: Baka i uppvärmd ugn på 180 °C tills puddingen har stelnat och når minst 72 °C i mitten.",
+          "uses": [
+            "ägg",
+            "ris"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Bär: Skölj och ansa jordgubbar. Skär frukt och grönsaker i små bitar. Lägg upp jordgubbar tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "jordgubbar"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Vaniljyoghurt: Finfördela fasta råvaror i komponenten och rör ihop yoghurt naturell och vaniljpulver i en skål tills blandningen är jämn.",
+          "uses": [
+            "yoghurt naturell",
+            "vaniljpulver"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Mandel: Lägg upp mandel tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "mandel"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera bakad rispudding, bär, vaniljyoghurt och mandel tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "ris",
+            "mjölk",
+            "ägg",
+            "rapsolja",
+            "strösocker",
+            "salt",
+            "jordgubbar",
+            "yoghurt naturell",
+            "vaniljpulver",
+            "mandel"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 48 minuter aktivt och 25 minuter huvudsakligen passiv väntan, cirka 73 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Mjukkokt ris binds med ägg och bakas till en skärbar pudding; slutstrukturen skiljer sig från risgrynsgröten. Granska rispudding och risgrynsgröt tillsammans; bakad äggstanning är den avsedda huvudskillnaden. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för jordgubbar, mandel och vaniljpulver; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-berry-soup-cottage-dumplings",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Bärsoppa med små kesoklimpar – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "bärsoppa med klimpar",
+      "primary": "keso",
+      "method": "pot",
+      "side": "Blåbärssoppa",
+      "flavor": [
+        "salt",
+        "potatismjöl",
+        "strösocker"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Två skedar",
+        "Kastrull",
+        "Hålslev",
+        "Termometer",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Keso- och mjölklimpar",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 130,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, mängd som såld utan extra avrinning"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Blåbärssoppa",
+          "ingredients": [
+            {
+              "name": "blåbär",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blåbär, rå ätlig vikt"
+            },
+            {
+              "name": "potatismjöl",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatismjöl, torr vikt"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Keso- och mjölklimpar: Mosa keson lätt och blanda med ägg, mjöl och salt till en tjock klimpdeg. Låt stå så att mjölet sväller.",
+          "uses": [
+            "keso",
+            "ägg",
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Keso- och mjölklimpar: Koka upp 1000 ml vatten. Forma små klimpar med två skedar och låt sjuda försiktigt tills de håller ihop och är genomkokta. Kontrollera minst 72 °C i mitten. Lyft med hålslev.",
+          "uses": [
+            "keso",
+            "ägg",
+            "vetemjöl"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Blåbärssoppa: Sjud blåbär och socker med 180 ml vatten tills bären spricker. Rör potatismjölet med 20 ml vatten, ta kastrullen från värmen och vispa ner redningen. Värm bara tills soppan tjocknar och första bubblan syns.",
+          "uses": [
+            "blåbär",
+            "strösocker",
+            "potatismjöl"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fördela de genomkokta kesoklimparna i en djup skål och häll hela den varma blåbärssoppan runt och över. Lägg övriga färdiga komponenter över eller intill.",
+          "uses": [
+            "keso",
+            "ägg",
+            "vetemjöl",
+            "salt",
+            "blåbär",
+            "potatismjöl",
+            "strösocker"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 23 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 23 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Små kokta kesoklimpar serveras i en varm stärkelseredd bärsoppa; både soppa och klimpar har egna tillagningsprocesser. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för blåbär och potatismjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-berry-soup-cottage-dumplings",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Bärsoppa med små kesoklimpar – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "bärsoppa med klimpar",
+      "primary": "keso",
+      "method": "pot",
+      "side": "Blåbärssoppa, Rostningsfri mandel",
+      "flavor": [
+        "salt",
+        "potatismjöl",
+        "strösocker",
+        "mandel",
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Två skedar",
+        "Kastrull",
+        "Hålslev",
+        "Termometer",
+        "Visp",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Keso- och mjölklimpar",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 130,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, mängd som såld utan extra avrinning"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Blåbärssoppa",
+          "ingredients": [
+            {
+              "name": "blåbär",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blåbär, rå ätlig vikt"
+            },
+            {
+              "name": "potatismjöl",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Potatismjöl, torr vikt"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Rostningsfri mandel",
+          "ingredients": [
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mandel, mängd som såld"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Keso- och mjölklimpar: Mosa keson lätt och blanda med ägg, mjöl och salt till en tjock klimpdeg. Låt stå så att mjölet sväller.",
+          "uses": [
+            "keso",
+            "ägg",
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Keso- och mjölklimpar: Koka upp 1000 ml vatten. Forma små klimpar med två skedar och låt sjuda försiktigt tills de håller ihop och är genomkokta. Kontrollera minst 72 °C i mitten. Lyft med hålslev.",
+          "uses": [
+            "keso",
+            "ägg",
+            "vetemjöl"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Blåbärssoppa: Sjud blåbär och socker med 180 ml vatten tills bären spricker. Rör potatismjölet med 20 ml vatten, ta kastrullen från värmen och vispa ner redningen. Värm bara tills soppan tjocknar och första bubblan syns.",
+          "uses": [
+            "blåbär",
+            "strösocker",
+            "potatismjöl"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Rostningsfri mandel: Lägg upp mandel och kanel tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "mandel",
+            "kanel"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela de genomkokta kesoklimparna i en djup skål och häll hela den varma blåbärssoppan runt och över. Lägg övriga färdiga komponenter över eller intill.",
+          "uses": [
+            "keso",
+            "ägg",
+            "vetemjöl",
+            "salt",
+            "blåbär",
+            "potatismjöl",
+            "strösocker",
+            "mandel",
+            "kanel"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 27 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 27 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Små kokta kesoklimpar serveras i en varm stärkelseredd bärsoppa; både soppa och klimpar har egna tillagningsprocesser. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för blåbär, mandel och potatismjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-boiled-bagel-quark",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Kokt och bakad bagel med kvargkräm – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "kokt brödring",
+      "primary": "vetemjöl",
+      "method": "bake",
+      "side": "Kvargkräm, Gurka",
+      "flavor": [
+        "torrjäst",
+        "strösocker",
+        "salt",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Slev",
+        "Bakbord",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Plåt",
+        "Grytlappar",
+        "Kastrull",
+        "Hålslev",
+        "Gaffel",
+        "Sked",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bagel",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 85,
+              "unit": "g",
+              "role": "primary",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torrjäst, torr vikt"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kvargkräm",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Bagel: Blanda vetemjöl, torrjäst, strösocker och salt med 45 ml vatten som är ljummet, cirka 37 °C. Arbeta till en smidig deg; knåda tills degen håller ihop och släpper från skålens kanter.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Bagel: Täck degen och låt den jäsa tills den tydligt ökat i volym.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Bagel: Forma degen till en ring med stort hål. Koka upp 1000 ml vatten i en kastrull. Sjud brödet cirka en minut på varje sida, lyft med hålslev och låt rinna av. Lägg på bakplåtspapper och baka i uppvärmd ugn på 220 °C tills ytan fått tydlig färg och brödet är genomgräddat.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Kvargkräm: Finfördela fasta råvaror i komponenten och rör ihop kvarg och citronjuice i en skål tills blandningen är jämn.",
+          "uses": [
+            "kvarg",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera bagel, kvargkräm och gurka tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "kvarg",
+            "citronjuice",
+            "gurka"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 17 minuter aktivt och 70 minuter huvudsakligen passiv väntan, cirka 87 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Degen sjuds före ugnsbakningen och får en tät, seg ringstruktur; kokningen är en bärande skillnad mot vanliga brödringar. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för torrjäst; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-boiled-bagel-quark",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Kokt och bakad bagel med kvargkräm – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "kokt brödring",
+      "primary": "vetemjöl",
+      "method": "bake",
+      "side": "Kvargkräm, Gurka, Avokado och rädisa",
+      "flavor": [
+        "torrjäst",
+        "strösocker",
+        "salt",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Slev",
+        "Bakbord",
+        "Kavel",
+        "Bakplåtspapper",
+        "Ugn",
+        "Plåt",
+        "Grytlappar",
+        "Kastrull",
+        "Hålslev",
+        "Gaffel",
+        "Sked",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bagel",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 85,
+              "unit": "g",
+              "role": "primary",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torrjäst, torr vikt"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kvargkräm",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kvarg, mängd som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Avokado och rädisa",
+          "ingredients": [
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Avokado, rå ätlig vikt"
+            },
+            {
+              "name": "rädisa",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rädisa, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Bagel: Blanda vetemjöl, torrjäst, strösocker och salt med 45 ml vatten som är ljummet, cirka 37 °C. Arbeta till en smidig deg; knåda tills degen håller ihop och släpper från skålens kanter.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Bagel: Täck degen och låt den jäsa tills den tydligt ökat i volym.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Bagel: Forma degen till en ring med stort hål. Koka upp 1000 ml vatten i en kastrull. Sjud brödet cirka en minut på varje sida, lyft med hålslev och låt rinna av. Lägg på bakplåtspapper och baka i uppvärmd ugn på 220 °C tills ytan fått tydlig färg och brödet är genomgräddat.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Kvargkräm: Finfördela fasta råvaror i komponenten och rör ihop kvarg och citronjuice i en skål tills blandningen är jämn.",
+          "uses": [
+            "kvarg",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Avokado och rädisa: Skölj och ansa avokado och rädisa. Skär frukt och grönsaker i små bitar. Lägg upp avokado och rädisa tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "avokado",
+            "rädisa"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera bagel, kvargkräm, gurka och avokado och rädisa tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "strösocker",
+            "salt",
+            "kvarg",
+            "citronjuice",
+            "gurka",
+            "avokado",
+            "rädisa"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 21 minuter aktivt och 70 minuter huvudsakligen passiv väntan, cirka 91 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Degen sjuds före ugnsbakningen och får en tät, seg ringstruktur; kokningen är en bärande skillnad mot vanliga brödringar. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för avokado, rädisa och torrjäst; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    }
+  ]
+}

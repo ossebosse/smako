@@ -1,0 +1,4100 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-01",
+  "recipes": [
+    {
+      "base_id": "smako-indian-lentil-crepes-potato",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade linspannkakor med potatisfyllning och gurka – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "fyllda linspannkakor",
+      "primary": "linser",
+      "method": "pan",
+      "side": "potatisfyllning och gurka",
+      "flavor": [
+        "spiskummin",
+        "citron"
+      ],
+      "equipment": [
+        "Köksvåg och måttkanna",
+        "Stor skål med lock och en mindre salladsskål",
+        "Finmaskig sil",
+        "Blender och slickepott",
+        "Kastrull med lock",
+        "Två stekpannor med fungerande nonstickbeläggning, cirka 24 cm",
+        "Bred stekspade och pensel för stekoljan",
+        "Kniv och skärbräda",
+        "Potatisstöt eller gaffel",
+        "Serveringsfat med lock",
+        "Sked",
+        "Kylskåp",
+        "Måttsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Linspannkakor",
+          "ingredients": [
+            {
+              "name": "linser",
+              "form": "dry",
+              "quantity": 320,
+              "unit": "g",
+              "role": "primary",
+              "label": "Röda delade linser, torr vikt före blötläggning"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till hela pannkaksgräddningen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt till pannkakssmeten"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatisfyllning",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå skalad ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, skalad vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till potatisfyllningen"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen spiskummin"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice till potatisfyllningen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt till potatisfyllningen"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citronvänd gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice till salladen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt till salladen"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj linserna i silen och lägg dem i den stora skålen med 1000 ml vatten. Täck skålen.",
+          "uses": [
+            "linser"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Ställ linserna i kylskåp och låt dem svälla i cirka 4 timmar. De ska ha mjuknat så att en delad lins lätt kan tryckas sönder mellan fingrarna; låt dem stå längre om de fortfarande är hårda.",
+          "uses": [
+            "linser"
+          ],
+          "minutes": 240,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll bort blötläggningsvattnet och låt linserna rinna av ordentligt i silen. Mixa dem med pannkakornas salt och 330 ml vatten till en helt slät, hällbar smet. Stanna och skrapa ner från blenderns sidor så att inga hårda linsbitar finns kvar.",
+          "uses": [
+            "linser",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila medan fyllningen förbereds. Rör igenom den före gräddningen.",
+          "uses": [
+            "linser"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatisen och skär den i jämna bitar, cirka 2 cm. Skala och finhacka löken.",
+          "uses": [
+            "potatis",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg potatisen i kastrullen med 1000 ml vatten. Koka upp utan salt; fyllningens salt tillsätts efter avhällning.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud potatisen under lock tills den är helt mjuk, cirka 15 minuter. Kontrollera med en gaffel.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 15,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Medan potatisen sjuder: värm fyllningens olja i den ena stekpannan. Fräs löken på medelvärme tills den är mjuk och lätt gyllene.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner spiskumminen i löken och fräs kort utan att kryddan bränns. Häll av potatisen och låt den ånga av. Krossa den grovt med en gaffel och vänd ner den i lökfräset. Rör in fyllningens citronjuice och salt. Lägg tillbaka fyllningen i den varma, tömda kastrullen och täck med lock.",
+          "uses": [
+            "spiskummin",
+            "gul lök",
+            "potatis",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            7,
+            8
+          ]
+        },
+        {
+          "text": "Skär gurkan i små bitar och blanda i salladsskålen med salladens citronjuice och salt. Låt stå fram till servering.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Torka ur stekpannan som använts till fyllningen och värm båda pannorna till medelvärme. Fördela pannkakornas uppmätta olja över hela gräddningen och pensla pannorna tunt mellan omgångarna. Rör om smeten före varje omgång. Häll smet i pannorna och bred genast med baksidan av en sked till pannkakor cirka 18 cm i diameter och 2–3 mm tjocka. Grädda omkring 2–3 minuter på första sidan. Vänta tills ovansidan blivit matt, kanterna släpper och pannkakan går att lossa med en bred stekspade; vänd inte medan smeten fortfarande är blöt. Vänd och grädda ytterligare 1–2 minuter tills båda sidor fått färg och mitten är helt genomgräddad utan rå, kladdig smet. Sänk värmen om ytan mörknar innan mitten stelnar. Fortsätt med all smet och all uppmätt stekolja, ungefär tre pannkakor per portion. Lägg färdiga pannkakor i en täckt stapel på serveringsfatet så att de håller sig mjuka.",
+          "uses": [
+            "linser",
+            "rapsolja"
+          ],
+          "minutes": 28,
+          "after": [
+            4,
+            9,
+            10
+          ]
+        },
+        {
+          "text": "Fördela den varma potatisfyllningen mellan pannkakorna och vik dem över fyllningen. Servera direkt med den citronvända gurkan och dess dressing.",
+          "uses": [
+            "linser",
+            "potatis",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad rätt utan påstående om en traditionell förlaga. Avsedd för innehållsgranskning; inte importerad eller godkänd i Smako. Växtbaserad utformning utifrån ingredienslistan; diet, allergener, näring och köpbarhet behöver prövas per variant mot faktiskt valda produkter. Lokalt härlett ingrediensantal: 7 unika identiteter utan salt, peppar och processvatten. Ligger utanför nuvarande standardfilter för middag på 10–15 ingredienser och kräver ändrade gränser. Enkel beskriver innehållsvarianten, inte kort tillagningstid. Beräknad totaltid cirka 5 timmar 10 minuter, varav cirka 65 minuter aktivt arbete; totaltiden inkluderar 4 timmars passiv blötläggning. Blötläggningstid, smetens vattenmängd, pannkakornas hållfasthet och gräddningstid behöver provlagas. Tidsuppskattningen förutsätter två nonstickpannor; med en panna tar gräddningen längre tid. Passiva moment överlappar delvis aktivt arbete och ska inte summeras som total väntetid."
+    },
+    {
+      "base_id": "smako-indian-lentil-crepes-potato",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade linspannkakor med potatis, spenat och gurka – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "fyllda linspannkakor",
+      "primary": "linser",
+      "method": "pan",
+      "side": "potatisfyllning och gurka",
+      "flavor": [
+        "spiskummin",
+        "citron",
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg och måttkanna",
+        "Stor skål med lock och en mindre salladsskål",
+        "Finmaskig sil",
+        "Blender och slickepott",
+        "Kastrull med lock",
+        "Två stekpannor med fungerande nonstickbeläggning, cirka 24 cm",
+        "Bred stekspade och pensel för stekoljan",
+        "Kniv och skärbräda",
+        "Potatisstöt eller gaffel",
+        "Serveringsfat med lock",
+        "Sked",
+        "Kylskåp",
+        "Måttsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Linspannkakor",
+          "ingredients": [
+            {
+              "name": "linser",
+              "form": "dry",
+              "quantity": 320,
+              "unit": "g",
+              "role": "primary",
+              "label": "Röda delade linser, torr vikt före blötläggning"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till hela pannkaksgräddningen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt till pannkakssmeten"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis- och spenatfyllning",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå skalad ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, skalad vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till potatisfyllningen"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen spiskummin"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice till potatisfyllningen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt till potatisfyllningen"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld före upptining och urpressning"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, skalad vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk ingefära, skalad vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citronvänd gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice till salladen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt till salladen"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj linserna i silen och lägg dem i den stora skålen med 1000 ml vatten. Täck skålen.",
+          "uses": [
+            "linser"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Ställ linserna i kylskåp och låt dem svälla i cirka 4 timmar. De ska ha mjuknat så att en delad lins lätt kan tryckas sönder mellan fingrarna; låt dem stå längre om de fortfarande är hårda.",
+          "uses": [
+            "linser"
+          ],
+          "minutes": 240,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll bort blötläggningsvattnet och låt linserna rinna av ordentligt i silen. Mixa dem med pannkakornas salt och 330 ml vatten till en helt slät, hällbar smet. Stanna och skrapa ner från blenderns sidor så att inga hårda linsbitar finns kvar.",
+          "uses": [
+            "linser",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila medan fyllningen förbereds. Rör igenom den före gräddningen.",
+          "uses": [
+            "linser"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatisen och skär den i jämna bitar, cirka 2 cm. Skala och finhacka löken och vitlöken. Skala ingefäran och finhacka den mycket fint.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 9,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg potatisen i kastrullen med 1000 ml vatten. Koka upp utan salt; fyllningens salt tillsätts efter avhällning.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud potatisen under lock tills den är helt mjuk, cirka 15 minuter. Kontrollera med en gaffel.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 15,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Medan potatisen sjuder: lägg den frysta spenaten i den ena stekpannan med 50 ml vatten. Värm på medelvärme och rör sönder klumparna tills spenaten är helt tinad och genomvarm.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Häll spenaten i silen och pressa försiktigt med baksidan av en sked tills överskottsvätskan runnit av. Torka ur stekpannan. Den urpressade spenaten ska ge en fast fyllning som inte väter ner pannkakorna.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Värm fyllningens olja i stekpannan och fräs löken på medelvärme tills den mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Tillsätt vitlök, ingefära och spiskummin i lökfräset. Fräs under omrörning utan att vitlöken eller kryddan bränns.",
+          "uses": [
+            "vitlök",
+            "ingefära",
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Häll av potatisen och låt den ånga av. Krossa den grovt med en gaffel och vänd ner den i lökfräset tillsammans med den urpressade spenaten. Värm under omrörning tills fyllningen är jämnt varm. Rör in fyllningens citronjuice och salt. Lägg tillbaka fyllningen i den varma, tömda kastrullen och täck med lock.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "spenat",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            7,
+            11
+          ]
+        },
+        {
+          "text": "Skär gurkan i små bitar och blanda i salladsskålen med salladens citronjuice och salt. Låt stå fram till servering.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Torka ur stekpannan som använts till fyllningen och värm båda pannorna till medelvärme. Fördela pannkakornas uppmätta olja över hela gräddningen och pensla pannorna tunt mellan omgångarna. Rör om smeten före varje omgång. Häll smet i pannorna och bred genast med baksidan av en sked till pannkakor cirka 18 cm i diameter och 2–3 mm tjocka. Grädda omkring 2–3 minuter på första sidan. Vänta tills ovansidan blivit matt, kanterna släpper och pannkakan går att lossa med en bred stekspade; vänd inte medan smeten fortfarande är blöt. Vänd och grädda ytterligare 1–2 minuter tills båda sidor fått färg och mitten är helt genomgräddad utan rå, kladdig smet. Sänk värmen om ytan mörknar innan mitten stelnar. Fortsätt med all smet och all uppmätt stekolja, ungefär tre pannkakor per portion. Lägg färdiga pannkakor i en täckt stapel på serveringsfatet så att de håller sig mjuka.",
+          "uses": [
+            "linser",
+            "rapsolja"
+          ],
+          "minutes": 28,
+          "after": [
+            4,
+            12,
+            13
+          ]
+        },
+        {
+          "text": "Fördela den varma potatis- och spenatfyllningen mellan pannkakorna och vik dem över fyllningen. Servera direkt med den citronvända gurkan och dess dressing.",
+          "uses": [
+            "linser",
+            "potatis",
+            "spenat",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad rätt utan påstående om en traditionell förlaga. Avsedd för innehållsgranskning; inte importerad eller godkänd i Smako. Växtbaserad utformning utifrån ingredienslistan; diet, allergener, näring och köpbarhet behöver prövas per variant mot faktiskt valda produkter. Lokalt härlett ingrediensantal: 10 unika identiteter utan salt, peppar och processvatten; inom nuvarande middagsfilter 10–15 på denna preliminära räkning. Smako räknar slutligt. Potatismängden är anpassad till spenatfyllningen; spenaten pressas för att hålla fyllningen fast. Beräknad totaltid cirka 5 timmar 20 minuter, varav cirka 75 minuter aktivt arbete; totaltiden inkluderar 4 timmars passiv blötläggning. Blötläggningstid, smetens vattenmängd, pannkakornas hållfasthet och gräddningstid behöver provlagas. Tidsuppskattningen förutsätter två nonstickpannor; med en panna tar gräddningen längre tid. Passiva moment överlappar delvis aktivt arbete och ska inte summeras som total väntetid."
+    },
+    {
+      "base_id": "smako-indian-lentil-crepes-potato",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade linspannkakor med kryddig potatis- och spenatfyllning samt tomat- och gurksallad – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "family": "fyllda linspannkakor",
+      "primary": "linser",
+      "method": "pan",
+      "side": "potatisfyllning och gurk- och tomatsallad",
+      "flavor": [
+        "spiskummin",
+        "citron",
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg och måttkanna",
+        "Stor skål med lock och en mindre salladsskål",
+        "Finmaskig sil",
+        "Blender och slickepott",
+        "Kastrull med lock",
+        "Två stekpannor med fungerande nonstickbeläggning, cirka 24 cm",
+        "Bred stekspade och pensel för stekoljan",
+        "Kniv och skärbräda",
+        "Potatisstöt eller gaffel",
+        "Serveringsfat med lock",
+        "Sked",
+        "Kylskåp",
+        "Måttsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Linspannkakor",
+          "ingredients": [
+            {
+              "name": "linser",
+              "form": "dry",
+              "quantity": 320,
+              "unit": "g",
+              "role": "primary",
+              "label": "Röda delade linser, torr vikt före blötläggning"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till hela pannkaksgräddningen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt till pannkakssmeten"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Potatis- och spenatfyllning",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå skalad ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, skalad vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till potatisfyllningen"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen spiskummin"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice till potatisfyllningen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt till potatisfyllningen"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld före upptining och urpressning"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, skalad vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk ingefära, skalad vikt"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen gurkmeja"
+            },
+            {
+              "name": "malen koriander",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malda korianderfrön"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citronvänd gurk- och tomatsallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice till salladen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt till salladen"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt utan stjälkfäste"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj linserna i silen och lägg dem i den stora skålen med 1000 ml vatten. Täck skålen.",
+          "uses": [
+            "linser"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Ställ linserna i kylskåp och låt dem svälla i cirka 4 timmar. De ska ha mjuknat så att en delad lins lätt kan tryckas sönder mellan fingrarna; låt dem stå längre om de fortfarande är hårda.",
+          "uses": [
+            "linser"
+          ],
+          "minutes": 240,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll bort blötläggningsvattnet och låt linserna rinna av ordentligt i silen. Mixa dem med pannkakornas salt och 330 ml vatten till en helt slät, hällbar smet. Stanna och skrapa ner från blenderns sidor så att inga hårda linsbitar finns kvar.",
+          "uses": [
+            "linser",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila medan fyllningen förbereds. Rör igenom den före gräddningen.",
+          "uses": [
+            "linser"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala potatisen och skär den i jämna bitar, cirka 2 cm. Skala och finhacka löken och vitlöken. Skala ingefäran och finhacka den mycket fint.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 9,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg potatisen i kastrullen med 1000 ml vatten. Koka upp utan salt; fyllningens salt tillsätts efter avhällning.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud potatisen under lock tills den är helt mjuk, cirka 15 minuter. Kontrollera med en gaffel.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 15,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Medan potatisen sjuder: lägg den frysta spenaten i den ena stekpannan med 50 ml vatten. Värm på medelvärme och rör sönder klumparna tills spenaten är helt tinad och genomvarm.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Häll spenaten i silen och pressa försiktigt med baksidan av en sked tills överskottsvätskan runnit av. Torka ur stekpannan. Den urpressade spenaten ska ge en fast fyllning som inte väter ner pannkakorna.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Värm fyllningens olja i stekpannan och fräs löken på medelvärme tills den mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Tillsätt vitlök, ingefära, spiskummin, gurkmeja och malen koriander i lökfräset. Fräs under omrörning så att kryddorna blandas med oljan utan att brännas.",
+          "uses": [
+            "vitlök",
+            "ingefära",
+            "spiskummin",
+            "gurkmeja",
+            "malen koriander"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Häll av potatisen och låt den ånga av. Krossa den grovt med en gaffel och vänd ner den i lökfräset tillsammans med den urpressade spenaten. Värm under omrörning tills fyllningen är jämnt varm. Rör in fyllningens citronjuice och salt. Lägg tillbaka fyllningen i den varma, tömda kastrullen och täck med lock.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "spenat",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            7,
+            11
+          ]
+        },
+        {
+          "text": "Skär gurkan och tomaterna i små bitar. Lägg dem i salladsskålen med salladens citronjuice och salt och vänd runt. Behåll grönsakssaften som dressing.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Torka ur stekpannan som använts till fyllningen och värm båda pannorna till medelvärme. Fördela pannkakornas uppmätta olja över hela gräddningen och pensla pannorna tunt mellan omgångarna. Rör om smeten före varje omgång. Häll smet i pannorna och bred genast med baksidan av en sked till pannkakor cirka 18 cm i diameter och 2–3 mm tjocka. Grädda omkring 2–3 minuter på första sidan. Vänta tills ovansidan blivit matt, kanterna släpper och pannkakan går att lossa med en bred stekspade; vänd inte medan smeten fortfarande är blöt. Vänd och grädda ytterligare 1–2 minuter tills båda sidor fått färg och mitten är helt genomgräddad utan rå, kladdig smet. Sänk värmen om ytan mörknar innan mitten stelnar. Fortsätt med all smet och all uppmätt stekolja, ungefär tre pannkakor per portion. Lägg färdiga pannkakor i en täckt stapel på serveringsfatet så att de håller sig mjuka.",
+          "uses": [
+            "linser",
+            "rapsolja"
+          ],
+          "minutes": 28,
+          "after": [
+            4,
+            12,
+            13
+          ]
+        },
+        {
+          "text": "Fördela den varma potatis- och spenatfyllningen mellan pannkakorna och vik dem över fyllningen. Servera direkt med gurk- och tomatsalladen och dess dressing.",
+          "uses": [
+            "linser",
+            "potatis",
+            "spenat",
+            "gurka",
+            "tomat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Indiskinspirerad rätt utan påstående om en traditionell förlaga. Avsedd för innehållsgranskning; inte importerad eller godkänd i Smako. Växtbaserad utformning utifrån ingredienslistan; diet, allergener, näring och köpbarhet behöver prövas per variant mot faktiskt valda produkter. Lokalt härlett ingrediensantal: 13 unika identiteter utan salt, peppar och processvatten; inom nuvarande middagsfilter 10–15 på denna preliminära räkning. Smako räknar slutligt. Fyllningens potatis och spenat är anpassade till den större salladen; kryddorna ger smak åt potatisen och tomaten ger saftighet till serveringen. Beräknad totaltid cirka 5 timmar 20 minuter, varav cirka 77 minuter aktivt arbete; totaltiden inkluderar 4 timmars passiv blötläggning. Blötläggningstid, smetens vattenmängd, pannkakornas hållfasthet och gräddningstid behöver provlagas. Tidsuppskattningen förutsätter två nonstickpannor; med en panna tar gräddningen längre tid. Passiva moment överlappar delvis aktivt arbete och ska inte summeras som total väntetid."
+    },
+    {
+      "base_id": "smako-italian-chicken-spinach-roulades",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade kycklingrullader med spenat, ost och potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "fyllda kycklingrullader",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "kokt potatis",
+      "flavor": [
+        "tomat",
+        "oregano",
+        "spenat"
+      ],
+      "equipment": [
+        "Ugn",
+        "Ugnsform cirka 20 × 30 cm",
+        "Liten kastrull",
+        "Kastrull med lock för potatis",
+        "Finmaskig sil",
+        "Skål",
+        "Tallrik",
+        "Sked",
+        "Skärbräda",
+        "Kniv",
+        "Rivjärn",
+        "Bakplåtspapper",
+        "Kavel eller köttklubba",
+        "Tandpetare av trä",
+        "Digital kökstermometer",
+        "Köksvåg",
+        "Måttkärl",
+        "Durkslag",
+        "Provsticka",
+        "Grytlappar",
+        "Måttsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Spenat- och ostfyllda kycklingrullader",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan skinn och ben"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen svartpeppar"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Oreganotomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad oregano"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 200 °C över- och undervärme. Skölj potatisen och skär den i jämnstora bitar, cirka 3 cm. Lägg den i potatiskastrullen.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Lägg spenaten i den lilla kastrullen med 30 ml vatten. Värm på medelvärme och rör så att den tinar jämnt och blir genomvarm. Bryt sönder frysta klumpar.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Häll spenaten i en finmaskig sil, pressa ut vätskan med baksidan av en sked och sprid spenaten på en tallrik.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt den urpressade spenaten svalna medan nästa steg utförs.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ihop de krossade tomaterna med såsens rapsolja, oregano och salt direkt i ugnsformen. Bred ut såsen jämnt.",
+          "uses": [
+            "krossade tomater",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Riv osten och blanda den med den avsvalnade spenaten, rulladernas salt och svartpepparn.",
+          "uses": [
+            "ost",
+            "spenat",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 3,
+          "after": [
+            4,
+            5
+          ]
+        },
+        {
+          "text": "Skär kycklingen på längden till breda, tunna skivor. Banka skivorna mellan bakplåtspapper till omkring 5 mm tjocklek. Fördela spenatfyllningen på dem, vik in kanterna och rulla ihop. Fäst med tandpetare och lägg med skarven nedåt i tomatsåsen. Skeda lite av såsen över rulladerna. Tvätta händerna och diska kniv och skärbräda efter råkycklingen.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "ost",
+            "krossade tomater"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ställ formen mitt i den uppvärmda ugnen. Baka i cirka 25 minuter; den slutliga tiden avgörs av temperaturkontrollen i ett senare steg.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Medan rulladerna står i ugnen: tillsätt potatisens salt och 1200 ml vatten i potatiskastrullen. Koka upp under lock.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud potatisen under lock cirka 18 minuter, tills bitarna är mjuka när du känner med en sticka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mät i den tjockaste kycklingrulladens mitt, genom fyllningen, och kontrollera även en annan rullad. Kycklingen och rulladens centrum ska nå minst 74 °C. Om temperaturen är lägre, baka vidare och kontrollera igen. Ta därefter ut formen.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Häll av potatisen och låt den ånga av kort i kastrullen med locket på glänt.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Ta bort samtliga tandpetare. Servera kycklingrulladerna med sin tomatsås och den kokta potatisen.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            11,
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. Uppskattat 60–70 minuter totalt och 41 minuter aktivt arbete; ugnstid, spenatens avsvalning och potatiskokning är huvudsakligen passiva och överlappar. 7 preliminärt räknade ingredienser; samma råvara i flera komponenter räknas en gång, salt och svartpeppar undantas. Ligger utanför nuvarande standardfilter för middag, 10–15 ingredienser; användaren behöver sänka minantalet. Enkel betecknar innehållsvarianten och innebär inte att rullningstekniken är snabb. Italienskinspirerad rätt. Nyhetsmotiveringen är den fyllda och rullade kycklingen; närmaste befintliga grupper är tomatbräserad kyckling och cacciatore. Den kulinariska avgränsningen behöver innehållsgranskas. Kycklingbröst och ost som går att riva preciseras i label; produktkopplingen måste kontrollera att dessa egenskaper uppfylls. Spenaten vägs fryst som såld, före uppvärmning och urpressning. Rulladernas storlek, fyllningens fuktighet och ugnstid behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Köpbarhet, diet, allergener och näring måste bedömas per variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-italian-chicken-spinach-roulades",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade kycklingrullader med zucchini i tomatsåsen – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "fyllda kycklingrullader",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "kokt potatis",
+      "flavor": [
+        "tomat",
+        "oregano",
+        "spenat"
+      ],
+      "equipment": [
+        "Ugn",
+        "Ugnsform cirka 20 × 30 cm",
+        "Liten kastrull",
+        "Kastrull med lock för potatis",
+        "Finmaskig sil",
+        "Skål",
+        "Tallrik",
+        "Sked",
+        "Skärbräda",
+        "Kniv",
+        "Rivjärn",
+        "Bakplåtspapper",
+        "Kavel eller köttklubba",
+        "Tandpetare av trä",
+        "Digital kökstermometer",
+        "Köksvåg",
+        "Måttkärl",
+        "Durkslag",
+        "Stekpanna",
+        "Stekspade",
+        "Provsticka",
+        "Grytlappar",
+        "Måttsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Spenat- och ostfyllda kycklingrullader",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan skinn och ben"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen svartpeppar"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatsås med zucchini",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad oregano"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, skalad rå vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, skalad rå vikt"
+            },
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 850,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 200 °C över- och undervärme. Skölj potatisen och skär den i jämnstora bitar, cirka 3 cm. Lägg den i potatiskastrullen.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Lägg spenaten i den lilla kastrullen med 30 ml vatten. Värm på medelvärme och rör så att den tinar jämnt och blir genomvarm. Bryt sönder frysta klumpar.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Häll spenaten i en finmaskig sil, pressa ut vätskan med baksidan av en sked och sprid spenaten på en tallrik.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt den urpressade spenaten svalna medan nästa steg utförs.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala och finhacka löken och vitlöken. Skär zucchinin i små tärningar.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "zucchini"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm såsens rapsolja i stekpannan. Fräs löken på medelvärme tills den mjuknar. Tillsätt zucchinin och stek under omrörning tills den börjar mjukna. Rör ner vitlöken och oreganon mot slutet utan att låta vitlöken brännas.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "zucchini",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt de krossade tomaterna och såsens salt. Låt koka upp under omrörning och häll såsen i ugnsformen.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Riv osten och blanda den med den avsvalnade spenaten, rulladernas salt och svartpepparn.",
+          "uses": [
+            "ost",
+            "spenat",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 3,
+          "after": [
+            4,
+            7
+          ]
+        },
+        {
+          "text": "Skär kycklingen på längden till breda, tunna skivor. Banka skivorna mellan bakplåtspapper till omkring 5 mm tjocklek. Fördela spenatfyllningen på dem, vik in kanterna och rulla ihop. Fäst med tandpetare och lägg med skarven nedåt i tomatsåsen. Skeda lite av såsen över rulladerna. Tvätta händerna och diska kniv och skärbräda efter råkycklingen.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "ost",
+            "krossade tomater"
+          ],
+          "minutes": 12,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ställ formen mitt i den uppvärmda ugnen. Baka i cirka 25 minuter; den slutliga tiden avgörs av temperaturkontrollen i ett senare steg.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 25,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Medan rulladerna står i ugnen: tillsätt potatisens salt och 1200 ml vatten i potatiskastrullen. Koka upp under lock.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud potatisen under lock cirka 18 minuter, tills bitarna är mjuka när du känner med en sticka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mät i den tjockaste kycklingrulladens mitt, genom fyllningen, och kontrollera även en annan rullad. Kycklingen och rulladens centrum ska nå minst 74 °C. Om temperaturen är lägre, baka vidare och kontrollera igen. Ta därefter ut formen.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Häll av potatisen och låt den ånga av kort i kastrullen med locket på glänt.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Ta bort samtliga tandpetare. Servera kycklingrulladerna med sin tomatsås och den kokta potatisen.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            13,
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. Uppskattat 70–80 minuter totalt och 54 minuter aktivt arbete; ugnstid, spenatens avsvalning och potatiskokning är huvudsakligen passiva och överlappar. 10 preliminärt räknade ingredienser; samma råvara i flera komponenter räknas en gång, salt och svartpeppar undantas. Ligger preliminärt inom nuvarande standardfilter för middag, 10–15 ingredienser. Italienskinspirerad rätt. Nyhetsmotiveringen är den fyllda och rullade kycklingen; närmaste befintliga grupper är tomatbräserad kyckling och cacciatore. Den kulinariska avgränsningen behöver innehållsgranskas. Kycklingbröst och ost som går att riva preciseras i label; produktkopplingen måste kontrollera att dessa egenskaper uppfylls. Spenaten vägs fryst som såld, före uppvärmning och urpressning. Rulladernas storlek, fyllningens fuktighet och ugnstid behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Köpbarhet, diet, allergener och näring måste bedömas per variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-italian-chicken-spinach-roulades",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade kycklingrullader med basilikatomatsås och citronmorot – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "fyllda kycklingrullader",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "kokt potatis",
+      "flavor": [
+        "tomat",
+        "oregano",
+        "spenat",
+        "basilika",
+        "citron"
+      ],
+      "equipment": [
+        "Ugn",
+        "Ugnsform cirka 20 × 30 cm",
+        "Liten kastrull",
+        "Kastrull med lock för potatis",
+        "Finmaskig sil",
+        "Skål",
+        "Tallrik",
+        "Sked",
+        "Skärbräda",
+        "Kniv",
+        "Rivjärn",
+        "Bakplåtspapper",
+        "Kavel eller köttklubba",
+        "Tandpetare av trä",
+        "Digital kökstermometer",
+        "Köksvåg",
+        "Måttkärl",
+        "Durkslag",
+        "Stekpanna",
+        "Stekspade",
+        "Provsticka",
+        "Grytlappar",
+        "Måttsats",
+        "Separat salladsskål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Spenat- och ostfyllda kycklingrullader",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan skinn och ben"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen svartpeppar"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatsås med zucchini",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad oregano"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, skalad rå vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, skalad rå vikt"
+            },
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk basilika, ätliga blad"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 850,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Citronmorot med basilika",
+          "ingredients": [
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, skalad rå vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk basilika, ätliga blad"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 200 °C över- och undervärme. Skölj potatisen och skär den i jämnstora bitar, cirka 3 cm. Lägg den i potatiskastrullen.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Lägg spenaten i den lilla kastrullen med 30 ml vatten. Värm på medelvärme och rör så att den tinar jämnt och blir genomvarm. Bryt sönder frysta klumpar.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Häll spenaten i en finmaskig sil, pressa ut vätskan med baksidan av en sked och sprid spenaten på en tallrik.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt den urpressade spenaten svalna medan nästa steg utförs.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala och finhacka löken och vitlöken. Skär zucchinin i små tärningar.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "zucchini"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm såsens rapsolja i stekpannan. Fräs löken på medelvärme tills den mjuknar. Tillsätt zucchinin och stek under omrörning tills den börjar mjukna. Rör ner vitlöken och oreganon mot slutet utan att låta vitlöken brännas.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "zucchini",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt de krossade tomaterna och såsens salt. Låt koka upp under omrörning och häll såsen i ugnsformen.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Riv osten och blanda den med den avsvalnade spenaten, rulladernas salt och svartpepparn.",
+          "uses": [
+            "ost",
+            "spenat",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 3,
+          "after": [
+            4,
+            7
+          ]
+        },
+        {
+          "text": "Skär kycklingen på längden till breda, tunna skivor. Banka skivorna mellan bakplåtspapper till omkring 5 mm tjocklek. Fördela spenatfyllningen på dem, vik in kanterna och rulla ihop. Fäst med tandpetare och lägg med skarven nedåt i tomatsåsen. Skeda lite av såsen över rulladerna. Tvätta händerna och diska kniv och skärbräda efter råkycklingen.",
+          "uses": [
+            "kyckling",
+            "spenat",
+            "ost",
+            "krossade tomater"
+          ],
+          "minutes": 12,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ställ formen mitt i den uppvärmda ugnen. Baka i cirka 25 minuter; den slutliga tiden avgörs av temperaturkontrollen i ett senare steg.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 25,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Medan rulladerna står i ugnen: tillsätt potatisens salt och 1200 ml vatten i potatiskastrullen. Koka upp under lock.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sänk värmen och sjud potatisen under lock cirka 18 minuter, tills bitarna är mjuka när du känner med en sticka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 18,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala och grovriv moroten. Strimla salladens basilika och blanda med moroten, citronjuicen, salladens rapsolja och salt. Ställ salladen åt sidan till servering.",
+          "uses": [
+            "morot",
+            "basilika",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Mät i den tjockaste kycklingrulladens mitt, genom fyllningen, och kontrollera även en annan rullad. Kycklingen och rulladens centrum ska nå minst 74 °C. Om temperaturen är lägre, baka vidare och kontrollera igen. Ta därefter ut formen.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Häll av potatisen och låt den ånga av kort i kastrullen med locket på glänt.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Ta bort samtliga tandpetare. Riv ner såsens basilika i den heta tomatsåsen. Servera rulladerna med såsen, potatisen och citronmoroten.",
+          "uses": [
+            "kyckling",
+            "basilika",
+            "krossade tomater",
+            "potatis",
+            "morot"
+          ],
+          "minutes": 2,
+          "after": [
+            14,
+            15,
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. Uppskattat 75–85 minuter totalt och 59 minuter aktivt arbete; ugnstid, spenatens avsvalning och potatiskokning är huvudsakligen passiva och överlappar. 13 preliminärt räknade ingredienser; samma råvara i flera komponenter räknas en gång, salt och svartpeppar undantas. Ligger preliminärt inom nuvarande standardfilter för middag, 10–15 ingredienser. Italienskinspirerad rätt. Nyhetsmotiveringen är den fyllda och rullade kycklingen; närmaste befintliga grupper är tomatbräserad kyckling och cacciatore. Den kulinariska avgränsningen behöver innehållsgranskas. Kycklingbröst och ost som går att riva preciseras i label; produktkopplingen måste kontrollera att dessa egenskaper uppfylls. Spenaten vägs fryst som såld, före uppvärmning och urpressning. Rulladernas storlek, fyllningens fuktighet och ugnstid behöver provlagning. Ingen import eller något godkännande i Smako har genomförts. Köpbarhet, diet, allergener och näring måste bedömas per variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-salmon-cakes-potatoes",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Laxbiffar med potatis, ärtor och citronyoghurt – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "fiskbiffar",
+      "primary": "lax",
+      "method": "pan",
+      "side": "kokt potatis",
+      "flavor": [
+        "citron"
+      ],
+      "equipment": [
+        "Spis",
+        "Stor kastrull med lock",
+        "Liten kastrull",
+        "Bred stekpanna",
+        "Två skålar",
+        "Sked",
+        "Skärbräda",
+        "Vass kniv",
+        "Stekspade",
+        "Två tallrikar och ett lock",
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkärl",
+        "Provsticka",
+        "Måttsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Laxbiffar",
+          "ingredients": [
+            {
+              "name": "lax",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Laxfilé, rå ätlig vikt utan skinn och ben"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till samtliga stekomgångar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen svartpeppar"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1000,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gröna ärtor",
+          "ingredients": [
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Citronyoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj potatisen och skär den i jämnstora bitar, cirka 3 cm. Lägg i kastrullen med potatisens salt och 1400 ml vatten. Koka upp under lock.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Sjud potatisen under lock på låg värme cirka 20 minuter, tills den är mjuk när du känner med en sticka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Blanda biffarnas yoghurt, ströbröd, citronjuice, salt och svartpeppar i en skål. Låt blandningen stå medan laxen hackas.",
+          "uses": [
+            "yoghurt naturell",
+            "ströbröd",
+            "citronjuice",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Kontrollera att laxen saknar ben och skinn. Finhacka den kalla laxen med kniv, och hacka sedan ungefär hälften ytterligare tills den blir en klibbig färs. Arbeta ner all lax i ströbrödsblandningen tills smeten håller ihop. Tvätta händerna och diska kniv och skärbräda efter råfisken.",
+          "uses": [
+            "lax",
+            "ströbröd"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ställ laxsmeten i kylskåpet så att ströbrödet hinner svälla och smeten blir lättare att forma.",
+          "uses": [
+            "lax",
+            "ströbröd"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ihop såsens yoghurt, citronjuice och salt. Ställ citronyoghurten kallt fram till servering.",
+          "uses": [
+            "yoghurt naturell",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Häll av den färdigkokta potatisen och håll den varm i kastrullen under lock.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Forma den kalla laxsmeten med en sked och lätt fuktade händer till två biffar per portion, cirka 1,5 cm tjocka. Lägg på en tallrik.",
+          "uses": [
+            "lax"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm en del av biffarnas rapsolja i stekpannan på medelvärme. Stek biffarna i omgångar utan att tränga pannan, cirka 3–4 minuter på varje sida. Fördela hela mängden stekolja över omgångarna. Vänd först när en sammanhängande stekyta har bildats. Mät i biffarnas mitt med kökstermometer; laxen ska nå minst 63 °C. Fortsätt på lägre värme om de får färg innan mitten är färdig. Lägg färdiga biffar på en ren tallrik och täck löst med ett lock.",
+          "uses": [
+            "rapsolja",
+            "lax"
+          ],
+          "minutes": 16,
+          "after": [
+            8,
+            7
+          ]
+        },
+        {
+          "text": "Koka upp 400 ml vatten med ärtornas salt i den lilla kastrullen och tillsätt de frysta ärtorna. Låt vattnet koka upp igen.",
+          "uses": [
+            "ärtor",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Låt ärtorna sjuda cirka 3 minuter tills de är helt varma; följ en längre tillagningstid om förpackningen anger det.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 3,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av ärtorna. Servera laxbiffarna med potatisen, ärtorna och citronyoghurten.",
+          "uses": [
+            "lax",
+            "potatis",
+            "ärtor",
+            "yoghurt naturell"
+          ],
+          "minutes": 2,
+          "after": [
+            9,
+            7,
+            11,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. Uppskattat 55–65 minuter totalt och 46 minuter aktivt arbete; potatiskokning och smetens kylvila överlappar. 7 preliminärt räknade ingredienser; samma ingrediens i flera komponenter räknas bara en gång. Salt och svartpeppar undantas. Ligger utanför nuvarande standardfilter för middag, 10–15 ingredienser; användaren behöver sänka minantalet. Laxen finfördelas rå, binds med yoghurt och ströbröd och formas till biffar. Det skiljer huvudrättens teknik och konsistens från befintliga laxfiléer och fiskgratänger, men avgränsningen ska innehållsgranskas. Biffarnas hållfasthet och stektid behöver provlagning. Smeten innehåller inget tillsatt ägg; slutliga ingrediens- och allergenuppgifter kan ändå inte fastställas utan produktkontroll. Väg laxen utan skinn och ben; ärtorna vägs frysta som sålda. Alla angivna yoghurt- och oljemängder används i respektive namngiven komponent. Ingen import eller något godkännande i Smako har genomförts. Köpbarhet, diet, allergener och näring måste bedömas per variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-salmon-cakes-potatoes",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Laxbiffar med senapsdillsås och citronmorot – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "fiskbiffar",
+      "primary": "lax",
+      "method": "pan",
+      "side": "kokt potatis",
+      "flavor": [
+        "citron",
+        "dill",
+        "senap"
+      ],
+      "equipment": [
+        "Spis",
+        "Stor kastrull med lock",
+        "Liten kastrull",
+        "Bred stekpanna",
+        "Tre skålar",
+        "Sked",
+        "Skärbräda",
+        "Vass kniv",
+        "Stekspade",
+        "Två tallrikar och ett lock",
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkärl",
+        "Rivjärn",
+        "Provsticka",
+        "Måttsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Laxbiffar",
+          "ingredients": [
+            {
+              "name": "lax",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Laxfilé, rå ätlig vikt utan skinn och ben"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till samtliga stekomgångar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen svartpeppar"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gröna ärtor",
+          "ingredients": [
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Senapsdillsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk dill, ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Citronmorot",
+          "ingredients": [
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, skalad rå vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj potatisen och skär den i jämnstora bitar, cirka 3 cm. Lägg i kastrullen med potatisens salt och 1400 ml vatten. Koka upp under lock.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Sjud potatisen under lock på låg värme cirka 20 minuter, tills den är mjuk när du känner med en sticka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Blanda biffarnas yoghurt, ströbröd, citronjuice, salt och svartpeppar i en skål. Låt blandningen stå medan laxen hackas.",
+          "uses": [
+            "yoghurt naturell",
+            "ströbröd",
+            "citronjuice",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Kontrollera att laxen saknar ben och skinn. Finhacka den kalla laxen med kniv, och hacka sedan ungefär hälften ytterligare tills den blir en klibbig färs. Arbeta ner all lax i ströbrödsblandningen tills smeten håller ihop. Tvätta händerna och diska kniv och skärbräda efter råfisken.",
+          "uses": [
+            "lax",
+            "ströbröd"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ställ laxsmeten i kylskåpet så att ströbrödet hinner svälla och smeten blir lättare att forma.",
+          "uses": [
+            "lax",
+            "ströbröd"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka dillen. Rör ihop såsens yoghurt med dill, senap, citronjuice och salt. Ställ såsen kallt fram till servering.",
+          "uses": [
+            "dill",
+            "yoghurt naturell",
+            "senap",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala och grovriv moroten. Blanda med salladens citronjuice, rapsolja och salt.",
+          "uses": [
+            "morot",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Häll av den färdigkokta potatisen och håll den varm i kastrullen under lock.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Forma den kalla laxsmeten med en sked och lätt fuktade händer till två biffar per portion, cirka 1,5 cm tjocka. Lägg på en tallrik.",
+          "uses": [
+            "lax"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm en del av biffarnas rapsolja i stekpannan på medelvärme. Stek biffarna i omgångar utan att tränga pannan, cirka 3–4 minuter på varje sida. Fördela hela mängden stekolja över omgångarna. Vänd först när en sammanhängande stekyta har bildats. Mät i biffarnas mitt med kökstermometer; laxen ska nå minst 63 °C. Fortsätt på lägre värme om de får färg innan mitten är färdig. Lägg färdiga biffar på en ren tallrik och täck löst med ett lock.",
+          "uses": [
+            "rapsolja",
+            "lax"
+          ],
+          "minutes": 16,
+          "after": [
+            9,
+            8
+          ]
+        },
+        {
+          "text": "Koka upp 400 ml vatten med ärtornas salt i den lilla kastrullen och tillsätt de frysta ärtorna. Låt vattnet koka upp igen.",
+          "uses": [
+            "ärtor",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Låt ärtorna sjuda cirka 3 minuter tills de är helt varma; följ en längre tillagningstid om förpackningen anger det.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av ärtorna. Servera laxbiffarna med potatisen, ärtorna, senapsdillsåsen och citronmoroten.",
+          "uses": [
+            "lax",
+            "potatis",
+            "ärtor",
+            "yoghurt naturell",
+            "morot",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            10,
+            8,
+            12,
+            6,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. Uppskattat 55–65 minuter totalt och 51 minuter aktivt arbete; potatiskokning och smetens kylvila överlappar. 10 preliminärt räknade ingredienser; samma ingrediens i flera komponenter räknas bara en gång. Salt och svartpeppar undantas. Ligger preliminärt inom nuvarande standardfilter för middag, 10–15 ingredienser. Laxen finfördelas rå, binds med yoghurt och ströbröd och formas till biffar. Det skiljer huvudrättens teknik och konsistens från befintliga laxfiléer och fiskgratänger, men avgränsningen ska innehållsgranskas. Biffarnas hållfasthet och stektid behöver provlagning. Smeten innehåller inget tillsatt ägg; slutliga ingrediens- och allergenuppgifter kan ändå inte fastställas utan produktkontroll. Väg laxen utan skinn och ben; ärtorna vägs frysta som sålda. Alla angivna yoghurt- och oljemängder används i respektive namngiven komponent. Ingen import eller något godkännande i Smako har genomförts. Köpbarhet, diet, allergener och näring måste bedömas per variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-salmon-cakes-potatoes",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Laxbiffar med pepparrotsdillsås och krispig gurksallad – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "fiskbiffar",
+      "primary": "lax",
+      "method": "pan",
+      "side": "kokt potatis",
+      "flavor": [
+        "citron",
+        "dill",
+        "senap",
+        "pepparrot"
+      ],
+      "equipment": [
+        "Spis",
+        "Stor kastrull med lock",
+        "Liten kastrull",
+        "Bred stekpanna",
+        "Tre skålar",
+        "Sked",
+        "Skärbräda",
+        "Vass kniv",
+        "Stekspade",
+        "Två tallrikar och ett lock",
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkärl",
+        "Rivjärn",
+        "Provsticka",
+        "Måttsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Laxbiffar",
+          "ingredients": [
+            {
+              "name": "lax",
+              "form": "raw_edible",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Laxfilé, rå ätlig vikt utan skinn och ben"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till samtliga stekomgångar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen svartpeppar"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokt potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gröna ärtor",
+          "ingredients": [
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Pepparrots- och dillsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk dill, ätlig vikt"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap"
+            },
+            {
+              "name": "pepparrot",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk pepparrot, skalad rå vikt"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Gurk- och morotssallad",
+          "ingredients": [
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, skalad rå vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, skalad rå vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj potatisen och skär den i jämnstora bitar, cirka 3 cm. Lägg i kastrullen med potatisens salt och 1400 ml vatten. Koka upp under lock.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Sjud potatisen under lock på låg värme cirka 20 minuter, tills den är mjuk när du känner med en sticka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Blanda biffarnas yoghurt, ströbröd, citronjuice, salt och svartpeppar i en skål. Låt blandningen stå medan laxen hackas.",
+          "uses": [
+            "yoghurt naturell",
+            "ströbröd",
+            "citronjuice",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Kontrollera att laxen saknar ben och skinn. Finhacka den kalla laxen med kniv, och hacka sedan ungefär hälften ytterligare tills den blir en klibbig färs. Arbeta ner all lax i ströbrödsblandningen tills smeten håller ihop. Tvätta händerna och diska kniv och skärbräda efter råfisken.",
+          "uses": [
+            "lax",
+            "ströbröd"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ställ laxsmeten i kylskåpet så att ströbrödet hinner svälla och smeten blir lättare att forma.",
+          "uses": [
+            "lax",
+            "ströbröd"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka dillen och finriv pepparroten. Rör ihop såsens yoghurt med dill, pepparrot, senap, citronjuice och salt. Ställ såsen kallt fram till servering.",
+          "uses": [
+            "dill",
+            "pepparrot",
+            "yoghurt naturell",
+            "senap",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala och grovriv moroten, skiva gurkan tunt och strimla rödlöken fint. Blanda grönsakerna med salladens citronjuice, rapsolja och salt.",
+          "uses": [
+            "morot",
+            "gurka",
+            "rödlök",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Häll av den färdigkokta potatisen och håll den varm i kastrullen under lock.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Forma den kalla laxsmeten med en sked och lätt fuktade händer till två biffar per portion, cirka 1,5 cm tjocka. Lägg på en tallrik.",
+          "uses": [
+            "lax"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm en del av biffarnas rapsolja i stekpannan på medelvärme. Stek biffarna i omgångar utan att tränga pannan, cirka 3–4 minuter på varje sida. Fördela hela mängden stekolja över omgångarna. Vänd först när en sammanhängande stekyta har bildats. Mät i biffarnas mitt med kökstermometer; laxen ska nå minst 63 °C. Fortsätt på lägre värme om de får färg innan mitten är färdig. Lägg färdiga biffar på en ren tallrik och täck löst med ett lock.",
+          "uses": [
+            "rapsolja",
+            "lax"
+          ],
+          "minutes": 16,
+          "after": [
+            9,
+            8
+          ]
+        },
+        {
+          "text": "Koka upp 400 ml vatten med ärtornas salt i den lilla kastrullen och tillsätt de frysta ärtorna. Låt vattnet koka upp igen.",
+          "uses": [
+            "ärtor",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Låt ärtorna sjuda cirka 3 minuter tills de är helt varma; följ en längre tillagningstid om förpackningen anger det.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av ärtorna. Servera laxbiffarna med potatisen, ärtorna, pepparrots- och dillsåsen samt gurk- och morotssalladen.",
+          "uses": [
+            "lax",
+            "potatis",
+            "ärtor",
+            "yoghurt naturell",
+            "morot",
+            "dill",
+            "pepparrot",
+            "gurka"
+          ],
+          "minutes": 2,
+          "after": [
+            10,
+            8,
+            12,
+            6,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. Uppskattat 55–65 minuter totalt och 54 minuter aktivt arbete; potatiskokning och smetens kylvila överlappar. 13 preliminärt räknade ingredienser; samma ingrediens i flera komponenter räknas bara en gång. Salt och svartpeppar undantas. Ligger preliminärt inom nuvarande standardfilter för middag, 10–15 ingredienser. Laxen finfördelas rå, binds med yoghurt och ströbröd och formas till biffar. Det skiljer huvudrättens teknik och konsistens från befintliga laxfiléer och fiskgratänger, men avgränsningen ska innehållsgranskas. Biffarnas hållfasthet och stektid behöver provlagning. Smeten innehåller inget tillsatt ägg; slutliga ingrediens- och allergenuppgifter kan ändå inte fastställas utan produktkontroll. Väg laxen utan skinn och ben; ärtorna vägs frysta som sålda. Alla angivna yoghurt- och oljemängder används i respektive namngiven komponent. Ingen import eller något godkännande i Smako har genomförts. Köpbarhet, diet, allergener och näring måste bedömas per variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-french-toast-apple-quark",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Fattiga riddare med äpple och kvarg – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "fattiga riddare",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "äpple och kvarg",
+      "flavor": [
+        "äpple",
+        "mild äggsmak"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Vid skål",
+        "Gaffel",
+        "Stekpanna med släppbeläggning, cirka 24 cm",
+        "Stekspade",
+        "Skärbräda",
+        "Kniv",
+        "Måttsats och måttkanna",
+        "Digital kökstermometer med tunn insticksgivare",
+        "Serveringstallrik"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fattiga riddare",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "side",
+              "label": "Skivat bröd, vikt som sålt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till stekning"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Äpple och kvarg",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "side",
+              "label": "Äpple, vikt utan kärnhus"
+            },
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell kvarg"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa ihop den uppvägda äggmängden, mjölken och saltet i en vid skål. Lägg i brödet och vänd så att båda sidor fuktas.",
+          "uses": [
+            "ägg",
+            "mjölk",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2
+        },
+        {
+          "text": "Låt brödet dra i äggmjölken så att det blir jämnt fuktigt.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Medan brödet drar: skär äpplet i tunna klyftor. Lägg upp äpplet och kvargen på en tallrik.",
+          "uses": [
+            "äpple",
+            "kvarg"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm oljan i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            2,
+            3
+          ]
+        },
+        {
+          "text": "Lägg det blötlagda brödet i pannan. Fördela all äggmjölk som finns kvar i skålen över brödet. Stek ungefär fyra minuter per sida och vänd försiktigt. Brödet ska vara gyllene och äggblandningen helt stelnad, även i mitten; sänk värmen om ytan får färg för snabbt.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Kontrollera från sidan in i brödets tjockaste mitt med kökstermometern. Äggblandningen ska vara helt stelnad och nå minst 72 °C. Fortsätt steka på låg värme om den ännu är kallare eller har en rå kärna.",
+          "uses": [
+            "bröd",
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera de nystekta riddarna med äppelklyftorna och kvargen.",
+          "uses": [
+            "bröd",
+            "äpple",
+            "kvarg"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Produktval, allergener och näring behöver bedömas separat för denna variant. Sex räknade ingredienser, salt undantaget. Uppskattad tid cirka 16 minuter totalt, varav cirka 16 minuter aktivt arbete; två minuters passiv blötläggning överlappar tillbehörens förberedelse. Äggmängden vägs utan skal före tillagning. Brödet tillagas som en äggindränkt sammanhållen brödskiva, vilket skiljer grundrätten från en kall frukostsmörgås, äggröra eller ugnsgröt. Kulinarisk avgränsning mot befintliga rätter återstår för innehållsgranskning. Temperaturmålet 72 °C är ett tillagningsval för detta utkast, inte ett påstått ytterligare krav i det bifogade Smako-kontraktet. Brödets skivtjocklek och uppsugningsförmåga kan ändra stektiden."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-french-toast-apple-quark",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Fattiga riddare med kaneläpple och jordnötskvarg – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "fattiga riddare",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "varmt kaneläpple och jordnötskvarg",
+      "flavor": [
+        "äpple",
+        "kanel",
+        "jordnöt",
+        "citron"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Vid skål",
+        "Liten skål",
+        "Gaffel",
+        "Stekpanna med släppbeläggning, cirka 24 cm",
+        "Stekspade",
+        "Skärbräda",
+        "Kniv",
+        "Måttsats och måttkanna",
+        "Digital kökstermometer med tunn insticksgivare",
+        "Serveringstallrik"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fattiga riddare",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 75,
+              "unit": "g",
+              "role": "side",
+              "label": "Skivat bröd, vikt som sålt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk till äggblandningen"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till brödets stekning"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt kaneläpple",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 140,
+              "unit": "g",
+              "role": "side",
+              "label": "Äpple, vikt utan kärnhus"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till äpplet"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kanel"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Jordnötskvarg",
+          "ingredients": [
+            {
+              "name": "kvarg",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell kvarg"
+            },
+            {
+              "name": "jordnötssmör",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Naturellt jordnötssmör"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk till jordnötskvargen"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär äpplet i tunna skivor. Håll komponenternas uppvägda mängder mjölk och olja åtskilda.",
+          "uses": [
+            "äpple",
+            "mjölk",
+            "rapsolja"
+          ],
+          "minutes": 2
+        },
+        {
+          "text": "Vispa ihop äggmängden, mjölken från komponenten Fattiga riddare och saltet i den vida skålen. Lägg i brödet och vänd så att båda sidor fuktas.",
+          "uses": [
+            "ägg",
+            "mjölk",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt brödet dra i äggmjölken medan äpplet tillagas.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm oljan från äppelkomponenten i stekpannan. Tillsätt äpplet och 20 ml vatten. Tillaga på medelvärme under omrörning tills skivorna mjuknat och vattnet avdunstat, ungefär fem minuter. Rör ner kanelen och citronjuicen under den sista minuten.",
+          "uses": [
+            "rapsolja",
+            "äpple",
+            "kanel",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ihop kvargen, jordnötssmöret och mjölken från komponenten Jordnötskvarg i den lilla skålen.",
+          "uses": [
+            "kvarg",
+            "jordnötssmör",
+            "mjölk"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Flytta det varma äpplet till en tallrik. Torka ur pannan och värm oljan från komponenten Fattiga riddare på medelvärme.",
+          "uses": [
+            "äpple",
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg det blötlagda brödet i pannan. Fördela all äggmjölk som finns kvar i skålen över brödet. Stek ungefär fyra minuter per sida och vänd försiktigt. Brödet ska vara gyllene och äggblandningen helt stelnad, även i mitten; sänk värmen om ytan får färg för snabbt.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk"
+          ],
+          "minutes": 8,
+          "after": [
+            3,
+            6
+          ]
+        },
+        {
+          "text": "Kontrollera från sidan in i brödets tjockaste mitt med kökstermometern. Äggblandningen ska vara helt stelnad och nå minst 72 °C. Fortsätt steka på låg värme om den ännu är kallare eller har en rå kärna.",
+          "uses": [
+            "bröd",
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera de nystekta riddarna med det varma kaneläpplet och jordnötskvargen.",
+          "uses": [
+            "bröd",
+            "äpple",
+            "kvarg",
+            "jordnötssmör"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Produktval, allergener och näring behöver bedömas separat för denna variant. Nio räknade ingredienser; mjölk och rapsolja räknas bara en gång vardera trots fördelning mellan komponenter. Uppskattad tid cirka 22 minuter totalt och cirka 22 minuter aktivt arbete; två minuters passiv blötläggning överlappar äppelstekningen. Äggmängden vägs utan skal före tillagning. Varmt syrligt kaneläpple och jordnötskvarg ger en annan konsistens och smakbalans än den enkla versionens råa äpple och naturella kvarg. Samma grundrättsidentitet ska användas vid veckoplaneringens upprepningskontroll. Kulinarisk avgränsning mot befintliga rätter återstår för innehållsgranskning. Temperaturmålet 72 °C är ett tillagningsval för detta utkast, inte ett påstått ytterligare krav i det bifogade Smako-kontraktet. Brödets skivtjocklek och uppsugningsförmåga kan ändra stektiden."
+    },
+    {
+      "base_id": "smako-swedish-snack-cottage-cheese-apple-cake",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Liten kesokaka med äppelklyftor – enkel",
+      "servings": 1,
+      "meal_type": "snack",
+      "cuisine": "swedish",
+      "family": "kesokaka",
+      "primary": "keso",
+      "method": "bake",
+      "side": "äppelklyftor",
+      "flavor": [
+        "keso",
+        "äpple"
+      ],
+      "equipment": [
+        "Ugn",
+        "Liten ugnsform, cirka 250 ml",
+        "Köksvåg",
+        "Skål",
+        "Gaffel",
+        "Sked",
+        "Skärbräda",
+        "Kniv",
+        "Grytlappar",
+        "Måttsats och måttkanna",
+        "Digital kökstermometer med tunn insticksgivare",
+        "Serveringstallrik"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kesokaka",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, vikt som såld utan extra avrinning"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till formen"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Äppelklyftor",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "side",
+              "label": "Äpple, vikt utan kärnhus"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 180 °C över- och undervärme. Smörj den lilla ugnsformen med oljan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Låt ugnen bli varm medan smeten blandas. Använd en form som ger ett smetdjup på högst tre centimeter.",
+          "uses": [],
+          "minutes": 9,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vispa ihop den uppvägda äggmängden, mjölken, vetemjölet och saltet i skålen. Rör ner keson med all vätska som ingår i den uppvägda mängden. Häll smeten i den smorda formen.",
+          "uses": [
+            "ägg",
+            "mjölk",
+            "vetemjöl",
+            "salt",
+            "keso"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ställ formen på ett galler i mitten av den uppvärmda ugnen.",
+          "uses": [
+            "keso",
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            2,
+            3
+          ]
+        },
+        {
+          "text": "Grädda i mitten av ugnen cirka 25 minuter, tills ytan börjar få lätt färg.",
+          "uses": [
+            "keso",
+            "ägg",
+            "vetemjöl"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera kesokakans mitt med kökstermometern: äggsmeten ska nå minst 72 °C och vara helt stelnad. Mitten får vara mjuk men får inte innehålla lös äggsmet. Grädda vidare och kontrollera igen om det behövs. Ta ut formen med grytlappar.",
+          "uses": [
+            "keso",
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt kesokakan vila före servering.",
+          "uses": [
+            "keso",
+            "ägg"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Under gräddningen: skär äpplet i tunna klyftor och lägg dem på serveringstallriken.",
+          "uses": [
+            "äpple"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera kesokakan ljummen med äppelklyftorna.",
+          "uses": [
+            "keso",
+            "äpple"
+          ],
+          "minutes": 1,
+          "after": [
+            7,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Produktval, allergener och näring behöver bedömas separat för denna variant. Sex räknade ingredienser, salt undantaget. Uppskattad tid cirka 43 minuter totalt, varav cirka 10 minuter aktivt arbete. Ugnsuppvärmning, gräddning och vila är huvudsakligen passiva; blandning och äppelförberedelse görs under väntetiden. Äggmängden vägs utan skal före tillagning. Vid portionsskalning används fler portionsformar eller en större grund form med samma smetdjup; tillagningen kontrolleras i mitten. Grundrätten är en äggstannad kesokaka med lite mjöl som bindning och utan havre. Närmaste granskningsobjekt är smako-breakfast-baked-oats-cottage, som enligt underlaget är en havre- och yoghurtbaserad ugnsgröt. Skillnaden i huvudstruktur behöver bekräftas vid innehållsgranskning. Temperaturmålet 72 °C är ett tillagningsval för detta utkast, inte ett påstått ytterligare krav i det bifogade Smako-kontraktet."
+    },
+    {
+      "base_id": "smako-swedish-snack-cottage-cheese-apple-cake",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Äppelkesokaka med kanel, yoghurt och jordnötskrisp – utökad",
+      "servings": 1,
+      "meal_type": "snack",
+      "cuisine": "swedish",
+      "family": "kesokaka",
+      "primary": "keso",
+      "method": "bake",
+      "side": "äpple, yoghurt och rostade jordnötter",
+      "flavor": [
+        "äpple",
+        "kanel",
+        "jordnöt"
+      ],
+      "equipment": [
+        "Ugn",
+        "Liten ugnsform, cirka 300 ml",
+        "Köksvåg",
+        "Skål",
+        "Gaffel",
+        "Sked",
+        "Liten stekpanna",
+        "Skärbräda",
+        "Kniv",
+        "Grytlappar",
+        "Måttsats och måttkanna",
+        "Digital kökstermometer med tunn insticksgivare",
+        "Serveringstallrik"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Äppelkesokaka",
+          "ingredients": [
+            {
+              "name": "keso",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Naturell keso, vikt som såld utan extra avrinning"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 12,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja till formen"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "side",
+              "label": "Äpple till smeten, vikt utan kärnhus"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen kanel"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Äpple, yoghurt och jordnötskrisp",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "side",
+              "label": "Äpple till serveringen, vikt utan kärnhus"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Jordnötter, vikt som sålda"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 180 °C över- och undervärme. Smörj den lilla ugnsformen med oljan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1
+        },
+        {
+          "text": "Låt ugnen bli varm medan smeten förbereds. Använd en form som ger ett smetdjup på högst tre centimeter.",
+          "uses": [],
+          "minutes": 9,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär äpplet från kakkomponenten i små tärningar, ungefär en halv centimeter stora. Vispa ihop den uppvägda äggmängden, mjölken, vetemjölet, kanelen och saltet. Rör ner keson med all vätska som ingår i den uppvägda mängden och därefter äppeltärningarna. Häll smeten i den smorda formen.",
+          "uses": [
+            "äpple",
+            "ägg",
+            "mjölk",
+            "vetemjöl",
+            "kanel",
+            "salt",
+            "keso"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ställ formen på ett galler i mitten av den uppvärmda ugnen.",
+          "uses": [
+            "keso",
+            "ägg",
+            "äpple"
+          ],
+          "minutes": 1,
+          "after": [
+            2,
+            3
+          ]
+        },
+        {
+          "text": "Grädda i mitten av ugnen cirka 30 minuter, tills ytan börjar få lätt färg och äppeltärningarna mjuknar.",
+          "uses": [
+            "keso",
+            "ägg",
+            "äpple",
+            "vetemjöl"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera kesokakans mitt med kökstermometern: äggsmeten ska nå minst 72 °C och vara helt stelnad. Mitten får vara mjuk men får inte innehålla lös äggsmet. Grädda vidare och kontrollera igen om det behövs. Ta ut formen med grytlappar.",
+          "uses": [
+            "keso",
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt kesokakan vila före servering.",
+          "uses": [
+            "keso",
+            "ägg",
+            "äpple"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Under gräddningen: grovhacka jordnötterna. Rosta dem i en torr stekpanna på medelvärme tills de doftar, ungefär två minuter; rör så att de inte bränns. Lägg över på en tallrik och låt svalna.",
+          "uses": [
+            "jordnötter"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skär äpplet från tillbehörskomponenten i tunna klyftor. Lägg upp yoghurten intill klyftorna.",
+          "uses": [
+            "äpple",
+            "yoghurt naturell"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera kesokakan ljummen med äppelklyftorna och yoghurten. Strö de rostade jordnötterna över yoghurten precis före servering.",
+          "uses": [
+            "keso",
+            "äpple",
+            "yoghurt naturell",
+            "jordnötter"
+          ],
+          "minutes": 1,
+          "after": [
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Produktval, allergener och näring behöver bedömas separat för denna variant. Nio räknade ingredienser; äpple räknas bara en gång trots fördelning mellan komponenter. Uppskattad tid cirka 48 minuter totalt, varav cirka 15 minuter aktivt arbete. Ugnsuppvärmning, gräddning och vila är huvudsakligen passiva; smet och tillbehör förbereds under väntetiden. Äggmängden vägs utan skal före tillagning. Mjölken är minskad och mjölet ökat för att ta hand om vätskan från äpplet i smeten. Vid portionsskalning används fler portionsformar eller en större grund form med samma smetdjup; tillagningen kontrolleras i mitten. Den äggstannade kesokakan har samma grundrättsidentitet som den enkla versionen. Den ska vid innehållsgranskning jämföras med smako-breakfast-baked-oats-cottage, vars huvudsakliga struktur enligt underlaget är havre- och yoghurtbaserad ugnsgröt. Temperaturmålet 72 °C är ett tillagningsval för detta utkast, inte ett påstått ytterligare krav i det bifogade Smako-kontraktet."
+    }
+  ]
+}

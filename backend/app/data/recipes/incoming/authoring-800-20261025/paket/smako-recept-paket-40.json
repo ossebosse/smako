@@ -1,0 +1,4481 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-40",
+  "recipes": [
+    {
+      "base_id": "smako-italian-sardine-chickpea-pasta-soup",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad sardinsoppa med kikärtor och pasta – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "konservfisksoppa med pasta och baljväxter",
+      "primary": "sardiner",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Sardinpastasoppa",
+          "ingredients": [
+            {
+              "name": "sardiner",
+              "form": "preserved_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade sardiner, avrunnen vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sardinpastasoppa: Ansa och finhacka gul lök. Låt kikärtor rinna av noga.",
+          "uses": [
+            "kikärtor",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner sardiner, kikärtor, krossade tomater och salt och 1300 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "sardiner",
+            "kikärtor",
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "sardiner",
+            "kikärtor",
+            "krossade tomater",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner pastan i den sjudande soppan och koka cirka 10 minuter tills den är mjuk; anpassa efter förpackningen. Rör då och då så att pastan inte fastnar.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera sardinpastasoppa. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "sardiner",
+            "kikärtor",
+            "pasta",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 42 minuter totalt, varav 20 aktivt och 22 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av sardiner; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fet konservfisk, pasta och kikärtor kokas till en bitig tomatsoppa; inte en pastatallrik eller kall bönsallad. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-sardine-chickpea-pasta-soup",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad sardinsoppa med kikärtor och pasta – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "konservfisksoppa med pasta och baljväxter",
+      "primary": "sardiner",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "persilja"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Sardinpastasoppa",
+          "ingredients": [
+            {
+              "name": "sardiner",
+              "form": "preserved_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade sardiner, avrunnen vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sardinpastasoppa: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär selleri i små jämna bitar; skala rotfrukter före vägning. Låt kikärtor rinna av noga. Finhacka persilja.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "selleri",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner sardiner, kikärtor, krossade tomater, salt och selleri och 1300 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "sardiner",
+            "kikärtor",
+            "krossade tomater",
+            "salt",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "sardiner",
+            "kikärtor",
+            "krossade tomater",
+            "salt",
+            "selleri",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner pastan i den sjudande soppan och koka cirka 10 minuter tills den är mjuk; anpassa efter förpackningen. Rör då och då så att pastan inte fastnar.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner persilja precis före servering. ",
+          "uses": [
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera sardinpastasoppa. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "sardiner",
+            "kikärtor",
+            "pasta",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "selleri",
+            "vitlök",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 44 minuter totalt, varav 22 aktivt och 22 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av sardiner; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fet konservfisk, pasta och kikärtor kokas till en bitig tomatsoppa; inte en pastatallrik eller kall bönsallad. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-sardine-chickpea-pasta-soup",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad sardinsoppa med kikärtor och pasta – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "konservfisksoppa med pasta och baljväxter",
+      "primary": "sardiner",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "persilja",
+        "basilika",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Sardinpastasoppa",
+          "ingredients": [
+            {
+              "name": "sardiner",
+              "form": "preserved_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade sardiner, avrunnen vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sardinpastasoppa: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär selleri och morot i små jämna bitar; skala rotfrukter före vägning. Låt kikärtor rinna av noga. Finhacka persilja och basilika.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "selleri",
+            "vitlök",
+            "morot"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner sardiner, kikärtor, krossade tomater, salt, selleri, morot och kapris och 1300 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "sardiner",
+            "kikärtor",
+            "krossade tomater",
+            "salt",
+            "selleri",
+            "morot",
+            "kapris"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "sardiner",
+            "kikärtor",
+            "krossade tomater",
+            "salt",
+            "selleri",
+            "morot",
+            "kapris",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner pastan i den sjudande soppan och koka cirka 10 minuter tills den är mjuk; anpassa efter förpackningen. Rör då och då så att pastan inte fastnar.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner persilja, basilika och citronjuice precis före servering. ",
+          "uses": [
+            "persilja",
+            "basilika",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera sardinpastasoppa. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "sardiner",
+            "kikärtor",
+            "pasta",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "selleri",
+            "vitlök",
+            "persilja",
+            "morot",
+            "basilika",
+            "citronjuice",
+            "kapris"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 44 minuter totalt, varav 22 aktivt och 22 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av sardiner; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fet konservfisk, pasta och kikärtor kokas till en bitig tomatsoppa; inte en pastatallrik eller kall bönsallad. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-sardine-tomato-pasta-crisp-bread",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad sardinpasta med tomat och brödkrisp – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "sardinpasta med brödkrisp",
+      "primary": "sardiner",
+      "method": "pot",
+      "side": "sardintomat; brödkrisp",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Sardintomat",
+          "ingredients": [
+            {
+              "name": "sardiner",
+              "form": "preserved_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade sardiner, avrunnen vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Brödkrisp",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sardintomat: Ansa och finhacka gul lök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner sardiner, tomat och salt och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "sardiner",
+            "tomat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "sardiner",
+            "tomat",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Brödkrisp: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd",
+            "rapsolja"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den färdigkokta pastan med sardintomaten. Bryt eller smula det frasiga brödet grovt och strö över hela brödkrispet precis före servering.",
+          "uses": [
+            "pasta",
+            "salt",
+            "sardiner",
+            "tomat",
+            "gul lök",
+            "rapsolja",
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera kokt pasta, sardintomat och brödkrisp. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "pasta",
+            "salt",
+            "sardiner",
+            "tomat",
+            "gul lök",
+            "rapsolja",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 62 minuter totalt, varav 45 aktivt och 17 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av sardiner; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Sardinernas fasta flagor i färsk tomat kontrasterar mot torra brödsmulor på pastan; skild från kall tonfisk-bönsallad. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-sardine-tomato-pasta-crisp-bread",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad sardinpasta med tomat och brödkrisp – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "sardinpasta med brödkrisp",
+      "primary": "sardiner",
+      "method": "pot",
+      "side": "sardintomat; brödkrisp",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Sardintomat",
+          "ingredients": [
+            {
+              "name": "sardiner",
+              "form": "preserved_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade sardiner, avrunnen vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Brödkrisp",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sardintomat: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner sardiner, tomat, salt och kapris och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "sardiner",
+            "tomat",
+            "salt",
+            "kapris"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "sardiner",
+            "tomat",
+            "salt",
+            "kapris",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. ",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Brödkrisp: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd",
+            "rapsolja"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vänd den färdigkokta pastan med sardintomaten. Bryt eller smula det frasiga brödet grovt och strö över hela brödkrispet precis före servering.",
+          "uses": [
+            "pasta",
+            "salt",
+            "sardiner",
+            "tomat",
+            "gul lök",
+            "rapsolja",
+            "kapris",
+            "vitlök",
+            "citronjuice",
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera kokt pasta, sardintomat och brödkrisp. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "pasta",
+            "salt",
+            "sardiner",
+            "tomat",
+            "gul lök",
+            "rapsolja",
+            "kapris",
+            "vitlök",
+            "citronjuice",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            10,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 64 minuter totalt, varav 47 aktivt och 17 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av sardiner; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Sardinernas fasta flagor i färsk tomat kontrasterar mot torra brödsmulor på pastan; skild från kall tonfisk-bönsallad. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-sardine-tomato-pasta-crisp-bread",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad sardinpasta med tomat och brödkrisp – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "sardinpasta med brödkrisp",
+      "primary": "sardiner",
+      "method": "pot",
+      "side": "sardintomat; brödkrisp; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "persilja",
+        "basilika"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kokt pasta",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Sardintomat",
+          "ingredients": [
+            {
+              "name": "sardiner",
+              "form": "preserved_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade sardiner, avrunnen vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Brödkrisp",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kokt pasta: Koka upp 2500 ml vatten med komponentens salt. Lägg i pastan och rör så att den inte klibbar ihop.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Koka pastan tills den har mjuknat men har lätt tuggmotstånd, cirka 10 minuter; anpassa efter den valda pastans förpackning. Rör ett par gånger.",
+          "uses": [
+            "pasta"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av pastan. Håll den varm under lock.",
+          "uses": [
+            "pasta",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sardintomat: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja och basilika.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner sardiner, tomat, salt, kapris och oliver och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "sardiner",
+            "tomat",
+            "salt",
+            "kapris",
+            "oliver"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "sardiner",
+            "tomat",
+            "salt",
+            "kapris",
+            "oliver",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice, persilja och basilika precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "persilja",
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Brödkrisp: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd",
+            "rapsolja"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd",
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda gurka, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Vänd den färdigkokta pastan med sardintomaten. Bryt eller smula det frasiga brödet grovt och strö över hela brödkrispet precis före servering.",
+          "uses": [
+            "pasta",
+            "salt",
+            "sardiner",
+            "tomat",
+            "gul lök",
+            "rapsolja",
+            "kapris",
+            "vitlök",
+            "citronjuice",
+            "persilja",
+            "oliver",
+            "basilika",
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera kokt pasta, sardintomat, brödkrisp och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "pasta",
+            "salt",
+            "sardiner",
+            "tomat",
+            "gul lök",
+            "rapsolja",
+            "kapris",
+            "vitlök",
+            "citronjuice",
+            "persilja",
+            "oliver",
+            "basilika",
+            "bröd",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            10,
+            12,
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 72 minuter totalt, varav 55 aktivt och 17 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av sardiner; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Sardinernas fasta flagor i färsk tomat kontrasterar mot torra brödsmulor på pastan; skild från kall tonfisk-bönsallad. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-semolina-cheese-oven-rounds",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade mannagrynsrundlar med ost och spenat – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "ostbunden mannagrynsbakning",
+      "primary": "ost",
+      "method": "bake",
+      "side": "varm spenat",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mannagrynskakor",
+          "ingredients": [
+            {
+              "name": "mannagryn",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mannagryn, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm spenat",
+          "ingredients": [
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mannagrynskakor: Koka upp mjölken och 300 ml vatten. Vispa ner mannagrynen och sjud under ständig omrörning cirka 8 minuter till en mycket tjock gröt.",
+          "uses": [
+            "mannagryn",
+            "mjölk"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Låt den kokta basen svalna till ljummen.",
+          "uses": [
+            "mannagryn"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med komponentens fett och blanda den kokta basen med ägg, ost och salt.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Tryck ut blandningen i formen och baka cirka 25 minuter tills den håller ihop och ytan fått färg. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt vila och skär sedan i fasta portionsbitar.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varm spenat: Väg spenat frysta enligt komponenten.",
+          "uses": [
+            "spenat"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Lägg i spenat och fräs på medelvärme.",
+          "uses": [
+            "rapsolja",
+            "spenat"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner spenat och salt och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "spenat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "spenat",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. ",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera mannagrynskakor och varm spenat. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "spenat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 98 minuter totalt, varav 53 aktivt och 45 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mannagryn; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Mannagrynsgröt binds med ägg och ost, stelnar och bakas till portionskakor; annan råvarumatris än potatisgnocchi. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-semolina-cheese-oven-rounds",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade mannagrynsrundlar med ost och spenat – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "ostbunden mannagrynsbakning",
+      "primary": "ost",
+      "method": "bake",
+      "side": "varm spenat",
+      "flavor": [
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mannagrynskakor",
+          "ingredients": [
+            {
+              "name": "mannagryn",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mannagryn, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svartpeppar, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm spenat",
+          "ingredients": [
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mannagrynskakor: Koka upp mjölken och 300 ml vatten. Vispa ner mannagrynen och sjud under ständig omrörning cirka 8 minuter till en mycket tjock gröt.",
+          "uses": [
+            "mannagryn",
+            "mjölk"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Låt den kokta basen svalna till ljummen.",
+          "uses": [
+            "mannagryn"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med komponentens fett och blanda den kokta basen med ägg, ost, salt och svartpeppar.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Tryck ut blandningen i formen och baka cirka 25 minuter tills den håller ihop och ytan fått färg. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt vila och skär sedan i fasta portionsbitar.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varm spenat: Ansa och finhacka vitlök. Väg spenat frysta enligt komponenten. Finhacka persilja.",
+          "uses": [
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner spenat och salt och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "spenat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "spenat",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 12,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice och persilja precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera mannagrynskakor och varm spenat. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "svartpeppar",
+            "spenat",
+            "citronjuice",
+            "vitlök",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 98 minuter totalt, varav 53 aktivt och 45 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mannagryn; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Mannagrynsgröt binds med ägg och ost, stelnar och bakas till portionskakor; annan råvarumatris än potatisgnocchi. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-semolina-cheese-oven-rounds",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade mannagrynsrundlar med ost och spenat – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "ostbunden mannagrynsbakning",
+      "primary": "ost",
+      "method": "bake",
+      "side": "varm spenat; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "persilja",
+        "basilika"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mannagrynskakor",
+          "ingredients": [
+            {
+              "name": "mannagryn",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Mannagryn, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 700.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svartpeppar, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm spenat",
+          "ingredients": [
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mannagrynskakor: Koka upp mjölken och 300 ml vatten. Vispa ner mannagrynen och sjud under ständig omrörning cirka 8 minuter till en mycket tjock gröt.",
+          "uses": [
+            "mannagryn",
+            "mjölk"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Låt den kokta basen svalna till ljummen.",
+          "uses": [
+            "mannagryn"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med komponentens fett och blanda den kokta basen med ägg, ost, salt och svartpeppar.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Tryck ut blandningen i formen och baka cirka 25 minuter tills den håller ihop och ytan fått färg. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt vila och skär sedan i fasta portionsbitar.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varm spenat: Ansa och finhacka vitlök. Väg spenat frysta enligt komponenten. Finhacka persilja.",
+          "uses": [
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner spenat och salt och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "spenat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "spenat",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 12,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice och persilja precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka basilika.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "basilika"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, oliver, basilika, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera mannagrynskakor, varm spenat och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "mannagryn",
+            "mjölk",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "svartpeppar",
+            "spenat",
+            "citronjuice",
+            "vitlök",
+            "persilja",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            10,
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 106 minuter totalt, varav 61 aktivt och 45 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mannagryn; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Mannagrynsgröt binds med ägg och ost, stelnar och bakas till portionskakor; annan råvarumatris än potatisgnocchi. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-slow-beef-carrot-caper-polenta",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerat nötkött med morot, kapris och polenta – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "långkokt nötkött på polenta",
+      "primary": "nötkött",
+      "method": "pot",
+      "side": "krämig polenta",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Morotsnötkött",
+          "ingredients": [
+            {
+              "name": "nötkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötkött, rå ätlig vikt; styckdetalj anges i komponentens instruktion"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Krämig polenta",
+          "ingredients": [
+            {
+              "name": "majsgryn",
+              "form": "dry",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Majsgryn för polenta, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Morotsnötkött: Ansa och finhacka gul lök. Skölj, ansa och skär morot i små jämna bitar; skala rotfrukter före vägning. Skär nötkött i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "nötkött",
+            "morot",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och nötkött under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "nötkött"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner morot, kapris och salt och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "morot",
+            "kapris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 130 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "morot",
+            "kapris",
+            "salt",
+            "nötkött",
+            "gul lök"
+          ],
+          "minutes": 130,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten.",
+          "uses": [
+            "nötkött"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Krämig polenta: Koka upp 1170 ml vatten och komponentens salt. Vispa ner majsgrynen lite i taget.",
+          "uses": [
+            "majsgryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under återkommande omrörning tills grynen är helt mjuka och gröten tjock, cirka 25 minuter; följ längre tid på förpackningen.",
+          "uses": [
+            "majsgryn"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner rapsolja i den heta polentan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera morotsnötkött och krämig polenta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "nötkött",
+            "morot",
+            "gul lök",
+            "rapsolja",
+            "kapris",
+            "salt",
+            "majsgryn"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 183 minuter totalt, varav 53 aktivt och 130 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av majsgryn och nötkött; inte importklar. Inga nya produkt- eller pack-koder har skapats. Välj nötkött för långkok, exempelvis högrev, och fortsätt koka tills bitarna faller isär under lätt gaffeltryck. Kulinarisk avgränsning: Långkokt nötkött i morotsdominerat spad med kapris serveras över majsgröt; annan struktur än färs och annan spadbas än tomatragu. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-slow-beef-carrot-caper-polenta",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerat nötkött med morot, kapris och polenta – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "långkokt nötkött på polenta",
+      "primary": "nötkött",
+      "method": "pot",
+      "side": "krämig polenta",
+      "flavor": [
+        "rosmarin"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Morotsnötkött",
+          "ingredients": [
+            {
+              "name": "nötkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötkött, rå ätlig vikt; styckdetalj anges i komponentens instruktion"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Krämig polenta",
+          "ingredients": [
+            {
+              "name": "majsgryn",
+              "form": "dry",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Majsgryn för polenta, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Morotsnötkött: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär morot i små jämna bitar; skala rotfrukter före vägning. Skär nötkött i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "nötkött",
+            "morot",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och nötkött under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "nötkött"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner morot, kapris, salt, tomatpuré och rosmarin och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "morot",
+            "kapris",
+            "salt",
+            "tomatpuré",
+            "rosmarin"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 130 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "morot",
+            "kapris",
+            "salt",
+            "tomatpuré",
+            "rosmarin",
+            "nötkött",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 130,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten.",
+          "uses": [
+            "nötkött"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Krämig polenta: Koka upp 1170 ml vatten och komponentens salt. Vispa ner majsgrynen lite i taget.",
+          "uses": [
+            "majsgryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under återkommande omrörning tills grynen är helt mjuka och gröten tjock, cirka 25 minuter; följ längre tid på förpackningen.",
+          "uses": [
+            "majsgryn"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner rapsolja i den heta polentan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera morotsnötkött och krämig polenta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "nötkött",
+            "morot",
+            "gul lök",
+            "rapsolja",
+            "kapris",
+            "salt",
+            "vitlök",
+            "tomatpuré",
+            "rosmarin",
+            "majsgryn"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 183 minuter totalt, varav 53 aktivt och 130 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av majsgryn, nötkött och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats. Välj nötkött för långkok, exempelvis högrev, och fortsätt koka tills bitarna faller isär under lätt gaffeltryck. Kulinarisk avgränsning: Långkokt nötkött i morotsdominerat spad med kapris serveras över majsgröt; annan struktur än färs och annan spadbas än tomatragu. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-slow-beef-carrot-caper-polenta",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerat nötkött med morot, kapris och polenta – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "långkokt nötkött på polenta",
+      "primary": "nötkött",
+      "method": "pot",
+      "side": "krämig polenta; fräsch sallad",
+      "flavor": [
+        "rosmarin",
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Morotsnötkött",
+          "ingredients": [
+            {
+              "name": "nötkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötkött, rå ätlig vikt; styckdetalj anges i komponentens instruktion"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Krämig polenta",
+          "ingredients": [
+            {
+              "name": "majsgryn",
+              "form": "dry",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Majsgryn för polenta, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Morotsnötkött: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär morot och selleri i små jämna bitar; skala rotfrukter före vägning. Skär nötkött i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Finhacka persilja.",
+          "uses": [
+            "nötkött",
+            "morot",
+            "gul lök",
+            "vitlök",
+            "selleri"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och nötkött under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "nötkött"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner morot, kapris, salt, tomatpuré, rosmarin och selleri och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "morot",
+            "kapris",
+            "salt",
+            "tomatpuré",
+            "rosmarin",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 130 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "morot",
+            "kapris",
+            "salt",
+            "tomatpuré",
+            "rosmarin",
+            "selleri",
+            "nötkött",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 130,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner persilja och citronjuice precis före servering. Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten.",
+          "uses": [
+            "persilja",
+            "citronjuice",
+            "nötkött"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Krämig polenta: Koka upp 1170 ml vatten och komponentens salt. Vispa ner majsgrynen lite i taget.",
+          "uses": [
+            "majsgryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under återkommande omrörning tills grynen är helt mjuka och gröten tjock, cirka 25 minuter; följ längre tid på förpackningen.",
+          "uses": [
+            "majsgryn"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner rapsolja i den heta polentan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera morotsnötkött, krämig polenta och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "nötkött",
+            "morot",
+            "gul lök",
+            "rapsolja",
+            "kapris",
+            "salt",
+            "vitlök",
+            "tomatpuré",
+            "rosmarin",
+            "selleri",
+            "persilja",
+            "citronjuice",
+            "majsgryn",
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 15 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 191 minuter totalt, varav 61 aktivt och 130 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av majsgryn, nötkött och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats. Välj nötkött för långkok, exempelvis högrev, och fortsätt koka tills bitarna faller isär under lätt gaffeltryck. Kulinarisk avgränsning: Långkokt nötkött i morotsdominerat spad med kapris serveras över majsgröt; annan struktur än färs och annan spadbas än tomatragu. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-slow-pork-spread-lentil-apple",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad långkokt fläskröra med linser och syrligt äpple – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "långkokt trådig köttröra med baljväxt och råfrukt",
+      "primary": "fläskkött",
+      "method": "pot",
+      "side": "hela linser; fräsch sallad",
+      "flavor": [
+        "rödvinsvinäger"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Långkokt fläskröra",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Hela linser",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Långkokt fläskröra: Välj benfri fläskkarré. Skär i stora bitar och skiva löken tunt. Lägg i en trång gryta med olja, salt och 350 ml vatten.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Sjud under lock på mycket låg värme i 150 minuter tills köttet faller isär under lätt gaffeltryck. Vänd var 30 minut och kontrollera minst 72 °C i köttet.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 150,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta av locket och låt överskottsvätska koka bort under omrörning 10 minuter. Dela köttet till tunna trådar med två gafflar och arbeta ihop med löken och allt återstående stekfett till bredbar varm röra.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Hela linser: Väg och fördela komponentens råvaror före tillagning.",
+          "uses": [],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Värm fettet varsamt utan att låta det ryka.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser och salt och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Kärna ur äpplet och skär fruktköttet i små bitar.",
+          "uses": [
+            "äpple"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda äpple, rödvinsvinäger, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "äpple",
+            "rödvinsvinäger",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera långkokt fläskröra, hela linser och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "äpple",
+            "rödvinsvinäger"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 241 minuter totalt, varav 56 aktivt och 185 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och rödvinsvinäger; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Långkokt fläskkarré sönderdelas och arbetas ihop med sitt eget kokfett till varm bredbar röra; hela linser och syrligt rått äpple är separata kontraster. Ingen pannkaksrulle eller köttfärsfyllning ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-slow-pork-spread-lentil-apple",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad långkokt fläskröra med linser och syrligt äpple – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "långkokt trådig köttröra med baljväxt och råfrukt",
+      "primary": "fläskkött",
+      "method": "pot",
+      "side": "hela linser; fräsch sallad; persilja-citrondressing",
+      "flavor": [
+        "rödvinsvinäger",
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Långkokt fläskröra",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Hela linser",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Persilja-citrondressing",
+          "ingredients": [
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Långkokt fläskröra: Välj benfri fläskkarré. Skär i stora bitar och skiva löken tunt. Lägg i en trång gryta med olja, salt och 350 ml vatten.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Sjud under lock på mycket låg värme i 150 minuter tills köttet faller isär under lätt gaffeltryck. Vänd var 30 minut och kontrollera minst 72 °C i köttet.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 150,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta av locket och låt överskottsvätska koka bort under omrörning 10 minuter. Dela köttet till tunna trådar med två gafflar och arbeta ihop med löken och allt återstående stekfett till bredbar varm röra.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Hela linser: Väg och fördela komponentens råvaror före tillagning.",
+          "uses": [],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Värm fettet varsamt utan att låta det ryka.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser och salt och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Kärna ur äpplet och skär fruktköttet i små bitar.",
+          "uses": [
+            "äpple"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda äpple, rödvinsvinäger, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "äpple",
+            "rödvinsvinäger",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Persilja-citrondressing: Finhacka fasta bitar och färska örter. Rör ihop persilja, citronjuice, vitlök, rapsolja och salt till en jämn röra.",
+          "uses": [
+            "persilja",
+            "citronjuice",
+            "vitlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera långkokt fläskröra, hela linser, fräsch sallad och persilja-citrondressing. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "äpple",
+            "rödvinsvinäger",
+            "persilja",
+            "citronjuice",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 245 minuter totalt, varav 60 aktivt och 185 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och rödvinsvinäger; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Långkokt fläskkarré sönderdelas och arbetas ihop med sitt eget kokfett till varm bredbar röra; hela linser och syrligt rått äpple är separata kontraster. Ingen pannkaksrulle eller köttfärsfyllning ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-slow-pork-spread-lentil-apple",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad långkokt fläskröra med linser och syrligt äpple – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "långkokt trådig köttröra med baljväxt och råfrukt",
+      "primary": "fläskkött",
+      "method": "pot",
+      "side": "hela linser; fräsch sallad; persilja-citrondressing; fräsch sallad; varmt bröd",
+      "flavor": [
+        "rödvinsvinäger",
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Långkokt fläskröra",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Hela linser",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "rödvinsvinäger",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Rödvinsvinäger"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Persilja-citrondressing",
+          "ingredients": [
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c6",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Långkokt fläskröra: Välj benfri fläskkarré. Skär i stora bitar och skiva löken tunt. Lägg i en trång gryta med olja, salt och 350 ml vatten.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Sjud under lock på mycket låg värme i 150 minuter tills köttet faller isär under lätt gaffeltryck. Vänd var 30 minut och kontrollera minst 72 °C i köttet.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 150,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta av locket och låt överskottsvätska koka bort under omrörning 10 minuter. Dela köttet till tunna trådar med två gafflar och arbeta ihop med löken och allt återstående stekfett till bredbar varm röra.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Hela linser: Väg och fördela komponentens råvaror före tillagning.",
+          "uses": [],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Värm fettet varsamt utan att låta det ryka.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser och salt och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Kärna ur äpplet och skär fruktköttet i små bitar.",
+          "uses": [
+            "äpple"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda äpple, rödvinsvinäger, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "äpple",
+            "rödvinsvinäger",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Persilja-citrondressing: Finhacka fasta bitar och färska örter. Rör ihop persilja, citronjuice, vitlök, rapsolja och salt till en jämn röra.",
+          "uses": [
+            "persilja",
+            "citronjuice",
+            "vitlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, oliver, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            13
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera långkokt fläskröra, hela linser, fräsch sallad, persilja-citrondressing, fräsch sallad och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "äpple",
+            "rödvinsvinäger",
+            "persilja",
+            "citronjuice",
+            "vitlök",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            9,
+            10,
+            12,
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 263 minuter totalt, varav 71 aktivt och 192 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och rödvinsvinäger; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Långkokt fläskkarré sönderdelas och arbetas ihop med sitt eget kokfett till varm bredbar röra; hela linser och syrligt rått äpple är separata kontraster. Ingen pannkaksrulle eller köttfärsfyllning ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

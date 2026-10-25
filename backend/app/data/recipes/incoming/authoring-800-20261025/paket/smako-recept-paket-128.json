@@ -1,0 +1,1927 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-128",
+  "recipes": [
+    {
+      "base_id": "smako-indian-breakfast-millet-breakfast-with-roasted-vegetables",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Hirsfrukost med rostade grönsaker och yoghurt – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "hirsfrukost",
+      "primary": "hirs",
+      "method": "pot",
+      "side": "Kryddig blomkål, Yoghurt",
+      "flavor": [
+        "salt",
+        "gurkmeja",
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull med lock",
+        "Slev",
+        "Finmaskig sil",
+        "Ugn",
+        "Grund ugnsform",
+        "Kniv",
+        "Skärbräda",
+        "Stekspade",
+        "Grytlappar",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Hel hirs",
+          "ingredients": [
+            {
+              "name": "hirs",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "primary",
+              "label": "Hirs, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kryddig blomkål",
+          "ingredients": [
+            {
+              "name": "blomkål",
+              "form": "raw_edible",
+              "quantity": 130,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blomkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Hel hirs: Skölj grynen i en finmaskig sil. Lägg hirs i kastrullen med 180 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "hirs"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Hel hirs: Sänk till låg värme. Sjud under lock tills grynen är mjuka och vätskan absorberad. Låt vätska som återstår ånga bort kort utan lock. Tillagningstiden är ungefärlig; grynen ska vara mjuka före servering.",
+          "uses": [
+            "hirs"
+          ],
+          "minutes": 18,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Hel hirs: Rör ner salt och blanda jämnt. Skär eventuella fruktbitar små före tillsättningen.",
+          "uses": [
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Kryddig blomkål: Sätt ugnen på 210 °C. Skölj och ansa råvarorna. Skär fasta råvaror i små buketter. Blanda blomkål, rapsolja, gurkmeja och spiskummin i en grund ugnsform och fördela jämnt.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "gurkmeja",
+            "spiskummin"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Kryddig blomkål: Tillaga i uppvärmd ugn tills råvarorna är mjuka och har fått färg. Vänd eller rör om efter halva tiden och kontrollera med en gaffel innan formen tas ut.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "gurkmeja",
+            "spiskummin"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Yoghurt: Lägg upp yoghurt naturell tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera hel hirs, kryddig blomkål och yoghurt tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "hirs",
+            "salt",
+            "blomkål",
+            "rapsolja",
+            "gurkmeja",
+            "spiskummin",
+            "yoghurt naturell"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 17 minuter aktivt och 40 minuter huvudsakligen passiv väntan, cirka 57 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Hela hirsgryn serveras med separat ugnsrostad blomkål och yoghurt, med tuggmotstånd och rostad yta. Granska mot andra helgrynsskålar; både grönsakernas tillagning och måltidens struktur ska ingå i bedömningen. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för hirs; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-indian-breakfast-millet-breakfast-with-roasted-vegetables",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Hirsfrukost med rostade grönsaker och yoghurt – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "hirsfrukost",
+      "primary": "hirs",
+      "method": "pot",
+      "side": "Kryddig blomkål, Yoghurt, Aprikos och mandel",
+      "flavor": [
+        "salt",
+        "gurkmeja",
+        "spiskummin",
+        "torkade aprikoser",
+        "mandel",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull med lock",
+        "Slev",
+        "Finmaskig sil",
+        "Ugn",
+        "Grund ugnsform",
+        "Kniv",
+        "Skärbräda",
+        "Stekspade",
+        "Grytlappar",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Hel hirs",
+          "ingredients": [
+            {
+              "name": "hirs",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "primary",
+              "label": "Hirs, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kryddig blomkål",
+          "ingredients": [
+            {
+              "name": "blomkål",
+              "form": "raw_edible",
+              "quantity": 130,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blomkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Yoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Aprikos och mandel",
+          "ingredients": [
+            {
+              "name": "torkade aprikoser",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkade aprikoser, mängd som såld"
+            },
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mandel, mängd som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Hel hirs: Skölj grynen i en finmaskig sil. Lägg hirs i kastrullen med 180 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "hirs"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Hel hirs: Sänk till låg värme. Sjud under lock tills grynen är mjuka och vätskan absorberad. Låt vätska som återstår ånga bort kort utan lock. Tillagningstiden är ungefärlig; grynen ska vara mjuka före servering.",
+          "uses": [
+            "hirs"
+          ],
+          "minutes": 18,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Hel hirs: Rör ner salt och blanda jämnt. Skär eventuella fruktbitar små före tillsättningen.",
+          "uses": [
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Kryddig blomkål: Sätt ugnen på 210 °C. Skölj och ansa råvarorna. Skär fasta råvaror i små buketter. Blanda blomkål, rapsolja, gurkmeja och spiskummin i en grund ugnsform och fördela jämnt.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "gurkmeja",
+            "spiskummin"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Kryddig blomkål: Tillaga i uppvärmd ugn tills råvarorna är mjuka och har fått färg. Vänd eller rör om efter halva tiden och kontrollera med en gaffel innan formen tas ut.",
+          "uses": [
+            "blomkål",
+            "rapsolja",
+            "gurkmeja",
+            "spiskummin"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Yoghurt: Lägg upp yoghurt naturell tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "För komponenten Aprikos och mandel: Lägg upp torkade aprikoser, mandel och citronjuice tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "torkade aprikoser",
+            "mandel",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera hel hirs, kryddig blomkål, yoghurt och aprikos och mandel tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "hirs",
+            "salt",
+            "blomkål",
+            "rapsolja",
+            "gurkmeja",
+            "spiskummin",
+            "yoghurt naturell",
+            "torkade aprikoser",
+            "mandel",
+            "citronjuice"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 21 minuter aktivt och 40 minuter huvudsakligen passiv väntan, cirka 61 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Hela hirsgryn serveras med separat ugnsrostad blomkål och yoghurt, med tuggmotstånd och rostad yta. Granska mot andra helgrynsskålar; både grönsakernas tillagning och måltidens struktur ska ingå i bedömningen. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för hirs, mandel och torkade aprikoser; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-indian-breakfast-paneer-stuffed-flatbread-breakfast",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Fyllda stekpannebröd med ost och spenat – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "fyllda indiska plattbröd",
+      "primary": "vetemjöl",
+      "method": "pan",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "spiskummin",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Kastrull",
+        "Sil",
+        "Kavel",
+        "Bakplåtspapper",
+        "Stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fyllda stekpannebröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fetaost, mängd som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fyllda stekpannebröd: Arbeta mjöl, salt och hälften av oljan med 40 ml vatten till en smidig deg. Täck och låt vila. Värm spenaten med 20 ml vatten tills genomvarm och pressa ur vätskan.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "rapsolja",
+            "spenat"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Fyllda stekpannebröd: Smula fetaosten och blanda med spenat och spiskummin. Kavla degen mellan bakplåtspapper till rundlar, lägg fyllningen på ena halvan och vik ihop. Tryck kanterna täta och platta försiktigt.",
+          "uses": [
+            "fetaost",
+            "spenat",
+            "spiskummin",
+            "vetemjöl"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Fyllda stekpannebröd: Fördela resten av oljan i pannan och stek bröden på medellåg värme tills båda sidor fått färg, degen är genomgräddad och fyllningen genomvarm.",
+          "uses": [
+            "rapsolja",
+            "vetemjöl",
+            "fetaost"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera fyllda stekpannebröd tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "fetaost",
+            "spenat",
+            "rapsolja",
+            "spiskummin",
+            "salt"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 5 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 25 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 25 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. En fast ost- och spenatfyllning försluts i hemlagad deg som steks platt; fyllningen tillagas inne i brödet. Jämför med middagssamlingens fyllda plattbröd; samma fyllning med annat måltidsnamn ska inte räknas igen. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-indian-breakfast-paneer-stuffed-flatbread-breakfast",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Fyllda stekpannebröd med ost och spenat – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "fyllda indiska plattbröd",
+      "primary": "vetemjöl",
+      "method": "pan",
+      "side": "Myntayoghurt, Tomat",
+      "flavor": [
+        "spiskummin",
+        "salt",
+        "yoghurt naturell",
+        "mynta",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Kastrull",
+        "Sil",
+        "Kavel",
+        "Bakplåtspapper",
+        "Stekpanna",
+        "Gaffel",
+        "Sked",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fyllda stekpannebröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 70,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fetaost, mängd som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Myntayoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mynta, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tomat",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fyllda stekpannebröd: Arbeta mjöl, salt och hälften av oljan med 40 ml vatten till en smidig deg. Täck och låt vila. Värm spenaten med 20 ml vatten tills genomvarm och pressa ur vätskan.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "rapsolja",
+            "spenat"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Fyllda stekpannebröd: Smula fetaosten och blanda med spenat och spiskummin. Kavla degen mellan bakplåtspapper till rundlar, lägg fyllningen på ena halvan och vik ihop. Tryck kanterna täta och platta försiktigt.",
+          "uses": [
+            "fetaost",
+            "spenat",
+            "spiskummin",
+            "vetemjöl"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Fyllda stekpannebröd: Fördela resten av oljan i pannan och stek bröden på medellåg värme tills båda sidor fått färg, degen är genomgräddad och fyllningen genomvarm.",
+          "uses": [
+            "rapsolja",
+            "vetemjöl",
+            "fetaost"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Myntayoghurt: Finfördela fasta råvaror i komponenten och rör ihop yoghurt naturell, mynta och citronjuice i en skål tills blandningen är jämn.",
+          "uses": [
+            "yoghurt naturell",
+            "mynta",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Tomat: Skölj och ansa tomat. Skär frukt och grönsaker i små bitar. Lägg upp tomat tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera fyllda stekpannebröd, myntayoghurt och tomat tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "fetaost",
+            "spenat",
+            "rapsolja",
+            "spiskummin",
+            "salt",
+            "yoghurt naturell",
+            "mynta",
+            "citronjuice",
+            "tomat"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 33 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 33 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. En fast ost- och spenatfyllning försluts i hemlagad deg som steks platt; fyllningen tillagas inne i brödet. Jämför med middagssamlingens fyllda plattbröd; samma fyllning med annat måltidsnamn ska inte räknas igen. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för mynta; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-indian-breakfast-rice-flake-poha",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade risflingor med jordnötter och potatis – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "risflingepanna",
+      "primary": "risflingor",
+      "method": "pan",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "gurkmeja",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Stekpanna med lock",
+        "Sil",
+        "Kniv",
+        "Skärbräda"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuk risflingepanna",
+          "ingredients": [
+            {
+              "name": "risflingor",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "primary",
+              "label": "Risflingor, torr vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "primary",
+              "label": "Jordnötter, mängd som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Mjuk risflingepanna: Lägg risflingorna i en sil och skölj snabbt med 150 ml vatten. Låt rinna av och mjukna. Skala potatisen och tärna den mycket fint; finhacka löken.",
+          "uses": [
+            "risflingor",
+            "potatis",
+            "gul lök"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Mjuk risflingepanna: Värm oljan, stek lök och potatis och tillsätt 60 ml vatten. Lägg på lock och tillaga tills potatisen är mjuk.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Mjuk risflingepanna: Vänd ner risflingor, jordnötter, gurkmeja och salt. Värm under varsam omrörning tills allt är genomvarmt och flingorna mjuka utan att bli mos.",
+          "uses": [
+            "risflingor",
+            "jordnötter",
+            "gurkmeja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera mjuk risflingepanna tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "risflingor",
+            "potatis",
+            "jordnötter",
+            "gul lök",
+            "rapsolja",
+            "gurkmeja",
+            "salt"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 20 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 20 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Förkokta pressade risflingor fuktas kort och steks med potatis; flingornas tillredning skiljer sig från kokt ris. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för risflingor; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-indian-breakfast-rice-flake-poha",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Indiskinspirerade risflingor med jordnötter och potatis – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "risflingepanna",
+      "primary": "risflingor",
+      "method": "pan",
+      "side": "Gurkyoghurt",
+      "flavor": [
+        "gurkmeja",
+        "salt",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Stekpanna med lock",
+        "Sil",
+        "Kniv",
+        "Skärbräda",
+        "Skål",
+        "Gaffel",
+        "Sked"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuk risflingepanna",
+          "ingredients": [
+            {
+              "name": "risflingor",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "primary",
+              "label": "Risflingor, torr vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "primary",
+              "label": "Jordnötter, mängd som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Gurkyoghurt",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Mjuk risflingepanna: Lägg risflingorna i en sil och skölj snabbt med 150 ml vatten. Låt rinna av och mjukna. Skala potatisen och tärna den mycket fint; finhacka löken.",
+          "uses": [
+            "risflingor",
+            "potatis",
+            "gul lök"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Mjuk risflingepanna: Värm oljan, stek lök och potatis och tillsätt 60 ml vatten. Lägg på lock och tillaga tills potatisen är mjuk.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Mjuk risflingepanna: Vänd ner risflingor, jordnötter, gurkmeja och salt. Värm under varsam omrörning tills allt är genomvarmt och flingorna mjuka utan att bli mos.",
+          "uses": [
+            "risflingor",
+            "jordnötter",
+            "gurkmeja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Gurkyoghurt: Finfördela fasta råvaror i komponenten och rör ihop yoghurt naturell, gurka och citronjuice i en skål tills blandningen är jämn.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera mjuk risflingepanna och gurkyoghurt tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "risflingor",
+            "potatis",
+            "jordnötter",
+            "gul lök",
+            "rapsolja",
+            "gurkmeja",
+            "salt",
+            "yoghurt naturell",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 24 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 24 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Förkokta pressade risflingor fuktas kort och steks med potatis; flingornas tillredning skiljer sig från kokt ris. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för risflingor; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-indian-breakfast-slow-reduced-milk-breakfast-cream",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Långsamt reducerad mjölkkräm med päron och rostat bröd – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "mjölkkräm genom reduktion och skinnbildning",
+      "primary": "mjölk",
+      "method": "pot",
+      "side": "Rostat bröd, Päron",
+      "flavor": [
+        "strösocker",
+        "kardemumma"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Vid tjockbottnad kastrull",
+        "Slickepott",
+        "Slev",
+        "Kniv",
+        "Skärbräda",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Skiktad mjölkreduktionskräm",
+          "ingredients": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "ml",
+              "role": "primary",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "kardemumma",
+              "form": "dry",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kardemumma, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Rostat bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Päron",
+          "ingredients": [
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Päron, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Skiktad mjölkreduktionskräm: Häll mjölken i en vid tjockbottnad kastrull. Värm på medellåg värme till lugn sjudning; låt inte koka över.",
+          "uses": [
+            "mjölk"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Skiktad mjölkreduktionskräm: Sjud utan lock tills ungefär en tredjedel av startvolymen återstår. Lyft mjölkskinn som bildas på ytan till kastrullens inre kant med en spatel. Skrapa försiktigt längs botten återkommande så att mjölken inte bränner fast. Avdunstningen tar ungefär fyrtiofem minuter.",
+          "uses": [
+            "mjölk"
+          ],
+          "minutes": 45,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Skiktad mjölkreduktionskräm: Rör ner socker och kardemumma. Skrapa loss de mjuka mjölkskinnen från kanten och vik ner dem i den tjocknade mjölken som tunna skikt. Sjud ytterligare två minuter och ta från värmen.",
+          "uses": [
+            "mjölk",
+            "strösocker",
+            "kardemumma"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Skiktad mjölkreduktionskräm: Låt krämen svalna kort till ljummen. Den tjocknar av avdunstning och mjölkskinn, inte av tillsatt mjöl eller ägg.",
+          "uses": [
+            "mjölk"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Rostat bröd: Skär brödet i portionsbitar och lägg på bakplåtspapper.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Rostat bröd: Värm i uppvärmd ugn på 200 °C tills brödet är krispigt och fyllningen är genomvarm. Servera hela mängden fyllning tillsammans med brödet.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 8,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "För komponenten Päron: Skölj och ansa päron. Skär frukt och grönsaker i små bitar. Lägg upp päron tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "päron"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera skiktad mjölkreduktionskräm, rostat bröd och päron tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "mjölk",
+            "strösocker",
+            "kardemumma",
+            "bröd",
+            "päron"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 5 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 65 minuter aktivt och 18 minuter huvudsakligen passiv väntan, cirka 83 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Mjölk sjuder länge i vid panna och koncentreras; uppsamlat mjölkskinn viks tillbaka som mjuka skikt i krämen. Varken gryn, äggredning eller gelatin ger strukturen. Indiskinspirerad rabri-konstruktion utan traditionsanspråk. Slutvolym och mjölkens fetthalt påverkar konsistensen och måste provlagas. Hela den angivna mjölkmängden ingår före avdunstningen. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för kardemumma och päron; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-indian-breakfast-slow-reduced-milk-breakfast-cream",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Långsamt reducerad mjölkkräm med päron och rostat bröd – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "mjölkkräm genom reduktion och skinnbildning",
+      "primary": "mjölk",
+      "method": "pot",
+      "side": "Rostat bröd, Päron, Apelsin, mandel och kanel",
+      "flavor": [
+        "strösocker",
+        "kardemumma",
+        "mandel",
+        "kanel"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Vid tjockbottnad kastrull",
+        "Slickepott",
+        "Slev",
+        "Kniv",
+        "Skärbräda",
+        "Ugn",
+        "Plåt",
+        "Bakplåtspapper",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Skiktad mjölkreduktionskräm",
+          "ingredients": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "ml",
+              "role": "primary",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "kardemumma",
+              "form": "dry",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kardemumma, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Rostat bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Päron",
+          "ingredients": [
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Päron, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Apelsin, mandel och kanel",
+          "ingredients": [
+            {
+              "name": "apelsin",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Apelsin, rå ätlig vikt"
+            },
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mandel, mängd som såld"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Skiktad mjölkreduktionskräm: Häll mjölken i en vid tjockbottnad kastrull. Värm på medellåg värme till lugn sjudning; låt inte koka över.",
+          "uses": [
+            "mjölk"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Skiktad mjölkreduktionskräm: Sjud utan lock tills ungefär en tredjedel av startvolymen återstår. Lyft mjölkskinn som bildas på ytan till kastrullens inre kant med en spatel. Skrapa försiktigt längs botten återkommande så att mjölken inte bränner fast. Avdunstningen tar ungefär fyrtiofem minuter.",
+          "uses": [
+            "mjölk"
+          ],
+          "minutes": 45,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Skiktad mjölkreduktionskräm: Rör ner socker och kardemumma. Skrapa loss de mjuka mjölkskinnen från kanten och vik ner dem i den tjocknade mjölken som tunna skikt. Sjud ytterligare två minuter och ta från värmen.",
+          "uses": [
+            "mjölk",
+            "strösocker",
+            "kardemumma"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Skiktad mjölkreduktionskräm: Låt krämen svalna kort till ljummen. Den tjocknar av avdunstning och mjölkskinn, inte av tillsatt mjöl eller ägg.",
+          "uses": [
+            "mjölk"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Rostat bröd: Skär brödet i portionsbitar och lägg på bakplåtspapper.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Rostat bröd: Värm i uppvärmd ugn på 200 °C tills brödet är krispigt och fyllningen är genomvarm. Servera hela mängden fyllning tillsammans med brödet.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 8,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "För komponenten Päron: Skölj och ansa päron. Skär frukt och grönsaker i små bitar. Lägg upp päron tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "päron"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "För komponenten Apelsin, mandel och kanel: Skölj och ansa apelsin. Skär frukt och grönsaker i små bitar. Lägg upp apelsin, mandel och kanel tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "apelsin",
+            "mandel",
+            "kanel"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera skiktad mjölkreduktionskräm, rostat bröd, päron och apelsin, mandel och kanel tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "mjölk",
+            "strösocker",
+            "kardemumma",
+            "bröd",
+            "päron",
+            "apelsin",
+            "mandel",
+            "kanel"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 69 minuter aktivt och 18 minuter huvudsakligen passiv väntan, cirka 87 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Mjölk sjuder länge i vid panna och koncentreras; uppsamlat mjölkskinn viks tillbaka som mjuka skikt i krämen. Varken gryn, äggredning eller gelatin ger strukturen. Indiskinspirerad rabri-konstruktion utan traditionsanspråk. Slutvolym och mjölkens fetthalt påverkar konsistensen och måste provlagas. Hela den angivna mjölkmängden ingår före avdunstningen. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för apelsin, kardemumma, mandel och päron; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-indian-breakfast-steamed-besan-breakfast-cake",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Ångad kikärtskaka med yoghurt och gurka – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "ångad baljväxtkaka",
+      "primary": "kikärtsmjöl",
+      "method": "pot",
+      "side": "Gurka och yoghurt",
+      "flavor": [
+        "yoghurt naturell",
+        "bakpulver",
+        "gurkmeja",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull med lock",
+        "Ånginsats",
+        "Grund värmetålig form",
+        "Visp",
+        "Provsticka",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ångad kikärtskaka",
+          "ingredients": [
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 60,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 2.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Bakpulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Gurka och yoghurt",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Ångad kikärtskaka: Vispa kikärtsmjöl, yoghurt, gurkmeja och salt med 65 ml vatten till en slät smet. Smörj en grund värmetålig form med oljan. Koka upp 800 ml vatten under en ånginsats.",
+          "uses": [
+            "kikärtsmjöl",
+            "yoghurt naturell",
+            "gurkmeja",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "För komponenten Ångad kikärtskaka: Rör ner bakpulvret precis före tillagning, häll smeten i formen och ställ den ovanför vattenytan i ånginsatsen.",
+          "uses": [
+            "bakpulver",
+            "kikärtsmjöl"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ångad kikärtskaka: Ånga under lock tills kakan har rest sig och en provsticka kommer ut utan rå smet. Låt stå kort före uppskärning.",
+          "uses": [
+            "kikärtsmjöl"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Gurka och yoghurt: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka och yoghurt naturell tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka",
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera ångad kikärtskaka och gurka och yoghurt tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "kikärtsmjöl",
+            "yoghurt naturell",
+            "bakpulver",
+            "rapsolja",
+            "gurkmeja",
+            "salt",
+            "gurka"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 12 minuter aktivt och 20 minuter huvudsakligen passiv väntan, cirka 32 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. En luftig kikärtsmjölssmet ångas i form och skärs i bitar; detta är en annan struktur än gräddade linspannkakor. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bakpulver och kikärtsmjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-indian-breakfast-steamed-besan-breakfast-cake",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Ångad kikärtskaka med yoghurt och gurka – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "indian",
+      "family": "ångad baljväxtkaka",
+      "primary": "kikärtsmjöl",
+      "method": "pot",
+      "side": "Gurka och yoghurt, Sesam- och ingefärsolja",
+      "flavor": [
+        "yoghurt naturell",
+        "bakpulver",
+        "gurkmeja",
+        "salt",
+        "sesamfrön",
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull med lock",
+        "Ånginsats",
+        "Grund värmetålig form",
+        "Visp",
+        "Provsticka",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Stekpanna",
+        "Stekspade",
+        "Rivjärn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ångad kikärtskaka",
+          "ingredients": [
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 60,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 2.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Bakpulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Gurka och yoghurt",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Sesam- och ingefärsolja",
+          "ingredients": [
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Sesamfrön, mängd som såld"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Ångad kikärtskaka: Vispa kikärtsmjöl, yoghurt, gurkmeja och salt med 65 ml vatten till en slät smet. Smörj en grund värmetålig form med oljan. Koka upp 800 ml vatten under en ånginsats.",
+          "uses": [
+            "kikärtsmjöl",
+            "yoghurt naturell",
+            "gurkmeja",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "För komponenten Ångad kikärtskaka: Rör ner bakpulvret precis före tillagning, häll smeten i formen och ställ den ovanför vattenytan i ånginsatsen.",
+          "uses": [
+            "bakpulver",
+            "kikärtsmjöl"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ångad kikärtskaka: Ånga under lock tills kakan har rest sig och en provsticka kommer ut utan rå smet. Låt stå kort före uppskärning.",
+          "uses": [
+            "kikärtsmjöl"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Gurka och yoghurt: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka och yoghurt naturell tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka",
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Sesam- och ingefärsolja: Skölj och ansa ingefära. Skär i små jämna bitar; finhacka lök, ingefära och örter. ",
+          "uses": [
+            "sesamfrön",
+            "ingefära"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Sesam- och ingefärsolja: Värm rapsolja i pannan. Tillsätt sesamfrön och ingefära. Tillaga på medelvärme under omrörning tills grönsakerna är mjuka och allt är genomvarmt. ",
+          "uses": [
+            "rapsolja",
+            "sesamfrön",
+            "ingefära"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera ångad kikärtskaka, gurka och yoghurt och sesam- och ingefärsolja tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "kikärtsmjöl",
+            "yoghurt naturell",
+            "bakpulver",
+            "rapsolja",
+            "gurkmeja",
+            "salt",
+            "gurka",
+            "sesamfrön",
+            "ingefära"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 18 minuter aktivt och 20 minuter huvudsakligen passiv väntan, cirka 38 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. En luftig kikärtsmjölssmet ångas i form och skärs i bitar; detta är en annan struktur än gräddade linspannkakor. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bakpulver och kikärtsmjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    }
+  ]
+}

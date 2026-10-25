@@ -1,0 +1,3711 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-02",
+  "recipes": [
+    {
+      "base_id": "smako-greek-aubergine-chickpea-onion-boats",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade auberginebåtar med kikärtor och lök – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fyllda auberginehalvor",
+      "primary": "kikärtor",
+      "method": "oven",
+      "side": "varmt bröd",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fylld aubergine",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fylld aubergine: Sätt ugnen på 200 °C över- och undervärme. Dela aubergine på längden. Gröp ur försiktigt och finhacka det urgröpta fruktköttet; behåll väggar som håller fyllningen.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm hälften av komponentens rapsolja i stekpannan. Fräs gul lök med det hackade fruktköttet tills det mjuknar. ",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "aubergine"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor, krossade tomater och salt i fyllningen. Fördela den i de urgröpta grönsakshalvorna och ringla resterande fett över. Häll 100 ml vatten i formens botten.",
+          "uses": [
+            "kikärtor",
+            "krossade tomater",
+            "salt",
+            "rapsolja",
+            "aubergine"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Baka cirka 35 minuter tills grönsaksskalet är mjukt men håller formen. ",
+          "uses": [
+            "aubergine",
+            "kikärtor",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera fylld aubergine och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "aubergine",
+            "kikärtor",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 70 minuter totalt, varav 28 aktivt och 42 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Auberginen blir ätliga skålar med lökdominerad kikärtsfyllning, jämfört med skivad aubergine i en gratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-aubergine-chickpea-onion-boats",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade auberginebåtar med kikärtor och lök – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fyllda auberginehalvor",
+      "primary": "kikärtor",
+      "method": "oven",
+      "side": "varmt bröd",
+      "flavor": [
+        "oregano"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fylld aubergine",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fylld aubergine: Sätt ugnen på 200 °C över- och undervärme. Dela aubergine på längden. Gröp ur försiktigt och finhacka det urgröpta fruktköttet; behåll väggar som håller fyllningen.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm hälften av komponentens rapsolja i stekpannan. Fräs gul lök och vitlök med det hackade fruktköttet tills det mjuknar. ",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "aubergine"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor, krossade tomater, salt, oregano och tomatpuré i fyllningen. Fördela den i de urgröpta grönsakshalvorna och ringla resterande fett över. Häll 100 ml vatten i formens botten.",
+          "uses": [
+            "kikärtor",
+            "krossade tomater",
+            "salt",
+            "oregano",
+            "tomatpuré",
+            "rapsolja",
+            "aubergine"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Baka cirka 35 minuter tills grönsaksskalet är mjukt men håller formen. ",
+          "uses": [
+            "aubergine",
+            "kikärtor",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomatpuré"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera fylld aubergine och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "aubergine",
+            "kikärtor",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomatpuré",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 70 minuter totalt, varav 28 aktivt och 42 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Auberginen blir ätliga skålar med lökdominerad kikärtsfyllning, jämfört med skivad aubergine i en gratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-aubergine-chickpea-onion-boats",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade auberginebåtar med kikärtor och lök – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fyllda auberginehalvor",
+      "primary": "kikärtor",
+      "method": "oven",
+      "side": "varmt bröd; fräsch sallad",
+      "flavor": [
+        "oregano",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fylld aubergine",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "tomatpuré",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tomatpuré, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fylld aubergine: Sätt ugnen på 200 °C över- och undervärme. Dela aubergine på längden. Gröp ur försiktigt och finhacka det urgröpta fruktköttet; behåll väggar som håller fyllningen.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm hälften av komponentens rapsolja i stekpannan. Fräs gul lök och vitlök med det hackade fruktköttet tills det mjuknar. ",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "aubergine"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor, krossade tomater, salt, oregano och tomatpuré i fyllningen. Fördela den i de urgröpta grönsakshalvorna och ringla resterande fett över. Häll 100 ml vatten i formens botten.",
+          "uses": [
+            "kikärtor",
+            "krossade tomater",
+            "salt",
+            "oregano",
+            "tomatpuré",
+            "rapsolja",
+            "aubergine"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Baka cirka 35 minuter tills grönsaksskalet är mjukt men håller formen. ",
+          "uses": [
+            "aubergine",
+            "kikärtor",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomatpuré"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda gurka, rödlök, citronjuice, persilja, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "citronjuice",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera fylld aubergine, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "aubergine",
+            "kikärtor",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomatpuré",
+            "bröd",
+            "gurka",
+            "rödlök",
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 78 minuter totalt, varav 36 aktivt och 42 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Auberginen blir ätliga skålar med lökdominerad kikärtsfyllning, jämfört med skivad aubergine i en gratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-aubergine-feta-egg-terrine",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad aubergine- och fetaterrin med bröd – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "skivbar aubergineterrin",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "varmt bröd",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Aubergineterrin",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Aubergineterrin: Sätt ugnen på 190 °C över- och undervärme. Skölj, ansa och skär aubergine i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs aubergine tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "aubergine"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Vänd ner fetaost. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "aubergine",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "aubergine",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera aubergineterrin och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "aubergine",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 63 minuter totalt, varav 26 aktivt och 37 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Aubergine binds i äggstanning till en skivbar terrin utan lins- eller köttsås och utan potatislager. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-aubergine-feta-egg-terrine",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad aubergine- och fetaterrin med bröd – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "skivbar aubergineterrin",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "varmt bröd",
+      "flavor": [
+        "oregano"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Aubergineterrin",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Aubergineterrin: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka vitlök. Skölj, ansa och skär aubergine och tomat i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten.",
+          "uses": [
+            "aubergine",
+            "vitlök",
+            "tomat"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs vitlök, aubergine och tomat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "vitlök",
+            "aubergine",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk, salt och oregano. Vänd ner fetaost. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "aubergine",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomat"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "aubergine",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomat"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera aubergineterrin och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "aubergine",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomat",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 63 minuter totalt, varav 26 aktivt och 37 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Aubergine binds i äggstanning till en skivbar terrin utan lins- eller köttsås och utan potatislager. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-aubergine-feta-egg-terrine",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad aubergine- och fetaterrin med bröd – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "skivbar aubergineterrin",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "varmt bröd; fräsch sallad",
+      "flavor": [
+        "oregano",
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Aubergineterrin",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Aubergineterrin: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka vitlök. Skölj, ansa och skär aubergine och tomat i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten.",
+          "uses": [
+            "aubergine",
+            "vitlök",
+            "tomat"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs vitlök, aubergine och tomat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "vitlök",
+            "aubergine",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk, salt och oregano. Vänd ner fetaost. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "aubergine",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomat"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "aubergine",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomat"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda gurka, rödlök, persilja, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "persilja",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera aubergineterrin, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "aubergine",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "tomat",
+            "bröd",
+            "gurka",
+            "rödlök",
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 71 minuter totalt, varav 34 aktivt och 37 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Aubergine binds i äggstanning till en skivbar terrin utan lins- eller köttsås och utan potatislager. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-bean-feta-potato-pie",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad bön- och fetapaj med potatisbotten – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "potatisbotten med baljväxtstanning",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bönfetapaj",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bönfetapaj: Sätt ugnen på 190 °C över- och undervärme. Skala potatisen och skiva mycket tunt. Koka skivorna i 1200 ml vatten cirka 8 minuter och häll av. Låt bönorna rinna av. Fördela potatisskivorna som botten i formen.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs potatis tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Vänd ner bönor och fetaost. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "bönor",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "bönor",
+            "potatis",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "bönor",
+            "potatis",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera bönfetapaj. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "potatis",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 53 minuter totalt, varav 23 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Potatisskivor bildar pajbotten under äggbunden bön- och fetafyllning; skiljer sig från lös potatismosgratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-bean-feta-potato-pie",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad bön- och fetapaj med potatisbotten – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "potatisbotten med baljväxtstanning",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bönfetapaj",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bönfetapaj: Sätt ugnen på 190 °C över- och undervärme. Skala potatisen och skiva mycket tunt. Koka skivorna i 1200 ml vatten cirka 8 minuter och häll av. Låt bönorna rinna av. Fördela potatisskivorna som botten i formen.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs gul lök, vitlök och potatis tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Vänd ner bönor, fetaost och dill. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "bönor",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "salt",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "bönor",
+            "potatis",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "bönor",
+            "potatis",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera bönfetapaj. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "potatis",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 53 minuter totalt, varav 23 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Potatisskivor bildar pajbotten under äggbunden bön- och fetafyllning; skiljer sig från lös potatismosgratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-bean-feta-potato-pie",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad bön- och fetapaj med potatisbotten – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "potatisbotten med baljväxtstanning",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "dill",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bönfetapaj",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bönfetapaj: Sätt ugnen på 190 °C över- och undervärme. Skala potatisen och skiva mycket tunt. Koka skivorna i 1200 ml vatten cirka 8 minuter och häll av. Låt bönorna rinna av. Fördela potatisskivorna som botten i formen.",
+          "uses": [
+            "potatis",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs gul lök, vitlök och potatis tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Vänd ner bönor, fetaost och dill. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "bönor",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "salt",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "bönor",
+            "potatis",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "bönor",
+            "potatis",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera bönfetapaj och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "potatis",
+            "fetaost",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill",
+            "vitlök",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 61 minuter totalt, varav 31 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Potatisskivor bildar pajbotten under äggbunden bön- och fetafyllning; skiljer sig från lös potatismosgratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-beef-barley-stuffed-courgette",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad zucchini med nötkött och korngryn – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "gryn- och färsfylld zucchini",
+      "primary": "nötfärs",
+      "method": "oven",
+      "side": "korngryn",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Färszucchini",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 1100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Korngryn",
+          "ingredients": [
+            {
+              "name": "pärlkorn",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pärlkorn, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Färszucchini: Sätt ugnen på 200 °C över- och undervärme. Dela zucchini på längden. Gröp ur försiktigt och finhacka det urgröpta fruktköttet; behåll väggar som håller fyllningen.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm hälften av komponentens rapsolja i stekpannan. Fräs gul lök och nötfärs med det hackade fruktköttet tills det mjuknar. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "zucchini",
+            "nötfärs"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd ner krossade tomater och salt i fyllningen. Fördela den i de urgröpta grönsakshalvorna och ringla resterande fett över. Häll 100 ml vatten i formens botten.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "rapsolja",
+            "zucchini"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Baka cirka 35 minuter tills grönsaksskalet är mjukt men håller formen. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "zucchini",
+            "nötfärs",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Korngryn: Skölj pärlkorn. Lägg i kastrullen med 875 ml vatten och rapsolja och salt. Koka upp.",
+          "uses": [
+            "pärlkorn",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 30 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "pärlkorn",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "pärlkorn"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera färszucchini och korngryn. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "zucchini",
+            "nötfärs",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "pärlkorn"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 99 minuter totalt, varav 29 aktivt och 70 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pärlkorn; inte importklar. Inga nya produkt- eller pack-koder har skapats. Blanda en del av de kokta korngrynen i färsfyllningen före fyllning och servera resten intill; hela angivna mängden används. Kulinarisk avgränsning: Kokt korn blandas med den fasta köttfyllningen i zucchini; tuggigt korn och mjukt grönsaksskal skiljer från risfylld paprika. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-beef-barley-stuffed-courgette",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad zucchini med nötkött och korngryn – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "gryn- och färsfylld zucchini",
+      "primary": "nötfärs",
+      "method": "oven",
+      "side": "korngryn",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Färszucchini",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 1100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Korngryn",
+          "ingredients": [
+            {
+              "name": "pärlkorn",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pärlkorn, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Färszucchini: Sätt ugnen på 200 °C över- och undervärme. Dela zucchini på längden. Gröp ur försiktigt och finhacka det urgröpta fruktköttet; behåll väggar som håller fyllningen.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm hälften av komponentens rapsolja i stekpannan. Fräs gul lök, vitlök och nötfärs med det hackade fruktköttet tills det mjuknar. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "zucchini",
+            "nötfärs"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd ner krossade tomater, salt och dill i fyllningen. Fördela den i de urgröpta grönsakshalvorna och ringla resterande fett över. Häll 100 ml vatten i formens botten.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "dill",
+            "rapsolja",
+            "zucchini"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Baka cirka 35 minuter tills grönsaksskalet är mjukt men håller formen. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "zucchini",
+            "nötfärs",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "dill"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Korngryn: Skölj pärlkorn. Lägg i kastrullen med 875 ml vatten och rapsolja och salt. Koka upp.",
+          "uses": [
+            "pärlkorn",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 30 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "pärlkorn",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "pärlkorn"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera färszucchini och korngryn. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "zucchini",
+            "nötfärs",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "dill",
+            "pärlkorn"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 99 minuter totalt, varav 29 aktivt och 70 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pärlkorn; inte importklar. Inga nya produkt- eller pack-koder har skapats. Blanda en del av de kokta korngrynen i färsfyllningen före fyllning och servera resten intill; hela angivna mängden används. Kulinarisk avgränsning: Kokt korn blandas med den fasta köttfyllningen i zucchini; tuggigt korn och mjukt grönsaksskal skiljer från risfylld paprika. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-beef-barley-stuffed-courgette",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad zucchini med nötkött och korngryn – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "gryn- och färsfylld zucchini",
+      "primary": "nötfärs",
+      "method": "oven",
+      "side": "korngryn; kall yoghurtsås",
+      "flavor": [
+        "dill",
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Färszucchini",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 1100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Korngryn",
+          "ingredients": [
+            {
+              "name": "pärlkorn",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pärlkorn, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Färszucchini: Sätt ugnen på 200 °C över- och undervärme. Dela zucchini på längden. Gröp ur försiktigt och finhacka det urgröpta fruktköttet; behåll väggar som håller fyllningen.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm hälften av komponentens rapsolja i stekpannan. Fräs gul lök, vitlök och nötfärs med det hackade fruktköttet tills det mjuknar. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "zucchini",
+            "nötfärs"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vänd ner krossade tomater, salt, dill, persilja och fetaost i fyllningen. Fördela den i de urgröpta grönsakshalvorna och ringla resterande fett över. Häll 100 ml vatten i formens botten.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "dill",
+            "persilja",
+            "fetaost",
+            "rapsolja",
+            "zucchini"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Baka cirka 35 minuter tills grönsaksskalet är mjukt men håller formen. Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "zucchini",
+            "nötfärs",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "dill",
+            "persilja",
+            "fetaost"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Korngryn: Skölj pärlkorn. Lägg i kastrullen med 875 ml vatten och rapsolja och salt. Koka upp.",
+          "uses": [
+            "pärlkorn",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 30 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "pärlkorn",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "pärlkorn"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, citronjuice, gurka och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "citronjuice",
+            "gurka",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera färszucchini, korngryn och kall yoghurtsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "zucchini",
+            "nötfärs",
+            "gul lök",
+            "krossade tomater",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "dill",
+            "persilja",
+            "fetaost",
+            "pärlkorn",
+            "yoghurt naturell",
+            "citronjuice",
+            "gurka"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 103 minuter totalt, varav 33 aktivt och 70 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pärlkorn; inte importklar. Inga nya produkt- eller pack-koder har skapats. Blanda en del av de kokta korngrynen i färsfyllningen före fyllning och servera resten intill; hela angivna mängden används. Kulinarisk avgränsning: Kokt korn blandas med den fasta köttfyllningen i zucchini; tuggigt korn och mjukt grönsaksskal skiljer från risfylld paprika. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-beef-caramel-onion-inverted-tart",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad uppochnedpaj med lök och nötfärs – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "vänd smördegspaj med karamelliserad botten",
+      "primary": "nötfärs",
+      "method": "bake",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "balsamvinäger"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Uppochnedpaj",
+          "ingredients": [
+            {
+              "name": "smördeg",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Smördeg, vikt som såld; animaliskt eller vegetabiliskt fett måste kontrolleras"
+            },
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "balsamvinäger",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Balsamvinäger"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Uppochnedpaj: Skala löken och skär i tjocka ringar. Värm hälften av oljan i en ugnstålig stekpanna. Lägg i ringarna med hälften av saltet och stek på låg värme 25 minuter; vänd försiktigt.",
+          "uses": [
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30
+        },
+        {
+          "text": "Tärna tomaterna och koka dem med löken och balsamvinägern tills överskottsvätskan försvunnit, cirka 8 minuter. Behåll lökens runda lager.",
+          "uses": [
+            "tomat",
+            "balsamvinäger",
+            "gul lök"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Stek nötfärsen i resterande olja i en annan panna. Smula den och tillsätt resterande salt. Stek helt genom till minst 72 °C och fördela över lökbottnen.",
+          "uses": [
+            "nötfärs",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 210 °C. Lägg smördegen som ett lock över fyllningen och vik in kanterna mellan fyllningen och pannans kant. Skär några små ånghål. Baka 25 minuter tills degen är genomgräddad.",
+          "uses": [
+            "smördeg",
+            "nötfärs",
+            "gul lök",
+            "tomat"
+          ],
+          "minutes": 30,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt vila 5 minuter. Lägg ett stort fat över pannan och vänd med grytlappar så att lökbottnen hamnar överst. Lyft pannan försiktigt och skrapa med eventuell fyllning som lossnat.",
+          "uses": [
+            "smördeg",
+            "nötfärs",
+            "gul lök",
+            "tomat",
+            "rapsolja",
+            "balsamvinäger",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera uppochnedpaj. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "smördeg",
+            "nötfärs",
+            "gul lök",
+            "tomat",
+            "rapsolja",
+            "balsamvinäger",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 92 minuter totalt, varav 62 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av balsamvinäger och smördeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Karamelliserade hela lökringars botten bakas under ett smördegslock med genomstekt färs, varefter hela pajen vänds. Det är en vänd skorpa med löktopping, utan äggstanning eller potatismatris. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-beef-caramel-onion-inverted-tart",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad uppochnedpaj med lök och nötfärs – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "vänd smördegspaj med karamelliserad botten",
+      "primary": "nötfärs",
+      "method": "bake",
+      "side": "fetaörtströssel",
+      "flavor": [
+        "balsamvinäger",
+        "persilja",
+        "oregano"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Uppochnedpaj",
+          "ingredients": [
+            {
+              "name": "smördeg",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Smördeg, vikt som såld; animaliskt eller vegetabiliskt fett måste kontrolleras"
+            },
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "balsamvinäger",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Balsamvinäger"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fetaörtströssel",
+          "ingredients": [
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Uppochnedpaj: Skala löken och skär i tjocka ringar. Värm hälften av oljan i en ugnstålig stekpanna. Lägg i ringarna med hälften av saltet och stek på låg värme 25 minuter; vänd försiktigt.",
+          "uses": [
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30
+        },
+        {
+          "text": "Tärna tomaterna och koka dem med löken och balsamvinägern tills överskottsvätskan försvunnit, cirka 8 minuter. Behåll lökens runda lager.",
+          "uses": [
+            "tomat",
+            "balsamvinäger",
+            "gul lök"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Stek nötfärsen i resterande olja i en annan panna. Smula den och tillsätt resterande salt. Stek helt genom till minst 72 °C och fördela över lökbottnen.",
+          "uses": [
+            "nötfärs",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 210 °C. Lägg smördegen som ett lock över fyllningen och vik in kanterna mellan fyllningen och pannans kant. Skär några små ånghål. Baka 25 minuter tills degen är genomgräddad.",
+          "uses": [
+            "smördeg",
+            "nötfärs",
+            "gul lök",
+            "tomat"
+          ],
+          "minutes": 30,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt vila 5 minuter. Lägg ett stort fat över pannan och vänd med grytlappar så att lökbottnen hamnar överst. Lyft pannan försiktigt och skrapa med eventuell fyllning som lossnat.",
+          "uses": [
+            "smördeg",
+            "nötfärs",
+            "gul lök",
+            "tomat",
+            "rapsolja",
+            "balsamvinäger",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fetaörtströssel: Finhacka fasta bitar och färska örter. Rör ihop fetaost, persilja och oregano till en jämn röra.",
+          "uses": [
+            "fetaost",
+            "persilja",
+            "oregano"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera uppochnedpaj och fetaörtströssel. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "smördeg",
+            "nötfärs",
+            "gul lök",
+            "tomat",
+            "rapsolja",
+            "balsamvinäger",
+            "salt",
+            "fetaost",
+            "persilja",
+            "oregano"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 96 minuter totalt, varav 66 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av balsamvinäger och smördeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Karamelliserade hela lökringars botten bakas under ett smördegslock med genomstekt färs, varefter hela pajen vänds. Det är en vänd skorpa med löktopping, utan äggstanning eller potatismatris. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-beef-caramel-onion-inverted-tart",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad uppochnedpaj med lök och nötfärs – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "vänd smördegspaj med karamelliserad botten",
+      "primary": "nötfärs",
+      "method": "bake",
+      "side": "fetaörtströssel; fräsch sallad",
+      "flavor": [
+        "balsamvinäger",
+        "persilja",
+        "oregano",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Uppochnedpaj",
+          "ingredients": [
+            {
+              "name": "smördeg",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Smördeg, vikt som såld; animaliskt eller vegetabiliskt fett måste kontrolleras"
+            },
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "balsamvinäger",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Balsamvinäger"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fetaörtströssel",
+          "ingredients": [
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Uppochnedpaj: Skala löken och skär i tjocka ringar. Värm hälften av oljan i en ugnstålig stekpanna. Lägg i ringarna med hälften av saltet och stek på låg värme 25 minuter; vänd försiktigt.",
+          "uses": [
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30
+        },
+        {
+          "text": "Tärna tomaterna och koka dem med löken och balsamvinägern tills överskottsvätskan försvunnit, cirka 8 minuter. Behåll lökens runda lager.",
+          "uses": [
+            "tomat",
+            "balsamvinäger",
+            "gul lök"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Stek nötfärsen i resterande olja i en annan panna. Smula den och tillsätt resterande salt. Stek helt genom till minst 72 °C och fördela över lökbottnen.",
+          "uses": [
+            "nötfärs",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 210 °C. Lägg smördegen som ett lock över fyllningen och vik in kanterna mellan fyllningen och pannans kant. Skär några små ånghål. Baka 25 minuter tills degen är genomgräddad.",
+          "uses": [
+            "smördeg",
+            "nötfärs",
+            "gul lök",
+            "tomat"
+          ],
+          "minutes": 30,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt vila 5 minuter. Lägg ett stort fat över pannan och vänd med grytlappar så att lökbottnen hamnar överst. Lyft pannan försiktigt och skrapa med eventuell fyllning som lossnat.",
+          "uses": [
+            "smördeg",
+            "nötfärs",
+            "gul lök",
+            "tomat",
+            "rapsolja",
+            "balsamvinäger",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fetaörtströssel: Finhacka fasta bitar och färska örter. Rör ihop fetaost, persilja och oregano till en jämn röra.",
+          "uses": [
+            "fetaost",
+            "persilja",
+            "oregano"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, oliver, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera uppochnedpaj, fetaörtströssel och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "smördeg",
+            "nötfärs",
+            "gul lök",
+            "tomat",
+            "rapsolja",
+            "balsamvinäger",
+            "salt",
+            "fetaost",
+            "persilja",
+            "oregano",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 104 minuter totalt, varav 74 aktivt och 30 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av balsamvinäger och smördeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Karamelliserade hela lökringars botten bakas under ett smördegslock med genomstekt färs, varefter hela pajen vänds. Det är en vänd skorpa med löktopping, utan äggstanning eller potatismatris. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

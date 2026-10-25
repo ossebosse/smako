@@ -1,0 +1,4039 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-15",
+  "recipes": [
+    {
+      "base_id": "smako-greek-leek-whitebean-rice-pilaf",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerat purjolöksris med vita bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "grönsaksdominerad pilaff",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Purjolöksris",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Purjolök, ansad rå vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Purjolöksris: Ansa och finhacka purjolök. Låt bönor rinna av noga.",
+          "uses": [
+            "bönor",
+            "purjolök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs purjolök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "purjolök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner bönor, ris och salt och 650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 22 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "bönor",
+            "ris",
+            "salt",
+            "purjolök"
+          ],
+          "minutes": 22,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. ",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera purjolöksris. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "ris",
+            "purjolök",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 44 minuter totalt, varav 22 aktivt och 22 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av purjolök; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ris kokas genom en stor mängd purjolök och vita bönor till sammanhållen pilaff; ingen tomatbaserad pastagryta. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-leek-whitebean-rice-pilaf",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerat purjolöksris med vita bönor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "grönsaksdominerad pilaff",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Purjolöksris",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Purjolök, ansad rå vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Purjolöksris: Ansa och finhacka purjolök och vitlök. Skölj, ansa och skär selleri i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga. Finhacka dill.",
+          "uses": [
+            "bönor",
+            "purjolök",
+            "selleri",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs purjolök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "purjolök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner bönor, ris, salt och selleri och 650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "ris",
+            "salt",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 22 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "bönor",
+            "ris",
+            "salt",
+            "selleri",
+            "purjolök",
+            "vitlök"
+          ],
+          "minutes": 22,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice och dill precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera purjolöksris. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "ris",
+            "purjolök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "selleri",
+            "dill",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 44 minuter totalt, varav 22 aktivt och 22 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av purjolök; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ris kokas genom en stor mängd purjolök och vita bönor till sammanhållen pilaff; ingen tomatbaserad pastagryta. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-leek-whitebean-rice-pilaf",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerat purjolöksris med vita bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "grönsaksdominerad pilaff",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "rostad paprikasallad",
+      "flavor": [
+        "citronjuice",
+        "dill",
+        "oregano"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Purjolöksris",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vitt ris, torr vikt"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Purjolök, ansad rå vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Rostad paprikasallad",
+          "ingredients": [
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Purjolöksris: Ansa och finhacka purjolök och vitlök. Skölj, ansa och skär selleri i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga. Finhacka dill.",
+          "uses": [
+            "bönor",
+            "purjolök",
+            "selleri",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs purjolök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "purjolök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner bönor, ris, salt och selleri och 650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "ris",
+            "salt",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 22 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "bönor",
+            "ris",
+            "salt",
+            "selleri",
+            "purjolök",
+            "vitlök"
+          ],
+          "minutes": 22,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice och dill precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rostad paprikasallad: Sätt ugnen på 220 °C över- och undervärme. Skölj, ansa och skär paprika och tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "paprika",
+            "tomat",
+            "oliver"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela paprika, tomat, oliver, rapsolja, oregano och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "paprika",
+            "tomat",
+            "oliver",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "paprika",
+            "tomat",
+            "oliver",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "paprika",
+            "tomat",
+            "oliver",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera purjolöksris och rostad paprikasallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "ris",
+            "purjolök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "selleri",
+            "dill",
+            "vitlök",
+            "paprika",
+            "tomat",
+            "oliver",
+            "oregano"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 82 minuter totalt, varav 35 aktivt och 47 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av purjolök; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Ris kokas genom en stor mängd purjolök och vita bönor till sammanhållen pilaff; ingen tomatbaserad pastagryta. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-lemon-artichoke-beans-carrot-mash",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad citronbräserad kronärtskocka med bönor och morotsmos – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "syrlig grönsaksbräsering med mos",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "morotspotatis",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kronärtskocksbönor",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "kronärtskocka",
+              "form": "preserved_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade kronärtskockshjärtan, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Morotspotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kronärtskocksbönor: Ansa och finhacka gul lök. Låt bönor rinna av noga.",
+          "uses": [
+            "bönor",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner bönor, kronärtskocka och salt och 250 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "kronärtskocka",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 18 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "bönor",
+            "kronärtskocka",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. ",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Morotspotatis: Skala potatisen och morot och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "morot",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis",
+            "morot"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatisen med den kokta moroten och komponentens olja. Använd hela komponentens rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "morot",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera kronärtskocksbönor och morotspotatis. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "kronärtskocka",
+            "gul lök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "potatis",
+            "morot"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 72 minuter totalt, varav 34 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av kronärtskocka; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Syrlig vit bräsering med kronärtskockshjärtan serveras på rotfruktsmos; huvudstrukturen skiljer sig från tomatbakade bönor med couscous. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-lemon-artichoke-beans-carrot-mash",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad citronbräserad kronärtskocka med bönor och morotsmos – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "syrlig grönsaksbräsering med mos",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "morotspotatis",
+      "flavor": [
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kronärtskocksbönor",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "kronärtskocka",
+              "form": "preserved_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade kronärtskockshjärtan, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Morotspotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kronärtskocksbönor: Ansa och finhacka gul lök och vitlök. Låt bönor rinna av noga. Finhacka dill.",
+          "uses": [
+            "bönor",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner bönor, kronärtskocka och salt och 250 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "kronärtskocka",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 18 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "bönor",
+            "kronärtskocka",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice och dill precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Morotspotatis: Skala potatisen och morot och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "morot",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis",
+            "morot"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatisen med den kokta moroten och komponentens olja. Använd hela komponentens rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "morot",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera kronärtskocksbönor och morotspotatis. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "kronärtskocka",
+            "gul lök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök",
+            "potatis",
+            "morot"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 72 minuter totalt, varav 34 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av kronärtskocka; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Syrlig vit bräsering med kronärtskockshjärtan serveras på rotfruktsmos; huvudstrukturen skiljer sig från tomatbakade bönor med couscous. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-lemon-artichoke-beans-carrot-mash",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad citronbräserad kronärtskocka med bönor och morotsmos – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "syrlig grönsaksbräsering med mos",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "morotspotatis; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kronärtskocksbönor",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "kronärtskocka",
+              "form": "preserved_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Konserverade kronärtskockshjärtan, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Morotspotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kronärtskocksbönor: Ansa och finhacka gul lök och vitlök. Låt bönor rinna av noga. Finhacka dill.",
+          "uses": [
+            "bönor",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner bönor, kronärtskocka och salt och 250 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "kronärtskocka",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 18 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "bönor",
+            "kronärtskocka",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice och dill precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Morotspotatis: Skala potatisen och morot och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "morot",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis",
+            "morot"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatisen med den kokta moroten och komponentens olja. Använd hela komponentens rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "morot",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "kapris",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda gurka, tomat, kapris, persilja, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "kapris",
+            "persilja",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera kronärtskocksbönor, morotspotatis och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "kronärtskocka",
+            "gul lök",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "dill",
+            "vitlök",
+            "potatis",
+            "morot",
+            "gurka",
+            "tomat",
+            "kapris",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 80 minuter totalt, varav 42 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av kronärtskocka; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Syrlig vit bräsering med kronärtskockshjärtan serveras på rotfruktsmos; huvudstrukturen skiljer sig från tomatbakade bönor med couscous. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-mackerel-roast-pepper-polenta",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad makrill med rostad paprika och polenta – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "makrill på grönsaksbädd med polenta",
+      "primary": "makrill",
+      "method": "oven",
+      "side": "krämig polenta",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Paprikamakrill",
+          "ingredients": [
+            {
+              "name": "makrill",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Makrillfilé, rå ätlig vikt utan ben"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Krämig polenta",
+          "ingredients": [
+            {
+              "name": "majsgryn",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Majsgryn för polenta, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Paprikamakrill: Sätt ugnen på 220 °C över- och undervärme. Skär paprikan i tunna strimlor och makrillen till benfria portionsfiléer. Lägg paprikan i ett tunt lager under fisken.",
+          "uses": [
+            "makrill",
+            "paprika"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela makrill, paprika, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 63 °C i fiskens tjockaste mitt. Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "makrill",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Krämig polenta: Koka upp 1125 ml vatten och komponentens salt. Vispa ner majsgrynen lite i taget.",
+          "uses": [
+            "majsgryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under återkommande omrörning tills grynen är helt mjuka och gröten tjock, cirka 25 minuter; följ längre tid på förpackningen.",
+          "uses": [
+            "majsgryn"
+          ],
+          "minutes": 25,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rapsolja i den heta polentan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera paprikamakrill och krämig polenta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "majsgryn"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 71 minuter totalt, varav 46 aktivt och 25 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av majsgryn och makrill; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fet makrill tillagas över tunna paprikastrimlor och serveras på majsgröt, med fiskens fett som del av grönsaksspadet. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-mackerel-roast-pepper-polenta",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad makrill med rostad paprika och polenta – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "makrill på grönsaksbädd med polenta",
+      "primary": "makrill",
+      "method": "oven",
+      "side": "krämig polenta",
+      "flavor": [
+        "citronjuice",
+        "oregano"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Paprikamakrill",
+          "ingredients": [
+            {
+              "name": "makrill",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Makrillfilé, rå ätlig vikt utan ben"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Krämig polenta",
+          "ingredients": [
+            {
+              "name": "majsgryn",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Majsgryn för polenta, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Paprikamakrill: Sätt ugnen på 220 °C över- och undervärme. Skär paprikan i tunna strimlor och makrillen till benfria portionsfiléer. Lägg paprikan i ett tunt lager under fisken.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela makrill, paprika, rapsolja, salt, gul lök, vitlök och oregano i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 25,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 63 °C i fiskens tjockaste mitt. Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "makrill",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Krämig polenta: Koka upp 1125 ml vatten och komponentens salt. Vispa ner majsgrynen lite i taget.",
+          "uses": [
+            "majsgryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under återkommande omrörning tills grynen är helt mjuka och gröten tjock, cirka 25 minuter; följ längre tid på förpackningen.",
+          "uses": [
+            "majsgryn"
+          ],
+          "minutes": 25,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rapsolja i den heta polentan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera paprikamakrill och krämig polenta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "oregano",
+            "majsgryn"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 71 minuter totalt, varav 46 aktivt och 25 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av majsgryn och makrill; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fet makrill tillagas över tunna paprikastrimlor och serveras på majsgröt, med fiskens fett som del av grönsaksspadet. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-mackerel-roast-pepper-polenta",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad makrill med rostad paprika och polenta – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "makrill på grönsaksbädd med polenta",
+      "primary": "makrill",
+      "method": "oven",
+      "side": "krämig polenta; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "oregano",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Paprikamakrill",
+          "ingredients": [
+            {
+              "name": "makrill",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Makrillfilé, rå ätlig vikt utan ben"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Krämig polenta",
+          "ingredients": [
+            {
+              "name": "majsgryn",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Majsgryn för polenta, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Paprikamakrill: Sätt ugnen på 220 °C över- och undervärme. Skär paprikan i tunna strimlor och makrillen till benfria portionsfiléer. Lägg paprikan i ett tunt lager under fisken.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela makrill, paprika, rapsolja, salt, gul lök, vitlök och oregano i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 25,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 63 °C i fiskens tjockaste mitt. Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "makrill",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Krämig polenta: Koka upp 1125 ml vatten och komponentens salt. Vispa ner majsgrynen lite i taget.",
+          "uses": [
+            "majsgryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under återkommande omrörning tills grynen är helt mjuka och gröten tjock, cirka 25 minuter; följ längre tid på förpackningen.",
+          "uses": [
+            "majsgryn"
+          ],
+          "minutes": 25,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rapsolja i den heta polentan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "persilja",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, persilja, oliver, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "persilja",
+            "oliver",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera paprikamakrill, krämig polenta och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "makrill",
+            "paprika",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "oregano",
+            "majsgryn",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "persilja",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 54 aktivt och 25 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av majsgryn och makrill; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Fet makrill tillagas över tunna paprikastrimlor och serveras på majsgröt, med fiskens fett som del av grönsaksspadet. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-mushroom-bean-filo-strudel",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad filorulle med svamp och vita bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fylld filostrudel",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Svamp- och bönrulle",
+          "ingredients": [
+            {
+              "name": "filodeg",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Filodeg, vikt som såld; kontrollera ingredienser för avsedd diet"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Svamp- och bönrulle: Sätt ugnen på 200 °C över- och undervärme. Ansa och finhacka gul lök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga.",
+          "uses": [
+            "bönor",
+            "champinjoner",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Använd en tredjedel av oljan för att fräsa gul lök och champinjoner tills grönsakerna mjuknar. ",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "champinjoner"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ta pannan från värmen och blanda ner bönor och salt. Låt fyllningen svalna så att den inte blöter sönder degen.",
+          "uses": [
+            "bönor",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg filodegsarken omlott på bakplåtspapper och pensla mellan med resterande olja. Lägg fyllningen i en sträng, vik in kortsidorna och rulla med hjälp av papperet. Lägg med skarven nedåt och pensla med all återstående olja.",
+          "uses": [
+            "filodeg",
+            "rapsolja",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 30 minuter tills filodegen är frasig och gyllene. ",
+          "uses": [
+            "filodeg",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "filodeg",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda gurka, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera svamp- och bönrulle och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "filodeg",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 41 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av filodeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: En sluten filorulle med saftig svamp och mosad vit böna, skuren i skivor, skiljer sig från öppna ugnsgrönsaker och tomatbakade bönor. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-mushroom-bean-filo-strudel",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad filorulle med svamp och vita bönor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fylld filostrudel",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "timjan",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Svamp- och bönrulle",
+          "ingredients": [
+            {
+              "name": "filodeg",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Filodeg, vikt som såld; kontrollera ingredienser för avsedd diet"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Svamp- och bönrulle: Sätt ugnen på 200 °C över- och undervärme. Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga.",
+          "uses": [
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Använd en tredjedel av oljan för att fräsa gul lök, vitlök och champinjoner tills grönsakerna mjuknar. ",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "champinjoner"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ta pannan från värmen och blanda ner bönor, salt och timjan. Låt fyllningen svalna så att den inte blöter sönder degen.",
+          "uses": [
+            "bönor",
+            "salt",
+            "timjan"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg filodegsarken omlott på bakplåtspapper och pensla mellan med resterande olja. Lägg fyllningen i en sträng, vik in kortsidorna och rulla med hjälp av papperet. Lägg med skarven nedåt och pensla med all återstående olja.",
+          "uses": [
+            "filodeg",
+            "rapsolja",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "salt",
+            "vitlök",
+            "timjan"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 30 minuter tills filodegen är frasig och gyllene. ",
+          "uses": [
+            "filodeg",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "timjan"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "filodeg",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "timjan"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda gurka, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera svamp- och bönrulle och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "filodeg",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "timjan",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 41 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av filodeg och timjan; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: En sluten filorulle med saftig svamp och mosad vit böna, skuren i skivor, skiljer sig från öppna ugnsgrönsaker och tomatbakade bönor. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-mushroom-bean-filo-strudel",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad filorulle med svamp och vita bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fylld filostrudel",
+      "primary": "bönor",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "timjan",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Svamp- och bönrulle",
+          "ingredients": [
+            {
+              "name": "filodeg",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Filodeg, vikt som såld; kontrollera ingredienser för avsedd diet"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Svamp- och bönrulle: Sätt ugnen på 200 °C över- och undervärme. Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga. Grovhacka valnötter.",
+          "uses": [
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Använd en tredjedel av oljan för att fräsa gul lök, vitlök och champinjoner tills grönsakerna mjuknar. ",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "champinjoner"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ta pannan från värmen och blanda ner bönor, salt, timjan och valnötter. Låt fyllningen svalna så att den inte blöter sönder degen.",
+          "uses": [
+            "bönor",
+            "salt",
+            "timjan",
+            "valnötter"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg filodegsarken omlott på bakplåtspapper och pensla mellan med resterande olja. Lägg fyllningen i en sträng, vik in kortsidorna och rulla med hjälp av papperet. Lägg med skarven nedåt och pensla med all återstående olja.",
+          "uses": [
+            "filodeg",
+            "rapsolja",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "salt",
+            "vitlök",
+            "timjan",
+            "valnötter"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 30 minuter tills filodegen är frasig och gyllene. ",
+          "uses": [
+            "filodeg",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "timjan",
+            "valnötter"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "filodeg",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "timjan",
+            "valnötter"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda gurka, citronjuice, rapsolja, salt, tomat, persilja och rödlök i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera svamp- och bönrulle och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "filodeg",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "timjan",
+            "valnötter",
+            "gurka",
+            "citronjuice",
+            "tomat",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 41 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av filodeg, timjan och valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: En sluten filorulle med saftig svamp och mosad vit böna, skuren i skivor, skiljer sig från öppna ugnsgrönsaker och tomatbakade bönor. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-mushroom-feta-stuffed-potatoes",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fylld bakpotatis",
+      "primary": "fetaost",
+      "method": "oven",
+      "side": "svampfetafyllning",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bakad potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1200.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Svampfetafyllning",
+          "ingredients": [
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bakad potatis: Sätt ugnen på 220 °C över- och undervärme. Välj stora potatisar. Dela på längden, nagga snittytan och lägg med snittet uppåt.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela potatis, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 50 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 50,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Svampfetafyllning: Ansa och finhacka gul lök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten.",
+          "uses": [
+            "champinjoner",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och champinjoner under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "champinjoner"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner salt och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "salt",
+            "gul lök",
+            "champinjoner"
+          ],
+          "minutes": 12,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner fetaost precis före servering. ",
+          "uses": [
+            "fetaost"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Öppna den genomvarma, mjuka potatisen med en gaffel och gör plats i mitten. Fördela hela svampfetafyllningen i fördjupningarna.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "champinjoner",
+            "fetaost",
+            "gul lök"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera bakad potatis och svampfetafyllning. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "champinjoner",
+            "fetaost",
+            "gul lök"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 101 minuter totalt, varav 51 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas. Öppna den mjuka potatisen med en gaffel och lägg svampfetafyllningen i fördjupningen vid serveringen. Kulinarisk avgränsning: Stora bakpotatishalvor öppnas och fylls med svamp och feta; potatisen är ett ätligt skal, inte separata ugnsbitar. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-mushroom-feta-stuffed-potatoes",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade bakpotatisar med svamp och feta – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fylld bakpotatis",
+      "primary": "fetaost",
+      "method": "oven",
+      "side": "svampfetafyllning",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bakad potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1200.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Svampfetafyllning",
+          "ingredients": [
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bakad potatis: Sätt ugnen på 220 °C över- och undervärme. Välj stora potatisar. Dela på längden, nagga snittytan och lägg med snittet uppåt.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela potatis, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 50 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 50,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Svampfetafyllning: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Väg spenat frysta enligt komponenten. Smula fetaosten.",
+          "uses": [
+            "champinjoner",
+            "gul lök",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och champinjoner under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "champinjoner"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner salt och spenat och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "salt",
+            "spenat"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "salt",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "champinjoner"
+          ],
+          "minutes": 12,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner fetaost precis före servering. ",
+          "uses": [
+            "fetaost"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Öppna den genomvarma, mjuka potatisen med en gaffel och gör plats i mitten. Fördela hela svampfetafyllningen i fördjupningarna.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "champinjoner",
+            "fetaost",
+            "gul lök",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera bakad potatis och svampfetafyllning. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "champinjoner",
+            "fetaost",
+            "gul lök",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 101 minuter totalt, varav 51 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas. Öppna den mjuka potatisen med en gaffel och lägg svampfetafyllningen i fördjupningen vid serveringen. Kulinarisk avgränsning: Stora bakpotatishalvor öppnas och fylls med svamp och feta; potatisen är ett ätligt skal, inte separata ugnsbitar. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-mushroom-feta-stuffed-potatoes",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade bakpotatisar med svamp och feta – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fylld bakpotatis",
+      "primary": "fetaost",
+      "method": "oven",
+      "side": "svampfetafyllning; kall yoghurtsås; fräsch sallad",
+      "flavor": [
+        "dill",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bakad potatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1200.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Svampfetafyllning",
+          "ingredients": [
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Bakad potatis: Sätt ugnen på 220 °C över- och undervärme. Välj stora potatisar. Dela på längden, nagga snittytan och lägg med snittet uppåt.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela potatis, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 50 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 50,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Svampfetafyllning: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Väg spenat frysta enligt komponenten. Smula fetaosten.",
+          "uses": [
+            "champinjoner",
+            "gul lök",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och champinjoner under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "champinjoner"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner salt och spenat och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "salt",
+            "spenat"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "salt",
+            "spenat",
+            "gul lök",
+            "vitlök",
+            "champinjoner"
+          ],
+          "minutes": 12,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner fetaost precis före servering. ",
+          "uses": [
+            "fetaost"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, dill, citronjuice och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "dill",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Öppna den genomvarma, mjuka potatisen med en gaffel och gör plats i mitten. Fördela hela svampfetafyllningen i fördjupningarna.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "champinjoner",
+            "fetaost",
+            "gul lök",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 4,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera bakad potatis, svampfetafyllning, kall yoghurtsås och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "champinjoner",
+            "fetaost",
+            "gul lök",
+            "spenat",
+            "vitlök",
+            "yoghurt naturell",
+            "dill",
+            "citronjuice",
+            "tomat",
+            "gurka"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            9,
+            10,
+            12,
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 113 minuter totalt, varav 63 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas. Öppna den mjuka potatisen med en gaffel och lägg svampfetafyllningen i fördjupningen vid serveringen. Kulinarisk avgränsning: Stora bakpotatishalvor öppnas och fylls med svamp och feta; potatisen är ett ätligt skal, inte separata ugnsbitar. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

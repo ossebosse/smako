@@ -1,3 +1,27 @@
+# 2026-10-25: 800 grundrätter mottagna; Sol färdigställer ingredienser och import
+
+Ägaren beställde att receptleveransen läggs till i Smako och att Sol får
+instruktioner. Nästa läsning är
+[CODEX-SOL-NEXT-20261025-RECIPE-INTAKE.md](CODEX-SOL-NEXT-20261025-RECIPE-INTAKE.md),
+före stora nya skalprov i det fortsatt gällande V2-uppdraget. Sammanlagd
+benchmarkbudget för denna fortsatta etapp är fortfarande 120 minuter, inte
+två separata budgetar. Produktmålet innehåller nu även ingrediensvarianter.
+
+Alla 800 grundrättskandidater/2 200 varianter finns i 160 bytebevarade
+författarpaket under `backend/app/data/recipes/incoming/authoring-800-20261025`.
+Originalbilagor och bevarade filer har källmanifest med SHA-256.
+[Mottagningsrapport](reviews/recipe-intake-800-20261025.md) och JSON redovisar
+429 native-kompatibla varianter, 1 763 ingrediensblockerade, sex
+standardiseringsfel och två valideringsavslag. Befintlig normalisering ger
+189 saknade kanoniska identiteter, jämfört med författarens råa 198.
+
+Samlingen är tillagd som komplett underlag i projektet. Ingen av dessa
+varianter har ännu publicerats som konsumentrecept: aktivt manifest och
+bibliotekets 262 recept är oförändrade. Sol ska rätta dokumenterade hinder,
+granska innehåll, komplettera befintliga kopplingar och publicera korrekta
+delmängder genom vanlig import. Importens 16 MiB/128-generationsgränser
+kräver färre runtimepaket än de 160 författarpaketen. Ingen aktivering i beta.
+
 # 2026-10-25: Bestående produktmål och ny planeringsriktning efter PR #12
 
 Ägaren har förtydligat hela produkten: plats och valda butiker, butikstak

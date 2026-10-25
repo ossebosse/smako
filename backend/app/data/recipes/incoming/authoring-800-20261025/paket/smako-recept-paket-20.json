@@ -1,0 +1,4225 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-20",
+  "recipes": [
+    {
+      "base_id": "smako-greek-toasted-bean-bread-pockets",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade rostade bönbrödsfickor med kål – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fyllda rostade brödfickor",
+      "primary": "bönor",
+      "method": "cold_assembly",
+      "side": "varmt bröd; fräsch sallad",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Vit bönröra",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vit bönröra: Lägg bönor, citronjuice, rapsolja och salt i mixerkärlet med 50 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär vitkål i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "vitkål"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda vitkål, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "vitkål",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Öppna det varma mjuka brödet försiktigt som fickor. Fördela hela bönröran och kålsalladen i fickorna. Om brödet är skivat, bygg fyllda dubbla bröd med samma mängder.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "vitkål"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera vit bönröra, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "vitkål"
+          ],
+          "minutes": 2,
+          "after": [
+            1,
+            3,
+            5,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 29 minuter totalt, varav 22 aktivt och 7 huvudsakligen passivt. Tiderna behöver provlagas. Använd mjukt bröd som går att öppna som ficka. Öppna det efter uppvärmning och fördela bönröra och kål inuti. Produktens brödform måste kontrolleras. Kulinarisk avgränsning: Rostade mjuka brödfickor fylls med tjock bönkräm och syrlig kål; ingen tortilla med smält ost eller stekt kött. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-toasted-bean-bread-pockets",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade rostade bönbrödsfickor med kål – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fyllda rostade brödfickor",
+      "primary": "bönor",
+      "method": "cold_assembly",
+      "side": "varmt bröd; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "oregano"
+      ],
+      "equipment": [
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Vit bönröra",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vit bönröra: Lägg bönor, citronjuice, rapsolja, salt, vitlök och oregano i mixerkärlet med 50 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär vitkål och morot i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "vitkål",
+            "morot"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda vitkål, rapsolja, citronjuice, salt och morot i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "vitkål",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "morot"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Öppna det varma mjuka brödet försiktigt som fickor. Fördela hela bönröran och kålsalladen i fickorna. Om brödet är skivat, bygg fyllda dubbla bröd med samma mängder.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "bröd",
+            "vitkål",
+            "morot"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera vit bönröra, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "bröd",
+            "vitkål",
+            "morot"
+          ],
+          "minutes": 2,
+          "after": [
+            1,
+            3,
+            5,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 29 minuter totalt, varav 22 aktivt och 7 huvudsakligen passivt. Tiderna behöver provlagas. Använd mjukt bröd som går att öppna som ficka. Öppna det efter uppvärmning och fördela bönröra och kål inuti. Produktens brödform måste kontrolleras. Kulinarisk avgränsning: Rostade mjuka brödfickor fylls med tjock bönkräm och syrlig kål; ingen tortilla med smält ost eller stekt kött. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-toasted-bean-bread-pockets",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade rostade bönbrödsfickor med kål – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "fyllda rostade brödfickor",
+      "primary": "bönor",
+      "method": "cold_assembly",
+      "side": "varmt bröd; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "oregano",
+        "persilja"
+      ],
+      "equipment": [
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Vit bönröra",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vit bönröra: Lägg bönor, citronjuice, rapsolja, salt, vitlök och oregano i mixerkärlet med 50 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär vitkål, morot och tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "tomat",
+            "rödlök",
+            "persilja",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda vitkål, rapsolja, citronjuice, salt, morot, tomat, rödlök, persilja och oliver i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "vitkål",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "morot",
+            "tomat",
+            "rödlök",
+            "persilja",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Öppna det varma mjuka brödet försiktigt som fickor. Fördela hela bönröran och kålsalladen i fickorna. Om brödet är skivat, bygg fyllda dubbla bröd med samma mängder.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "bröd",
+            "vitkål",
+            "morot",
+            "tomat",
+            "rödlök",
+            "persilja",
+            "oliver"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera vit bönröra, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "oregano",
+            "bröd",
+            "vitkål",
+            "morot",
+            "tomat",
+            "rödlök",
+            "persilja",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            1,
+            3,
+            5,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 29 minuter totalt, varav 22 aktivt och 7 huvudsakligen passivt. Tiderna behöver provlagas. Använd mjukt bröd som går att öppna som ficka. Öppna det efter uppvärmning och fördela bönröra och kål inuti. Produktens brödform måste kontrolleras. Kulinarisk avgränsning: Rostade mjuka brödfickor fylls med tjock bönkräm och syrlig kål; ingen tortilla med smält ost eller stekt kött. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tofu-spinach-flatbread-folds",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade tunnbrödsveck med spenattofu – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "stekbröd med varm fyllning",
+      "primary": "tofu",
+      "method": "pan",
+      "side": "spenattofu",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Degskål",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuka stekbröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 320.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Spenattofu",
+          "ingredients": [
+            {
+              "name": "tofu",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tofu, vikt som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mjuka stekbröd: Blanda vetemjöl och salt med 190 ml vatten till en mjuk deg. Knåda jämnt och dela till ett bröd per portion.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kavla bröden tunt. Fördela rapsolja över gräddningen och stek i omgångar på medelhög värme cirka 2 minuter per sida, tills de fått bruna fläckar och är genomgräddade.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Spenattofu: Väg spenat frysta enligt komponenten. Torka av tofun och tärna den.",
+          "uses": [
+            "tofu",
+            "spenat"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs tofu under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "tofu"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner spenat och salt och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "spenat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "spenat",
+            "salt",
+            "tofu"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. ",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fördela den varma spenattofun på stekbröden. Vik bröden runt fyllningen och lägg eventuella extra sallader intill.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "tofu",
+            "spenat",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera mjuka stekbröd och spenattofu. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "tofu",
+            "spenat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 75 minuter totalt, varav 60 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Nybakade pannbröd fylls vid bordet med en torr spenat- och tofuröra; skiljs från smulig tofu med ris och från filopaj. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tofu-spinach-flatbread-folds",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade tunnbrödsveck med spenattofu – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "stekbröd med varm fyllning",
+      "primary": "tofu",
+      "method": "pan",
+      "side": "spenattofu",
+      "flavor": [
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Degskål",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuka stekbröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 320.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Spenattofu",
+          "ingredients": [
+            {
+              "name": "tofu",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tofu, vikt som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mjuka stekbröd: Blanda vetemjöl och salt med 190 ml vatten till en mjuk deg. Knåda jämnt och dela till ett bröd per portion.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kavla bröden tunt. Fördela rapsolja över gräddningen och stek i omgångar på medelhög värme cirka 2 minuter per sida, tills de fått bruna fläckar och är genomgräddade.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Spenattofu: Ansa och finhacka gul lök och vitlök. Väg spenat frysta enligt komponenten. Torka av tofun och tärna den. Finhacka dill.",
+          "uses": [
+            "tofu",
+            "spenat",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och tofu under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "tofu"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner spenat och salt och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "spenat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "spenat",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "tofu"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice och dill precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fördela den varma spenattofun på stekbröden. Vik bröden runt fyllningen och lägg eventuella extra sallader intill.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "tofu",
+            "spenat",
+            "citronjuice",
+            "gul lök",
+            "vitlök",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera mjuka stekbröd och spenattofu. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "tofu",
+            "spenat",
+            "citronjuice",
+            "gul lök",
+            "vitlök",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 75 minuter totalt, varav 60 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Nybakade pannbröd fylls vid bordet med en torr spenat- och tofuröra; skiljs från smulig tofu med ris och från filopaj. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tofu-spinach-flatbread-folds",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade tunnbrödsveck med spenattofu – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "stekbröd med varm fyllning",
+      "primary": "tofu",
+      "method": "pan",
+      "side": "spenattofu; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Degskål",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Mjuka stekbröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 320.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Spenattofu",
+          "ingredients": [
+            {
+              "name": "tofu",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tofu, vikt som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Mjuka stekbröd: Blanda vetemjöl och salt med 190 ml vatten till en mjuk deg. Knåda jämnt och dela till ett bröd per portion.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kavla bröden tunt. Fördela rapsolja över gräddningen och stek i omgångar på medelhög värme cirka 2 minuter per sida, tills de fått bruna fläckar och är genomgräddade.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Spenattofu: Ansa och finhacka gul lök och vitlök. Väg spenat frysta enligt komponenten. Torka av tofun och tärna den. Finhacka dill.",
+          "uses": [
+            "tofu",
+            "spenat",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och tofu under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "tofu"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner spenat och salt och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "spenat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "spenat",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "tofu"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice och dill precis före servering. ",
+          "uses": [
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, oliver, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "oliver",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Fördela den varma spenattofun på stekbröden. Vik bröden runt fyllningen och lägg eventuella extra sallader intill.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "tofu",
+            "spenat",
+            "citronjuice",
+            "gul lök",
+            "vitlök",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera mjuka stekbröd, spenattofu och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "tofu",
+            "spenat",
+            "citronjuice",
+            "gul lök",
+            "vitlök",
+            "dill",
+            "tomat",
+            "gurka",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            10,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 11 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 83 minuter totalt, varav 68 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Nybakade pannbröd fylls vid bordet med en torr spenat- och tofuröra; skiljs från smulig tofu med ris och från filopaj. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tomato-feta-baked-eggs-bulgur",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade bakade ägg i fetatomat med bulgur – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "tomat- och äggbakning",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "bulgur",
+      "flavor": [
+        "oregano"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatägg",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bulgur",
+          "ingredients": [
+            {
+              "name": "bulgur",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bulgur, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatägg: Sätt ugnen på 190 °C över- och undervärme. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs tomat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, oregano och salt. Vänd ner fetaost. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "ägg",
+            "fetaost",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "tomat",
+            "ägg",
+            "fetaost",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "tomat",
+            "ägg",
+            "fetaost",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Bulgur: Skölj bulgur. Lägg i kastrullen med 528 ml vatten och rapsolja och salt. Koka upp.",
+          "uses": [
+            "bulgur",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 12 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "bulgur",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "bulgur"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tomatägg och bulgur. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "tomat",
+            "ägg",
+            "fetaost",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "bulgur"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 74 minuter totalt, varav 27 aktivt och 47 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av bulgur; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Färska tomater bakas med sammanhängande äggstanning och feta till en skivbar rätt med bulgur; närliggande shakshuka ska granskas. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tomato-feta-baked-eggs-bulgur",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade bakade ägg i fetatomat med bulgur – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "tomat- och äggbakning",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "bulgur",
+      "flavor": [
+        "oregano"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatägg",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bulgur",
+          "ingredients": [
+            {
+              "name": "bulgur",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bulgur, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatägg: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs gul lök, vitlök och tomat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, oregano och salt. Vänd ner fetaost. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "ägg",
+            "fetaost",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "tomat",
+            "ägg",
+            "fetaost",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "tomat",
+            "ägg",
+            "fetaost",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Bulgur: Skölj bulgur. Lägg i kastrullen med 528 ml vatten och rapsolja och salt. Koka upp.",
+          "uses": [
+            "bulgur",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 12 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "bulgur",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "bulgur"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tomatägg och bulgur. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "tomat",
+            "ägg",
+            "fetaost",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "bulgur"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 74 minuter totalt, varav 27 aktivt och 47 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av bulgur; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Färska tomater bakas med sammanhängande äggstanning och feta till en skivbar rätt med bulgur; närliggande shakshuka ska granskas. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tomato-feta-baked-eggs-bulgur",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade bakade ägg i fetatomat med bulgur – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "tomat- och äggbakning",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "bulgur; fräsch sallad",
+      "flavor": [
+        "oregano",
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatägg",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bulgur",
+          "ingredients": [
+            {
+              "name": "bulgur",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bulgur, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatägg: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten.",
+          "uses": [
+            "tomat",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs gul lök, vitlök och tomat tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, oregano och salt. Vänd ner fetaost. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "ägg",
+            "fetaost",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "tomat",
+            "ägg",
+            "fetaost",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "tomat",
+            "ägg",
+            "fetaost",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Bulgur: Skölj bulgur. Lägg i kastrullen med 528 ml vatten och rapsolja och salt. Koka upp.",
+          "uses": [
+            "bulgur",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 12 minuter tills kornen är mjuka och vätskan absorberad. Följ en längre koktid om den valda produkten behöver det.",
+          "uses": [
+            "bulgur",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Ta kastrullen från värmen och låt kornen vila under lock.",
+          "uses": [
+            "bulgur"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda gurka, rödlök, oliver, persilja, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera tomatägg, bulgur och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "tomat",
+            "ägg",
+            "fetaost",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "gul lök",
+            "vitlök",
+            "bulgur",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 82 minuter totalt, varav 35 aktivt och 47 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av bulgur; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Färska tomater bakas med sammanhängande äggstanning och feta till en skivbar rätt med bulgur; närliggande shakshuka ska granskas. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tuna-corn-chickpea-griddle-cakes",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade tonfiskkakor med majs och kikärtor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "konserverad fisk i baljväxt-majskakor",
+      "primary": "tonfisk",
+      "method": "pan",
+      "side": "citronpotatis",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kastrull med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfisk-majskakor",
+          "ingredients": [
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell majs, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Citronpotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfisk-majskakor: Låt tonfisk och kikärtor rinna av noga. Koka majsen i 400 ml vatten 3 minuter och häll av. Mosa kikärtorna och flaga tonfisken.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda tonfisk, kikärtor, majs, ägg, ströbröd och salt till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Citronpotatis: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Vänd den med rapsolja och citronjuice.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera tonfisk-majskakor och citronpotatis. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 44 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Avrunnen tonfisk, hela majskorn och mosade kikärtor formas till kakor; tydligt annan bindning och textur än rå fiskfärs. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tuna-corn-chickpea-griddle-cakes",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade tonfiskkakor med majs och kikärtor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "konserverad fisk i baljväxt-majskakor",
+      "primary": "tonfisk",
+      "method": "pan",
+      "side": "citronpotatis",
+      "flavor": [
+        "dill",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kastrull med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfisk-majskakor",
+          "ingredients": [
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell majs, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Citronpotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfisk-majskakor: Låt tonfisk och kikärtor rinna av noga. Koka majsen i 400 ml vatten 3 minuter och häll av. Mosa kikärtorna och flaga tonfisken.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "dill"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda tonfisk, kikärtor, majs, ägg, ströbröd, salt, dill och citronjuice till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "salt",
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "salt",
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Citronpotatis: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Vänd den med rapsolja och citronjuice.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera tonfisk-majskakor och citronpotatis. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "dill",
+            "citronjuice",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 44 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Avrunnen tonfisk, hela majskorn och mosade kikärtor formas till kakor; tydligt annan bindning och textur än rå fiskfärs. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tuna-corn-chickpea-griddle-cakes",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade tonfiskkakor med majs och kikärtor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "konserverad fisk i baljväxt-majskakor",
+      "primary": "tonfisk",
+      "method": "pan",
+      "side": "citronpotatis; kall yoghurtsås; fräsch sallad",
+      "flavor": [
+        "dill",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kastrull med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfisk-majskakor",
+          "ingredients": [
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell majs, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Citronpotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 6.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfisk-majskakor: Låt tonfisk och kikärtor rinna av noga. Koka majsen i 400 ml vatten 3 minuter och häll av. Mosa kikärtorna och flaga tonfisken.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "dill"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda tonfisk, kikärtor, majs, ägg, ströbröd, salt, dill och citronjuice till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "salt",
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "salt",
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "dill",
+            "citronjuice"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Citronpotatis: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Vänd den med rapsolja och citronjuice.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, gurka, vitlök, citronjuice och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "vitlök",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera tonfisk-majskakor, citronpotatis, kall yoghurtsås och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "tonfisk",
+            "kikärtor",
+            "majs",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "dill",
+            "citronjuice",
+            "potatis",
+            "yoghurt naturell",
+            "gurka",
+            "vitlök",
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 91 minuter totalt, varav 56 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Avrunnen tonfisk, hela majskorn och mosade kikärtor formas till kakor; tydligt annan bindning och textur än rå fiskfärs. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tuna-potato-filo-spiral",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad tonfisk- och potatisspiral i filo – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "konserverad fisk i filospiral",
+      "primary": "tonfisk",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfiskfilospiral",
+          "ingredients": [
+            {
+              "name": "filodeg",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Filodeg, vikt som såld; kontrollera ingredienser för avsedd diet"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 55.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfiskfilospiral: Sätt ugnen på 200 °C över- och undervärme. Skala och tärna potatisen smått. Förkoka i 1000 ml vatten 10 minuter och häll av. Låt tonfisken rinna av och finhacka löken.",
+          "uses": [
+            "potatis",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Använd en tredjedel av oljan för att fräsa gul lök och potatis tills grönsakerna mjuknar. ",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ta pannan från värmen och blanda ner tonfisk och salt. Låt fyllningen svalna så att den inte blöter sönder degen.",
+          "uses": [
+            "tonfisk",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg filodegsark dubbla och pensla med den återstående oljan. Lägg fyllningen som strängar och rulla ihop. Lägg rullarna i en spiral i formen och pensla med all resterande olja.",
+          "uses": [
+            "filodeg",
+            "rapsolja",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 30 minuter tills filodegen är frasig och gyllene. ",
+          "uses": [
+            "filodeg",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "filodeg",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera tonfiskfilospiral och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "filodeg",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 41 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av filodeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Avrunnen tonfisk och kokt potatis bildar fast fyllning i en spiral av filodeg; annan fyllningskonsistens än färsk fiskfilopaj. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tuna-potato-filo-spiral",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad tonfisk- och potatisspiral i filo – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "konserverad fisk i filospiral",
+      "primary": "tonfisk",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "dill",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfiskfilospiral",
+          "ingredients": [
+            {
+              "name": "filodeg",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Filodeg, vikt som såld; kontrollera ingredienser för avsedd diet"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 55.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfiskfilospiral: Sätt ugnen på 200 °C över- och undervärme. Skala och tärna potatisen smått. Förkoka i 1000 ml vatten 10 minuter och häll av. Låt tonfisken rinna av och finhacka löken.",
+          "uses": [
+            "potatis",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Använd en tredjedel av oljan för att fräsa gul lök och potatis tills grönsakerna mjuknar. ",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ta pannan från värmen och blanda ner tonfisk, salt, dill och kapris. Låt fyllningen svalna så att den inte blöter sönder degen.",
+          "uses": [
+            "tonfisk",
+            "salt",
+            "dill",
+            "kapris"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg filodegsark dubbla och pensla med den återstående oljan. Lägg fyllningen som strängar och rulla ihop. Lägg rullarna i en spiral i formen och pensla med all resterande olja.",
+          "uses": [
+            "filodeg",
+            "rapsolja",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "salt",
+            "dill",
+            "kapris"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 30 minuter tills filodegen är frasig och gyllene. ",
+          "uses": [
+            "filodeg",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "dill",
+            "kapris"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "filodeg",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "dill",
+            "kapris"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera tonfiskfilospiral och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "filodeg",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "dill",
+            "kapris",
+            "tomat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 41 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av filodeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Avrunnen tonfisk och kokt potatis bildar fast fyllning i en spiral av filodeg; annan fyllningskonsistens än färsk fiskfilopaj. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-tuna-potato-filo-spiral",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad tonfisk- och potatisspiral i filo – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "konserverad fisk i filospiral",
+      "primary": "tonfisk",
+      "method": "bake",
+      "side": "fräsch sallad",
+      "flavor": [
+        "dill",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Pensel",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfiskfilospiral",
+          "ingredients": [
+            {
+              "name": "filodeg",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Filodeg, vikt som såld; kontrollera ingredienser för avsedd diet"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 55.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfiskfilospiral: Sätt ugnen på 200 °C över- och undervärme. Skala och tärna potatisen smått. Förkoka i 1000 ml vatten 10 minuter och häll av. Låt tonfisken rinna av och finhacka löken.",
+          "uses": [
+            "potatis",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Använd en tredjedel av oljan för att fräsa gul lök och potatis tills grönsakerna mjuknar. ",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "potatis"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ta pannan från värmen och blanda ner tonfisk, salt, dill och kapris. Låt fyllningen svalna så att den inte blöter sönder degen.",
+          "uses": [
+            "tonfisk",
+            "salt",
+            "dill",
+            "kapris"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg filodegsark dubbla och pensla med den återstående oljan. Lägg fyllningen som strängar och rulla ihop. Lägg rullarna i en spiral i formen och pensla med all resterande olja.",
+          "uses": [
+            "filodeg",
+            "rapsolja",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "salt",
+            "dill",
+            "kapris"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Grädda cirka 30 minuter tills filodegen är frasig och gyllene. ",
+          "uses": [
+            "filodeg",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "dill",
+            "kapris"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt pajen vila före uppskärning.",
+          "uses": [
+            "filodeg",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "dill",
+            "kapris"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja, salt, gurka, rödlök, oliver och persilja i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera tonfiskfilospiral och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "filodeg",
+            "tonfisk",
+            "potatis",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "dill",
+            "kapris",
+            "tomat",
+            "citronjuice",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 41 aktivt och 38 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av filodeg; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Avrunnen tonfisk och kokt potatis bildar fast fyllning i en spiral av filodeg; annan fyllningskonsistens än färsk fiskfilopaj. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

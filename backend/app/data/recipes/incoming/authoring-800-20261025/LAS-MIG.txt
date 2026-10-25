@@ -1,0 +1,43 @@
+SMAKO – SAMLAD FÖRFATTNINGSLEVERANS
+
+800 författade grundrättsförslag och 2 200 fullständiga varianter.
+Denna fortsättning innehåller 795 baser och 2 187 varianter. Pilotens 5 baser och 13 varianter ingår oförändrade.
+600 middagar (4 portioner), 100 frukostar (1 portion), 100 mellanmål (1 portion).
+160 numrerade paket med 5 grundrätter i varje. Samma grundrätts varianter ligger i samma paket.
+
+VÄLJ EN RECEPTVY
+smako-alla-recept.json innehåller hela samlingen.
+paket/ innehåller exakt samma recept i 160 mindre JSON-filer.
+De två vyerna ska inte behandlas som två olika receptleveranser. Paket 01 är den tidigare pilotfilen.
+Använd paket 02–160 om du endast behöver fortsättningen efter piloten.
+Receptfilerna följer smako-recipe-authoring-v1. Identitet är base_id + variant_id + version.
+variant_id är simple/standard/extended. version är 1.0.0. Fältet level används inte som variantskala.
+
+ÖVERSIKTER
+smako-leveransoversikt.json: faktisk fördelning, samtliga identiteter, ingrediensantal per variant,
+avvikelser, tidsuppskattningar, ingrediensobservationer och granskningspunkter.
+paketoversikter/: motsvarande bokföring med kumulativa antal efter varje paket.
+smako-registerforslag.json: 198 exakta råvaruidentiteter som saknas i registret.
+smako-kontrollrapport.json: lokal maskinkontroll inklusive de väntade felen för saknade registeridentiteter.
+smako-dubblettgranskning.json: pensioneringar, ersättningar och kvarvarande kulinariska gränsfall.
+pilot-leveransoversikt.json: den tidigare pilotöversikten, bevarad som historisk referens.
+
+VAD KONTROLLERNA VISAR
+0 strukturella fel efter att saknade ingrediensidentiteter särredovisats.
+0 upprepade base_id/variant_id och 0 ID-krockar med tillhandahållet bibliotek eller exempel.
+1778 varianter behöver registergranskning. 422 använder endast kända identiteter.
+294 middagsvarianter avviker från riktmärkena 5–7, 8–11, 12–15.
+7 middagsbaser saknar variant inom standardfiltret 10–15.
+Salt, svartpeppar, peppar och vatten räknas inte. Samma name/form/unit räknas bara en gång per variant.
+Processvatten skrivs N ml vatten. Två markeringar om 400 ml i frukost avser kärlstorlek, inte råvara.
+
+VAD SOM ÅTERSTÅR FÖRE ANVÄNDNING I SMAKO
+AI-författade utkast, inte provlagade. Ingen import, formell granskning eller Smako-validering är gjord.
+Kandidatantalet är inte bevis på 800 globalt kulinariskt unika rätter. Namngivna gränsfall finns i granskningen.
+Faktisk råvarutillgång, produktmatchning, mängdbasis och alias måste kontrolleras.
+Kostinriktningen i översikten är författarens avsikt. Varje variants verkliga ingredienser är redovisade separat.
+Veganism, vegetarisk löpe, allergener, näring och köpbarhet avgörs av faktiska produkter och Smakos regler.
+Priser, kampanjer, näringsvärden, hashes och formella godkännanden har inte skapats.
+Tiderna är uppskattade. Många recept har förberedande kylning, blötläggning eller jäsning som ingår i tiden.
+Köks- och proteinfördelningen avviker från målet där en bättre ny rätt ersatte en bekräftad klon.
+Se översiktens actual- och targets-fält för den exakta jämförelsen.

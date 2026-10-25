@@ -8,6 +8,9 @@
 # Authored recipes carry exact file hashes; checkout must preserve their bytes.
 /backend/app/data/recipes/*.json -text
 /backend/app/data/recipes/content-pack-20261004/*.json -text
+# Preserve the user's draft source bytes and their intake audit on every checkout.
+/backend/app/data/recipes/incoming/authoring-800-20261025/** -text whitespace=cr-at-eol
+/docs/reviews/recipe-intake-800-20261025.json -text whitespace=cr-at-eol
 # Evidence documents reference each other's exact bytes, including line endings.
 /docs/reviews/preparation-memory-20261024/*.json -text
 /docs/reviews/preparation-memory-20261024/*.py text eol=lf

@@ -1,0 +1,4225 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-42",
+  "recipes": [
+    {
+      "base_id": "smako-italian-tuna-potato-oven-loaf",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tonfisk- och potatislimpa – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "potatis-konservfisklimpa",
+      "primary": "tonfisk",
+      "method": "pot",
+      "side": "fräsch sallad",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfiskpotatismassa",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfiskpotatismassa: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa den avrunna potatisen och låt svalna till ljummen. Flaga tonfisken och blanda med potatis, ägg och olja. Tryck i en bakpappersklädd form. Använd hela komponentens tonfisk, ägg och rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Jämna till tonfiskpotatismassan i den bakpappersklädda formen; äggblandningen är fortfarande rå och ska nu bakas.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Grädda cirka 35 minuter tills limpan håller ihop, ägget har stelnat helt och mitten når minst 72 °C.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 35,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt limpan vila 10 minuter före uppskärning så att skivorna håller ihop.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tonfiskpotatismassa och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 90 minuter totalt, varav 25 aktivt och 65 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Potatis och avrunnen tonfisk binds av ägg och bakas till en skärbar limpa; inte lös tonfiskröra eller fiskfilé under mos. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tuna-potato-oven-loaf",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tonfisk- och potatislimpa – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "potatis-konservfisklimpa",
+      "primary": "tonfisk",
+      "method": "pot",
+      "side": "fräsch sallad",
+      "flavor": [
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfiskpotatismassa",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfiskpotatismassa: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa den avrunna potatisen och låt svalna till ljummen. Flaga tonfisken och blanda med potatis, ägg och olja. Tryck i en bakpappersklädd form. Använd hela komponentens tonfisk, ägg, rapsolja, kapris, persilja och vitlök i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Jämna till tonfiskpotatismassan i den bakpappersklädda formen; äggblandningen är fortfarande rå och ska nu bakas.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Grädda cirka 35 minuter tills limpan håller ihop, ägget har stelnat helt och mitten når minst 72 °C.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt limpan vila 10 minuter före uppskärning så att skivorna håller ihop.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 10,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tonfiskpotatismassa och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök",
+            "tomat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            5,
+            6,
+            7,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 90 minuter totalt, varav 25 aktivt och 65 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Potatis och avrunnen tonfisk binds av ägg och bakas till en skärbar limpa; inte lös tonfiskröra eller fiskfilé under mos. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-tuna-potato-oven-loaf",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tonfisk- och potatislimpa – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "potatis-konservfisklimpa",
+      "primary": "tonfisk",
+      "method": "pot",
+      "side": "fräsch sallad; kall yoghurtsås",
+      "flavor": [
+        "persilja",
+        "citronjuice",
+        "basilika"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tonfiskpotatismassa",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "tonfisk",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tonfisk, kokt avrunnen vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tonfiskpotatismassa: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa den avrunna potatisen och låt svalna till ljummen. Flaga tonfisken och blanda med potatis, ägg och olja. Tryck i en bakpappersklädd form. Använd hela komponentens tonfisk, ägg, rapsolja, kapris, persilja och vitlök i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka basilika.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "basilika"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja, salt, gurka, rödlök, oliver och basilika i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, citronjuice och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Jämna till tonfiskpotatismassan i den bakpappersklädda formen; äggblandningen är fortfarande rå och ska nu bakas.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Grädda cirka 35 minuter tills limpan håller ihop, ägget har stelnat helt och mitten når minst 72 °C.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt limpan vila 10 minuter före uppskärning så att skivorna håller ihop.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök"
+          ],
+          "minutes": 10,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tonfiskpotatismassa, fräsch sallad och kall yoghurtsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "tonfisk",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "kapris",
+            "persilja",
+            "vitlök",
+            "tomat",
+            "citronjuice",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "basilika",
+            "yoghurt naturell"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 94 minuter totalt, varav 29 aktivt och 65 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Potatis och avrunnen tonfisk binds av ägg och bakas till en skärbar limpa; inte lös tonfiskröra eller fiskfilé under mos. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-warm-egg-hard-cheese-pasta-emulsion",
+      "name": "Pasta med varm ägg-ostemulsion och knaprigt fläsk – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "pasta binds med kontrollerat uppvärmd ägg-ostemulsion",
+      "primary": "rimmat fläsk",
+      "method": "pot",
+      "side": "Varma ärtor",
+      "flavor": [
+        "mild",
+        "rimmat fläsk"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Pastakastrull",
+        "Durkslag",
+        "Stekpanna",
+        "Värmetålig skål",
+        "Visp",
+        "Rivjärn",
+        "Digital kökstermometer",
+        "Liten kastrull"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pasta med varm ägg-ostemulsion",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 320,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 240,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 140,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vällagrad hårdost, som såld"
+            },
+            {
+              "name": "rimmat fläsk",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rimmat sidfläsk utan svål, rå ätlig vikt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svartpeppar, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varma ärtor",
+          "ingredients": [
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tärna det rimmade fläsket smått och stek det i torr panna tills fettet smält ut och bitarna är genomstekta och minst 72 °C. Ta pannan från värmen men spara fläsket och det utsmälta fettet i pannan. Riv osten mycket fint.",
+          "uses": [
+            "rimmat fläsk",
+            "ost"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Koka pastan i 2200 ml vatten med saltet till strax före helt mjuk. Spara kokvattnet innan pastan lyfts över till fläskpannan. Vänd den heta pastan med fläsket och det utsmälta fettet.",
+          "uses": [
+            "pasta",
+            "salt",
+            "rimmat fläsk"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa äggen, den finrivna osten och svartpepparn i den värmetåliga skålen. Vispa gradvis in 120 ml vatten från pastakoket. Häll blandningen över pastan när stekpannan tagits från direkt värme.",
+          "uses": [
+            "pasta",
+            "ägg",
+            "ost",
+            "rimmat fläsk",
+            "svartpeppar",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd pasta och äggblandning oavbrutet så att såsen blir blank och omsluter pastan. Värm mycket försiktigt över sjudande vatten om temperaturen behöver höjas och fortsätt röra till 72 °C i äggsåsen. Stoppa uppvärmningen direkt; ingen äggröra ska bildas. Servera genast.",
+          "uses": [
+            "pasta",
+            "ägg",
+            "ost",
+            "rimmat fläsk",
+            "svartpeppar",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm ärtorna i en liten kastrull med 100 ml vatten tills de är helt genomvarma. Häll av och servera till pastan.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera de färdiga huvudkomponenterna och samtliga ätliga tillbehör tillsammans. Fördela maten över det angivna antalet portioner. Processmaterial som enligt tidigare steg ska avlägsnas eller kasseras ingår inte i serveringen.",
+          "uses": [
+            "pasta",
+            "ägg",
+            "ost",
+            "rimmat fläsk",
+            "svartpeppar",
+            "salt",
+            "ärtor"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 5 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 42 minuter aktivt och 0 minuter huvudsakligen passiv väntan. Ägg och finriven ost binds till en varm emulsion på pastans yta med stärkelsehaltigt kokvatten och utsmält fett. Det är ingen gräddsås, pastafrittata eller gratäng. Temperatur och omrörning behöver provlagning. Kräver registergranskning av rimmat fläsk; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Kräver registergranskning av de exakta identiteterna rimmat fläsk/raw_edible/g; inte importklar. Identiteter med ett redan känt namn men annan form får inte matchas tyst mot den befintliga formen. Varianten ligger under nuvarande standardfilter 10–15 räknade ingredienser och kräver att filtrets minimiantal sänks för att kunna väljas.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-italian-warm-egg-hard-cheese-pasta-emulsion",
+      "name": "Pasta med varm ägg-ostemulsion och knaprigt fläsk – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "pasta binds med kontrollerat uppvärmd ägg-ostemulsion",
+      "primary": "rimmat fläsk",
+      "method": "pot",
+      "side": "Varma ärtor",
+      "flavor": [
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Pastakastrull",
+        "Durkslag",
+        "Stekpanna",
+        "Värmetålig skål",
+        "Visp",
+        "Rivjärn",
+        "Digital kökstermometer",
+        "Liten kastrull"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pasta med varm ägg-ostemulsion",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 320,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 240,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 140,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vällagrad hårdost, som såld"
+            },
+            {
+              "name": "rimmat fläsk",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rimmat sidfläsk utan svål, rå ätlig vikt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svartpeppar, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varma ärtor",
+          "ingredients": [
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citron- och örtdressing",
+          "ingredients": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tärna det rimmade fläsket smått och stek det i torr panna tills fettet smält ut och bitarna är genomstekta och minst 72 °C. Ta pannan från värmen men spara fläsket och det utsmälta fettet i pannan. Riv osten mycket fint.",
+          "uses": [
+            "rimmat fläsk",
+            "ost"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Koka pastan i 2200 ml vatten med saltet till strax före helt mjuk. Spara kokvattnet innan pastan lyfts över till fläskpannan. Vänd den heta pastan med fläsket och det utsmälta fettet.",
+          "uses": [
+            "pasta",
+            "salt",
+            "rimmat fläsk"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa äggen, den finrivna osten och svartpepparn i den värmetåliga skålen. Vispa gradvis in 120 ml vatten från pastakoket. Häll blandningen över pastan när stekpannan tagits från direkt värme.",
+          "uses": [
+            "pasta",
+            "ägg",
+            "ost",
+            "rimmat fläsk",
+            "svartpeppar",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd pasta och äggblandning oavbrutet så att såsen blir blank och omsluter pastan. Värm mycket försiktigt över sjudande vatten om temperaturen behöver höjas och fortsätt röra till 72 °C i äggsåsen. Stoppa uppvärmningen direkt; ingen äggröra ska bildas. Servera genast.",
+          "uses": [
+            "pasta",
+            "ägg",
+            "ost",
+            "rimmat fläsk",
+            "svartpeppar",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm ärtorna i en liten kastrull med 100 ml vatten tills de är helt genomvarma. Häll av och servera till pastan.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Finhacka persiljan och rör ihop med dressingens citronjuice och olja. Fördela hela dressingen över huvudrätten eller tillbehöret vid serveringen.",
+          "uses": [
+            "citronjuice",
+            "rapsolja",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera de färdiga huvudkomponenterna och samtliga ätliga tillbehör tillsammans. Fördela maten över det angivna antalet portioner. Processmaterial som enligt tidigare steg ska avlägsnas eller kasseras ingår inte i serveringen.",
+          "uses": [
+            "pasta",
+            "ägg",
+            "ost",
+            "rimmat fläsk",
+            "svartpeppar",
+            "salt",
+            "ärtor",
+            "citronjuice",
+            "rapsolja",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 8 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 46 minuter aktivt och 0 minuter huvudsakligen passiv väntan. Ägg och finriven ost binds till en varm emulsion på pastans yta med stärkelsehaltigt kokvatten och utsmält fett. Det är ingen gräddsås, pastafrittata eller gratäng. Temperatur och omrörning behöver provlagning. Kräver registergranskning av rimmat fläsk; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Kräver registergranskning av de exakta identiteterna rimmat fläsk/raw_edible/g; inte importklar. Identiteter med ett redan känt namn men annan form får inte matchas tyst mot den befintliga formen. Varianten ligger under nuvarande standardfilter 10–15 räknade ingredienser och kräver att filtrets minimiantal sänks för att kunna väljas.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-italian-warm-egg-hard-cheese-pasta-emulsion",
+      "name": "Pasta med varm ägg-ostemulsion och knaprigt fläsk – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "pasta binds med kontrollerat uppvärmd ägg-ostemulsion",
+      "primary": "rimmat fläsk",
+      "method": "pot",
+      "side": "Varma ärtor",
+      "flavor": [
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Pastakastrull",
+        "Durkslag",
+        "Stekpanna",
+        "Värmetålig skål",
+        "Visp",
+        "Rivjärn",
+        "Digital kökstermometer",
+        "Liten kastrull"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pasta med varm ägg-ostemulsion",
+          "ingredients": [
+            {
+              "name": "pasta",
+              "form": "dry",
+              "quantity": 320,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pasta, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 240,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 140,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vällagrad hårdost, som såld"
+            },
+            {
+              "name": "rimmat fläsk",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rimmat sidfläsk utan svål, rå ätlig vikt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svartpeppar, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varma ärtor",
+          "ingredients": [
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citron- och örtdressing",
+          "ingredients": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Färsk krispig sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Färsk mynta, bladens råa ätliga vikt"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sesamfrön, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tärna det rimmade fläsket smått och stek det i torr panna tills fettet smält ut och bitarna är genomstekta och minst 72 °C. Ta pannan från värmen men spara fläsket och det utsmälta fettet i pannan. Riv osten mycket fint.",
+          "uses": [
+            "rimmat fläsk",
+            "ost"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Koka pastan i 2200 ml vatten med saltet till strax före helt mjuk. Spara kokvattnet innan pastan lyfts över till fläskpannan. Vänd den heta pastan med fläsket och det utsmälta fettet.",
+          "uses": [
+            "pasta",
+            "salt",
+            "rimmat fläsk"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa äggen, den finrivna osten och svartpepparn i den värmetåliga skålen. Vispa gradvis in 120 ml vatten från pastakoket. Häll blandningen över pastan när stekpannan tagits från direkt värme.",
+          "uses": [
+            "pasta",
+            "ägg",
+            "ost",
+            "rimmat fläsk",
+            "svartpeppar",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd pasta och äggblandning oavbrutet så att såsen blir blank och omsluter pastan. Värm mycket försiktigt över sjudande vatten om temperaturen behöver höjas och fortsätt röra till 72 °C i äggsåsen. Stoppa uppvärmningen direkt; ingen äggröra ska bildas. Servera genast.",
+          "uses": [
+            "pasta",
+            "ägg",
+            "ost",
+            "rimmat fläsk",
+            "svartpeppar",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm ärtorna i en liten kastrull med 100 ml vatten tills de är helt genomvarma. Häll av och servera till pastan.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Finhacka persiljan och rör ihop med dressingens citronjuice och olja. Fördela hela dressingen över huvudrätten eller tillbehöret vid serveringen.",
+          "uses": [
+            "citronjuice",
+            "rapsolja",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skölj gurkan och skala moroten. Skär båda i tunna stavar och hacka myntan. Blanda och strö över sesamfröna. Servera hela salladen till huvudkomponenten.",
+          "uses": [
+            "gurka",
+            "morot",
+            "mynta",
+            "sesamfrön"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera de färdiga huvudkomponenterna och samtliga ätliga tillbehör tillsammans. Fördela maten över det angivna antalet portioner. Processmaterial som enligt tidigare steg ska avlägsnas eller kasseras ingår inte i serveringen.",
+          "uses": [
+            "pasta",
+            "ägg",
+            "ost",
+            "rimmat fläsk",
+            "svartpeppar",
+            "salt",
+            "ärtor",
+            "citronjuice",
+            "rapsolja",
+            "persilja",
+            "gurka",
+            "morot",
+            "mynta",
+            "sesamfrön"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 12 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 53 minuter aktivt och 0 minuter huvudsakligen passiv väntan. Ägg och finriven ost binds till en varm emulsion på pastans yta med stärkelsehaltigt kokvatten och utsmält fett. Det är ingen gräddsås, pastafrittata eller gratäng. Temperatur och omrörning behöver provlagning. Kräver registergranskning av mynta och rimmat fläsk; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Kräver registergranskning av de exakta identiteterna mynta/raw_edible/g, rimmat fläsk/raw_edible/g; inte importklar. Identiteter med ett redan känt namn men annan form får inte matchas tyst mot den befintliga formen.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-italian-whitebean-potato-basil-ravioli",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade potatis- och bönkuddar med basilika – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "potatis-baljväxtfylld färsk pasta",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "bönravioli; varm tomat",
+      "flavor": [
+        "basilika"
+      ],
+      "equipment": [
+        "Degskål",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull",
+        "Kastrull med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisbönfyllning",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 550.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bönravioli",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varm tomat",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatisbönfyllning: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatisen och de avrunna bönorna med oljan till en fast fyllning. Använd hela komponentens bönor och rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bönravioli: Blanda vetemjöl och salt med 175 ml vatten. Knåda cirka 8 minuter till en smidig fast pastadeg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt pastadegen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt kokta baljväxter rinna av noga och mosa dem. Finhacka färska örter och grovhacka nötter.",
+          "uses": [
+            "bönor",
+            "basilika"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda bönor och basilika med den tillagade fyllningen. Mosa baljväxter och smula ostar till en fast massa; låt svalna till ljummen. Blanda även ner komponentens olja.",
+          "uses": [
+            "bönor",
+            "basilika",
+            "rapsolja"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda hela den tidigare tillagade potatisbönfyllningen med bön- och basilikablandningen. Låt den samlade fyllningen svalna till ljummen; hela mängden ska fördelas i pastakuddarna.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "salt",
+            "basilika"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Kavla degen mycket tunt och skär till fyrkanter. Lägg små klickar fyllning på hälften, fukta kanterna lätt, täck med återstående deg och pressa ut luften. Förslut kanterna noga med en gaffel.",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Koka upp 2500 ml vatten. Sjud pastakuddarna i omgångar cirka 4–6 minuter tills degen är genomkokt och fyllningen het. Lyft upp med hålslev. ",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Varm tomat: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 8,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Lägg i tomat och fräs på medelvärme.",
+          "uses": [
+            "rapsolja",
+            "tomat"
+          ],
+          "minutes": 7,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Rör ner tomat och salt och 50 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "tomat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 8 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "tomat",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera potatisbönfyllning, bönravioli och varm tomat. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "salt",
+            "vetemjöl",
+            "basilika",
+            "tomat"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            10,
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 145 minuter totalt, varav 95 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas. Potatisbönmassan används tillsammans med den lilla bön- och basilikamängden som raviolifyllning; all massa fördelas i pastakuddarna. Kulinarisk avgränsning: Pastakuddar fylls med en potatisdominerad bönpuré och serveras med varm färsk tomat; grannar till bön-spenatravioli granskas. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-whitebean-potato-basil-ravioli",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade potatis- och bönkuddar med basilika – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "potatis-baljväxtfylld färsk pasta",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "bönravioli; varm tomat",
+      "flavor": [
+        "citronjuice",
+        "basilika"
+      ],
+      "equipment": [
+        "Degskål",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull",
+        "Kastrull med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisbönfyllning",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 550.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bönravioli",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varm tomat",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatisbönfyllning: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatisen och de avrunna bönorna med oljan till en fast fyllning. Använd hela komponentens bönor, rapsolja, vitlök och citronjuice i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bönravioli: Blanda vetemjöl och salt med 175 ml vatten. Knåda cirka 8 minuter till en smidig fast pastadeg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt pastadegen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt kokta baljväxter rinna av noga och mosa dem. Finhacka färska örter och grovhacka nötter.",
+          "uses": [
+            "bönor",
+            "basilika"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda bönor och basilika med den tillagade fyllningen. Mosa baljväxter och smula ostar till en fast massa; låt svalna till ljummen. Blanda även ner komponentens olja.",
+          "uses": [
+            "bönor",
+            "basilika",
+            "rapsolja"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda hela den tidigare tillagade potatisbönfyllningen med bön- och basilikablandningen. Låt den samlade fyllningen svalna till ljummen; hela mängden ska fördelas i pastakuddarna.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "basilika"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Kavla degen mycket tunt och skär till fyrkanter. Lägg små klickar fyllning på hälften, fukta kanterna lätt, täck med återstående deg och pressa ut luften. Förslut kanterna noga med en gaffel.",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Koka upp 2500 ml vatten. Sjud pastakuddarna i omgångar cirka 4–6 minuter tills degen är genomkokt och fyllningen het. Lyft upp med hålslev. ",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Varm tomat: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 8,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Lägg i tomat och fräs på medelvärme.",
+          "uses": [
+            "rapsolja",
+            "tomat"
+          ],
+          "minutes": 7,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Rör ner tomat och salt och 50 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "tomat",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 8 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "tomat",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera potatisbönfyllning, bönravioli och varm tomat. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "vetemjöl",
+            "basilika",
+            "tomat"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            10,
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 145 minuter totalt, varav 95 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas. Potatisbönmassan används tillsammans med den lilla bön- och basilikamängden som raviolifyllning; all massa fördelas i pastakuddarna. Kulinarisk avgränsning: Pastakuddar fylls med en potatisdominerad bönpuré och serveras med varm färsk tomat; grannar till bön-spenatravioli granskas. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-whitebean-potato-basil-ravioli",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade potatis- och bönkuddar med basilika – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "potatis-baljväxtfylld färsk pasta",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "bönravioli; varm tomat",
+      "flavor": [
+        "citronjuice",
+        "basilika",
+        "oregano",
+        "persilja"
+      ],
+      "equipment": [
+        "Degskål",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull",
+        "Kastrull med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Potatisbönfyllning",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 550.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bönravioli",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varm tomat",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kapris, avrunnen vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Potatisbönfyllning: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Mosa potatisen och de avrunna bönorna med oljan till en fast fyllning. Använd hela komponentens bönor, rapsolja, vitlök och citronjuice i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bönravioli: Blanda vetemjöl och salt med 175 ml vatten. Knåda cirka 8 minuter till en smidig fast pastadeg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Låt pastadegen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt kokta baljväxter rinna av noga och mosa dem. Finhacka färska örter och grovhacka nötter.",
+          "uses": [
+            "bönor",
+            "basilika"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda bönor och basilika med den tillagade fyllningen. Mosa baljväxter och smula ostar till en fast massa; låt svalna till ljummen. Blanda även ner komponentens olja.",
+          "uses": [
+            "bönor",
+            "basilika",
+            "rapsolja"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda hela den tidigare tillagade potatisbönfyllningen med bön- och basilikablandningen. Låt den samlade fyllningen svalna till ljummen; hela mängden ska fördelas i pastakuddarna.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "basilika"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Kavla degen mycket tunt och skär till fyrkanter. Lägg små klickar fyllning på hälften, fukta kanterna lätt, täck med återstående deg och pressa ut luften. Förslut kanterna noga med en gaffel.",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Koka upp 2500 ml vatten. Sjud pastakuddarna i omgångar cirka 4–6 minuter tills degen är genomkokt och fyllningen het. Lyft upp med hålslev. ",
+          "uses": [
+            "vetemjöl",
+            "bönor",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Varm tomat: Ansa och finhacka gul lök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Rör ner tomat, salt, oregano och kapris och 50 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "tomat",
+            "salt",
+            "oregano",
+            "kapris"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 8 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "tomat",
+            "salt",
+            "oregano",
+            "kapris",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Rör ner persilja precis före servering. ",
+          "uses": [
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Servera potatisbönfyllning, bönravioli och varm tomat. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "vetemjöl",
+            "basilika",
+            "tomat",
+            "gul lök",
+            "oregano",
+            "kapris",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            10,
+            15
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 147 minuter totalt, varav 97 aktivt och 50 huvudsakligen passivt. Tiderna behöver provlagas. Potatisbönmassan används tillsammans med den lilla bön- och basilikamängden som raviolifyllning; all massa fördelas i pastakuddarna. Kulinarisk avgränsning: Pastakuddar fylls med en potatisdominerad bönpuré och serveras med varm färsk tomat; grannar till bön-spenatravioli granskas. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-whitebean-tomato-bread-porridge",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tomat- och brödgryta med vita bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "brödredd tomatgryta",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatbrödgryta",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatbrödgryta: Ansa och finhacka gul lök. Låt bönor rinna av noga. Skär brödet i jämna små tärningar.",
+          "uses": [
+            "bönor",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner bönor, krossade tomater, bröd och salt och 650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "krossade tomater",
+            "bröd",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 25 minuter under lock. Rör då och då. Rör kraftigt och mosa brödet mot grytans kant tills det har lösts upp och bundit all tomatvätska till en tjock, skedbar brödgröt. Det ska inte finnas några torra brödtärningar eller fri tunn buljong.",
+          "uses": [
+            "bönor",
+            "krossade tomater",
+            "bröd",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera tomatbrödgryta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "krossade tomater",
+            "bröd",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 45 minuter totalt, varav 20 aktivt och 25 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Bröd kokas sönder i riklig tomat till en skedbar porridge med bönor; nära ribollita men avsiktligt utan kål och med tomat-bröd som huvudstruktur. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-whitebean-tomato-bread-porridge",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tomat- och brödgryta med vita bönor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "brödredd tomatgryta",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "basilika"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatbrödgryta",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatbrödgryta: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär morot i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga. Skär brödet i jämna små tärningar. Finhacka basilika.",
+          "uses": [
+            "bönor",
+            "gul lök",
+            "vitlök",
+            "morot"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner bönor, krossade tomater, bröd, salt och morot och 650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "krossade tomater",
+            "bröd",
+            "salt",
+            "morot"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 25 minuter under lock. Rör då och då. Rör kraftigt och mosa brödet mot grytans kant tills det har lösts upp och bundit all tomatvätska till en tjock, skedbar brödgröt. Det ska inte finnas några torra brödtärningar eller fri tunn buljong.",
+          "uses": [
+            "bönor",
+            "krossade tomater",
+            "bröd",
+            "salt",
+            "morot",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner basilika precis före servering. ",
+          "uses": [
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera tomatbrödgryta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "krossade tomater",
+            "bröd",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "basilika",
+            "morot"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 47 minuter totalt, varav 22 aktivt och 25 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Bröd kokas sönder i riklig tomat till en skedbar porridge med bönor; nära ribollita men avsiktligt utan kål och med tomat-bröd som huvudstruktur. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-whitebean-tomato-bread-porridge",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad tomat- och brödgryta med vita bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "brödredd tomatgryta",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "fräsch sallad",
+      "flavor": [
+        "basilika",
+        "oregano",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Tomatbrödgryta",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 260.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 25.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Tomatbrödgryta: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär morot och selleri i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga. Skär brödet i jämna små tärningar. Finhacka basilika.",
+          "uses": [
+            "bönor",
+            "gul lök",
+            "vitlök",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner bönor, krossade tomater, bröd, salt, morot, selleri och oregano och 650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "bönor",
+            "krossade tomater",
+            "bröd",
+            "salt",
+            "morot",
+            "selleri",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 25 minuter under lock. Rör då och då. Rör kraftigt och mosa brödet mot grytans kant tills det har lösts upp och bundit all tomatvätska till en tjock, skedbar brödgröt. Det ska inte finnas några torra brödtärningar eller fri tunn buljong.",
+          "uses": [
+            "bönor",
+            "krossade tomater",
+            "bröd",
+            "salt",
+            "morot",
+            "selleri",
+            "oregano",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner basilika precis före servering. ",
+          "uses": [
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda gurka, rödlök, oliver, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "rödlök",
+            "oliver",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera tomatbrödgryta och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "bönor",
+            "krossade tomater",
+            "bröd",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "basilika",
+            "morot",
+            "selleri",
+            "oregano",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 30 aktivt och 25 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Bröd kokas sönder i riklig tomat till en skedbar porridge med bönor; nära ribollita men avsiktligt utan kål och med tomat-bröd som huvudstruktur. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-mexican-bean-cheese-rice-balls",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Fyllda risbollar med bönor och ost – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "riceball",
+      "primary": "ost",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Kastrull med lock",
+        "Grund form",
+        "Plåt",
+        "Bakplåtspapper",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Risskal och yta",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skölj svarta bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt.",
+          "uses": [
+            "svarta bönor",
+            "rökt paprikapulver"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg svarta bönor i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "svarta bönor"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner ost i pannan och fördela jämnt.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "ost"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Koka risskalets ris med dess salt och 640 ml vatten under lock cirka 18 minuter tills det är mjukt. Bred ut i en grund form och låt svalna till ljummet.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 28,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vispa risskalets ägg lätt och arbeta in i det ljumma riset. Dela rismassan i jämnstora delar. Platta ut, lägg lite huvudfyllning i mitten och slut riset runt om. Forma till platta bollar och rulla i risskalets ströbröd. Fördela all risblandning, fyllning och panering.",
+          "uses": [
+            "ris",
+            "ägg",
+            "ströbröd",
+            "ost"
+          ],
+          "minutes": 12,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Lägg bollarna på bakplåtspapper, pensla med risskalets olja och baka cirka 20 minuter. Vänd efter halva tiden. Äggbindningen ska nå minst 72 °C i mitten och ytan ska vara krispig.",
+          "uses": [
+            "ris",
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "ost",
+            "svarta bönor",
+            "rökt paprikapulver",
+            "rapsolja",
+            "salt",
+            "ris",
+            "ägg",
+            "ströbröd"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 35 minuter och huvudsakligen passiva moment till 48 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 83 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Kokt ris formas kring ost och bönor, paneras och bakas knaprigt; annan form än risgryta. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-bean-cheese-rice-balls",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Fyllda risbollar med bönor och ost – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "riceball",
+      "primary": "ost",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Kastrull med lock",
+        "Grund form",
+        "Plåt",
+        "Bakplåtspapper",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Risskal och yta",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skölj svarta bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt; finhacka färsk koriander.",
+          "uses": [
+            "svarta bönor",
+            "rökt paprikapulver",
+            "majs",
+            "färsk koriander"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg svarta bönor och majs i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "svarta bönor",
+            "majs"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner ost i pannan och fördela jämnt.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "ost"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Koka risskalets ris med dess salt och 640 ml vatten under lock cirka 18 minuter tills det är mjukt. Bred ut i en grund form och låt svalna till ljummet.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 28,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vispa risskalets ägg lätt och arbeta in i det ljumma riset. Dela rismassan i jämnstora delar. Platta ut, lägg lite huvudfyllning i mitten och slut riset runt om. Forma till platta bollar och rulla i risskalets ströbröd. Fördela all risblandning, fyllning och panering.",
+          "uses": [
+            "ris",
+            "ägg",
+            "ströbröd",
+            "ost"
+          ],
+          "minutes": 12,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Lägg bollarna på bakplåtspapper, pensla med risskalets olja och baka cirka 20 minuter. Vänd efter halva tiden. Äggbindningen ska nå minst 72 °C i mitten och ytan ska vara krispig.",
+          "uses": [
+            "ris",
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "ost",
+            "svarta bönor",
+            "rökt paprikapulver",
+            "majs",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "ris",
+            "ägg",
+            "ströbröd"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 9 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 38 minuter och huvudsakligen passiva moment till 48 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 86 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Kokt ris formas kring ost och bönor, paneras och bakas knaprigt; annan form än risgryta. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-bean-cheese-rice-balls",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Fyllda risbollar med bönor och ost – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "riceball",
+      "primary": "ost",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Kastrull med lock",
+        "Grund form",
+        "Plåt",
+        "Bakplåtspapper",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Risskal och yta",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skölj svarta bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt; finhacka färsk koriander.",
+          "uses": [
+            "svarta bönor",
+            "rökt paprikapulver",
+            "majs",
+            "färsk koriander"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg svarta bönor och majs i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "svarta bönor",
+            "majs"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner ost i pannan och fördela jämnt.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "ost"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Koka risskalets ris med dess salt och 640 ml vatten under lock cirka 18 minuter tills det är mjukt. Bred ut i en grund form och låt svalna till ljummet.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 28,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Vispa risskalets ägg lätt och arbeta in i det ljumma riset. Dela rismassan i jämnstora delar. Platta ut, lägg lite huvudfyllning i mitten och slut riset runt om. Forma till platta bollar och rulla i risskalets ströbröd. Fördela all risblandning, fyllning och panering.",
+          "uses": [
+            "ris",
+            "ägg",
+            "ströbröd",
+            "ost"
+          ],
+          "minutes": 12,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Lägg bollarna på bakplåtspapper, pensla med risskalets olja och baka cirka 20 minuter. Vänd efter halva tiden. Äggbindningen ska nå minst 72 °C i mitten och ytan ska vara krispig.",
+          "uses": [
+            "ris",
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär tomat i små bitar; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, limejuice, färsk koriander och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "ost",
+            "svarta bönor",
+            "rökt paprikapulver",
+            "majs",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "ris",
+            "ägg",
+            "ströbröd",
+            "tomat",
+            "rödlök",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 12 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 47 minuter och huvudsakligen passiva moment till 48 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 95 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Kokt ris formas kring ost och bönor, paneras och bakas knaprigt; annan form än risgryta. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    }
+  ]
+}

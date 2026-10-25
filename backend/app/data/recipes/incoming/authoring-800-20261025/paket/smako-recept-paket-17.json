@@ -1,0 +1,4109 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-17",
+  "recipes": [
+    {
+      "base_id": "smako-greek-pork-pumpkin-whitebean-stew",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad fläskgryta med pumpa och vita bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "pumparett fläsklångkok",
+      "primary": "fläskkött",
+      "method": "pot",
+      "side": "varmt bröd",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pumpafläsk",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pumpafläsk: Ansa och finhacka gul lök. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga. Skär fläskkött i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "fläskkött",
+            "pumpa",
+            "bönor",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och fläskkött under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "fläskkött"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner pumpa, bönor och salt och 550 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "pumpa",
+            "bönor",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 75 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "pumpa",
+            "bönor",
+            "salt",
+            "fläskkött",
+            "gul lök"
+          ],
+          "minutes": 75,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera pumpafläsk och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "pumpa",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 107 minuter totalt, varav 25 aktivt och 82 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pumpa; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Pumpan mjuknar och reder spadet kring fläsk och bönor; måltiden äts med bröd i stället för separat ris. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-pork-pumpkin-whitebean-stew",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad fläskgryta med pumpa och vita bönor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "pumparett fläsklångkok",
+      "primary": "fläskkött",
+      "method": "pot",
+      "side": "varmt bröd",
+      "flavor": [
+        "rosmarin",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pumpafläsk",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pumpafläsk: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga. Skär fläskkött i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "fläskkött",
+            "pumpa",
+            "bönor",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och fläskkött under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "fläskkött"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner pumpa, bönor, salt och rosmarin och 550 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "pumpa",
+            "bönor",
+            "salt",
+            "rosmarin"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 75 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "pumpa",
+            "bönor",
+            "salt",
+            "rosmarin",
+            "fläskkött",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 75,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten.",
+          "uses": [
+            "citronjuice",
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera pumpafläsk och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "pumpa",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "rosmarin",
+            "citronjuice",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 107 minuter totalt, varav 25 aktivt och 82 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pumpa och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Pumpan mjuknar och reder spadet kring fläsk och bönor; måltiden äts med bröd i stället för separat ris. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-pork-pumpkin-whitebean-stew",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad fläskgryta med pumpa och vita bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "pumparett fläsklångkok",
+      "primary": "fläskkött",
+      "method": "pot",
+      "side": "varmt bröd; fräsch sallad",
+      "flavor": [
+        "rosmarin",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pumpafläsk",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rosmarin",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad rosmarin"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pumpafläsk: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär pumpa, selleri och tomat i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga. Skär fläskkött i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "fläskkött",
+            "pumpa",
+            "bönor",
+            "gul lök",
+            "vitlök",
+            "selleri",
+            "tomat"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och fläskkött under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "fläskkött"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner pumpa, bönor, salt, rosmarin, selleri och tomat och 550 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "pumpa",
+            "bönor",
+            "salt",
+            "rosmarin",
+            "selleri",
+            "tomat"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 75 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "pumpa",
+            "bönor",
+            "salt",
+            "rosmarin",
+            "selleri",
+            "tomat",
+            "fläskkött",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 75,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten.",
+          "uses": [
+            "citronjuice",
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda gurka, persilja, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "persilja",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera pumpafläsk, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "pumpa",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "rosmarin",
+            "citronjuice",
+            "selleri",
+            "tomat",
+            "bröd",
+            "gurka",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 115 minuter totalt, varav 33 aktivt och 82 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pumpa och rosmarin; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Pumpan mjuknar och reder spadet kring fläsk och bönor; måltiden äts med bröd i stället för separat ris. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-pork-walnut-cinnamon-flatbread-plate",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad valnötsfläskpanna med stekbröd – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "nötbunden fläskpanna med eget bröd",
+      "primary": "fläskkött",
+      "method": "pan",
+      "side": "stekbröd",
+      "flavor": [
+        "kanel"
+      ],
+      "equipment": [
+        "Degskål",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fläskpanna med valnöt",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 90.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Stekbröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fläskpanna med valnöt: Välj tunt skivat benfritt fläskkött avsett för snabb stekning. Strimla köttet och löken; grovhacka valnötterna.",
+          "uses": [
+            "fläskkött",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och fläskkött under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "fläskkött"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner valnötter, kanel och salt och 120 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "valnötter",
+            "kanel",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "valnötter",
+            "kanel",
+            "salt",
+            "fläskkött",
+            "gul lök"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Stekbröd: Blanda vetemjöl och salt med 210 ml vatten till en mjuk deg. Knåda jämnt och dela till ett bröd per portion.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt degen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kavla bröden tunt. Fördela rapsolja över gräddningen och stek i omgångar på medelhög värme cirka 2 minuter per sida, tills de fått bruna fläckar och är genomgräddade.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera fläskpanna med valnöt och stekbröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "valnötter",
+            "gul lök",
+            "rapsolja",
+            "kanel",
+            "salt",
+            "vetemjöl"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 74 minuter totalt, varav 59 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Strimlat fläsk och grovhackad valnöt steks till en nötbunden panna, med nygjort stekbröd och kylig kräm; avgränsas från klassiskt souvlaki. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-pork-walnut-cinnamon-flatbread-plate",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad valnötsfläskpanna med stekbröd – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "nötbunden fläskpanna med eget bröd",
+      "primary": "fläskkött",
+      "method": "pan",
+      "side": "stekbröd",
+      "flavor": [
+        "kanel",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Degskål",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fläskpanna med valnöt",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 90.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Stekbröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fläskpanna med valnöt: Välj tunt skivat benfritt fläskkött avsett för snabb stekning. Strimla köttet och löken; grovhacka valnötterna.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och fläskkött under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "fläskkött"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner valnötter, kanel och salt och 120 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "valnötter",
+            "kanel",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "valnötter",
+            "kanel",
+            "salt",
+            "fläskkött",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten.",
+          "uses": [
+            "citronjuice",
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Stekbröd: Blanda vetemjöl och salt med 210 ml vatten till en mjuk deg. Knåda jämnt och dela till ett bröd per portion.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt degen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kavla bröden tunt. Fördela rapsolja över gräddningen och stek i omgångar på medelhög värme cirka 2 minuter per sida, tills de fått bruna fläckar och är genomgräddade.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera fläskpanna med valnöt och stekbröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "valnötter",
+            "gul lök",
+            "rapsolja",
+            "kanel",
+            "salt",
+            "citronjuice",
+            "vitlök",
+            "vetemjöl"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 74 minuter totalt, varav 59 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Strimlat fläsk och grovhackad valnöt steks till en nötbunden panna, med nygjort stekbröd och kylig kräm; avgränsas från klassiskt souvlaki. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-pork-walnut-cinnamon-flatbread-plate",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad valnötsfläskpanna med stekbröd – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "nötbunden fläskpanna med eget bröd",
+      "primary": "fläskkött",
+      "method": "pan",
+      "side": "stekbröd; kall yoghurtsås; fräsch sallad",
+      "flavor": [
+        "kanel",
+        "citronjuice",
+        "mynta",
+        "persilja"
+      ],
+      "equipment": [
+        "Degskål",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fläskpanna med valnöt",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 90.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Stekbröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk mynta, blad"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Fläskpanna med valnöt: Välj tunt skivat benfritt fläskkött avsett för snabb stekning. Strimla köttet och löken; grovhacka valnötterna.",
+          "uses": [
+            "fläskkött",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och fläskkött under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "fläskkött"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner valnötter, kanel och salt och 120 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "valnötter",
+            "kanel",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "valnötter",
+            "kanel",
+            "salt",
+            "fläskkött",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. Köttet ska vara genomvarmt; följ den angivna tiden tills det är mört och kontrollera minst 72 °C i tjockaste biten.",
+          "uses": [
+            "citronjuice",
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Stekbröd: Blanda vetemjöl och salt med 210 ml vatten till en mjuk deg. Knåda jämnt och dela till ett bröd per portion.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt degen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kavla bröden tunt. Fördela rapsolja över gräddningen och stek i omgångar på medelhög värme cirka 2 minuter per sida, tills de fått bruna fläckar och är genomgräddade.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, gurka, mynta och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Blanda tomat, persilja, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera fläskpanna med valnöt, stekbröd, kall yoghurtsås och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "fläskkött",
+            "valnötter",
+            "gul lök",
+            "rapsolja",
+            "kanel",
+            "salt",
+            "citronjuice",
+            "vitlök",
+            "vetemjöl",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "tomat",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            9,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 86 minuter totalt, varav 71 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mynta och valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Strimlat fläsk och grovhackad valnöt steks till en nötbunden panna, med nygjort stekbröd och kylig kräm; avgränsas från klassiskt souvlaki. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-potato-chickpea-rosti-sesame",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad kikärtsrösti med tomat – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "rösti med baljväxtkärna",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "fräsch sallad",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kikärtsrösti",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 45.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kikärtsrösti: Mosa avrunna kikärtor. Skala och finriv potatisen och pressa ur dess vätska i en ren kökshandduk. Blanda genast så att potatisen inte mörknar.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda kikärtor, potatis, vetemjöl och salt till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. ",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera kikärtsrösti och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 40 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Rå riven potatis bildar ett krispigt röstitäcke runt mosade kikärtor, utan separat kokt potatistillbehör. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-potato-chickpea-rosti-sesame",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad kikärtsrösti med tomat – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "rösti med baljväxtkärna",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kikärtsrösti",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 45.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sesamfrön, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kikärtsrösti: Mosa avrunna kikärtor. Skala och finriv potatisen och pressa ur dess vätska i en ren kökshandduk. Blanda genast så att potatisen inte mörknar.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "sesamfrön",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda kikärtor, potatis, vetemjöl, salt, sesamfrön och vitlök till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "salt",
+            "sesamfrön",
+            "vitlök"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "salt",
+            "sesamfrön",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. ",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "sesamfrön",
+            "vitlök"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja, salt och persilja i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera kikärtsrösti och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "sesamfrön",
+            "vitlök",
+            "tomat",
+            "citronjuice",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 40 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Rå riven potatis bildar ett krispigt röstitäcke runt mosade kikärtor, utan separat kokt potatistillbehör. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-potato-chickpea-rosti-sesame",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad kikärtsrösti med tomat – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "rösti med baljväxtkärna",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "fräsch sallad",
+      "flavor": [
+        "oregano",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kikärtsrösti",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 45.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sesamfrön, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kikärtsrösti: Mosa avrunna kikärtor. Skala och finriv potatisen och pressa ur dess vätska i en ren kökshandduk. Blanda genast så att potatisen inte mörknar.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "sesamfrön",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda kikärtor, potatis, vetemjöl, salt, sesamfrön, vitlök och oregano till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "salt",
+            "sesamfrön",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "salt",
+            "sesamfrön",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. ",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "sesamfrön",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "persilja",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Blanda tomat, citronjuice, rapsolja, salt, persilja, gurka, rödlök och oliver i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "persilja",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera kikärtsrösti och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kikärtor",
+            "potatis",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "sesamfrön",
+            "vitlök",
+            "oregano",
+            "tomat",
+            "citronjuice",
+            "persilja",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 40 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Rå riven potatis bildar ett krispigt röstitäcke runt mosade kikärtor, utan separat kokt potatistillbehör. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-pumpkin-yellowpea-soup-seed-bread",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad pumpa- och ärtsoppa med fröbröd – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "len baljväxt-pumpasoppa",
+      "primary": "gula ärtor",
+      "method": "pot",
+      "side": "fröbröd",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pumpa- och ärtsoppa",
+          "ingredients": [
+            {
+              "name": "gula ärtor",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gula delade ärtor, torr vikt"
+            },
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fröbröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "solrosfrön",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Solrosfrön utan skal"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pumpa- och ärtsoppa: Ansa och finhacka gul lök. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "pumpa",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gula ärtor, pumpa och salt och 1500 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 65 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 65,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa soppan slät med stavmixer; håll mixerklockan under ytan för att undvika stänk.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fröbröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "solrosfrön"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "solrosfrön"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera pumpa- och ärtsoppa och fröbröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "solrosfrön"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 98 minuter totalt, varav 26 aktivt och 72 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gula ärtor, pumpa och solrosfrön; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Måltidssoppa där gul ärta och pumpa kokar sönder till en len, fyllig vätska; skiljer sig i råvaror och struktur från rödlins- och morotssoppa. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-pumpkin-yellowpea-soup-seed-bread",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad pumpa- och ärtsoppa med fröbröd – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "len baljväxt-pumpasoppa",
+      "primary": "gula ärtor",
+      "method": "pot",
+      "side": "fröbröd",
+      "flavor": [
+        "citronjuice",
+        "timjan"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pumpa- och ärtsoppa",
+          "ingredients": [
+            {
+              "name": "gula ärtor",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gula delade ärtor, torr vikt"
+            },
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fröbröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "solrosfrön",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Solrosfrön utan skal"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pumpa- och ärtsoppa: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär pumpa i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "pumpa",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gula ärtor, pumpa, salt och timjan och 1500 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "salt",
+            "timjan"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 65 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "salt",
+            "timjan",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 65,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa soppan slät med stavmixer; håll mixerklockan under ytan för att undvika stänk.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "timjan"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. ",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fröbröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "solrosfrön"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "solrosfrön"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera pumpa- och ärtsoppa och fröbröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "timjan",
+            "bröd",
+            "solrosfrön"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 100 minuter totalt, varav 28 aktivt och 72 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gula ärtor, pumpa, solrosfrön och timjan; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Måltidssoppa där gul ärta och pumpa kokar sönder till en len, fyllig vätska; skiljer sig i råvaror och struktur från rödlins- och morotssoppa. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-pumpkin-yellowpea-soup-seed-bread",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad pumpa- och ärtsoppa med fröbröd – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "len baljväxt-pumpasoppa",
+      "primary": "gula ärtor",
+      "method": "pot",
+      "side": "fröbröd; persiljetomat",
+      "flavor": [
+        "citronjuice",
+        "timjan",
+        "persilja"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pumpa- och ärtsoppa",
+          "ingredients": [
+            {
+              "name": "gula ärtor",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gula delade ärtor, torr vikt"
+            },
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå vikt utan skal och kärnor"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fröbröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "solrosfrön",
+              "form": "as_sold",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Solrosfrön utan skal"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Persiljetomat",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pumpa- och ärtsoppa: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär pumpa, morot och selleri i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "pumpa",
+            "gul lök",
+            "vitlök",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gula ärtor, pumpa, salt, timjan, morot och selleri och 1650 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "salt",
+            "timjan",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 65 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "salt",
+            "timjan",
+            "morot",
+            "selleri",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 65,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa soppan slät med stavmixer; håll mixerklockan under ytan för att undvika stänk.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "timjan",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. ",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fröbröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "solrosfrön"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd",
+            "rapsolja",
+            "solrosfrön"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Persiljetomat: Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, persilja, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "persilja",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera pumpa- och ärtsoppa, fröbröd och persiljetomat. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gula ärtor",
+            "pumpa",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "citronjuice",
+            "timjan",
+            "morot",
+            "selleri",
+            "bröd",
+            "solrosfrön",
+            "tomat",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 108 minuter totalt, varav 36 aktivt och 72 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gula ärtor, pumpa, solrosfrön och timjan; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Måltidssoppa där gul ärta och pumpa kokar sönder till en len, fyllig vätska; skiljer sig i råvaror och struktur från rödlins- och morotssoppa. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-raw-soaked-chickpea-coarse-falafel",
+      "name": "Falafel av råblötlagda kikärtor med couscous och gurka – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "rå hel baljväxt blötläggs grovmals och friteras utan förkokning",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "Couscous och gurka",
+      "flavor": [
+        "persilja",
+        "vitlök",
+        "spiskummin",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Stor skål",
+        "Kylskåp",
+        "Durkslag",
+        "Matberedare",
+        "Djup kastrull",
+        "Frityrtermometer",
+        "Hålslev",
+        "Galler",
+        "Kastrull med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Grovmalen rå kikärtsmassa",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "dry",
+              "quantity": 300,
+              "unit": "g",
+              "role": "primary",
+              "label": "Hela torkade kikärtor, torr vikt före blötläggning; detta är en föreslagen ny registerform"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Bakpulver"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Couscous och gurka",
+          "ingredients": [
+            {
+              "name": "couscous",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Couscous, torr vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg de hela torkade kikärtorna i 1800 ml vatten som är kallt. Täck och låt stå i kylskåp i 16 timmar. Häll bort blötläggningsvattnet, skölj och låt rinna av mycket väl. Kikärtorna ska inte förkokas.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 960,
+          "passive": true
+        },
+        {
+          "text": "Hacka lök, persilja och vitlök grovt. Mixa tillsammans med de avrunna råa blötlagda kikärtorna i korta pulser till en fin grynig massa, inte slät puré. Arbeta ner spiskummin, kikärtsmjöl, bakpulver och salt. Kyl massan 30 minuter.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 42,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma små bollar eller lätt tillplattade kakor, cirka tre centimeter breda. Hetta upp processoljan i den djupa kastrullen till 170 °C. Stek en provkaka i ungefär sex minuter och dela den; den ska hålla ihop och sakna hård rå kikärtskärna.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fritera resten i små omgångar cirka sex–sju minuter per omgång, vänd vid behov och håll oljan kring 170 °C. Låt rinna av på galler. Alla kikärtsbitar ska vara genomlagade. Processoljan ska inte hällas över maten.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka upp 300 ml vatten med couscousens salt. Rör ner couscous, ta från värmen och låt svälla under lock fem minuter. Fluffa med gaffel och vänd ner olja och citronjuice. Tärna gurkan och blanda ner strax före servering.",
+          "uses": [
+            "couscous",
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera de färdiga huvudkomponenterna och samtliga ätliga tillbehör tillsammans. Fördela maten över det angivna antalet portioner. Processmaterial som enligt tidigare steg ska avlägsnas eller kasseras ingår inte i serveringen.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt",
+            "rapsolja",
+            "couscous",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 11 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 49 minuter aktivt och 1002 minuter huvudsakligen passiv väntan. Hela torra kikärtor blötläggs och grovmals råa; stärkelse och protein sätter sig först i frityren. De är inte mosade konserverade kikärtor med ett annat tillbehör. Formen kikärtor/dry är ett uttryckligt nytt registerförslag. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av bakpulver och kikärtsmjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Kräver registergranskning av de exakta identiteterna bakpulver/dry/g, kikärtor/dry/g, kikärtsmjöl/dry/g; inte importklar. Identiteter med ett redan känt namn men annan form får inte matchas tyst mot den befintliga formen.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-greek-raw-soaked-chickpea-coarse-falafel",
+      "name": "Falafel av råblötlagda kikärtor med couscous och gurka – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "rå hel baljväxt blötläggs grovmals och friteras utan förkokning",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "Couscous och gurka",
+      "flavor": [
+        "persilja",
+        "vitlök",
+        "spiskummin",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Stor skål",
+        "Kylskåp",
+        "Durkslag",
+        "Matberedare",
+        "Djup kastrull",
+        "Frityrtermometer",
+        "Hålslev",
+        "Galler",
+        "Kastrull med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Grovmalen rå kikärtsmassa",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "dry",
+              "quantity": 300,
+              "unit": "g",
+              "role": "primary",
+              "label": "Hela torkade kikärtor, torr vikt före blötläggning; detta är en föreslagen ny registerform"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Bakpulver"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Couscous och gurka",
+          "ingredients": [
+            {
+              "name": "couscous",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Couscous, torr vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citron- och örtdressing",
+          "ingredients": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg de hela torkade kikärtorna i 1800 ml vatten som är kallt. Täck och låt stå i kylskåp i 16 timmar. Häll bort blötläggningsvattnet, skölj och låt rinna av mycket väl. Kikärtorna ska inte förkokas.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 960,
+          "passive": true
+        },
+        {
+          "text": "Hacka lök, persilja och vitlök grovt. Mixa tillsammans med de avrunna råa blötlagda kikärtorna i korta pulser till en fin grynig massa, inte slät puré. Arbeta ner spiskummin, kikärtsmjöl, bakpulver och salt. Kyl massan 30 minuter.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 42,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma små bollar eller lätt tillplattade kakor, cirka tre centimeter breda. Hetta upp processoljan i den djupa kastrullen till 170 °C. Stek en provkaka i ungefär sex minuter och dela den; den ska hålla ihop och sakna hård rå kikärtskärna.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fritera resten i små omgångar cirka sex–sju minuter per omgång, vänd vid behov och håll oljan kring 170 °C. Låt rinna av på galler. Alla kikärtsbitar ska vara genomlagade. Processoljan ska inte hällas över maten.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka upp 300 ml vatten med couscousens salt. Rör ner couscous, ta från värmen och låt svälla under lock fem minuter. Fluffa med gaffel och vänd ner olja och citronjuice. Tärna gurkan och blanda ner strax före servering.",
+          "uses": [
+            "couscous",
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Finhacka persiljan och rör ihop med dressingens citronjuice och olja. Fördela hela dressingen över huvudrätten eller tillbehöret vid serveringen.",
+          "uses": [
+            "citronjuice",
+            "rapsolja",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera de färdiga huvudkomponenterna och samtliga ätliga tillbehör tillsammans. Fördela maten över det angivna antalet portioner. Processmaterial som enligt tidigare steg ska avlägsnas eller kasseras ingår inte i serveringen.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt",
+            "rapsolja",
+            "couscous",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 11 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 53 minuter aktivt och 1002 minuter huvudsakligen passiv väntan. Hela torra kikärtor blötläggs och grovmals råa; stärkelse och protein sätter sig först i frityren. De är inte mosade konserverade kikärtor med ett annat tillbehör. Formen kikärtor/dry är ett uttryckligt nytt registerförslag. Kräver registergranskning av bakpulver och kikärtsmjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Kräver registergranskning av de exakta identiteterna bakpulver/dry/g, kikärtor/dry/g, kikärtsmjöl/dry/g; inte importklar. Identiteter med ett redan känt namn men annan form får inte matchas tyst mot den befintliga formen.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-greek-raw-soaked-chickpea-coarse-falafel",
+      "name": "Falafel av råblötlagda kikärtor med couscous och gurka – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "rå hel baljväxt blötläggs grovmals och friteras utan förkokning",
+      "primary": "kikärtor",
+      "method": "pan",
+      "side": "Couscous och gurka",
+      "flavor": [
+        "persilja",
+        "vitlök",
+        "spiskummin",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Stor skål",
+        "Kylskåp",
+        "Durkslag",
+        "Matberedare",
+        "Djup kastrull",
+        "Frityrtermometer",
+        "Hålslev",
+        "Galler",
+        "Kastrull med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Grovmalen rå kikärtsmassa",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "dry",
+              "quantity": 300,
+              "unit": "g",
+              "role": "primary",
+              "label": "Hela torkade kikärtor, torr vikt före blötläggning; detta är en föreslagen ny registerform"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "kikärtsmjöl",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Kikärtsmjöl, torr vikt"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Bakpulver"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Couscous och gurka",
+          "ingredients": [
+            {
+              "name": "couscous",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Couscous, torr vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citron- och örtdressing",
+          "ingredients": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Färsk krispig sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Färsk mynta, bladens råa ätliga vikt"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sesamfrön, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg de hela torkade kikärtorna i 1800 ml vatten som är kallt. Täck och låt stå i kylskåp i 16 timmar. Häll bort blötläggningsvattnet, skölj och låt rinna av mycket väl. Kikärtorna ska inte förkokas.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 960,
+          "passive": true
+        },
+        {
+          "text": "Hacka lök, persilja och vitlök grovt. Mixa tillsammans med de avrunna råa blötlagda kikärtorna i korta pulser till en fin grynig massa, inte slät puré. Arbeta ner spiskummin, kikärtsmjöl, bakpulver och salt. Kyl massan 30 minuter.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 42,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma små bollar eller lätt tillplattade kakor, cirka tre centimeter breda. Hetta upp processoljan i den djupa kastrullen till 170 °C. Stek en provkaka i ungefär sex minuter och dela den; den ska hålla ihop och sakna hård rå kikärtskärna.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Fritera resten i små omgångar cirka sex–sju minuter per omgång, vänd vid behov och håll oljan kring 170 °C. Låt rinna av på galler. Alla kikärtsbitar ska vara genomlagade. Processoljan ska inte hällas över maten.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt",
+            "rapsolja"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka upp 300 ml vatten med couscousens salt. Rör ner couscous, ta från värmen och låt svälla under lock fem minuter. Fluffa med gaffel och vänd ner olja och citronjuice. Tärna gurkan och blanda ner strax före servering.",
+          "uses": [
+            "couscous",
+            "gurka",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Finhacka persiljan och rör ihop med dressingens citronjuice och olja. Fördela hela dressingen över huvudrätten eller tillbehöret vid serveringen.",
+          "uses": [
+            "citronjuice",
+            "rapsolja",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Skölj gurkan och skala moroten. Skär båda i tunna stavar och hacka myntan. Blanda och strö över sesamfröna. Servera hela salladen till huvudkomponenten.",
+          "uses": [
+            "gurka",
+            "morot",
+            "mynta",
+            "sesamfrön"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera de färdiga huvudkomponenterna och samtliga ätliga tillbehör tillsammans. Fördela maten över det angivna antalet portioner. Processmaterial som enligt tidigare steg ska avlägsnas eller kasseras ingår inte i serveringen.",
+          "uses": [
+            "kikärtor",
+            "gul lök",
+            "persilja",
+            "vitlök",
+            "spiskummin",
+            "kikärtsmjöl",
+            "bakpulver",
+            "salt",
+            "rapsolja",
+            "couscous",
+            "gurka",
+            "citronjuice",
+            "morot",
+            "mynta",
+            "sesamfrön"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 14 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 60 minuter aktivt och 1002 minuter huvudsakligen passiv väntan. Hela torra kikärtor blötläggs och grovmals råa; stärkelse och protein sätter sig först i frityren. De är inte mosade konserverade kikärtor med ett annat tillbehör. Formen kikärtor/dry är ett uttryckligt nytt registerförslag. Kräver registergranskning av bakpulver, kikärtsmjöl och mynta; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Kräver registergranskning av de exakta identiteterna bakpulver/dry/g, kikärtor/dry/g, kikärtsmjöl/dry/g, mynta/raw_edible/g; inte importklar. Identiteter med ett redan känt namn men annan form får inte matchas tyst mot den befintliga formen.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    }
+  ]
+}

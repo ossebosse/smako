@@ -1,0 +1,3948 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-107",
+  "recipes": [
+    {
+      "base_id": "smako-swedish-chicken-vegetable-broth",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Klar kycklinggryta med hela rotfruktsbitar – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "broth",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "bröd",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor gryta med lock",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rotselleri",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rotselleri, skalad rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd till servering",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skala och skär rotselleri i små jämna tärningar.",
+          "uses": [
+            "morot",
+            "rotselleri",
+            "timjan"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och rotselleri och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rotselleri",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Flytta huvudrätten till en gryta och tillsätt 1000 ml vatten. Rör från botten och koka upp.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "rotselleri",
+            "timjan",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sjud varsamt under lock tills alla grönsaker är helt mjuka och smakerna blandats.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "rotselleri",
+            "timjan"
+          ],
+          "minutes": 15,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm bröd kort på båda sidor i en torr stekpanna. Håll täckt fram till servering.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "rotselleri",
+            "timjan",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 6 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 38 minuter och huvudsakligen passiva moment till 35 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 73 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Klar buljong med stora möra bitar; ingen puré, grädde eller tomatsås. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av rotselleri, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-vegetable-broth",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Klar kycklinggryta med hela rotfruktsbitar – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "broth",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "bröd",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor gryta med lock",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rotselleri",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rotselleri, skalad rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd till servering",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skala och skär rotselleri i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt; finhacka persilja.",
+          "uses": [
+            "morot",
+            "rotselleri",
+            "timjan",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och rotselleri och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rotselleri",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner persilja från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Flytta huvudrätten till en gryta och tillsätt 1000 ml vatten. Rör från botten och koka upp.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "rotselleri",
+            "timjan",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sjud varsamt under lock tills alla grönsaker är helt mjuka och smakerna blandats.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "rotselleri",
+            "timjan",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm bröd kort på båda sidor i en torr stekpanna. Håll täckt fram till servering.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "rotselleri",
+            "timjan",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 8 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 52 minuter och huvudsakligen passiva moment till 35 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 87 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Klar buljong med stora möra bitar; ingen puré, grädde eller tomatsås. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök, rotselleri, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-vegetable-broth",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Klar kycklinggryta med hela rotfruktsbitar – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "broth",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "bröd",
+      "flavor": [
+        "timjan"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stor gryta med lock",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rotselleri",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rotselleri, skalad rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök, ansad och sköljd rå vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd till servering",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: senapsdressing",
+          "ingredients": [
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; skala och skär rotselleri i små jämna tärningar; skölj purjolöken noga mellan bladen och skiva tunt; finhacka persilja.",
+          "uses": [
+            "morot",
+            "rotselleri",
+            "timjan",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan. Lägg i morot och rotselleri och 150 ml vatten. Lägg på lock och låt småsjuda tills rotfrukterna är mjuka, cirka 15–20 minuter. Rör om några gånger och låt återstående vätska avdunsta.",
+          "uses": [
+            "morot",
+            "rotselleri",
+            "rapsolja"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg purjolök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "purjolök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rör ner timjan och låt fräsa kort under omrörning.",
+          "uses": [
+            "timjan"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Behåll lite vätska i botten.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner persilja från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Flytta huvudrätten till en gryta och tillsätt 1000 ml vatten. Rör från botten och koka upp.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "rotselleri",
+            "timjan",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sjud varsamt under lock tills alla grönsaker är helt mjuka och smakerna blandats.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "rotselleri",
+            "timjan",
+            "purjolök",
+            "persilja"
+          ],
+          "minutes": 15,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Värm bröd kort på båda sidor i en torr stekpanna. Håll täckt fram till servering.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: finhacka dill.",
+          "uses": [
+            "senap",
+            "citronjuice",
+            "rapsolja",
+            "dill",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Blanda senap, citronjuice, rapsolja, dill och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "senap",
+            "citronjuice",
+            "rapsolja",
+            "dill",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "morot",
+            "rotselleri",
+            "timjan",
+            "purjolök",
+            "persilja",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "senap",
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 58 minuter och huvudsakligen passiva moment till 35 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 93 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Klar buljong med stora möra bitar; ingen puré, grädde eller tomatsås. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av purjolök, rotselleri, timjan; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-swedish-chicken-yeast-rice-steam-cakes",
+      "name": "Kyckling med jästa och ångade riskakor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "jäst risdeg ångad i formar",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "Kyckling och ärtor",
+      "flavor": [
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Ånginsats",
+        "Stor gryta med lock",
+        "Värmetåliga små formar",
+        "Kylskåp",
+        "Visp",
+        "Stekpanna med lock",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Jästa riskakor",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Rismjöl, torr vikt; inte klibbigt rismjöl"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 160,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torrjäst för matbröd"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kyckling och ärtor",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa rismjöl, yoghurt, torrjäst och salt med 260 ml vatten (ljummet) till en jämn tjock smet. Täck skålen och låt jäsa i rumstemperatur tills smeten är synligt bubblig och något högre.",
+          "uses": [
+            "rismjöl",
+            "yoghurt naturell",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 60,
+          "passive": true
+        },
+        {
+          "text": "Pensla de värmetåliga formarna med riskakornas olja. Fördela smeten så att formarna är halvfulla. Koka upp 1000 ml vatten i grytan; vattenytan ska ligga under ånginsatsen.",
+          "uses": [
+            "rismjöl",
+            "yoghurt naturell",
+            "torrjäst",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ånga formarna under lock cirka 20 minuter, i omgångar om det behövs. En provsticka ska komma ut utan våt smet. Lyft ur och låt kakorna stå fem minuter före urtagning. Låt ångvattnet sjuda och håll det under formarnas botten.",
+          "uses": [
+            "rismjöl"
+          ],
+          "minutes": 25,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kycklingen i strimlor. Hetta upp kycklingkomponentens olja och stek strimlorna runt om. Tillsätt ärtor, senap, salt och 120 ml vatten. Sjud under lock tills ärtorna är varma och kycklingen håller minst 74 °C. Servera med de mjuka jästa riskakorna.",
+          "uses": [
+            "kyckling",
+            "ärtor",
+            "rapsolja",
+            "senap",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "rismjöl",
+            "yoghurt naturell",
+            "torrjäst",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "ärtor",
+            "senap"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 7 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 26 minuter aktivt och 85 minuter huvudsakligen passiv väntan. Rismjölssmet jäser till en porös massa och ångas i formar. Den mjuka porösa stärkelsen och den separata kycklingen ersätter ett rent proteinbyte i rotmos. Kräver registergranskning av rismjöl och torrjäst; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-chicken-yeast-rice-steam-cakes",
+      "name": "Kyckling med jästa och ångade riskakor – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "jäst risdeg ångad i formar",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "Kyckling och ärtor",
+      "flavor": [
+        "senap",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Ånginsats",
+        "Stor gryta med lock",
+        "Värmetåliga små formar",
+        "Kylskåp",
+        "Visp",
+        "Stekpanna med lock",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Jästa riskakor",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Rismjöl, torr vikt; inte klibbigt rismjöl"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 160,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torrjäst för matbröd"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kyckling och ärtor",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa rismjöl, yoghurt, torrjäst och salt med 260 ml vatten (ljummet) till en jämn tjock smet. Täck skålen och låt jäsa i rumstemperatur tills smeten är synligt bubblig och något högre.",
+          "uses": [
+            "rismjöl",
+            "yoghurt naturell",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 60,
+          "passive": true
+        },
+        {
+          "text": "Pensla de värmetåliga formarna med riskakornas olja. Fördela smeten så att formarna är halvfulla. Koka upp 1000 ml vatten i grytan; vattenytan ska ligga under ånginsatsen.",
+          "uses": [
+            "rismjöl",
+            "yoghurt naturell",
+            "torrjäst",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ånga formarna under lock cirka 20 minuter, i omgångar om det behövs. En provsticka ska komma ut utan våt smet. Lyft ur och låt kakorna stå fem minuter före urtagning. Låt ångvattnet sjuda och håll det under formarnas botten.",
+          "uses": [
+            "rismjöl"
+          ],
+          "minutes": 25,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kycklingen i strimlor. Hetta upp kycklingkomponentens olja och stek strimlorna runt om. Tillsätt ärtor, senap, salt och 120 ml vatten. Sjud under lock tills ärtorna är varma och kycklingen håller minst 74 °C. Servera med de mjuka jästa riskakorna.",
+          "uses": [
+            "kyckling",
+            "ärtor",
+            "rapsolja",
+            "senap",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "rismjöl",
+            "yoghurt naturell",
+            "torrjäst",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "ärtor",
+            "senap",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 8 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 30 minuter aktivt och 85 minuter huvudsakligen passiv väntan. Rismjölssmet jäser till en porös massa och ångas i formar. Den mjuka porösa stärkelsen och den separata kycklingen ersätter ett rent proteinbyte i rotmos. Kräver registergranskning av rismjöl och torrjäst; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-chicken-yeast-rice-steam-cakes",
+      "name": "Kyckling med jästa och ångade riskakor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "jäst risdeg ångad i formar",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "Kyckling och ärtor",
+      "flavor": [
+        "senap",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Ånginsats",
+        "Stor gryta med lock",
+        "Värmetåliga små formar",
+        "Kylskåp",
+        "Visp",
+        "Stekpanna med lock",
+        "Digital kökstermometer",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Jästa riskakor",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Rismjöl, torr vikt; inte klibbigt rismjöl"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 160,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torrjäst för matbröd"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kyckling och ärtor",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ärtor, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Äppel- och gurksallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "solroskärnor",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella solroskärnor, som sålda"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa rismjöl, yoghurt, torrjäst och salt med 260 ml vatten (ljummet) till en jämn tjock smet. Täck skålen och låt jäsa i rumstemperatur tills smeten är synligt bubblig och något högre.",
+          "uses": [
+            "rismjöl",
+            "yoghurt naturell",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 60,
+          "passive": true
+        },
+        {
+          "text": "Pensla de värmetåliga formarna med riskakornas olja. Fördela smeten så att formarna är halvfulla. Koka upp 1000 ml vatten i grytan; vattenytan ska ligga under ånginsatsen.",
+          "uses": [
+            "rismjöl",
+            "yoghurt naturell",
+            "torrjäst",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ånga formarna under lock cirka 20 minuter, i omgångar om det behövs. En provsticka ska komma ut utan våt smet. Lyft ur och låt kakorna stå fem minuter före urtagning. Låt ångvattnet sjuda och håll det under formarnas botten.",
+          "uses": [
+            "rismjöl"
+          ],
+          "minutes": 25,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kycklingen i strimlor. Hetta upp kycklingkomponentens olja och stek strimlorna runt om. Tillsätt ärtor, senap, salt och 120 ml vatten. Sjud under lock tills ärtorna är varma och kycklingen håller minst 74 °C. Servera med de mjuka jästa riskakorna.",
+          "uses": [
+            "kyckling",
+            "ärtor",
+            "rapsolja",
+            "senap",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rosta solroskärnorna torrt under omrörning tills de doftar. Skölj äpple och gurka, kärna ur äpplet och skär båda i tunna skivor. Finhacka persiljan. Blanda och strö över kärnorna.",
+          "uses": [
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "rismjöl",
+            "yoghurt naturell",
+            "torrjäst",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "ärtor",
+            "senap",
+            "dill",
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 12 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 37 minuter aktivt och 85 minuter huvudsakligen passiv väntan. Rismjölssmet jäser till en porös massa och ångas i formar. Den mjuka porösa stärkelsen och den separata kycklingen ersätter ett rent proteinbyte i rotmos. Kräver registergranskning av rismjöl, solroskärnor och torrjäst; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-cold-almond-bread-emulsion-shrimp",
+      "name": "Kall mandel- och brödsoppa med räkor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "rå blandning av uppblött bröd nötter och oljeemulsion",
+      "primary": "räkor",
+      "method": "refrigerated_assembly",
+      "side": "Kalla räkor och gurka",
+      "flavor": [
+        "citronjuice",
+        "vitlök",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Blender",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kall mandel- och brödemulsion",
+          "ingredients": [
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sötmandel, naturell, som såld"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kalla räkor och gurka",
+          "ingredients": [
+            {
+              "name": "räkor",
+              "form": "cooked_drained",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta skalade räkor, avrunnen ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Välj skållad sötmandel. Riv brödet i bitar och lägg med mandeln i blenderkannan med 300 ml vatten (kallt). Låt stå 15 minuter så att brödet mjuknar.",
+          "uses": [
+            "mandel",
+            "bröd"
+          ],
+          "minutes": 15,
+          "passive": true
+        },
+        {
+          "text": "Tillsätt skalad vitlök, citronjuice, salt och 600 ml vatten (kallt). Mixa länge till en så slät soppa som möjligt. Häll i oljan i tunn stråle medan mixern går så att blandningen blir en ljus jämn emulsion.",
+          "uses": [
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Kyl soppan övertäckt i 45 minuter. Rör om före servering så att konsistensen är jämn.",
+          "uses": [
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 45,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Använd färdigkokta skalade räkor. Tärna gurkan mycket fint och hacka dillen. Fördela den kalla soppan i skålar och lägg räkor, gurka och dill i mitten. Servera direkt.",
+          "uses": [
+            "räkor",
+            "gurka",
+            "dill",
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt",
+            "räkor",
+            "gurka",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 8 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 16 minuter aktivt och 60 minuter huvudsakligen passiv väntan. Nötter och uppblött bröd finmixas, varefter olja emulgeras in till en kall tät soppa. Räkor och gurka behåller separata bitar ovanpå; ingen risboll byter protein. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av mandel och räkor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-cold-almond-bread-emulsion-shrimp",
+      "name": "Kall mandel- och brödsoppa med räkor – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "rå blandning av uppblött bröd nötter och oljeemulsion",
+      "primary": "räkor",
+      "method": "refrigerated_assembly",
+      "side": "Kalla räkor och gurka",
+      "flavor": [
+        "citronjuice",
+        "vitlök",
+        "dill",
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Blender",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kall mandel- och brödemulsion",
+          "ingredients": [
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sötmandel, naturell, som såld"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kalla räkor och gurka",
+          "ingredients": [
+            {
+              "name": "räkor",
+              "form": "cooked_drained",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta skalade räkor, avrunnen ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Välj skållad sötmandel. Riv brödet i bitar och lägg med mandeln i blenderkannan med 300 ml vatten (kallt). Låt stå 15 minuter så att brödet mjuknar.",
+          "uses": [
+            "mandel",
+            "bröd"
+          ],
+          "minutes": 15,
+          "passive": true
+        },
+        {
+          "text": "Tillsätt skalad vitlök, citronjuice, salt och 600 ml vatten (kallt). Mixa länge till en så slät soppa som möjligt. Häll i oljan i tunn stråle medan mixern går så att blandningen blir en ljus jämn emulsion.",
+          "uses": [
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Kyl soppan övertäckt i 45 minuter. Rör om före servering så att konsistensen är jämn.",
+          "uses": [
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 45,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Använd färdigkokta skalade räkor. Tärna gurkan mycket fint och hacka dillen. Fördela den kalla soppan i skålar och lägg räkor, gurka och dill i mitten. Servera direkt.",
+          "uses": [
+            "räkor",
+            "gurka",
+            "dill",
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt",
+            "räkor",
+            "gurka",
+            "dill",
+            "yoghurt naturell",
+            "senap"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 10 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 20 minuter aktivt och 60 minuter huvudsakligen passiv väntan. Nötter och uppblött bröd finmixas, varefter olja emulgeras in till en kall tät soppa. Räkor och gurka behåller separata bitar ovanpå; ingen risboll byter protein. Kräver registergranskning av mandel och räkor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-cold-almond-bread-emulsion-shrimp",
+      "name": "Kall mandel- och brödsoppa med räkor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "rå blandning av uppblött bröd nötter och oljeemulsion",
+      "primary": "räkor",
+      "method": "refrigerated_assembly",
+      "side": "Kalla räkor och gurka",
+      "flavor": [
+        "citronjuice",
+        "vitlök",
+        "dill",
+        "senap",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Blender",
+        "Kylskåp",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kall mandel- och brödemulsion",
+          "ingredients": [
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sötmandel, naturell, som såld"
+            },
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kalla räkor och gurka",
+          "ingredients": [
+            {
+              "name": "räkor",
+              "form": "cooked_drained",
+              "quantity": 600,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta skalade räkor, avrunnen ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Äppel- och gurksallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "solroskärnor",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella solroskärnor, som sålda"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Välj skållad sötmandel. Riv brödet i bitar och lägg med mandeln i blenderkannan med 300 ml vatten (kallt). Låt stå 15 minuter så att brödet mjuknar.",
+          "uses": [
+            "mandel",
+            "bröd"
+          ],
+          "minutes": 15,
+          "passive": true
+        },
+        {
+          "text": "Tillsätt skalad vitlök, citronjuice, salt och 600 ml vatten (kallt). Mixa länge till en så slät soppa som möjligt. Häll i oljan i tunn stråle medan mixern går så att blandningen blir en ljus jämn emulsion.",
+          "uses": [
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Kyl soppan övertäckt i 45 minuter. Rör om före servering så att konsistensen är jämn.",
+          "uses": [
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 45,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Använd färdigkokta skalade räkor. Tärna gurkan mycket fint och hacka dillen. Fördela den kalla soppan i skålar och lägg räkor, gurka och dill i mitten. Servera direkt.",
+          "uses": [
+            "räkor",
+            "gurka",
+            "dill",
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rosta solroskärnorna torrt under omrörning tills de doftar. Skölj äpple och gurka, kärna ur äpplet och skär båda i tunna skivor. Finhacka persiljan. Blanda och strö över kärnorna.",
+          "uses": [
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "mandel",
+            "bröd",
+            "rapsolja",
+            "citronjuice",
+            "vitlök",
+            "salt",
+            "räkor",
+            "gurka",
+            "dill",
+            "yoghurt naturell",
+            "senap",
+            "äpple",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 13 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 27 minuter aktivt och 60 minuter huvudsakligen passiv väntan. Nötter och uppblött bröd finmixas, varefter olja emulgeras in till en kall tät soppa. Räkor och gurka behåller separata bitar ovanpå; ingen risboll byter protein. Kräver registergranskning av mandel, räkor och solroskärnor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-cold-raised-hotwater-pork-pie",
+      "name": "Kall hög fläskpaj av skållad deg med buljonggelé – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "skållad hög degvägg grov bakad köttfyllning och eftergjuten gelé",
+      "primary": "fläskkött",
+      "method": "refrigerated_assembly",
+      "side": "Grov fläskfyllning, Ljus buljonggelé",
+      "flavor": [
+        "timjan",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Avlång liten brödform",
+        "Bakplåtspapper",
+        "Kavel",
+        "Ugn",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Skållat pajskal",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör, som sålt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Grov fläskfyllning",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 500,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ljus buljonggelé",
+          "ingredients": [
+            {
+              "name": "gelatinblad",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Gelatinblad, torr vikt som sålda före blötläggning"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Koka upp 160 ml vatten med smör och skalets salt. Häll den heta vätskan över mjölet och rör först med slev. När degen kan hanteras, knåda kort till en mjuk smidig deg. Håll den ljummen medan formen kläs.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Skär fläskköttet i mycket små tärningar och hacka löken fint. Blanda köttbitar, fläskfärs, lök, timjan och fyllningens salt till en grov sammanhängande massa.",
+          "uses": [
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 180 °C. Klä formen med bakplåtspapper. Kavla ungefär två tredjedelar av den ljumma degen och klä formens botten och höga sidor. Pressa ner fyllningen. Kavla resten till lock, nyp samman kanterna och gör ett tydligt ånghål mitt i locket.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Baka cirka 75 minuter tills skalet är stadigt och fyllningen når minst 72 °C. Låt ånga av högst 20 minuter och ställ därefter i kylskåp tills pajen är kall, cirka två timmar.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan"
+          ],
+          "minutes": 215,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala och skiva moroten. Sjud morot, dillstjälkar och geléns salt i 280 ml vatten i tolv minuter. Sila ner vätskan i en skål; spara moroten till servering och finhacka de kokta dillstjälkarna tillsammans med dillbladen. Blötlägg gelatinbladen i 300 ml vatten (kallt) fem minuter och krama ur. Lös bladen i det varma silade spadet.",
+          "uses": [
+            "gelatinblad",
+            "morot",
+            "dill",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt gelévätskan svalna till ljummen. Häll långsamt genom pajens ånghål så att hålrum kring den bakade köttfyllningen fylls. Häll eventuell vätska som inte ryms i en liten skål och låt stelna som tillbehör. Kyl paj och gelé minst fyra timmar. Servera kalla skivor med den sparade moroten, dillen och all gelé.",
+          "uses": [
+            "gelatinblad",
+            "morot",
+            "dill",
+            "salt",
+            "vetemjöl",
+            "smör",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan"
+          ],
+          "minutes": 245,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan",
+            "gelatinblad",
+            "morot",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 9 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 52 minuter aktivt och 460 minuter huvudsakligen passiv väntan. En varm skållad deg formas till höga väggar kring grov fläskfyllning. Efter bakning och kylning fylls hålrummen med buljonggelé. Det är en annan konstruktion än köttbitar i samma pumpakärnssås. Ingrediensantalet avviker från variantens riktmärke eftersom grundstrukturen och de kompletta tillbehören kräver dessa ingredienser; inget är ett valfritt eller okvantifierat tillägg. Kräver registergranskning av gelatinblad, smör och timjan; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-cold-raised-hotwater-pork-pie",
+      "name": "Kall hög fläskpaj av skållad deg med buljonggelé – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "skållad hög degvägg grov bakad köttfyllning och eftergjuten gelé",
+      "primary": "fläskkött",
+      "method": "refrigerated_assembly",
+      "side": "Grov fläskfyllning, Ljus buljonggelé",
+      "flavor": [
+        "timjan",
+        "dill",
+        "senap"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Avlång liten brödform",
+        "Bakplåtspapper",
+        "Kavel",
+        "Ugn",
+        "Digital kökstermometer",
+        "Kylskåp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Skållat pajskal",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör, som sålt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Grov fläskfyllning",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 500,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ljus buljonggelé",
+          "ingredients": [
+            {
+              "name": "gelatinblad",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Gelatinblad, torr vikt som sålda före blötläggning"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Koka upp 160 ml vatten med smör och skalets salt. Häll den heta vätskan över mjölet och rör först med slev. När degen kan hanteras, knåda kort till en mjuk smidig deg. Håll den ljummen medan formen kläs.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Skär fläskköttet i mycket små tärningar och hacka löken fint. Blanda köttbitar, fläskfärs, lök, timjan och fyllningens salt till en grov sammanhängande massa.",
+          "uses": [
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 180 °C. Klä formen med bakplåtspapper. Kavla ungefär två tredjedelar av den ljumma degen och klä formens botten och höga sidor. Pressa ner fyllningen. Kavla resten till lock, nyp samman kanterna och gör ett tydligt ånghål mitt i locket.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Baka cirka 75 minuter tills skalet är stadigt och fyllningen når minst 72 °C. Låt ånga av högst 20 minuter och ställ därefter i kylskåp tills pajen är kall, cirka två timmar.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan"
+          ],
+          "minutes": 215,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala och skiva moroten. Sjud morot, dillstjälkar och geléns salt i 280 ml vatten i tolv minuter. Sila ner vätskan i en skål; spara moroten till servering och finhacka de kokta dillstjälkarna tillsammans med dillbladen. Blötlägg gelatinbladen i 300 ml vatten (kallt) fem minuter och krama ur. Lös bladen i det varma silade spadet.",
+          "uses": [
+            "gelatinblad",
+            "morot",
+            "dill",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt gelévätskan svalna till ljummen. Häll långsamt genom pajens ånghål så att hålrum kring den bakade köttfyllningen fylls. Häll eventuell vätska som inte ryms i en liten skål och låt stelna som tillbehör. Kyl paj och gelé minst fyra timmar. Servera kalla skivor med den sparade moroten, dillen och all gelé.",
+          "uses": [
+            "gelatinblad",
+            "morot",
+            "dill",
+            "salt",
+            "vetemjöl",
+            "smör",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan"
+          ],
+          "minutes": 245,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan",
+            "gelatinblad",
+            "morot",
+            "dill",
+            "yoghurt naturell",
+            "senap"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 11 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 56 minuter aktivt och 460 minuter huvudsakligen passiv väntan. En varm skållad deg formas till höga väggar kring grov fläskfyllning. Efter bakning och kylning fylls hålrummen med buljonggelé. Det är en annan konstruktion än köttbitar i samma pumpakärnssås. Kräver registergranskning av gelatinblad, smör och timjan; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-cold-raised-hotwater-pork-pie",
+      "name": "Kall hög fläskpaj av skållad deg med buljonggelé – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "skållad hög degvägg grov bakad köttfyllning och eftergjuten gelé",
+      "primary": "fläskkött",
+      "method": "refrigerated_assembly",
+      "side": "Grov fläskfyllning, Ljus buljonggelé",
+      "flavor": [
+        "timjan",
+        "dill",
+        "senap",
+        "persilja"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Avlång liten brödform",
+        "Bakplåtspapper",
+        "Kavel",
+        "Ugn",
+        "Digital kökstermometer",
+        "Kylskåp",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Skållat pajskal",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 350,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör, som sålt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Grov fläskfyllning",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 500,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fläskfärs, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ljus buljonggelé",
+          "ingredients": [
+            {
+              "name": "gelatinblad",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Gelatinblad, torr vikt som sålda före blötläggning"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Örtkräm",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell, vikt eller volym som såld"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Senap, vikt eller volym som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Äppel- och gurksallad",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "solroskärnor",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella solroskärnor, som sålda"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Koka upp 160 ml vatten med smör och skalets salt. Häll den heta vätskan över mjölet och rör först med slev. När degen kan hanteras, knåda kort till en mjuk smidig deg. Håll den ljummen medan formen kläs.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Skär fläskköttet i mycket små tärningar och hacka löken fint. Blanda köttbitar, fläskfärs, lök, timjan och fyllningens salt till en grov sammanhängande massa.",
+          "uses": [
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 180 °C. Klä formen med bakplåtspapper. Kavla ungefär två tredjedelar av den ljumma degen och klä formens botten och höga sidor. Pressa ner fyllningen. Kavla resten till lock, nyp samman kanterna och gör ett tydligt ånghål mitt i locket.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Baka cirka 75 minuter tills skalet är stadigt och fyllningen når minst 72 °C. Låt ånga av högst 20 minuter och ställ därefter i kylskåp tills pajen är kall, cirka två timmar.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan"
+          ],
+          "minutes": 215,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skala och skiva moroten. Sjud morot, dillstjälkar och geléns salt i 280 ml vatten i tolv minuter. Sila ner vätskan i en skål; spara moroten till servering och finhacka de kokta dillstjälkarna tillsammans med dillbladen. Blötlägg gelatinbladen i 300 ml vatten (kallt) fem minuter och krama ur. Lös bladen i det varma silade spadet.",
+          "uses": [
+            "gelatinblad",
+            "morot",
+            "dill",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt gelévätskan svalna till ljummen. Häll långsamt genom pajens ånghål så att hålrum kring den bakade köttfyllningen fylls. Häll eventuell vätska som inte ryms i en liten skål och låt stelna som tillbehör. Kyl paj och gelé minst fyra timmar. Servera kalla skivor med den sparade moroten, dillen och all gelé.",
+          "uses": [
+            "gelatinblad",
+            "morot",
+            "dill",
+            "salt",
+            "vetemjöl",
+            "smör",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan"
+          ],
+          "minutes": 245,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka dillen. Rör samman örtkrämens yoghurt, senap och dill och håll krämen kall till serveringen.",
+          "uses": [
+            "yoghurt naturell",
+            "senap",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rosta solroskärnorna torrt under omrörning tills de doftar. Skölj äpple och gurka, kärna ur äpplet och skär båda i tunna skivor. Finhacka persiljan. Blanda och strö över kärnorna.",
+          "uses": [
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "smör",
+            "salt",
+            "fläskkött",
+            "fläskfärs",
+            "gul lök",
+            "timjan",
+            "gelatinblad",
+            "morot",
+            "dill",
+            "yoghurt naturell",
+            "senap",
+            "äpple",
+            "gurka",
+            "persilja",
+            "solroskärnor"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 15 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 63 minuter aktivt och 460 minuter huvudsakligen passiv väntan. En varm skållad deg formas till höga väggar kring grov fläskfyllning. Efter bakning och kylning fylls hålrummen med buljonggelé. Det är en annan konstruktion än köttbitar i samma pumpakärnssås. Kräver registergranskning av gelatinblad, smör, solroskärnor och timjan; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-swedish-cold-salmon-fibre-spread-bread-salad",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Kall laxrillette med rostat bröd och grönsallad – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "cold-salmon-fibre-spread-bread-salad",
+      "primary": "lax",
+      "method": "refrigerated_assembly",
+      "side": "Rostat bröd, Grönsallad",
+      "flavor": [
+        "smör",
+        "yoghurt naturell",
+        "citronjuice",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Ugn",
+        "Grund form med lock",
+        "Termometer",
+        "Två gafflar",
+        "Skål med lock",
+        "Kylskåp",
+        "Brödrost eller stekpanna",
+        "Kniv",
+        "Skärbräda",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Laxrillette",
+          "ingredients": [
+            {
+              "name": "lax",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Lax, rå ätlig vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Smör, mängd som såld"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Rostat bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Grönsallad",
+          "ingredients": [
+            {
+              "name": "sallad",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sallad, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Laxrillette: Lägg laxen i en grund form med 100 ml vatten och saltet. Täck och baka i ugn på 160 °C tills mitten är minst 63 °C. Häll av fritt spad och låt laxen svalna kort.",
+          "uses": [
+            "lax",
+            "salt"
+          ],
+          "minutes": 20,
+          "passive": true
+        },
+        {
+          "text": "För komponenten Laxrillette: Dela laxen i små tydliga fibrer med två gafflar. Arbeta in det mjuka smöret och sedan yoghurt och citronjuice utan att mixa slätt. Lägg i en grund skål, täck och kyl tills röran är kall och sammanhållen.",
+          "uses": [
+            "lax",
+            "smör",
+            "yoghurt naturell",
+            "citronjuice"
+          ],
+          "minutes": 60,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Rostat bröd: Skiva brödet och rosta i brödrost eller på torr het panna tills ytorna är krispiga. Använd hela brödmängden.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Grönsallad: Skölj och ansa sallad och gurka. Skär frukt och grönsaker i små bitar. Lägg upp sallad, gurka, citronjuice och rapsolja tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "sallad",
+            "gurka",
+            "citronjuice",
+            "rapsolja"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera den kalla rilletten som en bredbar huvudkomponent till varmt rostat bröd och hela salladen. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "lax",
+            "smör",
+            "yoghurt naturell",
+            "citronjuice",
+            "salt",
+            "bröd",
+            "sallad",
+            "gurka",
+            "rapsolja"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Svenskinspirerad konstruktion utan traditionsanspråk. Tillagad lax delas i fibrer och binds kall med en måttlig smör- och yoghurtblandning. Röran kyls till bredbar form; den är inte en varm fisksås, quenell eller fiskbiff. Svenskinspirerad servering av rillette. Jämför mot andra kalla fiskröror; kokning, bevarade fiskfibrer och kall fettbindning är bärande. Kyltiden är en del av receptet. Fyra portioner. 8 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 15 minuter aktivt arbete och 80 minuter huvudsakligen passiv väntan, totalt 95 minuter. Tiderna är inte verifierade genom provlagning. Avsteg från variantens riktmärke: den bärande tillagningsstrukturen och kompletta måltiden behålls; inga fyllnadsingredienser har lagts till för att nå ett antal. Utanför nuvarande standardfilter 10–15 ingredienser; kräver att användaren ändrar minantalet. Kräver registergranskning för sallad och smör; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-cold-salmon-fibre-spread-bread-salad",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Kall laxrillette med rostat bröd och grönsallad – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "cold-salmon-fibre-spread-bread-salad",
+      "primary": "lax",
+      "method": "refrigerated_assembly",
+      "side": "Rostat bröd, Grönsallad, Dill och rödlök",
+      "flavor": [
+        "smör",
+        "yoghurt naturell",
+        "citronjuice",
+        "salt",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Ugn",
+        "Grund form med lock",
+        "Termometer",
+        "Två gafflar",
+        "Skål med lock",
+        "Kylskåp",
+        "Brödrost eller stekpanna",
+        "Kniv",
+        "Skärbräda",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Laxrillette",
+          "ingredients": [
+            {
+              "name": "lax",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Lax, rå ätlig vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Smör, mängd som såld"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Rostat bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Grönsallad",
+          "ingredients": [
+            {
+              "name": "sallad",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sallad, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Dill och rödlök",
+          "ingredients": [
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Laxrillette: Lägg laxen i en grund form med 100 ml vatten och saltet. Täck och baka i ugn på 160 °C tills mitten är minst 63 °C. Häll av fritt spad och låt laxen svalna kort.",
+          "uses": [
+            "lax",
+            "salt"
+          ],
+          "minutes": 20,
+          "passive": true
+        },
+        {
+          "text": "För komponenten Laxrillette: Dela laxen i små tydliga fibrer med två gafflar. Arbeta in det mjuka smöret och sedan yoghurt och citronjuice utan att mixa slätt. Lägg i en grund skål, täck och kyl tills röran är kall och sammanhållen.",
+          "uses": [
+            "lax",
+            "smör",
+            "yoghurt naturell",
+            "citronjuice"
+          ],
+          "minutes": 60,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Rostat bröd: Skiva brödet och rosta i brödrost eller på torr het panna tills ytorna är krispiga. Använd hela brödmängden.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Grönsallad: Skölj och ansa sallad och gurka. Skär frukt och grönsaker i små bitar. Lägg upp sallad, gurka, citronjuice och rapsolja tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "sallad",
+            "gurka",
+            "citronjuice",
+            "rapsolja"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Dill och rödlök: Skölj och ansa dill och rödlök. Skär frukt och grönsaker i små bitar. Lägg upp dill och rödlök tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "dill",
+            "rödlök"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera den kalla rilletten som en bredbar huvudkomponent till varmt rostat bröd och hela salladen. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "lax",
+            "smör",
+            "yoghurt naturell",
+            "citronjuice",
+            "salt",
+            "bröd",
+            "sallad",
+            "gurka",
+            "rapsolja",
+            "dill",
+            "rödlök"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Svenskinspirerad konstruktion utan traditionsanspråk. Tillagad lax delas i fibrer och binds kall med en måttlig smör- och yoghurtblandning. Röran kyls till bredbar form; den är inte en varm fisksås, quenell eller fiskbiff. Svenskinspirerad servering av rillette. Jämför mot andra kalla fiskröror; kokning, bevarade fiskfibrer och kall fettbindning är bärande. Kyltiden är en del av receptet. Fyra portioner. 10 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 19 minuter aktivt arbete och 80 minuter huvudsakligen passiv väntan, totalt 99 minuter. Tiderna är inte verifierade genom provlagning. Kräver registergranskning för sallad och smör; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-cold-salmon-fibre-spread-bread-salad",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Kall laxrillette med rostat bröd och grönsallad – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "family": "cold-salmon-fibre-spread-bread-salad",
+      "primary": "lax",
+      "method": "refrigerated_assembly",
+      "side": "Rostat bröd, Grönsallad, Dill och rödlök, Äpple och kapris",
+      "flavor": [
+        "smör",
+        "yoghurt naturell",
+        "citronjuice",
+        "salt",
+        "dill",
+        "kapris"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Måttsats",
+        "Ugn",
+        "Grund form med lock",
+        "Termometer",
+        "Två gafflar",
+        "Skål med lock",
+        "Kylskåp",
+        "Brödrost eller stekpanna",
+        "Kniv",
+        "Skärbräda",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Laxrillette",
+          "ingredients": [
+            {
+              "name": "lax",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Lax, rå ätlig vikt"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Smör, mängd som såld"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Rostat bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 320,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Grönsallad",
+          "ingredients": [
+            {
+              "name": "sallad",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Sallad, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Dill och rödlök",
+          "ingredients": [
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c5",
+          "name": "Äpple och kapris",
+          "ingredients": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "kapris",
+              "form": "preserved_drained",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kapris, konserverad avrunnen vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Laxrillette: Lägg laxen i en grund form med 100 ml vatten och saltet. Täck och baka i ugn på 160 °C tills mitten är minst 63 °C. Häll av fritt spad och låt laxen svalna kort.",
+          "uses": [
+            "lax",
+            "salt"
+          ],
+          "minutes": 20,
+          "passive": true
+        },
+        {
+          "text": "För komponenten Laxrillette: Dela laxen i små tydliga fibrer med två gafflar. Arbeta in det mjuka smöret och sedan yoghurt och citronjuice utan att mixa slätt. Lägg i en grund skål, täck och kyl tills röran är kall och sammanhållen.",
+          "uses": [
+            "lax",
+            "smör",
+            "yoghurt naturell",
+            "citronjuice"
+          ],
+          "minutes": 60,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Rostat bröd: Skiva brödet och rosta i brödrost eller på torr het panna tills ytorna är krispiga. Använd hela brödmängden.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Grönsallad: Skölj och ansa sallad och gurka. Skär frukt och grönsaker i små bitar. Lägg upp sallad, gurka, citronjuice och rapsolja tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "sallad",
+            "gurka",
+            "citronjuice",
+            "rapsolja"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Dill och rödlök: Skölj och ansa dill och rödlök. Skär frukt och grönsaker i små bitar. Lägg upp dill och rödlök tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "dill",
+            "rödlök"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Äpple och kapris: Skölj och ansa äpple. Skär frukt och grönsaker i små bitar. Lägg upp äpple och kapris tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "äpple",
+            "kapris"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera den kalla rilletten som en bredbar huvudkomponent till varmt rostat bröd och hela salladen. Fördela allt till fyra portioner. Servera samtliga tillagade tillbehör till.",
+          "uses": [
+            "lax",
+            "smör",
+            "yoghurt naturell",
+            "citronjuice",
+            "salt",
+            "bröd",
+            "sallad",
+            "gurka",
+            "rapsolja",
+            "dill",
+            "rödlök",
+            "äpple",
+            "kapris"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. Svenskinspirerad konstruktion utan traditionsanspråk. Tillagad lax delas i fibrer och binds kall med en måttlig smör- och yoghurtblandning. Röran kyls till bredbar form; den är inte en varm fisksås, quenell eller fiskbiff. Svenskinspirerad servering av rillette. Jämför mot andra kalla fiskröror; kokning, bevarade fiskfibrer och kall fettbindning är bärande. Kyltiden är en del av receptet. Fyra portioner. 12 lokalt räknade ingredienser. Uppskattad sekventiell tidsplan: 23 minuter aktivt arbete och 80 minuter huvudsakligen passiv väntan, totalt 103 minuter. Tiderna är inte verifierade genom provlagning. Kräver registergranskning för sallad och smör; inte importklar. Diet, allergener, näring och produktkrav ska bedömas från denna variants faktiska ingredienser och valda produkter."
+    }
+  ]
+}

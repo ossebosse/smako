@@ -1,0 +1,4292 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-55",
+  "recipes": [
+    {
+      "base_id": "smako-mexican-pork-stuffed-masa",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Majsdegsknyten med fläsk och svarta bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "masa_pocket",
+      "primary": "fläskkött",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bakplåtspapper",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stekpanna med släppbeläggning"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Majsdeg",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Nixtamaliserat majsmjöl, torr vikt; inte vanligt majsmjöl"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda majsdegens masa harina och salt. Arbeta in majsdegens olja och 480 ml vatten (varmt) till en mjuk, formbar deg. Täck skålen så att degen inte torkar.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen svälla täckt. Den ska gå att platta ut utan att falla sönder.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär fläskkött i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera att fläskköttet är genomstekt; sikta på minst 72 °C i den tjockaste delen. Dela därefter fint till fyllning.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skölj svarta bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt.",
+          "uses": [
+            "svarta bönor",
+            "rökt paprikapulver"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg svarta bönor i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "svarta bönor"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade fläskkött i pannan och fördela jämnt.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "fläskkött"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 8,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Platta ut majsdegen mellan bakplåtspapper till runda plattor, två per portion. Lägg fyllning på ena halvan och vik över. Pressa ihop kanterna utan sprickor.",
+          "uses": [
+            "masa harina",
+            "fläskkött"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Stek knytena i torr panna på medelvärme i omgångar, cirka fem minuter per sida. Degen ska vara genomgräddad och inte ha någon rå, mjölig kärna. Sänk värmen om utsidan mörknar för snabbt.",
+          "uses": [
+            "masa harina",
+            "fläskkött"
+          ],
+          "minutes": 30,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt",
+            "fläskkött",
+            "svarta bönor",
+            "rökt paprikapulver"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 86 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 104 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Finhackat tillagat fläsk och bönor omsluts av majsdeg som steks till slutna halvmånar. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av masa harina; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-pork-stuffed-masa",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Majsdegsknyten med fläsk och svarta bönor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "masa_pocket",
+      "primary": "fläskkött",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bakplåtspapper",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stekpanna med släppbeläggning"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Majsdeg",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Nixtamaliserat majsmjöl, torr vikt; inte vanligt majsmjöl"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda majsdegens masa harina och salt. Arbeta in majsdegens olja och 480 ml vatten (varmt) till en mjuk, formbar deg. Täck skålen så att degen inte torkar.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen svälla täckt. Den ska gå att platta ut utan att falla sönder.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär fläskkött i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera att fläskköttet är genomstekt; sikta på minst 72 °C i den tjockaste delen. Dela därefter fint till fyllning.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skölj svarta bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt; skala och finhacka gul lök; finhacka färsk koriander.",
+          "uses": [
+            "svarta bönor",
+            "rökt paprikapulver",
+            "gul lök",
+            "färsk koriander"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg svarta bönor och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "svarta bönor",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade fläskkött i pannan och fördela jämnt.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "fläskkött"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 8,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Platta ut majsdegen mellan bakplåtspapper till runda plattor, två per portion. Lägg fyllning på ena halvan och vik över. Pressa ihop kanterna utan sprickor.",
+          "uses": [
+            "masa harina",
+            "fläskkött"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Stek knytena i torr panna på medelvärme i omgångar, cirka fem minuter per sida. Degen ska vara genomgräddad och inte ha någon rå, mjölig kärna. Sänk värmen om utsidan mörknar för snabbt.",
+          "uses": [
+            "masa harina",
+            "fläskkött"
+          ],
+          "minutes": 30,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt",
+            "fläskkött",
+            "svarta bönor",
+            "rökt paprikapulver",
+            "gul lök",
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 91 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 109 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Finhackat tillagat fläsk och bönor omsluts av majsdeg som steks till slutna halvmånar. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander, masa harina; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-pork-stuffed-masa",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Majsdegsknyten med fläsk och svarta bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "masa_pocket",
+      "primary": "fläskkött",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bakplåtspapper",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stekpanna med släppbeläggning"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Majsdeg",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Nixtamaliserat majsmjöl, torr vikt; inte vanligt majsmjöl"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "fläskkött",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläskkött, rå ätlig vikt"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: limekål",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda majsdegens masa harina och salt. Arbeta in majsdegens olja och 480 ml vatten (varmt) till en mjuk, formbar deg. Täck skålen så att degen inte torkar.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen svälla täckt. Den ska gå att platta ut utan att falla sönder.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär fläskkött i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera att fläskköttet är genomstekt; sikta på minst 72 °C i den tjockaste delen. Dela därefter fint till fyllning.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skölj svarta bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt; skala och finhacka gul lök; finhacka färsk koriander.",
+          "uses": [
+            "svarta bönor",
+            "rökt paprikapulver",
+            "gul lök",
+            "färsk koriander"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg svarta bönor och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "svarta bönor",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade fläskkött i pannan och fördela jämnt.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "fläskkött"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "fläskkött"
+          ],
+          "minutes": 8,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Platta ut majsdegen mellan bakplåtspapper till runda plattor, två per portion. Lägg fyllning på ena halvan och vik över. Pressa ihop kanterna utan sprickor.",
+          "uses": [
+            "masa harina",
+            "fläskkött"
+          ],
+          "minutes": 12,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Stek knytena i torr panna på medelvärme i omgångar, cirka fem minuter per sida. Degen ska vara genomgräddad och inte ha någon rå, mjölig kärna. Sänk värmen om utsidan mörknar för snabbt.",
+          "uses": [
+            "masa harina",
+            "fläskkött"
+          ],
+          "minutes": 30,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: strimla vitkålen tunt; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Blanda vitkål, morot, limejuice och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            15
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt",
+            "fläskkött",
+            "svarta bönor",
+            "rökt paprikapulver",
+            "gul lök",
+            "färsk koriander",
+            "vitkål",
+            "morot",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            16
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 10 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 98 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 116 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Finhackat tillagat fläsk och bönor omsluts av majsdeg som steks till slutna halvmånar. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander, masa harina; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-salmon-cooked-vegetable-escabeche",
+      "name": "Stekt lax i kyld syrlig grönsakslag med ris – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "först stekt sedan marinerad och kyld fisk",
+      "primary": "lax",
+      "method": "refrigerated_assembly",
+      "side": "Ris",
+      "flavor": [
+        "äppelcidervinäger",
+        "oregano"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Kastrull",
+        "Grund form med lock",
+        "Kylskåp",
+        "Digital kökstermometer",
+        "Kastrull med tätt lock",
+        "Sil"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fisk i kokt syrlig grönsakslag",
+          "ingredients": [
+            {
+              "name": "lax",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Lax, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Äppelcidervinäger, som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär laxen i portionsbitar. Hetta upp hälften av oljan och stek laxen varsamt på båda sidor tills den håller minst 63 °C. Lägg den i en grund form.",
+          "uses": [
+            "lax",
+            "rapsolja"
+          ],
+          "minutes": 14
+        },
+        {
+          "text": "Skala moroten och skiva den tunt. Skiva rödlöken. Fräs båda i resterande olja utan kraftig färg. Tillsätt vinäger, oregano, salt och 180 ml vatten. Sjud tills moroten är mjuk men behåller tuggmotstånd, cirka tio minuter.",
+          "uses": [
+            "morot",
+            "rödlök",
+            "rapsolja",
+            "äppelcidervinäger",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fördela den varma grönsakslagen över laxen. Låt ånga av högst 20 minuter, täck och ställ i kylskåp i minst fyra timmar. Vänd fiskbitarna försiktigt en gång under kylningen. Detta är en tillagad rätt som kyls; syran ersätter inte fiskens värmebehandling.",
+          "uses": [
+            "lax",
+            "morot",
+            "rödlök",
+            "äppelcidervinäger",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 260,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj riset i sil. Lägg i kastrullen med risets salt och 560 ml vatten. Koka upp, sänk värmen och sjud under lock cirka 18 minuter. Ta från värmen och låt stå under lock fem minuter. Fluffa med gaffel.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 26,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den kylda laxen och all grönsakslag med det nykokta riset. Lyft med bred stekspade så att fisken behåller hela bitar.",
+          "uses": [
+            "lax",
+            "morot",
+            "rödlök",
+            "äppelcidervinäger",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "ris"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "lax",
+            "morot",
+            "rödlök",
+            "äppelcidervinäger",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 7 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 35 minuter aktivt och 286 minuter huvudsakligen passiv väntan. Fisk steks färdig och mognar därefter kall i kokt vinäger- och grönsakslag. Det är en annan tidsordning, serveringstemperatur och vätskestruktur än fruktspett. Kräver registergranskning av äppelcidervinäger; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-mexican-salmon-cooked-vegetable-escabeche",
+      "name": "Stekt lax i kyld syrlig grönsakslag med ris – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "först stekt sedan marinerad och kyld fisk",
+      "primary": "lax",
+      "method": "refrigerated_assembly",
+      "side": "Ris",
+      "flavor": [
+        "äppelcidervinäger",
+        "oregano",
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Kastrull",
+        "Grund form med lock",
+        "Kylskåp",
+        "Digital kökstermometer",
+        "Kastrull med tätt lock",
+        "Sil"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fisk i kokt syrlig grönsakslag",
+          "ingredients": [
+            {
+              "name": "lax",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Lax, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Äppelcidervinäger, som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Syrlig tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär laxen i portionsbitar. Hetta upp hälften av oljan och stek laxen varsamt på båda sidor tills den håller minst 63 °C. Lägg den i en grund form.",
+          "uses": [
+            "lax",
+            "rapsolja"
+          ],
+          "minutes": 14
+        },
+        {
+          "text": "Skala moroten och skiva den tunt. Skiva rödlöken. Fräs båda i resterande olja utan kraftig färg. Tillsätt vinäger, oregano, salt och 180 ml vatten. Sjud tills moroten är mjuk men behåller tuggmotstånd, cirka tio minuter.",
+          "uses": [
+            "morot",
+            "rödlök",
+            "rapsolja",
+            "äppelcidervinäger",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fördela den varma grönsakslagen över laxen. Låt ånga av högst 20 minuter, täck och ställ i kylskåp i minst fyra timmar. Vänd fiskbitarna försiktigt en gång under kylningen. Detta är en tillagad rätt som kyls; syran ersätter inte fiskens värmebehandling.",
+          "uses": [
+            "lax",
+            "morot",
+            "rödlök",
+            "äppelcidervinäger",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 260,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj riset i sil. Lägg i kastrullen med risets salt och 560 ml vatten. Koka upp, sänk värmen och sjud under lock cirka 18 minuter. Ta från värmen och låt stå under lock fem minuter. Fluffa med gaffel.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 26,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den kylda laxen och all grönsakslag med det nykokta riset. Lyft med bred stekspade så att fisken behåller hela bitar.",
+          "uses": [
+            "lax",
+            "morot",
+            "rödlök",
+            "äppelcidervinäger",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "ris"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skölj tomaten. Tärna tomat och rödlök fint och vänd ihop med salsans limejuice och salt. Låt stå medan huvudrätten avslutas.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "lax",
+            "morot",
+            "rödlök",
+            "äppelcidervinäger",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "ris",
+            "tomat",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 9 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 40 minuter aktivt och 286 minuter huvudsakligen passiv väntan. Fisk steks färdig och mognar därefter kall i kokt vinäger- och grönsakslag. Det är en annan tidsordning, serveringstemperatur och vätskestruktur än fruktspett. Kräver registergranskning av äppelcidervinäger; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-mexican-salmon-cooked-vegetable-escabeche",
+      "name": "Stekt lax i kyld syrlig grönsakslag med ris – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "först stekt sedan marinerad och kyld fisk",
+      "primary": "lax",
+      "method": "refrigerated_assembly",
+      "side": "Ris",
+      "flavor": [
+        "äppelcidervinäger",
+        "oregano",
+        "limejuice",
+        "färsk koriander",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Kastrull",
+        "Grund form med lock",
+        "Kylskåp",
+        "Digital kökstermometer",
+        "Kastrull med tätt lock",
+        "Sil",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fisk i kokt syrlig grönsakslag",
+          "ingredients": [
+            {
+              "name": "lax",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Lax, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Äppelcidervinäger, som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Syrlig tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Kålkrisp med frön",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella pumpakärnor, som sålda"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär laxen i portionsbitar. Hetta upp hälften av oljan och stek laxen varsamt på båda sidor tills den håller minst 63 °C. Lägg den i en grund form.",
+          "uses": [
+            "lax",
+            "rapsolja"
+          ],
+          "minutes": 14
+        },
+        {
+          "text": "Skala moroten och skiva den tunt. Skiva rödlöken. Fräs båda i resterande olja utan kraftig färg. Tillsätt vinäger, oregano, salt och 180 ml vatten. Sjud tills moroten är mjuk men behåller tuggmotstånd, cirka tio minuter.",
+          "uses": [
+            "morot",
+            "rödlök",
+            "rapsolja",
+            "äppelcidervinäger",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fördela den varma grönsakslagen över laxen. Låt ånga av högst 20 minuter, täck och ställ i kylskåp i minst fyra timmar. Vänd fiskbitarna försiktigt en gång under kylningen. Detta är en tillagad rätt som kyls; syran ersätter inte fiskens värmebehandling.",
+          "uses": [
+            "lax",
+            "morot",
+            "rödlök",
+            "äppelcidervinäger",
+            "rapsolja",
+            "oregano",
+            "salt"
+          ],
+          "minutes": 260,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj riset i sil. Lägg i kastrullen med risets salt och 560 ml vatten. Koka upp, sänk värmen och sjud under lock cirka 18 minuter. Ta från värmen och låt stå under lock fem minuter. Fluffa med gaffel.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 26,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera den kylda laxen och all grönsakslag med det nykokta riset. Lyft med bred stekspade så att fisken behåller hela bitar.",
+          "uses": [
+            "lax",
+            "morot",
+            "rödlök",
+            "äppelcidervinäger",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "ris"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skölj tomaten. Tärna tomat och rödlök fint och vänd ihop med salsans limejuice och salt. Låt stå medan huvudrätten avslutas.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rosta pumpakärnorna i en torr panna under omrörning tills de doftar. Strimla vitkålen tunt och finhacka koriandern. Vänd kålen med koriander, tillbehörets olja och citronjuice. Strö över kärnorna vid servering.",
+          "uses": [
+            "vitkål",
+            "färsk koriander",
+            "pumpakärnor",
+            "rapsolja",
+            "citronjuice"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "lax",
+            "morot",
+            "rödlök",
+            "äppelcidervinäger",
+            "rapsolja",
+            "oregano",
+            "salt",
+            "ris",
+            "tomat",
+            "limejuice",
+            "vitkål",
+            "färsk koriander",
+            "pumpakärnor",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 13 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 47 minuter aktivt och 286 minuter huvudsakligen passiv väntan. Fisk steks färdig och mognar därefter kall i kokt vinäger- och grönsakslag. Det är en annan tidsordning, serveringstemperatur och vätskestruktur än fruktspett. Kräver registergranskning av färsk koriander, pumpakärnor och äppelcidervinäger; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-mexican-salty-maize-churros-bean-ragout",
+      "name": "Spritsade salta majsstavar med varm bönröra – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "äggfri kokt majs-vetedeg spritsad och friterad",
+      "primary": "bönor",
+      "method": "pan",
+      "side": "Varm bön- och tomatröra",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Träslev",
+        "Kraftig spritspåse med stjärnmunstycke",
+        "Djup panna",
+        "Hålslev",
+        "Digital kökstermometer",
+        "Galler",
+        "Stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Spritsade salta majsstavar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 170,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "majsmjöl",
+              "form": "dry",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Finmalet majsmjöl, torr vikt; inte majsstärkelse"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm bön- och tomatröra",
+          "ingredients": [
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 750,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Koka upp 380 ml vatten med saltet. Blanda mjölsorterna, ta kastrullen från värmen och rör ner blandningen på en gång. Rör kraftigt till en tjock slät deg. Ställ tillbaka på låg värme och rör två minuter tills degen samlas. Låt svalna tills den kan hanteras.",
+          "uses": [
+            "vetemjöl",
+            "majsmjöl",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Fyll den kraftiga spritspåsen med degen. Hetta upp all processolja i en djup panna till cirka 175 °C. Spritsa korta stavar direkt ovanför oljan och klipp av med sax. Stek i små omgångar och vänd tills stavarna är gyllene och genomkokta, cirka fem minuter per omgång. Låt rinna av på galler. Processoljan ska inte serveras.",
+          "uses": [
+            "vetemjöl",
+            "majsmjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken och fräs i rörans olja med spiskummin. Tillsätt tomater, bönor och rörans salt. Sjud tio minuter och mosa en del av bönorna så att röran blir tjock. Servera den varma röran med de nyfriterade salta majsstavarna.",
+          "uses": [
+            "svarta bönor",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "spiskummin",
+            "salt"
+          ],
+          "minutes": 17,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "majsmjöl",
+            "rapsolja",
+            "salt",
+            "svarta bönor",
+            "krossade tomater",
+            "gul lök",
+            "spiskummin"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 7 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 54 minuter aktivt och 0 minuter huvudsakligen passiv väntan. En äggfri kokt majs-vetedeg spritsas med räfflor och friteras till kompakta frasiga stavar. Ingen luftig bakad chouxkrans räknas igen; den finns aktiv hos en annan agent. Kräver registergranskning av majsmjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas. Denna variant ligger utanför nuvarande standardfilter 10–15 räknade ingredienser eftersom den har färre än 10. Användaren behöver sänka minantalet.",
+      "variant_id": "simple",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-mexican-salty-maize-churros-bean-ragout",
+      "name": "Spritsade salta majsstavar med varm bönröra – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "äggfri kokt majs-vetedeg spritsad och friterad",
+      "primary": "bönor",
+      "method": "pan",
+      "side": "Varm bön- och tomatröra",
+      "flavor": [
+        "spiskummin",
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Träslev",
+        "Kraftig spritspåse med stjärnmunstycke",
+        "Djup panna",
+        "Hålslev",
+        "Digital kökstermometer",
+        "Galler",
+        "Stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Spritsade salta majsstavar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 170,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "majsmjöl",
+              "form": "dry",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Finmalet majsmjöl, torr vikt; inte majsstärkelse"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm bön- och tomatröra",
+          "ingredients": [
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 750,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Syrlig tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Koka upp 380 ml vatten med saltet. Blanda mjölsorterna, ta kastrullen från värmen och rör ner blandningen på en gång. Rör kraftigt till en tjock slät deg. Ställ tillbaka på låg värme och rör två minuter tills degen samlas. Låt svalna tills den kan hanteras.",
+          "uses": [
+            "vetemjöl",
+            "majsmjöl",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Fyll den kraftiga spritspåsen med degen. Hetta upp all processolja i en djup panna till cirka 175 °C. Spritsa korta stavar direkt ovanför oljan och klipp av med sax. Stek i små omgångar och vänd tills stavarna är gyllene och genomkokta, cirka fem minuter per omgång. Låt rinna av på galler. Processoljan ska inte serveras.",
+          "uses": [
+            "vetemjöl",
+            "majsmjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken och fräs i rörans olja med spiskummin. Tillsätt tomater, bönor och rörans salt. Sjud tio minuter och mosa en del av bönorna så att röran blir tjock. Servera den varma röran med de nyfriterade salta majsstavarna.",
+          "uses": [
+            "svarta bönor",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "spiskummin",
+            "salt"
+          ],
+          "minutes": 17,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj tomaten. Tärna tomat och rödlök fint och vänd ihop med salsans limejuice och salt. Låt stå medan huvudrätten avslutas.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "majsmjöl",
+            "rapsolja",
+            "salt",
+            "svarta bönor",
+            "krossade tomater",
+            "gul lök",
+            "spiskummin",
+            "tomat",
+            "rödlök",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 10 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 59 minuter aktivt och 0 minuter huvudsakligen passiv väntan. En äggfri kokt majs-vetedeg spritsas med räfflor och friteras till kompakta frasiga stavar. Ingen luftig bakad chouxkrans räknas igen; den finns aktiv hos en annan agent. Kräver registergranskning av majsmjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "standard",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-mexican-salty-maize-churros-bean-ragout",
+      "name": "Spritsade salta majsstavar med varm bönröra – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "äggfri kokt majs-vetedeg spritsad och friterad",
+      "primary": "bönor",
+      "method": "pan",
+      "side": "Varm bön- och tomatröra",
+      "flavor": [
+        "spiskummin",
+        "limejuice",
+        "färsk koriander",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttkanna",
+        "Kniv",
+        "Skärbräda",
+        "Skålar",
+        "Kastrull",
+        "Träslev",
+        "Kraftig spritspåse med stjärnmunstycke",
+        "Djup panna",
+        "Hålslev",
+        "Digital kökstermometer",
+        "Galler",
+        "Stekpanna",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Spritsade salta majsstavar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 170,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "majsmjöl",
+              "form": "dry",
+              "quantity": 100,
+              "unit": "g",
+              "role": "side",
+              "label": "Finmalet majsmjöl, torr vikt; inte majsstärkelse"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varm bön- och tomatröra",
+          "ingredients": [
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 750,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Syrlig tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Kålkrisp med frön",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Skalade naturella pumpakärnor, som sålda"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Citronjuice, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Koka upp 380 ml vatten med saltet. Blanda mjölsorterna, ta kastrullen från värmen och rör ner blandningen på en gång. Rör kraftigt till en tjock slät deg. Ställ tillbaka på låg värme och rör två minuter tills degen samlas. Låt svalna tills den kan hanteras.",
+          "uses": [
+            "vetemjöl",
+            "majsmjöl",
+            "salt"
+          ],
+          "minutes": 10
+        },
+        {
+          "text": "Fyll den kraftiga spritspåsen med degen. Hetta upp all processolja i en djup panna till cirka 175 °C. Spritsa korta stavar direkt ovanför oljan och klipp av med sax. Stek i små omgångar och vänd tills stavarna är gyllene och genomkokta, cirka fem minuter per omgång. Låt rinna av på galler. Processoljan ska inte serveras.",
+          "uses": [
+            "vetemjöl",
+            "majsmjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken och fräs i rörans olja med spiskummin. Tillsätt tomater, bönor och rörans salt. Sjud tio minuter och mosa en del av bönorna så att röran blir tjock. Servera den varma röran med de nyfriterade salta majsstavarna.",
+          "uses": [
+            "svarta bönor",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "spiskummin",
+            "salt"
+          ],
+          "minutes": 17,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj tomaten. Tärna tomat och rödlök fint och vänd ihop med salsans limejuice och salt. Låt stå medan huvudrätten avslutas.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rosta pumpakärnorna i en torr panna under omrörning tills de doftar. Strimla vitkålen tunt och finhacka koriandern. Vänd kålen med koriander, tillbehörets olja och citronjuice. Strö över kärnorna vid servering.",
+          "uses": [
+            "vitkål",
+            "färsk koriander",
+            "pumpakärnor",
+            "rapsolja",
+            "citronjuice"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudkomponenten och samtliga tillbehör tillsammans. Fördela hela de angivna komponentmängderna över det angivna antalet portioner.",
+          "uses": [
+            "vetemjöl",
+            "majsmjöl",
+            "rapsolja",
+            "salt",
+            "svarta bönor",
+            "krossade tomater",
+            "gul lök",
+            "spiskummin",
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "vitkål",
+            "färsk koriander",
+            "pumpakärnor",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen Smako-validator eller import har körts. Fyra portioner. 14 räknade ingredienser; salt, svartpeppar och processvatten undantagna. Uppskattad sekventiell tid: 66 minuter aktivt och 0 minuter huvudsakligen passiv väntan. En äggfri kokt majs-vetedeg spritsas med räfflor och friteras till kompakta frasiga stavar. Ingen luftig bakad chouxkrans räknas igen; den finns aktiv hos en annan agent. Kräver registergranskning av färsk koriander, majsmjöl och pumpakärnor; inte importklar. Förslagen är inte godkända ingrediensidentiteter. Produktmatchning, kulinarisk avgränsning, angiven köksinspiration och hållfasthet behöver redaktionell granskning och provlagning. Ingen beräknad näring eller allergengaranti lämnas.",
+      "variant_id": "extended",
+      "version": "1.0.0"
+    },
+    {
+      "base_id": "smako-mexican-shrimp-corn-flan",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Majsflan med räkor och paprika – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "flan",
+      "primary": "räkor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Visp",
+        "Elvisp",
+        "Två skålar",
+        "Kastrull",
+        "Digital kökstermometer",
+        "Djup långpanna",
+        "Folie"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "räkor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta skalade räkor, avrunnen ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Stanning",
+          "ingredients": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 45,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar.",
+          "uses": [
+            "majs",
+            "paprika",
+            "limejuice"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg majs och paprika i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "paprika"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd ner räkor i pannan och fördela jämnt.",
+          "uses": [
+            "räkor"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "räkor"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner limejuice från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "räkor"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vispa stanningens mjöl i mjölken i en kastrull. Värm under omrörning tills blandningen tjocknar och låt sjuda två minuter. Rör ner stanningens salt. Låt svalna tills blandningen är ljummen.",
+          "uses": [
+            "mjölk",
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 175 °C. Vispa den uppvägda äggmängden till stanningen i den ljumma mjölkbasen och vänd ner huvudfyllningen. Smörj formen med stanningens olja och häll i blandningen. Ställ formen i en långpanna med 1500 ml vatten (hett) runt formen.",
+          "uses": [
+            "ägg",
+            "rapsolja",
+            "räkor",
+            "majs",
+            "paprika",
+            "limejuice"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Baka i vattenbad cirka 35 minuter tills stanningen är fast men fortfarande mjuk. Kontrollera minst 72 °C i äggstanningen. Låt vila fem minuter före servering.",
+          "uses": [
+            "ägg",
+            "räkor"
+          ],
+          "minutes": 40,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "räkor",
+            "majs",
+            "paprika",
+            "limejuice",
+            "rapsolja",
+            "salt",
+            "mjölk",
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 8 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 38 minuter och huvudsakligen passiva moment till 40 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 78 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Tillagade räkor hålls i bitar i mjuk ägg- och majsstanning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av räkor; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-shrimp-corn-flan",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Majsflan med räkor och paprika – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "flan",
+      "primary": "räkor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Visp",
+        "Elvisp",
+        "Två skålar",
+        "Kastrull",
+        "Digital kökstermometer",
+        "Djup långpanna",
+        "Folie"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "räkor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta skalade räkor, avrunnen ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Stanning",
+          "ingredients": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 45,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "majs",
+            "paprika",
+            "limejuice",
+            "rödlök",
+            "färsk koriander"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg majs, paprika och rödlök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "paprika",
+            "rödlök"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd ner räkor i pannan och fördela jämnt.",
+          "uses": [
+            "räkor"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "räkor"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner limejuice och färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "limejuice",
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "räkor"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vispa stanningens mjöl i mjölken i en kastrull. Värm under omrörning tills blandningen tjocknar och låt sjuda två minuter. Rör ner stanningens salt. Låt svalna tills blandningen är ljummen.",
+          "uses": [
+            "mjölk",
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 175 °C. Vispa den uppvägda äggmängden till stanningen i den ljumma mjölkbasen och vänd ner huvudfyllningen. Smörj formen med stanningens olja och häll i blandningen. Ställ formen i en långpanna med 1500 ml vatten (hett) runt formen.",
+          "uses": [
+            "ägg",
+            "rapsolja",
+            "räkor",
+            "majs",
+            "paprika",
+            "limejuice",
+            "rödlök",
+            "färsk koriander"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Baka i vattenbad cirka 35 minuter tills stanningen är fast men fortfarande mjuk. Kontrollera minst 72 °C i äggstanningen. Låt vila fem minuter före servering.",
+          "uses": [
+            "ägg",
+            "räkor"
+          ],
+          "minutes": 40,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "räkor",
+            "majs",
+            "paprika",
+            "limejuice",
+            "rödlök",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "mjölk",
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 10 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 41 minuter och huvudsakligen passiva moment till 40 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 81 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Tillagade räkor hålls i bitar i mjuk ägg- och majsstanning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander, räkor; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-shrimp-corn-flan",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Majsflan med räkor och paprika – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "flan",
+      "primary": "räkor",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Visp",
+        "Elvisp",
+        "Två skålar",
+        "Kastrull",
+        "Digital kökstermometer",
+        "Djup långpanna",
+        "Folie"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "räkor",
+              "form": "cooked_drained",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta skalade räkor, avrunnen ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Stanning",
+          "ingredients": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt eller volym som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 45,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Ägg, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "majs",
+            "paprika",
+            "limejuice",
+            "rödlök",
+            "färsk koriander"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg majs, paprika och rödlök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "paprika",
+            "rödlök"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Vänd ner räkor i pannan och fördela jämnt.",
+          "uses": [
+            "räkor"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "räkor"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner limejuice och färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "limejuice",
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "räkor"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vispa stanningens mjöl i mjölken i en kastrull. Värm under omrörning tills blandningen tjocknar och låt sjuda två minuter. Rör ner stanningens salt. Låt svalna tills blandningen är ljummen.",
+          "uses": [
+            "mjölk",
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 175 °C. Vispa den uppvägda äggmängden till stanningen i den ljumma mjölkbasen och vänd ner huvudfyllningen. Smörj formen med stanningens olja och häll i blandningen. Ställ formen i en långpanna med 1500 ml vatten (hett) runt formen.",
+          "uses": [
+            "ägg",
+            "rapsolja",
+            "räkor",
+            "majs",
+            "paprika",
+            "limejuice",
+            "rödlök",
+            "färsk koriander"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Baka i vattenbad cirka 35 minuter tills stanningen är fast men fortfarande mjuk. Kontrollera minst 72 °C i äggstanningen. Låt vila fem minuter före servering.",
+          "uses": [
+            "ägg",
+            "räkor"
+          ],
+          "minutes": 40,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär tomat i små bitar; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, limejuice, färsk koriander och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "räkor",
+            "majs",
+            "paprika",
+            "limejuice",
+            "rödlök",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "mjölk",
+            "vetemjöl",
+            "ägg",
+            "tomat"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 50 minuter och huvudsakligen passiva moment till 40 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 90 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Tillagade räkor hålls i bitar i mjuk ägg- och majsstanning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander, räkor; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-spinach-cheese-corn-pockets",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Majsdegshalvmånar med spenat och ost – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "masa_pocket",
+      "primary": "ost",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bakplåtspapper",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stekpanna med släppbeläggning"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Majsdeg",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Nixtamaliserat majsmjöl, torr vikt; inte vanligt majsmjöl"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Spenat, vikt eller volym som såld"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda majsdegens masa harina och salt. Arbeta in majsdegens olja och 480 ml vatten (varmt) till en mjuk, formbar deg. Täck skålen så att degen inte torkar.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen svälla täckt. Den ska gå att platta ut utan att falla sönder.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: låt den frysta spenaten ligga kvar fryst tills den värms; skölj bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt.",
+          "uses": [
+            "spenat",
+            "bönor",
+            "spiskummin"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg spenat och bönor i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "spenat",
+            "bönor"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vänd ner ost i pannan och fördela jämnt.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "ost"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Platta ut majsdegen mellan bakplåtspapper till runda plattor, två per portion. Lägg fyllning på ena halvan och vik över. Pressa ihop kanterna utan sprickor.",
+          "uses": [
+            "masa harina",
+            "ost"
+          ],
+          "minutes": 12,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Stek knytena i torr panna på medelvärme i omgångar, cirka fem minuter per sida. Degen ska vara genomgräddad och inte ha någon rå, mjölig kärna. Sänk värmen om utsidan mörknar för snabbt.",
+          "uses": [
+            "masa harina",
+            "ost"
+          ],
+          "minutes": 30,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt",
+            "ost",
+            "spenat",
+            "bönor",
+            "spiskummin"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 6 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 72 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 90 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Majsdeg omsluter en fast ost- och spenatfyllning som steks i slutna halvmånar. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av masa harina; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-spinach-cheese-corn-pockets",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Majsdegshalvmånar med spenat och ost – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "masa_pocket",
+      "primary": "ost",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bakplåtspapper",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stekpanna med släppbeläggning"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Majsdeg",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Nixtamaliserat majsmjöl, torr vikt; inte vanligt majsmjöl"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Spenat, vikt eller volym som såld"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda majsdegens masa harina och salt. Arbeta in majsdegens olja och 480 ml vatten (varmt) till en mjuk, formbar deg. Täck skålen så att degen inte torkar.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen svälla täckt. Den ska gå att platta ut utan att falla sönder.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: låt den frysta spenaten ligga kvar fryst tills den värms; skölj bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt; skala och finhacka gul lök; finhacka färsk koriander.",
+          "uses": [
+            "spenat",
+            "bönor",
+            "spiskummin",
+            "gul lök",
+            "färsk koriander"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg spenat, bönor och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "spenat",
+            "bönor",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vänd ner ost i pannan och fördela jämnt.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "ost"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 8,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Platta ut majsdegen mellan bakplåtspapper till runda plattor, två per portion. Lägg fyllning på ena halvan och vik över. Pressa ihop kanterna utan sprickor.",
+          "uses": [
+            "masa harina",
+            "ost"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Stek knytena i torr panna på medelvärme i omgångar, cirka fem minuter per sida. Degen ska vara genomgräddad och inte ha någon rå, mjölig kärna. Sänk värmen om utsidan mörknar för snabbt.",
+          "uses": [
+            "masa harina",
+            "ost"
+          ],
+          "minutes": 30,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt",
+            "ost",
+            "spenat",
+            "bönor",
+            "spiskummin",
+            "gul lök",
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 8 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 78 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 96 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Majsdeg omsluter en fast ost- och spenatfyllning som steks i slutna halvmånar. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander, masa harina; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-spinach-cheese-corn-pockets",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Majsdegshalvmånar med spenat och ost – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "masa_pocket",
+      "primary": "ost",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Bakplåtspapper",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Stekpanna med släppbeläggning"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Majsdeg",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Nixtamaliserat majsmjöl, torr vikt; inte vanligt majsmjöl"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Spenat, vikt eller volym som såld"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda majsdegens masa harina och salt. Arbeta in majsdegens olja och 480 ml vatten (varmt) till en mjuk, formbar deg. Täck skålen så att degen inte torkar.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen svälla täckt. Den ska gå att platta ut utan att falla sönder.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: låt den frysta spenaten ligga kvar fryst tills den värms; skölj bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt; skala och finhacka gul lök; finhacka färsk koriander.",
+          "uses": [
+            "spenat",
+            "bönor",
+            "spiskummin",
+            "gul lök",
+            "färsk koriander"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg spenat, bönor och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "spenat",
+            "bönor",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Vänd ner ost i pannan och fördela jämnt.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner färsk koriander från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "ost"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 8,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Platta ut majsdegen mellan bakplåtspapper till runda plattor, två per portion. Lägg fyllning på ena halvan och vik över. Pressa ihop kanterna utan sprickor.",
+          "uses": [
+            "masa harina",
+            "ost"
+          ],
+          "minutes": 12,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Stek knytena i torr panna på medelvärme i omgångar, cirka fem minuter per sida. Degen ska vara genomgräddad och inte ha någon rå, mjölig kärna. Sänk värmen om utsidan mörknar för snabbt.",
+          "uses": [
+            "masa harina",
+            "ost"
+          ],
+          "minutes": 30,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär tomat i små bitar; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, limejuice, färsk koriander och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "masa harina",
+            "rapsolja",
+            "salt",
+            "ost",
+            "spenat",
+            "bönor",
+            "spiskummin",
+            "gul lök",
+            "färsk koriander",
+            "tomat",
+            "rödlök",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            15
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 87 minuter och huvudsakligen passiva moment till 18 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 105 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Majsdeg omsluter en fast ost- och spenatfyllning som steks i slutna halvmånar. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander, masa harina; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    }
+  ]
+}

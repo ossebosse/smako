@@ -1,0 +1,1848 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-131",
+  "recipes": [
+    {
+      "base_id": "smako-thai-breakfast-pumpkin-coconut-egg-custard",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Pumpabåt med kokosäggstanning – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "pumpafylld stanning",
+      "primary": "pumpa",
+      "method": "oven",
+      "side": "Bröd",
+      "flavor": [
+        "kokosmjölk",
+        "strösocker",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Ugn",
+        "Ugnsform",
+        "Liten form",
+        "Visp",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fylld pumpabåt",
+          "ingredients": [
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fylld pumpabåt: Skär pumpan till en båt med en fördjupning, och avlägsna kärnorna. Lägg i en liten form och förbaka i uppvärmd ugn på 190 °C tills fruktköttet börjar mjukna.",
+          "uses": [
+            "pumpa"
+          ],
+          "minutes": 20,
+          "passive": true
+        },
+        {
+          "text": "För komponenten Fylld pumpabåt: Vispa ägg, kokosmjölk, socker och salt utan att skumma kraftigt. Häll i pumpans fördjupning. Överbliven stanning tillagas i en liten form bredvid.",
+          "uses": [
+            "ägg",
+            "kokosmjölk",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Fylld pumpabåt: Baka på 170 °C tills pumpan är helt mjuk och stanningen fast. Mät minst 72 °C i stanningens mitt.",
+          "uses": [
+            "pumpa",
+            "ägg"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Bröd: Lägg upp bröd tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera fylld pumpabåt och bröd tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "pumpa",
+            "ägg",
+            "kokosmjölk",
+            "strösocker",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 5 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 8 minuter aktivt och 45 minuter huvudsakligen passiv väntan, cirka 53 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Förbakad pumpa fungerar som ätlig form för mjuk kokosäggstanning och äts tillsammans med fyllningen. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för pumpa; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-pumpkin-coconut-egg-custard",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Pumpabåt med kokosäggstanning – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "pumpafylld stanning",
+      "primary": "pumpa",
+      "method": "oven",
+      "side": "Bröd, Yoghurt och kokos",
+      "flavor": [
+        "kokosmjölk",
+        "strösocker",
+        "salt",
+        "kokosflingor"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Ugn",
+        "Ugnsform",
+        "Liten form",
+        "Visp",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fylld pumpabåt",
+          "ingredients": [
+            {
+              "name": "pumpa",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pumpa, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, mängd som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Yoghurt och kokos",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "kokosflingor",
+              "form": "as_sold",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kokosflingor, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fylld pumpabåt: Skär pumpan till en båt med en fördjupning, och avlägsna kärnorna. Lägg i en liten form och förbaka i uppvärmd ugn på 190 °C tills fruktköttet börjar mjukna.",
+          "uses": [
+            "pumpa"
+          ],
+          "minutes": 20,
+          "passive": true
+        },
+        {
+          "text": "För komponenten Fylld pumpabåt: Vispa ägg, kokosmjölk, socker och salt utan att skumma kraftigt. Häll i pumpans fördjupning. Överbliven stanning tillagas i en liten form bredvid.",
+          "uses": [
+            "ägg",
+            "kokosmjölk",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Fylld pumpabåt: Baka på 170 °C tills pumpan är helt mjuk och stanningen fast. Mät minst 72 °C i stanningens mitt.",
+          "uses": [
+            "pumpa",
+            "ägg"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Bröd: Lägg upp bröd tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Yoghurt och kokos: Lägg upp yoghurt naturell och kokosflingor tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "yoghurt naturell",
+            "kokosflingor"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera fylld pumpabåt, bröd och yoghurt och kokos tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "pumpa",
+            "ägg",
+            "kokosmjölk",
+            "strösocker",
+            "salt",
+            "bröd",
+            "yoghurt naturell",
+            "kokosflingor"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 7 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 12 minuter aktivt och 45 minuter huvudsakligen passiv väntan, cirka 57 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Förbakad pumpa fungerar som ätlig form för mjuk kokosäggstanning och äts tillsammans med fyllningen. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för kokosflingor och pumpa; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-rice-paper-egg-crisp",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Krispigt rispapper med ägg och sesam – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "rispappersägg",
+      "primary": "rispapper",
+      "method": "pan",
+      "side": "Gurka och tofu",
+      "flavor": [
+        "sojasås",
+        "sesamfrön"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Stekpanna",
+        "Rivjärn",
+        "Visp",
+        "Stekspade",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Rispappersägg",
+          "ingredients": [
+            {
+              "name": "rispapper",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "side",
+              "label": "Rispapper, mängd som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Sesamfrön, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Gurka och tofu",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tofu",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tofu, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Rispappersägg: Finriv moroten. Vispa ägg, soja och sesam. Värm oljan i en stekpanna och lägg i torra rispappersark utan att stapla dem tjockt.",
+          "uses": [
+            "morot",
+            "ägg",
+            "sojasås",
+            "sesamfrön",
+            "rapsolja",
+            "rispapper"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Rispappersägg: Fördela äggblandningen och moroten tunt över rispapperet. Stek på medellåg värme tills botten är krispig. Vik ihop eller vänd försiktigt och tillaga tills ägget är fast och minst 72 °C.",
+          "uses": [
+            "ägg",
+            "morot",
+            "rispapper"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Gurka och tofu: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka och tofu tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka",
+            "tofu"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera rispappersägg och gurka och tofu tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "rispapper",
+            "ägg",
+            "morot",
+            "sojasås",
+            "sesamfrön",
+            "rapsolja",
+            "gurka",
+            "tofu"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 17 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 17 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Ett rispappersark blir en spröd botten direkt sammanbunden med tillagat ägg, utan vanlig bröddeg. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för rispapper; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-rice-paper-egg-crisp",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Krispigt rispapper med ägg och sesam – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "rispappersägg",
+      "primary": "rispapper",
+      "method": "pan",
+      "side": "Gurka och tofu, Lime och jordnötter",
+      "flavor": [
+        "sojasås",
+        "sesamfrön",
+        "limejuice",
+        "jordnötter",
+        "mynta"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Stekpanna",
+        "Rivjärn",
+        "Visp",
+        "Stekspade",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Rispappersägg",
+          "ingredients": [
+            {
+              "name": "rispapper",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "side",
+              "label": "Rispapper, mängd som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "sesamfrön",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Sesamfrön, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Gurka och tofu",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tofu",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tofu, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Lime och jordnötter",
+          "ingredients": [
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Jordnötter, mängd som såld"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mynta, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Rispappersägg: Finriv moroten. Vispa ägg, soja och sesam. Värm oljan i en stekpanna och lägg i torra rispappersark utan att stapla dem tjockt.",
+          "uses": [
+            "morot",
+            "ägg",
+            "sojasås",
+            "sesamfrön",
+            "rapsolja",
+            "rispapper"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Rispappersägg: Fördela äggblandningen och moroten tunt över rispapperet. Stek på medellåg värme tills botten är krispig. Vik ihop eller vänd försiktigt och tillaga tills ägget är fast och minst 72 °C.",
+          "uses": [
+            "ägg",
+            "morot",
+            "rispapper"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Gurka och tofu: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka och tofu tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka",
+            "tofu"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Lime och jordnötter: Skölj och ansa mynta. Skär frukt och grönsaker i små bitar. Lägg upp limejuice, jordnötter och mynta tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "limejuice",
+            "jordnötter",
+            "mynta"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera rispappersägg, gurka och tofu och lime och jordnötter tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "rispapper",
+            "ägg",
+            "morot",
+            "sojasås",
+            "sesamfrön",
+            "rapsolja",
+            "gurka",
+            "tofu",
+            "limejuice",
+            "jordnötter",
+            "mynta"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 11 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 21 minuter aktivt och 0 minuter huvudsakligen passiv väntan, cirka 21 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Ett rispappersark blir en spröd botten direkt sammanbunden med tillagat ägg, utan vanlig bröddeg. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för mynta och rispapper; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-steamed-buns-egg-cabbage",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Ångade frukostbullar med ägg och kål – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "fyllda ångbullar",
+      "primary": "vetemjöl",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "torrjäst",
+        "sojasås",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Stekpanna",
+        "Visp",
+        "Termometer",
+        "Kastrull med lock",
+        "Ånginsats",
+        "Bakplåtspapper"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fyllda ångbullar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 75,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torrjäst, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fyllda ångbullar: Arbeta mjöl, jäst och salt med 45 ml vatten (ljummet) till en smidig deg. Täck och låt jäsa. Strimla kålen tunt.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "salt",
+            "vitkål"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Fyllda ångbullar: Låt degen jäsa tills den ökat tydligt i volym.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Fyllda ångbullar: Stek kålen mjuk i oljan. Vispa ägget, rör ner tillsammans med sojan och tillaga till fast röra. Kontrollera minst 72 °C. Låt fyllningen svalna något.",
+          "uses": [
+            "vitkål",
+            "rapsolja",
+            "ägg",
+            "sojasås"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Fyllda ångbullar: Platta degen till rundlar, fördela fyllningen i mitten och nyp ihop till täta bullar. Lägg på bakplåtspapper i ånginsats.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "vitkål"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Fyllda ångbullar: Häll 1000 ml vatten i kastrullen under insatsen och ånga bullarna under lock tills degen är helt genomgräddad och fyllningen varm.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera fyllda ångbullar tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "ägg",
+            "vitkål",
+            "rapsolja",
+            "sojasås",
+            "salt"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 24 minuter aktivt och 65 minuter huvudsakligen passiv väntan, cirka 89 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Jäst vetedeg sluts kring en förkokt ägg- och kålfyllning och ångas till mjuka bullar. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för torrjäst; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-steamed-buns-egg-cabbage",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Ångade frukostbullar med ägg och kål – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "fyllda ångbullar",
+      "primary": "vetemjöl",
+      "method": "pot",
+      "side": "Gurka med ingefära",
+      "flavor": [
+        "torrjäst",
+        "sojasås",
+        "salt",
+        "ingefära",
+        "limejuice"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Stekpanna",
+        "Visp",
+        "Termometer",
+        "Kastrull med lock",
+        "Ånginsats",
+        "Bakplåtspapper",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fyllda ångbullar",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 75,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torrjäst, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Gurka med ingefära",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fyllda ångbullar: Arbeta mjöl, jäst och salt med 45 ml vatten (ljummet) till en smidig deg. Täck och låt jäsa. Strimla kålen tunt.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "salt",
+            "vitkål"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Fyllda ångbullar: Låt degen jäsa tills den ökat tydligt i volym.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 45,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Fyllda ångbullar: Stek kålen mjuk i oljan. Vispa ägget, rör ner tillsammans med sojan och tillaga till fast röra. Kontrollera minst 72 °C. Låt fyllningen svalna något.",
+          "uses": [
+            "vitkål",
+            "rapsolja",
+            "ägg",
+            "sojasås"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Fyllda ångbullar: Platta degen till rundlar, fördela fyllningen i mitten och nyp ihop till täta bullar. Lägg på bakplåtspapper i ånginsats.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "vitkål"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Fyllda ångbullar: Häll 1000 ml vatten i kastrullen under insatsen och ånga bullarna under lock tills degen är helt genomgräddad och fyllningen varm.",
+          "uses": [
+            "vetemjöl",
+            "ägg"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Gurka med ingefära: Skölj och ansa gurka och ingefära. Skär frukt och grönsaker i små bitar. Lägg upp gurka, ingefära och limejuice tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka",
+            "ingefära",
+            "limejuice"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera fyllda ångbullar och gurka med ingefära tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "torrjäst",
+            "ägg",
+            "vitkål",
+            "rapsolja",
+            "sojasås",
+            "salt",
+            "gurka",
+            "ingefära",
+            "limejuice"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 28 minuter aktivt och 65 minuter huvudsakligen passiv väntan, cirka 93 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Jäst vetedeg sluts kring en förkokt ägg- och kålfyllning och ångas till mjuka bullar. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för torrjäst; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-steamed-egg-custard-peas",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Thailändskt inspirerad ångad äggstanning med ärtor – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "ångad äggstanning",
+      "primary": "ägg",
+      "method": "pot",
+      "side": "Bröd och gurka",
+      "flavor": [
+        "sojasås"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Gaffel",
+        "Kniv",
+        "Skärbräda",
+        "Digital kökstermometer",
+        "Kastrull med lock",
+        "Ånginsats",
+        "Värmetålig portionsskål med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ångad äggstanning",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella ärtor, mängd som såld"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd och gurka",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Ångad äggstanning: Värm ärtor med 60 ml vatten tills genomvarmt och häll av noga; pressa ur spenat om den ingår. Vispa försiktigt ihop den uppvägda äggmängden med 80 ml vatten. Blanda ner sojasås. Vänd ner de förberedda grönsakerna. Häll i en grund värmetålig portionsskål och täck med ett litet lock eller en tallrik.",
+          "uses": [
+            "ägg",
+            "ärtor",
+            "sojasås"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Ångad äggstanning: Häll 700 ml vatten i en kastrull och sätt i en ånginsats ovanför vattenytan. Koka upp, ställ skålen i insatsen och lägg på kastrullens lock. Ånga försiktigt utan häftig kokning tills äggstanningen har satt sig.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 18,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ångad äggstanning: Mät i äggrättens tjockaste del: minst 72 °C och ingen lös äggsmet. Fortsätt tillagningen om det behövs.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Bröd och gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp bröd och gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "bröd",
+            "gurka"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera ångad äggstanning och bröd och gurka tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "ägg",
+            "ärtor",
+            "sojasås",
+            "bröd",
+            "gurka"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 5 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 11 minuter aktivt och 18 minuter huvudsakligen passiv väntan, cirka 29 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Utspädd äggstanning ångas försiktigt i täckt skål och blir slät; tekniken skiljer sig från stekt omelett. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-steamed-egg-custard-peas",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Thailändskt inspirerad ångad äggstanning med ärtor – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "ångad äggstanning",
+      "primary": "ägg",
+      "method": "pot",
+      "side": "Bröd och gurka, Ingefärssvamp",
+      "flavor": [
+        "sojasås",
+        "ingefära"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Gaffel",
+        "Kniv",
+        "Skärbräda",
+        "Digital kökstermometer",
+        "Kastrull med lock",
+        "Ånginsats",
+        "Värmetålig portionsskål med lock",
+        "Stekpanna",
+        "Stekspade",
+        "Rivjärn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Ångad äggstanning",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella ärtor, mängd som såld"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd och gurka",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Ingefärssvamp",
+          "ingredients": [
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Ångad äggstanning: Värm ärtor med 60 ml vatten tills genomvarmt och häll av noga; pressa ur spenat om den ingår. Vispa försiktigt ihop den uppvägda äggmängden med 80 ml vatten. Blanda ner sojasås. Vänd ner de förberedda grönsakerna. Häll i en grund värmetålig portionsskål och täck med ett litet lock eller en tallrik.",
+          "uses": [
+            "ägg",
+            "ärtor",
+            "sojasås"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Ångad äggstanning: Häll 700 ml vatten i en kastrull och sätt i en ånginsats ovanför vattenytan. Koka upp, ställ skålen i insatsen och lägg på kastrullens lock. Ånga försiktigt utan häftig kokning tills äggstanningen har satt sig.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 18,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Ångad äggstanning: Mät i äggrättens tjockaste del: minst 72 °C och ingen lös äggsmet. Fortsätt tillagningen om det behövs.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Bröd och gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp bröd och gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "bröd",
+            "gurka"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Ingefärssvamp: Skölj och ansa champinjoner och ingefära. Skär i små jämna bitar; finhacka lök, ingefära och örter. ",
+          "uses": [
+            "champinjoner",
+            "ingefära"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Ingefärssvamp: Värm rapsolja i pannan. Tillsätt champinjoner och ingefära. Tillaga på medelvärme under omrörning tills grönsakerna är mjuka och allt är genomvarmt. ",
+          "uses": [
+            "champinjoner",
+            "ingefära",
+            "rapsolja"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera ångad äggstanning, bröd och gurka och ingefärssvamp tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "ägg",
+            "ärtor",
+            "sojasås",
+            "bröd",
+            "gurka",
+            "champinjoner",
+            "ingefära",
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 21 minuter aktivt och 18 minuter huvudsakligen passiv väntan, cirka 39 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Utspädd äggstanning ångas försiktigt i täckt skål och blir slät; tekniken skiljer sig från stekt omelett. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-steamed-extruded-rice-flour-noodles",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Ångade rismjölsnudlar med kokos och ägg – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "färsk ångad rismjölspasta",
+      "primary": "rismjöl",
+      "method": "pot",
+      "side": "Kokosägg med morot",
+      "flavor": [
+        "salt",
+        "kokosmjölk",
+        "sojasås"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull",
+        "Slev",
+        "Stadig potatispress med fina hål",
+        "Pensel",
+        "Kastrull med lock",
+        "Plan ånginsats",
+        "Stekspade",
+        "Rivjärn",
+        "Stekpanna",
+        "Skål",
+        "Visp",
+        "Termometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Färska ångade rismjölsnudlar",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 60,
+              "unit": "g",
+              "role": "side",
+              "label": "Rismjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokosägg med morot",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, mängd som såld"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Färska ångade rismjölsnudlar: Koka upp 90 ml vatten med saltet i en liten kastrull. Ta från värmen och rör genast ner rismjölet. Arbeta kraftigt till en sammanhängande deg. Låt svalna tills den kan hanteras och knåda smidig.",
+          "uses": [
+            "rismjöl",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Färska ångade rismjölsnudlar: Pensla en plan ånginsats med oljan. Lägg degen i en stadig potatispress med fina hål och pressa ut tunna strängar till lösa små högar på insatsen. Pressa igenom hela degen utan att packa högarna.",
+          "uses": [
+            "rismjöl",
+            "rapsolja"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Färska ångade rismjölsnudlar: Koka upp 900 ml vatten under insatsen. Ånga under lock tills strängarna är mjuka och mjölet genomkokt. Lyft med stekspade så att högarna håller ihop.",
+          "uses": [
+            "rismjöl"
+          ],
+          "minutes": 12,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Kokosägg med morot: Skala och finriv moroten. Värm oljan och fräs moroten mjuk med 20 ml vatten. Vispa ägg, kokosmjölk och sojasås. Häll i pannan och rör sakta tills ägget blir en krämig men helt fast röra. Mät minst 72 °C. Lägg röran över de färdiga risnudlarna.",
+          "uses": [
+            "morot",
+            "rapsolja",
+            "ägg",
+            "kokosmjölk",
+            "sojasås"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera färska ångade rismjölsnudlar och kokosägg med morot tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "rismjöl",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "kokosmjölk",
+            "morot",
+            "sojasås"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 24 minuter aktivt och 12 minuter huvudsakligen passiv väntan, cirka 36 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Skållad rismjölsdeg pressas till färska strängar som ångas; inga färdigköpta nudlar eller långkokt risgröt används. Thailändskt inspirerad servering utan traditionsanspråk. Pressens hålstorlek och rismjölets vattenupptag behöver provlagas; strängarna ska vara helt mjuka. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för rismjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-thai-breakfast-steamed-extruded-rice-flour-noodles",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Ångade rismjölsnudlar med kokos och ägg – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "thai",
+      "family": "färsk ångad rismjölspasta",
+      "primary": "rismjöl",
+      "method": "pot",
+      "side": "Kokosägg med morot, Gurka, lime och jordnötter",
+      "flavor": [
+        "salt",
+        "kokosmjölk",
+        "sojasås",
+        "limejuice",
+        "jordnötter"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Kastrull",
+        "Slev",
+        "Stadig potatispress med fina hål",
+        "Pensel",
+        "Kastrull med lock",
+        "Plan ånginsats",
+        "Stekspade",
+        "Rivjärn",
+        "Stekpanna",
+        "Skål",
+        "Visp",
+        "Termometer",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Färska ångade rismjölsnudlar",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 60,
+              "unit": "g",
+              "role": "side",
+              "label": "Rismjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kokosägg med morot",
+          "ingredients": [
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk, mängd som såld"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Sojasås, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Gurka, lime och jordnötter",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren limejuice"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Jordnötter, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Färska ångade rismjölsnudlar: Koka upp 90 ml vatten med saltet i en liten kastrull. Ta från värmen och rör genast ner rismjölet. Arbeta kraftigt till en sammanhängande deg. Låt svalna tills den kan hanteras och knåda smidig.",
+          "uses": [
+            "rismjöl",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "För komponenten Färska ångade rismjölsnudlar: Pensla en plan ånginsats med oljan. Lägg degen i en stadig potatispress med fina hål och pressa ut tunna strängar till lösa små högar på insatsen. Pressa igenom hela degen utan att packa högarna.",
+          "uses": [
+            "rismjöl",
+            "rapsolja"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Färska ångade rismjölsnudlar: Koka upp 900 ml vatten under insatsen. Ånga under lock tills strängarna är mjuka och mjölet genomkokt. Lyft med stekspade så att högarna håller ihop.",
+          "uses": [
+            "rismjöl"
+          ],
+          "minutes": 12,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Kokosägg med morot: Skala och finriv moroten. Värm oljan och fräs moroten mjuk med 20 ml vatten. Vispa ägg, kokosmjölk och sojasås. Häll i pannan och rör sakta tills ägget blir en krämig men helt fast röra. Mät minst 72 °C. Lägg röran över de färdiga risnudlarna.",
+          "uses": [
+            "morot",
+            "rapsolja",
+            "ägg",
+            "kokosmjölk",
+            "sojasås"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Gurka, lime och jordnötter: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka, limejuice och jordnötter tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka",
+            "limejuice",
+            "jordnötter"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera färska ångade rismjölsnudlar, kokosägg med morot och gurka, lime och jordnötter tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "rismjöl",
+            "rapsolja",
+            "salt",
+            "ägg",
+            "kokosmjölk",
+            "morot",
+            "sojasås",
+            "gurka",
+            "limejuice",
+            "jordnötter"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 28 minuter aktivt och 12 minuter huvudsakligen passiv väntan, cirka 40 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Skållad rismjölsdeg pressas till färska strängar som ångas; inga färdigköpta nudlar eller långkokt risgröt används. Thailändskt inspirerad servering utan traditionsanspråk. Pressens hålstorlek och rismjölets vattenupptag behöver provlagas; strängarna ska vara helt mjuka. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för rismjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    }
+  ]
+}

@@ -1,0 +1,4158 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-10",
+  "recipes": [
+    {
+      "base_id": "smako-greek-closed-chicken-pan-bread",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade stekbröd med kycklingfyllning – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "nygjort stekbröd med kyckling",
+      "primary": "kyckling",
+      "method": "pan",
+      "side": "kycklingfyllning",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Degskål",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pannbröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kycklingfyllning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pannbröd: Blanda vetemjöl och salt med 210 ml vatten till en mjuk deg. Knåda jämnt och dela till ett bröd per portion.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kavla bröden tunt. Fördela rapsolja över gräddningen och stek i omgångar på medelhög värme cirka 2 minuter per sida, tills de fått bruna fläckar och är genomgräddade.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kycklingfyllning: Ansa och finhacka gul lök. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "kyckling",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och kyckling under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner salt och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "salt",
+            "kyckling",
+            "gul lök"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "citronjuice",
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fördela den färdiga kycklingfyllningen på stekbröden och vik dem dubbla medan de fortfarande är mjuka. Lägg eventuella extra kalla tillbehör intill.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "gul lök",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera pannbröd och kycklingfyllning. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "gul lök",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 75 minuter totalt, varav 60 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Egen knådad deg steks till mjuka bröd kring varm kycklingfyllning; skiljer sig från färdiga tortillabröd eller pitabröd med grillat kött. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-closed-chicken-pan-bread",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade stekbröd med kycklingfyllning – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "nygjort stekbröd med kyckling",
+      "primary": "kyckling",
+      "method": "pan",
+      "side": "kycklingfyllning",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Degskål",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pannbröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kycklingfyllning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pannbröd: Blanda vetemjöl och salt med 210 ml vatten till en mjuk deg. Knåda jämnt och dela till ett bröd per portion.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kavla bröden tunt. Fördela rapsolja över gräddningen och stek i omgångar på medelhög värme cirka 2 minuter per sida, tills de fått bruna fläckar och är genomgräddade.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kycklingfyllning: Ansa och finhacka gul lök och vitlök. Väg spenat frysta enligt komponenten. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och kyckling under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner salt och spenat och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "salt",
+            "spenat"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "salt",
+            "spenat",
+            "kyckling",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice precis före servering. Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "citronjuice",
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fördela den färdiga kycklingfyllningen på stekbröden och vik dem dubbla medan de fortfarande är mjuka. Lägg eventuella extra kalla tillbehör intill.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "gul lök",
+            "citronjuice",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera pannbröd och kycklingfyllning. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "gul lök",
+            "citronjuice",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 75 minuter totalt, varav 60 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Egen knådad deg steks till mjuka bröd kring varm kycklingfyllning; skiljer sig från färdiga tortillabröd eller pitabröd med grillat kött. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-closed-chicken-pan-bread",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade stekbröd med kycklingfyllning – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "nygjort stekbröd med kyckling",
+      "primary": "kyckling",
+      "method": "pan",
+      "side": "kycklingfyllning; kall yoghurtsås",
+      "flavor": [
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Degskål",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kavel",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pannbröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 360.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kycklingfyllning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Pannbröd: Blanda vetemjöl och salt med 210 ml vatten till en mjuk deg. Knåda jämnt och dela till ett bröd per portion.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 6
+        },
+        {
+          "text": "Låt degen vila täckt.",
+          "uses": [
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kavla bröden tunt. Fördela rapsolja över gräddningen och stek i omgångar på medelhög värme cirka 2 minuter per sida, tills de fått bruna fläckar och är genomgräddade.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 16,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kycklingfyllning: Ansa och finhacka gul lök och vitlök. Väg spenat frysta enligt komponenten. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Smula fetaosten.",
+          "uses": [
+            "kyckling",
+            "gul lök",
+            "spenat",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och kyckling under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner salt och spenat och 60 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "salt",
+            "spenat"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 12 minuter. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "salt",
+            "spenat",
+            "kyckling",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 12,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner citronjuice och fetaost precis före servering. Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "citronjuice",
+            "fetaost",
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, gurka, dill, citronjuice och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "gurka",
+            "dill",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fördela den färdiga kycklingfyllningen på stekbröden och vik dem dubbla medan de fortfarande är mjuka. Lägg eventuella extra kalla tillbehör intill.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "gul lök",
+            "citronjuice",
+            "spenat",
+            "vitlök",
+            "fetaost"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera pannbröd, kycklingfyllning och kall yoghurtsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "gul lök",
+            "citronjuice",
+            "spenat",
+            "vitlök",
+            "fetaost",
+            "yoghurt naturell",
+            "gurka",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 11 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 64 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Egen knådad deg steks till mjuka bröd kring varm kycklingfyllning; skiljer sig från färdiga tortillabröd eller pitabröd med grillat kött. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-courgette-feta-egg-skillet",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad zucchiniomelett med feta och bröd – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "tjock grönsaksomelett",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "varmt bröd",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Zucchiniomelett",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Zucchiniomelett: Sätt ugnen på 190 °C över- och undervärme. Skölj, ansa och skär zucchini i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs zucchini tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "zucchini"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Vänd ner fetaost. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "zucchini",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "zucchini",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera zucchiniomelett och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "zucchini",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 63 minuter totalt, varav 26 aktivt och 37 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: En tjock ugnsstannad omelett med rikligt zucchini och feta, avsedd som middag med bröd; skild från tunn svampomelett till frukost. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-courgette-feta-egg-skillet",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad zucchiniomelett med feta och bröd – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "tjock grönsaksomelett",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "varmt bröd",
+      "flavor": [
+        "dill"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Zucchiniomelett",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Zucchiniomelett: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka gul lök. Skölj, ansa och skär zucchini i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten. Finhacka dill.",
+          "uses": [
+            "zucchini",
+            "gul lök"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs gul lök och zucchini tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "zucchini"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Vänd ner fetaost och dill. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "salt",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "zucchini",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "zucchini",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera zucchiniomelett och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "zucchini",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 63 minuter totalt, varav 26 aktivt och 37 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: En tjock ugnsstannad omelett med rikligt zucchini och feta, avsedd som middag med bröd; skild från tunn svampomelett till frukost. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-courgette-feta-egg-skillet",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad zucchiniomelett med feta och bröd – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "tjock grönsaksomelett",
+      "primary": "ägg",
+      "method": "bake",
+      "side": "varmt bröd; fräsch sallad",
+      "flavor": [
+        "dill",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform",
+        "Visp"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Zucchiniomelett",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 150.0,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Zucchiniomelett: Sätt ugnen på 190 °C över- och undervärme. Ansa och finhacka gul lök. Skölj, ansa och skär zucchini i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten. Finhacka dill.",
+          "uses": [
+            "zucchini",
+            "gul lök"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Värm rapsolja i stekpannan. Fräs gul lök och zucchini tills grönsakerna mjuknar.  Lägg allt i ugnsformen.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "zucchini"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa ihop ägg, mjölk och salt. Vänd ner fetaost och dill. Fördela blandningen jämnt i formen.",
+          "uses": [
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "salt",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Grädda i den uppvärmda ugnen cirka 25 minuter tills äggstanningen håller ihop. Kontrollera minst 72 °C i mitten och att ingen lös äggsmet finns kvar. ",
+          "uses": [
+            "zucchini",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt äggrätten vila före uppskärning.",
+          "uses": [
+            "zucchini",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, oliver, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "oliver",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera zucchiniomelett, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "zucchini",
+            "ägg",
+            "fetaost",
+            "mjölk",
+            "rapsolja",
+            "salt",
+            "gul lök",
+            "dill",
+            "bröd",
+            "tomat",
+            "gurka",
+            "oliver",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 71 minuter totalt, varav 34 aktivt och 37 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: En tjock ugnsstannad omelett med rikligt zucchini och feta, avsedd som middag med bröd; skild från tunn svampomelett till frukost. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-courgette-feta-fritters-pea-dip",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade zucchiniplättar med feta och ärtkräm – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "riven grönsaksplätt med baljväxtkräm",
+      "primary": "fetaost",
+      "method": "pan",
+      "side": "ärtkräm",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kastrull",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Zucchiniplättar",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 90.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ärtkräm",
+          "ingredients": [
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Zucchiniplättar: Skölj, ansa och skär zucchini i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten. Riv zucchinin och pressa ur vätskan noga.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda zucchini, fetaost, ägg, vetemjöl och salt till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ärtkräm: Koka ärtor i 500 ml vatten tills allt är helt genomvarmt, cirka 5 minuter. Häll av noga.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ärtkräm: Lägg ärtor, citronjuice, rapsolja och salt i mixerkärlet med 80 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "ärtor",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera zucchiniplättar och ärtkräm. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "ärtor",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 59 minuter totalt, varav 44 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Riven urpressad zucchini bildar tunna ostplättar; ärtkrämen är ett separat varmt proteintillbehör. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-courgette-feta-fritters-pea-dip",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade zucchiniplättar med feta och ärtkräm – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "riven grönsaksplätt med baljväxtkräm",
+      "primary": "fetaost",
+      "method": "pan",
+      "side": "ärtkräm",
+      "flavor": [
+        "dill",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kastrull",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekpanna",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Zucchiniplättar",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 90.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ärtkräm",
+          "ingredients": [
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Zucchiniplättar: Ansa och finhacka gul lök. Skölj, ansa och skär zucchini i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten. Finhacka dill. Riv zucchinin och pressa ur vätskan noga.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "dill",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda zucchini, fetaost, ägg, vetemjöl, salt, dill och gul lök till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "salt",
+            "dill",
+            "gul lök"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "salt",
+            "dill",
+            "gul lök"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "dill",
+            "gul lök"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ärtkräm: Koka ärtor i 500 ml vatten tills allt är helt genomvarmt, cirka 5 minuter. Häll av noga.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ärtkräm: Lägg ärtor, citronjuice, rapsolja, salt och vitlök i mixerkärlet med 80 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "ärtor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera zucchiniplättar och ärtkräm. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "dill",
+            "gul lök",
+            "ärtor",
+            "citronjuice",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 10 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 59 minuter totalt, varav 44 aktivt och 15 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Riven urpressad zucchini bildar tunna ostplättar; ärtkrämen är ett separat varmt proteintillbehör. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-courgette-feta-fritters-pea-dip",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade zucchiniplättar med feta och ärtkräm – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "riven grönsaksplätt med baljväxtkräm",
+      "primary": "fetaost",
+      "method": "pan",
+      "side": "ärtkräm; varmt bröd; fräsch sallad",
+      "flavor": [
+        "dill",
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Kastrull",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekpanna",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Zucchiniplättar",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 90.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ärtkräm",
+          "ingredients": [
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Zucchiniplättar: Ansa och finhacka gul lök. Skölj, ansa och skär zucchini i små jämna bitar; skala rotfrukter före vägning. Smula fetaosten. Finhacka dill. Riv zucchinin och pressa ur vätskan noga.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "dill",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Blanda zucchini, fetaost, ägg, vetemjöl, salt, dill och gul lök till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "salt",
+            "dill",
+            "gul lök"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "salt",
+            "dill",
+            "gul lök"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till två jämntjocka biffar per portion, cirka 1 cm tjocka. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "dill",
+            "gul lök"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ärtkräm: Koka ärtor i 500 ml vatten tills allt är helt genomvarmt, cirka 5 minuter. Häll av noga.",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 7,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ärtkräm: Lägg ärtor, citronjuice, rapsolja, salt och vitlök i mixerkärlet med 80 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "ärtor",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, persilja, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "persilja",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera zucchiniplättar, ärtkräm, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "zucchini",
+            "fetaost",
+            "ägg",
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "dill",
+            "gul lök",
+            "ärtor",
+            "citronjuice",
+            "vitlök",
+            "bröd",
+            "tomat",
+            "gurka",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            6,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 77 minuter totalt, varav 55 aktivt och 22 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Riven urpressad zucchini bildar tunna ostplättar; ärtkrämen är ett separat varmt proteintillbehör. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-courgette-green-lentil-bulgur-boats",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad zucchini fylld med linsbulgur – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "bakade grönsaksskal med grynfyllning",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "zucchinibåtar",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Linsbulgur",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "bulgur",
+              "form": "dry",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bulgur, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Zucchinibåtar",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Linsbulgur: Ansa och finhacka gul lök.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, bulgur och salt och 1000 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Zucchinibåtar: Sätt ugnen på 220 °C över- och undervärme. Dela zucchinin på längden och gröp ur en grund ränna. Finhacka urgröpt fruktkött och lägg det runt halvorna i formen.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fördela zucchini, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "zucchini",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "zucchini",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": " Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fördela den färdigkokta linsbulgurn i de rostade zucchinibåtarnas fördjupningar. Lägg det rostade fruktköttet ovanpå och skeda formens saft över.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "zucchini",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera linsbulgur och zucchinibåtar. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "zucchini",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 97 minuter totalt, varav 37 aktivt och 60 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av bulgur och gröna linser; inte importklar. Inga nya produkt- eller pack-koder har skapats. Fördela den färdiga linsbulgurn i zucchinibåtarna och lägg det rostade fruktköttet ovanpå före servering. Kulinarisk avgränsning: Mjuka zucchinibåtar fylls efter bakning med sammanhållen linsbulgur; en större varm grönsaksform med fiberrik fyllning. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-courgette-green-lentil-bulgur-boats",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad zucchini fylld med linsbulgur – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "bakade grönsaksskal med grynfyllning",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "zucchinibåtar",
+      "flavor": [
+        "persilja",
+        "citronjuice",
+        "oregano"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Linsbulgur",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "bulgur",
+              "form": "dry",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bulgur, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Zucchinibåtar",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Linsbulgur: Ansa och finhacka gul lök och vitlök. Finhacka persilja.",
+          "uses": [
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, bulgur och salt och 1000 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner persilja precis före servering. ",
+          "uses": [
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Zucchinibåtar: Sätt ugnen på 220 °C över- och undervärme. Dela zucchinin på längden och gröp ur en grund ränna. Finhacka urgröpt fruktkött och lägg det runt halvorna i formen.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela zucchini, rapsolja, salt och oregano i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "zucchini",
+            "rapsolja",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "zucchini",
+            "rapsolja",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": " Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fördela den färdigkokta linsbulgurn i de rostade zucchinibåtarnas fördjupningar. Lägg det rostade fruktköttet ovanpå och skeda formens saft över.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "persilja",
+            "zucchini",
+            "citronjuice",
+            "oregano"
+          ],
+          "minutes": 4,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera linsbulgur och zucchinibåtar. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "persilja",
+            "zucchini",
+            "citronjuice",
+            "oregano"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 99 minuter totalt, varav 39 aktivt och 60 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av bulgur och gröna linser; inte importklar. Inga nya produkt- eller pack-koder har skapats. Fördela den färdiga linsbulgurn i zucchinibåtarna och lägg det rostade fruktköttet ovanpå före servering. Kulinarisk avgränsning: Mjuka zucchinibåtar fylls efter bakning med sammanhållen linsbulgur; en större varm grönsaksform med fiberrik fyllning. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-courgette-green-lentil-bulgur-boats",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad zucchini fylld med linsbulgur – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "bakade grönsaksskal med grynfyllning",
+      "primary": "gröna linser",
+      "method": "pot",
+      "side": "zucchinibåtar; citron-tahinikräm; fräsch sallad",
+      "flavor": [
+        "persilja",
+        "citronjuice",
+        "oregano",
+        "dill"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Linsbulgur",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "bulgur",
+              "form": "dry",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bulgur, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Zucchinibåtar",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Citron-tahinikräm",
+          "ingredients": [
+            {
+              "name": "tahini",
+              "form": "as_sold",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tahini av sesamfrön"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Linsbulgur: Ansa och finhacka gul lök och vitlök. Finhacka persilja.",
+          "uses": [
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner gröna linser, bulgur och salt och 1000 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner persilja precis före servering. ",
+          "uses": [
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Zucchinibåtar: Sätt ugnen på 220 °C över- och undervärme. Dela zucchinin på längden och gröp ur en grund ränna. Finhacka urgröpt fruktkött och lägg det runt halvorna i formen.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela zucchini, rapsolja, salt och oregano i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "zucchini",
+            "rapsolja",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 25 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "zucchini",
+            "rapsolja",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 25,
+          "after": [
+            7
+          ],
+          "passive": true
+        },
+        {
+          "text": " Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Citron-tahinikräm: Lägg tahini, citronjuice, dill och salt i mixerkärlet med 70 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "tahini",
+            "citronjuice",
+            "dill",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Fördela den färdigkokta linsbulgurn i de rostade zucchinibåtarnas fördjupningar. Lägg det rostade fruktköttet ovanpå och skeda formens saft över.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "persilja",
+            "zucchini",
+            "citronjuice",
+            "oregano"
+          ],
+          "minutes": 4,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera linsbulgur, zucchinibåtar, citron-tahinikräm och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "gröna linser",
+            "bulgur",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "persilja",
+            "zucchini",
+            "citronjuice",
+            "oregano",
+            "tahini",
+            "dill",
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            9,
+            10,
+            12,
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 112 minuter totalt, varav 52 aktivt och 60 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av bulgur, gröna linser och tahini; inte importklar. Inga nya produkt- eller pack-koder har skapats. Fördela den färdiga linsbulgurn i zucchinibåtarna och lägg det rostade fruktköttet ovanpå före servering. Kulinarisk avgränsning: Mjuka zucchinibåtar fylls efter bakning med sammanhållen linsbulgur; en större varm grönsaksform med fiberrik fyllning. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-couscous-pepper-feta-pan-cakes",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade couscouskakor med paprika och feta – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "bakade couscouskakor",
+      "primary": "fetaost",
+      "method": "bake",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Couscouskakor",
+          "ingredients": [
+            {
+              "name": "couscous",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Couscous, torr vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Couscouskakor: Koka couscous med 380 ml vatten på låg värme tills kornen är mjuka och vätskan absorberad. Rör då och då.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 7,
+          "passive": true
+        },
+        {
+          "text": "Låt den kokta basen svalna till ljummen.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär grönsaker och råa animalier i små bitar. Värm paprika i en stekpanna med 80 ml vatten tills grönsakerna mjuknat och överskottsvätskan avdunstat.  Låt svalna kort.",
+          "uses": [
+            "paprika"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med komponentens fett och blanda den kokta basen med paprika, fetaost, ägg och salt.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tryck ut blandningen i formen och baka cirka 25 minuter tills den håller ihop och ytan fått färg. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt vila och skär sedan i fasta portionsbitar.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera couscouskakor. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 73 minuter totalt, varav 21 aktivt och 52 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Svälda couscousgryn med ost och paprika bakas till fasta kakor, en annan form och tillagning än fyllda paprikahalvor. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-couscous-pepper-feta-pan-cakes",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade couscouskakor med paprika och feta – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "bakade couscouskakor",
+      "primary": "fetaost",
+      "method": "bake",
+      "side": "kall yoghurtsås",
+      "flavor": [
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Couscouskakor",
+          "ingredients": [
+            {
+              "name": "couscous",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Couscous, torr vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Couscouskakor: Koka couscous med 380 ml vatten på låg värme tills kornen är mjuka och vätskan absorberad. Rör då och då.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 7,
+          "passive": true
+        },
+        {
+          "text": "Låt den kokta basen svalna till ljummen.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär grönsaker och råa animalier i små bitar. Värm paprika och rödlök i en stekpanna med 80 ml vatten tills grönsakerna mjuknat och överskottsvätskan avdunstat.  Låt svalna kort.",
+          "uses": [
+            "paprika",
+            "rödlök"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med komponentens fett och blanda den kokta basen med paprika, fetaost, ägg, salt, rödlök och persilja.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tryck ut blandningen i formen och baka cirka 25 minuter tills den håller ihop och ytan fått färg. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt vila och skär sedan i fasta portionsbitar.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 10,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, citronjuice och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera couscouskakor och kall yoghurtsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "persilja",
+            "yoghurt naturell",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 77 minuter totalt, varav 25 aktivt och 52 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Svälda couscousgryn med ost och paprika bakas till fasta kakor, en annan form och tillagning än fyllda paprikahalvor. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-couscous-pepper-feta-pan-cakes",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerade couscouskakor med paprika och feta – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "bakade couscouskakor",
+      "primary": "fetaost",
+      "method": "bake",
+      "side": "kall yoghurtsås; fräsch sallad",
+      "flavor": [
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Couscouskakor",
+          "ingredients": [
+            {
+              "name": "couscous",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Couscous, torr vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "fetaost",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fetaost, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Couscouskakor: Koka couscous med 380 ml vatten på låg värme tills kornen är mjuka och vätskan absorberad. Rör då och då.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 7,
+          "passive": true
+        },
+        {
+          "text": "Låt den kokta basen svalna till ljummen.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär grönsaker och råa animalier i små bitar. Värm paprika och rödlök i en stekpanna med 80 ml vatten tills grönsakerna mjuknat och överskottsvätskan avdunstat.  Låt svalna kort.",
+          "uses": [
+            "paprika",
+            "rödlök"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med komponentens fett och blanda den kokta basen med paprika, fetaost, ägg, salt, rödlök och persilja.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Tryck ut blandningen i formen och baka cirka 25 minuter tills den håller ihop och ytan fått färg. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Låt vila och skär sedan i fasta portionsbitar.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 10,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, citronjuice och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka vitlök. Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "oliver",
+            "vitlök"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda gurka, tomat, oliver, vitlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "oliver",
+            "vitlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera couscouskakor, kall yoghurtsås och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "couscous",
+            "paprika",
+            "fetaost",
+            "ägg",
+            "rapsolja",
+            "salt",
+            "rödlök",
+            "persilja",
+            "yoghurt naturell",
+            "citronjuice",
+            "gurka",
+            "tomat",
+            "oliver",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 85 minuter totalt, varav 33 aktivt och 52 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Svälda couscousgryn med ost och paprika bakas till fasta kakor, en annan form och tillagning än fyllda paprikahalvor. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

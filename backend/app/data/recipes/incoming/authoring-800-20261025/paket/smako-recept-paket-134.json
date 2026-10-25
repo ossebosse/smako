@@ -1,0 +1,1791 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-134",
+  "recipes": [
+    {
+      "base_id": "smako-swedish-breakfast-breakfast-waffles-berries",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Frukostvåfflor med yoghurt och bär – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "frukostvåfflor",
+      "primary": "vetemjöl",
+      "method": "pan",
+      "side": "Yoghurt och bär",
+      "flavor": [
+        "mjölk",
+        "bakpulver",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Visp",
+        "Skärbräda",
+        "Kniv",
+        "Rivjärn",
+        "Våffeljärn",
+        "Pensel",
+        "Digital kökstermometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Våfflor",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "primary",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 8,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Bakpulver, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Yoghurt och bär",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "jordgubbar",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Jordgubbar, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Våfflor: Vispa samman ägg och mjölk. Rör ner vetemjöl, bakpulver och salt tills smeten är jämn.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Våfflor: Låt smeten vila så att mjölet hinner svälla. Rör om innan den tillagas.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 8,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Våfflor: Värm våffeljärnet. Fördela den uppmätta stekfetten över gräddningen och pensla järnet. Häll i smet utan att överfylla och grädda tills våfflorna är gyllene och genomgräddade. Tillaga hela smeten i omgångar.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Våfflor: Kontrollera i den tjockaste delen att äggsmeten är helt stelnad och har nått minst 72 °C. Tillaga längre på måttlig värme om det behövs.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Yoghurt och bär: Skölj och ansa jordgubbar. Skär frukt och grönsaker i små bitar. Lägg upp yoghurt naturell och jordgubbar tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "yoghurt naturell",
+            "jordgubbar"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera våfflor och yoghurt och bär tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "bakpulver",
+            "salt",
+            "yoghurt naturell",
+            "jordgubbar"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 7 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 23 minuter aktivt och 8 minuter huvudsakligen passiv väntan, cirka 31 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Smeten gräddas mellan två heta räfflade järn och får våfflans luftiga och frasiga struktur. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bakpulver och jordgubbar; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-breakfast-waffles-berries",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Frukostvåfflor med yoghurt och bär – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "frukostvåfflor",
+      "primary": "vetemjöl",
+      "method": "pan",
+      "side": "Yoghurt och bär, Jordnötskräm",
+      "flavor": [
+        "mjölk",
+        "bakpulver",
+        "salt",
+        "jordnötssmör",
+        "yoghurt naturell"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Visp",
+        "Skärbräda",
+        "Kniv",
+        "Rivjärn",
+        "Våffeljärn",
+        "Pensel",
+        "Digital kökstermometer",
+        "Gaffel",
+        "Sked"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Våfflor",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "primary",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 40,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 65,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 8,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "bakpulver",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Bakpulver, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Yoghurt och bär",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "jordgubbar",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Jordgubbar, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Jordnötskräm",
+          "ingredients": [
+            {
+              "name": "jordnötssmör",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Jordnötssmör, mängd som såld"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Våfflor: Vispa samman ägg och mjölk. Rör ner vetemjöl, bakpulver och salt tills smeten är jämn.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 5
+        },
+        {
+          "text": "För komponenten Våfflor: Låt smeten vila så att mjölet hinner svälla. Rör om innan den tillagas.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 8,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Våfflor: Värm våffeljärnet. Fördela den uppmätta stekfetten över gräddningen och pensla järnet. Häll i smet utan att överfylla och grädda tills våfflorna är gyllene och genomgräddade. Tillaga hela smeten i omgångar.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "bakpulver",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Våfflor: Kontrollera i den tjockaste delen att äggsmeten är helt stelnad och har nått minst 72 °C. Tillaga längre på måttlig värme om det behövs.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Yoghurt och bär: Skölj och ansa jordgubbar. Skär frukt och grönsaker i små bitar. Lägg upp yoghurt naturell och jordgubbar tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "yoghurt naturell",
+            "jordgubbar"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Jordnötskräm: Finfördela fasta råvaror i komponenten och rör ihop jordnötssmör och yoghurt naturell i en skål tills blandningen är jämn.",
+          "uses": [
+            "jordnötssmör",
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera våfflor, yoghurt och bär och jordnötskräm tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "vetemjöl",
+            "ägg",
+            "mjölk",
+            "rapsolja",
+            "bakpulver",
+            "salt",
+            "yoghurt naturell",
+            "jordgubbar",
+            "jordnötssmör"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 8 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 27 minuter aktivt och 8 minuter huvudsakligen passiv väntan, cirka 35 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Smeten gräddas mellan två heta räfflade järn och får våfflans luftiga och frasiga struktur. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bakpulver och jordgubbar; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-broccoli-bread-strata",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Brödpudding med broccoli och ost till frukost – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "brödpudding",
+      "primary": "bröd",
+      "method": "oven",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mjölk",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Ugn",
+        "Grund portionsform",
+        "Kastrull",
+        "Durkslag",
+        "Rivjärn",
+        "Visp",
+        "Kylskåp",
+        "Termometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Broccolistrata",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "broccoli",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Broccoli, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Broccolistrata: Skär broccolin i små buketter. Koka i 500 ml vatten tills den börjar mjukna och häll av. Skär brödet i kuber och riv osten.",
+          "uses": [
+            "broccoli",
+            "bröd",
+            "ost"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Broccolistrata: Smörj en grund portionsform med oljan. Blanda bröd, broccoli och ost i formen. Vispa ägg, mjölk och salt och häll över.",
+          "uses": [
+            "rapsolja",
+            "bröd",
+            "broccoli",
+            "ost",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Broccolistrata: Täck formen och låt brödet suga upp vätskan i kylskåp.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk"
+          ],
+          "minutes": 30,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Broccolistrata: Värm ugnen till 180 °C och baka puddingen tills stanningen håller ihop.",
+          "uses": [
+            "ägg",
+            "bröd"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Broccolistrata: Kontrollera minst 72 °C i mitten och att ingen rå äggvätska återstår.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera broccolistrata tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk",
+            "broccoli",
+            "ost",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 13 minuter aktivt och 65 minuter huvudsakligen passiv väntan, cirka 78 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Brödkuber suger upp stanning före ugnsgräddning och blir en sammanhängande matig brödpudding. Granska avgränsningen mot fattiga riddare: här tillkommer grönsaker, förblötläggning och gratängliknande huvudstruktur, men bröd och ägg är gemensamma. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-broccoli-bread-strata",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Brödpudding med broccoli och ost till frukost – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "brödpudding",
+      "primary": "bröd",
+      "method": "oven",
+      "side": "Syrlig gurka",
+      "flavor": [
+        "mjölk",
+        "salt",
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Ugn",
+        "Grund portionsform",
+        "Kastrull",
+        "Durkslag",
+        "Rivjärn",
+        "Visp",
+        "Kylskåp",
+        "Termometer",
+        "Skärbräda",
+        "Kniv",
+        "Skål"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Broccolistrata",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 70,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "broccoli",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Broccoli, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Syrlig gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Broccolistrata: Skär broccolin i små buketter. Koka i 500 ml vatten tills den börjar mjukna och häll av. Skär brödet i kuber och riv osten.",
+          "uses": [
+            "broccoli",
+            "bröd",
+            "ost"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "För komponenten Broccolistrata: Smörj en grund portionsform med oljan. Blanda bröd, broccoli och ost i formen. Vispa ägg, mjölk och salt och häll över.",
+          "uses": [
+            "rapsolja",
+            "bröd",
+            "broccoli",
+            "ost",
+            "ägg",
+            "mjölk",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Broccolistrata: Täck formen och låt brödet suga upp vätskan i kylskåp.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk"
+          ],
+          "minutes": 30,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Broccolistrata: Värm ugnen till 180 °C och baka puddingen tills stanningen håller ihop.",
+          "uses": [
+            "ägg",
+            "bröd"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Broccolistrata: Kontrollera minst 72 °C i mitten och att ingen rå äggvätska återstår.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "För komponenten Syrlig gurka: Skölj och ansa gurka och dill. Skär frukt och grönsaker i små bitar. Lägg upp gurka, citronjuice och dill tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera broccolistrata och syrlig gurka tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "bröd",
+            "ägg",
+            "mjölk",
+            "broccoli",
+            "ost",
+            "rapsolja",
+            "salt",
+            "gurka",
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 9 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 17 minuter aktivt och 65 minuter huvudsakligen passiv väntan, cirka 82 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Brödkuber suger upp stanning före ugnsgräddning och blir en sammanhängande matig brödpudding. Granska avgränsningen mot fattiga riddare: här tillkommer grönsaker, förblötläggning och gratängliknande huvudstruktur, men bröd och ägg är gemensamma. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-broccoli-cheese-breakfast-souffle",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Broccoli- och ostsufflé med bröd – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "grönsakssufflé",
+      "primary": "broccoli",
+      "method": "bake",
+      "side": "Broccolisufflé",
+      "flavor": [
+        "mjölk",
+        "vetemjöl",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Kastrull",
+        "Durkslag",
+        "Mixer",
+        "Rivjärn",
+        "Elvisp",
+        "Ugn",
+        "Hög portionsform",
+        "Termometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Broccolisufflé",
+          "ingredients": [
+            {
+              "name": "broccoli",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Broccoli, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Bröd: Lägg upp bröd tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Broccolisufflé: Koka broccolin i 400 ml vatten tills mjuk. Häll av väl och mixa med mjölken. Riv osten. Separera den uppvägda äggmängden.",
+          "uses": [
+            "broccoli",
+            "mjölk",
+            "ost",
+            "ägg"
+          ],
+          "minutes": 10,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Broccolisufflé: Rör ner gulorna, mjölet, osten och saltet i broccolipurén. Vispa vitorna fasta och vänd försiktigt ner. Smörj en hög portionsform med oljan och fyll till högst två tredjedelar.",
+          "uses": [
+            "ägg",
+            "vetemjöl",
+            "ost",
+            "salt",
+            "rapsolja",
+            "broccoli"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Broccolisufflé: Baka i uppvärmd ugn på 190 °C tills sufflén rest sig och mitten stelnat. Kontrollera minst 72 °C och servera genast.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera bröd och broccolisufflé tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "bröd",
+            "broccoli",
+            "ägg",
+            "mjölk",
+            "ost",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 7 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 22 minuter aktivt och 22 minuter huvudsakligen passiv väntan, cirka 44 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. En kokt grönsakspuré lyfts med separat vispat äggskum och bakas till en hög sufflé, inte en kompakt omelett. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-broccoli-cheese-breakfast-souffle",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Broccoli- och ostsufflé med bröd – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "grönsakssufflé",
+      "primary": "broccoli",
+      "method": "bake",
+      "side": "Tomat och gräslök, Broccolisufflé",
+      "flavor": [
+        "gräslök",
+        "citronjuice",
+        "mjölk",
+        "vetemjöl",
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Kastrull",
+        "Durkslag",
+        "Mixer",
+        "Rivjärn",
+        "Elvisp",
+        "Ugn",
+        "Hög portionsform",
+        "Termometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "side",
+              "label": "Mjukt skivat bröd, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomat och gräslök",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gräslök",
+              "form": "raw_edible",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gräslök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Broccolisufflé",
+          "ingredients": [
+            {
+              "name": "broccoli",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Broccoli, rå ätlig vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Bröd: Lägg upp bröd tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Tomat och gräslök: Skölj och ansa tomat och gräslök. Skär frukt och grönsaker i små bitar. Lägg upp tomat, gräslök och citronjuice tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "tomat",
+            "gräslök",
+            "citronjuice"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Broccolisufflé: Koka broccolin i 400 ml vatten tills mjuk. Häll av väl och mixa med mjölken. Riv osten. Separera den uppvägda äggmängden.",
+          "uses": [
+            "broccoli",
+            "mjölk",
+            "ost",
+            "ägg"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Broccolisufflé: Rör ner gulorna, mjölet, osten och saltet i broccolipurén. Vispa vitorna fasta och vänd försiktigt ner. Smörj en hög portionsform med oljan och fyll till högst två tredjedelar.",
+          "uses": [
+            "ägg",
+            "vetemjöl",
+            "ost",
+            "salt",
+            "rapsolja",
+            "broccoli"
+          ],
+          "minutes": 7,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "För komponenten Broccolisufflé: Baka i uppvärmd ugn på 190 °C tills sufflén rest sig och mitten stelnat. Kontrollera minst 72 °C och servera genast.",
+          "uses": [
+            "ägg"
+          ],
+          "minutes": 22,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera bröd, tomat och gräslök och broccolisufflé tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "bröd",
+            "tomat",
+            "gräslök",
+            "citronjuice",
+            "broccoli",
+            "ägg",
+            "mjölk",
+            "ost",
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 10 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 26 minuter aktivt och 22 minuter huvudsakligen passiv väntan, cirka 48 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. En kokt grönsakspuré lyfts med separat vispat äggskum och bakas till en hög sufflé, inte en kompakt omelett. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för gräslök; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-buckwheat-galette-egg",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Bovetegalett med ägg och ost – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "fylld bovetegalett",
+      "primary": "bovetemjöl",
+      "method": "pan",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "salt"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Visp",
+        "Rivjärn",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Termometer"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fylld bovetegalett",
+          "ingredients": [
+            {
+              "name": "bovetemjöl",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "side",
+              "label": "Bovetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fylld bovetegalett: Vispa bovetemjöl och salt med 115 ml vatten till en slät smet och låt vila. Riv osten.",
+          "uses": [
+            "bovetemjöl",
+            "salt",
+            "ost"
+          ],
+          "minutes": 15,
+          "passive": true
+        },
+        {
+          "text": "För komponenten Fylld bovetegalett: Värm en bred stekpanna och fördela oljan över gräddningen. Häll i ett tunt lager smet och grädda tills undersidan håller ihop. Vänd.",
+          "uses": [
+            "rapsolja",
+            "bovetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Fylld bovetegalett: Vispa ägget och fördela i galettens mitt med osten. Vik kanterna inåt, sänk värmen och lägg på lock tills ägget stelnat och nått minst 72 °C.",
+          "uses": [
+            "ägg",
+            "ost"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera fylld bovetegalett tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "bovetemjöl",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 4 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 13 minuter aktivt och 15 minuter huvudsakligen passiv väntan, cirka 28 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. En tunn bovetemjölsgalett gräddas först och fylls sedan med ägg som tillagas inne i den vikta galetten. Jämför fyllda pannkaksrätter över köksgränser; mjölbyte ensamt räcker inte, men äggets tillagning i galetten är en huvudskillnad. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bovetemjöl; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-buckwheat-galette-egg",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Bovetegalett med ägg och ost – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "fylld bovetegalett",
+      "primary": "bovetemjöl",
+      "method": "pan",
+      "side": "Tomat och gräslök",
+      "flavor": [
+        "salt",
+        "gräslök",
+        "yoghurt naturell"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Visp",
+        "Rivjärn",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Termometer",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Fylld bovetegalett",
+          "ingredients": [
+            {
+              "name": "bovetemjöl",
+              "form": "dry",
+              "quantity": 55,
+              "unit": "g",
+              "role": "side",
+              "label": "Bovetemjöl, torr vikt"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost, mängd som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, mängd som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, mängd som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomat och gräslök",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gräslök",
+              "form": "raw_edible",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gräslök, rå ätlig vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Fylld bovetegalett: Vispa bovetemjöl och salt med 115 ml vatten till en slät smet och låt vila. Riv osten.",
+          "uses": [
+            "bovetemjöl",
+            "salt",
+            "ost"
+          ],
+          "minutes": 15,
+          "passive": true
+        },
+        {
+          "text": "För komponenten Fylld bovetegalett: Värm en bred stekpanna och fördela oljan över gräddningen. Häll i ett tunt lager smet och grädda tills undersidan håller ihop. Vänd.",
+          "uses": [
+            "rapsolja",
+            "bovetemjöl"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Fylld bovetegalett: Vispa ägget och fördela i galettens mitt med osten. Vik kanterna inåt, sänk värmen och lägg på lock tills ägget stelnat och nått minst 72 °C.",
+          "uses": [
+            "ägg",
+            "ost"
+          ],
+          "minutes": 7,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Tomat och gräslök: Skölj och ansa tomat och gräslök. Skär frukt och grönsaker i små bitar. Lägg upp tomat, gräslök och yoghurt naturell tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "tomat",
+            "gräslök",
+            "yoghurt naturell"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera fylld bovetegalett och tomat och gräslök tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "bovetemjöl",
+            "ägg",
+            "ost",
+            "rapsolja",
+            "salt",
+            "tomat",
+            "gräslök",
+            "yoghurt naturell"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 7 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 17 minuter aktivt och 15 minuter huvudsakligen passiv väntan, cirka 32 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. En tunn bovetemjölsgalett gräddas först och fylls sedan med ägg som tillagas inne i den vikta galetten. Jämför fyllda pannkaksrätter över köksgränser; mjölbyte ensamt räcker inte, men äggets tillagning i galetten är en huvudskillnad. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för bovetemjöl och gräslök; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-chia-orange-pudding",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Chiapudding med apelsin och yoghurt – enkel",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "kall fröpudding",
+      "primary": "chiafrön",
+      "method": "refrigerated_assembly",
+      "side": "Apelsin",
+      "flavor": [
+        "mjölk"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Gaffel",
+        "Sked",
+        "Kylskåp",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Chiapudding",
+          "ingredients": [
+            {
+              "name": "chiafrön",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Chiafrön, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 160,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Apelsin",
+          "ingredients": [
+            {
+              "name": "apelsin",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Apelsin, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Chiapudding: Finfördela fasta råvaror i komponenten och rör ihop chiafrön, mjölk och yoghurt naturell i en skål tills blandningen är jämn.",
+          "uses": [
+            "chiafrön",
+            "mjölk",
+            "yoghurt naturell"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Chiapudding: Täck skålen och ställ den i kylskåp tills blandningen har satt sig. Rör igenom före servering.",
+          "uses": [
+            "chiafrön",
+            "mjölk",
+            "yoghurt naturell"
+          ],
+          "minutes": 240,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Apelsin: Skölj och ansa apelsin. Skär frukt och grönsaker i små bitar. Lägg upp apelsin tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "apelsin"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Servera chiapudding och apelsin tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "chiafrön",
+            "mjölk",
+            "yoghurt naturell",
+            "apelsin"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 4 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 9 minuter aktivt och 240 minuter huvudsakligen passiv väntan, cirka 249 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Chiafrön gelbildar i kall vätska; huvudstrukturen är en fröpudding och inte blötlagda havregryn. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för apelsin och chiafrön; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-chia-orange-pudding",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Chiapudding med apelsin och yoghurt – utökad",
+      "servings": 1,
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "family": "kall fröpudding",
+      "primary": "chiafrön",
+      "method": "refrigerated_assembly",
+      "side": "Apelsin, Rostningsfri nöt- och fruktblandning",
+      "flavor": [
+        "mjölk",
+        "hasselnötter",
+        "russin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skål",
+        "Gaffel",
+        "Sked",
+        "Kylskåp",
+        "Skärbräda",
+        "Kniv"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Chiapudding",
+          "ingredients": [
+            {
+              "name": "chiafrön",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Chiafrön, torr vikt"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 160,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk, mängd som såld"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 80,
+              "unit": "g",
+              "role": "primary",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Apelsin",
+          "ingredients": [
+            {
+              "name": "apelsin",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Apelsin, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Rostningsfri nöt- och fruktblandning",
+          "ingredients": [
+            {
+              "name": "hasselnötter",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Hasselnötter, mängd som såld"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Russin, mängd som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "För komponenten Chiapudding: Finfördela fasta råvaror i komponenten och rör ihop chiafrön, mjölk och yoghurt naturell i en skål tills blandningen är jämn.",
+          "uses": [
+            "chiafrön",
+            "mjölk",
+            "yoghurt naturell"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "För komponenten Chiapudding: Täck skålen och ställ den i kylskåp tills blandningen har satt sig. Rör igenom före servering.",
+          "uses": [
+            "chiafrön",
+            "mjölk",
+            "yoghurt naturell"
+          ],
+          "minutes": 240,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "För komponenten Apelsin: Skölj och ansa apelsin. Skär frukt och grönsaker i små bitar. Lägg upp apelsin tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "apelsin"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "För komponenten Rostningsfri nöt- och fruktblandning: Lägg upp hasselnötter och russin tillsammans och fördela samtliga angivna mängder över portionen.",
+          "uses": [
+            "hasselnötter",
+            "russin"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera chiapudding, apelsin och rostningsfri nöt- och fruktblandning tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+          "uses": [
+            "chiafrön",
+            "mjölk",
+            "yoghurt naturell",
+            "apelsin",
+            "hasselnötter",
+            "russin"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Inte importerat eller godkänt i Smako. En portion. 6 lokalt räknade ingredienser; samma identitet i flera komponenter räknas en gång, salt och svartpeppar undantas. Tidsplanen är sekventiell och uppskattad: 13 minuter aktivt och 240 minuter huvudsakligen passiv väntan, cirka 253 minuter totalt. Kortare tid kan vara möjlig med överlapp, men den är inte verifierad. Chiafrön gelbildar i kall vätska; huvudstrukturen är en fröpudding och inte blötlagda havregryn. Jämför huvudstruktur och tillagning med övriga rätter i samma familj vid innehållsgranskning. Diet, allergener, näring och produktmatchning måste bedömas för denna variant mot valda produkter. Kräver registergranskning för apelsin, chiafrön, hasselnötter och russin; inte importklar. Förslagen är inte godkända ingrediensidentiteter."
+    }
+  ]
+}

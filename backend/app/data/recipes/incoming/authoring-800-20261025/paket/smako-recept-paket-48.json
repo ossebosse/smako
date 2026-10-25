@@ -1,0 +1,4039 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-48",
+  "recipes": [
+    {
+      "base_id": "smako-mexican-chicken-soup-meatballs",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Kycklingbullar i majs- och tomatsoppa – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "meatball_soup",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stor gryta med lock",
+        "Digital kökstermometer",
+        "Kastrull med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning till bullarna",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör av ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hacka kycklingen till fin färs. Blanda huvudråvaran med bindningens havregryn och salt samt 60 ml vatten. Arbeta kort tills massan binder och forma små jämnstora bullar. Håll kallt medan soppan kokas.",
+          "uses": [
+            "kyckling",
+            "havregryn",
+            "salt"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Tillsätt majs, krossade tomater och spiskummin och huvudkomponentens salt samt 1000 ml vatten. Sjud under lock tills de hårdaste grönsakerna börjar mjukna.",
+          "uses": [
+            "majs",
+            "krossade tomater",
+            "spiskummin",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ner bullarna i den sjudande soppan. Sjud försiktigt cirka 12 minuter utan kraftig omrörning. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ris i kastrullen med tillbehörets salt och 480 ml vatten. Koka upp.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under lock tills kornen är mjuka och vätskan absorberats. Räkna med cirka 15 minuter; följ längre tid på förpackningen om det behövs.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 15,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fluffa tillbehöret med en gaffel och håll det täckt till servering.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "krossade tomater",
+            "spiskummin",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 15 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 60 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Kyckling hackas till färs och små bullar sjuds direkt i soppan. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-soup-meatballs",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Kycklingbullar i majs- och tomatsoppa – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "meatball_soup",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stor gryta med lock",
+        "Digital kökstermometer",
+        "Kastrull med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning till bullarna",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör av ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; finhacka färsk koriander.",
+          "uses": [
+            "majs",
+            "krossade tomater",
+            "spiskummin",
+            "morot",
+            "färsk koriander"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Hacka kycklingen till fin färs. Blanda huvudråvaran med bindningens havregryn och salt samt 60 ml vatten. Arbeta kort tills massan binder och forma små jämnstora bullar. Håll kallt medan soppan kokas.",
+          "uses": [
+            "kyckling",
+            "havregryn",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Tillsätt majs, krossade tomater, spiskummin, morot och färsk koriander och huvudkomponentens salt samt 1000 ml vatten. Sjud under lock tills de hårdaste grönsakerna börjar mjukna.",
+          "uses": [
+            "majs",
+            "krossade tomater",
+            "spiskummin",
+            "morot",
+            "färsk koriander",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ner bullarna i den sjudande soppan. Sjud försiktigt cirka 12 minuter utan kraftig omrörning. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ris i kastrullen med tillbehörets salt och 480 ml vatten. Koka upp.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under lock tills kornen är mjuka och vätskan absorberats. Räkna med cirka 15 minuter; följ längre tid på förpackningen om det behövs.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 15,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fluffa tillbehöret med en gaffel och håll det täckt till servering.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "krossade tomater",
+            "spiskummin",
+            "morot",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "ris"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 9 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 19 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 64 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Kyckling hackas till färs och små bullar sjuds direkt i soppan. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-soup-meatballs",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Kycklingbullar i majs- och tomatsoppa – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "meatball_soup",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stor gryta med lock",
+        "Digital kökstermometer",
+        "Kastrull med lock"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bindning till bullarna",
+          "ingredients": [
+            {
+              "name": "havregryn",
+              "form": "dry",
+              "quantity": 50,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Havregryn, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör av ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Tillbehör: syrliga rädisor",
+          "ingredients": [
+            {
+              "name": "rädisor",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rädisor, ansad rå vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker, torr vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och skär morot i små jämna tärningar; finhacka färsk koriander.",
+          "uses": [
+            "majs",
+            "krossade tomater",
+            "spiskummin",
+            "morot",
+            "färsk koriander"
+          ],
+          "minutes": 4
+        },
+        {
+          "text": "Hacka kycklingen till fin färs. Blanda huvudråvaran med bindningens havregryn och salt samt 60 ml vatten. Arbeta kort tills massan binder och forma små jämnstora bullar. Håll kallt medan soppan kokas.",
+          "uses": [
+            "kyckling",
+            "havregryn",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i grytan. Tillsätt majs, krossade tomater, spiskummin, morot och färsk koriander och huvudkomponentens salt samt 1000 ml vatten. Sjud under lock tills de hårdaste grönsakerna börjar mjukna.",
+          "uses": [
+            "majs",
+            "krossade tomater",
+            "spiskummin",
+            "morot",
+            "färsk koriander",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ner bullarna i den sjudande soppan. Sjud försiktigt cirka 12 minuter utan kraftig omrörning. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg ris i kastrullen med tillbehörets salt och 480 ml vatten. Koka upp.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under lock tills kornen är mjuka och vätskan absorberats. Räkna med cirka 15 minuter; följ längre tid på förpackningen om det behövs.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 15,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fluffa tillbehöret med en gaffel och håll det täckt till servering.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär gurka i små bitar.",
+          "uses": [
+            "rädisor",
+            "gurka",
+            "limejuice",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda rädisor, gurka, limejuice, strösocker och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "rädisor",
+            "gurka",
+            "limejuice",
+            "strösocker",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "majs",
+            "krossade tomater",
+            "spiskummin",
+            "morot",
+            "färsk koriander",
+            "rapsolja",
+            "salt",
+            "havregryn",
+            "ris",
+            "rädisor",
+            "gurka",
+            "limejuice",
+            "strösocker"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 13 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Stegens uppskattade aktiva arbete summerar till 25 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 70 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Kyckling hackas till färs och små bullar sjuds direkt i soppan. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander, rädisor; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-stuffed-panbread",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Hembakade pannbröd med kyckling och paprika – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "flatbread",
+      "primary": "kyckling",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kavel",
+        "Torr stekpanna",
+        "Bakplåtspapper",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pannbrödsdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 420,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl och salt med 260 ml vatten och degens olja. Knåda till en smidig deg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Låt degen vila medan fyllningen förbereds.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar.",
+          "uses": [
+            "paprika",
+            "rökt paprikapulver"
+          ],
+          "minutes": 3,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg paprika i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "paprika"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 8,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela pannbrödsdegen i jämnstora bitar, två per portion. Kavla tunt mellan bakplåtspapper. Lägg fyllning på ena halvan, vik över och tryck ihop kanterna.",
+          "uses": [
+            "vetemjöl",
+            "kyckling"
+          ],
+          "minutes": 10,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Värm en torr stekpanna på medelvärme. Grädda de fyllda bröden i omgångar cirka fyra minuter på varje sida tills degen är genomgräddad och har bruna fläckar. Håll färdiga bröd under en ren handduk.",
+          "uses": [
+            "vetemjöl",
+            "kyckling"
+          ],
+          "minutes": 28,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "paprika",
+            "rökt paprikapulver"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 83 minuter och huvudsakligen passiva moment till 23 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 106 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Vetedeg omsluter tillagad kyckling och steks i panna; inget färdigt tortillabröd används. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-stuffed-panbread",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Hembakade pannbröd med kyckling och paprika – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "flatbread",
+      "primary": "kyckling",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kavel",
+        "Torr stekpanna",
+        "Bakplåtspapper",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pannbrödsdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 420,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl och salt med 260 ml vatten och degens olja. Knåda till en smidig deg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Låt degen vila medan fyllningen förbereds.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar; skala och finhacka gul lök.",
+          "uses": [
+            "paprika",
+            "rökt paprikapulver",
+            "gul lök",
+            "limejuice"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg paprika och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "paprika",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner limejuice från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 8,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela pannbrödsdegen i jämnstora bitar, två per portion. Kavla tunt mellan bakplåtspapper. Lägg fyllning på ena halvan, vik över och tryck ihop kanterna.",
+          "uses": [
+            "vetemjöl",
+            "kyckling"
+          ],
+          "minutes": 10,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Värm en torr stekpanna på medelvärme. Grädda de fyllda bröden i omgångar cirka fyra minuter på varje sida tills degen är genomgräddad och har bruna fläckar. Håll färdiga bröd under en ren handduk.",
+          "uses": [
+            "vetemjöl",
+            "kyckling"
+          ],
+          "minutes": 28,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "paprika",
+            "rökt paprikapulver",
+            "gul lök",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 86 minuter och huvudsakligen passiva moment till 23 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 109 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Vetedeg omsluter tillagad kyckling och steks i panna; inget färdigt tortillabröd används. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-stuffed-panbread",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Hembakade pannbröd med kyckling och paprika – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "flatbread",
+      "primary": "kyckling",
+      "method": "pan",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Kavel",
+        "Torr stekpanna",
+        "Bakplåtspapper",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Pannbrödsdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 420,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: limekål",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda degens mjöl och salt med 260 ml vatten och degens olja. Knåda till en smidig deg och täck skålen.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Låt degen vila medan fyllningen förbereds.",
+          "uses": [
+            "vetemjöl"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar; skala och finhacka gul lök.",
+          "uses": [
+            "paprika",
+            "rökt paprikapulver",
+            "gul lök",
+            "limejuice"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg paprika och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "paprika",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner limejuice från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Låt fyllningen svalna tills den är ljummen innan den läggs i deg eller på pannkakor. Den ska inte lämna en vätskepöl.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 8,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela pannbrödsdegen i jämnstora bitar, två per portion. Kavla tunt mellan bakplåtspapper. Lägg fyllning på ena halvan, vik över och tryck ihop kanterna.",
+          "uses": [
+            "vetemjöl",
+            "kyckling"
+          ],
+          "minutes": 10,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Värm en torr stekpanna på medelvärme. Grädda de fyllda bröden i omgångar cirka fyra minuter på varje sida tills degen är genomgräddad och har bruna fläckar. Håll färdiga bröd under en ren handduk.",
+          "uses": [
+            "vetemjöl",
+            "kyckling"
+          ],
+          "minutes": 28,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: strimla vitkålen tunt; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Blanda vitkål, morot, limejuice och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            15
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "paprika",
+            "rökt paprikapulver",
+            "gul lök",
+            "limejuice",
+            "vitkål",
+            "morot"
+          ],
+          "minutes": 2,
+          "after": [
+            16
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 9 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 93 minuter och huvudsakligen passiva moment till 23 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 116 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Vetedeg omsluter tillagad kyckling och steks i panna; inget färdigt tortillabröd används. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-tinga-bread",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Trådig tomatkyckling på rostat bröd – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "shredded",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "bröd",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Gryta med lock",
+        "Två gafflar",
+        "Digital kökstermometer",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd till servering",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär köttet i stora jämna bitar. Värm huvudkomponentens olja i grytan och bryn köttet lätt runt om. Tillsätt krossade tomater och rökt paprikapulver och huvudkomponentens salt samt 450 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "rökt paprikapulver",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12
+        },
+        {
+          "text": "Lägg på lock och sjud på låg värme tills köttet går att dra isär, cirka 45 minuter. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 45,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dra isär köttet med två gafflar och vänd tillbaka det i kokvätskan. Låt överflödig vätska avdunsta så att den fastnar på köttfibrerna.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Värm bröd kort på båda sidor i en torr stekpanna. Håll täckt fram till servering.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "rökt paprikapulver",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 24 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 69 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Kyckling bräseras tills den kan dras isär och läggs på rostat bröd, med fibrig huvudstruktur. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-tinga-bread",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Trådig tomatkyckling på rostat bröd – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "shredded",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "bröd",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Gryta med lock",
+        "Två gafflar",
+        "Digital kökstermometer",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd till servering",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finhacka gul lök.",
+          "uses": [
+            "krossade tomater",
+            "rökt paprikapulver",
+            "gul lök",
+            "oregano"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Skär köttet i stora jämna bitar. Värm huvudkomponentens olja i grytan och bryn köttet lätt runt om. Tillsätt krossade tomater, rökt paprikapulver, gul lök och oregano och huvudkomponentens salt samt 450 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "rökt paprikapulver",
+            "gul lök",
+            "oregano",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg på lock och sjud på låg värme tills köttet går att dra isär, cirka 45 minuter. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 45,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dra isär köttet med två gafflar och vänd tillbaka det i kokvätskan. Låt överflödig vätska avdunsta så att den fastnar på köttfibrerna.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm bröd kort på båda sidor i en torr stekpanna. Håll täckt fram till servering.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "rökt paprikapulver",
+            "gul lök",
+            "oregano",
+            "rapsolja",
+            "salt",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 27 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 72 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Kyckling bräseras tills den kan dras isär och läggs på rostat bröd, med fibrig huvudstruktur. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-tinga-bread",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Trådig tomatkyckling på rostat bröd – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "shredded",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "bröd",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Gryta med lock",
+        "Två gafflar",
+        "Digital kökstermometer",
+        "Torr stekpanna"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 750.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 180.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bröd till servering",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: avokadoröra",
+          "ingredients": [
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Avokadokött utan skal och kärna, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Förbered råvarorna: skala och finhacka gul lök.",
+          "uses": [
+            "krossade tomater",
+            "rökt paprikapulver",
+            "gul lök",
+            "oregano"
+          ],
+          "minutes": 3
+        },
+        {
+          "text": "Skär köttet i stora jämna bitar. Värm huvudkomponentens olja i grytan och bryn köttet lätt runt om. Tillsätt krossade tomater, rökt paprikapulver, gul lök och oregano och huvudkomponentens salt samt 450 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "rökt paprikapulver",
+            "gul lök",
+            "oregano",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg på lock och sjud på låg värme tills köttet går att dra isär, cirka 45 minuter. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 45,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dra isär köttet med två gafflar och vänd tillbaka det i kokvätskan. Låt överflödig vätska avdunsta så att den fastnar på köttfibrerna.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Värm bröd kort på båda sidor i en torr stekpanna. Håll täckt fram till servering.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skär avokadoköttet i bitar; skala och finhacka vitlök.",
+          "uses": [
+            "avokado",
+            "limejuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Mosa avokadoköttet med limejuice, finriven vitlök och tillbehörets salt. Rör till en grov röra och servera direkt.",
+          "uses": [
+            "avokado",
+            "limejuice",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "rökt paprikapulver",
+            "gul lök",
+            "oregano",
+            "rapsolja",
+            "salt",
+            "bröd",
+            "avokado",
+            "limejuice",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 10 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 34 minuter och huvudsakligen passiva moment till 45 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 79 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Kyckling bräseras tills den kan dras isär och läggs på rostat bröd, med fibrig huvudstruktur. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av avokado; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-tortilla-layered-pie",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Skiktad kyckling- och tortillapaj – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tortillabake",
+      "primary": "kyckling",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Pensel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tortillabas",
+          "ingredients": [
+            {
+              "name": "tortillas",
+              "form": "as_sold",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Tortillas, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg majs i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs"
+          ],
+          "minutes": 8,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "krossade tomater",
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med tortillabasens olja. Varva hela tortillas med tunna lager av huvudfyllningen och avsluta med fyllning överst.",
+          "uses": [
+            "tortillas",
+            "rapsolja",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Täck formen och baka 20 minuter. Ta av täckningen och baka ytterligare fem minuter. Låt sätta sig fem minuter innan formen skärs i bitar.",
+          "uses": [
+            "tortillas",
+            "kyckling"
+          ],
+          "minutes": 30,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "majs",
+            "rökt paprikapulver",
+            "rapsolja",
+            "salt",
+            "tortillas"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 6 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 43 minuter och huvudsakligen passiva moment till 30 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 73 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela tortillas staplas med kyckling och sås och skärs i bitar efter bakning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-tortilla-layered-pie",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Skiktad kyckling- och tortillapaj – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tortillabake",
+      "primary": "kyckling",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Pensel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tortillabas",
+          "ingredients": [
+            {
+              "name": "tortillas",
+              "form": "as_sold",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Tortillas, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar; riv eller smula ost.",
+          "uses": [
+            "krossade tomater",
+            "majs",
+            "rökt paprikapulver",
+            "paprika",
+            "ost"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg majs och paprika i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "paprika"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "krossade tomater",
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner ost från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med tortillabasens olja. Varva hela tortillas med tunna lager av huvudfyllningen och avsluta med fyllning överst.",
+          "uses": [
+            "tortillas",
+            "rapsolja",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Täck formen och baka 20 minuter. Ta av täckningen och baka ytterligare fem minuter. Låt sätta sig fem minuter innan formen skärs i bitar.",
+          "uses": [
+            "tortillas",
+            "kyckling"
+          ],
+          "minutes": 30,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "majs",
+            "rökt paprikapulver",
+            "paprika",
+            "ost",
+            "rapsolja",
+            "salt",
+            "tortillas"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 8 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 49 minuter och huvudsakligen passiva moment till 30 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 79 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela tortillas staplas med kyckling och sås och skärs i bitar efter bakning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-tortilla-layered-pie",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Skiktad kyckling- och tortillapaj – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tortillabake",
+      "primary": "kyckling",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "rökt paprikapulver"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade",
+        "Ugn",
+        "Ugnsform",
+        "Plåt",
+        "Bakplåtspapper",
+        "Pensel"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 500.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Majs, vikt eller volym som såld"
+            },
+            {
+              "name": "rökt paprikapulver",
+              "form": "dry",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rökt paprikapulver, torr vikt"
+            },
+            {
+              "name": "paprika",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Paprika, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ost, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tortillabas",
+          "ingredients": [
+            {
+              "name": "tortillas",
+              "form": "as_sold",
+              "quantity": 360,
+              "unit": "g",
+              "role": "side",
+              "label": "Tortillas, vikt eller volym som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: limekål",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål, rå ätlig vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär paprika i små bitar; riv eller smula ost.",
+          "uses": [
+            "krossade tomater",
+            "majs",
+            "rökt paprikapulver",
+            "paprika",
+            "ost"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lägg majs och paprika i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "majs",
+            "paprika"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Rör ner rökt paprikapulver och låt fräsa kort under omrörning.",
+          "uses": [
+            "rökt paprikapulver"
+          ],
+          "minutes": 1,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Behåll en saftig sås kring ingredienserna.",
+          "uses": [
+            "krossade tomater",
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ta pannan från stark värme. Rör ner ost från huvudkomponenten så att allt fördelas.",
+          "uses": [
+            "ost"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Smörj formen med tortillabasens olja. Varva hela tortillas med tunna lager av huvudfyllningen och avsluta med fyllning överst.",
+          "uses": [
+            "tortillas",
+            "rapsolja",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Täck formen och baka 20 minuter. Ta av täckningen och baka ytterligare fem minuter. Låt sätta sig fem minuter innan formen skärs i bitar.",
+          "uses": [
+            "tortillas",
+            "kyckling"
+          ],
+          "minutes": 30,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: strimla vitkålen tunt; skala och skär morot i små jämna tärningar.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Blanda vitkål, morot, limejuice och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "krossade tomater",
+            "majs",
+            "rökt paprikapulver",
+            "paprika",
+            "ost",
+            "rapsolja",
+            "salt",
+            "tortillas",
+            "vitkål",
+            "morot",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 56 minuter och huvudsakligen passiva moment till 30 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 86 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Hela tortillas staplas med kyckling och sås och skärs i bitar efter bakning. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-zucchini-boats",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Zucchinibåtar med kyckling och bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "stuffedzucchini",
+      "primary": "kyckling",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Sked",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ätbart grönsaksskal",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 1100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Dela zucchini i stora portionsbitar och gröp ur så att de kan bära fyllning. Ta bort oätliga frön och stjälkfästen. Ätligt urgröpt fruktkött finhackas och läggs i huvudfyllningen.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Lägg grönsaksskalet i ugnsformen och fördela skalkomponentens olja och salt över det.",
+          "uses": [
+            "zucchini",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbaka grönsaksskalet cirka 15 minuter så att det börjar mjukna.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skölj svarta bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt.",
+          "uses": [
+            "svarta bönor",
+            "spiskummin"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg svarta bönor i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "svarta bönor"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Tillsätt 80 ml vatten och värm fyllningen under omrörning. Låt vattnet avdunsta; fyllningen ska vara saftig men inte rinnig.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Fördela hela huvudfyllningen i eller mellan de förberedda grönsaksskalen. Häll 150 ml vatten i formens botten.",
+          "uses": [
+            "zucchini",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Täck formen och baka cirka 25 minuter tills grönsaksskalet är helt mjukt och fyllningen genomvarm. Ta av täckningen de sista fem minuterna.",
+          "uses": [
+            "zucchini",
+            "kyckling"
+          ],
+          "minutes": 25,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "svarta bönor",
+            "spiskummin",
+            "rapsolja",
+            "salt",
+            "zucchini"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 5 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Stegens uppskattade aktiva arbete summerar till 56 minuter och huvudsakligen passiva moment till 40 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 96 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Zucchinins urholkade halvor fylls med kyckling och bönor; fruktköttet används i fyllningen. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-zucchini-boats",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Zucchinibåtar med kyckling och bönor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "stuffedzucchini",
+      "primary": "kyckling",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Sked",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ätbart grönsaksskal",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 1100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Dela zucchini i stora portionsbitar och gröp ur så att de kan bära fyllning. Ta bort oätliga frön och stjälkfästen. Ätligt urgröpt fruktkött finhackas och läggs i huvudfyllningen.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Lägg grönsaksskalet i ugnsformen och fördela skalkomponentens olja och salt över det.",
+          "uses": [
+            "zucchini",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbaka grönsaksskalet cirka 15 minuter så att det börjar mjukna.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skölj svarta bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt; skala och finhacka gul lök.",
+          "uses": [
+            "svarta bönor",
+            "spiskummin",
+            "krossade tomater",
+            "gul lök"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg svarta bönor och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "svarta bönor",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Låt vätskan avdunsta så att fyllningen blir fast och går att lägga i en hög.",
+          "uses": [
+            "krossade tomater",
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Fördela hela huvudfyllningen i eller mellan de förberedda grönsaksskalen. Häll 150 ml vatten i formens botten.",
+          "uses": [
+            "zucchini",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Täck formen och baka cirka 25 minuter tills grönsaksskalet är helt mjukt och fyllningen genomvarm. Ta av täckningen de sista fem minuterna.",
+          "uses": [
+            "zucchini",
+            "kyckling"
+          ],
+          "minutes": 25,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "svarta bönor",
+            "spiskummin",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "zucchini"
+          ],
+          "minutes": 2,
+          "after": [
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 7 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger utanför nuvarande standardfilter för middag på 10–15 räknade ingredienser; minantalet behöver sänkas. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 58 minuter och huvudsakligen passiva moment till 40 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 98 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Zucchinins urholkade halvor fylls med kyckling och bönor; fruktköttet används i fyllningen. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    },
+    {
+      "base_id": "smako-mexican-chicken-zucchini-boats",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Zucchinibåtar med kyckling och bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "stuffedzucchini",
+      "primary": "kyckling",
+      "method": "bake",
+      "side": "ingår i huvudrätten",
+      "flavor": [
+        "spiskummin"
+      ],
+      "equipment": [
+        "Köksvåg",
+        "Måttsats och måttkanna",
+        "Skärbräda",
+        "Kniv",
+        "Skål",
+        "Slev",
+        "Spis",
+        "Ugn",
+        "Ugnsform",
+        "Grytlappar",
+        "Sked",
+        "Stekpanna",
+        "Digital kökstermometer",
+        "Bred stekpanna med lock",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Huvudrättens fyllning och smaksättning",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kyckling, rå ätlig vikt"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Svarta bönor, tillagad och avrunnen vikt"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin, torr vikt"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Krossade tomater, vikt eller volym som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Ätbart grönsaksskal",
+          "ingredients": [
+            {
+              "name": "zucchini",
+              "form": "raw_edible",
+              "quantity": 1100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Zucchini, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt eller volym som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Tillbehör: tomatsalsa",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Limejuice, vikt eller volym som såld"
+            },
+            {
+              "name": "färsk koriander",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk koriander, ätliga blad och späda stjälkar"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt eller volym som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Dela zucchini i stora portionsbitar och gröp ur så att de kan bära fyllning. Ta bort oätliga frön och stjälkfästen. Ätligt urgröpt fruktkött finhackas och läggs i huvudfyllningen.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Sätt ugnen på 200 °C. Lägg grönsaksskalet i ugnsformen och fördela skalkomponentens olja och salt över det.",
+          "uses": [
+            "zucchini",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Förbaka grönsaksskalet cirka 15 minuter så att det börjar mjukna.",
+          "uses": [
+            "zucchini"
+          ],
+          "minutes": 15,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skär kyckling i små bitar. Lägg i en stekpanna med 100 ml vatten och sjud under omrörning tills köttet är genomlagat och vattnet nästan avdunstat. Kontrollera med termometer att kycklingens tjockaste del når minst 74 °C. Dela därefter fint till fyllning.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Förbered råvarorna: skölj svarta bönor och låt rinna av; mängden avser redan tillagad avrunnen vikt; skala och finhacka gul lök.",
+          "uses": [
+            "svarta bönor",
+            "spiskummin",
+            "krossade tomater",
+            "gul lök"
+          ],
+          "minutes": 4,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm huvudkomponentens olja i stekpannan på medelvärme.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 1,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg svarta bönor och gul lök i pannan och fräs tills grönsakerna mjuknat. Rör regelbundet och låt överflödig vätska koka bort.",
+          "uses": [
+            "svarta bönor",
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner spiskummin och låt fräsa kort under omrörning.",
+          "uses": [
+            "spiskummin"
+          ],
+          "minutes": 1,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Vänd ner den förlagade kyckling i pannan och fördela jämnt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater från huvudkomponenten. Värm på låg värme under omrörning tills fyllningen är genomvarm. Låt vätskan avdunsta så att fyllningen blir fast och går att lägga i en hög.",
+          "uses": [
+            "krossade tomater",
+            "kyckling"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Rör ner huvudkomponentens salt. Håll fyllningen varm på lägsta värme tills den används.",
+          "uses": [
+            "salt",
+            "kyckling"
+          ],
+          "minutes": 1,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Fördela hela huvudfyllningen i eller mellan de förberedda grönsaksskalen. Häll 150 ml vatten i formens botten.",
+          "uses": [
+            "zucchini",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Täck formen och baka cirka 25 minuter tills grönsaksskalet är helt mjukt och fyllningen genomvarm. Ta av täckningen de sista fem minuterna.",
+          "uses": [
+            "zucchini",
+            "kyckling"
+          ],
+          "minutes": 25,
+          "after": [
+            12
+          ],
+          "passive": true
+        },
+        {
+          "text": "Förbered råvarorna: ansa och skär tomat i små bitar; skala och finhacka rödlök; finhacka färsk koriander.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, limejuice, färsk koriander och salt från denna tillbehörskomponent i en separat skål. Rör så att smaksättningen fördelas jämnt. Håll kallt fram till servering.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            14
+          ]
+        },
+        {
+          "text": "Servera huvudrätten tillsammans med samtliga tillagade tillbehör och såser. Fördela varje komponent jämnt mellan portionerna.",
+          "uses": [
+            "kyckling",
+            "svarta bönor",
+            "spiskummin",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "zucchini",
+            "tomat",
+            "rödlök",
+            "limejuice",
+            "färsk koriander"
+          ],
+          "minutes": 2,
+          "after": [
+            15
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Fyra portioner. 11 preliminärt räknade ingredienser; samma registeridentitet i flera komponenter räknas en gång, salt och peppar undantas. Ligger preliminärt inom nuvarande standardfilter 10–15; detta är ingen kvalificering av köpbarhet eller valbarhet. Avsteg från variantens ingrediensriktmärke: deg, bindning, fyllning eller naturligt tillbehör kräver det redovisade antalet; inga ingredienser är valfria. Stegens uppskattade aktiva arbete summerar till 67 minuter och huvudsakligen passiva moment till 40 minuter. Den beskrivna sekventiella arbetsordningen ger cirka 107 minuter; uppvärmning och lokala råvaruegenskaper kan ändra tiden. Nyhetsmotivering: Zucchinins urholkade halvor fylls med kyckling och bönor; fruktköttet används i fyllningen. Kulinarisk avgränsning ska innehållsgranskas; olika namn eller råvarubyten bevisar inte en ny grundrätt. Kräver registergranskning av färsk koriander; inte importklar. Inga pack-koder eller produktkrav har hittats på. Mängdbasis framgår av varje form och label. Köpbarhet, diet, allergener och näring måste bedömas från denna variants faktiska produkter. Ingen import, Smako-validering eller formellt godkännande har genomförts."
+    }
+  ]
+}

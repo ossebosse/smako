@@ -1,0 +1,4579 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-05",
+  "recipes": [
+    {
+      "base_id": "smako-greek-chicken-cauliflower-couscous-mosaic",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad kyckling- och blomkålsmosaik med couscous – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "samrostad blomkål och kyckling",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "couscous",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Blomkålskyckling",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "blomkål",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blomkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Couscous",
+          "ingredients": [
+            {
+              "name": "couscous",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Couscous, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blomkålskyckling: Sätt ugnen på 220 °C över- och undervärme. Skölj, ansa och skär blomkål i små jämna bitar; skala rotfrukter före vägning. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "kyckling",
+            "blomkål"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela kyckling, blomkål, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 30 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 74 °C i kycklingens tjockaste mitt. Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "kyckling",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Couscous: Koka upp 312 ml vatten. Rör ner couscous, rapsolja och salt. Ta kastrullen från värmen och täck med lock.",
+          "uses": [
+            "couscous",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt couscousen svälla under lock.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fluffa couscousen ordentligt med en gaffel.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera blomkålskyckling och couscous. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "couscous"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 56 minuter totalt, varav 19 aktivt och 37 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Stora blomkålsbuketter och kyckling rostas tillsammans och serveras på fluffiga gryn med kylande kräm; närgranne till andra ugnsplåtar. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-cauliflower-couscous-mosaic",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad kyckling- och blomkålsmosaik med couscous – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "samrostad blomkål och kyckling",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "couscous; kall yoghurtsås",
+      "flavor": [
+        "citronjuice",
+        "paprikapulver"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Blomkålskyckling",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "blomkål",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blomkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "paprikapulver",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Paprikapulver, torr vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Couscous",
+          "ingredients": [
+            {
+              "name": "couscous",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Couscous, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blomkålskyckling: Sätt ugnen på 220 °C över- och undervärme. Ansa och finhacka vitlök. Skölj, ansa och skär blomkål i små jämna bitar; skala rotfrukter före vägning. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela kyckling, blomkål, rapsolja, salt, paprikapulver och vitlök i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 30 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver",
+            "vitlök"
+          ],
+          "minutes": 30,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 74 °C i kycklingens tjockaste mitt. Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "kyckling",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Couscous: Koka upp 312 ml vatten. Rör ner couscous, rapsolja och salt. Ta kastrullen från värmen och täck med lock.",
+          "uses": [
+            "couscous",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt couscousen svälla under lock.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fluffa couscousen ordentligt med en gaffel.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera blomkålskyckling, couscous och kall yoghurtsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "paprikapulver",
+            "vitlök",
+            "couscous",
+            "yoghurt naturell"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 60 minuter totalt, varav 23 aktivt och 37 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Stora blomkålsbuketter och kyckling rostas tillsammans och serveras på fluffiga gryn med kylande kräm; närgranne till andra ugnsplåtar. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-cauliflower-couscous-mosaic",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad kyckling- och blomkålsmosaik med couscous – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "samrostad blomkål och kyckling",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "couscous; kall yoghurtsås; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "paprikapulver",
+        "mynta"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Blomkålskyckling",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "blomkål",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Blomkål, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "paprikapulver",
+              "form": "dry",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Paprikapulver, torr vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Couscous",
+          "ingredients": [
+            {
+              "name": "couscous",
+              "form": "dry",
+              "quantity": 240.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Couscous, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk mynta, blad"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blomkålskyckling: Sätt ugnen på 220 °C över- och undervärme. Ansa och finhacka vitlök. Skölj, ansa och skär blomkål i små jämna bitar; skala rotfrukter före vägning. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela kyckling, blomkål, rapsolja, salt, paprikapulver och vitlök i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 30 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "rapsolja",
+            "salt",
+            "paprikapulver",
+            "vitlök"
+          ],
+          "minutes": 30,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 74 °C i kycklingens tjockaste mitt. Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "kyckling",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Couscous: Koka upp 312 ml vatten. Rör ner couscous, rapsolja och salt. Ta kastrullen från värmen och täck med lock.",
+          "uses": [
+            "couscous",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt couscousen svälla under lock.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fluffa couscousen ordentligt med en gaffel.",
+          "uses": [
+            "couscous"
+          ],
+          "minutes": 1,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, salt, gurka och mynta till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "salt",
+            "gurka",
+            "mynta"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, oliver, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "oliver",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera blomkålskyckling, couscous, kall yoghurtsås och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "blomkål",
+            "rapsolja",
+            "citronjuice",
+            "salt",
+            "paprikapulver",
+            "vitlök",
+            "couscous",
+            "yoghurt naturell",
+            "gurka",
+            "mynta",
+            "tomat",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            7,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 68 minuter totalt, varav 31 aktivt och 37 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mynta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Stora blomkålsbuketter och kyckling rostas tillsammans och serveras på fluffiga gryn med kylande kräm; närgranne till andra ugnsplåtar. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-celery-apple-braise",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad sellerikyckling med äpple och potatis – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "kycklingbräsering med frukt och selleri",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "citronpotatis",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Sellerikyckling",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Citronpotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sellerikyckling: Ansa och finhacka gul lök. Skölj, ansa och skär selleri i små jämna bitar; skala rotfrukter före vägning. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Kärna ur äpplet och skär fruktköttet i små bitar.",
+          "uses": [
+            "kyckling",
+            "selleri",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och kyckling under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner selleri, äpple och salt och 350 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "selleri",
+            "äpple",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 25 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "selleri",
+            "äpple",
+            "salt",
+            "kyckling",
+            "gul lök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Citronpotatis: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Vänd den med rapsolja och citronjuice.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera sellerikyckling och citronpotatis. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "selleri",
+            "äpple",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "potatis",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 34 aktivt och 45 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Selleri och äpple mjuknar till ett syrligt ljust spad runt kycklingen; egen balans mellan kokt frukt och grönsak. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-celery-apple-braise",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad sellerikyckling med äpple och potatis – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "kycklingbräsering med frukt och selleri",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "citronpotatis",
+      "flavor": [
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Sellerikyckling",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Citronpotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sellerikyckling: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär selleri i små jämna bitar; skala rotfrukter före vägning. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Kärna ur äpplet och skär fruktköttet i små bitar. Finhacka dill.",
+          "uses": [
+            "kyckling",
+            "selleri",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och kyckling under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner selleri, äpple och salt och 350 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "selleri",
+            "äpple",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 25 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "selleri",
+            "äpple",
+            "salt",
+            "kyckling",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice och dill precis före servering. Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "citronjuice",
+            "dill",
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Citronpotatis: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Vänd den med rapsolja och citronjuice.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera sellerikyckling och citronpotatis. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "selleri",
+            "äpple",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "citronjuice",
+            "dill",
+            "vitlök",
+            "potatis"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 79 minuter totalt, varav 34 aktivt och 45 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Selleri och äpple mjuknar till ett syrligt ljust spad runt kycklingen; egen balans mellan kokt frukt och grönsak. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-celery-apple-braise",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad sellerikyckling med äpple och potatis – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "kycklingbräsering med frukt och selleri",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "citronpotatis; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Sellerikyckling",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Citronpotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sellerikyckling: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär selleri i små jämna bitar; skala rotfrukter före vägning. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör. Kärna ur äpplet och skär fruktköttet i små bitar. Finhacka dill.",
+          "uses": [
+            "kyckling",
+            "selleri",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och kyckling under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner selleri, äpple och salt och 350 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "selleri",
+            "äpple",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 25 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "selleri",
+            "äpple",
+            "salt",
+            "kyckling",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner citronjuice, dill och yoghurt naturell precis före servering. Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "citronjuice",
+            "dill",
+            "yoghurt naturell",
+            "kyckling"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Citronpotatis: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Vänd den med rapsolja och citronjuice.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda gurka, tomat, persilja, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera sellerikyckling, citronpotatis och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "selleri",
+            "äpple",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "citronjuice",
+            "dill",
+            "vitlök",
+            "yoghurt naturell",
+            "potatis",
+            "gurka",
+            "tomat",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 87 minuter totalt, varav 42 aktivt och 45 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Selleri och äpple mjuknar till ett syrligt ljust spad runt kycklingen; egen balans mellan kokt frukt och grönsak. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-charred-aubergine-crisp-lentils",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad kyckling på auberginekräm med linskrisp – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "kyckling på röstad grönsakskräm med linskrisp",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "spröda hela linser",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kyckling och röstad auberginekräm",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Spröda hela linser",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kyckling och röstad auberginekräm: Sätt ugnen på 250 °C. Stick hål i auberginerna och rosta dem hela på bakplåtspapper i 45 minuter tills skalet är mörkt och innanmätet helt mjukt. Vänd efter halva tiden.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 48,
+          "passive": true
+        },
+        {
+          "text": "Låt auberginerna svalna kort. Öppna dem, skrapa ur allt mjukt fruktkött och kasta skalet. Låt fruktköttet rinna av i sil 5 minuter. Mosa med yoghurt, citronjuice och hälften av saltet.",
+          "uses": [
+            "aubergine",
+            "yoghurt naturell",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skär kycklingen i tunna skivor. Stek i all olja och resterande salt tills den fått färg och når minst 74 °C i tjockaste mitt, cirka 12 minuter. Lägg över auberginekrämen med stekskyn.",
+          "uses": [
+            "kyckling",
+            "rapsolja",
+            "salt",
+            "aubergine",
+            "yoghurt naturell"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Spröda hela linser: Koka linserna i 800 ml vatten cirka 30 minuter tills de är mjuka men håller ihop. Häll av och låt ånga av ordentligt.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 220 °C. Blanda linserna med olja och salt på bakplåtspapper. Rosta 20 minuter och rör en gång tills ytan är torr och spröd. Strö över kycklingen.",
+          "uses": [
+            "gröna linser",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 24,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera kyckling och röstad auberginekräm och spröda hela linser. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "aubergine",
+            "yoghurt naturell",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "gröna linser"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 139 minuter totalt, varav 32 aktivt och 107 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Helrostat auberginefruktkött skalas och mosas till en yoghurtkräm; hela linser kokas och rostas separat till torrt krisp. Kycklingen ligger på puré med knapriga linser, i stället för att fylla aubergineskal. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-charred-aubergine-crisp-lentils",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad kyckling på auberginekräm med linskrisp – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "kyckling på röstad grönsakskräm med linskrisp",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "spröda hela linser; örtsallad",
+      "flavor": [
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kyckling och röstad auberginekräm",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Spröda hela linser",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtsallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kyckling och röstad auberginekräm: Sätt ugnen på 250 °C. Stick hål i auberginerna och rosta dem hela på bakplåtspapper i 45 minuter tills skalet är mörkt och innanmätet helt mjukt. Vänd efter halva tiden.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 48,
+          "passive": true
+        },
+        {
+          "text": "Låt auberginerna svalna kort. Öppna dem, skrapa ur allt mjukt fruktkött och kasta skalet. Låt fruktköttet rinna av i sil 5 minuter. Mosa med yoghurt, citronjuice och hälften av saltet.",
+          "uses": [
+            "aubergine",
+            "yoghurt naturell",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skär kycklingen i tunna skivor. Stek i all olja och resterande salt tills den fått färg och når minst 74 °C i tjockaste mitt, cirka 12 minuter. Lägg över auberginekrämen med stekskyn.",
+          "uses": [
+            "kyckling",
+            "rapsolja",
+            "salt",
+            "aubergine",
+            "yoghurt naturell"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Spröda hela linser: Koka linserna i 800 ml vatten cirka 30 minuter tills de är mjuka men håller ihop. Häll av och låt ånga av ordentligt.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 220 °C. Blanda linserna med olja och salt på bakplåtspapper. Rosta 20 minuter och rör en gång tills ytan är torr och spröd. Strö över kycklingen.",
+          "uses": [
+            "gröna linser",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 24,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Örtsallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda tomat, persilja, rödlök, citronjuice, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "persilja",
+            "rödlök",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera kyckling och röstad auberginekräm, spröda hela linser och örtsallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "aubergine",
+            "yoghurt naturell",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "tomat",
+            "persilja",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 147 minuter totalt, varav 40 aktivt och 107 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Helrostat auberginefruktkött skalas och mosas till en yoghurtkräm; hela linser kokas och rostas separat till torrt krisp. Kycklingen ligger på puré med knapriga linser, i stället för att fylla aubergineskal. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-charred-aubergine-crisp-lentils",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad kyckling på auberginekräm med linskrisp – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "kyckling på röstad grönsakskräm med linskrisp",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "spröda hela linser; örtsallad; varmt bröd",
+      "flavor": [
+        "citronjuice",
+        "persilja",
+        "mynta"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kyckling och röstad auberginekräm",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Spröda hela linser",
+          "ingredients": [
+            {
+              "name": "gröna linser",
+              "form": "dry",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Gröna linser, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Örtsallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "mynta",
+              "form": "raw_edible",
+              "quantity": 12.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Färsk mynta, blad"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kyckling och röstad auberginekräm: Sätt ugnen på 250 °C. Stick hål i auberginerna och rosta dem hela på bakplåtspapper i 45 minuter tills skalet är mörkt och innanmätet helt mjukt. Vänd efter halva tiden.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 48,
+          "passive": true
+        },
+        {
+          "text": "Låt auberginerna svalna kort. Öppna dem, skrapa ur allt mjukt fruktkött och kasta skalet. Låt fruktköttet rinna av i sil 5 minuter. Mosa med yoghurt, citronjuice och hälften av saltet.",
+          "uses": [
+            "aubergine",
+            "yoghurt naturell",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skär kycklingen i tunna skivor. Stek i all olja och resterande salt tills den fått färg och når minst 74 °C i tjockaste mitt, cirka 12 minuter. Lägg över auberginekrämen med stekskyn.",
+          "uses": [
+            "kyckling",
+            "rapsolja",
+            "salt",
+            "aubergine",
+            "yoghurt naturell"
+          ],
+          "minutes": 18,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Spröda hela linser: Koka linserna i 800 ml vatten cirka 30 minuter tills de är mjuka men håller ihop. Häll av och låt ånga av ordentligt.",
+          "uses": [
+            "gröna linser"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 220 °C. Blanda linserna med olja och salt på bakplåtspapper. Rosta 20 minuter och rör en gång tills ytan är torr och spröd. Strö över kycklingen.",
+          "uses": [
+            "gröna linser",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 24,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Örtsallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja och mynta.",
+          "uses": [
+            "tomat",
+            "persilja",
+            "rödlök",
+            "gurka",
+            "oliver",
+            "mynta"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda tomat, persilja, rödlök, citronjuice, rapsolja, salt, gurka, oliver och mynta i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "persilja",
+            "rödlök",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "gurka",
+            "oliver",
+            "mynta"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera kyckling och röstad auberginekräm, spröda hela linser, örtsallad och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "aubergine",
+            "yoghurt naturell",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "gröna linser",
+            "tomat",
+            "persilja",
+            "rödlök",
+            "gurka",
+            "oliver",
+            "mynta",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            5,
+            7,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 157 minuter totalt, varav 43 aktivt och 114 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av gröna linser och mynta; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Helrostat auberginefruktkött skalas och mosas till en yoghurtkräm; hela linser kokas och rostas separat till torrt krisp. Kycklingen ligger på puré med knapriga linser, i stället för att fylla aubergineskal. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-chickpea-crisp-potato-tray",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad krosspotatis med kyckling och kikärtskrisp – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "krosspotatisbädd med rostad kyckling",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "kycklingkikärtor",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Krosspotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kycklingkikärtor",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Krosspotatis: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Lägg den kokta potatisen på en plåt, tryck till med en gaffel och ringla oljan över. Använd hela komponentens rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kycklingkikärtor: Sätt ugnen på 220 °C över- och undervärme. Låt kikärtor rinna av noga. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "kyckling",
+            "kikärtor"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela kyckling, kikärtor, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 30 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 74 °C i kycklingens tjockaste mitt. Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "kyckling",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Låt den kokta och krossade potatisen ligga glest på plåten med komponentens redan fördelade olja.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Rosta krosspotatisen cirka 28 minuter tills kanterna är gyllene och spröda.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 28,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg de färdigrostade kycklingkikärtorna över krosspotatisen och skeda formens saft över.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "kikärtor",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera krosspotatis och kycklingkikärtor. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "kikärtor",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 110 minuter totalt, varav 32 aktivt och 78 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Förkokt krossad potatis rostas spröd som en bädd under kyckling och kikärtor; två texturer av stärkelse och baljväxt. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-chickpea-crisp-potato-tray",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad krosspotatis med kyckling och kikärtskrisp – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "krosspotatisbädd med rostad kyckling",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "kycklingkikärtor; kall yoghurtsås",
+      "flavor": [
+        "citronjuice",
+        "oregano"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Krosspotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kycklingkikärtor",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Krosspotatis: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Lägg den kokta potatisen på en plåt, tryck till med en gaffel och ringla oljan över. Använd hela komponentens rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kycklingkikärtor: Sätt ugnen på 220 °C över- och undervärme. Ansa och finhacka vitlök. Låt kikärtor rinna av noga. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela kyckling, kikärtor, rapsolja, salt, oregano och vitlök i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "rapsolja",
+            "salt",
+            "oregano",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 30 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "rapsolja",
+            "salt",
+            "oregano",
+            "vitlök"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 74 °C i kycklingens tjockaste mitt. Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "kyckling",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell och salt till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Låt den kokta och krossade potatisen ligga glest på plåten med komponentens redan fördelade olja.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Rosta krosspotatisen cirka 28 minuter tills kanterna är gyllene och spröda.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 28,
+          "after": [
+            9
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg de färdigrostade kycklingkikärtorna över krosspotatisen och skeda formens saft över.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "kikärtor",
+            "citronjuice",
+            "oregano",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera krosspotatis, kycklingkikärtor och kall yoghurtsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "kikärtor",
+            "citronjuice",
+            "oregano",
+            "vitlök",
+            "yoghurt naturell"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            8,
+            9,
+            10,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 114 minuter totalt, varav 36 aktivt och 78 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Förkokt krossad potatis rostas spröd som en bädd under kyckling och kikärtor; två texturer av stärkelse och baljväxt. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-chickpea-crisp-potato-tray",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad krosspotatis med kyckling och kikärtskrisp – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "krosspotatisbädd med rostad kyckling",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "kycklingkikärtor; kall yoghurtsås; fräsch sallad",
+      "flavor": [
+        "citronjuice",
+        "oregano",
+        "dill",
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Grytlappar",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Krosspotatis",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 900.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Kycklingkikärtor",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Kall yoghurtsås",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Tjock naturell yoghurt"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Krosspotatis: Skala potatisen och skär i jämna bitar. Koka upp med 1400 ml vatten och komponentens salt.",
+          "uses": [
+            "potatis",
+            "salt"
+          ],
+          "minutes": 7
+        },
+        {
+          "text": "Sjud rotfrukterna under lock cirka 20 minuter tills bitarna är mjuka.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Häll av potatisen. Lägg den kokta potatisen på en plåt, tryck till med en gaffel och ringla oljan över. Använd hela komponentens rapsolja i den färdiga potatisblandningen; finhacka örter, vitlök och fasta inlägg och riv eventuell ost före inblandning.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kycklingkikärtor: Sätt ugnen på 220 °C över- och undervärme. Ansa och finhacka vitlök. Låt kikärtor rinna av noga. Skär kyckling i jämna små bitar och håll råvarorna och redskapen åtskilda från färdiga tillbehör.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Fördela kyckling, kikärtor, rapsolja, salt, oregano och vitlök i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "rapsolja",
+            "salt",
+            "oregano",
+            "vitlök"
+          ],
+          "minutes": 3,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 30 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "rapsolja",
+            "salt",
+            "oregano",
+            "vitlök"
+          ],
+          "minutes": 30,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Kontrollera minst 74 °C i kycklingens tjockaste mitt. Fördela citronjuice över den färdiga maten.",
+          "uses": [
+            "kyckling",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Kall yoghurtsås: Finhacka fasta bitar och färska örter. Rör ihop yoghurt naturell, salt, gurka och dill till en jämn röra.",
+          "uses": [
+            "yoghurt naturell",
+            "salt",
+            "gurka",
+            "dill"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka persilja.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Blanda tomat, rödlök, persilja, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "persilja",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Låt den kokta och krossade potatisen ligga glest på plåten med komponentens redan fördelade olja.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Rosta krosspotatisen cirka 28 minuter tills kanterna är gyllene och spröda.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 28,
+          "after": [
+            11
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg de färdigrostade kycklingkikärtorna över krosspotatisen och skeda formens saft över.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "kikärtor",
+            "citronjuice",
+            "oregano",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Servera krosspotatis, kycklingkikärtor, kall yoghurtsås och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "potatis",
+            "rapsolja",
+            "salt",
+            "kyckling",
+            "kikärtor",
+            "citronjuice",
+            "oregano",
+            "vitlök",
+            "yoghurt naturell",
+            "gurka",
+            "dill",
+            "tomat",
+            "rödlök",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            3,
+            7,
+            8,
+            10,
+            11,
+            12,
+            13
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 122 minuter totalt, varav 44 aktivt och 78 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Förkokt krossad potatis rostas spröd som en bädd under kyckling och kikärtor; två texturer av stärkelse och baljväxt. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-chickpea-tomato-dumpling-soup",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad tomatsoppa med kyckling- och kikärtsbullar – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "soppa med baljväxtbundna kycklingbullar",
+      "primary": "kyckling",
+      "method": "pan",
+      "side": "tomatsoppa; varmt bröd",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kycklingkikärtsbullar",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatsoppa",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kycklingkikärtsbullar: Låt kikärtor rinna av noga. Mosa kikärtor till en grov massa.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Finhacka kyckling till en klibbig färs med kniv; håll råvaran kall och diska redskapen efteråt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda kyckling, kikärtor, ströbröd och salt till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till små bollar, cirka 2 cm stora, och vänd dem flera gånger under stekningen. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tomatsoppa: Ansa och finhacka gul lök.",
+          "uses": [
+            "gul lök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 700 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 20 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg de genomstekta kycklingkikärtsbullarna i den heta tomatsoppan. Fördela soppan och bullarna jämnt mellan skålarna.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "gul lök"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera kycklingkikärtsbullar, tomatsoppa och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "gul lök",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            9,
+            11,
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 105 minuter totalt, varav 63 aktivt och 42 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Små formade kyckling-kikärtsbullar serveras nedsänkta i tomatsoppa med bröd; soppa och bullar är separata komponenter. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-chickpea-tomato-dumpling-soup",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad tomatsoppa med kyckling- och kikärtsbullar – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "soppa med baljväxtbundna kycklingbullar",
+      "primary": "kyckling",
+      "method": "pan",
+      "side": "tomatsoppa; varmt bröd",
+      "flavor": [
+        "persilja",
+        "oregano"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kycklingkikärtsbullar",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatsoppa",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kycklingkikärtsbullar: Låt kikärtor rinna av noga. Finhacka persilja. Mosa kikärtor till en grov massa.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "persilja"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Finhacka kyckling till en klibbig färs med kniv; håll råvaran kall och diska redskapen efteråt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda kyckling, kikärtor, ströbröd, salt och persilja till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till små bollar, cirka 2 cm stora, och vänd dem flera gånger under stekningen. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tomatsoppa: Ansa och finhacka gul lök och vitlök.",
+          "uses": [
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater, salt och oregano och 700 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 20 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "oregano",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg de genomstekta kycklingkikärtsbullarna i den heta tomatsoppan. Fördela soppan och bullarna jämnt mellan skålarna.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "persilja",
+            "krossade tomater",
+            "gul lök",
+            "vitlök",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera kycklingkikärtsbullar, tomatsoppa och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "persilja",
+            "krossade tomater",
+            "gul lök",
+            "vitlök",
+            "oregano",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            9,
+            11,
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 10 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 105 minuter totalt, varav 63 aktivt och 42 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Små formade kyckling-kikärtsbullar serveras nedsänkta i tomatsoppa med bröd; soppa och bullar är separata komponenter. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-greek-chicken-chickpea-tomato-dumpling-soup",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Grekiskinspirerad tomatsoppa med kyckling- och kikärtsbullar – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "greek",
+      "family": "soppa med baljväxtbundna kycklingbullar",
+      "primary": "kyckling",
+      "method": "pan",
+      "side": "tomatsoppa; varmt bröd; fräsch sallad",
+      "flavor": [
+        "persilja",
+        "oregano",
+        "citronjuice",
+        "dill"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Kylskåp",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekpanna",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Kycklingkikärtsbullar",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kycklingbröstfilé, rå ätlig vikt utan ben och skinn"
+            },
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta kikärtor, avrunnen vikt"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatsoppa",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "dill",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Dill, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kycklingkikärtsbullar: Låt kikärtor rinna av noga. Finhacka persilja. Mosa kikärtor till en grov massa.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "persilja"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Finhacka kyckling till en klibbig färs med kniv; håll råvaran kall och diska redskapen efteråt.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda kyckling, kikärtor, ströbröd, salt och persilja till en sammanhängande smet. Arbeta blandningen en stund så att bindningen fördelas.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 4,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt smeten vila i kylskåp så att bindningen hinner svälla.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 15,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Forma smeten till små bollar, cirka 2 cm stora, och vänd dem flera gånger under stekningen. Fördela komponentens rapsolja mellan stekomgångarna och stek på medelvärme cirka 4 minuter per sida tills bitarna håller ihop, fått färg och är genomtillagade även i mitten. Sänk värmen och förläng tiden om mitten fortfarande är rå eller kladdig. Kontrollera minst 74 °C i kycklingens tjockaste mitt.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "persilja"
+          ],
+          "minutes": 18,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Tomatsoppa: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär morot och selleri i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gul lök",
+            "vitlök",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater, salt, oregano, morot och selleri och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "oregano",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 20 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "oregano",
+            "morot",
+            "selleri",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 20,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            10
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fräsch sallad: Skölj, ansa och skär gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka dill.",
+          "uses": [
+            "gurka",
+            "dill"
+          ],
+          "minutes": 6,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Blanda gurka, citronjuice, dill, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "citronjuice",
+            "dill",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            12
+          ]
+        },
+        {
+          "text": "Lägg de genomstekta kycklingkikärtsbullarna i den heta tomatsoppan. Fördela soppan och bullarna jämnt mellan skålarna.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "persilja",
+            "krossade tomater",
+            "gul lök",
+            "vitlök",
+            "oregano",
+            "morot",
+            "selleri"
+          ],
+          "minutes": 3,
+          "after": [
+            13
+          ]
+        },
+        {
+          "text": "Servera kycklingkikärtsbullar, tomatsoppa, varmt bröd och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "kyckling",
+            "kikärtor",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "persilja",
+            "krossade tomater",
+            "gul lök",
+            "vitlök",
+            "oregano",
+            "morot",
+            "selleri",
+            "bröd",
+            "gurka",
+            "citronjuice",
+            "dill"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            9,
+            11,
+            13,
+            14
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 15 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 113 minuter totalt, varav 71 aktivt och 42 huvudsakligen passivt. Tiderna behöver provlagas.  Kulinarisk avgränsning: Små formade kyckling-kikärtsbullar serveras nedsänkta i tomatsoppa med bröd; soppa och bullar är separata komponenter. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}

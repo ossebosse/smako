@@ -1,0 +1,1854 @@
+{
+  "title": "Smako – leveransöversikt och fortsättningsregister, paket 01",
+  "date": "2026-10-25",
+  "pack_id": "smako-recipe-pack-01",
+  "recipe_file": "smako-recept-paket-01.json",
+  "overview_purpose": "Separat bokföring och granskningsunderlag. Denna översiktsfil ska inte matas till receptimporten som ett smako-recipe-authoring-v1-paket.",
+  "provenance": "AI-författade receptutkast, inte provlagade. Ingen import, formell granskning, produktkvalificering eller något godkännande i Smako har genomförts.",
+  "source_material": {
+    "files": [
+      "prompt-till-chatgpt.txt",
+      "smako-receptunderlag.json",
+      "smako-receptexempel.json"
+    ],
+    "existing_recipe_records": 262,
+    "existing_unique_base_ids": 165,
+    "known_ingredient_identities": 86,
+    "excluded_example_base_id": "smako-indian-lentil-spinach-rice-example",
+    "comparison_scope": "Alla 262 befintliga receptposter, inklusive varianter inom de 165 grundidentiteterna, samt format-exemplet. Underlaget innehåller sammanfattningar med titel, familj, metod, tillbehör och ingredienser, inte de befintliga receptens fullständiga instruktioner.",
+    "earlier_packages_in_this_delivery_series": [],
+    "external_prior_package_note": "Inga andra tidigare paket i denna nya leveransserie har varit tillgängliga. Ingen jämförelse mot obifogade leveranser påstås."
+  },
+  "distribution_plan": {
+    "new_base_dishes": 800,
+    "by_meal": {
+      "dinner": 600,
+      "breakfast": 100,
+      "snack": 100
+    },
+    "dinner_bases_per_cuisine": [
+      {
+        "cuisine": "greek",
+        "target": 100,
+        "vegetarian_including_vegan": 40,
+        "vegan_minimum_included_in_vegetarian": 20,
+        "chicken": 30,
+        "fish": 15,
+        "other_meat": 15
+      },
+      {
+        "cuisine": "italian",
+        "target": 100,
+        "vegetarian_including_vegan": 40,
+        "vegan_minimum_included_in_vegetarian": 20,
+        "chicken": 30,
+        "fish": 15,
+        "other_meat": 15
+      },
+      {
+        "cuisine": "mexican",
+        "target": 100,
+        "vegetarian_including_vegan": 40,
+        "vegan_minimum_included_in_vegetarian": 20,
+        "chicken": 30,
+        "fish": 15,
+        "other_meat": 15
+      },
+      {
+        "cuisine": "indian",
+        "target": 100,
+        "vegetarian_including_vegan": 40,
+        "vegan_minimum_included_in_vegetarian": 20,
+        "chicken": 30,
+        "fish": 15,
+        "other_meat": 15
+      },
+      {
+        "cuisine": "thai",
+        "target": 100,
+        "vegetarian_including_vegan": 40,
+        "vegan_minimum_included_in_vegetarian": 20,
+        "chicken": 30,
+        "fish": 15,
+        "other_meat": 15
+      },
+      {
+        "cuisine": "swedish",
+        "target": 100,
+        "vegetarian_including_vegan": 40,
+        "vegan_minimum_included_in_vegetarian": 20,
+        "chicken": 30,
+        "fish": 15,
+        "other_meat": 15
+      }
+    ],
+    "dinner_protein_targets": {
+      "vegetarian_including_vegan": 240,
+      "vegan_minimum_included_in_vegetarian": 120,
+      "chicken": 180,
+      "fish": 90,
+      "other_meat": 90
+    },
+    "default_variants": {
+      "dinner": [
+        "simple",
+        "standard",
+        "extended"
+      ],
+      "breakfast": [
+        "simple",
+        "extended"
+      ],
+      "snack": [
+        "simple",
+        "extended"
+      ]
+    },
+    "expected_complete_variants_if_targets_hold": 2200,
+    "expected_packages_at_five_bases": 160,
+    "batching": "Normalt fem grundrätter per paket, med en grundrätts varianter tillsammans. Paket 01 är pilot med tre middagar, en frukost och ett mellanmål. Därefter avstämning i block om 40 grundrätter: 30 middagar, fem frukostar och fem mellanmål. Första blocket återstår efter piloten 27 middagar, fyra frukostar och fyra mellanmål. Den exakta paketmixen får anpassas och bokförs.",
+    "quality_exception_rule": "Kvoter och variantantal är mål. Konstlade maträtter eller onödiga ingredienser ska inte användas för att nå dem. Motiverade avsteg ska redovisas när de uppstår.",
+    "future_selection_rule": "Smako ska senare pröva varje variant mot användarens min- och maxantal och övriga krav. Högre maxantal fortsätter att tillåta enklare varianter; högre minantal kräver fler ingredienser. Valet avgörs bland kvalificerade varianter mot verklig gemensam veckokorg, giltiga kampanjer och hela förpackningar. Inga kostnadsjämförelser eller påståenden om att fler ingredienser är bättre görs i paketet."
+  },
+  "this_delivery": {
+    "authored_new_base_candidates": 5,
+    "complete_variants": 13,
+    "by_meal": {
+      "dinner": {
+        "bases": 3,
+        "variants": 9
+      },
+      "breakfast": {
+        "bases": 1,
+        "variants": 2
+      },
+      "snack": {
+        "bases": 1,
+        "variants": 2
+      }
+    },
+    "by_cuisine_and_meal": [
+      {
+        "cuisine": "greek",
+        "dinner_new_bases": 0,
+        "dinner_variants": 0,
+        "breakfast_new_bases": 0,
+        "breakfast_variants": 0,
+        "snack_new_bases": 0,
+        "snack_variants": 0
+      },
+      {
+        "cuisine": "italian",
+        "dinner_new_bases": 1,
+        "dinner_variants": 3,
+        "breakfast_new_bases": 0,
+        "breakfast_variants": 0,
+        "snack_new_bases": 0,
+        "snack_variants": 0
+      },
+      {
+        "cuisine": "mexican",
+        "dinner_new_bases": 0,
+        "dinner_variants": 0,
+        "breakfast_new_bases": 0,
+        "breakfast_variants": 0,
+        "snack_new_bases": 0,
+        "snack_variants": 0
+      },
+      {
+        "cuisine": "indian",
+        "dinner_new_bases": 1,
+        "dinner_variants": 3,
+        "breakfast_new_bases": 0,
+        "breakfast_variants": 0,
+        "snack_new_bases": 0,
+        "snack_variants": 0
+      },
+      {
+        "cuisine": "thai",
+        "dinner_new_bases": 0,
+        "dinner_variants": 0,
+        "breakfast_new_bases": 0,
+        "breakfast_variants": 0,
+        "snack_new_bases": 0,
+        "snack_variants": 0
+      },
+      {
+        "cuisine": "swedish",
+        "dinner_new_bases": 1,
+        "dinner_variants": 3,
+        "breakfast_new_bases": 1,
+        "breakfast_variants": 2,
+        "snack_new_bases": 1,
+        "snack_variants": 2
+      }
+    ],
+    "dinner_protein_design": {
+      "vegetarian_including_vegan": 1,
+      "vegan_included_in_vegetarian": 1,
+      "vegetarian_non_vegan": 0,
+      "chicken": 1,
+      "fish": 1,
+      "other_meat": 0
+    },
+    "diet_counting_note": "Grundrättskvoten är redaktionell bokföring efter den författade ingredienslistan. Varje fullständig variant har bedömts från sina egna ingredienser; ingen diet-, allergen- eller näringskvalificering ärvs eller påstås vara godkänd.",
+    "variants_of_preexisting_base_dishes": 0,
+    "used_registered_ingredient_identities": 40,
+    "new_ingredient_proposals": [],
+    "unregistered_ingredient_identities": 0,
+    "deviations_from_variant_count_targets": [],
+    "deviations_from_count_guidelines": [],
+    "pilot_distribution_note": "Pilotens tre middagar täcker indiskt, italienskt och svenskt samt växtbaserat, kyckling och fisk. Grekiska, mexikanska och thailändska middagar samt annat kött återstår i denna series första avstämningsblock.",
+    "dinner_variants_with_10_to_15_local_count": 6,
+    "dinner_variants_below_current_default": 3,
+    "default_filter_note": "Varje middag har en vardagsvariant med 10 och en utökad variant med 13 räknade ingredienser. De enkla har 7 och ligger utanför standardens minantal 10; detta anges i respektive notes. Detta är en räknekontroll, inte ett påstående om att recepten blir valda eller är kvalificerade."
+  },
+  "full_variant_registry": [
+    {
+      "base_id": "smako-indian-lentil-crepes-potato",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "full_identity": "smako-indian-lentil-crepes-potato::simple::1.0.0",
+      "name": "Indiskinspirerade linspannkakor med potatisfyllning och gurka – enkel",
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "servings": 4,
+      "family": "fyllda linspannkakor",
+      "primary": "linser",
+      "method": "pan",
+      "side": "potatisfyllning och gurka",
+      "ingredient_count_local": 7,
+      "counted_ingredient_identities": [
+        {
+          "name": "citronjuice",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "gul lök",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "gurka",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "linser",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "potatis",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "spiskummin",
+          "form": "dry",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": false,
+      "active_step_minutes_sum": 65,
+      "passive_step_minutes_sum_not_elapsed": 265,
+      "estimated_elapsed_minutes_range": [
+        310,
+        310
+      ],
+      "ingredient_based_meal_description": "Växtbaserad middag utifrån den författade ingredienslistan.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-indian-lentil-crepes-potato",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "full_identity": "smako-indian-lentil-crepes-potato::standard::1.0.0",
+      "name": "Indiskinspirerade linspannkakor med potatis, spenat och gurka – vardag",
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "servings": 4,
+      "family": "fyllda linspannkakor",
+      "primary": "linser",
+      "method": "pan",
+      "side": "potatisfyllning och gurka",
+      "ingredient_count_local": 10,
+      "counted_ingredient_identities": [
+        {
+          "name": "citronjuice",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "gul lök",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "gurka",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "ingefära",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "linser",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "potatis",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "spenat",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "spiskummin",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "vitlök",
+          "form": "raw_edible",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": true,
+      "active_step_minutes_sum": 75,
+      "passive_step_minutes_sum_not_elapsed": 265,
+      "estimated_elapsed_minutes_range": [
+        320,
+        320
+      ],
+      "ingredient_based_meal_description": "Växtbaserad middag utifrån den författade ingredienslistan.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-indian-lentil-crepes-potato",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "full_identity": "smako-indian-lentil-crepes-potato::extended::1.0.0",
+      "name": "Indiskinspirerade linspannkakor med kryddig potatis- och spenatfyllning samt tomat- och gurksallad – utökad",
+      "meal_type": "dinner",
+      "cuisine": "indian",
+      "servings": 4,
+      "family": "fyllda linspannkakor",
+      "primary": "linser",
+      "method": "pan",
+      "side": "potatisfyllning och gurk- och tomatsallad",
+      "ingredient_count_local": 13,
+      "counted_ingredient_identities": [
+        {
+          "name": "citronjuice",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "gul lök",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "gurka",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "gurkmeja",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "ingefära",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "linser",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "malen koriander",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "potatis",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "spenat",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "spiskummin",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "tomat",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "vitlök",
+          "form": "raw_edible",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": true,
+      "active_step_minutes_sum": 77,
+      "passive_step_minutes_sum_not_elapsed": 265,
+      "estimated_elapsed_minutes_range": [
+        320,
+        320
+      ],
+      "ingredient_based_meal_description": "Växtbaserad middag utifrån den författade ingredienslistan.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-italian-chicken-spinach-roulades",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "full_identity": "smako-italian-chicken-spinach-roulades::simple::1.0.0",
+      "name": "Italienskinspirerade kycklingrullader med spenat, ost och potatis – enkel",
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "servings": 4,
+      "family": "fyllda kycklingrullader",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "kokt potatis",
+      "ingredient_count_local": 7,
+      "counted_ingredient_identities": [
+        {
+          "name": "krossade tomater",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "kyckling",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "oregano",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "ost",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "potatis",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "spenat",
+          "form": "as_sold",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": false,
+      "active_step_minutes_sum": 41,
+      "passive_step_minutes_sum_not_elapsed": 48,
+      "estimated_elapsed_minutes_range": [
+        60,
+        70
+      ],
+      "ingredient_based_meal_description": "Middag med kyckling.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-italian-chicken-spinach-roulades",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "full_identity": "smako-italian-chicken-spinach-roulades::standard::1.0.0",
+      "name": "Italienskinspirerade kycklingrullader med zucchini i tomatsåsen – vardag",
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "servings": 4,
+      "family": "fyllda kycklingrullader",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "kokt potatis",
+      "ingredient_count_local": 10,
+      "counted_ingredient_identities": [
+        {
+          "name": "gul lök",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "krossade tomater",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "kyckling",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "oregano",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "ost",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "potatis",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "spenat",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "vitlök",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "zucchini",
+          "form": "raw_edible",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": true,
+      "active_step_minutes_sum": 54,
+      "passive_step_minutes_sum_not_elapsed": 48,
+      "estimated_elapsed_minutes_range": [
+        70,
+        80
+      ],
+      "ingredient_based_meal_description": "Middag med kyckling.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-italian-chicken-spinach-roulades",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "full_identity": "smako-italian-chicken-spinach-roulades::extended::1.0.0",
+      "name": "Italienskinspirerade kycklingrullader med basilikatomatsås och citronmorot – utökad",
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "servings": 4,
+      "family": "fyllda kycklingrullader",
+      "primary": "kyckling",
+      "method": "oven",
+      "side": "kokt potatis",
+      "ingredient_count_local": 13,
+      "counted_ingredient_identities": [
+        {
+          "name": "basilika",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "citronjuice",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "gul lök",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "krossade tomater",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "kyckling",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "morot",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "oregano",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "ost",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "potatis",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "spenat",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "vitlök",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "zucchini",
+          "form": "raw_edible",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": true,
+      "active_step_minutes_sum": 59,
+      "passive_step_minutes_sum_not_elapsed": 48,
+      "estimated_elapsed_minutes_range": [
+        75,
+        85
+      ],
+      "ingredient_based_meal_description": "Middag med kyckling.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-swedish-salmon-cakes-potatoes",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "full_identity": "smako-swedish-salmon-cakes-potatoes::simple::1.0.0",
+      "name": "Laxbiffar med potatis, ärtor och citronyoghurt – enkel",
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "servings": 4,
+      "family": "fiskbiffar",
+      "primary": "lax",
+      "method": "pan",
+      "side": "kokt potatis",
+      "ingredient_count_local": 7,
+      "counted_ingredient_identities": [
+        {
+          "name": "citronjuice",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "lax",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "potatis",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "ströbröd",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "yoghurt naturell",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "ärtor",
+          "form": "as_sold",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": false,
+      "active_step_minutes_sum": 46,
+      "passive_step_minutes_sum_not_elapsed": 33,
+      "estimated_elapsed_minutes_range": [
+        55,
+        65
+      ],
+      "ingredient_based_meal_description": "Middag med fisk.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-swedish-salmon-cakes-potatoes",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "full_identity": "smako-swedish-salmon-cakes-potatoes::standard::1.0.0",
+      "name": "Laxbiffar med senapsdillsås och citronmorot – vardag",
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "servings": 4,
+      "family": "fiskbiffar",
+      "primary": "lax",
+      "method": "pan",
+      "side": "kokt potatis",
+      "ingredient_count_local": 10,
+      "counted_ingredient_identities": [
+        {
+          "name": "citronjuice",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "dill",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "lax",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "morot",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "potatis",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "senap",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "ströbröd",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "yoghurt naturell",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "ärtor",
+          "form": "as_sold",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": true,
+      "active_step_minutes_sum": 51,
+      "passive_step_minutes_sum_not_elapsed": 33,
+      "estimated_elapsed_minutes_range": [
+        55,
+        65
+      ],
+      "ingredient_based_meal_description": "Middag med fisk.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-swedish-salmon-cakes-potatoes",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "full_identity": "smako-swedish-salmon-cakes-potatoes::extended::1.0.0",
+      "name": "Laxbiffar med pepparrotsdillsås och krispig gurksallad – utökad",
+      "meal_type": "dinner",
+      "cuisine": "swedish",
+      "servings": 4,
+      "family": "fiskbiffar",
+      "primary": "lax",
+      "method": "pan",
+      "side": "kokt potatis",
+      "ingredient_count_local": 13,
+      "counted_ingredient_identities": [
+        {
+          "name": "citronjuice",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "dill",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "gurka",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "lax",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "morot",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "pepparrot",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "potatis",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "rödlök",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "senap",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "ströbröd",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "yoghurt naturell",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "ärtor",
+          "form": "as_sold",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": true,
+      "active_step_minutes_sum": 54,
+      "passive_step_minutes_sum_not_elapsed": 33,
+      "estimated_elapsed_minutes_range": [
+        55,
+        65
+      ],
+      "ingredient_based_meal_description": "Middag med fisk.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-french-toast-apple-quark",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "full_identity": "smako-swedish-breakfast-french-toast-apple-quark::simple::1.0.0",
+      "name": "Fattiga riddare med äpple och kvarg – enkel",
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "servings": 1,
+      "family": "fattiga riddare",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "äpple och kvarg",
+      "ingredient_count_local": 6,
+      "counted_ingredient_identities": [
+        {
+          "name": "bröd",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "kvarg",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "mjölk",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "ägg",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "äpple",
+          "form": "raw_edible",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": null,
+      "active_step_minutes_sum": 16,
+      "passive_step_minutes_sum_not_elapsed": 2,
+      "estimated_elapsed_minutes_range": [
+        16,
+        16
+      ],
+      "ingredient_based_meal_description": "Måltid med ägg och mejeriprodukter.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-swedish-breakfast-french-toast-apple-quark",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "full_identity": "smako-swedish-breakfast-french-toast-apple-quark::extended::1.0.0",
+      "name": "Fattiga riddare med kaneläpple och jordnötskvarg – utökad",
+      "meal_type": "breakfast",
+      "cuisine": "swedish",
+      "servings": 1,
+      "family": "fattiga riddare",
+      "primary": "ägg",
+      "method": "pan",
+      "side": "varmt kaneläpple och jordnötskvarg",
+      "ingredient_count_local": 9,
+      "counted_ingredient_identities": [
+        {
+          "name": "bröd",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "citronjuice",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "jordnötssmör",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "kanel",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "kvarg",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "mjölk",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "ägg",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "äpple",
+          "form": "raw_edible",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": null,
+      "active_step_minutes_sum": 22,
+      "passive_step_minutes_sum_not_elapsed": 2,
+      "estimated_elapsed_minutes_range": [
+        22,
+        22
+      ],
+      "ingredient_based_meal_description": "Måltid med ägg och mejeriprodukter.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-swedish-snack-cottage-cheese-apple-cake",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "full_identity": "smako-swedish-snack-cottage-cheese-apple-cake::simple::1.0.0",
+      "name": "Liten kesokaka med äppelklyftor – enkel",
+      "meal_type": "snack",
+      "cuisine": "swedish",
+      "servings": 1,
+      "family": "kesokaka",
+      "primary": "keso",
+      "method": "bake",
+      "side": "äppelklyftor",
+      "ingredient_count_local": 6,
+      "counted_ingredient_identities": [
+        {
+          "name": "keso",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "mjölk",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "vetemjöl",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "ägg",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "äpple",
+          "form": "raw_edible",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": null,
+      "active_step_minutes_sum": 10,
+      "passive_step_minutes_sum_not_elapsed": 39,
+      "estimated_elapsed_minutes_range": [
+        43,
+        43
+      ],
+      "ingredient_based_meal_description": "Måltid med ägg och mejeriprodukter.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    },
+    {
+      "base_id": "smako-swedish-snack-cottage-cheese-apple-cake",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "full_identity": "smako-swedish-snack-cottage-cheese-apple-cake::extended::1.0.0",
+      "name": "Äppelkesokaka med kanel, yoghurt och jordnötskrisp – utökad",
+      "meal_type": "snack",
+      "cuisine": "swedish",
+      "servings": 1,
+      "family": "kesokaka",
+      "primary": "keso",
+      "method": "bake",
+      "side": "äpple, yoghurt och rostade jordnötter",
+      "ingredient_count_local": 9,
+      "counted_ingredient_identities": [
+        {
+          "name": "jordnötter",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "kanel",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "keso",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "mjölk",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "rapsolja",
+          "form": "as_sold",
+          "unit": "ml"
+        },
+        {
+          "name": "vetemjöl",
+          "form": "dry",
+          "unit": "g"
+        },
+        {
+          "name": "yoghurt naturell",
+          "form": "as_sold",
+          "unit": "g"
+        },
+        {
+          "name": "ägg",
+          "form": "raw_edible",
+          "unit": "g"
+        },
+        {
+          "name": "äpple",
+          "form": "raw_edible",
+          "unit": "g"
+        }
+      ],
+      "within_current_dinner_count_range_only": null,
+      "active_step_minutes_sum": 15,
+      "passive_step_minutes_sum_not_elapsed": 44,
+      "estimated_elapsed_minutes_range": [
+        48,
+        48
+      ],
+      "ingredient_based_meal_description": "Måltid med ägg och mejeriprodukter.",
+      "product_assessment_note": "Beskrivning och ingrediensantal är författarens underlag. Diet, allergener, näring, produktmatchning och valbarhet i Smako måste prövas för denna variant."
+    }
+  ],
+  "novelty_review": {
+    "existing_id_collisions": [],
+    "exact_counted_ingredient_set_matches_against_existing_records": [],
+    "identified_exact_duplicate_dishes": [],
+    "certainty_note": "Inga uppenbara dubbletter identifierades i den tillgängliga sammanställningen. Nya identiteter och avvikande ingredienslistor bevisar inte kulinarisk unikhet. Samtliga fem är nya grundrättskandidater för innehållsgranskning, med särskilt uttalade grannar nedan.",
+    "by_base": [
+      {
+        "base_id": "smako-indian-lentil-crepes-potato",
+        "nearest_existing_base_ids": [
+          "smako-swedish-lentil-patties",
+          "smako-indian-tofu-dal",
+          "smako-dinner-lentil-cabbage-rolls"
+        ],
+        "distinction": "Blötlagda röda linser mixas råa till pannkakssmet, steks tunt och fylls med potatis. Den författade processen och huvudstrukturen skiljer sig från linsgryta, lins- och havrebiffar samt linsfyllda kålblad.",
+        "review_points": [
+          "Bedöm kulinarisk avgränsning mot de befintliga linsrätterna. Deras fullständiga steg har inte ingått i underlaget.",
+          "Provlaga blötläggning i kyl, mixvätska, pannkakornas hållfasthet och gräddningstid. Fyra timmar är en uppskattning, med instruktion att förlänga vid hårda linser."
+        ]
+      },
+      {
+        "base_id": "smako-italian-chicken-spinach-roulades",
+        "nearest_existing_base_ids": [
+          "smako-italian-tomato-braised-chicken",
+          "smako-italian-chicken-cacciatore",
+          "smako-italian-piccata"
+        ],
+        "distinction": "Tunna kycklingskivor fylls med urpressad spenat och ost, rullas och bakas i tomatsås. Avgränsningen bygger på fyllda rullader, inte ett byte av krydda eller tillbehör.",
+        "review_points": [
+          "Jämför mot befintlig tomatbräserad kyckling och cacciatore vid redaktionell granskning.",
+          "Provlaga fyllningens fuktighet, storlek på kycklingskivor, rullning och ugnstid. Kontrollera även produktvalet kycklingbröst."
+        ]
+      },
+      {
+        "base_id": "smako-swedish-salmon-cakes-potatoes",
+        "nearest_existing_base_ids": [
+          "smako-greek-fish-plaki",
+          "smako-swedish-fish-potato-gratin",
+          "smako-swedish-fish-gratin-mash"
+        ],
+        "nearest_existing_variant_notes": "Särskilt gr03-lax inom smako-greek-fish-plaki och se02-lax inom smako-swedish-fish-potato-gratin har liknande protein och tillbehör.",
+        "distinction": "Rå lax finhackas, en del bearbetas till klibbig färs, och massan binds med yoghurt och ströbröd. Formade, pannstekta biffar ger en annan huvudstruktur än bakade laxfiléer eller fisk i gratäng.",
+        "review_points": [
+          "Delade ingredienser som lax, potatis, ärtor och dill är en likhet som ska granskas, även när huvudtekniken skiljer sig.",
+          "Provlaga bindning utan tillsatt ägg, kylvila och stektid."
+        ]
+      },
+      {
+        "base_id": "smako-swedish-breakfast-french-toast-apple-quark",
+        "nearest_existing_base_ids": [
+          "smako-breakfast-carrot-apple-yoghurt-bread",
+          "smako-swedish-breakfast-scrambled-eggs-spinach",
+          "smako-swedish-spinach-oven-pancake"
+        ],
+        "distinction": "Sammanhållna brödskivor blötläggs i äggmjölk och steks till fattiga riddare. Detta är en annan struktur än kall smörgås, äggröra och ugnspannkaka.",
+        "review_points": [
+          "Kontrollera brödets skivtjocklek och uppsugningsförmåga vid provlagning.",
+          "Utökad variant har jordnötssmör, vilket ska bedömas separat vid produkt- och allergenkontroll."
+        ]
+      },
+      {
+        "base_id": "smako-swedish-snack-cottage-cheese-apple-cake",
+        "nearest_existing_base_ids": [
+          "smako-breakfast-baked-oats-cottage",
+          "smako-swedish-breakfast-baked-apple-oats",
+          "smako-swedish-spinach-oven-pancake"
+        ],
+        "distinction": "Huvuddelen är en äggstannad kesosmet med lite vetemjöl som bindning och utan havre. Den närmaste befintliga posten smako-breakfast-baked-oats-cottage anges som ugnsgröt och innehåller havre, keso, yoghurt och äpple.",
+        "review_points": [
+          "Kulinarisk skillnad mot den befintliga ugnsgröten med keso och den salta ugnspannkakan är en uttrycklig redaktionell granskningspunkt; skillnaden är inte bevisad.",
+          "Provlaga formstorlek, högst cirka tre centimeters smetdjup och äggstanning. Den utökade får mindre mjölk och mer mjöl när äpple bakas in."
+        ]
+      }
+    ]
+  },
+  "validation": {
+    "own_structural_preflight_executed": true,
+    "own_preflight_error_count": 0,
+    "own_preflight_warning_count": 0,
+    "smako_validator_executed": false,
+    "smako_import_executed": false,
+    "checks_executed": [
+      "JSON-avkodning och fältstruktur enligt bifogat format.",
+      "Obligatoriska fält, tillåtna enums, variant_id och version. Inget level-fält behövs.",
+      "Unika base_id/variant_id/version inom paketet och ID-kollisioner mot underlag och exempel.",
+      "Exakta registrerade name/form/unit; krav ärvs från registret och inga nya pack-koder skapas.",
+      "Positiva mängder, portionsantal, komponent-ID, giltiga uses och bakåtriktade after.",
+      "Alla ingredienser refereras i instruktionernas uses och kontrollerades även manuellt i texten.",
+      "Ingrediensantal med deduplicering mellan komponenter; samma resultat per namn och per registeridentitet.",
+      "Processvatten i ml och sökning efter fasta upprepade ingrediensmängder i steg.",
+      "Kycklingens och laxens temperaturmarkörer enligt underlaget.",
+      "Summor av aktiva och passiva steg samt granskning av realistisk tidsordning och nödvändig utrustning.",
+      "Jämförelse av ingrediensuppsättningar och beskriven huvudstruktur mot alla befintliga sammanfattningar; separat redaktionell granskning av närmaste grannar. Befintliga mängder och steg har inte varit tillgängliga."
+    ],
+    "self_review_and_corrections": [
+      "Extra skålar, provsticka, måttsats, sked och grytlappar lades till där de faktiskt används.",
+      "Korrigerade en notering om olja i den enkla laxvarianten.",
+      "Lade till explicit temperaturkontroll för äggstanning och justerade aktiv tid samt uppskattad totaltid i frukost- och mellanmålsrecepten.",
+      "Den slutliga JSON-filen kontrollerades igen efter ändringarna."
+    ],
+    "limitations": [
+      "Ingen tillgång till användarens repository eller körning av Smakos riktiga validator/importer.",
+      "Ingen provlagning; smet, bindning, slutlig smakbalans, konsistens, avkastning och praktiska tider återstår att pröva.",
+      "Inga produktuppslag, aktuella förpackningspriser, kampanjpriser, inköpsoptimering, näringsberäkningar eller allergengarantier.",
+      "Label kan precisera till exempel kycklingbröst och skivat bröd, men produktkopplingens stöd för dessa egenskaper är inte verifierat.",
+      "Tidsangivelser är uppskattningar. Passiva stegtider kan överlappa varandra och aktivt arbete; deras summa är inte total väntetid.",
+      "Tidigare receptsteg och obifogade paket kan innehålla liknande rätter som inte framgår av sammanfattningarna."
+    ],
+    "local_preflight_report": {
+      "checker": "Independent local preflight v1; NOT Smako's validator/importer",
+      "scope": "Explicit supplied fields/enums, ingredient identities, structural references, arithmetic and text heuristics; no product, taste, nutrition, allergen or formal novelty validation.",
+      "timing_caveat": "Sums of active/passive step durations are not elapsed cooking time. The DAG critical path assumes unconstrained parallel execution; the one-cook lower bound is also not a schedule or a ready-time guarantee.",
+      "source_existing_recipe_rows": 262,
+      "source_existing_unique_base_ids": 165,
+      "source_registered_identities": 86,
+      "pack_id": "smako-recipe-pack-01",
+      "recipe_variants": 13,
+      "unique_base_ids": 5,
+      "new_base_ids_by_identity": 5,
+      "existing_base_ids_reused": [],
+      "new_bases_by_meal": {
+        "dinner": 3,
+        "breakfast": 1,
+        "snack": 1
+      },
+      "new_bases_by_cuisine_and_meal": {
+        "indian/dinner": 1,
+        "italian/dinner": 1,
+        "swedish/dinner": 1,
+        "swedish/breakfast": 1,
+        "swedish/snack": 1
+      },
+      "errors": [],
+      "warnings": [],
+      "variants": [
+        {
+          "base_id": "smako-indian-lentil-crepes-potato",
+          "variant_id": "simple",
+          "version": "1.0.0",
+          "name": "Indiskinspirerade linspannkakor med potatisfyllning och gurka – enkel",
+          "meal_type": "dinner",
+          "cuisine": "indian",
+          "counted_canonical_identities": 7,
+          "counted_unique_names": 7,
+          "dinner_default_count_range": false,
+          "active_step_minutes_sum": 65,
+          "passive_step_minutes_sum": 265,
+          "dependency_critical_path_minutes": 308,
+          "one_cook_duration_lower_bound_minutes": 308,
+          "repeated_component_allocations": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c2",
+                "c3"
+              ],
+              "total_quantity": 35.0
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c2"
+              ],
+              "total_quantity": 45.0
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2",
+                "c3"
+              ],
+              "total_quantity": 7.0
+            }
+          ]
+        },
+        {
+          "base_id": "smako-indian-lentil-crepes-potato",
+          "variant_id": "standard",
+          "version": "1.0.0",
+          "name": "Indiskinspirerade linspannkakor med potatis, spenat och gurka – vardag",
+          "meal_type": "dinner",
+          "cuisine": "indian",
+          "counted_canonical_identities": 10,
+          "counted_unique_names": 10,
+          "dinner_default_count_range": true,
+          "active_step_minutes_sum": 75,
+          "passive_step_minutes_sum": 265,
+          "dependency_critical_path_minutes": 315,
+          "one_cook_duration_lower_bound_minutes": 315,
+          "repeated_component_allocations": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c2",
+                "c3"
+              ],
+              "total_quantity": 35.0
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c2"
+              ],
+              "total_quantity": 45.0
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2",
+                "c3"
+              ],
+              "total_quantity": 7.0
+            }
+          ]
+        },
+        {
+          "base_id": "smako-indian-lentil-crepes-potato",
+          "variant_id": "extended",
+          "version": "1.0.0",
+          "name": "Indiskinspirerade linspannkakor med kryddig potatis- och spenatfyllning samt tomat- och gurksallad – utökad",
+          "meal_type": "dinner",
+          "cuisine": "indian",
+          "counted_canonical_identities": 13,
+          "counted_unique_names": 13,
+          "dinner_default_count_range": true,
+          "active_step_minutes_sum": 77,
+          "passive_step_minutes_sum": 265,
+          "dependency_critical_path_minutes": 317,
+          "one_cook_duration_lower_bound_minutes": 317,
+          "repeated_component_allocations": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c2",
+                "c3"
+              ],
+              "total_quantity": 40.0
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c2"
+              ],
+              "total_quantity": 45.0
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2",
+                "c3"
+              ],
+              "total_quantity": 7.5
+            }
+          ]
+        },
+        {
+          "base_id": "smako-italian-chicken-spinach-roulades",
+          "variant_id": "simple",
+          "version": "1.0.0",
+          "name": "Italienskinspirerade kycklingrullader med spenat, ost och potatis – enkel",
+          "meal_type": "dinner",
+          "cuisine": "italian",
+          "counted_canonical_identities": 7,
+          "counted_unique_names": 7,
+          "dinner_default_count_range": false,
+          "active_step_minutes_sum": 41,
+          "passive_step_minutes_sum": 48,
+          "dependency_critical_path_minutes": 62,
+          "one_cook_duration_lower_bound_minutes": 62,
+          "repeated_component_allocations": [
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2",
+                "c3"
+              ],
+              "total_quantity": 8.0
+            }
+          ]
+        },
+        {
+          "base_id": "smako-italian-chicken-spinach-roulades",
+          "variant_id": "standard",
+          "version": "1.0.0",
+          "name": "Italienskinspirerade kycklingrullader med zucchini i tomatsåsen – vardag",
+          "meal_type": "dinner",
+          "cuisine": "italian",
+          "counted_canonical_identities": 10,
+          "counted_unique_names": 10,
+          "dinner_default_count_range": true,
+          "active_step_minutes_sum": 54,
+          "passive_step_minutes_sum": 48,
+          "dependency_critical_path_minutes": 72,
+          "one_cook_duration_lower_bound_minutes": 72,
+          "repeated_component_allocations": [
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2",
+                "c3"
+              ],
+              "total_quantity": 8.5
+            }
+          ]
+        },
+        {
+          "base_id": "smako-italian-chicken-spinach-roulades",
+          "variant_id": "extended",
+          "version": "1.0.0",
+          "name": "Italienskinspirerade kycklingrullader med basilikatomatsås och citronmorot – utökad",
+          "meal_type": "dinner",
+          "cuisine": "italian",
+          "counted_canonical_identities": 13,
+          "counted_unique_names": 13,
+          "dinner_default_count_range": true,
+          "active_step_minutes_sum": 59,
+          "passive_step_minutes_sum": 48,
+          "dependency_critical_path_minutes": 72,
+          "one_cook_duration_lower_bound_minutes": 72,
+          "repeated_component_allocations": [
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "unit": "g",
+              "components": [
+                "c2",
+                "c4"
+              ],
+              "total_quantity": 15.0
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c2",
+                "c4"
+              ],
+              "total_quantity": 30.0
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2",
+                "c3",
+                "c4"
+              ],
+              "total_quantity": 9.2
+            }
+          ]
+        },
+        {
+          "base_id": "smako-swedish-salmon-cakes-potatoes",
+          "variant_id": "simple",
+          "version": "1.0.0",
+          "name": "Laxbiffar med potatis, ärtor och citronyoghurt – enkel",
+          "meal_type": "dinner",
+          "cuisine": "swedish",
+          "counted_canonical_identities": 7,
+          "counted_unique_names": 7,
+          "dinner_default_count_range": false,
+          "active_step_minutes_sum": 46,
+          "passive_step_minutes_sum": 33,
+          "dependency_critical_path_minutes": 55,
+          "one_cook_duration_lower_bound_minutes": 55,
+          "repeated_component_allocations": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c4"
+              ],
+              "total_quantity": 30.0
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2",
+                "c3",
+                "c4"
+              ],
+              "total_quantity": 7.2
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c4"
+              ],
+              "total_quantity": 280.0
+            }
+          ]
+        },
+        {
+          "base_id": "smako-swedish-salmon-cakes-potatoes",
+          "variant_id": "standard",
+          "version": "1.0.0",
+          "name": "Laxbiffar med senapsdillsås och citronmorot – vardag",
+          "meal_type": "dinner",
+          "cuisine": "swedish",
+          "counted_canonical_identities": 10,
+          "counted_unique_names": 10,
+          "dinner_default_count_range": true,
+          "active_step_minutes_sum": 51,
+          "passive_step_minutes_sum": 33,
+          "dependency_critical_path_minutes": 55,
+          "one_cook_duration_lower_bound_minutes": 55,
+          "repeated_component_allocations": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c4",
+                "c5"
+              ],
+              "total_quantity": 40.0
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c5"
+              ],
+              "total_quantity": 30.0
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2",
+                "c3",
+                "c4",
+                "c5"
+              ],
+              "total_quantity": 7.9
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c4"
+              ],
+              "total_quantity": 280.0
+            }
+          ]
+        },
+        {
+          "base_id": "smako-swedish-salmon-cakes-potatoes",
+          "variant_id": "extended",
+          "version": "1.0.0",
+          "name": "Laxbiffar med pepparrotsdillsås och krispig gurksallad – utökad",
+          "meal_type": "dinner",
+          "cuisine": "swedish",
+          "counted_canonical_identities": 13,
+          "counted_unique_names": 13,
+          "dinner_default_count_range": true,
+          "active_step_minutes_sum": 54,
+          "passive_step_minutes_sum": 33,
+          "dependency_critical_path_minutes": 55,
+          "one_cook_duration_lower_bound_minutes": 55,
+          "repeated_component_allocations": [
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c4",
+                "c5"
+              ],
+              "total_quantity": 45.0
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c5"
+              ],
+              "total_quantity": 30.0
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2",
+                "c3",
+                "c4",
+                "c5"
+              ],
+              "total_quantity": 7.9
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c4"
+              ],
+              "total_quantity": 280.0
+            }
+          ]
+        },
+        {
+          "base_id": "smako-swedish-breakfast-french-toast-apple-quark",
+          "variant_id": "simple",
+          "version": "1.0.0",
+          "name": "Fattiga riddare med äpple och kvarg – enkel",
+          "meal_type": "breakfast",
+          "cuisine": "swedish",
+          "counted_canonical_identities": 6,
+          "counted_unique_names": 6,
+          "dinner_default_count_range": false,
+          "active_step_minutes_sum": 16,
+          "passive_step_minutes_sum": 2,
+          "dependency_critical_path_minutes": 16,
+          "one_cook_duration_lower_bound_minutes": 16,
+          "repeated_component_allocations": []
+        },
+        {
+          "base_id": "smako-swedish-breakfast-french-toast-apple-quark",
+          "variant_id": "extended",
+          "version": "1.0.0",
+          "name": "Fattiga riddare med kaneläpple och jordnötskvarg – utökad",
+          "meal_type": "breakfast",
+          "cuisine": "swedish",
+          "counted_canonical_identities": 9,
+          "counted_unique_names": 9,
+          "dinner_default_count_range": false,
+          "active_step_minutes_sum": 22,
+          "passive_step_minutes_sum": 2,
+          "dependency_critical_path_minutes": 22,
+          "one_cook_duration_lower_bound_minutes": 22,
+          "repeated_component_allocations": [
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c3"
+              ],
+              "total_quantity": 55.0
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "unit": "ml",
+              "components": [
+                "c1",
+                "c2"
+              ],
+              "total_quantity": 7.0
+            }
+          ]
+        },
+        {
+          "base_id": "smako-swedish-snack-cottage-cheese-apple-cake",
+          "variant_id": "simple",
+          "version": "1.0.0",
+          "name": "Liten kesokaka med äppelklyftor – enkel",
+          "meal_type": "snack",
+          "cuisine": "swedish",
+          "counted_canonical_identities": 6,
+          "counted_unique_names": 6,
+          "dinner_default_count_range": false,
+          "active_step_minutes_sum": 10,
+          "passive_step_minutes_sum": 39,
+          "dependency_critical_path_minutes": 43,
+          "one_cook_duration_lower_bound_minutes": 43,
+          "repeated_component_allocations": []
+        },
+        {
+          "base_id": "smako-swedish-snack-cottage-cheese-apple-cake",
+          "variant_id": "extended",
+          "version": "1.0.0",
+          "name": "Äppelkesokaka med kanel, yoghurt och jordnötskrisp – utökad",
+          "meal_type": "snack",
+          "cuisine": "swedish",
+          "counted_canonical_identities": 9,
+          "counted_unique_names": 9,
+          "dinner_default_count_range": false,
+          "active_step_minutes_sum": 15,
+          "passive_step_minutes_sum": 44,
+          "dependency_critical_path_minutes": 48,
+          "one_cook_duration_lower_bound_minutes": 48,
+          "repeated_component_allocations": [
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "unit": "g",
+              "components": [
+                "c1",
+                "c2"
+              ],
+              "total_quantity": 100.0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "food_temperature_reference": {
+    "source": "FoodSafety.gov – Cook to a Safe Minimum Internal Temperature",
+    "url": "https://www.foodsafety.gov/food-safety-charts/safe-minimum-internal-temperatures",
+    "accessed": "2026-10-25",
+    "scope": "Endast kontroll av tillagningstemperaturer; inte källa för recepttexter, mängder, kulinarisk tradition eller provlagning.",
+    "note": "Underlaget föreskriver 74 °C för kyckling och 63 °C för fisk/lax. Dessa markörer används. Källan anger 71 °C för äggrätter; 72 °C används här som uttryckligt tillagningsmål för fattiga riddare och kesokaka, tillsammans med kontroll av stelnad äggblandning."
+  },
+  "cumulative_delivery_register": {
+    "delivered_pack_ids": [
+      "smako-recipe-pack-01"
+    ],
+    "new_base_candidates_authored": 5,
+    "complete_variants_authored": 13,
+    "by_meal": {
+      "dinner": 3,
+      "breakfast": 1,
+      "snack": 1
+    },
+    "dinner_bases_by_cuisine": {
+      "greek": 0,
+      "italian": 1,
+      "mexican": 0,
+      "indian": 1,
+      "thai": 0,
+      "swedish": 1
+    },
+    "variants_of_preexisting_bases": 0,
+    "remaining_new_base_dishes": 795,
+    "remaining_by_meal": {
+      "dinner": 597,
+      "breakfast": 99,
+      "snack": 99
+    },
+    "remaining_dinner_bases_by_cuisine": {
+      "greek": 100,
+      "italian": 99,
+      "mexican": 100,
+      "indian": 99,
+      "thai": 100,
+      "swedish": 99
+    },
+    "remaining_dinner_protein_targets": {
+      "vegetarian_including_vegan": 239,
+      "vegan_minimum_included_in_vegetarian": 119,
+      "chicken": 179,
+      "fish": 89,
+      "other_meat": 90
+    },
+    "remaining_complete_variants_if_no_future_exceptions": 2187,
+    "remaining_five_base_packages": 159,
+    "next_pack_number": 2,
+    "next_pack_id": "smako-recipe-pack-02",
+    "next_pack_priority": "Fortsätt med fem nya grundrätter. Prioritera nu grekiska, mexikanska och thailändska middagar, vegetariska rätter och annat kött. Återanvänd inte pilotens fem base_id för nya grundrätter.",
+    "continuation_rule": "Vid fortsätt: läs detta register och tidigare paket; fortsätt med paket 02 och uppdatera kumulativa räknare. Om tidigare leveranser saknas, be om sammanställningen innan nya identiteter räknas. Använd samma base_id vid framtida varianter av en redan författad grundrätt."
+  }
+}

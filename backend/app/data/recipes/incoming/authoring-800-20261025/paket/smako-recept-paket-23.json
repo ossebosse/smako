@@ -1,0 +1,4010 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-recipe-pack-23",
+  "recipes": [
+    {
+      "base_id": "smako-italian-aubergine-whitebean-walnut-rolls",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade auberginerullar med bön- och valnötsfyllning – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "grönsaksrullar med nöt-baljväxtfyllning",
+      "primary": "bönor",
+      "method": "oven",
+      "side": "bönvalnötskräm; varmt bröd",
+      "flavor": [
+        "citronjuice"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Aubergineskivor",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bönvalnötskräm",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 80.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Aubergineskivor: Sätt ugnen på 220 °C över- och undervärme. Skär auberginen på längden i tunna, breda skivor. Lägg i ett lager på plåt.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela aubergine, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 20 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Bönvalnötskräm: Lägg bönor, valnötter, citronjuice, rapsolja och salt i mixerkärlet med 80 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "valnötter",
+            "citronjuice",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Bred bönvalnötskrämen på de mjuka aubergineskivorna. Rulla ihop från kortsidan och lägg med skarven nedåt. Använd hela krämen; eventuell överskjutande kräm fördelas under rullarna.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt",
+            "bönor",
+            "valnötter",
+            "citronjuice"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera aubergineskivor, bönvalnötskräm och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt",
+            "bönor",
+            "valnötter",
+            "citronjuice",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            7,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 6 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 58 minuter totalt, varav 31 aktivt och 27 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats. Bred bönkrämen på de mjuka aubergineskivorna och rulla ihop till fyllda rullar. Servera brödet och övriga komponenter intill. Kulinarisk avgränsning: Tunna rostade aubergineskivor rullas kring en fast nöt-bönkräm; ingen skivad auberginegratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-aubergine-whitebean-walnut-rolls",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade auberginerullar med bön- och valnötsfyllning – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "grönsaksrullar med nöt-baljväxtfyllning",
+      "primary": "bönor",
+      "method": "oven",
+      "side": "bönvalnötskräm; varmt bröd",
+      "flavor": [
+        "citronjuice",
+        "persilja"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Aubergineskivor",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bönvalnötskräm",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 80.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Aubergineskivor: Sätt ugnen på 220 °C över- och undervärme. Skär auberginen på längden i tunna, breda skivor. Lägg i ett lager på plåt.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela aubergine, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 20 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Bönvalnötskräm: Lägg bönor, valnötter, citronjuice, rapsolja, salt, vitlök och persilja i mixerkärlet med 80 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "valnötter",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "persilja"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Bred bönvalnötskrämen på de mjuka aubergineskivorna. Rulla ihop från kortsidan och lägg med skarven nedåt. Använd hela krämen; eventuell överskjutande kräm fördelas under rullarna.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt",
+            "bönor",
+            "valnötter",
+            "citronjuice",
+            "vitlök",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera aubergineskivor, bönvalnötskräm och varmt bröd. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt",
+            "bönor",
+            "valnötter",
+            "citronjuice",
+            "vitlök",
+            "persilja",
+            "bröd"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            7,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 58 minuter totalt, varav 31 aktivt och 27 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats. Bred bönkrämen på de mjuka aubergineskivorna och rulla ihop till fyllda rullar. Servera brödet och övriga komponenter intill. Kulinarisk avgränsning: Tunna rostade aubergineskivor rullas kring en fast nöt-bönkräm; ingen skivad auberginegratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-aubergine-whitebean-walnut-rolls",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade auberginerullar med bön- och valnötsfyllning – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "grönsaksrullar med nöt-baljväxtfyllning",
+      "primary": "bönor",
+      "method": "oven",
+      "side": "bönvalnötskräm; varmt bröd; tomat- och basilikasallad",
+      "flavor": [
+        "citronjuice",
+        "persilja",
+        "basilika"
+      ],
+      "equipment": [
+        "Grytlappar",
+        "Kniv",
+        "Köksvåg",
+        "Mixerkärl",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stavmixer",
+        "Ugn",
+        "Ugnsform"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Aubergineskivor",
+          "ingredients": [
+            {
+              "name": "aubergine",
+              "form": "raw_edible",
+              "quantity": 1000.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Aubergine, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Bönvalnötskräm",
+          "ingredients": [
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 700.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 80.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Valnötskärnor, vikt utan skal"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Varmt bröd",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 220.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Bröd, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Tomat- och basilikasallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 400.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Aubergineskivor: Sätt ugnen på 220 °C över- och undervärme. Skär auberginen på längden i tunna, breda skivor. Lägg i ett lager på plåt.",
+          "uses": [
+            "aubergine"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Fördela aubergine, rapsolja och salt i ugnsformen så att fett och kryddning fördelas jämnt. Behåll eventuella halvor, båtar eller skivor i den form som förbereddes i föregående steg.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Tillaga i den uppvärmda ugnen cirka 20 minuter. Låt grönsakerna bli mjuka och få färg; vänd lösa bitar en gång men behåll fyllda skal och lager hela.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": " Ta ut formen med grytlappar.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Bönvalnötskräm: Lägg bönor, valnötter, citronjuice, rapsolja, salt, vitlök och persilja i mixerkärlet med 80 ml vatten. Mixa till en jämn kräm och skrapa ner från sidorna så att hela mängden blandas.",
+          "uses": [
+            "bönor",
+            "valnötter",
+            "citronjuice",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "persilja"
+          ],
+          "minutes": 5,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Varmt bröd: Sätt ugnen på 200 °C över- och undervärme. Skär brödet i portionsbitar och fördela komponentens övriga ingredienser över dem.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm brödet i ugnen cirka 7 minuter tills det är genomvarmt och kanterna börjar bli frasiga.",
+          "uses": [
+            "bröd"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ],
+          "passive": true
+        },
+        {
+          "text": "Tomat- och basilikasallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat i små jämna bitar; skala rotfrukter före vägning. Finhacka basilika.",
+          "uses": [
+            "tomat",
+            "basilika",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Blanda tomat, basilika, rödlök, oliver, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "basilika",
+            "rödlök",
+            "oliver",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Bred bönvalnötskrämen på de mjuka aubergineskivorna. Rulla ihop från kortsidan och lägg med skarven nedåt. Använd hela krämen; eventuell överskjutande kräm fördelas under rullarna.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt",
+            "bönor",
+            "valnötter",
+            "citronjuice",
+            "vitlök",
+            "persilja"
+          ],
+          "minutes": 8,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Servera aubergineskivor, bönvalnötskräm, varmt bröd och tomat- och basilikasallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "aubergine",
+            "rapsolja",
+            "salt",
+            "bönor",
+            "valnötter",
+            "citronjuice",
+            "vitlök",
+            "persilja",
+            "bröd",
+            "tomat",
+            "basilika",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            4,
+            5,
+            7,
+            9,
+            10
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 12 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 66 minuter totalt, varav 39 aktivt och 27 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av valnötter; inte importklar. Inga nya produkt- eller pack-koder har skapats. Bred bönkrämen på de mjuka aubergineskivorna och rulla ihop till fyllda rullar. Servera brödet och övriga komponenter intill. Kulinarisk avgränsning: Tunna rostade aubergineskivor rullas kring en fast nöt-bönkräm; ingen skivad auberginegratäng. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-baked-rice-balls-mozzarella-peas",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade ugnsrisbollar med mozzarella och ärtor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "panerade risbollar",
+      "primary": "mozzarella",
+      "method": "pot",
+      "side": "tomatsås",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Bakplåt",
+        "Bakplåtspapper",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Risbollar",
+          "ingredients": [
+            {
+              "name": "risottoris",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Risottoris, torr vikt"
+            },
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 90.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Risbollar: Koka risottoriset med 750 ml vatten tills det är mjukt och vätskan absorberad, cirka 22 minuter. Rör ofta.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 22
+        },
+        {
+          "text": "Sprid riset tunt i en stor skål och låt svalna tills det är ljummet.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka ärtor och tillaga i en panna med 60 ml vatten tills allt mjuknat och vätskan avdunstat. ",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda riset med mozzarella, ärtor, ägg och salt. Forma till kompakta bollar med fuktade händer. Rulla dem i allt ströbröd och tryck fast paneringen.",
+          "uses": [
+            "mozzarella",
+            "ärtor",
+            "ägg",
+            "salt",
+            "risottoris",
+            "ströbröd"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Lägg bollarna på bakplåtspapper och fördela all olja över ytan. Baka cirka 25 minuter tills ytan är krispig och mitten varm. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "risottoris",
+            "mozzarella",
+            "ärtor",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Tomatsås: Väg och fördela komponentens råvaror före tillagning.",
+          "uses": [],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Värm fettet varsamt utan att låta det ryka.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera risbollar och tomatsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "risottoris",
+            "mozzarella",
+            "ärtor",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "krossade tomater"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 124 minuter totalt, varav 64 aktivt och 60 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mozzarella och risottoris; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Kokt ris och ost formas till panerade bollar och bakas krispiga, med separat tomatsås; skild från lös risotto. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-baked-rice-balls-mozzarella-peas",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade ugnsrisbollar med mozzarella och ärtor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "panerade risbollar",
+      "primary": "mozzarella",
+      "method": "pot",
+      "side": "tomatsås",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Bakplåt",
+        "Bakplåtspapper",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Risbollar",
+          "ingredients": [
+            {
+              "name": "risottoris",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Risottoris, torr vikt"
+            },
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 90.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Risbollar: Koka risottoriset med 750 ml vatten tills det är mjukt och vätskan absorberad, cirka 22 minuter. Rör ofta.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 22
+        },
+        {
+          "text": "Sprid riset tunt i en stor skål och låt svalna tills det är ljummet.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka ärtor och tillaga i en panna med 60 ml vatten tills allt mjuknat och vätskan avdunstat. ",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda riset med mozzarella, ärtor, ägg och salt. Forma till kompakta bollar med fuktade händer. Rulla dem i allt ströbröd och tryck fast paneringen.",
+          "uses": [
+            "mozzarella",
+            "ärtor",
+            "ägg",
+            "salt",
+            "risottoris",
+            "ströbröd"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Lägg bollarna på bakplåtspapper och fördela all olja över ytan. Baka cirka 25 minuter tills ytan är krispig och mitten varm. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "risottoris",
+            "mozzarella",
+            "ärtor",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Tomatsås: Ansa och finhacka gul lök och vitlök.",
+          "uses": [
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater och salt och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera risbollar och tomatsås. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "risottoris",
+            "mozzarella",
+            "ärtor",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 9 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 124 minuter totalt, varav 64 aktivt och 60 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mozzarella och risottoris; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Kokt ris och ost formas till panerade bollar och bakas krispiga, med separat tomatsås; skild från lös risotto. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-baked-rice-balls-mozzarella-peas",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerade ugnsrisbollar med mozzarella och ärtor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "panerade risbollar",
+      "primary": "mozzarella",
+      "method": "pot",
+      "side": "tomatsås; fräsch sallad",
+      "flavor": [
+        "basilika",
+        "oregano"
+      ],
+      "equipment": [
+        "Bakplåt",
+        "Bakplåtspapper",
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Grytlappar",
+        "Kastrull",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Rivjärn",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade",
+        "Ugn"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Risbollar",
+          "ingredients": [
+            {
+              "name": "risottoris",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Risottoris, torr vikt"
+            },
+            {
+              "name": "mozzarella",
+              "form": "preserved_drained",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Mozzarella, avrunnen ostvikt utan lag"
+            },
+            {
+              "name": "ärtor",
+              "form": "as_sold",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Frysta naturella gröna ärtor, vikt som såld"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ströbröd",
+              "form": "dry",
+              "quantity": 90.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Ströbröd, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Tomatsås",
+          "ingredients": [
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 600.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Oregano, torr vikt"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Risbollar: Koka risottoriset med 750 ml vatten tills det är mjukt och vätskan absorberad, cirka 22 minuter. Rör ofta.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 22
+        },
+        {
+          "text": "Sprid riset tunt i en stor skål och låt svalna tills det är ljummet.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 20,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Finhacka ärtor och tillaga i en panna med 60 ml vatten tills allt mjuknat och vätskan avdunstat. ",
+          "uses": [
+            "ärtor"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Blanda riset med mozzarella, ärtor, ägg och salt. Forma till kompakta bollar med fuktade händer. Rulla dem i allt ströbröd och tryck fast paneringen.",
+          "uses": [
+            "mozzarella",
+            "ärtor",
+            "ägg",
+            "salt",
+            "risottoris",
+            "ströbröd"
+          ],
+          "minutes": 10,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sätt ugnen på 225 °C. Lägg bollarna på bakplåtspapper och fördela all olja över ytan. Baka cirka 25 minuter tills ytan är krispig och mitten varm. Äggblandningen ska vara helt stelnad och nå minst 72 °C.",
+          "uses": [
+            "risottoris",
+            "mozzarella",
+            "ärtor",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Tomatsås: Ansa och finhacka gul lök och vitlök. Finhacka basilika.",
+          "uses": [
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner krossade tomater, salt och oregano och 100 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "oregano"
+          ],
+          "minutes": 3,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 15 minuter under lock. Rör då och då. Grönsakerna ska vara mjuka och såsen jämn.",
+          "uses": [
+            "krossade tomater",
+            "salt",
+            "oregano",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 15,
+          "after": [
+            8
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner basilika precis före servering. ",
+          "uses": [
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär gurka och tomat i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Blanda gurka, tomat, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "gurka",
+            "tomat",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            11
+          ]
+        },
+        {
+          "text": "Servera risbollar, tomatsås och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "risottoris",
+            "mozzarella",
+            "ärtor",
+            "ägg",
+            "ströbröd",
+            "rapsolja",
+            "salt",
+            "krossade tomater",
+            "gul lök",
+            "vitlök",
+            "basilika",
+            "oregano",
+            "gurka",
+            "tomat",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            10,
+            12
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 134 minuter totalt, varav 74 aktivt och 60 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av mozzarella och risottoris; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Kokt ris och ost formas till panerade bollar och bakas krispiga, med separat tomatsås; skild från lös risotto. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-barley-mushroom-whitebean-risotto",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerat kornotto med svamp och vita bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "krämigt helt korn",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Svampkornotto",
+          "ingredients": [
+            {
+              "name": "pärlkorn",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pärlkorn, torr vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Svampkornotto: Ansa och finhacka gul lök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga.",
+          "uses": [
+            "bönor",
+            "champinjoner",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner pärlkorn, bönor, champinjoner och salt och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "pärlkorn",
+            "bönor",
+            "champinjoner",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Korngrynen ska vara helt mjuka och rätten tjock och krämig utan fri buljong. Mosa en del av bönorna mot grytkanten och rör in dem för att binda spadet; sjud utan lock de sista minuterna om det finns fri vätska.",
+          "uses": [
+            "pärlkorn",
+            "bönor",
+            "champinjoner",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Servera svampkornotto. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "pärlkorn",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 55 minuter totalt, varav 20 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pärlkorn; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Tuggigt pärlkorn kokas till en krämig bön- och svamprätt utan ris eller mejeri; annat spannmål och baljväxtstruktur än svamplinsris. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-barley-mushroom-whitebean-risotto",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerat kornotto med svamp och vita bönor – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "krämigt helt korn",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Svampkornotto",
+          "ingredients": [
+            {
+              "name": "pärlkorn",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pärlkorn, torr vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Svampkornotto: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Låt bönor rinna av noga. Finhacka persilja.",
+          "uses": [
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner pärlkorn, bönor, champinjoner och salt och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "pärlkorn",
+            "bönor",
+            "champinjoner",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Korngrynen ska vara helt mjuka och rätten tjock och krämig utan fri buljong. Mosa en del av bönorna mot grytkanten och rör in dem för att binda spadet; sjud utan lock de sista minuterna om det finns fri vätska.",
+          "uses": [
+            "pärlkorn",
+            "bönor",
+            "champinjoner",
+            "salt",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner persilja och citronjuice precis före servering. ",
+          "uses": [
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera svampkornotto. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "pärlkorn",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 57 minuter totalt, varav 22 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pärlkorn; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Tuggigt pärlkorn kokas till en krämig bön- och svamprätt utan ris eller mejeri; annat spannmål och baljväxtstruktur än svamplinsris. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-barley-mushroom-whitebean-risotto",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerat kornotto med svamp och vita bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "krämigt helt korn",
+      "primary": "bönor",
+      "method": "pot",
+      "side": "fräsch sallad",
+      "flavor": [
+        "persilja",
+        "citronjuice",
+        "timjan"
+      ],
+      "equipment": [
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Svampkornotto",
+          "ingredients": [
+            {
+              "name": "pärlkorn",
+              "form": "dry",
+              "quantity": 280.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Pärlkorn, torr vikt"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kokta vita bönor, avrunnen vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "spenat",
+              "form": "as_sold",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Fryst naturell spenat, vikt som såld"
+            },
+            {
+              "name": "timjan",
+              "form": "dry",
+              "quantity": 2.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Torkad timjan"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Svampkornotto: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Väg spenat frysta enligt komponenten. Låt bönor rinna av noga. Finhacka persilja.",
+          "uses": [
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "spenat"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och vitlök under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner pärlkorn, bönor, champinjoner, salt, spenat och timjan och 850 ml vatten. Koka upp under omrörning.",
+          "uses": [
+            "pärlkorn",
+            "bönor",
+            "champinjoner",
+            "salt",
+            "spenat",
+            "timjan"
+          ],
+          "minutes": 3,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sänk värmen och låt sjuda 35 minuter under lock. Rör då och då. Korngrynen ska vara helt mjuka och rätten tjock och krämig utan fri buljong. Mosa en del av bönorna mot grytkanten och rör in dem för att binda spadet; sjud utan lock de sista minuterna om det finns fri vätska.",
+          "uses": [
+            "pärlkorn",
+            "bönor",
+            "champinjoner",
+            "salt",
+            "spenat",
+            "timjan",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 35,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Rör ner persilja och citronjuice precis före servering. ",
+          "uses": [
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Servera svampkornotto och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "pärlkorn",
+            "bönor",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "persilja",
+            "citronjuice",
+            "spenat",
+            "timjan",
+            "tomat",
+            "gurka",
+            "rödlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 13 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 65 minuter totalt, varav 30 aktivt och 35 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av pärlkorn och timjan; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Tuggigt pärlkorn kokas till en krämig bön- och svamprätt utan ris eller mejeri; annat spannmål och baljväxtstruktur än svamplinsris. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-beef-egg-braciola-tomato",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad nötköttsrulle med ägg i tomatsås – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "långbräserad köttskiverulle med stelnad äggkärna",
+      "primary": "nötkött",
+      "method": "pot",
+      "side": "krämig polenta",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Köttbankare",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Steksnöre",
+        "Visp",
+        "Värmetålig skål",
+        "Ånginsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Långbräserad nötköttsrulle",
+          "ingredients": [
+            {
+              "name": "nötkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötkött, rå ätlig vikt; styckdetalj anges i komponentens instruktion"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Krämig polenta",
+          "ingredients": [
+            {
+              "name": "majsgryn",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Majsgryn för polenta, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Långbräserad nötköttsrulle: Koka upp 800 ml vatten i en kastrull. Knäck de uppvägda äggen försiktigt i en lätt oljad värmetålig skål som ryms över vattenytan. Ånga under lock 12 minuter tills äggen är helt stelnade till 72 °C. Låt svalna och skär i längder. Använd en tesked av komponentens olja till skålen.",
+          "uses": [
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 18
+        },
+        {
+          "text": "Välj tunt skivat nötkött avsett för bräsering. Lägg skivorna överlappande till en stor rektangel och banka jämnt. Riv osten och fördela tillsammans med ägglängderna och hälften av saltet. Rulla tätt och bind med steksnöre.",
+          "uses": [
+            "nötkött",
+            "ost",
+            "ägg",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken. Bryn rullen runtom i resterande olja i en gryta och fräs löken intill. Tillsätt tomater, resten av saltet och 500 ml vatten.",
+          "uses": [
+            "gul lök",
+            "nötkött",
+            "rapsolja",
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bräsera under lock på låg värme cirka 100 minuter tills köttet är gaffelmört och når minst 72 °C. Vänd rullen efter halva tiden och rör såsen försiktigt.",
+          "uses": [
+            "nötkött",
+            "ägg",
+            "ost",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 100,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lyft upp rullen, klipp bort allt snöre och skär i tjocka skivor med äggmönster. Skeda hela tomatsåsen över.",
+          "uses": [
+            "nötkött",
+            "ägg",
+            "ost",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Krämig polenta: Koka upp 1125 ml vatten och komponentens salt. Vispa ner majsgrynen lite i taget.",
+          "uses": [
+            "majsgryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under återkommande omrörning tills grynen är helt mjuka och gröten tjock, cirka 25 minuter; följ längre tid på förpackningen.",
+          "uses": [
+            "majsgryn"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner rapsolja i den heta polentan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera långbräserad nötköttsrulle och krämig polenta. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "nötkött",
+            "ägg",
+            "ost",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majsgryn"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 7 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 186 minuter totalt, varav 86 aktivt och 100 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av majsgryn och nötkött; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Överlappande tunna nötköttsskivor rullas kring ett sammanhängande tillagat ägg-ostcentrum och långbräseras i tomat. Den skärs med synliga lager; ingen deg eller mald pastafyllning ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-beef-egg-braciola-tomato",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad nötköttsrulle med ägg i tomatsås – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "långbräserad köttskiverulle med stelnad äggkärna",
+      "primary": "nötkött",
+      "method": "pot",
+      "side": "krämig polenta; persilja-citrondressing",
+      "flavor": [
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Köttbankare",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Steksnöre",
+        "Visp",
+        "Värmetålig skål",
+        "Ånginsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Långbräserad nötköttsrulle",
+          "ingredients": [
+            {
+              "name": "nötkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötkött, rå ätlig vikt; styckdetalj anges i komponentens instruktion"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Krämig polenta",
+          "ingredients": [
+            {
+              "name": "majsgryn",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Majsgryn för polenta, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Persilja-citrondressing",
+          "ingredients": [
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Långbräserad nötköttsrulle: Koka upp 800 ml vatten i en kastrull. Knäck de uppvägda äggen försiktigt i en lätt oljad värmetålig skål som ryms över vattenytan. Ånga under lock 12 minuter tills äggen är helt stelnade till 72 °C. Låt svalna och skär i längder. Använd en tesked av komponentens olja till skålen.",
+          "uses": [
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 18
+        },
+        {
+          "text": "Välj tunt skivat nötkött avsett för bräsering. Lägg skivorna överlappande till en stor rektangel och banka jämnt. Riv osten och fördela tillsammans med ägglängderna och hälften av saltet. Rulla tätt och bind med steksnöre.",
+          "uses": [
+            "nötkött",
+            "ost",
+            "ägg",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken. Bryn rullen runtom i resterande olja i en gryta och fräs löken intill. Tillsätt tomater, resten av saltet och 500 ml vatten.",
+          "uses": [
+            "gul lök",
+            "nötkött",
+            "rapsolja",
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bräsera under lock på låg värme cirka 100 minuter tills köttet är gaffelmört och når minst 72 °C. Vänd rullen efter halva tiden och rör såsen försiktigt.",
+          "uses": [
+            "nötkött",
+            "ägg",
+            "ost",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 100,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lyft upp rullen, klipp bort allt snöre och skär i tjocka skivor med äggmönster. Skeda hela tomatsåsen över.",
+          "uses": [
+            "nötkött",
+            "ägg",
+            "ost",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Krämig polenta: Koka upp 1125 ml vatten och komponentens salt. Vispa ner majsgrynen lite i taget.",
+          "uses": [
+            "majsgryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under återkommande omrörning tills grynen är helt mjuka och gröten tjock, cirka 25 minuter; följ längre tid på förpackningen.",
+          "uses": [
+            "majsgryn"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner rapsolja i den heta polentan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Persilja-citrondressing: Finhacka fasta bitar och färska örter. Rör ihop persilja, citronjuice, vitlök, rapsolja och salt till en jämn röra.",
+          "uses": [
+            "persilja",
+            "citronjuice",
+            "vitlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Servera långbräserad nötköttsrulle, krämig polenta och persilja-citrondressing. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "nötkött",
+            "ägg",
+            "ost",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majsgryn",
+            "persilja",
+            "citronjuice",
+            "vitlök"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 10 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 190 minuter totalt, varav 90 aktivt och 100 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av majsgryn och nötkött; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Överlappande tunna nötköttsskivor rullas kring ett sammanhängande tillagat ägg-ostcentrum och långbräseras i tomat. Den skärs med synliga lager; ingen deg eller mald pastafyllning ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-beef-egg-braciola-tomato",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad nötköttsrulle med ägg i tomatsås – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "långbräserad köttskiverulle med stelnad äggkärna",
+      "primary": "nötkött",
+      "method": "pot",
+      "side": "krämig polenta; persilja-citrondressing; fräsch sallad",
+      "flavor": [
+        "persilja",
+        "citronjuice"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Durkslag",
+        "Gryta med lock",
+        "Kastrull med lock",
+        "Kniv",
+        "Köksvåg",
+        "Köttbankare",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Steksnöre",
+        "Visp",
+        "Värmetålig skål",
+        "Ånginsats"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Långbräserad nötköttsrulle",
+          "ingredients": [
+            {
+              "name": "nötkött",
+              "form": "raw_edible",
+              "quantity": 850.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötkött, rå ätlig vikt; styckdetalj anges i komponentens instruktion"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ägg, uppvägd rå ätlig vikt utan skal"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "krossade tomater",
+              "form": "as_sold",
+              "quantity": 800.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Krossade tomater, vikt som såld"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Krämig polenta",
+          "ingredients": [
+            {
+              "name": "majsgryn",
+              "form": "dry",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Majsgryn för polenta, torr vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c3",
+          "name": "Persilja-citrondressing",
+          "ingredients": [
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 15.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        },
+        {
+          "id": "c4",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 50.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "oliver",
+              "form": "preserved_drained",
+              "quantity": 60.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Oliver, urkärnad avrunnen vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Långbräserad nötköttsrulle: Koka upp 800 ml vatten i en kastrull. Knäck de uppvägda äggen försiktigt i en lätt oljad värmetålig skål som ryms över vattenytan. Ånga under lock 12 minuter tills äggen är helt stelnade till 72 °C. Låt svalna och skär i längder. Använd en tesked av komponentens olja till skålen.",
+          "uses": [
+            "ägg",
+            "rapsolja"
+          ],
+          "minutes": 18
+        },
+        {
+          "text": "Välj tunt skivat nötkött avsett för bräsering. Lägg skivorna överlappande till en stor rektangel och banka jämnt. Riv osten och fördela tillsammans med ägglängderna och hälften av saltet. Rulla tätt och bind med steksnöre.",
+          "uses": [
+            "nötkött",
+            "ost",
+            "ägg",
+            "salt"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Hacka löken. Bryn rullen runtom i resterande olja i en gryta och fräs löken intill. Tillsätt tomater, resten av saltet och 500 ml vatten.",
+          "uses": [
+            "gul lök",
+            "nötkött",
+            "rapsolja",
+            "krossade tomater",
+            "salt"
+          ],
+          "minutes": 12,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bräsera under lock på låg värme cirka 100 minuter tills köttet är gaffelmört och når minst 72 °C. Vänd rullen efter halva tiden och rör såsen försiktigt.",
+          "uses": [
+            "nötkött",
+            "ägg",
+            "ost",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 100,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lyft upp rullen, klipp bort allt snöre och skär i tjocka skivor med äggmönster. Skeda hela tomatsåsen över.",
+          "uses": [
+            "nötkött",
+            "ägg",
+            "ost",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Krämig polenta: Koka upp 1125 ml vatten och komponentens salt. Vispa ner majsgrynen lite i taget.",
+          "uses": [
+            "majsgryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Sjud på låg värme under återkommande omrörning tills grynen är helt mjuka och gröten tjock, cirka 25 minuter; följ längre tid på förpackningen.",
+          "uses": [
+            "majsgryn"
+          ],
+          "minutes": 25,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Rör ner rapsolja i den heta polentan.",
+          "uses": [
+            "rapsolja"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Persilja-citrondressing: Finhacka fasta bitar och färska örter. Rör ihop persilja, citronjuice, vitlök, rapsolja och salt till en jämn röra.",
+          "uses": [
+            "persilja",
+            "citronjuice",
+            "vitlök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, oliver, rapsolja, citronjuice och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver",
+            "rapsolja",
+            "citronjuice",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            10
+          ]
+        },
+        {
+          "text": "Servera långbräserad nötköttsrulle, krämig polenta, persilja-citrondressing och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "nötkött",
+            "ägg",
+            "ost",
+            "krossade tomater",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majsgryn",
+            "persilja",
+            "citronjuice",
+            "vitlök",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "oliver"
+          ],
+          "minutes": 2,
+          "after": [
+            5,
+            8,
+            9,
+            11
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 198 minuter totalt, varav 98 aktivt och 100 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av majsgryn och nötkött; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Överlappande tunna nötköttsskivor rullas kring ett sammanhängande tillagat ägg-ostcentrum och långbräseras i tomat. Den skärs med synliga lager; ingen deg eller mald pastafyllning ingår. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-beef-mushroom-risotto",
+      "variant_id": "simple",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad nötfärs- och svamprisotto – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "köttfärsrisotto",
+      "primary": "nötfärs",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "mild"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Färssvamprisotto",
+          "ingredients": [
+            {
+              "name": "risottoris",
+              "form": "dry",
+              "quantity": 320.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Risottoris, torr vikt"
+            },
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Färssvamprisotto: Ansa och finhacka gul lök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning.",
+          "uses": [
+            "nötfärs",
+            "champinjoner",
+            "gul lök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök och nötfärs under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "nötfärs"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner risottoriset och nötfärs, champinjoner och salt. Låt riset bli blankt under omrörning.",
+          "uses": [
+            "risottoris",
+            "nötfärs",
+            "champinjoner",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Tillsätt 1000 ml vatten i flera omgångar under omkring 20 minuter. Rör regelbundet och låt nästan all vätska sugas upp före nästa omgång. Riset ska bli mjukt med lätt kärna och rätten krämig, inte torr.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Servera färssvamprisotto. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "risottoris",
+            "nötfärs",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 5 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 41 minuter totalt, varav 41 aktivt och 0 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av risottoris; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Stekt nötfärs och svamp binds i rörd risotto; annan stärkelsematris än köttfärssås med pasta. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-beef-mushroom-risotto",
+      "variant_id": "standard",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad nötfärs- och svamprisotto – vardag",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "köttfärsrisotto",
+      "primary": "nötfärs",
+      "method": "pot",
+      "side": "ingår i huvudkomponenten",
+      "flavor": [
+        "persilja"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Färssvamprisotto",
+          "ingredients": [
+            {
+              "name": "risottoris",
+              "form": "dry",
+              "quantity": 320.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Risottoris, torr vikt"
+            },
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Färssvamprisotto: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär champinjoner i små jämna bitar; skala rotfrukter före vägning. Riv den fasta osten. Finhacka persilja.",
+          "uses": [
+            "nötfärs",
+            "champinjoner",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och nötfärs under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "nötfärs"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner risottoriset och nötfärs, champinjoner och salt. Låt riset bli blankt under omrörning.",
+          "uses": [
+            "risottoris",
+            "nötfärs",
+            "champinjoner",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Tillsätt 1000 ml vatten i flera omgångar under omkring 20 minuter. Rör regelbundet och låt nästan all vätska sugas upp före nästa omgång. Riset ska bli mjukt med lätt kärna och rätten krämig, inte torr.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ta grytan från värmen och rör ner ost och persilja.",
+          "uses": [
+            "ost",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Servera färssvamprisotto. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "risottoris",
+            "nötfärs",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "ost",
+            "persilja"
+          ],
+          "minutes": 2,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 8 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ligger utanför nuvarande standardfilter för middag 10–15; användaren behöver sänka minantalet. Stegen är skrivna sekventiellt för en matlagare: cirka 43 minuter totalt, varav 43 aktivt och 0 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av risottoris; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Stekt nötfärs och svamp binds i rörd risotto; annan stärkelsematris än köttfärssås med pasta. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    },
+    {
+      "base_id": "smako-italian-beef-mushroom-risotto",
+      "variant_id": "extended",
+      "version": "1.0.0",
+      "name": "Italienskinspirerad nötfärs- och svamprisotto – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "italian",
+      "family": "köttfärsrisotto",
+      "primary": "nötfärs",
+      "method": "pot",
+      "side": "fräsch sallad",
+      "flavor": [
+        "persilja",
+        "citronjuice",
+        "basilika"
+      ],
+      "equipment": [
+        "Digital kökstermometer",
+        "Gryta med lock",
+        "Kniv",
+        "Köksvåg",
+        "Måttkanna och måttsats",
+        "Salladsskål",
+        "Sked",
+        "Skärbräda",
+        "Skålar",
+        "Stekspade"
+      ],
+      "components": [
+        {
+          "id": "c1",
+          "name": "Färssvamprisotto",
+          "ingredients": [
+            {
+              "name": "risottoris",
+              "form": "dry",
+              "quantity": 320.0,
+              "unit": "g",
+              "role": "side",
+              "label": "Risottoris, torr vikt"
+            },
+            {
+              "name": "nötfärs",
+              "form": "raw_edible",
+              "quantity": 650.0,
+              "unit": "g",
+              "role": "primary",
+              "label": "Nötfärs, rå ätlig vikt"
+            },
+            {
+              "name": "champinjoner",
+              "form": "raw_edible",
+              "quantity": 450.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Champinjoner, rå ätlig vikt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gul lök, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 30.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök, rå ätlig vikt"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 100.0,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Fast ost att riva, vikt som såld"
+            },
+            {
+              "name": "persilja",
+              "form": "raw_edible",
+              "quantity": 20.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Persilja, rå ätlig vikt"
+            },
+            {
+              "name": "selleri",
+              "form": "raw_edible",
+              "quantity": 120.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Selleri, rå ätlig vikt"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25.0,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "Ren citronjuice"
+            }
+          ]
+        },
+        {
+          "id": "c2",
+          "name": "Fräsch sallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 350.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Tomat, rå ätlig vikt"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250.0,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka, rå ätlig vikt"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 40.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Rödlök, rå ätlig vikt"
+            },
+            {
+              "name": "basilika",
+              "form": "raw_edible",
+              "quantity": 15.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Basilika, rå ätlig vikt"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10.0,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja, vikt som såld"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1.0,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt, vikt som såld"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Färssvamprisotto: Ansa och finhacka gul lök och vitlök. Skölj, ansa och skär champinjoner och selleri i små jämna bitar; skala rotfrukter före vägning. Riv den fasta osten. Finhacka persilja.",
+          "uses": [
+            "nötfärs",
+            "champinjoner",
+            "gul lök",
+            "vitlök",
+            "selleri"
+          ],
+          "minutes": 8
+        },
+        {
+          "text": "Värm rapsolja i grytan. Fräs gul lök, vitlök och nötfärs under omrörning tills råvarorna får färg och eventuell lök mjuknar.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "vitlök",
+            "nötfärs"
+          ],
+          "minutes": 7,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner risottoriset och nötfärs, champinjoner, salt och selleri. Låt riset bli blankt under omrörning.",
+          "uses": [
+            "risottoris",
+            "nötfärs",
+            "champinjoner",
+            "salt",
+            "selleri"
+          ],
+          "minutes": 2,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Tillsätt 1000 ml vatten i flera omgångar under omkring 20 minuter. Rör regelbundet och låt nästan all vätska sugas upp före nästa omgång. Riset ska bli mjukt med lätt kärna och rätten krämig, inte torr.",
+          "uses": [
+            "risottoris"
+          ],
+          "minutes": 20,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ta grytan från värmen och rör ner ost, persilja och citronjuice.",
+          "uses": [
+            "ost",
+            "persilja",
+            "citronjuice"
+          ],
+          "minutes": 2,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Färsen ska vara genomstekt och nå minst 72 °C i mitten.",
+          "uses": [
+            "nötfärs"
+          ],
+          "minutes": 2,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fräsch sallad: Ansa och finhacka rödlök. Skölj, ansa och skär tomat och gurka i små jämna bitar; skala rotfrukter före vägning. Finhacka basilika.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "basilika"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Blanda tomat, gurka, rödlök, basilika, rapsolja och salt i salladsskålen. Vänd så att komponentens dressing fördelas och behåll grönsakssaften vid serveringen.",
+          "uses": [
+            "tomat",
+            "gurka",
+            "rödlök",
+            "basilika",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Servera färssvamprisotto och fräsch sallad. Fördela samtliga komponenter mellan fyra portioner.",
+          "uses": [
+            "risottoris",
+            "nötfärs",
+            "champinjoner",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "ost",
+            "persilja",
+            "selleri",
+            "citronjuice",
+            "tomat",
+            "gurka",
+            "rödlök",
+            "basilika"
+          ],
+          "minutes": 2,
+          "after": [
+            6,
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat utkast, inte provlagat. Ingen import eller något godkännande i Smako har genomförts. 14 lokalt räknade ingredienser; salt, svartpeppar och processvatten undantas och samma råvara i flera komponenter räknas en gång. Ingrediensantalet ligger preliminärt inom middagens standardfilter 10–15; det innebär inte kvalificering eller val i Smako. Stegen är skrivna sekventiellt för en matlagare: cirka 51 minuter totalt, varav 51 aktivt och 0 huvudsakligen passivt. Tiderna behöver provlagas. Kräver registergranskning av risottoris; inte importklar. Inga nya produkt- eller pack-koder har skapats.  Kulinarisk avgränsning: Stekt nötfärs och svamp binds i rörd risotto; annan stärkelsematris än köttfärssås med pasta. Skillnaden behöver innehållsgranskas; inga fullständiga instruktioner för de befintliga rätterna har funnits i underlaget. Diet, allergener, näring och köpbarhet måste bedömas per variant mot faktiskt valda produkter."
+    }
+  ]
+}
