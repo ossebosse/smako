@@ -89,6 +89,10 @@ separat profilerad. Browserprovet redovisas för sig.
 
 ## Före/efter
 
+Tabellen använder explicit `smako-verified-reference-v1` i båda armar.
+Utvecklingsstandardens `legacy` är oförändrad; dess separata slutkodskontroll
+redovisas nedan och är ingen uppmätt före/efter-latensjämförelse för legacy.
+
 Prefixsekvensen var `A seed, A igen, B, C, D`. Båda armar stoppades vid D:s
 första femminutersgräns. Ingen utvidgning av den sekvensen gjordes därefter.
 För att ändå mäta huvudfallet användes en separat, matchad sekvens
