@@ -188,7 +188,7 @@ och båda storlekarna: **24 av 48 pilotceller och 96 auditgodkända anrop**.
 Hela piloten och standardkvalificeringen är fortfarande öppna grindar.
 [Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
 
-### Pilot: första Axfood-gruppen klar
+### Pilot: Axfood/Malmö klar vid båda storlekarna
 
 Malmö/Axfood/262 är avslutad med sex celler och 24 auditgodkända anrop.
 Slutlig peak är **1 834 098 688 byte (1,708 GiB)**, exit 0 utan OOM/swap;
@@ -206,10 +206,26 @@ V1 använder sitt separata referensarkiv och alla tolv levererade menyer
 klarar aktuell checkout-audit. Originalmenyernas källhashar finns i rårapporterna;
 tidigare kassasumma eller audit återanvänds inte som nytt godkännande.
 
-Totalt är **30 av 48 pilotceller och 120 auditgodkända anrop** uppmätta.
-Axfood/Malmö/5 000 körs nu; 18 pilotceller och Axfood-armens samtliga
-5 000/262-kvoter återstår. Den partiella releasen omfattar fortsatt 103
-verifierade dokument och ingen aktiv fakta-/prisversion har ändrats.
+Även Malmö/Axfood/5 000 är avslutad med sex celler och 24 auditgodkända
+anrop. Slutlig cgroup-peak är **2 251 034 624 byte (2,096 GiB)**, exit 0
+utan OOM/swap. Hela sexcellsprocessen tog **8 870,44 s**.
+
+| Profil | Legacy, betalt | V1, betalt | Första v1-anrop | Tre varma v1-anrop | Varm max(5 000)/min(262) |
+| --- | --- | --- | --- | --- | --- |
+| Standard | 511,46 kr | 492,15 kr | 744,36 s | 11,81–12,68 s | 1,2024 |
+| Fördelning | 988,32 kr | 988,32 kr | 678,53 s | 12,50–12,88 s | 1,1731 |
+| Organic-share | 316,26 kr | 316,26 kr | 3 984,17 s | 12,10–12,41 s | 1,1747 |
+
+Samtliga kvoter klarar 1,25 och v1:s varma anrop är snabbare än legacy.
+V1:s pris är högst legacy och högst 262-priset; priserna matchar också
+originalfakta-armen. Organic-shares första förberedelse kostar fortfarande
+**66,40 minuter**. Alla 36 avslutade pilotceller har identiska priser och
+menyhashar mellan sina fyra anrop.
+
+Totalt är **36 av 48 pilotceller och 144 auditgodkända anrop** uppmätta.
+Axfood/Lund/262 har startat; tolv pilotceller och Lunds Axfood-kvoter
+återstår. Den partiella releasen omfattar fortsatt 103 verifierade dokument
+och ingen aktiv fakta-/prisversion har ändrats.
 
 SSH-kanalen stängdes efter den färdiga Malmögruppen; därefter var sekvensens
 processer avslutade och nästa gruppkatalog tom. Avslutade mätningar har
@@ -220,8 +236,9 @@ Ofullständig evidens skrivs inte över. Fortsättningsloggen skrivs till disk
 evidensprov passerar, liksom Ruff/compileall. Samma seriella gränser och
 frysta appkod gäller. [Fortsättningskvitto och kommando](preparation-memory-20261024/continuation.json).
 
-Full [CI på verifieringsverktygen i `431e0b7`](https://github.com/ossebosse/smako/actions/runs/40123553894)
-passerar. Appkoden är fortsatt byteidentisk med `eeda184`. Återstående
+Full [CI på `18f6148`](https://github.com/ossebosse/smako/actions/runs/40136156721)
+passerar före denna datauppdatering; app- och verifieringskoden är oförändrade.
+Appkoden är fortsatt byteidentisk med `eeda184`. Återstående
 pilot- och matrisgrindar är fortfarande öppna.
 
 ## Föregående runtime: tre kalla prov och cachelägen godkända

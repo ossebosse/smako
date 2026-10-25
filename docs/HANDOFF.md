@@ -1,4 +1,4 @@
-# 2026-10-24 21:50 UTC: Trettio pilotceller klara; Axfood/Malmö/5 000 körs
+# 2026-10-25: Trettiosex pilotceller klara; Axfood/Lund/262 körs
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -64,18 +64,25 @@ exit 0 utan OOM/swap. Samma priser som originalarmen. V1 första/varmt:
 standard 174,51/10,54–10,83 s, fördelning 45,57/10,98–11,32 s och
 organic-share 549,74/10,56–10,81 s. Explicita legacy-omprövningar verifierar
 tidigare meny i alla tolv anrop, utan avvisningar; v1-menyer klarar aktuell audit.
-Totalt 30/48 pilotceller och 120 auditgodkända anrop. Axfood-armens övriga
-18 celler och 5 000/262-kvoter återstår. Ingen standardkvalificering eller ändrad default.
+Även Axfood/Malmö/5 000 är klar: sex celler/24 anrop med audit PASS,
+slutlig peak **2,096 GiB**, exit 0 utan OOM/swap. V1 ger 492,15 / 988,32 /
+316,26 kr mot legacy 511,46 / 988,32 / 316,26 kr. V1 första/varmt:
+744,36/11,81–12,68 s, 678,53/12,50–12,88 s och 3 984,17/12,10–12,41 s.
+Varmkvoter 1,2024/1,1731/1,1747 passerar 1,25, liksom pris/tid mot legacy
+och pris mot 262. Organic-shares första förberedelse kostar 66,40 minuter.
+Totalt 36/48 pilotceller och 144 auditgodkända anrop, med stabila priser och
+menyhashar i varje cells fyra anrop. Axfood/Lunds tolv celler och kvoter
+återstår. Ingen standardkvalificering eller ändrad default.
 
 SSH-kanalen stängdes efter den avslutade Malmögruppen och sekvensen stannade
 innan nästa arbetare. Kvitton och den tomma Lund/262-katalogen verifierades.
 Återupptagningen hoppar bara över verifierade färdiga grupper, bevarar
 ofullständig evidens och skriver fortsättningsloggen till disk även om
-transporten stängs. Axfood/Malmö/5 000 körs nu inom samma gränser och frysta appkod.
+transporten stängs. Axfood/Lund/262 har startat inom samma gränser och frysta appkod.
 Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
 det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
 Tolv lokala evidenskontrakt, Ruff och compileall samt full CI på
-verifieringsverktygens `431e0b7` passerar. Appfiler och
+`18f6148` före denna datauppdatering passerar. App- och verifieringskod samt
 metodsignatur är oförändrade; HTTP, matchade basprov och fullmatris återstår.
 
 ---
