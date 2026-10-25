@@ -20,11 +20,11 @@ KINDS = ("vegetarian", "chicken", "fish", "meat")
     {"chicken": 1, "vegetarian": 2, "meat": 2}, {"vegetarian": 5}])
 def test_capacity_matches_exhaustive_feasible_completions(distribution):
     meal = MealSettings(meal_type="snack", count=5, distribution=distribution)
-    for fixed in ((), ("chicken",), ("vegetarian", "meat"), ("fish", "fish")):
+    for fixed in ((), ("chicken",), ("vegetarian", "meat"), ("fish", "fish"), ("shellfish",)):
         slots = [MealSlot(id=str(i), day=i+1, meal_type="snack", recipe=recipe(name=k)) for i, k in enumerate(fixed)]
         capacity = remaining_category_capacity(meal, slots, classify=lambda r: r.name)
         possible = set()
-        for tail in product(KINDS, repeat=5-len(fixed)):
+        for tail in product((*KINDS, "shellfish"), repeat=5-len(fixed)):
             counts = Counter((*fixed, *tail))
             if all(counts[k] == n for k, n in distribution.items()):
                 possible.update(tail)

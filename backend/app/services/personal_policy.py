@@ -283,19 +283,28 @@ def pantry_checks(items, profile):
     return results
 
 
+FINFISH_INGREDIENTS = frozenset({"fisk", "lax", "torsk", "tonfisk", "makrill", "rökt makrill",
+                                "sardiner", "matjessill", "stenbitsrom", "rökt lax", "varmrökt lax"})
+SHELLFISH_INGREDIENTS = frozenset({"räkor", "råa räkor", "skaldjur", "musslor", "bläckfisk"})
+
+
 def protein_category(recipe):
     # Each recipe receives ONE category. Mixed meat/fish recipes do not count twice.
     names = [canonicalize_ingredient_name(i.name) for i in recipe.ingredients]
     main = primary_ingredient(recipe)
     if main in {"kyckling", "kalkon"}:
         return "chicken"
-    if main in {"fisk", "lax", "torsk", "tonfisk", "räkor", "skaldjur"}:
+    if main in FINFISH_INGREDIENTS:
         return "fish"
+    if main in SHELLFISH_INGREDIENTS:
+        return "shellfish"
     if not recipe_respects_diet(recipe, preference="vegetarian"):
         if any(n in {"kyckling", "kalkon"} for n in names):
             return "chicken"
-        if any(n in {"fisk", "lax", "torsk", "tonfisk", "räkor", "skaldjur"} for n in names):
+        if any(n in FINFISH_INGREDIENTS for n in names):
             return "fish"
+        if any(n in SHELLFISH_INGREDIENTS for n in names):
+            return "shellfish"
         return "meat"
     return "vegetarian"
 
@@ -306,7 +315,9 @@ def remaining_category_capacity(meal, fixed_slots=(), *, classify=protein_catego
     Unspecified categories share the unassigned places; explicit zero is a ban.
     This is only a necessary condition, never proof that a menu is feasible.
     """
-    categories = ("vegetarian", "chicken", "fish", "meat")
+    # Shellfish may occupy an unassigned place, never an explicit fish quota.
+    # The public four-category request vocabulary is unchanged.
+    categories = ("vegetarian", "chicken", "fish", "meat", "shellfish")
     chosen = [s.recipe for s in fixed_slots if s.meal_type == meal.meal_type and s.recipe]
     counts = Counter(classify(r) for r in chosen)
     remaining = meal.count - len(chosen)

@@ -19,6 +19,7 @@ EXAMPLE = Path(__file__).parents[2] / "docs/recipes/examples/authoring-example.j
 def authored(name="kyckling", *, method=None):
     source = json.loads(EXAMPLE.read_bytes())
     row = source["recipes"][0]
+    row["primary"] = name
     row["components"][0]["ingredients"][0]["name"] = name
     for step in row["steps"]:
         step["uses"] = [name if n == "kyckling" else n for n in step["uses"]]
@@ -63,6 +64,23 @@ def test_animal_ingredients_cannot_become_vegetarian_or_implicitly_fish(name):
 def test_additional_dairy_and_egg_inputs_are_not_vegan(name):
     pack, _ = authored(name)
     assert not recipe_respects_diet(Recipe.model_validate(pack["recipes"][0]), preference="vegan")
+
+
+@pytest.mark.parametrize("name", ["räkor", "råa räkor", "musslor", "bläckfisk"])
+def test_shellfish_never_fill_a_fish_distribution_quota(name):
+    from app.services.personal_policy import (
+        distribution_ok,
+        protein_category,
+        remaining_category_capacity,
+    )
+
+    pack, _ = authored(name)
+    recipe = Recipe.model_validate(pack["recipes"][0])
+    assert protein_category(recipe) == "shellfish"
+    meal = MealSettings(count=1, distribution={"fish": 1})
+    slot = MealSlot(id="dinner-1", day=1, meal_type="dinner", recipe=recipe)
+    assert remaining_category_capacity(meal)["shellfish"] == 0
+    assert not distribution_ok([slot], [meal])
 
 
 @pytest.mark.parametrize("name", ["lammkött", "råa räkor", "äggvita"])
