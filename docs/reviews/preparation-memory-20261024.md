@@ -355,7 +355,7 @@ Det kompletterande steget för tolv nytillkomna menyidentiteter har nu startat.
 Råhashar, request-normalisering, kö-/avbrottstider,
 progress, separata jobbspår och resurskvitton finns i HTTP-statusunderlaget.
 
-### Nytillkommen sparad meny: tre giltiga prov med förberedd vy passerar
+### Nytillkommen sparad meny: båda giltiga cachevägarna passerar
 
 Första kombinationen giltig meny/förberedd vy är avslutad i alla tre prover.
 Vanlig 262-planering tog **34,63 / 35,64 / 34,53 s** och levererade
@@ -372,12 +372,23 @@ kontext som API-baslinjen. Två sparade revisioner och auktoritativt privat
 tillstånd var oförändrade under ankomstplaneringen. Slutpeak är
 som mest **1 563 791 360 byte (1,456 GiB)**, exit 0 utan OOM/swap i alla tre.
 
-Detta är **3 av 12** erforderliga ankomstobservationer. Serien giltig meny/
-certifikat har startat; resterande prov är pågående/återstår. Det är inget
-vanligt varmt latensprov. Arkivet med 74 verifierade metadatafiler har SHA-256
-`cec8a1922f267349c96cec695d7b7a0c74480a9dabb0707e9811aad3e9b5164c`.
+Även samtliga tre giltig/certifikat-prov passerar efter borttagning av endast
+menyvyn i kopian. Plananropen tog **266,52 / 301,05 / 287,82 s** inklusive
+profileringshook, median **287,82 s**, spann **266,52–301,05 s**. Hela
+ankomstprocesserna tog **325,41 / 362,24 / 348,65 s**. Alla tre gav 976,32 kr,
+audit PASS, noll sökanrop, åtta auditanrop och elva laddade publiceringar utan
+omsökning. Faktisk privat revision 2 och auktoritativ historik bevarades.
+Högsta slutliga ankomstpeak är **1 598 578 688 byte (1,489 GiB)**, exit 0
+utan OOM/swap. Native seed tog 35,34 / 36,88 / 35,71 s och sparades på vanligt sätt.
+
+Detta är **6 av 12** erforderliga ankomstobservationer. Serien med en tidigare
+giltig meny på fyra måltider har startat; den är ofullständig för den aktuella
+begärans fem. Övriga prov är pågående/återstår. Tiderna är instrumenterad
+diagnostik, inte vanliga varma latensprov. Arkivet med 104 verifierade
+metadatafiler har SHA-256
+`52b7868e694ce847fafabc5c7c96e0da699facc318978c1528f20960310e2944`.
 [Detaljer per seed och ankomst](preparation-memory-20261024/history-arrival-current.json).
-Full [CI på `7314e65`](https://github.com/ossebosse/smako/actions/runs/40160912531)
+Full [CI på `f9e6cc9`](https://github.com/ossebosse/smako/actions/runs/40161651368)
 passerar inklusive browserprov före denna resultatssummering.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)

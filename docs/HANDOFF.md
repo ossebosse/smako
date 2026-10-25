@@ -135,9 +135,13 @@ sökanrop och åtta auditanrop vardera, elva certifikat laddade utan omsökning.
 Native seed tog 34,63 / 35,64 / 34,53 s, gav 984,22 kr och verklig Save
 flyttade privat revision 1→2 i varje kopia. Ankomsterna bevarade två sparade
 revisioner och privat tillstånd; högsta slutpeak 1,456 GiB, exit 0 utan OOM/swap.
-Totalt 3/12 ankomster och tre seedarbetare klara. Giltig/certifikat har startat.
-Arkiv SHA-256 `cec8a1922f267349c96cec695d7b7a0c74480a9dabb0707e9811aad3e9b5164c`,
-74 metadatafiler verifierade. Full CI på `7314e65` passerar inklusive browserprov.
+Även tre giltig/certifikat-prov passerar: 266,52 / 301,05 / 287,82 s inklusive
+profileringshook (median 287,82 s), samma 976,32 kr/audit, noll sökanrop och
+åtta auditanrop. Elva publiceringar laddade utan omsökning, privat revision 2
+och historik bevarade; högsta slutliga ankomstpeak 1,489 GiB, exit 0 utan OOM/swap.
+Totalt 6/12 ankomster och sex seedarbetare klara. Ofullständig/förberedd har startat.
+Arkiv SHA-256 `52b7868e694ce847fafabc5c7c96e0da699facc318978c1528f20960310e2944`,
+104 metadatafiler verifierade. Full CI på `f9e6cc9` passerar inklusive browserprov.
 Appfiler och metodsignatur är oförändrade;
 de nya proven, matchade basprov och fullmatris återstår.
 
