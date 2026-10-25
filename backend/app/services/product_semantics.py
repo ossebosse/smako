@@ -1487,6 +1487,10 @@ _CULINARY_LABELS = {
     "sesamfrön": (r"sesamfron", "seed"),
     "jordnötssmör": (r"jordnotssmor", "nut_butter"),
 }
+from app.services.content_pack_requirements import INTAKE_IDENTITIES
+
+_CULINARY_LABELS.update({name: (entry[1], entry[2]) for name, entry in INTAKE_IDENTITIES.items()
+                         if name != "smör"})  # Preserve butter's existing primary-product interpretation.
 
 
 def _culinary_label_match(canonical, product):
@@ -2371,6 +2375,7 @@ def evaluate_product_semantics(
         )
 
     visible_text = f"{name_text} {category_text}".strip()
+    butter_brand = _search_text(str(_value(product, "brand", "") or "")) if requirement.canonical_name == "smör" else ""
     excluded_phrase = next(
         (
             phrase
@@ -2383,7 +2388,7 @@ def evaluate_product_semantics(
                 and _infer_special_identity(_search_text(phrase)) is not None
                 and _classify_prepared_form(_search_text(phrase)) is None
                 else visible_text, phrase
-            )
+            ) or (butter_brand and _contains_phrase(butter_brand, phrase))
         ),
         None,
     )

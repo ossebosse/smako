@@ -261,8 +261,13 @@ def _requirements_compatible(canonical, requirements, product, fact):
     requirements = tuple(r for r in requirements if not r.startswith("pack:"))
     text = product.name.casefold()
     composition = " ".join(fact.ingredients).casefold() if fact else ""
-    if set(requirements) - {"plain", "ground", "firm", "thick", "pure_juice", "frozen", "red_split", "white_rice", "white_beans", "dried_leaf"}:
+    if set(requirements) - {"plain", "ground", "firm", "thick", "pure_juice", "frozen", "red_split", "white_rice", "white_beans", "dried_leaf", "pitted"}:
         return False
+    if "pitted" in requirements:
+        declaration = text + " " + composition
+        if (not re.search(r"\b(?:urkärnade?|utan kärnor|pitted)\b", declaration)
+                or re.search(r"\b(?:med kärnor|ej urkärnade?|inte urkärnade?|unpitted)\b", declaration)):
+            return False
     if "white_beans" in requirements and not re.search(r"\bvita\b", text + " " + composition):
         return False
     if "ground" in requirements:
@@ -513,7 +518,13 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         return bool(fact and len(fact.ingredients) == 1 and plain_bread_composition(composition)
                     and _retained_classification(product, fact, "ready_baked_bread", raw_fields={
                         "name": product.name, "listOfIngredients": fact.ingredients[0]}))
-    from app.services.content_pack_requirements import additional_whole_identity
+    from app.services.content_pack_requirements import INTAKE_IDENTITIES, additional_whole_identity
+    if canonical in INTAKE_IDENTITIES and form == "dry":
+        if fresh or frozen:
+            return False
+        if canonical in {"timjan", "rosmarin"} and not (
+                re.search(r"krydd|skaffer", category) or re.search(r"torkad|burk|påse", label)):
+            return False
     return additional_whole_identity(canonical, form, label, composition)
 
 

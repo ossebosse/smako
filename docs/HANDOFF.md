@@ -1,3 +1,72 @@
+# 2026-10-25: Första granskade receptimporten — 45 varianter, 18 nya grundrätter
+
+[PR #13](https://github.com/ossebosse/smako/pull/13) genomför den första
+granskade delmängden i
+[receptuppdraget](CODEX-SOL-NEXT-20261025-RECIPE-INTAKE.md).
+[Slutrapport och maskinunderlag](reviews/recipe-integration-800-20261025.md)
+anger exakt käll-ID → aktivt ID, innehållsbeslut, produktavslag och mätgränser.
+Utvecklingsbiblioteket har nu **307 aktiva varianter/183 grundrätter**,
+tidigare 262/165. Nytt: **45 varianter av 18 nya och två befintliga baser**,
+alla måltidstyper och sex kök. Samtliga 166 manifestbundna originalfiler
+är bytebevarade. Recepten är inte provlagade.
+
+Tolv uttryckligt granskade ingrediensidentiteter med 23 exakta bevarade
+produktreferenser har införts genom befintlig författar-/produktväg.
+Längre total-/väntetid, rå animalisk insats i kalla sluträtter,
+diet/skaldjur, precisa namn/former, urkärning, portionsskalning och
+importgräns har riktade regressioner. Ingen fri densitets-/ätlig-andels-
+omräkning eller fabricerad närings-/allergen-/ekostatus har lagts till.
+
+Tre ny-basanspråk avvisas efter jämförelse med gamla biblioteket: grekiska
+färsbiffar och thailändsk laxsallad är nu varianter av befintliga baser;
+bulgur-/linsfrukost ska bli framtida varianter av befintlig frukostbas men
+är inte importerad. Därmed högst 797 nya baskandidater; global unikhet är
+inte styrkt och 13 bredare familjegrupper återstår. Samgrupperingen bevarar
+base_id, diversitetsfamilj och max_same_base_meals. Åtta tidigare separata/
+felaktiga mellanversioner är återkallade med oförändrade historiska bytes.
+Manifestet har **17 aktuella + sju historiska generationer**, idempotent
+återimport och paket klart under 16 MiB; 128-gränsen är oförändrad.
+
+Originalets nya native audit: 572 kompatibla, 1 626 ingrediensblockerade och
+två kvarvarande originalavslag som har rättats i den importerade delmängden.
+**2 155 originalvarianter återstår utan import**, varav 529 strukturellt
+kompatibla men inte färdiggranskade. **183 exakta ingrediensidentiteter**
+återstår; börja med salladslök 139, mynta 131, koriander/purjolök vardera
+111, tamarindpasta 93. Effekterna överlappar. Recept-ID/rad och nästa
+komplettering finns i rapportens `ingredient-blockers.json`. 294 avvikelser
+från variantintervallen och sju middagsbaser utan 10–15-variant är verifierade.
+Standardfilter och `dinner_level` ändras inte för variantnamnens skull.
+
+Fryst behörigt Malmöunderlag från 23 oktober: gemensamt 201 inputscope,
+23/45 individuellt produktlösbara varianter. Fyra låsta funktionella fall
+ger full checkout/audit, privat save och ägarbunden återläsning; tre gamla
+priser oförändrade, fjärde fallet provar lång blötläggning. Ingen allmän
+närings-/eko-/allergikvalificering eller veckosöklatens påstås. Nytt kallt
+recept-/portionsunderlag är förberett, även för historiska sparade referenser.
+
+**Gemensam intake/V2-budget: 1 073,9377 s = 17,90 minuter förbrukade,
+6 126,0623 s = 102,10 minuter återstår av samma 120 minuter.** Fortsätt
+`docs/reviews/recipe-integration-800-20261025/budget.json`; starta inte en ny
+120-minutersjournal. Alla starter, omtag och förberedelser är debiterade;
+inga mätarbetare fortsätter. Windows-jobb med verklig interpreter, två CPU,
+hårt 3 GiB commit; största verifierade private commitpeak 1,102 GiB.
+De tre första wrapperminnesvärdena är ogiltiga och uttryckligen uteslutna.
+
+122 riktade offlineprov och tre budgetprov, Ruff och compileall passerar.
+Ordinarie full CI inklusive Chromium/WebKit passerar på runtime `81466b1`
+(körning 40241622213); slutleveransens checkar finns på PR #13.
+Legacy är fortsatt default, `library_merge_generations=False`; ingen beta,
+produktion, scheduler, insamling eller produktionsprofil har ändrats.
+
+**Nästa arbete:** bygg vidare med innehållsgranskning av de 529 kompatibla
+varianterna och de prioriterade exakta produkt-/mängdluckorna, samt avsluta
+likhetsgranskningen. Fortsätt sedan det separata
+[V2-implementationsuppdraget](CODEX-SOL-NEXT-20261025-PREPARED-PLANNING.md)
+med dessa verkliga recept och fryst 262-baslinje. Någon ny opt-in V2-sökväg,
+1..N-butiksexponering, end-to-end-deadline eller 1 000-/5 000-kvalificering
+har inte implementerats här. A–E/HTTP GET/browser/nya användarval är inte
+ommätta på en ny V2-väg; 30–60-sekundersmålet är inte uppnått av denna import.
+
 # 2026-10-25: 800 grundrätter mottagna; Sol färdigställer ingredienser och import
 
 Ägaren beställde att receptleveransen läggs till i Smako och att Sol får

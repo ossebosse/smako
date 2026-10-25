@@ -2,6 +2,7 @@ from copy import deepcopy
 from dataclasses import replace
 
 import pytest
+from app.services.library_publications import publications
 from app.services.plan_store import PlanStore
 from app.services.planner_artifacts import OwnedPlannerArtifacts
 from app.services.planner_context import planner_context
@@ -117,7 +118,7 @@ def test_qualification_and_verified_menu_survive_new_planner_instances(tmp_path)
     assert result.optimized_basket == first.optimized_basket
     assert result.personal.slots == first.personal.slots
     report = result.personal.checks["verified_reference"]
-    assert report["loaded_publications"] == 1 and report["replayed_publications"] == 0
+    assert report["loaded_publications"] == len(publications()) and report["replayed_publications"] == 0
     assert report["prepared_menu_hit"] is True
     assert sum(p.get("qualification_cache_hits", 0) for p in second.diagnostics.pools) > 0
     # Erase durable cache, then reproduce with ordinary qualification/search.
@@ -221,7 +222,7 @@ def test_new_owned_delivery_competes_on_both_cache_paths(tmp_path, cache_path, v
     assert result.personal.slots == expected.personal.slots
     report = result.personal.checks["verified_reference"]
     assert not report.get("prepared_menu_hit")
-    assert report["loaded_publications"] == 1 and report["replayed_publications"] == 0
+    assert report["loaded_publications"] == len(publications()) and report["replayed_publications"] == 0
     assert result.personal.checks["checkout_audit"]["passed"]
     if valid:
         assert subject().create(_compare_scopes=False).personal.checks["verified_reference"]["prepared_menu_hit"]

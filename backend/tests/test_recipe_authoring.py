@@ -122,4 +122,4 @@ def test_issued_water_steps_scale_as_before():
         for servings in (1, 2, 4, 8, 12):
             text = _scaled(recipe, servings).design.steps[index].text
             for _token, quantity in step.scalable_amounts:
-                assert f"{quantity * servings / recipe.servings:g} ml" in text
+                assert f"{quantity * servings / recipe.servings:g} ml".replace(".", ",") in text

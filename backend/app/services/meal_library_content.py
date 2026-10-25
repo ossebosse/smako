@@ -185,7 +185,10 @@ def validate_pack_bytes(source, *, label="content pack"):
             if not all(c.amounts for c in d.components):
                 raise ValueError(f"{ref}.design.components: komponentmängder krävs")
             if d.method in {"cold_assembly", "refrigerated_assembly", "salad"} and any(
-                    i.canonical_name in {"kyckling", "nötfärs", "fläskkött", "ägg", "fisk", "lax"}
+                    i.canonical_name in {"kyckling", "kalkon", "nötfärs", "fläskfärs", "blandfärs",
+                                         "nötkött", "lammkött", "lammfärs", "fläskkött", "fläsklever",
+                                         "kycklinglever", "råa räkor", "bläckfisk", "musslor", "makrill",
+                                         "ägg", "äggula", "äggvita", "fisk", "lax"}
                     and i.form == "raw_edible" for i in recipe.ingredients):
                 raise ValueError(f"{ref}.design.method: rå animalisk ingrediens kräver varm metod")
             sha = content_hash(recipe)
@@ -271,11 +274,13 @@ def import_pack(path, *, root=ROOT, accepted_ids=None):
                          "dela upp utkastet i flera paket")
     sha = digest(content)
     target = root / ("meal-pack-" + sha + ".json")
+    manifest = manifest_entries(root)
+    entry = {"file":target.name,"sha256":sha}
+    if entry not in manifest["current"] and len(manifest["current"]) + len(manifest["history"]) >= 128:
+        raise ValueError("Biblioteket har för många paketgenerationer")
     if target.exists() and target.read_bytes() != content:
         raise ValueError("Befintligt paket har ändrats")
     if not target.exists():atomic_write(target,content)
-    manifest = manifest_entries(root)
-    entry = {"file":target.name,"sha256":sha}
     if entry not in manifest["current"]:
         manifest["current"].append(entry)
         atomic_write(root/MANIFEST.name,encoded(manifest))

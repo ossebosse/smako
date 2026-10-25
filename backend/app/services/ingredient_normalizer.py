@@ -209,6 +209,18 @@ _ALIAS_TO_CANONICAL: dict[str, str] = {
 }
 _SORTED_ALIASES = sorted(_ALIAS_TO_CANONICAL, key=lambda value: (-len(value), value))
 
+# Exact authored forms must be resolved before generic substring aliases.
+# A yolk is not a whole shell egg; green lentils are not red split lentils.
+# This adds no product, quantity conversion or culinary substitution.
+_PRECISE_NAMES = {
+    _search_text(name): name for name in (
+        "gröna linser", "svarta linser", "gula ärtor", "klibbigt ris",
+        "rimmat fläsk", "rökt lax", "varmrökt lax", "äggula", "kokta ägg",
+        "kondenserad mjölk", "puffat ris",
+    )
+}
+_PRECISE_NAMES.update({"farsk koriander": "koriander", "radisor": "rädisa"})
+
 
 def _presented_canonical_from_query(query: str) -> str:
     """Resolve one authoritative recipe alias into the matcher vocabulary."""
@@ -317,6 +329,8 @@ def _canonicalize_name(name: str) -> str:
     # source. No prices, product facts or private request state enter this pure
     # text operation. A new runtime imports its own tables and empty cache.
     cleaned = _search_text(name)
+    if cleaned in _PRECISE_NAMES:
+        return _PRECISE_NAMES[cleaned]
     recipe_canonical = _RECIPE_ID_TO_MATCHER_CANONICAL.get(cleaned)
     if recipe_canonical:
         return recipe_canonical

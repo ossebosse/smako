@@ -7,6 +7,50 @@ import re
 
 PACK_KEYS = frozenset(["chicken_thigh", "chicken_breast", "cod", "salmon", "pork_mince", "tofu", "white_beans", "black_beans", "chickpeas", "tuna", "red_lentils", "rice", "pasta", "small_pasta", "couscous", "rice_noodles", "egg_noodles", "pita", "tortilla", "gnocchi", "flour", "potato", "carrot", "cabbage", "onion", "red_onion", "garlic", "ginger", "cucumber", "tomato", "pepper", "mushroom", "spinach", "peas", "corn", "broccoli", "cauliflower", "apple", "crushed_tomato", "tomato_paste", "olives", "yogurt", "creme_fraiche", "feta", "cottage_cheese", "hard_cheese", "milk", "egg", "coconut_milk", "lemon_juice", "lime_juice", "oil", "soy_sauce", "mustard", "peanut_butter", "peanuts", "sugar", "oregano", "basil", "dill", "parsley", "cumin", "paprika_powder", "smoked_paprika", "turmeric", "coriander_seed", "chili", "salt", "black_pepper"])
 
+# Reviewed whole culinary identities; names are compared after the shared
+# accent/whitespace normalization, never as a substring of a composite food.
+# Raw produce remains pending edible-yield evidence in the intake review.
+INTAKE_IDENTITIES = {
+    "smör": ("as_sold", r"smor(?: normalsaltat| osaltat| extrasaltat| extra saltat| saltat| svenskt)*", "butter"),
+    "timjan": ("dry", r"timjan", "herb"),
+    "rosmarin": ("dry", r"rosmarin", "herb"),
+    "majsstärkelse": ("dry", r"(?:majsstarkelse|maizena majsstarkelse)", "starch"),
+    "kikärtsmjöl": ("dry", r"kikartsmjol", "flour"),
+    "bakpulver": ("dry", r"bakpulver", "raising_agent"),
+    "kokosflingor": ("dry", r"(?:kokosflingor|riven kokos|kokos riven)", "coconut"),
+    "valnötter": ("as_sold", r"valnotter(?: naturell| naturella| skalade| karnor)*", "nuts"),
+    "mandel": ("as_sold", r"(?:sotmandel|mandel)(?: sot| naturell| naturella| hel| hela| skalad| skalade)*", "nuts"),
+    "pumpakärnor": ("as_sold", r"pumpakarnor(?: naturell| naturella| skalade)*", "seed"),
+    "solroskärnor": ("as_sold", r"solroskarnor(?: naturell| naturella| skalade)*", "seed"),
+    "rismjöl": ("dry", r"rismjol", "flour"),
+}
+INTAKE_PACK_KEYS = {
+    "intake_butter": "smör", "intake_thyme": "timjan", "intake_rosemary": "rosmarin",
+    "intake_corn_starch": "majsstärkelse", "intake_chickpea_flour": "kikärtsmjöl",
+    "intake_baking_powder": "bakpulver", "intake_coconut": "kokosflingor",
+    "intake_walnuts": "valnötter", "intake_almonds": "mandel",
+    "intake_pumpkin_kernels": "pumpakärnor", "intake_sunflower_kernels": "solroskärnor",
+    "intake_rice_flour": "rismjöl",
+}
+PACK_KEYS = PACK_KEYS | INTAKE_PACK_KEYS.keys()
+
+
+def intake_whole_identity(canonical, form, label, composition):
+    from app.services.ingredient_normalizer import _search_text
+
+    entry = INTAKE_IDENTITIES.get(canonical)
+    if not entry or form != entry[0]:
+        return False
+    descriptors = r"(?:eko|ekologisk|ekologiskt|ekologiska|krav|burk|pase|torkad|torkade|blad|naturell|naturella)"
+    if not re.fullmatch(rf"(?:{descriptors} )*{entry[1]}(?: {descriptors})*", _search_text(label)):
+        return False
+    declared = re.split(r"kan innehålla|may contain", composition)[0]
+    if canonical == "smör":
+        return not re.search(r"margarin|rapsolja|vegetabilisk|krydd|vitlök", declared)
+    if canonical == "bakpulver":
+        return True  # A raising-agent mixture is intrinsic to baking powder.
+    return not re.search(r"\b(?:salt|socker|olja|smör|vitlök|lök|sirap|honung)\b", declared)
+
 
 def declared_fat_g(fact):
     """Declared fat per 100 g as sold, or None when it cannot be trusted.
@@ -37,6 +81,10 @@ def compatible(keys, product, fact):
         "tortilla": r"vete", "gnocchi": r"gnocchi", "peanuts": r"jordnötter",
     }
     for key in keys:
+        if key in INTAKE_PACK_KEYS:
+            canonical = INTAKE_PACK_KEYS[key]
+            if not intake_whole_identity(canonical, INTAKE_IDENTITIES[canonical][0], text, composition):
+                return False
         if key in rules and not re.search(rules[key], text + (" " + composition if key == "tortilla" else "")):
             return False
         if key == "chicken_breast" and re.search(r"lår|inner", text):
@@ -80,6 +128,8 @@ def additional_whole_identity(canonical, form, label, composition):
     The caller has stripped only the published brand and package amount. A
     culinary label alone never supplies a missing declaration or mass basis.
     """
+    if canonical in INTAKE_IDENTITIES:
+        return intake_whole_identity(canonical, form, label, composition)
     patterns = {
         "svartpeppar": ("dry", r"(?:malen )?svartpeppar(?: malen| finmalen| burk)*"),
         # Swedish shelves label the same single spice "Rökt Paprika",

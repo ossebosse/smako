@@ -210,6 +210,13 @@ def _scale_amount_tokens(text, amounts, factor):
 
 
 def _scaled(recipe: Recipe, servings: int) -> Recipe:
+    if servings == recipe.servings:
+        # Native four-/one-portion authoring is already complete. Do not add
+        # the old two-portion scaling allowance to an unchanged recipe.
+        preparation = recipe.preparation
+        return recipe.model_copy(update={"ingredients": list(recipe.ingredients),
+            "instructions": list(recipe.instructions), "preparation": preparation.model_copy(
+                update={"input_forms": dict(preparation.input_forms)}) if preparation else None})
     factor = servings / recipe.servings
     ingredients = [i.model_copy(update={
         key: round(getattr(i, key) * factor, 8)
@@ -229,17 +236,22 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
             if servings != 2:
                 for phrase in ("två portioner", "två djupa tallrikar", "två tallrikar"):
                     text = text.replace(phrase, f"{servings} portioner")
+            if recipe.servings == 4:
+                text = text.replace("fyra portioner", f"{servings} portioner")
+            if recipe.servings == 1:
+                text = text.replace("en mellanmålsportion", f"{servings} mellanmålsportioner")
+                text = text.replace("en portion", f"{servings} portioner")
             steps.append(step.model_copy(update={"text": text}))
-        if servings >= 4 and not (result.design.active_minutes is not None and result.design.method in {"cold_assembly", "refrigerated_assembly"}):
+        if servings >= 4 and servings > recipe.servings and not (result.design.active_minutes is not None and result.design.method in {"cold_assembly", "refrigerated_assembly"}):
             steps[0] = steps[0].model_copy(update={"text": steps[0].text +
                 " Använd tillräckligt stor panna eller fler plåtar så att lagrets djup är detsamma. "
                 "Om maten måste lagas i omgångar blir tiden längre än uppskattningen."})
         result = result.model_copy(update={"design": result.design.model_copy(update={
             "components": components, "steps": tuple(steps)}), "instructions": [s.text for s in steps]})
-    if servings > 2 and (result.design.version != "1.0.0" or result.design.active_minutes is not None):
+    extra_prep = max(0, (servings - 1) // 2 - (recipe.servings - 1) // 2) * 3
+    if extra_prep and (result.design.version != "1.0.0" or result.design.active_minutes is not None):
         # More chopping/weighing for four portions is real work, even when the
         # oven or a large pot can accommodate the full batch without extra heat.
-        extra_prep = ((servings - 1) // 2) * 3
         steps = list(result.design.steps)
         steps[0] = steps[0].model_copy(update={
             "duration_minutes": steps[0].duration_minutes + extra_prep,
@@ -252,7 +264,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
             }),
             "instructions": [s.text for s in steps],
         })
-    if servings > 4 and not (result.design.active_minutes is not None and result.design.method in {"cold_assembly", "refrigerated_assembly"}):
+    if servings > max(4, recipe.servings) and not (result.design.active_minutes is not None and result.design.method in {"cold_assembly", "refrigerated_assembly"}):
         # A larger pan is not an implicit unlimited cooking resource. Reserve
         # sequential batches and show that allowance instead of silently keeping
         # the two-person time estimate for twelve portions.
@@ -260,10 +272,11 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
         steps = list(result.design.steps)
         heat = next((index for index, step in enumerate(steps)
                      if index > 0 and step.duration_minutes >= 10
+                     and (recipe.servings == 2 or re.search(r"grädda|stek|baka|sjud|koka", step.text.casefold()))
                      and not (result.design.version in {"1.3.0", "1.4.0"}
                               and step.id in {"rice", "prebake"})), 0)
         original = steps[heat]
-        extra = original.duration_minutes * (batches - 1)
+        extra = original.duration_minutes * (batches - (recipe.servings + 3) // 4)
         steps[heat] = original.model_copy(update={
             "duration_minutes": original.duration_minutes + extra,
             "text": original.text + f" För {servings} portioner: tillaga i {batches} omgångar "
