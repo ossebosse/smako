@@ -109,8 +109,10 @@ def active_price_status(settings: Settings, *, now: datetime | None = None) -> d
 
 
 def price_universe_id(settings: Settings) -> str | None:
-    value = active_price_status(settings)
-    return str(value["price_universe_id"]) if value.get("active") else None
+    # Request evidence needs the exact active identity, not a readiness scan.
+    # Dynamic ages and campaign applicability remain in active_price_status.
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_active(_scope_id(settings))
+    return prepared.universe.universe_id if prepared is not None else None
 
 
 def pseudonymous_actor(session_id: str | None, settings: Settings) -> str | None:

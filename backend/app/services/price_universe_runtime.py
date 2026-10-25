@@ -23,7 +23,7 @@ import json
 from collections import OrderedDict, defaultdict
 from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from threading import RLock
 from time import perf_counter
@@ -462,6 +462,8 @@ class PreparedPriceUniverse:
     )
     _campaign_products: tuple[Product, ...] = field(init=False, repr=False)
     _base_context_ids: frozenset[str] = field(init=False, repr=False)
+    _campaign_days: OrderedDict[date, frozenset[str]] = field(default_factory=OrderedDict, init=False, repr=False, compare=False)
+    _campaign_days_lock: Any = field(default_factory=RLock, init=False, repr=False, compare=False)
 
     def __post_init__(self) -> None:
         """Freeze per-context freshness once; health checks stay O(contexts)."""
@@ -511,6 +513,33 @@ class PreparedPriceUniverse:
             ),
         )
 
+    def _active_campaign_contexts(self, on_date: date) -> frozenset[str]:
+        """Pure existential campaign evidence for this immutable price artifact.
+
+        Read dependencies are the prepared product/offer/provenance values and
+        the Stockholm purchase DAY. No prices, age, membership, facts, pantry,
+        owner or menu approvals are cached. New artifacts own new caches; even
+        negative results expire at the next day without a new snapshot ID.
+        Keep two days for bounded clock-boundary overlap and single-flight the
+        scan. Finishing a retired object's scan only updates that old object.
+        """
+        with self._campaign_days_lock:
+            cached = self._campaign_days.get(on_date)
+            if cached is not None:
+                self._campaign_days.move_to_end(on_date)
+                return cached
+            contexts = set()
+            for product in self._campaign_products:
+                if (product.store_id not in self._base_context_ids
+                        and product.store_id not in contexts
+                        and has_active_campaign(product, on_date)):
+                    contexts.add(product.store_id)
+            result = frozenset(contexts)
+            self._campaign_days[on_date] = result
+            if len(self._campaign_days) > 2:
+                self._campaign_days.popitem(last=False)
+            return result
+
     def _context_partition(
         self,
         *,
@@ -534,9 +563,7 @@ class PreparedPriceUniverse:
             if observed_at != datetime.min.replace(tzinfo=UTC)
             and observed_at <= evaluated_at + timedelta(hours=1)
         }
-        campaign_contexts = {p.store_id for p in self._campaign_products
-            if p.store_id not in self._base_context_ids
-            and has_active_campaign(p, now.astimezone(STOCKHOLM).date())}
+        campaign_contexts = self._active_campaign_contexts(now.astimezone(STOCKHOLM).date())
         usable = tuple(
             context_id
             for context_id in sorted(ages)
