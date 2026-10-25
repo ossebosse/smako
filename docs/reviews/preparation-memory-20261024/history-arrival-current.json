@@ -1,0 +1,144 @@
+{
+  "schema": "smako-history-arrival-progress-v1",
+  "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+  "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+  "status": "PREPARED_NOT_MEASURED",
+  "facts_arm": "original",
+  "city": "malmo",
+  "seed_library_size": 262,
+  "arrival_library_size": 5000,
+  "library_versions": {
+    "262": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+    "5000": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c"
+  },
+  "samples_per_mode": 3,
+  "required_arrival_samples": 12,
+  "measured_arrival_samples": 0,
+  "required_seed_workers": 12,
+  "source_files": {
+    "history_arrival_entry.py": {
+      "raw_sha256": "26169e3cde3d8728cab9abbd2a8437f90c20735b60a90676c633ea137d158a90",
+      "normalized_lf_sha256": "26169e3cde3d8728cab9abbd2a8437f90c20735b60a90676c633ea137d158a90"
+    },
+    "run_history_arrival.py": {
+      "raw_sha256": "621c13839058110b11a8b8bfc54f7b4fe08a76d685e7e97edfb74183665c42f9",
+      "normalized_lf_sha256": "621c13839058110b11a8b8bfc54f7b4fe08a76d685e7e97edfb74183665c42f9"
+    },
+    "run_http_history.py": {
+      "raw_sha256": "9f94e993d2db98c0b6d913d7319fff5d2058eaebe3eb8675a2df3df05f26fb55",
+      "normalized_lf_sha256": "d2feb6d4859de1d53ee44f8c47abb2eff22e22c2745f9d3794f7a5be4fb46cf3"
+    },
+    "http_history_entry.py": {
+      "raw_sha256": "22e1b3f9d6b034f359cc38139851e3c7e7796d98ab74ee111ded78bbd008d696",
+      "normalized_lf_sha256": "1d467db2de2ce884e9ee2be84e5f146717c3e25ea36e8c6a8841e5d021e80a0a"
+    }
+  },
+  "cells": [
+    {
+      "arrival_kind": "valid",
+      "cache_path": "prepared",
+      "sample": 1,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "valid",
+      "cache_path": "prepared",
+      "sample": 2,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "valid",
+      "cache_path": "prepared",
+      "sample": 3,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "valid",
+      "cache_path": "certificate",
+      "sample": 1,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "valid",
+      "cache_path": "certificate",
+      "sample": 2,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "valid",
+      "cache_path": "certificate",
+      "sample": 3,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "incomplete",
+      "cache_path": "prepared",
+      "sample": 1,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "incomplete",
+      "cache_path": "prepared",
+      "sample": 2,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "incomplete",
+      "cache_path": "prepared",
+      "sample": 3,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "incomplete",
+      "cache_path": "certificate",
+      "sample": 1,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "incomplete",
+      "cache_path": "certificate",
+      "sample": 2,
+      "status": "NOT_RUN"
+    },
+    {
+      "arrival_kind": "incomplete",
+      "cache_path": "certificate",
+      "sample": 3,
+      "status": "NOT_RUN"
+    }
+  ],
+  "resources": {
+    "cpu_count": 2,
+    "memory_bytes": 3221225472,
+    "memory_swap_bytes": 3221225472,
+    "cgroup_peak_target_bytes": 2684354560,
+    "network": "none",
+    "readonly_root": true
+  },
+  "private_revisions": {
+    "source_after_http": 1,
+    "after_native_history_save": 2,
+    "policy": "Read and use the actual revision; never rewind or bypass concurrency/erasure guards"
+  },
+  "contracts": [
+    "Seed deliveries use the ordinary legacy planner and native PlanStore.create",
+    "A five-meal 262 delivery is valid for the current layout; a four-meal past delivery is incomplete for it",
+    "The new Save advances the real private revision but leaves the empty effective pantry unchanged",
+    "Arrival calls preserve authoritative history/private state and perform fresh current checkout",
+    "No native publication optimizer calls or replayed publications during arrival",
+    "Compare exact current context, inputs, library, source method and post-serialization process resources"
+  ],
+  "limitations": [
+    "Prepared protocol only; no large-data observations yet",
+    "Native PlanStore arrivals are measured separately from the HTTP Save diagnostic",
+    "Current-checkout rejection is also exercised separately by permanent regression tests",
+    "Fresh processes and copied warm public disk; OS cache is uncontrolled",
+    "Arrival times include a CPython call-profile hook; native method objects are unchanged"
+  ],
+  "verification": {
+    "targeted_evidence_tests": 20,
+    "ruff": "PASS",
+    "compileall": "PASS"
+  },
+  "full_release_qualified": false
+}

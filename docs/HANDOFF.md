@@ -85,9 +85,15 @@ ofullständig evidens och skriver fortsättningsloggen till disk även om
 transporten stängs. Axfood/Lund/5 000 har startat inom samma gränser och frysta appkod.
 Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
 det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
-Tolv lokala evidenskontrakt, Ruff och compileall samt full CI på
-`da36e09` före denna datauppdatering passerar. App- och verifieringskod samt
-metodsignatur är oförändrade; HTTP, matchade basprov och fullmatris återstår.
+Full CI på `0c2b7d2` passerar före tillägget av kompletterande historikprov.
+Åtta nya och tidigare tolv lokala evidenskontrakt samt Ruff/compileall passerar.
+Efter HTTP/historik följer tre prover för var och en av fyra kombinationer
+av nya menyidentiteter och cachevägar. Native `PlanStore.create` flyttar den
+verkliga privata revisionen 1→2; efterföljande anrop använder faktisk revision
+och oförändrade effektiva skafferiindata. Sök-/auditanrop räknas utan att
+metoderna ersätts; tiderna inkluderar profileringskostnaden. Dessa storprov
+är ännu inte körda. Appfiler och metodsignatur är oförändrade; HTTP/historik,
+de nya proven, matchade basprov och fullmatris återstår.
 
 ---
 

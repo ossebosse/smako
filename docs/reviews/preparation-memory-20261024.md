@@ -111,6 +111,21 @@ Syntetiska lagren har noll vanliga sparade leveranser. HTTP-/historikproven
 och resterande pilot/matris är ännu inte klara. De tre vanliga
 versionsbytesproven och faktaprojektionen inför piloten har också passerat.
 
+Efter HTTP-/historiksteget följer ett kompletterande prov för nytillkomna
+sparade menyidentiteter. Fyra kombinationer mäts tre gånger var: en giltig
+262-meny respektive en tidigare giltig fyrarättersmeny som är ofullständig
+för den aktuella femrättersbegäran, genom förberedd vy respektive certifikat.
+Varje försök använder en separat SQLite-backup och en verklig legacy-leverans
+som sparas med ordinarie `PlanStore.create`. Den verkliga privata revisionen
+går från 1 till 2; ingen revision eller raderingsepok återställs. Aktuell
+planering ska använda samma effektiva tomma skafferi, göra ny audit och
+återanvända publiceringarna utan sökanrop. En extern Python-profileringshook
+räknar native sök-/auditanrop; anropstiderna inkluderar dess kostnad.
+Åtta nya protokollprov och de tidigare tolv evidensproven passerar, liksom
+Ruff/compileall. Storproven är **förberedda men ännu inte körda** och ersätter
+inte de permanenta testen som tvingar fram ett checkout-avslag.
+[Separat provstatus och källhashar](preparation-memory-20261024/history-arrival-current.json).
+
 Faktaprojektionen är klar för båda städerna, med peak **1,867 GiB i Malmö**
 och **1,348 GiB i Lund**. Priser, request och klocka är byteidentiska med
 originalen. Armen använder den oförändrade, partiella releasen
@@ -248,9 +263,9 @@ Ofullständig evidens skrivs inte över. Fortsättningsloggen skrivs till disk
 evidensprov passerar, liksom Ruff/compileall. Samma seriella gränser och
 frysta appkod gäller. [Fortsättningskvitto och kommando](preparation-memory-20261024/continuation.json).
 
-Full [CI på `da36e09`](https://github.com/ossebosse/smako/actions/runs/40145989231)
-passerar före denna datauppdatering; app- och verifieringskoden är oförändrade.
-Appkoden är fortsatt byteidentisk med `eeda184`. Återstående
+Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
+passerar före tillägget av historikprovens mätverktyg. Dessa verifieras lokalt
+ovan och följer med nästa fulla CI. Appkoden är fortsatt byteidentisk med `eeda184`. Återstående
 pilot- och matrisgrindar är fortfarande öppna.
 
 ## Föregående runtime: tre kalla prov och cachelägen godkända

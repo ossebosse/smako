@@ -62,6 +62,10 @@ def main():
         write(destination/'summary.json',summary)
     write(destination/'complete.json',{'source_commit':SOURCE,'status':'HTTP_AND_NONEMPTY_HISTORY_DIAGNOSTICS_PASSED',
         'http_samples':1,'fresh_process_cache_loss_samples':3,'full_release_qualified':False})
+    # Measure actual late-arriving identities before broadening to the full grid.
+    # This child driver has not run during the preceding frozen pilot.
+    from run_history_arrival import main as history_arrival
+    history_arrival()
 
 
 if __name__ == '__main__':
