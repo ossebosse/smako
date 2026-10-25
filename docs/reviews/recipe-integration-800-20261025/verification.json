@@ -1,0 +1,44 @@
+{
+  "budget_tests": {
+    "command": [
+      ".venv/Scripts/python.exe",
+      "scripts/verify_offline.py",
+      "backend/tests/test_recipe_budget_check.py",
+      "-m",
+      "not live",
+      "-q",
+      "--no-header"
+    ],
+    "exit_code": 0,
+    "passed": 3
+  },
+  "ci_runtime_run": "https://github.com/ossebosse/smako/actions/runs/40241622213",
+  "ci_runtime_status": "success",
+  "compileall": "passed",
+  "focused_offline_tests": {
+    "command": [
+      ".venv/Scripts/python.exe",
+      "scripts/verify_offline.py",
+      "backend/tests/test_recipe_intake_review.py",
+      "backend/tests/test_recipe_content_pack.py",
+      "backend/tests/test_owned_planner_artifacts.py",
+      "backend/tests/test_verified_menu_search.py",
+      "-m",
+      "not live",
+      "-q",
+      "--no-header"
+    ],
+    "exit_code": 0,
+    "passed": 122
+  },
+  "manifest_idempotent": true,
+  "manifest_sha256": "2b6e0b719ee18942f80f524716b6e4b4ca92d816d62b0a6b196cc37d60e5d339",
+  "method_signature": "f49ea31c2d9aa128cd016732084c601bbb28d67c452af846b24f074b92f4f491",
+  "pinned_prices_match_previous": true,
+  "pinned_probes_saved_owned_readback": 4,
+  "ruff": "passed",
+  "runtime_app_tree": "4c04fccc9172d9a8b594b7fa4534737459357170",
+  "runtime_commit": "81466b11e5edd90c8feed7a8e0de722a990f8b2d",
+  "schema": "smako-reviewed-intake-verification-v1",
+  "source_files_hash_verified": 166
+}
