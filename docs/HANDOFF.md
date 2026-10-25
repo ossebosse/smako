@@ -1,4 +1,4 @@
-# 2026-10-25: Matchade förgrindar godkända; fullmatris 63/252 pågår
+# 2026-10-25: Matchade förgrindar godkända; fullmatris 77/252 pågår
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -46,14 +46,21 @@ priser identiska. Budgeterad förbättring kvar 437,33 s; kalkylatoranrop oför�
 Inläsningsmedianen är däremot 33,12→47,70 s; faserna förbättras inte likformigt.
 Fullmatrisens första grupp är stängd: 573,48 s, 1,495 GiB, exit 0 utan OOM/swap.
 V5-referensgruppen vid 262 är också stängd: 2 083,53 s, 1,496 GiB, exit 0
-utan OOM/swap, med verifierat obegränsat referenskontrakt. Totalt 63/252
-uppmätta, 60 auditgodkända menyceller/240 anrop och tre vegan-SEARCH_BLOCKED-
-celler/tolv observationer, samma kod/steg legacy/v1/v5. Inget globalt
-omöjlighetsbevis. 189 celler återstår; Malmö/original/1 000 kör nu båda
+utan OOM/swap, med verifierat obegränsat referenskontrakt. Även Malmö/original/
+1 000 är stängd: 4 101,51 s, 1,540 GiB, exit 0 utan OOM/swap. V1 ger
+948,31 kr för protein40/all-macros mot legacy 1 027,79 och 262:s 1 000,86.
+Organic-share v1 ger 318,96 kr mot legacy 321,16; första anropet tar
+1 266,27 s, sedan 11,04–11,47 s varmt. Totalt 77/252 uppmätta,
+72 auditgodkända menyceller/288 anrop och fem vegan-SEARCH_BLOCKED-celler/
+20 observationer med bevarad kod/steg. Inget globalt omöjlighetsbevis.
+175 celler återstår; Malmö/original/2 000 kör nu båda
 huvudpolicyerna för alla profiler. Ingen standardkvalificering.
 [Fullmatrisstatus](reviews/preparation-memory-20261024/full-matrix-current.json).
-Senaste arkiv 221 verifierade metadatafiler:
-`9f34ee1aa5e19874ca15842e88017dddc8bf884fc45c742dc2e9c2390796098a`.
+Separat läsande korsgranskning passerar 179 kontroller, 330 jämförelser väntar.
+Alla tillgängliga prisgränser, inklusive v5/262, är kontrollerade; ingen
+standardkvalificering. Verktyg och resultat finns bredvid fullmatrisunderlaget.
+Senaste arkiv 240 verifierade metadatafiler:
+`333df20e181147d74cf9e740dbe4e10cc3db2487c533fd7dbf33f23010a49685`.
 
 
 Pilotuppdatering: originalfakta/Malmö vid både 262 och 5 000 är klart,
