@@ -86,6 +86,22 @@ def test_reviewed_whole_identities_reject_neighbouring_products(name, form, labe
     assert not intake_whole_identity(name, form, label, "")
 
 
+@pytest.mark.parametrize("name", ["timjan", "rosmarin"])
+def test_dried_herbs_require_dry_shelf_evidence_not_a_fresh_herb_with_the_same_name(name):
+    from app.services.complete_recipes import _whole_food_identity
+
+    herb = SimpleNamespace(name=name.capitalize(), category="Frukt & grönt > Kryddor/örter", brand=None)
+    assert not _whole_food_identity(name, "dry", herb, None)
+    herb.category = "Skafferi > Kryddor"
+    assert _whole_food_identity(name, "dry", herb, None)
+
+
+def test_butter_does_not_bypass_existing_margarine_brand_exclusions():
+    from app.services.product_semantics import evaluate_product_semantics
+
+    assert not evaluate_product_semantics("smör", SimpleNamespace(name="Smör", brand="Milda")).compatible
+
+
 def test_reviewed_vocabulary_rejects_an_empty_bootstrap(tmp_path):
     path = tmp_path / "vocabulary.json"
     path.write_text(json.dumps({"schema_version": "smako-authoring-vocabulary-v1", "ingredients": [{

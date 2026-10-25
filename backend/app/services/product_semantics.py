@@ -1501,6 +1501,10 @@ def _culinary_label_match(canonical, product):
     if canonical == 'salt':
         descriptors = r'(?:fint|finkornigt)'
     compatible = bool(re.fullmatch(rf"(?:{descriptors} )*{identity}(?: {descriptors})*", label))
+    if canonical == "smör" and _contains_any(
+            _search_text(str(_value(product, "name", "")) + " " + str(_value(product, "brand", "") or "")),
+            STRICT_EXCLUSIONS["smör"]):
+        compatible = False
     return SemanticMatchResult(
         compatible=compatible,
         confidence=SemanticConfidence.HIGH if compatible else SemanticConfidence.REJECTED,
