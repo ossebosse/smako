@@ -5,6 +5,7 @@ import json
 import sys
 from pathlib import Path
 
+import httpx
 import pytest
 from app.services.personal_store import PersonalStore
 from app.services.plan_store import PlanStore
@@ -94,6 +95,23 @@ def test_call_observer_restores_profile_on_failure(entry):
     with pytest.raises(ValueError,match='probe failure'), entry.observe_native_calls():
         raise ValueError('probe failure')
     assert sys.getprofile() is None
+
+
+def test_http_rejection_evidence_excludes_inputs_and_capabilities(entry):
+    response = httpx.Response(422,json={'detail':[{'loc':['body','personal','meals'],
+        'type':'value_error','msg':'Meal count must be positive',
+        'input':{'password':'never-persist-this','owner_actor_hash':'a'*64}}]},
+        headers={'X-Error-Code':'form_validation_error','Set-Cookie':'never-copy-this'})
+    value = entry.bootstrap.safe_http_error(response)
+    encoded = json.dumps(value)
+    assert value['detail'][0]['loc'] == ['body','personal','meals']
+    assert 'never-' not in encoded and 'input' not in encoded and 'Set-Cookie' not in encoded
+    assert value['error_code'] == 'form_validation_error'
+
+
+def test_http_rejection_message_redacts_sensitive_text(entry):
+    value = entry.bootstrap.safe_http_error(httpx.Response(422,json={'detail':'token never-copy-this'}))
+    assert value['detail'] == '<sensitive message redacted>'
 
 
 @pytest.mark.parametrize('wrong_method', [False,True])

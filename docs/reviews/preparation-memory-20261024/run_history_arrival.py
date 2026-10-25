@@ -21,9 +21,13 @@ def backup(source,destination):
         original.backup(copied)
 
 
-def main():
+def main(http_root=None):
     gates()
-    source = ROOT/f'http-history-{REVISION}'
+    source = Path(http_root) if http_root is not None else ROOT/f'http-history-{REVISION}'
+    assert source.resolve().parent == ROOT.resolve(), 'HTTP evidence must belong to this task root'
+    prefix = f'http-history-{REVISION}'
+    assert source.name.startswith(prefix)
+    suffix = source.name[len(prefix):]
     completed = json.loads((source/'complete.json').read_bytes())
     assert completed['status'] == 'HTTP_AND_NONEMPTY_HISTORY_DIAGNOSTICS_PASSED'
     prepared = source/'prepare'
@@ -33,7 +37,7 @@ def main():
     assert baseline['quality']['audit_passed'] and baseline['actual_pantry_revision'] == 1
     assert baseline['before']['saved_revisions'] == baseline['after']['saved_revisions'] == 1
     assert baseline['after']['private_sha256'] == baseline['before']['private_sha256']
-    destination = ROOT/f'history-arrival-{REVISION}'
+    destination = ROOT/source.name.replace('http-history-','history-arrival-',1)
     destination.mkdir()
     snapshot = destination/'source-owned.sqlite'
     backup(prepared/'owned.sqlite',snapshot)
@@ -46,6 +50,7 @@ def main():
     write(destination/'protocol.json',{'source_commit':SOURCE,'samples_per_mode':3,
         'modes':['valid/prepared','valid/certificate','incomplete/prepared','incomplete/certificate'],
         'controller_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'source_http_root':str(source),
         'probe_entry_sha256':entry_sha,'bootstrap_entry_sha256':bootstrap_sha,
         'method_signature':METHOD,'library_versions':libraries,'inputs':baseline_protocol['inputs'],
         'source_snapshot_sha256':hashlib.sha256(snapshot.read_bytes()).hexdigest(),
@@ -92,7 +97,7 @@ def main():
                 '--expected-context',baseline['quality']['verified_reference']['context'],
                 '--baseline-paid',str(baseline['quality']['paid'])]
             print(json.dumps({'start':str(folder)}),flush=True)
-            receipt = worker(args,f'smako-preparation-{REVISION}-arrival-{kind}-{cache_path}-{index}-{stage}',folder)
+            receipt = worker(args,f'smako-preparation-{REVISION}-arrival{suffix}-{kind}-{cache_path}-{index}-{stage}',folder)
             report_path = folder/f'history-{stage}.json'
             report = json.loads(report_path.read_bytes())
             final = json.loads((folder/'final-resource.json').read_bytes())

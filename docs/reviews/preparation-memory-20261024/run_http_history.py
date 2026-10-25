@@ -11,6 +11,7 @@ import os
 import shutil
 import sqlite3
 from contextlib import closing
+from pathlib import Path
 
 from run_pilot import IMAGE, REVISION, ROOT, SOURCE, gates, worker, write
 
@@ -21,11 +22,15 @@ def copy_store(source, destination):
         original.backup(copied)
 
 
-def main():
+def main(destination=None):
     pilot = json.loads((ROOT/f'pilot-{REVISION}/complete.json').read_bytes())
     assert pilot['status'] == 'PILOT_PASSED_NOT_FULL_MATRIX' and pilot['source_commit'] == SOURCE
     gates()
-    destination = ROOT/f'http-history-{REVISION}'
+    destination = Path(destination) if destination is not None else ROOT/f'http-history-{REVISION}'
+    assert destination.resolve().parent == ROOT.resolve(), 'Evidence destination must stay inside this task root'
+    prefix = f'http-history-{REVISION}'
+    assert destination.name.startswith(prefix)
+    suffix = destination.name[len(prefix):]
     destination.mkdir()
     template = json.loads((ROOT/f'candidate-{REVISION}-plain-command.json').read_bytes())
     summary = []
@@ -50,7 +55,7 @@ def main():
         args = args[:args.index(IMAGE)+1]+['-u','/http_history_entry.py',
             '--inputs','/inputs/malmo','--output','/output','--store','/output/owned.sqlite','--mode',mode]
         print(json.dumps({'start':stage}),flush=True)
-        receipt = worker(args,f'smako-preparation-{REVISION}-history-{stage}',folder)
+        receipt = worker(args,f'smako-preparation-{REVISION}-history{suffix}-{stage}',folder)
         report_path = folder/('http-history.json' if stage == 'http' else f'history-{mode}.json')
         data = json.loads(report_path.read_bytes())
         final = json.loads((folder/'final-resource.json').read_bytes())
@@ -65,7 +70,7 @@ def main():
     # Measure actual late-arriving identities before broadening to the full grid.
     # This child driver has not run during the preceding frozen pilot.
     from run_history_arrival import main as history_arrival
-    history_arrival()
+    history_arrival(http_root=destination)
 
 
 if __name__ == '__main__':

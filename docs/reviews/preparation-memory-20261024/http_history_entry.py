@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import secrets
 import socket
 import sqlite3
@@ -29,6 +30,31 @@ LIMIT = 2684354560
 
 def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2)+'\n', encoding='utf8')
+
+
+def safe_http_error(response):
+    """Keep validation locations/messages, never inputs, cookies or capabilities."""
+    def message(value):
+        value = str(value)
+        if re.search(r'cookie|authorization|password|recovery|token|secret|email|owner_actor_hash',value,re.IGNORECASE):
+            return '<sensitive message redacted>'
+        value = re.sub(r'\b[0-9a-fA-F]{8}-[0-9a-fA-F-]{27,}\b','<id>',value)
+        value = re.sub(r'[A-Za-z0-9_+/=-]{40,}','<long value redacted>',value)
+        return value[:512]
+    result = {'status_code':response.status_code,'error_code':response.headers.get('X-Error-Code')}
+    try:
+        payload = response.json()
+    except ValueError:
+        result['detail'] = 'Non-JSON error response'
+        return result
+    detail = payload.get('detail') if isinstance(payload,dict) else None
+    if isinstance(detail,list):
+        result['detail'] = [{key:message(row[key]) if key != 'loc' else [message(v) for v in row[key][:12]]
+                            for key in ('loc','msg','type') if key in row}
+                           for row in detail[:20] if isinstance(row,dict)]
+    else:
+        result['detail'] = message(detail)
+    return result
 
 
 def history(path):
@@ -141,6 +167,10 @@ def http_probe(settings, prepared, facts, clock, request, output):
             started = time.perf_counter()
             response = client.post('/api/plans',headers={'Prefer':'respond-async'},
                                    json=body.model_dump(mode='json',exclude_unset=True))
+            if response.status_code != 202:
+                report['status'] = 'HTTP_REQUEST_REJECTED_BEFORE_JOB'
+                report['request_error'] = safe_http_error(response)
+                write(output/'http-history.json',report)
             assert response.status_code == 202, ('plan start',response.status_code)
             return response.json()['status_url'],time.perf_counter()-started
 

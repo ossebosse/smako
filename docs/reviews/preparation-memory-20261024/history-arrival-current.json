@@ -21,16 +21,20 @@
       "normalized_lf_sha256": "26169e3cde3d8728cab9abbd2a8437f90c20735b60a90676c633ea137d158a90"
     },
     "run_history_arrival.py": {
-      "raw_sha256": "621c13839058110b11a8b8bfc54f7b4fe08a76d685e7e97edfb74183665c42f9",
-      "normalized_lf_sha256": "621c13839058110b11a8b8bfc54f7b4fe08a76d685e7e97edfb74183665c42f9"
+      "raw_sha256": "88c0f66a80001295e06443ff89bf0288a6a40eb81a921349deaf029d21a994d2",
+      "normalized_lf_sha256": "88c0f66a80001295e06443ff89bf0288a6a40eb81a921349deaf029d21a994d2"
     },
     "run_http_history.py": {
-      "raw_sha256": "9f94e993d2db98c0b6d913d7319fff5d2058eaebe3eb8675a2df3df05f26fb55",
-      "normalized_lf_sha256": "d2feb6d4859de1d53ee44f8c47abb2eff22e22c2745f9d3794f7a5be4fb46cf3"
+      "raw_sha256": "9fb941a317668d53861ae3f0f8c2950e11a68565550b9f3890662aac12d27db6",
+      "normalized_lf_sha256": "ce232c494ac2cefa5b57b9d747e3b59a3a336e2242ce5b0e56aa250ccc684f1f"
     },
     "http_history_entry.py": {
-      "raw_sha256": "22e1b3f9d6b034f359cc38139851e3c7e7796d98ab74ee111ded78bbd008d696",
-      "normalized_lf_sha256": "1d467db2de2ce884e9ee2be84e5f146717c3e25ea36e8c6a8841e5d021e80a0a"
+      "raw_sha256": "87ad62f41d37fb07a8f8a5421959c4d626825564a02eb41541388202596600c5",
+      "normalized_lf_sha256": "9ff9baaa621eba48bafcdf80703bce44e7ee2168576c1725e9f30ac748cbf971"
+    },
+    "continue_http_attempt.py": {
+      "raw_sha256": "c40835ecc24348f5b91da2253ab5897ba936a50c40d9144bc8c01699a05028a1",
+      "normalized_lf_sha256": "c40835ecc24348f5b91da2253ab5897ba936a50c40d9144bc8c01699a05028a1"
     }
   },
   "cells": [
@@ -133,10 +137,11 @@
     "Native PlanStore arrivals are measured separately from the HTTP Save diagnostic",
     "Current-checkout rejection is also exercised separately by permanent regression tests",
     "Fresh processes and copied warm public disk; OS cache is uncontrolled",
-    "Arrival times include a CPython call-profile hook; native method objects are unchanged"
+    "Arrival times include a CPython call-profile hook; native method objects are unchanged",
+    "The first HTTP diagnostic rejected the request with 422 before starting a job; retries use separate evidence and container names"
   ],
   "verification": {
-    "targeted_evidence_tests": 20,
+    "targeted_evidence_tests": 22,
     "ruff": "PASS",
     "compileall": "PASS"
   },
