@@ -423,7 +423,7 @@ Matchade vanliga basprov på runtime `9162f0f` har nu startat med samma frysta
 underlag, cacheläge och två CPU/3 GiB. Tre basprocesser följs av slutkodens
 separata instrumenterade fasprofil innan fullmatrisen körs vidare.
 
-### Matchad före/efter: två vanliga basprov klara
+### Matchad före/efter: tre vanliga basprov ger 24,79 procent lägre median
 
 Första omätningen av runtime `9162f0f` med tom app-/förberedelsecache och ny
 syntetisk ägarstore är avslutad: **881,31 s** för plananropet och **926,36 s**
@@ -438,6 +438,10 @@ för hela processen, åter 988,32 kr/förväntad hash/audit PASS. Slutpeak är
 **3 025 485 824 byte (2,818 GiB)**, exit 0 utan OOM/swap. Samma käll-/metod-,
 indata-, biblioteks- och resurskontroller gäller för båda proverna.
 
+Även tredje basprovet passerar: **900,77 s** plananrop, **947,50 s** hela
+processen, 988,32 kr/förväntad hash/audit PASS. Slutpeak är **3 008 270 336
+byte (2,802 GiB)**, exit 0 utan OOM/swap.
+
 Slutkodens tre vanliga prov på samma frysta Malmö/fördelning/5 000-fall är
 **662,83 / 649,49 / 664,50 s**, median **662,83 s**, alla 988,32 kr och samma
 semantiska hash/audit. Dessa redan uppmätta prov återanvänds med exakt samma
@@ -446,11 +450,29 @@ processen innehöll även tre senare varma anrop, men bara första anropets tid
 jämförs. Dess första noterade peak är redan samma som hela processens slutpeak,
 **1,882 GiB**. OS-cache är okontrollerad i båda armarna och har inte rensats.
 
-Endast **2 av 3** basprover är ännu klara; ingen färdig medianjämförelse
-redovisas. Tredje basprocessen körs nu. Instrumenterade tider hålls separat,
-och slutkodens fasprofil återstår. Arkivets 178 metadatafiler har verifierade
+De vanliga treprovsserierna är därmed klara:
+
+| Kod | Första plananrop, tre processer | Median | Spann | Högsta slutliga processpeak |
+| --- | --- | --- | --- | --- |
+| Baslinje `9162f0f` | 881,31 / 879,93 / 900,77 s | 881,31 s | 879,93–900,77 s | 2,818 GiB |
+| Slutkod `eeda184` | 662,83 / 649,49 / 664,50 s | 662,83 s | 649,49–664,50 s | 1,882 GiB |
+
+Medianen sjunker **218,48 s (24,79 procent)** och högsta slutliga peak över
+de tre processerna **33,20 procent**. Det gäller exakt detta frysta fall,
+inte en kallstartsgaranti för andra profiler. De stora organic-share-kostnaderna
+ovan kvarstår. Alla sex första anrop ger samma 988,32 kr/semantiska hash och
+godkänd aktuell audit.
+
+Slutkodens hela processer tog **756,71 / 704,55 / 719,74 s**. Första värdet
+omfattar fyra plananrop, de två senare ett vardera; därför redovisas ingen
+blandad median för processväggtid. Baslinjens tre processer har ett anrop
+vardera och tog 926,36 / 924,78 / 947,50 s. Plananropens medianjämförelse
+ovan använder exakt första anropet i varje tom process.
+
+Instrumenterade tider hålls separat. Slutkodens fasprofil startade 06:11:22 UTC;
+dess delmål under 700 s och fullständiga minneskvitto återstår. Arkivets 184 metadatafiler har verifierade
 manifesthashar, SHA-256
-`b430537f00082b6fed918a56ce0e998e40789a6c8015778afde82814b4f910fd`.
+`711dfa0ccfebb7e12f4410d482e0129e070e3a015614565ee016a44bf77bfc59`.
 [Aktuella matchade prov och separata referensprofiler](preparation-memory-20261024/matched-current.json).
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)

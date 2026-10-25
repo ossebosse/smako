@@ -2,10 +2,10 @@
   "schema": "smako-current-matched-preparation-v1",
   "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
   "baseline_commit": "9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94",
-  "status": "MATCHED_PLAIN_IN_PROGRESS",
+  "status": "PLAIN_SAMPLES_COMPLETE_PHASE_PROFILE_PENDING",
   "scope": "Frozen Malmö/distribution/5000/original facts; empty app/preparation cache and synthetic owner per process",
   "os_cache": "Uncontrolled; never cleared",
-  "plain_comparison_complete": false,
+  "plain_comparison_complete": true,
   "required_baseline_plain_samples": 3,
   "baseline_plain": [
     {
@@ -269,17 +269,149 @@
           "evaluations": 1384
         }
       ]
+    },
+    {
+      "sample": "baseline-plain-3",
+      "source_commit": "9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94",
+      "instrumented": false,
+      "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "raw_report_sha256": "9b62bca638fa0c8c9dcf88c8fac10c36492a3ba40aedeeac58d33403180cadcd",
+      "process_plan_calls": 1,
+      "compared_plan_calls": 1,
+      "receipt_sha256": "cecdcdb2a1c5dd218a12ca7295ae3a52d969667fbbbd002fdc8c1077acf970a2",
+      "final_resource_sha256": "445bfa17b7f28ab1b50949cb13cac3865b1c29d35099abfbe945dcb85b6addad",
+      "wall_seconds": 900.767418819014,
+      "process_wall_seconds": 947.4982637730427,
+      "paid": 988.32,
+      "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+      "audit_passed": true,
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 2975186944,
+          "peak": 3008270336,
+          "swap_current": 0
+        },
+        "memory_target_passed": false,
+        "target_enforced_for_current_runtime": false
+      },
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "exit_code": 0,
+      "oom_killed": false,
+      "certificate_reuse": {
+        "loaded_publications": 0,
+        "replayed_publications": 11
+      },
+      "native_timings_seconds": {
+        "product_facts": 0.002680168952792883,
+        "package_calculation": 144.02815973944962,
+        "nutrition": 23.5311137274839,
+        "candidate_generation_and_qualification": 212.80552353477105,
+        "audit": 0.3866706546396017,
+        "week_search": 670.4605544232763,
+        "total": 893.982749748975
+      },
+      "legacy_preparation": [
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 7.506245370022953,
+          "evaluations": 409
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 7.891182286664844,
+          "evaluations": 493
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 8.4367452589795,
+          "evaluations": 548
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 13.76268413104117,
+          "evaluations": 635
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 16.54201425006613,
+          "evaluations": 741
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 18.154558557085693,
+          "evaluations": 843
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 21.499062854796648,
+          "evaluations": 972
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 26.056939064059407,
+          "evaluations": 1067
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 27.80441574100405,
+          "evaluations": 1165
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 30.564478538930416,
+          "evaluations": 1260
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "988.32",
+          "seconds": 32.19441797072068,
+          "evaluations": 1384
+        }
+      ]
     }
   ],
   "baseline_summary": {
-    "samples": 2,
+    "samples": 3,
     "seconds": [
       881.3099835189059,
-      879.9257521918043
+      879.9257521918043,
+      900.767418819014
     ],
     "minimum_seconds": 879.9257521918043,
-    "median_seconds": 880.6178678553551,
-    "maximum_seconds": 881.3099835189059,
+    "median_seconds": 881.3099835189059,
+    "maximum_seconds": 900.767418819014,
     "maximum_final_cgroup_peak_bytes": 3025485824
   },
   "current_plain": [
@@ -307,7 +439,8 @@
         "target_enforced_for_current_runtime": true
       },
       "process_plan_calls": 4,
-      "compared_plan_calls": 1
+      "compared_plan_calls": 1,
+      "process_wall_seconds": 756.7053618086502
     },
     {
       "sample": "cold-2",
@@ -333,7 +466,9 @@
         "target_enforced_for_current_runtime": true
       },
       "process_plan_calls": 1,
-      "compared_plan_calls": 1
+      "compared_plan_calls": 1,
+      "process_wall_seconds": 704.545473231934,
+      "provision_seconds_excluded_from_process": 0.0002289172261953354
     },
     {
       "sample": "cold-3",
@@ -359,7 +494,9 @@
         "target_enforced_for_current_runtime": true
       },
       "process_plan_calls": 1,
-      "compared_plan_calls": 1
+      "compared_plan_calls": 1,
+      "process_wall_seconds": 719.7432773569599,
+      "provision_seconds_excluded_from_process": 0.00023655081167817116
     }
   ],
   "current_summary": {
@@ -2005,13 +2142,14 @@
   },
   "source_cache_evidence_sha256": "5fdc46d4629a43363134d1866a20585e209625e1d4ed77066de174910b3c9f0c",
   "source_phase_evidence_sha256": "0f5902ee41384402804f5d9f425de8dfc8b34ddff23cb2a75a6b9e0864e175dd",
-  "bundle_sha256": "b430537f00082b6fed918a56ce0e998e40789a6c8015778afde82814b4f910fd",
-  "bundle_metadata_files": 178,
+  "bundle_sha256": "711dfa0ccfebb7e12f4410d482e0129e070e3a015614565ee016a44bf77bfc59",
+  "bundle_metadata_files": 184,
   "full_release_qualified": false,
   "limitations": [
     "Plain and instrumented timings remain separate",
-    "Current primary compares its first call only; its final process peak includes three later warm calls (the first-call recorded peak already equals that final peak)",
+    "Current primary compares its first call only; its whole process time and final peak include three later warm calls (the first-call recorded peak already equals that final peak)",
     "The historical baseline may exceed the new 2.5 GiB target; the unchanged 3 GiB hard limit still applies",
     "Completion does not qualify the pending full matrix or change defaults"
-  ]
+  ],
+  "plain_median_reduction_percent": 24.790765997281618
 }
