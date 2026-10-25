@@ -2,7 +2,7 @@
   "schema": "smako-http-history-progress-v1",
   "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
   "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
-  "status": "HTTP_PASSED_HISTORY_RECOVERY_IN_PROGRESS",
+  "status": "HTTP_AND_HISTORY_PASSED",
   "closed_attempts": [
     {
       "attempt": 1,
@@ -206,7 +206,7 @@
     "scope": "Native API pricing normalization is preserved; history compares exact saved price/semantic hash/context, with fresh native audit. CLI 988.32 remains a separate initial upper bound, not an equality oracle."
   },
   "http_samples_passed": 1,
-  "fresh_process_cache_loss_samples_passed": 0,
+  "fresh_process_cache_loss_samples_passed": 3,
   "full_release_qualified": false,
   "verification": {
     "targeted_evidence_tests": 30,
@@ -1043,8 +1043,149 @@
       "plan_seconds": 52.585284085944295,
       "actual_pantry_revision": 1,
       "authoritative_history_private_unchanged": true
+    },
+    {
+      "stage": "recover-1",
+      "report_sha256": "ef20208ea2441258a6561a3f206cb1f40d6511b4d0b2673b8bd2079c1d01b449",
+      "receipt_sha256": "bac85fdb74c60f6583fb2496545ee5ae2b20b10d258a2933bb569a1c72260325",
+      "final_resource_sha256": "51f97752fb16de24208df0079f64f61608d86609cb25b8c33e9c8462ee8312a7",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        }
+      },
+      "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+      "resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "final_resource": {
+        "memory": {
+          "current": 1683988480,
+          "peak": 2047270912,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4"
+      },
+      "process_wall_seconds": 190.15420450968668,
+      "exit_code": 0,
+      "oom_killed": false,
+      "paid": 976.32,
+      "audit_passed": true,
+      "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+      "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+      "loaded_publications": 11,
+      "replayed_publications": 0,
+      "plan_seconds": 131.16447198297828,
+      "actual_pantry_revision": 1,
+      "authoritative_history_private_unchanged": true
+    },
+    {
+      "stage": "recover-2",
+      "report_sha256": "d5148b949368b6142cdd99008a57cc15df87b76e095470ac3fe622f2bf35e3ee",
+      "receipt_sha256": "1c6307f259a6836ad267c10070cd751fdcf6ec12094ae9bf07158478c9037949",
+      "final_resource_sha256": "a6dae571ef05fa6cb3c7b0f81c18e0c2d12944a762e0f1b3fbda9935efd878e0",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        }
+      },
+      "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+      "resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "final_resource": {
+        "memory": {
+          "current": 1683230720,
+          "peak": 2046382080,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4"
+      },
+      "process_wall_seconds": 192.67799819493666,
+      "exit_code": 0,
+      "oom_killed": false,
+      "paid": 976.32,
+      "audit_passed": true,
+      "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+      "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+      "loaded_publications": 11,
+      "replayed_publications": 0,
+      "plan_seconds": 133.18488711398095,
+      "actual_pantry_revision": 1,
+      "authoritative_history_private_unchanged": true
+    },
+    {
+      "stage": "recover-3",
+      "report_sha256": "5ac0166bdc3cd5d75d20ee9f757bd37883726230b918d66e4c79524b5142d9e2",
+      "receipt_sha256": "c94c21ada8e2a576cfcea0ec1b253c80e60a10a0b4d2c4363d2087825eddcbb5",
+      "final_resource_sha256": "002dac2508e5f63c03cbcdfa3e4e1e626d717d8684616f36048a8889980b4ae3",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        }
+      },
+      "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+      "resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "final_resource": {
+        "memory": {
+          "current": 1678540800,
+          "peak": 2045280256,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4"
+      },
+      "process_wall_seconds": 192.61457508569583,
+      "exit_code": 0,
+      "oom_killed": false,
+      "paid": 976.32,
+      "audit_passed": true,
+      "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+      "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+      "loaded_publications": 11,
+      "replayed_publications": 0,
+      "plan_seconds": 133.1615050882101,
+      "actual_pantry_revision": 1,
+      "authoritative_history_private_unchanged": true
     }
   ],
-  "current_metadata_bundle_sha256": "4c5d8e53efb9820657dde7ac6d9a8c8e39b29d77f35b56e1ce2724a2d3362828",
-  "current_metadata_files": 26
+  "current_metadata_bundle_sha256": "200fd54409e1ffaf1adb7a54071f6d7a95dc9a4a5103dd1acfbc77cfaeff4767",
+  "current_metadata_files": 43
 }

@@ -68,7 +68,8 @@ ger 988,32 kr/hash/audit PASS. Medianen är **662,83 s**, spannet
 Alla har slutkvitto efter rapportserialisering och städning, utan OOM/swap.
 [Aktuellt cacheunderlag](preparation-memory-20261024/cache-modes-current.json).
 Förgrundssekvensens tre kalla prov, tretton cachelägesprocesser och hela
-48-cellspiloten är klara. Den fortsätter med HTTP/historik, tre matchade basprov, ny
+48-cellspiloten är klara. HTTP och tre historikåterhämtningar är också godkända.
+Sekvensen fortsätter med nytillkomna menyidentiteter, tre matchade basprov, ny
 fasprofil och full matris. Varje
 steg stannar vid missad grind. Metodsignaturen är
 `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`;
@@ -107,8 +108,9 @@ rapportskrivning och städning, utan OOM/swap. Varm max(5 000)/min(262) är
 alla tre jämförbara varma legacy-anrop. Detta är en profil/stad/faktaarm,
 inte hela standardgrinden. De sex omstarts-/cacheförlustproven gör aktuell
 slutkontroll och audit; de återanvänder inte en gammal kassasumma.
-Syntetiska lagren har noll vanliga sparade leveranser. HTTP-/historikproven
-och slutmatrisen är ännu inte klara. De tre vanliga
+Just dessa cacheprovs syntetiska lager har noll vanliga sparade leveranser.
+Separata HTTP-/historikprov med riktig sparning är nu klara enligt nedan;
+nytillkomna menyidentiteter och slutmatrisen återstår. De tre vanliga
 versionsbytesproven och faktaprojektionen inför piloten har också passerat.
 
 Efter HTTP-/historiksteget följer ett kompletterande prov för nytillkomna
@@ -122,7 +124,7 @@ planering ska använda samma effektiva tomma skafferi, göra ny audit och
 återanvända publiceringarna utan sökanrop. En extern Python-profileringshook
 räknar native sök-/auditanrop; anropstiderna inkluderar dess kostnad.
 Totalt 30 riktade protokoll-/evidensprov passerar, liksom
-Ruff/compileall. Storproven är **förberedda men ännu inte körda** och ersätter
+Ruff/compileall. De tolv ankomstproven är **startade men ännu inte avslutade** och ersätter
 inte de permanenta testen som tvingar fram ett checkout-avslag.
 [Separat provstatus och källhashar](preparation-memory-20261024/history-arrival-current.json).
 
@@ -280,7 +282,7 @@ Ofullständig evidens skrivs inte över. Fortsättningsloggen skrivs till disk
 evidensprov passerar, liksom Ruff/compileall. Samma seriella gränser och
 frysta appkod gäller. [Fortsättningskvitto och kommando](preparation-memory-20261024/continuation.json).
 
-### HTTP/historik: HTTP passerar, tre cacheåterhämtningsprov pågår
+### HTTP/historik: samtliga fem steg passerar
 
 De första två HTTP-försöken avvisades med 422 innan något jobb startade.
 Det andra fångade valideringsfelet utan credentials eller request-input:
@@ -339,8 +341,18 @@ exit 0 utan OOM/swap. Marginalen är smalare än i pilotens högsta process.
 Det första färskprocessåteranropet med faktisk sparad historik passerar på
 **52,59 s**: exakt samma 976,32 kr, menyhash och kontext, privat revision 1,
 elva laddade certifikat och noll omsökta publiceringar. Efterföljande tre
-prov tar bort endast härledd kvalificering/menyvy i nya SQLite-backuper;
-de är ännu inte färdiga. Råhashar, request-normalisering, kö-/avbrottstider,
+prov tar bort endast härledd kvalificering/menyvy i nya SQLite-backuper.
+Samtliga tre passerar på **131,16 / 133,18 / 133,16 s** per plananrop
+(median **133,16 s**, spann **131,16–133,18 s**). Hela processerna tar
+**190,15 / 192,68 / 192,61 s** inklusive separata inläsningar. Slutpeakar är
+**1,907 / 1,906 / 1,905 GiB**, exit 0 utan OOM/swap. Samma pris, semantiska
+hash och kontext bevaras vid faktisk privat revision 1; alla elva certifikat
+laddas utan omsökning och auktoritativ historik/privata data är oförändrade.
+Femstegsdiagnostiken är därmed klar. Arkivets 43 unika metadatafiler har
+verifierade manifesthashar, SHA-256
+`200fd54409e1ffaf1adb7a54071f6d7a95dc9a4a5103dd1acfbc77cfaeff4767`.
+Det kompletterande steget för tolv nytillkomna menyidentiteter har nu startat.
+Råhashar, request-normalisering, kö-/avbrottstider,
 progress, separata jobbspår och resurskvitton finns i HTTP-statusunderlaget.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
@@ -653,7 +665,7 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
 Kvar på slutkoden: tre kalla jämförbara prov på basarmen, matchad
-instrumenterad profil, HTTP-/historikproven inklusive nytillkomna sparade
+instrumenterad profil, kompletterande prov för nytillkomna sparade
 menyer och de 204 återstående cellerna före full matrisgranskning. Slutkodens
 tretton cachelägesprocesser, tre ordinarie versionsbytesprov och båda
 faktaprojektionerna är klara enligt rapportens inledning.

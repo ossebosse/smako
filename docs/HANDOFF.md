@@ -1,4 +1,4 @@
-# 2026-10-25: Hela 48-cellspiloten godkänd; HTTP-prov fortsätter
+# 2026-10-25: Pilot och HTTP/historik godkända; nya menyidentiteter mäts
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -114,14 +114,22 @@ Slutpeak **2,467 GiB**, cirka 34,15 MiB under målet, exit 0 utan OOM/swap.
 En ASGI-observation med befintlig spårning, ingen last-/nätlatenskvalificering.
 Första historikåteranropet ger exakt samma pris/hash/kontext på 52,59 s,
 faktisk privat revision 1 och elva certifikat laddade utan omsökning.
-Tre färskprocessprov med borttagen härledd cache pågår. Full CI inklusive
+Alla tre färskprocessprov med borttagen härledd cache passerar:
+131,16 / 133,18 / 133,16 s plananrop (median 133,16 s), samma pris/hash/
+kontext, privat revision 1 och elva certifikat laddade utan omsökning.
+Historik och privat tillstånd bevarade; processerna 190,15 / 192,68 / 192,61 s,
+slutpeakar 1,907 / 1,906 / 1,905 GiB, exit 0 utan OOM/swap.
+Alla fem grundsteg är klara; kompletterande prov för nytillkomna sparade
+menyidentiteter har startat. 43 verifierade metadatafiler i arkiv
+`200fd54409e1ffaf1adb7a54071f6d7a95dc9a4a5103dd1acfbc77cfaeff4767`.
+Full CI inklusive
 Chromium/WebKit passerar även på senaste regressionen `5e7c66a`.
 Efter HTTP/historik följer tre prover för var och en av fyra kombinationer
 av nya menyidentiteter och cachevägar. Native `PlanStore.create` flyttar den
 verkliga privata revisionen 1→2; efterföljande anrop använder faktisk revision
 och oförändrade effektiva skafferiindata. Sök-/auditanrop räknas utan att
 metoderna ersätts; tiderna inkluderar profileringskostnaden. Dessa storprov
-är ännu inte körda. Appfiler och metodsignatur är oförändrade; HTTP/historik,
+är startade men ännu inte avslutade. Appfiler och metodsignatur är oförändrade;
 de nya proven, matchade basprov och fullmatris återstår.
 
 ---

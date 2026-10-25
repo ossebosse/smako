@@ -2,7 +2,7 @@
   "schema": "smako-history-arrival-progress-v1",
   "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
   "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
-  "status": "PREPARED_NOT_MEASURED",
+  "status": "IN_PROGRESS",
   "facts_arm": "original",
   "city": "malmo",
   "seed_library_size": 262,
@@ -133,17 +133,66 @@
     "Compare exact current context, inputs, library, source method and post-serialization process resources"
   ],
   "limitations": [
-    "Prepared protocol only; no large-data observations yet",
+    "Only closed native observations are included; unmeasured cells remain pending",
     "Native PlanStore arrivals are measured separately from the HTTP Save diagnostic",
     "Current-checkout rejection is also exercised separately by permanent regression tests",
     "Fresh processes and copied warm public disk; OS cache is uncontrolled",
     "Arrival times include a CPython call-profile hook; native method objects are unchanged",
-    "Attempts 1/2 rejected before job start; attempt 3 saved an audited 976.32 kr API-normalized result but failed the harness CLI-equality oracle. All attempts are preserved."
+    "HTTP attempt 4 passed; earlier failed harness attempts remain preserved separately"
   ],
   "verification": {
     "targeted_evidence_tests": 30,
     "ruff": "PASS",
     "compileall": "PASS"
   },
-  "full_release_qualified": false
+  "full_release_qualified": false,
+  "protocol": {
+    "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+    "samples_per_mode": 3,
+    "modes": [
+      "valid/prepared",
+      "valid/certificate",
+      "incomplete/prepared",
+      "incomplete/certificate"
+    ],
+    "controller_sha256": "88c0f66a80001295e06443ff89bf0288a6a40eb81a921349deaf029d21a994d2",
+    "source_http_root": "/opt/smako/evidence/preparation-memory-20261024/http-history-eeda184-attempt4",
+    "probe_entry_sha256": "26169e3cde3d8728cab9abbd2a8437f90c20735b60a90676c633ea137d158a90",
+    "bootstrap_entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+    "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+    "library_versions": {
+      "262": "smako-complete-dinners-v1:7b9ae4e0c994e553b5deb3a285998405960f3410e1f3f047c608c67bc58fb9d9",
+      "5000": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c"
+    },
+    "inputs": {
+      "now": "2026-10-23T06:00:02.869273+00:00",
+      "sha256": {
+        "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+        "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+        "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+      }
+    },
+    "source_snapshot_sha256": "239534d27e8c28ef68f374a6d7edae0a630c64131d8fa994e6242936c2653da2",
+    "source_history": {
+      "saved_revisions": 1,
+      "history_sha256": "ebe3d1cc7a4bcdd478b9c2abefeb06469c92a0b850c93c637d633c68b73d50f6",
+      "private_sha256": "018abe65236af1fb7d4f783f47c6fd4fcd12d2741960fb5a51562cdebf52baad",
+      "artifacts": {
+        "menu_certificate": 11,
+        "menu_view": 1,
+        "qualification": 1
+      }
+    },
+    "limitations": [
+      "Native PlanStore arrivals, separate from ordinary HTTP Save",
+      "Incomplete means four meals valid for the past request but not the current five-meal layout",
+      "Synthetic checkout rejection is covered separately by permanent regression tests",
+      "Arrival times include a CPython call-profile hook; native method objects and results are unchanged",
+      "Fresh processes with copied warm public disk; OS disk cache uncontrolled"
+    ]
+  },
+  "protocol_sha256": "401d5d8ba180c104839c2f2fca5425156ed752cd4dbd28f84c98c303a523faa4",
+  "measured_seed_workers": 0,
+  "bundle_sha256": "200fd54409e1ffaf1adb7a54071f6d7a95dc9a4a5103dd1acfbc77cfaeff4767",
+  "bundle_metadata_files": 43
 }
