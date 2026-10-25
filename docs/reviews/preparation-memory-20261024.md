@@ -67,8 +67,8 @@ ger 988,32 kr/hash/audit PASS. Medianen är **662,83 s**, spannet
 **649,49–664,50 s** och högsta slutliga processpeak **1,882 GiB**.
 Alla har slutkvitto efter rapportserialisering och städning, utan OOM/swap.
 [Aktuellt cacheunderlag](preparation-memory-20261024/cache-modes-current.json).
-Förgrundssekvensens tre kalla prov och tretton cachelägesprocesser är nu
-klara. Den fortsätter med pilot, HTTP/historik, tre matchade basprov, ny
+Förgrundssekvensens tre kalla prov, tretton cachelägesprocesser och hela
+48-cellspiloten är klara. Den fortsätter med HTTP/historik, tre matchade basprov, ny
 fasprofil och full matris. Varje
 steg stannar vid missad grind. Metodsignaturen är
 `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`;
@@ -108,20 +108,20 @@ alla tre jämförbara varma legacy-anrop. Detta är en profil/stad/faktaarm,
 inte hela standardgrinden. De sex omstarts-/cacheförlustproven gör aktuell
 slutkontroll och audit; de återanvänder inte en gammal kassasumma.
 Syntetiska lagren har noll vanliga sparade leveranser. HTTP-/historikproven
-och resterande pilot/matris är ännu inte klara. De tre vanliga
+och slutmatrisen är ännu inte klara. De tre vanliga
 versionsbytesproven och faktaprojektionen inför piloten har också passerat.
 
 Efter HTTP-/historiksteget följer ett kompletterande prov för nytillkomna
 sparade menyidentiteter. Fyra kombinationer mäts tre gånger var: en giltig
-262-meny respektive en tidigare giltig fyrarättersmeny som är ofullständig
-för den aktuella femrättersbegäran, genom förberedd vy respektive certifikat.
+262-meny med fem måltider respektive en tidigare giltig meny med fyra måltider
+som är ofullständig för den aktuella begärans fem, genom förberedd vy respektive certifikat.
 Varje försök använder en separat SQLite-backup och en verklig legacy-leverans
 som sparas med ordinarie `PlanStore.create`. Den verkliga privata revisionen
 går från 1 till 2; ingen revision eller raderingsepok återställs. Aktuell
 planering ska använda samma effektiva tomma skafferi, göra ny audit och
 återanvända publiceringarna utan sökanrop. En extern Python-profileringshook
 räknar native sök-/auditanrop; anropstiderna inkluderar dess kostnad.
-Åtta nya protokollprov och de tidigare tolv evidensproven passerar, liksom
+Totalt 25 riktade protokoll-/evidensprov passerar, liksom
 Ruff/compileall. Storproven är **förberedda men ännu inte körda** och ersätter
 inte de permanenta testen som tvingar fram ett checkout-avslag.
 [Separat provstatus och källhashar](preparation-memory-20261024/history-arrival-current.json).
@@ -200,7 +200,7 @@ Organic-shares första v1-förberedelse tar fortfarande **48,18 minuter**.
 
 Originalfakta-armen är därmed klar för pilotens tre profiler, båda städerna
 och båda storlekarna: **24 av 48 pilotceller och 96 auditgodkända anrop**.
-Hela piloten och standardkvalificeringen är fortfarande öppna grindar.
+Detta är originalarmens delresultat; hela pilotens slutstatus följer nedan.
 [Pilotens löpande maskinunderlag](preparation-memory-20261024/pilot-current.json).
 
 ### Pilot: Axfood/Malmö klar vid båda storlekarna
@@ -236,7 +236,7 @@ V1:s pris är högst legacy och högst 262-priset; priserna matchar också
 originalfakta-armen. Organic-shares första förberedelse kostar fortfarande
 **66,40 minuter**.
 
-### Pilot: Axfood/Lund klar vid 262
+### Pilot: Axfood/Lund klar vid båda storlekarna
 
 Lund/Axfood/262 är avslutad med sex celler och 24 auditgodkända anrop.
 Slutlig peak är **1 350 033 408 byte (1,257 GiB)**, exit 0 utan OOM/swap;
@@ -248,11 +248,28 @@ hela sexcellsprocessen tog **1 277,21 s**. Priserna matchar originalarmen.
 | Fördelning | 761,45 kr | 98,04 s | 7,33–7,61 s |
 | Organic-share | 314,24 kr | 305,73 s | 7,16–7,26 s |
 
-Totalt är **42 av 48 pilotceller och 168 auditgodkända anrop** uppmätta.
-Alla 42 celler har identiska priser och menyhashar mellan sina fyra anrop.
-Axfood/Lund/5 000 har startat; dess sex celler och Lunds Axfood-kvoter
-återstår. Den partiella releasen omfattar fortsatt 103 verifierade dokument
-och ingen aktiv fakta-/prisversion har ändrats.
+Lund/Axfood/5 000 avslutades 2026-10-25 02:40:55 UTC med sex celler och
+24 auditgodkända anrop. Slutlig cgroup-peak är **1 866 579 968 byte
+(1,738 GiB)**, exit 0 utan OOM/swap. Hela sexcellsprocessen tog **7 621,78 s**.
+
+| Profil | Legacy, betalt | V1, betalt | Första v1-anrop | Tre varma v1-anrop | Varm max(5 000)/min(262) |
+| --- | --- | --- | --- | --- | --- |
+| Standard | 504,34 kr | 477,84 kr | 858,03 s | 7,88–8,01 s | 1,1038 |
+| Fördelning | 704,30 kr | 699,10 kr | 1 013,01 s | 8,51–8,74 s | 1,1929 |
+| Organic-share | 309,34 kr | 286,32 kr | 3 146,17 s | 7,91–8,22 s | 1,1470 |
+
+Priserna matchar originalarmen och är högst legacy och högst 262-priset.
+Varmkvoterna klarar 1,25 och v1 är snabbare än varm legacy. Organic-shares
+första förberedelse tar fortfarande **52,44 minuter**.
+
+Hela piloten är därmed godkänd: **48 av 48 celler och 192 auditgodkända anrop**.
+Alla 48 celler har identiska priser och menyhashar mellan sina fyra anrop.
+Högsta slutliga processpeak är **2,414 GiB** och högsta varmkvot **1,24054**.
+Detta kvalificerar piloten, inte hela 252-cellsmatrisen eller standardpolicyn.
+Slutarkivets 94 unika metadatafiler har verifierade manifesthashar;
+SHA-256 är `550b78946fd3cdfee0c29db04a6626474faa2a6a7085d102819fd66d121dcb26`.
+Den partiella releasen omfattar fortsatt 103 verifierade dokument och ingen
+aktiv fakta-/prisversion har ändrats.
 
 SSH-kanalen stängdes efter den färdiga Malmögruppen; därefter var sekvensens
 processer avslutade och nästa gruppkatalog tom. Avslutade mätningar har
@@ -262,6 +279,26 @@ Ofullständig evidens skrivs inte över. Fortsättningsloggen skrivs till disk
 även om transportens läsare stängs. Sex nya avgränsade prov och tidigare sex
 evidensprov passerar, liksom Ruff/compileall. Samma seriella gränser och
 frysta appkod gäller. [Fortsättningskvitto och kommando](preparation-memory-20261024/continuation.json).
+
+### HTTP/historik: postnummerfel bevarat, rättat transportprov körs
+
+De första två HTTP-försöken avvisades med 422 innan något jobb startade.
+Det andra fångade valideringsfelet utan credentials eller request-input:
+CLI-begärans standardpostnummer 22350 saknar aktiverat prisområde i det
+frysta Malmöunderlaget, som uttryckligen stöder 21120. Första svarets
+detaljer sparades inte och påstås därför inte vara verifierade.
+
+Provverktyget binder nu transportbegäran till underlagets entydiga postnummer,
+även för det köade standardprovet. Ursprungliga input-bytes, appens normala
+validering, priser, klocka och resursgränser är oförändrade. Tre nya kontraktsprov
+kontrollerar postnummer, oberoende kopia och avslag vid tvetydigt område.
+Försök 3 körs i en egen katalog; båda tidigare försöken och deras källhashar
+bevaras. De misslyckade processerna hade exit 1, ingen OOM/swap och slutpeak
+1,233 / 1,237 GiB. [Separat HTTP-status och råhashar](preparation-memory-20261024/http-history-current.json).
+
+Full [CI på `3ea8161`](https://github.com/ossebosse/smako/actions/runs/40154521593)
+passerar inklusive browserprov före postnummerrättningen; senare revisioners
+CI redovisas separat. De 25 lokala evidensproven, Ruff och compileall passerar.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
 passerar före tillägget av historikprovens mätverktyg. Dessa verifieras lokalt
@@ -573,8 +610,8 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
 Kvar på slutkoden: tre kalla jämförbara prov på basarmen, matchad
-instrumenterad profil, resten av piloten inklusive 262-kvoter för varje
-profil/stad/faktaarm, HTTP-/historikproven och hela slutmatrisen. Slutkodens
+instrumenterad profil, HTTP-/historikproven inklusive nytillkomna sparade
+menyer och de 204 återstående cellerna före full matrisgranskning. Slutkodens
 tretton cachelägesprocesser, tre ordinarie versionsbytesprov och båda
 faktaprojektionerna är klara enligt rapportens inledning.
 Ingen generell total bytebudget för alla RAM-cacher har bevisats; de

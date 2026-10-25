@@ -1,4 +1,4 @@
-# 2026-10-25: Fyrtiotvå pilotceller klara; Axfood/Lund/5 000 körs
+# 2026-10-25: Hela 48-cellspiloten godkänd; HTTP-prov fortsätter
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -74,19 +74,33 @@ och pris mot 262. Organic-shares första förberedelse kostar 66,40 minuter.
 slutlig peak **1,257 GiB**, exit 0 utan OOM/swap. Legacy och v1 ger
 487,85 / 761,45 / 314,24 kr, samma som originalarmen. V1 första/varmt:
 106,76/7,25–7,40 s, 98,04/7,33–7,61 s och 305,73/7,16–7,26 s.
-Totalt 42/48 pilotceller och 168 auditgodkända anrop, med stabila priser och
-menyhashar i varje cells fyra anrop. Axfood/Lund/5 000:s sex celler och kvoter
-återstår. Ingen standardkvalificering eller ändrad default.
+Även Axfood/Lund/5 000 är klar: sex celler/24 anrop med audit PASS,
+slutlig peak **1,738 GiB**, exit 0 utan OOM/swap. V1 ger 477,84 / 699,10 /
+286,32 kr mot legacy 504,34 / 704,30 / 309,34 kr och är billigare än vid 262.
+V1 första/varmt: 858,03/7,88–8,01 s, 1 013,01/8,51–8,74 s och
+3 146,17/7,91–8,22 s. Varmkvoter 1,1038/1,1929/1,1470 passerar, liksom
+pris/tid mot legacy. Organic-shares första förberedelse kostar 52,44 minuter.
+Totalt **48/48 pilotceller och 192 auditgodkända anrop**, med stabila priser
+och menyhashar i varje cells fyra anrop. Högsta slutpeak 2,414 GiB, högsta
+varmkvot 1,24054. Pilotarkiv SHA-256
+`550b78946fd3cdfee0c29db04a6626474faa2a6a7085d102819fd66d121dcb26`,
+94 unika metadatafiler verifierade. Ingen standardkvalificering eller ändrad default.
 
 SSH-kanalen stängdes efter den avslutade Malmögruppen och sekvensen stannade
 innan nästa arbetare. Kvitton och den tomma Lund/262-katalogen verifierades.
 Återupptagningen hoppar bara över verifierade färdiga grupper, bevarar
 ofullständig evidens och skriver fortsättningsloggen till disk även om
-transporten stängs. Axfood/Lund/5 000 har startat inom samma gränser och frysta appkod.
+transporten stängs. Samtliga åtta pilotgrupper är nu avslutade inom samma gränser och frysta appkod.
 Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
 det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
-Full CI på `0c2b7d2` passerar före tillägget av kompletterande historikprov.
-Åtta nya och tidigare tolv lokala evidenskontrakt samt Ruff/compileall passerar.
+Full CI på `3ea8161` passerar inklusive browserprov före HTTP-postnummerrättningen.
+Totalt 25 lokala evidenskontrakt samt Ruff/compileall passerar.
+Första två HTTP-försöken gav 422 före jobbstart; andra svaret bevisar
+postnummerfelet 22350 mot fryst Malmöområdes 21120. Första svarets detaljer
+saknas. Provets transportbegäran använder nu underlagets entydiga postnummer,
+även i köprovet. Inga input-bytes eller native API-grindar ändrade.
+Försök 3 körs separat; båda tidigare katalogerna/kvittona/källhasharna bevaras.
+Se [HTTP-status](reviews/preparation-memory-20261024/http-history-current.json).
 Efter HTTP/historik följer tre prover för var och en av fyra kombinationer
 av nya menyidentiteter och cachevägar. Native `PlanStore.create` flyttar den
 verkliga privata revisionen 1→2; efterföljande anrop använder faktisk revision

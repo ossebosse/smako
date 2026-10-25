@@ -1,0 +1,104 @@
+{
+  "schema": "smako-http-history-progress-v1",
+  "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+  "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+  "status": "ATTEMPT_3_RUNNING_NOT_QUALIFIED",
+  "closed_attempts": [
+    {
+      "attempt": 1,
+      "status": "FAILED_BEFORE_JOB",
+      "http_status": 422,
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "receipt_sha256": "aa73154064bbc64afc19446849c704dba62a923ede57168e9e26b2741090dca1",
+      "final_resource_sha256": "da8482f27e950cd4a790450e79f772424785b4630853931e84f4b3d7e641b835",
+      "entry_sha256": "22e1b3f9d6b034f359cc38139851e3c7e7796d98ab74ee111ded78bbd008d696",
+      "process_wall_seconds": 63.02974776690826,
+      "started_at": "2026-10-25T02:40:55.678608631Z",
+      "finished_at": "2026-10-25T02:41:58.493521235Z",
+      "exit_code": 1,
+      "oom_killed": false,
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+      "user": "10001:10001",
+      "final_resource": {
+        "memory": {
+          "current": 1291882496,
+          "peak": 1323470848,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "22e1b3f9d6b034f359cc38139851e3c7e7796d98ab74ee111ded78bbd008d696"
+      },
+      "response_details_captured": false
+    },
+    {
+      "attempt": 2,
+      "status": "FAILED_BEFORE_JOB",
+      "http_status": 422,
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "receipt_sha256": "3555d2461edc7c113ceb281630c2964065da88cd9c9d90e33824f3fa15e3df4e",
+      "final_resource_sha256": "010702c45fee25790157333081aaa1fe4f8837c95adfefe0292124c72df0cd32",
+      "entry_sha256": "87ad62f41d37fb07a8f8a5421959c4d626825564a02eb41541388202596600c5",
+      "process_wall_seconds": 62.53306543407962,
+      "started_at": "2026-10-25T03:09:47.07604428Z",
+      "finished_at": "2026-10-25T03:10:49.426953941Z",
+      "exit_code": 1,
+      "oom_killed": false,
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+      "user": "10001:10001",
+      "final_resource": {
+        "memory": {
+          "current": 1297367040,
+          "peak": 1328689152,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "87ad62f41d37fb07a8f8a5421959c4d626825564a02eb41541388202596600c5"
+      },
+      "response_details_captured": true,
+      "request_error": {
+        "status_code": 422,
+        "error_code": "form_validation_error",
+        "detail": [
+          {
+            "loc": [
+              "body",
+              "postal_code"
+            ],
+            "msg": "Det finns inget aktiverat prisområde för postnumret. Tillgängliga postnummer i betan: 21120",
+            "type": "value_error"
+          }
+        ]
+      },
+      "report_sha256": "468d0199f84d4f3cb482a532ea3932a059f808440875c14483a7f573e857e0ef"
+    }
+  ],
+  "closed_metadata_bundle_sha256": "1a0820ac4b5ef6440c2ca0a1b788b6bc3d7b3e48b3333848c88eca39dc4f396f",
+  "closed_metadata_files": 9,
+  "current_attempt": {
+    "attempt": 3,
+    "entry_sha256": "b3c4f8a65365e86858b72d190af558065997cfe1cd94f54e1c932c2b38a29f74",
+    "destination": "http-history-eeda184-attempt3",
+    "request_postal_code": "21120",
+    "frozen_cli_default_postal_code": "22350",
+    "scope": "Transport request binds the frozen sole postal area; original input bytes and native API validation unchanged"
+  },
+  "http_samples_passed": 0,
+  "fresh_process_cache_loss_samples_passed": 0,
+  "full_release_qualified": false
+}

@@ -138,18 +138,12 @@
     "Current-checkout rejection is also exercised separately by permanent regression tests",
     "Fresh processes and copied warm public disk; OS cache is uncontrolled",
     "Arrival times include a CPython call-profile hook; native method objects are unchanged",
-    "The first HTTP diagnostic rejected the request with 422 before starting a job; retries use separate evidence and container names"
+    "Two HTTP attempts rejected before job start; the second proved the frozen postal-area mismatch. Attempt 3 binds transport requests to 21120."
   ],
   "verification": {
-    "targeted_evidence_tests": 22,
+    "targeted_evidence_tests": 25,
     "ruff": "PASS",
     "compileall": "PASS"
   },
-  "full_release_qualified": false,
-  "local_verification": {
-    "targeted_tests_passed": 25,
-    "ruff": "PASS",
-    "compileall": "PASS",
-    "scope": "External evidence contracts; no native application changes"
-  }
+  "full_release_qualified": false
 }
