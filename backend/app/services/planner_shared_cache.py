@@ -104,8 +104,8 @@ class CheckoutArithmeticCache:
     """Bounded memo of integer arithmetic, containing no quotes or menus.
 
     A key contains every exact (rank, cents, winning-store bits) operand and
-    its subset-position mask, plus the cap masks. The result is only numeric
-    leading keys and winning positions. Source qualification and quoting run
+    its subset-position mask, count and lane width for ONE ingredient. The
+    result is numeric columns and position masks. Source qualification and quoting run
     BEFORE this boundary; current quotes and independent checkout audit run
     AFTER it. Equal integers have equal arithmetic even after a price/fact
     replacement. No source identity, date, eligibility or approval is inferred.

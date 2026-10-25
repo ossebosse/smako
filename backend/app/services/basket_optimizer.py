@@ -1473,6 +1473,84 @@ class BasketOptimizer:
         return tuple(best_by_cap) + (best_by_cap[-1],) * (requested_limit - limit)
 
     @staticmethod
+    def _packed_subset_keys(partitions, subset_count, cap_masks, store_bits, *, winning_mask):
+        """Add independent exact cent columns, then inspect every feasible subset.
+
+        Each price occupies a 128-bit lane. The caller proves at most 10,000
+        nonnegative operands of <=22 decimal digits: their sum is <10**26,
+        far below 2**128, so addition cannot carry into an adjacent subset.
+        Store lanes are ORed, never added. Ranks and missing quotes use exact
+        position masks. This changes only representation of the existing joint
+        checkout arithmetic; all subsets and deterministic ties remain present.
+        """
+        from app.services.planner_shared_cache import CHECKOUT_ARITHMETIC
+
+        store_bytes = max(1, (store_bits + 7) // 8)
+        store_width = store_bytes * 8
+        price_totals = store_unions = 0
+        feasible = (1 << subset_count) - 1
+        rank_positions = {}
+        for groups, _positions in partitions:
+            key = ("integer-checkout-columns-v2", subset_count, store_bytes, tuple(sorted(groups)))
+            column = CHECKOUT_ARITHMETIC.get(key)
+            if column is None:
+                prices, stores = bytearray(16 * subset_count), bytearray(store_bytes * subset_count)
+                present, ranks = 0, {}
+                for (rank, cents, store), mask in groups:
+                    present |= mask
+                    ranks[rank] = ranks.get(rank, 0) | mask
+                    price_bytes, store_value = cents.to_bytes(16, "little"), store.to_bytes(store_bytes, "little")
+                    pending = mask
+                    while pending:
+                        bit = pending & -pending
+                        pending ^= bit
+                        position = bit.bit_length() - 1
+                        prices[position * 16:(position + 1) * 16] = price_bytes
+                        stores[position * store_bytes:(position + 1) * store_bytes] = store_value
+                column = (int.from_bytes(prices, "little"), int.from_bytes(stores, "little"), present, tuple(ranks.items()))
+                CHECKOUT_ARITHMETIC.put(key, column)
+                increment_performance_counter("checkout_arithmetic_misses")
+            else:
+                increment_performance_counter("checkout_arithmetic_hits")
+            price_totals += column[0]
+            store_unions |= column[1]
+            feasible &= column[2]
+            for rank, mask in column[3]:
+                rank_positions[rank] = rank_positions.get(rank, 0) | mask
+        # At a position the highest rank of any ingredient is authoritative.
+        remaining = feasible
+        ranks = {}
+        for rank in sorted(rank_positions, reverse=True):
+            ranks[rank] = rank_positions[rank] & remaining
+            remaining &= ~rank_positions[rank]
+        leading, winners = [], 0
+        allowed = 0
+        price_mask, store_mask = (1 << 128) - 1, (1 << store_width) - 1
+        for cap_mask in cap_masks:
+            allowed |= cap_mask
+            best, tied = None, 0
+            for rank in sorted(ranks):
+                pending = ranks[rank] & allowed
+                if not pending:
+                    continue
+                while pending:
+                    bit = pending & -pending
+                    pending ^= bit
+                    position = bit.bit_length() - 1
+                    cents = (price_totals >> (position * 128)) & price_mask
+                    count = ((store_unions >> (position * store_width)) & store_mask).bit_count()
+                    candidate = (rank, cents, count)
+                    if best is None or candidate < best:
+                        best, tied = candidate, bit
+                    elif candidate == best:
+                        tied |= bit
+                break  # A larger verification rank cannot win at this cap.
+            leading.append(None if best is None else (best[0], Decimal(best[1]).scaleb(-2), best[2]))
+            winners = tied
+        result = (leading, subset_count - feasible.bit_count())
+        return (*result, winners) if winning_mask else result
+
+    @staticmethod
     def _grouped_subset_keys(subset_vectors, store_subsets, limit, session=None, *, winning_mask=False,
                              _integer_prices=True):
         """Aggregate every exact subset once per distinct winning-quote pattern.
@@ -1561,23 +1639,12 @@ class BasketOptimizer:
             cap_masks = tuple(masks)
             if session:
                 session.subset_cap_masks[id(store_subsets)] = (store_subsets, cap_masks)
-        arithmetic_key = None
         if (integer_prices and len(store_subsets) <= 2048
                 and sum(len(groups) for groups, _ in partitions) <= 2048):
-            from app.services.planner_shared_cache import CHECKOUT_ARITHMETIC
-
-            # Integer addition, max(rank) and store-bit union commute. Canonical
-            # operands reuse pure work between personal choices, never recipes,
-            # quotes, nutrition decisions or mutable search trajectories.
-            arithmetic_key = ("integer-checkout-v1", cap_masks, tuple(sorted(
-                tuple(sorted(groups)) for groups, _ in partitions)))
-            reused = CHECKOUT_ARITHMETIC.get(arithmetic_key)
-            if reused is not None:
-                increment_performance_counter("checkout_arithmetic_hits")
-                leading, infeasible, winners = reused
-                best = [None if k is None else (k[0], Decimal(k[1]).scaleb(-2), k[2]) for k in leading]
-                return (best, infeasible, winners) if winning_mask else (best, infeasible)
-            increment_performance_counter("checkout_arithmetic_misses")
+            store_bits = max((k[2].bit_length() for groups, _ in partitions for k, _mask in groups), default=0)
+            if store_bits <= 128:
+                return BasketOptimizer._packed_subset_keys(partitions, len(store_subsets), cap_masks,
+                    store_bits, winning_mask=winning_mask)
         states = {(0, 0 if integer_prices else Decimal(0), 0): (1 << len(store_subsets)) - 1}
         settled = {}
         for partition_index, (groups, positions) in enumerate(partitions):
@@ -1643,12 +1710,10 @@ class BasketOptimizer:
                     best_by_cap[cap] = key
         infeasible = len(store_subsets) - feasible_mask.bit_count()
         winners = 0
-        if winning_mask or arithmetic_key is not None:
+        if winning_mask:
             for (rank, total, stores), mask in states.items():
                 if (rank, total, stores.bit_count()) == best_by_cap[-1]:
                     winners |= mask
-        if arithmetic_key is not None:
-            CHECKOUT_ARITHMETIC.put(arithmetic_key, (tuple(best_by_cap), infeasible, winners))
         if winning_mask:
             if integer_prices:
                 best_by_cap = [None if key is None else (key[0], Decimal(key[1]).scaleb(-2), key[2])
