@@ -10,9 +10,20 @@ from app.config import Settings
 from app.models.product import OfferKind, OfferMetadata
 from app.services import beta_observability, price_universe_runtime
 from app.services.price_universe import PriceUniverseBuilder, PriceUniverseKey
-from app.services.price_universe_runtime import PreparedPriceUniverse, PreparedPriceUniverseManager, normalized_memberships
+from app.services.price_universe_runtime import (
+    PreparedPriceUniverse,
+    PreparedPriceUniverseManager,
+    normalized_memberships,
+)
 
-from backend.tests.test_price_universe_runtime import POSTAL_CODE, SNAPSHOT_ID, STORE_ID, _pool, _product, _store
+from backend.tests.test_price_universe_runtime import (
+    POSTAL_CODE,
+    SNAPSHOT_ID,
+    STORE_ID,
+    _pool,
+    _product,
+    _store,
+)
 from grocery_data.app.domain.campaign_validity import CampaignEvidence
 
 OBSERVED = datetime(2026, 9, 14, 8, tzinfo=UTC)
