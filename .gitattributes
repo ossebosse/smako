@@ -8,3 +8,6 @@
 # Authored recipes carry exact file hashes; checkout must preserve their bytes.
 /backend/app/data/recipes/*.json -text
 /backend/app/data/recipes/content-pack-20261004/*.json -text
+# Evidence documents reference each other's exact bytes, including line endings.
+/docs/reviews/preparation-memory-20261024/*.json -text
+/docs/reviews/preparation-memory-20261024/*.py text eol=lf

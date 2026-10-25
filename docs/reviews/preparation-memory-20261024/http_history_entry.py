@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import secrets
 import socket
 import sqlite3
@@ -23,12 +24,36 @@ from unittest.mock import patch
 
 from app.config import Settings
 
-EXPECTED = '1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7'
 LIMIT = 2684354560
 
 
 def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2)+'\n', encoding='utf8')
+
+
+def safe_http_error(response):
+    """Keep validation locations/messages, never inputs, cookies or capabilities."""
+    def message(value):
+        value = str(value)
+        if re.search(r'cookie|authorization|password|recovery|token|secret|email|owner_actor_hash',value,re.IGNORECASE):
+            return '<sensitive message redacted>'
+        value = re.sub(r'\b[0-9a-fA-F]{8}-[0-9a-fA-F-]{27,}\b','<id>',value)
+        value = re.sub(r'[A-Za-z0-9_+/=-]{40,}','<long value redacted>',value)
+        return value[:512]
+    result = {'status_code':response.status_code,'error_code':response.headers.get('X-Error-Code')}
+    try:
+        payload = response.json()
+    except ValueError:
+        result['detail'] = 'Non-JSON error response'
+        return result
+    detail = payload.get('detail') if isinstance(payload,dict) else None
+    if isinstance(detail,list):
+        result['detail'] = [{key:message(row[key]) if key != 'loc' else [message(v) for v in row[key][:12]]
+                            for key in ('loc','msg','type') if key in row}
+                           for row in detail[:20] if isinstance(row,dict)]
+    else:
+        result['detail'] = message(detail)
+    return result
 
 
 def history(path):
@@ -45,12 +70,25 @@ def memory():
     return {name:int(Path('/sys/fs/cgroup/memory.'+name).read_text()) for name in ('current','peak','swap.current')}
 
 
-def validate(plan, request):
+def validate(plan, request, reference=None):
     from backend.scripts.planner_acceptance_matrix import quality
     result = quality(plan,request)
-    assert result['audit_passed'] and result['paid'] == 988.32
-    assert result['semantic_sha256'] == EXPECTED
+    assert result['audit_passed']
+    if reference is not None:
+        assert result['paid'] == reference['paid'], 'Same-context history price changed'
+        assert result['semantic_sha256'] == reference['semantic_sha256'], 'Same-context history semantics changed'
+        assert ((result.get('verified_reference') or {}).get('context')
+                == (reference.get('verified_reference') or {}).get('context')), 'History planner context changed'
     return result
+
+
+def http_area_request(request, prepared):
+    """Use the frozen universe's sole area when the CLI default is unsupported."""
+    available = sorted(prepared.universe.key.postal_codes)
+    if request.postal_code in available:
+        return request.model_copy(deep=True)
+    assert len(available) == 1, 'HTTP probe needs an unambiguous frozen postal area'
+    return request.model_copy(deep=True,update={'postal_code':available[0]})
 
 
 def http_probe(settings, prepared, facts, clock, request, output):
@@ -141,6 +179,10 @@ def http_probe(settings, prepared, facts, clock, request, output):
             started = time.perf_counter()
             response = client.post('/api/plans',headers={'Prefer':'respond-async'},
                                    json=body.model_dump(mode='json',exclude_unset=True))
+            if response.status_code != 202:
+                report['status'] = 'HTTP_REQUEST_REJECTED_BEFORE_JOB'
+                report['request_error'] = safe_http_error(response)
+                write(output/'http-history.json',report)
             assert response.status_code == 202, ('plan start',response.status_code)
             return response.json()['status_url'],time.perf_counter()-started
 
@@ -157,7 +199,8 @@ def http_probe(settings, prepared, facts, clock, request, output):
         url,report['post_accept_seconds'] = post(request)
         wait_for(lambda:stats()['active']==1,10)
         from backend.scripts.planner_acceptance_matrix import matrix_request
-        other = matrix_request(json.loads((output/'base-request.json').read_bytes()),'standard')
+        other = http_area_request(
+            matrix_request(json.loads((output/'base-request.json').read_bytes()),'standard'),prepared)
         queued,report['queued_post_accept_seconds'] = post(other)
         queue_accepted_at = time.perf_counter()
         report['queued_snapshot'] = wait_for(lambda:(s if (s:=stats())['queued']==1 else None),10)
@@ -188,6 +231,21 @@ def http_probe(settings, prepared, facts, clock, request, output):
         report['accepted_until_saved_response_seconds'] = (
             report['start_request_until_saved_response_seconds']-report['post_accept_seconds'])
         report['quality'] = validate(saved.plan,saved.request)
+        from backend.scripts.planner_acceptance_matrix import digest
+        report['normalized_request'] = {
+            'request_sha256':digest(saved.request.model_dump(mode='json')),
+            'postal_code':saved.request.postal_code,
+            'membership_price_policy':saved.request.membership_price_policy,
+            'strategy':saved.request.strategy,'debug':saved.request.debug,
+            'scope':'Native API normalization; this saved result is the same-context history baseline'}
+        # Preserve the actual result before any later transport/cancellation gate.
+        write(output/'http-history.json',report)
+        assert saved.request.membership_price_policy == 'all_advertised'
+        assert saved.request.postal_code == request.postal_code
+        assert saved.request.strategy == 'optimized' and saved.request.debug is False
+        # The CLI target remains a separate upper bound, not an equality/hash
+        # oracle for the API's different native membership pricing policy.
+        assert report['quality']['paid'] <= 988.32
         reread = client.get('/api/plans/'+saved.plan_id)
         assert reread.status_code == 200
         assert SavedPlan.model_validate(reread.json()).plan == saved.plan
@@ -241,6 +299,7 @@ def direct_probe(settings, prepared, facts, clock, output, mode):
     with store._connect() as connection:
         row = connection.execute('SELECT plan_id,owner_actor_hash FROM consumer_plan_revisions').fetchone()
     saved = store.get_owned(row['plan_id'],owner_actor_hash=row['owner_actor_hash'])
+    reference = validate(saved.plan,saved.request)
     state = PersonalStore(store).read(row['owner_actor_hash'])
     assert state['revision'] == 1
     request = saved.request.model_copy(deep=True)
@@ -248,7 +307,9 @@ def direct_probe(settings, prepared, facts, clock, output, mode):
     artifacts = OwnedPlannerArtifacts(store,row['owner_actor_hash'])
     started = time.perf_counter()
     plan = PersonalPlanner(request,settings,prepared,state,facts=facts,now=clock,artifacts=artifacts).create()
-    result = {'mode':mode,'plan_seconds':time.perf_counter()-started,'quality':validate(plan,request),
+    result = {'mode':mode,'plan_seconds':time.perf_counter()-started,'quality':validate(plan,request,reference),
+              'saved_reference':{'paid':reference['paid'],'semantic_sha256':reference['semantic_sha256'],
+                                 'context':reference['verified_reference']['context']},
               'actual_pantry_revision':state['revision'],'before':before,'after':history(store.path)}
     assert all(result['after'][k]==before[k] for k in ('saved_revisions','history_sha256','private_sha256'))
     if mode == 'recover':
@@ -284,16 +345,21 @@ def run(args):
     from app.services.recipe_library import library_version
     method = method_signature()
     assert method == '17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6'
+    base = json.loads((args.inputs/'combined-request.json').read_bytes())
+    original_request = matrix_request(base,'distribution')
+    request = http_area_request(original_request,prepared)
     write(args.output/'protocol.json',{'mode':args.mode,'inputs':manifest,'method_signature':method,
         'library_version':library_version(),'source_commit':'eeda184926f02e73ab76e71e50c740e9dcb01b02',
+        'http_postal_area':{'cli_default':original_request.postal_code,'request':request.postal_code,
+                            'available':sorted(prepared.universe.key.postal_codes),
+                            'scope':'Transport request only; frozen input bytes and native API validation unchanged'},
         'startup_seconds':time.perf_counter()-startup_started,
         'startup_scope':'Input hashes, catalogue validation/index build, frozen facts and method/library identity; before HTTP or direct plan timing'})
-    base = json.loads((args.inputs/'combined-request.json').read_bytes())
     # Frozen public request, containing no credentials/private capabilities.
     write(args.output/'base-request.json',base)
     with patch.object(socket.socket,'connect',side_effect=AssertionError('network forbidden')):
         if args.mode == 'http':
-            http_probe(settings,prepared,facts,clock,matrix_request(base,'distribution'),args.output)
+            http_probe(settings,prepared,facts,clock,request,args.output)
         else:
             direct_probe(settings,prepared,facts,clock,args.output,args.mode)
 

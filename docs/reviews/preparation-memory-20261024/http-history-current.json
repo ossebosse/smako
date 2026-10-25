@@ -1,0 +1,1191 @@
+{
+  "schema": "smako-http-history-progress-v1",
+  "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+  "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+  "status": "HTTP_AND_HISTORY_PASSED",
+  "closed_attempts": [
+    {
+      "attempt": 1,
+      "status": "FAILED_BEFORE_JOB",
+      "http_status": 422,
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "receipt_sha256": "aa73154064bbc64afc19446849c704dba62a923ede57168e9e26b2741090dca1",
+      "final_resource_sha256": "da8482f27e950cd4a790450e79f772424785b4630853931e84f4b3d7e641b835",
+      "entry_sha256": "22e1b3f9d6b034f359cc38139851e3c7e7796d98ab74ee111ded78bbd008d696",
+      "process_wall_seconds": 63.02974776690826,
+      "started_at": "2026-10-25T02:40:55.678608631Z",
+      "finished_at": "2026-10-25T02:41:58.493521235Z",
+      "exit_code": 1,
+      "oom_killed": false,
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+      "user": "10001:10001",
+      "final_resource": {
+        "memory": {
+          "current": 1291882496,
+          "peak": 1323470848,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "22e1b3f9d6b034f359cc38139851e3c7e7796d98ab74ee111ded78bbd008d696"
+      },
+      "response_details_captured": false
+    },
+    {
+      "attempt": 2,
+      "status": "FAILED_BEFORE_JOB",
+      "http_status": 422,
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "receipt_sha256": "3555d2461edc7c113ceb281630c2964065da88cd9c9d90e33824f3fa15e3df4e",
+      "final_resource_sha256": "010702c45fee25790157333081aaa1fe4f8837c95adfefe0292124c72df0cd32",
+      "entry_sha256": "87ad62f41d37fb07a8f8a5421959c4d626825564a02eb41541388202596600c5",
+      "process_wall_seconds": 62.53306543407962,
+      "started_at": "2026-10-25T03:09:47.07604428Z",
+      "finished_at": "2026-10-25T03:10:49.426953941Z",
+      "exit_code": 1,
+      "oom_killed": false,
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+      "user": "10001:10001",
+      "final_resource": {
+        "memory": {
+          "current": 1297367040,
+          "peak": 1328689152,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "87ad62f41d37fb07a8f8a5421959c4d626825564a02eb41541388202596600c5"
+      },
+      "response_details_captured": true,
+      "request_error": {
+        "status_code": 422,
+        "error_code": "form_validation_error",
+        "detail": [
+          {
+            "loc": [
+              "body",
+              "postal_code"
+            ],
+            "msg": "Det finns inget aktiverat prisområde för postnumret. Tillgängliga postnummer i betan: 21120",
+            "type": "value_error"
+          }
+        ]
+      },
+      "report_sha256": "468d0199f84d4f3cb482a532ea3932a059f808440875c14483a7f573e857e0ef"
+    },
+    {
+      "attempt": 3,
+      "status": "SAVED_RESULT_THEN_HARNESS_CLI_EQUALITY_FAILURE",
+      "receipt_sha256": "8e954ed9da03a4f08a6e96bb07d29ed4507c0788b34d5d00619e4078f88443c7",
+      "final_resource_sha256": "3d3ada7084d38e1a88b66e4c2561d0fe164d8bbba511966d1b78a5f595ed5c0d",
+      "postmortem_sha256": "f23ea67de7d4252abede7cf53a03c0c604209688b849fc1e57e97af671dc7454",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "entry_sha256": "b3c4f8a65365e86858b72d190af558065997cfe1cd94f54e1c932c2b38a29f74",
+      "process_wall_seconds": 853.8192155901343,
+      "started_at": "2026-10-25T03:15:53.013933254Z",
+      "finished_at": "2026-10-25T03:30:06.586225617Z",
+      "exit_code": 1,
+      "oom_killed": false,
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+      "user": "10001:10001",
+      "final_resource": {
+        "memory": {
+          "current": 2025545728,
+          "peak": 2153918464,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "b3c4f8a65365e86858b72d190af558065997cfe1cd94f54e1c932c2b38a29f74"
+      },
+      "postmortem": {
+        "status": "SAVED_RESULT_BEFORE_HARNESS_CLI_EQUALITY_FAILURE",
+        "response_json_sha256": "5fdbad9ea98de956f5e489479cf6c76aac7926f10c7a4195e259b245848f826b",
+        "request_json_sha256": "a8ec424033c40fec21c722d2b4425d8b2ec1cc76926d34f2f6c488b9b62a34e4",
+        "paid": 976.32,
+        "slots": 5,
+        "normalized_request": {
+          "postal_code": "21120",
+          "membership_price_policy": "all_advertised",
+          "strategy": "optimized",
+          "debug": false,
+          "max_stores": 2,
+          "recipes": 5,
+          "servings": 4
+        },
+        "actual_saved_pantry_revision": 0,
+        "persisted_audit": {
+          "passed": true,
+          "totals_reconciled": true,
+          "deficits": [],
+          "unknown_quantities": 0
+        },
+        "verified_reference_context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+        "loaded_publications": 0,
+        "replayed_publications": 11,
+        "publication_paid": [
+          {
+            "size": 262,
+            "paid": "984.22"
+          },
+          {
+            "size": 762,
+            "paid": "984.22"
+          },
+          {
+            "size": 1000,
+            "paid": "984.22"
+          },
+          {
+            "size": 1500,
+            "paid": "984.22"
+          },
+          {
+            "size": 2000,
+            "paid": "984.22"
+          },
+          {
+            "size": 2500,
+            "paid": "984.22"
+          },
+          {
+            "size": 3000,
+            "paid": "980.22"
+          },
+          {
+            "size": 3500,
+            "paid": "980.22"
+          },
+          {
+            "size": 4000,
+            "paid": "980.22"
+          },
+          {
+            "size": 4500,
+            "paid": "980.22"
+          },
+          {
+            "size": 5000,
+            "paid": "976.32"
+          }
+        ],
+        "scope": "Read-only extraction from the failed attempt native saved result, not a new audit or complete HTTP diagnostic",
+        "failure": "Native quality returned successfully; the harness then asserted equality with 988.32 from a different CLI membership policy"
+      }
+    }
+  ],
+  "closed_metadata_bundle_sha256": "1d3fb38af39c6f19a5a24b8178b14468a10220fb35f082da9b9b496c2bb11798",
+  "closed_metadata_files": 15,
+  "current_attempt": {
+    "attempt": 4,
+    "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+    "destination": "http-history-eeda184-attempt4",
+    "request_postal_code": "21120",
+    "frozen_cli_default_postal_code": "22350",
+    "scope": "Native API pricing normalization is preserved; history compares exact saved price/semantic hash/context, with fresh native audit. CLI 988.32 remains a separate initial upper bound, not an equality oracle."
+  },
+  "http_samples_passed": 1,
+  "fresh_process_cache_loss_samples_passed": 3,
+  "full_release_qualified": false,
+  "verification": {
+    "targeted_evidence_tests": 30,
+    "ruff": "PASS",
+    "compileall": "PASS"
+  },
+  "measured_stages": [
+    {
+      "stage": "http",
+      "report_sha256": "674c624a92fdff11b1be90976df6c3f0097d073ce65d653db92203cc6efb720a",
+      "receipt_sha256": "ff7804b6a5dc225851475df623c8c9421fd334bcc3fc821c24d997ea8c8b05bf",
+      "final_resource_sha256": "738d1846a36ade395d5ae761108703e52251c27df2a1af3c94922881b2593dc4",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        }
+      },
+      "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+      "resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "final_resource": {
+        "memory": {
+          "current": 2163519488,
+          "peak": 2648543232,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4"
+      },
+      "process_wall_seconds": 828.3602968021296,
+      "exit_code": 0,
+      "oom_killed": false,
+      "paid": 976.32,
+      "audit_passed": true,
+      "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+      "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+      "loaded_publications": 0,
+      "replayed_publications": 11,
+      "transport": {
+        "post_accept_seconds": 1.2072180570103228,
+        "queued_post_accept_seconds": 0.3942571128718555,
+        "queued_snapshot": {
+          "active": 1,
+          "queued": 1,
+          "in_flight_keys": 2,
+          "admitted": 2,
+          "coalesced": 0,
+          "rejected": 0,
+          "peak_active": 1,
+          "peak_queued": 1
+        },
+        "queued_cancel_until_released_seconds": 0.3620256809517741,
+        "start_request_until_saved_response_seconds": 754.0191267952323,
+        "accepted_until_saved_response_seconds": 752.811908738222,
+        "active_cancel_stage": "product_facts",
+        "active_cancel_until_worker_released_seconds": 6.55692279106006,
+        "foreign_job_read_status": 404,
+        "admission": {
+          "active": 0,
+          "queued": 0,
+          "in_flight_keys": 0,
+          "admitted": 3,
+          "coalesced": 0,
+          "rejected": 0,
+          "peak_active": 1,
+          "peak_queued": 1
+        },
+        "normalized_request": {
+          "request_sha256": "04526a4f5c161a43a72ef94ab50522e97ea76164b23108070c165f46eec5335b",
+          "postal_code": "21120",
+          "membership_price_policy": "all_advertised",
+          "strategy": "optimized",
+          "debug": false,
+          "scope": "Native API normalization; this saved result is the same-context history baseline"
+        },
+        "instrumentation": "Existing request-local performance trace; elapsed HTTP includes its overhead",
+        "startup_prewarm": "disabled in isolated lifespan; catalogue/facts loaded before HTTP",
+        "wait_scope": "Request start / accepted response until first observed saved-result response; includes polling delay",
+        "scope": "In-process ASGI routes/auth/middleware/admission/jobs/save/read; no browser/network/metric persistence"
+      },
+      "job_traces": [
+        {
+          "sequence": 2,
+          "outcome": "CancelledError",
+          "trace": {
+            "timings_ms": {
+              "planner_queue_wait": 175.693
+            },
+            "span_statistics": {
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 175.693,
+                "cpu_ms": 178.289,
+                "average_ms": 175.693,
+                "max_ms": 175.693
+              }
+            },
+            "operation_counters": {},
+            "depth_counters": {}
+          }
+        },
+        {
+          "sequence": 1,
+          "outcome": "returned",
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 203041.849,
+              "personal_audit": 545.901,
+              "personal_candidate_generation": 21990.195,
+              "personal_candidate_generation_and_qualification": 114249.589,
+              "personal_memory_reclamation": 30255.049,
+              "personal_nutrition": 19132.294,
+              "personal_package_calculation": 118219.782,
+              "personal_product_facts": 0.021,
+              "personal_week_search": 599419.809,
+              "planner_queue_wait": 0.014
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 31363,
+                "wall_ms": 203041.849,
+                "cpu_ms": 0.0,
+                "average_ms": 6.474,
+                "max_ms": 3078.645
+              },
+              "personal_audit": {
+                "calls": 110,
+                "wall_ms": 545.901,
+                "cpu_ms": 547.401,
+                "average_ms": 4.963,
+                "max_ms": 12.454
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 21990.195,
+                "cpu_ms": 15770.777,
+                "average_ms": 21990.195,
+                "max_ms": 21990.195
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 114249.589,
+                "cpu_ms": 108363.815,
+                "average_ms": 114249.589,
+                "max_ms": 114249.589
+              },
+              "personal_memory_reclamation": {
+                "calls": 47,
+                "wall_ms": 30255.049,
+                "cpu_ms": 30463.008,
+                "average_ms": 643.724,
+                "max_ms": 2777.304
+              },
+              "personal_nutrition": {
+                "calls": 59994,
+                "wall_ms": 19132.294,
+                "cpu_ms": 19168.251,
+                "average_ms": 0.319,
+                "max_ms": 2364.976
+              },
+              "personal_package_calculation": {
+                "calls": 24060,
+                "wall_ms": 118219.782,
+                "cpu_ms": 118405.516,
+                "average_ms": 4.914,
+                "max_ms": 3078.768
+              },
+              "personal_product_facts": {
+                "calls": 2,
+                "wall_ms": 0.021,
+                "cpu_ms": 0.014,
+                "average_ms": 0.011,
+                "max_ms": 0.011
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 599419.809,
+                "cpu_ms": 600577.65,
+                "average_ms": 599419.809,
+                "max_ms": 599419.809
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.014,
+                "cpu_ms": 0.012,
+                "average_ms": 0.014,
+                "max_ms": 0.014
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 31796,
+              "cache_hits": 4607624,
+              "cache_misses": 372123,
+              "library_prefix_cohorts_resumed": 165,
+              "menu_search_result_cache_hits": 82,
+              "menu_search_result_cache_misses": 1,
+              "optimistic_basket_bounds": 16167,
+              "package_cache_hits": 3379525,
+              "package_cache_misses": 280399,
+              "package_calculations": 280399,
+              "per_store_selection_cache_hits": 15202,
+              "per_store_selection_cache_misses": 15855,
+              "planner_allocator_trim_available": 47,
+              "planner_allocator_trim_released": 47,
+              "planner_memory_reclamation_calls": 47,
+              "planner_memory_reclamation_generation_1": 34,
+              "planner_memory_reclamation_generation_2": 13,
+              "planner_unreachable_objects_collected": 1677058,
+              "product_match_calculations": 5449,
+              "quote_set_cache_hits": 587725,
+              "quote_set_cache_misses": 32137,
+              "quote_subset_pattern_cache_hits": 18462,
+              "quote_subset_pattern_cache_misses": 12595,
+              "quote_subset_vector_cache_hits": 574911,
+              "quote_subset_vector_cache_misses": 31057,
+              "semantic_candidates_returned": 5077,
+              "semantic_comparisons": 5449,
+              "store_combinations": 27141097,
+              "store_combinations_pruned_infeasible": 25128730,
+              "store_subset_cache_hits": 31717,
+              "store_subset_cache_misses": 79
+            },
+            "depth_counters": {}
+          }
+        },
+        {
+          "sequence": 3,
+          "outcome": "CancelledError",
+          "trace": {
+            "timings_ms": {
+              "personal_memory_reclamation": 1433.606,
+              "personal_product_facts": 0.01,
+              "planner_queue_wait": 0.015
+            },
+            "span_statistics": {
+              "personal_memory_reclamation": {
+                "calls": 1,
+                "wall_ms": 1433.606,
+                "cpu_ms": 1445.45,
+                "average_ms": 1433.606,
+                "max_ms": 1433.606
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 0.01,
+                "cpu_ms": 0.007,
+                "average_ms": 0.01,
+                "max_ms": 0.01
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.015,
+                "cpu_ms": 0.012,
+                "average_ms": 0.015,
+                "max_ms": 0.015
+              }
+            },
+            "operation_counters": {
+              "planner_allocator_trim_available": 1,
+              "planner_allocator_trim_released": 1,
+              "planner_memory_reclamation_calls": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 0
+            },
+            "depth_counters": {}
+          }
+        }
+      ],
+      "progress_samples": [
+        {
+          "elapsed_seconds": 2.157539322040975,
+          "stage": "queued",
+          "progress": null
+        },
+        {
+          "elapsed_seconds": 7.055406852159649,
+          "stage": "product_facts",
+          "progress": null
+        },
+        {
+          "elapsed_seconds": 26.13192795822397,
+          "stage": "candidate_qualification",
+          "progress": null
+        },
+        {
+          "elapsed_seconds": 48.06388476630673,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 0,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 64.65447712410241,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 25,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 66.79908726830035,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 50,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 68.24776583211496,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 100,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 72.44018082227558,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 125,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 73.87648945720866,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 150,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 75.33994049718603,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 175,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 76.86219209711999,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 200,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 78.35901105916128,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 225,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 79.91241409024224,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 300,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 81.68465867033228,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 450,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 83.5274975313805,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 475,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 85.05196914216504,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 600,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 86.61228225706145,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 725,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 88.27049180213362,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 875,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 89.94950722437352,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 1025,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 91.70564346713945,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 1175,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 93.4951887303032,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 1350,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 95.28529747016728,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 1525,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 98.34357802895829,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 1675,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 100.08158516837284,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 1800,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 101.68343965010718,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 1975,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 103.31600471120328,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 2125,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 104.9896868490614,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 2300,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 106.7377638053149,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 2450,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 108.3897796543315,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 2625,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 110.13648109324276,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 2800,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 111.76982469018549,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 2950,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 115.07555402023718,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 3100,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 116.72134924214333,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 3225,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 118.33728456124663,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 3375,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 120.01279830699787,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 3500,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 121.62827466800809,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 3625,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 123.31138343596831,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 3800,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 124.92447896115482,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 3950,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 126.58484298130497,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 4125,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 128.1699054511264,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 4225,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 131.49693084415048,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 4350,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 133.1627132082358,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 4525,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 134.90146989701316,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 4700,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 136.52149372315034,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 4825,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 139.593310858123,
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 4946,
+            "total": 4946,
+            "unit": "recipes"
+          }
+        },
+        {
+          "elapsed_seconds": 141.88199788797647,
+          "stage": "week_search",
+          "progress": null
+        },
+        {
+          "elapsed_seconds": 145.60732566704974,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 0,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 180.5229001333937,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 1,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 210.88595606805757,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 2,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 242.66329006338492,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 3,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 279.61735671712086,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 4,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 328.35924809612334,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 5,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 387.71738432440907,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 6,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 452.0183883132413,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 7,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 519.9259330062196,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 8,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 594.2814742950723,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 9,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 668.8212775480933,
+          "stage": "library_preparation",
+          "progress": {
+            "completed": 10,
+            "total": 11,
+            "unit": "publications"
+          }
+        },
+        {
+          "elapsed_seconds": 741.6326894462109,
+          "stage": "final_audit",
+          "progress": null
+        },
+        {
+          "elapsed_seconds": 742.9562717480585,
+          "stage": "product_facts",
+          "progress": null
+        }
+      ]
+    },
+    {
+      "stage": "prepare",
+      "report_sha256": "acc158f9400e3baa2d7417328a2baec4814c98ce98fe42ab38300c1fd0868509",
+      "receipt_sha256": "6dddb9d24d8f6d3e9c7a90bd499e74b087fc757b6ab84ccd5b49e32b342d0c49",
+      "final_resource_sha256": "8733dcff129b6d1d88a1689ea072d7a192e4357a504e7448050e23968eec5b62",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        }
+      },
+      "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+      "resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "final_resource": {
+        "memory": {
+          "current": 1285681152,
+          "peak": 1619337216,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4"
+      },
+      "process_wall_seconds": 112.1721385200508,
+      "exit_code": 0,
+      "oom_killed": false,
+      "paid": 976.32,
+      "audit_passed": true,
+      "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+      "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+      "loaded_publications": 11,
+      "replayed_publications": 0,
+      "plan_seconds": 52.585284085944295,
+      "actual_pantry_revision": 1,
+      "authoritative_history_private_unchanged": true
+    },
+    {
+      "stage": "recover-1",
+      "report_sha256": "ef20208ea2441258a6561a3f206cb1f40d6511b4d0b2673b8bd2079c1d01b449",
+      "receipt_sha256": "bac85fdb74c60f6583fb2496545ee5ae2b20b10d258a2933bb569a1c72260325",
+      "final_resource_sha256": "51f97752fb16de24208df0079f64f61608d86609cb25b8c33e9c8462ee8312a7",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        }
+      },
+      "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+      "resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "final_resource": {
+        "memory": {
+          "current": 1683988480,
+          "peak": 2047270912,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4"
+      },
+      "process_wall_seconds": 190.15420450968668,
+      "exit_code": 0,
+      "oom_killed": false,
+      "paid": 976.32,
+      "audit_passed": true,
+      "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+      "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+      "loaded_publications": 11,
+      "replayed_publications": 0,
+      "plan_seconds": 131.16447198297828,
+      "actual_pantry_revision": 1,
+      "authoritative_history_private_unchanged": true
+    },
+    {
+      "stage": "recover-2",
+      "report_sha256": "d5148b949368b6142cdd99008a57cc15df87b76e095470ac3fe622f2bf35e3ee",
+      "receipt_sha256": "1c6307f259a6836ad267c10070cd751fdcf6ec12094ae9bf07158478c9037949",
+      "final_resource_sha256": "a6dae571ef05fa6cb3c7b0f81c18e0c2d12944a762e0f1b3fbda9935efd878e0",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        }
+      },
+      "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+      "resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "final_resource": {
+        "memory": {
+          "current": 1683230720,
+          "peak": 2046382080,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4"
+      },
+      "process_wall_seconds": 192.67799819493666,
+      "exit_code": 0,
+      "oom_killed": false,
+      "paid": 976.32,
+      "audit_passed": true,
+      "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+      "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+      "loaded_publications": 11,
+      "replayed_publications": 0,
+      "plan_seconds": 133.18488711398095,
+      "actual_pantry_revision": 1,
+      "authoritative_history_private_unchanged": true
+    },
+    {
+      "stage": "recover-3",
+      "report_sha256": "5ac0166bdc3cd5d75d20ee9f757bd37883726230b918d66e4c79524b5142d9e2",
+      "receipt_sha256": "c94c21ada8e2a576cfcea0ec1b253c80e60a10a0b4d2c4363d2087825eddcbb5",
+      "final_resource_sha256": "002dac2508e5f63c03cbcdfa3e4e1e626d717d8684616f36048a8889980b4ae3",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "inputs": {
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        }
+      },
+      "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+      "resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "final_resource": {
+        "memory": {
+          "current": 1678540800,
+          "peak": 2045280256,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4"
+      },
+      "process_wall_seconds": 192.61457508569583,
+      "exit_code": 0,
+      "oom_killed": false,
+      "paid": 976.32,
+      "audit_passed": true,
+      "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+      "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+      "loaded_publications": 11,
+      "replayed_publications": 0,
+      "plan_seconds": 133.1615050882101,
+      "actual_pantry_revision": 1,
+      "authoritative_history_private_unchanged": true
+    }
+  ],
+  "current_metadata_bundle_sha256": "200fd54409e1ffaf1adb7a54071f6d7a95dc9a4a5103dd1acfbc77cfaeff4767",
+  "current_metadata_files": 43
+}

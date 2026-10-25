@@ -1,0 +1,4023 @@
+{
+  "schema": "smako-current-matched-preparation-v1",
+  "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+  "baseline_commit": "9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94",
+  "status": "MATCHED_GATES_PASSED_NOT_FULL_MATRIX",
+  "scope": "Frozen Malmö/distribution/5000/original facts; empty app/preparation cache and synthetic owner per process",
+  "os_cache": "Uncontrolled; never cleared",
+  "plain_comparison_complete": true,
+  "required_baseline_plain_samples": 3,
+  "baseline_plain": [
+    {
+      "sample": "baseline-plain-1",
+      "source_commit": "9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94",
+      "instrumented": false,
+      "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "raw_report_sha256": "83595862c682de8f2ce9d3349210fdb9cfcc22c766df9685de6824f036aa016d",
+      "process_plan_calls": 1,
+      "compared_plan_calls": 1,
+      "receipt_sha256": "2b0c9dc67096570534d456a00babf28a3ece5ba121a60fa0d18729c6caed0163",
+      "final_resource_sha256": "26b0866ac660a875f182dcea9bcf9b184c043914491f77101dcab18302d61c2e",
+      "wall_seconds": 881.3099835189059,
+      "process_wall_seconds": 926.3566496069543,
+      "paid": 988.32,
+      "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+      "audit_passed": true,
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 2973937664,
+          "peak": 3008499712,
+          "swap_current": 0
+        },
+        "memory_target_passed": false,
+        "target_enforced_for_current_runtime": false
+      },
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "exit_code": 0,
+      "oom_killed": false,
+      "certificate_reuse": {
+        "loaded_publications": 0,
+        "replayed_publications": 11
+      },
+      "native_timings_seconds": {
+        "product_facts": 0.0024161548353731632,
+        "package_calculation": 141.52125577116385,
+        "nutrition": 23.366298449225724,
+        "candidate_generation_and_qualification": 207.62794580403715,
+        "audit": 0.38766858633607626,
+        "week_search": 657.2586793070659,
+        "total": 874.7078423863277
+      },
+      "preparation_stats": {
+        "hits": 4119,
+        "misses": 6240,
+        "writes": 4098,
+        "invalid": 0
+      },
+      "legacy_preparation": [
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 6.575288732070476,
+          "evaluations": 409
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 7.583262185100466,
+          "evaluations": 493
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 8.47070464398712,
+          "evaluations": 548
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 13.162401726935059,
+          "evaluations": 635
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 15.110651122406125,
+          "evaluations": 741
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 17.415423472877592,
+          "evaluations": 843
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 20.97926259273663,
+          "evaluations": 972
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 25.030938871204853,
+          "evaluations": 1067
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 28.531387687195092,
+          "evaluations": 1165
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 30.46543996501714,
+          "evaluations": 1260
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "988.32",
+          "seconds": 31.869204096961766,
+          "evaluations": 1384
+        }
+      ],
+      "load_seconds": 33.124777962919325,
+      "startup_report_sha256": "1487a1edd98444930b694245ded80c6b9b2c34dd9e5259dcf18150bfbbec1d97"
+    },
+    {
+      "sample": "baseline-plain-2",
+      "source_commit": "9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94",
+      "instrumented": false,
+      "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "raw_report_sha256": "bd568ee4fc02c5d9b0d5f80d946d662d36efd776ea1d2821b6d596ca2dd12602",
+      "process_plan_calls": 1,
+      "compared_plan_calls": 1,
+      "receipt_sha256": "9927e7454cc4309a0c00735b821e400d4a3cd5f637ab9df3c6141ba864d59bb9",
+      "final_resource_sha256": "55cdb2d65ff03277789c0a64905975e2b45ae4cbefe41bc668debfd607ec6bed",
+      "wall_seconds": 879.9257521918043,
+      "process_wall_seconds": 924.7757072420791,
+      "paid": 988.32,
+      "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+      "audit_passed": true,
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 2991665152,
+          "peak": 3025485824,
+          "swap_current": 0
+        },
+        "memory_target_passed": false,
+        "target_enforced_for_current_runtime": false
+      },
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "exit_code": 0,
+      "oom_killed": false,
+      "certificate_reuse": {
+        "loaded_publications": 0,
+        "replayed_publications": 11
+      },
+      "native_timings_seconds": {
+        "product_facts": 0.002488102298229933,
+        "package_calculation": 141.3933605994098,
+        "nutrition": 22.901228711009026,
+        "candidate_generation_and_qualification": 208.40401313314214,
+        "audit": 0.397779923863709,
+        "week_search": 654.6432188129984,
+        "total": 873.3342948285863
+      },
+      "preparation_stats": {
+        "hits": 4119,
+        "misses": 6240,
+        "writes": 4098,
+        "invalid": 0
+      },
+      "legacy_preparation": [
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 6.579299420118332,
+          "evaluations": 409
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 8.138593467883766,
+          "evaluations": 493
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 8.26203603995964,
+          "evaluations": 548
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 13.24963858211413,
+          "evaluations": 635
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 15.046115322969854,
+          "evaluations": 741
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 17.802178527694196,
+          "evaluations": 843
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 21.715101764071733,
+          "evaluations": 972
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 24.95590680092573,
+          "evaluations": 1067
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 27.53375067189336,
+          "evaluations": 1165
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 29.902356332167983,
+          "evaluations": 1260
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "988.32",
+          "seconds": 33.98089182097465,
+          "evaluations": 1384
+        }
+      ],
+      "load_seconds": 32.95482400292531,
+      "startup_report_sha256": "f9b4f0604b2d6bc319466096c8b4922701028f7f256f5092a0cd25a9b1e43483"
+    },
+    {
+      "sample": "baseline-plain-3",
+      "source_commit": "9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94",
+      "instrumented": false,
+      "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "raw_report_sha256": "9b62bca638fa0c8c9dcf88c8fac10c36492a3ba40aedeeac58d33403180cadcd",
+      "process_plan_calls": 1,
+      "compared_plan_calls": 1,
+      "receipt_sha256": "cecdcdb2a1c5dd218a12ca7295ae3a52d969667fbbbd002fdc8c1077acf970a2",
+      "final_resource_sha256": "445bfa17b7f28ab1b50949cb13cac3865b1c29d35099abfbe945dcb85b6addad",
+      "wall_seconds": 900.767418819014,
+      "process_wall_seconds": 947.4982637730427,
+      "paid": 988.32,
+      "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+      "audit_passed": true,
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 2975186944,
+          "peak": 3008270336,
+          "swap_current": 0
+        },
+        "memory_target_passed": false,
+        "target_enforced_for_current_runtime": false
+      },
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "exit_code": 0,
+      "oom_killed": false,
+      "certificate_reuse": {
+        "loaded_publications": 0,
+        "replayed_publications": 11
+      },
+      "native_timings_seconds": {
+        "product_facts": 0.002680168952792883,
+        "package_calculation": 144.02815973944962,
+        "nutrition": 23.5311137274839,
+        "candidate_generation_and_qualification": 212.80552353477105,
+        "audit": 0.3866706546396017,
+        "week_search": 670.4605544232763,
+        "total": 893.982749748975
+      },
+      "preparation_stats": {
+        "hits": 4119,
+        "misses": 6240,
+        "writes": 4098,
+        "invalid": 0
+      },
+      "legacy_preparation": [
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 7.506245370022953,
+          "evaluations": 409
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 7.891182286664844,
+          "evaluations": 493
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 8.4367452589795,
+          "evaluations": 548
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 13.76268413104117,
+          "evaluations": 635
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 16.54201425006613,
+          "evaluations": 741
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 18.154558557085693,
+          "evaluations": 843
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 21.499062854796648,
+          "evaluations": 972
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 26.056939064059407,
+          "evaluations": 1067
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 27.80441574100405,
+          "evaluations": 1165
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 30.564478538930416,
+          "evaluations": 1260
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "988.32",
+          "seconds": 32.19441797072068,
+          "evaluations": 1384
+        }
+      ],
+      "load_seconds": 34.91744541330263,
+      "startup_report_sha256": "aad8437bf33f22b79fedf0b622a76b2e2a9e925c8fc86a22664f9e7898c1e51d"
+    }
+  ],
+  "baseline_summary": {
+    "samples": 3,
+    "seconds": [
+      881.3099835189059,
+      879.9257521918043,
+      900.767418819014
+    ],
+    "minimum_seconds": 879.9257521918043,
+    "median_seconds": 881.3099835189059,
+    "maximum_seconds": 900.767418819014,
+    "maximum_final_cgroup_peak_bytes": 3025485824
+  },
+  "current_plain": [
+    {
+      "sample": "primary-first-call",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "instrumented": false,
+      "raw_report_sha256": "81d4a40e035d1a837e23dab0e32e7c5834f03f1428102f09acdbd68fe65b3f81",
+      "wall_seconds": 662.8264877940528,
+      "paid": 988.32,
+      "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+      "audit_passed": true,
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 1919729664,
+          "peak": 2021113856,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "process_plan_calls": 4,
+      "compared_plan_calls": 1,
+      "process_wall_seconds": 756.7053618086502,
+      "load_seconds": 47.327742367982864,
+      "startup_report_sha256": "b9ef0862573f0eddd51b882ef05d84048c35e5ef819144729876650bd97b7a6e"
+    },
+    {
+      "sample": "cold-2",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "instrumented": false,
+      "raw_report_sha256": "6839709bcbb906022367fed6aed466d7377b8cd417c3e288a44617ed7b489a8b",
+      "wall_seconds": 649.491942001041,
+      "paid": 988.32,
+      "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+      "audit_passed": true,
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 1896579072,
+          "peak": 1952149504,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "process_plan_calls": 1,
+      "compared_plan_calls": 1,
+      "process_wall_seconds": 704.545473231934,
+      "provision_seconds_excluded_from_process": 0.0002289172261953354,
+      "load_seconds": 47.69853514479473,
+      "startup_report_sha256": "4f6b287fa87a58441885c80a0a8e00b05396d80728742d5fa8d110ee8a3fe7b9"
+    },
+    {
+      "sample": "cold-3",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "instrumented": false,
+      "raw_report_sha256": "122af2174f0df9b2d15fccb3823dd57bb77151eca094d8ae805a194dad18ca57",
+      "wall_seconds": 664.5011015748605,
+      "paid": 988.32,
+      "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+      "audit_passed": true,
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 1897705472,
+          "peak": 1952477184,
+          "swap_current": 0
+        },
+        "memory_target_passed": true,
+        "target_enforced_for_current_runtime": true
+      },
+      "process_plan_calls": 1,
+      "compared_plan_calls": 1,
+      "process_wall_seconds": 719.7432773569599,
+      "provision_seconds_excluded_from_process": 0.00023655081167817116,
+      "load_seconds": 47.743215741124004,
+      "startup_report_sha256": "33c3ef741738edf7433bcb7c6c3465085b00aacbdd726262c6f4da32d1c5a23a"
+    }
+  ],
+  "current_summary": {
+    "samples": 3,
+    "seconds": [
+      662.8264877940528,
+      649.491942001041,
+      664.5011015748605
+    ],
+    "minimum_seconds": 649.491942001041,
+    "median_seconds": 662.8264877940528,
+    "maximum_seconds": 664.5011015748605,
+    "maximum_final_cgroup_peak_bytes": 2021113856
+  },
+  "current_instrumented_profile": {
+    "sample": "current-instrumented",
+    "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+    "instrumented": true,
+    "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+    "inputs": {
+      "sha256": {
+        "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+        "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+        "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+      },
+      "now": "2026-10-23T06:00:02.869273+00:00",
+      "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+      "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+      "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+    },
+    "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+    "raw_report_sha256": "712c5540333e0f215411a791c7a4ec5eb0a8116722a6cbea8faae536bb34189d",
+    "process_plan_calls": 1,
+    "compared_plan_calls": 1,
+    "receipt_sha256": "94026d9692bc84e425763c6be7cebc865efe61e6565a8b648b012fab60f2fe8d",
+    "final_resource_sha256": "85f07abbdc1e622bb1657ed5a05db5239c2ffbef511fbcfb36bbf2415b070c79",
+    "wall_seconds": 666.0346000320278,
+    "process_wall_seconds": 721.7925133639947,
+    "paid": 988.32,
+    "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+    "audit_passed": true,
+    "final_resource": {
+      "scope": "after plan calls and atexit phase-report serialization; before tiny receipt write",
+      "measurement_complete": true,
+      "phase_report_serialized": true,
+      "phase_report_sha256": "bfa70b2fe00805e508dfa5b8a5a8d8baea639e6fbea34a62293e0820330fe004",
+      "entry_sha256": "ef251c5c14ce9c66f1614fa7998cd9ac75fcb421737bf9394fbe5ee3a5f35f2a",
+      "instrumentation_entry_sha256": "d0f8a45823d7e9d3cef8f50bf7f03d246f954cedec673a279a66efa67c93eaaf",
+      "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+      "memory": {
+        "current": 1911349248,
+        "peak": 1962889216,
+        "swap_current": 0
+      },
+      "target_enforced_for_current_runtime": true,
+      "memory_target_passed": true
+    },
+    "actual_resources": {
+      "Memory": 3221225472,
+      "MemorySwap": 3221225472,
+      "NanoCpus": 2000000000,
+      "NetworkMode": "none",
+      "ReadonlyRootfs": true
+    },
+    "exit_code": 0,
+    "oom_killed": false,
+    "certificate_reuse": {
+      "loaded_publications": 0,
+      "replayed_publications": 11
+    },
+    "native_timings_seconds": {
+      "product_facts": 0.0028442521579563618,
+      "memory_reclamation": 28.68489922117442,
+      "package_calculation": 114.73558537568897,
+      "nutrition": 20.453573648817837,
+      "candidate_generation_and_qualification": 101.90125238988549,
+      "audit": 0.4765236354433,
+      "week_search": 536.2440176880918,
+      "total": 656.9446930000558
+    },
+    "preparation_stats": {
+      "hits": 4119,
+      "misses": 6240,
+      "writes": 4098,
+      "invalid": 0
+    },
+    "legacy_preparation": [
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "996.22",
+        "seconds": 6.655728681012988,
+        "evaluations": 409
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "996.22",
+        "seconds": 4.15835134871304,
+        "evaluations": 238
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "996.22",
+        "seconds": 3.682645784225315,
+        "evaluations": 203
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "996.22",
+        "seconds": 3.820662274956703,
+        "evaluations": 234
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "996.22",
+        "seconds": 4.9339699652045965,
+        "evaluations": 254
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "996.22",
+        "seconds": 5.013928035274148,
+        "evaluations": 260
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "992.22",
+        "seconds": 6.393772623967379,
+        "evaluations": 293
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "992.22",
+        "seconds": 6.8907538605853915,
+        "evaluations": 279
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "992.22",
+        "seconds": 6.354644793085754,
+        "evaluations": 281
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "992.22",
+        "seconds": 6.675818420946598,
+        "evaluations": 281
+      },
+      {
+        "status": "proposal_completed",
+        "proposed_paid": "988.32",
+        "seconds": 6.583122329320759,
+        "evaluations": 309
+      }
+    ],
+    "load_seconds": 48.09896103711799,
+    "startup_report_sha256": "3a4bd9c381a99ea72d842b202059f023e6fd9fa7c53aa57c4bcab51070a5027d",
+    "phase_profile": {
+      "schema": "smako-preparation-profile-v1",
+      "process_seconds": 718.0211457051337,
+      "memory": {
+        "VmHWM": 1947316224,
+        "VmRSS": 1896050688,
+        "cgroup_current": 1911132160,
+        "cgroup_peak": 1962889216
+      },
+      "phases": [
+        {
+          "phase": "load_restore_indexes",
+          "seconds": 26.25550513435155,
+          "exclusive_seconds": 26.25550513435155,
+          "cpu_seconds": 26.231784459,
+          "before": {
+            "VmHWM": 1590218752,
+            "VmRSS": 1390997504,
+            "cgroup_current": 1377058816,
+            "cgroup_peak": 1576529920
+          },
+          "after": {
+            "VmHWM": 1590218752,
+            "VmRSS": 1560690688,
+            "cgroup_current": 1546219520,
+            "cgroup_peak": 1576529920
+          }
+        },
+        {
+          "phase": "planner_init",
+          "seconds": 9.085217013955116,
+          "exclusive_seconds": 9.085217013955116,
+          "cpu_seconds": 9.071745608999997,
+          "before": {
+            "VmHWM": 1619628032,
+            "VmRSS": 1619296256,
+            "cgroup_current": 1604874240,
+            "cgroup_peak": 1605414912
+          },
+          "after": {
+            "VmHWM": 1712545792,
+            "VmRSS": 1712545792,
+            "cgroup_current": 1698217984,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "publication_identity_hashing",
+          "seconds": 9.976313350722194,
+          "exclusive_seconds": 9.976313350722194,
+          "cpu_seconds": 9.966685089999999,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1119715328,
+            "cgroup_current": 1104601088,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1161220096,
+            "cgroup_current": 1145569280,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0008521671406924725,
+          "exclusive_seconds": 0.0008521671406924725,
+          "cpu_seconds": 0.000854763000006642,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1161961472,
+            "cgroup_current": 1146355712,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1161994240,
+            "cgroup_current": 1146355712,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "publication_identity_hashing",
+          "seconds": 0.00034538935869932175,
+          "exclusive_seconds": 0.00034538935869932175,
+          "cpu_seconds": 0.000346980999992752,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1161994240,
+            "cgroup_current": 1146355712,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1161994240,
+            "cgroup_current": 1146355712,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0005452018231153488,
+          "exclusive_seconds": 0.0005452018231153488,
+          "cpu_seconds": 0.0005469359999921153,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1161994240,
+            "cgroup_current": 1146355712,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1162084352,
+            "cgroup_current": 1146617856,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.000986413098871708,
+          "exclusive_seconds": 0.000986413098871708,
+          "cpu_seconds": 0.0009885829999944917,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1242501120,
+            "cgroup_current": 1252048896,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1242537984,
+            "cgroup_current": 1252048896,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.10765124438330531,
+          "exclusive_seconds": 0.10765124438330531,
+          "cpu_seconds": 0.10154597900000795,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1651687424,
+            "cgroup_current": 1662394368,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1665806336,
+            "cgroup_current": 1679958016,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "qualification",
+          "seconds": 101.90142116183415,
+          "exclusive_seconds": 101.79278350435197,
+          "cpu_seconds": 95.20143058,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1162084352,
+            "cgroup_current": 1146617856,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1666404352,
+            "cgroup_current": 1680482304,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "publication_identity_hashing",
+          "seconds": 0.0006129806861281395,
+          "exclusive_seconds": 0.0006129806861281395,
+          "cpu_seconds": 0.0006111559999908422,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1648414720,
+            "cgroup_current": 1662468096,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1648414720,
+            "cgroup_current": 1662468096,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0006161178462207317,
+          "exclusive_seconds": 0.0006161178462207317,
+          "cpu_seconds": 0.0006167669999967984,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1649463296,
+            "cgroup_current": 1663516672,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1649463296,
+            "cgroup_current": 1663516672,
+            "cgroup_peak": 1698217984
+          }
+        },
+        {
+          "phase": "search:12:13",
+          "seconds": 6.6529827560298145,
+          "exclusive_seconds": 6.6529827560298145,
+          "cpu_seconds": 6.646954270000009,
+          "before": {
+            "VmHWM": 1712209920,
+            "VmRSS": 1649467392,
+            "cgroup_current": 1663516672,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1732067328,
+            "VmRSS": 1732067328,
+            "cgroup_current": 1746145280,
+            "cgroup_peak": 1746145280
+          }
+        },
+        {
+          "phase": "search:12:13",
+          "seconds": 5.824702967889607,
+          "exclusive_seconds": 5.824702967889607,
+          "cpu_seconds": 5.820263947000001,
+          "before": {
+            "VmHWM": 1731600384,
+            "VmRSS": 1725087744,
+            "cgroup_current": 1739153408,
+            "cgroup_peak": 1746145280
+          },
+          "after": {
+            "VmHWM": 1757536256,
+            "VmRSS": 1757536256,
+            "cgroup_current": 1771659264,
+            "cgroup_peak": 1771659264
+          }
+        },
+        {
+          "phase": "search:1:13",
+          "seconds": 9.310395224019885,
+          "exclusive_seconds": 9.310395224019885,
+          "cpu_seconds": 9.302260332999992,
+          "before": {
+            "VmHWM": 1757052928,
+            "VmRSS": 1747169280,
+            "cgroup_current": 1761275904,
+            "cgroup_peak": 1771659264
+          },
+          "after": {
+            "VmHWM": 1769820160,
+            "VmRSS": 1769820160,
+            "cgroup_current": 1784082432,
+            "cgroup_peak": 1784082432
+          }
+        },
+        {
+          "phase": "search:3:13",
+          "seconds": 6.33735455898568,
+          "exclusive_seconds": 6.33735455898568,
+          "cpu_seconds": 6.332555272000008,
+          "before": {
+            "VmHWM": 1769414656,
+            "VmRSS": 1762021376,
+            "cgroup_current": 1776271360,
+            "cgroup_peak": 1784082432
+          },
+          "after": {
+            "VmHWM": 1770270720,
+            "VmRSS": 1770270720,
+            "cgroup_current": 1784397824,
+            "cgroup_peak": 1784397824
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.00643819710239768,
+          "exclusive_seconds": 0.00643819710239768,
+          "cpu_seconds": 0.002400590999997121,
+          "before": {
+            "VmHWM": 1769893888,
+            "VmRSS": 1751597056,
+            "cgroup_current": 1765687296,
+            "cgroup_peak": 1784397824
+          },
+          "after": {
+            "VmHWM": 1769893888,
+            "VmRSS": 1751875584,
+            "cgroup_current": 1766211584,
+            "cgroup_peak": 1784397824
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0010292460210621357,
+          "exclusive_seconds": 0.0010292460210621357,
+          "cpu_seconds": 0.001032546000004686,
+          "before": {
+            "VmHWM": 1769893888,
+            "VmRSS": 1750413312,
+            "cgroup_current": 1764700160,
+            "cgroup_peak": 1784397824
+          },
+          "after": {
+            "VmHWM": 1769893888,
+            "VmRSS": 1750528000,
+            "cgroup_current": 1764700160,
+            "cgroup_peak": 1784397824
+          }
+        },
+        {
+          "phase": "search:13:14",
+          "seconds": 4.1474165436811745,
+          "exclusive_seconds": 4.1474165436811745,
+          "cpu_seconds": 4.144233939000003,
+          "before": {
+            "VmHWM": 1769893888,
+            "VmRSS": 1750700032,
+            "cgroup_current": 1764929536,
+            "cgroup_peak": 1784397824
+          },
+          "after": {
+            "VmHWM": 1769893888,
+            "VmRSS": 1763778560,
+            "cgroup_current": 1778036736,
+            "cgroup_peak": 1784397824
+          }
+        },
+        {
+          "phase": "search:1:14",
+          "seconds": 8.465149509720504,
+          "exclusive_seconds": 8.465149509720504,
+          "cpu_seconds": 8.458408424999988,
+          "before": {
+            "VmHWM": 1769893888,
+            "VmRSS": 1763553280,
+            "cgroup_current": 1777659904,
+            "cgroup_peak": 1784397824
+          },
+          "after": {
+            "VmHWM": 1833435136,
+            "VmRSS": 1833435136,
+            "cgroup_current": 1847652352,
+            "cgroup_peak": 1847652352
+          }
+        },
+        {
+          "phase": "search:4:14",
+          "seconds": 12.872316285967827,
+          "exclusive_seconds": 12.872316285967827,
+          "cpu_seconds": 12.860400252000005,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1823567872,
+            "cgroup_current": 1838030848,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1830150144,
+            "cgroup_current": 1844584448,
+            "cgroup_peak": 1847902208
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.006544709671288729,
+          "exclusive_seconds": 0.006544709671288729,
+          "cpu_seconds": 0.00276234000000386,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1814433792,
+            "cgroup_current": 1828732928,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1814642688,
+            "cgroup_current": 1828995072,
+            "cgroup_peak": 1847902208
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0014464827254414558,
+          "exclusive_seconds": 0.0014464827254414558,
+          "cpu_seconds": 0.0014511610000056407,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1802596352,
+            "cgroup_current": 1816903680,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1802706944,
+            "cgroup_current": 1817165824,
+            "cgroup_peak": 1847902208
+          }
+        },
+        {
+          "phase": "search:14:15",
+          "seconds": 3.663460901938379,
+          "exclusive_seconds": 3.663460901938379,
+          "cpu_seconds": 3.660328669000023,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1802866688,
+            "cgroup_current": 1817133056,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1810104320,
+            "cgroup_current": 1824473088,
+            "cgroup_peak": 1847902208
+          }
+        },
+        {
+          "phase": "search:1:15",
+          "seconds": 10.105332396924496,
+          "exclusive_seconds": 10.105332396924496,
+          "cpu_seconds": 10.096745106000014,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1801547776,
+            "cgroup_current": 1815891968,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1822748672,
+            "cgroup_current": 1837125632,
+            "cgroup_peak": 1847902208
+          }
+        },
+        {
+          "phase": "search:5:15",
+          "seconds": 13.661753854248673,
+          "exclusive_seconds": 13.661753854248673,
+          "cpu_seconds": 13.650143919999977,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1813753856,
+            "cgroup_current": 1828147200,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1821855744,
+            "cgroup_current": 1836204032,
+            "cgroup_peak": 1847902208
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.005967377219349146,
+          "exclusive_seconds": 0.005967377219349146,
+          "cpu_seconds": 0.0023669580000387214,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1805062144,
+            "cgroup_current": 1819328512,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1805377536,
+            "cgroup_current": 1819590656,
+            "cgroup_peak": 1847902208
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0010096877813339233,
+          "exclusive_seconds": 0.0010096877813339233,
+          "cpu_seconds": 0.0010131089999845244,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1803747328,
+            "cgroup_current": 1818177536,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1803866112,
+            "cgroup_current": 1818177536,
+            "cgroup_peak": 1847902208
+          }
+        },
+        {
+          "phase": "search:15:16",
+          "seconds": 3.792822601273656,
+          "exclusive_seconds": 3.792822601273656,
+          "cpu_seconds": 3.7901100120000137,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1804529664,
+            "cgroup_current": 1818931200,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1813471232,
+            "cgroup_current": 1827844096,
+            "cgroup_peak": 1847902208
+          }
+        },
+        {
+          "phase": "search:1:16",
+          "seconds": 7.978221692144871,
+          "exclusive_seconds": 7.978221692144871,
+          "cpu_seconds": 7.971947431999979,
+          "before": {
+            "VmHWM": 1833066496,
+            "VmRSS": 1812963328,
+            "cgroup_current": 1827426304,
+            "cgroup_peak": 1847902208
+          },
+          "after": {
+            "VmHWM": 1845764096,
+            "VmRSS": 1845764096,
+            "cgroup_current": 1860456448,
+            "cgroup_peak": 1860456448
+          }
+        },
+        {
+          "phase": "search:6:16",
+          "seconds": 18.937094004359096,
+          "exclusive_seconds": 18.937094004359096,
+          "cpu_seconds": 18.91724794800001,
+          "before": {
+            "VmHWM": 1845342208,
+            "VmRSS": 1836838912,
+            "cgroup_current": 1851502592,
+            "cgroup_peak": 1860456448
+          },
+          "after": {
+            "VmHWM": 1846063104,
+            "VmRSS": 1846063104,
+            "cgroup_current": 1860415488,
+            "cgroup_peak": 1860677632
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.0065125091932713985,
+          "exclusive_seconds": 0.0065125091932713985,
+          "cpu_seconds": 0.0024672760000044036,
+          "before": {
+            "VmHWM": 1845616640,
+            "VmRSS": 1831415808,
+            "cgroup_current": 1845858304,
+            "cgroup_peak": 1860677632
+          },
+          "after": {
+            "VmHWM": 1845616640,
+            "VmRSS": 1831686144,
+            "cgroup_current": 1846120448,
+            "cgroup_peak": 1860677632
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0013995026238262653,
+          "exclusive_seconds": 0.0013995026238262653,
+          "cpu_seconds": 0.0014030309999952806,
+          "before": {
+            "VmHWM": 1845616640,
+            "VmRSS": 1819766784,
+            "cgroup_current": 1834156032,
+            "cgroup_peak": 1860677632
+          },
+          "after": {
+            "VmHWM": 1845616640,
+            "VmRSS": 1819881472,
+            "cgroup_current": 1834156032,
+            "cgroup_peak": 1860677632
+          }
+        },
+        {
+          "phase": "search:16:17",
+          "seconds": 4.8910500491037965,
+          "exclusive_seconds": 4.8910500491037965,
+          "cpu_seconds": 4.886006491000046,
+          "before": {
+            "VmHWM": 1845616640,
+            "VmRSS": 1820504064,
+            "cgroup_current": 1834909696,
+            "cgroup_peak": 1860677632
+          },
+          "after": {
+            "VmHWM": 1845616640,
+            "VmRSS": 1830699008,
+            "cgroup_current": 1845133312,
+            "cgroup_peak": 1860677632
+          }
+        },
+        {
+          "phase": "search:1:17",
+          "seconds": 15.764450599905103,
+          "exclusive_seconds": 15.764450599905103,
+          "cpu_seconds": 15.747426684000004,
+          "before": {
+            "VmHWM": 1845616640,
+            "VmRSS": 1830162432,
+            "cgroup_current": 1844727808,
+            "cgroup_peak": 1860677632
+          },
+          "after": {
+            "VmHWM": 1902235648,
+            "VmRSS": 1902235648,
+            "cgroup_current": 1916768256,
+            "cgroup_peak": 1916768256
+          }
+        },
+        {
+          "phase": "search:7:17",
+          "seconds": 20.59084010589868,
+          "exclusive_seconds": 20.59084010589868,
+          "cpu_seconds": 20.570455995999964,
+          "before": {
+            "VmHWM": 1902309376,
+            "VmRSS": 1902309376,
+            "cgroup_current": 1916936192,
+            "cgroup_peak": 1917005824
+          },
+          "after": {
+            "VmHWM": 1909547008,
+            "VmRSS": 1909547008,
+            "cgroup_current": 1923977216,
+            "cgroup_peak": 1924014080
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.005678836721926928,
+          "exclusive_seconds": 0.005678836721926928,
+          "cpu_seconds": 0.0024713849999784543,
+          "before": {
+            "VmHWM": 1908998144,
+            "VmRSS": 1876267008,
+            "cgroup_current": 1890689024,
+            "cgroup_peak": 1924014080
+          },
+          "after": {
+            "VmHWM": 1908998144,
+            "VmRSS": 1876484096,
+            "cgroup_current": 1890951168,
+            "cgroup_peak": 1924014080
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0019205277785658836,
+          "exclusive_seconds": 0.0019205277785658836,
+          "cpu_seconds": 0.0019244279999952596,
+          "before": {
+            "VmHWM": 1908998144,
+            "VmRSS": 1866940416,
+            "cgroup_current": 1881362432,
+            "cgroup_peak": 1924014080
+          },
+          "after": {
+            "VmHWM": 1908998144,
+            "VmRSS": 1867055104,
+            "cgroup_current": 1881624576,
+            "cgroup_peak": 1924014080
+          }
+        },
+        {
+          "phase": "search:17:18",
+          "seconds": 4.956655412912369,
+          "exclusive_seconds": 4.956655412912369,
+          "cpu_seconds": 4.952210227000023,
+          "before": {
+            "VmHWM": 1908998144,
+            "VmRSS": 1867751424,
+            "cgroup_current": 1882378240,
+            "cgroup_peak": 1924014080
+          },
+          "after": {
+            "VmHWM": 1908998144,
+            "VmRSS": 1875587072,
+            "cgroup_current": 1890242560,
+            "cgroup_peak": 1924014080
+          }
+        },
+        {
+          "phase": "search:1:18",
+          "seconds": 18.805794354062527,
+          "exclusive_seconds": 18.805794354062527,
+          "cpu_seconds": 18.789055890999975,
+          "before": {
+            "VmHWM": 1908998144,
+            "VmRSS": 1875152896,
+            "cgroup_current": 1889665024,
+            "cgroup_peak": 1924014080
+          },
+          "after": {
+            "VmHWM": 1908998144,
+            "VmRSS": 1901109248,
+            "cgroup_current": 1915723776,
+            "cgroup_peak": 1924014080
+          }
+        },
+        {
+          "phase": "search:8:18",
+          "seconds": 28.84063156368211,
+          "exclusive_seconds": 28.84063156368211,
+          "cpu_seconds": 28.818140252999967,
+          "before": {
+            "VmHWM": 1908998144,
+            "VmRSS": 1901096960,
+            "cgroup_current": 1915613184,
+            "cgroup_peak": 1924014080
+          },
+          "after": {
+            "VmHWM": 1915027456,
+            "VmRSS": 1915027456,
+            "cgroup_current": 1929506816,
+            "cgroup_peak": 1929506816
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.0056425160728394985,
+          "exclusive_seconds": 0.0056425160728394985,
+          "cpu_seconds": 0.002394761000005019,
+          "before": {
+            "VmHWM": 1914355712,
+            "VmRSS": 1872400384,
+            "cgroup_current": 1886916608,
+            "cgroup_peak": 1929506816
+          },
+          "after": {
+            "VmHWM": 1914355712,
+            "VmRSS": 1872732160,
+            "cgroup_current": 1887440896,
+            "cgroup_peak": 1929506816
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0012145200744271278,
+          "exclusive_seconds": 0.0012145200744271278,
+          "cpu_seconds": 0.0012191559999905621,
+          "before": {
+            "VmHWM": 1914355712,
+            "VmRSS": 1871101952,
+            "cgroup_current": 1885765632,
+            "cgroup_peak": 1929506816
+          },
+          "after": {
+            "VmHWM": 1914355712,
+            "VmRSS": 1871220736,
+            "cgroup_current": 1885765632,
+            "cgroup_peak": 1929506816
+          }
+        },
+        {
+          "phase": "search:18:19",
+          "seconds": 6.314230363816023,
+          "exclusive_seconds": 6.314230363816023,
+          "cpu_seconds": 6.3091719420000345,
+          "before": {
+            "VmHWM": 1914355712,
+            "VmRSS": 1872539648,
+            "cgroup_current": 1887043584,
+            "cgroup_peak": 1929506816
+          },
+          "after": {
+            "VmHWM": 1914355712,
+            "VmRSS": 1882333184,
+            "cgroup_current": 1897005056,
+            "cgroup_peak": 1929506816
+          }
+        },
+        {
+          "phase": "search:1:19",
+          "seconds": 17.688071644399315,
+          "exclusive_seconds": 17.688071644399315,
+          "cpu_seconds": 17.67055115400001,
+          "before": {
+            "VmHWM": 1914355712,
+            "VmRSS": 1881341952,
+            "cgroup_current": 1896132608,
+            "cgroup_peak": 1929506816
+          },
+          "after": {
+            "VmHWM": 1914355712,
+            "VmRSS": 1907564544,
+            "cgroup_current": 1922084864,
+            "cgroup_peak": 1929506816
+          }
+        },
+        {
+          "phase": "search:8:19",
+          "seconds": 28.330989360809326,
+          "exclusive_seconds": 28.330989360809326,
+          "cpu_seconds": 28.307322941999985,
+          "before": {
+            "VmHWM": 1914355712,
+            "VmRSS": 1907458048,
+            "cgroup_current": 1922138112,
+            "cgroup_peak": 1929506816
+          },
+          "after": {
+            "VmHWM": 1929895936,
+            "VmRSS": 1929895936,
+            "cgroup_current": 1944637440,
+            "cgroup_peak": 1944637440
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.0068941074423491955,
+          "exclusive_seconds": 0.0068941074423491955,
+          "cpu_seconds": 0.002374603999953706,
+          "before": {
+            "VmHWM": 1929248768,
+            "VmRSS": 1882816512,
+            "cgroup_current": 1897402368,
+            "cgroup_peak": 1944637440
+          },
+          "after": {
+            "VmHWM": 1929248768,
+            "VmRSS": 1883111424,
+            "cgroup_current": 1897664512,
+            "cgroup_peak": 1944637440
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0010117818601429462,
+          "exclusive_seconds": 0.0010117818601429462,
+          "cpu_seconds": 0.001015393999978187,
+          "before": {
+            "VmHWM": 1929248768,
+            "VmRSS": 1881587712,
+            "cgroup_current": 1896357888,
+            "cgroup_peak": 1944637440
+          },
+          "after": {
+            "VmHWM": 1929248768,
+            "VmRSS": 1881698304,
+            "cgroup_current": 1896357888,
+            "cgroup_peak": 1944637440
+          }
+        },
+        {
+          "phase": "search:19:20",
+          "seconds": 6.801184840966016,
+          "exclusive_seconds": 6.801184840966016,
+          "cpu_seconds": 6.795602039000016,
+          "before": {
+            "VmHWM": 1929248768,
+            "VmRSS": 1883037696,
+            "cgroup_current": 1897635840,
+            "cgroup_peak": 1944637440
+          },
+          "after": {
+            "VmHWM": 1929248768,
+            "VmRSS": 1894707200,
+            "cgroup_current": 1909432320,
+            "cgroup_peak": 1944637440
+          }
+        },
+        {
+          "phase": "search:1:20",
+          "seconds": 18.76156085729599,
+          "exclusive_seconds": 18.76156085729599,
+          "cpu_seconds": 18.744566970999983,
+          "before": {
+            "VmHWM": 1929248768,
+            "VmRSS": 1893605376,
+            "cgroup_current": 1908191232,
+            "cgroup_peak": 1944637440
+          },
+          "after": {
+            "VmHWM": 1929248768,
+            "VmRSS": 1922482176,
+            "cgroup_current": 1937551360,
+            "cgroup_peak": 1944637440
+          }
+        },
+        {
+          "phase": "search:9:20",
+          "seconds": 31.88619843777269,
+          "exclusive_seconds": 31.88619843777269,
+          "cpu_seconds": 31.843056416999957,
+          "before": {
+            "VmHWM": 1929248768,
+            "VmRSS": 1922371584,
+            "cgroup_current": 1937317888,
+            "cgroup_peak": 1944637440
+          },
+          "after": {
+            "VmHWM": 1933910016,
+            "VmRSS": 1933910016,
+            "cgroup_current": 1948860416,
+            "cgroup_peak": 1948860416
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.00876843836158514,
+          "exclusive_seconds": 0.00876843836158514,
+          "cpu_seconds": 0.0022828400000207694,
+          "before": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1898868736,
+            "cgroup_current": 1913737216,
+            "cgroup_peak": 1948860416
+          },
+          "after": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1899118592,
+            "cgroup_current": 1913999360,
+            "cgroup_peak": 1948860416
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0023783030919730663,
+          "exclusive_seconds": 0.0023783030919730663,
+          "cpu_seconds": 0.0023830279999970116,
+          "before": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1888976896,
+            "cgroup_current": 1903812608,
+            "cgroup_peak": 1948860416
+          },
+          "after": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1889091584,
+            "cgroup_current": 1903812608,
+            "cgroup_peak": 1948860416
+          }
+        },
+        {
+          "phase": "search:20:21",
+          "seconds": 6.22882250091061,
+          "exclusive_seconds": 6.22882250091061,
+          "cpu_seconds": 6.223986880999973,
+          "before": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1890672640,
+            "cgroup_current": 1905614848,
+            "cgroup_peak": 1948860416
+          },
+          "after": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1900421120,
+            "cgroup_current": 1915314176,
+            "cgroup_peak": 1948860416
+          }
+        },
+        {
+          "phase": "search:1:21",
+          "seconds": 22.0006897659041,
+          "exclusive_seconds": 22.0006897659041,
+          "cpu_seconds": 21.977628227000082,
+          "before": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1899364352,
+            "cgroup_current": 1914089472,
+            "cgroup_peak": 1948860416
+          },
+          "after": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1931149312,
+            "cgroup_current": 1945931776,
+            "cgroup_peak": 1948860416
+          }
+        },
+        {
+          "phase": "search:9:21",
+          "seconds": 33.334239108953625,
+          "exclusive_seconds": 33.334239108953625,
+          "cpu_seconds": 33.308975282000006,
+          "before": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1931063296,
+            "cgroup_current": 1945952256,
+            "cgroup_peak": 1948860416
+          },
+          "after": {
+            "VmHWM": 1933594624,
+            "VmRSS": 1933594624,
+            "cgroup_current": 1948618752,
+            "cgroup_peak": 1948860416
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.006126360967755318,
+          "exclusive_seconds": 0.006126360967755318,
+          "cpu_seconds": 0.002385322999998607,
+          "before": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1899491328,
+            "cgroup_current": 1914294272,
+            "cgroup_peak": 1948860416
+          },
+          "after": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1899708416,
+            "cgroup_current": 1914814464,
+            "cgroup_peak": 1948860416
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.0026769819669425488,
+          "exclusive_seconds": 0.0026769819669425488,
+          "cpu_seconds": 0.0026815479999413583,
+          "before": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1891713024,
+            "cgroup_current": 1906774016,
+            "cgroup_peak": 1948860416
+          },
+          "after": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1891823616,
+            "cgroup_current": 1906774016,
+            "cgroup_peak": 1948860416
+          }
+        },
+        {
+          "phase": "search:21:22",
+          "seconds": 6.5352967758663,
+          "exclusive_seconds": 6.5352967758663,
+          "cpu_seconds": 6.530391957999996,
+          "before": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1893388288,
+            "cgroup_current": 1908314112,
+            "cgroup_peak": 1948860416
+          },
+          "after": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1902137344,
+            "cgroup_current": 1916960768,
+            "cgroup_peak": 1948860416
+          }
+        },
+        {
+          "phase": "search:1:22",
+          "seconds": 23.29231418389827,
+          "exclusive_seconds": 23.29231418389827,
+          "cpu_seconds": 23.27145167499998,
+          "before": {
+            "VmHWM": 1933266944,
+            "VmRSS": 1900535808,
+            "cgroup_current": 1915199488,
+            "cgroup_peak": 1948860416
+          },
+          "after": {
+            "VmHWM": 1935908864,
+            "VmRSS": 1935908864,
+            "cgroup_current": 1950846976,
+            "cgroup_peak": 1950846976
+          }
+        },
+        {
+          "phase": "search:9:22",
+          "seconds": 32.251776705961674,
+          "exclusive_seconds": 32.251776705961674,
+          "cpu_seconds": 32.222245191999946,
+          "before": {
+            "VmHWM": 1935949824,
+            "VmRSS": 1935949824,
+            "cgroup_current": 1950715904,
+            "cgroup_peak": 1950846976
+          },
+          "after": {
+            "VmHWM": 1940520960,
+            "VmRSS": 1940520960,
+            "cgroup_current": 1955315712,
+            "cgroup_peak": 1955434496
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.006018976215273142,
+          "exclusive_seconds": 0.006018976215273142,
+          "cpu_seconds": 0.002308839000079388,
+          "before": {
+            "VmHWM": 1939914752,
+            "VmRSS": 1907056640,
+            "cgroup_current": 1921744896,
+            "cgroup_peak": 1955434496
+          },
+          "after": {
+            "VmHWM": 1939914752,
+            "VmRSS": 1907290112,
+            "cgroup_current": 1922007040,
+            "cgroup_peak": 1955434496
+          }
+        },
+        {
+          "phase": "owned_artifact_load",
+          "seconds": 0.002580579835921526,
+          "exclusive_seconds": 0.002580579835921526,
+          "cpu_seconds": 0.0025847870000461626,
+          "before": {
+            "VmHWM": 1939914752,
+            "VmRSS": 1898459136,
+            "cgroup_current": 1913131008,
+            "cgroup_peak": 1955434496
+          },
+          "after": {
+            "VmHWM": 1939914752,
+            "VmRSS": 1898569728,
+            "cgroup_current": 1913393152,
+            "cgroup_peak": 1955434496
+          }
+        },
+        {
+          "phase": "search:22:23",
+          "seconds": 6.426143609918654,
+          "exclusive_seconds": 6.426143609918654,
+          "cpu_seconds": 6.4209126790000255,
+          "before": {
+            "VmHWM": 1939914752,
+            "VmRSS": 1901436928,
+            "cgroup_current": 1916243968,
+            "cgroup_peak": 1955434496
+          },
+          "after": {
+            "VmHWM": 1939914752,
+            "VmRSS": 1910747136,
+            "cgroup_current": 1925419008,
+            "cgroup_peak": 1955434496
+          }
+        },
+        {
+          "phase": "search:1:23",
+          "seconds": 24.433324337936938,
+          "exclusive_seconds": 24.433324337936938,
+          "cpu_seconds": 24.41193420500008,
+          "before": {
+            "VmHWM": 1939914752,
+            "VmRSS": 1909084160,
+            "cgroup_current": 1923829760,
+            "cgroup_peak": 1955434496
+          },
+          "after": {
+            "VmHWM": 1947856896,
+            "VmRSS": 1947856896,
+            "cgroup_current": 1962627072,
+            "cgroup_peak": 1962627072
+          }
+        },
+        {
+          "phase": "search:9:23",
+          "seconds": 33.67786561883986,
+          "exclusive_seconds": 33.67786561883986,
+          "cpu_seconds": 33.64964195499999,
+          "before": {
+            "VmHWM": 1947910144,
+            "VmRSS": 1947910144,
+            "cgroup_current": 1962749952,
+            "cgroup_peak": 1962889216
+          },
+          "after": {
+            "VmHWM": 1947942912,
+            "VmRSS": 1947942912,
+            "cgroup_current": 1962684416,
+            "cgroup_peak": 1962889216
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.005703762639313936,
+          "exclusive_seconds": 0.005703762639313936,
+          "cpu_seconds": 0.0022697550000430056,
+          "before": {
+            "VmHWM": 1947316224,
+            "VmRSS": 1913974784,
+            "cgroup_current": 1928712192,
+            "cgroup_peak": 1962889216
+          },
+          "after": {
+            "VmHWM": 1947316224,
+            "VmRSS": 1914183680,
+            "cgroup_current": 1928974336,
+            "cgroup_peak": 1962889216
+          }
+        },
+        {
+          "phase": "owned_artifact_save",
+          "seconds": 0.0027970122173428535,
+          "exclusive_seconds": 0.0027970122173428535,
+          "cpu_seconds": 0.001055899999983012,
+          "before": {
+            "VmHWM": 1947316224,
+            "VmRSS": 1914183680,
+            "cgroup_current": 1928974336,
+            "cgroup_peak": 1962889216
+          },
+          "after": {
+            "VmHWM": 1947316224,
+            "VmRSS": 1914269696,
+            "cgroup_current": 1929236480,
+            "cgroup_peak": 1962889216
+          }
+        },
+        {
+          "phase": "planner_init",
+          "seconds": 4.701850508339703,
+          "exclusive_seconds": 4.701850508339703,
+          "cpu_seconds": 4.698131932000024,
+          "before": {
+            "VmHWM": 1947316224,
+            "VmRSS": 1905815552,
+            "cgroup_current": 1920692224,
+            "cgroup_peak": 1962889216
+          },
+          "after": {
+            "VmHWM": 1947316224,
+            "VmRSS": 1922256896,
+            "cgroup_current": 1937207296,
+            "cgroup_peak": 1962889216
+          }
+        },
+        {
+          "phase": "finalize",
+          "seconds": 0.005231671966612339,
+          "exclusive_seconds": 0.005231671966612339,
+          "cpu_seconds": 0.0052297160000307485,
+          "before": {
+            "VmHWM": 1947316224,
+            "VmRSS": 1922469888,
+            "cgroup_current": 1937207296,
+            "cgroup_peak": 1962889216
+          },
+          "after": {
+            "VmHWM": 1947316224,
+            "VmRSS": 1922469888,
+            "cgroup_current": 1937207296,
+            "cgroup_peak": 1962889216
+          }
+        },
+        {
+          "phase": "create",
+          "seconds": 656.9459285503253,
+          "exclusive_seconds": 36.70724608702585,
+          "cpu_seconds": 649.658429321,
+          "before": {
+            "VmHWM": 1712549888,
+            "VmRSS": 1712549888,
+            "cgroup_current": 1698217984,
+            "cgroup_peak": 1698217984
+          },
+          "after": {
+            "VmHWM": 1947316224,
+            "VmRSS": 1922469888,
+            "cgroup_current": 1937207296,
+            "cgroup_peak": 1962889216
+          }
+        }
+      ],
+      "counts": {
+        "qualification:final=False:deferred=False": 4871,
+        "qualification:final=False:deferred=False:seconds": 45.89451855001971,
+        "search:12:13:final=False:deferred=True": 438,
+        "search:12:13:final=False:deferred=True:seconds": 5.213394455611706,
+        "search:12:13:final=True:deferred=True": 380,
+        "search:12:13:final=True:deferred=True:seconds": 6.456980829127133,
+        "create:final=True:deferred=False": 111,
+        "create:final=True:deferred=False:seconds": 2.373104767408222,
+        "search:1:13:final=False:deferred=True": 352,
+        "search:1:13:final=False:deferred=True:seconds": 5.987781713716686,
+        "search:1:13:final=True:deferred=True": 175,
+        "search:1:13:final=True:deferred=True:seconds": 2.646353399846703,
+        "search:3:13:final=False:deferred=True": 219,
+        "search:3:13:final=False:deferred=True:seconds": 2.4349347767420113,
+        "search:3:13:final=True:deferred=True": 186,
+        "search:3:13:final=True:deferred=True:seconds": 3.209553221706301,
+        "search:13:14:final=True:deferred=True": 238,
+        "search:13:14:final=True:deferred=True:seconds": 3.539548127911985,
+        "search:1:14:final=False:deferred=True": 430,
+        "search:1:14:final=False:deferred=True:seconds": 3.803738249000162,
+        "search:1:14:final=True:deferred=True": 232,
+        "search:1:14:final=True:deferred=True:seconds": 3.535624884068966,
+        "search:4:14:final=False:deferred=True": 219,
+        "search:4:14:final=False:deferred=True:seconds": 2.7458710027858615,
+        "search:4:14:final=True:deferred=True": 392,
+        "search:4:14:final=True:deferred=True:seconds": 8.524976523593068,
+        "search:14:15:final=True:deferred=True": 203,
+        "search:14:15:final=True:deferred=True:seconds": 2.970374316442758,
+        "search:1:15:final=False:deferred=True": 447,
+        "search:1:15:final=False:deferred=True:seconds": 4.905549668241292,
+        "search:1:15:final=True:deferred=True": 234,
+        "search:1:15:final=True:deferred=True:seconds": 3.8153063082136214,
+        "search:5:15:final=False:deferred=True": 219,
+        "search:5:15:final=False:deferred=True:seconds": 2.701345296110958,
+        "search:5:15:final=True:deferred=True": 481,
+        "search:5:15:final=True:deferred=True:seconds": 9.028486455325037,
+        "search:15:16:final=True:deferred=True": 234,
+        "search:15:16:final=True:deferred=True:seconds": 3.04438001383096,
+        "search:1:16:final=False:deferred=True": 422,
+        "search:1:16:final=False:deferred=True:seconds": 3.5222520427778363,
+        "search:1:16:final=True:deferred=True": 226,
+        "search:1:16:final=True:deferred=True:seconds": 3.210651455912739,
+        "search:6:16:final=False:deferred=True": 219,
+        "search:6:16:final=False:deferred=True:seconds": 2.8520186520181596,
+        "search:6:16:final=True:deferred=True": 695,
+        "search:6:16:final=True:deferred=True:seconds": 12.991431965492666,
+        "search:16:17:final=True:deferred=True": 254,
+        "search:16:17:final=True:deferred=True:seconds": 3.9063457679003477,
+        "search:1:17:final=False:deferred=True": 435,
+        "search:1:17:final=False:deferred=True:seconds": 8.754016752820462,
+        "search:1:17:final=True:deferred=True": 255,
+        "search:1:17:final=True:deferred=True:seconds": 5.679990741889924,
+        "search:7:17:final=False:deferred=True": 219,
+        "search:7:17:final=False:deferred=True:seconds": 5.435430539306253,
+        "search:7:17:final=True:deferred=True": 798,
+        "search:7:17:final=True:deferred=True:seconds": 11.635072998236865,
+        "search:17:18:final=True:deferred=True": 260,
+        "search:17:18:final=True:deferred=True:seconds": 3.7718378785066307,
+        "search:1:18:final=False:deferred=True": 429,
+        "search:1:18:final=False:deferred=True:seconds": 11.928125540725887,
+        "search:1:18:final=True:deferred=True": 222,
+        "search:1:18:final=True:deferred=True:seconds": 5.322373414877802,
+        "search:8:18:final=False:deferred=True": 219,
+        "search:8:18:final=False:deferred=True:seconds": 5.8065270176157355,
+        "search:8:18:final=True:deferred=True": 1033,
+        "search:8:18:final=True:deferred=True:seconds": 18.177147495094687,
+        "search:18:19:final=True:deferred=True": 293,
+        "search:18:19:final=True:deferred=True:seconds": 4.8874186226166785,
+        "search:1:19:final=False:deferred=True": 423,
+        "search:1:19:final=False:deferred=True:seconds": 11.062275949399918,
+        "search:1:19:final=True:deferred=True": 227,
+        "search:1:19:final=True:deferred=True:seconds": 4.968722445424646,
+        "search:8:19:final=False:deferred=True": 219,
+        "search:8:19:final=False:deferred=True:seconds": 5.366378280334175,
+        "search:8:19:final=True:deferred=True": 1019,
+        "search:8:19:final=True:deferred=True:seconds": 17.89171590236947,
+        "search:19:20:final=True:deferred=True": 279,
+        "search:19:20:final=True:deferred=True:seconds": 5.398082317784429,
+        "search:1:20:final=False:deferred=True": 423,
+        "search:1:20:final=False:deferred=True:seconds": 11.10794031759724,
+        "search:1:20:final=True:deferred=True": 240,
+        "search:1:20:final=True:deferred=True:seconds": 5.7947782929986715,
+        "search:9:20:final=False:deferred=True": 219,
+        "search:9:20:final=False:deferred=True:seconds": 5.76786578213796,
+        "search:9:20:final=True:deferred=True": 1128,
+        "search:9:20:final=True:deferred=True:seconds": 20.642912617884576,
+        "search:20:21:final=True:deferred=True": 281,
+        "search:20:21:final=True:deferred=True:seconds": 4.70676699327305,
+        "search:1:21:final=False:deferred=True": 414,
+        "search:1:21:final=False:deferred=True:seconds": 13.932249828707427,
+        "search:1:21:final=True:deferred=True": 238,
+        "search:1:21:final=True:deferred=True:seconds": 6.092842914164066,
+        "search:9:21:final=False:deferred=True": 219,
+        "search:9:21:final=False:deferred=True:seconds": 5.424892032984644,
+        "search:9:21:final=True:deferred=True": 1156,
+        "search:9:21:final=True:deferred=True:seconds": 21.858104675542563,
+        "search:21:22:final=True:deferred=True": 281,
+        "search:21:22:final=True:deferred=True:seconds": 4.6047262330539525,
+        "search:1:22:final=False:deferred=True": 414,
+        "search:1:22:final=False:deferred=True:seconds": 14.158176669385284,
+        "search:1:22:final=True:deferred=True": 238,
+        "search:1:22:final=True:deferred=True:seconds": 6.876274728216231,
+        "search:9:22:final=False:deferred=True": 219,
+        "search:9:22:final=False:deferred=True:seconds": 5.732071795035154,
+        "search:9:22:final=True:deferred=True": 1127,
+        "search:9:22:final=True:deferred=True:seconds": 20.529125269968063,
+        "search:22:23:final=True:deferred=True": 309,
+        "search:22:23:final=True:deferred=True:seconds": 4.246924431528896,
+        "search:1:23:final=False:deferred=True": 411,
+        "search:1:23:final=False:deferred=True:seconds": 14.839343739673495,
+        "search:1:23:final=True:deferred=True": 238,
+        "search:1:23:final=True:deferred=True:seconds": 7.149438957683742,
+        "search:9:23:final=False:deferred=True": 219,
+        "search:9:23:final=False:deferred=True:seconds": 5.748450073879212,
+        "search:9:23:final=True:deferred=True": 1128,
+        "search:9:23:final=True:deferred=True:seconds": 21.61504150321707
+      },
+      "unique_baskets": {
+        "qualification:final=False:deferred=False": 4871,
+        "search:12:13:final=False:deferred=True": 219,
+        "search:12:13:final=True:deferred=True": 190,
+        "create:final=True:deferred=False": 32,
+        "search:1:13:final=False:deferred=True": 352,
+        "search:1:13:final=True:deferred=True": 175,
+        "search:3:13:final=False:deferred=True": 219,
+        "search:3:13:final=True:deferred=True": 186,
+        "search:13:14:final=True:deferred=True": 238,
+        "search:1:14:final=False:deferred=True": 430,
+        "search:1:14:final=True:deferred=True": 232,
+        "search:4:14:final=False:deferred=True": 219,
+        "search:4:14:final=True:deferred=True": 372,
+        "search:14:15:final=True:deferred=True": 203,
+        "search:1:15:final=False:deferred=True": 447,
+        "search:1:15:final=True:deferred=True": 234,
+        "search:5:15:final=False:deferred=True": 219,
+        "search:5:15:final=True:deferred=True": 443,
+        "search:15:16:final=True:deferred=True": 234,
+        "search:1:16:final=False:deferred=True": 422,
+        "search:1:16:final=True:deferred=True": 226,
+        "search:6:16:final=False:deferred=True": 219,
+        "search:6:16:final=True:deferred=True": 586,
+        "search:16:17:final=True:deferred=True": 254,
+        "search:1:17:final=False:deferred=True": 435,
+        "search:1:17:final=True:deferred=True": 255,
+        "search:7:17:final=False:deferred=True": 219,
+        "search:7:17:final=True:deferred=True": 723,
+        "search:17:18:final=True:deferred=True": 260,
+        "search:1:18:final=False:deferred=True": 429,
+        "search:1:18:final=True:deferred=True": 222,
+        "search:8:18:final=False:deferred=True": 219,
+        "search:8:18:final=True:deferred=True": 831,
+        "search:18:19:final=True:deferred=True": 292,
+        "search:1:19:final=False:deferred=True": 423,
+        "search:1:19:final=True:deferred=True": 227,
+        "search:8:19:final=False:deferred=True": 219,
+        "search:8:19:final=True:deferred=True": 868,
+        "search:19:20:final=True:deferred=True": 279,
+        "search:1:20:final=False:deferred=True": 423,
+        "search:1:20:final=True:deferred=True": 240,
+        "search:9:20:final=False:deferred=True": 219,
+        "search:9:20:final=True:deferred=True": 970,
+        "search:20:21:final=True:deferred=True": 281,
+        "search:1:21:final=False:deferred=True": 414,
+        "search:1:21:final=True:deferred=True": 238,
+        "search:9:21:final=False:deferred=True": 219,
+        "search:9:21:final=True:deferred=True": 1058,
+        "search:21:22:final=True:deferred=True": 281,
+        "search:1:22:final=False:deferred=True": 414,
+        "search:1:22:final=True:deferred=True": 238,
+        "search:9:22:final=False:deferred=True": 219,
+        "search:9:22:final=True:deferred=True": 978,
+        "search:22:23:final=True:deferred=True": 309,
+        "search:1:23:final=False:deferred=True": 411,
+        "search:1:23:final=True:deferred=True": 238,
+        "search:9:23:final=False:deferred=True": 219,
+        "search:9:23:final=True:deferred=True": 978
+      },
+      "notes": [
+        "Instrumented timings; use matched uninstrumented latency samples",
+        "Empty application cache does not imply cold OS disk"
+      ]
+    },
+    "phase_report_sha256": "bfa70b2fe00805e508dfa5b8a5a8d8baea639e6fbea34a62293e0820330fe004",
+    "concrete_target_seconds": 700,
+    "concrete_target_passed": true
+  },
+  "instrumented_baseline_reference": {
+    "commit": "9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94",
+    "status": "MEASURED_NOT_FULLY_QUALIFIED",
+    "city": "malmo",
+    "profile": "distribution",
+    "size": 5000,
+    "policy": "smako-verified-reference-v1",
+    "inputs": {
+      "sha256": {
+        "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+        "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+        "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+      },
+      "now": "2026-10-23T06:00:02.869273+00:00",
+      "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+      "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+      "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+    },
+    "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+    "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+    "raw_report_sha256": "320b5b6fede1c845c9c2b246b590ee8337efc1ff6aa683ad8c23fb6740c55bc7",
+    "records": [
+      {
+        "outcome": "PASS",
+        "paid": 988.32,
+        "audit_passed": true,
+        "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+        "wall_seconds": 858.5999638973735,
+        "cpu_seconds": 849.497160719,
+        "rss_bytes": 2999664640,
+        "process_peak_rss_bytes": 2999664640,
+        "cgroup_peak_bytes": 3221225472,
+        "preparation_stats": {
+          "hits": 4119,
+          "misses": 6240,
+          "writes": 4098,
+          "invalid": 0
+        },
+        "timings_seconds": {
+          "product_facts": 0.002480106893926859,
+          "package_calculation": 142.20408158563077,
+          "nutrition": 21.598466295283288,
+          "candidate_generation_and_qualification": 206.99936285009608,
+          "audit": 0.36117069656029344,
+          "week_search": 635.1294326423667,
+          "total": 852.0625803037547
+        }
+      }
+    ],
+    "legacy_preparation": {
+      "seconds": 200.29545224551111,
+      "evaluations": 9517,
+      "publications": [
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 6.400927469134331,
+          "evaluations": 409
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 6.905431024264544,
+          "evaluations": 493
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 7.860186704900116,
+          "evaluations": 548
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 12.55807332508266,
+          "evaluations": 635
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 14.816889548208565,
+          "evaluations": 741
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 16.97380400216207,
+          "evaluations": 843
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 20.112523453775793,
+          "evaluations": 972
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 24.575414604041725,
+          "evaluations": 1067
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 27.235641226172447,
+          "evaluations": 1165
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 31.019387766718864,
+          "evaluations": 1260
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "988.32",
+          "seconds": 31.83717312105,
+          "evaluations": 1384
+        }
+      ]
+    },
+    "trace_counters": {
+      "basket_calculations": 39462,
+      "cache_hits": 5725088,
+      "cache_misses": 489605,
+      "menu_search_result_cache_hits": 82,
+      "menu_search_result_cache_misses": 1,
+      "optimistic_basket_bounds": 21827,
+      "package_cache_hits": 4137162,
+      "package_cache_misses": 374188,
+      "package_calculations": 374188,
+      "per_store_selection_cache_hits": 15933,
+      "per_store_selection_cache_misses": 21141,
+      "product_match_calculations": 5449,
+      "quote_set_cache_hits": 760273,
+      "quote_set_cache_misses": 43862,
+      "quote_subset_pattern_cache_hits": 23791,
+      "quote_subset_pattern_cache_misses": 13283,
+      "quote_subset_vector_cache_hits": 748441,
+      "quote_subset_vector_cache_misses": 37074,
+      "semantic_candidates_returned": 5077,
+      "semantic_comparisons": 5449,
+      "store_combinations": 32124551,
+      "store_combinations_pruned_infeasible": 29949055,
+      "store_subset_cache_hits": 39406,
+      "store_subset_cache_misses": 56
+    },
+    "instrumented": true,
+    "scope": "Direct planner calls; first process has empty public app cache and new owner store; OS disk cache uncontrolled",
+    "raw_profile_sha256": "4d542d9832a14a297bc8f21630c652d4fb13b0ff9b9941919499a610bf298e8c",
+    "process_seconds": 897.7584482710809,
+    "phase_counts": {
+      "qualification:final=False:deferred=False": 4871,
+      "qualification:final=False:deferred=False:seconds": 41.81193139590323,
+      "search:12:13:final=False:deferred=True": 438,
+      "search:12:13:final=False:deferred=True:seconds": 7.438279672525823,
+      "search:12:13:final=True:deferred=True": 380,
+      "search:12:13:final=True:deferred=True:seconds": 6.211975903715938,
+      "create:final=True:deferred=False": 111,
+      "create:final=True:deferred=False:seconds": 2.41870816424489,
+      "search:1:13:final=False:deferred=True": 352,
+      "search:1:13:final=False:deferred=True:seconds": 3.8096573720686138,
+      "search:1:13:final=True:deferred=True": 175,
+      "search:1:13:final=True:deferred=True:seconds": 2.410058090928942,
+      "search:3:13:final=False:deferred=True": 219,
+      "search:3:13:final=False:deferred=True:seconds": 2.327027078717947,
+      "search:3:13:final=True:deferred=True": 186,
+      "search:3:13:final=True:deferred=True:seconds": 5.664554430637509,
+      "search:13:14:final=False:deferred=True": 219,
+      "search:13:14:final=False:deferred=True:seconds": 2.0010375534184277,
+      "search:13:14:final=True:deferred=True": 274,
+      "search:13:14:final=True:deferred=True:seconds": 4.190313468221575,
+      "search:1:14:final=False:deferred=True": 430,
+      "search:1:14:final=False:deferred=True:seconds": 3.4861785443499684,
+      "search:1:14:final=True:deferred=True": 232,
+      "search:1:14:final=True:deferred=True:seconds": 2.9938817876391113,
+      "search:4:14:final=False:deferred=True": 219,
+      "search:4:14:final=False:deferred=True:seconds": 5.249759695958346,
+      "search:4:14:final=True:deferred=True": 392,
+      "search:4:14:final=True:deferred=True:seconds": 5.924073996022344,
+      "search:14:15:final=False:deferred=True": 219,
+      "search:14:15:final=False:deferred=True:seconds": 2.530674070119858,
+      "search:14:15:final=True:deferred=True": 329,
+      "search:14:15:final=True:deferred=True:seconds": 4.481575974728912,
+      "search:1:15:final=False:deferred=True": 447,
+      "search:1:15:final=False:deferred=True:seconds": 6.932414019946009,
+      "search:1:15:final=True:deferred=True": 234,
+      "search:1:15:final=True:deferred=True:seconds": 3.004469607491046,
+      "search:5:15:final=False:deferred=True": 219,
+      "search:5:15:final=False:deferred=True:seconds": 2.343676784541458,
+      "search:5:15:final=True:deferred=True": 481,
+      "search:5:15:final=True:deferred=True:seconds": 6.767176514025778,
+      "search:15:16:final=False:deferred=True": 219,
+      "search:15:16:final=False:deferred=True:seconds": 5.340183028951287,
+      "search:15:16:final=True:deferred=True": 416,
+      "search:15:16:final=True:deferred=True:seconds": 6.01854301430285,
+      "search:1:16:final=False:deferred=True": 422,
+      "search:1:16:final=False:deferred=True:seconds": 3.251668539363891,
+      "search:1:16:final=True:deferred=True": 226,
+      "search:1:16:final=True:deferred=True:seconds": 2.8511439776048064,
+      "search:6:16:final=False:deferred=True": 219,
+      "search:6:16:final=False:deferred=True:seconds": 5.172870192211121,
+      "search:6:16:final=True:deferred=True": 695,
+      "search:6:16:final=True:deferred=True:seconds": 8.767789654433727,
+      "search:16:17:final=False:deferred=True": 219,
+      "search:16:17:final=False:deferred=True:seconds": 2.601883779745549,
+      "search:16:17:final=True:deferred=True": 522,
+      "search:16:17:final=True:deferred=True:seconds": 10.630682833027095,
+      "search:1:17:final=False:deferred=True": 435,
+      "search:1:17:final=False:deferred=True:seconds": 8.177399090025574,
+      "search:1:17:final=True:deferred=True": 255,
+      "search:1:17:final=True:deferred=True:seconds": 5.799516069702804,
+      "search:7:17:final=False:deferred=True": 219,
+      "search:7:17:final=False:deferred=True:seconds": 2.4827246270142496,
+      "search:7:17:final=True:deferred=True": 798,
+      "search:7:17:final=True:deferred=True:seconds": 13.756136574782431,
+      "search:17:18:final=False:deferred=True": 219,
+      "search:17:18:final=False:deferred=True:seconds": 2.515524092130363,
+      "search:17:18:final=True:deferred=True": 624,
+      "search:17:18:final=True:deferred=True:seconds": 12.478651642799377,
+      "search:1:18:final=False:deferred=True": 429,
+      "search:1:18:final=False:deferred=True:seconds": 10.661664381157607,
+      "search:1:18:final=True:deferred=True": 222,
+      "search:1:18:final=True:deferred=True:seconds": 5.26095973001793,
+      "search:8:18:final=False:deferred=True": 219,
+      "search:8:18:final=False:deferred=True:seconds": 2.7026904840022326,
+      "search:8:18:final=True:deferred=True": 1033,
+      "search:8:18:final=True:deferred=True:seconds": 18.04829587461427,
+      "search:18:19:final=False:deferred=True": 219,
+      "search:18:19:final=False:deferred=True:seconds": 5.176201554946601,
+      "search:18:19:final=True:deferred=True": 753,
+      "search:18:19:final=True:deferred=True:seconds": 12.468628579750657,
+      "search:1:19:final=False:deferred=True": 423,
+      "search:1:19:final=False:deferred=True:seconds": 13.761126725468785,
+      "search:1:19:final=True:deferred=True": 227,
+      "search:1:19:final=True:deferred=True:seconds": 4.510101557243615,
+      "search:8:19:final=False:deferred=True": 219,
+      "search:8:19:final=False:deferred=True:seconds": 2.560592493508011,
+      "search:8:19:final=True:deferred=True": 1019,
+      "search:8:19:final=True:deferred=True:seconds": 18.668640124611557,
+      "search:19:20:final=False:deferred=True": 219,
+      "search:19:20:final=False:deferred=True:seconds": 2.477442000992596,
+      "search:19:20:final=True:deferred=True": 848,
+      "search:19:20:final=True:deferred=True:seconds": 15.829643411561847,
+      "search:1:20:final=False:deferred=True": 423,
+      "search:1:20:final=False:deferred=True:seconds": 10.846217332407832,
+      "search:1:20:final=True:deferred=True": 240,
+      "search:1:20:final=True:deferred=True:seconds": 5.593839379958808,
+      "search:9:20:final=False:deferred=True": 219,
+      "search:9:20:final=False:deferred=True:seconds": 6.214003503788263,
+      "search:9:20:final=True:deferred=True": 1128,
+      "search:9:20:final=True:deferred=True:seconds": 21.046683087479323,
+      "search:20:21:final=False:deferred=True": 219,
+      "search:20:21:final=False:deferred=True:seconds": 2.721621534321457,
+      "search:20:21:final=True:deferred=True": 946,
+      "search:20:21:final=True:deferred=True:seconds": 17.947701660450548,
+      "search:1:21:final=False:deferred=True": 414,
+      "search:1:21:final=False:deferred=True:seconds": 13.316491281613708,
+      "search:1:21:final=True:deferred=True": 238,
+      "search:1:21:final=True:deferred=True:seconds": 5.735085830558091,
+      "search:9:21:final=False:deferred=True": 219,
+      "search:9:21:final=False:deferred=True:seconds": 2.5259893792681396,
+      "search:9:21:final=True:deferred=True": 1156,
+      "search:9:21:final=True:deferred=True:seconds": 25.496489197947085,
+      "search:21:22:final=False:deferred=True": 219,
+      "search:21:22:final=False:deferred=True:seconds": 2.9004387366585433,
+      "search:21:22:final=True:deferred=True": 1041,
+      "search:21:22:final=True:deferred=True:seconds": 24.05867934320122,
+      "search:1:22:final=False:deferred=True": 414,
+      "search:1:22:final=False:deferred=True:seconds": 13.87795496918261,
+      "search:1:22:final=True:deferred=True": 238,
+      "search:1:22:final=True:deferred=True:seconds": 6.641732271295041,
+      "search:9:22:final=False:deferred=True": 219,
+      "search:9:22:final=False:deferred=True:seconds": 2.5519806053489447,
+      "search:9:22:final=True:deferred=True": 1127,
+      "search:9:22:final=True:deferred=True:seconds": 24.05163212446496,
+      "search:22:23:final=False:deferred=True": 219,
+      "search:22:23:final=False:deferred=True:seconds": 2.668123598676175,
+      "search:22:23:final=True:deferred=True": 1165,
+      "search:22:23:final=True:deferred=True:seconds": 24.60441305115819,
+      "search:1:23:final=False:deferred=True": 411,
+      "search:1:23:final=False:deferred=True:seconds": 13.287229001522064,
+      "search:1:23:final=True:deferred=True": 238,
+      "search:1:23:final=True:deferred=True:seconds": 6.242154393810779,
+      "search:9:23:final=False:deferred=True": 219,
+      "search:9:23:final=False:deferred=True:seconds": 6.009804870933294,
+      "search:9:23:final=True:deferred=True": 1128,
+      "search:9:23:final=True:deferred=True:seconds": 18.361724367830902
+    },
+    "unique_baskets": {
+      "qualification:final=False:deferred=False": 4871,
+      "search:12:13:final=False:deferred=True": 219,
+      "search:12:13:final=True:deferred=True": 190,
+      "create:final=True:deferred=False": 32,
+      "search:1:13:final=False:deferred=True": 352,
+      "search:1:13:final=True:deferred=True": 175,
+      "search:3:13:final=False:deferred=True": 219,
+      "search:3:13:final=True:deferred=True": 186,
+      "search:13:14:final=False:deferred=True": 219,
+      "search:13:14:final=True:deferred=True": 274,
+      "search:1:14:final=False:deferred=True": 430,
+      "search:1:14:final=True:deferred=True": 232,
+      "search:4:14:final=False:deferred=True": 219,
+      "search:4:14:final=True:deferred=True": 372,
+      "search:14:15:final=False:deferred=True": 219,
+      "search:14:15:final=True:deferred=True": 329,
+      "search:1:15:final=False:deferred=True": 447,
+      "search:1:15:final=True:deferred=True": 234,
+      "search:5:15:final=False:deferred=True": 219,
+      "search:5:15:final=True:deferred=True": 443,
+      "search:15:16:final=False:deferred=True": 219,
+      "search:15:16:final=True:deferred=True": 416,
+      "search:1:16:final=False:deferred=True": 422,
+      "search:1:16:final=True:deferred=True": 226,
+      "search:6:16:final=False:deferred=True": 219,
+      "search:6:16:final=True:deferred=True": 586,
+      "search:16:17:final=False:deferred=True": 219,
+      "search:16:17:final=True:deferred=True": 515,
+      "search:1:17:final=False:deferred=True": 435,
+      "search:1:17:final=True:deferred=True": 255,
+      "search:7:17:final=False:deferred=True": 219,
+      "search:7:17:final=True:deferred=True": 723,
+      "search:17:18:final=False:deferred=True": 219,
+      "search:17:18:final=True:deferred=True": 609,
+      "search:1:18:final=False:deferred=True": 429,
+      "search:1:18:final=True:deferred=True": 222,
+      "search:8:18:final=False:deferred=True": 219,
+      "search:8:18:final=True:deferred=True": 831,
+      "search:18:19:final=False:deferred=True": 219,
+      "search:18:19:final=True:deferred=True": 745,
+      "search:1:19:final=False:deferred=True": 423,
+      "search:1:19:final=True:deferred=True": 227,
+      "search:8:19:final=False:deferred=True": 219,
+      "search:8:19:final=True:deferred=True": 868,
+      "search:19:20:final=False:deferred=True": 219,
+      "search:19:20:final=True:deferred=True": 839,
+      "search:1:20:final=False:deferred=True": 423,
+      "search:1:20:final=True:deferred=True": 240,
+      "search:9:20:final=False:deferred=True": 219,
+      "search:9:20:final=True:deferred=True": 970,
+      "search:20:21:final=False:deferred=True": 219,
+      "search:20:21:final=True:deferred=True": 930,
+      "search:1:21:final=False:deferred=True": 414,
+      "search:1:21:final=True:deferred=True": 238,
+      "search:9:21:final=False:deferred=True": 219,
+      "search:9:21:final=True:deferred=True": 1058,
+      "search:21:22:final=False:deferred=True": 219,
+      "search:21:22:final=True:deferred=True": 1023,
+      "search:1:22:final=False:deferred=True": 414,
+      "search:1:22:final=True:deferred=True": 238,
+      "search:9:22:final=False:deferred=True": 219,
+      "search:9:22:final=True:deferred=True": 978,
+      "search:22:23:final=False:deferred=True": 219,
+      "search:22:23:final=True:deferred=True": 1149,
+      "search:1:23:final=False:deferred=True": 411,
+      "search:1:23:final=True:deferred=True": 238,
+      "search:9:23:final=False:deferred=True": 219,
+      "search:9:23:final=True:deferred=True": 978
+    },
+    "phases": [
+      {
+        "phase": "load_restore_indexes",
+        "seconds": 17.980397371109575,
+        "exclusive_seconds": 17.980397371109575,
+        "cpu_seconds": 17.95387494,
+        "before": {
+          "VmHWM": 1953345536,
+          "VmRSS": 1754128384,
+          "cgroup_current": 1994170368,
+          "cgroup_peak": 2193641472
+        },
+        "after": {
+          "VmHWM": 1982124032,
+          "VmRSS": 1982124032,
+          "cgroup_current": 2222358528,
+          "cgroup_peak": 2222362624
+        }
+      },
+      {
+        "phase": "planner_init",
+        "seconds": 6.532348385080695,
+        "exclusive_seconds": 6.532348385080695,
+        "cpu_seconds": 6.5054479350000065,
+        "before": {
+          "VmHWM": 2093195264,
+          "VmRSS": 2092986368,
+          "cgroup_current": 2338340864,
+          "cgroup_peak": 2338422784
+        },
+        "after": {
+          "VmHWM": 2238115840,
+          "VmRSS": 2238115840,
+          "cgroup_current": 2539171840,
+          "cgroup_peak": 2539171840
+        }
+      },
+      {
+        "phase": "publication_identity_hashing",
+        "seconds": 5.320852869190276,
+        "exclusive_seconds": 5.320852869190276,
+        "cpu_seconds": 5.311294633999999,
+        "before": {
+          "VmHWM": 2238115840,
+          "VmRSS": 2238115840,
+          "cgroup_current": 2539171840,
+          "cgroup_peak": 2539171840
+        },
+        "after": {
+          "VmHWM": 2271395840,
+          "VmRSS": 2271395840,
+          "cgroup_current": 2578935808,
+          "cgroup_peak": 2578935808
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0009520580060780048,
+        "exclusive_seconds": 0.0009520580060780048,
+        "cpu_seconds": 0.0009543990000011604,
+        "before": {
+          "VmHWM": 2271399936,
+          "VmRSS": 2271399936,
+          "cgroup_current": 2578935808,
+          "cgroup_peak": 2578935808
+        },
+        "after": {
+          "VmHWM": 2271432704,
+          "VmRSS": 2271432704,
+          "cgroup_current": 2578935808,
+          "cgroup_peak": 2578935808
+        }
+      },
+      {
+        "phase": "publication_identity_hashing",
+        "seconds": 0.0003692661412060261,
+        "exclusive_seconds": 0.0003692661412060261,
+        "cpu_seconds": 0.00037081500000368806,
+        "before": {
+          "VmHWM": 2271432704,
+          "VmRSS": 2271432704,
+          "cgroup_current": 2578935808,
+          "cgroup_peak": 2578935808
+        },
+        "after": {
+          "VmHWM": 2271432704,
+          "VmRSS": 2271432704,
+          "cgroup_current": 2578935808,
+          "cgroup_peak": 2578935808
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0005806293338537216,
+        "exclusive_seconds": 0.0005806293338537216,
+        "cpu_seconds": 0.0005825830000034671,
+        "before": {
+          "VmHWM": 2271432704,
+          "VmRSS": 2271432704,
+          "cgroup_current": 2578935808,
+          "cgroup_peak": 2578935808
+        },
+        "after": {
+          "VmHWM": 2271432704,
+          "VmRSS": 2271432704,
+          "cgroup_current": 2578935808,
+          "cgroup_peak": 2578935808
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.000970733817666769,
+        "exclusive_seconds": 0.000970733817666769,
+        "cpu_seconds": 0.0009710909999967043,
+        "before": {
+          "VmHWM": 2440187904,
+          "VmRSS": 2440187904,
+          "cgroup_current": 2772930560,
+          "cgroup_peak": 2772930560
+        },
+        "after": {
+          "VmHWM": 2440220672,
+          "VmRSS": 2440220672,
+          "cgroup_current": 2772930560,
+          "cgroup_peak": 2772930560
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.08844067575410008,
+        "exclusive_seconds": 0.08844067575410008,
+        "cpu_seconds": 0.08120283499999914,
+        "before": {
+          "VmHWM": 2795143168,
+          "VmRSS": 2795143168,
+          "cgroup_current": 3134754816,
+          "cgroup_peak": 3134754816
+        },
+        "after": {
+          "VmHWM": 2795462656,
+          "VmRSS": 2795462656,
+          "cgroup_current": 3138162688,
+          "cgroup_peak": 3138162688
+        }
+      },
+      {
+        "phase": "qualification",
+        "seconds": 206.9995150808245,
+        "exclusive_seconds": 206.91010367125273,
+        "cpu_seconds": 198.60449123200002,
+        "before": {
+          "VmHWM": 2271432704,
+          "VmRSS": 2271432704,
+          "cgroup_current": 2578935808,
+          "cgroup_peak": 2578935808
+        },
+        "after": {
+          "VmHWM": 2796019712,
+          "VmRSS": 2796019712,
+          "cgroup_current": 3138686976,
+          "cgroup_peak": 3138686976
+        }
+      },
+      {
+        "phase": "publication_identity_hashing",
+        "seconds": 0.0006305938586592674,
+        "exclusive_seconds": 0.0006305938586592674,
+        "cpu_seconds": 0.0006282280000107221,
+        "before": {
+          "VmHWM": 2804166656,
+          "VmRSS": 2804166656,
+          "cgroup_current": 3146792960,
+          "cgroup_peak": 3146792960
+        },
+        "after": {
+          "VmHWM": 2804166656,
+          "VmRSS": 2804166656,
+          "cgroup_current": 3146792960,
+          "cgroup_peak": 3146792960
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0005752290599048138,
+        "exclusive_seconds": 0.0005752290599048138,
+        "cpu_seconds": 0.0005751690000010967,
+        "before": {
+          "VmHWM": 2804748288,
+          "VmRSS": 2804748288,
+          "cgroup_current": 3147579392,
+          "cgroup_peak": 3147579392
+        },
+        "after": {
+          "VmHWM": 2804748288,
+          "VmRSS": 2804748288,
+          "cgroup_current": 3147579392,
+          "cgroup_peak": 3147579392
+        }
+      },
+      {
+        "phase": "search:12:13",
+        "seconds": 6.398114466108382,
+        "exclusive_seconds": 6.398114466108382,
+        "cpu_seconds": 6.392935730999994,
+        "before": {
+          "VmHWM": 2804764672,
+          "VmRSS": 2804764672,
+          "cgroup_current": 3147579392,
+          "cgroup_peak": 3147579392
+        },
+        "after": {
+          "VmHWM": 2857586688,
+          "VmRSS": 2857586688,
+          "cgroup_current": 3200499712,
+          "cgroup_peak": 3200499712
+        }
+      },
+      {
+        "phase": "search:12:13",
+        "seconds": 8.050900160335004,
+        "exclusive_seconds": 8.050900160335004,
+        "cpu_seconds": 8.043607546000032,
+        "before": {
+          "VmHWM": 2857586688,
+          "VmRSS": 2857586688,
+          "cgroup_current": 3200499712,
+          "cgroup_peak": 3200499712
+        },
+        "after": {
+          "VmHWM": 2857619456,
+          "VmRSS": 2857619456,
+          "cgroup_current": 3200761856,
+          "cgroup_peak": 3200761856
+        }
+      },
+      {
+        "phase": "search:1:13",
+        "seconds": 6.87592882104218,
+        "exclusive_seconds": 6.87592882104218,
+        "cpu_seconds": 6.869689246000007,
+        "before": {
+          "VmHWM": 2857619456,
+          "VmRSS": 2857619456,
+          "cgroup_current": 3200753664,
+          "cgroup_peak": 3200761856
+        },
+        "after": {
+          "VmHWM": 2863575040,
+          "VmRSS": 2863575040,
+          "cgroup_current": 3206782976,
+          "cgroup_peak": 3206782976
+        }
+      },
+      {
+        "phase": "search:3:13",
+        "seconds": 8.685695102903992,
+        "exclusive_seconds": 8.685695102903992,
+        "cpu_seconds": 8.678863529000012,
+        "before": {
+          "VmHWM": 2863575040,
+          "VmRSS": 2863575040,
+          "cgroup_current": 3206774784,
+          "cgroup_peak": 3206782976
+        },
+        "after": {
+          "VmHWM": 2864271360,
+          "VmRSS": 2864271360,
+          "cgroup_current": 3207561216,
+          "cgroup_peak": 3207561216
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.007557756267488003,
+        "exclusive_seconds": 0.007557756267488003,
+        "cpu_seconds": 0.0023614370000473173,
+        "before": {
+          "VmHWM": 2864271360,
+          "VmRSS": 2864271360,
+          "cgroup_current": 3207544832,
+          "cgroup_peak": 3207561216
+        },
+        "after": {
+          "VmHWM": 2864304128,
+          "VmRSS": 2864304128,
+          "cgroup_current": 3207544832,
+          "cgroup_peak": 3207561216
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.000737758819013834,
+        "exclusive_seconds": 0.000737758819013834,
+        "cpu_seconds": 0.0007396369999810304,
+        "before": {
+          "VmHWM": 2864304128,
+          "VmRSS": 2864304128,
+          "cgroup_current": 3207544832,
+          "cgroup_peak": 3207561216
+        },
+        "after": {
+          "VmHWM": 2864304128,
+          "VmRSS": 2864304128,
+          "cgroup_current": 3207544832,
+          "cgroup_peak": 3207561216
+        }
+      },
+      {
+        "phase": "search:13:14",
+        "seconds": 6.896091765258461,
+        "exclusive_seconds": 6.896091765258461,
+        "cpu_seconds": 6.891140711999981,
+        "before": {
+          "VmHWM": 2864271360,
+          "VmRSS": 2864271360,
+          "cgroup_current": 3207462912,
+          "cgroup_peak": 3207561216
+        },
+        "after": {
+          "VmHWM": 2864271360,
+          "VmRSS": 2864271360,
+          "cgroup_current": 3207462912,
+          "cgroup_peak": 3207561216
+        }
+      },
+      {
+        "phase": "search:1:14",
+        "seconds": 7.5075256852433085,
+        "exclusive_seconds": 7.5075256852433085,
+        "cpu_seconds": 7.497857772999964,
+        "before": {
+          "VmHWM": 2864279552,
+          "VmRSS": 2864279552,
+          "cgroup_current": 3207450624,
+          "cgroup_peak": 3207561216
+        },
+        "after": {
+          "VmHWM": 2909257728,
+          "VmRSS": 2909257728,
+          "cgroup_current": 3221164032,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:4:14",
+        "seconds": 12.708247593138367,
+        "exclusive_seconds": 12.708247593138367,
+        "cpu_seconds": 12.69850196699997,
+        "before": {
+          "VmHWM": 2909257728,
+          "VmRSS": 2909257728,
+          "cgroup_current": 3221159936,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2909294592,
+          "VmRSS": 2909294592,
+          "cgroup_current": 3221200896,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.007216063793748617,
+        "exclusive_seconds": 0.007216063793748617,
+        "cpu_seconds": 0.002210505000050489,
+        "before": {
+          "VmHWM": 2909294592,
+          "VmRSS": 2909294592,
+          "cgroup_current": 3221200896,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2909327360,
+          "VmRSS": 2909327360,
+          "cgroup_current": 3221024768,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0006088842637836933,
+        "exclusive_seconds": 0.0006088842637836933,
+        "cpu_seconds": 0.000610564999988128,
+        "before": {
+          "VmHWM": 2909327360,
+          "VmRSS": 2909327360,
+          "cgroup_current": 3221024768,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2909327360,
+          "VmRSS": 2909327360,
+          "cgroup_current": 3221024768,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:14:15",
+        "seconds": 7.843991689849645,
+        "exclusive_seconds": 7.843991689849645,
+        "cpu_seconds": 7.837511798000037,
+        "before": {
+          "VmHWM": 2909294592,
+          "VmRSS": 2909294592,
+          "cgroup_current": 3220967424,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2914127872,
+          "VmRSS": 2914127872,
+          "cgroup_current": 3220443136,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:1:15",
+        "seconds": 11.06963948206976,
+        "exclusive_seconds": 11.06963948206976,
+        "cpu_seconds": 11.059700088,
+        "before": {
+          "VmHWM": 2914295808,
+          "VmRSS": 2914295808,
+          "cgroup_current": 3220688896,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933563392,
+          "VmRSS": 2933563392,
+          "cgroup_current": 3220070400,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:5:15",
+        "seconds": 10.948143484070897,
+        "exclusive_seconds": 10.948143484070897,
+        "cpu_seconds": 10.93856045199999,
+        "before": {
+          "VmHWM": 2933563392,
+          "VmRSS": 2933563392,
+          "cgroup_current": 3220054016,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933563392,
+          "VmRSS": 2933563392,
+          "cgroup_current": 3220070400,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.009627168998122215,
+        "exclusive_seconds": 0.009627168998122215,
+        "cpu_seconds": 0.0023066040000117027,
+        "before": {
+          "VmHWM": 2933563392,
+          "VmRSS": 2933563392,
+          "cgroup_current": 3220054016,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933596160,
+          "VmRSS": 2933596160,
+          "cgroup_current": 3220054016,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0007105171680450439,
+        "exclusive_seconds": 0.0007105171680450439,
+        "cpu_seconds": 0.0007128869999633025,
+        "before": {
+          "VmHWM": 2933596160,
+          "VmRSS": 2933596160,
+          "cgroup_current": 3220054016,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933596160,
+          "VmRSS": 2933596160,
+          "cgroup_current": 3220054016,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:15:16",
+        "seconds": 12.531551816035062,
+        "exclusive_seconds": 12.531551816035062,
+        "cpu_seconds": 12.522455766000007,
+        "before": {
+          "VmHWM": 2933563392,
+          "VmRSS": 2933563392,
+          "cgroup_current": 3219976192,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933575680,
+          "VmRSS": 2933575680,
+          "cgroup_current": 3220115456,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:1:16",
+        "seconds": 7.250319709070027,
+        "exclusive_seconds": 7.250319709070027,
+        "cpu_seconds": 7.245416910000017,
+        "before": {
+          "VmHWM": 2933575680,
+          "VmRSS": 2933575680,
+          "cgroup_current": 3220099072,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933792768,
+          "VmRSS": 2933792768,
+          "cgroup_current": 3220099072,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:6:16",
+        "seconds": 16.67309316340834,
+        "exclusive_seconds": 16.67309316340834,
+        "cpu_seconds": 16.660923029000003,
+        "before": {
+          "VmHWM": 2933792768,
+          "VmRSS": 2933792768,
+          "cgroup_current": 3220336640,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933792768,
+          "VmRSS": 2933792768,
+          "cgroup_current": 3220336640,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.006570340134203434,
+        "exclusive_seconds": 0.006570340134203434,
+        "cpu_seconds": 0.0021669829999950707,
+        "before": {
+          "VmHWM": 2933792768,
+          "VmRSS": 2933792768,
+          "cgroup_current": 3220316160,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933825536,
+          "VmRSS": 2933825536,
+          "cgroup_current": 3220316160,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0005309339612722397,
+        "exclusive_seconds": 0.0005309339612722397,
+        "cpu_seconds": 0.0005327689999603535,
+        "before": {
+          "VmHWM": 2933825536,
+          "VmRSS": 2933825536,
+          "cgroup_current": 3220316160,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933825536,
+          "VmRSS": 2933825536,
+          "cgroup_current": 3220316160,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:16:17",
+        "seconds": 14.778081098105758,
+        "exclusive_seconds": 14.778081098105758,
+        "cpu_seconds": 14.76608582,
+        "before": {
+          "VmHWM": 2933792768,
+          "VmRSS": 2933792768,
+          "cgroup_current": 3220238336,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2933792768,
+          "VmRSS": 2933792768,
+          "cgroup_current": 3220365312,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:1:17",
+        "seconds": 15.279535106848925,
+        "exclusive_seconds": 15.279535106848925,
+        "cpu_seconds": 15.267491340999982,
+        "before": {
+          "VmHWM": 2933792768,
+          "VmRSS": 2933792768,
+          "cgroup_current": 3220344832,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2936619008,
+          "VmRSS": 2936619008,
+          "cgroup_current": 3221098496,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:7:17",
+        "seconds": 19.59149737795815,
+        "exclusive_seconds": 19.59149737795815,
+        "cpu_seconds": 19.57641900699997,
+        "before": {
+          "VmHWM": 2936676352,
+          "VmRSS": 2936676352,
+          "cgroup_current": 3221143552,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2966663168,
+          "VmRSS": 2966663168,
+          "cgroup_current": 3219918848,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.009145589079707861,
+        "exclusive_seconds": 0.009145589079707861,
+        "cpu_seconds": 0.0023658350000346218,
+        "before": {
+          "VmHWM": 2966663168,
+          "VmRSS": 2966663168,
+          "cgroup_current": 3219894272,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2966695936,
+          "VmRSS": 2966695936,
+          "cgroup_current": 3219894272,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0006334101781249046,
+        "exclusive_seconds": 0.0006334101781249046,
+        "cpu_seconds": 0.0006352309999897443,
+        "before": {
+          "VmHWM": 2966695936,
+          "VmRSS": 2966695936,
+          "cgroup_current": 3219894272,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2966695936,
+          "VmRSS": 2966695936,
+          "cgroup_current": 3219894272,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:17:18",
+        "seconds": 16.91868311073631,
+        "exclusive_seconds": 16.91868311073631,
+        "cpu_seconds": 16.905887924000012,
+        "before": {
+          "VmHWM": 2966663168,
+          "VmRSS": 2966663168,
+          "cgroup_current": 3219816448,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2966663168,
+          "VmRSS": 2966663168,
+          "cgroup_current": 3219816448,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:1:18",
+        "seconds": 17.416271987836808,
+        "exclusive_seconds": 17.416271987836808,
+        "cpu_seconds": 17.394494949000034,
+        "before": {
+          "VmHWM": 2966663168,
+          "VmRSS": 2966663168,
+          "cgroup_current": 3219791872,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2966663168,
+          "VmRSS": 2966663168,
+          "cgroup_current": 3219791872,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:8:18",
+        "seconds": 25.564685062970966,
+        "exclusive_seconds": 25.564685062970966,
+        "cpu_seconds": 25.54250048399996,
+        "before": {
+          "VmHWM": 2966663168,
+          "VmRSS": 2966663168,
+          "cgroup_current": 3219763200,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221073920,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.00857163267210126,
+        "exclusive_seconds": 0.00857163267210126,
+        "cpu_seconds": 0.0023067340000011427,
+        "before": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221045248,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968068096,
+          "VmRSS": 2968068096,
+          "cgroup_current": 3221045248,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0007235128432512283,
+        "exclusive_seconds": 0.0007235128432512283,
+        "cpu_seconds": 0.0007256110000071203,
+        "before": {
+          "VmHWM": 2968068096,
+          "VmRSS": 2968068096,
+          "cgroup_current": 3221045248,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968068096,
+          "VmRSS": 2968068096,
+          "cgroup_current": 3221045248,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:18:19",
+        "seconds": 20.044140953104943,
+        "exclusive_seconds": 20.044140953104943,
+        "cpu_seconds": 20.02856587499997,
+        "before": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3220967424,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3220967424,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:1:19",
+        "seconds": 19.85396413318813,
+        "exclusive_seconds": 19.85396413318813,
+        "cpu_seconds": 19.837385953999956,
+        "before": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221200896,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221168128,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:8:19",
+        "seconds": 26.1650173580274,
+        "exclusive_seconds": 26.1650173580274,
+        "cpu_seconds": 26.145514883000033,
+        "before": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221139456,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221139456,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.009251682087779045,
+        "exclusive_seconds": 0.009251682087779045,
+        "cpu_seconds": 0.0023979370000688505,
+        "before": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221106688,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968068096,
+          "VmRSS": 2968068096,
+          "cgroup_current": 3221106688,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0007119602523744106,
+        "exclusive_seconds": 0.0007119602523744106,
+        "cpu_seconds": 0.0007143490000771635,
+        "before": {
+          "VmHWM": 2968068096,
+          "VmRSS": 2968068096,
+          "cgroup_current": 3221106688,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968068096,
+          "VmRSS": 2968068096,
+          "cgroup_current": 3221106688,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:19:20",
+        "seconds": 24.484673904255033,
+        "exclusive_seconds": 24.484673904255033,
+        "cpu_seconds": 24.463876135999953,
+        "before": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221028864,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221217280,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:1:20",
+        "seconds": 18.32574831880629,
+        "exclusive_seconds": 18.32574831880629,
+        "cpu_seconds": 18.306090125999958,
+        "before": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221184512,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221217280,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:9:20",
+        "seconds": 32.729655132163316,
+        "exclusive_seconds": 32.729655132163316,
+        "cpu_seconds": 32.696138657999995,
+        "before": {
+          "VmHWM": 2968035328,
+          "VmRSS": 2968035328,
+          "cgroup_current": 3221184512,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968494080,
+          "VmRSS": 2968494080,
+          "cgroup_current": 3219394560,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.006997928023338318,
+        "exclusive_seconds": 0.006997928023338318,
+        "cpu_seconds": 0.0022166960000049585,
+        "before": {
+          "VmHWM": 2968494080,
+          "VmRSS": 2968494080,
+          "cgroup_current": 3219361792,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968526848,
+          "VmRSS": 2968526848,
+          "cgroup_current": 3219623936,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0006279712542891502,
+        "exclusive_seconds": 0.0006279712542891502,
+        "cpu_seconds": 0.0006296799999745417,
+        "before": {
+          "VmHWM": 2968526848,
+          "VmRSS": 2968526848,
+          "cgroup_current": 3219623936,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968526848,
+          "VmRSS": 2968526848,
+          "cgroup_current": 3219623936,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:20:21",
+        "seconds": 27.13115312717855,
+        "exclusive_seconds": 27.13115312717855,
+        "cpu_seconds": 27.10212271699993,
+        "before": {
+          "VmHWM": 2968494080,
+          "VmRSS": 2968494080,
+          "cgroup_current": 3219546112,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2968502272,
+          "VmRSS": 2968502272,
+          "cgroup_current": 3219619840,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:1:21",
+        "seconds": 20.889008968602866,
+        "exclusive_seconds": 20.889008968602866,
+        "cpu_seconds": 20.872894550999945,
+        "before": {
+          "VmHWM": 2968502272,
+          "VmRSS": 2968502272,
+          "cgroup_current": 3219582976,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2969341952,
+          "VmRSS": 2969341952,
+          "cgroup_current": 3220369408,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:9:21",
+        "seconds": 34.013230992946774,
+        "exclusive_seconds": 34.013230992946774,
+        "cpu_seconds": 33.984082414,
+        "before": {
+          "VmHWM": 2969387008,
+          "VmRSS": 2969387008,
+          "cgroup_current": 3220332544,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2997854208,
+          "VmRSS": 2997854208,
+          "cgroup_current": 3219656704,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.006150839850306511,
+        "exclusive_seconds": 0.006150839850306511,
+        "cpu_seconds": 0.002347833000044375,
+        "before": {
+          "VmHWM": 2997854208,
+          "VmRSS": 2997854208,
+          "cgroup_current": 3219619840,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2997886976,
+          "VmRSS": 2997886976,
+          "cgroup_current": 3219619840,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0005930229090154171,
+        "exclusive_seconds": 0.0005930229090154171,
+        "cpu_seconds": 0.00059518599994135,
+        "before": {
+          "VmHWM": 2997886976,
+          "VmRSS": 2997886976,
+          "cgroup_current": 3219619840,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2997886976,
+          "VmRSS": 2997886976,
+          "cgroup_current": 3219619840,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:21:22",
+        "seconds": 30.891728007234633,
+        "exclusive_seconds": 30.891728007234633,
+        "cpu_seconds": 30.862559925999903,
+        "before": {
+          "VmHWM": 2997854208,
+          "VmRSS": 2997854208,
+          "cgroup_current": 3219542016,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2997854208,
+          "VmRSS": 2997854208,
+          "cgroup_current": 3219705856,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:1:22",
+        "seconds": 22.726307154167444,
+        "exclusive_seconds": 22.726307154167444,
+        "cpu_seconds": 22.706374697,
+        "before": {
+          "VmHWM": 2997854208,
+          "VmRSS": 2997854208,
+          "cgroup_current": 3219668992,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2997854208,
+          "VmRSS": 2997854208,
+          "cgroup_current": 3219668992,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:9:22",
+        "seconds": 32.4807165376842,
+        "exclusive_seconds": 32.4807165376842,
+        "cpu_seconds": 32.445552969000005,
+        "before": {
+          "VmHWM": 2997854208,
+          "VmRSS": 2997854208,
+          "cgroup_current": 3219628032,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219423232,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.007988990284502506,
+        "exclusive_seconds": 0.007988990284502506,
+        "cpu_seconds": 0.0023331840000082593,
+        "before": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219423232,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999697408,
+          "VmRSS": 2999697408,
+          "cgroup_current": 3219423232,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_load",
+        "seconds": 0.0006242319941520691,
+        "exclusive_seconds": 0.0006242319941520691,
+        "cpu_seconds": 0.0006258039999238463,
+        "before": {
+          "VmHWM": 2999697408,
+          "VmRSS": 2999697408,
+          "cgroup_current": 3219423232,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999697408,
+          "VmRSS": 2999697408,
+          "cgroup_current": 3219423232,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:22:23",
+        "seconds": 31.679925483185798,
+        "exclusive_seconds": 31.679925483185798,
+        "cpu_seconds": 31.648327197999947,
+        "before": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219345408,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219451904,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:1:23",
+        "seconds": 21.848867969121784,
+        "exclusive_seconds": 21.848867969121784,
+        "cpu_seconds": 21.83151107399999,
+        "before": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219410944,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219456000,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "search:9:23",
+        "seconds": 33.393394742161036,
+        "exclusive_seconds": 33.393394742161036,
+        "cpu_seconds": 33.36202505199992,
+        "before": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219410944,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219673088,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.00687663396820426,
+        "exclusive_seconds": 0.00687663396820426,
+        "cpu_seconds": 0.0021841249999852153,
+        "before": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219628032,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999697408,
+          "VmRSS": 2999697408,
+          "cgroup_current": 3219628032,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "owned_artifact_save",
+        "seconds": 0.0023391973227262497,
+        "exclusive_seconds": 0.0023391973227262497,
+        "cpu_seconds": 0.0009636659999614494,
+        "before": {
+          "VmHWM": 2999697408,
+          "VmRSS": 2999697408,
+          "cgroup_current": 3219628032,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219533824,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "planner_init",
+        "seconds": 3.4526738738641143,
+        "exclusive_seconds": 3.4526738738641143,
+        "cpu_seconds": 3.448767801000031,
+        "before": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219533824,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219533824,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "finalize",
+        "seconds": 0.006123916711658239,
+        "exclusive_seconds": 0.006123916711658239,
+        "cpu_seconds": 0.00611007600002722,
+        "before": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219533824,
+          "cgroup_peak": 3221225472
+        },
+        "after": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219533824,
+          "cgroup_peak": 3221225472
+        }
+      },
+      {
+        "phase": "create",
+        "seconds": 852.0640937751159,
+        "exclusive_seconds": 6.541494767181575,
+        "cpu_seconds": 842.9784819170001,
+        "before": {
+          "VmHWM": 2238115840,
+          "VmRSS": 2238115840,
+          "cgroup_current": 2539171840,
+          "cgroup_peak": 2539171840
+        },
+        "after": {
+          "VmHWM": 2999664640,
+          "VmRSS": 2999664640,
+          "cgroup_current": 3219533824,
+          "cgroup_peak": 3221225472
+        }
+      }
+    ],
+    "memory": {
+      "VmHWM": 2999312384,
+      "VmRSS": 2966110208,
+      "cgroup_current": 3186196480,
+      "cgroup_peak": 3221225472
+    }
+  },
+  "source_cache_evidence_sha256": "5fdc46d4629a43363134d1866a20585e209625e1d4ed77066de174910b3c9f0c",
+  "source_phase_evidence_sha256": "0f5902ee41384402804f5d9f425de8dfc8b34ddff23cb2a75a6b9e0864e175dd",
+  "bundle_sha256": "9f34ee1aa5e19874ca15842e88017dddc8bf884fc45c742dc2e9c2390796098a",
+  "bundle_metadata_files": 221,
+  "full_release_qualified": false,
+  "limitations": [
+    "Plain and instrumented timings remain separate",
+    "Current primary compares its first call only; its whole process time and final peak include three later warm calls (the first-call recorded peak already equals that final peak)",
+    "The historical baseline may exceed the new 2.5 GiB target; the unchanged 3 GiB hard limit still applies",
+    "Completion does not qualify the pending full matrix or change defaults"
+  ],
+  "plain_median_reduction_percent": 24.790765997281618,
+  "plain_load_comparison": {
+    "baseline_seconds": [
+      33.124777962919325,
+      32.95482400292531,
+      34.91744541330263
+    ],
+    "current_seconds": [
+      47.327742367982864,
+      47.69853514479473,
+      47.743215741124004
+    ],
+    "baseline_median_seconds": 33.124777962919325,
+    "current_median_seconds": 47.69853514479473,
+    "scope": "Existing startup load_seconds timers; separate from first plan calls and partial instrumented restore/index phases"
+  },
+  "instrumented_comparison": {
+    "baseline_plan_seconds": 858.5999638973735,
+    "current_plan_seconds": 666.0346000320278,
+    "single_observation_reduction_percent": 22.42783274660871,
+    "baseline": {
+      "phases": {
+        "load_restore_indexes": {
+          "calls": 1,
+          "inclusive_seconds": 17.980397371109575,
+          "exclusive_seconds": 17.980397371109575,
+          "max_positive_rss_delta_bytes": 227995648
+        },
+        "planner_init": {
+          "calls": 2,
+          "inclusive_seconds": 9.98502225894481,
+          "exclusive_seconds": 9.98502225894481,
+          "max_positive_rss_delta_bytes": 145129472
+        },
+        "publication_identity_hashing": {
+          "calls": 3,
+          "inclusive_seconds": 5.321852729190141,
+          "exclusive_seconds": 5.321852729190141,
+          "max_positive_rss_delta_bytes": 33280000
+        },
+        "owned_artifact_load": {
+          "calls": 14,
+          "inclusive_seconds": 0.0095808538608253,
+          "exclusive_seconds": 0.0095808538608253,
+          "max_positive_rss_delta_bytes": 32768
+        },
+        "owned_artifact_save": {
+          "calls": 13,
+          "inclusive_seconds": 0.17673449823632836,
+          "exclusive_seconds": 0.17673449823632836,
+          "max_positive_rss_delta_bytes": 319488
+        },
+        "qualification": {
+          "calls": 1,
+          "inclusive_seconds": 206.9995150808245,
+          "exclusive_seconds": 206.91010367125273,
+          "max_positive_rss_delta_bytes": 524587008
+        },
+        "search_all_tracks": {
+          "calls": 34,
+          "inclusive_seconds": 629.6455294648185,
+          "exclusive_seconds": 629.6455294648185,
+          "max_positive_rss_delta_bytes": 52822016
+        },
+        "finalize": {
+          "calls": 1,
+          "inclusive_seconds": 0.006123916711658239,
+          "exclusive_seconds": 0.006123916711658239,
+          "max_positive_rss_delta_bytes": 0
+        },
+        "create": {
+          "calls": 1,
+          "inclusive_seconds": 852.0640937751159,
+          "exclusive_seconds": 6.541494767181575,
+          "max_positive_rss_delta_bytes": 761548800
+        },
+        "legacy_search": {
+          "calls": 11,
+          "inclusive_seconds": 199.59813542105258,
+          "exclusive_seconds": 199.59813542105258,
+          "max_positive_rss_delta_bytes": 52822016
+        },
+        "pinned_reference_search": {
+          "calls": 1,
+          "inclusive_seconds": 8.050900160335004,
+          "exclusive_seconds": 8.050900160335004,
+          "max_positive_rss_delta_bytes": 32768
+        },
+        "budgeted_improvement_search": {
+          "calls": 22,
+          "inclusive_seconds": 421.99649388343096,
+          "exclusive_seconds": 421.99649388343096,
+          "max_positive_rss_delta_bytes": 44978176
+        }
+      },
+      "calculator_calls": {
+        "qualification": {
+          "calls": 4871,
+          "seconds": 41.81193139590323,
+          "sum_unique_within_instrument_labels": 4871
+        },
+        "search": {
+          "calls": 28603,
+          "seconds": 536.4374781209044,
+          "sum_unique_within_instrument_labels": 26955
+        },
+        "create": {
+          "calls": 111,
+          "seconds": 2.41870816424489,
+          "sum_unique_within_instrument_labels": 32
+        }
+      },
+      "native_legacy_timer_seconds": 200.29545224551111,
+      "native_legacy_evaluations": 9517,
+      "reference_calculator_calls": 409,
+      "budgeted_improvement_calculator_calls": 18677,
+      "scope": "Frozen native call order: 11 legacy, one initial pinned reference, 22 improvement calls; label shape checked",
+      "memory_scope": "Largest positive RSS difference at phase boundaries, not allocation totals or attribution of historical cgroup peaks",
+      "time_scope": "Inclusive parent/child phases overlap; native legacy timer also covers bookkeeping outside the optimizer wrapper",
+      "unique_scope": "Distinct baskets within each instrument label are summed; not a global distinct-basket count"
+    },
+    "current": {
+      "phases": {
+        "load_restore_indexes": {
+          "calls": 1,
+          "inclusive_seconds": 26.25550513435155,
+          "exclusive_seconds": 26.25550513435155,
+          "max_positive_rss_delta_bytes": 169693184
+        },
+        "planner_init": {
+          "calls": 2,
+          "inclusive_seconds": 13.78706752229482,
+          "exclusive_seconds": 13.78706752229482,
+          "max_positive_rss_delta_bytes": 93249536
+        },
+        "publication_identity_hashing": {
+          "calls": 3,
+          "inclusive_seconds": 9.977271720767021,
+          "exclusive_seconds": 9.977271720767021,
+          "max_positive_rss_delta_bytes": 41504768
+        },
+        "owned_artifact_load": {
+          "calls": 14,
+          "inclusive_seconds": 0.01966751366853714,
+          "exclusive_seconds": 0.01966751366853714,
+          "max_positive_rss_delta_bytes": 118784
+        },
+        "owned_artifact_save": {
+          "calls": 13,
+          "inclusive_seconds": 0.18074404820799828,
+          "exclusive_seconds": 0.18074404820799828,
+          "max_positive_rss_delta_bytes": 14118912
+        },
+        "qualification": {
+          "calls": 1,
+          "inclusive_seconds": 101.90142116183415,
+          "exclusive_seconds": 101.79278350435197,
+          "max_positive_rss_delta_bytes": 504320000
+        },
+        "search_all_tracks": {
+          "calls": 34,
+          "inclusive_seconds": 503.56113349599764,
+          "exclusive_seconds": 503.56113349599764,
+          "max_positive_rss_delta_bytes": 82599936
+        },
+        "finalize": {
+          "calls": 1,
+          "inclusive_seconds": 0.005231671966612339,
+          "exclusive_seconds": 0.005231671966612339,
+          "max_positive_rss_delta_bytes": 0
+        },
+        "create": {
+          "calls": 1,
+          "inclusive_seconds": 656.9459285503253,
+          "exclusive_seconds": 36.70724608702585,
+          "max_positive_rss_delta_bytes": 209920000
+        },
+        "legacy_search": {
+          "calls": 11,
+          "inclusive_seconds": 60.41006635641679,
+          "exclusive_seconds": 60.41006635641679,
+          "max_positive_rss_delta_bytes": 82599936
+        },
+        "pinned_reference_search": {
+          "calls": 1,
+          "inclusive_seconds": 5.824702967889607,
+          "exclusive_seconds": 5.824702967889607,
+          "max_positive_rss_delta_bytes": 32448512
+        },
+        "budgeted_improvement_search": {
+          "calls": 22,
+          "inclusive_seconds": 437.32636417169124,
+          "exclusive_seconds": 437.32636417169124,
+          "max_positive_rss_delta_bytes": 72073216
+        }
+      },
+      "calculator_calls": {
+        "qualification": {
+          "calls": 4871,
+          "seconds": 45.89451855001971,
+          "sum_unique_within_instrument_labels": 4871
+        },
+        "search": {
+          "calls": 22127,
+          "seconds": 427.9599418803118,
+          "sum_unique_within_instrument_labels": 20567
+        },
+        "create": {
+          "calls": 111,
+          "seconds": 2.373104767408222,
+          "sum_unique_within_instrument_labels": 32
+        }
+      },
+      "native_legacy_timer_seconds": 61.16339811729267,
+      "native_legacy_evaluations": 3041,
+      "reference_calculator_calls": 409,
+      "budgeted_improvement_calculator_calls": 18677,
+      "scope": "Frozen native call order: 11 legacy, one initial pinned reference, 22 improvement calls; label shape checked",
+      "memory_scope": "Largest positive RSS difference at phase boundaries, not allocation totals or attribution of historical cgroup peaks",
+      "time_scope": "Inclusive parent/child phases overlap; native legacy timer also covers bookkeeping outside the optimizer wrapper",
+      "unique_scope": "Distinct baskets within each instrument label are summed; not a global distinct-basket count"
+    },
+    "baseline_preparation_stats": {
+      "hits": 4119,
+      "misses": 6240,
+      "writes": 4098,
+      "invalid": 0
+    },
+    "current_preparation_stats": {
+      "hits": 4119,
+      "misses": 6240,
+      "writes": 4098,
+      "invalid": 0
+    },
+    "baseline_memory_scope": "Historical planning/profile snapshots; no new post-serialization baseline receipt is asserted",
+    "current_memory_scope": "Final receipt after atexit phase-report serialization; target enforced",
+    "legacy_publication_prices_identical": true,
+    "scope": "One matched diagnostic profile per code; separate from the three-sample plain comparison"
+  }
+}

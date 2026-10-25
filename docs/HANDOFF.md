@@ -1,6 +1,15 @@
-# 2026-10-24 15:46 UTC: Cache- och ordinarie minnesgrind passerar; pilot startad
+# 2026-10-25: Etappen avslutad på begäran; fullmatris 91/252 uppmätt
+
+Beställaren bad att 5 000-proven skulle hoppas över och leveransen avslutas
+med befintligt underlag. Den pågående 5 000-arbetaren, båda styrprocesserna
+och mätobservatören är stoppade. Inga nya matrisgrupper eller återstarter
+är planerade. [Slutrapporten](reviews/preparation-memory-final-20261025.md)
+sammanfattar resultat och varför hela verifieringen inte genomfördes.
+Full standardkvalificering påstås inte; legacy/merge=False kvarstår.
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
+PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
+appfilerna är byteidentiska med den frysta runtime som fortsatt mäts.
 Katalogfilen läses och valideras radvis med samma native produkt-/kandidat-
 och indexvalidatorer samt full digest-/lineagekontroll. Stora JSON-buffertar
 släpps före nästa graf. Befintlig atomisk filskrivning, validering och LKG kvar.
@@ -25,14 +34,183 @@ Omstart och cacheförlust laddar elva certifikat utan omsökta publiceringar.
 Tre nya ägarstore tog 641,40/637,84/641,36 s. Tre extra versionsbytesprov
 utan mätverktygets fasstädning passerar också: **2,023/2,039/2,030 GiB**,
 båda katalogerna och fakta kvar, exakt samma filhash, ingen OOM/swap.
-Faktaprojektionen inför piloten har startat, följd av
-HTTP/historik, matchade
-basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar
+Faktaprojektionen är klar för båda städerna, med oförändrade priser/request/
+klocka och den partiella 103-dokumentsreleasen. Kvar följer
+hela återstående matrisen. En seriell förgrundssekvens stannar
 vid varje missad grind. B5-resultaten nedan är historik, inte automatiskt
 slutkodens kvalificering. Standard förblir legacy och generationsmerge=False;
 ingen drift, insamling, aktiv fakta/prisversion eller samtidighet ändrad.
 
 [Rapport och maskinunderlag](reviews/preparation-memory-20261024.md).
+
+Ny fasprofil klar: **666,03 s < 700 s**, 988,32 kr/hash/audit PASS,
+hela processen 721,79 s, slutligt kvitto efter rapportserialisering **1,828 GiB**
+utan OOM/swap. Matchad instrumenterad r2-referens 858,60 s: 22,43 procent
+lägre tid, separat från vanliga treprovsmedianens 24,79 procent. Legacy native
+200,30→61,16 s och 9 517→3 041 verkliga utvärderingar, alla elva föreslagna
+priser identiska. Budgeterad förbättring kvar 437,33 s; kalkylatoranrop oförändrat
+18 677. Kvalificering 207,00→101,90 s med samma 4 871 kalkylatoranrop.
+Inläsningsmedianen är däremot 33,12→47,70 s; faserna förbättras inte likformigt.
+Fullmatrisens första grupp är stängd: 573,48 s, 1,495 GiB, exit 0 utan OOM/swap.
+V5-referensgruppen vid 262 är också stängd: 2 083,53 s, 1,496 GiB, exit 0
+utan OOM/swap, med verifierat obegränsat referenskontrakt. Även Malmö/original/
+1 000 är stängd: 4 101,51 s, 1,540 GiB, exit 0 utan OOM/swap. V1 ger
+948,31 kr för protein40/all-macros mot legacy 1 027,79 och 262:s 1 000,86.
+Organic-share v1 ger 318,96 kr mot legacy 321,16; första anropet tar
+1 266,27 s, sedan 11,04–11,47 s varmt. Även 2 000-gruppen är stängd:
+6 559,39 s, 1,789 GiB, exit 0 utan OOM/swap. V1 protein40/all-macros ger
+897,31/834,06 kr mot legacy 904,82/951,42, lägre än 1 000:s v1-priser.
+Organic-share v1 ger samma 318,96 kr; första anropet kostar 1 987,99 s
+(33,13 minuter), sedan 11,50–11,83 s varmt. Totalt 91/252 uppmätta,
+84 auditgodkända menyceller/336 anrop och sju vegan-SEARCH_BLOCKED-celler/
+28 observationer med bevarad kod/steg. Inget globalt omöjlighetsbevis.
+161 celler saknar fullständig mätning. Malmö/original/5 000 avbröts under
+protein40/v1:s första anrop. Fyra legacy-observationer för 912,72 kr med audit
+bevaras separat, utan slutligt resurskvitto eller nya fullständiga celler.
+Ingen standardkvalificering och inga fortsatta matrisgrupper.
+[Fullmatrisstatus](reviews/preparation-memory-20261024/full-matrix-current.json).
+Separat läsande korsgranskning passerar 224 kontroller; 299 jämförelser saknar underlag.
+Alla tillgängliga prisgränser, inklusive v5/262, är kontrollerade; ingen
+standardkvalificering. Verktyg och resultat finns bredvid fullmatrisunderlaget.
+Senaste arkiv 259 verifierade metadatafiler:
+`3aeaa7292c6759602b50862b4c0e009b41505db5e1e56ef1dd1dee160a6af640`.
+
+
+Pilotuppdatering: originalfakta/Malmö vid både 262 och 5 000 är klart,
+tolv celler och 48 anrop med audit PASS. Slutliga processpeakar är
+1,514 respektive **2,414 GiB**, exit 0 utan OOM/swap. V1 standard ger
+492,15 kr vid båda storlekarna mot legacy 511,46. V1 fördelning går från
+996,22 till 988,32 kr och organic-share från 321,16 till 316,26 kr.
+Fem-tusen ger kallt/varmt: standard 743,97/11,66–12,45 s, fördelning
+672,51/12,93–12,97 s och organic-share **3 992,65/12,44–12,78 s**.
+Organic-shares kalla 66,54 minuter kvarstår som tydlig kostnad; ekologisk
+sökning redovisar 3 365,56 s i överlappande fasdiagnostik. Varmkvoterna
+mot 262 är 1,1391/1,1315/1,1925 och passerar 1,25, även mot legacytid/pris.
+Även Lund/262 är nu klar: sex celler/24 anrop med audit PASS, 1,088 GiB
+slutlig peak och exit 0 utan OOM/swap. Legacy och v1 ger samma priser:
+standard 487,85, fördelning 761,45 och organic-share 314,24 kr. V1 kallt/varmt:
+103,38/7,16–7,38 s, 91,67/7,58–7,79 s och 293,48/7,14–7,69 s.
+Lund/5 000 är också klar: sex celler/24 anrop med audit PASS, 1,744 GiB
+slutlig peak och exit 0 utan OOM/swap. V1 ger 477,84 / 699,10 / 286,32 kr
+mot legacy 504,34 / 704,30 / 309,34 kr och är även billigare än vid 262.
+V1 första/varmt: 808,89/8,10–8,56 s, 938,02/8,53–9,40 s och
+2 890,91/7,72–7,85 s. Varmkvoter 1,1970/1,2405/1,0999 passerar 1,25 och
+varma anrop är snabbare än legacy. Organic-shares kalla 48,18 minuter kvarstår.
+Originalfakta-armen är därmed klar för pilotens tre profiler vid båda storlekarna
+i båda städerna: totalt 24/48 pilotceller och 96 auditgodkända anrop.
+Även Axfood/Malmö/262 är klar: sex celler/24 anrop med audit PASS, 1,708 GiB,
+exit 0 utan OOM/swap. Samma priser som originalarmen. V1 första/varmt:
+standard 174,51/10,54–10,83 s, fördelning 45,57/10,98–11,32 s och
+organic-share 549,74/10,56–10,81 s. Explicita legacy-omprövningar verifierar
+tidigare meny i alla tolv anrop, utan avvisningar; v1-menyer klarar aktuell audit.
+Även Axfood/Malmö/5 000 är klar: sex celler/24 anrop med audit PASS,
+slutlig peak **2,096 GiB**, exit 0 utan OOM/swap. V1 ger 492,15 / 988,32 /
+316,26 kr mot legacy 511,46 / 988,32 / 316,26 kr. V1 första/varmt:
+744,36/11,81–12,68 s, 678,53/12,50–12,88 s och 3 984,17/12,10–12,41 s.
+Varmkvoter 1,2024/1,1731/1,1747 passerar 1,25, liksom pris/tid mot legacy
+och pris mot 262. Organic-shares första förberedelse kostar 66,40 minuter.
+Även Axfood/Lund/262 är klar: sex celler/24 anrop med audit PASS,
+slutlig peak **1,257 GiB**, exit 0 utan OOM/swap. Legacy och v1 ger
+487,85 / 761,45 / 314,24 kr, samma som originalarmen. V1 första/varmt:
+106,76/7,25–7,40 s, 98,04/7,33–7,61 s och 305,73/7,16–7,26 s.
+Även Axfood/Lund/5 000 är klar: sex celler/24 anrop med audit PASS,
+slutlig peak **1,738 GiB**, exit 0 utan OOM/swap. V1 ger 477,84 / 699,10 /
+286,32 kr mot legacy 504,34 / 704,30 / 309,34 kr och är billigare än vid 262.
+V1 första/varmt: 858,03/7,88–8,01 s, 1 013,01/8,51–8,74 s och
+3 146,17/7,91–8,22 s. Varmkvoter 1,1038/1,1929/1,1470 passerar, liksom
+pris/tid mot legacy. Organic-shares första förberedelse kostar 52,44 minuter.
+Totalt **48/48 pilotceller och 192 auditgodkända anrop**, med stabila priser
+och menyhashar i varje cells fyra anrop. Högsta slutpeak 2,414 GiB, högsta
+varmkvot 1,24054. Pilotarkiv SHA-256
+`550b78946fd3cdfee0c29db04a6626474faa2a6a7085d102819fd66d121dcb26`,
+94 unika metadatafiler verifierade. Ingen standardkvalificering eller ändrad default.
+
+SSH-kanalen stängdes efter den avslutade Malmögruppen och sekvensen stannade
+innan nästa arbetare. Kvitton och den tomma Lund/262-katalogen verifierades.
+Återupptagningen hoppar bara över verifierade färdiga grupper, bevarar
+ofullständig evidens och skriver fortsättningsloggen till disk även om
+transporten stängs. Samtliga åtta pilotgrupper är nu avslutade inom samma gränser och frysta appkod.
+Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
+det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
+Full CI på `ba256ea` och postnummerrättningen `d40ec5a` passerar inklusive browserprov.
+Totalt 30 lokala evidenskontrakt samt Ruff/compileall passerar.
+Första två HTTP-försöken gav 422 före jobbstart; andra svaret bevisar
+postnummerfelet 22350 mot fryst Malmöområdes 21120. Första svarets detaljer
+saknas. Provets transportbegäran använder nu underlagets entydiga postnummer,
+även i köprovet. Inga input-bytes eller native API-grindar ändrade.
+Försök 3 sparade fem måltider för 976,32 kr med audit PASS. Därefter stoppade
+provverktygets felaktiga likhetsjämförelse mot CLI-priset 988,32 kr: native API
+använder `all_advertised`, en annan priskontext. Slutpeak 2,006 GiB, exit 1
+utan OOM/swap; ingen full HTTP-kvalificering. Provets återanrop jämför nu strikt
+pris/hash/kontext mot den sparade API-menyn och gör ny aktuell audit. CLI-priset
+kvarstår som separat övre gräns för första resultatet. Försök 4 körs separat;
+alla tidigare kataloger/kvitton/källhashar och en säker resultatssummering bevaras.
+Se [HTTP-status](reviews/preparation-memory-20261024/http-history-current.json).
+HTTP-steget i försök 4 passerar nu: 976,32 kr/audit PASS, lyckad Save/GET,
+annan ägare 404, köat avbrott 0,36 s och aktivt avbrott 6,56 s, högst ett
+aktivt jobb. POST 1,21 s, begäran→sparat svar 754,02 s, hela processen 828,36 s.
+Slutpeak **2,467 GiB**, cirka 34,15 MiB under målet, exit 0 utan OOM/swap.
+En ASGI-observation med befintlig spårning, ingen last-/nätlatenskvalificering.
+Första historikåteranropet ger exakt samma pris/hash/kontext på 52,59 s,
+faktisk privat revision 1 och elva certifikat laddade utan omsökning.
+Alla tre färskprocessprov med borttagen härledd cache passerar:
+131,16 / 133,18 / 133,16 s plananrop (median 133,16 s), samma pris/hash/
+kontext, privat revision 1 och elva certifikat laddade utan omsökning.
+Historik och privat tillstånd bevarade; processerna 190,15 / 192,68 / 192,61 s,
+slutpeakar 1,907 / 1,906 / 1,905 GiB, exit 0 utan OOM/swap.
+Alla fem grundsteg är klara; kompletterande prov för nytillkomna sparade
+menyidentiteter har startat. 43 verifierade metadatafiler i arkiv
+`200fd54409e1ffaf1adb7a54071f6d7a95dc9a4a5103dd1acfbc77cfaeff4767`.
+Full CI inklusive
+Chromium/WebKit passerar även på senaste regressionen `5e7c66a`.
+Efter HTTP/historik följer tre prover för var och en av fyra kombinationer
+av nya menyidentiteter och cachevägar. Native `PlanStore.create` flyttar den
+verkliga privata revisionen 1→2; efterföljande anrop använder faktisk revision
+och oförändrade effektiva skafferiindata. Sök-/auditanrop räknas utan att
+metoderna ersätts; tiderna inkluderar profileringskostnaden. Dessa storprov
+har nu alla tre giltig/förberedd-prov klara: 265,00 / 263,42 / 265,63 s
+inklusive profileringshook (median 265,00 s), 976,32 kr/audit PASS, noll
+sökanrop och åtta auditanrop vardera, elva certifikat laddade utan omsökning.
+Native seed tog 34,63 / 35,64 / 34,53 s, gav 984,22 kr och verklig Save
+flyttade privat revision 1→2 i varje kopia. Ankomsterna bevarade två sparade
+revisioner och privat tillstånd; högsta slutpeak 1,456 GiB, exit 0 utan OOM/swap.
+Även tre giltig/certifikat-prov passerar: 266,52 / 301,05 / 287,82 s inklusive
+profileringshook (median 287,82 s), samma 976,32 kr/audit, noll sökanrop och
+åtta auditanrop. Elva publiceringar laddade utan omsökning, privat revision 2
+och historik bevarade; högsta slutliga ankomstpeak 1,489 GiB, exit 0 utan OOM/swap.
+Även tre ofullständig/förberedd-prov passerar: 267,44 / 263,87 / 262,98 s
+inklusive profileringshook, median 263,87 s, fem måltider för 976,32 kr/audit
+PASS, noll sökanrop och sju auditanrop vardera. Native fyramåltidsseed tog
+33,30 / 33,24 / 33,71 s, gav 869,99 kr och sparades på vanligt sätt till
+privat revision 2. Ankomsterna laddade elva certifikat utan omsökning och
+bevarade historik/privat tillstånd; högsta slutpeak 1,528 GiB, ingen OOM/swap.
+Även tre ofullständig/certifikat-prov passerar: 261,47 / 263,59 / 264,20 s
+inklusive profileringshook, median 263,59 s, fem måltider för 976,32 kr/audit
+PASS, noll sökanrop och sju auditanrop. Högsta slutliga ankomstpeak 1,459 GiB.
+Totalt 12/12 ankomster och tolv seedarbetare klara, ingen OOM/swap. Alla 24
+arbetares högsta peak 1,666 GiB; enbart ankomster högst 1,528 GiB.
+Arkiv SHA-256 `d85fee402cb9e660af283168a94bdf41263668040af7f25cb3749620a83f444d`,
+165 metadatafiler verifierade. Full CI på `46c0935` passerar inklusive browserprov.
+Första matchade basprocessen på runtime `9162f0f` startade 05:24:43 UTC,
+med samma frysta underlag, cacheläge och två CPU/3 GiB. Tre basprocesser
+följs av separat instrumenterad fasprofil och därefter hela återstående matrisen.
+Första basprovet är nu klart: 881,31 s plananrop, 926,36 s hela processen,
+988,32 kr/förväntad hash/audit PASS, slutpeak 2,802 GiB, exit 0 utan OOM/swap.
+Baslinjens överskridna 2,5-GiB-mål bevaras; hårda taket är fortsatt 3 GiB.
+Även andra basprovet passerar: 879,93 s plananrop, 924,78 s hela processen,
+988,32 kr/hash/audit PASS, slutpeak 2,818 GiB, exit 0 utan OOM/swap.
+Tredje basprovet passerar på 900,77 s, hela processen 947,50 s, 988,32 kr/
+hash/audit PASS, slutpeak 2,802 GiB utan OOM/swap. Baslinjens median är nu
+881,31 s mot slutkodens 662,83 s (649,49–664,50 s): **218,48 s/24,79 procent
+lägre median** i exakt detta frysta fall. Högsta slutpeak över tre sjunker
+från 2,818 till 1,882 GiB, **33,20 procent**. Slutkodens processväggtider
+756,71 / 704,55 / 719,74 s har olika anropsantal (4/1/1), ingen blandad median.
+Vanliga och instrumenterade tider hålls separat. Ny fasprofil startade
+06:11:22 UTC, dess 700-sekundersmål/minneskvitto är nu godkända enligt sammanfattningen ovan.
+[Maskinunderlag](reviews/preparation-memory-20261024/matched-current.json),
+184 verifierade metadatafiler, arkiv `711dfa0ccfebb7e12f4410d482e0129e070e3a015614565ee016a44bf77bfc59`.
+Appfiler och metodsignatur är oförändrade;
+fullmatrisens återstående celler och slutgranskning återstår.
 
 ---
 
