@@ -2,7 +2,7 @@
   "schema": "smako-http-history-progress-v1",
   "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
   "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
-  "status": "ATTEMPT_3_RUNNING_NOT_QUALIFIED",
+  "status": "ATTEMPT_4_RUNNING_NOT_QUALIFIED",
   "closed_attempts": [
     {
       "attempt": 1,
@@ -86,19 +86,131 @@
         ]
       },
       "report_sha256": "468d0199f84d4f3cb482a532ea3932a059f808440875c14483a7f573e857e0ef"
+    },
+    {
+      "attempt": 3,
+      "status": "SAVED_RESULT_THEN_HARNESS_CLI_EQUALITY_FAILURE",
+      "receipt_sha256": "8e954ed9da03a4f08a6e96bb07d29ed4507c0788b34d5d00619e4078f88443c7",
+      "final_resource_sha256": "3d3ada7084d38e1a88b66e4c2561d0fe164d8bbba511966d1b78a5f595ed5c0d",
+      "postmortem_sha256": "f23ea67de7d4252abede7cf53a03c0c604209688b849fc1e57e97af671dc7454",
+      "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+      "entry_sha256": "b3c4f8a65365e86858b72d190af558065997cfe1cd94f54e1c932c2b38a29f74",
+      "process_wall_seconds": 853.8192155901343,
+      "started_at": "2026-10-25T03:15:53.013933254Z",
+      "finished_at": "2026-10-25T03:30:06.586225617Z",
+      "exit_code": 1,
+      "oom_killed": false,
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "PidsLimit": 128,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+      "user": "10001:10001",
+      "final_resource": {
+        "memory": {
+          "current": 2025545728,
+          "peak": 2153918464,
+          "swap.current": 0
+        },
+        "memory_target_passed": true,
+        "entry_sha256": "b3c4f8a65365e86858b72d190af558065997cfe1cd94f54e1c932c2b38a29f74"
+      },
+      "postmortem": {
+        "status": "SAVED_RESULT_BEFORE_HARNESS_CLI_EQUALITY_FAILURE",
+        "response_json_sha256": "5fdbad9ea98de956f5e489479cf6c76aac7926f10c7a4195e259b245848f826b",
+        "request_json_sha256": "a8ec424033c40fec21c722d2b4425d8b2ec1cc76926d34f2f6c488b9b62a34e4",
+        "paid": 976.32,
+        "slots": 5,
+        "normalized_request": {
+          "postal_code": "21120",
+          "membership_price_policy": "all_advertised",
+          "strategy": "optimized",
+          "debug": false,
+          "max_stores": 2,
+          "recipes": 5,
+          "servings": 4
+        },
+        "actual_saved_pantry_revision": 0,
+        "persisted_audit": {
+          "passed": true,
+          "totals_reconciled": true,
+          "deficits": [],
+          "unknown_quantities": 0
+        },
+        "verified_reference_context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+        "loaded_publications": 0,
+        "replayed_publications": 11,
+        "publication_paid": [
+          {
+            "size": 262,
+            "paid": "984.22"
+          },
+          {
+            "size": 762,
+            "paid": "984.22"
+          },
+          {
+            "size": 1000,
+            "paid": "984.22"
+          },
+          {
+            "size": 1500,
+            "paid": "984.22"
+          },
+          {
+            "size": 2000,
+            "paid": "984.22"
+          },
+          {
+            "size": 2500,
+            "paid": "984.22"
+          },
+          {
+            "size": 3000,
+            "paid": "980.22"
+          },
+          {
+            "size": 3500,
+            "paid": "980.22"
+          },
+          {
+            "size": 4000,
+            "paid": "980.22"
+          },
+          {
+            "size": 4500,
+            "paid": "980.22"
+          },
+          {
+            "size": 5000,
+            "paid": "976.32"
+          }
+        ],
+        "scope": "Read-only extraction from the failed attempt native saved result, not a new audit or complete HTTP diagnostic",
+        "failure": "Native quality returned successfully; the harness then asserted equality with 988.32 from a different CLI membership policy"
+      }
     }
   ],
-  "closed_metadata_bundle_sha256": "1a0820ac4b5ef6440c2ca0a1b788b6bc3d7b3e48b3333848c88eca39dc4f396f",
-  "closed_metadata_files": 9,
+  "closed_metadata_bundle_sha256": "1d3fb38af39c6f19a5a24b8178b14468a10220fb35f082da9b9b496c2bb11798",
+  "closed_metadata_files": 15,
   "current_attempt": {
-    "attempt": 3,
-    "entry_sha256": "b3c4f8a65365e86858b72d190af558065997cfe1cd94f54e1c932c2b38a29f74",
-    "destination": "http-history-eeda184-attempt3",
+    "attempt": 4,
+    "entry_sha256": "06299b40195bde5185fd2ef1f6b2bd719477e60ef7e64bb8eb0518b108693ba4",
+    "destination": "http-history-eeda184-attempt4",
     "request_postal_code": "21120",
     "frozen_cli_default_postal_code": "22350",
-    "scope": "Transport request binds the frozen sole postal area; original input bytes and native API validation unchanged"
+    "scope": "Native API pricing normalization is preserved; history compares exact saved price/semantic hash/context, with fresh native audit. CLI 988.32 remains a separate initial upper bound, not an equality oracle."
   },
   "http_samples_passed": 0,
   "fresh_process_cache_loss_samples_passed": 0,
-  "full_release_qualified": false
+  "full_release_qualified": false,
+  "verification": {
+    "targeted_evidence_tests": 29,
+    "ruff": "PASS",
+    "compileall": "PASS"
+  }
 }

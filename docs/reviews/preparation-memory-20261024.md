@@ -121,7 +121,7 @@ går från 1 till 2; ingen revision eller raderingsepok återställs. Aktuell
 planering ska använda samma effektiva tomma skafferi, göra ny audit och
 återanvända publiceringarna utan sökanrop. En extern Python-profileringshook
 räknar native sök-/auditanrop; anropstiderna inkluderar dess kostnad.
-Totalt 25 riktade protokoll-/evidensprov passerar, liksom
+Totalt 29 riktade protokoll-/evidensprov passerar, liksom
 Ruff/compileall. Storproven är **förberedda men ännu inte körda** och ersätter
 inte de permanenta testen som tvingar fram ett checkout-avslag.
 [Separat provstatus och källhashar](preparation-memory-20261024/history-arrival-current.json).
@@ -280,7 +280,7 @@ Ofullständig evidens skrivs inte över. Fortsättningsloggen skrivs till disk
 evidensprov passerar, liksom Ruff/compileall. Samma seriella gränser och
 frysta appkod gäller. [Fortsättningskvitto och kommando](preparation-memory-20261024/continuation.json).
 
-### HTTP/historik: postnummerfel bevarat, rättat transportprov körs
+### HTTP/historik: två provverktygsfel bevarade, fjärde försök körs
 
 De första två HTTP-försöken avvisades med 422 innan något jobb startade.
 Det andra fångade valideringsfelet utan credentials eller request-input:
@@ -292,13 +292,32 @@ Provverktyget binder nu transportbegäran till underlagets entydiga postnummer,
 även för det köade standardprovet. Ursprungliga input-bytes, appens normala
 validering, priser, klocka och resursgränser är oförändrade. Tre nya kontraktsprov
 kontrollerar postnummer, oberoende kopia och avslag vid tvetydigt område.
-Försök 3 körs i en egen katalog; båda tidigare försöken och deras källhashar
+Försök 3 kördes i en egen katalog; båda tidigare försöken och deras källhashar
 bevaras. De misslyckade processerna hade exit 1, ingen OOM/swap och slutpeak
 1,233 / 1,237 GiB. [Separat HTTP-status och råhashar](preparation-memory-20261024/http-history-current.json).
 
-Full [CI på `3ea8161`](https://github.com/ossebosse/smako/actions/runs/40154521593)
-passerar inklusive browserprov före postnummerrättningen; senare revisioners
-CI redovisas separat. De 25 lokala evidensproven, Ruff och compileall passerar.
+Försök 3 levererade och sparade fem måltider för **976,32 kr** med godkänd
+aktuell audit, inga underskott och noll okända mängder. Provverktyget stoppade
+därefter på sin felaktiga likhetsjämförelse med CLI-priset 988,32 kr. Native
+API normaliserar medlemsprispolicyn till `all_advertised`, vilket ger en annan
+priskontext än CLI-armen. Detta är inte en prisregression; HTTP-resultatet
+är heller inte ett matchat CLI-jämförelseprov. Försökets slutpeak är
+**2 153 918 464 byte (2,006 GiB)**, exit 1 utan OOM/swap, hela processen 853,82 s.
+Sparat resultat lästes endast för en separat summering utan ägaruppgifter;
+hela HTTP-diagnostiken blev inte klar.
+
+Provverktyget använder nu det verkliga sparade API-resultatet som strikt
+pris-/hash-/kontextreferens för historikens återanrop. Varje nytt plananrop
+gör ordinarie aktuell audit; gammal audit är bara referensdata. CLI-målet
+988,32 kr kvarstår som separat övre gräns för första HTTP-resultatet.
+Fyra nya native-fixturprov verifierar giltigt annat pris och avslag vid ändrat
+pris, semantisk hash eller kontext. Försök 4 körs separat med tomt syntetiskt
+ägarunderlag; samtliga tidigare försök bevaras.
+
+Full [CI på `ba256ea`](https://github.com/ossebosse/smako/actions/runs/40157707628)
+och [postnummerrättningen](https://github.com/ossebosse/smako/actions/runs/40157543052)
+passerar inklusive browserprov före kontextreferensrättningen.
+De 29 lokala evidensproven, Ruff och compileall passerar; senaste CI pågår.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
 passerar före tillägget av historikprovens mätverktyg. Dessa verifieras lokalt

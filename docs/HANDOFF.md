@@ -93,13 +93,19 @@ ofullständig evidens och skriver fortsättningsloggen till disk även om
 transporten stängs. Samtliga åtta pilotgrupper är nu avslutade inom samma gränser och frysta appkod.
 Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
 det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
-Full CI på `3ea8161` passerar inklusive browserprov före HTTP-postnummerrättningen.
-Totalt 25 lokala evidenskontrakt samt Ruff/compileall passerar.
+Full CI på `ba256ea` och postnummerrättningen `d40ec5a` passerar inklusive browserprov.
+Totalt 29 lokala evidenskontrakt samt Ruff/compileall passerar.
 Första två HTTP-försöken gav 422 före jobbstart; andra svaret bevisar
 postnummerfelet 22350 mot fryst Malmöområdes 21120. Första svarets detaljer
 saknas. Provets transportbegäran använder nu underlagets entydiga postnummer,
 även i köprovet. Inga input-bytes eller native API-grindar ändrade.
-Försök 3 körs separat; båda tidigare katalogerna/kvittona/källhasharna bevaras.
+Försök 3 sparade fem måltider för 976,32 kr med audit PASS. Därefter stoppade
+provverktygets felaktiga likhetsjämförelse mot CLI-priset 988,32 kr: native API
+använder `all_advertised`, en annan priskontext. Slutpeak 2,006 GiB, exit 1
+utan OOM/swap; ingen full HTTP-kvalificering. Provets återanrop jämför nu strikt
+pris/hash/kontext mot den sparade API-menyn och gör ny aktuell audit. CLI-priset
+kvarstår som separat övre gräns för första resultatet. Försök 4 körs separat;
+alla tidigare kataloger/kvitton/källhashar och en säker resultatssummering bevaras.
 Se [HTTP-status](reviews/preparation-memory-20261024/http-history-current.json).
 Efter HTTP/historik följer tre prover för var och en av fyra kombinationer
 av nya menyidentiteter och cachevägar. Native `PlanStore.create` flyttar den
