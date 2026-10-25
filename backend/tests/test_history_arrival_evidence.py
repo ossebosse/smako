@@ -154,6 +154,20 @@ def test_history_quality_rejects_changed_same_context_result(entry,field,changed
         entry.bootstrap.validate(plan,request,reference)
 
 
+def test_history_reference_survives_native_save_and_actual_private_revision(entry,tmp_path):
+    store,private,owner,_,_,universe,facts = native_store(tmp_path)
+    with store._connect() as connection:
+        row = connection.execute('SELECT plan_id FROM consumer_plan_revisions').fetchone()
+    saved = store.get_owned(row['plan_id'],owner_actor_hash=owner)
+    reference = entry.bootstrap.validate(saved.plan,saved.request)
+    state = private.read(owner)
+    current = saved.request.model_copy(deep=True)
+    current.personal.pantry_revision = state['revision']
+    assert current.personal.pantry_revision == 1 and saved.request.personal.pantry_revision == 0
+    plan = planner(current,universe,facts,state).create(_compare_scopes=False)
+    assert entry.bootstrap.validate(plan,current,reference)['audit_passed']
+
+
 @pytest.mark.parametrize('wrong_method', [False,True])
 def test_receipt_rejects_late_peak_or_wrong_actual_method(entry,tmp_path,monkeypatch,wrong_method):
     from app.services import meal_prepared_artifacts

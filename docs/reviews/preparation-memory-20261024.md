@@ -121,7 +121,7 @@ går från 1 till 2; ingen revision eller raderingsepok återställs. Aktuell
 planering ska använda samma effektiva tomma skafferi, göra ny audit och
 återanvända publiceringarna utan sökanrop. En extern Python-profileringshook
 räknar native sök-/auditanrop; anropstiderna inkluderar dess kostnad.
-Totalt 29 riktade protokoll-/evidensprov passerar, liksom
+Totalt 30 riktade protokoll-/evidensprov passerar, liksom
 Ruff/compileall. Storproven är **förberedda men ännu inte körda** och ersätter
 inte de permanenta testen som tvingar fram ett checkout-avslag.
 [Separat provstatus och källhashar](preparation-memory-20261024/history-arrival-current.json).
@@ -311,13 +311,14 @@ pris-/hash-/kontextreferens för historikens återanrop. Varje nytt plananrop
 gör ordinarie aktuell audit; gammal audit är bara referensdata. CLI-målet
 988,32 kr kvarstår som separat övre gräns för första HTTP-resultatet.
 Fyra nya native-fixturprov verifierar giltigt annat pris och avslag vid ändrat
-pris, semantisk hash eller kontext. Försök 4 körs separat med tomt syntetiskt
+pris, semantisk hash eller kontext. Ett femte prov verifierar exakt pris/hash
+efter native Save och faktisk privat revision 0→1. Försök 4 körs separat med tomt syntetiskt
 ägarunderlag; samtliga tidigare försök bevaras.
 
 Full [CI på `ba256ea`](https://github.com/ossebosse/smako/actions/runs/40157707628)
 och [postnummerrättningen](https://github.com/ossebosse/smako/actions/runs/40157543052)
 passerar inklusive browserprov före kontextreferensrättningen.
-De 29 lokala evidensproven, Ruff och compileall passerar; senaste CI pågår.
+De 30 lokala evidensproven, Ruff och compileall passerar; senaste CI pågår.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
 passerar före tillägget av historikprovens mätverktyg. Dessa verifieras lokalt

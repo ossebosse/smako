@@ -94,7 +94,7 @@ transporten stängs. Samtliga åtta pilotgrupper är nu avslutade inom samma gr�
 Det kommande fasprovet får ett obligatoriskt kvitto efter sin rapportskrivning;
 det ursprungliga profileringsverktyget och plananropets mätgränser är oförändrade.
 Full CI på `ba256ea` och postnummerrättningen `d40ec5a` passerar inklusive browserprov.
-Totalt 29 lokala evidenskontrakt samt Ruff/compileall passerar.
+Totalt 30 lokala evidenskontrakt samt Ruff/compileall passerar.
 Första två HTTP-försöken gav 422 före jobbstart; andra svaret bevisar
 postnummerfelet 22350 mot fryst Malmöområdes 21120. Första svarets detaljer
 saknas. Provets transportbegäran använder nu underlagets entydiga postnummer,
