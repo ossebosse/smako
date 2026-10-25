@@ -1,8 +1,13 @@
 # Granskade delmängder av 800-leveransen
 
-Första delmängden: 16 grundrätter, 37 fullständiga varianter. Andra delmängden
-under `batch-02`: fyra ytterligare grundrätter, åtta varianter. Alla tre
-måltidstyper och sex kök finns med. Recepten är AI-författade och inte provlagade.
+De två första författardelmängderna omfattar 20 källkandidater och 45 fullständiga
+varianter. Redaktionell samgruppering i `batch-03`/`batch-04` gör fyra av varianterna till
+varianter av två befintliga grundrätter. Slutläget är 45 aktiva varianter, 18 nya
+bas-ID:n och två befintliga baser med nya varianter. De fyra tidigare separata
+ID:nas utgåvor är bevarade och återkallade. `batch-04` korrigerar även deras
+diversitetsfamiljer i version 1.0.1; de fyra mellanversionerna är bevarade och
+återkallade. Alla tre måltidstyper och sex kök
+finns med. Recepten är AI-författade och inte provlagade.
 
 `authoring.json` är korrigerat författarunderlag; `standardized.json` är dess
 vanliga author-resultat. `REVIEW.json` binder varje beslut till källpaket,
@@ -15,10 +20,14 @@ oförändrade paketfiler i överordnad katalog, utan dubblerad receptdata.
 ```powershell
 .venv/Scripts/python.exe -X utf8 scripts/recipe_layer/build_reviewed_subset.py
 .venv/Scripts/python.exe -X utf8 scripts/recipe_layer/build_reviewed_subset.py --batch 2
+.venv/Scripts/python.exe -X utf8 scripts/recipe_layer/reconcile_reviewed_bases.py
 ```
 
-Kör därefter vanlig author/validate/diff/import/prepare enligt
-`docs/recipes/AUTHORING.md`. Runtimefilerna namnges och binds av importörens hash;
+Kör därefter vanlig author/validate/diff/import enligt
+`docs/recipes/AUTHORING.md`. Efter import av `batch-04`, återkalla de exakt
+angivna tidigare ID:na med vanlig `revoke` enligt `batch-03/REVIEW.json` och
+`batch-04/REVIEW.json`, och
+kör `prepare`. Runtimefilerna namnges och binds av importörens hash;
 ingen handregistrering i Python används. `variant_id` skiljer varianter medan
 gemensamt `base_id` bevarar veckans upprepningsgräns. Nivåfältet ändras inte för
 att en variant heter simple eller extended.

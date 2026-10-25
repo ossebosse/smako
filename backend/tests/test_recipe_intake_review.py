@@ -137,7 +137,8 @@ def test_pitted_purchase_requirement_does_not_accept_explicit_unpitted_declarati
     from app.services.personal_policy import ProductFacts
 
     product = SimpleNamespace(name="Oliver", category="Konserver")
-    fact = ProductFacts(ingredients=("Ej urkärnade oliver",))
+    fact = ProductFacts(source="synthetic-unit-only", source_product_id="olive", source_snapshot_id="unit",
+                        ingredients=("Ej urkärnade oliver",))
     assert not _requirements_compatible("oliver", ["pitted"], product, fact)
     product.name = "Oliver Urkärnade"
     assert _requirements_compatible("oliver", ["pitted"], product, None)
@@ -195,6 +196,23 @@ def test_week_cap_cannot_be_bypassed_with_simple_and_extended_of_one_base():
     planner = SimpleNamespace(meals={"dinner": MealSettings(count=2, max_same_base_meals=1)},
                               request=SimpleNamespace(recipe_preferences=RecipePreferences(mode="complete")))
     slots = [MealSlot(id=f"dinner-{n}", day=n, meal_type="dinner", recipe=r) for n, r in enumerate(variants, 1)]
+    with pytest.raises(ValueError, match="upprepningsgränsen"):
+        PersonalPlanner._check_final(planner, slots, None, None, None, None)
+
+
+@pytest.mark.parametrize("base,variant", [("smako-greek-keftedes", "tomato-simple"),
+                                           ("smako-thai-sour-noodle-salad", "salmon-simple")])
+def test_reconciled_variants_share_repeat_cap_with_the_existing_recipe(base, variant):
+    from app.services.personal_planner import PersonalPlanner
+    from app.services.recipe_library import _scaled
+
+    rows = current_recipes()
+    original = next(r for r in rows if r.design.base_id == base and r.design.variant_id == "base")
+    new = next(r for r in rows if r.design.base_id == base and r.design.variant_id == variant)
+    planner = SimpleNamespace(meals={"dinner": MealSettings(count=2, max_same_base_meals=1)},
+                              request=SimpleNamespace(recipe_preferences=RecipePreferences(mode="complete")))
+    slots = [MealSlot(id=f"dinner-{n}", day=n, meal_type="dinner", recipe=_scaled(r, 4))
+             for n, r in enumerate((original, new), 1)]
     with pytest.raises(ValueError, match="upprepningsgränsen"):
         PersonalPlanner._check_final(planner, slots, None, None, None, None)
 
