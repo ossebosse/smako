@@ -4,6 +4,7 @@ import importlib
 import json
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import httpx
 import pytest
@@ -112,6 +113,24 @@ def test_http_rejection_evidence_excludes_inputs_and_capabilities(entry):
 def test_http_rejection_message_redacts_sensitive_text(entry):
     value = entry.bootstrap.safe_http_error(httpx.Response(422,json={'detail':'token never-copy-this'}))
     assert value['detail'] == '<sensitive message redacted>'
+
+
+@pytest.mark.parametrize('supplied', ['22350','21120'])
+def test_http_request_binds_frozen_area_without_mutating_cli_input(entry,supplied):
+    request = matrix_request({'postal_code':supplied},'distribution')
+    original = request.model_dump(mode='json')
+    prepared = SimpleNamespace(universe=SimpleNamespace(key=SimpleNamespace(postal_codes={'21120'})))
+    actual = entry.bootstrap.http_area_request(request,prepared)
+    assert actual.postal_code == '21120'
+    actual.personal.meals[0].count = 1
+    assert request.model_dump(mode='json') == original
+
+
+def test_http_request_refuses_to_guess_between_frozen_areas(entry):
+    request = matrix_request({'postal_code':'22350'},'distribution')
+    prepared = SimpleNamespace(universe=SimpleNamespace(key=SimpleNamespace(postal_codes={'21120','21211'})))
+    with pytest.raises(AssertionError,match='unambiguous frozen postal area'):
+        entry.bootstrap.http_area_request(request,prepared)
 
 
 @pytest.mark.parametrize('wrong_method', [False,True])

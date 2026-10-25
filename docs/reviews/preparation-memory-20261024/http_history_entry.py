@@ -79,6 +79,15 @@ def validate(plan, request):
     return result
 
 
+def http_area_request(request, prepared):
+    """Use the frozen universe's sole area when the CLI default is unsupported."""
+    available = sorted(prepared.universe.key.postal_codes)
+    if request.postal_code in available:
+        return request.model_copy(deep=True)
+    assert len(available) == 1, 'HTTP probe needs an unambiguous frozen postal area'
+    return request.model_copy(deep=True,update={'postal_code':available[0]})
+
+
 def http_probe(settings, prepared, facts, clock, request, output):
     # Bind the synthetic configuration before importing the app, auth or middleware.
     from app import config
@@ -187,7 +196,8 @@ def http_probe(settings, prepared, facts, clock, request, output):
         url,report['post_accept_seconds'] = post(request)
         wait_for(lambda:stats()['active']==1,10)
         from backend.scripts.planner_acceptance_matrix import matrix_request
-        other = matrix_request(json.loads((output/'base-request.json').read_bytes()),'standard')
+        other = http_area_request(
+            matrix_request(json.loads((output/'base-request.json').read_bytes()),'standard'),prepared)
         queued,report['queued_post_accept_seconds'] = post(other)
         queue_accepted_at = time.perf_counter()
         report['queued_snapshot'] = wait_for(lambda:(s if (s:=stats())['queued']==1 else None),10)
@@ -314,16 +324,21 @@ def run(args):
     from app.services.recipe_library import library_version
     method = method_signature()
     assert method == '17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6'
+    base = json.loads((args.inputs/'combined-request.json').read_bytes())
+    original_request = matrix_request(base,'distribution')
+    request = http_area_request(original_request,prepared)
     write(args.output/'protocol.json',{'mode':args.mode,'inputs':manifest,'method_signature':method,
         'library_version':library_version(),'source_commit':'eeda184926f02e73ab76e71e50c740e9dcb01b02',
+        'http_postal_area':{'cli_default':original_request.postal_code,'request':request.postal_code,
+                            'available':sorted(prepared.universe.key.postal_codes),
+                            'scope':'Transport request only; frozen input bytes and native API validation unchanged'},
         'startup_seconds':time.perf_counter()-startup_started,
         'startup_scope':'Input hashes, catalogue validation/index build, frozen facts and method/library identity; before HTTP or direct plan timing'})
-    base = json.loads((args.inputs/'combined-request.json').read_bytes())
     # Frozen public request, containing no credentials/private capabilities.
     write(args.output/'base-request.json',base)
     with patch.object(socket.socket,'connect',side_effect=AssertionError('network forbidden')):
         if args.mode == 'http':
-            http_probe(settings,prepared,facts,clock,matrix_request(base,'distribution'),args.output)
+            http_probe(settings,prepared,facts,clock,request,args.output)
         else:
             direct_probe(settings,prepared,facts,clock,args.output,args.mode)
 
