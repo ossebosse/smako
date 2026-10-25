@@ -133,6 +133,27 @@ def test_http_request_refuses_to_guess_between_frozen_areas(entry):
         entry.bootstrap.http_area_request(request,prepared)
 
 
+def test_history_quality_uses_native_result_instead_of_a_different_cli_price(entry):
+    request,universe,facts,pantry = fixture()
+    pantry['items'] = []
+    plan = planner(request,universe,facts,pantry).create(_compare_scopes=False)
+    result = entry.bootstrap.validate(plan,request)
+    assert result['audit_passed'] and result['paid'] != 988.32
+    assert entry.bootstrap.validate(plan,request,result) == result
+
+
+@pytest.mark.parametrize('field,changed', [
+    ('paid',0),('semantic_sha256','changed'),('verified_reference',{'context':'different'})])
+def test_history_quality_rejects_changed_same_context_result(entry,field,changed):
+    request,universe,facts,pantry = fixture()
+    pantry['items'] = []
+    plan = planner(request,universe,facts,pantry).create(_compare_scopes=False)
+    result = entry.bootstrap.validate(plan,request)
+    reference = {**result,field:changed}
+    with pytest.raises(AssertionError,match='changed'):
+        entry.bootstrap.validate(plan,request,reference)
+
+
 @pytest.mark.parametrize('wrong_method', [False,True])
 def test_receipt_rejects_late_peak_or_wrong_actual_method(entry,tmp_path,monkeypatch,wrong_method):
     from app.services import meal_prepared_artifacts
