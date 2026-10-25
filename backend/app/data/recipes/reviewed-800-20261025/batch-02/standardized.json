@@ -1,0 +1,2771 @@
+{
+ "schema_version": "smako-meal-pack-v1",
+ "pack_id": "recipe-intake-reviewed-20261025-02",
+ "recipes": [
+  {
+   "name": "Italienskinspirerad kikärtskaka med tomat – enkel",
+   "servings": 1,
+   "ingredients": [
+    {
+     "name": "kikärtsmjöl",
+     "canonical_name": "kikärtsmjöl",
+     "quantity": 65.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:intake_chickpea_flour"
+     ],
+     "quantity_min": 65.0,
+     "quantity_max": 65.0,
+     "quantity_step": 65.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 0.6,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 0.6,
+     "quantity_max": 0.6,
+     "quantity_step": 0.6
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 120.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 120.0,
+     "quantity_max": 120.0,
+     "quantity_step": 120.0
+    },
+    {
+     "name": "basilika",
+     "canonical_name": "basilika",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 4.0,
+     "quantity_max": 4.0,
+     "quantity_step": 4.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 5.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 5.0,
+     "quantity_max": 5.0,
+     "quantity_step": 5.0
+    }
+   ],
+   "instructions": [
+    "För komponenten Tunn kikärtskaka: Vispa samman kikärtsmjöl och salt med 150 ml vatten till en jämn smet.",
+    "För komponenten Tunn kikärtskaka: Låt smeten vila så att mjölet hinner svälla. Rör om innan den tillagas.",
+    "Sätt ugnen på 230 °C. Ställ in en grund metallform, cirka 20 cm bred.",
+    "Låt ugnen och formen bli helt varma, cirka 15 minuter.",
+    "Ta ut formen med grytlappar. Häll hela mängden olja i formen, rör smeten och häll i ett tunt lager, högst en centimeter. Ställ tillbaka formen i ugnen.",
+    "Baka cirka 25 minuter tills kanterna har fått färg och mitten är fast och helt genomgräddad.",
+    "För komponenten Tomatsallad: Skölj och ansa tomat och basilika. Skär frukt och grönsaker i små bitar. Lägg upp tomat, basilika och citronjuice tillsammans och fördela samtliga angivna mängder över portionen.",
+    "Servera tunn kikärtskaka och tomatsallad tillsammans. Fördela hela de angivna komponentmängderna till en portion."
+   ],
+   "design": {
+    "base_id": "smako-italian-breakfast-chickpea-flour-oven-flatbread",
+    "version": "1.0.0",
+    "variant_id": "simple",
+    "cuisines": [
+     "italian"
+    ],
+    "family": "kikärtsmjölskaka",
+    "primary_ingredient": "kikärtsmjöl",
+    "method": "bake",
+    "side": "Tomatsallad",
+    "flavor_profile": [
+     "salt",
+     "basilika",
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Tunn kikärtskaka",
+      "amounts": [
+       {
+        "ingredient_key": "kikärtsmjöl|dry",
+        "name": "Kikärtsmjöl, torr vikt",
+        "note": "",
+        "quantity": 65.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja, volym som såld (ml)",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt, mängd som såld",
+        "note": "",
+        "quantity": 0.6,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Tomatsallad",
+      "amounts": [
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat, rå ätlig vikt",
+        "note": "",
+        "quantity": 120.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "basilika|raw_edible",
+        "name": "Basilika, rå ätlig vikt",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice, volym som såld (ml)",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "För komponenten Tunn kikärtskaka: Vispa samman kikärtsmjöl och salt med 150 ml vatten till en jämn smet.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "salt|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "150 ml",
+        150.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "För komponenten Tunn kikärtskaka: Låt smeten vila så att mjölet hinner svälla. Rör om innan den tillagas.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 30,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Sätt ugnen på 230 °C. Ställ in en grund metallform, cirka 20 cm bred.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Låt ugnen och formen bli helt varma, cirka 15 minuter.",
+      "ingredient_keys": [],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Ta ut formen med grytlappar. Häll hela mängden olja i formen, rör smeten och häll i ett tunt lager, högst en centimeter. Ställ tillbaka formen i ugnen.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     },
+     {
+      "id": "s6",
+      "text": "Baka cirka 25 minuter tills kanterna har fått färg och mitten är fast och helt genomgräddad.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s5"
+      ],
+      "duration_minutes": 25,
+      "parallel_group": null
+     },
+     {
+      "id": "s7",
+      "text": "För komponenten Tomatsallad: Skölj och ansa tomat och basilika. Skär frukt och grönsaker i små bitar. Lägg upp tomat, basilika och citronjuice tillsammans och fördela samtliga angivna mängder över portionen.",
+      "ingredient_keys": [
+       "basilika|raw_edible",
+       "citronjuice|as_sold",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s6"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s8",
+      "text": "Servera tunn kikärtskaka och tomatsallad tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+      "ingredient_keys": [
+       "basilika|raw_edible",
+       "citronjuice|as_sold",
+       "kikärtsmjöl|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s7"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 84,
+    "equipment": [
+     "Köksvåg",
+     "Måttsats och måttkanna",
+     "Skål",
+     "Visp",
+     "Skärbräda",
+     "Kniv",
+     "Rivjärn",
+     "Ugn",
+     "Grund portionsform",
+     "Pensel",
+     "Provsticka",
+     "Grytlappar"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 5,
+    "provenance": {
+     "reviewed_at": "2026-10-25",
+     "notes": "Innehållsgranskad utvecklingsleverans 2026-10-25. AI-författad och inte provlagad. Källoriginal: paket/smako-recept-paket-124.json SHA-256 197ac807499612e6fc4977be44ca3cf2fd7570e1c4c855ebdd0814d7f3d9d5b0. Produktköp, mängdomvandling, diet, näring, allergener och ekologiskt kvalificeras separat för faktiska produkter och användarval."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "breakfast"
+    ],
+    "active_minutes": 14,
+    "waiting_minutes": 70,
+    "total_minutes": 84
+   }
+  },
+  {
+   "name": "Italienskinspirerad kikärtskaka med tomat – utökad",
+   "servings": 1,
+   "ingredients": [
+    {
+     "name": "kikärtsmjöl",
+     "canonical_name": "kikärtsmjöl",
+     "quantity": 65.0,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:intake_chickpea_flour"
+     ],
+     "quantity_min": 65.0,
+     "quantity_max": 65.0,
+     "quantity_step": 65.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 10.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 10.0,
+     "quantity_max": 10.0,
+     "quantity_step": 10.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 0.6,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 0.6,
+     "quantity_max": 0.6,
+     "quantity_step": 0.6
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 120.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 120.0,
+     "quantity_max": 120.0,
+     "quantity_step": 120.0
+    },
+    {
+     "name": "basilika",
+     "canonical_name": "basilika",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 4.0,
+     "quantity_max": 4.0,
+     "quantity_step": 4.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 5.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 5.0,
+     "quantity_max": 5.0,
+     "quantity_step": 5.0
+    },
+    {
+     "name": "keso",
+     "canonical_name": "keso",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "plain"
+     ],
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "oliver",
+     "canonical_name": "oliver",
+     "quantity": 15.0,
+     "unit": "g",
+     "form": "preserved_drained",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pitted"
+     ],
+     "quantity_min": 15.0,
+     "quantity_max": 15.0,
+     "quantity_step": 15.0
+    }
+   ],
+   "instructions": [
+    "För komponenten Tunn kikärtskaka: Vispa samman kikärtsmjöl och salt med 150 ml vatten till en jämn smet.",
+    "För komponenten Tunn kikärtskaka: Låt smeten vila så att mjölet hinner svälla. Rör om innan den tillagas.",
+    "Sätt ugnen på 230 °C. Ställ in en grund metallform, cirka 20 cm bred.",
+    "Låt ugnen och formen bli helt varma, cirka 15 minuter.",
+    "Ta ut formen med grytlappar. Häll hela mängden olja i formen, rör smeten och häll i ett tunt lager, högst en centimeter. Ställ tillbaka formen i ugnen.",
+    "Baka cirka 25 minuter tills kanterna har fått färg och mitten är fast och helt genomgräddad.",
+    "För komponenten Tomatsallad: Skölj och ansa tomat och basilika. Skär frukt och grönsaker i små bitar. Lägg upp tomat, basilika och citronjuice tillsammans och fördela samtliga angivna mängder över portionen.",
+    "För komponenten Keso och oliver: Lägg upp keso och oliver tillsammans och fördela samtliga angivna mängder över portionen.",
+    "Servera tunn kikärtskaka, tomatsallad och keso och oliver tillsammans. Fördela hela de angivna komponentmängderna till en portion."
+   ],
+   "design": {
+    "base_id": "smako-italian-breakfast-chickpea-flour-oven-flatbread",
+    "version": "1.0.0",
+    "variant_id": "extended",
+    "cuisines": [
+     "italian"
+    ],
+    "family": "kikärtsmjölskaka",
+    "primary_ingredient": "kikärtsmjöl",
+    "method": "bake",
+    "side": "Tomatsallad, Keso och oliver",
+    "flavor_profile": [
+     "salt",
+     "basilika",
+     "citronjuice",
+     "oliver"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Tunn kikärtskaka",
+      "amounts": [
+       {
+        "ingredient_key": "kikärtsmjöl|dry",
+        "name": "Kikärtsmjöl, torr vikt",
+        "note": "",
+        "quantity": 65.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja, volym som såld (ml)",
+        "note": "",
+        "quantity": 10.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt, mängd som såld",
+        "note": "",
+        "quantity": 0.6,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Tomatsallad",
+      "amounts": [
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat, rå ätlig vikt",
+        "note": "",
+        "quantity": 120.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "basilika|raw_edible",
+        "name": "Basilika, rå ätlig vikt",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice, volym som såld (ml)",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Keso och oliver",
+      "amounts": [
+       {
+        "ingredient_key": "keso|as_sold",
+        "name": "Naturell keso, mängd som såld utan extra avrinning",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "oliver|preserved_drained",
+        "name": "Oliver, konserverad avrunnen vikt",
+        "note": "",
+        "quantity": 15.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "För komponenten Tunn kikärtskaka: Vispa samman kikärtsmjöl och salt med 150 ml vatten till en jämn smet.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "salt|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "150 ml",
+        150.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "För komponenten Tunn kikärtskaka: Låt smeten vila så att mjölet hinner svälla. Rör om innan den tillagas.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 30,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Sätt ugnen på 230 °C. Ställ in en grund metallform, cirka 20 cm bred.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Låt ugnen och formen bli helt varma, cirka 15 minuter.",
+      "ingredient_keys": [],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Ta ut formen med grytlappar. Häll hela mängden olja i formen, rör smeten och häll i ett tunt lager, högst en centimeter. Ställ tillbaka formen i ugnen.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     },
+     {
+      "id": "s6",
+      "text": "Baka cirka 25 minuter tills kanterna har fått färg och mitten är fast och helt genomgräddad.",
+      "ingredient_keys": [
+       "kikärtsmjöl|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold"
+      ],
+      "depends_on": [
+       "s5"
+      ],
+      "duration_minutes": 25,
+      "parallel_group": null
+     },
+     {
+      "id": "s7",
+      "text": "För komponenten Tomatsallad: Skölj och ansa tomat och basilika. Skär frukt och grönsaker i små bitar. Lägg upp tomat, basilika och citronjuice tillsammans och fördela samtliga angivna mängder över portionen.",
+      "ingredient_keys": [
+       "basilika|raw_edible",
+       "citronjuice|as_sold",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s6"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s8",
+      "text": "För komponenten Keso och oliver: Lägg upp keso och oliver tillsammans och fördela samtliga angivna mängder över portionen.",
+      "ingredient_keys": [
+       "keso|as_sold",
+       "oliver|preserved_drained"
+      ],
+      "depends_on": [
+       "s7"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s9",
+      "text": "Servera tunn kikärtskaka, tomatsallad och keso och oliver tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+      "ingredient_keys": [
+       "basilika|raw_edible",
+       "citronjuice|as_sold",
+       "keso|as_sold",
+       "kikärtsmjöl|dry",
+       "oliver|preserved_drained",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s8"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 88,
+    "equipment": [
+     "Köksvåg",
+     "Måttsats och måttkanna",
+     "Skål",
+     "Visp",
+     "Skärbräda",
+     "Kniv",
+     "Rivjärn",
+     "Ugn",
+     "Grund portionsform",
+     "Pensel",
+     "Provsticka",
+     "Grytlappar"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 7,
+    "provenance": {
+     "reviewed_at": "2026-10-25",
+     "notes": "Innehållsgranskad utvecklingsleverans 2026-10-25. AI-författad och inte provlagad. Källoriginal: paket/smako-recept-paket-124.json SHA-256 197ac807499612e6fc4977be44ca3cf2fd7570e1c4c855ebdd0814d7f3d9d5b0. Produktköp, mängdomvandling, diet, näring, allergener och ekologiskt kvalificeras separat för faktiska produkter och användarval."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "breakfast"
+    ],
+    "active_minutes": 18,
+    "waiting_minutes": 70,
+    "total_minutes": 88
+   }
+  },
+  {
+   "name": "Tortillakorg med ägg, bönor och majs – enkel",
+   "servings": 1,
+   "ingredients": [
+    {
+     "name": "tortillas",
+     "canonical_name": "tortillas",
+     "quantity": 45.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "quantity_min": 45.0,
+     "quantity_max": 45.0,
+     "quantity_step": 45.0
+    },
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 70.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 70.0,
+     "quantity_max": 70.0,
+     "quantity_step": 70.0
+    },
+    {
+     "name": "kidneybönor",
+     "canonical_name": "kidneybönor",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "majs",
+     "canonical_name": "majs",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 3.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 0.7,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 0.7,
+     "quantity_max": 0.7,
+     "quantity_step": 0.7
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 0.4,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 0.4,
+     "quantity_max": 0.4,
+     "quantity_step": 0.4
+    }
+   ],
+   "instructions": [
+    "För komponenten Fylld tortillakorg: Värm ugnen till 180 °C. Pensla en stor muffinsform med oljan. Tryck ner tortillan till en korg. Värm majsen med 20 ml vatten i en liten kastrull tills genomvarm och häll av.",
+    "För komponenten Fylld tortillakorg: Blanda bönor, majs, paprikapulver och salt i korgen. Vispa ägget och häll över utan att fylla ända upp.",
+    "För komponenten Fylld tortillakorg: Baka tills tortillan är krispig och äggstanningen helt fast. Kontrollera minst 72 °C i mitten.",
+    "Servera fylld tortillakorg tillsammans. Fördela hela de angivna komponentmängderna till en portion."
+   ],
+   "design": {
+    "base_id": "smako-mexican-breakfast-baked-tortilla-egg-nest",
+    "version": "1.0.0",
+    "variant_id": "simple",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "tortillakorg",
+    "primary_ingredient": "tortillas",
+    "method": "oven",
+    "side": "ingår i huvudkomponenten",
+    "flavor_profile": [
+     "paprikapulver",
+     "salt"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fylld tortillakorg",
+      "amounts": [
+       {
+        "ingredient_key": "tortillas|as_sold",
+        "name": "Tortillas, mängd som såld",
+        "note": "",
+        "quantity": 45.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg, uppvägd rå ätlig vikt utan skal",
+        "note": "",
+        "quantity": 70.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kidneybönor|cooked_drained",
+        "name": "Kidneybönor, tillagad avrunnen vikt",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "majs|as_sold",
+        "name": "Fryst naturell majs, mängd som såld",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja, volym som såld (ml)",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver, torr vikt",
+        "note": "",
+        "quantity": 0.7,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt, mängd som såld",
+        "note": "",
+        "quantity": 0.4,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "För komponenten Fylld tortillakorg: Värm ugnen till 180 °C. Pensla en stor muffinsform med oljan. Tryck ner tortillan till en korg. Värm majsen med 20 ml vatten i en liten kastrull tills genomvarm och häll av.",
+      "ingredient_keys": [
+       "majs|as_sold",
+       "rapsolja|as_sold",
+       "tortillas|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "20 ml",
+        20.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "För komponenten Fylld tortillakorg: Blanda bönor, majs, paprikapulver och salt i korgen. Vispa ägget och häll över utan att fylla ända upp.",
+      "ingredient_keys": [
+       "kidneybönor|cooked_drained",
+       "majs|as_sold",
+       "paprikapulver|dry",
+       "salt|as_sold",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "För komponenten Fylld tortillakorg: Baka tills tortillan är krispig och äggstanningen helt fast. Kontrollera minst 72 °C i mitten.",
+      "ingredient_keys": [
+       "tortillas|as_sold",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 22,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Servera fylld tortillakorg tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+      "ingredient_keys": [
+       "kidneybönor|cooked_drained",
+       "majs|as_sold",
+       "paprikapulver|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "tortillas|as_sold",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 32,
+    "equipment": [
+     "Köksvåg",
+     "Måttsats och måttkanna",
+     "Ugn",
+     "Stor muffinsform",
+     "Kastrull",
+     "Visp",
+     "Termometer"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 6,
+    "provenance": {
+     "reviewed_at": "2026-10-25",
+     "notes": "Innehållsgranskad utvecklingsleverans 2026-10-25. AI-författad och inte provlagad. Källoriginal: paket/smako-recept-paket-125.json SHA-256 af60dacee717594c5a4b715f82b98b7fb12b010c10a2075a0e91171c437a3aaa. Produktköp, mängdomvandling, diet, näring, allergener och ekologiskt kvalificeras separat för faktiska produkter och användarval."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "breakfast"
+    ],
+    "active_minutes": 10,
+    "waiting_minutes": 22,
+    "total_minutes": 32
+   }
+  },
+  {
+   "name": "Tortillakorg med ägg, bönor och majs – utökad",
+   "servings": 1,
+   "ingredients": [
+    {
+     "name": "tortillas",
+     "canonical_name": "tortillas",
+     "quantity": 45.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "quantity_min": 45.0,
+     "quantity_max": 45.0,
+     "quantity_step": 45.0
+    },
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 70.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 70.0,
+     "quantity_max": 70.0,
+     "quantity_step": 70.0
+    },
+    {
+     "name": "kidneybönor",
+     "canonical_name": "kidneybönor",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "cooked_drained",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "majs",
+     "canonical_name": "majs",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 3.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "paprikapulver",
+     "canonical_name": "paprikapulver",
+     "quantity": 0.7,
+     "unit": "g",
+     "form": "dry",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "ground"
+     ],
+     "quantity_min": 0.7,
+     "quantity_max": 0.7,
+     "quantity_step": 0.7
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 0.4,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 0.4,
+     "quantity_max": 0.4,
+     "quantity_step": 0.4
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "yoghurt naturell",
+     "canonical_name": "yoghurt naturell",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "sauce",
+     "product_requirements": [
+      "plain",
+      "thick"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "limejuice",
+     "canonical_name": "limejuice",
+     "quantity": 5.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "flavour",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 5.0,
+     "quantity_max": 5.0,
+     "quantity_step": 5.0
+    }
+   ],
+   "instructions": [
+    "För komponenten Fylld tortillakorg: Värm ugnen till 180 °C. Pensla en stor muffinsform med oljan. Tryck ner tortillan till en korg. Värm majsen med 20 ml vatten i en liten kastrull tills genomvarm och häll av.",
+    "För komponenten Fylld tortillakorg: Blanda bönor, majs, paprikapulver och salt i korgen. Vispa ägget och häll över utan att fylla ända upp.",
+    "För komponenten Fylld tortillakorg: Baka tills tortillan är krispig och äggstanningen helt fast. Kontrollera minst 72 °C i mitten.",
+    "För komponenten Gurka och limekräm: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka, yoghurt naturell och limejuice tillsammans och fördela samtliga angivna mängder över portionen.",
+    "Servera fylld tortillakorg och gurka och limekräm tillsammans. Fördela hela de angivna komponentmängderna till en portion."
+   ],
+   "design": {
+    "base_id": "smako-mexican-breakfast-baked-tortilla-egg-nest",
+    "version": "1.0.0",
+    "variant_id": "extended",
+    "cuisines": [
+     "mexican"
+    ],
+    "family": "tortillakorg",
+    "primary_ingredient": "tortillas",
+    "method": "oven",
+    "side": "Gurka och limekräm",
+    "flavor_profile": [
+     "paprikapulver",
+     "salt",
+     "yoghurt naturell",
+     "limejuice"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Fylld tortillakorg",
+      "amounts": [
+       {
+        "ingredient_key": "tortillas|as_sold",
+        "name": "Tortillas, mängd som såld",
+        "note": "",
+        "quantity": 45.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg, uppvägd rå ätlig vikt utan skal",
+        "note": "",
+        "quantity": 70.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "kidneybönor|cooked_drained",
+        "name": "Kidneybönor, tillagad avrunnen vikt",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "majs|as_sold",
+        "name": "Fryst naturell majs, mängd som såld",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja, volym som såld (ml)",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "paprikapulver|dry",
+        "name": "Paprikapulver, torr vikt",
+        "note": "",
+        "quantity": 0.7,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt, mängd som såld",
+        "note": "",
+        "quantity": 0.4,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Gurka och limekräm",
+      "amounts": [
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka, rå ätlig vikt",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "yoghurt naturell|as_sold",
+        "name": "Tjock naturell yoghurt",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "limejuice|as_sold",
+        "name": "Limejuice, volym som såld (ml)",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "För komponenten Fylld tortillakorg: Värm ugnen till 180 °C. Pensla en stor muffinsform med oljan. Tryck ner tortillan till en korg. Värm majsen med 20 ml vatten i en liten kastrull tills genomvarm och häll av.",
+      "ingredient_keys": [
+       "majs|as_sold",
+       "rapsolja|as_sold",
+       "tortillas|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 6,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "20 ml",
+        20.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "För komponenten Fylld tortillakorg: Blanda bönor, majs, paprikapulver och salt i korgen. Vispa ägget och häll över utan att fylla ända upp.",
+      "ingredient_keys": [
+       "kidneybönor|cooked_drained",
+       "majs|as_sold",
+       "paprikapulver|dry",
+       "salt|as_sold",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "För komponenten Fylld tortillakorg: Baka tills tortillan är krispig och äggstanningen helt fast. Kontrollera minst 72 °C i mitten.",
+      "ingredient_keys": [
+       "tortillas|as_sold",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 22,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "För komponenten Gurka och limekräm: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp gurka, yoghurt naturell och limejuice tillsammans och fördela samtliga angivna mängder över portionen.",
+      "ingredient_keys": [
+       "gurka|raw_edible",
+       "limejuice|as_sold",
+       "yoghurt naturell|as_sold"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Servera fylld tortillakorg och gurka och limekräm tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+      "ingredient_keys": [
+       "gurka|raw_edible",
+       "kidneybönor|cooked_drained",
+       "limejuice|as_sold",
+       "majs|as_sold",
+       "paprikapulver|dry",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "tortillas|as_sold",
+       "yoghurt naturell|as_sold",
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 36,
+    "equipment": [
+     "Köksvåg",
+     "Måttsats och måttkanna",
+     "Ugn",
+     "Stor muffinsform",
+     "Kastrull",
+     "Visp",
+     "Termometer",
+     "Skärbräda",
+     "Kniv",
+     "Skål"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 9,
+    "provenance": {
+     "reviewed_at": "2026-10-25",
+     "notes": "Innehållsgranskad utvecklingsleverans 2026-10-25. AI-författad och inte provlagad. Källoriginal: paket/smako-recept-paket-125.json SHA-256 af60dacee717594c5a4b715f82b98b7fb12b010c10a2075a0e91171c437a3aaa. Produktköp, mängdomvandling, diet, näring, allergener och ekologiskt kvalificeras separat för faktiska produkter och användarval."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "breakfast"
+    ],
+    "active_minutes": 14,
+    "waiting_minutes": 22,
+    "total_minutes": 36
+   }
+  },
+  {
+   "name": "Thailändskt inspirerad ångad äggstanning med ärtor – enkel",
+   "servings": 1,
+   "ingredients": [
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ärtor",
+     "canonical_name": "ärtor",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "sojasås",
+     "canonical_name": "sojasås",
+     "quantity": 5.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 5.0,
+     "quantity_max": 5.0,
+     "quantity_step": 5.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    }
+   ],
+   "instructions": [
+    "För komponenten Ångad äggstanning: Värm ärtor med 60 ml vatten tills genomvarmt och häll av noga. Vispa försiktigt ihop den uppvägda äggmängden med 80 ml vatten. Blanda ner sojasås. Vänd ner de förberedda grönsakerna. Häll i en grund värmetålig portionsskål och täck med ett litet lock eller en tallrik.",
+    "Häll 700 ml vatten i en kastrull och sätt i en ånginsats ovanför vattenytan. Koka upp och ställ skålen i insatsen. Lägg på kastrullens lock.",
+    "Ånga försiktigt utan häftig kokning i cirka 18 minuter tills äggstanningen har satt sig.",
+    "För komponenten Ångad äggstanning: Mät i äggrättens tjockaste del: minst 72 °C och ingen lös äggsmet. Fortsätt tillagningen om det behövs.",
+    "För komponenten Bröd och gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp bröd och gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+    "Servera ångad äggstanning och bröd och gurka tillsammans. Fördela hela de angivna komponentmängderna till en portion."
+   ],
+   "design": {
+    "base_id": "smako-thai-breakfast-steamed-egg-custard-peas",
+    "version": "1.0.0",
+    "variant_id": "simple",
+    "cuisines": [
+     "thai"
+    ],
+    "family": "ångad äggstanning",
+    "primary_ingredient": "ägg",
+    "method": "pot",
+    "side": "Bröd och gurka",
+    "flavor_profile": [
+     "sojasås"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Ångad äggstanning",
+      "amounts": [
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg, uppvägd rå ätlig vikt utan skal",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ärtor|as_sold",
+        "name": "Frysta naturella ärtor, mängd som såld",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "sojasås|as_sold",
+        "name": "Sojasås, volym som såld (ml)",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Bröd och gurka",
+      "amounts": [
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Mjukt skivat bröd, mängd som såld",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka, rå ätlig vikt",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "För komponenten Ångad äggstanning: Värm ärtor med 60 ml vatten tills genomvarmt och häll av noga. Vispa försiktigt ihop den uppvägda äggmängden med 80 ml vatten. Blanda ner sojasås. Vänd ner de förberedda grönsakerna. Häll i en grund värmetålig portionsskål och täck med ett litet lock eller en tallrik.",
+      "ingredient_keys": [
+       "sojasås|as_sold",
+       "ägg|raw_edible",
+       "ärtor|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "60 ml",
+        60.0
+       ],
+       [
+        "80 ml",
+        80.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Häll 700 ml vatten i en kastrull och sätt i en ånginsats ovanför vattenytan. Koka upp och ställ skålen i insatsen. Lägg på kastrullens lock.",
+      "ingredient_keys": [
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "700 ml",
+        700.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Ånga försiktigt utan häftig kokning i cirka 18 minuter tills äggstanningen har satt sig.",
+      "ingredient_keys": [
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "För komponenten Ångad äggstanning: Mät i äggrättens tjockaste del: minst 72 °C och ingen lös äggsmet. Fortsätt tillagningen om det behövs.",
+      "ingredient_keys": [
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "För komponenten Bröd och gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp bröd och gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "gurka|raw_edible"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s6",
+      "text": "Servera ångad äggstanning och bröd och gurka tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "gurka|raw_edible",
+       "sojasås|as_sold",
+       "ägg|raw_edible",
+       "ärtor|as_sold"
+      ],
+      "depends_on": [
+       "s5"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 32,
+    "equipment": [
+     "Köksvåg",
+     "Måttsats och måttkanna",
+     "Skål",
+     "Gaffel",
+     "Kniv",
+     "Skärbräda",
+     "Digital kökstermometer",
+     "Kastrull med lock",
+     "Ånginsats",
+     "Värmetålig portionsskål med lock"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 5,
+    "provenance": {
+     "reviewed_at": "2026-10-25",
+     "notes": "Innehållsgranskad utvecklingsleverans 2026-10-25. AI-författad och inte provlagad. Källoriginal: paket/smako-recept-paket-131.json SHA-256 cedf46883b1b52a1949d822e92ff6370025c63f9a3d0eae41832ce6ef6c3b9be. Produktköp, mängdomvandling, diet, näring, allergener och ekologiskt kvalificeras separat för faktiska produkter och användarval."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "breakfast"
+    ],
+    "active_minutes": 14,
+    "waiting_minutes": 18,
+    "total_minutes": 32
+   }
+  },
+  {
+   "name": "Thailändskt inspirerad ångad äggstanning med ärtor – utökad",
+   "servings": 1,
+   "ingredients": [
+    {
+     "name": "ägg",
+     "canonical_name": "ägg",
+     "quantity": 100.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "product_requirements": [
+      "pack:egg"
+     ],
+     "quantity_min": 100.0,
+     "quantity_max": 100.0,
+     "quantity_step": 100.0
+    },
+    {
+     "name": "ärtor",
+     "canonical_name": "ärtor",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "vegetable",
+     "product_requirements": [
+      "plain",
+      "frozen"
+     ],
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "sojasås",
+     "canonical_name": "sojasås",
+     "quantity": 5.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 5.0,
+     "quantity_max": 5.0,
+     "quantity_step": 5.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 50.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 50.0,
+     "quantity_max": 50.0,
+     "quantity_step": 50.0
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "champinjoner",
+     "canonical_name": "champinjoner",
+     "quantity": 70.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "vegetable",
+     "quantity_min": 70.0,
+     "quantity_max": 70.0,
+     "quantity_step": 70.0
+    },
+    {
+     "name": "ingefära",
+     "canonical_name": "ingefära",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 4.0,
+     "quantity_max": 4.0,
+     "quantity_step": 4.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 4.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 4.0,
+     "quantity_max": 4.0,
+     "quantity_step": 4.0
+    }
+   ],
+   "instructions": [
+    "För komponenten Ångad äggstanning: Värm ärtor med 60 ml vatten tills genomvarmt och häll av noga. Vispa försiktigt ihop den uppvägda äggmängden med 80 ml vatten. Blanda ner sojasås. Vänd ner de förberedda grönsakerna. Häll i en grund värmetålig portionsskål och täck med ett litet lock eller en tallrik.",
+    "Häll 700 ml vatten i en kastrull och sätt i en ånginsats ovanför vattenytan. Koka upp och ställ skålen i insatsen. Lägg på kastrullens lock.",
+    "Ånga försiktigt utan häftig kokning i cirka 18 minuter tills äggstanningen har satt sig.",
+    "För komponenten Ångad äggstanning: Mät i äggrättens tjockaste del: minst 72 °C och ingen lös äggsmet. Fortsätt tillagningen om det behövs.",
+    "För komponenten Bröd och gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp bröd och gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+    "För komponenten Ingefärssvamp: Skölj och ansa champinjoner och ingefära. Skär i små jämna bitar; finhacka lök, ingefära och örter. ",
+    "För komponenten Ingefärssvamp: Värm rapsolja i pannan. Tillsätt champinjoner och ingefära. Tillaga på medelvärme under omrörning tills grönsakerna är mjuka och allt är genomvarmt. ",
+    "Servera ångad äggstanning, bröd och gurka och ingefärssvamp tillsammans. Fördela hela de angivna komponentmängderna till en portion."
+   ],
+   "design": {
+    "base_id": "smako-thai-breakfast-steamed-egg-custard-peas",
+    "version": "1.0.0",
+    "variant_id": "extended",
+    "cuisines": [
+     "thai"
+    ],
+    "family": "ångad äggstanning",
+    "primary_ingredient": "ägg",
+    "method": "pot",
+    "side": "Bröd och gurka, Ingefärssvamp",
+    "flavor_profile": [
+     "sojasås",
+     "ingefära"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Ångad äggstanning",
+      "amounts": [
+       {
+        "ingredient_key": "ägg|raw_edible",
+        "name": "Ägg, uppvägd rå ätlig vikt utan skal",
+        "note": "",
+        "quantity": 100.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ärtor|as_sold",
+        "name": "Frysta naturella ärtor, mängd som såld",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "sojasås|as_sold",
+        "name": "Sojasås, volym som såld (ml)",
+        "note": "",
+        "quantity": 5.0,
+        "unit": "ml"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Bröd och gurka",
+      "amounts": [
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Mjukt skivat bröd, mängd som såld",
+        "note": "",
+        "quantity": 50.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka, rå ätlig vikt",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Ingefärssvamp",
+      "amounts": [
+       {
+        "ingredient_key": "champinjoner|raw_edible",
+        "name": "Champinjoner, rå ätlig vikt",
+        "note": "",
+        "quantity": 70.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "ingefära|raw_edible",
+        "name": "Ingefära, rå ätlig vikt",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja, volym som såld (ml)",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "ml"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "För komponenten Ångad äggstanning: Värm ärtor med 60 ml vatten tills genomvarmt och häll av noga. Vispa försiktigt ihop den uppvägda äggmängden med 80 ml vatten. Blanda ner sojasås. Vänd ner de förberedda grönsakerna. Häll i en grund värmetålig portionsskål och täck med ett litet lock eller en tallrik.",
+      "ingredient_keys": [
+       "sojasås|as_sold",
+       "ägg|raw_edible",
+       "ärtor|as_sold"
+      ],
+      "depends_on": [],
+      "duration_minutes": 5,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "60 ml",
+        60.0
+       ],
+       [
+        "80 ml",
+        80.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Häll 700 ml vatten i en kastrull och sätt i en ånginsats ovanför vattenytan. Koka upp och ställ skålen i insatsen. Lägg på kastrullens lock.",
+      "ingredient_keys": [
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "700 ml",
+        700.0
+       ]
+      ]
+     },
+     {
+      "id": "s3",
+      "text": "Ånga försiktigt utan häftig kokning i cirka 18 minuter tills äggstanningen har satt sig.",
+      "ingredient_keys": [
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 18,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "För komponenten Ångad äggstanning: Mät i äggrättens tjockaste del: minst 72 °C och ingen lös äggsmet. Fortsätt tillagningen om det behövs.",
+      "ingredient_keys": [
+       "ägg|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "För komponenten Bröd och gurka: Skölj och ansa gurka. Skär frukt och grönsaker i små bitar. Lägg upp bröd och gurka tillsammans och fördela samtliga angivna mängder över portionen.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "gurka|raw_edible"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s6",
+      "text": "För komponenten Ingefärssvamp: Skölj och ansa champinjoner och ingefära. Skär i små jämna bitar; finhacka lök, ingefära och örter. ",
+      "ingredient_keys": [
+       "champinjoner|raw_edible",
+       "ingefära|raw_edible"
+      ],
+      "depends_on": [
+       "s5"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null
+     },
+     {
+      "id": "s7",
+      "text": "För komponenten Ingefärssvamp: Värm rapsolja i pannan. Tillsätt champinjoner och ingefära. Tillaga på medelvärme under omrörning tills grönsakerna är mjuka och allt är genomvarmt. ",
+      "ingredient_keys": [
+       "champinjoner|raw_edible",
+       "ingefära|raw_edible",
+       "rapsolja|as_sold"
+      ],
+      "depends_on": [
+       "s6"
+      ],
+      "duration_minutes": 6,
+      "parallel_group": null
+     },
+     {
+      "id": "s8",
+      "text": "Servera ångad äggstanning, bröd och gurka och ingefärssvamp tillsammans. Fördela hela de angivna komponentmängderna till en portion.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "champinjoner|raw_edible",
+       "gurka|raw_edible",
+       "ingefära|raw_edible",
+       "rapsolja|as_sold",
+       "sojasås|as_sold",
+       "ägg|raw_edible",
+       "ärtor|as_sold"
+      ],
+      "depends_on": [
+       "s7"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 42,
+    "equipment": [
+     "Köksvåg",
+     "Måttsats och måttkanna",
+     "Skål",
+     "Gaffel",
+     "Kniv",
+     "Skärbräda",
+     "Digital kökstermometer",
+     "Kastrull med lock",
+     "Ånginsats",
+     "Värmetålig portionsskål med lock",
+     "Stekpanna",
+     "Stekspade",
+     "Rivjärn"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 8,
+    "provenance": {
+     "reviewed_at": "2026-10-25",
+     "notes": "Innehållsgranskad utvecklingsleverans 2026-10-25. AI-författad och inte provlagad. Källoriginal: paket/smako-recept-paket-131.json SHA-256 cedf46883b1b52a1949d822e92ff6370025c63f9a3d0eae41832ce6ef6c3b9be. Produktköp, mängdomvandling, diet, näring, allergener och ekologiskt kvalificeras separat för faktiska produkter och användarval."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "breakfast"
+    ],
+    "active_minutes": 24,
+    "waiting_minutes": 18,
+    "total_minutes": 42
+   }
+  },
+  {
+   "name": "Vitlökspotatiskräm med gurka – enkel",
+   "servings": 1,
+   "ingredients": [
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 120.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 120.0,
+     "quantity_max": 120.0,
+     "quantity_step": 120.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 8.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 8.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 0.3,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 0.3,
+     "quantity_max": 0.3,
+     "quantity_step": 0.3
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    }
+   ],
+   "instructions": [
+    "Skala potatisen och skär i små bitar. Koka upp i kastrull med 400 ml vatten.",
+    "Koka potatisen helt mjuk, cirka femton minuter.",
+    "Häll av potatisen och låt den ånga av i kastrullen.",
+    "Mosa potatisen slät med gaffel eller potatispress. Finriv vitlöken och arbeta in med saltet.",
+    "Arbeta in oljan i en tunn stråle växelvis med citronjuice och 15 ml vatten tills krämen är jämn och blank. Använd gaffel eller visp; överarbeta inte potatisen i mixer.",
+    "Skär gurkan i stavar. Rosta brödet i torr panna och servera med den ljumma vitlökskrämen.",
+    "Servera hela den angivna mängden av huvudkomponenten med gurkstavar och bröd som en mellanmålsportion."
+   ],
+   "design": {
+    "base_id": "smako-greek-snack-garlic-potato-emulsion",
+    "version": "1.0.0",
+    "variant_id": "simple",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "garlic-potato-emulsion",
+    "primary_ingredient": "potatis",
+    "method": "pot",
+    "side": "Gurkstavar och bröd",
+    "flavor_profile": [
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Vitlökspotatiskräm med gurka",
+      "amounts": [
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis, rå ätlig vikt",
+        "note": "",
+        "quantity": 120.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök, rå ätlig vikt",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja, volym som såld (ml)",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice, volym som såld (ml)",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt, vikt som såld (g)",
+        "note": "",
+        "quantity": 0.3,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Gurkstavar och bröd",
+      "amounts": [
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka, rå ätlig vikt",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Bröd, vikt som såld (g)",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Skala potatisen och skär i små bitar. Koka upp i kastrull med 400 ml vatten.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 4,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "400 ml",
+        400.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Koka potatisen helt mjuk, cirka femton minuter.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Häll av potatisen och låt den ånga av i kastrullen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Mosa potatisen slät med gaffel eller potatispress. Finriv vitlöken och arbeta in med saltet.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Arbeta in oljan i en tunn stråle växelvis med citronjuice och 15 ml vatten tills krämen är jämn och blank. Använd gaffel eller visp; överarbeta inte potatisen i mixer.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "15 ml",
+        15.0
+       ]
+      ]
+     },
+     {
+      "id": "s6",
+      "text": "Skär gurkan i stavar. Rosta brödet i torr panna och servera med den ljumma vitlökskrämen.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "gurka|raw_edible"
+      ],
+      "depends_on": [
+       "s5"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     },
+     {
+      "id": "s7",
+      "text": "Servera hela den angivna mängden av huvudkomponenten med gurkstavar och bröd som en mellanmålsportion.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "citronjuice|as_sold",
+       "gurka|raw_edible",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s6"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 32,
+    "equipment": [
+     "Köksvåg",
+     "Måttkanna och måttsats",
+     "Skål",
+     "Sked och gaffel",
+     "Kniv och skärbräda",
+     "Digital kökstermometer",
+     "Kastrull",
+     "Potatispress eller gaffel",
+     "Rivjärn",
+     "Visp",
+     "Liten kastrull",
+     "Liten släppbelagd stekpanna",
+     "Finmaskig sil",
+     "Serveringsskål"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 6,
+    "provenance": {
+     "reviewed_at": "2026-10-25",
+     "notes": "Innehållsgranskad utvecklingsleverans 2026-10-25. AI-författad och inte provlagad. Källoriginal: paket/smako-recept-paket-141.json SHA-256 6461c0dd3f89c3f0bff66797edac544345be9fb2c1c255b9378b1f4526db71c9. Produktköp, mängdomvandling, diet, näring, allergener och ekologiskt kvalificeras separat för faktiska produkter och användarval."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "snack"
+    ],
+    "active_minutes": 17,
+    "waiting_minutes": 15,
+    "total_minutes": 32
+   }
+  },
+  {
+   "name": "Vitlökspotatiskräm med gurka – utökad",
+   "servings": 1,
+   "ingredients": [
+    {
+     "name": "potatis",
+     "canonical_name": "potatis",
+     "quantity": 120.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "primary",
+     "quantity_min": 120.0,
+     "quantity_max": 120.0,
+     "quantity_step": 120.0
+    },
+    {
+     "name": "vitlök",
+     "canonical_name": "vitlök",
+     "quantity": 3.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "quantity_min": 3.0,
+     "quantity_max": 3.0,
+     "quantity_step": 3.0
+    },
+    {
+     "name": "rapsolja",
+     "canonical_name": "rapsolja",
+     "quantity": 8.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "cooking",
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "citronjuice",
+     "canonical_name": "citronjuice",
+     "quantity": 8.0,
+     "unit": "ml",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "side",
+     "product_requirements": [
+      "pure_juice"
+     ],
+     "quantity_min": 8.0,
+     "quantity_max": 8.0,
+     "quantity_step": 8.0
+    },
+    {
+     "name": "salt",
+     "canonical_name": "salt",
+     "quantity": 0.3,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c1",
+     "required": true,
+     "role": "flavour",
+     "quantity_min": 0.3,
+     "quantity_max": 0.3,
+     "quantity_step": 0.3
+    },
+    {
+     "name": "gurka",
+     "canonical_name": "gurka",
+     "quantity": 80.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 80.0,
+     "quantity_max": 80.0,
+     "quantity_step": 80.0
+    },
+    {
+     "name": "bröd",
+     "canonical_name": "bröd",
+     "quantity": 20.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c2",
+     "required": true,
+     "role": "side",
+     "quantity_min": 20.0,
+     "quantity_max": 20.0,
+     "quantity_step": 20.0
+    },
+    {
+     "name": "tomat",
+     "canonical_name": "tomat",
+     "quantity": 70.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 70.0,
+     "quantity_max": 70.0,
+     "quantity_step": 70.0
+    },
+    {
+     "name": "basilika",
+     "canonical_name": "basilika",
+     "quantity": 2.0,
+     "unit": "g",
+     "form": "raw_edible",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 2.0,
+     "quantity_max": 2.0,
+     "quantity_step": 2.0
+    },
+    {
+     "name": "sesamfrön",
+     "canonical_name": "sesamfrön",
+     "quantity": 4.0,
+     "unit": "g",
+     "form": "as_sold",
+     "component": "c3",
+     "required": true,
+     "role": "side",
+     "quantity_min": 4.0,
+     "quantity_max": 4.0,
+     "quantity_step": 4.0
+    }
+   ],
+   "instructions": [
+    "Skala potatisen och skär i små bitar. Koka upp i kastrull med 400 ml vatten.",
+    "Koka potatisen helt mjuk, cirka femton minuter.",
+    "Häll av potatisen och låt den ånga av i kastrullen.",
+    "Mosa potatisen slät med gaffel eller potatispress. Finriv vitlöken och arbeta in med saltet.",
+    "Arbeta in oljan i en tunn stråle växelvis med citronjuice och 15 ml vatten tills krämen är jämn och blank. Använd gaffel eller visp; överarbeta inte potatisen i mixer.",
+    "Skär gurkan i stavar. Rosta brödet i torr panna och servera med den ljumma vitlökskrämen.",
+    "Tärna tomaten och hacka basilikan. Rosta sesamfröna i torr panna och fördela alla tre över serveringen.",
+    "Servera hela den angivna mängden av huvudkomponenten med gurkstavar och bröd, tomat och basilika som en mellanmålsportion."
+   ],
+   "design": {
+    "base_id": "smako-greek-snack-garlic-potato-emulsion",
+    "version": "1.0.0",
+    "variant_id": "extended",
+    "cuisines": [
+     "greek"
+    ],
+    "family": "garlic-potato-emulsion",
+    "primary_ingredient": "potatis",
+    "method": "pot",
+    "side": "Gurkstavar och bröd, Tomat och basilika",
+    "flavor_profile": [
+     "citronjuice"
+    ],
+    "components": [
+     {
+      "id": "c1",
+      "name": "Vitlökspotatiskräm med gurka",
+      "amounts": [
+       {
+        "ingredient_key": "potatis|raw_edible",
+        "name": "Potatis, rå ätlig vikt",
+        "note": "",
+        "quantity": 120.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "vitlök|raw_edible",
+        "name": "Vitlök, rå ätlig vikt",
+        "note": "",
+        "quantity": 3.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "rapsolja|as_sold",
+        "name": "Rapsolja, volym som såld (ml)",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "citronjuice|as_sold",
+        "name": "Citronjuice, volym som såld (ml)",
+        "note": "",
+        "quantity": 8.0,
+        "unit": "ml"
+       },
+       {
+        "ingredient_key": "salt|as_sold",
+        "name": "Salt, vikt som såld (g)",
+        "note": "",
+        "quantity": 0.3,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c2",
+      "name": "Gurkstavar och bröd",
+      "amounts": [
+       {
+        "ingredient_key": "gurka|raw_edible",
+        "name": "Gurka, rå ätlig vikt",
+        "note": "",
+        "quantity": 80.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "bröd|as_sold",
+        "name": "Bröd, vikt som såld (g)",
+        "note": "",
+        "quantity": 20.0,
+        "unit": "g"
+       }
+      ]
+     },
+     {
+      "id": "c3",
+      "name": "Tomat och basilika",
+      "amounts": [
+       {
+        "ingredient_key": "tomat|raw_edible",
+        "name": "Tomat, rå ätlig vikt",
+        "note": "",
+        "quantity": 70.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "basilika|raw_edible",
+        "name": "Basilika, rå ätlig vikt",
+        "note": "",
+        "quantity": 2.0,
+        "unit": "g"
+       },
+       {
+        "ingredient_key": "sesamfrön|as_sold",
+        "name": "Sesamfrön, vikt som såld (g)",
+        "note": "",
+        "quantity": 4.0,
+        "unit": "g"
+       }
+      ]
+     }
+    ],
+    "steps": [
+     {
+      "id": "s1",
+      "text": "Skala potatisen och skär i små bitar. Koka upp i kastrull med 400 ml vatten.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [],
+      "duration_minutes": 4,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "400 ml",
+        400.0
+       ]
+      ]
+     },
+     {
+      "id": "s2",
+      "text": "Koka potatisen helt mjuk, cirka femton minuter.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s1"
+      ],
+      "duration_minutes": 15,
+      "parallel_group": null
+     },
+     {
+      "id": "s3",
+      "text": "Häll av potatisen och låt den ånga av i kastrullen.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s2"
+      ],
+      "duration_minutes": 2,
+      "parallel_group": null
+     },
+     {
+      "id": "s4",
+      "text": "Mosa potatisen slät med gaffel eller potatispress. Finriv vitlöken och arbeta in med saltet.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s3"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     },
+     {
+      "id": "s5",
+      "text": "Arbeta in oljan i en tunn stråle växelvis med citronjuice och 15 ml vatten tills krämen är jämn och blank. Använd gaffel eller visp; överarbeta inte potatisen i mixer.",
+      "ingredient_keys": [
+       "citronjuice|as_sold",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s4"
+      ],
+      "duration_minutes": 4,
+      "parallel_group": null,
+      "scalable_amounts": [
+       [
+        "15 ml",
+        15.0
+       ]
+      ]
+     },
+     {
+      "id": "s6",
+      "text": "Skär gurkan i stavar. Rosta brödet i torr panna och servera med den ljumma vitlökskrämen.",
+      "ingredient_keys": [
+       "bröd|as_sold",
+       "gurka|raw_edible"
+      ],
+      "depends_on": [
+       "s5"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     },
+     {
+      "id": "s7",
+      "text": "Tärna tomaten och hacka basilikan. Rosta sesamfröna i torr panna och fördela alla tre över serveringen.",
+      "ingredient_keys": [
+       "basilika|raw_edible",
+       "sesamfrön|as_sold",
+       "tomat|raw_edible"
+      ],
+      "depends_on": [
+       "s6"
+      ],
+      "duration_minutes": 3,
+      "parallel_group": null
+     },
+     {
+      "id": "s8",
+      "text": "Servera hela den angivna mängden av huvudkomponenten med gurkstavar och bröd, tomat och basilika som en mellanmålsportion.",
+      "ingredient_keys": [
+       "basilika|raw_edible",
+       "bröd|as_sold",
+       "citronjuice|as_sold",
+       "gurka|raw_edible",
+       "potatis|raw_edible",
+       "rapsolja|as_sold",
+       "salt|as_sold",
+       "sesamfrön|as_sold",
+       "tomat|raw_edible",
+       "vitlök|raw_edible"
+      ],
+      "depends_on": [
+       "s7"
+      ],
+      "duration_minutes": 1,
+      "parallel_group": null
+     }
+    ],
+    "estimated_minutes": 35,
+    "equipment": [
+     "Köksvåg",
+     "Måttkanna och måttsats",
+     "Skål",
+     "Sked och gaffel",
+     "Kniv och skärbräda",
+     "Digital kökstermometer",
+     "Kastrull",
+     "Potatispress eller gaffel",
+     "Rivjärn",
+     "Visp",
+     "Liten kastrull",
+     "Liten släppbelagd stekpanna",
+     "Finmaskig sil",
+     "Serveringsskål"
+    ],
+    "vegetarian": true,
+    "fish": false,
+    "ingredient_count": 9,
+    "provenance": {
+     "reviewed_at": "2026-10-25",
+     "notes": "Innehållsgranskad utvecklingsleverans 2026-10-25. AI-författad och inte provlagad. Källoriginal: paket/smako-recept-paket-141.json SHA-256 6461c0dd3f89c3f0bff66797edac544345be9fb2c1c255b9378b1f4526db71c9. Produktköp, mängdomvandling, diet, näring, allergener och ekologiskt kvalificeras separat för faktiska produkter och användarval."
+    },
+    "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "meal_types": [
+     "snack"
+    ],
+    "active_minutes": 20,
+    "waiting_minutes": 15,
+    "total_minutes": 35
+   }
+  }
+ ]
+}

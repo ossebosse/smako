@@ -80,7 +80,9 @@ class RecipeDesign(BaseModel):
     flavor_profile: tuple[str, ...]
     components: tuple[RecipeComponent, ...]
     steps: tuple[RecipeStep, ...]
-    estimated_minutes: int = Field(ge=1, le=180)
+    # This is elapsed time, including soaking, proving, draining and chilling.
+    # Active work keeps its separate 180-minute bound.
+    estimated_minutes: int = Field(ge=1, le=2880)
     equipment: tuple[str, ...]
     vegetarian: bool
     fish: bool = False

@@ -1487,6 +1487,9 @@ _CULINARY_LABELS = {
     "sesamfrön": (r"sesamfron", "seed"),
     "jordnötssmör": (r"jordnotssmor", "nut_butter"),
 }
+from app.services.content_pack_requirements import INTAKE_IDENTITIES
+
+_CULINARY_LABELS.update({name: (entry[1], entry[2]) for name, entry in INTAKE_IDENTITIES.items()})
 
 
 def _culinary_label_match(canonical, product):

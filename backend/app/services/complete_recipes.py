@@ -261,7 +261,9 @@ def _requirements_compatible(canonical, requirements, product, fact):
     requirements = tuple(r for r in requirements if not r.startswith("pack:"))
     text = product.name.casefold()
     composition = " ".join(fact.ingredients).casefold() if fact else ""
-    if set(requirements) - {"plain", "ground", "firm", "thick", "pure_juice", "frozen", "red_split", "white_rice", "white_beans", "dried_leaf"}:
+    if set(requirements) - {"plain", "ground", "firm", "thick", "pure_juice", "frozen", "red_split", "white_rice", "white_beans", "dried_leaf", "pitted"}:
+        return False
+    if "pitted" in requirements and not re.search(r"urkärnad|utan kärnor|pitted", text + " " + composition):
         return False
     if "white_beans" in requirements and not re.search(r"\bvita\b", text + " " + composition):
         return False

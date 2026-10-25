@@ -28,10 +28,13 @@ import difflib
 import json
 import re
 from collections import Counter
+from pathlib import Path
 
 SCHEMA = "smako-recipe-authoring-v1"
 MEAT = {"kyckling", "nötfärs", "fläskfärs", "blandfärs", "fläskkött", "kalkon"}
 FISH = {"fisk", "lax", "torsk", "tonfisk"}
+FISH.update({"makrill", "rökt makrill", "sardiner", "matjessill", "stenbitsrom", "rökt lax", "varmrökt lax"})
+REVIEWED_VOCABULARY = Path(__file__).parents[1] / "data/ingredients/authoring-20261025.json"
 SAFETY = {
     "kyckling": ("74 °C",), "kalkon": ("74 °C",),
     "nötfärs": ("72 °C", "genomstekt"), "fläskfärs": ("72 °C", "genomstekt"),
@@ -39,7 +42,7 @@ SAFETY = {
 }
 
 
-def library_vocabulary(recipes):
+def library_vocabulary(recipes, *, reviewed_path=REVIEWED_VOCABULARY):
     """Most common unit and product requirements per ``canonical|form``."""
     counts = Counter()
     for recipe in recipes:
@@ -49,6 +52,27 @@ def library_vocabulary(recipes):
     vocabulary = {}
     for (canonical, form, unit, requirements), _ in counts.most_common():
         vocabulary.setdefault(f"{canonical}|{form}", (unit, list(requirements)))
+    # Explicit reviewed additions bootstrap authoring without dummy recipes.
+    # Existing issued defaults cannot be silently replaced by this overlay.
+    from app.services.content_pack_requirements import PACK_KEYS
+    from app.services.ingredient_normalizer import canonicalize_ingredient_name
+
+    document = json.loads(reviewed_path.read_bytes())
+    if document["schema_version"] != "smako-authoring-vocabulary-v1":
+        raise ValueError("Okänd schema för granskat ingrediensvokabulär")
+    seen = set()
+    for row in document["ingredients"]:
+        key = f"{row['name']}|{row['form']}"
+        requirements = row["requirements"]
+        if (key in seen or canonicalize_ingredient_name(row["name"]) != row["name"]
+                or row["unit"] not in {"g", "ml"}
+                or row["form"] not in {"dry", "raw_edible", "as_sold", "preserved_drained", "cooked_drained"}
+                or (row["form"] != "as_sold" and row["unit"] != "g")
+                or not requirements or not row["review_basis"] or not row["evidence"]
+                or any(not r.startswith("pack:") or r[5:] not in PACK_KEYS for r in requirements)):
+            raise ValueError(f"Ogiltig granskad ingrediens: {key}")
+        seen.add(key)
+        vocabulary.setdefault(key, (row["unit"], list(requirements)))
     return vocabulary
 
 
@@ -91,8 +115,11 @@ def standardize(source, vocabulary, *, reviewed_at):
                     near = difflib.get_close_matches(key, vocabulary, n=3)
                     raise ValueError(f"{where}: okänd identitet {key}; närmaste kända: {near}")
                 unit, requirements = vocabulary[key]
+                reviewed_requirements = {r for r in requirements if r.startswith("pack:intake_")}
                 unit = item.get("unit", unit)
                 requirements = item.get("requirements", requirements)
+                if not reviewed_requirements <= set(requirements):
+                    raise ValueError(f"{where}: {key} får inte tappa granskade produktkrav")
                 quantity = float(item["quantity"])
                 amounts.append({"ingredient_key": key, "name": item.get("label", canonical),
                                 "note": item.get("note", ""), "quantity": quantity, "unit": unit})
@@ -147,7 +174,10 @@ def standardize(source, vocabulary, *, reviewed_at):
             step.pop("_passive")
         canon = {line["canonical_name"] for line in ingredients}
         fish = bool(canon & FISH)
-        vegetarian = not (canon & (MEAT | FISH))
+        from app.models.plan import DietPreference
+        from app.services.diet_policy import _excluded_by_diet
+
+        vegetarian = not any(_excluded_by_diet(name, DietPreference.VEGETARIAN) for name in canon)
         for food, markers in SAFETY.items():
             text = " ".join(s["text"] for s in steps)
             if food in canon and not any(m in text for m in markers):
