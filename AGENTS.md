@@ -1,5 +1,25 @@
 # Project rules
 
+## Product purpose and current architecture
+
+- Read `docs/PRODUCT-GOAL.md` and `docs/PLANNING-ARCHITECTURE.md` before
+  planning new feature, performance or architecture work; then read the latest
+  assignment in `docs/HANDOFF.md`. These are the persistent product direction.
+- Smako targets complete recipes and the cheapest valid shared shopping list
+  within 30–60 seconds for NEW combinations of supported user choices, with
+  thousands of recipes. A warm identical-request cache hit is insufficient.
+- Preserve the full choice catalogue: location/store selection, up to all
+  selected stores as the purchase cap, meals/servings, diet/distribution,
+  nutrition/weight, cuisine/variation, preparation limits, taste/allergies,
+  organic cost share/animal products, surplus, pantry and extras. Current UI
+  limits and a 262-recipe benchmark are not permanent product scope.
+- Separate product targets from measured results. Never count a blocked,
+  partial or unaudited plan as successful latency; never silently relax user
+  constraints or price quality. Global optimality requires a real proof.
+- For the new V2 direction, prepare shared versioned data and search the
+  current library; historical-publication replay is not a mandatory request
+  step. Follow the explicit V1/V2 contract distinction in the architecture.
+
 ## Start recurring operations work here
 
 - Read `docs/OPERATIONS.md`, then run

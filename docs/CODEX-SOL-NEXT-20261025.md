@@ -1,5 +1,11 @@
 # Nästa uppdrag till Sol: kort väntan när användaren ändrar sina val
 
+**Avslutat via PR #12.** Nästa uppdrag är
+[förberett underlag och gemensam sökning](CODEX-SOL-NEXT-20261025-PREPARED-PLANNING.md).
+Läs den bestående [målbilden](PRODUCT-GOAL.md) och
+[uppdaterade arkitekturen](PLANNING-ARCHITECTURE.md). De ersätter den här
+etappens avgränsning som aktuell riktning; historiska resultat bevaras.
+
 Datum: 2026-10-25. Dokumentationsbas: main `b604840`, efter PR #11.
 Arbeta i `D:\Projects\Smako`. Läs `AGENTS.md`, aktuell `HANDOFF.md`,
 `DEVELOPMENT.md` och `CONSOLIDATION.md`; hämta main utan att skriva över

@@ -1,9 +1,12 @@
 # Beslut och implementeringsuppdrag till Sol: skalning och Axfood
 
-**Aktuellt nästa steg efter PR #11:** följ
-[CODEX-SOL-NEXT-20261025.md](CODEX-SOL-NEXT-20261025.md) för kortare väntan
-vid nya personliga val och prisuppdateringar, med avgränsad testbudget.
-Arkitekturkontrakten nedan gäller fortsatt; den tidigare fullmatrisen är stoppad.
+**Aktuell riktning efter PR #12:** läs [produktmålet](PRODUCT-GOAL.md),
+[planeringsarkitekturen](PLANNING-ARCHITECTURE.md) och
+[nästa Sol-uppdrag](CODEX-SOL-NEXT-20261025-PREPARED-PLANNING.md).
+Dokumentet nedan beskriver V1. Den nya arkitekturens avsnitt 5 ersätter för
+V2 kravet på full historisk återspelning/legacy-förberedelse per ny kontext;
+övriga pris-, giltighets- och ägargränser bevaras enligt det nya kontraktet.
+V1:s beteende och historiska evidens består. Gamla fullmatrisen är stoppad.
 
 Status: beslutad arkitekturriktning 2026-10-23; implementation återstår.
 Bas: main `59e6f76f4f615a0e09ec980efc908665a64c1f37`.

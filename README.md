@@ -3,6 +3,12 @@
 Svensk måltidsplanering med recept, näringsval, skafferi och gemensam
 inköpsoptimering utifrån verifierade matvarupriser.
 
+Produktmålet är kompletta recept och billigast möjliga giltiga inköpslista
+inom **30–60 sekunder**, även för nya kombinationer av användarval och med
+tusentals recept. Detta är målbilden, inte en redan verifierad tidsutfästelse.
+Läs [produktmål och hela valkatalogen](docs/PRODUCT-GOAL.md) samt
+[planeringsarkitekturen](docs/PLANNING-ARCHITECTURE.md).
+
 **`main` är huvudgren och utgångspunkt för utveckling och nya betareleaser.**
 En vanlig kloning från GitHub hämtar den. Push till `main` startar ingen
 automatisk deployment; betan aktiveras med det dokumenterade releaseflödet.

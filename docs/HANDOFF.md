@@ -1,3 +1,28 @@
+# 2026-10-25: Bestående produktmål och ny planeringsriktning efter PR #12
+
+Ägaren har förtydligat hela produkten: plats och valda butiker, butikstak
+upp till alla valda, måltider/portioner och samtliga kombinerbara recept-,
+kost-, närings-, smak-, allergi-, eko- och överskottsval. Billigast möjlig
+giltig gemensam inköpslista ska nå användaren inom 30–60 sekunder även vid
+nya val och med tusentals recept. Målet är ännu inte uppnått.
+
+Bestående läsordning finns nu även i AGENTS och README:
+[PRODUCT-GOAL.md](PRODUCT-GOAL.md) →
+[PLANNING-ARCHITECTURE.md](PLANNING-ARCHITECTURE.md) →
+[CODEX-SOL-NEXT-20261025-PREPARED-PLANNING.md](CODEX-SOL-NEXT-20261025-PREPARED-PLANNING.md).
+
+Ny opt-in-riktning V2: gemensamt versionsbundet underlag, personlig sökning
+mot aktuellt bibliotek, exakt checkout och butikshantering utan full
+delmängdsmaterialisering. Historisk återspelning flyttas från V2:s anropskrav
+till proveniens/validering; V1 bevaras. Ingen prisregressionstolerans eller
+generell optimalitetsgaranti införs. E:s produkt-/faktaluckor behöver egen
+utredning. Nästa etapp har 120 minuters sammanlagd benchmarkbudget och få
+villkorade skalprov, inte gamla fullmatrisen.
+
+Denna leverans är dokumentation och arkitekturbeslut. Inga runtimeändringar,
+prestandaarbetare, defaultbyten eller produktionsaktiveringar har gjorts.
+PR #12:s nio nya riktade offlineprov har omkörts: nio PASS.
+
 # 2026-10-25: Personliga val — avgränsad förbättring och mätning avslutad
 
 [PR #12](https://github.com/ossebosse/smako/pull/12) levererar runtime
