@@ -423,7 +423,7 @@ Matchade vanliga basprov på runtime `9162f0f` har nu startat med samma frysta
 underlag, cacheläge och två CPU/3 GiB. Tre basprocesser följs av slutkodens
 separata instrumenterade fasprofil innan fullmatrisen körs vidare.
 
-### Matchad före/efter: första vanliga basprovet klart
+### Matchad före/efter: två vanliga basprov klara
 
 Första omätningen av runtime `9162f0f` med tom app-/förberedelsecache och ny
 syntetisk ägarstore är avslutad: **881,31 s** för plananropet och **926,36 s**
@@ -433,6 +433,11 @@ OOM/swap. Den gamla baslinjen överskrider det nya 2,5-GiB-målet; den körs
 fortfarande under samma hårda 3-GiB-gräns och räknas inte som slutkodens
 minneskvalificering.
 
+Andra basprovet passerar på **879,93 s** för plananropet och **924,78 s**
+för hela processen, åter 988,32 kr/förväntad hash/audit PASS. Slutpeak är
+**3 025 485 824 byte (2,818 GiB)**, exit 0 utan OOM/swap. Samma käll-/metod-,
+indata-, biblioteks- och resurskontroller gäller för båda proverna.
+
 Slutkodens tre vanliga prov på samma frysta Malmö/fördelning/5 000-fall är
 **662,83 / 649,49 / 664,50 s**, median **662,83 s**, alla 988,32 kr och samma
 semantiska hash/audit. Dessa redan uppmätta prov återanvänds med exakt samma
@@ -441,11 +446,11 @@ processen innehöll även tre senare varma anrop, men bara första anropets tid
 jämförs. Dess första noterade peak är redan samma som hela processens slutpeak,
 **1,882 GiB**. OS-cache är okontrollerad i båda armarna och har inte rensats.
 
-Endast **1 av 3** basprover är ännu klara; ingen färdig medianjämförelse
-redovisas. Andra basprocessen körs nu. Instrumenterade tider hålls separat,
-och slutkodens fasprofil återstår. Arkivets 172 metadatafiler har verifierade
+Endast **2 av 3** basprover är ännu klara; ingen färdig medianjämförelse
+redovisas. Tredje basprocessen körs nu. Instrumenterade tider hålls separat,
+och slutkodens fasprofil återstår. Arkivets 178 metadatafiler har verifierade
 manifesthashar, SHA-256
-`076face7ea88bf6fbed1724c60b62f4ba1db0d84b3de603bc2a51a4fe61729f6`.
+`b430537f00082b6fed918a56ce0e998e40789a6c8015778afde82814b4f910fd`.
 [Aktuella matchade prov och separata referensprofiler](preparation-memory-20261024/matched-current.json).
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)

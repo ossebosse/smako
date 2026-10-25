@@ -138,17 +138,149 @@
           "evaluations": 1384
         }
       ]
+    },
+    {
+      "sample": "baseline-plain-2",
+      "source_commit": "9162f0fe5800a5c6ce52ac18cbbefa1a044ecc94",
+      "instrumented": false,
+      "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+      "inputs": {
+        "sha256": {
+          "combined-prices.json": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+          "combined-facts.json": "fa624f8b849dc927727c1655b8feaa0c5ce12f4f1adade21bdbdaa17f0199d16",
+          "combined-request.json": "f6d7c15c3950fb835c0dd17827de22562f5c34f0c2a445036a97b14c8b64507c"
+        },
+        "now": "2026-10-23T06:00:02.869273+00:00",
+        "request_sha256": "11e2070f47321d738154de27fb20d413cfe02a1081abae0fc2cba06ea97850aa",
+        "facts_version": "retained-catalog-facts-v11-nutrition-extras:c769c5ea04a4bc26bb9bf74f5bd3ffc21a5501fe252cdff88da48d2fcb42a5b8",
+        "universe_id": "price-universe:b9fc5dc1f631bb626a5b75ca92e6e0ca88225c1b0a237524b5bce1954e7674af"
+      },
+      "library_version": "smako-complete-dinners-v1:4fc013df181905bd9314b40d63cd1dc85c784d26dab79f400525a21748939c3c",
+      "raw_report_sha256": "bd568ee4fc02c5d9b0d5f80d946d662d36efd776ea1d2821b6d596ca2dd12602",
+      "process_plan_calls": 1,
+      "compared_plan_calls": 1,
+      "receipt_sha256": "9927e7454cc4309a0c00735b821e400d4a3cd5f637ab9df3c6141ba864d59bb9",
+      "final_resource_sha256": "55cdb2d65ff03277789c0a64905975e2b45ae4cbefe41bc668debfd607ec6bed",
+      "wall_seconds": 879.9257521918043,
+      "process_wall_seconds": 924.7757072420791,
+      "paid": 988.32,
+      "semantic_sha256": "1c0ad484edda7e36bf026b83a6e4f171dddf9c8d4a2b3d5359d95fa90bc227b7",
+      "audit_passed": true,
+      "final_resource": {
+        "scope": "after all ordinary plan calls, report serialization and final GC; before tiny receipt write",
+        "entry_sha256": "f14a5e1e257c38a9bc02a65037e5badeb96ff51930ed597ec0367e27421a981e",
+        "method_signature": "35f0249859ee2b70376844df7a0804f05279f8d1f8db3657604cef3687e28a84",
+        "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+        "memory": {
+          "current": 2991665152,
+          "peak": 3025485824,
+          "swap_current": 0
+        },
+        "memory_target_passed": false,
+        "target_enforced_for_current_runtime": false
+      },
+      "actual_resources": {
+        "Memory": 3221225472,
+        "MemorySwap": 3221225472,
+        "NanoCpus": 2000000000,
+        "NetworkMode": "none",
+        "ReadonlyRootfs": true
+      },
+      "exit_code": 0,
+      "oom_killed": false,
+      "certificate_reuse": {
+        "loaded_publications": 0,
+        "replayed_publications": 11
+      },
+      "native_timings_seconds": {
+        "product_facts": 0.002488102298229933,
+        "package_calculation": 141.3933605994098,
+        "nutrition": 22.901228711009026,
+        "candidate_generation_and_qualification": 208.40401313314214,
+        "audit": 0.397779923863709,
+        "week_search": 654.6432188129984,
+        "total": 873.3342948285863
+      },
+      "legacy_preparation": [
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 6.579299420118332,
+          "evaluations": 409
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 8.138593467883766,
+          "evaluations": 493
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 8.26203603995964,
+          "evaluations": 548
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 13.24963858211413,
+          "evaluations": 635
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 15.046115322969854,
+          "evaluations": 741
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "996.22",
+          "seconds": 17.802178527694196,
+          "evaluations": 843
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 21.715101764071733,
+          "evaluations": 972
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 24.95590680092573,
+          "evaluations": 1067
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 27.53375067189336,
+          "evaluations": 1165
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "992.22",
+          "seconds": 29.902356332167983,
+          "evaluations": 1260
+        },
+        {
+          "status": "proposal_completed",
+          "proposed_paid": "988.32",
+          "seconds": 33.98089182097465,
+          "evaluations": 1384
+        }
+      ]
     }
   ],
   "baseline_summary": {
-    "samples": 1,
+    "samples": 2,
     "seconds": [
-      881.3099835189059
+      881.3099835189059,
+      879.9257521918043
     ],
-    "minimum_seconds": 881.3099835189059,
-    "median_seconds": 881.3099835189059,
+    "minimum_seconds": 879.9257521918043,
+    "median_seconds": 880.6178678553551,
     "maximum_seconds": 881.3099835189059,
-    "maximum_final_cgroup_peak_bytes": 3008499712
+    "maximum_final_cgroup_peak_bytes": 3025485824
   },
   "current_plain": [
     {
@@ -1873,8 +2005,8 @@
   },
   "source_cache_evidence_sha256": "5fdc46d4629a43363134d1866a20585e209625e1d4ed77066de174910b3c9f0c",
   "source_phase_evidence_sha256": "0f5902ee41384402804f5d9f425de8dfc8b34ddff23cb2a75a6b9e0864e175dd",
-  "bundle_sha256": "076face7ea88bf6fbed1724c60b62f4ba1db0d84b3de603bc2a51a4fe61729f6",
-  "bundle_metadata_files": 172,
+  "bundle_sha256": "b430537f00082b6fed918a56ce0e998e40789a6c8015778afde82814b4f910fd",
+  "bundle_metadata_files": 178,
   "full_release_qualified": false,
   "limitations": [
     "Plain and instrumented timings remain separate",

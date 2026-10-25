@@ -157,11 +157,13 @@ följs av separat instrumenterad fasprofil och därefter hela återstående matr
 Första basprovet är nu klart: 881,31 s plananrop, 926,36 s hela processen,
 988,32 kr/förväntad hash/audit PASS, slutpeak 2,802 GiB, exit 0 utan OOM/swap.
 Baslinjens överskridna 2,5-GiB-mål bevaras; hårda taket är fortsatt 3 GiB.
-Andra basprocessen kör. Slutkodens redan uppmätta tre vanliga kallprov är
+Även andra basprovet passerar: 879,93 s plananrop, 924,78 s hela processen,
+988,32 kr/hash/audit PASS, slutpeak 2,818 GiB, exit 0 utan OOM/swap.
+Tredje basprocessen kör. Slutkodens redan uppmätta tre vanliga kallprov är
 662,83 / 649,49 / 664,50 s (median 662,83 s); ingen färdig medianjämförelse
 förrän alla tre basprover är klara. Vanliga och instrumenterade tider hålls
 separat. [Maskinunderlag](reviews/preparation-memory-20261024/matched-current.json),
-172 verifierade metadatafiler, arkiv `076face7ea88bf6fbed1724c60b62f4ba1db0d84b3de603bc2a51a4fe61729f6`.
+178 verifierade metadatafiler, arkiv `b430537f00082b6fed918a56ce0e998e40789a6c8015778afde82814b4f910fd`.
 Appfiler och metodsignatur är oförändrade;
 matchade basprov/fasprofil och fullmatris återstår.
 
