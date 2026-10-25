@@ -35,6 +35,7 @@ MEAT = {"kyckling", "nötfärs", "fläskfärs", "blandfärs", "fläskkött", "ka
 FISH = {"fisk", "lax", "torsk", "tonfisk"}
 FISH.update({"makrill", "rökt makrill", "sardiner", "matjessill", "stenbitsrom", "rökt lax", "varmrökt lax"})
 REVIEWED_VOCABULARY = Path(__file__).parents[1] / "data/ingredients/authoring-20261025.json"
+AUTHORING_REQUIREMENTS = {"aggnudlar": ("pack:egg_noodles",)}
 SAFETY = {
     "kyckling": ("74 °C",), "kalkon": ("74 °C",),
     "nötfärs": ("72 °C", "genomstekt"), "fläskfärs": ("72 °C", "genomstekt"),
@@ -96,7 +97,7 @@ def _times(steps):
 def standardize(source, vocabulary, *, reviewed_at):
     """Return ``(pack, report)``; raise ValueError on content Smako cannot use."""
     from app.models import Recipe
-    from app.services.ingredient_normalizer import canonicalize_ingredient_name
+    from app.services.ingredient_normalizer import _search_text, canonicalize_ingredient_name
     from app.services.recipe_library import ingredient_count
 
     if source.get("schema_version") != SCHEMA:
@@ -117,7 +118,8 @@ def standardize(source, vocabulary, *, reviewed_at):
                 unit, requirements = vocabulary[key]
                 reviewed_requirements = {r for r in requirements if r.startswith("pack:intake_")}
                 unit = item.get("unit", unit)
-                requirements = item.get("requirements", requirements)
+                requirements = list(dict.fromkeys([*item.get("requirements", requirements),
+                    *AUTHORING_REQUIREMENTS.get(_search_text(item["name"]), ())]))
                 if not reviewed_requirements <= set(requirements):
                     raise ValueError(f"{where}: {key} får inte tappa granskade produktkrav")
                 quantity = float(item["quantity"])

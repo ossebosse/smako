@@ -126,7 +126,7 @@ def test_pinned_reference_keeps_publication_order_and_exact_values():
     from app.services.reference_library import reference_manifest
 
     pin = reference_manifest()["manifest"]
-    assert pin["recipes"] == [[identity(r), content_digest(r)] for r in current_recipes()]
+    assert pin["recipes"] == [[identity(r), content_digest(r)] for r in current_recipes(len(pin["entries"]))]
     assert len(pin["recipes"]) == 262
 
 

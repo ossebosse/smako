@@ -31,11 +31,23 @@ def authored(name="kyckling", *, method=None):
 
 @pytest.mark.parametrize("name", [
     "gröna linser", "svarta linser", "gula ärtor", "klibbigt ris", "rimmat fläsk",
-    "rökt lax", "varmrökt lax", "äggula", "kokta ägg", "kondenserad mjölk", "puffat ris", "äggnudlar",
+    "rökt lax", "varmrökt lax", "äggula", "kokta ägg", "kondenserad mjölk", "puffat ris",
 ])
 def test_specific_input_does_not_inherit_generic_recipe_requirements(name):
     assert canonicalize_ingredient_name(name) == name
     assert f"{name}|raw_edible" not in library_vocabulary(())
+
+
+def test_egg_noodles_keep_legacy_alias_with_explicit_authored_product_requirement():
+    assert canonicalize_ingredient_name("Äggnudlar") == "nudlar"
+    source = json.loads(EXAMPLE.read_bytes())
+    row = source["recipes"][0]
+    row["components"][0]["ingredients"][0].update(name="äggnudlar", form="dry", label="Äggnudlar")
+    for step in row["steps"]:
+        step["uses"] = ["äggnudlar" if n == "kyckling" else n for n in step["uses"]]
+    pack, _ = standardize(source, library_vocabulary(current_recipes()), reviewed_at="2026-10-25")
+    noodles = next(i for i in pack["recipes"][0]["ingredients"] if i["canonical_name"] == "nudlar")
+    assert "pack:egg_noodles" in noodles["product_requirements"]
 
 
 @pytest.mark.parametrize("name", ["lammkött", "lammfärs", "räkor", "råa räkor", "musslor", "bläckfisk", "gelatinblad"])
@@ -172,3 +184,16 @@ def test_long_issued_recipe_keeps_total_waiting_and_scaled_amounts_under_explici
         assert scaled.design.waiting_minutes == recipe.design.waiting_minutes
         lentils = next(i for i in scaled.ingredients if i.canonical_name == "linser")
         assert lentils.quantity == 320 * servings / 4
+
+
+def test_every_imported_variant_roundtrips_at_native_and_supported_portions():
+    from app.services.recipe_library import _scaled, validate_recipe_design
+
+    issued = [r for r in current_recipes() if r.design.content_source
+              and r.design.content_source.pack_id.startswith("recipe-intake-reviewed-20261025")]
+    assert len(issued) == 45
+    for recipe in issued:
+        for servings in {1, 2, 4, 12, recipe.servings}:
+            scaled = Recipe.model_validate_json(_scaled(recipe, servings).model_dump_json())
+            assert validate_recipe_design(scaled)
+            assert scaled.design.base_id == recipe.design.base_id

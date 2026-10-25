@@ -216,7 +216,7 @@ _PRECISE_NAMES = {
     _search_text(name): name for name in (
         "gröna linser", "svarta linser", "gula ärtor", "klibbigt ris",
         "rimmat fläsk", "rökt lax", "varmrökt lax", "äggula", "kokta ägg",
-        "kondenserad mjölk", "puffat ris", "äggnudlar",
+        "kondenserad mjölk", "puffat ris",
     )
 }
 _PRECISE_NAMES.update({"farsk koriander": "koriander", "radisor": "rädisa"})
