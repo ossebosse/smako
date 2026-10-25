@@ -63,7 +63,8 @@ ingen generell total bytebudget för alla möjliga RAM-cacher har bevisats.
   för båda städerna: 91 Willys, tolv Hemköp och 18 negativa svar. Priser,
   begäran och testklocka bevaras. Full källtäckning eller ett återfunnet
   historiskt Malmöarkiv påstås inte.
-- Relevanta regressionstester, Ruff och compileall passerar. Full
+- De 30 tidigare riktade evidenskontrakten och ett nytt regressionstest för
+  utcheckade filers SHA-kopplingar passerar, liksom Ruff och compileall. Full
   [CI på `2dc5020`](https://github.com/ossebosse/smako/actions/runs/40183481276)
   passerar inklusive Chromium/WebKit före avslutande dokumentation.
   Slutleveransens checkar finns i [PR #11](https://github.com/ossebosse/smako/pull/11/checks).
@@ -115,3 +116,10 @@ Ett separat fyrfilersarkiv bevarar den avbrutna gruppens uttryckliga metadata,
 SHA-256 `bedc75ebda50bd359fe4a508ccf9c6f9815f5de04afe70076dcb4867d78c1f02`.
 Båda finns hashverifierade lokalt och på evidensvärden. Ägarstore, privata
 cacher och databaser ingår inte i de exporterade metadataarkiven.
+
+Evidensdokumentens exakta JSON-bytes bevaras nu av `.gitattributes`; Git får
+inte normalisera bort de radslut som deras SHA-kopplingar beräknats över.
+Pythonverktygen får LF vid utcheckning. Ett permanent regressionstest
+kontrollerar kopplingarna mellan faktisk utcheckad inventering, pilot,
+fullmatris, granskningsverktyg och stoppkvitto. Radslutsrättningen ändrar
+inga mätvärden.
