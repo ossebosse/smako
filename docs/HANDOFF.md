@@ -107,6 +107,15 @@ pris/hash/kontext mot den sparade API-menyn och gör ny aktuell audit. CLI-prise
 kvarstår som separat övre gräns för första resultatet. Försök 4 körs separat;
 alla tidigare kataloger/kvitton/källhashar och en säker resultatssummering bevaras.
 Se [HTTP-status](reviews/preparation-memory-20261024/http-history-current.json).
+HTTP-steget i försök 4 passerar nu: 976,32 kr/audit PASS, lyckad Save/GET,
+annan ägare 404, köat avbrott 0,36 s och aktivt avbrott 6,56 s, högst ett
+aktivt jobb. POST 1,21 s, begäran→sparat svar 754,02 s, hela processen 828,36 s.
+Slutpeak **2,467 GiB**, cirka 34,15 MiB under målet, exit 0 utan OOM/swap.
+En ASGI-observation med befintlig spårning, ingen last-/nätlatenskvalificering.
+Första historikåteranropet ger exakt samma pris/hash/kontext på 52,59 s,
+faktisk privat revision 1 och elva certifikat laddade utan omsökning.
+Tre färskprocessprov med borttagen härledd cache pågår. Full CI inklusive
+Chromium/WebKit passerar även på senaste regressionen `5e7c66a`.
 Efter HTTP/historik följer tre prover för var och en av fyra kombinationer
 av nya menyidentiteter och cachevägar. Native `PlanStore.create` flyttar den
 verkliga privata revisionen 1→2; efterföljande anrop använder faktisk revision

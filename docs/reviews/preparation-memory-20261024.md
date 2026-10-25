@@ -280,7 +280,7 @@ Ofullständig evidens skrivs inte över. Fortsättningsloggen skrivs till disk
 evidensprov passerar, liksom Ruff/compileall. Samma seriella gränser och
 frysta appkod gäller. [Fortsättningskvitto och kommando](preparation-memory-20261024/continuation.json).
 
-### HTTP/historik: två provverktygsfel bevarade, fjärde försök körs
+### HTTP/historik: HTTP passerar, tre cacheåterhämtningsprov pågår
 
 De första två HTTP-försöken avvisades med 422 innan något jobb startade.
 Det andra fångade valideringsfelet utan credentials eller request-input:
@@ -318,7 +318,30 @@ efter native Save och faktisk privat revision 0→1. Försök 4 körs separat me
 Full [CI på `ba256ea`](https://github.com/ossebosse/smako/actions/runs/40157707628)
 och [postnummerrättningen](https://github.com/ossebosse/smako/actions/runs/40157543052)
 passerar inklusive browserprov före kontextreferensrättningen.
-De 30 lokala evidensproven, Ruff och compileall passerar; senaste CI pågår.
+De 30 lokala evidensproven, Ruff och compileall passerar. Även full
+[CI på senaste regressionen `5e7c66a`](https://github.com/ossebosse/smako/actions/runs/40159006231)
+passerar inklusive Chromium/WebKit.
+
+HTTP-steget i försök 4 är klart och godkänt. POST accepterades efter
+**1,21 s**; från första begäran till observerat sparat svar gick **754,02 s**,
+inklusive ensekundspollning och request-lokal prestandaspårning. Hela processen
+tog **828,36 s**, inklusive inläsning och avslut. In-process ASGI-provet är en
+enda diagnostisk observation och kvalificerar ingen nät-/browser-/lastlatens.
+
+Den sparade menyn ger **976,32 kr**, audit PASS, och lyckad GET återger samma
+plan. Annan ägare får 404, avbrutet köjobb frigör plats efter **0,36 s** och
+aktivt avbrott i `product_facts` släpper arbetaren efter **6,56 s**. Sparad
+historik/privata tillstånd är oförändrade under avbrottet. Admission är tom
+efteråt och högsta samtidiga aktiva antal är ett. Slutlig cgroup-peak är
+**2 648 543 232 byte (2,467 GiB)**, cirka **34,15 MiB under 2,5-GiB-målet**,
+exit 0 utan OOM/swap. Marginalen är smalare än i pilotens högsta process.
+
+Det första färskprocessåteranropet med faktisk sparad historik passerar på
+**52,59 s**: exakt samma 976,32 kr, menyhash och kontext, privat revision 1,
+elva laddade certifikat och noll omsökta publiceringar. Efterföljande tre
+prov tar bort endast härledd kvalificering/menyvy i nya SQLite-backuper;
+de är ännu inte färdiga. Råhashar, request-normalisering, kö-/avbrottstider,
+progress, separata jobbspår och resurskvitton finns i HTTP-statusunderlaget.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
 passerar före tillägget av historikprovens mätverktyg. Dessa verifieras lokalt
