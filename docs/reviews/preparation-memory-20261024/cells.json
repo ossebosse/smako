@@ -2541,10 +2541,11 @@
       "profile": "protein40",
       "library_size": 5000,
       "search_policy": "legacy",
-      "status": "NOT_RUN_ON_CURRENT_CODE",
+      "status": "INTERRUPTED_GROUP_WITHOUT_FINAL_RESOURCE_RECEIPT",
       "input_manifest_sha256": null,
       "library_manifest_sha256": null,
-      "evidence": []
+      "evidence": [],
+      "interrupted_attempt": "closure.interrupted_attempt"
     },
     {
       "facts_arm": "original",
@@ -2552,10 +2553,11 @@
       "profile": "protein40",
       "library_size": 5000,
       "search_policy": "smako-verified-reference-v1",
-      "status": "NOT_RUN_ON_CURRENT_CODE",
+      "status": "INTERRUPTED_GROUP_WITHOUT_FINAL_RESOURCE_RECEIPT",
       "input_manifest_sha256": null,
       "library_manifest_sha256": null,
-      "evidence": []
+      "evidence": [],
+      "interrupted_attempt": "closure.interrupted_attempt"
     },
     {
       "facts_arm": "original",
@@ -8449,13 +8451,42 @@
   "all_dimensions_enumerated": true,
   "completed_cells": 0,
   "measured_pilot_only_cells": 0,
-  "note": "Completed counts standard-qualified cells; current measurements and blocked observations stay separate until full review",
+  "note": "Delivery closed at user request: 91 closed measurements, 161 unverified cell identities, no further runs scheduled; zero standard-qualified cells",
   "pilot_cells_included": 48,
   "measured_cells_on_current_runtime": 91,
   "audited_pending_review_cells": 84,
   "observed_blocked_cells": 7,
   "pending_cells": 161,
   "current_full_matrix_evidence": "full-matrix-current.json",
-  "current_full_matrix_evidence_sha256": "249719540e66e7c82bcd555686956287cbaf8326576cf6df4c5f8d7583df6062",
-  "full_matrix_qualified": false
+  "current_full_matrix_evidence_sha256": "ce4c4d9354a32c56e7fb592a9d631def542403842708203099944ca096c342f0",
+  "full_matrix_qualified": false,
+  "status": "STOPPED_BY_USER_WITH_INCOMPLETE_MATRIX",
+  "closed_at_user_request": true,
+  "remaining_runs_scheduled": false,
+  "closure": {
+    "utc": "2026-10-25T10:28:00.010832+00:00",
+    "reason": "User requested skipping 5000 tests and delivering with available evidence",
+    "stop_receipt": "user-requested-stop.json",
+    "stop_receipt_sha256": "e56de0128abdfe92a4ad97aa17c7d40daf8b78fc19f48447b85368a6664735fe",
+    "remaining_runs_scheduled": false,
+    "remaining_unverified_cells": 161,
+    "remaining_measurements_cancelled_for_this_delivery": true,
+    "full_matrix_qualified": false,
+    "policy_default": "legacy",
+    "library_merge_generations": false,
+    "interrupted_attempt": {
+      "facts_arm": "original",
+      "city": "malmo",
+      "profile": "protein40",
+      "library_size": 5000,
+      "legacy_completed_observations": 4,
+      "legacy_paid": 912.72,
+      "legacy_report_sha256": "8252a7dda2aa064ce4c0f577255f0190c1a191eafc9165a659b7023ebf3dc1e0",
+      "v1_completed_observations": 0,
+      "ordinary_final_resource_receipt_available": false,
+      "counted_as_closed_matrix_cells": 0,
+      "metadata_bundle_sha256": "bedc75ebda50bd359fe4a508ccf9c6f9815f5de04afe70076dcb4867d78c1f02",
+      "metadata_bundle_files": 4
+    }
+  }
 }

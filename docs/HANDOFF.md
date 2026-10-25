@@ -1,4 +1,11 @@
-# 2026-10-25: Matchade förgrindar godkända; fullmatris 91/252 pågår
+# 2026-10-25: Etappen avslutad på begäran; fullmatris 91/252 uppmätt
+
+Beställaren bad att 5 000-proven skulle hoppas över och leveransen avslutas
+med befintligt underlag. Den pågående 5 000-arbetaren, båda styrprocesserna
+och mätobservatören är stoppade. Inga nya matrisgrupper eller återstarter
+är planerade. [Slutrapporten](reviews/preparation-memory-final-20261025.md)
+sammanfattar resultat och varför hela verifieringen inte genomfördes.
+Full standardkvalificering påstås inte; legacy/merge=False kvarstår.
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -57,10 +64,12 @@ Organic-share v1 ger samma 318,96 kr; första anropet kostar 1 987,99 s
 (33,13 minuter), sedan 11,50–11,83 s varmt. Totalt 91/252 uppmätta,
 84 auditgodkända menyceller/336 anrop och sju vegan-SEARCH_BLOCKED-celler/
 28 observationer med bevarad kod/steg. Inget globalt omöjlighetsbevis.
-161 celler återstår; Malmö/original/5 000 kör de fyra profiler som återstår
-utöver piloten, med båda huvudpolicyerna. Ingen standardkvalificering.
+161 celler saknar fullständig mätning. Malmö/original/5 000 avbröts under
+protein40/v1:s första anrop. Fyra legacy-observationer för 912,72 kr med audit
+bevaras separat, utan slutligt resurskvitto eller nya fullständiga celler.
+Ingen standardkvalificering och inga fortsatta matrisgrupper.
 [Fullmatrisstatus](reviews/preparation-memory-20261024/full-matrix-current.json).
-Separat läsande korsgranskning passerar 224 kontroller, 299 jämförelser väntar.
+Separat läsande korsgranskning passerar 224 kontroller; 299 jämförelser saknar underlag.
 Alla tillgängliga prisgränser, inklusive v5/262, är kontrollerade; ingen
 standardkvalificering. Verktyg och resultat finns bredvid fullmatrisunderlaget.
 Senaste arkiv 259 verifierade metadatafiler:

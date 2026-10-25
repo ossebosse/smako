@@ -5,8 +5,10 @@ Kodändringarna i [PR #9](https://github.com/ossebosse/smako/pull/9) och
 [PR #10](https://github.com/ossebosse/smako/pull/10) är integrerade på main,
 senast som `ea7c7ae005f1ea10dd716b53d327427785e84e61`.
 Aktuell runtime: `eeda184926f02e73ab76e71e50c740e9dcb01b02`,
-med identiska appfiler i denna main-version. Slutverifieringen fortsätter.
-**Etappen är ännu inte standardkvalificerad.** `legacy` och
+med identiska appfiler i denna main-version. Verifieringen avslutades på
+beställarens begäran den 25 oktober med 91/252 uppmätta celler; 5 000-arbetaren
+och återstående sekvens är stoppade. Se [slutrapport och orsaker till avgränsningen](preparation-memory-final-20261025.md).
+**Etappen är inte standardkvalificerad.** `legacy` och
 `library_merge_generations=False` är oförändrade standarder. Ingen aktivering,
 insamling, faktarelease, Windowsuppgift eller ökad samtidighet ingår.
 
@@ -71,16 +73,16 @@ Förgrundssekvensens tre kalla prov, tretton cachelägesprocesser och hela
 48-cellspiloten är klara. HTTP och tre historikåterhämtningar är också godkända.
 Även alla tolv ankomstprov för nytillkomna menyidentiteter passerar.
 Matchade basprov och ny fasprofil är också klara.
-Sekvensen fortsätter med full matris. Varje
-steg stannar vid missad grind. Metodsignaturen är
+Sekvensen avslutades på begäran med ofullständig fullmatris. Varje genomfört
+steg använde stopp vid missad grind. Metodsignaturen är
 `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`;
 kodändringen invaliderar äldre förberedelseartefakter. Äldre planresultat
 räknas därför inte automatiskt som `eeda184`-celler. Inget standardbyte.
 
-Det kommande instrumenterade omprovet får ett obligatoriskt minneskvitto
+Det avslutade instrumenterade omprovet fick ett obligatoriskt minneskvitto
 efter fasrapportens `atexit`-skrivning. Det ursprungliga profileringsverktyget
 är byteidentiskt med basprovet (SHA-256 `d0f8a45823d7e9d3cef8f50bf7f03d246f954cedec673a279a66efa67c93eaaf`);
-plananropets mätgränser ändras inte. Tre subprocessprov verifierar en sen
+plananropets mätgränser ändrades inte. Tre subprocessprov verifierar en sen
 minnesökning över grinden samt att en trasig fasrapport inte får slutkvitto.
 En planrads minnesprov får inte ersätta det saknade processkvittot.
 Tillsammans med matrisens tre utfallsprov passerar sex evidenskontrakt.
@@ -608,8 +610,10 @@ Totalt är **91 av 252** celler uppmätta: **84 med levererad meny och audit**
 **161 celler återstår**.
 Inga registrerade pris-/utfalls-/minnesgrindar har fallit. Korsjämförelser mot
 ännu omätta storlekar och slutlig releasegranskning återstår; ingen cell
-märks som standardkvalificerad. Malmö/original/5 000 kör nu de fyra profiler
-som återstår utöver piloten, med legacy och v1 i samma seriella arbetsordning.
+märks som standardkvalificerad. Malmö/original/5 000 avbröts på begäran under
+protein40/v1:s första anrop. Fyra avslutade legacy-anrop för 912,72 kr bevaras
+separat; gruppen saknar slutkvitto och tillför inga fullständiga celler.
+Inga ytterligare grupper startas.
 [Aktuellt fullmatrisunderlag](preparation-memory-20261024/full-matrix-current.json)
 och [den uppdaterade 252-cellsinventeringen](preparation-memory-20261024/cells.json).
 
@@ -618,7 +622,7 @@ kontrollerar exakt cellinventering, identisk kontext och varje tillgänglig
 prisgräns mot legacy, 262/v5 och föregående publicerade storlek. Den kontrollerar
 också blockeringssignaturer, slutminne och de uppmätta 5 000-varmkvoterna.
 [Resultatet](preparation-memory-20261024/cross-cell-review-current.json) innehåller
-224 passerande kontroller och 299 ännu väntande jämförelser, utan att märka
+224 passerande kontroller och 299 jämförelser utan underlag vid avslut, utan att märka
 någon cell som standardkvalificerad. Kör från projektroten med
 `.venv\Scripts\python.exe -X utf8 docs/reviews/preparation-memory-20261024/review_cross_cells.py`.
 
@@ -627,7 +631,7 @@ redan uppmätta uppstartsfilerna. SHA-256:
 `3aeaa7292c6759602b50862b4c0e009b41505db5e1e56ef1dd1dee160a6af640`.
 
 
-Full [CI på `8399b95`](https://github.com/ossebosse/smako/actions/runs/40176230967)
+Full [CI på `2dc5020`](https://github.com/ossebosse/smako/actions/runs/40183481276)
 passerar inklusive Chromium/WebKit före denna resultatuppdatering. Appkoden är
 fortsatt byteidentisk med `eeda184`. Återstående matrisgrindar är öppna.
 
@@ -935,7 +939,8 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 5 000/v1 är uppmätt pilot, ännu inte standardkvalificerad. Äldre kods
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
-Kvar på slutkoden: de 161 återstående cellerna och full matrisgranskning. Slutkodens
+Ej verifierat vid avslut: 161 celler och full matrisgranskning. Inga fortsatta
+körningar är planerade efter beställarens avgränsning. Slutkodens
 tretton cachelägesprocesser, tre ordinarie versionsbytesprov och båda
 faktaprojektionerna är klara enligt rapportens inledning.
 Ingen generell total bytebudget för alla RAM-cacher har bevisats; de

@@ -1,0 +1,31 @@
+{
+  "schema": "smako-user-requested-benchmark-stop-v1",
+  "utc": "2026-10-25T10:28:00.010832+00:00",
+  "status": "STOPPED_BY_USER_WITH_INCOMPLETE_MATRIX",
+  "reason": "User requested skipping the 5000 tests and closing with the available evidence and an explanation of incomplete work",
+  "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+  "entry_sha256": "2eab3a9ba5377f3efddd967d074fa0b84c319e1ba32a23efaab495b208e7af65",
+  "stopped_controllers": [
+    3181316,
+    3266816,
+    3271048
+  ],
+  "container": "smako-preparation-eeda184-grid-original-malmo-5000-remaining",
+  "image": "sha256:dc23ba03be3ca2370d28d6230d392160a63fb278a56f5b0171ebe91947713072",
+  "state": {
+    "Running": false,
+    "ExitCode": 137,
+    "OOMKilled": false,
+    "StartedAt": "2026-10-25T10:05:23.318574608Z",
+    "FinishedAt": "2026-10-25T10:27:59.933534656Z"
+  },
+  "observed_before_stop": {
+    "memory.current": 2316767232,
+    "memory.peak": 2318675968,
+    "memory.swap.current": 0
+  },
+  "memory_scope": "Live cgroup before deliberate stop; not a final ordinary process resource receipt",
+  "last_closed_cells_sha256": "443d84b22809425d4c1594c2e3244466b03fd800e12462f6fb653ef866fcf93f",
+  "last_closed_measured_cells": 91,
+  "full_matrix_qualified": false
+}

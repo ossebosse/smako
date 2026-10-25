@@ -1029,8 +1029,9 @@
       "profile": "protein40",
       "library_size": 5000,
       "search_policy": "legacy",
-      "status": "NOT_RUN_ON_CURRENT_CODE",
-      "evidence": []
+      "status": "INTERRUPTED_GROUP_WITHOUT_FINAL_RESOURCE_RECEIPT",
+      "evidence": [],
+      "interrupted_attempt": "closure.interrupted_attempt"
     },
     {
       "facts_arm": "original",
@@ -1038,8 +1039,9 @@
       "profile": "protein40",
       "library_size": 5000,
       "search_policy": "smako-verified-reference-v1",
-      "status": "NOT_RUN_ON_CURRENT_CODE",
-      "evidence": []
+      "status": "INTERRUPTED_GROUP_WITHOUT_FINAL_RESOURCE_RECEIPT",
+      "evidence": [],
+      "interrupted_attempt": "closure.interrupted_attempt"
     },
     {
       "facts_arm": "original",
@@ -7636,7 +7638,7 @@
   "observed_blocked_cells": 7,
   "failures": [],
   "full_matrix_qualified": false,
-  "status": "IN_PROGRESS",
+  "status": "STOPPED_BY_USER_WITH_INCOMPLETE_MATRIX",
   "limitations": [
     "Blocked outcomes are observed evidence, never a global impossibility proof",
     "Baseline-code, cache-mode, temporary-memory and HTTP queue evidence are separate",
@@ -7769,5 +7771,34 @@
   "standard_qualified_cells": 0,
   "delivered_audited_calls": 336,
   "blocked_observations": 28,
-  "review_scope": "Closed resources and native reports verified; cross-cell gates remain native; final release review pending"
+  "review_scope": "Closed resources and native reports verified; cross-cell gates remain native; final release review pending",
+  "closed_at_user_request": true,
+  "remaining_runs_scheduled": false,
+  "closure": {
+    "utc": "2026-10-25T10:28:00.010832+00:00",
+    "reason": "User requested skipping 5000 tests and delivering with available evidence",
+    "stop_receipt": "user-requested-stop.json",
+    "stop_receipt_sha256": "e56de0128abdfe92a4ad97aa17c7d40daf8b78fc19f48447b85368a6664735fe",
+    "remaining_runs_scheduled": false,
+    "remaining_unverified_cells": 161,
+    "remaining_measurements_cancelled_for_this_delivery": true,
+    "full_matrix_qualified": false,
+    "policy_default": "legacy",
+    "library_merge_generations": false,
+    "interrupted_attempt": {
+      "facts_arm": "original",
+      "city": "malmo",
+      "profile": "protein40",
+      "library_size": 5000,
+      "legacy_completed_observations": 4,
+      "legacy_paid": 912.72,
+      "legacy_report_sha256": "8252a7dda2aa064ce4c0f577255f0190c1a191eafc9165a659b7023ebf3dc1e0",
+      "v1_completed_observations": 0,
+      "ordinary_final_resource_receipt_available": false,
+      "counted_as_closed_matrix_cells": 0,
+      "metadata_bundle_sha256": "bedc75ebda50bd359fe4a508ccf9c6f9815f5de04afe70076dcb4867d78c1f02",
+      "metadata_bundle_files": 4
+    }
+  },
+  "measurement_status_before_user_stop": "IN_PROGRESS"
 }
