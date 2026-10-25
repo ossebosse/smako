@@ -13,7 +13,7 @@
   },
   "samples_per_mode": 3,
   "required_arrival_samples": 12,
-  "measured_arrival_samples": 1,
+  "measured_arrival_samples": 3,
   "required_seed_workers": 12,
   "source_files": {
     "history_arrival_entry.py": {
@@ -662,7 +662,7 @@
       "arrival_kind": "valid",
       "cache_path": "prepared",
       "sample": 2,
-      "status": "NATIVE_SEED_SAVED_ARRIVAL_PENDING",
+      "status": "HISTORY_ARRIVAL_PASSED_NOT_FULL_RELEASE",
       "seed": {
         "report": {
           "stage": "seed",
@@ -1001,13 +1001,902 @@
         "process_wall_seconds": 97.56158553110436,
         "exit_code": 0,
         "oom_killed": false
+      },
+      "arrival": {
+        "report": {
+          "stage": "arrival",
+          "arrival_kind": "valid",
+          "cache_path": "prepared",
+          "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+          "before": {
+            "saved_revisions": 2,
+            "history_sha256": "c55b9fae0395dffe8617e0a7b60eeaa7d3cc015932f3b78846859cc422fb40dd",
+            "private_sha256": "c6209880ec4a596d196cf0614216f2e484aed6fa607fb04835db6fc1ae6b9e54",
+            "artifacts": {
+              "menu_certificate": 11,
+              "menu_view": 1,
+              "qualification": 1
+            }
+          },
+          "actual_pantry_revision": 2,
+          "status": "HISTORY_ARRIVAL_PASSED",
+          "plan_seconds": 263.42356344731525,
+          "quality": {
+            "paid": 976.32,
+            "audit_passed": true,
+            "menu_slots": [
+              {
+                "slot": "dinner-1",
+                "recipe": "d00534c3df6c28b6d68e209befbf55d2aac48db59f690a12cdb8d3107112255d",
+                "recipe_name": "Kyckling i tomatsås med paprika, ärtor och morot, med ris"
+              },
+              {
+                "slot": "dinner-2",
+                "recipe": "8f1eb3a05ce6dd4d9d6ac498397ab2d5a68a1f1d72d8c6b670721b635d5af0c2",
+                "recipe_name": "Röda linser i tomatsås med paprika, morot och aubergine, med ris"
+              },
+              {
+                "slot": "dinner-3",
+                "recipe": "99b0e878ffd5b3e2ef2f55eda81d334a7f7bec4d09f026b75227744e10e11d86",
+                "recipe_name": "Rostad morot och kikärtor med feta, couscous och örtkräm"
+              },
+              {
+                "slot": "dinner-4",
+                "recipe": "f524d78bd85fefc7526d59a873931f7e0d6feea8ae5d9a7c8ce62a892d358dc5",
+                "recipe_name": "Färsbiffar med citronpotatis, tzatziki och tomatsallad"
+              },
+              {
+                "slot": "dinner-5",
+                "recipe": "200a1a0a6af148eb9cf809369a5ae7b1569b79a3c242dee66f04297e20b489c7",
+                "recipe_name": "Citronbakad lax med potatis, ärtor och dillkräm"
+              }
+            ],
+            "reaudited_previous_menu": null,
+            "unknown_quantities": 0,
+            "recipes": [
+              "Kyckling i tomatsås med paprika, ärtor och morot, med ris",
+              "Röda linser i tomatsås med paprika, morot och aubergine, med ris",
+              "Rostad morot och kikärtor med feta, couscous och örtkräm",
+              "Färsbiffar med citronpotatis, tzatziki och tomatsallad",
+              "Citronbakad lax med potatis, ärtor och dillkräm"
+            ],
+            "distinct_recipes": 5,
+            "week_distribution": {
+              "classification_version": "authored-week-sources-v1",
+              "cuisines": {
+                "greek": 3,
+                "swedish": 2
+              },
+              "main_proteins": {
+                "kikärtor": 1,
+                "kyckling": 1,
+                "lax": 1,
+                "linser": 1,
+                "nötkött": 1
+              },
+              "distinct_cuisines": 2,
+              "dinner_count": 5,
+              "base_ids": [
+                "smako-greek-fish-plaki",
+                "smako-greek-keftedes",
+                "smako-greek-roasted-carrot-legumes",
+                "smako-scaling-test-01208",
+                "smako-scaling-test-02007"
+              ],
+              "base_id_counts": {
+                "smako-greek-fish-plaki": 1,
+                "smako-greek-keftedes": 1,
+                "smako-greek-roasted-carrot-legumes": 1,
+                "smako-scaling-test-01208": 1,
+                "smako-scaling-test-02007": 1
+              },
+              "dish_families": {
+                "husman": 1,
+                "scaling-kyckling-tomatsås": 1,
+                "scaling-linser-tomatsås": 1,
+                "ugn": 2
+              },
+              "cooking_methods": {
+                "oven": 3,
+                "pot": 2
+              }
+            },
+            "search_outcome": {
+              "status": "VALID_SOLUTION",
+              "global_optimum_proven": false,
+              "label": "Lägsta hittade inköpskostnad inom dina val",
+              "search_budget": {
+                "scope": "current_planner_search_diagnostics",
+                "nutrition_status": "NOT_REACHED",
+                "nutrition_searches_recorded": 0,
+                "nutrition_searches_omitted": 0,
+                "nutrition_budget_exhausted_recorded": 0,
+                "week_search_method": "verified_reference_and_bounded_improvement",
+                "distinct_week_proposals_pruned": 0,
+                "week_search_phases": [
+                  {
+                    "search_track": "reference_and_previous",
+                    "library_phase": "certificate_reaudit",
+                    "evaluations_executed": 0
+                  }
+                ],
+                "joint_refinement": []
+              },
+              "budget_message": "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget. Globalt lägsta pris är inte bevisat."
+            },
+            "nutrition": [
+              {
+                "slot_id": "dinner-1",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 54.15407
+                }
+              },
+              {
+                "slot_id": "dinner-2",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 32.899069999999995
+                }
+              },
+              {
+                "slot_id": "dinner-3",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 32.904725
+                }
+              },
+              {
+                "slot_id": "dinner-4",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 43.082834999999996
+                }
+              },
+              {
+                "slot_id": "dinner-5",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 48.65701
+                }
+              }
+            ],
+            "organic_cost_percent": 7.41867420517863,
+            "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+            "verified_reference": {
+              "policy": "smako-verified-reference-v1",
+              "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+              "global_optimum_proven": false,
+              "publications": [
+                {
+                  "policy": "smako-verified-reference-v1",
+                  "global_optimum_proven": false,
+                  "audit_rejected": 0,
+                  "constraint_rejected": 0,
+                  "tracks": [
+                    {
+                      "track": "reference",
+                      "status": "completed"
+                    },
+                    {
+                      "track": "improvement",
+                      "status": "completed"
+                    }
+                  ],
+                  "rejections": [],
+                  "evaluations": 0,
+                  "proposals": 0,
+                  "budget_stop": null,
+                  "selected_track": "previous",
+                  "verified_candidates": 2
+                }
+              ],
+              "verified_candidates": 2,
+              "reference_manifest": "8a1188dfa0079aa79535afbc5e12cb8f6840fa30ee0e189b5d42e610905f0481",
+              "publication_chain": "append_only_replayed_or_verified",
+              "certificate": "969f7e3fe63ac23a53ae9a758148e8bc46039cea576c19731a7c8e07b8c52b39",
+              "loaded_publications": 11,
+              "replayed_publications": 0,
+              "improvement_limits": {
+                "evaluations": 4096,
+                "proposals": 32768,
+                "wall_time_safety_seconds": 900,
+                "version": "full-pool-first-4096-v1"
+              }
+            },
+            "timings_seconds": {
+              "product_facts": 0.003518810961395502,
+              "memory_reclamation": 2.1687326920218766,
+              "candidate_generation_and_qualification": 196.98661802802235,
+              "package_calculation": 0.5217975848354399,
+              "nutrition": 0.014516868628561497,
+              "audit": 0.0831075981259346,
+              "week_search": 21.23161271214485,
+              "total": 245.19888046337292
+            },
+            "purchase_surplus": {
+              "unknown_lines": 0,
+              "unused_purchase_value": 299.84,
+              "unused_package_equivalents": 13.112752508934687,
+              "unused_quantities": {
+                "g": 5286.8,
+                "ml": 510.0
+              },
+              "quantity_status": "ESTIMATED",
+              "method": "proportional_paid_merchandise_cost_of_unused_usable_quantity",
+              "deposit_included": false,
+              "deducted_from_checkout": false,
+              "tie_break_enabled": true,
+              "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat."
+            },
+            "joint_refinement": []
+          },
+          "native_optimizer_calls": 0,
+          "native_audit_calls": 8,
+          "instrumented": true,
+          "after": {
+            "saved_revisions": 2,
+            "history_sha256": "c55b9fae0395dffe8617e0a7b60eeaa7d3cc015932f3b78846859cc422fb40dd",
+            "private_sha256": "c6209880ec4a596d196cf0614216f2e484aed6fa607fb04835db6fc1ae6b9e54",
+            "artifacts": {
+              "menu_certificate": 11,
+              "menu_view": 1,
+              "qualification": 1
+            }
+          }
+        },
+        "report_sha256": "6d5512961a1078cfd364a4eaafaaa3f558f789c81299c1cbf1c87b5ac91764ca",
+        "receipt_sha256": "61bb8e04cb3fe5bf8349533015f406e87da699543582f9972a2cf5d7c8023b29",
+        "protocol_sha256": "1e887e41a25f1865a4360fb64c84845a95e3e5422f73e847daf9cdf091432486",
+        "final_resource": {
+          "measurement_complete": true,
+          "scope": "After native calls, report serialization and report/source hashing; before tiny footer",
+          "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+          "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+          "target_enforced_for_current_runtime": true,
+          "memory": {
+            "current": 1421656064,
+            "peak": 1563791360,
+            "swap.current": 0
+          },
+          "memory_target_passed": true,
+          "entry_sha256": "26169e3cde3d8728cab9abbd2a8437f90c20735b60a90676c633ea137d158a90",
+          "report_sha256": "6d5512961a1078cfd364a4eaafaaa3f558f789c81299c1cbf1c87b5ac91764ca"
+        },
+        "final_resource_sha256": "56dcd910860a8bb3bec08a6b515f68afcb0a6502a64fa38d891e038fe9c8e6a4",
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "process_wall_seconds": 323.5425729136914,
+        "exit_code": 0,
+        "oom_killed": false
       }
     },
     {
       "arrival_kind": "valid",
       "cache_path": "prepared",
       "sample": 3,
-      "status": "NOT_RUN"
+      "status": "HISTORY_ARRIVAL_PASSED_NOT_FULL_RELEASE",
+      "seed": {
+        "report": {
+          "stage": "seed",
+          "arrival_kind": "valid",
+          "cache_path": "prepared",
+          "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+          "before": {
+            "saved_revisions": 1,
+            "history_sha256": "ebe3d1cc7a4bcdd478b9c2abefeb06469c92a0b850c93c637d633c68b73d50f6",
+            "private_sha256": "018abe65236af1fb7d4f783f47c6fd4fcd12d2741960fb5a51562cdebf52baad",
+            "artifacts": {
+              "menu_certificate": 11,
+              "menu_view": 1,
+              "qualification": 1
+            }
+          },
+          "actual_pantry_revision": 1,
+          "status": "NATIVE_262_DELIVERY_SAVED",
+          "native_plan_seconds": 34.5292001622729,
+          "quality": {
+            "paid": 984.22,
+            "audit_passed": true,
+            "menu_slots": [
+              {
+                "slot": "dinner-1",
+                "recipe": "1ef006893978b5b0d3545ebbbbc057d767883af16f64399c303daf903ba0b4e6",
+                "recipe_name": "Kyckling i paprikasås med spenat, med ris"
+              },
+              {
+                "slot": "dinner-2",
+                "recipe": "99b0e878ffd5b3e2ef2f55eda81d334a7f7bec4d09f026b75227744e10e11d86",
+                "recipe_name": "Rostad morot och kikärtor med feta, couscous och örtkräm"
+              },
+              {
+                "slot": "dinner-3",
+                "recipe": "05a3bcb73f9a9b0a50801b28f39b1d1db53c32d3f04e0d3579b304089c1c5f6d",
+                "recipe_name": "Röda linser i paprikasås med spenat, med ris"
+              },
+              {
+                "slot": "dinner-4",
+                "recipe": "f524d78bd85fefc7526d59a873931f7e0d6feea8ae5d9a7c8ce62a892d358dc5",
+                "recipe_name": "Färsbiffar med citronpotatis, tzatziki och tomatsallad"
+              },
+              {
+                "slot": "dinner-5",
+                "recipe": "200a1a0a6af148eb9cf809369a5ae7b1569b79a3c242dee66f04297e20b489c7",
+                "recipe_name": "Citronbakad lax med potatis, ärtor och dillkräm"
+              }
+            ],
+            "reaudited_previous_menu": null,
+            "unknown_quantities": 0,
+            "recipes": [
+              "Kyckling i paprikasås med spenat, med ris",
+              "Rostad morot och kikärtor med feta, couscous och örtkräm",
+              "Röda linser i paprikasås med spenat, med ris",
+              "Färsbiffar med citronpotatis, tzatziki och tomatsallad",
+              "Citronbakad lax med potatis, ärtor och dillkräm"
+            ],
+            "distinct_recipes": 5,
+            "week_distribution": {
+              "classification_version": "authored-week-sources-v1",
+              "cuisines": {
+                "greek": 3,
+                "swedish": 2
+              },
+              "main_proteins": {
+                "kikärtor": 1,
+                "kyckling": 1,
+                "lax": 1,
+                "linser": 1,
+                "nötkött": 1
+              },
+              "distinct_cuisines": 2,
+              "dinner_count": 5,
+              "base_ids": [
+                "smako-greek-fish-plaki",
+                "smako-greek-keftedes",
+                "smako-greek-roasted-carrot-legumes",
+                "smako-growth-20261018-chicken-paprika",
+                "smako-growth-20261018-lentils-paprika"
+              ],
+              "base_id_counts": {
+                "smako-greek-fish-plaki": 1,
+                "smako-greek-keftedes": 1,
+                "smako-greek-roasted-carrot-legumes": 1,
+                "smako-growth-20261018-chicken-paprika": 1,
+                "smako-growth-20261018-lentils-paprika": 1
+              },
+              "dish_families": {
+                "growth-chicken-paprika": 1,
+                "growth-lentils-paprika": 1,
+                "husman": 1,
+                "ugn": 2
+              },
+              "cooking_methods": {
+                "oven": 3,
+                "pot": 2
+              }
+            },
+            "search_outcome": {
+              "status": "VALID_SOLUTION",
+              "global_optimum_proven": false,
+              "label": "Lägsta hittade inköpskostnad inom dina val",
+              "search_budget": {
+                "scope": "current_planner_search_diagnostics",
+                "nutrition_status": "NOT_REACHED",
+                "nutrition_searches_recorded": 5,
+                "nutrition_searches_omitted": 0,
+                "nutrition_budget_exhausted_recorded": 0,
+                "week_search_method": "bounded_beam_then_library_substitutions",
+                "distinct_week_proposals_pruned": 353,
+                "week_search_phases": [
+                  {
+                    "library_phase": "seed",
+                    "library_generation": 2,
+                    "evaluations_executed": 0
+                  },
+                  {
+                    "library_phase": "seed",
+                    "library_generation": 2,
+                    "evaluations_executed": 104
+                  },
+                  {
+                    "library_phase": "seed",
+                    "library_generation": 2,
+                    "evaluations_executed": 60
+                  },
+                  {
+                    "library_phase": "seed",
+                    "library_generation": 2,
+                    "evaluations_executed": 40
+                  },
+                  {
+                    "library_phase": "seed",
+                    "library_generation": 2,
+                    "evaluations_executed": 24
+                  },
+                  {
+                    "library_phase": "substitution",
+                    "library_generation": 5,
+                    "evaluations_executed": 1
+                  },
+                  {
+                    "library_phase": "substitution",
+                    "library_generation": 5,
+                    "evaluations_executed": 0
+                  },
+                  {
+                    "library_phase": "substitution",
+                    "library_generation": 6,
+                    "evaluations_executed": 4
+                  },
+                  {
+                    "library_phase": "substitution",
+                    "library_generation": 12,
+                    "evaluations_executed": 7
+                  },
+                  {
+                    "library_phase": "substitution",
+                    "library_generation": 12,
+                    "evaluations_executed": 2
+                  },
+                  {
+                    "library_phase": "refinement",
+                    "library_generation": 13,
+                    "evaluations_executed": 20
+                  },
+                  {
+                    "library_phase": "paired_refinement",
+                    "library_generation": 13,
+                    "evaluations_executed": 123
+                  },
+                  {
+                    "library_phase": "joint_refinement",
+                    "library_generation": 13,
+                    "evaluations_executed": 9
+                  }
+                ],
+                "joint_refinement": [
+                  {
+                    "proposal_limit": 256,
+                    "evaluation_limit": 32,
+                    "proposals": 256,
+                    "evaluations_executed": 9,
+                    "constraints_rejected": 247,
+                    "evaluation_rejected": 0,
+                    "duplicate_proposals": 0,
+                    "improvements": 1
+                  }
+                ]
+              },
+              "budget_message": "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget. Globalt lägsta pris är inte bevisat."
+            },
+            "nutrition": [
+              {
+                "slot_id": "dinner-1",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 51.72907
+                }
+              },
+              {
+                "slot_id": "dinner-2",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 32.904725
+                }
+              },
+              {
+                "slot_id": "dinner-3",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 33.54907
+                }
+              },
+              {
+                "slot_id": "dinner-4",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 43.082834999999996
+                }
+              },
+              {
+                "slot_id": "dinner-5",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 48.65701
+                }
+              }
+            ],
+            "organic_cost_percent": 7.359127024445754,
+            "semantic_sha256": "88d828e259c95efcf8db7c8b96386e121af4d4172c801f01448792f50cb11bbb",
+            "verified_reference": null,
+            "timings_seconds": {
+              "product_facts": 0.00282499473541975,
+              "memory_reclamation": 1.9128672266378999,
+              "package_calculation": 2.8968706536106765,
+              "nutrition": 0.18169952230527997,
+              "candidate_generation_and_qualification": 19.516061110887676,
+              "week_search": 5.435409507714212,
+              "audit": 0.00480610691010952,
+              "total": 30.681915394961834
+            },
+            "purchase_surplus": {
+              "unknown_lines": 0,
+              "unused_purchase_value": 320.26,
+              "unused_package_equivalents": 13.912752508934688,
+              "unused_quantities": {
+                "g": 6186.8,
+                "ml": 510.0
+              },
+              "quantity_status": "VERIFIED",
+              "method": "proportional_paid_merchandise_cost_of_unused_usable_quantity",
+              "deposit_included": false,
+              "deducted_from_checkout": false,
+              "tie_break_enabled": true,
+              "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat."
+            },
+            "joint_refinement": [
+              {
+                "depth": 5,
+                "attempt": 9,
+                "beam_width": 1,
+                "library_generation": 13,
+                "library_phase": "joint_refinement",
+                "proposal_limit": 256,
+                "evaluation_limit": 32,
+                "shortlist_per_slot": 8,
+                "pairs_available": 256,
+                "proposals": 256,
+                "constraints_rejected": 247,
+                "evaluation_rejected": 0,
+                "priced": 9,
+                "retained": 1,
+                "beam_pruned": 8,
+                "evaluations_executed": 9,
+                "evaluation_cache_hits": 0,
+                "duplicate_proposals": 0,
+                "improvements": 1,
+                "rejections": {
+                  "policy_taste": 236,
+                  "nutrition": 0,
+                  "nutrition_bound": 0,
+                  "organic": 0,
+                  "store_cap": 0,
+                  "variation": 11,
+                  "preparation": 0,
+                  "product_qualification": 0,
+                  "price_basket": 0
+                }
+              }
+            ]
+          },
+          "instrumented": false,
+          "native_store_create_seconds": 1.304764179047197,
+          "after": {
+            "saved_revisions": 2,
+            "history_sha256": "e92d0a9872f9459e5e950c2b26d881d088dc55d04fcd897740953c0aafef50f6",
+            "private_sha256": "b129aad667d9a1c8cb83215e3d323438967b1d0acdd619277c10e72261987771",
+            "artifacts": {
+              "menu_certificate": 11,
+              "menu_view": 1,
+              "qualification": 1
+            }
+          },
+          "private_revision_after": 2
+        },
+        "report_sha256": "aceb6df2405fc286d69ce1cd503c21195d4f56b6cfa69e1c945282f541d99509",
+        "receipt_sha256": "b82dbb73eb3dfdcaa9879b8b1494f8b28e8ab73008b3d03724a39a0d69363953",
+        "protocol_sha256": "1ae7da1f7e71664880edd097f3168c4cd61e4baf86ac1d79013cefb2524a8ec0",
+        "final_resource": {
+          "measurement_complete": true,
+          "scope": "After native calls, report serialization and report/source hashing; before tiny footer",
+          "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+          "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+          "target_enforced_for_current_runtime": true,
+          "memory": {
+            "current": 1344176128,
+            "peak": 1594441728,
+            "swap.current": 0
+          },
+          "memory_target_passed": true,
+          "entry_sha256": "26169e3cde3d8728cab9abbd2a8437f90c20735b60a90676c633ea137d158a90",
+          "report_sha256": "aceb6df2405fc286d69ce1cd503c21195d4f56b6cfa69e1c945282f541d99509"
+        },
+        "final_resource_sha256": "c4488edf1c20f4dadd2e675a092816db7e50eb667f779d63a57adccf9f54d605",
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "process_wall_seconds": 96.19543693494052,
+        "exit_code": 0,
+        "oom_killed": false
+      },
+      "arrival": {
+        "report": {
+          "stage": "arrival",
+          "arrival_kind": "valid",
+          "cache_path": "prepared",
+          "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+          "before": {
+            "saved_revisions": 2,
+            "history_sha256": "e92d0a9872f9459e5e950c2b26d881d088dc55d04fcd897740953c0aafef50f6",
+            "private_sha256": "b129aad667d9a1c8cb83215e3d323438967b1d0acdd619277c10e72261987771",
+            "artifacts": {
+              "menu_certificate": 11,
+              "menu_view": 1,
+              "qualification": 1
+            }
+          },
+          "actual_pantry_revision": 2,
+          "status": "HISTORY_ARRIVAL_PASSED",
+          "plan_seconds": 265.63439295906574,
+          "quality": {
+            "paid": 976.32,
+            "audit_passed": true,
+            "menu_slots": [
+              {
+                "slot": "dinner-1",
+                "recipe": "d00534c3df6c28b6d68e209befbf55d2aac48db59f690a12cdb8d3107112255d",
+                "recipe_name": "Kyckling i tomatsås med paprika, ärtor och morot, med ris"
+              },
+              {
+                "slot": "dinner-2",
+                "recipe": "8f1eb3a05ce6dd4d9d6ac498397ab2d5a68a1f1d72d8c6b670721b635d5af0c2",
+                "recipe_name": "Röda linser i tomatsås med paprika, morot och aubergine, med ris"
+              },
+              {
+                "slot": "dinner-3",
+                "recipe": "99b0e878ffd5b3e2ef2f55eda81d334a7f7bec4d09f026b75227744e10e11d86",
+                "recipe_name": "Rostad morot och kikärtor med feta, couscous och örtkräm"
+              },
+              {
+                "slot": "dinner-4",
+                "recipe": "f524d78bd85fefc7526d59a873931f7e0d6feea8ae5d9a7c8ce62a892d358dc5",
+                "recipe_name": "Färsbiffar med citronpotatis, tzatziki och tomatsallad"
+              },
+              {
+                "slot": "dinner-5",
+                "recipe": "200a1a0a6af148eb9cf809369a5ae7b1569b79a3c242dee66f04297e20b489c7",
+                "recipe_name": "Citronbakad lax med potatis, ärtor och dillkräm"
+              }
+            ],
+            "reaudited_previous_menu": null,
+            "unknown_quantities": 0,
+            "recipes": [
+              "Kyckling i tomatsås med paprika, ärtor och morot, med ris",
+              "Röda linser i tomatsås med paprika, morot och aubergine, med ris",
+              "Rostad morot och kikärtor med feta, couscous och örtkräm",
+              "Färsbiffar med citronpotatis, tzatziki och tomatsallad",
+              "Citronbakad lax med potatis, ärtor och dillkräm"
+            ],
+            "distinct_recipes": 5,
+            "week_distribution": {
+              "classification_version": "authored-week-sources-v1",
+              "cuisines": {
+                "greek": 3,
+                "swedish": 2
+              },
+              "main_proteins": {
+                "kikärtor": 1,
+                "kyckling": 1,
+                "lax": 1,
+                "linser": 1,
+                "nötkött": 1
+              },
+              "distinct_cuisines": 2,
+              "dinner_count": 5,
+              "base_ids": [
+                "smako-greek-fish-plaki",
+                "smako-greek-keftedes",
+                "smako-greek-roasted-carrot-legumes",
+                "smako-scaling-test-01208",
+                "smako-scaling-test-02007"
+              ],
+              "base_id_counts": {
+                "smako-greek-fish-plaki": 1,
+                "smako-greek-keftedes": 1,
+                "smako-greek-roasted-carrot-legumes": 1,
+                "smako-scaling-test-01208": 1,
+                "smako-scaling-test-02007": 1
+              },
+              "dish_families": {
+                "husman": 1,
+                "scaling-kyckling-tomatsås": 1,
+                "scaling-linser-tomatsås": 1,
+                "ugn": 2
+              },
+              "cooking_methods": {
+                "oven": 3,
+                "pot": 2
+              }
+            },
+            "search_outcome": {
+              "status": "VALID_SOLUTION",
+              "global_optimum_proven": false,
+              "label": "Lägsta hittade inköpskostnad inom dina val",
+              "search_budget": {
+                "scope": "current_planner_search_diagnostics",
+                "nutrition_status": "NOT_REACHED",
+                "nutrition_searches_recorded": 0,
+                "nutrition_searches_omitted": 0,
+                "nutrition_budget_exhausted_recorded": 0,
+                "week_search_method": "verified_reference_and_bounded_improvement",
+                "distinct_week_proposals_pruned": 0,
+                "week_search_phases": [
+                  {
+                    "search_track": "reference_and_previous",
+                    "library_phase": "certificate_reaudit",
+                    "evaluations_executed": 0
+                  }
+                ],
+                "joint_refinement": []
+              },
+              "budget_message": "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget. Globalt lägsta pris är inte bevisat."
+            },
+            "nutrition": [
+              {
+                "slot_id": "dinner-1",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 54.15407
+                }
+              },
+              {
+                "slot_id": "dinner-2",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 32.899069999999995
+                }
+              },
+              {
+                "slot_id": "dinner-3",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 32.904725
+                }
+              },
+              {
+                "slot_id": "dinner-4",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 43.082834999999996
+                }
+              },
+              {
+                "slot_id": "dinner-5",
+                "status": "ESTIMATED",
+                "values": {
+                  "protein_g": 48.65701
+                }
+              }
+            ],
+            "organic_cost_percent": 7.41867420517863,
+            "semantic_sha256": "f5d0a93e266b6d518564fd2295d60fd4ad3f075a1f35d608043b827d7292c90d",
+            "verified_reference": {
+              "policy": "smako-verified-reference-v1",
+              "context": "23bbaa850dfa7c9776846ba4b46e45d2d104e6a4731b457afc094e743be3f7a3",
+              "global_optimum_proven": false,
+              "publications": [
+                {
+                  "policy": "smako-verified-reference-v1",
+                  "global_optimum_proven": false,
+                  "audit_rejected": 0,
+                  "constraint_rejected": 0,
+                  "tracks": [
+                    {
+                      "track": "reference",
+                      "status": "completed"
+                    },
+                    {
+                      "track": "improvement",
+                      "status": "completed"
+                    }
+                  ],
+                  "rejections": [],
+                  "evaluations": 0,
+                  "proposals": 0,
+                  "budget_stop": null,
+                  "selected_track": "previous",
+                  "verified_candidates": 2
+                }
+              ],
+              "verified_candidates": 2,
+              "reference_manifest": "8a1188dfa0079aa79535afbc5e12cb8f6840fa30ee0e189b5d42e610905f0481",
+              "publication_chain": "append_only_replayed_or_verified",
+              "certificate": "969f7e3fe63ac23a53ae9a758148e8bc46039cea576c19731a7c8e07b8c52b39",
+              "loaded_publications": 11,
+              "replayed_publications": 0,
+              "improvement_limits": {
+                "evaluations": 4096,
+                "proposals": 32768,
+                "wall_time_safety_seconds": 900,
+                "version": "full-pool-first-4096-v1"
+              }
+            },
+            "timings_seconds": {
+              "product_facts": 0.00351706612855196,
+              "memory_reclamation": 2.201307994313538,
+              "candidate_generation_and_qualification": 198.42051101708785,
+              "package_calculation": 0.48773982701823115,
+              "nutrition": 0.013915559276938438,
+              "audit": 0.08102643629536033,
+              "week_search": 21.924890058115125,
+              "total": 247.49428954394534
+            },
+            "purchase_surplus": {
+              "unknown_lines": 0,
+              "unused_purchase_value": 299.84,
+              "unused_package_equivalents": 13.112752508934687,
+              "unused_quantities": {
+                "g": 5286.8,
+                "ml": 510.0
+              },
+              "quantity_status": "ESTIMATED",
+              "method": "proportional_paid_merchandise_cost_of_unused_usable_quantity",
+              "deposit_included": false,
+              "deducted_from_checkout": false,
+              "tie_break_enabled": true,
+              "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat."
+            },
+            "joint_refinement": []
+          },
+          "native_optimizer_calls": 0,
+          "native_audit_calls": 8,
+          "instrumented": true,
+          "after": {
+            "saved_revisions": 2,
+            "history_sha256": "e92d0a9872f9459e5e950c2b26d881d088dc55d04fcd897740953c0aafef50f6",
+            "private_sha256": "b129aad667d9a1c8cb83215e3d323438967b1d0acdd619277c10e72261987771",
+            "artifacts": {
+              "menu_certificate": 11,
+              "menu_view": 1,
+              "qualification": 1
+            }
+          }
+        },
+        "report_sha256": "cb4321460500122e3e1b9f087a276aeb6ab5ae03a470ad3455eacf495bf92ba6",
+        "receipt_sha256": "febba308b709f8e242e89e8f525932e45c58620fe1041251e15e3e2ded430d99",
+        "protocol_sha256": "aa0053fe0b6c3203f57272c907a59d380ee22be6d150ef8edbb6c794e332bd55",
+        "final_resource": {
+          "measurement_complete": true,
+          "scope": "After native calls, report serialization and report/source hashing; before tiny footer",
+          "method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+          "target_method_signature": "17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6",
+          "target_enforced_for_current_runtime": true,
+          "memory": {
+            "current": 1421479936,
+            "peak": 1563541504,
+            "swap.current": 0
+          },
+          "memory_target_passed": true,
+          "entry_sha256": "26169e3cde3d8728cab9abbd2a8437f90c20735b60a90676c633ea137d158a90",
+          "report_sha256": "cb4321460500122e3e1b9f087a276aeb6ab5ae03a470ad3455eacf495bf92ba6"
+        },
+        "final_resource_sha256": "3327e9633d6c673909848e07c96d37d4b1fb7ef999383fc49076f6f2a370f297",
+        "resources": {
+          "Memory": 3221225472,
+          "MemorySwap": 3221225472,
+          "NanoCpus": 2000000000,
+          "PidsLimit": 128,
+          "NetworkMode": "none",
+          "ReadonlyRootfs": true
+        },
+        "source_commit": "eeda184926f02e73ab76e71e50c740e9dcb01b02",
+        "process_wall_seconds": 325.7929816660471,
+        "exit_code": 0,
+        "oom_killed": false
+      }
     },
     {
       "arrival_kind": "valid",
@@ -1145,7 +2034,7 @@
     ]
   },
   "protocol_sha256": "401d5d8ba180c104839c2f2fca5425156ed752cd4dbd28f84c98c303a523faa4",
-  "measured_seed_workers": 2,
-  "bundle_sha256": "95ec77e93dc493857f056a0db487f0a403bee9e55f5088e80d77e6e2e997e60f",
-  "bundle_metadata_files": 59
+  "measured_seed_workers": 3,
+  "bundle_sha256": "cec8a1922f267349c96cec695d7b7a0c74480a9dabb0707e9811aad3e9b5164c",
+  "bundle_metadata_files": 74
 }

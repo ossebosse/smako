@@ -355,26 +355,29 @@ Det kompletterande steget för tolv nytillkomna menyidentiteter har nu startat.
 Råhashar, request-normalisering, kö-/avbrottstider,
 progress, separata jobbspår och resurskvitton finns i HTTP-statusunderlaget.
 
-### Nytillkommen sparad meny: första giltiga ankomstprovet passerar
+### Nytillkommen sparad meny: tre giltiga prov med förberedd vy passerar
 
-Första kombinationen giltig meny/förberedd vy är avslutad. En vanlig
-262-planering tog **34,63 s** och levererade **984,22 kr** med native audit.
-Ordinarie Save sparade den nya identiteten och flyttade faktisk privat
-revision 1→2, med oförändrat effektivt tomt skafferi.
+Första kombinationen giltig meny/förberedd vy är avslutad i alla tre prover.
+Vanlig 262-planering tog **34,63 / 35,64 / 34,53 s** och levererade
+**984,22 kr** med native audit. Ordinarie Save sparade den nya identiteten
+och flyttade faktisk privat revision 1→2 i varje isolerad kopia, med
+oförändrat effektivt tomt skafferi.
 
-Efterföljande 5 000-anrop tog **265,00 s inklusive CPython-profileringshook**.
-Det återanvände elva publiceringar utan omsökning: **noll native sökanrop och
-åtta native auditanrop**. Resultatet blev **976,32 kr**, audit PASS och samma
+Efterföljande 5 000-anrop tog **265,00 / 263,42 / 265,63 s inklusive
+CPython-profileringshook**, median **265,00 s** och spann **263,42–265,63 s**.
+Hela ankomstprocesserna tog **324,66 / 323,54 / 325,79 s**.
+Varje prov återanvände elva publiceringar utan omsökning: **noll native
+sökanrop och åtta native auditanrop**. Resultatet blev **976,32 kr**, audit PASS och samma
 kontext som API-baslinjen. Två sparade revisioner och auktoritativt privat
 tillstånd var oförändrade under ankomstplaneringen. Slutpeak är
-**1 563 619 328 byte (1,456 GiB)**, exit 0 utan OOM/swap.
+som mest **1 563 791 360 byte (1,456 GiB)**, exit 0 utan OOM/swap i alla tre.
 
-Detta är **1 av 12** erforderliga ankomstobservationer; nästa giltiga seed
-är sparad och övriga prov är pågående/återstår. Det är inget vanligt varmt
-latensprov. Arkivet med 59 verifierade metadatafiler har SHA-256
-`95ec77e93dc493857f056a0db487f0a403bee9e55f5088e80d77e6e2e997e60f`.
+Detta är **3 av 12** erforderliga ankomstobservationer. Serien giltig meny/
+certifikat har startat; resterande prov är pågående/återstår. Det är inget
+vanligt varmt latensprov. Arkivet med 74 verifierade metadatafiler har SHA-256
+`cec8a1922f267349c96cec695d7b7a0c74480a9dabb0707e9811aad3e9b5164c`.
 [Detaljer per seed och ankomst](preparation-memory-20261024/history-arrival-current.json).
-Full [CI på `ea890f8`](https://github.com/ossebosse/smako/actions/runs/40160321641)
+Full [CI på `7314e65`](https://github.com/ossebosse/smako/actions/runs/40160912531)
 passerar inklusive browserprov före denna resultatssummering.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
