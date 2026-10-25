@@ -1,4 +1,4 @@
-# 2026-10-25: Pilot och historikgrindar godkända; matchad basmätning pågår
+# 2026-10-25: Matchade förgrindar godkända; fullmatris 56/252 pågår
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -29,12 +29,29 @@ utan mätverktygets fasstädning passerar också: **2,023/2,039/2,030 GiB**,
 båda katalogerna och fakta kvar, exakt samma filhash, ingen OOM/swap.
 Faktaprojektionen är klar för båda städerna, med oförändrade priser/request/
 klocka och den partiella 103-dokumentsreleasen. Kvar följer
-matchade basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar
+hela återstående matrisen. En seriell förgrundssekvens stannar
 vid varje missad grind. B5-resultaten nedan är historik, inte automatiskt
 slutkodens kvalificering. Standard förblir legacy och generationsmerge=False;
 ingen drift, insamling, aktiv fakta/prisversion eller samtidighet ändrad.
 
 [Rapport och maskinunderlag](reviews/preparation-memory-20261024.md).
+
+Ny fasprofil klar: **666,03 s < 700 s**, 988,32 kr/hash/audit PASS,
+hela processen 721,79 s, slutligt kvitto efter rapportserialisering **1,828 GiB**
+utan OOM/swap. Matchad instrumenterad r2-referens 858,60 s: 22,43 procent
+lägre tid, separat från vanliga treprovsmedianens 24,79 procent. Legacy native
+200,30→61,16 s och 9 517→3 041 verkliga utvärderingar, alla elva föreslagna
+priser identiska. Budgeterad förbättring kvar 437,33 s; kalkylatoranrop oförändrat
+18 677. Kvalificering 207,00→101,90 s med samma 4 871 kalkylatoranrop.
+Inläsningsmedianen är däremot 33,12→47,70 s; faserna förbättras inte likformigt.
+Fullmatrisens första grupp är stängd: 573,48 s, 1,495 GiB, exit 0 utan OOM/swap.
+Totalt 56/252 uppmätta, 54 auditgodkända menyceller/216 anrop och två vegan-
+SEARCH_BLOCKED-celler/åtta observationer, samma kod/steg legacy/v1. Inget globalt
+omöjlighetsbevis. 196 celler återstår; v5/262 körs nu. Ingen standardkvalificering.
+[Fullmatrisstatus](reviews/preparation-memory-20261024/full-matrix-current.json).
+Senaste arkiv 209 verifierade metadatafiler:
+`eb9c901fcc02bdc1e68de6bd0f0d9b773221d87d8bfe16d4081bc4fb9e17b2c7`.
+
 
 Pilotuppdatering: originalfakta/Malmö vid både 262 och 5 000 är klart,
 tolv celler och 48 anrop med audit PASS. Slutliga processpeakar är
@@ -166,11 +183,11 @@ lägre median** i exakt detta frysta fall. Högsta slutpeak över tre sjunker
 från 2,818 till 1,882 GiB, **33,20 procent**. Slutkodens processväggtider
 756,71 / 704,55 / 719,74 s har olika anropsantal (4/1/1), ingen blandad median.
 Vanliga och instrumenterade tider hålls separat. Ny fasprofil startade
-06:11:22 UTC, dess 700-sekundersmål/minneskvitto återstår.
+06:11:22 UTC, dess 700-sekundersmål/minneskvitto är nu godkända enligt sammanfattningen ovan.
 [Maskinunderlag](reviews/preparation-memory-20261024/matched-current.json),
 184 verifierade metadatafiler, arkiv `711dfa0ccfebb7e12f4410d482e0129e070e3a015614565ee016a44bf77bfc59`.
 Appfiler och metodsignatur är oförändrade;
-matchade basprov/fasprofil och fullmatris återstår.
+fullmatrisens återstående celler och slutgranskning återstår.
 
 ---
 

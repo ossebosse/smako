@@ -70,8 +70,8 @@ Alla har slutkvitto efter rapportserialisering och städning, utan OOM/swap.
 Förgrundssekvensens tre kalla prov, tretton cachelägesprocesser och hela
 48-cellspiloten är klara. HTTP och tre historikåterhämtningar är också godkända.
 Även alla tolv ankomstprov för nytillkomna menyidentiteter passerar.
-Sekvensen fortsätter med tre matchade basprov, ny
-fasprofil och full matris. Varje
+Matchade basprov och ny fasprofil är också klara.
+Sekvensen fortsätter med full matris. Varje
 steg stannar vid missad grind. Metodsignaturen är
 `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`;
 kodändringen invaliderar äldre förberedelseartefakter. Äldre planresultat
@@ -470,10 +470,93 @@ vardera och tog 926,36 / 924,78 / 947,50 s. Plananropens medianjämförelse
 ovan använder exakt första anropet i varje tom process.
 
 Instrumenterade tider hålls separat. Slutkodens fasprofil startade 06:11:22 UTC;
-dess delmål under 700 s och fullständiga minneskvitto återstår. Arkivets 184 metadatafiler har verifierade
+dess delmål under 700 s och fullständiga minneskvitto är nu godkända enligt nedan. Arkivets 184 metadatafiler har verifierade
 manifesthashar, SHA-256
 `711dfa0ccfebb7e12f4410d482e0129e070e3a015614565ee016a44bf77bfc59`.
 [Aktuella matchade prov och separata referensprofiler](preparation-memory-20261024/matched-current.json).
+
+### Slutkodens matchade fasprofil: 666,03 s och delmålet passerat
+
+Ny instrumenterad planering tar **666,03 s**, alltså **33,97 s under 700-s-målet**,
+och ger 988,32 kr/förväntad hash/audit PASS. Den matchade instrumenterade
+r2-referensen på samma indata och bibliotek tog **858,60 s**: **22,43 procent
+lägre tid** i detta diagnostiska par. Detta hålls separat från den vanliga
+kallmedianens 24,79 procent. Samma frysta profileringskälla används i båda.
+
+Hela nya processen tog **721,79 s**. Den separata uppstartsmätningen för
+inläsning är **48,10 s** i detta prov. I de tre vanliga processernas befintliga
+uppstartsmätningar är baslinjen 33,12 / 32,95 / 34,92 s, median **33,12 s**,
+och slutkoden 47,33 / 47,70 / 47,74 s, median **47,70 s**. Inläsningen är alltså
+långsammare. Restore/index nedan är en delmätning, inte hela inläsningssteget.
+
+| Fas | Anrop, bas/slutkod | Bas, s | Slutkod, s | Största positiva RSS-delta per anrop, MiB bas/slutkod |
+| --- | --- | --- | --- | --- |
+| Restore/index, delmätning | 1/1 | 17,98 | 26,26 | 217,43/161,83 |
+| Plannerkonstruktion | 2/2 | 9,99 | 13,79 | 138,41/88,93 |
+| Publiceringsidentitet/hash | 3/3 | 5,32 | 9,98 | 31,74/39,58 |
+| Kvalificering | 1/1 | 207,00 | 101,90 | 500,29/480,96 |
+| Legacy, optimizerfas | 11/11 | 199,60 | 60,41 | 50,38/78,77 |
+| Pinnad referens, optimizerfas | 1/1 | 8,05 | 5,82 | 0,03/30,95 |
+| Budgeterad förbättring, optimizerfas | 22/22 | 422,00 | 437,33 | 42,89/68,73 |
+| Ägarartefakter, läsning | 14/14 | 0,01 | 0,02 | 0,03/0,11 |
+| Ägarartefakter, skrivning | 13/13 | 0,18 | 0,18 | 0,30/13,46 |
+| Avslutande responsbyggande | 1/1 | 0,01 | 0,01 | 0,00/0,00 |
+
+Tiderna för omslutande och inre faser överlappar och ska inte summeras.
+RSS-delta är observerad skillnad vid fasgränser, inte allokerad total eller
+fasens peak. Slutligt **cgroup-peak efter rapportserialisering är 1 962 889 216
+byte (1,828 GiB)**, utan OOM/swap och med tillämpat 2,5-GiB-mål. Det inkluderar
+filcache och kernel. Äldre r2:s 3-GiB-notering är en plan-/profilsnapshot;
+den märks inte om till ett nytt kvitto efter serialisering.
+
+Legacyförberedelsernas fulla native-timer, inklusive kringarbete utanför
+optimizeromslutningen ovan, går från **200,30 till 61,16 s**. Verkliga
+legacy-utvärderingar går från **9 517 till 3 041**. Alla elva publiceringar
+förbereds kallt; deras föreslagna priser är parvis exakt lika:
+
+| Publicerade recept | Legacytid bas/slutkod, s | Verkliga utvärderingar bas/slutkod | Föreslaget betalt bas/slutkod, kr |
+| --- | --- | --- | --- |
+| 262 | 6,40/6,66 | 409/409 | 996.22 / 996.22 |
+| 762 | 6,91/4,16 | 493/238 | 996.22 / 996.22 |
+| 1000 | 7,86/3,68 | 548/203 | 996.22 / 996.22 |
+| 1500 | 12,56/3,82 | 635/234 | 996.22 / 996.22 |
+| 2000 | 14,82/4,93 | 741/254 | 996.22 / 996.22 |
+| 2500 | 16,97/5,01 | 843/260 | 996.22 / 996.22 |
+| 3000 | 20,11/6,39 | 972/293 | 992.22 / 992.22 |
+| 3500 | 24,58/6,89 | 1067/279 | 992.22 / 992.22 |
+| 4000 | 27,24/6,35 | 1165/281 | 992.22 / 992.22 |
+| 4500 | 31,02/6,68 | 1260/281 | 992.22 / 992.22 |
+| 5000 | 31,84/6,58 | 1384/309 | 988.32 / 988.32 |
+
+Den instrumenterade kalkylatorn gör 4 871 kvalificeringsanrop i båda armarna.
+Sökanrop till kalkylatorn minskar från 28 603 till 22 127; hela minskningen
+6 476 motsvarar legacyspårets borttagna upprepning. Referensens 409 och den
+budgeterade förbättringens 18 677 kalkylatoranrop är oförändrade. Den senare
+sökningen tar fortfarande cirka **437,33 s** och dominerar kvarvarande arbete.
+Förberedelsecachens 4 119 träffar, 6 240 missar och 4 098 skrivningar är också
+oförändrade. Native profilerings-/budgeträknare och per-etikett-unikhet finns
+i maskinunderlaget; summerad unikhet per etikett är inte global unikhet.
+
+### Fullmatris: första gruppen stängd, 56 av 252 uppmätta
+
+Malmö/originalfakta/262:s fyra återstående profiler är avslutade på **573,48 s**
+för hela gruppen, slutpeak **1 605 341 184 byte (1,495 GiB)**, exit 0 utan
+OOM/swap. Sex nya celler levererar 24 auditgodkända anrop. Vegan ger
+`SEARCH_BLOCKED` med samma kod/steg i legacy och v1:s samtliga fyra anrop;
+det är åtta blockerade observationer och inget bevis för global omöjlighet.
+
+Totalt är **56 av 252** celler uppmätta: **54 med levererad meny och audit**
+(216 anrop) samt **två separat blockerade celler**. **196 celler återstår**.
+Inga registrerade pris-/utfalls-/minnesgrindar har fallit. Korsjämförelser mot
+ännu omätta storlekar och slutlig releasegranskning återstår; ingen cell
+märks som standardkvalificerad. V5-referensgruppen vid 262 körs nu seriellt.
+[Aktuellt fullmatrisunderlag](preparation-memory-20261024/full-matrix-current.json)
+och [den uppdaterade 252-cellsinventeringen](preparation-memory-20261024/cells.json).
+
+Senaste arkivet innehåller **209 verifierade metadatafiler**, inklusive de
+redan uppmätta uppstartsfilerna. SHA-256:
+`eb9c901fcc02bdc1e68de6bd0f0d9b773221d87d8bfe16d4081bc4fb9e17b2c7`.
+
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
 passerar före tillägget av historikprovens mätverktyg. Dessa verifieras lokalt
@@ -784,8 +867,7 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 5 000/v1 är uppmätt pilot, ännu inte standardkvalificerad. Äldre kods
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
-Kvar på slutkoden: tre kalla jämförbara prov på basarmen, matchad
-instrumenterad profil och de 204 återstående cellerna före full matrisgranskning. Slutkodens
+Kvar på slutkoden: de 196 återstående cellerna och full matrisgranskning. Slutkodens
 tretton cachelägesprocesser, tre ordinarie versionsbytesprov och båda
 faktaprojektionerna är klara enligt rapportens inledning.
 Ingen generell total bytebudget för alla RAM-cacher har bevisats; de
