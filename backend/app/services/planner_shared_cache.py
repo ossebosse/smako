@@ -25,7 +25,6 @@ checkout audit still runs per request. Disable with
 from __future__ import annotations
 
 import os
-import sys
 import threading
 import weakref
 from collections import OrderedDict
@@ -98,69 +97,6 @@ class SharedResolution:
 
 
 SHARED_RESOLUTION = SharedResolution()
-
-
-class CheckoutArithmeticCache:
-    """Bounded memo of integer arithmetic, containing no quotes or menus.
-
-    A key contains every exact (rank, cents, winning-store bits) operand and
-    its subset-position mask, plus the cap masks. The result is only numeric
-    leading keys and winning positions. Source qualification and quoting run
-    BEFORE this boundary; current quotes and independent checkout audit run
-    AFTER it. Equal integers have equal arithmetic even after a price/fact
-    replacement. No source identity, date, eligibility or approval is inferred.
-    Only the optimizer's proven exact-integer path may use this cache. Decimal
-    fallback, coupled promotions and custom checkout retain their own paths.
-    """
-
-    def __init__(self, *, max_entries=512, max_bytes=8 * 1024 * 1024):
-        if max_entries < 1 or max_bytes < 1:
-            raise ValueError("Checkout arithmetic cache bounds must be positive")
-        self.max_entries, self.max_bytes = max_entries, max_bytes
-        self._entries = OrderedDict()
-        self._lock = threading.Lock()
-        self.clear()
-
-    def get(self, key):
-        with self._lock:
-            entry = self._entries.get(key)
-            if entry is None:
-                self._misses += 1
-                return None
-            self._entries.move_to_end(key)
-            self._hits += 1
-            return entry[0]
-
-    def put(self, key, value):
-        # These trees contain only tuples/ints/None. Count repeated references
-        # again conservatively; neither source models nor search state survive.
-        def size(item):
-            return sys.getsizeof(item) + (sum(size(v) for v in item) if isinstance(item, tuple) else 0)
-
-        weight = size(key) + size(value) + 128
-        if weight > min(self.max_bytes, 64 * 1024):
-            return
-        with self._lock:
-            previous = self._entries.pop(key, None)
-            if previous is not None:
-                self._bytes -= previous[1]
-            while self._entries and (len(self._entries) >= self.max_entries or self._bytes + weight > self.max_bytes):
-                _, (_, released) = self._entries.popitem(last=False)
-                self._bytes -= released
-            self._entries[key] = (value, weight)
-            self._bytes += weight
-
-    def clear(self):
-        with self._lock:
-            self._entries.clear()
-            self._bytes = self._hits = self._misses = 0
-
-    def stats(self):
-        with self._lock:
-            return {"entries": len(self._entries), "bytes": self._bytes, "hits": self._hits, "misses": self._misses}
-
-
-CHECKOUT_ARITHMETIC = CheckoutArithmeticCache()
 
 
 def planner_scope(planner):

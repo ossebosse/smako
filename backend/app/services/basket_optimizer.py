@@ -1551,33 +1551,6 @@ class BasketOptimizer:
         # Small partitions first reduces intermediate intersections without
         # changing the commutative arithmetic or quote selection.
         partitions.sort(key=lambda partition: len(partition[0]))
-        cached = session.subset_cap_masks.get(id(store_subsets)) if session else None
-        if cached is not None and cached[0] is store_subsets:
-            cap_masks = cached[1]
-        else:
-            masks = [0] * limit
-            for index, combo in enumerate(store_subsets):
-                masks[len(combo) - 1] |= 1 << index
-            cap_masks = tuple(masks)
-            if session:
-                session.subset_cap_masks[id(store_subsets)] = (store_subsets, cap_masks)
-        arithmetic_key = None
-        if (integer_prices and len(store_subsets) <= 2048
-                and sum(len(groups) for groups, _ in partitions) <= 2048):
-            from app.services.planner_shared_cache import CHECKOUT_ARITHMETIC
-
-            # Integer addition, max(rank) and store-bit union commute. Canonical
-            # operands reuse pure work between personal choices, never recipes,
-            # quotes, nutrition decisions or mutable search trajectories.
-            arithmetic_key = ("integer-checkout-v1", cap_masks, tuple(sorted(
-                tuple(sorted(groups)) for groups, _ in partitions)))
-            reused = CHECKOUT_ARITHMETIC.get(arithmetic_key)
-            if reused is not None:
-                increment_performance_counter("checkout_arithmetic_hits")
-                leading, infeasible, winners = reused
-                best = [None if k is None else (k[0], Decimal(k[1]).scaleb(-2), k[2]) for k in leading]
-                return (best, infeasible, winners) if winning_mask else (best, infeasible)
-            increment_performance_counter("checkout_arithmetic_misses")
         states = {(0, 0 if integer_prices else Decimal(0), 0): (1 << len(store_subsets)) - 1}
         settled = {}
         for partition_index, (groups, positions) in enumerate(partitions):
@@ -1632,6 +1605,16 @@ class BasketOptimizer:
                 break
         for key, mask in settled.items():
             states[key] = states.get(key, 0) | mask
+        cached = session.subset_cap_masks.get(id(store_subsets)) if session else None
+        if cached is not None and cached[0] is store_subsets:
+            cap_masks = cached[1]
+        else:
+            masks = [0] * limit
+            for index, combo in enumerate(store_subsets):
+                masks[len(combo) - 1] |= 1 << index
+            cap_masks = tuple(masks)
+            if session:
+                session.subset_cap_masks[id(store_subsets)] = (store_subsets, cap_masks)
         best_by_cap = [None] * limit
         feasible_mask = 0
         for (rank, total, stores), mask in states.items():
@@ -1642,14 +1625,11 @@ class BasketOptimizer:
                 if best_by_cap[cap] is None or key < best_by_cap[cap]:
                     best_by_cap[cap] = key
         infeasible = len(store_subsets) - feasible_mask.bit_count()
-        winners = 0
-        if winning_mask or arithmetic_key is not None:
+        if winning_mask:
+            winners = 0
             for (rank, total, stores), mask in states.items():
                 if (rank, total, stores.bit_count()) == best_by_cap[-1]:
                     winners |= mask
-        if arithmetic_key is not None:
-            CHECKOUT_ARITHMETIC.put(arithmetic_key, (tuple(best_by_cap), infeasible, winners))
-        if winning_mask:
             if integer_prices:
                 best_by_cap = [None if key is None else (key[0], Decimal(key[1]).scaleb(-2), key[2])
                                for key in best_by_cap]
