@@ -132,6 +132,17 @@ def test_butter_does_not_bypass_existing_margarine_brand_exclusions():
     assert not evaluate_product_semantics("smör", SimpleNamespace(name="Smör", brand="Milda")).compatible
 
 
+def test_pitted_purchase_requirement_does_not_accept_explicit_unpitted_declaration():
+    from app.services.complete_recipes import _requirements_compatible
+    from app.services.personal_policy import ProductFacts
+
+    product = SimpleNamespace(name="Oliver", category="Konserver")
+    fact = ProductFacts(ingredients=("Ej urkärnade oliver",))
+    assert not _requirements_compatible("oliver", ["pitted"], product, fact)
+    product.name = "Oliver Urkärnade"
+    assert _requirements_compatible("oliver", ["pitted"], product, None)
+
+
 def test_reviewed_vocabulary_rejects_an_empty_bootstrap(tmp_path):
     path = tmp_path / "vocabulary.json"
     path.write_text(json.dumps({"schema_version": "smako-authoring-vocabulary-v1", "ingredients": [{

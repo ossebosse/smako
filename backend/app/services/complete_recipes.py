@@ -263,8 +263,11 @@ def _requirements_compatible(canonical, requirements, product, fact):
     composition = " ".join(fact.ingredients).casefold() if fact else ""
     if set(requirements) - {"plain", "ground", "firm", "thick", "pure_juice", "frozen", "red_split", "white_rice", "white_beans", "dried_leaf", "pitted"}:
         return False
-    if "pitted" in requirements and not re.search(r"urkärnad|utan kärnor|pitted", text + " " + composition):
-        return False
+    if "pitted" in requirements:
+        declaration = text + " " + composition
+        if (not re.search(r"\b(?:urkärnade?|utan kärnor|pitted)\b", declaration)
+                or re.search(r"\b(?:med kärnor|ej urkärnade?|inte urkärnade?|unpitted)\b", declaration)):
+            return False
     if "white_beans" in requirements and not re.search(r"\bvita\b", text + " " + composition):
         return False
     if "ground" in requirements:
