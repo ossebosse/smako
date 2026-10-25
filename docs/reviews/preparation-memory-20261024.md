@@ -381,14 +381,28 @@ omsökning. Faktisk privat revision 2 och auktoritativ historik bevarades.
 Högsta slutliga ankomstpeak är **1 598 578 688 byte (1,489 GiB)**, exit 0
 utan OOM/swap. Native seed tog 35,34 / 36,88 / 35,71 s och sparades på vanligt sätt.
 
-Detta är **6 av 12** erforderliga ankomstobservationer. Serien med en tidigare
-giltig meny på fyra måltider har startat; den är ofullständig för den aktuella
-begärans fem. Övriga prov är pågående/återstår. Tiderna är instrumenterad
-diagnostik, inte vanliga varma latensprov. Arkivet med 104 verifierade
+### Tidigare giltig fyramåltidsmeny: tre prov med förberedd vy passerar
+
+Native legacy-planering tog **33,30 / 33,24 / 33,71 s** och sparade en
+fyramåltidsmeny för **869,99 kr** i varje separat kopia. Den klarar sin
+ursprungliga begärans audit, men är ofullständig för aktuell begärans fem
+måltider. Vanlig Save flyttade faktisk privat revision 1→2.
+
+Alla tre efterföljande 5 000-anrop passerar på **267,44 / 263,87 / 262,98 s**
+inklusive profileringshook, median **263,87 s**, spann **262,98–267,44 s**.
+Hela ankomstprocesserna tog **329,01 / 323,24 / 324,07 s**. De levererar fem
+måltider för **976,32 kr**, audit PASS, med noll sökanrop och **sju auditanrop**
+vardera. Elva certifikat laddas utan omsökning; två sparade revisioner och
+privat tillstånd är oförändrade under ankomsten. Högsta slutliga ankomstpeak
+är **1 640 955 904 byte (1,528 GiB)**, exit 0 utan OOM/swap i samtliga.
+
+Detta är **9 av 12** erforderliga ankomstobservationer. Ofullständig/certifikat
+har startat; dess tre ankomster återstår. Tiderna är instrumenterad
+diagnostik, inte vanliga varma latensprov. Arkivet med 134 verifierade
 metadatafiler har SHA-256
-`52b7868e694ce847fafabc5c7c96e0da699facc318978c1528f20960310e2944`.
+`1a4a1f3b3e63e0145f9468404d674bc3b63a1cb70bc6aafa80cd02cc21a55cc5`.
 [Detaljer per seed och ankomst](preparation-memory-20261024/history-arrival-current.json).
-Full [CI på `f9e6cc9`](https://github.com/ossebosse/smako/actions/runs/40161651368)
+Full [CI på `d031bd5`](https://github.com/ossebosse/smako/actions/runs/40162962637)
 passerar inklusive browserprov före denna resultatssummering.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)

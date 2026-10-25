@@ -139,9 +139,15 @@ revisioner och privat tillstånd; högsta slutpeak 1,456 GiB, exit 0 utan OOM/sw
 profileringshook (median 287,82 s), samma 976,32 kr/audit, noll sökanrop och
 åtta auditanrop. Elva publiceringar laddade utan omsökning, privat revision 2
 och historik bevarade; högsta slutliga ankomstpeak 1,489 GiB, exit 0 utan OOM/swap.
-Totalt 6/12 ankomster och sex seedarbetare klara. Ofullständig/förberedd har startat.
-Arkiv SHA-256 `52b7868e694ce847fafabc5c7c96e0da699facc318978c1528f20960310e2944`,
-104 metadatafiler verifierade. Full CI på `f9e6cc9` passerar inklusive browserprov.
+Även tre ofullständig/förberedd-prov passerar: 267,44 / 263,87 / 262,98 s
+inklusive profileringshook, median 263,87 s, fem måltider för 976,32 kr/audit
+PASS, noll sökanrop och sju auditanrop vardera. Native fyramåltidsseed tog
+33,30 / 33,24 / 33,71 s, gav 869,99 kr och sparades på vanligt sätt till
+privat revision 2. Ankomsterna laddade elva certifikat utan omsökning och
+bevarade historik/privat tillstånd; högsta slutpeak 1,528 GiB, ingen OOM/swap.
+Totalt 9/12 ankomster och nio seedarbetare klara. Ofullständig/certifikat har startat.
+Arkiv SHA-256 `1a4a1f3b3e63e0145f9468404d674bc3b63a1cb70bc6aafa80cd02cc21a55cc5`,
+134 metadatafiler verifierade. Full CI på `d031bd5` passerar inklusive browserprov.
 Appfiler och metodsignatur är oförändrade;
 de nya proven, matchade basprov och fullmatris återstår.
 
