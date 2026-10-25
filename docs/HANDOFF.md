@@ -1,4 +1,4 @@
-# 2026-10-25: Pilot och HTTP/historik godkända; nya menyidentiteter mäts
+# 2026-10-25: Pilot och historikgrindar godkända; matchad basmätning pågår
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -29,8 +29,7 @@ utan mätverktygets fasstädning passerar också: **2,023/2,039/2,030 GiB**,
 båda katalogerna och fakta kvar, exakt samma filhash, ingen OOM/swap.
 Faktaprojektionen är klar för båda städerna, med oförändrade priser/request/
 klocka och den partiella 103-dokumentsreleasen. Kvar följer
-HTTP/historik, matchade
-basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar
+matchade basprov/fasprofil och hela matrisen. En seriell förgrundssekvens stannar
 vid varje missad grind. B5-resultaten nedan är historik, inte automatiskt
 slutkodens kvalificering. Standard förblir legacy och generationsmerge=False;
 ingen drift, insamling, aktiv fakta/prisversion eller samtidighet ändrad.
@@ -145,11 +144,18 @@ PASS, noll sökanrop och sju auditanrop vardera. Native fyramåltidsseed tog
 33,30 / 33,24 / 33,71 s, gav 869,99 kr och sparades på vanligt sätt till
 privat revision 2. Ankomsterna laddade elva certifikat utan omsökning och
 bevarade historik/privat tillstånd; högsta slutpeak 1,528 GiB, ingen OOM/swap.
-Totalt 9/12 ankomster och nio seedarbetare klara. Ofullständig/certifikat har startat.
-Arkiv SHA-256 `1a4a1f3b3e63e0145f9468404d674bc3b63a1cb70bc6aafa80cd02cc21a55cc5`,
-134 metadatafiler verifierade. Full CI på `d031bd5` passerar inklusive browserprov.
+Även tre ofullständig/certifikat-prov passerar: 261,47 / 263,59 / 264,20 s
+inklusive profileringshook, median 263,59 s, fem måltider för 976,32 kr/audit
+PASS, noll sökanrop och sju auditanrop. Högsta slutliga ankomstpeak 1,459 GiB.
+Totalt 12/12 ankomster och tolv seedarbetare klara, ingen OOM/swap. Alla 24
+arbetares högsta peak 1,666 GiB; enbart ankomster högst 1,528 GiB.
+Arkiv SHA-256 `d85fee402cb9e660af283168a94bdf41263668040af7f25cb3749620a83f444d`,
+165 metadatafiler verifierade. Full CI på `46c0935` passerar inklusive browserprov.
+Första matchade basprocessen på runtime `9162f0f` startade 05:24:43 UTC,
+med samma frysta underlag, cacheläge och två CPU/3 GiB. Tre basprocesser
+följs av separat instrumenterad fasprofil och därefter hela återstående matrisen.
 Appfiler och metodsignatur är oförändrade;
-de nya proven, matchade basprov och fullmatris återstår.
+matchade basprov/fasprofil och fullmatris återstår.
 
 ---
 

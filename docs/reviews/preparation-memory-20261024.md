@@ -69,7 +69,8 @@ Alla har slutkvitto efter rapportserialisering och städning, utan OOM/swap.
 [Aktuellt cacheunderlag](preparation-memory-20261024/cache-modes-current.json).
 Förgrundssekvensens tre kalla prov, tretton cachelägesprocesser och hela
 48-cellspiloten är klara. HTTP och tre historikåterhämtningar är också godkända.
-Sekvensen fortsätter med nytillkomna menyidentiteter, tre matchade basprov, ny
+Även alla tolv ankomstprov för nytillkomna menyidentiteter passerar.
+Sekvensen fortsätter med tre matchade basprov, ny
 fasprofil och full matris. Varje
 steg stannar vid missad grind. Metodsignaturen är
 `17568fe52f2f4da372b1263979673cb79f74f731fa8ada05acc6fe8058e0d6b6`;
@@ -110,7 +111,7 @@ inte hela standardgrinden. De sex omstarts-/cacheförlustproven gör aktuell
 slutkontroll och audit; de återanvänder inte en gammal kassasumma.
 Just dessa cacheprovs syntetiska lager har noll vanliga sparade leveranser.
 Separata HTTP-/historikprov med riktig sparning är nu klara enligt nedan;
-nytillkomna menyidentiteter och slutmatrisen återstår. De tre vanliga
+även nytillkomna menyidentiteter passerar. Slutmatrisen återstår. De tre vanliga
 versionsbytesproven och faktaprojektionen inför piloten har också passerat.
 
 Efter HTTP-/historiksteget följer ett kompletterande prov för nytillkomna
@@ -124,7 +125,7 @@ planering ska använda samma effektiva tomma skafferi, göra ny audit och
 återanvända publiceringarna utan sökanrop. En extern Python-profileringshook
 räknar native sök-/auditanrop; anropstiderna inkluderar dess kostnad.
 Totalt 30 riktade protokoll-/evidensprov passerar, liksom
-Ruff/compileall. Provserien har startat; endast avslutade arbetare redovisas och proven ersätter
+Ruff/compileall. Samtliga tolv storprov är nu avslutade och godkända enligt nedan; de ersätter
 inte de permanenta testen som tvingar fram ett checkout-avslag.
 [Separat provstatus och källhashar](preparation-memory-20261024/history-arrival-current.json).
 
@@ -396,14 +397,31 @@ vardera. Elva certifikat laddas utan omsökning; två sparade revisioner och
 privat tillstånd är oförändrade under ankomsten. Högsta slutliga ankomstpeak
 är **1 640 955 904 byte (1,528 GiB)**, exit 0 utan OOM/swap i samtliga.
 
-Detta är **9 av 12** erforderliga ankomstobservationer. Ofullständig/certifikat
-har startat; dess tre ankomster återstår. Tiderna är instrumenterad
-diagnostik, inte vanliga varma latensprov. Arkivet med 134 verifierade
+### Tidigare giltig fyramåltidsmeny: certifikatvägen passerar också
+
+Samtliga tre ofullständig/certifikat-prov passerar på **261,47 / 263,59 /
+264,20 s** inklusive profileringshook, median **263,59 s**, spann
+**261,47–264,20 s**. Hela ankomstprocesserna tog **320,68 / 323,25 / 323,32 s**.
+Native seed tog **32,84 / 33,05 / 32,71 s**, gav 869,99 kr för fyra måltider
+och sparades genom ordinarie Save med verklig privat revision 1→2.
+
+Alla tre återanrop levererar fem måltider för **976,32 kr**, audit PASS,
+noll sökanrop och sju auditanrop vardera. De laddar elva publiceringar utan
+omsökning och bevarar auktoritativ historik/privat tillstånd. Högsta slutliga
+ankomstpeak är **1 566 441 472 byte (1,459 GiB)**, exit 0 utan OOM/swap.
+
+Därmed passerar **12 av 12** ankomstobservationer och alla tolv native
+seedarbetare. Högsta peak bland samtliga 24 arbetare är **1 788 420 096 byte
+(1,666 GiB)**; bland enbart ankomsterna **1,528 GiB**. Tiderna är instrumenterad
+diagnostik, inte vanliga varma latensprov. Arkivet med 165 verifierade
 metadatafiler har SHA-256
-`1a4a1f3b3e63e0145f9468404d674bc3b63a1cb70bc6aafa80cd02cc21a55cc5`.
+`d85fee402cb9e660af283168a94bdf41263668040af7f25cb3749620a83f444d`.
 [Detaljer per seed och ankomst](preparation-memory-20261024/history-arrival-current.json).
 Full [CI på `d031bd5`](https://github.com/ossebosse/smako/actions/runs/40162962637)
 passerar inklusive browserprov före denna resultatssummering.
+Matchade vanliga basprov på runtime `9162f0f` har nu startat med samma frysta
+underlag, cacheläge och två CPU/3 GiB. Tre basprocesser följs av slutkodens
+separata instrumenterade fasprofil innan fullmatrisen körs vidare.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
 passerar före tillägget av historikprovens mätverktyg. Dessa verifieras lokalt
@@ -715,8 +733,7 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
 Kvar på slutkoden: tre kalla jämförbara prov på basarmen, matchad
-instrumenterad profil, kompletterande prov för nytillkomna sparade
-menyer och de 204 återstående cellerna före full matrisgranskning. Slutkodens
+instrumenterad profil och de 204 återstående cellerna före full matrisgranskning. Slutkodens
 tretton cachelägesprocesser, tre ordinarie versionsbytesprov och båda
 faktaprojektionerna är klara enligt rapportens inledning.
 Ingen generell total bytebudget för alla RAM-cacher har bevisats; de
