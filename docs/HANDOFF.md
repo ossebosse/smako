@@ -154,6 +154,14 @@ Arkiv SHA-256 `d85fee402cb9e660af283168a94bdf41263668040af7f25cb3749620a83f444d`
 Första matchade basprocessen på runtime `9162f0f` startade 05:24:43 UTC,
 med samma frysta underlag, cacheläge och två CPU/3 GiB. Tre basprocesser
 följs av separat instrumenterad fasprofil och därefter hela återstående matrisen.
+Första basprovet är nu klart: 881,31 s plananrop, 926,36 s hela processen,
+988,32 kr/förväntad hash/audit PASS, slutpeak 2,802 GiB, exit 0 utan OOM/swap.
+Baslinjens överskridna 2,5-GiB-mål bevaras; hårda taket är fortsatt 3 GiB.
+Andra basprocessen kör. Slutkodens redan uppmätta tre vanliga kallprov är
+662,83 / 649,49 / 664,50 s (median 662,83 s); ingen färdig medianjämförelse
+förrän alla tre basprover är klara. Vanliga och instrumenterade tider hålls
+separat. [Maskinunderlag](reviews/preparation-memory-20261024/matched-current.json),
+172 verifierade metadatafiler, arkiv `076face7ea88bf6fbed1724c60b62f4ba1db0d84b3de603bc2a51a4fe61729f6`.
 Appfiler och metodsignatur är oförändrade;
 matchade basprov/fasprofil och fullmatris återstår.
 
