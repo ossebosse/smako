@@ -129,7 +129,15 @@ av nya menyidentiteter och cachevägar. Native `PlanStore.create` flyttar den
 verkliga privata revisionen 1→2; efterföljande anrop använder faktisk revision
 och oförändrade effektiva skafferiindata. Sök-/auditanrop räknas utan att
 metoderna ersätts; tiderna inkluderar profileringskostnaden. Dessa storprov
-är startade men ännu inte avslutade. Appfiler och metodsignatur är oförändrade;
+har nu första avslutade ankomstobservationen: giltig/förberedd, 265,00 s
+inklusive profileringshook, 976,32 kr/audit PASS, noll sökanrop och åtta
+auditanrop, elva certifikat laddade utan omsökning. Native seed tog 34,63 s,
+984,22 kr och verklig Save flyttade privat revision 1→2. Ankomsten bevarade
+två sparade revisioner och privat tillstånd; slutpeak 1,456 GiB, exit 0 utan
+OOM/swap. Totalt 1/12 ankomster, två avslutade seedarbetare; resten pågår/återstår.
+Arkiv SHA-256 `95ec77e93dc493857f056a0db487f0a403bee9e55f5088e80d77e6e2e997e60f`,
+59 metadatafiler verifierade. Full CI på `ea890f8` passerar inklusive browserprov.
+Appfiler och metodsignatur är oförändrade;
 de nya proven, matchade basprov och fullmatris återstår.
 
 ---

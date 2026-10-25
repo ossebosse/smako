@@ -124,7 +124,7 @@ planering ska använda samma effektiva tomma skafferi, göra ny audit och
 återanvända publiceringarna utan sökanrop. En extern Python-profileringshook
 räknar native sök-/auditanrop; anropstiderna inkluderar dess kostnad.
 Totalt 30 riktade protokoll-/evidensprov passerar, liksom
-Ruff/compileall. De tolv ankomstproven är **startade men ännu inte avslutade** och ersätter
+Ruff/compileall. Provserien har startat; endast avslutade arbetare redovisas och proven ersätter
 inte de permanenta testen som tvingar fram ett checkout-avslag.
 [Separat provstatus och källhashar](preparation-memory-20261024/history-arrival-current.json).
 
@@ -354,6 +354,28 @@ verifierade manifesthashar, SHA-256
 Det kompletterande steget för tolv nytillkomna menyidentiteter har nu startat.
 Råhashar, request-normalisering, kö-/avbrottstider,
 progress, separata jobbspår och resurskvitton finns i HTTP-statusunderlaget.
+
+### Nytillkommen sparad meny: första giltiga ankomstprovet passerar
+
+Första kombinationen giltig meny/förberedd vy är avslutad. En vanlig
+262-planering tog **34,63 s** och levererade **984,22 kr** med native audit.
+Ordinarie Save sparade den nya identiteten och flyttade faktisk privat
+revision 1→2, med oförändrat effektivt tomt skafferi.
+
+Efterföljande 5 000-anrop tog **265,00 s inklusive CPython-profileringshook**.
+Det återanvände elva publiceringar utan omsökning: **noll native sökanrop och
+åtta native auditanrop**. Resultatet blev **976,32 kr**, audit PASS och samma
+kontext som API-baslinjen. Två sparade revisioner och auktoritativt privat
+tillstånd var oförändrade under ankomstplaneringen. Slutpeak är
+**1 563 619 328 byte (1,456 GiB)**, exit 0 utan OOM/swap.
+
+Detta är **1 av 12** erforderliga ankomstobservationer; nästa giltiga seed
+är sparad och övriga prov är pågående/återstår. Det är inget vanligt varmt
+latensprov. Arkivet med 59 verifierade metadatafiler har SHA-256
+`95ec77e93dc493857f056a0db487f0a403bee9e55f5088e80d77e6e2e997e60f`.
+[Detaljer per seed och ankomst](preparation-memory-20261024/history-arrival-current.json).
+Full [CI på `ea890f8`](https://github.com/ossebosse/smako/actions/runs/40160321641)
+passerar inklusive browserprov före denna resultatssummering.
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
 passerar före tillägget av historikprovens mätverktyg. Dessa verifieras lokalt
