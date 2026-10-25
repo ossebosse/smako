@@ -537,7 +537,7 @@ Förberedelsecachens 4 119 träffar, 6 240 missar och 4 098 skrivningar är ocks
 oförändrade. Native profilerings-/budgeträknare och per-etikett-unikhet finns
 i maskinunderlaget; summerad unikhet per etikett är inte global unikhet.
 
-### Fullmatris: tre grupper stängda, 77 av 252 uppmätta
+### Fullmatris: fyra grupper stängda, 91 av 252 uppmätta
 
 Malmö/originalfakta/262:s fyra återstående profiler är avslutade på **573,48 s**
 för hela gruppen, slutpeak **1 605 341 184 byte (1,495 GiB)**, exit 0 utan
@@ -582,13 +582,34 @@ Organic-share kostar fortfarande **21,10 minuter** första gången vid 1 000.
 Breakfast/snack-weight är här varmt något långsammare än legacy; den återstående
 latensgrinden för profilen gäller 5 000 mot 262 och fullbibliotekslegacy.
 
-Totalt är **77 av 252** celler uppmätta: **72 med levererad meny och audit**
-(288 anrop) samt **fem separat blockerade celler** (20 observationer).
-**175 celler återstår**.
+Malmö/original/2 000 är också stängd: **6 559,39 s** för hela gruppen,
+slutpeak **1 920 614 400 byte (1,789 GiB)**, exit 0 utan OOM/swap. Tolv
+celler levererar ytterligare 48 auditgodkända anrop. Vegan ger samma
+`SEARCH_BLOCKED`/steg som vid 262 och 1 000 i alla åtta anrop.
+
+| Profil vid Malmö/original/2 000 | Legacy, kr | V1, kr | V1 första, s | V1 varmt, s | Legacy varmt, s |
+| --- | --- | --- | --- | --- | --- |
+| Standard | 510,65 | 492,15 | 426,93 | 10,87–11,28 | 61,33–63,00 |
+| Protein40 | 904,82 | 897,31 | 876,18 | 15,72–16,05 | 83,33–86,48 |
+| All-macros | 951,42 | 834,06 | 280,26 | 11,77–13,29 | 52,95–54,78 |
+| Vegan | SEARCH_BLOCKED | SEARCH_BLOCKED | – | – | – |
+| Fördelning | 996,22 | 996,22 | 203,72 | 11,82–11,95 | 53,76–55,12 |
+| Organic-share | 321,16 | 318,96 | 1 987,99 | 11,50–11,83 | 300,01–302,12 |
+| Breakfast/snack-weight | 53,16 | 53,16 | 24,26 | 11,32–11,43 | 10,66–11,47 |
+
+Alla 84 levererade cellers fyra menyhashar är kontrollerat stabila. V1:s
+priser vid 2 000 håller samtliga tillgängliga gränser. Organic-share kräver
+fortfarande **33,13 minuter** första gången och protein40 **14,60 minuter**.
+Protein40:s varma 2 000-tider redovisas som uppmätta; dess latensgrind vid
+5 000 återstår och får inte härledas från dessa anrop.
+
+Totalt är **91 av 252** celler uppmätta: **84 med levererad meny och audit**
+(336 anrop) samt **sju separat blockerade celler** (28 observationer).
+**161 celler återstår**.
 Inga registrerade pris-/utfalls-/minnesgrindar har fallit. Korsjämförelser mot
 ännu omätta storlekar och slutlig releasegranskning återstår; ingen cell
-märks som standardkvalificerad. Malmö/original/2 000 kör nu alla sju profiler
-med legacy och v1 i samma seriella arbetsordning.
+märks som standardkvalificerad. Malmö/original/5 000 kör nu de fyra profiler
+som återstår utöver piloten, med legacy och v1 i samma seriella arbetsordning.
 [Aktuellt fullmatrisunderlag](preparation-memory-20261024/full-matrix-current.json)
 och [den uppdaterade 252-cellsinventeringen](preparation-memory-20261024/cells.json).
 
@@ -597,16 +618,16 @@ kontrollerar exakt cellinventering, identisk kontext och varje tillgänglig
 prisgräns mot legacy, 262/v5 och föregående publicerade storlek. Den kontrollerar
 också blockeringssignaturer, slutminne och de uppmätta 5 000-varmkvoterna.
 [Resultatet](preparation-memory-20261024/cross-cell-review-current.json) innehåller
-179 passerande kontroller och 330 ännu väntande jämförelser, utan att märka
+224 passerande kontroller och 299 ännu väntande jämförelser, utan att märka
 någon cell som standardkvalificerad. Kör från projektroten med
 `.venv\Scripts\python.exe -X utf8 docs/reviews/preparation-memory-20261024/review_cross_cells.py`.
 
-Senaste arkivet innehåller **240 verifierade metadatafiler**, inklusive de
+Senaste arkivet innehåller **259 verifierade metadatafiler**, inklusive de
 redan uppmätta uppstartsfilerna. SHA-256:
-`333df20e181147d74cf9e740dbe4e10cc3db2487c533fd7dbf33f23010a49685`.
+`3aeaa7292c6759602b50862b4c0e009b41505db5e1e56ef1dd1dee160a6af640`.
 
 
-Full [CI på `c6ee8a7`](https://github.com/ossebosse/smako/actions/runs/40172017572)
+Full [CI på `8399b95`](https://github.com/ossebosse/smako/actions/runs/40176230967)
 passerar inklusive Chromium/WebKit före denna resultatuppdatering. Appkoden är
 fortsatt byteidentisk med `eeda184`. Återstående matrisgrindar är öppna.
 
@@ -914,7 +935,7 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 5 000/v1 är uppmätt pilot, ännu inte standardkvalificerad. Äldre kods
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
-Kvar på slutkoden: de 175 återstående cellerna och full matrisgranskning. Slutkodens
+Kvar på slutkoden: de 161 återstående cellerna och full matrisgranskning. Slutkodens
 tretton cachelägesprocesser, tre ordinarie versionsbytesprov och båda
 faktaprojektionerna är klara enligt rapportens inledning.
 Ingen generell total bytebudget för alla RAM-cacher har bevisats; de

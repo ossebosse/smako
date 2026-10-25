@@ -1,4 +1,4 @@
-# 2026-10-25: Matchade förgrindar godkända; fullmatris 77/252 pågår
+# 2026-10-25: Matchade förgrindar godkända; fullmatris 91/252 pågår
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -50,17 +50,21 @@ utan OOM/swap, med verifierat obegränsat referenskontrakt. Även Malmö/origina
 1 000 är stängd: 4 101,51 s, 1,540 GiB, exit 0 utan OOM/swap. V1 ger
 948,31 kr för protein40/all-macros mot legacy 1 027,79 och 262:s 1 000,86.
 Organic-share v1 ger 318,96 kr mot legacy 321,16; första anropet tar
-1 266,27 s, sedan 11,04–11,47 s varmt. Totalt 77/252 uppmätta,
-72 auditgodkända menyceller/288 anrop och fem vegan-SEARCH_BLOCKED-celler/
-20 observationer med bevarad kod/steg. Inget globalt omöjlighetsbevis.
-175 celler återstår; Malmö/original/2 000 kör nu båda
-huvudpolicyerna för alla profiler. Ingen standardkvalificering.
+1 266,27 s, sedan 11,04–11,47 s varmt. Även 2 000-gruppen är stängd:
+6 559,39 s, 1,789 GiB, exit 0 utan OOM/swap. V1 protein40/all-macros ger
+897,31/834,06 kr mot legacy 904,82/951,42, lägre än 1 000:s v1-priser.
+Organic-share v1 ger samma 318,96 kr; första anropet kostar 1 987,99 s
+(33,13 minuter), sedan 11,50–11,83 s varmt. Totalt 91/252 uppmätta,
+84 auditgodkända menyceller/336 anrop och sju vegan-SEARCH_BLOCKED-celler/
+28 observationer med bevarad kod/steg. Inget globalt omöjlighetsbevis.
+161 celler återstår; Malmö/original/5 000 kör de fyra profiler som återstår
+utöver piloten, med båda huvudpolicyerna. Ingen standardkvalificering.
 [Fullmatrisstatus](reviews/preparation-memory-20261024/full-matrix-current.json).
-Separat läsande korsgranskning passerar 179 kontroller, 330 jämförelser väntar.
+Separat läsande korsgranskning passerar 224 kontroller, 299 jämförelser väntar.
 Alla tillgängliga prisgränser, inklusive v5/262, är kontrollerade; ingen
 standardkvalificering. Verktyg och resultat finns bredvid fullmatrisunderlaget.
-Senaste arkiv 240 verifierade metadatafiler:
-`333df20e181147d74cf9e740dbe4e10cc3db2487c533fd7dbf33f23010a49685`.
+Senaste arkiv 259 verifierade metadatafiler:
+`3aeaa7292c6759602b50862b4c0e009b41505db5e1e56ef1dd1dee160a6af640`.
 
 
 Pilotuppdatering: originalfakta/Malmö vid både 262 och 5 000 är klart,
