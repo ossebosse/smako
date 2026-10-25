@@ -219,11 +219,23 @@ utan OOM/swap. Hela sexcellsprocessen tog **8 870,44 s**.
 Samtliga kvoter klarar 1,25 och v1:s varma anrop är snabbare än legacy.
 V1:s pris är högst legacy och högst 262-priset; priserna matchar också
 originalfakta-armen. Organic-shares första förberedelse kostar fortfarande
-**66,40 minuter**. Alla 36 avslutade pilotceller har identiska priser och
-menyhashar mellan sina fyra anrop.
+**66,40 minuter**.
 
-Totalt är **36 av 48 pilotceller och 144 auditgodkända anrop** uppmätta.
-Axfood/Lund/262 har startat; tolv pilotceller och Lunds Axfood-kvoter
+### Pilot: Axfood/Lund klar vid 262
+
+Lund/Axfood/262 är avslutad med sex celler och 24 auditgodkända anrop.
+Slutlig peak är **1 350 033 408 byte (1,257 GiB)**, exit 0 utan OOM/swap;
+hela sexcellsprocessen tog **1 277,21 s**. Priserna matchar originalarmen.
+
+| Profil | Legacy och v1, betalt | Första v1-anrop | Tre varma v1-anrop |
+| --- | --- | --- | --- |
+| Standard | 487,85 kr | 106,76 s | 7,25–7,40 s |
+| Fördelning | 761,45 kr | 98,04 s | 7,33–7,61 s |
+| Organic-share | 314,24 kr | 305,73 s | 7,16–7,26 s |
+
+Totalt är **42 av 48 pilotceller och 168 auditgodkända anrop** uppmätta.
+Alla 42 celler har identiska priser och menyhashar mellan sina fyra anrop.
+Axfood/Lund/5 000 har startat; dess sex celler och Lunds Axfood-kvoter
 återstår. Den partiella releasen omfattar fortsatt 103 verifierade dokument
 och ingen aktiv fakta-/prisversion har ändrats.
 
@@ -236,7 +248,7 @@ Ofullständig evidens skrivs inte över. Fortsättningsloggen skrivs till disk
 evidensprov passerar, liksom Ruff/compileall. Samma seriella gränser och
 frysta appkod gäller. [Fortsättningskvitto och kommando](preparation-memory-20261024/continuation.json).
 
-Full [CI på `18f6148`](https://github.com/ossebosse/smako/actions/runs/40136156721)
+Full [CI på `da36e09`](https://github.com/ossebosse/smako/actions/runs/40145989231)
 passerar före denna datauppdatering; app- och verifieringskoden är oförändrade.
 Appkoden är fortsatt byteidentisk med `eeda184`. Återstående
 pilot- och matrisgrindar är fortfarande öppna.
