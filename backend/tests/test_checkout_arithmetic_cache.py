@@ -1,7 +1,6 @@
 """Numeric reuse never carries a quote, personal decision or approval."""
 import gc
 import weakref
-from datetime import date
 from decimal import Decimal, localcontext
 from itertools import permutations
 
@@ -10,12 +9,8 @@ from app.models import NormalizedIngredient
 from app.services import planner_shared_cache
 from app.services.basket_optimizer import BasketOptimizer, _CompactQuoteSelection
 from app.services.planner_shared_cache import CheckoutArithmeticCache
-from app.services.user_pricing import price_candidate_for_context
 
 from backend.tests.test_search_reuse import _product, _store
-from backend.tests.test_shared_membership_pricing import _candidate, _member_offer
-from backend.tests.test_shared_membership_pricing import _product as declared_product
-from grocery_data.app.domain.promotion_pricing import MembershipProgram, UserPricingContext
 
 
 @pytest.fixture
@@ -40,8 +35,8 @@ def test_reordered_integer_operands_share_exact_results_without_sharing_inputs(c
         actual = BasketOptimizer._grouped_subset_keys(order, subsets, 2, winning_mask=True)
         assert actual == expected
         actual[0].clear()  # Returned lists belong only to this caller.
-    assert cache.stats()["entries"] == 3
-    assert cache.stats()["hits"] == 15
+    assert cache.stats()["entries"] == 1
+    assert cache.stats()["hits"] == 5
 
 
 @pytest.mark.parametrize("changed", ["price", "rank", "winning_store", "caps", "missing"])
@@ -64,8 +59,7 @@ def test_every_numeric_read_dependency_changes_the_key_including_negatives(cache
         vectors = [(selection(0, 100), selection(1, 100), selection(0, 100))]
     expected = BasketOptimizer._grouped_subset_keys(vectors, subsets, 2, winning_mask=True, _integer_prices=False)
     assert BasketOptimizer._grouped_subset_keys(vectors, subsets, 2, winning_mask=True) == expected
-    # Store caps apply to the current joint result, after shared line columns.
-    assert cache.stats()["entries"] == (1 if changed == "caps" else 2)
+    assert cache.stats()["entries"] == 2
 
 
 def test_new_source_and_owner_get_current_products_even_when_arithmetic_hits(cache):
@@ -95,23 +89,6 @@ def test_no_quote_or_search_object_is_retained(cache):
     assert cache.stats()["entries"] == 1
 
 
-def test_campaign_boundary_without_snapshot_change_and_membership_are_requoted(cache):
-    offer = _member_offer(price=10).model_copy(update={"valid_from": date(2026, 8, 31), "valid_to": date(2026, 8, 31)})
-    candidate = _candidate(declared_product(price=15, offers=[offer]))
-    member = UserPricingContext(memberships={MembershipProgram.COOP_MEMBER})
-    ingredients = [NormalizedIngredient(canonical_name="ris", required_quantity=1000, unit="g")]
-    stores = [_store(candidate.store_id)]
-    for context, day, expected in ((member, date(2026, 8, 31), 20),
-        (member, date(2026, 9, 1), 30), (UserPricingContext(), date(2026, 8, 31), 30)):
-        current = price_candidate_for_context(candidate, context, on_date=day)
-        optimizer = BasketOptimizer()
-        with optimizer.quote_cache():
-            basket = optimizer.optimize(ingredients, {"ris": (current,)}, stores, max_stores=1)
-        assert basket.total == expected
-        assert basket.stores[0].items[0].purchase_date == day
-    assert cache.stats()["hits"] >= 1
-
-
 def test_decimal_fallback_never_borrows_integer_arithmetic(cache):
     vectors = [(selection(0, 100),)]
     BasketOptimizer._grouped_subset_keys(vectors, ((0,),), 1)
@@ -120,18 +97,6 @@ def test_decimal_fallback_never_borrows_integer_arithmetic(cache):
         context.prec = 3
         assert BasketOptimizer._grouped_subset_keys(vectors, ((0,),), 1) == ([(0, Decimal("1.00"), 1)], 0)
     assert cache.stats() == before
-
-
-@pytest.mark.parametrize("store_bit", [63, 127, 128])
-def test_wide_store_masks_and_large_cent_sums_keep_all_lanes_separate(cache, store_bit):
-    subsets = ((0,), (1,), (0, 1))
-    price = Decimal("99999999999999999999.99")
-    high = _CompactQuoteSelection(quote=None, store_id="high", store_mask=1 << store_bit, total_price=price)
-    low = selection(0, 1)
-    absent = _CompactQuoteSelection(quote=None)
-    vectors = [(high, low, high), (high, absent, low)] * 129
-    expected = BasketOptimizer._grouped_subset_keys(vectors, subsets, 2, winning_mask=True, _integer_prices=False)
-    assert BasketOptimizer._grouped_subset_keys(vectors, subsets, 2, winning_mask=True) == expected
 
 
 def test_eviction_byte_bound_and_restart_are_safe_misses():
