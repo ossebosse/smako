@@ -7,14 +7,17 @@ from types import SimpleNamespace
 from unittest.mock import Mock
 
 from app.config import Settings
-from app.models.product import OfferKind, OfferMetadata
+from app.models.ingredient import NormalizedIngredient
+from app.models.product import OfferKind, OfferMetadata, ProductCandidate
 from app.services import beta_observability, price_universe_runtime
+from app.services.basket_calculator import BasketCalculator
 from app.services.price_universe import PriceUniverseBuilder, PriceUniverseKey
 from app.services.price_universe_runtime import (
     PreparedPriceUniverse,
     PreparedPriceUniverseManager,
     normalized_memberships,
 )
+from app.services.user_pricing import price_candidate_for_context
 
 from backend.tests.test_price_universe_runtime import (
     POSTAL_CODE,
@@ -25,16 +28,17 @@ from backend.tests.test_price_universe_runtime import (
     _store,
 )
 from grocery_data.app.domain.campaign_validity import CampaignEvidence
+from grocery_data.app.domain.promotion_pricing import UserPricingContext
 
 OBSERVED = datetime(2026, 9, 14, 8, tzinfo=UTC)
 
 
-def fixture(*, end=date(2026, 9, 20), strategy="fixture", observed=OBSERVED):
-    product = _product("campaign-rice", "ris", price=20, quantity=1000, observed_at=observed)
+def fixture(*, end=date(2026, 9, 20), strategy="fixture", observed=OBSERVED, price=20):
+    product = _product("campaign-rice", "ris", price=price, quantity=1000, observed_at=observed)
     proof = CampaignEvidence(store_external_id="official", offer_id="campaign-rice", source_reference="raw:synthetic",
         observed_current_at=observed, checked_at=observed)
     product = product.model_copy(update={"price": None, "coverage": "offers_only",
-        "offers": [OfferMetadata(kind=OfferKind.CAMPAIGN, description="Synthetic date-bound offer", price=20,
+        "offers": [OfferMetadata(kind=OfferKind.CAMPAIGN, description="Synthetic date-bound offer", price=price,
             valid_from=date(2026, 9, 16), valid_to=end, campaign_evidence=proof)],
         "source_provenance": product.source_provenance.model_copy(update={
             "source_channel": "offers", "provider_store_id": "official", "coverage": "offers_only"})})
@@ -69,9 +73,10 @@ def test_current_ages_and_invalid_observations_are_never_cached():
     later = prepared.status(now=early + timedelta(hours=1))
     assert later.oldest_price_age_hours == first.oldest_price_age_hours + 1
     # The same active campaign cannot turn a future observation into a valid one.
-    poisoned = fixture(observed=OBSERVED + timedelta(days=10))
+    poisoned = fixture(observed=early + timedelta(hours=2))
     assert poisoned._active_campaign_contexts(early.date()) == {STORE_ID}
     assert poisoned._context_partition(now=early, stale_age_hours=48)[0] == ()
+    assert poisoned._context_partition(now=early + timedelta(hours=1), stale_age_hours=48)[0] == (STORE_ID,)
 
 
 def test_new_artifact_and_restart_have_no_campaign_approval_from_previous_version():
@@ -83,6 +88,18 @@ def test_new_artifact_and_restart_have_no_campaign_approval_from_previous_versio
     restarted = replace(old)
     assert restarted._campaign_days == {}
     assert restarted._active_campaign_contexts(date(2026, 9, 17)) == {STORE_ID}
+
+
+def test_same_context_availability_never_reuses_old_campaign_price():
+    old, current = fixture(), fixture(strategy="new-price-version", price=30)
+    assert old.universe.universe_id != current.universe.universe_id
+    day = date(2026, 9, 17)
+    need = NormalizedIngredient(canonical_name="ris", required_quantity=1000, unit="g")
+    for prepared, expected in ((old, 20), (current, 30)):
+        assert prepared._active_campaign_contexts(day) == {STORE_ID}
+        candidate = price_candidate_for_context(ProductCandidate.from_product(prepared.universe.products[0], match_score=1),
+            UserPricingContext(), on_date=day)
+        assert BasketCalculator().quote_item(need, candidate).total_price == expected
 
 
 def test_single_flight_and_retired_scan_cannot_publish_into_new_artifact(monkeypatch):

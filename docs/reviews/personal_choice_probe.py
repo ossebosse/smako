@@ -6,6 +6,7 @@ alarm stops the entire batch on the first five-minute plan timeout.
 from __future__ import annotations
 
 import argparse
+import atexit
 import hashlib
 import json
 import os
@@ -36,6 +37,11 @@ def main():
     args = parser.parse_args()
     started = time.perf_counter()
     args.output.mkdir(parents=True, exist_ok=False)
+    def final_resource():
+        write(args.output / "final-resource.json", {
+            "scope": "atexit after final report serialization and client/server shutdown",
+            "memory": {n: int(Path("/sys/fs/cgroup/memory." + n).read_text()) for n in ("current", "peak", "swap.current")}})
+    atexit.register(final_resource)
     os.environ["RECIPE_PREPARATION_CACHE_ROOT"] = str(args.output / "prepared")
     os.environ["GROCERY_DATABASE_URL"] = "sqlite+pysqlite:///:memory:"
     os.environ["PYTHON_DOTENV_DISABLED"] = "1"
@@ -190,6 +196,7 @@ def main():
             report["records"][-1]["arithmetic_stats"] = planner_shared_cache.CHECKOUT_ARITHMETIC.stats()
         report["final_memory"] = {n: int(Path("/sys/fs/cgroup/memory." + n).read_text()) for n in ("current", "peak", "swap.current")}
         write(target, report)
+        final_resource()
         os._exit(124)
 
     signal.signal(signal.SIGALRM, timeout)

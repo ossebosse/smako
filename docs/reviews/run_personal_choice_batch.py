@@ -2,8 +2,10 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
+import shutil
 import subprocess
 import time
 from datetime import UTC, datetime
@@ -37,13 +39,15 @@ def main():
     folder = ROOT / args.arm
     folder.mkdir()
     os.chown(folder, 10001, 10001)
+    probe = folder / 'probe.py'
+    shutil.copyfile(ROOT / 'personal_choice_probe.py', probe)
     source = ROOT / (args.arm.split('-')[0] + '-code')
     assert source.is_dir()
     name = 'smako-personal-choice-' + args.arm
     command = ['docker', 'run', '--name', name, '--network', 'none', '--read-only', '--cpus', '2',
         '--memory', '3g', '--memory-swap', '3g', '--pids-limit', '128', '--user', '10001:10001',
         '--tmpfs', '/tmp:rw,nosuid,size=128m', '-v', f'{source}:/srv/app:ro',
-        '-v', f'{ROOT}/personal_choice_probe.py:/probe.py:ro', '-v', f'{INPUTS}:/inputs:ro',
+        '-v', f'{probe}:/probe.py:ro', '-v', f'{INPUTS}:/inputs:ro',
         '-v', f'{ROOT}/ui-requests.json:/ui-requests.json:ro',
         '-v', f'{folder}:/output:rw', '-e', 'PYTHONPATH=/srv/app/backend:/srv/app',
         '-e', 'PYTHON_DOTENV_DISABLED=1', '-e', 'PYTHONDONTWRITEBYTECODE=1',
@@ -78,6 +82,8 @@ def main():
         write(journal_path, journal)
         inspection = json.loads(subprocess.check_output(['docker', 'inspect', name]))[0]
         write(folder / 'receipt.json', {'budget': row, 'state': inspection['State'], 'image': inspection['Image'],
+            'probe_sha256': hashlib.sha256(probe.read_bytes()).hexdigest(),
+            'runner_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             'resources': {k: inspection['HostConfig'][k] for k in ('Memory', 'MemorySwap', 'NanoCpus', 'NetworkMode', 'ReadonlyRootfs')},
             'mounts': [{k: m[k] for k in ('Source', 'Destination', 'RW')} for m in inspection['Mounts']]})
     print(json.dumps(row), flush=True)

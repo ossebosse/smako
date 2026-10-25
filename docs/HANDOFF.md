@@ -1,3 +1,41 @@
+# 2026-10-25: Personliga val — avgränsad förbättring och mätning avslutad
+
+[PR #12](https://github.com/ossebosse/smako/pull/12) levererar runtime
+`5e4d47f` med samma uppmätta appträd i slutleveransen. Granskad ändring:
+återanvänd datumgiltig kampanjexistens per validerat prisobjekt/butik/svensk
+dag och läs aktiv prisidentitet utan full readiness-skanning. Ingen cache av
+personliga godkännanden, priser eller menyer; full kontext, aktuell giltighet,
+checkout/audit, referens/legacy och ägargränser kvarstår.
+
+[Slutrapport och kompakt maskinunderlag](reviews/personal-choice-latency-20261025.md).
+Riktiga UI-begäranden, 262 recept, fryst godkänd partiell Axfood-arm, seriellt
+två CPU/3 GiB. Genom sparad lista och GET: matkök **138,69 → 128,74 s**,
+40 g protein **66,87 → 62,79 s**. Tre första A: median **200,72 → 187,50 s**,
+samma pris/hash/audit. Förberett A **17,88 → 14,81 s**, återgång efter E
+**17,18 → 16,42 s**. D timeout efter 300 s i båda armar. **E når inte målet**:
+första svar 12,97 → 12,06 s är `SEARCH_BLOCKED`, ingen färdig lista. Endast
+två av 66 recept kvalificeras; detta bevisar inte global omöjlighet.
+Chromium visar samma blockerade E efter 13,47 s; A-listan synlig efter 199,56 s.
+
+Verklig veckouppdateringslatens är **omätt**: två matchade behöriga frysta
+prisversioner saknades. Syntetiska pris-/kampanj-/versions-/omstarts- och
+single-flight-prov passerar; inget påstående om verkligt kampanjbyte görs.
+Slutlig A/E-peak efter serialisering **1,245 GiB**, legacy **1,409 GiB**, ingen
+swap/OOM. Rapporten skiljer tidigare V1-sampling före sista rapportskrivning.
+
+Prestandajournalen är stängd: **117,13/120 minuter**, 172,16 s oanvända.
+Avbrutna prototyper, verktygsrättningar, browseromtag och uppstarter ingår.
+Inga mätarbetare, automatisk fortsättning, fullmatris eller 5 000-prov kvar.
+Största återstående fas är riktig gemensam korgberäkning (228 s före D-stopp).
+Nästa begränsade arbete bör utreda exakta paket-/offertdelar i befintlig
+`PackageCostCache` samt E:s produkt-/faktaluckor; ingen ny stor körning beställd.
+
+Riktade offlineprov, Ruff, compileall och ordinarie full CI inklusive
+Chromium/WebKit kontrolleras på PR:ns slutkod före integrering. Standard är
+fortsatt `legacy` och `library_merge_generations=False`. Ingen produktion,
+scheduler, insamling, pris-/faktarelease eller samtidighet ändrad. Full
+standardkvalificering påstås inte. Äldre nästa-steg-anteckningar nedan är historik.
+
 # 2026-10-25: Nytt uppdrag till Sol om personliga val och användarväntan
 
 Följ [CODEX-SOL-NEXT-20261025.md](CODEX-SOL-NEXT-20261025.md).

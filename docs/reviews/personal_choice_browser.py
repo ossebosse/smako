@@ -10,6 +10,8 @@ import hashlib
 import json
 import secrets
 import time
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 from playwright.sync_api import expect, sync_playwright
@@ -30,6 +32,16 @@ def main():
         (args.output / 'browser.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
 
     write()
+    deadline = time.monotonic() + 90
+    while True:
+        try:
+            with urllib.request.urlopen(args.url + '/health', timeout=2) as ready:
+                if ready.status == 200:
+                    break
+        except (urllib.error.URLError, OSError):
+            if time.monotonic() >= deadline:
+                raise TimeoutError('Isolated browser server was not ready') from None
+            time.sleep(1)
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
         report['browser'] = browser.version
@@ -45,18 +57,27 @@ def main():
             assert response.status == 202, response.status
             status_url = response.json()['status_url']
             while response.status == 202 and time.perf_counter() - started < 300:
-                time.sleep(.2)
+                time.sleep(2)
                 response = context.request.get(args.url + status_url)
             report['A_seed_seconds'] = time.perf_counter() - started
             if response.status == 202:
                 context.request.delete(args.url + status_url)
                 raise TimeoutError('A seed reached the five-minute boundary')
             assert response.status == 201, response.status
+            seed = response.json()
+            page.goto(args.url + '/personal#plan=' + seed['plan_id'])
+            expect(page.locator('#plan-content')).to_contain_text(seed['plan']['recipes'][0]['name'], timeout=30000)
+            page.locator('button[data-open="shopping"]').first.click()
+            expect(page.locator('#shopping-content')).to_contain_text(
+                seed['plan']['optimized_basket']['stores'][0]['items'][0]['product_name'])
+            report['A_request_to_visible_shopping_seconds'] = time.perf_counter() - started
+            page.screenshot(path=str(args.output / 'seed-shopping.png'), full_page=True)
             del response
             # Existing tab-local recovery is an ordinary supported UI input.
             # It restores values only; no E plan or certificate has been built.
             page.add_init_script('sessionStorage.setItem("smako.personal.requestDraft", ' + json.dumps(json.dumps(requests['E'])) + ');')
-            page.goto(args.url + '/personal#choices')
+            page.add_init_script('localStorage.removeItem("smako.personal.lastPlan");')
+            page.goto(args.url + '/personal?latency_probe=E#choices')
             expect(page.locator('#check-postcode')).to_be_enabled(timeout=30000)
             page.locator('#customer-postcode').fill('21120')
             page.locator('#check-postcode').click()
@@ -82,6 +103,10 @@ def main():
             payload = response.json()
             if response.status != 201:
                 report.update(status='BLOCKED', error=payload)
+                if isinstance(payload.get('detail'), str):
+                    expect(page.locator('#personal-status')).to_contain_text(payload['detail'].split('.')[0], timeout=30000)
+                report['click_to_visible_blocked_seconds'] = time.perf_counter() - started
+                page.screenshot(path=str(args.output / 'blocked.png'), full_page=True)
                 write()
                 return
             checks = payload['plan']['personal']['checks']
