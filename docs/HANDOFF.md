@@ -1,4 +1,4 @@
-# 2026-10-25: Matchade förgrindar godkända; fullmatris 56/252 pågår
+# 2026-10-25: Matchade förgrindar godkända; fullmatris 63/252 pågår
 
 Aktuell runtime `eeda184926f02e73ab76e71e50c740e9dcb01b02`, PR #10.
 PR #10 är integrerad på main `ea7c7ae005f1ea10dd716b53d327427785e84e61`;
@@ -45,12 +45,15 @@ priser identiska. Budgeterad förbättring kvar 437,33 s; kalkylatoranrop oför�
 18 677. Kvalificering 207,00→101,90 s med samma 4 871 kalkylatoranrop.
 Inläsningsmedianen är däremot 33,12→47,70 s; faserna förbättras inte likformigt.
 Fullmatrisens första grupp är stängd: 573,48 s, 1,495 GiB, exit 0 utan OOM/swap.
-Totalt 56/252 uppmätta, 54 auditgodkända menyceller/216 anrop och två vegan-
-SEARCH_BLOCKED-celler/åtta observationer, samma kod/steg legacy/v1. Inget globalt
-omöjlighetsbevis. 196 celler återstår; v5/262 körs nu. Ingen standardkvalificering.
+V5-referensgruppen vid 262 är också stängd: 2 083,53 s, 1,496 GiB, exit 0
+utan OOM/swap, med verifierat obegränsat referenskontrakt. Totalt 63/252
+uppmätta, 60 auditgodkända menyceller/240 anrop och tre vegan-SEARCH_BLOCKED-
+celler/tolv observationer, samma kod/steg legacy/v1/v5. Inget globalt
+omöjlighetsbevis. 189 celler återstår; Malmö/original/1 000 kör nu båda
+huvudpolicyerna för alla profiler. Ingen standardkvalificering.
 [Fullmatrisstatus](reviews/preparation-memory-20261024/full-matrix-current.json).
-Senaste arkiv 209 verifierade metadatafiler:
-`eb9c901fcc02bdc1e68de6bd0f0d9b773221d87d8bfe16d4081bc4fb9e17b2c7`.
+Senaste arkiv 221 verifierade metadatafiler:
+`9f34ee1aa5e19874ca15842e88017dddc8bf884fc45c742dc2e9c2390796098a`.
 
 
 Pilotuppdatering: originalfakta/Malmö vid både 262 och 5 000 är klart,

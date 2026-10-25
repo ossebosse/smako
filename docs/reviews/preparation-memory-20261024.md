@@ -537,7 +537,7 @@ Förberedelsecachens 4 119 träffar, 6 240 missar och 4 098 skrivningar är ocks
 oförändrade. Native profilerings-/budgeträknare och per-etikett-unikhet finns
 i maskinunderlaget; summerad unikhet per etikett är inte global unikhet.
 
-### Fullmatris: första gruppen stängd, 56 av 252 uppmätta
+### Fullmatris: två grupper stängda, 63 av 252 uppmätta
 
 Malmö/originalfakta/262:s fyra återstående profiler är avslutade på **573,48 s**
 för hela gruppen, slutpeak **1 605 341 184 byte (1,495 GiB)**, exit 0 utan
@@ -545,17 +545,35 @@ OOM/swap. Sex nya celler levererar 24 auditgodkända anrop. Vegan ger
 `SEARCH_BLOCKED` med samma kod/steg i legacy och v1:s samtliga fyra anrop;
 det är åtta blockerade observationer och inget bevis för global omöjlighet.
 
-Totalt är **56 av 252** celler uppmätta: **54 med levererad meny och audit**
-(216 anrop) samt **två separat blockerade celler**. **196 celler återstår**.
+V5-referensen vid Malmö/original/262 är också avslutad: **2 083,53 s** för
+hela sjuprofilgruppen, slutpeak **1 606 127 616 byte (1,496 GiB)**, exit 0
+utan OOM/swap. Dess `reference_contract`, obegränsade sökparametrar och alla
+resurskvitton är verifierade. Sex celler levererar 24 auditgodkända anrop;
+vegan har samma `SEARCH_BLOCKED`/steg i fyra ytterligare observationer.
+
+| Profil vid Malmö/original/262 | Legacy, kr | V1, kr | V5, kr |
+| --- | --- | --- | --- |
+| Standard | 511,46 | 492,15 | 511,46 |
+| Protein40 | 1 000,86 | 1 000,86 | 1 000,86 |
+| All-macros | 1 000,86 | 1 000,86 | 1 000,86 |
+| Vegan | SEARCH_BLOCKED | SEARCH_BLOCKED | SEARCH_BLOCKED |
+| Fördelning | 996,22 | 996,22 | 996,22 |
+| Organic-share | 321,16 | 321,16 | 321,16 |
+| Breakfast/snack-weight | 53,16 | 53,16 | 53,16 |
+
+Totalt är **63 av 252** celler uppmätta: **60 med levererad meny och audit**
+(240 anrop) samt **tre separat blockerade celler** (tolv observationer).
+**189 celler återstår**.
 Inga registrerade pris-/utfalls-/minnesgrindar har fallit. Korsjämförelser mot
 ännu omätta storlekar och slutlig releasegranskning återstår; ingen cell
-märks som standardkvalificerad. V5-referensgruppen vid 262 körs nu seriellt.
+märks som standardkvalificerad. Malmö/original/1 000 kör nu alla sju profiler
+med legacy och v1 i samma seriella arbetsordning.
 [Aktuellt fullmatrisunderlag](preparation-memory-20261024/full-matrix-current.json)
 och [den uppdaterade 252-cellsinventeringen](preparation-memory-20261024/cells.json).
 
-Senaste arkivet innehåller **209 verifierade metadatafiler**, inklusive de
+Senaste arkivet innehåller **221 verifierade metadatafiler**, inklusive de
 redan uppmätta uppstartsfilerna. SHA-256:
-`eb9c901fcc02bdc1e68de6bd0f0d9b773221d87d8bfe16d4081bc4fb9e17b2c7`.
+`9f34ee1aa5e19874ca15842e88017dddc8bf884fc45c742dc2e9c2390796098a`.
 
 
 Full [CI på `0c2b7d2`](https://github.com/ossebosse/smako/actions/runs/40147290300)
@@ -867,7 +885,7 @@ två städer, fyra storlekar, två sökpolicyer och v5 endast vid 262. Den räkn
 5 000/v1 är uppmätt pilot, ännu inte standardkvalificerad. Äldre kods
 matrisresultat räknas inte automatiskt som slutkodens resultat.
 
-Kvar på slutkoden: de 196 återstående cellerna och full matrisgranskning. Slutkodens
+Kvar på slutkoden: de 189 återstående cellerna och full matrisgranskning. Slutkodens
 tretton cachelägesprocesser, tre ordinarie versionsbytesprov och båda
 faktaprojektionerna är klara enligt rapportens inledning.
 Ingen generell total bytebudget för alla RAM-cacher har bevisats; de
