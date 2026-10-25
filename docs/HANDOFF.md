@@ -1,3 +1,19 @@
+# 2026-10-25: Nytt uppdrag till Sol om personliga val och användarväntan
+
+Följ [CODEX-SOL-NEXT-20261025.md](CODEX-SOL-NEXT-20261025.md).
+Beställaren vill prioritera kort väntan när en användare på varm server
+ändrar matkök, proteinmål och kyckling/vegetariskt, samt efter kampanjbyte.
+Uppdraget gäller implementation och avgränsad verifiering med dagens 262
+recept. Högst två timmars sammanlagda prestandakörningar; gamla fullmatrisen
+och 5 000-proven ska inte återupptas. 15/30 sekunder är utvecklingsmål för
+förberett återanrop/nya vanliga val, inte uppmätta generella användartider.
+Fulla kontext-/pris-/ägarkontrakt kvarstår; återanvänd oberoende delarbete
+mellan krav utan att återanvända ett felaktigt personligt godkännande.
+
+Denna leverans ändrar endast instruktioner. Ingen runtime, standardpolicy,
+drift eller pris-/faktaversion har ändrats och inga nya benchmarkarbetare
+har startats. Äldre löpande anteckningar om fortsatt matris nedan är historik.
+
 # 2026-10-25: Etappen avslutad på begäran; fullmatris 91/252 uppmätt
 
 Beställaren bad att 5 000-proven skulle hoppas över och leveransen avslutas

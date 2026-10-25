@@ -1,5 +1,12 @@
 # Nästa uppdrag till Sol: förberedelsekostnad, minne och slutverifiering
 
+**Ersatt arbetsordning 2026-10-25:** Följ
+[CODEX-SOL-NEXT-20261025.md](CODEX-SOL-NEXT-20261025.md).
+Etappen nedan avslutades på beställarens begäran. Starta inte om dess
+fullmatris eller 5 000-prov; avsnitt 5 är inte längre ett aktivt uppdrag.
+Bevara tidigare evidens och korrekthetskontrakt. Nästa etapp gäller nya
+personliga val med 262 recept och en sammanlagd benchmarkbudget på två timmar.
+
 Utgångspunkt: main `66bd85e`, runtime `9162f0f`, efter PR #8.
 Arbeta i `D:\Projects\Smako` enligt `AGENTS.md`, `DEVELOPMENT.md` och
 aktuell `HANDOFF.md`. Hämta aktuell main utan att skriva över annat arbete.
