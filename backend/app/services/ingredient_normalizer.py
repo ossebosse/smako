@@ -163,7 +163,7 @@ CANONICAL_ALIASES: dict[str, tuple[str, ...]] = {
     "kokosmjölk": ("kokosmjölk", "kokosmjolk"),
     "tortillas": ("tortilla", "tortillas", "tortillabröd", "tortillabrod"),
     "vitlök": ("vitlök", "vitlok", "vitlöksklyfta", "vitloksklyfta"),
-    "majs": ("majs",),
+    "majs": ("majs", "majskorn", "sockermajs"),
     "oliver": ("oliv", "oliver", "olive", "olives"),
     "buljong": (
         "buljong",
