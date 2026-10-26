@@ -1,5 +1,10 @@
 # Sol: rätta kvarstående receptfel och angrip veckosökningens flaskhals
 
+**Uppföljning efter PR #16:** fortsätt med
+[giltig vecka, tidsgräns vid omräkning och köpbarhet](CODEX-SOL-NEXT-20261026-VALID-WEEK-AND-COVERAGE.md).
+Nedanstående uppdrag och dess dåvarande budget är historik. Rapportens
+rättelse gäller: original-B innehåller 52 tillåtna butikskontexter, inte 55.
+
 Ägarens uppdrag efter granskningen av PR #15, main `6b2e946`, 2026-10-26.
 Arbeta i `D:\Projects\Smako`. Hämta aktuell main och följ AGENTS,
 DEVELOPMENT, [produktmålet](PRODUCT-GOAL.md),

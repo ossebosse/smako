@@ -4,7 +4,7 @@ Beslutad riktning 2026-10-25 efter PR #12, main `d27e0cf`. Utgår från
 [produktmålet](PRODUCT-GOAL.md). Implementation och mätning återstår;
 `legacy` är fortsatt standard och V1:s befintliga beteende ändras inte av
 detta dokument. Nästa etapp finns i
-[Sols uppdrag](CODEX-SOL-NEXT-20261025-PREPARED-PLANNING.md).
+[Sols aktuella uppdrag](CODEX-SOL-NEXT-20261026-VALID-WEEK-AND-COVERAGE.md).
 
 ## Varför riktningen ändras
 

@@ -1,3 +1,27 @@
+# 2026-10-26: Nästa Sol-uppdrag — giltig vecka, omräkning och köpbarhet
+
+Aktuell startpunkt efter ägarens granskning av main `c94c229`/PR #16:
+[CODEX-SOL-NEXT-20261026-VALID-WEEK-AND-COVERAGE.md](CODEX-SOL-NEXT-20261026-VALID-WEEK-AND-COVERAGE.md).
+Det ersätter WEEK-SEARCH som nästa uppdrag; tidigare rapporter är bevarad evidens.
+
+Lös uttryckliga val kontra ärvd standardvariation utan att ändra gamla
+planers innebörd eller andra hårda krav. Behåll original-B som negativt
+underlag; pröva separat B2 med dokumenterad policyändring och samma fem
+middagar, fyra portioner, protein-/kostval och 52 tillåtna butikskontexter.
+Täta också deadline-luckan i `api/personal.py`: omräkning/ändring av sparad
+plan når arbetstråd och lagring utan nya planers 60 s-skydd.
+
+Förbättra ett fåtal källstödda produkt-/mängdkopplingar och inventera aktuell
+köpbarhet för alla 2 200 importerade varianter. Historiska 733 exakt/920
+med tillåtna uppskattningar är inte ommätta efter rågbrödskravet; de är
+inte ett personligt närings-/allergen-/ekogodkännande. Därefter behövs en
+verkligt giltig, kontrollerad, sparad och återläst veckolista och browserprov
+om veckan klarar 60 s. Ett 45,10 s-avslag kvalificerar inte produktmålet.
+
+Samma mätbudget har senast **49,56 minuter kvar**, högst 12 minuter till
+dyr köpbarhetsinventering/profilering i denna etapp. Ingen ny stor matris.
+Legacy standard, V2 opt-in och separat driftaktivering kvarstår.
+
 # 2026-10-26: Spett/rågbröd rättade, cache lagrar igen, B ger strukturellt avslag
 
 [PR #16](https://github.com/ossebosse/smako/pull/16) genomför den avgränsade
