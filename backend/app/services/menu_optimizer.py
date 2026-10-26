@@ -1324,7 +1324,8 @@ class MenuOptimizer:
 
     def optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
                        search_trace=None, state_identity=None, fallback_beam_width=None, decision_observer=None,
-                       initial_evaluations=None, _attempt_offset=0):
+                       initial_evaluations=None, _attempt_offset=0, complete_first=False,
+                       candidate_priority=None, candidate_packages=None):
         """Try the ordinary beam, then one explicitly bounded safe retry.
 
         A retry requires actual exhaustion AND earlier removal of different
@@ -1334,23 +1335,32 @@ class MenuOptimizer:
         """
         if fallback_beam_width is not None and not 1 <= fallback_beam_width <= 64:
             raise ValueError("fallback beam must be bounded at 64")
+        if complete_first and len(candidates_by_slot) > 1:
+            if initial_evaluations is not None:
+                initial_evaluations.clear()  # Compact qualification evidence orders proposals instead.
+            return self._optimize_complete_slots(candidates_by_slot, evaluate=evaluate,
+                accepts=accepts, score=score, search_trace=search_trace,
+                state_identity=state_identity, decision_observer=decision_observer,
+                candidate_priority=candidate_priority, candidate_packages=candidate_packages)
         trace = search_trace if search_trace is not None else []
         start = len(trace)
         exhausted = {}
         evaluation_cache = OrderedDict()
+        pending_evaluations = OrderedDict()
         recipe_ids = RecipeComputationCache()
         # Only non-final first-slot results may come from the caller's earlier
         # qualification, under the same request and exact slot/recipe identity.
-        # Transfer ownership to this existing 256-entry cache; never share it
-        # between users or seed a result whose final constraints were unchecked.
+        # Reserve qualifications until their original-order consumption. New
+        # misses may use only the remaining part of the SAME 256-result budget;
+        # they must not evict work that has not yet been consumed.
         if initial_evaluations is not None:
             if len(candidates_by_slot) > 1:
                 for slot in candidates_by_slot[0]:
                     key = ((slot.id, recipe_ids.get(slot.recipe, recipe_id) if slot.recipe else None),)
                     if key in initial_evaluations:
-                        if len(evaluation_cache) >= 256:
-                            evaluation_cache.popitem(last=False)
-                        evaluation_cache[key] = initial_evaluations[key]
+                        if len(pending_evaluations) >= 256:
+                            pending_evaluations.popitem(last=False)
+                        pending_evaluations[key] = initial_evaluations[key]
             initial_evaluations.clear()
         try:
             return self._optimize_slots(
@@ -1358,6 +1368,7 @@ class MenuOptimizer:
                 beam_width=beam_width, search_trace=trace, state_identity=state_identity,
                 _exhaustion=exhausted, _attempt_number=_attempt_offset+1, _evaluation_cache=evaluation_cache,
                 _recipe_ids=recipe_ids, decision_observer=decision_observer,
+                _pending_evaluations=pending_evaluations,
             )
         except (IncompleteBasketError, ValueError):
             pruned_different_states = any(
@@ -1372,11 +1383,13 @@ class MenuOptimizer:
                 beam_width=fallback_beam_width, search_trace=trace, state_identity=state_identity,
                 _exhaustion={}, _attempt_number=_attempt_offset+2, _evaluation_cache=evaluation_cache,
                 _recipe_ids=recipe_ids, decision_observer=decision_observer,
+                _pending_evaluations=pending_evaluations,
             )
 
     def _optimize_slots(self, candidates_by_slot, *, evaluate, accepts, score, beam_width=12,
                         search_trace=None, state_identity=None, _exhaustion=None, _attempt_number=1,
-                        _evaluation_cache=None, _recipe_ids=None, decision_observer=None):
+                        _evaluation_cache=None, _recipe_ids=None, decision_observer=None,
+                        _pending_evaluations=None):
         """Use the same complete-basket search discipline for typed meal slots.
 
         ``evaluate`` aggregates ALL meal types, explicit extras and allocated stock
@@ -1385,6 +1398,7 @@ class MenuOptimizer:
         """
         states = [([], None)]
         cache = _evaluation_cache if _evaluation_cache is not None else OrderedDict()
+        pending = _pending_evaluations if _pending_evaluations is not None else OrderedDict()
         recipe_ids = _recipe_ids if _recipe_ids is not None else RecipeComputationCache()
         for index, options in enumerate(candidates_by_slot):
             errors = []
@@ -1412,17 +1426,25 @@ class MenuOptimizer:
                         continue
                     key = tuple((s.id, recipe_ids.get(s.recipe, recipe_id) if s.recipe else None) for s in slots)
                     try:
-                        if key not in cache:
+                        if key in pending:
+                            result = pending.pop(key)
+                            trace["evaluation_cache_hits"] += 1
+                            trace["qualification_cache_hits"] = trace.get("qualification_cache_hits", 0) + 1
+                        elif key not in cache:
                             trace["evaluations_executed"] += 1
                             result = evaluate(slots, final=final)
                             # Memoization changes work, never candidate admission or
                             # beam quality. Recompute evicted exact values on a miss.
-                            if len(cache) >= 256:
-                                cache.pop(next(iter(cache)))
-                            cache[key] = result
                         else:
                             trace["evaluation_cache_hits"] += 1
-                        result = cache[key]
+                            result = cache[key]
+                        if key not in cache:
+                            if len(cache) + len(pending) >= 256 and cache:
+                                cache.pop(next(iter(cache)))
+                            if len(cache) + len(pending) < 256:
+                                cache[key] = result
+                        trace["full_result_cache_entries_peak"] = max(
+                            trace.get("full_result_cache_entries_peak", 0), len(cache) + len(pending))
                         trace["priced"] += 1
                         if decision_observer:
                             decision_observer(slots, "priced", result=result, depth=index+1)
@@ -1474,6 +1496,205 @@ class MenuOptimizer:
         if not candidates_by_slot:
             return [], evaluate([], final=True)
         return min(states, key=lambda state: score(*state))
+
+    def _optimize_complete_slots(self, groups, *, evaluate, accepts, score, search_trace,
+                                 state_identity, decision_observer, candidate_priority,
+                                 candidate_packages):
+        """Propose whole menus, then price them through the caller's exact checkout.
+
+        Only the incumbent and current evaluation retain full baskets. Singleton
+        prices/package identities guide ordering, never admission or weekly cost.
+        All options remain available; broad search is explicitly heuristic.
+        """
+        import sys
+
+        from app.services.plan_jobs import (
+            PlanningDeadlineExceeded,
+            check_cancelled,
+            planning_deadline,
+            remaining_planning_seconds,
+        )
+
+        started = perf_counter()
+        ids = RecipeComputationCache()
+        priority = candidate_priority or (lambda slot: 0)
+        packages = candidate_packages or (lambda slot: frozenset())
+        ordered = [sorted(group, key=priority) for group in groups]  # Python's stable tie order.
+        package_sets = {id(slot): packages(slot) for group in groups for slot in group}
+        rows = [{'depth':i+1, 'attempt':1, 'beam_width':0, 'library_phase':'complete_first',
+            'proposals':0, 'constraints_rejected':0, 'evaluation_rejected':0, 'priced':0,
+            'retained':0, 'beam_pruned':0, 'evaluations_executed':0, 'evaluation_cache_hits':0}
+            for i in range(len(groups))]
+        if search_trace is not None:
+            search_trace.extend(rows)
+        trace = rows[-1]
+        trace.update(finalization_reserve_seconds=12, full_results_retained_limit=2,
+                     compact_seen_limit=4096, first_valid_search_seconds=None,
+                     first_valid_request_seconds=None, first_valid_cost=None,
+                     full_candidates=0, improvements=0, stop_reason='enumerated_proposals')
+        rows[0]['first_slot_priority_rows'] = len(groups[0]) if candidate_priority else 0
+        seen = OrderedDict()
+        considered = [set() for _ in groups]
+        incumbent = None
+        last_error = None
+        soft_stopped = False
+
+        class SearchWindowClosed(Exception):
+            pass
+
+        def checkpoint():
+            check_cancelled()
+            remaining = remaining_planning_seconds()
+            if remaining is not None and remaining <= 12:
+                raise SearchWindowClosed
+
+        def propose(slots):
+            nonlocal incumbent, last_error
+            checkpoint()
+            names = tuple(s.recipe.name if s.recipe else '' for s in slots)
+            key = (state_identity(slots) if state_identity is not None else
+                   tuple((s.id, ids.get(s.recipe, recipe_id) if s.recipe else None) for s in slots))
+            previous = seen.get(key)
+            if previous is not None and previous <= names:
+                trace['evaluation_cache_hits'] += 1
+                return
+            if len(seen) >= 4096 and key not in seen:
+                seen.popitem(last=False)
+            seen[key] = names
+            if not accepts(slots, final=True):
+                trace['constraints_rejected'] += 1
+                return
+            trace['evaluations_executed'] += 1
+            evaluation_started = perf_counter()
+            try:
+                remaining = remaining_planning_seconds()
+                # Existing cooperative checks also stop INSIDE an expensive
+                # improvement, while the outer request keeps its finalization time.
+                with planning_deadline(None if remaining is None else max(0, remaining-12)):
+                    result = evaluate(slots, final=True)
+            except PlanningDeadlineExceeded:
+                remaining = remaining_planning_seconds()
+                if remaining is not None and remaining > 0:
+                    raise SearchWindowClosed from None
+                raise
+            except (IncompleteBasketError, ValueError) as exc:
+                last_error = exc.with_traceback(None)
+                trace['evaluation_rejected'] += 1
+                if decision_observer:
+                    decision_observer(slots, 'evaluation_rejected', reason=str(exc), depth=len(groups))
+                return
+            finally:
+                trace['max_full_evaluation_seconds'] = max(trace.get('max_full_evaluation_seconds',0),
+                    perf_counter()-evaluation_started)
+            trace['priced'] += 1
+            trace['full_candidates'] += 1
+            if decision_observer:
+                decision_observer(slots, 'priced', result=result, depth=len(groups))
+            rank = score(slots, result)
+            if incumbent is None or rank < incumbent[0]:
+                if incumbent is None:
+                    remaining = remaining_planning_seconds()
+                    trace['first_valid_search_seconds'] = perf_counter()-started
+                    trace['first_valid_request_seconds'] = None if remaining is None else 60-remaining
+                    trace['first_valid_cost'] = str(result['basket'].total) if isinstance(result, dict) and 'basket' in result else str(rank)
+                incumbent = (rank, list(slots), result)
+                trace['improvements'] += 1
+                if decision_observer:
+                    decision_observer(slots, 'retained', result=result, depth=len(groups))
+
+        def completions(prefix, orders, *, node_limit=None):
+            nodes = 0
+            def visit(chosen):
+                nonlocal nodes
+                checkpoint()
+                if len(chosen) == len(groups):
+                    yield chosen
+                    return
+                index = len(chosen)
+                for slot in orders[index]:
+                    checkpoint()
+                    if node_limit is not None and nodes >= node_limit:
+                        return
+                    nodes += 1
+                    rows[index]['proposals'] += 1
+                    considered[index].add(id(slot))
+                    slots = [*chosen, slot]
+                    if accepts(slots, final=len(slots)==len(groups)):
+                        yield from visit(slots)
+                    else:
+                        rows[index]['constraints_rejected'] += 1
+            yield from visit(prefix)
+
+        combinations_count = 1
+        for group in groups:
+            combinations_count *= len(group)
+        try:
+            if combinations_count <= 4096:
+                for menu in completions([], ordered):
+                    propose(menu)
+                trace['proposal_space_enumerated'] = True
+            else:
+                # Interleave inexpensive individual ordering and original source
+                # order; later recipes compete before an entire price breadth.
+                anchors = []
+                anchor_ids = set()
+                for pair in zip(ordered[0], groups[0], strict=True):
+                    for slot in pair:
+                        if id(slot) not in anchor_ids:
+                            anchors.append(slot); anchor_ids.add(id(slot))
+                trace['anchors_total'] = len(anchors)
+                trace['anchors_considered'] = 0
+                for anchor_index, anchor in enumerate(anchors):
+                    checkpoint()
+                    trace['anchors_considered'] += 1
+                    affinity = package_sets[id(anchor)]
+                    orders = [[anchor], *[sorted(group,
+                        key=lambda slot: (-len(affinity & package_sets[id(slot)]), priority(slot)))
+                        for group in ordered[1:]]]
+                    # Rotate anchors before one incompatible prefix consumes all
+                    # checkout time; no truncated branch becomes an impossibility proof.
+                    for number, menu in enumerate(completions([], orders, node_limit=4096)):
+                        propose(menu)
+                        if incumbent is not None or number >= 15:
+                            break
+                    if incumbent is None:
+                        continue
+                    # One replacement from every slot, fairly interleaved with
+                    # full new anchor proposals. Shared packages can change ALL
+                    # other meals at once in the next anchor completion.
+                    for index, group in enumerate(ordered):
+                        if anchor_index < len(group):
+                            menu = list(incumbent[1]); menu[index] = group[anchor_index]
+                            considered[index].add(id(group[anchor_index]))
+                            propose(menu)
+        except SearchWindowClosed:
+            soft_stopped = True
+            trace['stop_reason'] = 'reserved_current_checkout_audit_save_time'
+        trace['search_seconds'] = perf_counter()-started
+        trace['anchors_deferred'] = trace.get('anchors_total', 0)-trace.get('anchors_considered', 0)
+        trace['candidate_options_total'] = sum(map(len, groups))
+        trace['candidate_options_considered'] = sum(map(len, considered))
+        trace['candidate_options_deferred'] = trace['candidate_options_total']-trace['candidate_options_considered']
+        trace['safely_excluded_options'] = 0
+        trace['compact_seen_entries'] = len(seen)
+        visited = set()
+        def size(value):
+            if id(value) in visited:
+                return 0
+            visited.add(id(value))
+            children = (list(value.keys())+list(value.values()) if isinstance(value, dict) else
+                        value if isinstance(value, (tuple, list, set, frozenset)) else ())
+            return sys.getsizeof(value)+sum(size(child) for child in children)
+        trace['compact_seen_bytes'] = size(seen)
+        if incumbent is None:
+            if soft_stopped:
+                raise PlanningDeadlineExceeded('No valid complete menu before the reserved finalization window')
+            if last_error is not None:
+                raise last_error
+            raise IncompleteBasketError('Inga fullständiga menyförslag uppfyllde kraven; ingen global omöjlighet är bevisad.')
+        trace['retained'] = 1
+        trace['best_search_cost'] = str(incumbent[2]['basket'].total) if isinstance(incumbent[2], dict) and 'basket' in incumbent[2] else str(incumbent[0])
+        return incumbent[1], incumbent[2]
 
     def accepts_recipes(self, recipes, constraints, *, profile_cache=None):
         classified = []

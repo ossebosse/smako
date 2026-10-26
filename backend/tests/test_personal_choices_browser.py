@@ -103,7 +103,7 @@ def test_current_variation_origins_and_deliberate_old_draft_migration(choices):
     control=page.locator('#recipe-inherited-variation')
     expect(control).not_to_be_checked()
     restored=submit(page,captured)
-    assert restored['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='unknown'
+    assert 'variation_intent' not in restored  # Absence preserves the old request's literal contract.
     assert restored['max_same_primary_ingredient_meals']==2 and restored['max_pairwise_recipe_similarity']==.6
     control.check()
     changed=submit(page,captured)
@@ -162,6 +162,20 @@ def test_explicit_pantry_choice_survives_draft_and_can_be_changed_deliberately(c
     expect(page.locator('#planning-use-pantry')).not_to_be_checked()
     page.locator('#planning-use-pantry').check()
     assert submit(page,captured)['personal']['use_pantry'] is True
+
+
+def test_old_A_keeps_all_normalized_choices_without_new_variation_intent(choices):
+    """Real saved A fields, with only the isolated fixture's location substituted."""
+    page,url,captured=choices
+    page.route('**/api/recipe-library',lambda route:route.fulfill(content_type='application/json',
+        body=json.dumps({'enabled':True,'variation_intent_enabled':True})))
+    draft=json.loads((Path(__file__).parents[2]/'docs/reviews/valid-week-and-coverage-20261026/requests.json').read_bytes())['A']
+    draft.update(postal_code='22350',allowed_store_ids=['near'])
+    page.add_init_script('sessionStorage.setItem("smako.personal.requestDraft",'+json.dumps(json.dumps(draft))+');')
+    page.goto(url);choose_location(page)
+    posted=submit(page,captured)
+    assert 'variation_intent' not in posted
+    assert PlanRequest.model_validate(posted).model_dump(mode='json')==PlanRequest.model_validate(draft).model_dump(mode='json')
 
 
 def choose_location(page):

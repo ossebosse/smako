@@ -3706,6 +3706,23 @@ class PersonalPlanner:
                     ))
                 ) if generating and not self.items and not self.spec.product_locks else None,
             )
+        if (self.current_library_search and self.complete and generating and replace_slot is None
+                and len(options) > 1 and max(map(len, options), default=0) > 64
+                and type(self.service.menu_optimizer) is MenuOptimizer
+                and getattr(search, '__func__', None) is MenuOptimizer.optimize_slots):
+            def candidate_priority(slot):
+                evidence = self.variant_search_evidence.get((slot.meal_type, self._recipe_id(slot.recipe)))
+                paid = evidence.paid if evidence is not None else float('inf')
+                taste = preference_score([slot.recipe], self.spec.profile)
+                taste += preference_score([slot.recipe], self.meals[slot.meal_type].profile)
+                return paid+taste*2, paid, slot.recipe.name
+
+            def candidate_packages(slot):
+                evidence = self.variant_search_evidence.get((slot.meal_type, self._recipe_id(slot.recipe)))
+                return evidence.packages if evidence is not None else frozenset()
+
+            search_kwargs.update(complete_first=True, candidate_priority=candidate_priority,
+                                 candidate_packages=candidate_packages)
         # Complete menus compared during the search are not audited; only the
         # chosen menu is, below. Should it fail the audit (not observed), the
         # search is repeated with every complete menu audited, which is the

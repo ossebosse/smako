@@ -165,6 +165,9 @@ def completed_search_outcome(diagnostics):
     status = "REACHED" if exhausted else "UNKNOWN" if omitted else "NOT_REACHED"
     pruned = sum(max(0, row.get("beam_pruned", 0) - row.get("equivalent_pruned", 0))
                  for row in diagnostics.get("search", []))
+    complete_rows = [row for row in diagnostics.get('search', [])
+                     if row.get('library_phase') == 'complete_first' and row.get('depth')
+                     and 'full_candidates' in row]
     if exhausted:
         message = (f"En giltig meny hittades. Sökbudgeten nåddes i {exhausted} registrerade "
                    "näringsdelberäkningar; andra godkända produktkombinationer kan finnas.")
@@ -173,6 +176,8 @@ def completed_search_outcome(diagnostics):
                    "saknas; det går inte att fastställa om alla näringsdelberäkningar höll sig inom sin budget.")
     else:
         message = "En giltig meny hittades inom en begränsad sökning. Inget näringsdelsteg nådde sin registrerade sökbudget."
+    if any(row.get('stop_reason') == 'reserved_current_checkout_audit_save_time' for row in complete_rows):
+        message += " Förbättringssökningen stoppades med reserverad tid för aktuell slutkontroll och sparande."
     return {
         "status": "VALID_SOLUTION", "global_optimum_proven": False,
         "label": "Lägsta hittade inköpskostnad inom dina val",
@@ -182,7 +187,8 @@ def completed_search_outcome(diagnostics):
             "nutrition_searches_recorded": len(nutrition),
             "nutrition_searches_omitted": omitted,
             "nutrition_budget_exhausted_recorded": exhausted,
-            "week_search_method": ("verified_reference_and_bounded_improvement"
+            "week_search_method": ("complete_menu_proposals_and_bounded_improvement" if complete_rows
+                else "verified_reference_and_bounded_improvement"
                 if any(row.get("search_track") for row in diagnostics.get("search", []))
                 else "bounded_search_with_exhaustive_prefixes"
                 if any(row.get("library_phase") == "exhaustive" for row in diagnostics.get("search", []))
@@ -194,6 +200,14 @@ def completed_search_outcome(diagnostics):
                        for row in diagnostics.get("search", []))
                 else "bounded_beam"),
             "distinct_week_proposals_pruned": pruned,
+            **({'complete_menu_search': [{k: row[k] for k in (
+                'first_valid_search_seconds', 'first_valid_request_seconds', 'first_valid_cost',
+                'best_search_cost', 'full_candidates', 'improvements', 'finalization_reserve_seconds',
+                'stop_reason', 'anchors_total', 'anchors_considered', 'anchors_deferred',
+                'candidate_options_total', 'candidate_options_considered', 'candidate_options_deferred',
+                'safely_excluded_options', 'max_full_evaluation_seconds', 'compact_seen_bytes',
+                'compact_seen_entries', 'full_results_retained_limit') if k in row} for row in complete_rows]}
+               if complete_rows else {}),
             "week_search_phases": [{k: row[k] for k in (
                 "search_track", "library_phase", "library_generation", "library_prefix_recipes",
                 "state_space", "evaluations_executed") if k in row}
