@@ -33,6 +33,10 @@ INTAKE_PACK_KEYS = {
     "intake_rice_flour": "rismjöl",
 }
 PACK_KEYS = PACK_KEYS | INTAKE_PACK_KEYS.keys()
+from app.services.intake_product_links import entries as intake_product_entries
+
+PACK_KEYS = PACK_KEYS | intake_product_entries().keys()
+PACK_KEYS = PACK_KEYS | {"beef_quick_cut", "beef_braising_cut", "lamb_quick_cut", "lamb_braising_cut"}
 
 
 def intake_whole_identity(canonical, form, label, composition):
@@ -81,6 +85,21 @@ def compatible(keys, product, fact):
         "tortilla": r"vete", "gnocchi": r"gnocchi", "peanuts": r"jordnötter",
     }
     for key in keys:
+        if key in {"beef_quick_cut", "beef_braising_cut", "lamb_quick_cut", "lamb_braising_cut"}:
+            from app.services.ingredient_normalizer import _search_text
+
+            label = _search_text(text)
+            pattern = {"beef_quick_cut": r"ryggbiff|entrecote|flankstek",
+                       "beef_braising_cut": r"hogrev benfri",
+                       "lamb_quick_cut": r"lammytterfile|lammrostbiff benfri",
+                       "lamb_braising_cut": r"lammstek benfri"}[key]
+            if not re.search(pattern, label):
+                return False
+        if key.startswith("intake_all_"):
+            from app.services.intake_product_links import compatible as exact_intake_compatible
+
+            if not exact_intake_compatible(key, product, fact):
+                return False
         if key in INTAKE_PACK_KEYS:
             canonical = INTAKE_PACK_KEYS[key]
             if not intake_whole_identity(canonical, INTAKE_IDENTITIES[canonical][0], text, composition):

@@ -81,7 +81,8 @@ class RecipeDesign(BaseModel):
     components: tuple[RecipeComponent, ...]
     steps: tuple[RecipeStep, ...]
     # This is elapsed time, including soaking, proving, draining and chilling.
-    # Active work keeps its separate 180-minute bound.
+    # Twelve-portion sequential batches can exceed the 180-minute user filter.
+    # Retain the declared time; selection must compare the actual scaled value.
     estimated_minutes: int = Field(ge=1, le=2880)
     equipment: tuple[str, ...]
     vegetarian: bool
@@ -94,7 +95,7 @@ class RecipeDesign(BaseModel):
         default=("dinner",), exclude_if=lambda v: v == ("dinner",))
     dinner_level: Literal["simple", "crafted"] = Field(
         default="crafted", exclude_if=lambda v: v == "crafted")
-    active_minutes: int | None = Field(default=None, ge=1, le=180,
+    active_minutes: int | None = Field(default=None, ge=1, le=2880,
                                       exclude_if=lambda v: v is None)
     waiting_minutes: int = Field(default=0, ge=0, le=1440, exclude_if=lambda v: v == 0)
     total_minutes: int | None = Field(default=None, ge=1, le=2880,

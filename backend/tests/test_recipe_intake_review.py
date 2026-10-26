@@ -31,12 +31,20 @@ def authored(name="kyckling", *, method=None):
 
 
 @pytest.mark.parametrize("name", [
-    "gröna linser", "svarta linser", "gula ärtor", "klibbigt ris", "rimmat fläsk",
-    "rökt lax", "varmrökt lax", "äggula", "kokta ägg", "kondenserad mjölk", "puffat ris",
+    "gröna linser", "svarta linser", "gula ärtor", "klibbigt ris",
+    "rökt lax", "varmrökt lax", "kokta ägg", "kondenserad mjölk", "puffat ris",
 ])
 def test_specific_input_does_not_inherit_generic_recipe_requirements(name):
     assert canonicalize_ingredient_name(name) == name
     assert f"{name}|raw_edible" not in library_vocabulary(())
+
+
+@pytest.mark.parametrize("specific,generic", [("rimmat fläsk", "fläskkött"), ("äggula", "ägg")])
+def test_new_reviewed_specific_inputs_have_independent_mandatory_product_requirements(specific, generic):
+    vocabulary = library_vocabulary(current_recipes(13))
+    specific_requirements = vocabulary[f"{specific}|raw_edible"][1]
+    assert specific_requirements and all(r.startswith("pack:intake_all_") for r in specific_requirements)
+    assert set(specific_requirements).isdisjoint(vocabulary[f"{generic}|raw_edible"][1])
 
 
 def test_egg_noodles_keep_legacy_alias_with_explicit_authored_product_requirement():
