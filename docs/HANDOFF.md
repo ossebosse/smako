@@ -1,3 +1,50 @@
+# 2026-10-26: Bred A-vecka levererad på 55,12 s i browser, 297,18 kr
+
+Leverans enligt BROAD-WEEK från main `2dd7183`; mätkod `11b5b97`.
+Läs [rapporten](reviews/broad-week-search-20261026.md) och maskinkvittona.
+**Oförändrat A ger full checkout/audit/save/ägd GET på 53,3724 s;
+verklig Chromium knapp→synlig full lista+GET 55,1185 s, 297,18 kr.**
+Hela råa/normaliserade sparade begäran och hela korgen matchar exakt.
+Samma 52 butiks-ID:n, fem middagar/fyra portioner, max två butiker,
+10–15 ingredienser, gamla variationsregler och inget nytt variation-intent.
+Skafferival False bevaras. A saknar personliga närings-/eko-/allergimål;
+dess näringsstatus är NOT_REQUESTED, inga nya proteinvärden intygas.
+
+**Matchat B2 behåller exakt hela 731,20-kronorskorgen och sparade val**,
+API/save/GET 30,8191 s. Minst 35 g protein ESTIMATED, 3 kyckling/2 veg,
+variation, butiker och aktuell audit passerar. Ingen prisregression.
+
+Cacheutträngningen är rättad utan större LRU: väntande kvalificeringar och
+fortsatt cache delar 256 fulla resultat. Ett 300-kandidatprov ger 44 nya/
+256 återanvändningar och samma ordning/likaprisutfall som okachad sökning.
+För bred genererad aktuell V2 prioriteras nu hela strukturella menyförslag
+som prövas i befintlig checkout. Ingen dyr singleton/prefixprissättning
+görs på sökdjup 1–4. Första giltiga hela A-kandidaten efter 34,9840 s;
+509,64 kr förbättras till 297,18. 58/960 ankare och 316 giltiga hela korgar
+prövas, resten är uppskjutet. Inget globalt optimumbevis.
+
+En snävare deadline inne i förbättringscheckout reserverar tolv sekunder
+för aktuell audit/save/svar och återställer yttre budget vid mjukt stopp.
+Högst två fulla sökresultat och 4 096 kompakta menyidentiteter behålls;
+privat allokering/lås behåller ordning. Ingen personlig vinnarcache delas.
+Total observerad Windows-jobbcommit högst 1,506 GiB på två CPU, hårt 3 GiB;
+bara en faktisk pris-/faktaversion, versionsöverlapp fortfarande omätt.
+
+Ett nytt A-API-prov, ett verkligt A-browserprov och B2-regressionen räckte.
+Två startfel före dataladdning/API kostar också 0,0496 s i journalen.
+Samma journal: **5 344,9842 s använda / 1 855,0158 s kvar (30,92 min)**.
+121 avslutande riktade regressioner inklusive Chromium/WebKit och små
+korg-/kampanj-/närings-/ekoorakel passerar. Tidigare testkörningar överlappar.
+Ruff/compileall samt ordinarie CI inklusive browser krävs inför mainintegration.
+
+Ingen ny inventering: återanvänd 738 exakt/931 inklusive tillåtna uppskattningar
+av 2 200; källor och centrala kvalificeringsfunktioner är verifierat oförändrade.
+Största kvarvarande uppmätta del är personlig kvalificering cirka 26,8 s,
+sedan API-/lagrings-/svarsarbete och begränsad prisförbättring. p95,
+samtidighet, verklig veckouppdatering, prisversionsöverlapp, hela valkatalogens
+kombinationer och UI-butikstak 1..N återstår. Ingen import/insamling/stor matris.
+Legacy standard, V2 opt-in, ingen beta eller produktion aktiverad.
+
 # 2026-10-26: Nästa Sol-uppdrag — bred A-vecka och återanvänd kvalificering
 
 Aktuell startpunkt efter oberoende granskning av main `719b927`/PR #17:
