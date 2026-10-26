@@ -15,6 +15,7 @@ from app.api.plan import (
     _run_personal_thread,
     _run_personal_work,
     _store,
+    _with_current_deadline,
     _with_release,
 )
 from app.config import get_settings
@@ -206,6 +207,10 @@ def profile_update(payload: ProfileWrite, request: Request, response: Response):
 async def change_plan(
     plan_id: str, payload: PersonalMutation, request: Request, response: Response
 ):
+    return await _with_current_deadline(get_settings(), lambda: _dispatch_change_plan(plan_id, payload, request, response))
+
+
+async def _dispatch_change_plan(plan_id, payload, request, response):
     if "respond-async" in {value.strip() for value in request.headers.get("Prefer", "").lower().split(",")}:
         settings, plans, owner = context(request, response)
         try:
@@ -258,6 +263,27 @@ def _check_membership_change(saved, payload, request, plans, owner):
 
 
 async def _change_plan(plan_id, payload, request, response):
+    try:
+        return await _with_current_deadline(get_settings(), lambda: _change_plan_body(plan_id, payload, request, response))
+    except PolicyConflict as exc:
+        if exc.code == "SEARCH_INCOMPLETE":
+            # A commit that finishes just after the deadline remains a complete
+            # owned revision. Expose its recoverable status; identical retries
+            # use the existing transactional mutation receipt, never append twice.
+            _settings, plans, owner = context(request, response)
+            prior = PersonalStore(plans).read(owner).get("mutations", {}).get(_mutation_key(plan_id, payload))
+            if prior:
+                plans.get_owned(plan_id, owner_actor_hash=owner, revision=prior)
+                exc.diagnostics = {**(exc.diagnostics or {}), "operation_status":"committed",
+                    "committed_revision":prior, "recovery":"Owned GET or identical retry returns the committed revision."}
+        raise
+
+
+def _mutation_key(plan_id, payload):
+    return hashlib.sha256(json.dumps([plan_id, payload.model_dump(mode="json")], sort_keys=True).encode()).hexdigest()
+
+
+async def _change_plan_body(plan_id, payload, request, response):
     settings, plans, owner = context(request, response)
     private = PersonalStore(plans)
     try:
@@ -268,9 +294,7 @@ async def _change_plan(plan_id, payload, request, response):
         raise HTTPException(422, "Öppna den äldre planen i dess befintliga redigeringsflöde.")
     _check_membership_change(saved, payload, request, plans, owner)
     state = private.read(owner)
-    mutation_key = hashlib.sha256(
-        json.dumps([plan_id, payload.model_dump(mode="json")], sort_keys=True).encode()
-    ).hexdigest()
+    mutation_key = _mutation_key(plan_id, payload)
     prior = state.get("mutations", {}).get(mutation_key)
     if prior:
         return {
@@ -296,6 +320,8 @@ async def _change_plan(plan_id, payload, request, response):
         raise PersonalConflict("Planen ändrades. Senaste fungerande resultat är bevarat.")
     if payload.pantry_revision != state["revision"]:
         raise PersonalConflict("Skafferiet ändrades. Läs om innan ändring.")
+    if saved.request.variation_intent and settings.library_search_policy != 'smako-current-library-v2':
+        raise PolicyConflict("Denna miljö stöder inte planens nya variationsregler. Den befintliga planen är bevarad.", code='SEARCH_POLICY_UNAVAILABLE')
     state = private.prepare_revision(owner, saved)
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(saved.request.postal_code, {})
     if prepared is None:
@@ -399,6 +425,8 @@ async def _change_plan(plan_id, payload, request, response):
         ),
         settings,
     )
+    from app.services.plan_jobs import check_cancelled
+    check_cancelled()
     saved = plans.append(
         plan_id=plan_id,
         request=plan_request,

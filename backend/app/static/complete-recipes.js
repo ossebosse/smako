@@ -18,6 +18,8 @@
   function controls(host, {personal=false}={}) {
     if(!host)throw new Error("Receptvalens fält saknas.");
     const key=`smako.recipeChoices.${personal?"personal":"public"}`;
+    const variationFields=["max_same_primary_ingredient_meals","max_same_recipe_family","max_same_carbohydrate_meals","max_same_cooking_method_meals","max_same_dish_form_meals","max_pairwise_culinary_similarity","max_pairwise_recipe_similarity"];
+    let variationEnabled=false,retainedIntent=false,variationOrigins=Object.fromEntries(variationFields.map(k=>[k,"default"])),retainedVariation={},retainedOverrides=null;
     const box=el("fieldset",null,"complete-recipe-options");box.hidden=true;box.disabled=true;
     box.append(el("legend",personal?"Antal ingredienser":"Receptstil"));
     const mode=select("recipe-style",[["legacy","Befintliga vardagsrecept"],["complete","Genomarbetade middagar"],["library","Måltidsbibliotek: middag, frukost och mellanmål"]],"legacy");
@@ -31,6 +33,14 @@
     const cuisineDistribution=select("recipe-cuisine-distribution",[["free","Välj fritt bland valda matkök"],["minimum","Minst X olika matkök"],["each_selected","Minst en rätt från varje valt matkök"]],"free");
     const minCuisines=input("recipe-min-cuisines","number",3,{min:"1",max:"6",step:"1"});
     const proteinCap=input("recipe-main-protein-cap","number","",{min:"1",max:"7",step:"1",placeholder:"Inget extra tak"});
+    const inheritedVariation=input("recipe-inherited-variation","checkbox","");inheritedVariation.checked=true;
+    const inheritedField=field("Låt min måltidsfördelning gå före standardgränsen för samma huvudråvara",inheritedVariation);inheritedField.hidden=true;
+    inheritedField.append(el("span"," Egna gränser behålls. För en äldre plan krävs detta nya val för att ersätta den tidigare standardtolkningen.","field-hint"));
+    advanced.append(inheritedField);
+    inheritedVariation.addEventListener("change",()=>{
+      variationOrigins.max_same_primary_ingredient_meals=inheritedVariation.checked?"default":"unknown";
+      if(inheritedVariation.checked){delete retainedVariation.max_same_primary_ingredient_meals;if(retainedOverrides)delete retainedOverrides.max_same_primary_ingredient_meals;}
+    });
     const moreVariety=el("button","Mer omväxling: minst 3 matkök, högst 2 middagar per huvudprotein");moreVariety.type="button";
     const variation=el("div",null,"complete-recipe-grid");variation.append(field("Köksfördelning",cuisineDistribution),field("Minsta antal olika matkök",minCuisines),field("Högst middagar per huvudproteinkälla",proteinCap));
     advanced.append(variation,moreVariety,el("p","Valen ovan är frivilliga krav för hela veckans middagar. En blandrätt räknas en gång för varje huvudsaklig proteinkälla som ingår. Billigast, Balanserad och Varierad behåller sina ekonomiska mål.","field-hint"));
@@ -167,6 +177,9 @@
       if(!["complete","library"].includes(mode.value))return selectedContexts.length?{allowed_store_ids:selectedContexts.slice()}:{};
       const [lo,hi]=preset.value==="custom"?[Number(min.value),Number(max.value)]:preset.value.split("-").map(Number);
       const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),cuisine_distribution:cuisineDistribution.value,min_distinct_cuisines:cuisineDistribution.value==="minimum"?Number(minCuisines.value):null,max_same_main_protein_dinners:proteinCap.value===""?null:Number(proteinCap.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:personal||mode.value==="library"||protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
+      Object.assign(result,retainedVariation);
+      if(retainedOverrides!==null)result.recipe_diversity_overrides={...retainedOverrides};
+      if(variationEnabled||retainedIntent)result.variation_intent={version:"explicit-over-default-v2",field_origins:{...variationOrigins}};
       if(mode.value==="library"&&Number(document.getElementById(personal?"dinner-count":"recipes")?.value??0)===0)Object.assign(result.recipe_preferences,{cuisines:[],cuisine_distribution:"free",min_distinct_cuisines:null,max_same_main_protein_dinners:null,max_minutes:null});
       if(selectedContexts.length)result.allowed_store_ids=selectedContexts.slice();
       if(!personal)Object.assign(result,{allow_nutrition_estimates:estimates.checked,use_pantry:pantry.checked});
@@ -187,6 +200,14 @@
       return result;
     }
     function restore(request={}) {
+      const old=Object.keys(request).length>0;
+      retainedIntent=Boolean(request.variation_intent);
+      variationOrigins={...Object.fromEntries(variationFields.map(k=>[k,old?"unknown":"default"])),...(request.variation_intent?.field_origins||{})};
+      retainedVariation=Object.fromEntries(variationFields.filter(k=>Object.hasOwn(request,k)&&variationOrigins[k]!=="default").map(k=>[k,request[k]]));
+      retainedOverrides=request.recipe_diversity_overrides==null?null:{...request.recipe_diversity_overrides};
+      const primaryOverride=variationOrigins.max_same_primary_ingredient_meals==="default"&&Object.hasOwn(retainedOverrides||{},"max_same_primary_ingredient_meals");
+      inheritedVariation.checked=variationOrigins.max_same_primary_ingredient_meals==="default"&&!primaryOverride;
+      inheritedVariation.disabled=variationOrigins.max_same_primary_ingredient_meals==="explicit"||primaryOverride;
       const preferences=request?.recipe_preferences||{};mode.value=personal?"library":preferences.mode==="complete"?"complete":"legacy";
       if(request.personal?.meals?.some(m=>m.recipe_choices!=null))mode.value="library";
       for(const [type,row] of Object.entries(mealRows)){
@@ -228,7 +249,7 @@
     return {
       storeValues(){return selectedContexts.length?{allowed_store_ids:selectedContexts.slice()}:{};},
       values(){return enabled?values():selectedContexts.length?{allowed_store_ids:selectedContexts.slice()}:{};}, mealValues, restore,
-      enabled(value){enabled=value===true;box.hidden=!enabled;box.disabled=!enabled;sync();if(enabled)void loadContexts();},
+      enabled(value,{variationIntent=false}={}){enabled=value===true;variationEnabled=variationIntent===true;inheritedField.hidden=!variationEnabled;box.hidden=!enabled;box.disabled=!enabled;sync();if(enabled)void loadContexts();},
       reset(){restore({});storage.remove(key);},
       validate(){sync();return !enabled||advanced.hidden||[...advanced.querySelectorAll("input,select")].every(node=>node.disabled||node.checkValidity());},
     };
@@ -394,6 +415,7 @@
     const out=el("div",null,"recipe-search-status data-note");
     out.append(el("p",mode==="cheapest"?"Lägsta hittade inköpskostnad inom dina val. Sökningen bevisar inte global optimalitet.":"Inköpskostnaden följer ditt val av balans mellan pris och variation. Sökningen bevisar inte global optimalitet."));
     const distribution=plan.personal?.checks?.week_distribution;if(distribution){const cuisineCounts=Object.entries(distribution.cuisines||{}).map(([name,count])=>`${cuisines[name]||name} ${count}`);const proteins=Object.entries(distribution.main_proteins||{}).map(([source,count])=>`${source} ${count} ${count===1?"middag":"middagar"}`);out.append(el("p",`${distribution.distinct_cuisines} matkök${cuisineCounts.length?` · ${cuisineCounts.join(" · ")}`:""}${proteins.length?` · ${proteins.join(" · ")}`:""}.`));}
+    const resolution=plan.personal?.checks?.variation_resolution;if(resolution?.message)out.append(el("p",resolution.message));
     const budget=plan.personal?.checks?.search_outcome?.budget_message;if(typeof budget==="string"&&budget.trim())out.append(el("p",budget));return out;
   }
 

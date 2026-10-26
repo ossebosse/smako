@@ -654,6 +654,8 @@ async def _prepare_saved_plan(request: PlanRequest, http_request: Request, setti
 
 
 def _prepare_complete_request(request, http_request, settings):
+    if request.variation_intent and settings.library_search_policy != 'smako-current-library-v2':
+        raise PolicyConflict("Denna miljö stöder inte de nya variationsvalen. Befintliga planer behåller sina regler.", code='SEARCH_POLICY_UNAVAILABLE')
     from app.services.membership import require_membership_limits
     require_membership_limits(request, http_request)
     from app.services.complete_recipes import enabled, prepare_request
@@ -764,10 +766,30 @@ async def find_plan_job(request_id: str, http_request: Request):
 async def _with_current_deadline(settings, work):
     if getattr(settings, "library_search_policy", "legacy") != "smako-current-library-v2":
         return await work()
-    from app.services.plan_jobs import PlanningDeadlineExceeded, check_cancelled, planning_deadline
+    from app.services.plan_jobs import (
+        PlanningDeadlineExceeded,
+        check_cancelled,
+        planning_deadline,
+        remaining_planning_seconds,
+    )
     try:
         with planning_deadline(60):
-            result = await work()
+            # Includes awaited admission, not only cooperative CPU-loop checks.
+            timer = asyncio.timeout(remaining_planning_seconds())
+            try:
+                async with timer:
+                    result = await work()
+            except TimeoutError as exc:
+                if not timer.expired():
+                    raise
+                raise PlanningDeadlineExceeded("The complete planning deadline expired while awaiting work") from exc
+            except PlanningDeadlineExceeded:
+                raise
+            except PolicyConflict:
+                raise  # Preserve an inner deadline's committed-revision receipt.
+            except Exception:
+                check_cancelled()  # E.g. a storage lock wait exhausted the remaining budget.
+                raise
             check_cancelled()  # Includes mandatory checkout and persistence.
             return result
     except PlanningDeadlineExceeded as exc:
@@ -982,7 +1004,9 @@ async def health() -> dict[str, str]:
 @router.get("/recipe-library")
 async def recipe_library_metadata():
     from app.services.recipe_library import library_summary
-    return {"enabled": get_settings().complete_recipes_enabled, **library_summary()}
+    settings = get_settings()
+    return {"enabled": settings.complete_recipes_enabled,
+            "variation_intent_enabled":settings.library_search_policy == 'smako-current-library-v2', **library_summary()}
 
 
 @router.get("/price-contexts")

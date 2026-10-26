@@ -9,7 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 from grocery_data.app.domain.promotion_pricing import MembershipProgram
 
 from .basket import OptimizedBasket, StoreBasket
-from .diversity import DiversityMode, DiversityPolicyOverrides
+from .diversity import DiversityMode, DiversityPolicyOverrides, VariationIntent
 from .ingredient import NormalizedIngredient
 from .personal import PersonalPlanning, PersonalResult
 from .product import CheapIngredient
@@ -48,6 +48,7 @@ class PlanRequest(BaseModel):
     model_config = ConfigDict(allow_inf_nan=False)
     recipe_preferences: RecipePreferences | None = Field(default=None, exclude_if=lambda v: v is None)
     recipe_diversity_overrides: dict[str, int | float | None] | None = Field(default=None, exclude_if=lambda v: v is None)
+    variation_intent: VariationIntent | None = Field(default=None, exclude_if=lambda v: v is None)
     allow_nutrition_estimates: bool = Field(default=False, exclude_if=lambda v: not v)
     use_pantry: bool = Field(default=True, exclude_if=lambda v: v)
     purchase_planning_mode: Literal["exact", "estimated"] = "exact"
@@ -140,6 +141,12 @@ class PlanRequest(BaseModel):
 
     @model_validator(mode="after")
     def validate_recipe_distribution(self):
+        if self.variation_intent:
+            for key, origin in self.variation_intent.field_origins.items():
+                if origin == "default" and getattr(self, key) != type(self).model_fields[key].default:
+                    raise ValueError(f"{key}: ett ändrat värde får inte anges som ärvd standard.")
+                if origin == "explicit" and key not in self.model_fields_set:
+                    raise ValueError(f"{key}: ange värdet för den uttryckliga gränsen.")
         prefs = self.recipe_preferences
         if prefs and prefs.mode == "complete":
             dinner_count = (next((meal.count for meal in self.personal.meals if meal.meal_type == "dinner"), 0)

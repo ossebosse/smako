@@ -111,9 +111,12 @@ class PlanStore:
                     )
 
     def _connect(self) -> sqlite3.Connection:
-        connection = sqlite3.connect(self.path, timeout=5.0)
+        from app.services.plan_jobs import remaining_planning_seconds
+        remaining = remaining_planning_seconds()
+        timeout = 5.0 if remaining is None else min(5.0, remaining)
+        connection = sqlite3.connect(self.path, timeout=timeout)
         connection.row_factory = sqlite3.Row
-        connection.execute("PRAGMA busy_timeout=5000")
+        connection.execute(f"PRAGMA busy_timeout={int(timeout * 1000)}")
         connection.execute("PRAGMA journal_mode=WAL")
         connection.execute("PRAGMA foreign_keys=ON")
         return connection
@@ -213,6 +216,8 @@ class PlanStore:
         owner_actor_hash: str | None,
         mutation_key: str | None = None,
     ) -> SavedPlan:
+        from app.services.plan_jobs import check_cancelled
+        check_cancelled()
         self._validate_owner_actor_hash(owner_actor_hash)
         response = self._consumer_safe_response(response)
         observed_at = datetime.now(UTC)
@@ -290,6 +295,7 @@ class PlanStore:
                     persisted_owner_actor_hash,
                 ),
             )
+            check_cancelled()  # Roll back revision + reservations + mutation receipt before commit.
         return SavedPlan(
             plan_id=plan_id,
             revision=revision,

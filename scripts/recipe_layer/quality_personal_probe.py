@@ -162,7 +162,10 @@ def main(args):
         sampler.__enter__()
     with activate_performance_trace() as trace:
         response = client.post("/api/plans", json=request.model_dump(mode="json"))
-        result.update(http_status=response.status_code, api_post_seconds=time.perf_counter() - request_start)
+        post_seconds = time.perf_counter() - request_start
+        receipt_timer.cancel()
+        receipt_timer.join()  # A progress writer must finish before final .next/replace.
+        result.update(http_status=response.status_code, api_post_seconds=post_seconds)
         if response.status_code == 201:
             saved = response.json()
             loaded = client.get("/api/plans/" + saved["plan_id"])

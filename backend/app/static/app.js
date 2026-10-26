@@ -3291,7 +3291,7 @@
       if (generation !== readinessGeneration) return;
       if (!payload) throw new Error("readiness unavailable");
       frontendBuildId = String(first(payload, ["build_id", "app_version", "version"], "beta"));
-      recipeControls.enabled(payload.features?.complete_recipes_enabled === true);
+      recipeControls.enabled(payload.features?.complete_recipes_enabled === true,{variationIntent:payload.features?.variation_intent_enabled});
       dom.appVersion.textContent = `Beta · ${frontendBuildId} · UI ${FRONTEND_VERSION}`;
       // /ready owns the policy: AGING/WARNING remains usable, while missing,
       // STALE or BROKEN required data returns 503. Mock/local modes may be

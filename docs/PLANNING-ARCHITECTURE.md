@@ -1,5 +1,52 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Tillägg 2026-10-26: uttryckliga val och känd standardvariation
+
+För nya opt-in-anrop med `smako-current-library-v2` och
+`variation_intent.version=explicit-over-default-v2` sparas varje variationsfälts
+ursprung: `default`, `explicit` eller `unknown`. UI skickar inte förifyllda
+standarder som skenbart uttryckliga begränsningar. Råa tidigare värden och
+ursprung bevaras vid återläsning. Utan metadata gäller tidigare tolkning;
+legacy/V1 och gamla sparade revisioner omtolkas inte. UI kräver ett nytt val
+för att ersätta en äldre okänd standardtolkning. En uttrycklig hård gräns
+behålls tills användaren ändrar själva gränsen.
+Sparat nytt intent får heller inte tappas när en miljö återgår till legacy:
+ägd GET fortsätter fungera, men ny beräkning med de reglerna avvisas om
+sökpolicyn inte stöder dem. En redan committad identisk ändring kan återläsas.
+
+Tre klassificeringar förblir separata: måltidsfördelningen använder en enda
+kost-/proteinkategori per recept, den kulinariska huvudråvarugränsen använder
+profilens enda `primary_protein`, och veckans huvudproteingräns räknar alla
+författade substantiella proteinkällor, även båda delarna av en blandrätt.
+Varianter delar samtidigt grundrättens `base_id`; ingen av dessa regler
+ersätter basupprepningskontrollen.
+
+Innan menyförsök beräknas en konservativ kapacitet ur de faktiskt
+kvalificerade aktuella recepten: per vald kategori grupperas distinkta
+baser efter den kulinariska primärklass som samma acceptanspredikat använder.
+Summan av `min(tak, antal baser)` är en övre kapacitetsgräns. Okänd klass
+ger inget omöjlighetsbevis. Om en uttrycklig måltidsfördelning kräver mer än
+denna kapacitet får en **känd ärvd** huvudråvarustandard höjas endast till
+minsta tillräckliga tak. Övriga variationsregler och samtliga egna hårda
+val består. En explicit eller okänd gräns anpassas inte automatiskt.
+Två motstridiga hårda val ger ett konkret konfliktbesked inom denna
+kvalificerade pool, inte ett globalt bevis om alla tänkbara livsmedel.
+
+Rå begäran, ursprung och normaliserade värden sparas med planen; faktisk
+effektiv policy och motiverad standardanpassning sparas i planens checks
+och visas för användaren. Original-B behålls som negativt underlag. B2
+behåller dess 52 butiks-ID:n och övriga val men markerar bara den tidigare
+huvudråvarustandarden som känd standard. Det är ett nytt acceptansfall.
+
+Samma absoluta serverdeadline följer nya och personliga ändringsanrop genom
+kö, async-jobb, tråd, inre loopar och transaktion. Timeout före commit rullar
+tillbaka revision, reservationer och mutationskvitto. En full revision som
+redan committat kan identifieras i timeoutstatus och återläsas genom ägd GET
+eller identiskt återförsök utan dubbel revision. Ett sent färdigt resultat
+räknas inte som levererat inom 60 s. Kompletterande samma-meny-jämförelser
+och produktkontrafaktiska förklaringar är inte obligatoriska före den
+aktuella V2-vinnarens checkout/audit/save; inga oprövade prisomdömen visas.
+
 Beslutad riktning 2026-10-25 efter PR #12, main `d27e0cf`. Utgår från
 [produktmålet](PRODUCT-GOAL.md). Implementation och mätning återstår;
 `legacy` är fortsatt standard och V1:s befintliga beteende ändras inte av

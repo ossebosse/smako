@@ -65,6 +65,11 @@ def check_cancelled():
         raise asyncio.CancelledError()
 
 
+def remaining_planning_seconds():
+    deadline = _planning_deadline.get()
+    return None if deadline is None else max(0.0, deadline - monotonic())
+
+
 def report_stage(stage: str, *, completed=None, total=None, unit=None):
     check_cancelled()
     progress = None

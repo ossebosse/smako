@@ -189,11 +189,12 @@
     const meals=standalone?[]:recipeControls.mealValues(readMeals());
     if(!standalone&&!recipeControls.validate()){$('personal-form').reportValidity();throw new Error("Kontrollera receptvalens intervall.");}
 
-    return {...(standalone?recipeControls.storeValues():recipeControls.values()),...locationControls.values(),membership_price_policy:"all_advertised",purchase_planning_mode:"estimated",recipes:meals.find(m=>m.meal_type==="dinner")?.count||0,servings:meals.find(m=>m.meal_type==="dinner")?.servings||1,max_stores:Number($('max-stores').value),memberships:[...document.querySelectorAll('input[name="membership"]:checked')].map(n=>n.value),diversity_mode:"balanced",varied_budget_percent:25,strategy:"optimized",personal:{profile:profile(),meals,extras,pantry_revision:privateState.revision,allow_nutrition_estimates:true,organic_percent:Number($('organic-percent').value),organic_animals:$('organic-animals').checked,surplus_mode:$('surplus-mode').value}};
+    return {...(standalone?recipeControls.storeValues():recipeControls.values()),...locationControls.values(),membership_price_policy:"all_advertised",purchase_planning_mode:"estimated",recipes:meals.find(m=>m.meal_type==="dinner")?.count||0,servings:meals.find(m=>m.meal_type==="dinner")?.servings||1,max_stores:Number($('max-stores').value),memberships:[...document.querySelectorAll('input[name="membership"]:checked')].map(n=>n.value),diversity_mode:"balanced",varied_budget_percent:25,strategy:"optimized",personal:{profile:profile(),meals,extras,pantry_revision:privateState.revision,use_pantry:$('planning-use-pantry').checked,allow_nutrition_estimates:true,organic_percent:Number($('organic-percent').value),organic_animals:$('organic-animals').checked,surplus_mode:$('surplus-mode').value}};
 
   }
 
   function putChoices(request){
+    $('planning-use-pantry').checked=request.personal?request.personal.use_pantry!==false:request.use_pantry!==false;
     locationControls.restore(request);
     const spec=request.personal;if(!spec){recipeControls.restore(request);return;}
     // Consolidate older per-meal profiles so exclusions and allergies are not lost.
@@ -349,7 +350,7 @@
     catch(error){if(error.code==="planner_job_expired"){window.SmakoRecipes.forgetJob("personal");error.message=saved?"Det tidigare beräkningsjobbet har gått ut. Din sparade plan visas fortfarande.":"Det tidigare beräkningsjobbet har gått ut. Dina sparade varuval finns kvar; du kan starta en ny beräkning.";}throw error;}
   }
   void task(async()=>{
-    try {const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true);}catch(_){recipeControls.enabled(false);}
+    try {const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true,{variationIntent:metadata.variation_intent_enabled});}catch(_){recipeControls.enabled(false);}
     await refreshState();putProfile(privateState.profile);const shoppingInitialized=privateState.shopping_initialized;const shoppingDraft=structuredClone(privateState.shopping_items||[]);
     const draft=window.SmakoRecipes.storage.get("smako.personal.requestDraft");
     if(draft){extras=structuredClone(draft.personal?.extras||[]);putChoices({...draft,membership_programs:draft.membership_programs||draft.memberships||[]});}
@@ -362,7 +363,7 @@
   });
   const resume=()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(resumePersonalJob);};
   window.addEventListener("pageshow",()=>setTimeout(resume,0));document.addEventListener("visibilitychange",()=>{if(!document.hidden)resume();});
-  window.addEventListener("online",()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(async()=>{try{const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true);}catch(_){/* A saved pending job can still reconnect. */}await resumePersonalJob();});});
+  window.addEventListener("online",()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(async()=>{try{const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true,{variationIntent:metadata.variation_intent_enabled});}catch(_){/* A saved pending job can still reconnect. */}await resumePersonalJob();});});
 
   function renderSuggestions(){
 

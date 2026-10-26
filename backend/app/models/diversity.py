@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -35,6 +36,18 @@ class DiversityPolicyOverrides(BaseModel):
         ge=0,
         le=1,
     )
+
+
+VariationField = Literal["max_same_primary_ingredient_meals", "max_same_recipe_family",
+    "max_same_carbohydrate_meals", "max_same_cooking_method_meals", "max_same_dish_form_meals",
+    "max_pairwise_culinary_similarity", "max_pairwise_recipe_similarity"]
+
+
+class VariationIntent(BaseModel):
+    """New intent is explicit opt-in; absence keeps historical interpretation."""
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    version: Literal["explicit-over-default-v2"] = "explicit-over-default-v2"
+    field_origins: dict[VariationField, Literal["default", "explicit", "unknown"]] = Field(max_length=7)
 
 
 class DiversityPolicy(BaseModel):
