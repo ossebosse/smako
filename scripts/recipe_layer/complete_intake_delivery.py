@@ -85,42 +85,10 @@ def phases(row, changes):
 
 
 def frozen_preparation(row, ingredients, changes):
-    prefix = []
-    fruit = []
-    for i in ingredients:
-        if i["name"] not in {"mango", "hallon", "blåbär", "jordgubbar", "ananas", "gräslök", "avokado", "koriander", "lingon"}:
-            continue
-        hot = any(i["name"] in s["uses"] and re.search(r"koka|sjud|stek|baka|grädda|rosta", s["text"], re.IGNORECASE) for s in row["steps"])
-        if i["name"] == "hallon":
-            prefix.append({"text": "Lägg de uppvägda frysta hallonen i en liten kastrull. Värm under omrörning till ett ordentligt uppkok och håll hela bärmassan kokande minst en minut. Behåll all fruktsaft.",
-                           "uses": ["hallon"], "minutes": 5})
-            if not hot:
-                prefix.extend([
-                    {"text": "Fördela de upphettade hallonen tunt i en ren grund behållare och ställ i kylskåp. Behåll all fruktsaft till receptet.", "uses": ["hallon"], "minutes": 2, "after": [len(prefix)]},
-                    {"text": "Låt hallonen bli helt kalla i kylskåp innan de blandas med kalla ingredienser; räkna med ungefär två timmar.", "uses": ["hallon"], "minutes": 120, "passive": True, "after": [len(prefix)+1]},
-                ])
-            changes.append({"code": "frozen_raspberries_boiled_and_if_needed_chilled",
-                            "source": "https://fragor.livsmedelsverket.se/org/livsmedelsverket/d/varfor-finns-det-virus-pa-importerade-frysta-bar/"})
-        elif not hot and i["name"] in {"gräslök", "koriander"}:
-            prefix.append({"text": f"Väg upp den frysta finhackade örten ({i['name']}). Blanda den direkt i receptets kalla sås eller fyllning och låt den tina där. Använd hela den uppvägda mängden.", "uses": [i["name"]], "minutes": 2})
-            changes.append({"code": "explicit_frozen_chive_use"})
-        elif not hot:
-            fruit.append(i["name"])
-    if fruit:
-        names = ", ".join(sorted(set(fruit)))
-        prefix.extend([
-            {"text": f"Väg upp fryst {names} i en täckt skål och ställ i kylskåp. Vikten avser den ätliga frukten utan skal eller kärnor.", "uses": sorted(set(fruit)), "minutes": 2},
-            {"text": "Låt frukten tina helt i kylskåp, lämpligen över natten; räkna med cirka åtta timmar. Behåll fruktsaften och använd den tillsammans med frukten i receptet.", "uses": sorted(set(fruit)), "minutes": 480, "passive": True, "after": [len(prefix)+1]},
-        ])
-        changes.append({"code": "authored_frozen_fruit_thaw_chain", "ingredients": sorted(set(fruit)), "waiting_minutes": 480})
-    if prefix:
-        for n, step in enumerate(prefix, 1):
-            if n > 1:
-                step["after"] = sorted(set(step.get("after", [])) | {n-1})
-        offset = len(prefix)
-        for step in row["steps"]:
-            step["after"] = [d+offset for d in step.get("after", [])] or [offset]
-        row["steps"] = prefix + row["steps"]
+    raise RuntimeError(
+        "Automatic frozen substitutions are retired after the 2026-10-26 review; "
+        "use amend_frozen_recipes.py and explicit product/process decisions."
+    )
 
 
 def build(do_import=False):

@@ -177,6 +177,8 @@ def test_entire_intake_is_imported_and_scales_without_changing_original_library(
     from app.services.recipe_library import _scaled, current_recipes, validate_recipe_design
 
     report = json.loads((ROOT.parents[3] / "docs/reviews/recipe-integration-all-20261026/all-recipes.json").read_bytes())
+    amendments = json.loads((ROOT.parents[3] / "docs/reviews/recipe-quality-and-planning-20261026/recipe-review.json").read_bytes())
+    replacements = {r["previous_id"]: r["runtime_id"] for r in amendments["recipes"]}
     current = {identity(r): r for r in current_recipes()}
     assert len(report["recipes"]) == 2200
     assert len({r["source_id"] for r in report["recipes"]}) == 2200
@@ -187,7 +189,7 @@ def test_entire_intake_is_imported_and_scales_without_changing_original_library(
         assert current[identity(original)].model_dump() == original.model_dump()
     for record in report["recipes"]:
         assert not record["blockers"]
-        recipe = current[record["runtime_id"]]
+        recipe = current[replacements.get(record["runtime_id"], record["runtime_id"])]
         for servings in (1, 2, 4, 12):
             scaled = Recipe.model_validate_json(_scaled(recipe, servings).model_dump_json())
             assert validate_recipe_design(scaled)

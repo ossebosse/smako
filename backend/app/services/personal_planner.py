@@ -255,7 +255,7 @@ class PersonalPlanner:
 
         self.diagnostics = PlanningDiagnostics()
         from app.services.product_planning_trace import ProductPlanningTrace
-        self.product_trace = ProductPlanningTrace(prepared)
+        self.product_trace = ProductPlanningTrace(prepared, recipe_cache=self.recipe_computations)
         for i, food_class in self.declared_classes.items():
             product = prepared.universe.products[i]
             if row := self.product_trace.products.get((product.store_id, product.product_id)):
@@ -1376,7 +1376,6 @@ class PersonalPlanner:
         Every comparison uses whole checkout, store cap, nutrition and audit.
         """
         from app.services.basket_optimizer import _VERIFICATION_RANK
-        from app.services.product_planning_trace import recipe_identity
 
         candidates, rows = result["trace_inputs"]
         baseline = result["basket"]
@@ -1391,7 +1390,7 @@ class PersonalPlanner:
             record = {
                 "kind": "bounded_final_menu_counterfactual", "ingredient": key,
                 "product_id": candidate.product_id, "store_id": candidate.store_id,
-                "recipes": [recipe_identity(s.recipe) for s in slots if s.recipe],
+                "recipes": [self.product_trace.identity(s.recipe) for s in slots if s.recipe],
                 "baseline_total": baseline.total,
                 "baseline_status": baseline.verification_status,
                 "baseline_stores": [s.store_id for s in baseline.stores],
@@ -1560,11 +1559,10 @@ class PersonalPlanner:
     def _reject_nutrition_bounds(self, slots, bounds):
         if bounds is None or not (violations := bounds.violations()):
             return
-        from app.services.product_planning_trace import recipe_identity
 
         if len(self.diagnostics.nutrition_searches) < 2048:
             self.diagnostics.nutrition_searches.append({
-                "recipes": [recipe_identity(s.recipe) for s in slots if s.recipe],
+                "recipes": [self.product_trace.identity(s.recipe) for s in slots if s.recipe],
                 "limit": self.nutrition_search_limit, "evaluated": 0,
                 "remaining_frontier": 0, "budget_exhausted": False,
                 "numeric_passed": 0, "nutrition_rejections": 0,
@@ -1837,9 +1835,8 @@ class PersonalPlanner:
                     rejected_purchase += 1
                 continue
         if len(self.diagnostics.nutrition_searches) < 2048:
-            from app.services.product_planning_trace import recipe_identity
             self.diagnostics.nutrition_searches.append({
-                "recipes": [recipe_identity(s.recipe) for s in slots if s.recipe],
+                "recipes": [self.product_trace.identity(s.recipe) for s in slots if s.recipe],
                 "limit": self.nutrition_search_limit, "evaluated": searched,
                 "remaining_frontier": len(queue), "budget_exhausted": bool(queue),
                 "class_counts": [len(c) for c in choices],

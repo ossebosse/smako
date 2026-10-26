@@ -321,7 +321,7 @@ INGREDIENT_TAXONOMY: tuple[IngredientTaxonomyEntry, ...] = (
         IngredientCategory.VEGETABLE,
         typical=300,
         utility=0.90,
-        identity=("majs",),
+        identity=("majs", "majskorn", "sockermajs"),
         exclude=("chips", "mjöl", "mjol"),
     ),
     # Legumes

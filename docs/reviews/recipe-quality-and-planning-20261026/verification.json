@@ -1,0 +1,46 @@
+{
+  "access": {
+    "blocked": [],
+    "report_reads": []
+  },
+  "all_diffs": "unchanged",
+  "compileall": "PASS: backend/app and scripts/recipe_layer",
+  "final_corn_rejection_extension": {
+    "F_contains_corn": false,
+    "all_already_require_frozen": true,
+    "estimated_measured_corn_scopes": 11,
+    "exact_measured_corn_scopes": 11,
+    "measured_code_path_unchanged": true
+  },
+  "final_method_signature": "02fa118e516addcb138c66f3bdabc526c521facf4b9e53c15923008608423698",
+  "focused_offline_tests_passed": 544,
+  "focused_seconds": 52.1,
+  "manifest_bytes_unchanged": true,
+  "manifest_sha256": "c716c091ff224a42dcafdaf12df512e11e053654c5ca09c708483e56ea6eb084",
+  "measurement_workers_left": false,
+  "normalized_browser_request_comparison": {
+    "C-browser-final": {
+      "API_use_pantry": false,
+      "UI_use_pantry": "omitted; model default True; actual private pantry empty",
+      "normalized_equal_except_use_pantry": true,
+      "reload_without_recompute": true,
+      "single_plan_POST": true
+    },
+    "F-browser": {
+      "API_use_pantry": false,
+      "UI_use_pantry": "omitted; model default True; actual private pantry empty",
+      "normalized_equal_except_use_pantry": true,
+      "reload_without_recompute": true,
+      "single_plan_POST": true
+    }
+  },
+  "pack_reimports": 5,
+  "ruff": "PASS: all changed Python files",
+  "schema": "smako-quality-final-verification-v1",
+  "source_origin_regression": {
+    "failed_ci": "https://github.com/ossebosse/smako/actions/runs/40318933026",
+    "fix": "Preserve exact parenthesized Hungary origin after a corn ingredient; retain all additive tokens, including parenthesized butter.",
+    "full_complete_recipe_integration_file": "PASS in final focused run",
+    "test": "test_source_frozen_corn_qualifies_without_category_guess_and_rejects_mixed_food"
+  }
+}

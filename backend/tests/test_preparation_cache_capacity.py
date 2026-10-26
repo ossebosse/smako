@@ -93,3 +93,17 @@ def test_content_batch_enforces_total_bytes_across_entries(tmp_path, monkeypatch
     paths = list((tmp_path / 'content').glob('*.json'))
     assert paths and len(paths) < len(values)
     assert sum(p.stat().st_size for p in paths) <= 600
+
+
+def test_version_change_at_full_content_cache_recomputes_without_stale_reuse(tmp_path, monkeypatch):
+    monkeypatch.setenv('RECIPE_PREPARATION_CACHE_ROOT', str(tmp_path))
+    monkeypatch.setattr(artifacts, 'CONTENT_LIMIT', 1)
+    version = ['first-source-version']
+    monkeypatch.setattr(artifacts, 'method_signature', lambda: version[0])
+    assert artifacts.prepared('content', 'same-content', lambda: {'source': 'first'}) == {'source': 'first'}
+    retained = {p.name: p.read_bytes() for p in (tmp_path / 'content').glob('*.json')}
+    version[0] = 'replacement-source-version'
+    assert artifacts.prepared('content', 'same-content', lambda: {'source': 'replacement'}) == {'source': 'replacement'}
+    assert {p.name: p.read_bytes() for p in (tmp_path / 'content').glob('*.json')} == retained
+    version[0] = 'first-source-version'
+    assert artifacts.prepared('content', 'same-content', lambda: pytest.fail('valid old version remains readable')) == {'source': 'first'}

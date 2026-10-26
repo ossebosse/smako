@@ -1289,6 +1289,18 @@ def _identity_term_visible(text: str, term: str) -> bool:
     )
 
 
+def _frozen_corn_identity(name_text, category_text):
+    """A whole frozen kernel label is stronger than generic corn metadata.
+
+    Keep cob, blend, canned, snack and flavour names outside this identity.
+    This supplies no composition, organic, nutrient or quantity declaration.
+    """
+    if (re.fullmatch(r"majskorn(?: ekologisk| ekologiska| eko| fryst| frysta)*", name_text)
+            and _contains_any(category_text, ("fryst", "frysta", "djupfryst"))):
+        return "majs", "vegetable", "whole_vegetable", "frozen"
+    return None
+
+
 def _infer_primary_product_identity(
     name_text: str,
     category_text: str,
@@ -1299,6 +1311,10 @@ def _infer_primary_product_identity(
     only when it names a concrete class, never for generic catalogue branches
     such as ``Livsmedel`` or ``Mat``.
     """
+
+    corn = _frozen_corn_identity(name_text, category_text)
+    if corn is not None:
+        return corn
 
     # A low-confidence collector may preserve the whole raw label as its food
     # key (e.g. rodbeta_klass_1). The complete label AND fresh-produce category

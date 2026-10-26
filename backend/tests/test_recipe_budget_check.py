@@ -66,3 +66,35 @@ def test_live_worker_lease_rejects_second_run_without_charging_or_replacing_its_
     # Closing the handle, including process exit, releases the lease.
     with code["budget_lease"](path):
         assert path.read_bytes() == original
+
+
+def test_phase_deadline_cannot_extend_shared_deadline_and_timer_is_cleaned(tmp_path, monkeypatch):
+    import sys
+
+    code = runpy.run_path(str(Path(__file__).resolve().parents[2] / "scripts/recipe_layer/budgeted_check.py"))
+    execute = code["run"]
+    monkeypatch.setitem(execute.__globals__, "windows_limits",
+                        lambda: (lambda _: None, lambda: 512, lambda _: (384, 512), lambda: None))
+    observed = []
+
+    def timer(seconds, callback):
+        value = SimpleNamespace(seconds=seconds, cancelled=False, start=lambda: None)
+        value.cancel = lambda: setattr(value, "cancelled", True)
+        observed.append(value)
+        return value
+
+    def target(_, **kwargs):
+        context = sys.modules["smako_budget_context"]
+        with pytest.raises(ValueError, match="positive"):
+            context.arm_phase(0)
+        context.arm_phase(100)
+        raise SystemExit(0)
+
+    monkeypatch.setattr(code["threading"], "Timer", timer)
+    monkeypatch.setattr(code["runpy"], "run_path", target)
+    monkeypatch.setattr(code["sys"], "argv", list(code["sys"].argv))
+    path = tmp_path / "budget.json"
+    path.write_text(json.dumps({"limit_seconds": 7200, "entries": []}))
+    assert execute(SimpleNamespace(budget=path, label="phase", max_seconds=5, command=["unit-only.py"])) == 0
+    assert len(observed) == 1 and 0 < observed[0].seconds <= 5 and observed[0].cancelled
+    assert "smako_budget_context" not in sys.modules
