@@ -76,7 +76,7 @@ faktafilerna matchar föregående imports bytes och version. Full bindning finns
 
 Befintliga frysta **Majskorn** fanns men saknades i aliasåtervinningen och fick
 för svag semantisk identitet. Båda stegen rättas i den ordinarie matchvägen.
-Det snäva fullständiga namnet plus fryst grönsakskategori tillåter hela korn;
+Det snäva fullständiga namnet plus fryst kategori tillåter hela korn;
 kolv, blandningar, snacks och djurfoder avvisas. Faktadeklaration med smör,
 salt, vatten eller andra grönsaker kan inte ärva godkännandet. Identitet är
 inte allergen-, eko- eller näringsintyg. Produkt, butik, snapshot, förpackning,
@@ -165,8 +165,9 @@ FastAPI/Uvicorn-app med verkliga pris-, plan-, save- och GET-anrop. Inga routes
 eller pris-/plan-API:n ersätts. Appens egen utkaståterställning fyller valen;
 postnummer och butiksval verifieras. F bevisar faktiskt skickat proteinmål 20,
 exakt en plan-POST, synlig inköpslista, inga JS-fel samt återladdning av sparad
-plan utan omräkning. UI skickar `use_pantry=true` mot ett tomt skafferi; API
-har false, så hela begärandena är inte byteidentiska. Effektiva ingredienskrav,
+plan utan omräkning. UI utelämnar `use_pantry`, vilket ger modellstandard true mot ett tomt privat
+skafferi; API har false. Normaliserade begäranden skiljer sig endast i det
+valet, verifierat i `verification.json`. Effektiva ingredienskrav,
 priser och butikscope matchar. [F-skärmbild](recipe-quality-and-planning-20261026/F-browser-shopping.png).
 Det första C-browserförsöket stoppade före någon plan-POST på en skymd knapp;
 felet och hela kostnaden behålls. Inga kontohemligheter eller sessions-ID:n
