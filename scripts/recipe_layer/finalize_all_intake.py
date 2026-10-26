@@ -11,6 +11,23 @@ from app.services.meal_library_content import ROOT, encoded, identity, import_pa
 from app.services.recipe_library import current_recipes
 
 REPORT = ROOT.parents[3] / "docs/reviews/recipe-integration-all-20261026"
+KNOWN_GAPS = {
+    "limejuice|as_sold": "Fullständig ingrediensdeklaration som styrker ren limejuice; namn och ml-förpackning räcker inte för pure_juice.",
+    "ingefära|raw_edible": "Källbelagd rå ätlig mängd efter putsning; hel rot, inlagd och torkad ingefära är olika insatser.",
+    "majs|as_sold": "Belägg frysta ätliga majskorn och exakt användbar mängd för författarformen; lag-/avrunnen konserv är en annan form.",
+    "fläskkött|raw_edible": "Belägg rätt benfri rå styckdetalj och köpbar förpackningsmängd; uppskattad vikt kräver uttryckligt estimated-val.",
+    "kvarg|as_sold": "Fullständig deklaration som styrker naturell kvarg; smaksatt kvarg eller enbart ordet kvarg räcker inte.",
+    "kapris|preserved_drained": "Deklarerad avrunnen mängd bunden till aktuell produkt och snapshot; nettovikt inklusive lag räcker inte.",
+    "keso|as_sold": "Belägg naturell cottage cheese och efterfrågad fetthalt 1–4 procent med aktuell deklaration.",
+    "kokosflingor|dry": "Granska och koppla exakt torr kokosprodukt även när butiken skriver Kokos Riven; fastställ torr form och ren sammansättning före sök-/matchningsändring.",
+    "nötkött|raw_edible": "Belägg den styckdetalj som varje exakt scope kräver och användbar rå mängd; uppskattade viktpaket får bara prövas med estimated-val.",
+    "rödbeta|raw_edible": "Belägg rå ätlig mängd; inlagda/kokta rödbetor får inte prissätta rå vikt.",
+    "jordnötssmör|as_sold": "Fullständig sammansättning för rent jordnötssmör enligt plain-kravet; varunamnet styrker inte frånvaro av socker/salt/olja.",
+    "lammkött|raw_edible": "Belägg benfri styckdetalj för faktisk tillagning och rå mängd; uppskattade viktpaket kräver estimated-val.",
+    "tonfisk|cooked_drained": "Belägg tonfisk i vatten samt deklarerad avrunnen fiskmängd; lag och nettovikt får inte räknas som fisk.",
+    "pepparrot|raw_edible": "Belägg rå ätlig pepparrotsmassa efter putsning; färskost och beredd kryddblandning är andra produkter.",
+    "gnocchi|as_sold": "Fullständig sammansättning som styrker ofylld potatisgnocchi; gnocchi kan även vara torr vetepasta.",
+}
 
 
 def main():
@@ -65,6 +82,13 @@ def main():
         print({k: v for k, v in summary.items() if not isinstance(v, (list, dict))})
         return
     inventory = json.loads(inventory_path.read_bytes())
+    estimated_path = REPORT / "product-inputs-estimated.json"
+    estimated = json.loads(estimated_path.read_bytes()) if estimated_path.exists() else None
+    estimated_blocks = {}
+    if estimated:
+        for row in estimated["shared_inputs"]:
+            if row["status"] == "blocked_product_input":
+                estimated_blocks.setdefault(row["identity"], set()).update(row["recipes"])
     research_path = Path(".local/recipes/all-ingredient-research-catalog.json")
     research = {r["identity"]: r for r in json.loads(research_path.read_bytes())["identities"]}
     known_research = Path(".local/recipes/known-input-product-research.json")
@@ -83,12 +107,17 @@ def main():
     for key, group in grouped.items():
         group["runtime_ids"] = sorted(group["runtime_ids"])
         group["affected_variants"] = len(group["runtime_ids"])
+        if estimated:
+            group["estimated_mode_affected_variants"] = len(estimated_blocks.get(key, ()))
         group["unapproved_source_suggestions"] = []
         definition = next((r for r in entries().values() if r["name"] + "|" + r["form"] == key), None)
         if definition and definition["kind"] == "definition_only":
             group["definition"] = definition["definition"]
             group["missing_proof"] = definition["required_classification"] + "; exact source-bound usable quantity and basis"
             group["next_action"] = "Review manufacturer/retained source documentation for this exact food, form and usable amount; bind the actual product/store/snapshot. " + definition["definition"]
+        elif key in KNOWN_GAPS:
+            group["definition"] = KNOWN_GAPS[key]
+            group["next_action"] = KNOWN_GAPS[key]
         for candidate in research.get(key, {}).get("candidates", [])[:5]:
             p, f = candidate["product"], candidate["facts"]
             group["unapproved_source_suggestions"].append({
@@ -102,14 +131,17 @@ def main():
         "universe_sha256": inventory["universe_sha256"], "facts_sha256": inventory["facts_sha256"],
         "conditions": inventory["conditions"], "variant_statuses": dict(counts), "blockers": blockers,
         "qualification": "Product-input coverage only; no joint basket, nutrition, allergen or organic approval."}
+    if estimated:
+        result["explicit_estimated_mode_statuses"] = dict(Counter(r["status"] for r in estimated["recipes"]))
     (REPORT / "purchase-blockers.json").write_bytes(encoded(result))
     lines = ["# Konkreta köphinder efter full receptimport", "",
         f"Alla 2 200 källvarianter är importerade. Fryst produktprov: {dict(counts)}.",
         "Enskilt lösta insatser är inte en godkänd gemensam inköpslista. Historiskt Malmöunderlag 23 oktober, inga nya priser insamlade.", "",
         "Varje rad nedan har exakta recept-ID:n, krav, mängder, avslagsorsaker och högst fem uttryckligen ogodkända källförslag i `purchase-blockers.json`.", "",
-        "| Ingrediens/form | Berörda varianter (överlapp) | Nästa komplettering |", "|---|---:|---|"]
+        "Uppskattat köpläge är ett separat uttryckligt val; det ändrar inga användarprofiler eller krav automatiskt.", "",
+        "| Ingrediens/form | Blockerade, exakt | Blockerade efter aktivt estimated-val | Nästa komplettering |", "|---|---:|---:|---|"]
     for row in blockers:
-        lines.append(f"| {row['identity'].replace('|', ' / ')} | {row['affected_variants']} | {row.get('definition', row['next_action'])} |")
+        lines.append(f"| {row['identity'].replace('|', ' / ')} | {row['affected_variants']} | {row.get('estimated_mode_affected_variants', 'Ej mätt')} | {row.get('definition', row['next_action'])} |")
     (REPORT / "HINDER.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     print({"variant_statuses": dict(counts), "blocked_identities": len(blockers)})
 
