@@ -68,10 +68,6 @@ def run(app, request, result, args, started, save):
                 from app.models import PlanRequest
                 actual = PlanRequest.model_validate(payload).model_dump(mode="json")
                 expected = request.model_dump(mode="json")
-                # Registration created an empty private pantry. The UI omits
-                # the flag (True); the saved API draft explicitly has False.
-                actual["personal"].pop("use_pantry", None)
-                expected["personal"].pop("use_pantry", None)
                 assert actual == expected, "UI changed normalized hard choices"
                 assert set(payload["allowed_store_ids"]) == set(draft["allowed_store_ids"])
                 plan_id = page.evaluate("localStorage.getItem('smako.personal.lastPlan')")

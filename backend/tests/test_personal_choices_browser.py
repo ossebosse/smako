@@ -140,6 +140,20 @@ def test_saved_current_intent_is_not_dropped_when_feature_is_unavailable(choices
     assert posted['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='default'
 
 
+def test_explicit_pantry_choice_survives_draft_and_can_be_changed_deliberately(choices):
+    page,url,captured=choices
+    draft={'postal_code':'22350','personal':{'use_pantry':False,
+        'meals':[{'meal_type':'dinner','count':3,'servings':2}]}}
+    page.add_init_script('sessionStorage.setItem("smako.personal.requestDraft",'+json.dumps(json.dumps(draft))+');')
+    page.goto(url);choose_location(page)
+    posted=submit(page,captured)
+    assert posted['personal']['use_pantry'] is False
+    page.locator('#extra-choices>summary').click()
+    expect(page.locator('#planning-use-pantry')).not_to_be_checked()
+    page.locator('#planning-use-pantry').check()
+    assert submit(page,captured)['personal']['use_pantry'] is True
+
+
 def choose_location(page):
     expect(page.locator("#check-postcode")).to_be_enabled()
     expect(page.locator("#dinner-count")).not_to_be_visible()
