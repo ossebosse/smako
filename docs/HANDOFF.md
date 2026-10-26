@@ -34,7 +34,7 @@ opt-in och med oförändrat B; återstarta inte den stora matrisen.
 
 Samma journal: **3 855,4145 s använda / 3 344,5855 s kvar (55,74 min)**.
 Ingen ny budget och inga kvarlämnade mätarbetare. Sista riktade offlinekörning
-451 PASS, Ruff/compileall gröna; ordinarie CI inklusive browser krävs på sista
+544 PASS, Ruff/compileall gröna; ordinarie CI inklusive browser krävs på sista
 PR-huvudet före mainmerge. Legacy-default och library_merge_generations=False
 består. Mainintegration är ingen betaaktivering; drift/profiler/insamling orörda.
 
@@ -1790,7 +1790,7 @@ Det kräver operatörens SSH-behörighet och stödjer bara granskade appfiler;
 scheduler, beroenden och databasschema behöver separat releasegranskning.
 
 Ingen ny betaaktivering ingår i denna ändring av Git och utvecklingsverktyg.
-Betan kör fortsatt `joint-week-refinement-app-e041451`. Uppstartsväntan nedan
+Betan kör fortsatt `joint-week-refinement-app-e041544`. Uppstartsväntan nedan
 är utredd men inte åtgärdad. Klon- och verifieringsresultat dokumenteras i
 [main-onboarding-20261016](releases/main-onboarding-20261016.md).
 
@@ -1810,8 +1810,8 @@ Se [utredning och sanerad evidens](../reports/startup-wait-20261016.md).
 
 # 2026-10-16: Veckooptimeringen aktiverad på betan
 
-Kodcommit `e041451` är pushad på `feature/joint-week-refinement` och aktiv som
-`joint-week-refinement-app-e041451`. Endast appen byttes under befintligt
+Kodcommit `e041544` är pushad på `feature/joint-week-refinement` och aktiv som
+`joint-week-refinement-app-e041544`. Endast appen byttes under befintligt
 driftlås efter kontrollerad backup. Lund och Malmö är ready med ny version.
 Fyra publika menyflöden passerar närings-/viktkrav, kassarevision och två
 sparade återläsningar; tidigare data och scheduler/proxy är bevarade.

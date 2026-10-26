@@ -189,12 +189,16 @@ låsta menyer är andra krav. Fixturetester kontrollerar oförändrad vinnare,
 pris och audit efter cacheändringen. Globalt billigaste korg påstås inte.
 F är ett endagsfall: målet 30–60 s är observerat där, inte för fem middagar.
 
-Efter sista mätningen utökades endast avvisningen av deklarerade tillsatser
-i frysta majskorn till recept utan uttryckligt frystkrav. Alla elva uppmätta
-majsscope i vardera köpläget hade redan frystkravet och följer identisk kodväg;
-F innehåller ingen majs. Därför startas ingen ny dyr mätning. Metodhash för
-sista kodhuvudet finns i `verification.json`; varje latenskvitto behåller sin
-egen uppmätta metodhash och påstås inte ha körts på det senare kodhuvudet.
+Efter sista mätningen utökades avvisningen av deklarerade tillsatser i
+frysta majskorn till recept utan uttryckligt frystkrav. Alla elva uppmätta
+majsscope i vardera köpläget hade redan frystkravet. Full CI fångade också
+att den nya sammansättningsgrinden avvisade en tidigare giltig källdeklaration:
+`Majskorn (Ungern)`. Den exakta ursprungsnoteringen bevaras nu; tillsatser i
+parentes avvisas fortfarande. Den befintliga käll-/snapshotregressionen och
+544 riktade prov passerar. F innehåller ingen majs. Ingen ny dyr mätning
+startas. Metodhash för sista kodhuvudet finns i `verification.json`; varje
+latenskvitto behåller sin egen uppmätta metodhash och påstås inte ha körts
+på det senare kodhuvudet.
 
 ## Avgränsad prestandaändring, cache och resurser
 
@@ -240,7 +244,7 @@ fasbyte kan inte förlänga den gemensamma tidsbudgeten. Inga mätarbetare är k
 
 ## Verifiering och fortsatt arbete
 
-**451 PASS** i sista riktade offlinekörningen: frysta publicerade recept och
+**544 PASS** i sista riktade offlinekörningen: frysta publicerade recept och
 tidsfilter, majskorn/faktabyte/allergigrind, alla intakelänkar, identitetscache,
 budget och full versionscache. Tidigare oförändrad struktur-/preparationssvit
 samt verklig plannerfixture är verifierade; Ruff på samtliga ändrade Pythonfiler

@@ -513,7 +513,10 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
             # Whole kernel metadata cannot override an actual declaration of
             # butter, mixed vegetables or added water. Missing declarations
             # still supply no positive allergy/nutrition/organic evidence.
-            words, _ = _culinary_words(declared)
+            # Preserve the retained source's explicit origin notation. Never
+            # discard arbitrary parentheses: they can contain real additives.
+            formula = re.sub(r"\b(majskorn|majs|sockermajs)\s*\(\s*ungern\s*\)", r"\1", declared)
+            words, _ = _culinary_words(formula)
             corn = {"majs", "majskorn", "sockermajs"}
             allowed = corn | {"ingredienser", "ekologisk", "ekologiska", "ekologiskt", "råvara", "råvaror"}
             if not words.intersection(corn) or not words <= allowed:

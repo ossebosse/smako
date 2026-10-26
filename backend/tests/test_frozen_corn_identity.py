@@ -40,7 +40,7 @@ def test_changed_category_does_not_reuse_frozen_identity():
     assert not evaluate_product_semantics("majs", corn(category="Djurfoder fryst")).compatible
 
 
-@pytest.mark.parametrize("declaration", ["Majskorn, smör", "Majskorn, salt", "Ärtor, majskorn, paprika", "Majskorn, vatten"])
+@pytest.mark.parametrize("declaration", ["Majskorn, smör", "Majskorn, salt", "Ärtor, majskorn, paprika", "Majskorn, vatten", "Majskorn (smör)", "Majskorn (Ungern, smör)"])
 @pytest.mark.parametrize("requirements", [[], ["plain"], ["plain", "frozen"]])
 def test_changed_facts_cannot_keep_plain_kernel_approval(declaration, requirements):
     fact = ProductFacts(source="synthetic", source_product_id="synthetic-corn", source_snapshot_id="synthetic-snapshot",
