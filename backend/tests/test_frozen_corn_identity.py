@@ -25,10 +25,11 @@ def test_whole_frozen_kernels_reach_real_matcher_with_exact_amount_and_price():
 
 
 @pytest.mark.parametrize("name", ["Majskolv Bitar Fryst", "Ärter Majs Paprika Fryst", "Majskorn Smör",
-    "Majskakor", "Majsstärkelse", "Majskyckling Bröstfilé Fryst", "Majskorn Frysta färdigrätt"])
+    "Majskakor", "Majsstärkelse", "Majskyckling Bröstfilé Fryst", "Majskorn Frysta färdigrätt", "Majs", "Sockermajs"])
 def test_corn_rule_never_accepts_other_shapes_or_compounds(name):
     assert _frozen_corn_identity(name.casefold(), "fryst") is None
-    assert not _whole_food_identity("majs", "as_sold", corn(name), None, ["frozen", "plain"])
+    if name not in {"Majs", "Sockermajs"}:
+        assert not _whole_food_identity("majs", "as_sold", corn(name), None, ["frozen", "plain"])
 
 
 def test_changed_category_does_not_reuse_frozen_identity():

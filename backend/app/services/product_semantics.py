@@ -1295,7 +1295,7 @@ def _frozen_corn_identity(name_text, category_text):
     Keep cob, blend, canned, snack and flavour names outside this identity.
     This supplies no composition, organic, nutrient or quantity declaration.
     """
-    if (re.fullmatch(r"(?:majs|majskorn|sockermajs)(?: ekologisk| ekologiska| eko| fryst| frysta)*", name_text)
+    if (re.fullmatch(r"majskorn(?: ekologisk| ekologiska| eko| fryst| frysta)*", name_text)
             and _contains_any(category_text, ("fryst", "frysta", "djupfryst"))):
         return "majs", "vegetable", "whole_vegetable", "frozen"
     return None

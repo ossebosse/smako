@@ -13,6 +13,7 @@ import runpy
 import sys
 import threading
 import time
+import types
 from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
@@ -152,6 +153,8 @@ def _run(args):
     start = time.perf_counter()
     code = 1
     cancel = threading.Event()
+    phase_timer = None
+    receipt = None
     worker = SimpleNamespace(_handle=-1)  # Actual interpreter, including Store-Python launchers.
     deadline = start + min(args.max_seconds, remaining)
     try:
@@ -165,12 +168,31 @@ def _run(args):
             entry.update(peak_job_commit_bytes=peak(), peak_working_bytes=working,
                          peak_private_commit_bytes=private, wall_seconds=round(time.perf_counter() - start, 4))
 
+        def expire():
+            entry.update(exit_code=124, status="deadline_exceeded")
+            receipt()
+            save()
+            os._exit(124)
+
+        def arm_phase(seconds):
+            """A stricter phase bound cannot extend the overall/shared budget."""
+            nonlocal phase_timer
+            if seconds <= 0:
+                raise ValueError("Phase deadline must be positive")
+            if phase_timer is not None:
+                phase_timer.cancel()
+            phase_timer = threading.Timer(min(seconds, max(0, deadline - time.perf_counter())), expire)
+            phase_timer.daemon = True
+            phase_timer.start()
+            return phase_timer.cancel
+
+        context = types.ModuleType("smako_budget_context")
+        context.arm_phase = arm_phase
+        sys.modules[context.__name__] = context
+
         def watchdog():
             if not cancel.wait(max(0, deadline - time.perf_counter())):
-                entry.update(exit_code=124, status="deadline_exceeded")
-                receipt()
-                save()
-                os._exit(124)
+                expire()
 
         threading.Thread(target=watchdog, daemon=True).start()
         command = args.command[1:] if args.command[:1] == ["--"] else args.command
@@ -189,10 +211,17 @@ def _run(args):
         except SystemExit as exc:
             code = exc.code if isinstance(exc.code, int) else 0 if exc.code is None else 1
         entry.update(exit_code=code, status="complete" if code == 0 else "stopped")
+        if phase_timer is not None:
+            phase_timer.cancel()
         receipt()
         return code
     finally:
         cancel.set()
+        if phase_timer is not None:
+            phase_timer.cancel()
+        sys.modules.pop("smako_budget_context", None)
+        if receipt is not None:
+            receipt()
         entry["wall_seconds"] = round(time.perf_counter() - start, 4)
         if entry["status"] == "running":
             entry["status"] = "failed"
