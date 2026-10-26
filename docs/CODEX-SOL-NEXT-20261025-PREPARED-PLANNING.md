@@ -1,5 +1,13 @@
 # Sol: nästa etapp efter PR #12 — förberett underlag och gemensam sökning
 
+**Aktuell prioritering 2026-10-26:** följ först
+[receptkvalitet, köpbarhet och avgränsad personlig mätning](CODEX-SOL-NEXT-20261026-RECIPE-QUALITY-AND-PLANNING.md).
+Massimporten är klar. V2-riktningen nedan kvarstår, men hela implementationen
+och 1 000-/5 000-proven är inte leveranskrav i den nya avgränsade etappen.
+Budgeten är redan påbörjad och delas fortsatt: använd befintlig intakejournal
+och aktuellt saldo. Ordet ”ny” i den ursprungliga budgettexten nedan ger inte
+en ny budget vid nästa sessionsstart.
+
 Tillägg efter ägarens receptleverans 2026-10-25: läs först
 [receptuppdraget](CODEX-SOL-NEXT-20261025-RECIPE-INTAKE.md). Prioritera
 ingrediens-/innehållsarbete före stora skalprov och använd den verkliga

@@ -1,5 +1,11 @@
 # Sol: gör de 800 grundrätterna användbara i Smako
 
+**Status 2026-10-26:** massimporten är genomförd i PR #14. Alla 2 200
+källvarianter är representerade. Börja med
+[det nya uppdraget om receptkvalitet, köpbarhet och personlig planering](CODEX-SOL-NEXT-20261026-RECIPE-QUALITY-AND-PLANNING.md)
+och aktuell HANDOFF. Nedanstående startantal och importordning är historiska;
+de ska inte utlösa en ny import från noll eller en ny benchmarkbudget.
+
 Ägaren har beställt att recepten läggs till och att du får nästa uppdrag.
 Samlingen finns nu komplett på main som författarunderlag. Hämta aktuell
 main i en ren arbetskopia. Följ AGENTS, DEVELOPMENT, produktmålet,

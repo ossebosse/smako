@@ -1,3 +1,30 @@
+# 2026-10-26: Nästa Sol-uppdrag efter oberoende granskning av PR #14
+
+Läs först
+[CODEX-SOL-NEXT-20261026-RECIPE-QUALITY-AND-PLANNING.md](CODEX-SOL-NEXT-20261026-RECIPE-QUALITY-AND-PLANNING.md).
+Ägaren har beställt instruktioner till en ny Sol-session. Uppdraget är att
+rätta de automatiska ändringarna till frysta ingredienser, förbättra de
+produktkopplingar som ger störst faktisk effekt och göra få avgränsade prov
+av personlig planering med det verkliga biblioteket.
+
+Granskning av main `ed36c0f`: 472 riktade tester passerar, men fryst mango
+har kvar skalningsinstruktioner och upphettning/upptining härleds felaktigt
+ur ord i steg. 337 varianter har ändringar till frysta ingredienser, 99
+har fått åtta timmars upptining; alla dessa är inte därmed felaktiga.
+Detaljer och reproducerbara exempel finns i det nya uppdraget. Tidigare
+uppgift om granskad struktur är inte ett slutligt innehållsgodkännande.
+
+Massimporten är klar. Behåll de 2 200 importerade varianterna och historiken;
+återgå inte till 45-importer. 704 individuellt produktlösbara varianter i
+exakt läge/888 i uttryckligt estimated-läge är fortfarande utgångspunkten,
+inte 2 200 fullt kvalificerade recept eller godkända veckomenyer.
+
+Fortsätt samma 120-minutersjournal: senast **84,57 minuter kvar**, kontrollera
+aktuellt saldo vid start. Ingen ny budget, gammal fullmatris eller nattlig
+fortsättning. Full V2 och 1 000-/5 000-prov är inte krav för denna etapp;
+produktmålet och V2-arkitekturen kvarstår. Denna handoff ändrar endast
+dokumentation, inte recept/runtime, standardläge eller drift.
+
 # 2026-10-26: Hela receptsamlingen integrerad — 2 200 källvarianter
 
 [PR #14](https://github.com/ossebosse/smako/pull/14) och
