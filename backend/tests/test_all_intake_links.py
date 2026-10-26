@@ -179,6 +179,10 @@ def test_entire_intake_is_imported_and_scales_without_changing_original_library(
     report = json.loads((ROOT.parents[3] / "docs/reviews/recipe-integration-all-20261026/all-recipes.json").read_bytes())
     amendments = json.loads((ROOT.parents[3] / "docs/reviews/recipe-quality-and-planning-20261026/recipe-review.json").read_bytes())
     replacements = {r["previous_id"]: r["runtime_id"] for r in amendments["recipes"]}
+    week = json.loads((ROOT.parents[3] / "docs/reviews/week-search-and-cache-20261026/recipe-review.json").read_bytes())
+    successors = {r["previous_id"]: r["runtime_id"] for r in week["corrected"]}
+    replacements = {k: successors.get(v, v) for k, v in replacements.items()}
+    replacements.update(successors)
     current = {identity(r): r for r in current_recipes()}
     assert len(report["recipes"]) == 2200
     assert len({r["source_id"] for r in report["recipes"]}) == 2200

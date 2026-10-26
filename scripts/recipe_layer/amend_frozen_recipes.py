@@ -83,8 +83,6 @@ REPLACEMENTS = {
     "Skala mangon och skär fruktköttet och gurkan i små bitar.": "Använd de tinade mangobitarna med all fruktsaft och skär gurkan i små bitar.",
     "tärna mangoköttet": "använd mangobitarna med all fruktsaft enligt upptiningssteget",
     "tärna den ansade ananasen": "använd de helt tinade ananasbitarna med all fruktsaft",
-    "skölj eller ansa och skär mango i små bitar": "väg upp frysta skalade mangobitar och lägg dem direkt i den varma pannan i tillagningssteget",
-    "skölj eller ansa och skär ananas i små bitar": "väg upp frysta skalade ananasbitar och lägg dem direkt i den varma pannan i tillagningssteget",
     "Dela avokadon och väg det råa ätliga fruktköttet utan skal och kärna.": "Använd de helt tinade skalade avokadotärningarna, vägda frysta, med all vätska.",
     "Dela avokadon, ta bort skal och kärna och tärna köttet.": "Använd de helt tinade skalade avokadotärningarna med all vätska.",
     "skär avokadoköttet i bitar": "använd de helt tinade skalade avokadotärningarna med all vätska",
@@ -122,6 +120,15 @@ def process(base, name):
     return "thaw_cold_use"
 
 
+def fruit_preparation(name, mode):
+    """A reviewed process, never a pan instruction shared with oven skewers."""
+    if mode == "thaw_before_threading":
+        return f"använd de helt tinade skalade {name}bitarna; dela större bitar till cirka 2 cm inför trädningen på spett och behåll all saft"
+    if mode == "frozen_direct_heat":
+        return f"väg upp frysta skalade {name}bitar och lägg dem direkt i den varma pannan i tillagningssteget"
+    raise ValueError(f"Ingen granskad tillagning för {name}: {mode}")
+
+
 def revise(original):
     row = copy.deepcopy(original)
     strip_prefix(row)
@@ -141,6 +148,10 @@ def revise(original):
         else:
             i["label"] = name.capitalize() + ", fryst ansad ätlig mängd vägd före upptining; all saft används"
     for step in row["steps"]:
+        for name in ("mango", "ananas"):
+            phrase = f"skölj eller ansa och skär {name} i små bitar"
+            if phrase in step["text"]:
+                step["text"] = step["text"].replace(phrase, fruit_preparation(name, modes[name]))
         for before, after in REPLACEMENTS.items():
             # Preserve the fresh preparation required for long avocado sticks.
             if modes.get("avokado") == "fresh_shape_required" and "avokado" in before:
@@ -205,11 +216,11 @@ def main(do_import=False):
     OUTPUT.mkdir(exist_ok=True)
     if (REPORT / "recipe-review.json").exists():
         reviewed = read_json(REPORT / "recipe-review.json")
-        current = {identity(r): r for r in current_recipes()}
-        if all(r["runtime_id"] in current for r in reviewed["recipes"]):
-            assert all(current[r["runtime_id"]].design.content_sha256 == r["content_sha256"] for r in reviewed["recipes"])
-            print({"already_issued_and_verified": len(reviewed["recipes"]), "no_historical_bytes_rewritten": True})
-            return
+        manifest = manifest_entries()
+        issued = {identity(r): r for r in load_entries([*manifest["current"], *manifest["history"]], ROOT)}
+        assert all(r["runtime_id"] in issued and issued[r["runtime_id"]].design.content_sha256 == r["content_sha256"] for r in reviewed["recipes"])
+        print({"already_issued_and_verified": len(reviewed["recipes"]), "no_historical_bytes_rewritten": True})
+        return
     previous = read_json(ROOT.parents[3] / "docs/reviews/recipe-integration-all-20261026/all-recipes.json")
     affected = {r["runtime_id"]: r for r in previous["recipes"] if any(c["code"] == "explicit_frozen_product_variant_not_fresh_dry_alias" for c in r.get("changes", []))}
     rows = [r for p in sorted((ROOT / "reviewed-all-20261026").glob("batch-*/authoring.json")) for r in read_json(p)["recipes"] if r["base_id"] + ":" + r["version"] + ":" + r["variant_id"] in affected]
