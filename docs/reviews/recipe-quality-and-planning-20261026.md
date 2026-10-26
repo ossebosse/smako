@@ -8,7 +8,7 @@ Maskinöversikt: [delivery-summary.json](recipe-quality-and-planning-20261026/de
 337 berörda receptvarianter har nya granskade versioner. Majskopplingen ger
 33 ytterligare individuellt produktlösbara varianter i exakt läge och 38 i
 uttryckligt estimated. Ett nytt kombinerat endagsval klarar checkout, save
-och GET på **31,96 s i sista API-kontrollen**; browserobservationen är
+och GET på **31,96 s i senast mätta API-kontrollen**; browserobservationen är
 **28,10 s från knapptryck till synlig inköpslista och GET**. Femmiddagsfallen
 är fortfarande ofärdiga vid 75 s. Produktmålet för fria veckoval är inte uppnått.
 Ingen beta, produktion, profil, scheduler eller insamling har aktiverats.
@@ -135,7 +135,7 @@ har inte skrivits om till en påstådd 10–15-begränsning.
 | C: 1×2, svenskt, 5–7 ingredienser, aktiv ≤30/total ≤45 min | 3 → 2 | API **29,16 s**, 108,45 kr; browser **27,70 s**; innehållsreservation nedan |
 | D: A + jordnötsallergi + 50 % ekologisk inköpskostnad | 2 021 → 0 | **24,89 s till HTTP 422 DATA_BLOCKED**, ingen meny |
 | E: A med en butik | 2 021 → 864 | Ingen färdig meny vid **75 s** |
-| F: ny ägare, 1×2, grekiskt/italienskt, 5–7 ingredienser, aktiv ≤30/total ≤45 min, protein ≥20 g | 14 → 4 | API **31,42 s**, slutlig faktagrindskontroll **31,96 s**; browser **28,10 s**, **104,30 kr** |
+| F: ny ägare, 1×2, grekiskt/italienskt, 5–7 ingredienser, aktiv ≤30/total ≤45 min, protein ≥20 g | 14 → 4 | API **31,42 s**, senaste faktagrindskontroll **31,96 s**; browser **28,10 s**, **104,30 kr** |
 
 A/B/E-siffror är partiella diagnostikkvitton omkring 60 s före stoppet, inte
 slutliga sökresultat. Exakta avslag och faktiskt prissatta/sökta förslag per
@@ -173,12 +173,12 @@ felet och hela kostnaden behålls. Inga kontohemligheter eller sessions-ID:n
 finns i Git.
 
 API-tiden omfattar POST, audit/save och kontrollerad GET. Browserns tid börjar
-vid klicket efter laddat underlag. F:s sista process tog **92,47 s totalt**,
+vid klicket efter laddat underlag. F:s senaste uppmätta process tog **92,47 s totalt**,
 varav **60,44 s uppstart/laddning** och **31,96 s API/GET**. Övriga laddningar
 var cirka 52–69 s (första misslyckade browserförsöket cirka 85 s); de ingår i
 budgeten men är inte klicklatens. Kö i lyckade API-fall var under en millisekund.
 Detta är få lokala Windowsobservationer, inte p95, Linux-/betalatens eller
-ett bevis för att kalla förstagångsanrop klarar 60 s. Slutliga F-kontrollen
+ett bevis för att kalla förstagångsanrop klarar 60 s. Senaste F-kontrollen
 sammanföll delvis med riktad lokal verifiering; ingen förbättring tillskrivs
 skillnaden mot tidigare F.
 
@@ -187,6 +187,13 @@ F:s API/browser/slutkontroll ger samma 104,30 kr och audit. Ingen jämförbar
 låsta menyer är andra krav. Fixturetester kontrollerar oförändrad vinnare,
 pris och audit efter cacheändringen. Globalt billigaste korg påstås inte.
 F är ett endagsfall: målet 30–60 s är observerat där, inte för fem middagar.
+
+Efter sista mätningen utökades endast avvisningen av deklarerade tillsatser
+i frysta majskorn till recept utan uttryckligt frystkrav. Alla elva uppmätta
+majsscope i vardera köpläget hade redan frystkravet och följer identisk kodväg;
+F innehåller ingen majs. Därför startas ingen ny dyr mätning. Metodhash för
+sista kodhuvudet finns i `verification.json`; varje latenskvitto behåller sin
+egen uppmätta metodhash och påstås inte ha körts på det senare kodhuvudet.
 
 ## Avgränsad prestandaändring, cache och resurser
 
@@ -232,7 +239,7 @@ fasbyte kan inte förlänga den gemensamma tidsbudgeten. Inga mätarbetare är k
 
 ## Verifiering och fortsatt arbete
 
-**443 PASS** i sista riktade offlinekörningen: frysta publicerade recept och
+**451 PASS** i sista riktade offlinekörningen: frysta publicerade recept och
 tidsfilter, majskorn/faktabyte/allergigrind, alla intakelänkar, identitetscache,
 budget och full versionscache. Tidigare oförändrad struktur-/preparationssvit
 samt verklig plannerfixture är verifierade; Ruff på samtliga ändrade Pythonfiler

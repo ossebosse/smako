@@ -41,10 +41,11 @@ def test_changed_category_does_not_reuse_frozen_identity():
 
 
 @pytest.mark.parametrize("declaration", ["Majskorn, smör", "Majskorn, salt", "Ärtor, majskorn, paprika", "Majskorn, vatten"])
-def test_changed_facts_cannot_keep_plain_kernel_approval(declaration):
+@pytest.mark.parametrize("requirements", [[], ["plain"], ["plain", "frozen"]])
+def test_changed_facts_cannot_keep_plain_kernel_approval(declaration, requirements):
     fact = ProductFacts(source="synthetic", source_product_id="synthetic-corn", source_snapshot_id="synthetic-snapshot",
                         ingredients=(declaration,), ingredients_complete=True)
-    assert not _whole_food_identity("majs", "as_sold", corn(), fact, ["plain", "frozen"])
+    assert not _whole_food_identity("majs", "as_sold", corn(), fact, requirements)
 
 
 def test_kernel_identity_is_not_a_positive_allergy_certificate():

@@ -16,7 +16,7 @@ insatslösta varianter (+33/+38); netto +29/+32 mot föregående rapport.
 källarbete; limejuice445 och ingefära402 dominerar men överlappar andra hinder.
 
 F är en ny ägare/nya val: en middag/två portioner, grekiskt/italienskt,
-5–7 ingredienser, aktiv30/total45 min, protein≥20 g. API31,42 s, sista kodens
+5–7 ingredienser, aktiv30/total45 min, protein≥20 g. API31,42 s, senaste uppmätta
 API31,96 s; verklig Chromium klick→lista+GET28,10 s, 104,30 kr och
 ESTIMATED protein20,7625 g. Checkout/save/ägar-GET passerar. A/B/E:s fria
 femmiddagsfall är ofärdiga vid75 s. D (jordnöt+eko50 %) avvisas DATA_BLOCKED
@@ -34,7 +34,7 @@ opt-in och med oförändrat B; återstarta inte den stora matrisen.
 
 Samma journal: **3 855,4145 s använda / 3 344,5855 s kvar (55,74 min)**.
 Ingen ny budget och inga kvarlämnade mätarbetare. Sista riktade offlinekörning
-443 PASS, Ruff/compileall gröna; ordinarie CI inklusive browser krävs på sista
+451 PASS, Ruff/compileall gröna; ordinarie CI inklusive browser krävs på sista
 PR-huvudet före mainmerge. Legacy-default och library_merge_generations=False
 består. Mainintegration är ingen betaaktivering; drift/profiler/insamling orörda.
 
