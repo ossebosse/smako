@@ -13,6 +13,7 @@ import runpy
 import sys
 import threading
 import time
+from contextlib import contextmanager
 from datetime import UTC, datetime
 from pathlib import Path
 from types import SimpleNamespace
@@ -87,7 +88,43 @@ def windows_limits():
     return attach, peak, sample, lambda: kernel.TerminateJobObject(job, 124)
 
 
+@contextmanager
+def budget_lease(path):
+    """Hold one OS lease for the whole run, including watchdog/failed exits.
+
+    A running journal row alone cannot distinguish a live worker from a crash.
+    Only the lease holder may recover old rows or replace the shared journal.
+    Closing the process releases this lock even when a watchdog terminates it.
+    """
+    handle = path.with_suffix(".lock").open("a+b")
+    try:
+        if os.name == "nt":
+            import msvcrt
+
+            if handle.seek(0, 2) == 0:
+                handle.write(b"0")
+                handle.flush()
+            handle.seek(0)
+            msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError as exc:
+        handle.close()
+        raise RuntimeError("A shared-budget worker is already active; no second check started") from exc
+    try:
+        yield
+    finally:
+        handle.close()
+
+
 def run(args):
+    with budget_lease(args.budget.resolve()):
+        return _run(args)
+
+
+def _run(args):
     args.budget = args.budget.resolve()
     budget = json.loads(args.budget.read_bytes())
     now = datetime.now(UTC)

@@ -206,3 +206,17 @@ def test_entire_intake_is_imported_and_scales_without_changing_original_library(
     assert len(manifest["preserved_files"]) == 166
     for entry in manifest["preserved_files"]:
         assert hashlib.sha256((source / entry["path"]).read_bytes()).hexdigest() == entry["sha256"]
+
+
+def test_large_batch_retains_real_active_time_and_obeys_user_limit():
+    from app.models.personal import MealSettings
+    from app.models.recipe_preferences import RecipePreferences
+    from app.services.recipe_library import _scaled, current_recipes, matches_meal
+
+    preferences = RecipePreferences(mode="complete")
+    unlimited = MealSettings(recipe_choices={"min_ingredients": 1, "max_ingredients": 40})
+    limited = MealSettings(recipe_choices={"min_ingredients": 1, "max_ingredients": 40, "max_active_minutes": 180})
+    batch = next(scaled for recipe in current_recipes() if recipe.design.meal_types[0] == "dinner"
+                 and (scaled := _scaled(recipe, 12)).design.active_minutes is not None
+                 and scaled.design.active_minutes > 180 and matches_meal(scaled, unlimited, preferences))
+    assert not matches_meal(batch, limited, preferences)

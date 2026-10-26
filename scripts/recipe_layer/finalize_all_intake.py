@@ -65,6 +65,9 @@ def main():
     inventory = json.loads(inventory_path.read_bytes())
     research_path = Path(".local/recipes/all-ingredient-research-catalog.json")
     research = {r["identity"]: r for r in json.loads(research_path.read_bytes())["identities"]}
+    known_research = Path(".local/recipes/known-input-product-research.json")
+    if known_research.exists():
+        research.update({r["identity"]: r for r in json.loads(known_research.read_bytes())["identities"]})
     grouped = {}
     for row in inventory["shared_inputs"]:
         if row["status"] != "blocked_product_input":

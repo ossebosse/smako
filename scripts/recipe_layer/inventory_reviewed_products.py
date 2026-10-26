@@ -49,7 +49,7 @@ def inventory(args):
     pack_ids = args.pack_id or ["recipe-intake-reviewed-20261025"]
     recipes = [r for r in current_recipes() if r.design.content_source and r.design.content_source.pack_id in pack_ids]
     shared, results = {}, []
-    for recipe in recipes:
+    for recipe in ([] if args.probe_only else recipes):
         meal = planner.meals[recipe.design.meal_types[0]]
         profile = planner._merged_profile(meal)
         inputs = []
@@ -158,6 +158,7 @@ if __name__ == "__main__":
     parser.add_argument("--runtime-tree")
     parser.add_argument("--pack-id", action="append")
     parser.add_argument("--probe-id", action="append", default=[])
+    parser.add_argument("--probe-only", action="store_true", help="Skip the already completed common input inventory")
     parser.add_argument("--purchase-mode", choices=["exact", "estimated"], default="exact")
     parser.add_argument("--plan-store", type=Path, default=Path(".local/recipes/intake-probes.sqlite3"))
     parser.add_argument("--output", type=Path, required=True)
