@@ -19,7 +19,7 @@
     if(!host)throw new Error("Receptvalens fält saknas.");
     const key=`smako.recipeChoices.${personal?"personal":"public"}`;
     const variationFields=["max_same_primary_ingredient_meals","max_same_recipe_family","max_same_carbohydrate_meals","max_same_cooking_method_meals","max_same_dish_form_meals","max_pairwise_culinary_similarity","max_pairwise_recipe_similarity"];
-    let variationEnabled=false,variationOrigins=Object.fromEntries(variationFields.map(k=>[k,"default"])),retainedVariation={},retainedOverrides=null;
+    let variationEnabled=false,retainedIntent=false,variationOrigins=Object.fromEntries(variationFields.map(k=>[k,"default"])),retainedVariation={},retainedOverrides=null;
     const box=el("fieldset",null,"complete-recipe-options");box.hidden=true;box.disabled=true;
     box.append(el("legend",personal?"Antal ingredienser":"Receptstil"));
     const mode=select("recipe-style",[["legacy","Befintliga vardagsrecept"],["complete","Genomarbetade middagar"],["library","Måltidsbibliotek: middag, frukost och mellanmål"]],"legacy");
@@ -179,7 +179,7 @@
       const result={recipe_preferences:{mode:"complete",cuisines:cuisineInputs.filter(n=>n.checked).map(n=>n.value),cuisine_distribution:cuisineDistribution.value,min_distinct_cuisines:cuisineDistribution.value==="minimum"?Number(minCuisines.value):null,max_same_main_protein_dinners:proteinCap.value===""?null:Number(proteinCap.value),min_ingredients:lo,max_ingredients:hi,max_minutes:minutes.value===""?null:Number(minutes.value),adaptation:adaptation.value,min_protein_g:personal||mode.value==="library"||protein.value===""?null:Number(protein.value),allow_fish:fish.checked}};
       Object.assign(result,retainedVariation);
       if(retainedOverrides!==null)result.recipe_diversity_overrides={...retainedOverrides};
-      if(variationEnabled)result.variation_intent={version:"explicit-over-default-v2",field_origins:{...variationOrigins}};
+      if(variationEnabled||retainedIntent)result.variation_intent={version:"explicit-over-default-v2",field_origins:{...variationOrigins}};
       if(mode.value==="library"&&Number(document.getElementById(personal?"dinner-count":"recipes")?.value??0)===0)Object.assign(result.recipe_preferences,{cuisines:[],cuisine_distribution:"free",min_distinct_cuisines:null,max_same_main_protein_dinners:null,max_minutes:null});
       if(selectedContexts.length)result.allowed_store_ids=selectedContexts.slice();
       if(!personal)Object.assign(result,{allow_nutrition_estimates:estimates.checked,use_pantry:pantry.checked});
@@ -201,6 +201,7 @@
     }
     function restore(request={}) {
       const old=Object.keys(request).length>0;
+      retainedIntent=Boolean(request.variation_intent);
       variationOrigins={...Object.fromEntries(variationFields.map(k=>[k,old?"unknown":"default"])),...(request.variation_intent?.field_origins||{})};
       retainedVariation=Object.fromEntries(variationFields.filter(k=>Object.hasOwn(request,k)&&variationOrigins[k]!=="default").map(k=>[k,request[k]]));
       retainedOverrides=request.recipe_diversity_overrides==null?null:{...request.recipe_diversity_overrides};

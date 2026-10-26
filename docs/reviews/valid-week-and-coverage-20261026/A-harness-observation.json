@@ -1,0 +1,11 @@
+{
+  "api_code": "SEARCH_INCOMPLETE",
+  "api_http_status": 422,
+  "api_seconds": 60.282805900031235,
+  "fix": "Cancel and join the progress writer after POST before final report mutation/writing; no replay of A.",
+  "harness_issue": "Timer progress and main final writer shared A.next; WinError 32 in timer thread. Final report contains blocked HTTP422 SEARCH_INCOMPLETE; main process exit 0.",
+  "log_local_copy": ".local/recipes/valid-week-A-api.log",
+  "log_sha256": "779e4bcba1c0004987cad52dbfd1b7805235be0c032184029b9093242ee4bbf0",
+  "scope": "Progress receipt writer race only; API result and final probe report are preserved, no A rerun.",
+  "valid_menu_delivered": false
+}

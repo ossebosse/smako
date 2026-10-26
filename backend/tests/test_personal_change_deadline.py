@@ -114,3 +114,53 @@ def test_legacy_has_no_new_deadline(scenario,monkeypatch):
     result=client.post('/api/personal/plans/'+saved['plan_id']+'/change',json=mutation)
     assert result.status_code==200,result.text
     assert calls==[None]
+
+
+@pytest.mark.asyncio
+async def test_external_cancellation_joins_current_worker_without_deadline_error():
+    import asyncio
+    from threading import Event
+    from types import SimpleNamespace
+
+    started=Event();finished=Event()
+    def work():
+        started.set()
+        try:
+            while True:
+                plan_jobs.check_cancelled()
+                time.sleep(.001)
+        finally:
+            finished.set()
+    async def operation():return await plan._run_personal_thread(work)
+    task=asyncio.create_task(plan._with_current_deadline(SimpleNamespace(library_search_policy='smako-current-library-v2'),operation))
+    assert await asyncio.to_thread(started.wait,1)
+    task.cancel()
+    with pytest.raises(asyncio.CancelledError):await task
+    assert finished.is_set()
+    assert plan_jobs._planning_deadline.get() is None
+
+
+def test_new_intent_survives_owned_get_and_cannot_silently_revert_to_legacy(scenario,monkeypatch):
+    from dataclasses import replace
+
+    client,_app,saved,_mutation,_clock,_calls,_Planner,settings=scenario
+    revision=client.get('/api/personal/state').json()['revision']
+    body={**saved['request'],'variation_intent':{'version':'explicit-over-default-v2',
+        'field_origins':{'max_same_primary_ingredient_meals':'default'}}}
+    body['personal']={**body['personal'],'pantry_revision':revision}
+    template=PlanResponse.model_validate(saved['plan'])
+    template.personal.pantry_revision=revision
+    async def build(*args):return template
+    monkeypatch.setattr(plan,'_run_admitted_plan',build)
+    created=client.post('/api/plans',json=body)
+    assert created.status_code==201,created.text
+    created=created.json()
+    assert client.get('/api/plans/'+created['plan_id']).json()['request']['variation_intent']==body['variation_intent']
+    legacy=replace(settings,library_search_policy='legacy')
+    for module in (plan,personal):monkeypatch.setattr(module,'get_settings',lambda:legacy)
+    assert client.get('/api/plans/'+created['plan_id']).status_code==200
+    mutation={'action':'recalculate','revision':1,'pantry_revision':client.get('/api/personal/state').json()['revision']}
+    rejected=client.post('/api/personal/plans/'+created['plan_id']+'/change',json=mutation)
+    assert rejected.status_code==422 and rejected.json()['code']=='SEARCH_POLICY_UNAVAILABLE'
+    assert client.post('/api/plans',json=body).json()['code']=='SEARCH_POLICY_UNAVAILABLE'
+    assert client.get('/api/plans/'+created['plan_id']).json()['revision']==1

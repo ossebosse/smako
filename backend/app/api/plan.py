@@ -654,6 +654,8 @@ async def _prepare_saved_plan(request: PlanRequest, http_request: Request, setti
 
 
 def _prepare_complete_request(request, http_request, settings):
+    if request.variation_intent and settings.library_search_policy != 'smako-current-library-v2':
+        raise PolicyConflict("Denna miljö stöder inte de nya variationsvalen. Befintliga planer behåller sina regler.", code='SEARCH_POLICY_UNAVAILABLE')
     from app.services.membership import require_membership_limits
     require_membership_limits(request, http_request)
     from app.services.complete_recipes import enabled, prepare_request

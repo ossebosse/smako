@@ -10,6 +10,9 @@ ursprung bevaras vid återläsning. Utan metadata gäller tidigare tolkning;
 legacy/V1 och gamla sparade revisioner omtolkas inte. UI kräver ett nytt val
 för att ersätta en äldre okänd standardtolkning. En uttrycklig hård gräns
 behålls tills användaren ändrar själva gränsen.
+Sparat nytt intent får heller inte tappas när en miljö återgår till legacy:
+ägd GET fortsätter fungera, men ny beräkning med de reglerna avvisas om
+sökpolicyn inte stöder dem. En redan committad identisk ändring kan återläsas.
 
 Tre klassificeringar förblir separata: måltidsfördelningen använder en enda
 kost-/proteinkategori per recept, den kulinariska huvudråvarugränsen använder

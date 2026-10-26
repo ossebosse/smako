@@ -74,3 +74,15 @@ def test_mixed_protein_cap_and_base_identity_are_not_the_culinary_primary_cap():
     with pytest.raises(PolicyConflict,match='huvudprotein'):
         resolve(req,recipes=recipes)
     assert not accepts_week([r,r,r],req.recipe_preferences,dinner_count=3,final=True)
+
+
+def test_mixed_primary_sources_and_variant_only_capacity_do_not_relax_hard_gates():
+    from app.models.recipe import RecipeIngredient
+    from app.services.recipe_week_variation import main_protein_sources
+    recipes=[r for r in current_recipes() if r.design.base_id.startswith('smako-greek-') and 'chicken' in r.design.base_id]
+    first=recipes[0]
+    mixed=first.model_copy(update={'ingredients':[*first.ingredients,RecipeIngredient(name='röda linser',canonical_name='röda linser',quantity=100,unit='g',role='primary')]})
+    assert {'kyckling','linser'}<=main_protein_sources(mixed)
+    variants=[r for r in recipes if r.design.base_id==first.design.base_id]
+    _,_,_,(policy,_constraints,resolution)=resolve(request(),recipes=variants)
+    assert policy.max_same_primary_ingredient_meals==2 and resolution['adjustments']==[]

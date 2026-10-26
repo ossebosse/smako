@@ -128,6 +128,18 @@ def test_current_explicit_primary_limit_is_retained_by_ui(choices):
     assert posted['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='explicit'
 
 
+def test_saved_current_intent_is_not_dropped_when_feature_is_unavailable(choices):
+    page,url,captured=choices
+    draft={'postal_code':'22350','variation_intent':{'version':'explicit-over-default-v2',
+        'field_origins':{'max_same_primary_ingredient_meals':'default'}},
+        'personal':{'meals':[{'meal_type':'dinner','count':3,'servings':2}]}}
+    page.add_init_script('sessionStorage.setItem("smako.personal.requestDraft",'+json.dumps(json.dumps(draft))+');')
+    page.goto(url);choose_location(page)
+    posted=submit(page,captured)
+    assert posted['variation_intent']['version']=='explicit-over-default-v2'
+    assert posted['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='default'
+
+
 def choose_location(page):
     expect(page.locator("#check-postcode")).to_be_enabled()
     expect(page.locator("#dinner-count")).not_to_be_visible()

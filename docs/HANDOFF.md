@@ -1,3 +1,64 @@
+# 2026-10-26: Giltig B2-vecka på 30,78 s i browser; aktuell köpbarhet 738/931
+
+[PR #17](https://github.com/ossebosse/smako/pull/17) genomför
+VALID-WEEK-AND-COVERAGE. Läs [rapporten](reviews/valid-week-and-coverage-20261026.md)
+och dess maskinkvitton före nya mätningar. Original-B är oförändrat negativt
+underlag; ingen dyr omkörning av dess gamla konflikt gjordes.
+
+B2 behåller 52 butiks-ID:n, fem middagar/fyra portioner, tre kyckling/två
+vegetariska, grekiskt/italienskt, protein minst 35 g, högst tre samma
+huvudprotein, butikstak två och estimated. Bara den kända kolliderande
+huvudråvarustandarden ändras 2→3, genom nytt sparat fältursprung. Egna och
+äldre okända gränser behålls. Effektiv regel/anpassning sparas och visas.
+Legacy/V1 och gamla planers betydelse ändras inte. Nya sparade intentdata
+får inte heller tyst ignoreras om miljön återgår till legacy.
+
+**B2 API/checkout/save/ägd GET 30,2549 s, verklig Chromium knapp→full synlig
+lista+GET 30,7820 s, 731,20 kr i båda.** Ny ägare/process, ingen identisk
+färdigplanscache. Fem olika baser, fyra grekiska/en italiensk, tre kyckling
+och två vegetariska. Protein 48,882/48,631/45,188/36,755/39,965 g per portion,
+ESTIMATED enligt uttryckligt tillåten spårbar insatsberäkning. Inköpsstatus
+VERIFIED, checkout-audit passerar, två valda Malmöbutiker. Ett lyckat fall
+är inte globalt optimum, prisparitet mot okänd äldre B2-vinnare eller p95.
+
+Den aktuella fullinventeringen av samtliga 2 200 importerade varianter gav
+före ny koppling samma 733 exakt/920 estimated som historiskt. Strikt rågbröd
+ger noll förlorade varianter; alla tre rågbrödsvarianterna är fortsatt
+insatslösta. Efter verifierat kokosalias: **738 exakt (33,5 %), 931 inklusive
+tillåtna uppskattningar (42,3 %), +5/+11 och noll förluster**. De 262 andra
+ursprungliga recepten ingår inte i dessa tal. Individuell insatslösbarhet
+är inte gemensam korg-/närings-/allergen-/ekokvalificering. Bara kokosens
+tolv kvantitetsscope ändrar utfall; inga recept eller mängder skrivs om.
+Limejuice och ansad ätlig grönsaksmängd saknar fortfarande behövligt källstöd.
+Köpbarhetsdelen kostade 168,4620 s = 2,81 av högst tolv minuter.
+
+Deadline följer nu även personliga ändringar genom admission, async-jobb,
+arbetstråd, inre loopar och lagring. Före commit rullas revision/reservation/
+mutationskvitto tillbaka. Redan fullständigt committad revision redovisas
+i timeoutstatus och kan GET:as eller återfås med identiskt återförsök utan
+dubbelversion. Simulerad klocka, direkt/async, kö, rollback, sen commit,
+avbrytning, annan ägare och legacy är provade.
+
+Det enda extra A-provet gav **SEARCH_INCOMPLETE efter 60,2828 s**, ingen
+levererad lista eller totalsumma. 2 021 råa/960 kvalificerade kandidater;
+vid deadline bara 699 förslag på djup två. Upprepad gemensam korgberäkning
+över denna större pool är nästa konkreta prestandahinder. Inget identiskt
+timeoutomtag. Separat progressfilskrock i testhjälparen dokumenteras/fixas;
+API-utfallet och budgetdebit behålls.
+
+Kall första preparation/registrering före B2-anropet 112,38 s; browserns
+gemensamma preparation 20,08 s med 4 926 träffar/noll missar. Det är inte
+30 s från tom installation. Högsta uppmätta jobb-commit 1,464 GiB, under
+2,5 GiB-målet/hårt 3 GiB på två CPU. Bara en verklig pris-/faktaversion:
+veckouppdatering, två fulla prisversioners överlapp och samtidighet omätta.
+Full V2, snabb bred A och UI-tak 1..N är fortsatt okvalificerade.
+
+Samma journal: **4 810,7861 s använda / 2 389,2139 s kvar (39,82 min)**.
+Senaste 678 riktade regressioner, Ruff och compileall passerar. Ordinarie
+CI inklusive browser krävs grön på slutligt PR-huvud före mainintegration.
+Legacy standard och `library_merge_generations=False`. Ingen beta,
+produktion, profiländring, bred insamling, stor matris eller nattlig fortsättning.
+
 # 2026-10-26: Nästa Sol-uppdrag — giltig vecka, omräkning och köpbarhet
 
 Aktuell startpunkt efter ägarens granskning av main `c94c229`/PR #16:

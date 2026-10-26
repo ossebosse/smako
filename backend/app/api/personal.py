@@ -320,6 +320,8 @@ async def _change_plan_body(plan_id, payload, request, response):
         raise PersonalConflict("Planen ändrades. Senaste fungerande resultat är bevarat.")
     if payload.pantry_revision != state["revision"]:
         raise PersonalConflict("Skafferiet ändrades. Läs om innan ändring.")
+    if saved.request.variation_intent and settings.library_search_policy != 'smako-current-library-v2':
+        raise PolicyConflict("Denna miljö stöder inte planens nya variationsregler. Den befintliga planen är bevarad.", code='SEARCH_POLICY_UNAVAILABLE')
     state = private.prepare_revision(owner, saved)
     prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(saved.request.postal_code, {})
     if prepared is None:
