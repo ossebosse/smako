@@ -1,5 +1,11 @@
 # Receptintegration av 800-leveransen, 2026-10-25
 
+**Uppföljning 26 oktober: [hela samlingen är nu integrerad](recipe-integration-all-20261026.md).**
+Alla 2 200 källvarianter finns i utvecklingsbiblioteket, totalt 2 462 aktiva
+varianter på 934 registrerade baser. [Konkreta kvarvarande köphinder](recipe-integration-all-20261026/HINDER.md)
+redovisas separat. Samma budgetjournal fortsätter gälla. Nedanstående
+45-variantersrapport bevaras som historiskt etappkvitto.
+
 Första granskade leveransen är **45 aktiva varianter av 18 nya grundrätter
 och två befintliga grundrätter**. Utvecklingsbiblioteket växer från 262
 varianter/165 baser till **307 varianter/183 baser**. Alla tre måltidstyper

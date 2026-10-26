@@ -1,3 +1,54 @@
+# 2026-10-26: Hela receptsamlingen integrerad — 2 200 källvarianter
+
+[PR #14](https://github.com/ossebosse/smako/pull/14) och
+[helhetsrapporten](reviews/recipe-integration-all-20261026.md) ersätter
+45-variantersdelmängden som aktuellt leveransresultat. Samtliga **800
+källkandidater/2 200 varianter** är representerade i utvecklingsbiblioteket:
+**2 462 aktiva varianter/934 registrerade grundrätter**. Alla 166 originalfiler
+är byteidentiska och de ursprungliga 262 recepten är oförändrade. Alla
+2200 käll-ID:n har exakt rad/SHA → aktivt runtime-ID; noll innehållsavslag.
+Recepten är AI-författade och inte provlagade.
+
+13 processgrupper har gemensamma baser/familjer. Med tre tidigare avvisade
+ny-basanspråk blir det 769 nya registrerade baser; global kulinarisk unikhet
+påstås inte. Middagens 294 ingrediensantalsundantag kvarstår, fyra samgrupperade
+baser saknar variant inom standardens 10–15. Standardfilter och dinner_level
+är oförändrade. Stegkedjor, kylning och frysta varianter är uttryckliga;
+tolv styckdetaljrättningar är nya 1.0.1-versioner med återkallade föregångare.
+**33 aktuella + sju historiska generationer**, största paket 2 882 571 byte.
+Återimport är idempotent och alla källvarianter valideras vid 1/2/4/12 portioner.
+
+Den nya vägen har 92 ytterligare identiteter/381 produktreferensrader samt
+89 granskade ingrediensdefinitioner med obligatoriska, ännu ouppfyllda
+produktbevis. Inga låtsasrecept, tomma krav, antagna densiteter eller
+ätliga/avrunna andelar. Kontrollera
+[den prioriterade hinderlistan](reviews/recipe-integration-all-20261026/HINDER.md)
+och dess JSON innan någon beskriver hela samlingen som köpbar. Där finns
+exakta recept-ID:n, mängder, krav, avslag, produktförslag och nästa komplettering.
+Fryst behörigt Malmöunderlag från 23 oktober används, inga nya källor samlas in.
+1 812 gemensamma inputscope: 704/2 200 varianter har alla insatser lösta i
+exakt köpläge, 1 496 är blockerade av 104 ingrediens-/formluckor. Efter ett
+uttryckligt estimated-val är motsvarande antal 888/1 312. Detta är individuell
+insatstäckning, inte godkända gemensamma veckokorgar eller näringsintyg.
+
+Åtta låsta funktionella kontrollfall på `ce0b7e9` täcker sex kök och tre
+måltidstyper med full checkout/audit, privat save och ägarbunden återläsning.
+De är inte fria veckosökningar; näring var NOT_REQUESTED. Slutlig
+innehålls-/portionsförberedelse och gemensam produktinventering binds till
+`d181416` och respektive exakta artefakthash i rapporterna.
+Ett nionde fall på slutlig runtime ger full checkout/save/GET för lammsoppa
+med uttryckligt estimated-val, uppskattat 317,90 kr. Det separat avvisade
+nötköttsfallet på rotselleri bevaras som avslag.
+
+Fortsätt samma **120-minutersjournal** i
+`docs/reviews/recipe-integration-800-20261025/budget.json`; ingen ny budget.
+**2 125,9999 s = 35,43 minuter förbrukade; 5 074,0001 s = 84,57 minuter kvar.**
+Ett stoppat överlapp är fullt debiterat och uteslutet från prestandapåståenden.
+Budgetverktyget har nu OS-låsning mot samtidiga arbetare. V2:s fortsatta
+sök-/arkitekturarbete och 30–60-sekundersmålet är inte redovisade som uppnådda.
+Legacy-default, merge=False och separat betarelease består; ingen produktion,
+profil, scheduler eller insamling har aktiverats.
+
 # 2026-10-25: Första granskade receptimporten — 45 varianter, 18 nya grundrätter
 
 [PR #13](https://github.com/ossebosse/smako/pull/13) genomför den första

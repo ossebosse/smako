@@ -59,6 +59,9 @@ def library_vocabulary(recipes, *, reviewed_path=REVIEWED_VOCABULARY):
     from app.services.ingredient_normalizer import canonicalize_ingredient_name
 
     document = json.loads(reviewed_path.read_bytes())
+    if reviewed_path == REVIEWED_VOCABULARY:
+        additional = reviewed_path.with_name("intake-all-20261026.json")
+        document["ingredients"].extend(json.loads(additional.read_bytes())["ingredients"])
     if document["schema_version"] != "smako-authoring-vocabulary-v1":
         raise ValueError("Okänd schema för granskat ingrediensvokabulär")
     seen = set()

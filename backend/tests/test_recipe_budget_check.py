@@ -52,3 +52,17 @@ def test_shared_limit_includes_prior_v2_before_starting_any_worker(tmp_path, mon
     with pytest.raises(RuntimeError, match="exhausted"):
         execute(SimpleNamespace(budget=path, label="refused", max_seconds=75, command=["unit-only.py"]))
     assert len(json.loads(path.read_bytes())["entries"]) == 1
+
+
+def test_live_worker_lease_rejects_second_run_without_charging_or_replacing_its_journal(tmp_path):
+    code = runpy.run_path(str(Path(__file__).resolve().parents[2] / "scripts/recipe_layer/budgeted_check.py"))
+    path = tmp_path / "budget.json"
+    original = b'{"limit_seconds":7200,"entries":[{"status":"running"}]}'
+    path.write_bytes(original)
+    with code["budget_lease"](path):
+        with pytest.raises(RuntimeError, match="already active"):
+            code["run"](SimpleNamespace(budget=path, label="refused", max_seconds=75, command=["never.py"]))
+        assert path.read_bytes() == original
+    # Closing the handle, including process exit, releases the lease.
+    with code["budget_lease"](path):
+        assert path.read_bytes() == original

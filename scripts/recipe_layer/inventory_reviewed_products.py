@@ -38,7 +38,7 @@ def inventory(args):
     shell_egg_quantity_proofs(prepared.universe.products, facts)
     loaded_seconds = time.perf_counter() - started
     request = PlanRequest.model_validate({"recipes": 1, "max_stores": 2,
-        "purchase_planning_mode": "exact", "recipe_preferences": {"mode": "complete"},
+        "purchase_planning_mode": args.purchase_mode, "recipe_preferences": {"mode": "complete"},
         "personal": {"allow_nutrition_estimates": True, "use_pantry": False, "meals": [
             {"meal_type": meal, "count": 1, "servings": 4 if meal == "dinner" else 1,
              "recipe_choices": {"min_ingredients": 1, "max_ingredients": 40}, "limits": {}}
@@ -49,13 +49,14 @@ def inventory(args):
     pack_ids = args.pack_id or ["recipe-intake-reviewed-20261025"]
     recipes = [r for r in current_recipes() if r.design.content_source and r.design.content_source.pack_id in pack_ids]
     shared, results = {}, []
-    for recipe in recipes:
+    for recipe in ([] if args.probe_only else recipes):
         meal = planner.meals[recipe.design.meal_types[0]]
         profile = planner._merged_profile(meal)
         inputs = []
         for ingredient in recipe.ingredients:
             key = (ingredient.canonical_name, ingredient.form, ingredient.unit,
-                   ingredient.quantity, tuple(ingredient.product_requirements or ()))
+                   ingredient.quantity, tuple(ingredient.product_requirements or ()),
+                   planner.recipe_computations.forms_for(recipe, ingredient.canonical_name))
             if key not in shared:
                 decision = {"identity": key[0] + "|" + key[1], "quantity": key[3], "unit": key[2],
                             "requirements": list(key[4]), "recipes": []}
@@ -107,7 +108,7 @@ def inventory(args):
         meal = recipe.design.meal_types[0]
         slot = {"id": meal + "-1", "day": 1, "meal_type": meal, "recipe": recipe.model_dump(mode="json")}
         probe_request = PlanRequest.model_validate({"recipes": 1 if meal == "dinner" else 0, "max_stores": 2,
-            "purchase_planning_mode": "exact", "recipe_preferences": {"mode": "complete"},
+            "purchase_planning_mode": args.purchase_mode, "recipe_preferences": {"mode": "complete"},
             "personal": {"allow_nutrition_estimates": True, "use_pantry": False, "slots": [slot],
                 "meals": [{"meal_type": meal, "count": 1, "servings": recipe.servings,
                            "recipe_choices": {"min_ingredients": 1, "max_ingredients": 40}, "limits": {}}]}})
@@ -157,6 +158,8 @@ if __name__ == "__main__":
     parser.add_argument("--runtime-tree")
     parser.add_argument("--pack-id", action="append")
     parser.add_argument("--probe-id", action="append", default=[])
+    parser.add_argument("--probe-only", action="store_true", help="Skip the already completed common input inventory")
+    parser.add_argument("--purchase-mode", choices=["exact", "estimated"], default="exact")
     parser.add_argument("--plan-store", type=Path, default=Path(".local/recipes/intake-probes.sqlite3"))
     parser.add_argument("--output", type=Path, required=True)
     inventory(parser.parse_args())

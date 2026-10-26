@@ -557,6 +557,14 @@ class PersonalPlanner:
             positions = self.index.groups.get(product_key, ())
         else:
             positions = set(self.declared_positions.get(canonical, ()))
+            if self.complete and recipe is not None and any(
+                    i.canonical_name == canonical and any(r.startswith("pack:intake_all_")
+                        for r in i.product_requirements or ()) for i in recipe.ingredients):
+                from app.services.intake_product_links import (
+                    search_positions as intake_search_positions,
+                )
+
+                positions.update(intake_search_positions(self.prepared).get(canonical, ()))
             # Reuse the semantic index first, and the existing product search for
             # goods outside the dinner taxonomy (including liver pâté/napkins).
             for candidate in self.view.economic_pool.candidates_by_name.get(canonical, ()):
@@ -642,6 +650,9 @@ class PersonalPlanner:
 
             reviewed_apple = canonical == 'äpple' and reviewed_reference(
                 product, canonical, self.source_facts(product)) == 588
+            from app.services.intake_product_links import recipe_product as reviewed_intake_product
+
+            reviewed_intake = self.complete and recipe is not None and reviewed_intake_product(recipe, name, product, self.source_facts(product))
             if canonical == "kvarg" and not product_key and not reviewed_quark:
                 note(i, "recipe_match", "stopped", "plain quark identity/composition not established")
                 continue
@@ -655,17 +666,18 @@ class PersonalPlanner:
                 conflicts.append(exc)
                 note(i, "policy", "stopped", str(exc))
                 continue
-            if (reviewed_quark or reviewed_apple) and not product_key:
+            if (reviewed_quark or reviewed_apple or reviewed_intake) and not product_key:
                 candidate = ProductCandidate.from_product(product, 1).model_copy(
                     update={
                         "semantic_confidence": "high",
                         "semantic_evidence": [
-                            "reviewed plain quark name/form and retained dairy ingredients"
+                            "reviewed exact intake GTIN/source identity, whole label and package; no inferred quantity conversion"
+                            if reviewed_intake else "reviewed plain quark name/form and retained dairy ingredients"
                             if reviewed_quark else "reviewed complete fresh apple label and produce category"
                         ],
-                        "canonical_food": "kvarg" if reviewed_quark else "apple",
-                        "food_family": "dairy" if reviewed_quark else "fruit",
-                        "product_role": "quark" if reviewed_quark else "whole_fruit",
+                        "canonical_food": canonical if reviewed_intake else "kvarg" if reviewed_quark else "apple",
+                        "food_family": None if reviewed_intake else "dairy" if reviewed_quark else "fruit",
+                        "product_role": "reviewed_whole_food" if reviewed_intake else "quark" if reviewed_quark else "whole_fruit",
                     }
                 )
             elif product_key:

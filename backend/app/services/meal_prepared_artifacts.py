@@ -195,6 +195,7 @@ def method_signature():
     # Conservative code invalidation also binds authoritative declaration
     # adapters and model changes. Content-only imports keep this signature.
     paths = [*base.joinpath("models").glob("*.py"),*base.joinpath("services").glob("*.py"),
+             *base.joinpath("data/ingredients").glob("*.json"),
              *base.joinpath("data/nutrition").glob("*.json"),
              repository / "grocery_data/app/data/product_declarations.json",
              repository / "grocery_data/app/services/product_declarations.py"]

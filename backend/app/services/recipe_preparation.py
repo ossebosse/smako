@@ -260,7 +260,11 @@ def input_evidence_identity(recipe, name, recipe_cache):
 
 def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache: RecipeComputationCache | None = None):
     """Preserve identity, units, source values and opt-in at the caller."""
+    from app.services.intake_product_links import gross_purchase_input
     from app.services.nutrition_reference import product_reference, reference_evidence
+
+    if gross_purchase_input(recipe, canonical(name)):
+        return None
 
     # Only the exact recipe's pure preparation validation is reusable. Product
     # identity, source, input form, units and nutrient qualification below still
