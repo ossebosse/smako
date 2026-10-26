@@ -485,7 +485,10 @@ def facts_version(facts):
     """
     digest = hashlib.sha256()
     digest.update(b"[")
+    from app.services.plan_jobs import check_cancelled
     for position, (key, fact) in enumerate(sorted(facts.items())):
+        if position % 256 == 0:
+            check_cancelled()
         if position:
             digest.update(b",")
         digest.update(json.dumps([list(key), fact], default=_fact_json,

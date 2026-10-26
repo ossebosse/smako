@@ -55,6 +55,7 @@ from app.services.personal_policy import (
     protein_category,
 )
 from app.services.personal_store import available_items, consumed_demands, demand_key
+from app.services.plan_jobs import PlanningDeadlineExceeded
 from app.services.recipe_candidate_generator import DeterministicRecipeCandidateGenerator
 from app.services.recipe_candidate_validator import recipe_id
 from app.services.recipe_computation_cache import (
@@ -184,9 +185,10 @@ class PersonalPlanner:
         self.timings["product_facts"] += perf_counter() - facts_started
         from app.services.personal_source_facts import facts_version
 
-        self.facts_version = (facts_version(self.facts)
-            if getattr(settings, "library_search_policy", "legacy") == "smako-verified-reference-v1"
-            else getattr(self.facts, "version", None) or facts_version(self.facts))
+        with performance_span("personal_facts_identity"):
+            self.facts_version = (facts_version(self.facts)
+                if getattr(settings, "library_search_policy", "legacy") in {"smako-verified-reference-v1", "smako-current-library-v2"}
+                else getattr(self.facts, "version", None) or facts_version(self.facts))
         self.reference_version = None
         if self.spec.allow_nutrition_estimates:
             from app.services.nutrition_reference import reference_data
@@ -196,7 +198,9 @@ class PersonalPlanner:
         self.now = now or datetime.now(UTC)
         self.pricing_date = self.now.astimezone(ZoneInfo("Europe/Stockholm")).date()
         self.service = MealPlanService(settings)
+        self.current_library_search = getattr(settings, "library_search_policy", "legacy") == "smako-current-library-v2"
         self.optimizer = BasketOptimizer(
+            prune_dominated_stores=self.current_library_search,
             memoize_store_subsets=True,
             verification_policy=BasketVerificationPolicy.strict_live(
                 allow_estimated_quantities=request.purchase_planning_mode == "estimated", allow_medium_semantic=False
@@ -233,7 +237,8 @@ class PersonalPlanner:
         from app.services.meal_prepared_artifacts import declaration_index
         self.declared_classes = {}
         self.declared_positions = defaultdict(set)
-        self.declared_classes = declaration_index(prepared.universe,self.facts,self.source_facts)
+        self.declared_classes = declaration_index(prepared.universe,self.facts,self.source_facts,
+            verified_version=self.facts_version if self.current_library_search else None)
         for i, food_class in self.declared_classes.items():
             self.declared_positions[food_class].add(i)
         self.lookup_cache = {}
@@ -1232,7 +1237,7 @@ class PersonalPlanner:
         if len(slots) == 1:
             nutrition_bounds = self._nutrition_search_bounds(slots, candidate_map, rows, allocations)
             self._reject_nutrition_bounds(slots, nutrition_bounds)
-        with self.optimizer.quote_cache(reuse_existing=True):
+        with self.optimizer.quote_cache(reuse_existing=True, **self._quote_cache_args()):
             try:
                 package_started = perf_counter()
                 with performance_span("personal_package_calculation"):
@@ -1784,7 +1789,9 @@ class PersonalPlanner:
             return total
 
         cost_pruned = 0
+        from app.services.plan_jobs import check_cancelled
         while queue and searched < self.nutrition_search_limit:
+            check_cancelled()
             _, indices = heapq.heappop(queue)
             for dimension, index in enumerate(indices):
                 if index + 1 < len(choices[dimension]):
@@ -2556,12 +2563,20 @@ class PersonalPlanner:
             raise PolicyConflict(f"Inga användbara recept för {meal.meal_type} med dina val.")
         return valid
 
+    def _quote_cache_args(self):
+        if (not self.current_library_search or any(self.request.pricing_memberships.values())
+                or self.request.use_member_prices):
+            return {}
+        from app.services.meal_prepared_artifacts import method_signature
+        return {"price_universe":self.prepared.universe, "persistent_cache":self.prepared.package_cache,
+            "calculator_version":f"current-library-v2:{method_signature()}:{self.pricing_date.isoformat()}"}
+
     def create(self, *, replace_slot=None, balanced_reference=None, _compare_scopes=True):
         started = perf_counter()
         self._release_idle_memory()
         incumbents = []
         incumbent_scopes = {}
-        if (self.complete and _compare_scopes and self.request.diversity_mode == "cheapest"
+        if (self.complete and not self.current_library_search and _compare_scopes and self.request.diversity_mode == "cheapest"
                 and self.spec.slots is None and replace_slot is None):
             scopes = [(cap, self.request.purchase_planning_mode) for cap in range(1, self.request.max_stores)]
             if self.request.purchase_planning_mode == "estimated":
@@ -2594,7 +2609,7 @@ class PersonalPlanner:
             # private state and budget. Never load another owner's saved plan.
             # If no added recipe qualifies, the old ordered pool is identical
             # and repeating its full search would have no benefit.
-            if (self._library_search_handled
+            if (self.current_library_search or self._library_search_handled
                     or not self.complete or not self.include_content_pack or not self._supplement_qualified
                     or not _compare_scopes
                     or self.spec.slots is not None or replace_slot is not None):
@@ -2618,7 +2633,7 @@ class PersonalPlanner:
             incumbent_scopes[id(candidate)] = {"max_stores": self.request.max_stores,
                 "purchase_planning_mode": self.request.purchase_planning_mode, "library": "before_content_pack"}
         try:
-            with self.optimizer.quote_cache():
+            with self.optimizer.quote_cache(**self._quote_cache_args()):
                 result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
             retain_library_comparison()
             if incumbents:
@@ -2631,6 +2646,9 @@ class PersonalPlanner:
                     "meaning": "Giltiga lösningar med färre butiker, exakt köp och tidigare recepturval jämförs när sökområdet utökas.",
                 })
             return self._finalize_result(result, started)
+        except PlanningDeadlineExceeded as exc:
+            exc.diagnostics = self.diagnostics.snapshot()
+            raise
         except (ValueError, IncompleteBasketError) as exc:
             if not any(scope.get("library") == "before_content_pack" for scope in incumbent_scopes.values()):
                 retain_library_comparison()
@@ -3288,6 +3306,12 @@ class PersonalPlanner:
         return result
 
     def _finalize_result(self, result, started):
+        if self.current_library_search:
+            result.personal.checks["planning_policy"] = {
+                "policy": "smako-current-library-v2", "library": "current_manifest",
+                "historical_replay": False, "global_optimum_proven": False,
+                "scope_comparisons": "not_replayed_in_request", "deadline_seconds": 60,
+            }
         self.product_trace.finalize(result.optimized_basket)
         comparison = result.personal.checks.get("scope_comparison", {})
         if not comparison.get("selected_from_narrow_scope"):
@@ -3317,6 +3341,7 @@ class PersonalPlanner:
 
         payload = {
             "policy": POLICY_VERSION,
+            "search_policy": getattr(self.settings, "library_search_policy", "legacy"),
             "week_classification": CLASSIFICATION_VERSION,
             "request": self.request.model_dump(mode="json"),
             "pantry_revision": self.state["revision"],
@@ -3594,7 +3619,7 @@ class PersonalPlanner:
         report_stage("week_search")
         from app.services.menu_optimizer import MenuOptimizer
         incremental_library = (
-            prepared_menu is None and self.complete and generating and self.include_content_pack and replace_slot is None
+            not self.current_library_search and prepared_menu is None and self.complete and generating and self.include_content_pack and replace_slot is None
             and getattr(self._candidates, "__func__", None) is PersonalPlanner._candidates
             and type(self.service.menu_optimizer) is MenuOptimizer
             and getattr(self.service.menu_optimizer.optimize_slots, "__func__", None) is MenuOptimizer.optimize_slots

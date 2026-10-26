@@ -36,7 +36,30 @@ def cancellable_work():
         _work_cancellation.reset(token)
 
 
+_planning_deadline: ContextVar = ContextVar("planning_deadline", default=None)
+
+
+class PlanningDeadlineExceeded(RuntimeError):
+    """Must escape pricing/beam ValueError retries before HTTP translation."""
+
+
+@contextmanager
+def planning_deadline(seconds):
+    previous = _planning_deadline.get()
+    limit = monotonic() + seconds if seconds is not None else previous
+    if previous is not None and limit is not None:
+        limit = min(previous, limit)
+    token = _planning_deadline.set(limit)
+    try:
+        yield
+    finally:
+        _planning_deadline.reset(token)
+
+
 def check_cancelled():
+    deadline = _planning_deadline.get()
+    if deadline is not None and monotonic() >= deadline:
+        raise PlanningDeadlineExceeded("The complete planning deadline expired")
     stop = _work_cancellation.get()
     if stop is not None and stop.is_set():
         raise asyncio.CancelledError()

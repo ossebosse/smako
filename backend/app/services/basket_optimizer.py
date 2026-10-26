@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 from dataclasses import replace as dataclass_replace
 from decimal import Decimal, getcontext
 from itertools import combinations
+from math import comb
 from threading import RLock
 from time import perf_counter
 from typing import Any
@@ -306,6 +307,7 @@ class StoreSubsetCacheStats:
 
 @dataclass(slots=True)
 class _QuoteCacheSession:
+    dominance_rows: dict = field(default_factory=dict)
     promotion_structure_rows: dict[int, tuple[tuple, tuple, tuple]] = field(default_factory=dict)
     promotion_structure_candidates: int = 0
     # Only the authoritative ordering of stores determines a subset's winner.
@@ -427,6 +429,7 @@ class BasketOptimizer:
         *,
         verification_policy: BasketVerificationPolicy | None = None,
         memoize_store_subsets: bool = False,
+        prune_dominated_stores: bool = False,
     ) -> None:
         self.calculator = calculator or BasketCalculator()
         self.verification_policy = (
@@ -437,12 +440,52 @@ class BasketOptimizer:
             default=None,
         )
         self.memoize_store_subsets = memoize_store_subsets
+        self.prune_dominated_stores = prune_dominated_stores
         self._store_subset_lock = RLock()
         self._store_subsets: dict[
             tuple[tuple[str, ...], int], tuple[tuple[str, ...], ...]
         ] = {}
         self._store_subset_hits = 0
         self._store_subset_misses = 0
+
+    def _undominated_store_ids(self, store_ids, quoted_ingredients):
+        """Exact independent-checkout dominance; never used for coupled offers.
+
+        An earlier store can replace T only with IDENTICAL line coverage,
+        equal per-line ranks and no higher checkout price. Extra higher-rank
+        coverage can otherwise raise a rank-first line's price while the whole
+        basket's max rank stays unchanged. Earlier identity preserves ties.
+        Candidate products remain intact for nutrition/eco alternative searches.
+        """
+        from app.services.plan_jobs import check_cancelled
+        session = self._quote_cache_context.get()
+        dominators = [(1 << i) - 1 for i in range(len(store_ids))]
+        for _ingredient, quotes, key in quoted_ingredients:
+            check_cancelled()
+            cache_key = (key, store_ids) if key is not None else None
+            masks = session.dominance_rows.get(cache_key) if session and cache_key else None
+            if masks is None:
+                by_store = self._cheapest_quotes_by_store(quotes, key)
+                masks = []
+                for target in store_ids:
+                    quote = by_store.get(target)
+                    if quote is None:
+                        masks.append(sum(1 << i for i, source in enumerate(store_ids) if source not in by_store))
+                        continue
+                    rank = self.verification_policy.rank_for_quote(quote)
+                    masks.append(sum(1 << i for i, source in enumerate(store_ids)
+                        if (other := by_store.get(source)) is not None
+                        and self.verification_policy.rank_for_quote(other) == rank
+                        and other.total_price <= quote.total_price))
+                masks = tuple(masks)
+                if session and cache_key:
+                    if len(session.dominance_rows) >= 4096:
+                        session.dominance_rows.pop(next(iter(session.dominance_rows)))
+                    session.dominance_rows[cache_key] = masks
+            dominators = [current & allowed for current, allowed in zip(dominators, masks, strict=True)]
+        retained = tuple(store for store, mask in zip(store_ids, dominators, strict=True) if not mask)
+        increment_performance_counter("store_contexts_pruned_dominated", len(store_ids) - len(retained))
+        return retained
 
     def _eligible_store_subsets(
         self,
@@ -756,7 +799,9 @@ class BasketOptimizer:
                 required_quantity=ingredient.required_quantity,
                 required_unit=ingredient.unit,
                 calculator_version=session.calculator_version,
-                factory=lambda: self._calculate_quote_uncached(ingredient, candidate),
+                # The shared value has no caller's purchase-line/extra label.
+                # Rebind it only in this request's named quote below.
+                factory=lambda: dataclass_replace(self._calculate_quote_uncached(ingredient, candidate), ingredient=""),
             )
         else:
             quote = self._calculate_quote_uncached(ingredient, candidate)
@@ -1483,6 +1528,8 @@ class BasketOptimizer:
         subsets, Decimal sums, max ranks and union of winning stores, including
         every nested cap. No float, heuristic pruning or weaker bound is used.
         """
+        from app.services.plan_jobs import check_cancelled
+        check_cancelled()
         if not store_subsets:
             result = ([None] * limit, 0)
             return (*result, 0) if winning_mask else result
@@ -1554,6 +1601,7 @@ class BasketOptimizer:
         states = {(0, 0 if integer_prices else Decimal(0), 0): (1 << len(store_subsets)) - 1}
         settled = {}
         for partition_index, (groups, positions) in enumerate(partitions):
+            check_cancelled()
             refined = {}
             # Every singleton at this depth traverses the same suffix. Build
             # it once, without changing the order of Decimal additions.
@@ -1790,6 +1838,8 @@ class BasketOptimizer:
         calculate_savings: bool = True,
         _accept_quote_selection=None,
     ) -> OptimizedBasket:
+        from app.services.plan_jobs import check_cancelled
+        check_cancelled()
         if _has_coupled_checkout(candidates_by_name, (i.canonical_name for i in ingredients), session=self._quote_cache_context.get()):
             return self._optimize_promotion_groups(
                 ingredients,
@@ -1851,6 +1901,12 @@ class BasketOptimizer:
         best_single_total: Decimal | None = None
         best_single_key: tuple[int, Decimal] | None = None
         store_ids = tuple(str(_value(store, "store_id")) for store in ordered_stores)
+        if self.prune_dominated_stores and type(self.calculator) is BasketCalculator:
+            before = sum(comb(len(store_ids), n) for n in range(1, limit + 1))
+            store_ids = self._undominated_store_ids(store_ids, quoted_ingredients)
+            limit = min(limit, len(store_ids))
+            increment_performance_counter("store_subsets_avoided_by_dominance",
+                before - sum(comb(len(store_ids), n) for n in range(1, limit + 1)))
         store_subsets = self._eligible_store_subsets(store_ids, limit)
         # Same exact per-store minima and deterministic tie breakers as the
         # scalar subset loop. Reuse the existing bounded, request-local quote
@@ -1882,7 +1938,9 @@ class BasketOptimizer:
         # subsets here. Both preserve ascending order and every tie breaker;
         # neither reduces the menu search budget or prunes by comparison price.
         session = self._quote_cache_context.get()
+        from app.services.plan_jobs import check_cancelled
         while winning_positions:
+            check_cancelled()
             bit = winning_positions & -winning_positions
             position = bit.bit_length() - 1
             winning_positions ^= bit
@@ -2106,7 +2164,9 @@ class BasketOptimizer:
                         "Erbjudandesökningen nådde beräkningsgränsen. Korgen använder verifierade baspriser; erbjudandetilläggen har utelämnats."]})
             raise GroupPricingError("Kampanjkombinationen är för stor för verifierad exakt beräkning.")
         best, best_items, single = None, None, None
+        from app.services.plan_jobs import check_cancelled
         for combination in product(*choices):
+            check_cancelled()
             used_stores = {q.store_id for q, _ in combination}
             if max_stores and len(used_stores) > max_stores:
                 continue

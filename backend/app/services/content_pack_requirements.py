@@ -43,7 +43,7 @@ BEEF_SPECIFIC_CUTS = {
     "beef_roasting_cut": r"rostbiff|fransyska|notrulle",
     "beef_lean_strips_cut": r"innanlar|ytterlar|rostbiff|fransyska|flankstek",
 }
-PACK_KEYS = PACK_KEYS | BEEF_SPECIFIC_CUTS.keys()
+PACK_KEYS = PACK_KEYS | BEEF_SPECIFIC_CUTS.keys() | {"rye_bread"}
 
 
 def intake_whole_identity(canonical, form, label, composition):
@@ -92,6 +92,13 @@ def compatible(keys, product, fact):
         "tortilla": r"vete", "gnocchi": r"gnocchi", "peanuts": r"jordnötter",
     }
     for key in keys:
+        # The whole marketed class is rye bread, not generic bread/pita.
+        # A missing formula gives no allergen/nutrient or rye-share proof;
+        # an actual formula must not contradict the named rye identity.
+        if key == "rye_bread" and (not re.search(r"\brågbröd\b", text)
+                or re.search(r"pita|wrap|tortilla|fylld|smörgås", text)
+                or (composition and not re.search(r"\b(?:råg|rågmjöl|fullkornsråg|rågfullkorn|fullkornsrågmjöl)\b", composition))):
+            return False
         if key in BEEF_SPECIFIC_CUTS:
             from app.services.ingredient_normalizer import _search_text
 

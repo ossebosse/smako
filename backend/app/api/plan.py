@@ -591,17 +591,20 @@ async def create_plan(
     debug: bool | None = None,
 ) -> PlanResponse:
     """Create a price-driven menu and a package-aware optimized basket."""
+    settings = get_settings()
+    return await _with_current_deadline(settings, lambda: _create_plan_body(request, http_request, settings, debug))
 
+
+async def _create_plan_body(request: PlanRequest, http_request: Request, settings: Settings, debug=None):
     if debug is not None:
         request = request.model_copy(update={"debug": debug})
-    settings = get_settings()
     request = _production_consumer_request(request, settings)
     request = _prepare_complete_request(request, http_request, settings)
     if settings.price_universe_required:
         _assert_offline_ready(request, settings)
     try:
         plan = _with_release(
-            await _run_admitted_plan(request, http_request, settings),
+            await _with_current_deadline(settings, lambda: _run_admitted_plan(request, http_request, settings)),
             settings,
         )
         if settings.price_universe_required:
@@ -624,8 +627,11 @@ async def create_plan(
 @router.post("/plans", response_model=SavedPlan, status_code=201)
 async def create_saved_plan(request: PlanRequest, http_request: Request):
     """Create and persist a reproducible, provider-offline consumer plan."""
-
     settings = get_settings()
+    return await _with_current_deadline(settings, lambda: _prepare_saved_plan(request, http_request, settings))
+
+
+async def _prepare_saved_plan(request: PlanRequest, http_request: Request, settings: Settings):
     request = _production_consumer_request(request, settings)
     request = _prepare_complete_request(request, http_request, settings)
     consumer_request = _consumer_request(request)
@@ -755,7 +761,28 @@ async def find_plan_job(request_id: str, http_request: Request):
     return _pending_plan_job(job)
 
 
+async def _with_current_deadline(settings, work):
+    if getattr(settings, "library_search_policy", "legacy") != "smako-current-library-v2":
+        return await work()
+    from app.services.plan_jobs import PlanningDeadlineExceeded, check_cancelled, planning_deadline
+    try:
+        with planning_deadline(60):
+            result = await work()
+            check_cancelled()  # Includes mandatory checkout and persistence.
+            return result
+    except PlanningDeadlineExceeded as exc:
+        raise PolicyConflict(
+            "Sökningen är ofullständig efter tidsgränsen. Ingen slutkontrollerad lista kunde levereras. Dina krav har inte ändrats.",
+            code="SEARCH_INCOMPLETE", stage="search_deadline",
+            diagnostics=getattr(exc, "diagnostics", None),
+        ) from exc
+
+
 async def _create_saved_plan(consumer_request: PlanRequest, http_request: Request, settings: Settings) -> SavedPlan:
+    return await _with_current_deadline(settings, lambda: _create_saved_plan_body(consumer_request, http_request, settings))
+
+
+async def _create_saved_plan_body(consumer_request: PlanRequest, http_request: Request, settings: Settings) -> SavedPlan:
     try:
         plan = _with_release(
             await _run_admitted_plan(consumer_request, http_request, settings),

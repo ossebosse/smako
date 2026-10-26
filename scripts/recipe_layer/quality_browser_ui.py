@@ -48,9 +48,10 @@ def run(app, request, result, args, started, save):
             expect(page.locator("#confirm-location")).to_be_enabled(timeout=30000)
             page.locator("#confirm-location").click()
             expect(page.locator("#generate-plan")).to_be_enabled(timeout=30000)
-            assert page.locator("#meal-dinner-min_ingredients").input_value() == "5"
-            assert page.locator("#meal-dinner-max_ingredients").input_value() == "7"
-            assert page.locator("#meal-dinner-max_total_minutes").input_value() == "45"
+            meal = draft["personal"]["meals"][0]
+            for key, value in (meal.get("recipe_choices") or {}).items():
+                if value is not None:
+                    assert page.locator("#meal-dinner-" + key).input_value() == str(value)
             for cuisine in draft["recipe_preferences"]["cuisines"]:
                 assert page.locator("#cuisine-" + cuisine).is_checked()
             result.update(preparation_seconds=time.perf_counter() - started, status="running",
@@ -64,12 +65,14 @@ def run(app, request, result, args, started, save):
                 plan_visible = time.perf_counter() - click
                 assert len(submitted) == 1
                 payload = submitted[0]
-                meal = payload["personal"]["meals"][0]
-                assert meal["count"] == 1 and meal["servings"] == 2
-                assert meal["recipe_choices"]["max_active_minutes"] == 30
-                protein = draft["personal"]["meals"][0]["limits"].get("min_protein_g")
-                if protein is not None:
-                    assert meal["limits"]["min_protein_g"] == protein
+                from app.models import PlanRequest
+                actual = PlanRequest.model_validate(payload).model_dump(mode="json")
+                expected = request.model_dump(mode="json")
+                # Registration created an empty private pantry. The UI omits
+                # the flag (True); the saved API draft explicitly has False.
+                actual["personal"].pop("use_pantry", None)
+                expected["personal"].pop("use_pantry", None)
+                assert actual == expected, "UI changed normalized hard choices"
                 assert set(payload["allowed_store_ids"]) == set(draft["allowed_store_ids"])
                 plan_id = page.evaluate("localStorage.getItem('smako.personal.lastPlan')")
                 read = context.request.get(base + "/api/plans/" + plan_id)
@@ -91,7 +94,7 @@ def run(app, request, result, args, started, save):
                     plan_sha256=hashlib.sha256(encoded(plan)).hexdigest(), submitted_request=payload,
                     expensive_posts=len(submitted), page_errors=errors)
                 (args.state / "browser-saved.json").write_bytes(encoded(saved))
-                page.screenshot(path=str(args.state / "browser-shopping.png"), full_page=True)
+                page.locator("#personal-shopping").screenshot(path=str(args.state / "browser-shopping.png"))
                 page.reload(wait_until="domcontentloaded")
                 expect(page.locator("#plan-content .personal-total")).to_be_visible(timeout=15000)
                 assert len(submitted) == 1

@@ -134,7 +134,7 @@ def current_recipes(generation=None):
 
 def reset_library_caches():
     for function in (_registered, _registered_history, _registered_portions,
-                     _registered_historical_portions, _issued_index):
+                     _registered_historical_portions, _issued_index, _current_issued_index):
         function.cache_clear()
     _revocations.cache_clear()
     _prepared_recipe_lookup.cache_clear()
@@ -338,7 +338,10 @@ def validate_recipe_design(recipe: Recipe) -> bool:
     reason = _revocations().get(f"{d.base_id}:{d.version}:{d.variant_id}")
     if reason:
         raise ValueError("Receptversionens innehållsgodkännande har återkallats: " + reason)
-    registered = _issued_index(recipe.servings).get((d.base_id, d.version, d.variant_id))
+    key = (d.base_id, d.version, d.variant_id)
+    registered = _current_issued_index(recipe.servings).get(key)
+    if registered is None:
+        registered = _issued_index(recipe.servings).get(key)
     if registered is None or _exact_value(recipe) != registered:
         _structural_check(recipe)  # retain precise diagnostics for rejected edits
         raise ValueError("Receptversionen eller mängden saknar godkänd innehållsgranskning.")
@@ -370,6 +373,17 @@ def _exact_value(recipe):
     if prep:
         prep = (*prep[:4], tuple(sorted(prep[4])))
     return (*value[:4], prep, value[5])
+
+
+@lru_cache(maxsize=12)
+def _current_issued_index(servings):
+    """Public exact current values; historical plans keep their fallback index."""
+    from app.services.plan_jobs import check_cancelled
+    rows = {}
+    for r in _registered_portions(servings):
+        check_cancelled()
+        rows[(r.design.base_id, r.design.version, r.design.variant_id)] = _exact_value(r)
+    return rows
 
 
 @lru_cache(maxsize=12)

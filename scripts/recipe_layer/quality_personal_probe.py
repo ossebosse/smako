@@ -30,7 +30,8 @@ def main(args):
         COMPLETE_RECIPES_ENABLED="true", APP_ENV="test", PUBLIC_BASE_URL=base,
         PRICE_UNIVERSE_PREWARM_ENABLED="false", SOURCE_FACTS_PREWARM_ENABLED="false",
         ALLOW_PROVIDER_FALLBACK="false", ALLOW_MOCK_FALLBACK="false",
-        RECIPE_PREPARATION_CACHE_ROOT=str(state.parent / "quality-prepared"))
+        RECIPE_PREPARATION_CACHE_ROOT=str(state.parent / "quality-prepared"),
+        LIBRARY_SEARCH_POLICY=args.policy)
     from app.config import get_settings
 
     from grocery_data.app.storage.database import create_database_engine, create_schema
@@ -49,8 +50,24 @@ def main(args):
     facts = FactsCollection({tuple(k): ProductFacts(**v) for k, v in raw["facts"]})
     facts.version = raw["facts_version"]
     del raw
+    source_loading_seconds = time.perf_counter() - started
+    shared_preparation = None
+    shared_preparation_seconds = 0
     from app.services.official_product_facts import shell_egg_quantity_proofs
     shell_egg_quantity_proofs(prepared.universe.products, facts)
+    if args.policy == "smako-current-library-v2":
+        from app.services.meal_prepared_artifacts import prepare_current_sources
+        payload = json.loads(args.requests.read_bytes())[args.case]
+        portions = {m["servings"] for m in payload["personal"]["meals"] if m["count"]}
+        common_started = time.perf_counter()
+        def common_progress(phase):
+            from app.services.meal_library_content import encoded
+            from app.services.meal_prepared_artifacts import STATS
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.with_suffix(".progress.json").write_bytes(encoded({"state":"preparing", "phase":phase,
+                "elapsed_seconds":time.perf_counter()-started, "cache_stats":dict(STATS)}))
+        shared_preparation = prepare_current_sources(prepared, facts, portions=portions, progress=common_progress)
+        shared_preparation_seconds = time.perf_counter() - common_started
     from app.services import personal_source_facts
     personal_source_facts.load_retained_facts = lambda *a, **kw: facts
     clock = datetime.fromisoformat(args.clock)
@@ -92,6 +109,8 @@ def main(args):
     request = PlanRequest.model_validate(json.loads(args.requests.read_bytes())[args.case])
     result = {"case": args.case, "request": request.model_dump(mode="json"), "clock": args.clock,
         "total_current_variants": len(current_recipes()), "policy": get_settings().library_search_policy,
+        "source_loading_seconds": source_loading_seconds,
+        "shared_preparation": shared_preparation, "shared_preparation_seconds": shared_preparation_seconds,
         "library_merge_generations": get_settings().library_merge_generations,
         "method_signature": method_signature(),
         "library_manifest_sha256": hashlib.sha256(Path("backend/app/data/recipes/library-manifest.json").read_bytes()).hexdigest(),
@@ -178,4 +197,5 @@ if __name__ == "__main__":
     p.add_argument("--profile", action="store_true")
     p.add_argument("--browser", action="store_true")
     p.add_argument("--expected-total", type=float)
+    p.add_argument("--policy", choices=["legacy", "smako-current-library-v2"], default="legacy")
     main(p.parse_args())

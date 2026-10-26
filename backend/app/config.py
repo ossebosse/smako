@@ -152,7 +152,7 @@ class Settings:
     allow_unknown_sale_model: bool = False
 
     def __post_init__(self) -> None:
-        if self.library_search_policy not in {"legacy", "smako-verified-reference-v1"}:
+        if self.library_search_policy not in {"legacy", "smako-verified-reference-v1", "smako-current-library-v2"}:
             raise ValueError("Unknown LIBRARY_SEARCH_POLICY")
         if self.app_env not in {"development", "test", "production"}:
             raise ValueError("APP_ENV must be development, test or production")

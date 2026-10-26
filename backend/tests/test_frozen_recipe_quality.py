@@ -63,13 +63,15 @@ def test_all_amended_versions_keep_history_and_original_library_and_source_bytes
     report = json.loads((ROOT.parents[3] / "docs/reviews/recipe-quality-and-planning-20261026/recipe-review.json").read_bytes())
     current = {identity(r): r for r in current_recipes()}
     manifest = manifest_entries()
-    issued = {identity(r) for r in load_entries([*manifest["current"], *manifest["history"]], ROOT)}
+    issued = {identity(r): r for r in load_entries([*manifest["current"], *manifest["history"]], ROOT)}
+    week = json.loads((ROOT.parents[3] / "docs/reviews/week-search-and-cache-20261026/recipe-review.json").read_bytes())
+    successors = {r["previous_id"]: r["runtime_id"] for r in week["corrected"]}
     assert report["affected_variants"] == 337
     assert len(current) == 2462
     for row in report["recipes"]:
         assert row["previous_id"] in issued and row["previous_id"] in manifest["revocations"]
-        assert row["previous_id"] not in current and row["runtime_id"] in current
-        assert current[row["runtime_id"]].design.content_sha256 == row["content_sha256"]
+        assert row["previous_id"] not in current and successors.get(row["runtime_id"], row["runtime_id"]) in current
+        assert issued[row["runtime_id"]].design.content_sha256 == row["content_sha256"]
     for original in current_recipes(13):
         assert current[identity(original)].model_dump() == original.model_dump()
 

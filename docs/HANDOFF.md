@@ -1,3 +1,56 @@
+# 2026-10-26: Spett/rågbröd rättade, cache lagrar igen, B ger strukturellt avslag
+
+[PR #16](https://github.com/ossebosse/smako/pull/16) genomför den avgränsade
+leveransen i WEEK-SEARCH. Läs [rapporten](reviews/week-search-and-cache-20261026.md)
+och maskinunderlagen före nästa mätning. Sex spettvarianter har 1.0.3 med
+sammanhängande tina/skär/trä/ugn; tre rågbrödsvarianter har 1.0.1 med
+`pack:rye_bread` och faktisk rostning. Tolv andra direkt-fryst-varianter
+verifieras oförändrade. Historiska bytes/referenser bevaras; 2 462 aktiva
+varianter/934 baser, 39 aktuella och sju historiska paketgenerationer.
+
+Ny opt-in `smako-current-library-v2` söker aktuell kvalificerad pool utan
+historiska menykohorter, återanvänder rena offentliga offertdelar och gallrar
+bara bevisat dominerade butiker i oberoende checkout. Små uttömmande orakel
+behåller bästa pris även för paket, kopplade kampanjer och närings-/ekoval.
+Legacy förblir standard och `library_merge_generations=False`.
+
+Fylld cache → nytt underlag → faktisk lagring → träff efter omstart fungerar:
+95,97 s första färdiga förberedelse, 2 464 skrivningar/2 461 gallrade poster;
+ny B-process ger 4 926 träffar, noll missar/skrivningar. Totalt 3 430 745 byte.
+Första 120 s-stoppet och mätt per-post-fsync-flaskhals är bevarade; korrigerad
+återbyggbar cache använder atomisk replace. Avbrott/omstart/CAS-fencing,
+byte-/posttak och säker fallback har riktade prov. Bara en behörig verklig
+pris-/faktaversion finns; veckouppdatering och två fulla prisversioners
+överlapp är fortfarande omätta. Uppmätt högsta job-commit för B är 1,47 GiB.
+
+Oförändrat B ger **HTTP 422 SEARCH_BLOCKED efter 45,10 s**, ingen färdig vecka,
+audit, sparad lista, totalsumma eller browserlatens. Samma 681→29 kandidater
+och samma första avslag; butikskombinationer minskar från 1 566 881 i det
+gamla partiella 60 s-kvittot till 93 269 vid det nya slutliga avslaget.
+868 132 delmängder undviks av dominans. Det är minskat arbete, ingen lyckad
+veckolatens eller bevisad prisparitet. A/browservillkoret uppfylldes inte.
+
+Budgeterat strukturprov på exakt B:s 29 kvalificerade recept: 25 kyckling,
+fyra vegetariska, samtliga 13 800 kombinationer med 3+2 kontrollerade.
+2 160 stoppas av upprepad bas och 11 640 av kulinarisk variation. Normaliserat
+anrop har `max_same_primary_ingredient_meals=2`; upplöst balanced-policy har
+samma tak samtidigt som B kräver 3 kyckling och tillåter 3 samma huvudprotein.
+Klarlägg denna policykonflikt utan tyst
+kravlättnad före fler dyra veckoprov. Kvarvarande historisk modellsharing
+och jämförelser av samma meny efter en vinnare är också kvar att tidsmäta.
+
+**Rättelse:** tidigare rapport/uppdrag säger 55 valda butikskontexter, men
+det sparade B-underlaget innehåller 52 `allowed_store_ids`. Nya och gamla
+normaliserade B-anrop är exakt lika; inga butiker lades till eller togs bort.
+Detta kvalificerar inte ett 55-butiksanrop. Tidigare 733/920 individuell
+produktlösbarhet har inte inventerats om; rågbröd är inget allergenintyg.
+
+Samma journal: **4 226,3128 s använda / 2 973,6872 s kvar (49,56 min)**.
+Senaste samlade riktade prov 78 PASS; innehåll 434, breda kärnregressioner 233
+och senaste cacheprov 31 PASS överlappar. Ruff/compileall gröna; grön ordinarie
+CI inklusive browser på slutligt PR-huvud krävs före mainintegration.
+Ingen ny budget, stor matris, kvarlämnad mätarbetare eller betaaktivering.
+
 # 2026-10-26: Nästa Sol-uppdrag — kvarstående receptfel, veckosökning och cache
 
 Ägaren har efter granskningen av PR #15 gett nästa uppdrag till Sol:
