@@ -220,3 +220,16 @@ def test_large_batch_retains_real_active_time_and_obeys_user_limit():
                  and (scaled := _scaled(recipe, 12)).design.active_minutes is not None
                  and scaled.design.active_minutes > 180 and matches_meal(scaled, unlimited, preferences))
     assert not matches_meal(batch, limited, preferences)
+
+
+@pytest.mark.parametrize("key,accepted,rejected", [
+    ("beef_inner_round_cut", "Innanlår Nötkött Sverige", "Högrev Benfri"),
+    ("beef_whole_tenderloin_cut", "Oxfilé Mittbit", "Flankstek"),
+    ("beef_roasting_cut", "Fransyska Nötkött", "Högrev Benfri"),
+    ("beef_lean_strips_cut", "Flankstek", "Entrecôte Nötkött"),
+])
+def test_source_named_cut_is_not_replaced_by_a_generic_cooking_time_rule(key, accepted, rejected):
+    from app.services.content_pack_requirements import compatible as culinary_requirement
+
+    assert culinary_requirement([key], SimpleNamespace(name=accepted), None)
+    assert not culinary_requirement([key], SimpleNamespace(name=rejected), None)

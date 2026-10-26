@@ -18,7 +18,9 @@ def main():
     current = {identity(r): r for r in current_recipes()}
     manifest = manifest_entries()
     before = (ROOT / "library-manifest.json").read_bytes()
-    for path in sorted((ROOT / "reviewed-all-20261026").glob("batch-*/standardized.json")):
+    paths = [*sorted((ROOT / "reviewed-all-20261026").glob("batch-*/standardized.json")),
+             ROOT / "reviewed-all-20261026/cut-refinement/standardized.json"]
+    for path in paths:
         import_pack(path)
     assert (ROOT / "library-manifest.json").read_bytes() == before
     source = ROOT / "incoming/authoring-800-20261025"

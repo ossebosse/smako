@@ -27,7 +27,10 @@ def test_all_authored_recipes_reuse_validation_with_identical_input_evidence():
     for recipe in recipes:
         # Different ingredients/products/units still go through normal evidence
         # checks. Synthetic declarations here prove equivalence, not coverage.
-        for ingredient in (recipe.ingredients[0], next(i for i in recipe.ingredients if i.unit == "ml")):
+        # The expanded library includes complete dishes without volume inputs.
+        # Exercise every unit actually present, including their real rejections.
+        by_unit = {i.unit: i for i in recipe.ingredients}
+        for ingredient in (recipe.ingredients[0], *by_unit.values()):
             item = product(ingredient.name, 500, ingredient.unit, 20)
             evidence = fact(ingredient.unit)
             args = (recipe, item, ingredient.name, ingredient.unit, True, evidence)
@@ -157,7 +160,8 @@ def test_non_prepared_recipe_false_is_reused_without_promoting_it():
 
 
 def test_distinct_recipes_share_input_work_but_keep_exact_validation_and_provenance():
-    recipes = candidates(RecipePreferences(mode="complete"), 2)
+    all_recipes = candidates(RecipePreferences(mode="complete"), 2)
+    recipes = [r for r in all_recipes if "rapsolja" in r.preparation.input_forms]
     item = product("Rapsolja", 500, "ml", 20)
     evidence = {(item.store_id, item.product_id): facts(item,
         nutrition={"protein_g": 0, "fat_g": 92, "carbs_g": 0, "kcal": 828},
@@ -166,6 +170,10 @@ def test_distinct_recipes_share_input_work_but_keep_exact_validation_and_provena
     planner = PersonalPlanner(request(allow_nutrition_estimates=True), Settings(),
         prepared(item), state(), facts=evidence, now=NOW)
     fields = frozenset({"protein_g", "fat_g", "carbs_g", "kcal"})
+    # Synthetic oil evidence cannot introduce oil into a recipe without it.
+    absent = [r for r in all_recipes if "rapsolja" not in r.preparation.input_forms]
+    assert absent
+    assert all(planner.nutrition_evidence(item, "rapsolja", "ml", fields, r) is None for r in absent)
     expected = [planner._nutrition_evidence(item, "rapsolja", "ml", fields, r) for r in recipes]
     assert all(expected)
     planner.recipe_computations = RecipeComputationCache()

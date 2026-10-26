@@ -19,6 +19,7 @@ from app.services.meal_library_content import (
     import_pack,
     pack_diff,
     read_json,
+    revoke_recipe,
     validate_pack_bytes,
 )
 from app.services.recipe_authoring import library_vocabulary, standardize
@@ -41,6 +42,12 @@ TITLE_FOODS = ["sotpotatis", "pumpa", "palsternacka", "aubergine", "broccoli", "
                "purjolok", "salladslok", "spenat", "gronkal", "rodbeta", "kyckling", "lax", "torsk",
                "lamm", "tofu", "halloumi", "ricotta", "mynta", "koriander", "banan", "apple", "paron",
                "mango", "bulgur", "tamarind", "kikart"]
+CUT_REFINEMENTS = {
+    "smako-swedish-thin-beef-potato-layered-pot": "beef_inner_round_cut",
+    "smako-swedish-whole-beef-mushroom-puff-shell": "beef_whole_tenderloin_cut",
+    "smako-swedish-frozen-roast-beef-cold-brine": "beef_roasting_cut",
+    "smako-thai-moist-heated-dried-fried-beef-strips": "beef_lean_strips_cut",
+}
 
 
 def sha(value):
@@ -268,7 +275,63 @@ def build(do_import=False):
     print({"statuses": dict(status), "blockers": summary["blocker_counts"], "packages": len(packages)})
 
 
+def refine_cuts(do_import=False):
+    """Issue only changed recipes; unchanged siblings keep their pack SHA.
+
+    Replacing a mixed pack would change unchanged siblings' content_source
+    hashes under the same ID/version. The ordinary importer rejects that.
+    A separate twelve-row amendment preserves every previously issued byte.
+    """
+    rows = []
+    for path in sorted(OUTPUT.glob("batch-*/authoring.json")):
+        for original in read_json(path)["recipes"]:
+            if original["base_id"] not in CUT_REFINEMENTS:
+                continue
+            row = copy.deepcopy(original)
+            row["version"] = "1.0.1"
+            for component in row["components"]:
+                for ingredient in component["ingredients"]:
+                    if ingredient["name"] == "nötkött":
+                        ingredient["requirements"] = sorted({r for r in ingredient["requirements"]
+                            if r not in {"pack:beef_quick_cut", "pack:beef_braising_cut"}}
+                            | {"pack:" + CUT_REFINEMENTS[row["base_id"]]})
+            row["notes"] += " Styckdetalj preciserad efter källinstruktionen i version 1.0.1; tidigare publicerade bytes bevaras."
+            rows.append(row)
+    assert len(rows) == 12
+    directory = OUTPUT / "cut-refinement"
+    directory.mkdir(exist_ok=True)
+    source = {"schema_version": "smako-recipe-authoring-v1", "pack_id": "recipe-intake-all-20261026-cut-review-01", "recipes": rows}
+    (directory / "authoring.json").write_bytes(encoded(source))
+    pack, author = standardize(source, library_vocabulary(current_recipes(17)), reviewed_at="2026-10-26")
+    path = directory / "standardized.json"
+    path.write_bytes(encoded(pack))
+    checked = validate_pack_bytes(path.read_bytes())
+    assert not checked["rejections"]
+    (REPORT / "cut-author.json").write_bytes(encoded(author))
+    (REPORT / "cut-validate.json").write_bytes(encoded({k: v for k, v in checked.items() if k != "recipes"}))
+    (REPORT / "cut-diff.json").write_bytes(encoded(pack_diff(checked)))
+    if do_import:
+        (REPORT / "cut-import.json").write_bytes(encoded(import_pack(path)))
+        revoked = [revoke_recipe(r["base_id"] + ":1.0.0:" + r["variant_id"],
+            "Superseded by 1.0.1: require the source recipe's specific beef cut instead of a coarse time-based cut.") for r in rows]
+        (REPORT / "cut-refinement-revocations.json").write_bytes(encoded(revoked))
+    summary = read_json(REPORT / "all-recipes.json")
+    changed = {r["base_id"] + ":1.0.0:" + r["variant_id"]: r for r in rows}
+    for record in summary["recipes"]:
+        if record["source_id"] in changed:
+            row = changed[record["source_id"]]
+            record.update(runtime_id=row["base_id"] + ":1.0.1:" + row["variant_id"], corrected_recipe_sha256=sha(row))
+            record["changes"].append({"code": "source_specific_meat_cut_refinement", "requirement": CUT_REFINEMENTS[row["base_id"]]})
+    summary["cut_amendment"] = {"pack_id": source["pack_id"], "revised_variants": 12, "published_siblings_unchanged": True}
+    (REPORT / "all-recipes.json").write_bytes(encoded(summary))
+    print(summary["cut_amendment"])
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--import", dest="do_import", action="store_true")
-    build(parser.parse_args().do_import)
+    parser.add_argument("--cut-refinements-only", action="store_true")
+    args = parser.parse_args()
+    if not args.cut_refinements_only:
+        build(args.do_import)
+    refine_cuts(args.do_import)
