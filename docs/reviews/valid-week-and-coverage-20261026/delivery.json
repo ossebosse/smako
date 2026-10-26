@@ -1,4 +1,5 @@
 {
+  "B2_dinners": 5,
   "B2_effective_variation": {
     "adjustments": [
       {
@@ -53,21 +54,52 @@
     }
   ],
   "B2_purchase_status": "VERIFIED",
+  "B2_saved_variation_intent": {
+    "field_origins": {
+      "max_pairwise_culinary_similarity": "unknown",
+      "max_pairwise_recipe_similarity": "unknown",
+      "max_same_carbohydrate_meals": "unknown",
+      "max_same_cooking_method_meals": "unknown",
+      "max_same_dish_form_meals": "unknown",
+      "max_same_primary_ingredient_meals": "default",
+      "max_same_recipe_family": "unknown"
+    },
+    "version": "explicit-over-default-v2"
+  },
+  "B2_servings_per_dinner": 4,
+  "B2_stores": [
+    {
+      "store_id": "context:ica:93d67e8c62b80044",
+      "store_name": "ICA Kvantum Malmborgs Mobilia",
+      "subtotal": 173.0
+    },
+    {
+      "store_id": "context:willys:bbd37ea3cd468706",
+      "store_name": "Willys Malmö Katrinelund",
+      "subtotal": 558.2
+    }
+  ],
   "base_main": "3a62cde",
   "beta_activated": false,
   "browser": {
+    "accepted_probe": "B2-browser-final.json",
+    "all_normalized_saved_request_fields_equal": true,
+    "all_raw_saved_request_fields_equal": true,
     "engine": "chromium",
+    "entire_optimized_basket_equal": true,
     "expensive_posts": 1,
+    "no_fields_omitted_from_comparison": true,
     "page_errors": [],
-    "reload_without_recalculation": true
+    "reload_without_recalculation": true,
+    "use_pantry": false
   },
   "budget": {
     "coverage_max_seconds": 720,
     "coverage_seconds": 168.462,
     "limit_seconds": 7200,
-    "remaining_seconds": 2389.2139,
-    "stage_used_seconds": 584.4733,
-    "used_seconds": 4810.7861
+    "remaining_seconds": 2273.2262,
+    "stage_used_seconds": 700.461,
+    "used_seconds": 4926.7738
   },
   "cases": {
     "A": {
@@ -119,6 +151,8 @@
       "valid_menu_delivered": true
     },
     "B2-browser": {
+      "acceptance_scope": "Retired as exact B2: inherited use_pantry=True instead of required False; actual valid cart and full budget receipt preserved.",
+      "accepted_as_exact_B2": false,
       "api_seconds": null,
       "budget_receipt": {
         "environment": "Windows job: two processor affinity, 3 GiB commit limit; not Linux cgroup latency",
@@ -136,8 +170,36 @@
       "full_report_local_copy": ".local/recipes/valid-week-evidence/probes/B2-browser.json",
       "full_report_sha256": "b23c4c33b63c9e531046ab6ed4495a9055013fcf13c9b1040dd3741d2af4b81e",
       "preparation_seconds": 83.7634398000082,
+      "profile_observation": "B2-browser-first-profile-observation.json",
       "shared_preparation_seconds": 20.081738999986555,
       "source_loading_seconds": 55.65958719997434,
+      "status": "saved_and_read_back",
+      "total": 731.2,
+      "valid_for_actual_request": true,
+      "valid_menu_delivered": true
+    },
+    "B2-browser-final": {
+      "accepted_as_exact_B2": true,
+      "budget_receipt": {
+        "environment": "Windows job: two processor affinity, 3 GiB commit limit; not Linux cgroup latency",
+        "exit_code": 0,
+        "label": "valid-week-B2-browser-exact-pantry-intent-after-ui-fix",
+        "peak_job_commit_bytes": 1524412416,
+        "peak_private_commit_bytes": 1524412416,
+        "peak_working_bytes": 1525166080,
+        "resource_enforcement": "actual_interpreter_self_attached",
+        "started_at": "2026-10-26T19:07:50.544966+00:00",
+        "status": "complete",
+        "wall_seconds": 115.9877
+      },
+      "button_to_visible_list_and_GET_seconds": 31.8624540999881,
+      "full_report_local_copy": ".local/recipes/valid-week-evidence/probes/B2-browser-final.json",
+      "full_report_sha256": "d24a1108746109caf1b9e8747c9ac5b8723417529de9f934fa08ba021f089c49",
+      "preparation_seconds": 78.03848950000247,
+      "runtime_commit": "b6889d7399b037f84974ebfe384bfbe08b57a070",
+      "saved_profile_comparison": "B2-browser-final-comparison.json",
+      "shared_preparation_seconds": 19.36745159997372,
+      "source_loading_seconds": 54.64649890002329,
       "status": "saved_and_read_back",
       "total": 731.2,
       "valid_menu_delivered": true
@@ -184,6 +246,10 @@
     "Full V2 and UI store cap 1..N unqualified",
     "1269 estimated and 1462 exact imported variants still lack at least one qualified input"
   ],
+  "runtime_commits": {
+    "API_and_A": "b2f17b5853eec944be0b6430a8bb589df607f036",
+    "final_browser": "b6889d7399b037f84974ebfe384bfbe08b57a070"
+  },
   "schema": "smako-valid-week-and-coverage-review-v1",
   "source_facts": 71138,
   "source_products": 89458,
@@ -199,12 +265,31 @@
       "blocked": [],
       "report_reads": []
     },
+    "browser_parity_update": "Old serializer omitted use_pantry, interpreted by actual PlanRequest as True. New serializer explicitly sends True for unchanged old defaults; all other raw fields still compare exactly.",
     "command_family": "scripts/verify_offline.py selected changed-policy/deadline/content/cache/oracle/browser modules -m not live -q",
     "compileall": "passed",
+    "final_browser_module": {
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "exit_code": 0,
+      "log_local_copy": ".local/recipes/valid-week-final-ui-regression-pass.log",
+      "log_sha256": "f56ca56649f13edaa45e491838f4cb4aa425066c9a3366d147d65e1f0ac5cc0a",
+      "passed": 50
+    },
     "focused_passed": 678,
+    "focused_scope": "678 passed before final pantry UI change; overlapping browser module fully rerun afterwards, 50 passed. Counts are not added.",
     "last_exit_code": 0,
     "log_local_copy": ".local/recipes/valid-week-final-focused.log",
     "log_sha256": "0c114cea3a1f55391185df2c05b5aef775762ef463356d0ba8c72ac80d05ca99",
+    "prior_browser_module_observation": {
+      "failed": 4,
+      "log_local_copy": ".local/recipes/valid-week-final-ui-regression.log",
+      "log_sha256": "a72a2c69f8cd263da7839f6f63586a40d6a682a11a07126eacf280a1427288d5",
+      "passed": 46,
+      "reason": "Old byte comparison did not yet account for newly explicit pantry default; assertion now verifies actual API default True, new raw True, then equality of every field."
+    },
     "ruff": "passed"
   }
 }

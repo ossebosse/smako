@@ -1,4 +1,4 @@
-# 2026-10-26: Giltig B2-vecka på 30,78 s i browser; aktuell köpbarhet 738/931
+# 2026-10-26: Giltig B2-vecka på 31,86 s i browser; aktuell köpbarhet 738/931
 
 [PR #17](https://github.com/ossebosse/smako/pull/17) genomför
 VALID-WEEK-AND-COVERAGE. Läs [rapporten](reviews/valid-week-and-coverage-20261026.md)
@@ -14,7 +14,8 @@ Legacy/V1 och gamla planers betydelse ändras inte. Nya sparade intentdata
 får inte heller tyst ignoreras om miljön återgår till legacy.
 
 **B2 API/checkout/save/ägd GET 30,2549 s, verklig Chromium knapp→full synlig
-lista+GET 30,7820 s, 731,20 kr i båda.** Ny ägare/process, ingen identisk
+lista+GET 31,8625 s, 731,20 kr i båda. Hela sparade begäran och
+hela korgen matchar strikt, inklusive `use_pantry=False`.** Ny ägare/process, ingen identisk
 färdigplanscache. Fem olika baser, fyra grekiska/en italiensk, tre kyckling
 och två vegetariska. Protein 48,882/48,631/45,188/36,755/39,965 g per portion,
 ESTIMATED enligt uttryckligt tillåten spårbar insatsberäkning. Inköpsstatus
@@ -47,15 +48,19 @@ timeoutomtag. Separat progressfilskrock i testhjälparen dokumenteras/fixas;
 API-utfallet och budgetdebit behålls.
 
 Kall första preparation/registrering före B2-anropet 112,38 s; browserns
-gemensamma preparation 20,08 s med 4 926 träffar/noll missar. Det är inte
-30 s från tom installation. Högsta uppmätta jobb-commit 1,464 GiB, under
+gemensamma preparation 19,37 s med 4 926 träffar/noll missar. Det är inte
+31,86 s från tom installation. Högsta uppmätta jobb-commit 1,464 GiB, under
 2,5 GiB-målet/hårt 3 GiB på två CPU. Bara en verklig pris-/faktaversion:
 veckouppdatering, två fulla prisversioners överlapp och samtidighet omätta.
 Full V2, snabb bred A och UI-tak 1..N är fortsatt okvalificerade.
 
-Samma journal: **4 810,7861 s använda / 2 389,2139 s kvar (39,82 min)**.
-Senaste 678 riktade regressioner, Ruff och compileall passerar. Ordinarie
+Samma journal: **4 926,7738 s använda / 2 273,2262 s kvar (37,89 min)**.
+678 riktade regressioner före sista UI-rättningen samt hela browsermodulens
+50 prov efter den passerar; antalen överlappar. Ruff/compileall passerar. Ordinarie
 CI inklusive browser krävs grön på slutligt PR-huvud före mainintegration.
+Första browserprovet på 30,78 s bevaras och debiteras men räknas inte som
+exakt B2: det sparade skafferistandard True i stället för valt False. UI har
+nu ett synligt återställt/skickat skafferival; slutprovet jämför alla fält.
 Legacy standard och `library_merge_generations=False`. Ingen beta,
 produktion, profiländring, bred insamling, stor matris eller nattlig fortsättning.
 

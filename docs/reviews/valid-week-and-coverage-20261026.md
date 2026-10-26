@@ -3,7 +3,7 @@
 [Uppdraget](../CODEX-SOL-NEXT-20261026-VALID-WEEK-AND-COVERAGE.md) genomförs
 från main `3a62cde`, via [PR #17](https://github.com/ossebosse/smako/pull/17).
 **B2 levererar fem middagar/fyra portioner för 731,20 kr: API/save/GET
-30,25 s, verklig Chromium knapp→synlig lista+GET 30,78 s.** Individuell
+30,25 s, verklig Chromium knapp→synlig lista+GET 31,86 s.** Individuell
 produktlösbarhet ökar från en nyuppmätt 733/920 till **738/931 av 2 200**,
 netto **+5 exakt/+11 med tillåtna mängduppskattningar**, inga förluster.
 Det bredare A blir fortfarande inte färdigt vid 60 s. Legacy är standard,
@@ -134,7 +134,8 @@ kooperativa stopp är inte en universell exakt 60,000 s-gräns för transport/UI
 
 ## Verklig B2-vecka och ett avgränsat A
 
-Samma bevarade Malmöunderlag och testklocka som tidigare. B2 behåller
+Samma bevarade Malmöunderlag från 23 oktober 2026: 89 458 produkter och
+71 138 faktarader, fryst klocka `2026-10-23T06:00:02.869273+00:00`. B2 behåller
 **52 butiks-ID:n, fem middagar × fyra portioner, tre kyckling/två vegetariska,
 grekiskt/italienskt, protein≥35 g, högst tre samma huvudprotein, inköpstak två,
 estimated och uttryckligt tillåten näringsuppskattning**. Endast ovanstående
@@ -143,16 +144,27 @@ standardkonflikt ändras. Ingen identisk färdigplanscache värms.
 | Prov | Slutligt utfall | Tid | Totalsumma |
 | --- | --- | ---: | ---: |
 | [B2, nytt API-anrop](valid-week-and-coverage-20261026/B2.json) | Komplett, checkout/audit, save, ägd GET | **30,2549 s** | **731,20 kr** |
-| [B2, ny browserägare](valid-week-and-coverage-20261026/B2-browser.json) | Verkligt knapptryck→synlig full lista+GET | **30,7820 s** | **731,20 kr** |
+| [B2, slutligt strikt browserprov](valid-week-and-coverage-20261026/B2-browser-final.json) | Knapptryck→synlig full lista+GET; alla sparade val lika API | **31,8625 s** | **731,20 kr** |
 | [A, ett enda bredare anrop](valid-week-and-coverage-20261026/A.json) | HTTP422 SEARCH_INCOMPLETE, ingen levererad lista | **60,2828 s till avslag** | saknas |
 
 Browserprovet använder verkliga lokala API-rutter utan mockade svar,
-kontrollerar skickade normaliserade val, gör exakt en dyr POST och visar
+kontrollerar samtliga skickade och sparade val, gör exakt en dyr POST och visar
 inga JavaScriptfel. Omladdning återläser samma sparade plan utan ny
-beräkning. [Skärmbilden](valid-week-and-coverage-20261026/B2-browser-shopping.png)
+beräkning. [Skärmbilden](valid-week-and-coverage-20261026/B2-browser-final-shopping.png)
 visar hela inköpslistan, utan konto-/sessionshuvud. Listan fördelas över
-ICA Kvantum Malmborgs Mobilia (171,00 kr) och Willys Malmö Katrinelund
-(560,20 kr), båda inom valt scope.
+ICA Kvantum Malmborgs Mobilia (173,00 kr) och Willys Malmö Katrinelund
+(558,20 kr), båda inom valt scope.
+
+[Den strikta jämförelsen](valid-week-and-coverage-20261026/B2-browser-final-comparison.json)
+verifierar hela den råa och normaliserade sparade begäran samt hela
+`optimized_basket` mot API-provet, utan undantagna fält. Det första
+[browserkvittot](valid-week-and-coverage-20261026/B2-browser.json) på 30,7820 s
+räknas inte som exakt B2-acceptans: UI utelämnade `personal.use_pantry=False`
+och sparade effektivt True. Den nya tomma testägarens korg var identisk,
+men det uppfyllde inte kravet på samma sparade val. [Observationen](valid-week-and-coverage-20261026/B2-browser-first-profile-observation.json)
+bevarar avvikelsen och hela debiteringen. UI har nu ett synligt skafferival,
+återställer det sparade värdet och skickar det uttryckligen. Slutprovet på
+31,8625 s bevarar False i UI→request→save→GET och passerar den strikta kontrollen.
 
 Veckan innehåller krosspotatis med kyckling/kikärtskrisp, kycklingfyllt
 stekbröd, kycklingsoppa med zucchini/småpasta, broccoli/kikärtor/feta med
@@ -195,13 +207,14 @@ före användaranropet: källaddning 56,0766 s, gemensam preparation 53,3113 s.
 Den nya metodversionen lagrar 2 462 contentposter i den befintliga fulla
 cachen och gallrar 2 462 gamla poster, ready med noll persistensfel.
 Ny browserprocess har 4 926 träffar, noll missar/skrivningar, gemensam
-preparation 20,0817 s. Total cachelagring 3 607 454 byte, inga höjda gränser.
-Browserförberedelse totalt 83,7634 s; det debiterade hela browserjobbet
-tar 121,3166 s inklusive process-/browseravslut. API-jobbet tar 143,6316 s.
-Detta är inte 30 s från en första tom installation.
+preparation 19,3675 s i slutprovet. Total cachelagring 3 607 454 byte, inga
+höjda gränser. Slutlig browserförberedelse totalt 78,0385 s, varav källaddning
+54,6465 s; hela slutliga browserjobbet tar 115,9877 s inklusive process-/
+browseravslut. Första browserförsöket debiteras också, 121,3166 s.
+API-jobbet tar 143,6316 s. Detta är inte 31,86 s från en första tom installation.
 
 Två CPU och hårt 3 GiB commit gäller för faktisk Windows-interpreter i OS-jobb.
-Jobbens högsta commit: B2-API 1,384 GiB, browser 1,396 GiB, A 1,464 GiB,
+Jobbens högsta commit: B2-API 1,384 GiB, slutlig browser 1,420 GiB, A 1,464 GiB,
 under målet 2,5 GiB. Det är Windows job-commit, inte Linux RSS/cgroup eller
 p95. En ensam verklig pris-/faktaversion används fortfarande: verklig
 veckouppdatering, två fulla prisversioners överlapp och samtidighetskapacitet
@@ -218,25 +231,31 @@ alternativ får inga prisomdömen. Legacy/V1 behåller sina jämförelser.
 
 ## Verifiering och budget
 
-**678 riktade regressioner passerar**, inklusive publicerade receptkedjor,
+**678 riktade regressioner passerar före sista skafferi-UI-rättningen**, inklusive publicerade receptkedjor,
 historiska referenser, fulla intake-länkar, nya policy-/deadlinefall,
 Chromium/WebKit och oförändrade små prisorakel. Separat tidigare
-transportkörning 109 PASS överlappar och summeras inte. Ruff/compileall
+transportkörning 109 PASS överlappar och summeras inte. Efter UI-rättningen
+passerar hela browsermodulens **50 prov i Chromium/WebKit**. Äldre
+serializerparitet kontrollerar uttryckligen att utelämnat skafferivärde
+tolkades True av API och nu skickas True; övriga råfält jämförs exakt.
+Ruff/compileall
 passerar på ändrade Pythonfiler. Ordinarie CI inklusive browserinstallation
 och hela sviten krävs grön på slutligt PR-huvud före mainintegration.
 Ingen testgrind sänks för att göra CI grön.
 
-Mätkoden är `b2f17b5`, metodsignatur
+API/A mättes på `b2f17b5`, slutligt strikt browserprov på `b6889d7`.
+Båda har samma pris-/sökmetodsignatur
 `3a78998c6de473d114bd790c3efac8ea03a76b10a99125ba606ce73215b4ffc5`.
-Därefter tillkommer stödgrindar mot att nytt intent ignoreras i legacy,
-UI-bevarande, tester och progressskrivarens skydd. V2:s uppmätta
+Efter API/A tillkommer stödgrindar mot att nytt intent ignoreras i legacy,
+UI-bevarande inklusive skafferivalet, tester och progressskrivarens skydd.
+Slutligt browserprov omfattar dessa rättningar. V2:s uppmätta
 pris-/sökmetod och B2:s positiva regelväg ändras inte av dessa kompletteringar.
 [Maskinsammanställningen](valid-week-and-coverage-20261026/delivery.json)
 binder käll-/bibliotek-/metodhashar, råkvitton och testloggar.
 
 Samma [budgetjournal](recipe-integration-800-20261025/budget.json):
-**4 810,7861 s använda / 2 389,2139 s kvar = 39,82 minuter av 120.**
-Denna etapp debiterar 584,4733 s inklusive all källaddning, båda inventeringar,
-strukturprov, första förberedelse, API, browser och misslyckat A. Inga
+**4 926,7738 s använda / 2 273,2262 s kvar = 37,89 minuter av 120.**
+Denna etapp debiterar 700,4610 s inklusive all källaddning, båda inventeringar,
+strukturprov, första förberedelse, API, båda browserförsöken och misslyckat A. Inga
 budgetar har nollställts, inga mätarbetare lämnas, och inga nya
 insamlingar, nattliga uppgifter, drift-/profiländringar eller aktiveringar görs.

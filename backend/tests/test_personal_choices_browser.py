@@ -515,6 +515,12 @@ def test_request_parity_against_pre_change_frontend(choices, seed):
         before["recipes"], before["servings"] = 3, 2
         dinner = next(m for m in before["personal"]["meals"] if m["meal_type"] == "dinner")
         dinner["count"], dinner["servings"] = 3, 2
+    # The old UI omitted this field; the API interpreted it as True. The
+    # visible pantry choice now serializes that same default explicitly.
+    assert "use_pantry" not in before["personal"]
+    assert PlanRequest.model_validate(before).personal.use_pantry is True
+    assert after["personal"]["use_pantry"] is True
+    before["personal"]["use_pantry"] = True
     assert before == after
 
 
