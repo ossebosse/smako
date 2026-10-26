@@ -238,6 +238,12 @@
   "measured_method_signature": "3a78998c6de473d114bd790c3efac8ea03a76b10a99125ba606ce73215b4ffc5",
   "measured_runtime_commit": "b2f17b5",
   "other_original_variants": 262,
+  "post_measurement_UI_override_guard": {
+    "backend_explicit_override_semantics": "unchanged",
+    "measured_B2_has_no_primary_override": true,
+    "restored_known_override_cannot_be_deleted_by_inherited_default_checkbox": true,
+    "search_and_price_method_unchanged": true
+  },
   "production_activated": false,
   "remaining": [
     "A incomplete at 60.2828 seconds, next work: repeated joint basket evaluations over 960 qualified recipes",
@@ -274,15 +280,25 @@
         "webkit"
       ],
       "exit_code": 0,
+      "log_local_copy": ".local/recipes/valid-week-final-ui-override-regression.log",
+      "log_sha256": "049c209dff7760ad1d73216b25fafb76716548d9397ca15caa9454d2656f6fe1",
+      "passed": 52
+    },
+    "focused_passed": 678,
+    "focused_scope": "678 passed before final pantry UI change; overlapping browser module rerun after pantry fix (50), then after explicit override UI guard (52). Counts are not added.",
+    "last_exit_code": 0,
+    "log_local_copy": ".local/recipes/valid-week-final-focused.log",
+    "log_sha256": "0c114cea3a1f55391185df2c05b5aef775762ef463356d0ba8c72ac80d05ca99",
+    "previous_final_browser_module": {
+      "engines": [
+        "chromium",
+        "webkit"
+      ],
+      "exit_code": 0,
       "log_local_copy": ".local/recipes/valid-week-final-ui-regression-pass.log",
       "log_sha256": "f56ca56649f13edaa45e491838f4cb4aa425066c9a3366d147d65e1f0ac5cc0a",
       "passed": 50
     },
-    "focused_passed": 678,
-    "focused_scope": "678 passed before final pantry UI change; overlapping browser module fully rerun afterwards, 50 passed. Counts are not added.",
-    "last_exit_code": 0,
-    "log_local_copy": ".local/recipes/valid-week-final-focused.log",
-    "log_sha256": "0c114cea3a1f55391185df2c05b5aef775762ef463356d0ba8c72ac80d05ca99",
     "prior_browser_module_observation": {
       "failed": 4,
       "log_local_copy": ".local/recipes/valid-week-final-ui-regression.log",

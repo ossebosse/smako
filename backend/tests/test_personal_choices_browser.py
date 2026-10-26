@@ -112,20 +112,30 @@ def test_current_variation_origins_and_deliberate_old_draft_migration(choices):
     assert changed['max_pairwise_recipe_similarity']==.6
 
 
-def test_current_explicit_primary_limit_is_retained_by_ui(choices):
+@pytest.mark.parametrize("source", ["field", "override"])
+def test_current_explicit_primary_limit_is_retained_by_ui(choices, source):
     page,url,captured=choices
     page.route('**/api/recipe-library',lambda route:route.fulfill(content_type='application/json',
         body=json.dumps({'enabled':True,'variation_intent_enabled':True})))
     draft={'postal_code':'22350','max_same_primary_ingredient_meals':2,
         'variation_intent':{'version':'explicit-over-default-v2','field_origins':{'max_same_primary_ingredient_meals':'explicit'}},
         'personal':{'meals':[{'meal_type':'dinner','count':3,'servings':2}]}}
+    if source == 'override':
+        del draft['max_same_primary_ingredient_meals']
+        draft['variation_intent']['field_origins']['max_same_primary_ingredient_meals']='default'
+        draft['recipe_diversity_overrides']={'max_same_primary_ingredient_meals':2}
     page.add_init_script('sessionStorage.setItem("smako.personal.requestDraft",'+json.dumps(json.dumps(draft))+');')
     page.goto(url);choose_location(page)
     page.locator('#extra-choices>summary').click()
     expect(page.locator('#recipe-inherited-variation')).to_be_disabled()
+    expect(page.locator('#recipe-inherited-variation')).not_to_be_checked()
     posted=submit(page,captured)
-    assert posted['max_same_primary_ingredient_meals']==2
-    assert posted['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='explicit'
+    if source == 'field':
+        assert posted['max_same_primary_ingredient_meals']==2
+        assert posted['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='explicit'
+    else:
+        assert posted['recipe_diversity_overrides']=={'max_same_primary_ingredient_meals':2}
+        assert posted['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='default'
 
 
 def test_saved_current_intent_is_not_dropped_when_feature_is_unavailable(choices):

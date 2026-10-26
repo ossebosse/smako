@@ -205,8 +205,9 @@
       variationOrigins={...Object.fromEntries(variationFields.map(k=>[k,old?"unknown":"default"])),...(request.variation_intent?.field_origins||{})};
       retainedVariation=Object.fromEntries(variationFields.filter(k=>Object.hasOwn(request,k)&&variationOrigins[k]!=="default").map(k=>[k,request[k]]));
       retainedOverrides=request.recipe_diversity_overrides==null?null:{...request.recipe_diversity_overrides};
-      inheritedVariation.checked=variationOrigins.max_same_primary_ingredient_meals==="default";
-      inheritedVariation.disabled=variationOrigins.max_same_primary_ingredient_meals==="explicit";
+      const primaryOverride=variationOrigins.max_same_primary_ingredient_meals==="default"&&Object.hasOwn(retainedOverrides||{},"max_same_primary_ingredient_meals");
+      inheritedVariation.checked=variationOrigins.max_same_primary_ingredient_meals==="default"&&!primaryOverride;
+      inheritedVariation.disabled=variationOrigins.max_same_primary_ingredient_meals==="explicit"||primaryOverride;
       const preferences=request?.recipe_preferences||{};mode.value=personal?"library":preferences.mode==="complete"?"complete":"legacy";
       if(request.personal?.meals?.some(m=>m.recipe_choices!=null))mode.value="library";
       for(const [type,row] of Object.entries(mealRows)){

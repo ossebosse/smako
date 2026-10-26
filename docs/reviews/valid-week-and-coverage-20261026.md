@@ -235,7 +235,8 @@ alternativ får inga prisomdömen. Legacy/V1 behåller sina jämförelser.
 historiska referenser, fulla intake-länkar, nya policy-/deadlinefall,
 Chromium/WebKit och oförändrade små prisorakel. Separat tidigare
 transportkörning 109 PASS överlappar och summeras inte. Efter UI-rättningen
-passerar hela browsermodulens **50 prov i Chromium/WebKit**. Äldre
+passerar hela browsermodulens **52 prov i Chromium/WebKit**, inklusive
+sparad explicit override som inte får tas bort av standardkryssrutan. Äldre
 serializerparitet kontrollerar uttryckligen att utelämnat skafferivärde
 tolkades True av API och nu skickas True; övriga råfält jämförs exakt.
 Ruff/compileall
@@ -248,7 +249,10 @@ Båda har samma pris-/sökmetodsignatur
 `3a78998c6de473d114bd790c3efac8ea03a76b10a99125ba606ce73215b4ffc5`.
 Efter API/A tillkommer stödgrindar mot att nytt intent ignoreras i legacy,
 UI-bevarande inklusive skafferivalet, tester och progressskrivarens skydd.
-Slutligt browserprov omfattar dessa rättningar. V2:s uppmätta
+Slutligt browserprov omfattar skafferirättningen. Därefter skyddas även
+sparad explicit override i UI, med de 52 browserproven. B2:s sparade
+begäran saknar sådan override; den uppmätta positiva vägen påverkas inte.
+V2:s uppmätta
 pris-/sökmetod och B2:s positiva regelväg ändras inte av dessa kompletteringar.
 [Maskinsammanställningen](valid-week-and-coverage-20261026/delivery.json)
 binder käll-/bibliotek-/metodhashar, råkvitton och testloggar.

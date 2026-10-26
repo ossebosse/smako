@@ -56,7 +56,7 @@ Full V2, snabb bred A och UI-tak 1..N är fortsatt okvalificerade.
 
 Samma journal: **4 926,7738 s använda / 2 273,2262 s kvar (37,89 min)**.
 678 riktade regressioner före sista UI-rättningen samt hela browsermodulens
-50 prov efter den passerar; antalen överlappar. Ruff/compileall passerar. Ordinarie
+52 prov efter skafferi- och override-skydden passerar; antalen överlappar. Ruff/compileall passerar. Ordinarie
 CI inklusive browser krävs grön på slutligt PR-huvud före mainintegration.
 Första browserprovet på 30,78 s bevaras och debiteras men räknas inte som
 exakt B2: det sparade skafferistandard True i stället för valt False. UI har
