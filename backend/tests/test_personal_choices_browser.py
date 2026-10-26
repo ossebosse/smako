@@ -87,6 +87,47 @@ def submit(page, captured):
     return captured[-1]
 
 
+def test_current_variation_origins_and_deliberate_old_draft_migration(choices):
+    page,url,captured=choices
+    page.route('**/api/recipe-library',lambda route:route.fulfill(content_type='application/json',
+        body=json.dumps({'enabled':True,'variation_intent_enabled':True})))
+    page.goto(url);choose_location(page)
+    fresh=submit(page,captured)
+    assert set(fresh['variation_intent']['field_origins'].values())=={'default'}
+    assert 'max_same_primary_ingredient_meals' not in fresh
+    old={'postal_code':'22350','max_same_primary_ingredient_meals':2,'max_pairwise_recipe_similarity':.6,
+         'personal':{'meals':[{'meal_type':'dinner','count':3,'servings':2}]}}
+    page.evaluate('(draft)=>sessionStorage.setItem("smako.personal.requestDraft",JSON.stringify(draft))',old)
+    page.reload();choose_location(page)
+    page.locator('#extra-choices>summary').click()
+    control=page.locator('#recipe-inherited-variation')
+    expect(control).not_to_be_checked()
+    restored=submit(page,captured)
+    assert restored['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='unknown'
+    assert restored['max_same_primary_ingredient_meals']==2 and restored['max_pairwise_recipe_similarity']==.6
+    control.check()
+    changed=submit(page,captured)
+    assert changed['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='default'
+    assert 'max_same_primary_ingredient_meals' not in changed
+    assert changed['max_pairwise_recipe_similarity']==.6
+
+
+def test_current_explicit_primary_limit_is_retained_by_ui(choices):
+    page,url,captured=choices
+    page.route('**/api/recipe-library',lambda route:route.fulfill(content_type='application/json',
+        body=json.dumps({'enabled':True,'variation_intent_enabled':True})))
+    draft={'postal_code':'22350','max_same_primary_ingredient_meals':2,
+        'variation_intent':{'version':'explicit-over-default-v2','field_origins':{'max_same_primary_ingredient_meals':'explicit'}},
+        'personal':{'meals':[{'meal_type':'dinner','count':3,'servings':2}]}}
+    page.add_init_script('sessionStorage.setItem("smako.personal.requestDraft",'+json.dumps(json.dumps(draft))+');')
+    page.goto(url);choose_location(page)
+    page.locator('#extra-choices>summary').click()
+    expect(page.locator('#recipe-inherited-variation')).to_be_disabled()
+    posted=submit(page,captured)
+    assert posted['max_same_primary_ingredient_meals']==2
+    assert posted['variation_intent']['field_origins']['max_same_primary_ingredient_meals']=='explicit'
+
+
 def choose_location(page):
     expect(page.locator("#check-postcode")).to_be_enabled()
     expect(page.locator("#dinner-count")).not_to_be_visible()

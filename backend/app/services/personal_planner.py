@@ -3498,6 +3498,10 @@ class PersonalPlanner:
             policy = policy.model_copy(update={"min_cooking_methods": 0})
         constraints = (self.service._culinary_constraints(dinner_pool, policy, profiles=prepared_menu["culinary_profiles"])
                        if prepared_menu else self.service._culinary_constraints(dinner_pool, policy))
+        variation_resolution = None
+        if self.current_library_search and self.complete and self.request.variation_intent:
+            from app.services.variation_intent import resolve_current_variation
+            policy, constraints, variation_resolution = resolve_current_variation(self.request, policy, constraints, dinner_pool)
         self._qualified_culinary_view = constraints.pairwise_recipe_similarities
         if self.complete and prepared_menu is None:
             self._release_idle_memory()
@@ -3766,6 +3770,8 @@ class PersonalPlanner:
             raise PolicyConflict("Slutlig fördelning eller variation kunde inte verifieras.")
         recipes = [s.recipe for s in chosen if s.recipe]
         result["checks"]["checkout_audit"] = result["audit"].model_dump(mode="json")
+        if variation_resolution is not None:
+            result["checks"]["variation_resolution"] = variation_resolution
         result["checks"]["allowed_store_ids"] = sorted(self.store_ids)
         from app.services.week_refinement import surplus_summary
         result["checks"]["purchase_surplus"] = {
@@ -3806,10 +3812,16 @@ class PersonalPlanner:
                     "allergens_trace": list(fact.allergens_trace) if fact else [],
                     "source": fact.source if fact else None,
                 })
-        self._trace_final_alternatives(chosen, result)
+        if self.current_library_search:
+            # Explanatory forced-product checkouts do not improve/select this
+            # winner. Keep them off the mandatory click -> audited saved list.
+            self.product_trace.comparisons.append({"kind":"not_requested",
+                "scope":"supplementary final-menu counterfactuals"})
+        else:
+            self._trace_final_alternatives(chosen, result)
         basket = result["basket"]
         comparisons = []
-        for cap in range(1, self.request.max_stores):
+        for cap in (() if self.current_library_search else range(1, self.request.max_stores)):
             alternative_request = self.request.model_copy(update={"max_stores": cap})
             try:
                 alternative = PersonalPlanner(

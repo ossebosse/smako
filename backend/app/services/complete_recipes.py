@@ -58,6 +58,10 @@ def prepare_request(request, settings, *, pantry_revision=0):
                   if key in request.model_fields_set}
         if "max_pairwise_recipe_similarity" in request.model_fields_set and "max_pairwise_culinary_similarity" not in values:
             values["max_pairwise_culinary_similarity"] = request.max_pairwise_recipe_similarity
+        if getattr(settings, 'library_search_policy', 'legacy') == 'smako-current-library-v2' and request.variation_intent:
+            for key, origin in request.variation_intent.field_origins.items():
+                if origin == 'default':
+                    values.pop('max_pairwise_culinary_similarity' if key == 'max_pairwise_recipe_similarity' else key, None)
         overrides = DiversityPolicyOverrides.model_validate(values).model_dump(exclude_unset=True)
     return request.model_copy(update={"personal": spec, "strategy": "optimized", "recipe_diversity_overrides": overrides})
 

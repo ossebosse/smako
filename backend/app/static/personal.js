@@ -349,7 +349,7 @@
     catch(error){if(error.code==="planner_job_expired"){window.SmakoRecipes.forgetJob("personal");error.message=saved?"Det tidigare beräkningsjobbet har gått ut. Din sparade plan visas fortfarande.":"Det tidigare beräkningsjobbet har gått ut. Dina sparade varuval finns kvar; du kan starta en ny beräkning.";}throw error;}
   }
   void task(async()=>{
-    try {const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true);}catch(_){recipeControls.enabled(false);}
+    try {const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true,{variationIntent:metadata.variation_intent_enabled});}catch(_){recipeControls.enabled(false);}
     await refreshState();putProfile(privateState.profile);const shoppingInitialized=privateState.shopping_initialized;const shoppingDraft=structuredClone(privateState.shopping_items||[]);
     const draft=window.SmakoRecipes.storage.get("smako.personal.requestDraft");
     if(draft){extras=structuredClone(draft.personal?.extras||[]);putChoices({...draft,membership_programs:draft.membership_programs||draft.memberships||[]});}
@@ -362,7 +362,7 @@
   });
   const resume=()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(resumePersonalJob);};
   window.addEventListener("pageshow",()=>setTimeout(resume,0));document.addEventListener("visibilitychange",()=>{if(!document.hidden)resume();});
-  window.addEventListener("online",()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(async()=>{try{const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true);}catch(_){/* A saved pending job can still reconnect. */}await resumePersonalJob();});});
+  window.addEventListener("online",()=>{if(!busy&&window.SmakoRecipes.pendingJob("personal"))void task(async()=>{try{const metadata=await api("/api/recipe-library");recipeControls.enabled(metadata.enabled===true,{variationIntent:metadata.variation_intent_enabled});}catch(_){/* A saved pending job can still reconnect. */}await resumePersonalJob();});});
 
   function renderSuggestions(){
 

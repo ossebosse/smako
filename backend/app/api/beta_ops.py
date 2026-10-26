@@ -432,7 +432,8 @@ def ready(request: Request, postal_code: str | None = None) -> JSONResponse:
                     "price_universe": prices,
                     "app_version": settings.app_version,
                     "build_id": settings.build_id,
-                    "features": {"complete_recipes_enabled": settings.complete_recipes_enabled},
+                    "features": {"complete_recipes_enabled": settings.complete_recipes_enabled,
+                                 "variation_intent_enabled":settings.library_search_policy == 'smako-current-library-v2'},
                 },
                 default=str,
             )

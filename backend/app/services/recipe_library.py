@@ -358,7 +358,10 @@ def share_issued_recipe_parts(recipe: Recipe) -> Recipe:
     if not validate_recipe_design(recipe):
         return recipe
     d = recipe.design
-    registered = _issued_index(recipe.servings)[(d.base_id, d.version, d.variant_id)]
+    key = (d.base_id, d.version, d.variant_id)
+    registered = _current_issued_index(recipe.servings).get(key)
+    if registered is None:
+        registered = _issued_index(recipe.servings)[key]
     return recipe.model_copy(update={
         "ingredients": list(registered[2]), "design": registered[5],
         "instructions": list(recipe.instructions),
