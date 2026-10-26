@@ -1,3 +1,26 @@
+# 2026-10-26: Nästa Sol-uppdrag — bred A-vecka och återanvänd kvalificering
+
+Aktuell startpunkt efter oberoende granskning av main `719b927`/PR #17:
+[CODEX-SOL-NEXT-20261026-BROAD-WEEK.md](CODEX-SOL-NEXT-20261026-BROAD-WEEK.md).
+Läs [granskningen](reviews/review-pr17-and-next-20261026.md). 116 riktade
+regressioner inklusive Chromium/WebKit passerar. Sparade B2-anrop och hela
+korgen har jämförts oberoende: samma 731,20 kr och val; uppmätt 31,86 s
+i browser är ett verkligt fullständigt veckofall. Köpbarhet 738/931 av
+2 200 är verifierad per ID, +5/+11 utan förluster.
+
+A klarar fortfarande ingen lista på 60 s. En konkret reproducerad brist
+är att de 960 kvalificerade enreceptskorgarna räknas om på sökdjup ett,
+med noll cacheträffar: de sista 256 sparade resultaten trängs undan innan
+de konsumeras. Rätta den minnesbegränsade överföringen och låt sökningen
+nå en fullständig giltig vecka tidigt före fortsatt prisförbättring.
+Bevara alla krav och aktuell slutlig checkout/audit/save. B2 är regression
+för pris/giltighet; A ska inte göras lättare. Ingen ny import eller bred
+insamling behövs för detta steg.
+
+Samma mätbudget: senast **37,89 minuter kvar**. Högst tre nya A-försök,
+bara efter konkreta ändringar, därefter delrapport vid kvarstående hinder.
+Ingen stor matris. Legacy standard, V2 opt-in, ingen driftaktivering.
+
 # 2026-10-26: Giltig B2-vecka på 31,86 s i browser; aktuell köpbarhet 738/931
 
 [PR #17](https://github.com/ossebosse/smako/pull/17) genomför

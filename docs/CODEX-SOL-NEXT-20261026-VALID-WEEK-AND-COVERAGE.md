@@ -1,5 +1,10 @@
 # Sol: fler köpbara varianter och en verifierad personlig veckoplan
 
+**Uppföljning efter PR #17:** fortsätt med
+[det breda veckourvalet och återanvänd kvalificering](CODEX-SOL-NEXT-20261026-BROAD-WEEK.md).
+Nedanstående uppdrag och dess dåvarande budget är historik. B2 har nu
+levererats; A är nästa avgränsade prestandafall.
+
 Ägarens uppdrag efter granskningen av PR #16, main `c94c229`, 2026-10-26.
 Arbeta i `D:\Projects\Smako`. Hämta aktuell main utan att skriva över
 andras ändringar. Läs AGENTS, DEVELOPMENT, PRODUCT-GOAL,
