@@ -887,6 +887,7 @@ class PackageCostCache:
             max_entries=max_entries,
             metric_prefix="package_cache",
         )
+        self._max_fingerprints = max_entries
         self._fingerprint_lock = RLock()
         self._candidate_digests: dict[int, tuple[ProductCandidate, str]] = {}
 
@@ -928,6 +929,8 @@ class PackageCostCache:
             digest = _model_digest(candidate)
             # Retaining the immutable model prevents Python from reusing its
             # identity for a different checkout surface while the cache lives.
+            if len(self._candidate_digests) >= self._max_fingerprints:
+                self._candidate_digests.pop(next(iter(self._candidate_digests)))
             self._candidate_digests[candidate_id] = (candidate, digest)
             return digest
 

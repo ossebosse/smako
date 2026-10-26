@@ -1398,8 +1398,10 @@ class MenuOptimizer:
             seen_states = set()
             priced_count = 0
             sequence = 0
+            from app.services.plan_jobs import check_cancelled
             for chosen, _result in states:
                 for slot in options:
+                    check_cancelled()
                     slots = [*chosen, slot]
                     final = index == len(candidates_by_slot) - 1
                     trace["proposals"] += 1

@@ -3,15 +3,19 @@ from __future__ import annotations
 
 import base64
 import hashlib
+import heapq
 import json
 import os
+import re
 import zlib
 from contextlib import contextmanager
-from dataclasses import dataclass
+from contextvars import ContextVar
+from dataclasses import dataclass, field
 from functools import lru_cache
 from itertools import islice
 from pathlib import Path
 from types import MappingProxyType
+from uuid import uuid4
 
 from app.services.meal_library_content import atomic_write, digest, encoded
 
@@ -28,16 +32,24 @@ class _ContentWriteBudget:
     count: int
     size: int
     writable: bool = True
+    lease: object = None
+    retirement: list | None = None
 
     def write(self, path, data, raw_size):
         if not self.writable or path.parent != self.directory:
+            if self.lease is not None:
+                self.lease.failures += 1
+            return
+        if self.lease is not None:
+            _retaining_write(self, path, data, raw_size)
             return
         try:
             old_size = path.stat().st_size
         except FileNotFoundError:
             old_size = None
+        limit = CONTENT_LIMIT if self.directory.name == "content" else MAX_GENERATIONS
         if (raw_size > 128 * 1024 * 1024 or len(data) > MAX_BYTES
-                or (old_size is None and self.count >= CONTENT_LIMIT)
+                or (old_size is None and self.count >= limit)
                 or self.size - (old_size or 0) + len(data) > MAX_BYTES):
             return
         atomic_write(path, data)
@@ -56,7 +68,7 @@ def _content_write_batch():
     No process-global usage snapshot can hide another writer or a removed file.
     """
     directory = root() / "content"
-    budget = _ContentWriteBudget(directory, 0, 0, writable=False)
+    budget = _ContentWriteBudget(directory, 0, 0, writable=False, lease=_shared_generation.get())
     handle = None
     try:
         directory.mkdir(parents=True, exist_ok=True)
@@ -79,6 +91,8 @@ def _content_write_batch():
                     budget.count += 1
                     budget.size += entry.stat().st_size
         budget.writable = True
+        if budget.lease is not None:
+            _retire_interrupted_writes(directory, budget.lease)
     except OSError:
         pass
     try:
@@ -86,6 +100,257 @@ def _content_write_batch():
     finally:
         if handle is not None:
             handle.close()  # Both platforms release the OS lock on close.
+
+
+
+@dataclass
+class _SharedGeneration:
+    cache_root: Path
+    identity: str
+    token: str
+    writable: bool = False
+    failures: int = 0
+    ready: bool = False
+    requested: set = field(default_factory=set)
+
+
+_shared_generation: ContextVar = ContextVar("shared_recipe_preparation_generation", default=None)
+
+
+@contextmanager
+def _cache_lock(path):
+    handle = None
+    acquired = False
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        handle = path.open("a+b")
+        if os.name == "nt":
+            import msvcrt
+            if handle.seek(0, 2) == 0:
+                handle.write(b"0")
+                handle.flush()
+            handle.seek(0)
+            msvcrt.locking(handle.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        acquired = True
+    except OSError:
+        pass
+    try:
+        yield acquired
+    finally:
+        if handle is not None:
+            handle.close()
+
+
+def _generation_state(cache_root):
+    try:
+        path = cache_root / ".shared-generation.json"
+        if path.stat().st_size > 16384:
+            return {}
+        value = json.loads(path.read_bytes())
+        return value if (isinstance(value, dict) and value.get("schema") == "smako-derived-generation-v1"
+            and type(value.get("sequence")) is int and value["sequence"] >= 0
+            and isinstance(value.get("token"), str)) else {}
+    except (OSError, ValueError, TypeError):
+        return {}
+
+
+@contextmanager
+def shared_preparation(identity):
+    """Coordinator lease; workers never activate or publish another generation.
+
+    Only rebuildable, format-verified cache entries can be retired. Sources,
+    recipe packs and saved plans are outside these cache directories. An older
+    computation can still return its exact value but cannot evict or mark the
+    newer coordinator's data ready. Restart acquires a fresh CAS token.
+    """
+    cache_root = root().resolve()
+    lease = _SharedGeneration(cache_root, digest(encoded([identity, method_signature()])), uuid4().hex)
+    with _cache_lock(cache_root / ".generation.lock") as acquired:
+        if acquired:
+            prior = _generation_state(cache_root)
+            state = {"schema":"smako-derived-generation-v1", "identity":lease.identity,
+                     "token":lease.token, "sequence":int(prior.get("sequence",0))+1,
+                     "method":method_signature(), "state":"preparing"}
+            try:
+                atomic_write(cache_root / ".shared-generation.json", encoded(state))
+                lease.writable = True
+            except OSError:
+                pass
+    token = _shared_generation.set(lease)
+    completed = False
+    try:
+        yield lease
+        completed = True
+    finally:
+        _shared_generation.reset(token)
+        if completed and lease.writable and not lease.failures:
+            with _cache_lock(cache_root / ".generation.lock") as acquired:
+                state = _generation_state(cache_root)
+                if acquired and state.get("token") == lease.token:
+                    state.update(state="ready", requested_entries=len(lease.requested))
+                    try:
+                        atomic_write(cache_root / ".shared-generation.json", encoded(state))
+                        lease.ready = True
+                    except OSError:
+                        pass
+
+
+
+def _retire_interrupted_writes(directory, lease):
+    directory = directory.resolve()
+    if directory.parent != lease.cache_root:
+        return
+    with _cache_lock(lease.cache_root / ".generation.lock") as acquired:
+        if not acquired or _generation_state(lease.cache_root).get("token") != lease.token:
+            return
+        for path in directory.glob(".derived-*.tmp"):
+            if re.fullmatch(r"\.derived-[0-9a-f]{64}-[0-9a-f]{32}\.tmp", path.name):
+                try:
+                    path.unlink()  # Owned interrupted cache output, never source evidence.
+                    STATS["interrupted_writes_removed"] = STATS.get("interrupted_writes_removed", 0) + 1
+                except OSError:
+                    lease.failures += 1
+
+
+def _atomic_derived_write(path, data, lease):
+    temporary = path.parent / (".derived-" + path.stem + "-" + lease.token + ".tmp")
+    try:
+        with temporary.open("wb") as handle:
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    finally:
+        try:
+            temporary.unlink()
+        except FileNotFoundError:
+            pass
+
+
+def _retaining_write(budget, path, data, raw_size):
+    lease = budget.lease
+    directory = budget.directory.resolve()
+    if (not lease.writable or directory.parent != lease.cache_root
+            or path.parent.resolve() != directory or len(path.stem) != 64
+            or any(c not in "0123456789abcdef" for c in path.stem)):
+        lease.failures += 1
+        return
+    with _cache_lock(lease.cache_root / ".generation.lock") as acquired:
+        if not acquired or _generation_state(lease.cache_root).get("token") != lease.token:
+            lease.failures += 1
+            return
+        try:
+            old_size = path.stat().st_size if path.exists() else 0
+            if old_size:
+                # A concurrent valid writer wins; a corrupt owned cache file
+                # can be retired before replacement, keeping temp+final bytes
+                # inside the same physical byte budget.
+                existing = json.loads(path.read_bytes())
+                if not isinstance(existing, dict) or existing.get("schema") != SCHEMA or existing.get("key") != path.stem:
+                    lease.failures += 1
+                    return
+                try:
+                    decode_payload(existing)
+                    return
+                except (ValueError, KeyError, TypeError, zlib.error):
+                    path.unlink()
+                    budget.count -= 1
+                    budget.size -= old_size
+                    old_size = 0
+            limit = CONTENT_LIMIT if directory.name == "content" else MAX_GENERATIONS
+            if raw_size > 128 * 1024 * 1024 or len(data) > MAX_BYTES:
+                lease.failures += 1
+                return
+            while budget.count + (not old_size) > limit or budget.size - old_size + len(data) > MAX_BYTES:
+                if budget.retirement is None:
+                    budget.retirement = []
+                    for candidate in directory.glob("*.json"):
+                        # Exact file ownership, not a wildcard deletion policy.
+                        if len(candidate.stem) != 64 or any(c not in "0123456789abcdef" for c in candidate.stem):
+                            continue
+                        try:
+                            stat = candidate.stat()
+                            if stat.st_size > MAX_BYTES:
+                                continue
+                            row = json.loads(candidate.read_bytes())
+                            if isinstance(row, dict) and row.get("schema") == SCHEMA and row.get("key") == candidate.stem:
+                                heapq.heappush(budget.retirement, (stat.st_mtime_ns, candidate.name, stat.st_size))
+                        except (OSError, ValueError, TypeError):
+                            continue
+                retired = False
+                while budget.retirement:
+                    _age, name, size = heapq.heappop(budget.retirement)
+                    candidate = directory / name
+                    if candidate.as_posix() in lease.requested or candidate == path:
+                        continue
+                    if candidate.exists():
+                        candidate.unlink()
+                        budget.count -= 1
+                        budget.size -= size
+                        STATS["retired"] = STATS.get("retired", 0) + 1
+                        STATS["retired_bytes"] = STATS.get("retired_bytes", 0) + size
+                        retired = True
+                        break
+                if not retired:
+                    lease.failures += 1
+                    return
+            _atomic_derived_write(path, data, lease)
+            budget.count += not old_size
+            budget.size += len(data) - old_size
+            STATS["writes"] += 1
+        except (OSError, ValueError, TypeError):
+            lease.failures += 1
+
+
+@contextmanager
+def _derived_write_batch(directory, lease):
+    with _cache_lock(directory / ".preparation-write.lock") as acquired:
+        budget = _ContentWriteBudget(directory, 0, 0, writable=acquired, lease=lease)
+        if acquired:
+            try:
+                if lease is not None:
+                    _retire_interrupted_writes(directory, lease)
+                for candidate in directory.glob("*.json"):
+                    budget.count += 1
+                    budget.size += candidate.stat().st_size
+            except OSError:
+                budget.writable = False
+        yield budget
+
+
+def prepare_current_sources(prepared_universe, facts, *, portions=(4,)):
+    """One current public catalog; no profile, meal winner or price approval."""
+    from app.services.meal_library_content import library_signature
+    from app.services.personal_source_facts import facts_version
+    from app.services.recipe_library import _current_issued_index, current_recipes
+    version = facts_version(facts)
+    identity = {"library":library_signature(), "universe":prepared_universe.universe.universe_id,
+                "facts":version, "portions":sorted(set(portions)),
+                "scope":"current_content_declarations_ingredient_positions"}
+    before = dict(STATS)
+    with shared_preparation(identity) as lease:
+        content = prepare_content(current_recipes())
+        counts = {str(n):len(_current_issued_index(n)) for n in sorted(set(portions))}
+        def source_fact(product):
+            fact = facts.get((product.store_id,product.product_id))
+            return fact if (fact and fact.source and fact.source_product_id == product.product_id
+                and product.source_provenance and fact.source_snapshot_id == product.source_provenance.source_snapshot_id) else None
+        declarations = declaration_index(prepared_universe.universe, facts, source_fact, verified_version=version)
+        searches = prepare_ingredient_search(prepared_universe)
+    cache = root()
+    storage = {directory.name:{"files":sum(1 for p in directory.glob("*.json")),
+        "bytes":sum(p.stat().st_size for p in directory.iterdir() if p.is_file())}
+        for directory in cache.iterdir() if directory.is_dir()}
+    total_bytes = sum(p.stat().st_size for p in cache.rglob("*") if p.is_file())
+    return {"identity":identity, "ready":lease.ready, "persistence_failures":lease.failures,
+            "storage":storage, "total_storage_bytes":total_bytes,
+            "content_variants":len(current_recipes()), "portion_views":counts,
+            "declarations":len(declarations), "ingredient_queries":len(searches),
+            "stats":{key:value-before.get(key,0) for key,value in STATS.items()},
+            "purchase_qualification":"not_performed", "method_signature":content["method_signature"]}
 
 
 def ingredient_search_positions(prepared_universe, name, *, complete):
@@ -154,6 +419,9 @@ def prepare_ingredient_search(prepared_universe):
                          for values in rows.values()))
         if not valid:
             STATS["invalid"] += 1
+            lease = _shared_generation.get()
+            if lease is not None:
+                lease.failures += 1
             rows = compute()
         return MappingProxyType({name: frozenset(values) for name, values in rows.items()})
 
@@ -220,6 +488,9 @@ def prepared(kind, identity, compute, *, storable=None, _write_budget=None):
     key = digest(encoded([SCHEMA,kind,identity,method_signature()]))
     directory = root() / kind
     path = directory / (key + ".json")
+    lease = _shared_generation.get()
+    if lease is not None:
+        lease.requested.add(path.resolve().as_posix())
     try:
         if path.stat().st_size > MAX_BYTES:
             raise ValueError("Prepared artifact too large")
@@ -236,6 +507,8 @@ def prepared(kind, identity, compute, *, storable=None, _write_budget=None):
     STATS["misses"] += 1
     payload = compute()
     if storable is not None and not storable():
+        if lease is not None:
+            lease.failures += 1
         STATS["unstorable"] = STATS.get("unstorable", 0) + 1
         return payload
     raw = payload_bytes(payload)
@@ -248,19 +521,26 @@ def prepared(kind, identity, compute, *, storable=None, _write_budget=None):
             _write_budget.write(path, data, len(raw))
             return payload
         directory.mkdir(parents=True,exist_ok=True)
+        if lease is not None:
+            with _derived_write_batch(directory, lease) as budget:
+                budget.write(path, data, len(raw))
+            return payload
         # Existing generation evidence is retained. At the bounded capacity,
         # continue safely in memory rather than growing disk indefinitely.
         limit = CONTENT_LIMIT if kind == "content" else MAX_GENERATIONS
         if _directory_at_capacity(directory, directory.stat().st_mtime_ns, limit) and not path.exists():
             return payload
-        existing = list(directory.glob("*.json"))
-        if len(existing) >= limit and not path.exists():
-            return payload  # A full cache cannot accept this new key; no size scan is needed.
-        total_bytes = sum(p.stat().st_size for p in existing)
-        if (len(raw) <= 128 * 1024 * 1024 and len(data) <= MAX_BYTES and total_bytes + len(data) <= MAX_BYTES
-                and (path.exists() or len(existing) < limit)):
-            atomic_write(path,data)
-            STATS["writes"] += 1
+        with _cache_lock(directory / ".preparation-write.lock") as acquired:
+            if not acquired:
+                return payload
+            existing = list(directory.glob("*.json"))
+            if len(existing) >= limit and not path.exists():
+                return payload
+            total_bytes = sum(p.stat().st_size for p in existing)
+            if (len(raw) <= 128 * 1024 * 1024 and len(data) <= MAX_BYTES and total_bytes + len(data) <= MAX_BYTES
+                    and (path.exists() or len(existing) < limit)):
+                atomic_write(path,data)
+                STATS["writes"] += 1
     except OSError:
         pass  # read-only deployments still use the ordinary checked calculation
     return payload
@@ -275,7 +555,9 @@ def _prepare_content(recipes, budget):
     from app.services.meal_library_content import identity
     from app.services.recipe_library import _structural_check, ingredient_key
     index = {}
+    from app.services.plan_jobs import check_cancelled
     for recipe in recipes:
+        check_cancelled()
         key = identity(recipe)
         def compute(recipe=recipe, key=key):
             _structural_check(recipe)
@@ -292,7 +574,7 @@ def _prepare_content(recipes, budget):
     return {"schema":SCHEMA,"method_signature":method_signature(),"dependencies":index,"stats":dict(STATS)}
 
 
-def declaration_index(universe, facts, source_facts):
+def declaration_index(universe, facts, source_facts, *, verified_version=None):
     """Snapshot/fact-bound declaration classes shared across meal types/requests.
 
     Includes the full product inventory: a previously missing product invalidates
@@ -300,7 +582,7 @@ def declaration_index(universe, facts, source_facts):
     """
     from app.services.declaration_semantics import declaration_food_class
     from app.services.personal_source_facts import facts_version
-    version = getattr(facts,"version",None) or facts_version(facts)
+    version = verified_version or getattr(facts,"version",None) or facts_version(facts)
     # The prepared universe also contains large search indexes. Classification
     # depends on the exact product inventory and facts, not those derived indexes.
     inventory = hashlib.sha256()

@@ -29,6 +29,48 @@ from app.services.meal_library_content import (
 )
 
 
+def _preparation_facts(universe, path):
+    from app.services.official_product_facts import shell_egg_quantity_proofs
+    from app.services.personal_policy import ProductFacts
+    from app.services.personal_source_facts import FactsCollection
+    document = json.loads(path.read_bytes())
+    facts = FactsCollection({tuple(k):ProductFacts(**v) for k,v in document["facts"]})
+    facts.version = document["facts_version"]
+    shell_egg_quantity_proofs(universe.universe.products, facts)
+    return facts
+
+
+def _prepare_current_cli(args):
+    from app.services.meal_library_content import library_signature
+    from app.services.meal_prepared_artifacts import (
+        prepare_content,
+        prepare_current_sources,
+        shared_preparation,
+    )
+    from app.services.recipe_library import _current_issued_index, current_recipes
+    if args.universe:
+        from app.services.personal_source_facts import load_retained_facts
+        from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+        universe = PreparedPriceUniverseArtifact.from_file(args.universe).restore()
+        if args.facts:
+            facts = _preparation_facts(universe, args.facts)
+        else:
+            facts = load_retained_facts(universe)
+        result = prepare_current_sources(universe, facts, portions=args.servings or (4,))
+    else:
+        with shared_preparation({"library":library_signature(), "scope":"current_content", "portions":args.servings}) as lease:
+            result = prepare_content(current_recipes())
+            result["prepared_portions"] = {str(n):len(_current_issued_index(n)) for n in args.servings}
+        result["ready"] = lease.ready
+        result["persistence_failures"] = lease.failures
+    result["manifest_sha256"] = library_signature()
+    if args.universe:
+        result["artifact_sha256"] = digest(args.universe.read_bytes())
+        result["facts_sha256"] = digest(args.facts.read_bytes()) if args.facts else None
+    result["library_scope"] = "current_manifest"
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
@@ -60,6 +102,9 @@ def main():
         p = sub.add_parser(name)
         p.add_argument("--output",type=Path,required=True)
         p.add_argument("--universe",type=Path,help="Prepare public source projections for this exact artifact")
+        p.add_argument("--facts",type=Path,help="Exact retained public facts export for this artifact")
+        if name == "prepare":
+            p.add_argument("--current",action="store_true",help="Coordinate bounded cache retention for only the current manifest")
         p.add_argument("--servings",type=int,action="append",choices=range(1,13),default=[])
     p = sub.add_parser("qualify")
     p.add_argument("--pack",type=Path,required=True)
@@ -95,51 +140,54 @@ def main():
         if args.command == "diff":report["diff"] = pack_diff(checked)
         if args.command == "import":report = import_pack(args.input,accepted_ids=args.accept_id)
     elif args.command in {"prepare","build"}:
-        from app.services.meal_prepared_artifacts import prepare_content
-        m = manifest_entries()
-        recipes = load_entries([*m["current"],*m["history"]])
-        report = prepare_content(recipes)
-        report["manifest_sha256"] = digest(encoded(m))
-        if args.servings:
-            from app.services.recipe_library import _registered_historical_portions
-            report["prepared_portions"] = {str(n):len(_registered_historical_portions(n))
-                                           for n in sorted(set(args.servings))}
-        if args.universe:
-            from app.services.meal_prepared_artifacts import (
-                declaration_index,
-                prepare_ingredient_search,
-            )
-            from app.services.personal_source_facts import facts_version, load_retained_facts
-            from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
-            universe = PreparedPriceUniverseArtifact.model_validate_json(args.universe.read_bytes()).restore()
-            facts = load_retained_facts(universe)
-            def exact_facts(product):
-                fact = facts.get((product.store_id,product.product_id))
-                return fact if (fact and fact.source and fact.source_product_id == product.product_id
-                                and product.source_provenance and fact.source_snapshot_id ==
-                                product.source_provenance.source_snapshot_id) else None
-            classes = declaration_index(universe.universe,facts,exact_facts)
-            ingredients = prepare_ingredient_search(universe)
-            report["source_preparation"] = {"universe_id":universe.universe.universe_id,
-                "artifact_sha256":digest(args.universe.read_bytes()),
-                "facts_version":getattr(facts,"version",None) or facts_version(facts),
-                "classified_products":len(classes),"ingredient_queries":len(ingredients),
-                "purchase_qualification":"not_performed"}
-        from app.services.meal_prepared_artifacts import STATS, root
-        report["stats"] = dict(STATS)
-        cache = root()
-        report["storage"] = {folder.name:{"files":len(list(folder.glob("*.json"))),
-            "bytes":sum(p.stat().st_size for p in folder.glob("*.json"))}
-            for folder in cache.iterdir() if folder.is_dir()} if cache.exists() else {}
-        if args.command == "build":
-            # A hash-bound content candidate is data, not an app/code deployment.
-            args.output.mkdir(parents=True,exist_ok=False)
-            for entry in [*m["current"],*m["history"]]:
-                target = args.output / entry["file"]
-                target.parent.mkdir(parents=True,exist_ok=True)
-                target.write_bytes((ROOT/entry["file"]).read_bytes())
-            (args.output/MANIFEST.name).write_bytes(encoded(m))
-            args.output = args.output / "PREPARATION.json"
+        if getattr(args, "current", False):
+            report = _prepare_current_cli(args)
+        else:
+            from app.services.meal_prepared_artifacts import prepare_content
+            m = manifest_entries()
+            recipes = load_entries([*m["current"],*m["history"]])
+            report = prepare_content(recipes)
+            report["manifest_sha256"] = digest(encoded(m))
+            if args.servings:
+                from app.services.recipe_library import _registered_historical_portions
+                report["prepared_portions"] = {str(n):len(_registered_historical_portions(n))
+                                               for n in sorted(set(args.servings))}
+            if args.universe:
+                from app.services.meal_prepared_artifacts import (
+                    declaration_index,
+                    prepare_ingredient_search,
+                )
+                from app.services.personal_source_facts import facts_version, load_retained_facts
+                from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+                universe = PreparedPriceUniverseArtifact.model_validate_json(args.universe.read_bytes()).restore()
+                facts = _preparation_facts(universe, args.facts) if args.facts else load_retained_facts(universe)
+                def exact_facts(product):
+                    fact = facts.get((product.store_id,product.product_id))
+                    return fact if (fact and fact.source and fact.source_product_id == product.product_id
+                                    and product.source_provenance and fact.source_snapshot_id ==
+                                    product.source_provenance.source_snapshot_id) else None
+                classes = declaration_index(universe.universe,facts,exact_facts)
+                ingredients = prepare_ingredient_search(universe)
+                report["source_preparation"] = {"universe_id":universe.universe.universe_id,
+                    "artifact_sha256":digest(args.universe.read_bytes()),
+                    "facts_version":getattr(facts,"version",None) or facts_version(facts),
+                    "classified_products":len(classes),"ingredient_queries":len(ingredients),
+                    "purchase_qualification":"not_performed"}
+            from app.services.meal_prepared_artifacts import STATS, root
+            report["stats"] = dict(STATS)
+            cache = root()
+            report["storage"] = {folder.name:{"files":len(list(folder.glob("*.json"))),
+                "bytes":sum(p.stat().st_size for p in folder.glob("*.json"))}
+                for folder in cache.iterdir() if folder.is_dir()} if cache.exists() else {}
+            if args.command == "build":
+                # A hash-bound content candidate is data, not an app/code deployment.
+                args.output.mkdir(parents=True,exist_ok=False)
+                for entry in [*m["current"],*m["history"]]:
+                    target = args.output / entry["file"]
+                    target.parent.mkdir(parents=True,exist_ok=True)
+                    target.write_bytes((ROOT/entry["file"]).read_bytes())
+                (args.output/MANIFEST.name).write_bytes(encoded(m))
+                args.output = args.output / "PREPARATION.json"
     else:
         from app.config import Settings
         from app.models import PlanRequest
