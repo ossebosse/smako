@@ -1,0 +1,940 @@
+{
+  "budget_receipt": {
+    "environment": "Windows job: two processor affinity, 3 GiB commit limit; not Linux cgroup latency",
+    "exit_code": 124,
+    "label": "final-code-personal-E-one-store-same-selection",
+    "peak_job_commit_bytes": 1510596608,
+    "peak_private_commit_bytes": 1510596608,
+    "peak_working_bytes": 1508405248,
+    "resource_enforcement": "actual_interpreter_self_attached",
+    "started_at": "2026-10-26T11:02:29.251813+00:00",
+    "status": "deadline_exceeded",
+    "wall_seconds": 137.1724
+  },
+  "case": "E",
+  "clock": "2026-10-23T06:00:02.869273+00:00",
+  "completion_latency_seconds": null,
+  "deadline_seconds": 75,
+  "diagnostics": {
+    "candidate_rejections": [
+      {
+        "label": "Policy/smak",
+        "rejected": 0,
+        "stage": "policy_taste"
+      },
+      {
+        "label": "Näringskrav",
+        "rejected": 0,
+        "stage": "nutrition"
+      },
+      {
+        "label": "Näringsgräns från kvalificerade produkter",
+        "rejected": 0,
+        "stage": "nutrition_bound"
+      },
+      {
+        "label": "Eko",
+        "rejected": 0,
+        "stage": "organic"
+      },
+      {
+        "label": "Butikstak",
+        "rejected": 85,
+        "stage": "store_cap"
+      },
+      {
+        "label": "Variationskrav",
+        "rejected": 0,
+        "stage": "variation"
+      },
+      {
+        "label": "Tillagning/beredning",
+        "rejected": 0,
+        "stage": "preparation"
+      },
+      {
+        "label": "Produktkvalificering",
+        "rejected": 1072,
+        "stage": "product_qualification"
+      },
+      {
+        "label": "Pris/korg",
+        "rejected": 0,
+        "stage": "price_basket"
+      }
+    ],
+    "counting": "Varje rå kandidat räknas vid sitt första avslag. Därefter räknas menyförslag separat per sökdjup; variation och gemensamt butikstak gäller kombinationer. Noll avslag betyder inte att ett otestat steg har passerat. Sökningen är begränsad och bevisar inte global omöjlighet.",
+    "estimate_alternatives": [],
+    "first_rejection_reasons": [
+      {
+        "count": 235,
+        "reason": "Ingen verifierad köpbar vara för limejuice, ml. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 90,
+        "reason": "Ingen verifierad köpbar vara för purjolök, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 85,
+        "reason": "No complete basket can be built with the selected stores.",
+        "stage": "store_cap"
+      },
+      {
+        "count": 66,
+        "reason": "Ingen verifierad köpbar vara för salladslök, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 55,
+        "reason": "Ingen verifierad köpbar vara för pumpa, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 50,
+        "reason": "Ingen verifierad köpbar vara för mynta, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 43,
+        "reason": "Ingen verifierad köpbar vara för keso, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 34,
+        "reason": "Ingen verifierad köpbar vara för tamarindpasta, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 27,
+        "reason": "Ingen verifierad köpbar vara för masa harina, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 27,
+        "reason": "Ingen verifierad köpbar vara för nötkött, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 26,
+        "reason": "Ingen verifierad köpbar vara för kapris, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 25,
+        "reason": "Ingen verifierad köpbar vara för tonfisk, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 24,
+        "reason": "Ingen verifierad köpbar vara för pärlkorn, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 24,
+        "reason": "Ingen verifierad köpbar vara för mozzarella, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 23,
+        "reason": "Ingen verifierad köpbar vara för fänkål, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 19,
+        "reason": "Ingen verifierad köpbar vara för kokosflingor, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 18,
+        "reason": "Ingen verifierad köpbar vara för rotselleri, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 15,
+        "reason": "Ingen verifierad köpbar vara för räkor, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 15,
+        "reason": "Ingen verifierad köpbar vara för bambuskott, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 12,
+        "reason": "Ingen verifierad köpbar vara för jordnötssmör, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 12,
+        "reason": "Ingen verifierad köpbar vara för rimmat fläsk, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 10,
+        "reason": "Ingen verifierad köpbar vara för gnocchi, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 9,
+        "reason": "Ingen verifierad köpbar vara för kronärtskocka, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 9,
+        "reason": "Ingen verifierad köpbar vara för kålrot, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 9,
+        "reason": "Ingen verifierad köpbar vara för tapiokastärkelse, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 9,
+        "reason": "Ingen verifierad köpbar vara för sardiner, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 9,
+        "reason": "Ingen verifierad köpbar vara för breda risnudlar, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 8,
+        "reason": "Ingen verifierad köpbar vara för mango, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 7,
+        "reason": "Ingen verifierad köpbar vara för tortillas, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 7,
+        "reason": "Ingen verifierad köpbar vara för citrongräs, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för palsternacka, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för gelatinblad, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för päron, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för klibbigt rismjöl, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för makrill, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för uradlinser, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för gröna mungbönor, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för pak choi, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för vattenkastanjer, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 6,
+        "reason": "Ingen verifierad köpbar vara för musslor, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 4,
+        "reason": "Ingen verifierad köpbar vara för fisk, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 4,
+        "reason": "Ingen verifierad köpbar vara för vinblad, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 4,
+        "reason": "Ingen verifierad köpbar vara för tapiokapärlor, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 4,
+        "reason": "Ingen verifierad köpbar vara för chana dal, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 4,
+        "reason": "Ingen verifierad köpbar vara för bittergurka, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för sallad, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för mungbönsstärkelse, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för surkål, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för svart te, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för bläckfisk, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för kalvlägg med ben, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för fläsksida med svål, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för rädisa, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för vetegluten, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för svarta linser, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för gröna linser, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för rispapper, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för kokta ägg, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för klibbigt ris, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för råa räkor, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för risvermicelli, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för silkestofu, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för kvarg, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för pomelo, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för vegansk smördeg, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för matjessill, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för avokado, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 3,
+        "reason": "Ingen verifierad köpbar vara för fjälster, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 2,
+        "reason": "Ingen verifierad köpbar vara för fläsklever, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 2,
+        "reason": "Ingen verifierad köpbar vara för sattu, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 1,
+        "reason": "Ingen verifierad köpbar vara för groddade mungbönor, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      },
+      {
+        "count": 1,
+        "reason": "Ingen verifierad köpbar vara för mangold, g. Kontrollera mängden, egenskaperna eller exakt produkt.",
+        "stage": "product_qualification"
+      }
+    ],
+    "not_singleton_evaluated": 0,
+    "nutrition_searches": [],
+    "omitted_nutrition_searches": 0,
+    "pools": [
+      {
+        "meal_type": "dinner",
+        "raw": 2021
+      }
+    ],
+    "raw_recipe_pool": 2021,
+    "search": [
+      {
+        "attempt": 1,
+        "beam_pruned": 32,
+        "beam_width": 8,
+        "constraints_rejected": 0,
+        "depth": 1,
+        "equivalent_pruned": 0,
+        "evaluation_cache_hits": 0,
+        "evaluation_rejected": 0,
+        "evaluations_executed": 40,
+        "library_generation": 2,
+        "library_phase": "seed",
+        "priced": 40,
+        "proposals": 40,
+        "rejections": {
+          "nutrition": 0,
+          "nutrition_bound": 0,
+          "organic": 0,
+          "policy_taste": 0,
+          "preparation": 0,
+          "price_basket": 0,
+          "product_qualification": 0,
+          "store_cap": 0,
+          "variation": 0
+        },
+        "retained": 8,
+        "seed_full_pool_retry": false,
+        "seed_variants_available": 370,
+        "seed_variants_retained": 200
+      },
+      {
+        "attempt": 1,
+        "beam_pruned": 291,
+        "beam_width": 8,
+        "constraints_rejected": 21,
+        "depth": 2,
+        "equivalent_pruned": 27,
+        "evaluation_cache_hits": 0,
+        "evaluation_rejected": 0,
+        "evaluations_executed": 299,
+        "library_generation": 2,
+        "library_phase": "seed",
+        "priced": 299,
+        "proposals": 320,
+        "rejections": {
+          "nutrition": 0,
+          "nutrition_bound": 0,
+          "organic": 0,
+          "policy_taste": 0,
+          "preparation": 0,
+          "price_basket": 0,
+          "product_qualification": 0,
+          "store_cap": 0,
+          "variation": 21
+        },
+        "retained": 8,
+        "seed_full_pool_retry": false,
+        "seed_variants_available": 370,
+        "seed_variants_retained": 200
+      },
+      {
+        "attempt": 1,
+        "beam_pruned": 242,
+        "beam_width": 8,
+        "constraints_rejected": 70,
+        "depth": 3,
+        "equivalent_pruned": 5,
+        "evaluation_cache_hits": 0,
+        "evaluation_rejected": 0,
+        "evaluations_executed": 250,
+        "library_generation": 2,
+        "library_phase": "seed",
+        "priced": 250,
+        "proposals": 320,
+        "rejections": {
+          "nutrition": 0,
+          "nutrition_bound": 0,
+          "organic": 0,
+          "policy_taste": 0,
+          "preparation": 0,
+          "price_basket": 0,
+          "product_qualification": 0,
+          "store_cap": 0,
+          "variation": 70
+        },
+        "retained": 8,
+        "seed_full_pool_retry": false,
+        "seed_variants_available": 370,
+        "seed_variants_retained": 200
+      },
+      {
+        "attempt": 1,
+        "beam_pruned": 177,
+        "beam_width": 8,
+        "constraints_rejected": 133,
+        "depth": 4,
+        "equivalent_pruned": 5,
+        "evaluation_cache_hits": 0,
+        "evaluation_rejected": 2,
+        "evaluations_executed": 187,
+        "library_generation": 2,
+        "library_phase": "seed",
+        "priced": 185,
+        "proposals": 320,
+        "rejections": {
+          "nutrition": 0,
+          "nutrition_bound": 0,
+          "organic": 0,
+          "policy_taste": 0,
+          "preparation": 0,
+          "price_basket": 0,
+          "product_qualification": 0,
+          "store_cap": 2,
+          "variation": 133
+        },
+        "retained": 8,
+        "seed_full_pool_retry": false,
+        "seed_variants_available": 370,
+        "seed_variants_retained": 200
+      },
+      {
+        "attempt": 1,
+        "beam_pruned": 129,
+        "beam_width": 8,
+        "constraints_rejected": 179,
+        "depth": 5,
+        "equivalent_pruned": 5,
+        "evaluation_cache_hits": 0,
+        "evaluation_rejected": 4,
+        "evaluations_executed": 141,
+        "library_generation": 2,
+        "library_phase": "seed",
+        "library_shared_basket_cache_hits": 0,
+        "priced": 137,
+        "proposals": 320,
+        "rejections": {
+          "nutrition": 0,
+          "nutrition_bound": 0,
+          "organic": 0,
+          "policy_taste": 0,
+          "preparation": 0,
+          "price_basket": 0,
+          "product_qualification": 0,
+          "store_cap": 4,
+          "variation": 179
+        },
+        "retained": 8,
+        "seed_full_pool_retry": false,
+        "seed_variants_available": 370,
+        "seed_variants_retained": 200
+      },
+      {
+        "attempt": 2,
+        "beam_pruned": 0,
+        "beam_width": 1,
+        "constraints_rejected": 0,
+        "depth": 5,
+        "evaluation_cache_hits": 0,
+        "evaluation_rejected": 0,
+        "evaluations_executed": 0,
+        "improvements": 0,
+        "library_generation": 3,
+        "library_phase": "substitution",
+        "priced": 0,
+        "proposals": 1,
+        "rejections": {
+          "nutrition": 0,
+          "nutrition_bound": 0,
+          "organic": 0,
+          "policy_taste": 0,
+          "preparation": 0,
+          "price_basket": 0,
+          "product_qualification": 0,
+          "store_cap": 0,
+          "variation": 0
+        },
+        "retained": 0,
+        "screened": 0,
+        "substitution_variants_available": 40,
+        "substitution_variants_retained": 40,
+        "sweep": 1
+      }
+    ],
+    "singleton_passed": 864,
+    "version": "candidate-and-branch-counts-v1"
+  },
+  "engine_timings_seconds": {
+    "candidate_generation_and_qualification": 38.49084589999984,
+    "memory_reclamation": 1.3512008999823593,
+    "nutrition": 0.08200649992795661,
+    "package_calculation": 20.908054500527214,
+    "product_facts": 4.1399995097890496e-05
+  },
+  "facts_sha256": "914327f31e06b4c81840c3c8f79959babf8da67e1041255714514ee5a3c13516",
+  "facts_version": "retained-catalog-facts-v11-nutrition-extras:171bebac7367caf0a3cebb1cdeed6c9a7c34ebfa21fc58996c56260a84420416",
+  "full_report_bytes": 22469756,
+  "full_report_local_copy": ".local/recipes/quality-evidence/probes/E.json",
+  "full_report_sha256": "ccfb49d69a1eaf8b749fa8d1e8605fde95fd2729c9d76a0d2f60d4fb50716a7c",
+  "last_observed_api_seconds": 60.84117480000714,
+  "library_manifest_sha256": "c716c091ff224a42dcafdaf12df512e11e053654c5ca09c708483e56ea6eb084",
+  "library_merge_generations": false,
+  "method_signature": "15a122ecd588697afc90d79b0893fd5ab2da3678ce0d73e6496e7daffff7d393",
+  "observation": "No completed response at the 75-second request stop. Progress diagnostics are partial.",
+  "performance": {
+    "depth_counters": {},
+    "operation_counters": {
+      "basket_calculations": 1867,
+      "cache_hits": 348,
+      "cache_misses": 2,
+      "menu_search_result_cache_hits": 348,
+      "menu_search_result_cache_misses": 2,
+      "planner_allocator_trim_available": 0,
+      "planner_allocator_trim_released": 0,
+      "planner_memory_reclamation_calls": 2,
+      "planner_memory_reclamation_generation_2": 2,
+      "planner_unreachable_objects_collected": 223,
+      "product_match_calculations": 5831,
+      "semantic_candidates_returned": 5439,
+      "semantic_comparisons": 5831,
+      "store_combinations": 67585,
+      "store_combinations_pruned_infeasible": 58006
+    },
+    "span_statistics": {
+      "basket_optimization": {
+        "average_ms": 11.66,
+        "calls": 1775,
+        "cpu_ms": 0.0,
+        "max_ms": 803.381,
+        "wall_ms": 20695.972
+      },
+      "personal_candidate_generation": {
+        "average_ms": 10980.789,
+        "calls": 1,
+        "cpu_ms": 10921.875,
+        "max_ms": 10980.789,
+        "wall_ms": 10980.789
+      },
+      "personal_candidate_generation_and_qualification": {
+        "average_ms": 38490.822,
+        "calls": 1,
+        "cpu_ms": 38359.375,
+        "max_ms": 38490.822,
+        "wall_ms": 38490.822
+      },
+      "personal_memory_reclamation": {
+        "average_ms": 675.565,
+        "calls": 2,
+        "cpu_ms": 1328.125,
+        "max_ms": 741.593,
+        "wall_ms": 1351.13
+      },
+      "personal_nutrition": {
+        "average_ms": 0.065,
+        "calls": 1001,
+        "cpu_ms": 46.875,
+        "max_ms": 4.836,
+        "wall_ms": 65.451
+      },
+      "personal_package_calculation": {
+        "average_ms": 11.979,
+        "calls": 1866,
+        "cpu_ms": 22406.25,
+        "max_ms": 803.506,
+        "wall_ms": 22352.82
+      },
+      "personal_product_facts": {
+        "average_ms": 0.007,
+        "calls": 1,
+        "cpu_ms": 0.0,
+        "max_ms": 0.007,
+        "wall_ms": 0.007
+      },
+      "planner_queue_wait": {
+        "average_ms": 0.009,
+        "calls": 1,
+        "cpu_ms": 0.0,
+        "max_ms": 0.009,
+        "wall_ms": 0.009
+      }
+    },
+    "timings_ms": {
+      "basket_optimization": 20695.972,
+      "personal_candidate_generation": 10980.789,
+      "personal_candidate_generation_and_qualification": 38490.822,
+      "personal_memory_reclamation": 1351.13,
+      "personal_nutrition": 65.451,
+      "personal_package_calculation": 22352.82,
+      "personal_product_facts": 0.007,
+      "planner_queue_wait": 0.009
+    }
+  },
+  "policy": "legacy",
+  "preparation_seconds": 62.090727000002516,
+  "request": {
+    "allowed_store_ids": [
+      "context:citygross:33b01007b20e8988",
+      "context:coop:00d3c70860d97cae",
+      "context:coop:0af1a8138f910d90",
+      "context:coop:20e4633ad51e8d1f",
+      "context:coop:55469b5a21f9b46e",
+      "context:coop:6ccb60b8518dcfba",
+      "context:coop:7249b37ed1aa3b58",
+      "context:coop:788d290977d9807c",
+      "context:coop:80003f1b518a562e",
+      "context:coop:91472761912c55cf",
+      "context:coop:a06d1b2d64d5a880",
+      "context:coop:c964acbfeb697ff3",
+      "context:coop:df2cb6829ff429e8",
+      "context:coop:f4e6dfa3fada9ab1",
+      "context:hemkop:363b00fb95065cf0",
+      "context:hemkop:559cb3b5b4885cdf",
+      "context:hemkop:7c2684c2238e291f",
+      "context:hemkop:ac1b35fa13bf792f",
+      "context:ica:094e21ba74aa33a2",
+      "context:ica:0a956c41111c4892",
+      "context:ica:0b4e04c736b28d7f",
+      "context:ica:0f3dfa38926580b4",
+      "context:ica:225fe3aad581eb30",
+      "context:ica:2ebe48fc8b94954d",
+      "context:ica:39388ccbeef44cc9",
+      "context:ica:3dea560861dd40c3",
+      "context:ica:40cf35f5cc4291d2",
+      "context:ica:5e27ad28cca298dd",
+      "context:ica:687e279d959c4fd5",
+      "context:ica:6a256df3bd824770",
+      "context:ica:7510f4e03751e496",
+      "context:ica:89adf2bc4a5fc50b",
+      "context:ica:9298d28d85680b25",
+      "context:ica:93d67e8c62b80044",
+      "context:ica:b6344d523dff467d",
+      "context:ica:b7da1e7d4e75ddec",
+      "context:ica:c7d64306e198b5c0",
+      "context:ica:d39e9477fc04e9cd",
+      "context:ica:d4f389e027dfd2aa",
+      "context:ica:e97cb5c51269702d",
+      "context:ica:ec2fb2e2de118f35",
+      "context:ica:f0d2c31124015463",
+      "context:willys:4c7406e2a0cbcdf4",
+      "context:willys:5adaf178f6561faa",
+      "context:willys:6e2de1b8bdc14801",
+      "context:willys:91fc2ae693ecdec6",
+      "context:willys:9e19db13968fa0c6",
+      "context:willys:aa4f80feaf2b85d5",
+      "context:willys:b69aa27a99e005be",
+      "context:willys:bbd37ea3cd468706",
+      "context:willys:f34dc63a3595b2c9",
+      "context:willys:fc5fbe8cd6399ad8"
+    ],
+    "availability_mode": "normal",
+    "avoid_ingredients": [],
+    "beam_width": 30,
+    "candidate_recipe_count": 80,
+    "candidate_search_limit": null,
+    "debug": false,
+    "diet_preference": "mixed",
+    "diversity_mode": "balanced",
+    "max_kcal_per_serving": 900.0,
+    "max_pairwise_culinary_similarity": null,
+    "max_pairwise_recipe_similarity": 0.7,
+    "max_same_carbohydrate_meals": 3,
+    "max_same_cooking_method_meals": null,
+    "max_same_dish_form_meals": null,
+    "max_same_primary_ingredient_meals": 2,
+    "max_same_recipe_family": 2,
+    "max_stores": 1,
+    "membership_price_policy": "all_advertised",
+    "membership_programs": [],
+    "memberships": {},
+    "min_kcal_per_serving": 450.0,
+    "min_protein_g_per_serving": 18.0,
+    "min_vegetable_g_per_serving": 100.0,
+    "optimization_iterations": 1,
+    "personal": {
+      "allow_nutrition_estimates": true,
+      "extras": [],
+      "meals": [
+        {
+          "count": 5,
+          "diet": "mixed",
+          "distribution": {},
+          "limits": {
+            "max_carbs_g": null,
+            "max_fat_g": null,
+            "max_kcal": null,
+            "max_protein_g": null,
+            "max_weight_g": null,
+            "min_carbs_g": null,
+            "min_fat_g": null,
+            "min_protein_g": null,
+            "min_weight_g": null
+          },
+          "meal_type": "dinner",
+          "organic_animals": false,
+          "profile": {
+            "allergies": [],
+            "dislikes": [],
+            "exclusions": [],
+            "likes": []
+          },
+          "recipe_choices": {
+            "dinner_level": null,
+            "max_active_minutes": null,
+            "max_ingredients": null,
+            "max_total_minutes": null,
+            "max_waiting_minutes": null,
+            "min_ingredients": null
+          },
+          "servings": 4
+        },
+        {
+          "count": 0,
+          "diet": "mixed",
+          "distribution": {},
+          "limits": {
+            "max_carbs_g": null,
+            "max_fat_g": null,
+            "max_kcal": null,
+            "max_protein_g": null,
+            "max_weight_g": null,
+            "min_carbs_g": null,
+            "min_fat_g": null,
+            "min_protein_g": null,
+            "min_weight_g": null
+          },
+          "meal_type": "breakfast",
+          "organic_animals": false,
+          "profile": {
+            "allergies": [],
+            "dislikes": [],
+            "exclusions": [],
+            "likes": []
+          },
+          "servings": 1
+        },
+        {
+          "count": 0,
+          "diet": "mixed",
+          "distribution": {},
+          "limits": {
+            "max_carbs_g": null,
+            "max_fat_g": null,
+            "max_kcal": null,
+            "max_protein_g": null,
+            "max_weight_g": null,
+            "min_carbs_g": null,
+            "min_fat_g": null,
+            "min_protein_g": null,
+            "min_weight_g": null
+          },
+          "meal_type": "snack",
+          "organic_animals": false,
+          "profile": {
+            "allergies": [],
+            "dislikes": [],
+            "exclusions": [],
+            "likes": []
+          },
+          "servings": 1
+        }
+      ],
+      "organic_animals": false,
+      "organic_percent": 0.0,
+      "pantry_revision": 0,
+      "product_locks": {},
+      "profile": {
+        "allergies": [],
+        "dislikes": [],
+        "exclusions": [],
+        "likes": []
+      },
+      "slots": null,
+      "surplus_mode": "minimize",
+      "use_pantry": false
+    },
+    "postal_code": "21120",
+    "purchase_planning_mode": "estimated",
+    "recipe_preferences": {
+      "adaptation": "approved",
+      "allow_fish": true,
+      "cuisines": [],
+      "max_ingredients": 15,
+      "max_minutes": null,
+      "min_ingredients": 10,
+      "min_protein_g": null,
+      "mode": "complete"
+    },
+    "recipes": 5,
+    "servings": 4,
+    "strategy": "optimized",
+    "use_member_prices": false,
+    "varied_budget_percent": 25.0
+  },
+  "scope": "Real in-process HTTP plan/save/GET; frozen source replay, no live collection or browser transport",
+  "started_at": "2026-10-26T11:03:30.575485+00:00",
+  "status": "deadline_exceeded",
+  "total_current_variants": 2462,
+  "universe_sha256": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+  "user_deadline_seconds": 75,
+  "valid_menu_delivered": false
+}

@@ -177,4 +177,5 @@ if __name__ == "__main__":
     p.add_argument("--case", required=True)
     p.add_argument("--profile", action="store_true")
     p.add_argument("--browser", action="store_true")
+    p.add_argument("--expected-total", type=float)
     main(p.parse_args())

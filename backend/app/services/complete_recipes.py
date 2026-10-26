@@ -509,6 +509,15 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         return form == "dry" and simple(grains[canonical], "fullkorn|fullkorns|glutenfri|glutenfritt|snabb|original|durumvete|durum|malet|fint|finmalet|special|siktat|torkade|delade|skalade|split")
     legumes = {"kikärtor": "kikärtor|kikärter", "kidneybönor": "kidneybönor|röda kidneybönor", "svarta bönor": "svarta bönor", "bönor": "bönor|vita bönor|stora vita bönor|vita bönor stora", "majs": "majs|majskorn|sockermajs", "ärtor": "ärtor|gröna ärtor"}
     if canonical in legumes:
+        if canonical == "majs" and frozen and "frozen" in requirements and declared:
+            # Whole kernel metadata cannot override an actual declaration of
+            # butter, mixed vegetables or added water. Missing declarations
+            # still supply no positive allergy/nutrition/organic evidence.
+            words, _ = _culinary_words(declared)
+            corn = {"majs", "majskorn", "sockermajs"}
+            allowed = corn | {"ingredienser", "ekologisk", "ekologiska", "ekologiskt", "råvara", "råvaror"}
+            if not words.intersection(corn) or not words <= allowed:
+                return False
         return simple(f"(?:{legumes[canonical]})", "kokta|avrunna|sweet corn|extra fina|söta|2-p|3-pack|utan tillsatt socker")
     if canonical == "tortillas":
         return bool(re.fullmatch(r"(?:(?:street|corn|glutenfria|glutenfri) )*(?:tortilla|tortillas|vetetortilla|vetetortillas)(?: original| medium| large| small| fullkorn| vete| majs| soft| mini| wraps| glutenfri| glutenfria| ekologiska| eko)*", label))

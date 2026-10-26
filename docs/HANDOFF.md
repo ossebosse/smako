@@ -1,3 +1,43 @@
+# 2026-10-26: Receptens frysta beredning rättad, verkliga personliga prov
+
+[PR #15](https://github.com/ossebosse/smako/pull/15) och
+[slutrapporten](reviews/recipe-quality-and-planning-20261026.md) genomför
+CODEX-SOL-NEXT-20261026-RECIPE-QUALITY-AND-PLANNING.md.
+337 berörda varianter/196 baser har nya versioner via author/validate/diff/import,
+inklusive explicita processer, faktiska `uses`, upptining/kylning, tidsfilter
+och 14 krav på färsk fast/grön råvara. Äldre bytes och original166/262 behålls.
+Aktuellt: 2 462 varianter/934 registrerade baser, 38 aktuella + sju historiska
+paketgenerationer. Recepten är inte provlagade; tiderna har beredskapskontroller.
+
+Majskornens alias/identitet rättas med bibehållna källa-/mängd-/policygrindar.
+Efter färskformskorrigeringen: exakt 700→733, estimated 882→920 individuellt
+insatslösta varianter (+33/+38); netto +29/+32 mot föregående rapport.
+1 467/1 280 kvarstår blockerade av 105 grupper. Läs den nya hinderlistan före
+källarbete; limejuice445 och ingefära402 dominerar men överlappar andra hinder.
+
+F är en ny ägare/nya val: en middag/två portioner, grekiskt/italienskt,
+5–7 ingredienser, aktiv30/total45 min, protein≥20 g. API31,42 s, sista kodens
+API31,96 s; verklig Chromium klick→lista+GET28,10 s, 104,30 kr och
+ESTIMATED protein20,7625 g. Checkout/save/ägar-GET passerar. A/B/E:s fria
+femmiddagsfall är ofärdiga vid75 s. D (jordnöt+eko50 %) avvisas DATA_BLOCKED
+24,89 s. C är funktionellt sparat men lovar rågbröd och köper pitabröd:
+exakt kvarstående innehållsärende finns i rapporten och ska få vanlig ny version.
+Endagsresultatet bevisar inte 30–60 s för veckor eller tusentals sökbara recept.
+
+En begärandeägd identitetscache återanvänds i diagnostiken, ingen verifierad
+veckolatensvinst. B räknar fortfarande över1,5 miljoner butikskombinationer.
+Gemensam preparation32,51 s på redan full4096-cache gav noll skrivningar;
+säker versionsfallback är testad men hållbar retention återstår. Bara en
+behörig pris-/faktaversion finns: verklig veckouppdateringslatens är omätt.
+Nästa prestandaändring ska angripa gemensam korgsökning/aktuellt bibliotek,
+opt-in och med oförändrat B; återstarta inte den stora matrisen.
+
+Samma journal: **3 855,4145 s använda / 3 344,5855 s kvar (55,74 min)**.
+Ingen ny budget och inga kvarlämnade mätarbetare. Sista riktade offlinekörning
+443 PASS, Ruff/compileall gröna; ordinarie CI inklusive browser krävs på sista
+PR-huvudet före mainmerge. Legacy-default och library_merge_generations=False
+består. Mainintegration är ingen betaaktivering; drift/profiler/insamling orörda.
+
 # 2026-10-26: Nästa Sol-uppdrag efter oberoende granskning av PR #14
 
 Läs först

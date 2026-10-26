@@ -51,7 +51,8 @@ def run(app, request, result, args, started, save):
             assert page.locator("#meal-dinner-min_ingredients").input_value() == "5"
             assert page.locator("#meal-dinner-max_ingredients").input_value() == "7"
             assert page.locator("#meal-dinner-max_total_minutes").input_value() == "45"
-            assert page.locator("#cuisine-swedish").is_checked()
+            for cuisine in draft["recipe_preferences"]["cuisines"]:
+                assert page.locator("#cuisine-" + cuisine).is_checked()
             result.update(preparation_seconds=time.perf_counter() - started, status="running",
                 scope="Real Chromium UI, actual source/plan APIs, fresh test member; no mocked routes", browser="chromium")
             save()
@@ -66,6 +67,9 @@ def run(app, request, result, args, started, save):
                 meal = payload["personal"]["meals"][0]
                 assert meal["count"] == 1 and meal["servings"] == 2
                 assert meal["recipe_choices"]["max_active_minutes"] == 30
+                protein = draft["personal"]["meals"][0]["limits"].get("min_protein_g")
+                if protein is not None:
+                    assert meal["limits"]["min_protein_g"] == protein
                 assert set(payload["allowed_store_ids"]) == set(draft["allowed_store_ids"])
                 plan_id = page.evaluate("localStorage.getItem('smako.personal.lastPlan')")
                 read = context.request.get(base + "/api/plans/" + plan_id)
@@ -73,9 +77,12 @@ def run(app, request, result, args, started, save):
                 saved = read.json()
                 plan = saved["plan"]
                 assert plan["personal"]["checks"]["checkout_audit"]["passed"]
+                if args.expected_total is not None:
+                    assert plan["optimized_basket"]["total"] == args.expected_total
                 page.get_by_role("button", name="Öppna inköpslistan", exact=True).click()
                 expect(page.locator("#personal-shopping")).to_be_visible()
-                expect(page.locator("#shopping-content")).to_contain_text(re.compile("108[,.]45"))
+                price = f"{plan['optimized_basket']['total']:.2f}".replace(".", "[,.]")
+                expect(page.locator("#shopping-content")).to_contain_text(re.compile(price))
                 elapsed = time.perf_counter() - click
                 cancel()
                 result.update(status="saved_and_read_back", valid_menu_delivered=True,
