@@ -14,6 +14,7 @@ PATH = Path(__file__).parents[1] / "data/ingredients/intake-all-20261026.json"
 @lru_cache(maxsize=1)
 def entries():
     rows = json.loads(PATH.read_bytes())["ingredients"]
+    rows.extend(json.loads(PATH.with_name("recipe-shapes-20261026.json").read_bytes())["ingredients"])
     return {row["requirements"][0].removeprefix("pack:"): row for row in rows}
 
 
