@@ -18,6 +18,9 @@ from grocery_data.app.domain.recipe import RECIPE_RELEVANT_INGREDIENTS
 # are not always interchangeable (nötfärs/blandfärs, smör/margarin) remain
 # distinct canonical ingredients.
 CANONICAL_ALIASES: dict[str, tuple[str, ...]] = {
+    # Same dry whole coconut commodity; full-label/form/composition gates still
+    # reject sweetened flakes, desserts, coconut flour, milk and oil.
+    "kokosflingor": ("kokosflingor", "riven kokos", "kokos riven"),
     "chiliflakes": ("chiliflakes", "chili flakes", "chiliflingor"),
     "rökt paprikapulver": ("rökt paprikapulver", "paprikapulver rökt", "rökt paprika", "paprika rökt",
                            "paprika smoked", "smoked paprika"),
