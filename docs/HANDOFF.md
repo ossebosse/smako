@@ -1,3 +1,22 @@
+# 2026-10-26: Nästa Sol-uppdrag — kvarstående receptfel, veckosökning och cache
+
+Ägaren har efter granskningen av PR #15 gett nästa uppdrag till Sol:
+[CODEX-SOL-NEXT-20261026-WEEK-SEARCH.md](CODEX-SOL-NEXT-20261026-WEEK-SEARCH.md).
+Detta är aktuell startpunkt; föregående rapport och uppdrag är bakgrund.
+
+Oberoende granskning av `6b2e946`: 457 riktade tester passerar. Sex aktuella
+1.0.2-spettvarianter har ändå motsägande instruktioner: tina frukten, lägg
+den sedan fryst i en panna, trots ugnsspett. Rätta båda basernas tre
+varianter och den redan dokumenterade rågbröd/pitabröd-avvikelsen genom
+vanliga nya versioner. Kontrollera även andra recept som samma ersättningar ändrat.
+
+Prioritera därefter återanvändning i gemensam korg-/butikssökning och
+beräkningscachens versionslivscykel. Mät det oförändrade femmiddagsfallet B
+efter en konkret ändring. Endags-F:s 28–32 s ersätter inte veckomålet;
+A/B/E saknar färdig meny vid 75 s. Ingen stor ny matris eller ny budget.
+Senast **55,74 minuter kvar** i samma intake/V2-journal; läs aktuellt saldo.
+Opt-in för ny sökväg, legacy som standard, separat driftaktivering kvarstår.
+
 # 2026-10-26: Receptens frysta beredning rättad, verkliga personliga prov
 
 [PR #15](https://github.com/ossebosse/smako/pull/15) och

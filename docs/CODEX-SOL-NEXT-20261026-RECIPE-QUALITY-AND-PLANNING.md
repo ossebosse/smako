@@ -1,5 +1,10 @@
 # Sol: rätta receptinnehåll, förbättra köpbarhet och mät personlig planering
 
+**Efter PR #15 och granskning 2026-10-26:** nästa uppdrag finns i
+[kvarstående receptfel, veckosökning och cache](CODEX-SOL-NEXT-20261026-WEEK-SEARCH.md).
+Det ersätter detta dokuments etappordning. Använd aktuellt saldo i samma
+journal, inte det historiska startsaldot nedan. Befintliga resultat behålls.
+
 Ägarens nästa uppdrag efter granskningen av PR #14, main `ed36c0f`,
 2026-10-26. Arbeta i `D:\Projects\Smako`, hämta aktuell main utan att
 skriva över annat arbete och följ AGENTS, DEVELOPMENT och senaste HANDOFF.
