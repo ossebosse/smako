@@ -1,5 +1,37 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Tillägg 2026-10-26: hel meny före bred prefixprissättning
+
+För genererade aktuella V2-urval med fler än 64 alternativ i någon slot
+föreslår befintlig MenuOptimizer kompletta menyer före gemensam checkout.
+Detta väljer algoritm, begränsar inte biblioteket. Alla hårda acceptans-
+och produkt-/pris-/närings-/ekoregler samt slutlig aktuell audit/save består.
+Kvalificeringens privata singletonpriser och paketidentiteter prioriterar
+förslag; de är inga giltighetsintyg eller undre gränser för hela veckan.
+Prioriterade och ursprungliga ankare varvas och redan giltiga hela korgar
+förbättras inom kvarvarande tid. Oprövade alternativ redovisas som uppskjutna,
+inte globalt omöjliga eller dyrare. Resultatet saknar globalt optimumbevis.
+
+Förbättringscheckouter får en nästlad kooperativ deadline som reserverar
+tolv sekunder av samma absoluta begäransbudget för aktuell slutkontroll,
+lagring och svar. Ett avbrutet förbättringsförsök får inte kasta en tidigare
+giltig kandidat eller förlänga den yttre deadlinen. Fulla resultat begränsas
+till bästa och pågående utvärdering; högst 4 096 kompakta menyidentiteter
+används för att undvika identiska utvärderingar. Privat allokering/lås
+behåller ordning. Varje nytt anrop/ägare får egen sökstatus.
+
+I den ordinarie slot-beamen reserveras överlämnade förstamåltidsresultat
+tills de konsumeras i samma ordning. Reserverade resultat och fortsatt cache
+delar fortfarande totalt 256 poster. Detta ändrar arbete, inte ranking,
+tie-break, kandidatgiltighet eller finalkontroller. Äldre återställda UI-val
+utan intentmetadata förblir utan metadata tills användaren väljer nytt intent.
+
+[Mätningen](reviews/broad-week-search-20261026.md) visar oförändrat A med
+53,37 s API/save/GET och 55,12 s verklig browser, 297,18 kr; B2 behåller exakt
+731,20-kronorskorgen. Det är singelprov med förberett underlag, inte p95,
+samtidighet, verklig veckouppdatering eller hela valkatalogens kvalificering.
+Legacy är fortfarande standard och den nya vägen opt-in.
+
 ## Tillägg 2026-10-26: uttryckliga val och känd standardvariation
 
 För nya opt-in-anrop med `smako-current-library-v2` och
