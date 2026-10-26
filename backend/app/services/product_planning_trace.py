@@ -2,6 +2,8 @@
 import hashlib
 import json
 
+from app.services.recipe_computation_cache import RecipeComputationCache
+
 
 def recipe_identity(recipe):
     if recipe is None:
@@ -13,7 +15,7 @@ def recipe_identity(recipe):
 
 
 class ProductPlanningTrace:
-    def __init__(self, prepared, *, limit=256, event_limit=4096):
+    def __init__(self, prepared, *, limit=256, event_limit=4096, recipe_cache=None):
         self.limit, self.event_limit = limit, event_limit
         self.products = {}
         self.omitted_products = 0
@@ -22,7 +24,7 @@ class ProductPlanningTrace:
         self.recipe_needs = {}
         self.comparisons = []
         self.search = {}
-        self._recipe_ids = {}
+        self._recipe_values = recipe_cache if recipe_cache is not None else RecipeComputationCache()
         indexes = {}
         pool = prepared.economic_pool
         for label, index in (("economic", pool.candidates_by_name),
@@ -54,14 +56,10 @@ class ProductPlanningTrace:
             }
 
     def identity(self, recipe):
-        key = id(recipe)
-        if key not in self._recipe_ids:
-            # Bounded, but above a large library: clearing at 512 re-hashed
-            # thousands of recipes over and over.
-            if len(self._recipe_ids) >= 65536:
-                self._recipe_ids.clear()
-            self._recipe_ids[key] = (recipe, recipe_identity(recipe))
-        return self._recipe_ids[key][1]
+        # Share the existing request-owned exact value snapshot with nutrition
+        # diagnostics too. Mutable instructions/forms and copied recipes cannot
+        # borrow a stale ID, and callers cannot mutate the cached value.
+        return dict(self._recipe_values.get(recipe, recipe_identity))
 
     def search_decision(self, slots, outcome, *, result=None, reason=None, depth=None):
         # Aggregate actual beam events per recipe. Never infer economic loss
