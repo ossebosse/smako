@@ -60,7 +60,13 @@ def main(args):
         payload = json.loads(args.requests.read_bytes())[args.case]
         portions = {m["servings"] for m in payload["personal"]["meals"] if m["count"]}
         common_started = time.perf_counter()
-        shared_preparation = prepare_current_sources(prepared, facts, portions=portions)
+        def common_progress(phase):
+            from app.services.meal_library_content import encoded
+            from app.services.meal_prepared_artifacts import STATS
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.with_suffix(".progress.json").write_bytes(encoded({"state":"preparing", "phase":phase,
+                "elapsed_seconds":time.perf_counter()-started, "cache_stats":dict(STATS)}))
+        shared_preparation = prepare_current_sources(prepared, facts, portions=portions, progress=common_progress)
         shared_preparation_seconds = time.perf_counter() - common_started
     from app.services import personal_source_facts
     personal_source_facts.load_retained_facts = lambda *a, **kw: facts

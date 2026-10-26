@@ -41,6 +41,13 @@ def _preparation_facts(universe, path):
 
 
 def _prepare_current_cli(args):
+    progress_started = time.perf_counter()
+    phases = []
+    def progress(phase):
+        from app.services.meal_prepared_artifacts import STATS
+        phases.append({"phase":phase, "elapsed_seconds":time.perf_counter()-progress_started})
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.with_suffix(".progress.json").write_bytes(encoded({"state":"preparing", "phases":phases, "cache_stats":dict(STATS)}))
     from app.services.meal_library_content import library_signature
     from app.services.meal_prepared_artifacts import (
         prepare_content,
@@ -51,12 +58,15 @@ def _prepare_current_cli(args):
     if args.universe:
         from app.services.personal_source_facts import load_retained_facts
         from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
+        progress("source_restore")
         universe = PreparedPriceUniverseArtifact.from_file(args.universe).restore()
+        progress("source_facts")
         if args.facts:
             facts = _preparation_facts(universe, args.facts)
         else:
             facts = load_retained_facts(universe)
-        result = prepare_current_sources(universe, facts, portions=args.servings or (4,))
+        result = prepare_current_sources(universe, facts, portions=args.servings or (4,), progress=progress)
+        result["preparation_phases"] = phases
     else:
         with shared_preparation({"library":library_signature(), "scope":"current_content", "portions":args.servings}) as lease:
             result = prepare_content(current_recipes())

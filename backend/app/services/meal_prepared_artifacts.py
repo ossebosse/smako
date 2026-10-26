@@ -1,4 +1,4 @@
-"""Bounded, durable preparation of public content; never cache purchase approval."""
+"""Bounded, rebuildable public preparation; never cache purchase approval."""
 from __future__ import annotations
 
 import base64
@@ -221,7 +221,9 @@ def _atomic_derived_write(path, data, lease):
         with temporary.open("wb") as handle:
             handle.write(data)
             handle.flush()
-            os.fsync(handle.fileno())
+        # Derived values use the existing cache's atomic-replace contract.
+        # Per-file fsync serializes thousands of small writes on this volume;
+        # after interruption every persisted payload is still hash-validated.
         os.replace(temporary, path)
     finally:
         try:
@@ -321,24 +323,34 @@ def _derived_write_batch(directory, lease):
         yield budget
 
 
-def prepare_current_sources(prepared_universe, facts, *, portions=(4,)):
+def prepare_current_sources(prepared_universe, facts, *, portions=(4,), progress=None):
     """One current public catalog; no profile, meal winner or price approval."""
     from app.services.meal_library_content import library_signature
     from app.services.personal_source_facts import facts_version
     from app.services.recipe_library import _current_issued_index, current_recipes
+    if progress:
+        progress("facts_identity")
     version = facts_version(facts)
     identity = {"library":library_signature(), "universe":prepared_universe.universe.universe_id,
                 "facts":version, "portions":sorted(set(portions)),
                 "scope":"current_content_declarations_ingredient_positions"}
     before = dict(STATS)
     with shared_preparation(identity) as lease:
+        if progress:
+            progress("current_content")
         content = prepare_content(current_recipes())
+        if progress:
+            progress("portion_views")
         counts = {str(n):len(_current_issued_index(n)) for n in sorted(set(portions))}
         def source_fact(product):
             fact = facts.get((product.store_id,product.product_id))
             return fact if (fact and fact.source and fact.source_product_id == product.product_id
                 and product.source_provenance and fact.source_snapshot_id == product.source_provenance.source_snapshot_id) else None
+        if progress:
+            progress("declarations")
         declarations = declaration_index(prepared_universe.universe, facts, source_fact, verified_version=version)
+        if progress:
+            progress("ingredient_search")
         searches = prepare_ingredient_search(prepared_universe)
     cache = root()
     storage = {directory.name:{"files":sum(1 for p in directory.glob("*.json")),
