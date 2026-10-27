@@ -56,17 +56,36 @@ def test_changed_product_cannot_borrow_reviewed_yield(scallion, field, value):
     assert not links.compatible(key, changed)
 
 
-def test_missing_source_changed_snapshot_and_contradictory_composition_fail_closed(scallion):
+def test_missing_source_and_contradictory_composition_fail_closed(scallion):
     _key, _row, proof, p = scallion
     changed = p.model_copy(update={'source_provenance': None})
-    assert project_usable_quantity(changed, None, allow_estimates=True, required_unit='g') is changed
-    changed = p.model_copy(update={'source_provenance': p.source_provenance.model_copy(update={'source_snapshot_id': 'new'})})
     assert project_usable_quantity(changed, None, allow_estimates=True, required_unit='g') is changed
     fact = ProductFacts(source='synthetic test', source_product_id=p.product_id,
                         source_snapshot_id=p.source_provenance.source_snapshot_id, ingredients=('Salt, salladslök',))
     assert project_usable_quantity(p, fact, allow_estimates=True, required_unit='g') is p
     proof['quantity']['source'].pop('sha256')
     assert project_usable_quantity(p, None, allow_estimates=True, required_unit='g') is p
+
+
+def test_price_update_reuses_stable_article_but_rebinds_current_facts(scallion):
+    key, _row, proof, p = scallion
+    old = ProductFacts(source='old-catalogue', source_product_id=p.product_id,
+                       source_snapshot_id=p.source_provenance.source_snapshot_id)
+    proof['composition_sha256'] = links.composition_signature(old)
+    fresh = p.model_copy(update={'product_id': 'new-price-row', 'price': 30,
+        'source_provenance': p.source_provenance.model_copy(update={'source_snapshot_id': 'new-price-snapshot'})})
+    facts = replace(old, source='new-catalogue', source_product_id=fresh.product_id,
+                    source_snapshot_id=fresh.source_provenance.source_snapshot_id)
+    assert links.composition_signature(old) == links.composition_signature(facts)
+    projected = project_usable_quantity(fresh, facts, allow_estimates=True, required_unit='g')
+    assert projected.usable_quantity == 96 and projected.price == 30
+    assert projected.source_provenance.source_snapshot_id == 'new-price-snapshot'
+    assert links.compatible(key, projected, facts)
+    assert project_usable_quantity(fresh, old, allow_estimates=True, required_unit='g') is fresh
+    changed = replace(facts, ingredients=('Salladslök, salt',))
+    assert project_usable_quantity(fresh, changed, allow_estimates=True, required_unit='g') is fresh
+    wrong_context = fresh.model_copy(update={'store_id': 'other-context'})
+    assert project_usable_quantity(wrong_context, facts, allow_estimates=True, required_unit='g') is wrong_context
 
 
 def drained_case():

@@ -70,6 +70,7 @@ def main(args):
             proof = {field: p.get(field) for field in ['store_id', 'product_id', 'gtin', 'name', 'brand', 'category',
                                                       'package_quantity', 'package_unit', 'sale_model']}
             proof.update(source_snapshot_id=prov['source_snapshot_id'], source_sha256=digest(p),
+                retailer_product_id=article,
                 source_observed_at=prov['source_observed_at'], source_provenance=prov,
                 identity_basis='whole_fresh_produce',
                 review='Whole fresh label/category and exact source identity reviewed against authored raw edible definition; package is gross produce, never edible mass.',

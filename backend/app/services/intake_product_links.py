@@ -51,20 +51,36 @@ def compatible(key, product, fact=None):
 
 
 def composition_signature(fact):
-    """Only the source-bound composition read by a culinary review, not prices."""
+    """Reviewed composition, independent of a catalogue's price generation.
+
+    The caller separately verifies the current fact's product/snapshot binding.
+    A new price document or UUID must not invalidate identical food content.
+    """
     value = {name: getattr(fact, name, None) for name in (
-        "source", "source_product_id", "source_snapshot_id", "ingredients",
-        "ingredients_complete", "ingredient_evidence_kind")}
-    value["field_sources"] = fact.field_sources.get("ingredients", ())
+        "ingredients", "ingredients_complete", "ingredient_evidence_kind")}
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
 
 
 def _review_identity(evidence, product, fact):
     provenance = getattr(product, "source_provenance", None)
+    original = evidence.get('source_provenance', {})
+    article = (getattr(provenance, 'retailer_product_id', None)
+               or getattr(fact, 'retailer_product_id', None))
+    # Stable, exact food identity; the live price, qualification and request
+    # scope remain downstream gates. Unidentified rows retain the snapshot gate.
+    if evidence.get('gtin'):
+        identified = evidence['gtin'] == getattr(product, 'gtin', None)
+    elif evidence.get('retailer_product_id'):
+        identified = evidence['retailer_product_id'] == article
+    else:
+        identified = (evidence['product_id'] == product.product_id and provenance
+                      and evidence['source_snapshot_id'] == provenance.source_snapshot_id)
     if (not provenance or not evidence.get("review") or not evidence.get("source_sha256")
             or evidence["store_id"] != product.store_id
-            or evidence["product_id"] != product.product_id
-            or evidence["source_snapshot_id"] != provenance.source_snapshot_id
+            or not identified
+            or any(getattr(provenance, field, None) != original.get(field) for field in (
+                'source_provider', 'source_channel', 'source_role', 'chain', 'provider_store_id',
+                'price_context', 'retailer_id_namespace'))
             or evidence.get("gtin") != getattr(product, "gtin", None)
             or any(getattr(product, field, None) != evidence.get(field)
                    for field in ("name", "brand", "category", "package_quantity", "package_unit", "sale_model"))):
@@ -103,7 +119,10 @@ def _quantity_reviews():
     for row in entries().values():
         for proof in row.get("reviewed_links", ()):
             if proof["quantity"].get("method") == "usda_sr28_refuse_v1":
-                result.setdefault((proof["store_id"], proof["product_id"]), []).append(proof)
+                key = (('gtin', proof['store_id'], proof['gtin']) if proof.get('gtin')
+                       else ('article', proof['store_id'], proof['retailer_product_id'])
+                       if proof.get('retailer_product_id') else ('product', proof['store_id'], proof['product_id']))
+                result.setdefault(key, []).append(proof)
     return result
 
 
@@ -115,7 +134,12 @@ def project_reviewed_quantity(product, fact, *, allow_estimates=False, required_
     """
     if not allow_estimates or required_unit != "g":
         return product
-    for proof in _quantity_reviews().get((product.store_id, product.product_id), ()):
+    article = (getattr(product.source_provenance, 'retailer_product_id', None)
+               or getattr(fact, 'retailer_product_id', None))
+    keys = [('gtin', product.store_id, getattr(product, 'gtin', None)),
+            ('article', product.store_id, article), ('product', product.store_id, product.product_id)]
+    proofs = [proof for key in keys for proof in _quantity_reviews().get(key, ())]
+    for proof in proofs:
         q = proof["quantity"]
         if (not _review_identity(proof, product, fact)
                 or product.sale_model not in {"fixed_package", "variable_weight_package"} or product.package_unit != "g"
@@ -212,6 +236,8 @@ def search_positions(prepared):
             for evidence in row.get("reviewed_links", ()):
                 key = (evidence["store_id"], evidence["product_id"], evidence["source_snapshot_id"])
                 scoped.setdefault(key, set()).add(row["name"])
+                if evidence.get('gtin'):
+                    gtins.setdefault(evidence['gtin'], set()).add(row['name'])
             if row["kind"] == "definition_only":
                 continue
             for evidence in row["evidence"]:
