@@ -179,8 +179,8 @@ def additional_whole_identity(canonical, form, label, composition):
         "strösocker": ("dry", r"strösocker(?: ekologiskt| eko)*"),
         "äpple": ("raw_edible", r"(?:äpple|äpplen)(?: röda| gröna| svenska| ekologiska| klass [12])*"),
         "jordnötter": ("as_sold", r"(?:rostade )?jordnötter(?: rostade| osaltade)*"),
-        "tonfisk": ("cooked_drained", r"tonfisk(?: i vatten| bitar| skipjack)*"),
-        "gnocchi": ("as_sold", r"(?:potatisgnocchi|gnocchi)(?: di patate| potatis| naturell| original)*"),
+        "tonfisk": ("cooked_drained", r"tonfisk(?: i vatten| vatten| bitar| skipjack)*"),
+        "gnocchi": ("as_sold", r"(?:potatisgnocchi|gnocchi)(?: di patate| potatis| naturell| original| classic| färsk pasta)*"),
     }
     entry = patterns.get(canonical)
     if entry is None or form != entry[0] or not re.fullmatch(entry[1], label):

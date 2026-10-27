@@ -23,7 +23,7 @@ def compatible(key, product, fact=None):
     if row is None:
         return False
     if row["kind"] == "definition_only":
-        return declared_definition(row, product, fact)
+        return reviewed_definition(row, product, fact) or declared_definition(row, product, fact)
     if fact is not None and row["kind"] in {"plain", "dry"}:
         composition = " ".join(fact.ingredients).casefold().split("kan innehålla")[0]
         excluded = r"\b(?:salt|socker|olja|smör|sirap|sugar|oil)\b"
@@ -48,6 +48,86 @@ def compatible(key, product, fact=None):
                and product.usable_quantity == product.package_quantity
                and getattr(product, "quantity_confidence", None) == evidence.get("quantity_confidence", "exact")
                for evidence in row["evidence"])
+
+
+def composition_signature(fact):
+    """Only the source-bound composition read by a culinary review, not prices."""
+    value = {name: getattr(fact, name, None) for name in (
+        "source", "source_product_id", "source_snapshot_id", "ingredients",
+        "ingredients_complete", "ingredient_evidence_kind")}
+    value["field_sources"] = fact.field_sources.get("ingredients", ())
+    return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
+
+
+def _review_identity(evidence, product, fact):
+    provenance = getattr(product, "source_provenance", None)
+    if (not provenance or not evidence.get("review") or not evidence.get("source_sha256")
+            or evidence["store_id"] != product.store_id
+            or evidence["product_id"] != product.product_id
+            or evidence["source_snapshot_id"] != provenance.source_snapshot_id
+            or evidence.get("gtin") != getattr(product, "gtin", None)
+            or any(getattr(product, field, None) != evidence.get(field)
+                   for field in ("name", "brand", "category", "package_quantity", "package_unit", "sale_model"))):
+        return False
+    if fact is not None:
+        from app.services.complete_recipes import identity_conflicts
+
+        if (identity_conflicts(fact) or fact.source_product_id != product.product_id
+                or fact.source_snapshot_id != provenance.source_snapshot_id):
+            return False
+    if evidence.get("composition_sha256"):
+        return bool(fact and fact.source_product_id == product.product_id
+                    and fact.source_snapshot_id == provenance.source_snapshot_id
+                    and composition_signature(fact) == evidence["composition_sha256"])
+    return (evidence.get("identity_basis") == "whole_fresh_produce"
+            and not (fact and fact.ingredients))
+
+
+def reviewed_definition(row, product, fact):
+    """Independent identity/form and quantity review; no personal fact approval."""
+    for proof in row.get("reviewed_links", ()):
+        if not _review_identity(proof, product, fact):
+            continue
+        quantity = proof["quantity"]
+        if (quantity["unit"] == row["unit"] == product.usable_unit
+                and quantity["usable_quantity"] == product.usable_quantity
+                and quantity["confidence"] == product.quantity_confidence
+                and quantity["basis"] == row["form"]):
+            return True
+    return False
+
+
+@lru_cache(maxsize=1)
+def _quantity_reviews():
+    result = {}
+    for row in entries().values():
+        for proof in row.get("reviewed_links", ()):
+            if proof["quantity"].get("method") == "usda_sr28_refuse_v1":
+                result.setdefault((proof["store_id"], proof["product_id"]), []).append(proof)
+    return result
+
+
+def project_reviewed_quantity(product, fact, *, allow_estimates=False, required_unit=None):
+    """Project edible mass on a copy; retain gross package mass and source time.
+
+    Only reviewed fixed/representative variable gram packs are supported. Pots, counted produce,
+    loose-weight contracts, cooked yields and unknown masses stay unresolved.
+    """
+    if not allow_estimates or required_unit != "g":
+        return product
+    for proof in _quantity_reviews().get((product.store_id, product.product_id), ()):
+        q = proof["quantity"]
+        if (not _review_identity(proof, product, fact)
+                or product.sale_model not in {"fixed_package", "variable_weight_package"} or product.package_unit != "g"
+                or product.purchase_terms is not None
+                or q.get("confidence") != "estimated" or q.get("basis") != "raw_edible"
+                or q.get("source", {}).get("sha256") is None
+                or not 0 < q.get("edible_fraction", 0) < 1
+                or q["usable_quantity"] != round(product.package_quantity * q["edible_fraction"], 8)):
+            continue
+        return product.model_copy(update={"usable_quantity": q["usable_quantity"], "usable_unit": "g",
+                                          "quantity_confidence": "estimated"})
+    return product
 
 
 def declared_definition(row, product, fact):
@@ -129,6 +209,9 @@ def search_positions(prepared):
     def compute():
         gtins, scoped = {}, {}
         for row in entries().values():
+            for evidence in row.get("reviewed_links", ()):
+                key = (evidence["store_id"], evidence["product_id"], evidence["source_snapshot_id"])
+                scoped.setdefault(key, set()).add(row["name"])
             if row["kind"] == "definition_only":
                 continue
             for evidence in row["evidence"]:
