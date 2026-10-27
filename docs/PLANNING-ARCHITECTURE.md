@@ -1,5 +1,15 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Statisk prioritet i den kompletta menysökningen
+
+Den befintliga kompletta V2-sökningen räknar singletonprioriteten en gång
+per måltidsplats och anrop. Värdet beror på fast kvalificerat prisunderlag
+och fasta preferenser. Återanvändning vid ankarnas sortering behåller
+ordning, dagsspecifika värden och alla kandidater; den frigör tid för fler
+fullständiga checkouter inom oförändrad deadline. Tolv sekunders
+slutreserv, audit och sparning består. Detta ger inget globalt optimumbevis.
+Se [fyravarugranskningen](reviews/recipe-four-staples-20261027.md).
+
 ## Ordinarie viktpris när en äldre rabattgräns saknar enhet
 
 En äldre katalograd kan ha ett separat ordinarie kilopris och ett kg-erbjudande

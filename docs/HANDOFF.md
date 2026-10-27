@@ -1,4 +1,35 @@
-# 2026-10-27: Fyra råvaror granskade — +68 korgar, integration stoppad av A-pris
+# 2026-10-27: Fyravarugranskning klar — prisgrinden åter godkänd
+
+[PR #23](https://github.com/ossebosse/smako/pull/23), från main `8dac239`.
+[Slutrapporten](reviews/recipe-four-staples-20261027.md) ersätter den
+underkända kontrollpunkten nedan. **1 717/2 200 hela korgar inklusive
+uppskattningar**, +68; exakt 1 008 hela/1 010 insatslösta. Inga förlorade
+korgar, samtliga original och 2 462 aktiva varianter kvar. 483 varianter
+återstår; detta avslutar fyravarugranskningen, inte målet om full täckning.
+
+91 generiska myntavarianter har granskade nya versioner för ansade blad och
+mjuka stjälkar. Tio exakt bundna 25-g-poster använder källbelagda 85 procent
+som uttrycklig uppskattning. 40 bladkrav är oförändrade. Ägarens två
+Lundprodukter är separat verifierade; Coop 730400 förblir Online Syd.
+Tamarind saknar belagd massa/koncentration; masa harina och pärlkorn behöver
+exakt prissatta produkter av rätt form. Se rapportens konkreta källspår.
+
+Sökningen beräknar statisk prioritet en gång per måltidsplats. Ordning,
+krav, deadline och tolv sekunders slutreserv består. A **281.31 kr**
+(tidigare 283,24), separat nyägarkörning **281.31 kr**; B2:s hela
+korg oförändrad **731.20 kr**. API/save/GET 52.05/
+52.16/33.41 s; separat förberedelse redovisas i
+rapporten. Ny full bibliotekskontroll och 2 727 kvittohashar passerar.
+Metod `70c233f8440dac886eeb8644da1e4583bb373e968e58c91e3e919001a81cefb5`.
+530 unika riktade testfall, Ruff och compileall passerar. Integration sker
+via PR efter grön CI; det tidigare A-stoppet är löst, inte undantaget.
+
+Ägaren godkände +900 s och slutförande. Samma journal: **3991.5507 s använda,
+508.4493 s kvar av 4500 s**. Ingen återställning av budgeten.
+Legacy är standard, V2 opt-in. Ingen beta-/produktionsaktivering,
+handlarinsamling, allowlist-, profil- eller schedulerändring.
+
+# Historisk kontrollpunkt 2026-10-27: +68 korgar, då stoppad av A-pris
 
 Arbetsgren `fix/four-ingredient-review-20261027`, från main `8dac239`/PR #22.
 Se [granskningen](reviews/recipe-four-staples-20261027.md). **1 717 av 2 200**

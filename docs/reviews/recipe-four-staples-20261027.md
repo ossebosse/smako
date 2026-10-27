@@ -7,12 +7,12 @@ uppskattningar, från 1 649.** Den exakta nivån är oförändrad: 1 010
 insatslösta och 1 008 hela korgar. Inga tidigare verifierade original-ID:n
 har förlorats. 483 varianter/68 grupper återstår; full täckning är inte klar.
 
-**Integrationen är stoppad av ett sämre pris i A.** Den nya kalla sparade
-API-sökningen gav 295,41 kr mot tidigare 283,24 kr. En oberoende ny checkout
-av den gamla menyn på exakt aktuellt underlag verifierar fortfarande
-283,24 kr. Detta är en sökregression, inte en prisändring eller ändrade krav.
-Myntarättningen och granskningen ligger därför kvar på arbetsgrenen/utkast-PR;
-de har inte integrerats i main. Fler köpbara recept upphäver inte prisgrinden.
+**Prisregressionen är rättad och leveransgrinden passerar.** A kostar nu
+281.31 kr mot tidigare 283,24 kr; en separat körning med ny ägare och
+nytt sparläge ger 281.31 kr. B2 behåller exakt hela sin korg på
+731.20 kr. Slutlig integration av [PR #23](https://github.com/ossebosse/smako/pull/23)
+följer godkänd CI. Det tidigare underkända resultatet 295,41 kr finns kvar
+som historiskt bevis i commit `a58973a` och `A-price-regression.json`.
 
 ## Vad som ändrats
 
@@ -77,33 +77,42 @@ Samma Malmöprisfil används: 89 458 produkter, 52 kontexter, klockan
 högst två butiker och inget skafferi. Faktafilens SHA-256 är oförändrad:
 `30fd1d335bc43c4c67fad89aebcece4ae970106268b9a7cf8a64fa5cbb1ae0cd`.
 Ny metodhash:
-`c2108182d4c54d3cbe2f362fcba284160eef7a6c5ab3b2cc162cacd6c619e983`.
+`70c233f8440dac886eeb8644da1e4583bb373e968e58c91e3e919001a81cefb5`.
 
-En ny full genomgång körde båda mängdlägena. Ett exakt fall nådde först sin
-en-sekundsgräns; endast det kvittot räknades om med tre sekunders gräns.
-Övriga aktuella, hashstabila kvitton återanvändes. Slutläget har inga
-ofullständiga sökningar. Två tidigare exakta checkout-avslag kvarstår
-under tvåbutikstaket och räknas inte som godkända korgar.
+En ny full genomgång med slutlig runtime har kontrollerat båda mängdlägena
+för samtliga 2 200 originalreferenser, med tre sekunder per enskilt
+korgförsök. Inga ofullständiga sökningar återstår. Två tidigare exakta
+checkout-avslag kvarstår under tvåbutikstaket och räknas inte som godkända.
 
-De fullständiga sparade A/B2-begärandena är oförändrade. A gav **295,41 kr**
-på 51,96 s API/save/GET efter 100,38 s separat förberedelse. B2 gav
-**731,20 kr** på 33,09 s efter 77,84 s förberedelse. A:s förbättringssökning
-stannade med 12 sekunder reserverade för slutkontroll; den hann med 54
-hela menyförslag mot 63 i det tidigare provet. Antalet kvalificerade
-alternativ steg från 1 578 till 1 625. Tidsgränsen förklarar att bättre
-förslag kan missas men godkänner inte prisförsämringen.
+Sökrättningen återanvänder oförändrad prioritet per måltidsplats inom samma
+anrop. Tidigare räknades samma pris-/preferensprioritet om för varje ankare.
+Ingen ny rangordning, kandidatgräns, receptspecifik regel eller benchmark-
+startmeny har införts. Tidsgränsen och tolv sekunder för slutkontroll består.
+Dagsspecifika prioriteter hålls isär även när receptet är detsamma.
 
-[Prisregressionen och den återkontrollerade gamla menyn](recipe-four-staples-20261027/A-price-regression.json),
-[91 versionsändringar och 40 bevarade bladrecept](recipe-four-staples-20261027/recipe-review.json),
-[fyravarugranskningen](recipe-four-staples-20261027/source-review.json)
-och den fullständiga kvitto-/grindverifieringen dokumenterar separata mått.
-Verifieraren skriver konkret misslyckad leveransstatus och avslutar med
-felkod när prisgrinden faller; resultatet får inte etiketteras godkänt.
+De fullständiga sparade A/B2-begärandena är oförändrade. A gav
+**281.31 kr på 52.05 s** API/save/GET efter
+96.93 s separat förberedelse. Den andra kalla
+A-körningen gav **281.31 kr på 52.16 s** efter
+77.77 s förberedelse. B2 gav **731.20 kr på
+33.41 s** efter 77.72 s förberedelse;
+hela dess sparade korg är identisk. A hann pröva
+70 respektive
+92 hela menyer,
+mot 54 i det underkända provet. Detta är lokala singelprov med två CPU:er och
+3 GiB minnesgräns, ingen garanti för p95, samtidighet eller globalt optimum.
 
-Budgeten är fortsatt samma
-3 600-sekundersjournal; ingen ny tilldelning har skapats. Misslyckade prov,
-omkörningen och en uttryckligt uppskattad 120-sekunderspost för lätta
-käll-/filgranskningar ingår. Ordinarie hostad PR-CI redovisas separat.
+[Den historiska prisregressionen](recipe-four-staples-20261027/A-price-regression.json),
+[rättningen och de två nya A-proven](recipe-four-staples-20261027/A-regression-resolution.json),
+[91 versionsändringar och 40 bevarade bladrecept](recipe-four-staples-20261027/recipe-review.json)
+och [fyravarugranskningen](recipe-four-staples-20261027/source-review.json)
+håller källor, recept och prisvalidering spårbara. Leveransverifieraren
+behåller den strikta prisgrinden; ingen tolerans har lagts till.
+
+Ägaren godkände uttryckligen ”Utöka med 15 minuter och slutför”. Samma
+budgetjournal har därför utökats från 3 600 till **4 500 sekunder**, utan
+nollställning av tidigare arbete. Misslyckade prov och ny verifiering ingår.
+Ordinarie hostad PR-CI redovisas separat.
 
 Legacy är fortsatt standard och V2 opt-in. Ingen ny priskälla, utvidgad
 Coop-allowlist, liveinsamling från handlare, produktion/beta-aktivering
@@ -112,14 +121,14 @@ eller schedulerändring ingår.
 Slutkontrollen har verifierat **2 727 kvittofiler** och samtliga aktuella
 beroenden. B2:s hela sparade korg är identisk. Båda exakta Lundprodukterna
 passerar den uppskattade mängdkopplingen och avvisas som bevis för blad-only
-eller exakt ätlig massa. **504 unika riktade testfall** passerar över två
-körningar; Ruff och compileall passerar. Hostad PR-CI är separat från detta.
+eller exakt ätlig massa. **530 unika riktade testfall** passerar: 504 tidigare hashstabila fall
+och 26 sökregressionstest, inklusive ett nytt prov för cache per måltidsplats.
+Ruff och compileall passerar. Hostad PR-CI är separat från detta.
 
-Journalens slutpunkt är **3318.4442 s använda, 281.5558 s kvar av
-3 600 s**. En rättning av menysökningen kräver ny metodverifiering för hela
-biblioteket och A/B2; det ryms inte i kvarvarande etappbudget. Inget undantag
-från prisgrinden eller ny budget har antagits. Arbetet bevaras granskningsbart
-på en utkast-PR, med integration uttryckligen stoppad.
+Journalens slutpunkt är **3991.5507 s använda, 508.4493 s kvar av
+4500 s**. Förlängningen är bokförd med ägarens beslut. Samtliga 2 727
+kvittoberoenden och A/B2-prisgrindar passerar efter rättningen; ingen
+produktionsaktivering ingår.
 
 [Verifieringsstatus](recipe-four-staples-20261027/verification.json),
 [68 nya hela korgar](recipe-four-staples-20261027/newly-verified.json),

@@ -2,11 +2,11 @@
   "schema": "smako-four-staples-review-delivery-v1",
   "base_main": "8dac2393e2fd1ae3dec265ea8d43528e5abe3d77",
   "branch": "fix/four-ingredient-review-20261027",
-  "integration_status": "blocked_by_A_price_regression",
+  "integration_status": "validated_pending_hosted_CI_and_merge",
   "full_coverage_goal_complete": false,
   "verification": {
-    "scope_sha256": "f984add6cddc693081222a901fbc43568b213c26bea81ab18181db863f9977d4",
-    "method_signature": "c2108182d4c54d3cbe2f362fcba284160eef7a6c5ab3b2cc162cacd6c619e983",
+    "scope_sha256": "467b563f1f55e5822ceb1244de95d8ab477774727008ae55449d23d9982df67a",
+    "method_signature": "70c233f8440dac886eeb8644da1e4583bb373e968e58c91e3e919001a81cefb5",
     "denominator": 2200,
     "active_variants": 2462,
     "receipt_count": 2727,
@@ -25,22 +25,18 @@
     "runtime_preparation_enabled": false,
     "legacy_remains_default": true,
     "production_activation": false,
-    "price_regression_gate_passed": false,
-    "price_regressions": {
-      "A": {
-        "reason": "A exceeds the earlier valid winner or the 290.82 reference",
-        "previous_total": 283.24,
-        "current_total": 295.41
-      }
-    }
+    "price_regression_gate_passed": true,
+    "price_regressions": {}
   },
   "focused_tests": {
-    "unique_passed": 504,
+    "unique_passed": 530,
     "first_run_passed": 473,
     "second_run_passed": 41,
     "overlap": 10,
     "ruff": "passed",
-    "compileall": "passed"
+    "compileall": "passed",
+    "search_regression_tests_passed": 26,
+    "unchanged_prior_unique_passed": 504
   },
   "file_hash_basis": "Verified Windows working-file bytes; Git may normalize line endings. Source prices, raw public benchmark receipts, and ephemeral API registrations remain ignored locally.",
   "files": {
@@ -72,9 +68,17 @@
       "sha256": "dad6f65464b44dac78c684d2de1d41a0f4854e33d8644628a763797513819c7a",
       "bytes": 13130
     },
+    "backend/app/services/menu_optimizer.py": {
+      "sha256": "bf22e566e7217bf394792c51b851c6bddc18225416112cd9346cd375750f2611",
+      "bytes": 161052
+    },
     "backend/tests/test_all_intake_links.py": {
       "sha256": "b67479269acd1e0b65523319e80d74d70a371a15481916b03acb24d2b071c0ed",
       "bytes": 13031
+    },
+    "backend/tests/test_complete_first_slots.py": {
+      "sha256": "a3a7acf9b7d1e55aa31507a2f90e2fcfb9101722d7ab0f508d72ff8a58edf4b8",
+      "bytes": 11224
     },
     "backend/tests/test_frozen_recipe_quality.py": {
       "sha256": "83baebb02acf918eae66c8420b57946666773a823fd122fa966ec721cb50cf79",
@@ -89,44 +93,56 @@
       "bytes": 4656
     },
     "docs/CODEX-ASTRA-FULL-COVERAGE-20261027.md": {
-      "sha256": "e42598b20365fccf5aef6874a836048955ee0156ce94222c36cd2eccb2049272",
-      "bytes": 5545
+      "sha256": "66c5ae78f70315a40b3bae41242093a1cabcc2692c39592d922bd9e4390c7c55",
+      "bytes": 6629
     },
     "docs/HANDOFF.md": {
-      "sha256": "a658abeceff19342fcb70d2ef6a78c20f6407e3e391fc4b399b20c264d0ae3ca",
-      "bytes": 383312
+      "sha256": "dc1b069f94d9cb2d5f37049440f5755ed0faaa44665c63a434087670cd15d928",
+      "bytes": 385196
+    },
+    "docs/PLANNING-ARCHITECTURE.md": {
+      "sha256": "a2ceea4948d471f61bbd3755a85b72caaffe1afaf8ed831ac39ac2dcf0c1adc1",
+      "bytes": 22912
+    },
+    "docs/PRODUCT-GOAL.md": {
+      "sha256": "eaff841f8432ef920eb7f49d6e4b09fe0842309c01cc3ac2f978b5fb3d768142",
+      "bytes": 10914
     },
     "docs/reviews/recipe-coverage-full-20261027/budget.json": {
-      "sha256": "e0bb2fc493a12c4bb58bed2e49f5dbb4e53fdf79e1eff94c3edb4485827efdf2",
-      "bytes": 28723
+      "sha256": "05f5649cb1fe9a79397172dcbbc1941b0de2677c6cf54c0c1385d7fa12f8186e",
+      "bytes": 32746
     },
     "docs/reviews/recipe-four-staples-20261027.md": {
-      "sha256": "89cfc7b91e409b3e9085afe41997011bf7b36bbf9902abdcbe3672884f3e71c5",
-      "bytes": 8604
+      "sha256": "827d985610054faab32d6da0f2b3f00a04227511e9c13df4f7830e1a007ff4ef",
+      "bytes": 8942
     },
     "docs/reviews/recipe-four-staples-20261027/A-comparison.json": {
-      "sha256": "a042fecfdbd1748c34af1a48c28f0f3bcd4ff7fd9be26198d678484707085106",
-      "bytes": 1063
+      "sha256": "56200fdbfddb707879ed556406474f97311f2a05b222be0f3816e56eb9b32b79",
+      "bytes": 1078
     },
     "docs/reviews/recipe-four-staples-20261027/A-price-regression.json": {
       "sha256": "7911f6073b04300367928e15e8e74a9c4110cedaaeeb4304f818094a6e13b4cf",
       "bytes": 39394
     },
+    "docs/reviews/recipe-four-staples-20261027/A-regression-resolution.json": {
+      "sha256": "f1149b0a1615a01f9f36b6a9109dda4f7812ef3a4273127738051eca56034067",
+      "bytes": 2511
+    },
     "docs/reviews/recipe-four-staples-20261027/B2-comparison.json": {
-      "sha256": "7f9bb84c90c8459f7adac7e9ee7dccaea571036527e6621416d21331947e890d",
-      "bytes": 1063
+      "sha256": "28234890e609cbebbe58313cc931fd31bba7edd58a3511943fc9ce902f4601c8",
+      "bytes": 1078
     },
     "docs/reviews/recipe-four-staples-20261027/basket-receipts.json": {
-      "sha256": "47bc0bec2ef0f63742004e89f2823818fec8f2f7ff27a8fd06fb83d898a24650",
-      "bytes": 1073115
+      "sha256": "ca0a9443b2b69a239f2e36981627297df313ab3d15ceb4ab02568d9ab1344a6b",
+      "bytes": 1092204
     },
     "docs/reviews/recipe-four-staples-20261027/blockers.json": {
-      "sha256": "e201f6fc1d8cf0299f925317293650c0ba6cc5e56e2251b9db5f20937a8a2067",
+      "sha256": "3e5d60d5f7292e2dc93563f64328390bf5812f8c458fb59f46e151a2cb6884f9",
       "bytes": 87966
     },
     "docs/reviews/recipe-four-staples-20261027/coverage.json": {
-      "sha256": "6d56fd05bb52c9f18a1144adfb6122c927d993e569bcf67134cd9b0dd33e8557",
-      "bytes": 4864120
+      "sha256": "fb08634e664d64e530e1cb9477abe1d1ea1676e4f5090b833d7a6541969b26bf",
+      "bytes": 4883215
     },
     "docs/reviews/recipe-four-staples-20261027/diff.json": {
       "sha256": "be6ec44e7f52127efaa0f7bf90d5ba630f03b6dae55e65a2380d9c025bd68adc",
@@ -145,8 +161,8 @@
       "bytes": 2484
     },
     "docs/reviews/recipe-four-staples-20261027/newly-verified.json": {
-      "sha256": "179bb73358f65dbc47ba47e5a061a1f570cf75fcc9dfeb74349f330488857e52",
-      "bytes": 27351
+      "sha256": "1c96f8de1fd10ac9cc9709fa28062728c2c7813f2f29af0162a814ea911ae6dd",
+      "bytes": 27827
     },
     "docs/reviews/recipe-four-staples-20261027/recipe-review.json": {
       "sha256": "ee3322a697c7ab3dc33888daf74a3723a66b3e9850d8550c50b96efd61537101",
@@ -165,11 +181,11 @@
       "bytes": 154
     },
     "docs/reviews/recipe-four-staples-20261027/verification.json": {
-      "sha256": "bfe5c1ec3ebe381391dc9fc42cce73bd4527a55527ba378a7fbed7f4e55bcbbf",
-      "bytes": 1018
+      "sha256": "31eec44d042995ae5e832650a5c23d0f07934cabe13f28f3db9730e4da64fec1",
+      "bytes": 851
     },
     "docs/reviews/recipe-four-staples-20261027/work-matrix.json": {
-      "sha256": "2950a0b95854a491a79a70a1cde034d454cd25b4ccd4377dfe4c64a2da28ad70",
+      "sha256": "4f4764e6d0961b53a770d57afbb477b5f02b9f2636005ad34a96bfd1925bf6ab",
       "bytes": 7423424
     },
     "docs/reviews/recipe-four-staples-20261027/work-matrix.md": {
@@ -208,5 +224,22 @@
       "sha256": "a7581640e5ffe43759ea8526ab7a924b50dc4ea15f6655ffc8106a24f586179b",
       "bytes": 9587
     }
-  }
+  },
+  "pull_request": "https://github.com/ossebosse/smako/pull/23",
+  "previous_failed_checkpoint_commit": "a58973a2491b80f3088f7621f4869921533606a7",
+  "budget": {
+    "limit_seconds": 4500,
+    "used_seconds": 3991.5507000000002,
+    "remaining_seconds": 508.44929999999977,
+    "authorized_extensions": [
+      {
+        "authorized_at": "2026-10-27T19:48:16.716788+00:00",
+        "additional_seconds": 900,
+        "previous_limit_seconds": 3600,
+        "new_limit_seconds": 4500,
+        "authorization": "Owner explicitly selected: Utöka med 15 minuter och slutför. Correct the A search regression, revalidate and finish integration."
+      }
+    ]
+  },
+  "A_regression_resolution": "A-regression-resolution.json"
 }

@@ -68,7 +68,7 @@ oförklarade förluster ska stoppas, och samma fullständiga A/B2-begäranden
 ska jämföras. Befintliga hashstabila bevis återanvänds. Eventuell fortsättning
 ska redovisa återstående etappbudget; ingen ny session får nollställa den.
 
-## Fyravarugranskning efter PR #22 — ej integrationsgodkänd
+## Historisk kontrollpunkt efter PR #22 — då ej integrationsgodkänd
 
 Ägarens konkreta Hemköp-/Coop-mynta och tre övriga råvaror är granskade i
 [rapporten](reviews/recipe-four-staples-20261027.md). De två Lundartiklarna
@@ -85,3 +85,20 @@ myntarättningen sparas därför i en utkast-PR och får inte integreras ännu.
 Samma journal har 281.5558 s kvar; full verifiering efter en ny
 sökrättning kräver ett uttryckligt utökat budgetbeslut. Ingen sådan
 utökning, automatisk fortsättning eller produktionsaktivering är beslutad.
+
+## Godkänd förlängning och slutförd fyravarugranskning
+
+Ägaren beslutade uttryckligen ”Utöka med 15 minuter och slutför”. Samma
+journal har nu 4 500 s total ram; tidigare förbrukning kvarstår. Den generella
+sökregressionen är rättad genom återanvändning av statisk prioritet per
+måltidsplats. Slutliga prov ger A 281.31 kr och i separat nyägarkörning
+281.31 kr, båda högst tidigare 283,24 kr. B2:s hela korg är identisk.
+Ny full verifiering på slutlig metod ger 1 717/2 200 inklusive uppskattningar,
++68; exakt 1 008, inga förluster och 2 727 verifierade kvittofiler.
+Prisgrinden passerar utan ändrade krav. [PR #23](https://github.com/ossebosse/smako/pull/23)
+kan integreras efter grön CI. [Slutrapporten](reviews/recipe-four-staples-20261027.md)
+beskriver alla fyra varor och de precisa kvarvarande källbehoven.
+
+Etappen är verifierad inom den godkända ramen: 3991.5507 s använda,
+508.4493 s kvar. Full täckning är fortsatt ett öppet mål med 483
+varianter kvar; inga nya produktfakta har antagits för att stänga dem.
