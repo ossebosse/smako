@@ -117,6 +117,36 @@ def test_exhausted_proposals_never_invent_a_valid_result():
             accepts=lambda slots,final:not final,evaluate=lambda slots,final:0,score=lambda slots,result:result)
 
 
+@pytest.mark.parametrize('pool_size', [17, 65])
+def test_exchange_reopens_an_earlier_rank_after_shared_basket_changes(monkeypatch, pool_size):
+    from app.services import plan_jobs
+
+    groups = options([f'{i:02d}' for i in range(pool_size)], days=3)
+    remaining = [30.0]
+    monkeypatch.setattr(plan_jobs, 'remaining_planning_seconds', lambda: remaining[0])
+    costs = {('00', '00', '00'): 100, ('01', '00', '00'): 90,
+             ('01', '00', '01'): 80, ('00', '00', '01'): 70,
+             ('00', '01', '01'): 60}
+    calls = []
+
+    def evaluate(slots, final):
+        assert final and len(slots) == 3
+        names = tuple(slot.recipe.name for slot in slots)
+        calls.append(names)
+        if len(calls) >= 25:
+            remaining[0] = 11
+        return costs.get(names, 200)
+
+    trace = []
+    chosen, cost = MenuOptimizer().optimize_slots(groups, complete_first=True,
+        accepts=lambda slots, final: True, evaluate=evaluate, score=lambda slots, cost: cost,
+        candidate_priority=lambda slot: slot.recipe.name, search_trace=trace)
+    assert cost == 60 and tuple(slot.recipe.name for slot in chosen) == ('00', '01', '01')
+    assert calls.index(('01', '00', '01')) < calls.index(('00', '00', '01'))
+    assert len(calls) <= 25 and trace[-1]['exchange_restarts'] >= 2
+    assert trace[-1]['anchors_deferred'] > 0
+
+
 @pytest.mark.parametrize('amount,expected', [(200,10),(400,17)])
 def test_real_joint_checkout_keeps_nutrition_organic_and_package_alternatives(amount, expected):
     from app.config import Settings

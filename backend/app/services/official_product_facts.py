@@ -304,7 +304,7 @@ def supplement_catalog_facts(products, original):
 
     rows = [r for r in declarations() if r.get("parser") in {
         "dabas-consumer-quantity-v1", "dabas-base-quantity-v2",
-        "garant-explicit-gs1-declaration-v1"}]
+        "garant-explicit-gs1-declaration-v1", "oetker-counted-package-v1"}]
     result = _supplement_culinary_attributes(products, _supplement_named_catalog_facts(products, original))
     for p in products:
         if not p.source_provenance or (p.purchase_terms and p.purchase_terms.identity_scope != "product"):
@@ -346,15 +346,21 @@ def supplement_catalog_facts(products, original):
         unit = row['basis_unit']
         # Two explicit quantities for THIS consumer package support arithmetic;
         # neither a universal density nor the logistics gross weight is used.
-        if row['package_unit'] == 'ml' and row.get('net_unit') == 'g':
+        if row['package_unit'] in {'ml', 'st'} and row.get('net_unit') == 'g':
             ratio = row['package_quantity'] / row['net_quantity']
-            if unit == 'ml':
+            if unit == 'ml' and row['package_unit'] == 'ml':
                 nutrition = {k: v * ratio for k, v in nutrition.items()}
                 unit = 'g'
                 source = {**source, 'operation': 'declared_per_100_ml * source_package_ml / source_net_g',
                           'package_ml': row['package_quantity'], 'net_g': row['net_quantity']}
             fields['usable_quantity'] = ({**source, 'quantity': row['net_quantity'],
                                           'unit': 'g', 'basis': 'source_net_mass'},)
+        elif row['package_unit'] == 'g' and row.get('net_unit') == 'ml':
+            # The same exact supplier package explicitly declares both mass
+            # and volume. Keep its original nutrient basis until the caller
+            # asks for that other unit; a gram label alone never proves ml.
+            fields['usable_quantity'] = ({**source, 'quantity': row['net_quantity'],
+                                          'unit': 'ml', 'basis': 'source_net_volume'},)
         elif row.get('comparison_basis') == 'Per avrunnen vikt':
             if row['comparison_unit'] != 'g' or not 0 < row['comparison_quantity'] <= row['net_quantity']:
                 continue
@@ -510,7 +516,7 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
                                          required_unit=required_unit)
     if reviewed is not product:
         return reviewed
-    if required_unit is not None and required_unit != "g":
+    if required_unit not in {None, "g", "ml"}:
         return product
     if not fact or not product.source_provenance:
         return product
@@ -519,6 +525,11 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
         return product
     proof = proofs[0]
     quantity = proof.get('quantity')
+    if proof.get('basis') == 'source_net_volume':
+        if required_unit != 'ml' or product.package_unit != 'g':
+            return product
+    elif required_unit == 'ml':
+        return product
     if proof.get('kind') == 'axfood_explicit_drained_mass_v1':
         from app.services.axfood_product_details import explicit_drained_quantity
 
@@ -556,8 +567,9 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
             or proof.get('bound_snapshot_id') != product.source_provenance.source_snapshot_id
             or proof.get('source_package_quantity') != product.package_quantity
             or proof.get('source_package_unit') != product.package_unit
-            or proof.get('basis') not in {'drained', 'source_net_mass'}
-            or proof.get('unit') != 'g' or not isinstance(quantity, (int, float))
+            or proof.get('basis') not in {'drained', 'source_net_mass', 'source_net_volume'}
+            or proof.get('unit') != ('ml' if proof.get('basis') == 'source_net_volume' else 'g')
+            or not isinstance(quantity, (int, float))
             or isinstance(quantity, bool) or not 0 < quantity < 100000
             or not proof.get('sha256')):
         return product
@@ -566,7 +578,7 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
             or isinstance(net, bool) or not quantity <= net < 100000
             or product.package_quantity not in {net, quantity})):
         return product
-    return product.model_copy(update={'usable_quantity': quantity, 'usable_unit': 'g',
+    return product.model_copy(update={'usable_quantity': quantity, 'usable_unit': proof['unit'],
                                       **({'package_quantity': net} if proof.get('basis') == 'drained' else {})})
 
 
@@ -576,8 +588,20 @@ def facts_for_quantity_unit(product, fact, unit):
 
     if not fact or fact.conflicts or unit != 'ml' or fact.nutrition_unit != 'g':
         return fact
-    projected = project_usable_quantity(product, fact)
     proof = fact.field_sources.get('usable_quantity', ())
+    if len(proof) == 1 and proof[0].get('basis') == 'source_net_volume':
+        projected = project_usable_quantity(product, fact, required_unit='ml')
+        if projected is product or projected.usable_unit != 'ml' or product.package_unit != 'g':
+            return fact
+        mass_per_volume = product.package_quantity / projected.usable_quantity
+        source = {**proof[0], 'operation': 'per_100_g * source_package_g / source_net_ml',
+                  'requested_basis_unit': 'ml'}
+        return replace(fact, nutrition={k: v * mass_per_volume for k, v in fact.nutrition.items()},
+                       nutrition_unit='ml', nutrition_basis='Supplier quantities for this exact package; per 100 ml',
+                       field_sources={**fact.field_sources,
+                           **{'nutrition.'+k: (*fact.field_sources.get('nutrition.'+k, ()), source)
+                              for k in fact.nutrition}})
+    projected = project_usable_quantity(product, fact)
     if (projected == product or product.package_unit != 'ml' or len(proof) != 1
             or proof[0].get('basis') != 'source_net_mass'):
         return fact
