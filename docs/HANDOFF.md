@@ -1,3 +1,57 @@
+# 2026-10-27: Fortsättning levererad — mängdspärr och 1 605 fullkorgar
+
+Läs [rapporten](reviews/recipe-coverage-followup-20261027.md) och
+[samtliga 2 200 utfall](reviews/recipe-coverage-followup-20261027/coverage.json).
+Från main `4093d33`: separat mängdrättning `cac2a91`, samlad runtime/data
+`e8c58ef`. Den granskade projektionen och efterföljande kvalificering använder
+nu samma `_mass_blocking`-policy. Reproducerade `nutrition.package_quantity`
+och okända `nutrition.*`-konflikter stoppas även efter uppvärmd cache.
+Normal uppskattning utan full näringsfakta och rena näringskonflikter hålls
+isär; motstridig näring blir inte godkänd näring för personliga krav.
+
+**Individuellt lösta 999 exakt/1 605 inklusive uppskattningar**, +30/+36
+mot PR #19, inga förlorade ID:n. **Fulla verifierade tvåbutikskorgar 997/1 605.**
+Två exakta checkout-avslag kvarstår. Alla 2 200 kontrollerade utan avbrott;
+606 kräver estimated för insatsstöd och 608 korgar är bara verifierade där.
+Samma fasta Malmöprisfil, 52 kontexter, portioner och tvåbutikstak används.
+
+Nio exakta GTIN-/förpackningsrelationer för Galbani mozzarella får Dabas-
+deklarerade 125 g avrunnen mängd, inklusive åtta produktbundna, exakt
+mängdangivna och variantupplösta ICA-erbjudanden med oförändrad checkout.
+Åtta gramförpackade romansalladsrelationer får USDA SR28/11251-utbyte 94 %
+enbart i uttryckligt estimated. Inga recept eller priser har skrivits om.
+Fakta-SHA `4f808c14e8bc8ab3e3719805ee59a2a2257b7953271ba56d346ed764fafe4cd3`.
+Metodhash och samtliga 2 604 kvittohashar finns i rapportpaketet; fulla kvitton
+och fakta är lokala under `.local/recipe-coverage-followup-20261027/`.
+
+**100 procent är inte klart:** 595 varianter/76 grupper återstår i estimated.
+Mynta 131 (92 med bara den gruppen), tamarindpasta 93/53, masa harina 31/31,
+pärlkorn 27/24. De är villkorade marginaler, inte redan uppnådda vinster.
+Exakta nästa källåtgärder och alla sällsynta grupper finns i blockerlistan.
+Myntabladens användbara vikt/utbyte saknas; tamarindkoncentratets ml/okända
+styrka ersätter inte pasta i g. Vanligt/förkokt majsmjöl är inte styrkt masa
+harina. Urtekram har rätt kornform, men inget exakt prissatt SKU verifierades
+i den frysta referensen. Nytt sortiment måste få eget deklarerat scope.
+Två försök till samma godkända sjuproduktskö avstod vid upptaget kommunrelälås,
+med noll handlaranrop. Inget lås kringgicks eller driftläge ändrades.
+
+A/B2 har exakt samma hela sparade begäran; B2 också samma hela **731,20-kr-korg**,
+33,7535 s API/save/GET. A ger **317,82 kr på 52,4272 s**, men föregående
+receptförslag verifierar korrekt skalat **290,82 kr** i aktuell checkout.
+**Prisgapet 27 kr är ett kvarstående releasehinder.** Inget pris-/prestanda-
+godkännande eller globalt optimum påstås. Laddning/förberedelse före API:t
+101,9719/77,9956 s är separat. Inga nya browsertider eller aktiva 10–15-krav.
+
+487 riktade regressioner, Ruff/compileall passerar; ordinarie CI krävs på
+slutligt PR-huvud. Ny separerad 20-minutersjournal: **772,9932 s använda,
+427,0068 s (7,12 minuter) kvar**. Källarbete slutade med 948,2167 s kvar,
+före slutproven. Peak jobbcommit 1,462 GiB på två CPU, hårt 3 GiB.
+Gamla journalen är orörd (7 172,6967/27,3033 s), inget överfört/nollställt.
+En full omkontroll/sammanställning kostade 249 s; A/B2 inklusive laddning
+cirka 271 s till. Ingen automatisk fortsättning. Prioritera kvarstående
+källgap och det verifierade prisgapet; invänta faktisk källa/ledig lease
+eller separat sortimentsbeslut. Legacy standard, V2 opt-in, ingen aktivering.
+
 # 2026-10-27: Nästa Sol-etapp — mängdspärr och prioriterade källgap
 
 Ägaren har godkänt nästa steg efter oberoende granskning av PR #19/main

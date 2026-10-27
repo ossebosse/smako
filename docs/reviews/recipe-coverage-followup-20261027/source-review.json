@@ -1,0 +1,115 @@
+{
+  "schema": "smako-followup-source-review-v1",
+  "base_main": "4093d33",
+  "runtime_commit": "e8c58ef",
+  "frozen_price_universe_sha256": "06cbf0b12e619f09dd3709b808916d1c74676859d246ad72f74d52d0e6d91857",
+  "new_store_scope": false,
+  "collection_attempts": {
+    "count": 2,
+    "result": "deferred_existing_local_relay_operation_lease_held",
+    "retailer_requests": 0,
+    "queue": "deferred-article-queue.json",
+    "previous_verified_archive": "b11ed75863be1547755ee78be5143ba737d5ea3564acc1cadaa0feb6b4ebf0a8"
+  },
+  "groups": {
+    "mynta": {
+      "status": "still_blocked",
+      "reviewed_articles": [
+        {
+          "code": "101599969_ST",
+          "gtin": "7311043011506",
+          "source_mass_g": 25,
+          "retained_detail_status": "verified",
+          "usable_leaf_mass": "not stated"
+        },
+        {
+          "code": "101391698_ST",
+          "gtin": "7311043022809",
+          "source_mass_g": 100,
+          "detail_attempt": "deferred by operation lease",
+          "usable_leaf_mass": "unknown"
+        },
+        {
+          "gtin": "7350018560892",
+          "source_mass_g": 429,
+          "presentation": "rooted pot; excluded"
+        }
+      ],
+      "next_action": "Obtain leaf-only grams or a presentation/species-specific reviewed leaf yield. The official retained 25-g detail describes flavour and net pack size only; no assumed trimming percentage."
+    },
+    "tamarindpasta": {
+      "status": "still_blocked",
+      "retained_article": {
+        "code": "101674821_ST",
+        "brand": "Chua Hah Seng",
+        "name": "Tamarindpaste Sour Concentrate",
+        "quantity": 435,
+        "unit": "ml",
+        "chain": "hemkop"
+      },
+      "manufacturer_discovery": "https://www.chuahahseng.com/?lang=en",
+      "next_action": "Source a priced seedless unsweetened paste with native usable g and authored strength. Manufacturer concentrate family discovery does not bind the Swedish 435-ml variant, establish density or equate its strength to the recipe paste."
+    },
+    "masa harina": {
+      "status": "no_verified_priced_nixtamalised_sku",
+      "reviewed_negative_candidate": {
+        "gtin": "7591002000547",
+        "name": "Majsmjöl Vitt Fint",
+        "brand": "PAN",
+        "quantity_g": 1000,
+        "manufacturer_catalogue": "https://es.allofpan.com/pdf/catalogo-alimentos-polar-eng.pdf",
+        "discovery_only": "White precooked cornmeal; does not establish nixtamalised flour. No source fact ingested from search snippets."
+      },
+      "next_action": "Obtain an exact priced nixtamalised maize SKU. Minsa and Maseca products require a new, declared priced assortment/source if absent from the frozen universe; no outside price is imported here."
+    },
+    "pärlkorn": {
+      "status": "no_verified_priced_polished_whole_barley_sku",
+      "retained_negative_candidates": [
+        "Gogreen Korngryn 500g",
+        "Pågen Guldkorn bread; not a grain ingredient"
+      ],
+      "possible_new_assortment_product": {
+        "manufacturer": "Urtekram",
+        "article": "1012040",
+        "package_g": 400,
+        "url": "https://www.urtekram.se/mat/ris-gryn--pasta/parlkorn/",
+        "declared_form": "polerade kornkärnor",
+        "qualification": "discovery only; no exact priced SKU/context in the frozen universe verified"
+      },
+      "next_action": "Bind a correctly polished whole barley SKU to a qualified selected-store price in a separately declared source/scope. Do not relabel cut korngryn or whole-grain bread."
+    },
+    "mozzarella_preserved_drained": {
+      "status": "qualified_exact",
+      "supplier_gtin": "08000430133035",
+      "links": 9,
+      "new_pricing": false,
+      "declared_drained_g": 125,
+      "source": "https://www.dabas.com/productsheet/08000430133035",
+      "source_acquisition": "public-acquisition.json",
+      "quantity_method": "Supplier consumer-level explicit drained quantity. Native 125-g packs; no invented brine weight or nutrition basis. Resolved product-scoped ICA offers keep the existing checkout promotion terms."
+    },
+    "mozzarella_as_sold": {
+      "status": "still_requires_separate_source",
+      "next_action": "Source plain cheese sold without brine. The new drained-cheese relation does not authorize as_sold recipes."
+    },
+    "sallad": {
+      "status": "qualified_estimated",
+      "reviewed_names": [
+        "Romansallad Ekologisk Klass 1",
+        "Romansallad Import Klass 1"
+      ],
+      "links": 8,
+      "usda_record": "11251",
+      "refuse_percent": 6,
+      "confidence": "estimated",
+      "source": "backend/app/data/nutrition/produce-yields-20261027.json",
+      "next_action": "No generic dressing, prepared salad, counted pot or iceberg yield is authorized."
+    }
+  },
+  "source_searches": {
+    "web_discovery": "Four small primary-source discovery batches, charged with conservatively rounded tool intervals in this phase journal. Search leads are not production declarations.",
+    "successful_supplier_documents": 1,
+    "supplier_http_404": 2
+  },
+  "benchmark_warning": "A price is compared to its previous full four-serving proposal through current checkout, after save/GET. Global cheapest price is never implied by a deadline."
+}
