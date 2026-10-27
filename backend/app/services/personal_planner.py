@@ -676,7 +676,7 @@ class PersonalPlanner:
                     update={
                         "semantic_confidence": "high",
                         "semantic_evidence": [
-                            "reviewed exact intake GTIN/source identity, whole label and package; no inferred quantity conversion"
+                            "reviewed exact intake identity/form and source-bound quantity policy"
                             if reviewed_intake else "reviewed plain quark name/form and retained dairy ingredients"
                             if reviewed_quark else "reviewed complete fresh apple label and produce category"
                         ],

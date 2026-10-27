@@ -1,3 +1,61 @@
+# 2026-10-27: Täckningsdelresultat — 1 569 verifierade tvåbutikskorgar
+
+Läs [rapporten](reviews/recipe-coverage-20261027.md) och dess kompakta
+[samtliga 2 200 ID:n](reviews/recipe-coverage-20261027/coverage.json).
+Runtime `7697492` från main `be0c528` separerar granskad produkt-/formidentitet
+från mängdbevis i befintligt register och kvalificeringsflöde. 139 konkreta
+råvarurelationer får dokumenterade utbyten enbart i uttryckligt estimated.
+Oförändrad livsmedelsidentitet/sammansättning följer stabil GTIN/artikelkod
+över rena prisuppdateringar; aktuell fakta-/priskontext och nytt pris kontrolleras.
+22 befintliga Axfood-artiklar granskades, 20 nya verifierade detaljdokument;
+Keso/kvarg, limejuice, kapris, jordnötssmör, färsk potatisgnocchi och tonfisk
+får fungerande käll-/form-/mängdstöd. Torra durumgnocchi förblir ett negativt fall.
+
+**Individuellt lösta 969 exakt / 1 569 inklusive uppskattningar av 2 200,
++231/+638 och noll förlorade ID:n. Fullt verifierade tvåbutikskorgar
+967/1 569.** Två exakta korgfall passerar separat med tre butiker och räknas
+inte som tvåbutiksframgångar. Slutkontrollen har inga tidsavbrott/okontrollerade
+lösta varianter. 602 korgar är verifierade endast i uppskattningskolumnen;
+600 av dem saknar dessutom exakt insatsstöd. Ingen mängdstandard växlas.
+
+**100 procent är inte klart:** 631 varianter har fortfarande insatshinder,
+78 grupper. [Blockerlistan](reviews/recipe-coverage-20261027/blockers.json)
+ger aktuella scope, berörda ID-index, nästa källåtgärd och hela restmängden.
+Prioritera fortsatt täckning: mynta 131 (83 enbart denna grupp), tamarindpasta
+93/53, masa harina 31/31, avrunnen mozzarella 30/30, pärlkorn 27/24 och
+citrongräs 27/15. Dessa marginaler är övre villkorade antal. Myntakrukans
+vikt, tamarindkoncentratets ml eller masalaträffar får inte ersätta saknade
+bladutbyten, pasta i rätt styrka/g eller verklig masa harina. Flera sällsynta
+SKU:er saknas i det frysta sortimentet; nytt sortiment/alternativ måste få
+eget deklarerat scope och behålla originalreferenserna.
+
+Den återupptagbara kontrollen körs genom `budgeted_check.py` med
+`PYTHONPATH=backend;.;scripts/recipe_layer`. Kvittorna binder hela lästa
+pris-/fakta-/recept-/metod-/villkorsversionen och återanvänds bara vid match.
+Första tio avbrotten återupptogs korrekt. Nya fakta fick ny version och
+samlad omkontroll. Slutligt detaljarkiv är
+`b11ed75863be1547755ee78be5143ba737d5ea3564acc1cadaa0feb6b4ebf0a8` under
+befintlig `D:/smako-data/axfood-product-details/releases/`; lokala frysta
+fakta och fulla korgkvitton refereras i rapporten. Ingen aktiv källa ändrades.
+
+B2 behåller exakt begäran och hela **731,20-kronorskorgen**, API/save/GET
+32,6722 s. Slutliga A ger full sparad korg på **52,2790 s för 290,82 kr**;
+tidigare receptkombination verifierar **297,18 kr** med samma aktuella
+planner och rätt skalning till fyra portioner. A är därmed 6,36 kr billigare.
+Det tidigare separata 276,38-kronorsprovet saknade portionsskalning och
+är uttryckligen ogiltigförklarat/ersatt i rapporten. Ingen global prisoptimalitet
+påstås. Laddning/förberedelse före API:t 98,5562/80,1325 s redovisas separat.
+Inga nya browsertider eller aktiva måltidsbundna 10–15-gränser påstås.
+
+674 riktade regressioner plus kontrollmodulens 30 slutprov (överlappar),
+Ruff/compileall passerar. Ordinarie CI krävs på slutligt PR-huvud.
+Etappen kostar 1 827,7125 s inklusive misslyckanden; gemensam journal har
+**27,3033 s = 0,46 minuter kvar**, utan nollställning. Högsta observerade
+jobbcommit 1,506 GiB på två CPU, hårt 3 GiB. Ingen stor matris eller
+automatisk fortsättning. Enbart nästa samlade kontroll/sammanställning behöver
+cirka fyra minuter, före nya källåtgärder; se rapportens fortsättningskostnad.
+Legacy standard, V2 opt-in, ingen betaaktivering.
+
 # 2026-10-27: Ägarprioritet — gör alla 2 200 varianter användbara
 
 Aktuellt uppdrag är

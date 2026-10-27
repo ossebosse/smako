@@ -1491,7 +1491,7 @@ _CULINARY_LABELS = {
     "chiliflakes": (r"(?:chiliflakes|chili flakes|chiliflingor)", "single_spice"),
     "strösocker": (r"strosocker", "sugar"),
     "jordnötter": (r"(?:rostade )?jordnotter(?: rostade| osaltade)*", "nuts"),
-    "gnocchi": (r"(?:potatisgnocchi|gnocchi)(?: di patate| potatis| naturell| original)*", "pasta"),
+    "gnocchi": (r"(?:potatisgnocchi|gnocchi)(?: di patate| potatis| naturell| original| classic| farsk pasta)*", "pasta"),
     "spiskummin": (r"spiskummin", "single_spice"),
     "cayennepeppar": (r"cayennepeppar", "single_spice"),
     "kanel": (r"kanel(?: cassia| ceylon)?", "single_spice"),

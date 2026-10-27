@@ -188,6 +188,42 @@ def main(args):
         sampler.__exit__()
         result["profile"] = sampler.report()
     save()
+    # Additional public-benchmark validation happens AFTER the measured saved
+    # API result. It is never injected as an API search seed or timed as API work.
+    if getattr(args, 'reference_proposal', None) and result.get('valid_menu_delivered'):
+        from app.models.personal import MealSlot
+        from app.services.plan_jobs import PlanningDeadlineExceeded, planning_deadline
+        from app.services.recipe_library import _scaled
+
+        reference = json.loads(args.reference_proposal.read_bytes())
+        assert reference['request'] == result['request']
+        assert reference['universe_sha256'] == result['universe_sha256']
+        assert reference['library_manifest_sha256'] == result['library_manifest_sha256']
+        subject = planners[0]
+        slots = []
+        for day, name in enumerate(reference['recipe_names'], 1):
+            found = [r for r in current_recipes() if r.name == name]
+            assert len(found) == 1, name
+            slots.append(MealSlot(id=f'dinner-{day}', day=day, meal_type='dinner',
+                recipe=_scaled(found[0], subject.meals['dinner'].servings)))
+        reference_started = time.perf_counter()
+        comparison = {'previous_total': reference['total'], 'method_signature': result['method_signature'],
+                      'facts_sha256': result['facts_sha256'], 'universe_sha256': result['universe_sha256'],
+                      'raw_request_unchanged': True, 'reference_sha256': hashlib.sha256(args.reference_proposal.read_bytes()).hexdigest()}
+        try:
+            with planning_deadline(10):
+                checked = subject.basket(slots, final=True)
+            if not checked['audit'].passed:
+                raise ValueError('Reference checkout audit failed')
+            comparison.update(status='verified_current_checkout', total=checked['basket'].total,
+                              basket=checked['basket'].model_dump(mode='json'),
+                              audit=checked['audit'].model_dump(mode='json'))
+        except (ValueError, PlanningDeadlineExceeded) as error:
+            comparison.update(status='not_verified', reason=str(error))
+        comparison['additional_validation_seconds'] = time.perf_counter() - reference_started
+        args.output.with_name(args.case + '-reference-current.json').write_bytes(encoded(comparison))
+        result['reference_proposal_check'] = {k: v for k, v in comparison.items() if k not in {'basket', 'audit'}}
+        args.output.write_bytes(encoded(result))
     print({k: result[k] for k in ("case", "status", "api_seconds", "http_status")}, flush=True)
 
 
@@ -200,5 +236,6 @@ if __name__ == "__main__":
     p.add_argument("--profile", action="store_true")
     p.add_argument("--browser", action="store_true")
     p.add_argument("--expected-total", type=float)
+    p.add_argument('--reference-proposal', type=Path)
     p.add_argument("--policy", choices=["legacy", "smako-current-library-v2"], default="legacy")
     main(p.parse_args())

@@ -57,7 +57,8 @@ def plain_quark(product, facts):
     text = product.name.casefold().strip()
     return bool(
         re.fullmatch(
-            r"(?:laktosfri )?(?:mild )?kvarg (?:mild )?naturell(?: (?:eko|ekologisk))?(?: \d+(?:[,.]\d+)?%)?",
+            r"(?:(?:laktosfri |mild )?kvarg (?:mild )?naturell|naturell (?:mild |kesella )?kvarg)"
+            r"(?: (?:laktosfri|eko|ekologisk))?(?: \d+(?:[,.]\d+)?%)?",
             text,
         )
         and product.usable_unit == "g"

@@ -224,12 +224,34 @@ def _retained_supplier_identity(product, fact):
     """
     prov = product.source_provenance
     if (not fact or not prov or product.chain not in {"willys", "hemkop"}
+            or 'identity_variant' in fact.conflicts
             or prov.source_provider != 'own' or prov.source_channel != 'catalog'
             or prov.store_id != product.store_id
             or product.sale_model != "fixed_package"
             or fact.source_product_id != product.product_id
             or fact.source_snapshot_id != prov.source_snapshot_id):
         return None
+    details = fact.field_sources.get('retailer_detail_gtin', ())
+    if len(details) == 1:
+        source = details[0]
+        raw = source.get('raw_fields', {})
+        from grocery_data.app.domain.identifiers import InvalidGtinError, normalize_gtin
+        from grocery_data.app.services.product_declarations import identity_text
+
+        try:
+            valid_gtin = normalize_gtin(raw.get('ean')).normalized_gtin == source.get('gtin')
+        except (InvalidGtinError, TypeError):
+            valid_gtin = False
+        if (valid_gtin and source.get('method') == 'checksum_valid_exact_retained_article_detail_gtin'
+                and source.get('binding') in {'exact_retailer_article_code', 'axfood_shared_article_code'}
+                and source.get('bound_fact_source') == fact.source
+                and source.get('product_id') == product.product_id and source.get('store_id') == product.store_id
+                and source.get('snapshot_id') == prov.source_snapshot_id and source.get('payload_sha256')
+                and source.get('document_url') == source.get('source')
+                and raw.get('code') == fact.retailer_product_id
+                and identity_text(raw.get('name', '')) == identity_text(product.name)
+                and identity_text(raw.get('manufacturer', '')) == identity_text(product.brand or '')):
+            return source
     sources = fact.field_sources.get("retailer_image_gtin", ())
     if len(sources) != 1:
         return None
@@ -337,7 +359,8 @@ def supplement_catalog_facts(products, original):
             if row['comparison_unit'] != 'g' or not 0 < row['comparison_quantity'] <= row['net_quantity']:
                 continue
             fields['usable_quantity'] = ({**source, 'quantity': row['comparison_quantity'],
-                                          'unit': 'g', 'basis': 'drained'},)
+                                          'unit': 'g', 'basis': 'drained',
+                                          'declared_net_quantity': row['net_quantity']},)
             changes['nutrition_preparation'] = 'draining_unspecified'
         overlap_conflict = bool(prior.nutrition and (
             prior.nutrition_unit != unit or any(prior.nutrition[k] != nutrition[k]
@@ -477,6 +500,12 @@ def shell_egg_quantity_proofs(products, result):
 
 def project_usable_quantity(product, fact, *, allow_estimates=False, required_unit=None):
     """Request-local quantity projection; immutable source price stays intact."""
+    from app.services.intake_product_links import project_reviewed_quantity
+
+    reviewed = project_reviewed_quantity(product, fact, allow_estimates=allow_estimates,
+                                         required_unit=required_unit)
+    if reviewed is not product:
+        return reviewed
     if required_unit is not None and required_unit != "g":
         return product
     if not fact or not product.source_provenance:
@@ -490,6 +519,20 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
         return product
     proof = proofs[0]
     quantity = proof.get('quantity')
+    if proof.get('kind') == 'axfood_explicit_drained_mass_v1':
+        from app.services.axfood_product_details import explicit_drained_quantity
+
+        expected = explicit_drained_quantity(product, {
+            'description': proof.get('raw_description'), 'displayVolume': proof.get('raw_display_volume'),
+            'code': fact.retailer_product_id}, {k: proof.get(k) for k in (
+                'binding', 'document_chain', 'document_url', 'payload_sha256', 'fetched_at', 'validation_version')})
+        if (expected == proof and proof.get('sha256') and proof.get('source')
+                and proof.get('binding') in {'exact_retailer_article_code', 'axfood_shared_article_code'}
+                and fact.source_product_id == product.product_id
+                and fact.source_snapshot_id == product.source_provenance.source_snapshot_id):
+            return product.model_copy(update={'package_quantity': proof['purchased_net_quantity'],
+                                               'usable_quantity': quantity, 'usable_unit': 'g'})
+        return product
     if (allow_estimates and proof.get('basis') == 'estimated_edible'
             and proof.get('identity_method') == 'plain_shell_egg_source_mass_documented_edible_estimate'
             and proof.get('purchased_shell_mass_g') == product.package_quantity
@@ -518,7 +561,13 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
             or isinstance(quantity, bool) or not 0 < quantity < 100000
             or not proof.get('sha256')):
         return product
-    return product.model_copy(update={'usable_quantity': quantity, 'usable_unit': 'g'})
+    net = proof.get('declared_net_quantity', product.package_quantity)
+    if (proof.get('basis') == 'drained' and (not isinstance(net, (int, float))
+            or isinstance(net, bool) or not quantity <= net < 100000
+            or product.package_quantity not in {net, quantity})):
+        return product
+    return product.model_copy(update={'usable_quantity': quantity, 'usable_unit': 'g',
+                                      **({'package_quantity': net} if proof.get('basis') == 'drained' else {})})
 
 
 def facts_for_quantity_unit(product, fact, unit):

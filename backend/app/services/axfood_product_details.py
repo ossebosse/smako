@@ -220,9 +220,17 @@ def merge_axfood_details(products, facts, root=None):
         provenance = {"binding": binding, "document_chain": meta["chain"], "document_url": meta.get("url"),
                       "payload_sha256": digest, "fetched_at": meta.get("fetched_at"),
                       "validation_version": VERSION}
+        quantity = explicit_drained_quantity(product, raw, provenance)
+        identity = retained_article_identity(product, fact, raw, provenance)
         sources = {k: tuple({**e, **provenance} for e in v) for k, v in detail.field_sources.items()
                    if k in _DETAIL_FIELDS or k.startswith("nutrition.") or k == "animal"}
         changes = {}
+        if identity:
+            sources['retailer_detail_gtin'] = (identity,)
+        if quantity:
+            previous = fact.field_sources.get('usable_quantity', ())
+            if not previous:
+                sources['usable_quantity'] = (quantity,)
         if detail.ingredients and not fact.ingredients:
             changes["ingredients"] = detail.ingredients
         if detail.nutrition and not fact.nutrition:
@@ -232,6 +240,17 @@ def merge_axfood_details(products, facts, root=None):
         if fact.animal is None and detail.animal is not None:
             changes["animal"] = detail.animal
         conflicts = list(detail.conflicts)
+        if identity:
+            for previous_identity in (*fact.field_sources.get('retailer_image_gtin', ()),
+                                      *fact.field_sources.get('retailer_detail_gtin', ())):
+                try:
+                    agrees = same_gtin(previous_identity.get('gtin'), identity['gtin'])
+                except ValueError:
+                    agrees = False
+                if not agrees:
+                    conflicts.append('identity_variant')
+        if quantity and previous and any(p.get('quantity') != quantity['quantity'] for p in previous):
+            conflicts.append('usable_quantity')
         if fact.ingredients and detail.ingredients and (
                 tuple(" ".join(x.casefold().split()) for x in fact.ingredients)
                 != tuple(" ".join(x.casefold().split()) for x in detail.ingredients)):
@@ -257,7 +276,8 @@ def merge_axfood_details(products, facts, root=None):
         kept = {k: v for k, v in sources.items()
                 if (k == "ingredients" and "ingredients" in changes)
                 or (k.startswith("nutrition") and "nutrition" in changes)
-                or (k == "animal" and "animal" in changes)}
+                or (k == "animal" and "animal" in changes)
+                or k in {'usable_quantity', 'retailer_detail_gtin'}}
         if "nutrition_limits" in sources:
             kept["nutrition_limits"] = (*fact_limits, *sources["nutrition_limits"])
         # Retain contradictory source evidence beside the existing declaration;
@@ -274,3 +294,54 @@ def merge_axfood_details(products, facts, root=None):
         facts[key] = replace(fact, **changes, field_sources={**fact.field_sources, **kept},
                              conflicts=tuple(dict.fromkeys((*fact.conflicts, *conflicts))))
     return stats
+
+
+def retained_article_identity(product, fact, raw, provenance):
+    """A verified article's declared GTIN, without editing the priced identity."""
+    from grocery_data.app.domain.identifiers import InvalidGtinError, normalize_gtin
+    from grocery_data.app.services.product_declarations import identity_text
+
+    if (not getattr(product, 'name', None)
+            or not all(isinstance(raw.get(k), str) for k in ['name', 'manufacturer', 'displayVolume', 'code', 'ean'])
+            or identity_text(raw.get('name') or '') != identity_text(product.name)
+            or not getattr(product, 'brand', None)
+            or identity_text(raw.get('manufacturer') or '') != identity_text(product.brand)
+            or raw.get('code') != fact.retailer_product_id or not raw.get('displayVolume')):
+        return None
+    try:
+        gtin = normalize_gtin(raw.get('ean')).normalized_gtin
+    except (InvalidGtinError, TypeError):
+        return None
+    return {**provenance, 'method': 'checksum_valid_exact_retained_article_detail_gtin',
+            'gtin': gtin, 'source': provenance['document_url'], 'bound_fact_source': fact.source,
+            'product_id': product.product_id, 'store_id': product.store_id,
+            'snapshot_id': product.source_provenance.source_snapshot_id,
+            'raw_fields': {k: raw[k] for k in ['name', 'manufacturer', 'displayVolume', 'code', 'ean']}}
+
+
+def explicit_drained_quantity(product, raw, provenance):
+    """Only an explicit net/drained sentence confirmed by the source pack label.
+
+    A slash label alone, a comparison price, or a generic draining ratio cannot
+    establish drained mass. The article/GTIN has already passed the reader gate.
+    """
+    if getattr(product, 'sale_model', None) != 'fixed_package' or getattr(product, 'package_unit', None) != 'g':
+        return None
+    text = raw.get('description') or ''
+    if not isinstance(text, str) or not isinstance(raw.get('displayVolume'), str):
+        return None
+    matches = re.findall(r'\b(\d+(?:[,.]\d+)?) gram, avrunnen vikt (\d+(?:[,.]\d+)?) gram\.', text)
+    if len(matches) != 1:
+        return None
+    net, drained = (float(n.replace(',', '.')) for n in matches[0])
+    label = re.fullmatch(r'(\d+(?:[,.]\d+)?)/(\d+(?:[,.]\d+)?)g', raw.get('displayVolume') or '')
+    if (not label or tuple(float(n.replace(',', '.')) for n in label.groups()) != (net, drained)
+            or not 0 < drained < net < 100000 or product.package_quantity not in {net, drained}):
+        return None
+    return {**provenance, 'kind': 'axfood_explicit_drained_mass_v1', 'basis': 'drained', 'unit': 'g',
+            'source': provenance['document_url'], 'sha256': provenance['payload_sha256'],
+            'quantity': drained, 'purchased_net_quantity': net, 'raw_description': text,
+            'raw_display_volume': raw['displayVolume'], 'article_code': raw['code'],
+            'bound_product_id': product.product_id, 'bound_store_id': product.store_id,
+            'bound_snapshot_id': product.source_provenance.source_snapshot_id,
+            'source_package_quantity': product.package_quantity, 'source_package_unit': product.package_unit}

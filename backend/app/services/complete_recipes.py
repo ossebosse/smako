@@ -402,7 +402,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
     category = (getattr(product, "category", None) or "").casefold()
     # Strip only a published brand and package amount, never flavour or method.
     brand = " ".join((getattr(product, "brand", None) or "").casefold().split())
-    if brand and label.startswith(brand + " "):
+    if brand and brand != canonical and label.startswith(brand + " "):
         label = label[len(brand) + 1:]
     label = re.sub(r"\b\d+(?:[,.]\d+)?\s*(?:kg|g|ml|cl|l)\b", "", label)
     label = " ".join(label.split())
@@ -484,7 +484,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
     if canonical == "tofu":
         return bool(re.fullmatch(r"(?:(?:naturell|fast|extra fast|ekologisk|eko) )*tofu(?: (?:naturell|fast|extra fast|firm|ekologisk|eko|vegansk|vegan))*", label.replace("/", " ")) and "naturell" in label and not re.search(r"rök|vitlök|ingefära|chili|marinad|socker", declared))
     if canonical == "keso":
-        return bool(re.fullmatch(r"(?:keso|keso cottage cheese|cottage cheese)(?: (?:mini|laktosfri|naturell|ekologisk|eko|\d+(?:[,.]\d+)?\s*%))*", label))
+        return bool(re.fullmatch(r"(?:keso|keso cottage cheese|cottage cheese)(?: (?:mini|supermini|laktosfri|naturell|ekologisk|eko|\d+(?:[,.]\d+)?\s*%))*", label))
     if canonical == "kvarg":
         # Reuse the already qualified cold-meal identity/composition rule for
         # authored content, without restricting it to named legacy recipes.
@@ -508,7 +508,7 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
         "kokosmjölk": r"kokosmjölk(?: eko| ekologisk| original| \d+(?:[,.]\d+)?(?:-\d+(?:[,.]\d+)?)?%)*",
         "sesamfrön": r"sesamfrön(?: vita| skalade| oskalade| eko| ekologiska| burk)*",
         "senap": r"(?:dijon )?senap(?: dijon| stark| mild| grov| skånsk| sötstark| finmalen)*",
-        "kapris": r"kapris(?: små| fina| fin| i lag)*", "oliver": r"(?:(?:gröna|svarta|kalamata|halkidiki) )?oliver(?: utan kärnor| urkärnade| kalamata| halkidiki| gröna| svarta| eko| ekologiska)*",
+        "kapris": r"kapris(?: små| fina| fin| medelstora| medelstor| non pareilles| i lag)*", "oliver": r"(?:(?:gröna|svarta|kalamata|halkidiki) )?oliver(?: utan kärnor| urkärnade| kalamata| halkidiki| gröna| svarta| eko| ekologiska)*",
         "salt": r"(?:salt|hushållssalt|finkornigt salt)(?: med jod| utan jod| fint| finkornigt)*",
         "mjölk": r"(?:standardmjölk|mellanmjölk|lättmjölk|mjölk)(?: laktosfri| ekologisk| eko| \d+(?:[,.]\d+)?\s*%)*",
     }
@@ -577,6 +577,7 @@ def plain_juice_composition(canonical, composition):
     if fruit is None:
         return False
     source = composition.casefold()
+    source = re.sub(rf"\b{fruit} juice\b", canonical, source)
     source = re.sub(rf"\({fruit}: (?:eu \()?[^()]+\)?\)", "", source)
     source = re.split(r"\*+krav-ekologisk ingrediens\.", source)[0]
     # The fruit's own peel oil in a >=99% juice is a declared citrus component.
@@ -600,7 +601,8 @@ def plain_juice_composition(canonical, composition):
 
 
 def plain_peanut_composition(composition):
-    words, _ = _culinary_words(composition)
+    source = re.sub(r"\*ekologisk ingrediens\.?", "", composition.casefold())
+    words, _ = _culinary_words(source)
     allowed = {"ingredienser", "jordnötter", "jordnöt", "jordnötssmör", "rostade", "malda", "och", "ekologiska",
                "ekologisk", "salt", "havssalt", "kina", "argentina", "ursprung", "eu", "icke"}
     return bool(words & {"jordnötter", "jordnöt"}) and words <= allowed
