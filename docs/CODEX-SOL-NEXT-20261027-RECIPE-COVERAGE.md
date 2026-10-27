@@ -1,5 +1,11 @@
 # Sol: gör alla 2 200 importerade receptvarianter användbara
 
+PR #19/main `7c0e066` gav ett verifierat delresultat. Ägaren har därefter
+godkänt [COVERAGE-FOLLOWUP](CODEX-SOL-NEXT-20261027-COVERAGE-FOLLOWUP.md)
+som nästa etapp: mängdkonfliktsspärren först, sedan prioriterade källgap,
+med separat begränsad budget. Målet och den fasta nämnaren nedan består;
+den äldre budgeten förlängs inte genom denna hänvisning.
+
 Ägarbeslut 2026-10-27 efter PR #18/main `fd2dcb8`: köpbarheten är för låg.
 **Högsta prioritet är nu 100 procent användbara importerade varianter.**
 Arbeta i `D:\Projects\Smako`, hämta senaste main och följ AGENTS,

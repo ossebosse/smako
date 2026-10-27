@@ -3,7 +3,7 @@
 ## Tillägg 2026-10-27: full recepttäckning före mer generell optimering
 
 Ägarens mål är att alla 2 200 importerade varianter blir användbara.
-Nästa uppdrag är [RECIPE-COVERAGE](CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md).
+Nästa uppdrag är [COVERAGE-FOLLOWUP](CODEX-SOL-NEXT-20261027-COVERAGE-FOLLOWUP.md).
 Den gemensamt förberedda produkt-/faktanivån ska därför kompletteras;
 fler recept eller mer cache löser inte en saknad ingredienskoppling.
 
@@ -33,6 +33,14 @@ inte nya deklarerade fakta om en enskild förpackning. Krukvikt, skal/ben,
 avrunnen vara och tillagad vikt är inte utbytbara. Saknat underlag för en
 sådan beräkning förblir ett hinder. Ingen uppskattning får kringgå okänd
 identitet, allergenrisk, ekologiskt bevis eller ändra användarens mängdpolicy.
+
+Förtydligande efter PR #19: samtliga mängdprojektioner ska följa samma
+befintliga mängdkonfliktspolicy, inklusive den nya vägen för granskade
+utbyten. Bara kända rena näringskonflikter får undantas från mängdspärren;
+ett prefix som `nutrition.` får inte i sig godkänna en okänd mängdkonflikt.
+Kontrollen ska ske innan en mängdberäkning accepteras och bevaras genom
+efterföljande produktkvalificering. En godkänd mängd gör inte omstridd
+näring användbar för ett personligt näringskrav.
 
 Förbered och återanvänd dessa relationer per exakt beroendeversion och
 butiksscope. En prisuppdatering ska kunna återanvända oförändrade faktabevis;
@@ -129,7 +137,7 @@ Beslutad riktning 2026-10-25 efter PR #12, main `d27e0cf`. Utgår från
 [produktmålet](PRODUCT-GOAL.md). Implementation och mätning återstår;
 `legacy` är fortsatt standard och V1:s befintliga beteende ändras inte av
 detta dokument. Nästa etapp finns i
-[Sols aktuella uppdrag](CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md).
+[Sols aktuella uppdrag](CODEX-SOL-NEXT-20261027-COVERAGE-FOLLOWUP.md).
 
 ## Varför riktningen ändras
 

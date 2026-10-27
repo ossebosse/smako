@@ -1,3 +1,25 @@
+# 2026-10-27: Nästa Sol-etapp — mängdspärr och prioriterade källgap
+
+Ägaren har godkänt nästa steg efter oberoende granskning av PR #19/main
+`7c0e066`. Genomför
+[COVERAGE-FOLLOWUP](CODEX-SOL-NEXT-20261027-COVERAGE-FOLLOWUP.md).
+Först rättas att den nya mängdprojektionen returnerar före `_mass_blocking`:
+`nutrition.package_quantity` kringgår spärren i reproducerat isolerat prov.
+Normala uttryckligen tillåtna uppskattningar och separata näringskonflikter
+ska fortsätta fungera enligt befintlig policy.
+
+Därefter prioriteras mynta, tamarindpasta, masa harina, avrunnen mozzarella
+och pärlkorn. Baslinjen är 969/1 569 insatslösta och 967/1 569 verifierade
+tvåbutikskorgar av 2 200, med 631 kvarvarande insatshinder. Oberoende
+granskning har kontrollerat alla korgkvitton och rätt portioner; 626 riktade
+tester passerade. A:s hela sparade begäran och B2:s begäran/korg är jämförda.
+
+Ny separat budget är **20 minuter tunga käll-/verifieringskörningar**, med
+tio minuter reserverade för slutprov. Använd
+[den nya journalen](reviews/recipe-coverage-followup-20261027/budget.json).
+Den gamla journalen bevaras och nollställs inte. Ingen stor matris,
+automatisk fortsättning eller driftaktivering. Slutmålet är fortsatt 100 %.
+
 # 2026-10-27: Täckningsdelresultat — 1 569 verifierade tvåbutikskorgar
 
 Läs [rapporten](reviews/recipe-coverage-20261027.md) och dess kompakta

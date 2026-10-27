@@ -14,10 +14,12 @@ allmän hastighetsoptimering eller mer receptimport. Målet 30–60 sekunder
 och pris-/kvalitetskraven kvarstår; en liten köpbar delmängd räcker inte.
 
 Alla 2 200 varianter är importerade och aktiva; tillsammans med de tidigare
-262 finns 2 462 aktiva varianter. I senaste frysta Malmöinventeringen har
-bara 738 (33,5 %) stöd för samtliga ingredienser i exakt inköpsläge, och
-931 (42,3 %) inklusive uttryckligen tillåtna mängduppskattningar. Det senare
-talet inkluderar det förra. Detta är ett väsentligt kvarstående produktgap.
+262 finns 2 462 aktiva varianter. Efter PR #19 har 969 (44,0 %) stöd för
+samtliga ingredienser i exakt inköpsläge och 1 569 (71,3 %) inklusive
+uttryckligen tillåtna mängduppskattningar i den frysta Malmöreferensen.
+Verifierade hela tvåbutikskorgar är 967 respektive 1 569. De inkluderande
+talen innehåller de exakta. 631 varianter har fortfarande insatshinder;
+100-procentsmålet kvarstår. Se [rapporten](reviews/recipe-coverage-20261027.md).
 
 Håll isär tre nivåer: registrerat recept, produkt-/mängdstöd för varje
 ingrediens och fullständig giltig inköpskorg för receptet. De två sista ska
@@ -33,7 +35,7 @@ Sådana val ska fortsatt begränsa urvalet. Saknade faktiska varor eller
 bevis ska redovisas, inte döljas genom borttagna recept, ändrad nämnare,
 påhittade fakta, inköp utanför valda butiker eller tyst ändrade ingredienser.
 
-Läs [Sols uppdrag för full recepttäckning](CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md).
+Läs [Sols aktuella fortsättningsuppdrag](CODEX-SOL-NEXT-20261027-COVERAGE-FOLLOWUP.md).
 
 ## Användarens flöde
 

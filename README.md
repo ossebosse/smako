@@ -34,7 +34,7 @@ På Linux/macOS används `python3.12` och `.venv/bin/python`.
 - **[Aktivera en granskad commit från main på betan](docs/BETA.md)**
 - [Medlemskap, gästgränser och kontoskafferi](docs/MEMBERSHIP.md)
 - [Aktiv betaversion och kommande arbete](docs/HANDOFF.md)
-- [Nästa Sol-uppdrag: gör alla 2 200 importerade varianter användbara](docs/CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md)
+- [Nästa Sol-uppdrag: mängdspärr och fortsatt recepttäckning](docs/CODEX-SOL-NEXT-20261027-COVERAGE-FOLLOWUP.md)
 - [Driftstatus och felsökning](docs/OPERATIONS.md)
 - [Projektregler](AGENTS.md)
 
