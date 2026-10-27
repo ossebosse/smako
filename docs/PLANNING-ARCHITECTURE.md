@@ -1,5 +1,15 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Deklarerad avrunnen massa och statisk spärrfrasscope
+
+Exakt granskade fasta förpackningar kan projicera deklarerad avrunnen massa
+genom befintlig mängdväg även utan uppskattningsval. Nettoinköp, källidentitet,
+konfliktspärrar och personlig kvalificering består. Hela sammansättningen
+granskas separat och godkänner inte allergen-/ekokrav. Fasta regelord och
+spärrfrasers namn-/kategoriscope beräknas vid inläsning, med identiska fulla
+klassningssvar; priser eller användarbeslut cachas inte av detta.
+Se [fortsättningsrapporten](reviews/coverage-continuation-20261027.md).
+
 ## Statisk prioritet i den kompletta menysökningen
 
 Den befintliga kompletta V2-sökningen räknar singletonprioriteten en gång

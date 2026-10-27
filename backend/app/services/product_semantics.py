@@ -933,6 +933,14 @@ _PREPARED_FORM_MARKERS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("powder", ("pulver", "powder")),
 )
 
+# These rules are static. Normalize their phrases once rather than for every
+# candidate product and every identity/form pass. Keep rule and phrase order,
+# including substring matching, exactly as in the declared table above.
+_NORMALIZED_PREPARED_FORM_MARKERS = tuple(
+    (product_form, tuple(_search_text(marker) for marker in markers))
+    for product_form, markers in _PREPARED_FORM_MARKERS
+)
+
 _PREPARED_ROLE_BY_FORM: dict[str, str] = {
     "fermented": "fermented_vegetable_mixture",
     "pizza": "prepared_dish",
@@ -1400,8 +1408,8 @@ def _is_filled_dough_dish(text: str) -> bool:
 
 
 def _classify_prepared_form(text: str) -> str | None:
-    for product_form, markers in _PREPARED_FORM_MARKERS:
-        if any(_search_text(marker) in text for marker in markers):
+    for product_form, markers in _NORMALIZED_PREPARED_FORM_MARKERS:
+        if any(marker in text for marker in markers):
             return product_form
     return None
 
@@ -1995,6 +2003,19 @@ def _infer_special_identity(
     return None
 
 
+
+# Scope depends on the fixed exclusion phrase, never the candidate product.
+# Reclassifying the same phrases for every match dominated identity inference
+# in broad qualification. Retain exact phrases, order and the existing rules.
+_STRICT_EXCLUSION_SCOPES = {
+    canonical: tuple((phrase,
+        _infer_special_identity(_search_text(phrase)) is not None
+        and _classify_prepared_form(_search_text(phrase)) is None)
+        for phrase in phrases)
+    for canonical, phrases in STRICT_EXCLUSIONS.items()
+}
+
+
 def _visible_generic_identity(name_text: str, canonical: str) -> bool:
     aliases = CANONICAL_ALIASES.get(canonical, (canonical,))
     tokens = name_text.split()
@@ -2395,14 +2416,12 @@ def evaluate_product_semantics(
     excluded_phrase = next(
         (
             phrase
-            for phrase in STRICT_EXCLUSIONS.get(requirement.canonical_name, ())
+            for phrase, name_only in _STRICT_EXCLUSION_SCOPES.get(requirement.canonical_name, ())
             # A different food in broad navigation is not this product's
             # identity. Preserve category exclusions for preparation/mixtures;
             # only explicit alternative food identities defer to the name.
             if _contains_phrase(
-                name_text if visible_identity
-                and _infer_special_identity(_search_text(phrase)) is not None
-                and _classify_prepared_form(_search_text(phrase)) is None
+                name_text if visible_identity and name_only
                 else visible_text, phrase
             ) or (butter_brand and _contains_phrase(butter_brand, phrase))
         ),

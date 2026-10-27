@@ -1,3 +1,28 @@
+# 2026-10-27: Fortsatt täckning och halverad CI
+
+[Rapport](reviews/coverage-continuation-20261027.md): 1747/2 200 hela korgar
+inklusive uppskattningar (+30), exakt 1020 hela/1022 insatslösta.
+453 återstår; alla original/2 462 aktiva och tidigare korgar består.
+32 nya exakt granskade Axfoodkopplingar samt två Spicefieldetiketter följer
+befintlig fakta-/mängdväg. 40 nya offentliga artikeldokument, 244 kompletterade
+produktposter och inga faktakonflikter. Fem sammansättningsdeklarationer har
+manuellt verifierad fullständighet; personliga egenskapskrav består.
+
+A 281.31 och återprov 281.31 kr, B2:s hela korg identisk
+731.20 kr. API/save/GET 51.86/52.17/32.25 s.
+Statisk spärrfrasscope återanvänds; alla 89 458 produkters fulla klassningssvar
+är identiska. Ny full kontroll och 2769 kvittohashar passerar.
+Metod 52aeb5a649d98e38760aaa35b71ee850154712870d52e67b010c694eb7031554. 312 riktade tester, Ruff/compileall passerar.
+Integration av täckningsändringen kräver grön PR-CI. CI-förbättringen är redan
+integrerad via PR #24 / main e68627f: 9:50 mot 20:35, alla 4 069 tester ingår.
+
+Ägarens senaste beslut är fortsatt arbete utan total tidsgräns. Samma journal
+har null som total gräns, med all historik kvar; watchdog, en tung arbetare,
+två CPU, 3 GiB och operationslås består. Ingen produktions-/betaaktivering.
+Fortsätt med räkdeklarationernas varav-gram-parser, gemensam äggberedning och
+övriga verkliga mängd-/sortimentsluckor. Ingen ny handlare/allowlist utan
+separat konkret käll-/scopebeslut. Legacy standard, V2 opt-in.
+
 # 2026-10-27: Fyravarugranskning klar — prisgrinden åter godkänd
 
 [PR #23](https://github.com/ossebosse/smako/pull/23), från main `8dac239`.

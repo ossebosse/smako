@@ -6,8 +6,11 @@
 
 `verify_offline.py` kör pytest utan nätverk mot handlare och utan läsning
 utanför repot. GitHub Actions (`.github/workflows/tests.yml`) kör samma
-kommando för `backend/tests` vid push till `main` och för varje pull request,
-plus Ruff på ändrade Python-filer.
+testurval i två separata partitioner vid push till `main` och för varje pull
+request, plus Ruff på ändrade Python-filer. Ett gemensamt `backend`-jobb kräver
+att båda partitionerna lyckas. Nya filer ingår automatiskt i core; fem tyngre
+planerar-/provider-/browserfiler körs i planner. JUnit sparas i sju dagar och
+de 30 långsammaste testerna skrivs ut. Ersatta PR-körningar avbryts.
 
 ## Lokal evidens (överhoppade tester)
 

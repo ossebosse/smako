@@ -39,7 +39,8 @@ def main(args):
     assert digest([identity(r) for r in recipes]) == scope['recipe_ids_sha256']
     assert file_sha('backend/app/data/recipes/library-manifest.json') == scope['manifest_sha256']
     assert method_signature() == scope['method_signature']
-    assert file_sha(args.local / 'facts-final-v2.json') == scope['facts_sha256']
+    facts_path = getattr(args, 'facts', None) or args.local / 'facts-final-v2.json'
+    assert file_sha(facts_path) == scope['facts_sha256']
     assert file_sha('.local/sol-architecture-20261023/final-enriched-vfinal/malmo/combined-prices.json') == scope['universe_sha256']
     checker = digest([file_sha(Path(__file__).with_name(name))
                       for name in ('check_recipe_coverage.py', 'coverage_reference.py')])
@@ -147,6 +148,7 @@ if __name__ == '__main__':
     parser.add_argument('--report', type=Path, required=True)
     parser.add_argument('--local', type=Path, required=True)
     parser.add_argument('--budget', type=Path)
+    parser.add_argument('--facts', type=Path)
     parser.add_argument('--previous-local', type=Path, default=Path('.local/recipe-coverage-followup-20261027'))
     parser.add_argument('--previous-report', type=Path)
     main(parser.parse_args())

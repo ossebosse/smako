@@ -1,0 +1,211 @@
+{
+  "schema": "smako-coverage-continuation-delivery-v1",
+  "base_main": "e68627f6e87f76e418f05600a99e0056811616e4",
+  "branch": "fix/coverage-and-ci-continuation-20261027",
+  "integration_status": "validated_pending_hosted_CI_and_merge",
+  "full_coverage_goal_complete": false,
+  "verification": {
+    "scope_sha256": "25300cbcf8d8418eb164c341e212b515e911bc3e8af441b23bc01d1cb1757c8a",
+    "method_signature": "52aeb5a649d98e38760aaa35b71ee850154712870d52e67b010c694eb7031554",
+    "denominator": 2200,
+    "active_variants": 2462,
+    "receipt_count": 2769,
+    "outcomes": {
+      "estimated:verified": 1747,
+      "exact:verified": 1020,
+      "exact:data_blocked": 1178,
+      "estimated:data_blocked": 453,
+      "exact:checkout_blocked": 2
+    },
+    "lost_original_ids": [],
+    "all_receipt_hashes_and_dependencies_verified": true,
+    "all_saved_full_requests_unchanged": true,
+    "older_budget_journals_unchanged": true,
+    "all_original_worklist_groups_reviewed": 76,
+    "runtime_preparation_enabled": false,
+    "legacy_remains_default": true,
+    "production_activation": false,
+    "price_regression_gate_passed": true,
+    "price_regressions": {}
+  },
+  "focused_tests": {
+    "passed": 312,
+    "ruff_changed_python_files": 9,
+    "compileall": "passed"
+  },
+  "file_hash_basis": "Verified Windows working-file bytes. Public raw checkouts and ephemeral registrations remain ignored.",
+  "files": {
+    ".gitattributes": {
+      "sha256": "914eefa12316af076ba4cbbf345c06e2402b90d9617adf5bb07a727638e8bc95",
+      "bytes": 2960
+    },
+    "backend/app/data/ingredients/intake-all-20261026.json": {
+      "sha256": "4e85d2f154adc2bb14e2fddccb837f0b3ba428a73ba8be9cf4f68b99fd21a231",
+      "bytes": 2070989
+    },
+    "backend/app/services/intake_product_links.py": {
+      "sha256": "3c243311b25b3c2fbee0a5f7002a3da165cf0d4bddb3392d2b54cc67d931b18f",
+      "bytes": 14538
+    },
+    "backend/app/services/product_semantics.py": {
+      "sha256": "5f03d2165b5b3dad3ccb9affddd6920ed3d4909c15e63c2506bba74d1815deb7",
+      "bytes": 94524
+    },
+    "backend/tests/test_reviewed_drained_label.py": {
+      "sha256": "60ef219fc9a175b745345d940b5aba6e97839190cd25579c24435d0f94a1d81a",
+      "bytes": 5453
+    },
+    "backend/tests/test_reviewed_plain_contents.py": {
+      "sha256": "372ee22141500c5c1f84fb4b733220f04fd6fab7c24394e69d4b9da0278c505c",
+      "bytes": 3227
+    },
+    "backend/tests/test_shared_work_budget.py": {
+      "sha256": "24e33d4b0090194d0fbec4481f2efe34a265ff65627203584ac2ea10b788dddd",
+      "bytes": 2103
+    },
+    "docs/CODEX-ASTRA-FULL-COVERAGE-20261027.md": {
+      "sha256": "b8b1e3d3d0522466470ad8af8d6ef462e8d7803991c61815b1852d0cc91fe521",
+      "bytes": 7735
+    },
+    "docs/HANDOFF.md": {
+      "sha256": "995a7a5068598752c91b9e43a0850bf2ad59f34a9db84924ee8005c14174fc08",
+      "bytes": 386792
+    },
+    "docs/PLANNING-ARCHITECTURE.md": {
+      "sha256": "0e7516c7d2d706c2ccbffa998f90fe26cf5da4495adf6726f7ed54c14255614c",
+      "bytes": 23515
+    },
+    "docs/PRODUCT-GOAL.md": {
+      "sha256": "5f0381bfd141b61140a149addb53430961326e11d6df96033e90efeb63ac8632",
+      "bytes": 10916
+    },
+    "docs/TESTING.md": {
+      "sha256": "f60246255ac3a4a4e0ea8611f76d0ac962580c886e3fa9f6c9243865b3efaaf1",
+      "bytes": 2072
+    },
+    "docs/reviews/ci-publications-20261027.md": {
+      "sha256": "68b17787588ae6be0ac66b557fc574b7ae230a86a50f6c46a4936b594e9b0abc",
+      "bytes": 1761
+    },
+    "docs/reviews/coverage-continuation-20261027.md": {
+      "sha256": "768c1a4457c83ae938f881897de1fca234b419148e5671d90588c92340ac52eb",
+      "bytes": 7226
+    },
+    "docs/reviews/coverage-continuation-20261027/A-comparison.json": {
+      "sha256": "9219108b12cf82fd3758aa43333f2882aabe0ed9b5649927e3f829dfed80e549",
+      "bytes": 1069
+    },
+    "docs/reviews/coverage-continuation-20261027/A-previous-menu-checkout.json": {
+      "sha256": "0b97d0a1e9da9762a601ebb100a3b366f71ee03ede1ba323d8af0fb613eb738d",
+      "bytes": 393
+    },
+    "docs/reviews/coverage-continuation-20261027/A-repeat-comparison.json": {
+      "sha256": "8f23e9e063f52f84cf421b6a8a8208eed36777420cd987d40c3c0635fa22e7b6",
+      "bytes": 677
+    },
+    "docs/reviews/coverage-continuation-20261027/B2-comparison.json": {
+      "sha256": "f276d52a6bb2b8b04c337a8457ea039c6540b6fdf898b8a895d3d7cd1a2e31fa",
+      "bytes": 1074
+    },
+    "docs/reviews/coverage-continuation-20261027/article-collection.json": {
+      "sha256": "8a8025181268cf9245bf91551677f755ebba5749760c22c45e368e5da80a615d",
+      "bytes": 899
+    },
+    "docs/reviews/coverage-continuation-20261027/axfood-details-review.json": {
+      "sha256": "4c6392ed82ce2e415d858d0df0125666b61b7e87184e4bc9bea33ef18259e4a0",
+      "bytes": 101335
+    },
+    "docs/reviews/coverage-continuation-20261027/bamboo-review.json": {
+      "sha256": "4e7a4265ab1a91b83b5effab8485ad522ceb3fa23628ba756fd970aaa8f5efc0",
+      "bytes": 4654
+    },
+    "docs/reviews/coverage-continuation-20261027/basket-receipts.json": {
+      "sha256": "2ad35c4de926c5776c6c30280a90a86110de1ce2a4f214ac45326c7b194a3430",
+      "bytes": 1095195
+    },
+    "docs/reviews/coverage-continuation-20261027/blockers.json": {
+      "sha256": "7d2115e9b3a88fa8061c594ecb12ce8614aa0c9e919776b238d570965c88b395",
+      "bytes": 84199
+    },
+    "docs/reviews/coverage-continuation-20261027/ci-hosted-measurement.json": {
+      "sha256": "4ba29347cb5190f48ac929229c60520f42698629bb65e4ba2f7220dfbfd791c4",
+      "bytes": 2074
+    },
+    "docs/reviews/coverage-continuation-20261027/ci-partitions.json": {
+      "sha256": "1371eafdb41817d35e80aa9e19d5c81bcb373582a2b9494ee832f5d1a3c2f340",
+      "bytes": 575
+    },
+    "docs/reviews/coverage-continuation-20261027/ci-timings.json": {
+      "sha256": "88e57666b01f80811196645a3b4e5eb92d617639ba69869a346bd530a6057269",
+      "bytes": 1741
+    },
+    "docs/reviews/coverage-continuation-20261027/coverage.json": {
+      "sha256": "c17b802ab89d17b9e2c7e429a03fe1bb956737d52e705f69b3d9de912ed54318",
+      "bytes": 4870648
+    },
+    "docs/reviews/coverage-continuation-20261027/exclusion-scope-equivalence.json": {
+      "sha256": "2d439334dc81f702ac5896845827c9406ebbacc63b93d516cbfb3bcf6f05f30e",
+      "bytes": 726
+    },
+    "docs/reviews/coverage-continuation-20261027/group-assessments.json": {
+      "sha256": "de6b12dc3d7a5f27f0f31d7611b89e689dff8eae76c211a54f148e9226848727",
+      "bytes": 20554
+    },
+    "docs/reviews/coverage-continuation-20261027/newly-verified.json": {
+      "sha256": "8da1d80bed5d44fbc9b32732049945a15f1756ba55e14233507816b290d6f758",
+      "bytes": 16667
+    },
+    "docs/reviews/coverage-continuation-20261027/plain-contents-review.json": {
+      "sha256": "b1e4ce5fd215f89c1b8a1450a02eef1ba353359304718ed4f210b6efc51c5fd9",
+      "bytes": 89189
+    },
+    "docs/reviews/coverage-continuation-20261027/prepared-form-equivalence.json": {
+      "sha256": "4155219fca701d960863eb3de3809f9e6d336d78f0a2b2764a8b43a6881c1543",
+      "bytes": 487
+    },
+    "docs/reviews/coverage-continuation-20261027/search-timing-review.json": {
+      "sha256": "dab93c700fab12198184d86647c94905aa65e83d260e5a0e9ca057b13e21c75d",
+      "bytes": 2084
+    },
+    "docs/reviews/coverage-continuation-20261027/verification.json": {
+      "sha256": "a87774cd900e17ee65b99ba7bd1144deacfc2afae041939a8bd41e78dfabbddc",
+      "bytes": 851
+    },
+    "docs/reviews/coverage-continuation-20261027/water-chestnut-review.json": {
+      "sha256": "4a86372eea2ff9627552ed7c09ea299b3d760e3432eea39f1753bfc3479855e8",
+      "bytes": 4981
+    },
+    "docs/reviews/coverage-continuation-20261027/work-matrix.json": {
+      "sha256": "7868076adaa12336f20255db4c29f40d80cd235c8907c0b54159080a08d19121",
+      "bytes": 7422478
+    },
+    "docs/reviews/coverage-continuation-20261027/work-matrix.md": {
+      "sha256": "83b997d10e6c7a34b3ea0380f0c0998e084c2696dcfa7c17a60daaa02124dd09",
+      "bytes": 20972
+    },
+    "docs/reviews/recipe-coverage-full-20261027/budget.json": {
+      "sha256": "486816fb7599426f140dff362b69ed7bec942890faa07f3cb316d1a6a73b81f1",
+      "bytes": 59558
+    },
+    "scripts/recipe_layer/budgeted_check.py": {
+      "sha256": "ad80632ead2bd85687c2cc1d8cf487e8959dbb8084af796965a09b09f89113fc",
+      "bytes": 10448
+    },
+    "scripts/recipe_layer/review_declared_drained_labels.py": {
+      "sha256": "7d102dc398ae7cce0926c957879da26e33f88b61284bb1bb8324a65dd4ae8dc9",
+      "bytes": 8221
+    },
+    "scripts/recipe_layer/review_new_axfood_contents.py": {
+      "sha256": "5da9bc00a86b0fff53fff099353a28eaecacd8d08f0ad02f5e6d18d575772c56",
+      "bytes": 8095
+    },
+    "scripts/recipe_layer/verify_full_coverage_delivery.py": {
+      "sha256": "6948ef1931e68f7bf64835d070ce17e7ef27aa63d6d0f7a3ec356260c89d2ba4",
+      "bytes": 9847
+    },
+    "docs/reviews/coverage-continuation-20261027/registry-diff-review.json": {
+      "sha256": "25b6bff05784618765c64f683e58743851b496c7dc76d71aabdf7a17870cc93c",
+      "bytes": 1045
+    }
+  }
+}

@@ -6,6 +6,7 @@ from functools import lru_cache
 from pathlib import Path
 from types import MappingProxyType
 
+from app.models.product import QuantityConfidence
 from app.services.ingredient_normalizer import _search_text
 
 PATH = Path(__file__).parents[1] / "data/ingredients/intake-all-20261026.json"
@@ -122,6 +123,7 @@ def _quantity_reviews():
         for proof in row.get("reviewed_links", ()):
             if proof["quantity"].get("method") in {
                 "usda_sr28_refuse_v1", "matvaretabellen_edible_fraction_v1",
+                "reviewed_declared_drained_mass_v1",
             }:
                 key = (('gtin', proof['store_id'], proof['gtin']) if proof.get('gtin')
                        else ('article', proof['store_id'], proof['retailer_product_id'])
@@ -133,10 +135,10 @@ def _quantity_reviews():
 def project_reviewed_quantity(product, fact, *, allow_estimates=False, required_unit=None):
     """Project edible mass on a copy; retain gross package mass and source time.
 
-    Only reviewed fixed/representative variable gram packs are supported. Pots, counted produce,
-    loose-weight contracts, cooked yields and unknown masses stay unresolved.
+    Declared drained contents are exact; population edible yields need consent.
+    Every review retains the exact source product, context and gross package.
     """
-    if not allow_estimates or required_unit != "g":
+    if required_unit != "g":
         return product
     article = (getattr(product.source_provenance, 'retailer_product_id', None)
                or getattr(fact, 'retailer_product_id', None))
@@ -145,7 +147,22 @@ def project_reviewed_quantity(product, fact, *, allow_estimates=False, required_
     proofs = [proof for key in keys for proof in _quantity_reviews().get(key, ())]
     for proof in proofs:
         q = proof["quantity"]
+        if q.get('method') == 'reviewed_declared_drained_mass_v1':
+            quantity = q.get('usable_quantity')
+            if (_review_identity(proof, product, fact)
+                    and product.sale_model == 'fixed_package' and product.package_unit == 'g'
+                    and product.purchase_terms is None
+                    and q.get('confidence') == 'exact' and q.get('basis') == 'preserved_drained'
+                    and q.get('unit') == 'g' and q.get('declared_net_quantity') == product.package_quantity
+                    and isinstance(quantity, (int, float)) and not isinstance(quantity, bool)
+                    and 0 < quantity <= product.package_quantity
+                    and q.get('source', {}).get('sha256')
+                    and q.get('label_source', {}).get('sha256')):
+                return product.model_copy(update={'usable_quantity': quantity, 'usable_unit': 'g',
+                                                   'quantity_confidence': QuantityConfidence.EXACT})
+            continue
         if (not _review_identity(proof, product, fact)
+                or not allow_estimates
                 or product.sale_model not in {"fixed_package", "variable_weight_package"} or product.package_unit != "g"
                 or product.purchase_terms is not None
                 or q.get("confidence") != "estimated" or q.get("basis") != "raw_edible"

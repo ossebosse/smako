@@ -133,8 +133,9 @@ def _run(args):
         if entry.get("status") == "running":
             entry.update(status="interrupted_charged", wall_seconds=(now - datetime.fromisoformat(entry["started_at"])).total_seconds())
     used = budget.get("prior_v2_seconds", 0) + sum(e["wall_seconds"] for e in budget["entries"])
-    remaining = budget["limit_seconds"] - used
-    if remaining <= 0:
+    limit = budget["limit_seconds"]
+    remaining = None if limit is None else limit - used
+    if remaining is not None and remaining <= 0:
         raise RuntimeError("Shared qualification/benchmark budget exhausted")
     entry = {"label": args.label, "started_at": now.isoformat(), "wall_seconds": 0, "status": "running",
              "environment": "Windows job: two processor affinity, 3 GiB commit limit; not Linux cgroup latency"}
@@ -142,7 +143,7 @@ def _run(args):
 
     def save():
         charged = budget.get("prior_v2_seconds", 0) + sum(e["wall_seconds"] for e in budget["entries"])
-        budget.update(used_seconds=charged, remaining_seconds=budget["limit_seconds"] - charged,
+        budget.update(used_seconds=charged, remaining_seconds=None if limit is None else limit - charged,
                       phase_status="serial check running" if entry["status"] == "running"
                       else "check closed; same shared budget remains for intake/V2")
         temporary = args.budget.with_suffix(".next")
@@ -156,7 +157,7 @@ def _run(args):
     phase_timer = None
     receipt = None
     worker = SimpleNamespace(_handle=-1)  # Actual interpreter, including Store-Python launchers.
-    deadline = start + min(args.max_seconds, remaining)
+    deadline = start + (args.max_seconds if remaining is None else min(args.max_seconds, remaining))
     try:
         attach, peak, sample, _terminate = windows_limits()
         attach(worker)

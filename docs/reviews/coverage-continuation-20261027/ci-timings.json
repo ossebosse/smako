@@ -1,0 +1,41 @@
+{
+  "schema": "smako-ci-continuation-timing-review-v1",
+  "base_main": "4f77ad3c6da273256629674498f5d9a6ba1959f6",
+  "previous_hosted_run": "https://github.com/ossebosse/smako/actions/runs/40575234955",
+  "previous_ci_backend_seconds": 1235,
+  "previous_ci_test_step_seconds": 1158,
+  "publications": {
+    "before_seconds": 34.97162019996904,
+    "after_seconds": 6.149536199984141,
+    "all_three_actual_chains_identical": true,
+    "node_counts": {
+      "13": 1,
+      "39": 27,
+      "40": 28
+    },
+    "before_sha256": "d6cbf48c30f951d32ef51428a100eecb2c4334a6bbbed1776556245ed401ed8c",
+    "after_sha256": "6ad3f0bbbf63c257396f4b7fe526cd981a7187123be34f671fc43218dccb7b50"
+  },
+  "focused_suite_measurements": {
+    "ci-baseline": {
+      "seconds": 258.728,
+      "tests": 55,
+      "failures": 0,
+      "junit_sha256": "ff29baf89101bfb411df0a115fcc9e5905e4a8ec146e817b3a40f39720be1d2f"
+    },
+    "ci-after": {
+      "seconds": 239.321,
+      "tests": 55,
+      "failures": 0,
+      "junit_sha256": "3e8769159a8ee6d6dc891b993bfac3fe8d1e09a412dd670b816932544427b6d9"
+    }
+  },
+  "resource_scope": "Local Windows, same two-processor affinity and 3-GiB job cap. Hosted CI elapsed time must be measured separately.",
+  "changes": [
+    "Reuse exact recipe value digests via existing RecipeComputationCache within one cold publication build; no certificate, predecessor, order or qualification change.",
+    "Cancel superseded PR workflow runs, retaining the newest full run.",
+    "Run two isolated CI test partitions, with a stable backend result requiring every partition to succeed.",
+    "Print slowest tests and retain JUnit timings for 7 days."
+  ],
+  "test_coverage_reduction": false
+}
