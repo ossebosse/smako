@@ -1,5 +1,34 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Konkret mängd- och sökkomplettering 2026-10-27
+
+`official_product_facts` använder samma produkt-/butiks-/snapshotbundna
+leverantörsbevis för deklarerad gramvikt i en styckförpackning och deklarerad
+volym i en gramförpackning. Förpackningens inköpsidentitet behålls, medan
+`project_usable_quantity` bara projicerar den uttryckligen begärda användbara
+enheten. Näringsomräkning kräver förpackningens belagda mass-/volympar och
+oförändrade konfliktspärrar. Ett gramvärde ensamt innebär aldrig en densitet.
+Den här vägen används för exakt 12-blads/20-g gelatin och ett källbelagt
+1000-g/1000-ml kefirpaket. Nya bevis ingår i befintlig metod-/faktaversion;
+inga priser eller observeringstider byts i den frysta jämförelsen.
+
+Den kompletta menysökningen återstartar de prisordnade enstaka receptbytena
+när en bättre gemensam korg hittas. Ett tidigare olönsamt byte kan bli
+lönsamt efter ett annat byte genom delade förpackningar. Den ordinarie
+strömmen av fulla menyförslag fortsätter parallellt i samma seriella sökning.
+Det är en ändrad förslagsordning; deadline, slut-audit, sparning och alla
+hårda användarvillkor gäller fortfarande. Ingen global optimalitet påstås.
+
+**Beredning med flera utfall är ännu inte implementerad.** Enbart en ny
+mängdfaktor i `resolve` räcker inte: `personal_store` bokför i dag samma
+mängdenhet för inköp, reservation och förbrukning. Gula och vita från samma
+ägg behöver en gemensam inköpsgrupp och separata uppmätta utfall, även vid
+delvis förbrukning, omplanering och återstående skafferi. Receptens
+insatsnäring och aktiva/vänt-/totaltider måste följa den granskade versionen.
+Nästa implementation ska utöka dessa befintliga vägar och deras förberedda
+beroenden, inte lägga till en fristående berednings- eller prisdatabas.
+Se [källgranskningen och acceptansfallen](reviews/recipe-coverage-full-20261027/preparation-review.md).
+
 ## Tillägg 2026-10-27: full recepttäckning före mer generell optimering
 
 Ägarens mål är att alla 2 200 importerade varianter blir användbara.

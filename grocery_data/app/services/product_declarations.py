@@ -278,6 +278,56 @@ def parse_declaration(body, acquisition, *, identity_body=None, identity_acquisi
     return parse_garant(body, acquisition)
 
 
+def parse_oetker_counted_package(body, acquisition, gtin):
+    """Read the requested exact variant, never the page's default sibling.
+
+    The public page can show a 10-sheet/17-g default while its embedded product
+    catalogue separately declares a 12-sheet/20-g GTIN. Conflicting duplicate
+    variant records fail closed. No absent ingredient/nutrient facts are filled.
+    """
+    if (urlparse(acquisition['url']).hostname != 'www.oetker.se'
+            or not urlparse(acquisition['url']).path.startswith('/produkter/p/')
+            or acquisition.get('status') != 200 or not acquisition.get('observed_at')
+            or hashlib.sha256(body).hexdigest() != acquisition['sha256']):
+        raise ValueError('unverified_oetker_source')
+    normalized = normalize_gtin(gtin).normalized_gtin
+    soup = BeautifulSoup(body, 'html.parser')
+    nodes = soup.find_all('script', id='__NEXT_DATA__', type='application/json')
+    if len(nodes) != 1:
+        raise ValueError('ambiguous_oetker_catalogue')
+    found = {}
+
+    def visit(value):
+        if isinstance(value, dict):
+            if value.get('__typename') == 'Product' and str(value.get('gtin', '')).zfill(14) == normalized.zfill(14):
+                item = {k: value.get(k) for k in ('productId', 'productTitle', 'gtin', 'fillingQuantity')}
+                found[json.dumps(item, sort_keys=True)] = item
+            for child in value.values():
+                visit(child)
+        elif isinstance(value, list):
+            for child in value:
+                visit(child)
+
+    visit(json.loads(nodes[0].get_text()))
+    if len(found) != 1:
+        raise ValueError('missing_or_conflicting_oetker_variant')
+    item = next(iter(found.values()))
+    count = re.fullmatch(r'(.+) (\d+)-p', item['productTitle'] or '')
+    mass = re.fullmatch(r'(\d+(?:[.,]\d+)?) Gram', item['fillingQuantity'] or '')
+    if not count or not mass or not item['productId'] or int(count[2]) <= 0:
+        raise ValueError('unsupported_oetker_counted_package')
+    net = float(mass[1].replace(',', '.'))
+    if not 0 < net < 100000:
+        raise ValueError('invalid_oetker_net_mass')
+    return {'gtin': normalized, 'name': item['productTitle'], 'brand': 'Dr.Oetker',
+            'package_quantity': int(count[2]), 'package_unit': 'st',
+            'net_quantity': net, 'net_unit': 'g', 'ingredients': '', 'nutrition': {},
+            'basis_quantity': 100, 'basis_unit': 'g', 'preparation': 'as_sold',
+            'source': dict(acquisition), 'selected_variant': item,
+            'binding_requirement': 'existing_exact_gtin_brand_fixed_package',
+            'parser': 'oetker-counted-package-v1'}
+
+
 def parse_dabas(body, acquisition):
     """Supplier's consumer-level fields, never transport gross weight.
 
@@ -310,12 +360,12 @@ def parse_dabas(body, acquisition):
         return values.pop()
 
     def amount(value):
-        match = re.fullmatch(r"(\d+(?:[.,]\d+)?)\s*(g|gr|gram|kg|ml|milliliter|dl|l)", value)
+        match = re.fullmatch(r"(\d+(?:[.,]\d+)?)\s*(g|gr|gram|kg|ml|milliliter|dl|l)", value, re.IGNORECASE)
         if not match:
             raise ValueError("unsupported_dabas_quantity:" + value)
         multiplier, unit = {"g": (1, "g"), "gr": (1, "g"), "gram": (1, "g"),
                             "kg": (1000, "g"), "ml": (1, "ml"), "milliliter": (1, "ml"),
-                            "dl": (100, "ml"), "l": (1000, "ml")}[match[2]]
+                            "dl": (100, "ml"), "l": (1000, "ml")}[match[2].casefold()]
         return float(match[1].replace(",", ".")) * multiplier, unit
 
     fields = cells(base)

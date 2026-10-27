@@ -1,3 +1,48 @@
+# 2026-10-27: Astra-kontrollpunkt — 1 646 fullkorgar och A 283,24 kr
+
+Från main `9992d34`, se [uppdraget](CODEX-ASTRA-FULL-COVERAGE-20261027.md)
+och [resultatrapporten](reviews/recipe-coverage-full-20261027.md).
+Alla tidigare 76 grupper/595 varianter är granskade i en komplett arbetsmatris.
+**1 010 exakt/1 646 inklusive uppskattningar är insatslösta; fulla verifierade
+tvåbutikskorgar är 1 008/1 646**, +11/+41 utan förlorade original-ID:n.
+Alla 2 200 importerade och 2 462 aktiva varianter är bevarade. Två tidigare
+exakta checkout-avslag kvarstår; inga okontrollerade sökningar räknas som klara.
+
+Fem exakt produktbundna leverantörsdeklarationer, explicit styckpaketmassa/
+grampaketvolym, 18 fruktrelationer med källbundet uppskattat utbyte och
+16 granskade köttrelationer använder befintlig mängd-/faktaarkitektur.
+Prisfilen med 89 458 produkter/52 kontexter, klockan, portionsvalen och
+tvåbutikstaket är oförändrade. Inga priser eller källtider har förnyats.
+Slutfakta: `.local/recipe-coverage-full-20261027/facts-final-v2.json`, SHA
+`30fd1d335bc43c4c67fad89aebcece4ae970106268b9a7cf8a64fa5cbb1ae0cd`.
+Metodhash: `45431ee57444ceb60c7ae64d4c43783412990fa00d432add821b2f22f911234c`.
+Samtliga 2 656 kvittofiler och aktuella beroenden är hashkontrollerade.
+
+Generell omprövning av receptbyten efter förbättrad gemensam korg löser det
+tidigare A-prisgapet i samma fullständiga sparade begäran: **283,24 kr,
+52,04 s API/save/GET**, mot 317,82 kr och den verifierade referensen 290,82 kr.
+**B2:s hela korg är identisk, 731,20 kr, 32,56 s.** Separat förberedelse är
+98,10/76,12 s. In-process Windowsprov på två CPU/hårt 3 GiB; inget globalt
+optimum, browsertransport eller allmänt prestandagodkännande påstås.
+
+**Full täckning är inte klar: 554 varianter/69 grupper återstår.** Dokumenterad
+äggdelning behöver fortsatt implementation av samköp, utfall, näring och
+skafferibokföring i befintliga modeller; ingen halvfärdig beredning är aktiv.
+Mungbönor och kaffe saknar verifierat massa-/slutvolymutbyte. Fyra exakt bundna
+hela oxfiléartiklar stoppas fortfarande av viktprisavtalet i tre recept:
+kilotaxan får inte behandlas som paketpris. Detta är tekniskt arbete, inte
+ett ägarbeslut att sänka kraven. Nästa åtgärder och verkliga käll-/scopegränser
+finns i uppdraget och arbetsmatrisen. Tre försök till samma tillåtna 44-artikelskö
+stannade vid upptagen serverlease med noll handlaranrop; inget lås kringgicks.
+
+640 riktade tester samt fyra ytterligare köttgränsfall passerar, liksom Ruff
+och compileall. Ordinarie PR/CI krävs före integration. Separat etappjournal:
+**1 311,3678 s använda, 2 288,6322 s kvar av 3 600 s**; äldre journaler är
+orörda och inget överfört/nollställt. Detta är första granskningsbara
+kontrollpunkten, inte uttömd budget eller slutleverans av full täckning.
+Ingen automatisk fortsättning. Legacy är standard, V2 opt-in; ingen
+beta-/produktionsaktivering eller schedulerändring.
+
 # 2026-10-27: Fortsättning levererad — mängdspärr och 1 605 fullkorgar
 
 Läs [rapporten](reviews/recipe-coverage-followup-20261027.md) och

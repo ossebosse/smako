@@ -30,6 +30,21 @@ def test_explicit_paired_net_quantities_not_assumed_density():
     assert lactose_free["net_unit"] == "ml"  # Its 100 g table proves no package mass.
 
 
+def test_uppercase_declared_units_preserve_quantity_and_density_rules():
+    body, acquisition = source()
+    soup = BeautifulSoup(body, "html.parser")
+    base = next(h for h in soup.find_all("h2") if h.get_text().startswith("Basnivå")).find_next_sibling()
+    for row in base.select("tr"):
+        header, cell = row.find("th"), row.find("td")
+        if header and cell and header.get_text(" ", strip=True).rstrip(": ") in {
+                "Förpackningsstorlek", "Nettoinnehåll värde", "Jämförmängd färdigvara"}:
+            cell.string = cell.get_text(" ", strip=True).upper()
+    changed = str(soup).encode()
+    result = parse_declaration(changed, {**acquisition, "sha256": hashlib.sha256(changed).hexdigest()})
+    assert result["net_quantities"] == {"g": 200, "ml": 200}
+    assert result["binding_requirement"] == "existing_exact_gtin_brand_fixed_package"
+
+
 @pytest.mark.parametrize(
     "label,value",
     [

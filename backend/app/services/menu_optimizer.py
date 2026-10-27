@@ -1644,7 +1644,16 @@ class MenuOptimizer:
                             anchors.append(slot); anchor_ids.add(id(slot))
                 trace['anchors_total'] = len(anchors)
                 trace['anchors_considered'] = 0
-                for anchor_index, anchor in enumerate(anchors):
+                # A replacement rejected against one menu can become cheaper
+                # after another slot changes its shared packages. Restart the
+                # price-ordered exchange sweep on a new incumbent, instead of
+                # tying its cursor to the ever-growing anchor pool. Keep the
+                # original anchor stream interleaved, so a local basin does not
+                # silently exclude the rest of the current library.
+                exchange_rank = 0
+                exchange_revision = 0
+                trace['exchange_restarts'] = 0
+                for anchor in anchors:
                     checkpoint()
                     trace['anchors_considered'] += 1
                     affinity = package_sets[id(anchor)]
@@ -1659,14 +1668,21 @@ class MenuOptimizer:
                             break
                     if incumbent is None:
                         continue
-                    # One replacement from every slot, fairly interleaved with
-                    # full new anchor proposals. Shared packages can change ALL
-                    # other meals at once in the next anchor completion.
-                    for index, group in enumerate(ordered):
-                        if anchor_index < len(group):
-                            menu = list(incumbent[1]); menu[index] = group[anchor_index]
-                            considered[index].add(id(group[anchor_index]))
-                            propose(menu)
+                    if exchange_revision != trace['improvements']:
+                        exchange_rank = 0
+                        trace['exchange_restarts'] += 1
+                    exchange_revision = trace['improvements']
+                    # Two ranks per anchor give the current complete basket a
+                    # useful neighbourhood even when qualification leaves a
+                    # short search window. This is proposal ordering only: all
+                    # candidates still pass accepts and current joint checkout.
+                    for rank in range(exchange_rank, exchange_rank + 2):
+                        for index, group in enumerate(ordered):
+                            if rank < len(group):
+                                menu = list(incumbent[1]); menu[index] = group[rank]
+                                considered[index].add(id(group[rank]))
+                                propose(menu)
+                    exchange_rank += 2
         except SearchWindowClosed:
             soft_stopped = True
             trace['stop_reason'] = 'reserved_current_checkout_audit_save_time'
