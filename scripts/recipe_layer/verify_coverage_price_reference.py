@@ -9,7 +9,7 @@ from app.models import PlanRequest
 from app.models.personal import MealSlot
 from app.services.personal_planner import PersonalPlanner
 from app.services.plan_jobs import planning_deadline
-from app.services.recipe_library import current_recipes
+from app.services.recipe_library import _scaled, current_recipes
 from coverage_reference import digest, file_sha, load_reference
 
 
@@ -29,7 +29,7 @@ def main(args):
         Settings(price_provider='mock', complete_recipes_enabled=True), prepared,
         {'revision': 0, 'items': [], 'reservations': {}, 'events': {}}, facts=facts,
         now=datetime.fromisoformat(scope['clock']))
-    slots = [MealSlot(id=f'dinner-{n}', day=n, meal_type='dinner', recipe=r) for n, r in enumerate(recipes, 1)]
+    slots = [MealSlot(id=f'dinner-{n}', day=n, meal_type='dinner', recipe=_scaled(r, planner.meals['dinner'].servings)) for n, r in enumerate(recipes, 1)]
     with planning_deadline(25):
         result = planner.basket(slots, final=True)
     evidence = {'basket': result['basket'].model_dump(mode='json'), 'audit': result['audit'].model_dump(mode='json'),

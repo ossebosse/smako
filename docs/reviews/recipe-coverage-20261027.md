@@ -1,6 +1,6 @@
 # Recepttäckning: 1 569 verifierade tvåbutikskorgar av 2 200
 
-Delresultat från main `be0c528`, runtimecommit `ee3d5ed`, enligt
+Delresultat från main `be0c528`, runtimecommit `7697492`, enligt
 [uppdraget](../CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md).
 **100-procentsuppdraget är inte färdigt.** Alla ursprungliga 2 200 referenser
 finns kvar, liksom samtliga 2 462 aktiva varianter. Inga recept, instruktioner,
@@ -62,8 +62,12 @@ variant, 283,43 kr. De ersätter inte tvåbutiksutfallen. Se
 
 `definition_only` är fortfarande ett behov, inte ett generellt godkännande.
 Registret kan nu bära en separat granskad, exakt produkt-/formrelation och
-ett separat mängdbevis. Relationerna binds till produkt, butik, snapshot,
-GTIN där det finns, hela namnet, varumärket, kategorin och förpackningen.
+ett separat mängdbevis. Relationerna binds till butik/priskontext, stabil GTIN eller artikelkod,
+hela namnet, varumärket, kategorin och förpackningen. Det granskade
+ursprungssnapshotet bevaras. Nuvarande fakta måste vara bundna till aktuell
+produkt och aktuellt snapshot. Identisk sammansättning får därför återanvändas
+vid en ren prisuppdatering; den nya kassan använder det nya priset. Utan
+stabil identitet krävs fortfarande samma produkt/snapshot.
 Ändrad sammansättning, identitetskonflikt eller saknad proveniens stoppar
 relationen. Personliga fakta och prisbehörighet kontrolleras därefter som tidigare.
 
@@ -108,8 +112,10 @@ binds till kvittot. Ändrat beroende eller skadat bevis ger omkontroll.
 Ett tidsavbrott heter `search_incomplete`, aldrig PASS eller omöjlighet.
 I första mätningen sparades tio avbrott. Samma version återupptogs med
 tre sekunders variantgräns utan omräkning av de redan verifierade korgarna.
-Efter den andra källversionen gjordes en ny samlad full kontroll; gamla
-beroendehashar tvingades inte att gälla för nya fakta.
+Efter den andra källversionen och den slutliga rättningen för prisuppdateringar
+gjordes nya samlade fullkontroller; gamla beroendehashar tvingades inte att
+gälla för nya fakta/metoder. Slutlig kontroll tog 213,3917 s plus 26,7559 s
+för kvittoverifiering/sammanställning. Båda gav oförändrade täckningstal.
 
 Kör från reporoten med `PYTHONPATH=backend;.;scripts/recipe_layer`, genom
 `scripts/recipe_layer/budgeted_check.py` och samma befintliga budgetjournal.
@@ -118,8 +124,8 @@ frysta pris-/fakta-/råfilerna är lokal data, inte Git-data; följ
 [DEVELOPMENT](../DEVELOPMENT.md) vid återställning. Ett klonat litet testunderlag
 ersätter inte dessa källor. Ingen automatisk fortsättning startas.
 
-667 riktade regressioner passerar på slutlig runtime. Därutöver passerar
-kontrollmodulens 29 slutprov efter tillagda beroende-/källkontroller; antalen
+674 riktade regressioner passerar på slutlig runtime. Därutöver passerar
+kontrollmodulens 30 slutprov efter tillagda beroende-/källkontroller; antalen
 överlappar. Bland proven finns fel form/produkt/enhet, brutto kontra ätlig/
 avrunnen mängd, samtycke, paketavrundning, saknad proveniens, motstridiga
 deklarationer, allergi/eko och invalidering vid ändrade fakta/priser/recept.
@@ -127,38 +133,46 @@ Ruff, compileall och diffkontroll passerar. Ordinarie GitHub-CI krävs grön
 på slutligt PR-huvud före mainintegration.
 
 Alla tunga körningar är seriella i samma supervisor: två CPU, hårt 3 GiB.
-Högsta observerade jobbcommit är 1 550 876 672 byte, cirka 1,444 GiB.
+Högsta observerade jobbcommit är 1 617 113 088 byte, cirka 1,506 GiB.
 Även avbruten första källinventering och ett avbrutet kallt referensprov
-är debiterade. Etappen använder 1 319,1493 s; journalen har totalt
-6 664,1335/7 200 s använda och **535,8665 s (8,93 minuter) kvar**.
+är debiterade. Etappen använder 1 827,7125 s; journalen har totalt
+7 172,6967/7 200 s använda och **27,3033 s (0,46 minuter) kvar**.
 Två små publika referenshämtningar debiterades i efterhand med observerad
 terminaltid, sammanlagt 6,7027 s. De är separat märkta och påstås inte vara
 supervisorbegränsade prestandaprov; de stora verifieringsjobben är det.
 
-## A/B2: giltiga svar, men A:s pris är ett kvarstående hinder
+## A/B2: giltiga sparade svar och bevarad prisreferens
 
 Samma sparade råval, 52 butiker och tvåbutikstak används. B2 behåller hela
-731,20-kronorskorgen och samtliga sparade begäransfält exakt; ny
-API/checkout/save/GET-tid är **31,9340 s**. A ger en full sparad och återläst
-korg på **52,3819 s för 306,00 kr**, med 1 508 kvalificerade kandidater jämfört
+731,20-kronorskorgen och samtliga sparade begäransfält exakt; slutlig
+API/checkout/save/GET-tid är **32,6722 s**. A ger en full sparad och återläst
+korg på **52,2790 s för 290,82 kr**, med 1 508 kvalificerade kandidater jämfört
 med tidigare 960. Se [A](recipe-coverage-20261027/A.json),
 [B2](recipe-coverage-20261027/B2.json) och
 [strikt korgjämförelse](recipe-coverage-20261027/B2-comparison.json).
 
-**A kvalificerar inte prisparitet.** Den tidigare receptkombinationen går
-genom aktuell checkout/audit för **276,38 kr** med oförändrade råval och
-pris-/receptmanifest. Den större poolens kalla sökning missar alltså en
-känd billigare giltig kombination med 29,62 kr. Detta är ett konkret
-kvarstående sök-/prishinder; ingen pristolerans har godkänts och ingen
-pris-/prestandarelease kvalificeras av det snabba svaret. Det separata
-[referenskvittot](recipe-coverage-20261027/A-reference-checkout.json) är ett
-aktuellt korgprov, inte en ny kall API-plan eller ett globalt optimumbevis.
+Den tidigare A-receptkombinationen verifierar **297,18 kr** genom samma
+aktuella planner/checkout/audit, skalad till fem middagar med fyra portioner.
+Slutliga A är 6,36 kr billigare än den kända giltiga referensen. Den
+begränsade sökningen bevisar fortfarande inte globalt lägsta pris.
+[Referenskvittot](recipe-coverage-20261027/A-reference-checkout.json) skrevs
+först efter den sparade API-planen, användes inte som sökfrö och ingår inte
+i API-tiden. Det verifierar aktuell kassa, inte en ytterligare kall API-plan.
+
+**Rättelse:** det tidigare separata referensprovet som angav 276,38 kr
+saknade portionsskalning. Det beloppet jämförde fel mängder och är ogiltigt
+som prisreferens. Båda referensdrivrutinerna använder nu befintlig
+portionsskalning. [Rättelsekvittot](recipe-coverage-20261027/reference-correction.json)
+bevarar det felaktiga bevisets hash, orsak och ersättare. Första etappens
+faktiska A-resultat, 306 kr/52,3819 s på runtime `ee3d5ed`, bevaras där som
+historiskt mätresultat. Slutprovet ovan kördes efter sista runtimeändringen.
 
 Tiderna ovan är nya API-prov, inga nya browsertider. Före API:t kostade
-den observerade laddningen/förberedelsen 97,9292 s för A och 75,4448 s för B2;
-detta är inte 30–60 s från tom installation. A har inga personliga näringsmål;
-B2:s minst 35 g protein följer fortsatt uttrycklig ESTIMATED-policy. A:s råa
-globala ingrediensgräns är fortsatt inte ett aktivt måltidsbundet 10–15-krav.
+den observerade laddningen/förberedelsen **98,5562 s för A och 80,1325 s för B2**;
+detta är inte 30–60 s från tom installation. Ingen full pris-/prestandarelease
+kvalificeras här. A har inga personliga näringsmål; B2:s minst 35 g protein
+följer fortsatt uttrycklig ESTIMATED-policy. A:s råa globala ingrediensgräns
+är fortsatt inte ett aktivt måltidsbundet 10–15-krav.
 
 ## Vad som återstår till 2 200
 
@@ -180,6 +194,10 @@ eller minska nämnaren. Ett annat sortiment eller ett kulinariskt granskat
 receptalternativ kräver ett eget deklarerat scope och bevarade original-ID:n.
 
 Fortsatt prioritet är dessa källgap tills de stängts eller ett precist
-externt hinder kräver ägarens beslut. A:s verifierade prisgap ska samtidigt
-bevaras som releasehinder. Legacy är fortsatt standard, V2 opt-in. Ingen
+externt hinder kräver ägarens beslut. Återstående 27,3 s räcker inte för
+en ny källfamilj och samlad verifiering. Enbart upprepad fullkontroll och
+sammanställning kostade senast cirka fyra minuter, före källarbete; nya
+A/B2-prov kräver dessutom cirka 4,5 minuter inklusive laddning. Fortsätt
+från angivna checkpoints med faktiska källbelägg och en ny uttrycklig budget,
+inte genom att nollställa den befintliga. Legacy är fortsatt standard, V2 opt-in. Ingen
 beta, produktion, profil eller scheduler har aktiverats eller ändrats.

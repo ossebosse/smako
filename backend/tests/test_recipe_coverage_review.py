@@ -72,7 +72,7 @@ def test_price_update_reuses_stable_article_but_rebinds_current_facts(scallion):
     old = ProductFacts(source='old-catalogue', source_product_id=p.product_id,
                        source_snapshot_id=p.source_provenance.source_snapshot_id)
     proof['composition_sha256'] = links.composition_signature(old)
-    fresh = p.model_copy(update={'product_id': 'new-price-row', 'price': 30,
+    fresh = p.model_copy(update={'product_id': 'new-price-row', 'price': 30, 'sale_price': 30, 'effective_price': 30,
         'source_provenance': p.source_provenance.model_copy(update={'source_snapshot_id': 'new-price-snapshot'})})
     facts = replace(old, source='new-catalogue', source_product_id=fresh.product_id,
                     source_snapshot_id=fresh.source_provenance.source_snapshot_id)
@@ -81,6 +81,8 @@ def test_price_update_reuses_stable_article_but_rebinds_current_facts(scallion):
     assert projected.usable_quantity == 96 and projected.price == 30
     assert projected.source_provenance.source_snapshot_id == 'new-price-snapshot'
     assert links.compatible(key, projected, facts)
+    checkout = PurchaseQuantityResolver().resolve(projected, required_quantity=100, required_unit='g')
+    assert checkout.packages_needed == 2 and checkout.total_price == 60
     assert project_usable_quantity(fresh, old, allow_estimates=True, required_unit='g') is fresh
     changed = replace(facts, ingredients=('Salladslök, salt',))
     assert project_usable_quantity(fresh, changed, allow_estimates=True, required_unit='g') is fresh
