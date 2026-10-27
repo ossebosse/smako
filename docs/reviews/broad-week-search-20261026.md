@@ -98,9 +98,19 @@ registreras och omladdning återläser samma plan utan ny beräkning.
 listan utan konto-/sessionshuvud.
 
 A behåller fem middagar × fyra portioner, 52 tillåtna butikskontexter,
-inköpstak två, 10–15 ingredienser, sitt ursprungliga fria kost-/köksurval,
+inköpstak två, sitt ursprungliga fria kost-/köksurval,
 estimated och alla normaliserade äldre variationsfält. Huvudråvarutak två,
-familjetak två och kolhydrattak tre är oförändrade. Fem olika baser väljs:
+familjetak två och kolhydrattak tre är oförändrade.
+
+**Rättelse efter oberoende granskning 2026-10-27:** begärans globala
+`recipe_preferences` innehåller 10–15 ingredienser, men måltidens egna
+`recipe_choices` har tomma gränser och har företräde i `matches_meal`.
+Effektivt A har därför inget aktivt ingrediensantalstak/-golv. De fem valda
+recepten har 5, 5, 5, 6, 6 ingredienser. Den råa begäran är oförändrad och
+latens-/prisresultatet består, men detta prov verifierar inte ett faktiskt
+10–15-krav. Ett sådant prov måste uttrycka gränserna per måltid.
+
+Fem olika baser väljs:
 
 - Grekiskinspirerad gul ärtkräm med mjuk lök och potatis – enkel.
 - Ugnsfalukorv med skårad potatis och senap – enkel.

@@ -1,5 +1,51 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Tillägg 2026-10-27: full recepttäckning före mer generell optimering
+
+Ägarens mål är att alla 2 200 importerade varianter blir användbara.
+Nästa uppdrag är [RECIPE-COVERAGE](CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md).
+Den gemensamt förberedda produkt-/faktanivån ska därför kompletteras;
+fler recept eller mer cache löser inte en saknad ingredienskoppling.
+
+Separera bevis för **produktidentitet och kulinarisk form**, **köpbar
+mängd**, **pris i rätt butik** och **personliga egenskapskrav**. Återanvänd
+befintliga produktfakta, register, `PersonalPlanner.resolve` och checkout.
+En importerad `definition_only` beskriver ett behov, inte en fungerande
+produktrelation. Nuvarande `intake_product_links.declared_definition`
+kräver både en särskild tillverkardeklaration och exakt mängd. Det är en
+gräns i den nuvarande vägen, inte ett permanent krav att varje vanlig
+grönsak måste ha just denna maskinella deklaration från tillverkaren.
+
+Godkänd källinformation får efter granskning bindas till rätt produkt och
+användas i samma register: exakt identifierad butik-/tillverkarprodukt,
+belagd form och sammansättning där den behövs samt korrekt mängdunderlag.
+Fuzzy namnträffar räcker inte. Full ingrediensdeklaration krävs när den
+behövs för exempelvis en sammansatt produkts renhet; den ska inte krävas
+slentrianmässigt för att identifiera en entydigt belagd hel färsk råvara.
+Kräv inte att källan redan publicerar Smakos interna klassificeringsfält.
+
+**Skilj också osäker mängd från osäker identitet.** Utveckla vid behov den
+befintliga uppskattningsvägen för källbelagda inköpsvikter/ätliga utbyten,
+med explicit `estimated`-val. Spara källa, metodversion, råvaruform och
+tillämpningsvillkor; kontrollera beräknad inköpsmängd, förpackningsavrundning,
+kostnad och förbrukad näringsmängd separat. Generella utbyten är uppskattningar,
+inte nya deklarerade fakta om en enskild förpackning. Krukvikt, skal/ben,
+avrunnen vara och tillagad vikt är inte utbytbara. Saknat underlag för en
+sådan beräkning förblir ett hinder. Ingen uppskattning får kringgå okänd
+identitet, allergenrisk, ekologiskt bevis eller ändra användarens mängdpolicy.
+
+Förbered och återanvänd dessa relationer per exakt beroendeversion och
+butiksscope. En prisuppdatering ska kunna återanvända oförändrade faktabevis;
+en ändrad produkt/form/deklaration ska invalidera berörda relationer.
+Bevara originalrecepten och alla aktuella hårda krav. Nya faktaversioner
+får inte tyst skrivas in i gamla mätningar eller sparade planer.
+
+Redovisa separat import, individuellt lösta ingredienser och fullständigt
+verifierade receptkorgar, med fast nämnare och referensscope. Täckning i
+en region/ett mängdläge bevisar inte stöd för alla butiks-/personval.
+Hela bibliotekets ökande användbara pool ska senare ingå i tidsproven;
+tidigare 55,12 s med en mindre kvalificerad pool är ingen ny tidsutfästelse.
+
 ## Tillägg 2026-10-26: hel meny före bred prefixprissättning
 
 För genererade aktuella V2-urval med fler än 64 alternativ i någon slot
@@ -83,7 +129,7 @@ Beslutad riktning 2026-10-25 efter PR #12, main `d27e0cf`. Utgår från
 [produktmålet](PRODUCT-GOAL.md). Implementation och mätning återstår;
 `legacy` är fortsatt standard och V1:s befintliga beteende ändras inte av
 detta dokument. Nästa etapp finns i
-[Sols aktuella uppdrag](CODEX-SOL-NEXT-20261026-BROAD-WEEK.md).
+[Sols aktuella uppdrag](CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md).
 
 ## Varför riktningen ändras
 

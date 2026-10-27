@@ -5,6 +5,36 @@ uppdrag. Läs också [planeringsarkitekturen](PLANNING-ARCHITECTURE.md) och
 aktuellt uppdrag i [HANDOFF](HANDOFF.md). Dokumentet beskriver mål, inte ett
 påstående om att nuvarande implementation redan uppfyller dem.
 
+## Högsta utvecklingsprioritet: hela receptbiblioteket ska fungera
+
+Ägarbeslut 2026-10-27: **gör alla 2 200 importerade receptvarianter
+användbara, med 100 procent verifierad täckning som mål.** Prioritera nu
+produktkopplingar, mängdunderlag och verkliga inköpskorgar före ytterligare
+allmän hastighetsoptimering eller mer receptimport. Målet 30–60 sekunder
+och pris-/kvalitetskraven kvarstår; en liten köpbar delmängd räcker inte.
+
+Alla 2 200 varianter är importerade och aktiva; tillsammans med de tidigare
+262 finns 2 462 aktiva varianter. I senaste frysta Malmöinventeringen har
+bara 738 (33,5 %) stöd för samtliga ingredienser i exakt inköpsläge, och
+931 (42,3 %) inklusive uttryckligen tillåtna mängduppskattningar. Det senare
+talet inkluderar det förra. Detta är ett väsentligt kvarstående produktgap.
+
+Håll isär tre nivåer: registrerat recept, produkt-/mängdstöd för varje
+ingrediens och fullständig giltig inköpskorg för receptet. De två sista ska
+mätas separat mot samma fasta lista med 2 200 ursprungsreferenser. Slutmålet
+kräver en verifierad hel korg per variant i ett i förväg redovisat
+referensunderlag, med angivna butiker, butikstak, portioner, mängdpolicy,
+fakta-/prisversion och datum. Exakta och uppskattade köp redovisas separat;
+en uppskattning får aldrig räknas som exakt eller aktiveras åt användaren.
+
+100 procent är ett biblioteks- och underlagsmål, inte ett löfte att varje
+recept passar varje allergi, kostval, näringsgräns eller butiksurval.
+Sådana val ska fortsatt begränsa urvalet. Saknade faktiska varor eller
+bevis ska redovisas, inte döljas genom borttagna recept, ändrad nämnare,
+påhittade fakta, inköp utanför valda butiker eller tyst ändrade ingredienser.
+
+Läs [Sols uppdrag för full recepttäckning](CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md).
+
 ## Användarens flöde
 
 1. I **Mina val** anger användaren sin plats och väljer vilka butiker som
@@ -70,14 +100,15 @@ samma grundrätt vid upprepningsgränser. Kost, näring, allergener och köp
 kontrolleras för varje variants verkliga innehåll och produkter. Variantnamn
 ersätter varken ingrediensräkning eller det separata nivåfältet simple/crafted.
 Den mottagna [800-grundrättssamlingen](reviews/recipe-intake-800-20261025.md)
-är författarunderlag tills granskning och import är genomförda.
+har importerats som 2 200 varianter. Import och efterföljande receptgranskning
+ersätter inte verifiering av produktkopplingar och kompletta inköpskorgar.
 
 ## Tid och skala
 
 **Målet är en färdig receptplan och inköpslista inom 30–60 sekunder även
 för nya kombinationer av tillåtna inställningar, med tusentals recept.**
-Sikta på 30 sekunder; 60 sekunder är produktens övre leveransmål. Dagens
-cirka 262 recept är startunderlag, inte en permanent avgränsning. Utvecklingen
+Sikta på 30 sekunder; 60 sekunder är produktens övre leveransmål. De
+ursprungliga 262 recept är startunderlag, inte en permanent avgränsning. Utvecklingen
 ska prövas mot exempelvis 1 000 och 5 000 recept med redovisat innehåll.
 Duplicerade testrecept kan mäta viss datavolym men bevisar inte verklig
 variations-, täcknings- eller sökskala.

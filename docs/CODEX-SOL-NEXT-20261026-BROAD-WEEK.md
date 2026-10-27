@@ -1,5 +1,9 @@
 # Sol: få det breda veckourvalet att leverera inom tidsmålet
 
+Genomfört i PR #18/main `fd2dcb8`. Nästa huvuduppdrag enligt ägarbeslut
+2026-10-27 är [full recepttäckning](CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md).
+Nedanstående instruktion är bevarad historik.
+
 Ägarens uppdrag efter granskningen av PR #17/main `719b927`, 2026-10-26.
 Arbeta i `D:\Projects\Smako`, hämta senaste main och följ AGENTS,
 DEVELOPMENT, PRODUCT-GOAL, PLANNING-ARCHITECTURE och HANDOFF.

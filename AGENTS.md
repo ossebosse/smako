@@ -5,6 +5,11 @@
 - Read `docs/PRODUCT-GOAL.md` and `docs/PLANNING-ARCHITECTURE.md` before
   planning new feature, performance or architecture work; then read the latest
   assignment in `docs/HANDOFF.md`. These are the persistent product direction.
+- Owner priority 2026-10-27: make all 2,200 imported variants usable before
+  further general latency tuning or recipe expansion. Preserve the denominator;
+  distinguish imported, individually input-resolved and fully checked-out
+  recipes. Target 100% in a declared reference scope, not every recipe for
+  every user's constraints. Never invent product facts to increase coverage.
 - Smako targets complete recipes and the cheapest valid shared shopping list
   within 30–60 seconds for NEW combinations of supported user choices, with
   thousands of recipes. A warm identical-request cache hit is insufficient.

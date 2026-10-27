@@ -1,3 +1,26 @@
+# 2026-10-27: Ägarprioritet — gör alla 2 200 varianter användbara
+
+Aktuellt uppdrag är
+[CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md](CODEX-SOL-NEXT-20261027-RECIPE-COVERAGE.md).
+Det ersätter fortsatt generell prestandatrimning som nästa huvuduppgift.
+Läs uppdaterade PRODUCT-GOAL och PLANNING-ARCHITECTURE. Utgångspunkt är
+PR #18/main `fd2dcb8`; inget nytt runtimearbete ingår i denna prioritering.
+
+738/931 av 2 200 betyder individuellt produkt-/mängdstöd för samtliga
+ingredienser i exakt läge/respektive inklusive tillåtna uppskattningar.
+931 inkluderar 738. Det är 33,5/42,3 procent, inte full bibliotekstäckning
+eller verifierade hela receptkorgar. Alla 2 200 är redan importerade.
+I uppskattningsläget blockeras 1 269 varianter av 99 ingrediensgrupper;
+782 av dessa varianter har bara en blockerande grupp. Registret innehåller
+89 `definition_only`-identiteter som alla återfinns bland hindren.
+
+Målet är 2 200/2 200 individuellt lösta varianter och verifierade fulla
+receptkorgar i redovisat referensscope. Bevara exakta/uppskattade utfall,
+alla ursprungs-ID:n och produkt-/pris-/personkrav. Läs instruktionernas
+prioriterade ingrediensarbete och budget innan nya mätningar. Befintlig
+journal har 1 855,0158 s (30,92 min) kvar; ingen nollställning/stor matris.
+Legacy standard, V2 opt-in, ingen ny driftaktivering beslutad.
+
 # 2026-10-26: Bred A-vecka levererad på 55,12 s i browser, 297,18 kr
 
 Leverans enligt BROAD-WEEK från main `2dd7183`; mätkod `11b5b97`.
@@ -6,7 +29,10 @@ Läs [rapporten](reviews/broad-week-search-20261026.md) och maskinkvittona.
 verklig Chromium knapp→synlig full lista+GET 55,1185 s, 297,18 kr.**
 Hela råa/normaliserade sparade begäran och hela korgen matchar exakt.
 Samma 52 butiks-ID:n, fem middagar/fyra portioner, max två butiker,
-10–15 ingredienser, gamla variationsregler och inget nytt variation-intent.
+gamla variationsregler och inget nytt variation-intent. Rättelse 2026-10-27:
+råa globala 10–15 ingredienser gäller inte effektivt när måltidens egna
+`recipe_choices` har tomma gränser; A:s valda recept har 5, 5, 5, 6, 6
+ingredienser. Tiden kvalificerar därför inte ett aktivt 10–15-krav.
 Skafferival False bevaras. A saknar personliga närings-/eko-/allergimål;
 dess näringsstatus är NOT_REQUESTED, inga nya proteinvärden intygas.
 
