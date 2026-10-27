@@ -1,0 +1,155 @@
+{
+  "schema": "smako-reviewed-drained-foods-delivery-v1",
+  "base_main": "bea0bcced1dd55aff1d573b487edcd12cada00a6",
+  "branch": "fix/reviewed-drained-foods-20261027",
+  "integration_status": "validated_pending_hosted_CI_and_merge",
+  "full_coverage_goal_complete": false,
+  "verification": {
+    "scope_sha256": "4e2913a8cf7ade025a15661e4455cfc4fcbb61bbd5e804d29dbb54a3d8aaba59",
+    "method_signature": "1e6bd1c73f31acef2a4f4384d118084643346c1357c8267acda0e4c02e24fe92",
+    "denominator": 2200,
+    "active_variants": 2462,
+    "receipt_count": 2835,
+    "outcomes": {
+      "estimated:verified": 1784,
+      "exact:verified": 1049,
+      "exact:data_blocked": 1149,
+      "estimated:data_blocked": 416,
+      "exact:checkout_blocked": 2
+    },
+    "lost_original_ids": [],
+    "all_receipt_hashes_and_dependencies_verified": true,
+    "all_saved_full_requests_unchanged": true,
+    "older_budget_journals_unchanged": true,
+    "all_original_worklist_groups_reviewed": 76,
+    "runtime_preparation_enabled": false,
+    "legacy_remains_default": true,
+    "production_activation": false,
+    "price_regression_gate_passed": true,
+    "price_regressions": {}
+  },
+  "focused_tests": {
+    "passed": 52,
+    "failures": 0,
+    "errors": 0,
+    "junit_sha256": "ff110f1ffe5f020f562adad96f8a78ddce00eb4e7da5265e1188c8fc93b60933",
+    "ruff_changed_python_files": 4,
+    "compileall": "passed",
+    "ci_partitions": "all current nodes exactly once",
+    "old_registry_rows_preserved": true,
+    "appended_links": 5,
+    "prices_changed": false,
+    "recipes_changed": false
+  },
+  "file_hash_basis": "Verified Windows working-file bytes. Raw public source evidence and benchmark registrations/checkouts remain ignored.",
+  "files": {
+    ".gitattributes": {
+      "sha256": "e1eabdfa7b20d49e226598dea37903d15ad4a085cbb53414599336b61e65d0c0",
+      "bytes": 3041
+    },
+    "backend/app/data/ingredients/intake-all-20261026.json": {
+      "sha256": "8745cc2ad6d46fba281fa1bf474a989ab71432d6430955ecd0e46a31c49c4544",
+      "bytes": 2093814
+    },
+    "backend/app/services/intake_product_links.py": {
+      "sha256": "b36777788d9f75225eabbfa48ebc879547b4c4777a849b350dc59b0c74649e0b",
+      "bytes": 14579
+    },
+    "backend/tests/test_reviewed_preserved_foods.py": {
+      "sha256": "4d43a126d0fbe607b43e067ee67716188c4cff3a4ef5065cbc6c8c185c9b46e5",
+      "bytes": 3971
+    },
+    "docs/CODEX-ASTRA-FULL-COVERAGE-20261027.md": {
+      "sha256": "9f1cf75777a7370e37ecaa810d59d2b10e2355312934b01214bcc3c2e8be8051",
+      "bytes": 8318
+    },
+    "docs/HANDOFF.md": {
+      "sha256": "95c0485afeeaa550ab417098e206fc0ad0e34dfd8e0e8f6236ff3a3377114947",
+      "bytes": 388439
+    },
+    "docs/PLANNING-ARCHITECTURE.md": {
+      "sha256": "aedae53a4221a0b4c2bfffd1042b4403ba0b9d8bcc8723f1de720a90ebf857c9",
+      "bytes": 24034
+    },
+    "docs/PRODUCT-GOAL.md": {
+      "sha256": "e7e2f47e8cc8ef5ac2c84510854a0503ad71cf8338dc0837b1fc1ae1ad6f3193",
+      "bytes": 10917
+    },
+    "docs/reviews/recipe-coverage-full-20261027/budget.json": {
+      "sha256": "54e83721a5257b6bd5deadb4efdb441e6d8d3bef81b6f35b5af664de317b7629",
+      "bytes": 64248
+    },
+    "docs/reviews/reviewed-drained-foods-20261027.md": {
+      "sha256": "bafcd3f0dd8c105526a5b3427a24dea64e06210d7d78169dae4d55f64ce12896",
+      "bytes": 5616
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/A-comparison.json": {
+      "sha256": "fb65eb831d834e461007e74eae90de3ae5cdb2cf1dc96e7fcbdcb2e0cc82ab9c",
+      "bytes": 1063
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/A-repeat-comparison.json": {
+      "sha256": "a4901fffd068395ea93e7405d29357ce84e7789801347a4c525edda9417d11e0",
+      "bytes": 678
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/B2-comparison.json": {
+      "sha256": "c72764a235f788b1b1ee6e2adff054832bd96f5fa22c30b58b46caae913a8f4a",
+      "bytes": 1066
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/basket-receipts.json": {
+      "sha256": "9ae788bebb2a9007004c15c637502865583e2ad156a72bf8aa651adf53af8468",
+      "bytes": 1118446
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/blockers.json": {
+      "sha256": "d17eb2fd6d65ee7722923c4a022d25f5b31a79b94c31ace28fae0307e5d3d21f",
+      "bytes": 81080
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/ci-partitions.json": {
+      "sha256": "236ac1280feea4aba8d85107025b1c80feda00541a53e6f635d30c910de5aef7",
+      "bytes": 575
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/coverage.json": {
+      "sha256": "17b6865543a9e1e705543df2e845a51d2a2146a6208dee023fb176188fff740b",
+      "bytes": 4869982
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/focused-verification.json": {
+      "sha256": "30b4ce308809e0e8542a9e42ee7c5535f785f6258b33db65ae9745fcbccf545e",
+      "bytes": 380
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/group-assessments.json": {
+      "sha256": "c36597ef3d9cf29c4f4fa21cfba2f4542e450417f3794fc21a6f9737fe6f038c",
+      "bytes": 21153
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/newly-verified.json": {
+      "sha256": "f700ea76a24662ab43c5a66efc58ea5787ea855470f7464b304a953ef8853535",
+      "bytes": 27075
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/preserved-review.json": {
+      "sha256": "2d8225233822f6302f832ccb88a089f918dbff2ca5384186974437d386d60919",
+      "bytes": 12319
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/shrimp-review.json": {
+      "sha256": "01ca7614703fcdaced4eb0edf502ff80b8b0116e8ad55d9286b9e129112f89e5",
+      "bytes": 10033
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/verification.json": {
+      "sha256": "ea853a68092254715feec7a6922d4a924a0a7849cc6b5e94f518678e9eedc40b",
+      "bytes": 851
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/work-matrix.json": {
+      "sha256": "1f2b964243a7433397a3df516630a7ff9445a1777eba33cb68a34061ac1bc4fe",
+      "bytes": 7422877
+    },
+    "docs/reviews/reviewed-drained-foods-20261027/work-matrix.md": {
+      "sha256": "e71588b57157e7bb5e7092108104423459653fa4c6b753fae148c06709c9b3c6",
+      "bytes": 21571
+    },
+    "scripts/recipe_layer/review_preserved_declarations.py": {
+      "sha256": "9b0f532c202b34c1d57db1520f066e57b4812076c35d988291dfa89c476bfffe",
+      "bytes": 10855
+    },
+    "scripts/recipe_layer/review_shrimp_labels.py": {
+      "sha256": "6bf148d83556a3a7339ac57af48be49d504c8863aa2a589a64e5cea33c22e87e",
+      "bytes": 7617
+    }
+  }
+}

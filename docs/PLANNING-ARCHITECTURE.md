@@ -1,5 +1,14 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Granskad avrunnen massa även för färdigkokta räkor
+
+Samma befintliga exakta mängdprojektion accepterar cooked_drained och
+preserved_drained. Den kräver en full granskad relation för samma produkt,
+butik, snapshot, nettovikt och sammansättning, deklarerade avrunna gram
+samt oförändrad konfliktspärr. Det konverterar inte rå vara till tillagad
+vikt. Nettoinköp, förpackningsavrundning och separata personliga krav består.
+Se [produktgranskningen](reviews/reviewed-drained-foods-20261027.md).
+
 ## Deklarerad avrunnen massa och statisk spärrfrasscope
 
 Exakt granskade fasta förpackningar kan projicera deklarerad avrunnen massa

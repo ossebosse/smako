@@ -121,3 +121,13 @@ CI-/processflaskhalsar utan att minska testtäckning eller kvalitetsgrindar.
 281,31 kr och B2:s hela korg är identisk. Se [rapporten](reviews/coverage-continuation-20261027.md).
 CI är integrerad via PR #24: 9:50 mot 20:35 med hela testurvalet kvar.
 Fortsatt kod-/källarbete återstår; full täckning är inte klar.
+
+## Nästa verifierade kontrollpunkt 2026-10-28
+
+1 784/2 200 hela korgar inklusive uppskattningar, +37; exakt 1 049 hela och
+1 051 insatslösta, 416 kvar. Alla original och tidigare korgar består.
+Fem exakt bundna produktdeklarationer ger avrunnen massa utan nya priser
+eller receptändringar. A 281,31 kr i båda slutprov och B2:s hela korg identisk
+731,20 kr. Alla 2 835 kvittohashar verifierade. Se
+[rapporten](reviews/reviewed-drained-foods-20261027.md). Full täckning återstår;
+ägarens fortsättning utan total tidsgräns och ordinarie resurs-/källkrav består.

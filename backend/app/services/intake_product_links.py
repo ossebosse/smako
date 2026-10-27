@@ -152,7 +152,8 @@ def project_reviewed_quantity(product, fact, *, allow_estimates=False, required_
             if (_review_identity(proof, product, fact)
                     and product.sale_model == 'fixed_package' and product.package_unit == 'g'
                     and product.purchase_terms is None
-                    and q.get('confidence') == 'exact' and q.get('basis') == 'preserved_drained'
+                    and q.get('confidence') == 'exact'
+                    and q.get('basis') in {'preserved_drained', 'cooked_drained'}
                     and q.get('unit') == 'g' and q.get('declared_net_quantity') == product.package_quantity
                     and isinstance(quantity, (int, float)) and not isinstance(quantity, bool)
                     and 0 < quantity <= product.package_quantity

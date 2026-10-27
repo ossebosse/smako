@@ -1,3 +1,29 @@
+# 2026-10-28: Ytterligare 37 hela receptkorgar verifierade
+
+[Rapport](reviews/reviewed-drained-foods-20261027.md): 1 784/2 200 hela
+korgar inklusive uppskattningar, exakt 1 049 hela/1 051 insatslösta.
+416 kvar; alla original, 2 462 aktiva och tidigare korgar består.
+Två Falkenbergräkpaket och Monte Castello kronärtskockshjärtan, Sevan vinblad
+samt Stollenwerk surkål har exakta granskade produktrelationer och avrunnen
+massa i CityGross Malmö. Ingen recept- eller prisändring. Vinbladens
+omstridda näring förblir okänd och uttryckligen konfliktmärkt.
+
+A 281,31 kr i båda nyägarproven; B2:s hela korg identisk 731,20 kr.
+API/save/GET 52,00/52,16/32,58 s, separat förberedelse 97,53/76,23/77,77 s.
+Alla 2 835 kvittohashar och aktuella beroenden passerar. Metod
+1e6bd1c73f31acef2a4f4384d118084643346c1357c8267acda0e4c02e24fe92.
+52 riktade slutregressioner, Ruff och compileall för fyra Pythonfiler passerar;
+4 100 CI-noder exakt en gång. Integration kräver grön hosted PR-CI.
+
+Fortsätt mot alla 2 200 med kvarvarande faktaluckor och gemensam äggberedning.
+Aktuell lokal faktafil är .local/recipe-shrimp-review-20261027/facts-final-v2.json,
+SHA f3d272dd0978101582386c3aeba92a1705a3126355af73494cbb1aba6ce4ad39.
+Senaste driftstatus visar fortsatt äldre kvalificerad Coop Online Syd-bas och
+öppen kvalificeringsincident 875e4d32e7da4aa0a8f4f388edea5747; diagnos ska
+använda ordinarie reproduce, aldrig sänkt grind eller breddad allowlist.
+Ägaren har ingen total tidsgräns. Samma journal, en tung arbetare, två CPU,
+3 GiB, watchdog och operationslås består. Ingen produktions-/betaaktivering.
+
 # 2026-10-27: Fortsatt täckning och halverad CI
 
 [Rapport](reviews/coverage-continuation-20261027.md): 1747/2 200 hela korgar
