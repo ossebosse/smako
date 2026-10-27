@@ -1,5 +1,18 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Ordinarie viktpris när en äldre rabattgräns saknar enhet
+
+En äldre katalograd kan ha ett separat ordinarie kilopris och ett kg-erbjudande
+vars rabattgräns saknar verifierad enhet. I uppskattat läge får `user_pricing`
+använda det ordinarie priset genom befintlig prisresolver, när försäljningsform,
+kilopris och mängdunderlag är belagda. `PurchaseQuantityResolver` beräknar
+sedan faktisk inköpsmängd och avrundar hela variabla paket. Erbjudandet finns
+kvar som källmetadata men tillämpas inte. Varken erbjudandets identifierare
+eller förpackningsvikten skapar nya `PurchaseTerms` eller en rabattgränsenhet.
+Den befintliga vägen för uttryckligen belagda paketgränser behåller sina rabatter.
+Exakt läge, separata inköpsgränser och identitets-/näringsvillkor består.
+Se [kontrollpunkten](reviews/recipe-weight-coverage-20261027.md).
+
 ## Konkret mängd- och sökkomplettering 2026-10-27
 
 `official_product_facts` använder samma produkt-/butiks-/snapshotbundna

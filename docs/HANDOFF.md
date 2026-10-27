@@ -1,3 +1,35 @@
+# 2026-10-27: Fortsättning — 1 649 fullkorgar och bevarat A/B2
+
+Se [kontrollpunkten](reviews/recipe-weight-coverage-20261027.md), från main
+`e8520bf`/PR #21. Ordinarie källbelagt kilopris kan nu användas för äldre
+viktvaror vars erbjudande saknar verifierad rabattgränsenhet. Rabattens
+villkor ligger kvar och tillämpas inte. Hela paket, explicit uppskattningsval,
+känt mängdunderlag och uppmätt privat skafferiköp krävs fortfarande.
+
+**1 010 exakt/1 649 inklusive uppskattningar är insatslösta; verifierade
+hela tvåbutikskorgar är 1 008/1 649**, +0/+3 och inga förlorade korg-ID:n.
+Alla 2 200 importerade och 2 462 aktiva varianter består. Samma pris-/faktafil,
+52 kontexter, klocka, portioner och butikstak. Metodhash
+`44adc0cb5d91d875b2d8d2d94ef85eabebce0a5e6bfb8f4b03c95860f98557ff`; 2 659 kvitton är kontrollerade.
+
+**A 283,24 kr/52.19 s, B2 731,20 kr/34.55 s** API/save/GET.
+Fulla begäranden är oförändrade och B2:s hela korg identisk. Separat
+förberedelse 97.46/76.40 s. Ingen generell latency- eller optimumgaranti.
+De två exakta avslagen kräver minst tre butiker efter giltiga mängdköp;
+diagnostiska trebutikskorgar passerar, men räknas inte in i tvåbutiksmåttet.
+
+**551 varianter/68 grupper återstår.** Alla 74 namn har också granskats i
+ett separat kvalificerat Willys Malmöarkiv från 2026-10-27 utan nya lösta
+faktahinder. Ett återförsök till den godkända 44-artikelskön stannade vid
+upptagen lokal lease med noll handlaranrop. Berednings-/skafferiarbetet och
+faktaluckorna i uppdraget kvarstår. Ingen delvis implementerad beredning är aktiv.
+
+644 riktade regressioner plus ett nytt skafferifall passerar; slutlig ny
+suite 28/28, Ruff och compileall passerar. Ordinarie PR-CI krävs före merge.
+Samma etappjournal: **2417.2708 s använda, 1182.7292 s kvar av 3 600 s**.
+Tidigare journaler/prefix är bevarade. Ingen automatisk fortsättning eller
+produktion/beta/schedulerändring; legacy standard och V2 opt-in.
+
 # 2026-10-27: Astra-kontrollpunkt — 1 646 fullkorgar och A 283,24 kr
 
 Från main `9992d34`, se [uppdraget](CODEX-ASTRA-FULL-COVERAGE-20261027.md)
