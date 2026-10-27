@@ -273,6 +273,8 @@ def test_each_real_yield_link_reproduces_its_cited_refuse_record():
     for row in links.entries().values():
         for proof in row.get('reviewed_links', ()):
             q = proof['quantity']
+            if q['method'] != 'usda_sr28_refuse_v1':
+                continue
             assert row['kind'] == 'definition_only' and row['form'] == q['basis'] == 'raw_edible'
             assert q['confidence'] == 'estimated' and q['method'] == 'usda_sr28_refuse_v1'
             record = reference['records'][row['name']]
@@ -299,3 +301,70 @@ def test_receipt_identity_changes_with_each_authoritative_dependency(monkeypatch
     assert first != receipt_key(scope, recipe, 'estimated', 'checker-v1')
     changed = recipe.model_copy(update={'ingredients': [recipe.ingredients[0].model_copy(update={'quantity': 200})]})
     assert first != receipt_key(scope, changed, 'exact', 'checker-v1')
+
+
+def test_real_mozzarella_review_has_explicit_drained_supplier_evidence():
+    import json
+
+    row = next(r for r in links.entries().values()
+               if r['name'] == 'mozzarella' and r['form'] == 'preserved_drained')
+    declarations_path = Path(__file__).resolve().parents[2] / 'grocery_data/app/data/product_declarations.json'
+    supplier = next(r for r in json.loads(declarations_path.read_bytes())['declarations']
+                    if r.get('gtin') == '08000430133035')
+    assert row['reviewed_links']
+    for proof in row['reviewed_links']:
+        q = proof['quantity']
+        assert q['method'] == 'supplier_declared_drained_mass_v1'
+        assert q['confidence'] == 'exact' and q['basis'] == 'preserved_drained'
+        assert q['usable_quantity'] == supplier['comparison_quantity'] == 125
+        assert supplier['comparison_basis'] == 'Per avrunnen vikt'
+        assert q['source'] == supplier['source']
+        assert q['supplier_gtin'] == proof['gtin'].zfill(14) == supplier['gtin']
+        assert q['declared_quantity_evidence']['basis'] == 'drained'
+
+
+def test_reviewed_drained_cheese_keeps_form_and_composition_gates(monkeypatch):
+    key, row = next((k, copy.deepcopy(r)) for k, r in links.entries().items()
+                   if r['name'] == 'mozzarella' and r['form'] == 'preserved_drained')
+    proof = row['reviewed_links'][0]
+    p = product(proof['name'], 125, 'g', 20, brand=proof['brand'],
+        store=proof['store_id'], identity=proof['product_id']).model_copy(update={
+            'gtin': proof['gtin'], 'category': proof['category'],
+            'source_provenance': SourceProvenance.model_validate(proof['source_provenance'])})
+    fact = ProductFacts(source='synthetic code fixture', source_product_id=p.product_id,
+        source_snapshot_id=p.source_provenance.source_snapshot_id,
+        ingredients=('Mjölk, salt, löpe, citronsyra',), ingredients_complete=True)
+    proof['composition_sha256'] = links.composition_signature(fact)
+    row['reviewed_links'] = [proof]
+    monkeypatch.setattr(links, 'entries', lambda: {key: row})
+    assert links.compatible(key, p, fact)
+    assert not links.compatible(key, p, replace(fact, ingredients=('Mjölk, pesto',)))
+    assert not links.compatible(key, p.model_copy(update={'gtin': 'wrong'}), fact)
+    assert not links.compatible(key, p.model_copy(update={'package_quantity': 250}), fact)
+    assert not links.ingredient_product('mozzarella', 'as_sold', row['requirements'], p, fact)
+    assert not links.compatible(key, p, replace(fact, conflicts=('nutrition.package_quantity',)))
+
+
+@pytest.mark.parametrize('changed', [None, 'store_ids', 'max_stores', 'servings', 'conditions'])
+def test_followup_baseline_preserves_ids_and_frozen_purchase_scope(monkeypatch, changed):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / 'scripts/recipe_layer'))
+    from coverage_reference import prior_input_report
+
+    scope = {k: k+'-v1' for k in ('universe_sha256', 'clock', 'store_ids',
+        'max_stores', 'servings', 'pantry', 'imported_reference_ids_sha256',
+        'recipe_ids_sha256', 'manifest_sha256', 'conditions', 'facts_sha256')}
+    before = {'schema': 'smako-recipe-coverage-v1', 'scope': scope,
+        'variants': [{'original_id': 'original', 'current_id': 'current', 'modes': {
+            'exact': {'inputs': 'data_blocked'}, 'estimated': {'inputs': 'resolved'}}}]}
+    compared = {**scope, 'facts_sha256': 'new-facts', 'method_signature': 'new-code'}
+    if changed:
+        compared[changed] = 'changed'
+        with pytest.raises(ValueError, match='Changed coverage comparison scope'):
+            prior_input_report(before, compared_scope=compared)
+    else:
+        normal = prior_input_report(before, compared_scope=compared)
+        assert normal['imported_reference_ids'] == ['original']
+        assert normal['recipe_ids'] == ['current']
+        assert normal['modes']['exact']['resolved_indices'] == []
+        assert normal['modes']['estimated']['resolved_indices'] == [0]
+        assert prior_input_report(normal, compared_scope=compared) == normal

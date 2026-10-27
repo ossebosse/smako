@@ -7,7 +7,7 @@ from pathlib import Path
 from app.services.intake_product_links import entries
 from app.services.meal_prepared_artifacts import method_signature
 from check_recipe_coverage import atomic_json, read_receipt, receipt_key
-from coverage_reference import digest, file_sha, imported_recipes
+from coverage_reference import digest, file_sha, imported_recipes, prior_input_report
 
 
 def source_need(name, form, unit, definition, supported_estimated):
@@ -40,7 +40,7 @@ def source_need(name, form, unit, definition, supported_estimated):
 
 def main(args):
     report = json.loads(args.after.read_bytes())
-    before = json.loads(args.before.read_bytes())
+    before = prior_input_report(json.loads(args.before.read_bytes()), compared_scope=report['scope'])
     references, recipes = imported_recipes()
     assert report['denominator'] == len(report['variants']) == 2200
     assert report['scope']['method_signature'] == method_signature()
