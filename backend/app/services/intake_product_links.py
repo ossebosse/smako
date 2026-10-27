@@ -120,7 +120,9 @@ def _quantity_reviews():
     result = {}
     for row in entries().values():
         for proof in row.get("reviewed_links", ()):
-            if proof["quantity"].get("method") == "usda_sr28_refuse_v1":
+            if proof["quantity"].get("method") in {
+                "usda_sr28_refuse_v1", "matvaretabellen_edible_fraction_v1",
+            }:
                 key = (('gtin', proof['store_id'], proof['gtin']) if proof.get('gtin')
                        else ('article', proof['store_id'], proof['retailer_product_id'])
                        if proof.get('retailer_product_id') else ('product', proof['store_id'], proof['product_id']))

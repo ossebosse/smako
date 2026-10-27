@@ -15,6 +15,29 @@ from app.services.personal_source_facts import FactsCollection
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
 from app.services.recipe_library import current_recipes
 
+MINT_REVIEW = Path('docs/reviews/recipe-four-staples-20261027/recipe-review.json')
+
+
+def reviewed_recipe_transition(scope, compared_scope, variants):
+    """Allow only the recorded manifest transition and complete successor set.
+
+    This changes comparison identities, never old checkout receipts or outcomes.
+    Unknown recipe/manifest drift still fails closed.
+    """
+    review = json.loads(MINT_REVIEW.read_bytes())
+    if (scope['manifest_sha256'] != review['before_manifest_file_sha256']
+            or compared_scope['manifest_sha256'] != review['after_manifest_file_sha256']):
+        raise ValueError('Changed coverage comparison scope: unreviewed manifest transition')
+    before = [r['current_id'] for r in variants]
+    replacements = {r['previous_id']: r['runtime_id'] for r in review['corrected']}
+    after = [replacements.get(r, r) for r in before]
+    if (digest(before) != scope['recipe_ids_sha256']
+            or digest(after) != compared_scope['recipe_ids_sha256']
+            or not set(replacements) <= set(before)
+            or len(set(after)) != len(after)):
+        raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
+    return after
+
 
 def digest(value):
     return hashlib.sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
@@ -33,17 +56,21 @@ def prior_input_report(report, *, compared_scope=None):
 
     Facts/method may deliberately change between phases. The original IDs,
     price universe, clock, stores, portions and purchase scope must not drift.
+    Issued recipe corrections require the explicit manifest/successor proof.
     """
     if report.get('schema') == 'smako-recipe-coverage-v1':
         scope, variants = report['scope'], report['variants']
+        recipe_ids = [r['current_id'] for r in variants]
         if compared_scope is not None:
             for key in ('universe_sha256', 'clock', 'store_ids', 'max_stores',
                         'servings', 'pantry', 'imported_reference_ids_sha256',
-                        'recipe_ids_sha256', 'manifest_sha256', 'conditions'):
+                        'conditions'):
                 if scope[key] != compared_scope[key]:
                     raise ValueError('Changed coverage comparison scope: '+key)
+            if any(scope[key] != compared_scope[key] for key in ('recipe_ids_sha256', 'manifest_sha256')):
+                recipe_ids = reviewed_recipe_transition(scope, compared_scope, variants)
         report = {'imported_reference_ids': [r['original_id'] for r in variants],
-                  'recipe_ids': [r['current_id'] for r in variants],
+                  'recipe_ids': recipe_ids,
                   'universe_sha256': scope['universe_sha256'],
                   'facts_sha256': scope['facts_sha256'], 'clock': scope['clock'],
                   'modes': {mode: {'resolved_indices': [i for i, row in enumerate(variants)
@@ -60,7 +87,8 @@ def imported_recipes():
     source = json.loads(Path('docs/reviews/recipe-integration-all-20261026/all-recipes.json').read_bytes())
     replacements = {}
     for file, key in [('recipe-quality-and-planning-20261026/recipe-review.json', 'recipes'),
-                      ('week-search-and-cache-20261026/recipe-review.json', 'corrected')]:
+                      ('week-search-and-cache-20261026/recipe-review.json', 'corrected'),
+                      ('recipe-four-staples-20261027/recipe-review.json', 'corrected')]:
         for row in json.loads((Path('docs/reviews') / file).read_bytes())[key]:
             replacements[row['previous_id']] = row['runtime_id']
     active = {identity(r): r for r in current_recipes()}

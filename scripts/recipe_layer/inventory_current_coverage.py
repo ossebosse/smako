@@ -22,6 +22,7 @@ from app.services.personal_policy import ProductFacts
 from app.services.personal_source_facts import FactsCollection
 from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
 from app.services.recipe_library import current_recipes
+from coverage_reference import imported_recipes
 
 
 def main(args):
@@ -32,21 +33,8 @@ def main(args):
     facts.version = raw['facts_version']
     del raw
     shell_egg_quantity_proofs(prepared.universe.products, facts)
-    source = json.loads(Path('docs/reviews/recipe-integration-all-20261026/all-recipes.json').read_bytes())
-    replacements = {}
-    for file, key in [('recipe-quality-and-planning-20261026/recipe-review.json', 'recipes'),
-                      ('week-search-and-cache-20261026/recipe-review.json', 'corrected')]:
-        for row in json.loads((Path('docs/reviews')/file).read_bytes())[key]:
-            replacements[row['previous_id']] = row['runtime_id']
     active = {identity(r): r for r in current_recipes()}
-    recipes = []
-    references = []
-    for row in source['recipes']:
-        key = row['runtime_id']
-        references.append(key)
-        while key in replacements:
-            key = replacements[key]
-        recipes.append(active[key])
+    references, recipes = imported_recipes()
     assert len(recipes) == len({identity(r) for r in recipes}) == 2200
     report = {'scope': 'Same individual-input definition as preceding quality inventory; current 2200 imported variants, not joint basket/nutrition approval',
         'universe_sha256': hashlib.sha256(args.universe.read_bytes()).hexdigest(),

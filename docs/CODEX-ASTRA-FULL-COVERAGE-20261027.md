@@ -67,3 +67,21 @@ Efter ändrad runtime/data behövs nya aktuella kvitton för hela nämnaren,
 oförklarade förluster ska stoppas, och samma fullständiga A/B2-begäranden
 ska jämföras. Befintliga hashstabila bevis återanvänds. Eventuell fortsättning
 ska redovisa återstående etappbudget; ingen ny session får nollställa den.
+
+## Fyravarugranskning efter PR #22 — ej integrationsgodkänd
+
+Ägarens konkreta Hemköp-/Coop-mynta och tre övriga råvaror är granskade i
+[rapporten](reviews/recipe-four-staples-20261027.md). De två Lundartiklarna
+fanns redan i underlaget. 91 generiska myntadefinitioner har versionerats
+separat från 40 bladkrav, och en källbunden uppskattning ger 68 nya hela
+korgar: 1 717 inklusive uppskattningar, exakt fortsatt 1 008.
+Tamarindens gram/koncentration och rätt prissatta masa-/pärlkornsprodukter
+återstår. 146 varianter har nu en av dessa fyra grupper som enda hinder;
+det är villkorad potential, inte verifierade nya korgar.
+
+**A-prisgrinden faller: 295,41 mot 283,24 kr.** Den gamla menyn kostar ännu
+283,24 kr vid ny checkout. B2 är helt identisk, 731,20 kr. Granskningen och
+myntarättningen sparas därför i en utkast-PR och får inte integreras ännu.
+Samma journal har 281.5558 s kvar; full verifiering efter en ny
+sökrättning kräver ett uttryckligt utökat budgetbeslut. Ingen sådan
+utökning, automatisk fortsättning eller produktionsaktivering är beslutad.

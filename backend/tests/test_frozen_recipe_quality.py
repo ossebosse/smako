@@ -66,6 +66,9 @@ def test_all_amended_versions_keep_history_and_original_library_and_source_bytes
     issued = {identity(r): r for r in load_entries([*manifest["current"], *manifest["history"]], ROOT)}
     week = json.loads((ROOT.parents[3] / "docs/reviews/week-search-and-cache-20261026/recipe-review.json").read_bytes())
     successors = {r["previous_id"]: r["runtime_id"] for r in week["corrected"]}
+    mint = json.loads((ROOT.parents[3] / "docs/reviews/recipe-four-staples-20261027/recipe-review.json").read_bytes())
+    latest = {r["previous_id"]: r["runtime_id"] for r in mint["corrected"]}
+    successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     assert report["affected_variants"] == 337
     assert len(current) == 2462
     for row in report["recipes"]:

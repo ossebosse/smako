@@ -15,7 +15,7 @@ def source_need(name, form, unit, definition, supported_estimated):
         return {'classification': ['quantity_policy'],
                 'next_action': 'Use the existing documented estimate only after explicit estimated choice, or source an exact prepared-edible quantity for this same culinary form.'}
     specific = {
-        'mynta': 'Obtain source-stated edible leaf g for the cut 25-g mint article, or a reviewed yield applicable to its botanical/presentation scope. Fresh net stem+leaf mass is not leaf mass; 429-g pots and dry 8/9-g spice packs are negative cases.',
+        'mynta': 'Generic trimmed mint now has a reviewed 85% population yield for ten exact cut 25-g product contexts in estimated mode. Explicit leaf-only recipes remain separate: obtain source-stated leaf g or an applicable picked-leaf yield. Exact mode still requires declared edible quantity. Rooted 429-g pots and dry 8/9-g spice packs are negative cases.',
         'tamarindpasta': 'Only retained food candidate is Chua Hah Seng Tamarindpaste Sour Concentrate 435 ml. Obtain seedless unsweetened paste of the authored strength in g; do not equate concentrated ml with paste g or rewrite the recipe.',
         'masa harina': 'Find an exact priced nixtamalised maize flour SKU and package. The retained masala matches are retrieval false positives; ordinary maize flour/polenta is not masa harina.',
         'pärlkorn': 'Obtain a manufacturer declaration of whole polished pearl barley for an exact priced SKU; Guldkorn/korngryn/full-grain search hits are not evidence of this shape.',

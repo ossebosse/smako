@@ -1,3 +1,40 @@
+# 2026-10-27: Fyra råvaror granskade — +68 korgar, integration stoppad av A-pris
+
+Arbetsgren `fix/four-ingredient-review-20261027`, från main `8dac239`/PR #22.
+Se [granskningen](reviews/recipe-four-staples-20261027.md). **1 717 av 2 200**
+hela korgar inklusive uppskattningar är verifierade, +68; exakt oförändrat
+1 008 korgar/1 010 insatslösta. 483 varianter/68 grupper återstår.
+Alla 2 200 original-ID:n och 2 462 aktiva varianter består, inga förlorade korgar.
+
+91 ursprungliga generiska myntarecept har nya versioner med ansade blad och
+mjuka stjälkar, samma ätliga gram och en extra aktiv minut. 40 uttryckliga
+bladrecept är oförändrade. Matvaretabellen 06.259:s 85% ätliga andel är enbart
+uppskattad och bunden till tio exakta 25-g-produktkontexter. Hemköp Karhögstorg
+och Coop Online Syd i ägarens två länkar finns redan i Lundunderlaget och
+är separat kontrollerade; Coop 730400 är fortsatt online, aldrig fysisk hyllpris.
+Tamarind 435 ml finns men saknar verifierad gram-/koncentrationskoppling;
+masa harina och pärlkorn saknar exakt kvalificerat prissatt SKU av rätt form.
+Tamarind är nu enda ingredienshindret i 63 varianter, masa i 31, pärlkorn i 24.
+
+**Integrera inte denna gren ännu.** Kall A gav 295,41 kr mot tidigare 283,24 kr.
+Den tidigare menyn passerar en ny checkout på det nya underlaget för 283,24 kr.
+B2:s hela korg är identisk, 731,20 kr. API/save/GET A 51,96 s/B2 33,09 s;
+separat förberedelse 100,38/77,84 s. Slutverifieraren kontrollerar alla 2 727
+kvitton och sparade begäranden, skriver `price_regression_gate_passed: false`
+och avslutar med felkod. Täckningsvinsten upphäver inte prisregressionen.
+Nästa kodarbete är att rätta den generella begränsade menysökningen utan
+receptnamnsundantag, sänkta krav eller benchmark-frön. Ny runtime kräver
+nya aktuella hela-biblioteket- och A/B2-bevis; gamla metodkvitton får inte bytas namn.
+
+504 unika riktade testfall passerar över två körningar; Ruff och compileall
+passerar. Ordinarie PR-CI redovisas separat. Metodhash
+`c2108182d4c54d3cbe2f362fcba284160eef7a6c5ab3b2cc162cacd6c619e983`.
+Samma pris-/faktafil, testklocka, kontexter, portioner och tvåbutikstak består.
+Samma etappbudget: **3318.4442 s använda, 281.5558 s kvar av 3 600 s**.
+Inget nytt budgetbeslut; kvarvarande tid räcker inte till en ny runtimeändring
+med full nödvändig verifiering. Ingen automatisk fortsättning, merge, beta-/
+produktionsaktivering eller schedulerändring. Legacy standard och V2 opt-in.
+
 # 2026-10-27: Fortsättning — 1 649 fullkorgar och bevarat A/B2
 
 Se [kontrollpunkten](reviews/recipe-weight-coverage-20261027.md), från main

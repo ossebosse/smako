@@ -17,6 +17,9 @@ def main(args):
     historical=read(Path('docs/reviews/recipe-quality-and-planning-20261026/purchase-coverage.json'))
     changes=read(Path('docs/reviews/week-search-and-cache-20261026/recipe-review.json'))['corrected']
     successors={r['previous_id']:r['runtime_id'] for r in changes}
+    mint=read(Path('docs/reviews/recipe-four-staples-20261027/recipe-review.json'))['corrected']
+    latest={r['previous_id']:r['runtime_id'] for r in mint}
+    successors={k:latest.get(v,v) for k,v in successors.items()}|latest
     positions={rid:i for i,rid in enumerate(after['recipe_ids'])}
     def index(rid):return positions[successors.get(rid,rid)]
     result={k:after[k] for k in ['scope','universe_sha256','facts_sha256','clock','manifest_sha256','recipe_ids','imported_reference_ids','current_variants','imported_variants','other_original_variants_not_inventoried']}
