@@ -3,6 +3,7 @@ from functools import lru_cache
 
 from app.services.meal_library_content import identity, manifest_entries
 from app.services.planner_context import content_digest
+from app.services.recipe_computation_cache import RecipeComputationCache
 from app.services.recipe_library import current_recipes
 from app.services.reference_library import reference_manifest
 
@@ -16,8 +17,9 @@ def _publications(signature, generation):
     if entries[:len(base["entries"])] != base["entries"]:
         return ()
     nodes, previous, predecessor = [], None, None
+    digests = RecipeComputationCache()
     for end in range(len(base["entries"]), len(entries) + 1):
-        recipes = tuple((identity(r), content_digest(r)) for r in current_recipes(end))
+        recipes = tuple((identity(r), digests.get(r, content_digest)) for r in current_recipes(end))
         if previous is None and recipes != tuple(tuple(row) for row in base["recipes"]):
             return ()  # Revocation/content edit breaks the certified base.
         if previous is not None and recipes[:len(previous)] != previous:
