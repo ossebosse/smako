@@ -27,6 +27,16 @@ och [verifieringsdata](reviews/recipe-coverage-full-20261027/verification.json).
 41 nya hela uppskattningskorgar, 11 nya exakta korgar och A:s prisrättning
 är verifierade. Detta är inte en slutleverans av målet om full täckning.
 
+## Fortsättning efter PR #21
+
+Ägarens ”Fortsätt” återupptar samma etapp och samma budget. Den andra
+[kontrollpunkten](reviews/recipe-weight-coverage-20261027.md) löser det ordinarie
+viktpriset för hel oxfilé: tre ytterligare fullkorgar, totalt 1 649 i estimated.
+Rabatten med obelagd gränsenhet tillämpas inte. Inga nya fakta eller priser
+har lagts in i den frysta referensen. Ett nyare kvalificerat Willys Malmöarkiv
+har också granskats för alla 74 namn utan att ge nya kvalificerade lösningar
+för kvarvarande hinder. Nästa steg nedan behåller sina beviskrav.
+
 ## Konkret nästa arbete
 
 1. Implementera gemensam beredning först när inköp, råvaruinsats, komponent-
@@ -35,10 +45,11 @@ och [verifieringsdata](reviews/recipe-coverage-full-20261027/verification.json).
    beskriver äggkälla, balans, tider, näringsgrund, återstående kod och tester.
    Mungbönskällan anger volymutbyte; kaffekällan anger tillsatt vatten.
    Dessa är inte belägg för receptens efterfrågade massa/slutvolym.
-2. Utred den befintliga viktprisvägen för fyra källbundna hela oxfiléartiklar.
-   Identitet/form fungerar, men en kilotaxa får inte bli ett paketpris.
-   [Diagnosen](reviews/recipe-coverage-full-20261027/tenderloin-price-contract-gap.json)
-   skiljer detta tekniska hinder från saknade produktfakta.
+2. Viktprishindret för de fyra hela oxfiléartiklarna är löst i fortsättningen:
+   separat ordinarie taxa används genom befintliga pris-/mängdresolvers,
+   med hela uppskattade förpackningar. Den gamla
+   [diagnosen](reviews/recipe-coverage-full-20261027/tenderloin-price-contract-gap.json)
+   är historisk; den obelagda rabattgränsen är fortfarande inte godkänd.
 3. Den exakta 44-artikelskön är kvar lokalt. Tre försök stannade före
    handlaranrop när den gemensamma serverleasen var upptagen. Respektera
    låset; återuppta bara när ordinarie operation är klar. Koden ändrar inte

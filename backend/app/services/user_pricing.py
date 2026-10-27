@@ -454,6 +454,40 @@ def _price_weight_candidate(candidate, context, target_date):
     })
 
 
+def _ordinary_weight_rate(candidate, context, target_date):
+    """Retain an independent ordinary rate when a legacy offer cap is unbound.
+
+    Older catalog rows can carry a kg offer without a verified limit unit.
+    Its count must not be guessed from an identifier or package size. Keep
+    those offers as source metadata and resolve only the separate ordinary
+    rate; the existing quantity resolver still rounds whole variable packs.
+    """
+    if (candidate.purchase_terms is not None
+            or candidate.sale_model not in {SaleModel.SOLD_BY_WEIGHT, SaleModel.VARIABLE_WEIGHT_PACKAGE}
+            or candidate.sale_unit != 'kg'
+            or candidate.price is None or candidate.sale_price != candidate.price
+            or not all(o.price_basis_unit == 'kg' and o.required_packages == 1
+                       and o.max_quantity is not None and o.limit_unit is None
+                       and o.deposit is None and o.mechanism is PromotionMechanism.SALE_PRICE
+                       and abs(o.price - candidate.price) > 0.005
+                       for o in candidate.offers)):
+        raise ValueError('Unbound weight offer requires an independent ordinary kg rate')
+    ordinary = candidate.model_copy(update={
+        'effective_price': candidate.price, 'member_price': None, 'offers': [],
+    })
+    contracts = price_contracts_for_candidate(ordinary)
+    resolution = resolve_effective_price(contracts, 1, context, on_date=target_date)
+    return candidate.model_copy(update={
+        'sale_price': float(resolution.checkout_total), 'effective_price': float(resolution.checkout_total),
+        'comparison_price': float(resolution.checkout_total), 'comparison_unit': 'kg',
+        'member_price': None, 'purchase_date': target_date,
+        'selected_price_contract_id': contracts[0].reference,
+        'selected_price_eligibility': PromotionEligibility.PUBLIC,
+        'selected_price_mechanism': PromotionMechanism.REGULAR,
+        'selected_membership_program': None,
+    })
+
+
 def price_candidate_for_context(
     candidate: ProductCandidate,
     context: UserPricingContext,
@@ -465,6 +499,7 @@ def price_candidate_for_context(
     """Return one request-local candidate; the input artifact row is untouched."""
 
     terms = candidate.purchase_terms
+    source_quantity_confidence = candidate.quantity_confidence
     estimated_deposit = any(o.deposit and o.deposit.confidence == 'estimated' for o in candidate.offers)
     if estimated_deposit and planning_mode != 'estimated':
         raise EstimatedPurchaseRequired('Estimated deposit requires estimated planning mode')
@@ -506,6 +541,10 @@ def price_candidate_for_context(
         return candidate.model_copy(update={'price': ordinary, 'sale_price': rate,
             'effective_price': rate, 'comparison_price': rate, 'comparison_unit': 'kg',
             'offers': offers, 'purchase_date': target_date})
+    if any(o.price_basis_unit == 'kg' for o in candidate.offers):
+        if source_quantity_confidence == 'unknown':
+            raise ValueError('Ordinary weight fallback requires known source quantity evidence')
+        return _ordinary_weight_rate(candidate, context, target_date)
     candidate = candidate.model_copy(update={"promotion_groups": tuple(
         g for g in candidate.promotion_groups
         if g.valid_from <= target_date <= g.valid_to

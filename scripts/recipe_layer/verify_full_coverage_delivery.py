@@ -10,6 +10,7 @@ from pathlib import Path
 
 from app.services.meal_library_content import identity
 from app.services.meal_prepared_artifacts import method_signature
+from app.services.recipe_library import current_recipes
 from check_recipe_coverage import read_receipt, receipt_key
 from coverage_reference import digest, file_sha, imported_recipes
 
@@ -24,6 +25,7 @@ def main(args):
     references, recipes = imported_recipes()
     scope = report['scope']
     assert report['denominator'] == len(recipes) == len(references) == 2200
+    assert len(current_recipes()) == 2462
     assert references == [r['original_id'] for r in report['variants']]
     assert digest(references) == scope['imported_reference_ids_sha256']
     assert digest([identity(r) for r in recipes]) == scope['recipe_ids_sha256']
@@ -63,9 +65,17 @@ def main(args):
     assert not any(key.endswith(('search_incomplete', 'not_checked')) for key in counts)
     for mode in ('exact', 'estimated'):
         assert not report['modes'][mode]['lost_indices']
+        if args.previous_report:
+            assert file_sha(args.previous_report / 'coverage.json') == report['before_sha256']
+            previous = json.loads((args.previous_report / 'coverage.json').read_bytes())
+            before_verified = {r['original_id'] for r in previous['variants']
+                               if r['modes'][mode]['basket'] == 'verified'}
+            now_verified = {r['original_id'] for r in report['variants']
+                            if r['modes'][mode]['basket'] == 'verified'}
+            assert before_verified <= now_verified, (mode, sorted(before_verified - now_verified))
     comparisons = {}
     for name in ('A', 'B2'):
-        old_path = Path('.local/recipe-coverage-followup-20261027/probes') / name / (name+'-saved.json')
+        old_path = args.previous_local / 'probes' / name / (name+'-saved.json')
         new_path = args.local / 'probes' / name / (name+'-saved.json')
         old, new = (json.loads(p.read_bytes()) for p in (old_path, new_path))
         probe_path = args.local / (name+'-final.json')
@@ -87,7 +97,8 @@ def main(args):
         if name == 'B2':
             assert old_basket == new_basket
         if name == 'A':
-            assert new_basket['total'] < 290.82 < old_basket['total']
+            assert new_basket['total'] < 290.82
+            assert new_basket['total'] <= old_basket['total']
         comparisons[name] = {'previous_local_copy': old_path.as_posix(), 'previous_sha256': file_sha(old_path),
             'current_local_copy': new_path.as_posix(), 'current_sha256': file_sha(new_path),
             'probe_local_copy': probe_path.as_posix(), 'probe_sha256': file_sha(probe_path),
@@ -99,7 +110,7 @@ def main(args):
             'shared_preparation_seconds': probe['shared_preparation_seconds'],
             'checkout_audit_passed': True, 'scope_sha256': digest(scope)}
         write(args.report / (name+'-comparison.json'), comparisons[name])
-    previous_journals = json.loads((args.report / 'budget.json').read_bytes())['previous_phases']
+    previous_journals = json.loads((args.budget or args.report / 'budget.json').read_bytes())['previous_phases']
     for old in previous_journals:
         assert file_sha(old['journal']) == old['sha256']
     matrix = json.loads((args.report / 'work-matrix.json').read_bytes())
@@ -119,4 +130,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--report', type=Path, required=True)
     parser.add_argument('--local', type=Path, required=True)
+    parser.add_argument('--budget', type=Path)
+    parser.add_argument('--previous-local', type=Path, default=Path('.local/recipe-coverage-followup-20261027'))
+    parser.add_argument('--previous-report', type=Path)
     main(parser.parse_args())
