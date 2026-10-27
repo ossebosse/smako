@@ -19,6 +19,14 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
 
 
+def benchmark_price_regression(name, old_basket, new_basket):
+    if name == 'B2' and old_basket != new_basket:
+        return 'B2 complete optimized basket changed'
+    if name == 'A' and not (new_basket['total'] < 290.82 and new_basket['total'] <= old_basket['total']):
+        return 'A exceeds the earlier valid winner or the 290.82 reference'
+    return None
+
+
 def main(args):
     report = json.loads((args.report / 'coverage.json').read_bytes())
     index = json.loads((args.report / 'basket-receipts.json').read_bytes())
@@ -73,7 +81,7 @@ def main(args):
             now_verified = {r['original_id'] for r in report['variants']
                             if r['modes'][mode]['basket'] == 'verified'}
             assert before_verified <= now_verified, (mode, sorted(before_verified - now_verified))
-    comparisons = {}
+    comparisons, price_regressions = {}, {}
     for name in ('A', 'B2'):
         old_path = args.previous_local / 'probes' / name / (name+'-saved.json')
         new_path = args.local / 'probes' / name / (name+'-saved.json')
@@ -94,11 +102,10 @@ def main(args):
         assert new['plan']['personal']['checks']['checkout_audit']['passed']
         old_basket, new_basket = old['plan']['optimized_basket'], new['plan']['optimized_basket']
         assert probe['total'] == new_basket['total']
-        if name == 'B2':
-            assert old_basket == new_basket
-        if name == 'A':
-            assert new_basket['total'] < 290.82
-            assert new_basket['total'] <= old_basket['total']
+        regression = benchmark_price_regression(name, old_basket, new_basket)
+        if regression:
+            price_regressions[name] = {'reason': regression, 'previous_total': old_basket['total'],
+                                       'current_total': new_basket['total']}
         comparisons[name] = {'previous_local_copy': old_path.as_posix(), 'previous_sha256': file_sha(old_path),
             'current_local_copy': new_path.as_posix(), 'current_sha256': file_sha(new_path),
             'probe_local_copy': probe_path.as_posix(), 'probe_sha256': file_sha(probe_path),
@@ -116,14 +123,23 @@ def main(args):
     matrix = json.loads((args.report / 'work-matrix.json').read_bytes())
     assert len(matrix['groups']) == 76 and len({i for r in matrix['groups'] for i in r['original_ids']}) == 595
     assert all(r['status'] != 'under_review' for r in matrix['groups'])
+    if matrix.get('current_scope'):
+        assert matrix['current_scope'] == scope
+        current_by_original = {v['original_id']: v['current_id'] for v in report['variants']}
+        assert all(row['current_ids'] == [current_by_original[rid] for rid in row['original_ids']]
+                   for row in matrix['groups'])
     result = {'scope_sha256': digest(scope), 'method_signature': scope['method_signature'],
         'denominator': 2200, 'active_variants': 2462, 'receipt_count': len(paths), 'outcomes': dict(counts),
         'lost_original_ids': [], 'all_receipt_hashes_and_dependencies_verified': True,
         'all_saved_full_requests_unchanged': True, 'older_budget_journals_unchanged': True,
         'all_original_worklist_groups_reviewed': 76, 'runtime_preparation_enabled': False,
-        'legacy_remains_default': True, 'production_activation': False}
+        'legacy_remains_default': True, 'production_activation': False,
+        'price_regression_gate_passed': not price_regressions, 'price_regressions': price_regressions}
     write(args.report / 'verification.json', result)
     print(result, flush=True)
+    # Preserve concrete coverage/receipt evidence even for a failed delivery.
+    # The command still fails; a better coverage count never overrides price.
+    assert not price_regressions, 'Integration blocked by benchmark price regression'
 
 
 if __name__ == '__main__':

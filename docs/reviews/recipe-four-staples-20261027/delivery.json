@@ -1,0 +1,250 @@
+{
+  "schema": "smako-four-staples-review-delivery-v1",
+  "base_main": "8dac2393e2fd1ae3dec265ea8d43528e5abe3d77",
+  "branch": "fix/four-ingredient-review-20261027",
+  "integration_status": "validated_pending_hosted_CI_and_merge",
+  "full_coverage_goal_complete": false,
+  "verification": {
+    "scope_sha256": "467b563f1f55e5822ceb1244de95d8ab477774727008ae55449d23d9982df67a",
+    "method_signature": "70c233f8440dac886eeb8644da1e4583bb373e968e58c91e3e919001a81cefb5",
+    "denominator": 2200,
+    "active_variants": 2462,
+    "receipt_count": 2727,
+    "outcomes": {
+      "estimated:verified": 1717,
+      "exact:verified": 1008,
+      "exact:data_blocked": 1190,
+      "estimated:data_blocked": 483,
+      "exact:checkout_blocked": 2
+    },
+    "lost_original_ids": [],
+    "all_receipt_hashes_and_dependencies_verified": true,
+    "all_saved_full_requests_unchanged": true,
+    "older_budget_journals_unchanged": true,
+    "all_original_worklist_groups_reviewed": 76,
+    "runtime_preparation_enabled": false,
+    "legacy_remains_default": true,
+    "production_activation": false,
+    "price_regression_gate_passed": true,
+    "price_regressions": {}
+  },
+  "focused_tests": {
+    "unique_passed": 530,
+    "first_run_passed": 473,
+    "second_run_passed": 41,
+    "overlap": 10,
+    "ruff": "passed",
+    "compileall": "passed",
+    "search_regression_tests_passed": 26,
+    "unchanged_prior_unique_passed": 504
+  },
+  "file_hash_basis": "Verified Windows working-file bytes; Git may normalize line endings. Source prices, raw public benchmark receipts, and ephemeral API registrations remain ignored locally.",
+  "files": {
+    "backend/app/data/ingredients/recipe-shapes-20261026.json": {
+      "sha256": "acc7933758f82145b2708fff18959764bd342b05419074a2afa7b7d43a24d2ea",
+      "bytes": 31188
+    },
+    "backend/app/data/nutrition/mint-yield-20261027.json": {
+      "sha256": "38d0dd885ccaba201c87edbdde6e9e0e7ff972ad026ef5e01b3730e93e431f1a",
+      "bytes": 964
+    },
+    "backend/app/data/recipes/library-manifest.json": {
+      "sha256": "630ceb3b3e3a3c253ef7d99622e346102d725a5837d6720460302aeb408f8456",
+      "bytes": 102526
+    },
+    "backend/app/data/recipes/meal-pack-6fe8e5252f6f25f639e63c02a3ad28183fd82c660aabba8b93ed413cfb23f4b1.json": {
+      "sha256": "6fe8e5252f6f25f639e63c02a3ad28183fd82c660aabba8b93ed413cfb23f4b1",
+      "bytes": 1851777
+    },
+    "backend/app/data/recipes/reviewed-mint-20261027/authoring.json": {
+      "sha256": "711a7ee5c5f4e3784b1f502167c4ff4e1104cff07d87a743a8ed1d4e262ce8d7",
+      "bytes": 952288
+    },
+    "backend/app/data/recipes/reviewed-mint-20261027/standardized.json": {
+      "sha256": "bb5e47061e0707415aeabe518914e2041b5202768d9775820dcc7d39c111f2b9",
+      "bytes": 1694643
+    },
+    "backend/app/services/intake_product_links.py": {
+      "sha256": "dad6f65464b44dac78c684d2de1d41a0f4854e33d8644628a763797513819c7a",
+      "bytes": 13130
+    },
+    "backend/app/services/menu_optimizer.py": {
+      "sha256": "bf22e566e7217bf394792c51b851c6bddc18225416112cd9346cd375750f2611",
+      "bytes": 161052
+    },
+    "backend/tests/test_all_intake_links.py": {
+      "sha256": "b67479269acd1e0b65523319e80d74d70a371a15481916b03acb24d2b071c0ed",
+      "bytes": 13031
+    },
+    "backend/tests/test_complete_first_slots.py": {
+      "sha256": "a3a7acf9b7d1e55aa31507a2f90e2fcfb9101722d7ab0f508d72ff8a58edf4b8",
+      "bytes": 11224
+    },
+    "backend/tests/test_frozen_recipe_quality.py": {
+      "sha256": "83baebb02acf918eae66c8420b57946666773a823fd122fa966ec721cb50cf79",
+      "bytes": 5919
+    },
+    "backend/tests/test_mint_review.py": {
+      "sha256": "8eec2833b6e07f35cfd2bcf97648bb3a0a1ddd9d7d6a57014a3cbde01b56e74e",
+      "bytes": 6935
+    },
+    "backend/tests/test_week_recipe_quality.py": {
+      "sha256": "0fe0cfe7748bf4387d255b8a5bf89dd8b048d3e9f90a978d3d2efe05b0830bc3",
+      "bytes": 4656
+    },
+    "docs/CODEX-ASTRA-FULL-COVERAGE-20261027.md": {
+      "sha256": "66c5ae78f70315a40b3bae41242093a1cabcc2692c39592d922bd9e4390c7c55",
+      "bytes": 6629
+    },
+    "docs/HANDOFF.md": {
+      "sha256": "dc1b069f94d9cb2d5f37049440f5755ed0faaa44665c63a434087670cd15d928",
+      "bytes": 385196
+    },
+    "docs/PLANNING-ARCHITECTURE.md": {
+      "sha256": "a2ceea4948d471f61bbd3755a85b72caaffe1afaf8ed831ac39ac2dcf0c1adc1",
+      "bytes": 22912
+    },
+    "docs/PRODUCT-GOAL.md": {
+      "sha256": "eaff841f8432ef920eb7f49d6e4b09fe0842309c01cc3ac2f978b5fb3d768142",
+      "bytes": 10914
+    },
+    "docs/reviews/recipe-coverage-full-20261027/budget.json": {
+      "sha256": "05f5649cb1fe9a79397172dcbbc1941b0de2677c6cf54c0c1385d7fa12f8186e",
+      "bytes": 32746
+    },
+    "docs/reviews/recipe-four-staples-20261027.md": {
+      "sha256": "827d985610054faab32d6da0f2b3f00a04227511e9c13df4f7830e1a007ff4ef",
+      "bytes": 8942
+    },
+    "docs/reviews/recipe-four-staples-20261027/A-comparison.json": {
+      "sha256": "56200fdbfddb707879ed556406474f97311f2a05b222be0f3816e56eb9b32b79",
+      "bytes": 1078
+    },
+    "docs/reviews/recipe-four-staples-20261027/A-price-regression.json": {
+      "sha256": "7911f6073b04300367928e15e8e74a9c4110cedaaeeb4304f818094a6e13b4cf",
+      "bytes": 39394
+    },
+    "docs/reviews/recipe-four-staples-20261027/A-regression-resolution.json": {
+      "sha256": "f1149b0a1615a01f9f36b6a9109dda4f7812ef3a4273127738051eca56034067",
+      "bytes": 2511
+    },
+    "docs/reviews/recipe-four-staples-20261027/B2-comparison.json": {
+      "sha256": "28234890e609cbebbe58313cc931fd31bba7edd58a3511943fc9ce902f4601c8",
+      "bytes": 1078
+    },
+    "docs/reviews/recipe-four-staples-20261027/basket-receipts.json": {
+      "sha256": "ca0a9443b2b69a239f2e36981627297df313ab3d15ceb4ab02568d9ab1344a6b",
+      "bytes": 1092204
+    },
+    "docs/reviews/recipe-four-staples-20261027/blockers.json": {
+      "sha256": "3e5d60d5f7292e2dc93563f64328390bf5812f8c458fb59f46e151a2cb6884f9",
+      "bytes": 87966
+    },
+    "docs/reviews/recipe-four-staples-20261027/coverage.json": {
+      "sha256": "fb08634e664d64e530e1cb9477abe1d1ea1676e4f5090b833d7a6541969b26bf",
+      "bytes": 4883215
+    },
+    "docs/reviews/recipe-four-staples-20261027/diff.json": {
+      "sha256": "be6ec44e7f52127efaa0f7bf90d5ba630f03b6dae55e65a2380d9c025bd68adc",
+      "bytes": 9702
+    },
+    "docs/reviews/recipe-four-staples-20261027/group-assessments.json": {
+      "sha256": "b06716788e2c185dfa8bc50ac1f1eb40c67ebc38a8c652166b670aad4332dd60",
+      "bytes": 19778
+    },
+    "docs/reviews/recipe-four-staples-20261027/import.json": {
+      "sha256": "476a6e6ed62d58f7c8a61494e1ea75ef98b279d2f62fb04b99d8d4acc763d016",
+      "bytes": 10745
+    },
+    "docs/reviews/recipe-four-staples-20261027/lund-user-examples.json": {
+      "sha256": "ac0c36433b8c9d53af982dd7dc7d48ecec2199ab684a11952ea2bbde8c909c33",
+      "bytes": 2484
+    },
+    "docs/reviews/recipe-four-staples-20261027/newly-verified.json": {
+      "sha256": "1c96f8de1fd10ac9cc9709fa28062728c2c7813f2f29af0162a814ea911ae6dd",
+      "bytes": 27827
+    },
+    "docs/reviews/recipe-four-staples-20261027/recipe-review.json": {
+      "sha256": "ee3322a697c7ab3dc33888daf74a3723a66b3e9850d8550c50b96efd61537101",
+      "bytes": 86046
+    },
+    "docs/reviews/recipe-four-staples-20261027/revocations.json": {
+      "sha256": "e0cae98898f90c728b7792f5295d03d7f269f205804a1c9b777060418ac46662",
+      "bytes": 40005
+    },
+    "docs/reviews/recipe-four-staples-20261027/source-review.json": {
+      "sha256": "644271e3d47d32f5cd1d4ebb4c39fde1e390c268e8675727a45d835d03976d8e",
+      "bytes": 5017
+    },
+    "docs/reviews/recipe-four-staples-20261027/validate.json": {
+      "sha256": "ce36c03cc2e278695daab1a95d583906a6b3a272b6fd37137fad9b65f1232c6c",
+      "bytes": 154
+    },
+    "docs/reviews/recipe-four-staples-20261027/verification.json": {
+      "sha256": "31eec44d042995ae5e832650a5c23d0f07934cabe13f28f3db9730e4da64fec1",
+      "bytes": 851
+    },
+    "docs/reviews/recipe-four-staples-20261027/work-matrix.json": {
+      "sha256": "4f4764e6d0961b53a770d57afbb477b5f02b9f2636005ad34a96bfd1925bf6ab",
+      "bytes": 7423424
+    },
+    "docs/reviews/recipe-four-staples-20261027/work-matrix.md": {
+      "sha256": "965c2759a5c17964c145a7f19f3ce49a989b1724744ddafcd8b8d51bbe048984",
+      "bytes": 20196
+    },
+    "scripts/recipe_layer/amend_mint_recipes.py": {
+      "sha256": "3ae2393bcb98d6f17bd8faa5f8aa668e5c64dfd90ddd1d3dfc7a13b0a1ffee47",
+      "bytes": 7250
+    },
+    "scripts/recipe_layer/coverage_reference.py": {
+      "sha256": "0e1661ccd85bab0f6b03cfc01da3483147e7e2c3a37d6251a8e9d3e65a5784eb",
+      "bytes": 7533
+    },
+    "scripts/recipe_layer/full_coverage_worklist.py": {
+      "sha256": "c6d56cc14c4ee8adf6753ab9c7ba12be3a3dcd00c966ac5aa201039f9024b1db",
+      "bytes": 18898
+    },
+    "scripts/recipe_layer/inventory_current_coverage.py": {
+      "sha256": "8c8fe8de090a697dc420d0df7d40ba7126d7557bb77f9335490aba16a7b9afe6",
+      "bytes": 7716
+    },
+    "scripts/recipe_layer/review_mint_products.py": {
+      "sha256": "28ff65e3b3a3701db92bfc759348c6cd13c2abb33de7bdc51a2bdfc3b5e4d7e7",
+      "bytes": 6105
+    },
+    "scripts/recipe_layer/summarize_current_coverage.py": {
+      "sha256": "0d1abd983342f3c3a1cfb24c6190e0eed4f39f1db313f651bd2f58d431b76da1",
+      "bytes": 7146
+    },
+    "scripts/recipe_layer/summarize_recipe_coverage.py": {
+      "sha256": "942849f09355d81f143d83a40ca7e15ddf6cbb85396ce35bc3ce704a1ae60390",
+      "bytes": 9107
+    },
+    "scripts/recipe_layer/verify_full_coverage_delivery.py": {
+      "sha256": "a7581640e5ffe43759ea8526ab7a924b50dc4ea15f6655ffc8106a24f586179b",
+      "bytes": 9587
+    },
+    ".gitattributes": {
+      "sha256": "4cb705c25e3588ed6ad5b1afebabb5f2a478feef7a1a06b6f6f696e987166d3e",
+      "bytes": 2806
+    }
+  },
+  "pull_request": "https://github.com/ossebosse/smako/pull/23",
+  "previous_failed_checkpoint_commit": "a58973a2491b80f3088f7621f4869921533606a7",
+  "budget": {
+    "limit_seconds": 4500,
+    "used_seconds": 3991.5507000000002,
+    "remaining_seconds": 508.44929999999977,
+    "authorized_extensions": [
+      {
+        "authorized_at": "2026-10-27T19:48:16.716788+00:00",
+        "additional_seconds": 900,
+        "previous_limit_seconds": 3600,
+        "new_limit_seconds": 4500,
+        "authorization": "Owner explicitly selected: Utöka med 15 minuter och slutför. Correct the A search regression, revalidate and finish integration."
+      }
+    ]
+  },
+  "A_regression_resolution": "A-regression-resolution.json",
+  "mint_authoring_and_review_checkout_bytes": "Preserved with -text attributes; authored source hashes survive Windows/Linux checkout."
+}

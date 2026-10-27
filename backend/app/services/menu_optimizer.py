@@ -1517,7 +1517,18 @@ class MenuOptimizer:
 
         started = perf_counter()
         ids = RecipeComputationCache()
-        priority = candidate_priority or (lambda slot: 0)
+        priority_for = candidate_priority or (lambda slot: 0)
+        # Singleton priority is fixed for this search. Recomputing it for every
+        # anchor's affinity sort spends the bounded improvement window on the
+        # same preference/evidence work as the qualified library grows. Keep
+        # slot identity (not just recipe identity) so day-specific priorities
+        # retain their meaning, and leave proposal ordering unchanged.
+        priorities = {}
+        for group in groups:
+            for slot in group:
+                if id(slot) not in priorities:
+                    priorities[id(slot)] = priority_for(slot)
+        priority = lambda slot: priorities[id(slot)]
         packages = candidate_packages or (lambda slot: frozenset())
         ordered = [sorted(group, key=priority) for group in groups]  # Python's stable tie order.
         package_sets = {id(slot): packages(slot) for group in groups for slot in group}
@@ -1532,6 +1543,7 @@ class MenuOptimizer:
                      compact_seen_limit=4096, first_valid_search_seconds=None,
                      first_valid_request_seconds=None, first_valid_cost=None,
                      full_candidates=0, improvements=0, stop_reason='enumerated_proposals')
+        trace['singleton_priorities_computed'] = len(priorities)
         rows[0]['first_slot_priority_rows'] = len(groups[0]) if candidate_priority else 0
         seen = OrderedDict()
         considered = [set() for _ in groups]

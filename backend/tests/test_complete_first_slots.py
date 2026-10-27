@@ -111,6 +111,39 @@ def test_broad_search_keeps_two_full_results_and_later_original_order_anchors(mo
     assert trace[-1]['anchors_deferred']>0
 
 
+def test_broad_search_computes_static_priority_once_per_slot_with_day_specific_values(monkeypatch):
+    from collections import Counter
+
+    from app.services import plan_jobs
+
+    groups = options([f'{i:02d}' for i in range(65)], days=3)
+    remaining = [30.0]
+    monkeypatch.setattr(plan_jobs, 'remaining_planning_seconds', lambda: remaining[0])
+    priorities, evaluated = Counter(), []
+
+    def priority(slot):
+        priorities[id(slot)] += 1
+        return abs(int(slot.recipe.name) - slot.day), slot.recipe.name
+
+    def evaluate(slots, final):
+        assert final
+        evaluated.append(tuple(s.recipe.name for s in slots))
+        if len(evaluated) == 80:
+            remaining[0] = 11
+        return sum(abs(int(s.recipe.name) - s.day) for s in slots)
+
+    trace = []
+    chosen, cost = MenuOptimizer().optimize_slots(groups, complete_first=True,
+        accepts=lambda slots, final: len({s.recipe.name for s in slots}) == len(slots),
+        evaluate=evaluate, score=lambda slots, value: value, candidate_priority=priority,
+        search_trace=trace)
+    assert cost == 0 and tuple(s.recipe.name for s in chosen) == ('01', '02', '03')
+    assert len(priorities) == 195 and set(priorities.values()) == {1}
+    assert trace[-1]['singleton_priorities_computed'] == 195
+    assert trace[-1]['anchors_considered'] > 1
+    assert trace[-1]['finalization_reserve_seconds'] == 12
+
+
 def test_exhausted_proposals_never_invent_a_valid_result():
     with pytest.raises(IncompleteBasketError):
         MenuOptimizer().optimize_slots(options('AB'),complete_first=True,

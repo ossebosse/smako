@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 
 NOTES = {
-    'mynta': ('quantity', '25/100-g cut herb packs need a leaf-only yield; reject rooted 429-g pots. Inspect retained 101599969_ST and queued 101391698_ST.'),
+    'mynta': ('quantity', 'Generic trimmed mint has a reviewed estimated yield for exact 25-g packs. Keep explicit leaf-only demand separate and source its own yield; reject rooted 429-g pots. Original 2200 IDs are retained through reviewed recipe versions.'),
     'tamarindpasta': ('assortment', '435-ml Chua Hah Seng concentrate has unproved strength and mass. Find a priced seedless unsweetened paste; do not equate concentrate to paste.'),
     'masa harina': ('assortment', 'PAN precooked cornmeal is not verified nixtamalised masa. Search approved catalogues for exact Maseca/Minsa/nixtamalised SKU.'),
     'citrongräs': ('quantity', '50-g whole stems exist. Need tender trimmed-core yield; tea, powder and seasoned dumplings are excluded.'),
@@ -143,6 +143,8 @@ def main(args):
                 'gröna mungbönor': 'mung_preparation', 'psylliumfröskal': 'fiberhusk_denmark'}.get(name, 'not_a_source_kind')
             or (name in {'ägg', 'äggula', 'äggvita', 'kokta ägg'} and a['item'].get('kind', '').startswith('egg_'))]
         if after:
+            current_by_original = {v['original_id']: v['current_id'] for v in after['variants']}
+            row['current_ids'] = [current_by_original[rid] for rid in row['original_ids']]
             row['current_verification'] = {}
             for mode in ('exact', 'estimated'):
                 scopes = after['modes'][mode]['input_scopes']
@@ -163,6 +165,8 @@ def main(args):
               'source_report': str(previous / 'coverage.json'), 'candidate_research': str(args.research),
               'candidate_research_sha256': hashlib.sha256(args.research.read_bytes()).hexdigest(),
               'scope': coverage['scope'], 'counts_are_not_promised_gains': True}
+    if after:
+        result['current_scope'] = after['scope']
     (args.output / 'work-matrix.json').write_text(json.dumps(result, ensure_ascii=False, separators=(',', ':'))+'\n', encoding='utf-8')
     lines = ['# Full recepttäckning: arbetsmatris', '',
              'Alla 76 grupper och 595 unika ursprungs-ID:n. Full ID- och kandidatkarta i `work-matrix.json`.',

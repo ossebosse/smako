@@ -1,0 +1,47 @@
+{
+  "schema": "smako-A-search-regression-resolution-v1",
+  "previous_failed_commit": "a58973a2491b80f3088f7621f4869921533606a7",
+  "previous_failure_report": "A-price-regression.json",
+  "previous_failure_report_sha256": "7911f6073b04300367928e15e8e74a9c4110cedaaeeb4304f818094a6e13b4cf",
+  "previous_valid_total": 283.24,
+  "failed_total_before_fix": 295.41,
+  "method_signature": "70c233f8440dac886eeb8644da1e4583bb373e968e58c91e3e919001a81cefb5",
+  "change": "Evaluate the static singleton priority once per slot identity, rather than again for each anchor affinity sort. Priority values, ordering, allowed candidates, request deadline and 12-second finalization reserve are unchanged.",
+  "benchmark_specific_seed_or_exception": false,
+  "new_fresh_owner_saved_probes": [
+    {
+      "case": "A",
+      "probe_path": ".local/recipe-four-staples-finish-20261027/A-final.json",
+      "probe_sha256": "0e3ca47168efebdf4126ddabf35ffb0c1044f1176a39750463fa471469582522",
+      "saved_path": ".local/recipe-four-staples-finish-20261027/probes/A/A-saved.json",
+      "saved_sha256": "f3f709fb6b865c998c91534e0d1b9e63905cc7e4818ee57529114b5066ccc263",
+      "total": 281.31,
+      "api_save_get_seconds": 52.051093699992634,
+      "preparation_seconds": 96.93217970000114,
+      "method_signature": "70c233f8440dac886eeb8644da1e4583bb373e968e58c91e3e919001a81cefb5",
+      "entire_saved_request_equal": true,
+      "checkout_audit_passed": true,
+      "full_candidates": 70,
+      "improvements": 16,
+      "finalization_reserve_seconds": 12,
+      "stop_reason": "reserved_current_checkout_audit_save_time"
+    },
+    {
+      "case": "A-repeat",
+      "probe_path": ".local/recipe-four-staples-finish-20261027/A-repeat.json",
+      "probe_sha256": "ff49010bea7122d26fef80c1003b54416173b96b9cb332df280bd71f82cb2cf1",
+      "saved_path": ".local/recipe-four-staples-finish-20261027/probes/A-repeat/A-saved.json",
+      "saved_sha256": "b73b4fd8b6cfb0963af34b1533668a412a2fe9058ef28dc6f747de034e539c9e",
+      "total": 281.31,
+      "api_save_get_seconds": 52.16339960001642,
+      "preparation_seconds": 77.7729634999996,
+      "method_signature": "70c233f8440dac886eeb8644da1e4583bb373e968e58c91e3e919001a81cefb5",
+      "entire_saved_request_equal": true,
+      "checkout_audit_passed": true,
+      "full_candidates": 92,
+      "improvements": 16,
+      "finalization_reserve_seconds": 12,
+      "stop_reason": "reserved_current_checkout_audit_save_time"
+    }
+  ]
+}
