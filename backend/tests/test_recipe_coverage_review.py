@@ -90,6 +90,35 @@ def test_price_update_reuses_stable_article_but_rebinds_current_facts(scallion):
     assert project_usable_quantity(wrong_context, facts, allow_estimates=True, required_unit='g') is wrong_context
 
 
+@pytest.mark.parametrize('conflict', ['nutrition.package_quantity', 'package_quantity',
+    'usable_quantity', 'nutrition.unknown_quantity', 'unknown_conflict'])
+def test_reviewed_yield_rejects_quantity_and_unknown_conflicts(scallion, conflict):
+    key, _row, _proof, p = scallion
+    fact = ProductFacts(source='synthetic conflict', source_product_id=p.product_id,
+        source_snapshot_id=p.source_provenance.source_snapshot_id, conflicts=(conflict,))
+    # Warm the shared review lookup, then change the authoritative current fact.
+    approved = project_usable_quantity(p, replace(fact, conflicts=()),
+        allow_estimates=True, required_unit='g')
+    assert approved.usable_quantity == 96
+    assert project_usable_quantity(p, fact, allow_estimates=True, required_unit='g') is p
+    assert links.project_reviewed_quantity(p, fact, allow_estimates=True, required_unit='g') is p
+    preprojected = p.model_copy(update={'usable_quantity': 96, 'quantity_confidence': 'estimated'})
+    assert not links.compatible(key, preprojected, fact)
+
+
+def test_reviewed_yield_keeps_pure_nutrition_conflict_separate(scallion):
+    key, _row, _proof, p = scallion
+    fact = ProductFacts(source='synthetic nutrition conflict', source_product_id=p.product_id,
+        source_snapshot_id=p.source_provenance.source_snapshot_id,
+        conflicts=('nutrition.protein_g',), nutrition={'protein_g': 10})
+    projected = project_usable_quantity(p, fact, allow_estimates=True, required_unit='g')
+    assert projected.usable_quantity == 96 and links.compatible(key, projected, fact)
+    assert projected.quantity_confidence == 'estimated'
+    assert project_usable_quantity(p, fact, required_unit='g') is p
+    from app.services.nutrition_reference import product_reference
+    assert product_reference(projected, 'salladslök', fact) is None
+
+
 def drained_case():
     p = product('Kapris Medelstora', 120, 'g', 20, identity='synthetic-capers')
     raw = {'description': 'Medelstora kapris. 205 gram, avrunnen vikt 120 gram.',
