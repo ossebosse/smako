@@ -102,3 +102,22 @@ beskriver alla fyra varor och de precisa kvarvarande källbehoven.
 Etappen är verifierad inom den godkända ramen: 3991.5507 s använda,
 508.4493 s kvar. Full täckning är fortsatt ett öppet mål med 483
 varianter kvar; inga nya produktfakta har antagits för att stänga dem.
+
+## Fortsättning utan total tidsgräns
+
+Ägaren beslutade: ”Fortsätt. Du har ingen tidsgräns. Om du hittar onödiga
+tider på ci eller andra processer åtgärda.” Den tidigare etappgränsen är
+därmed upphävd för fortsatt arbete. Samma journal behåller all historisk
+förbrukning och använder null för obegränsad total ram. Enskilda
+operationers watchdog, två CPU:er, 3 GiB minnesgräns och gemensamt lås
+består. Arbetet fortsätter från PR #23 / main 4f77ad3: 1 717 hela
+korgar inklusive uppskattningar, 483 kvar. Undersök och åtgärda verkliga
+CI-/processflaskhalsar utan att minska testtäckning eller kvalitetsgrindar.
+
+## Ny verifierad kontrollpunkt utan total tidsgräns
+
+1747/2 200 hela korgar inklusive uppskattningar, +30; exakt 1020 hela,
+1022 insatslösta, 453 kvar. Inga förlorade korgar. Två nya A-prov klarar
+281,31 kr och B2:s hela korg är identisk. Se [rapporten](reviews/coverage-continuation-20261027.md).
+CI är integrerad via PR #24: 9:50 mot 20:35 med hela testurvalet kvar.
+Fortsatt kod-/källarbete återstår; full täckning är inte klar.

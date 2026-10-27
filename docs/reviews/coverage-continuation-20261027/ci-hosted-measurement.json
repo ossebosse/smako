@@ -1,0 +1,71 @@
+{
+  "run_url": "https://github.com/ossebosse/smako/actions/runs/40591099474",
+  "head_sha": "2478834de32c82a868d837802d80ba8bc4a1ae6b",
+  "conclusion": "success",
+  "jobs": {
+    "backend-tests (planner)": {
+      "seconds": 424.0,
+      "conclusion": "success",
+      "steps_seconds": {
+        "Set up job": 1.0,
+        "Run actions/checkout@v4": 3.0,
+        "Run actions/setup-python@v5": 2.0,
+        "Install": 14.0,
+        "Use the Ubuntu archive for system dependencies": 0.0,
+        "Browsers for UI tests": 38.0,
+        "Startup check": 4.0,
+        "Ruff on changed Python files": 1.0,
+        "Offline backend tests": 357.0,
+        "Preserve test timings": 1.0,
+        "Post Run actions/setup-python@v5": 0.0,
+        "Post Run actions/checkout@v4": 1.0,
+        "Complete job": 0.0
+      }
+    },
+    "backend-tests (core)": {
+      "seconds": 583.0,
+      "conclusion": "success",
+      "steps_seconds": {
+        "Set up job": 1.0,
+        "Run actions/checkout@v4": 4.0,
+        "Run actions/setup-python@v5": 3.0,
+        "Install": 12.0,
+        "Use the Ubuntu archive for system dependencies": 0.0,
+        "Browsers for UI tests": 55.0,
+        "Startup check": 3.0,
+        "Ruff on changed Python files": 0.0,
+        "Offline backend tests": 501.0,
+        "Preserve test timings": 1.0,
+        "Post Run actions/setup-python@v5": 0.0,
+        "Post Run actions/checkout@v4": 1.0,
+        "Complete job": 0.0
+      }
+    },
+    "backend": {
+      "seconds": 4.0,
+      "conclusion": "success",
+      "steps_seconds": {
+        "Set up job": 0.0,
+        "Require every test partition": 0.0,
+        "Complete job": 0.0
+      }
+    }
+  },
+  "previous_critical_path_seconds": 1235,
+  "current_critical_path_seconds": 590,
+  "reduction_percent": 52.23,
+  "junit": {
+    "core": {
+      "tests": 3938,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 63
+    },
+    "planner": {
+      "tests": 131,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  }
+}

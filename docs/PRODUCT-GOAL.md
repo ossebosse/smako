@@ -15,11 +15,11 @@ och pris-/kvalitetskraven kvarstår; en liten köpbar delmängd räcker inte.
 
 Alla 2 200 varianter är importerade och aktiva; tillsammans med de tidigare
 262 finns 2 462 aktiva varianter. Senaste kontrollen 2026-10-27 visar
-1 010 med stöd för samtliga ingredienser i exakt läge och 1 717 inklusive
+1 022 med stöd för samtliga ingredienser i exakt läge och 1 747 inklusive
 uttryckligen tillåtna mängduppskattningar i den frysta Malmöreferensen.
-Verifierade hela tvåbutikskorgar är 1 008 respektive 1 717. De inkluderande
-talen innehåller de exakta. 483 varianter har fortfarande insatshinder;
-100-procentsmålet kvarstår. Se [rapporten](reviews/recipe-four-staples-20261027.md).
+Verifierade hela tvåbutikskorgar är 1 020 respektive 1 747. De inkluderande
+talen innehåller de exakta. 453 varianter har fortfarande insatshinder;
+100-procentsmålet kvarstår. Se [rapporten](reviews/coverage-continuation-20261027.md).
 
 Håll isär tre nivåer: registrerat recept, produkt-/mängdstöd för varje
 ingrediens och fullständig giltig inköpskorg för receptet. De två sista ska
