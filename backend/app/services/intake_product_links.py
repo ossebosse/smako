@@ -87,8 +87,10 @@ def _review_identity(evidence, product, fact):
         return False
     if fact is not None:
         from app.services.complete_recipes import identity_conflicts
+        from app.services.official_product_facts import _mass_blocking
 
-        if (identity_conflicts(fact) or fact.source_product_id != product.product_id
+        if (_mass_blocking(fact.conflicts) or identity_conflicts(fact)
+                or fact.source_product_id != product.product_id
                 or fact.source_snapshot_id != provenance.source_snapshot_id):
             return False
     if evidence.get("composition_sha256"):

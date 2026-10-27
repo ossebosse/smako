@@ -13,7 +13,7 @@ from pathlib import Path
 from app.models.personal import MealSlot
 from app.services.meal_library_content import identity
 from app.services.plan_jobs import PlanningDeadlineExceeded, planning_deadline
-from coverage_reference import digest, file_sha, load_reference, planner_for
+from coverage_reference import digest, file_sha, load_reference, planner_for, prior_input_report
 
 
 def atomic_json(path, value):
@@ -91,7 +91,7 @@ def main(args):
               'checker_sha256': checker_sha, 'denominator': 2200,
               'variants': [{'original_id': original, 'current_id': identity(recipe), 'modes': {}}
                            for original, recipe in zip(references, recipes, strict=True)], 'modes': {}}
-    before = json.loads(args.before.read_bytes())
+    before = prior_input_report(json.loads(args.before.read_bytes()), compared_scope=scope)
     assert before['imported_reference_ids'] == references
     assert before['recipe_ids'] == [identity(r) for r in recipes]
     assert before['universe_sha256'] == scope['universe_sha256'] and before['clock'] == scope['clock']

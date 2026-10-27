@@ -29,6 +29,7 @@ REVIEWS = {
     'banan': ('09040', {'Banan 5-6 St Fairtrade Klass 1 Eko Klase', 'Banan Eko Klass 1', 'Banan Klass 1'}),
     'kålrot': ('11435', {'Kålrot Hel Sverige Klass 1', 'Kålrot Klass 1'}),
     'rättika': ('11430', {'Rättika Mini Klass 1'}),
+    'sallad': ('11251', {'Romansallad Ekologisk Klass 1', 'Romansallad Import Klass 1'}),
 }
 
 

@@ -28,6 +28,34 @@ def file_sha(path):
     return h.hexdigest()
 
 
+def prior_input_report(report, *, compared_scope=None):
+    """Read either the original input inventory or a complete coverage report.
+
+    Facts/method may deliberately change between phases. The original IDs,
+    price universe, clock, stores, portions and purchase scope must not drift.
+    """
+    if report.get('schema') == 'smako-recipe-coverage-v1':
+        scope, variants = report['scope'], report['variants']
+        if compared_scope is not None:
+            for key in ('universe_sha256', 'clock', 'store_ids', 'max_stores',
+                        'servings', 'pantry', 'imported_reference_ids_sha256',
+                        'recipe_ids_sha256', 'manifest_sha256', 'conditions'):
+                if scope[key] != compared_scope[key]:
+                    raise ValueError('Changed coverage comparison scope: '+key)
+        report = {'imported_reference_ids': [r['original_id'] for r in variants],
+                  'recipe_ids': [r['current_id'] for r in variants],
+                  'universe_sha256': scope['universe_sha256'],
+                  'facts_sha256': scope['facts_sha256'], 'clock': scope['clock'],
+                  'modes': {mode: {'resolved_indices': [i for i, row in enumerate(variants)
+                               if row['modes'][mode]['inputs'] == 'resolved']}
+                            for mode in ('exact', 'estimated')}}
+    if (compared_scope is not None
+            and (report['universe_sha256'] != compared_scope['universe_sha256']
+                 or report['clock'] != compared_scope['clock'])):
+        raise ValueError('Changed original price universe or clock')
+    return report
+
+
 def imported_recipes():
     source = json.loads(Path('docs/reviews/recipe-integration-all-20261026/all-recipes.json').read_bytes())
     replacements = {}

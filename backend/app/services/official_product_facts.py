@@ -502,6 +502,10 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
     """Request-local quantity projection; immutable source price stays intact."""
     from app.services.intake_product_links import project_reviewed_quantity
 
+    # Every projection shares the same conflict policy, including reviews that
+    # can stand alone without a nutrition fact record.
+    if fact is not None and _mass_blocking(fact.conflicts):
+        return product
     reviewed = project_reviewed_quantity(product, fact, allow_estimates=allow_estimates,
                                          required_unit=required_unit)
     if reviewed is not product:
@@ -509,10 +513,6 @@ def project_usable_quantity(product, fact, *, allow_estimates=False, required_un
     if required_unit is not None and required_unit != "g":
         return product
     if not fact or not product.source_provenance:
-        return product
-    # A nutrient disagreement cannot invalidate independently sourced drained
-    # mass. Other/unknown conflicts remain blocking; nutrition keeps its guard.
-    if _mass_blocking(fact.conflicts):
         return product
     proofs = fact.field_sources.get('usable_quantity', ())
     if len(proofs) != 1:

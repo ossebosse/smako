@@ -1,0 +1,142 @@
+{
+  "schema": "smako-recipe-coverage-followup-delivery-v1",
+  "base_main": "4093d33",
+  "quantity_guard_commit": "cac2a912ed7826b06430c1f26b02bf4d519457b1",
+  "runtime_commit": "e8c58efd42d3f81d12df71a48588c9f37fb7e900",
+  "scope_sha256": "0a623080a63dd2dd278e4ae26f174db82e41f776afa91cceab1ec2febbe1b73d",
+  "method_signature": "1247b60415262b1c1238642c81d7aa63547821c780ece3229922e0cb8e59958e",
+  "denominator": 2200,
+  "active_variants": 2462,
+  "complete_100_percent": false,
+  "modes": {
+    "estimated": {
+      "resolved": 1605,
+      "before_resolved": 1569,
+      "lost_indices": [],
+      "basket_status": {
+        "data_blocked": 595,
+        "verified": 1605
+      }
+    },
+    "exact": {
+      "resolved": 999,
+      "before_resolved": 969,
+      "lost_indices": [],
+      "basket_status": {
+        "checkout_blocked": 2,
+        "data_blocked": 1201,
+        "verified": 997
+      }
+    }
+  },
+  "newly_resolved": {
+    "estimated": 36,
+    "exact": 30
+  },
+  "remaining_estimated_input_blocked": 595,
+  "remaining_estimated_groups": 76,
+  "estimated_only_input_variants": 606,
+  "verified_basket_only_with_estimated": 608,
+  "quantity_guard_regressions": {
+    "failed_before": [
+      "nutrition.package_quantity",
+      "nutrition.unknown_quantity"
+    ],
+    "passed_after": true,
+    "shared_existing_policy": true,
+    "pure_nutrition_conflict_still_rejected_for_nutrition": true
+  },
+  "A": {
+    "api_save_get_seconds": 52.42721600004006,
+    "total": 317.82,
+    "previous_proposal_current_checkout": 290.82,
+    "gap_to_known_valid_proposal": 27.0,
+    "price_quality_qualified": false,
+    "preparation_seconds": 101.97185670002364,
+    "comparison": "A-comparison.json",
+    "reference": "A-reference-checkout.json"
+  },
+  "B2": {
+    "api_save_get_seconds": 33.75353799998993,
+    "total": 731.2,
+    "preparation_seconds": 77.99557460000506,
+    "entire_saved_request_equal": true,
+    "entire_optimized_basket_equal": true,
+    "comparison": "B2-comparison.json"
+  },
+  "budget": {
+    "limit_seconds": 1200,
+    "used_seconds": 772.9932,
+    "remaining_seconds": 427.0068
+  },
+  "old_journal_unchanged_sha256": "0d7402418b9027ba84df692247cc41b18313a4ed3aded367b088a715898a0380",
+  "peak_supervised_job_commit_bytes": 1569783808,
+  "CPU_count": 2,
+  "hard_job_commit_limit_bytes": 3221225472,
+  "focused_regressions": 487,
+  "ruff": "passed",
+  "compileall": "passed",
+  "CI": "Required on the final PR head before integration; see PR checks and integration receipt.",
+  "legacy_default": true,
+  "V2_opt_in": true,
+  "beta_activated": false,
+  "scheduler_changed": false,
+  "files": {
+    "A-comparison.json": {
+      "sha256": "0f911d3d85f76e8cbb8f2bcb204d33daf08d66d30d001a8cd983a0993fc9e289",
+      "bytes": 451
+    },
+    "A-reference-checkout.json": {
+      "sha256": "186fea357b87227f11067894edebbe48f523f4ac53e7270842fbeceb7463e842",
+      "bytes": 80908
+    },
+    "A.json": {
+      "sha256": "4b900ac2952f76209326788f37fa1699e6e0509d17337a783c8d93f7ea64735a",
+      "bytes": 60036
+    },
+    "B2-comparison.json": {
+      "sha256": "98255d4737818abec16e586a8d1927323153aee096b757db9342aa4dcc5584e9",
+      "bytes": 494
+    },
+    "B2.json": {
+      "sha256": "88093c77361fc2891bf1bec127b0bb19cbd877dee526c9f84e6ab8137326f020",
+      "bytes": 89183
+    },
+    "basket-receipts.json": {
+      "sha256": "492ad556103acd7bc86617534fc0a8debe7ed109864ba4d04070893d193a3911",
+      "bytes": 1037594
+    },
+    "blockers.json": {
+      "sha256": "11d59aa2cc4b6045b7b7b58689150d53f2c09b70adc37caf0381e251a20f1c6d",
+      "bytes": 92567
+    },
+    "budget.json": {
+      "sha256": "82788f539bb4b015c5e0f1be0b2ded3fc4ce0f88823acba3ba552b74c6eea393",
+      "bytes": 10041
+    },
+    "coverage.json": {
+      "sha256": "fc41f7bc60ca4e962a1cd34a8a6285306797e229b8a8ba1c396b4201948613b1",
+      "bytes": 4870128
+    },
+    "deferred-article-queue.json": {
+      "sha256": "871561a9497293989b564649ce2e6a38db92c1f4b3a8508ad6029a45e438c51f",
+      "bytes": 7544
+    },
+    "deferred-collection.json": {
+      "sha256": "debfacb0bc040b38043796bd4e0c6e6cbd16de144e2292dc4db9abace59ca250",
+      "bytes": 91
+    },
+    "enrichment.json": {
+      "sha256": "7d48b255736cda05605403fa63f182fa6f8c1a01c1627d8b306b56d94534ab49",
+      "bytes": 52884
+    },
+    "public-acquisition.json": {
+      "sha256": "0c74f92fc1fe9b12d4e6fd3d169f145038719cb9c69ca479029ee03a2b3a52de",
+      "bytes": 1941
+    },
+    "source-review.json": {
+      "sha256": "c7415ce8e887b854b716c174af4f3c3c36fa7e8e6ab455ee677f73c178be0770",
+      "bytes": 5220
+    }
+  }
+}
