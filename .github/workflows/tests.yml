@@ -5,10 +5,18 @@ on:
     branches: [main]
   pull_request:
 
+concurrency:
+  group: tests-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
-  backend:
+  backend-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        suite: [core, planner]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -43,4 +51,38 @@ jobs:
       - name: Offline backend tests
         # Tests that replay untracked evidence under reports/ are reported as
         # skipped with the missing path (see conftest.py and docs/TESTING.md).
-        run: python scripts/verify_offline.py backend/tests -m "not live" -q --no-header -rfEs
+        env:
+          TEST_SUITE: ${{ matrix.suite }}
+          SMAKO_VERIFY_LABEL: ci-${{ matrix.suite }}
+        run: |
+          planner_tests=(
+            backend/tests/test_owned_planner_artifacts.py
+            backend/tests/test_complete_scope_incumbents.py
+            backend/tests/test_own_provider.py
+            backend/tests/test_own_provider_grocery_data_contract.py
+            backend/tests/test_personal_choices_browser.py
+          )
+          if [ "$TEST_SUITE" = planner ]; then
+            targets=("${planner_tests[@]}")
+          else
+            targets=(backend/tests)
+            for path in "${planner_tests[@]}"; do targets+=("--ignore=$path"); done
+          fi
+          python scripts/verify_offline.py "${targets[@]}" -m "not live" -q --no-header -rfEs --durations=30 --junitxml=.local/verification/backend-tests.xml
+      - name: Preserve test timings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-tests-${{ matrix.suite }}
+          path: .local/verification/backend-tests.xml
+          retention-days: 7
+
+  backend:
+    if: always()
+    needs: backend-tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require every test partition
+        env:
+          TEST_RESULT: ${{ needs.backend-tests.result }}
+        run: test "$TEST_RESULT" = success
