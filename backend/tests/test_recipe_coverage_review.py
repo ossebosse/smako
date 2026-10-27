@@ -214,3 +214,38 @@ def test_peanut_certification_note_is_not_an_extra_ingredient():
 
     assert plain_peanut_composition('INGREDIENSER JORDNÖTTER* 99,7%, havssalt 0,3%. *Ekologisk ingrediens.')
     assert not plain_peanut_composition('Jordnötter*, kokosolja. *Ekologisk ingrediens.')
+
+
+def test_each_real_yield_link_reproduces_its_cited_refuse_record():
+    import json
+
+    reference = json.loads((Path(__file__).parents[1] / 'app/data/nutrition/produce-yields-20261027.json').read_bytes())
+    for row in links.entries().values():
+        for proof in row.get('reviewed_links', ()):
+            q = proof['quantity']
+            assert row['kind'] == 'definition_only' and row['form'] == q['basis'] == 'raw_edible'
+            assert q['confidence'] == 'estimated' and q['method'] == 'usda_sr28_refuse_v1'
+            record = reference['records'][row['name']]
+            assert q['source']['record'] == record
+            assert q['source']['sha256'] == reference['source']['food_des_sha256']
+            assert q['edible_fraction'] == round(1 - record['refuse_percent'] / 100, 8)
+            assert q['usable_quantity'] == round(proof['package_quantity'] * q['edible_fraction'], 8)
+
+
+@pytest.mark.parametrize('field', ['facts_sha256', 'universe_sha256', 'clock', 'method_signature', 'max_stores'])
+def test_receipt_identity_changes_with_each_authoritative_dependency(monkeypatch, field):
+    from app.models.recipe import Recipe, RecipeIngredient
+
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / 'scripts/recipe_layer'))
+    from check_recipe_coverage import receipt_key
+
+    recipe = Recipe(name='Synthetic recipe', servings=1,
+                    ingredients=[RecipeIngredient(name='ris', quantity=100, unit='g')],
+                    instructions=['Synthetic instructions.'])
+    scope = {'facts_sha256': 'facts-v1', 'universe_sha256': 'prices-v1', 'clock': '2026-10-23',
+             'method_signature': 'method-v1', 'max_stores': 2}
+    first = receipt_key(scope, recipe, 'exact', 'checker-v1')
+    assert first != receipt_key({**scope, field: 'changed'}, recipe, 'exact', 'checker-v1')
+    assert first != receipt_key(scope, recipe, 'estimated', 'checker-v1')
+    changed = recipe.model_copy(update={'ingredients': [recipe.ingredients[0].model_copy(update={'quantity': 200})]})
+    assert first != receipt_key(scope, changed, 'exact', 'checker-v1')
