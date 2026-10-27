@@ -93,6 +93,12 @@ att sänka kraven. Inget nytt käll-/handlar-/allowlistscope har aktiverats.
 640 riktade offline-tester passerade på 37,88 s, därefter fyra ytterligare
 gränsfall för de nya köttrelationerna. Ruff och compileall passerar för
 berörda filer/paket. Repo-CI redovisas på PR:en före integration.
+CI:s hämtning av Ubuntu-paket från Azure-spegeln blev mycket långsam: den
+första loggen anger 119 MB att hämta och fortsatt nedladdning efter cirka
+20 minuter. Återförsöket låg kvar
+i samma steg efter 30 minuter. Befintlig workflow använder därför Ubuntus
+ordinarie arkiv, med oförändrade suites, signeringsnycklar, paketverifiering
+och teststeg. Detta ändrar inte appens metodhash eller verifierade korgbevis.
 Alla 2 656 kvittofiler kontrolleras mot filhash, evidenshash, aktuella
 metod-/recept-/villkorsberoenden, audit och butikstak. 2 654 är verifierade
 korgar och två är de kvarvarande exakta checkout-avslagen.

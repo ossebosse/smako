@@ -22,6 +22,15 @@ jobs:
             requirements-dev.lock
       - name: Install
         run: python -m pip install -r requirements-dev.txt
+      - name: Use the Ubuntu archive for system dependencies
+        # Avoid prolonged downloads from the runner's Azure mirror.
+        # Keep Ubuntu's suites, signing keys and package verification unchanged.
+        run: |
+          for apt_source in /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+            if [ -f "$apt_source" ]; then
+              sudo sed -i 's|://azure\.archive\.ubuntu\.com/ubuntu|://archive.ubuntu.com/ubuntu|g' "$apt_source"
+            fi
+          done
       - name: Browsers for UI tests
         run: python -m playwright install --with-deps chromium webkit
       - name: Startup check

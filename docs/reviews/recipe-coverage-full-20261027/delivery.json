@@ -554,8 +554,8 @@
       "bytes": 21453
     },
     "docs/reviews/recipe-coverage-full-20261027.md": {
-      "sha256": "aadd459ac8948a5bd5eac9aa2171e6fc98158e76b6fba5c6b891435edb0ef730",
-      "bytes": 7120
+      "sha256": "2247cbe11d0e73d8d2802bd6f4b5c2c9108ef678f5fc19aebf4c3b30fd02f572",
+      "bytes": 7546
     },
     "docs/reviews/recipe-coverage-full-20261027/A-comparison.json": {
       "sha256": "5c08235e11923ec0cd03fe8bd3546aaf69e3fd74b046d866ae4bf31b2739d1f8",
@@ -668,6 +668,10 @@
     "scripts/recipe_layer/verify_full_coverage_delivery.py": {
       "sha256": "69bc14ec699eb10d8e00c134cdeccba85a4807eb114766d7995ee5ac6cf60ceb",
       "bytes": 7493
+    },
+    ".github/workflows/tests.yml": {
+      "sha256": "f72071ad720b09b15c337bb7e473dd1227b1455251907ed8de07dec30b4ee019",
+      "bytes": 1825
     }
   },
   "focused_offline_tests_passed": 644,
@@ -676,5 +680,6 @@
   "git_diff_check": "passed",
   "production_activation": false,
   "automatic_continuation": false,
-  "ci": "Required on the final pull-request head before merge; see PR checks."
+  "ci": "Required on the final pull-request head before merge; see PR checks.",
+  "ci_environment_recovery": "Only the Ubuntu APT mirror hostname changed; original workflow settings and every existing step compare equal. Current head still requires full CI success."
 }
