@@ -1,0 +1,22 @@
+{
+  "reason": "Repeated hosted core test duration around 600 seconds vs planner about 353 seconds; move five measured long files to an additional required partition.",
+  "measured_run_id": 40602272627,
+  "measured_head_sha": "1924f62025c69ddec786fa73b4748c0de1d9bb59",
+  "selected_file_test_seconds": {
+    "backend/tests/test_coop_municipality_provider.py": 95.01400000000001,
+    "backend/tests/test_all_intake_links.py": 32.685999999999986,
+    "backend/tests/test_diversity_mode_api_contract.py": 32.643,
+    "backend/tests/test_optimized_llm_improvement.py": 30.09,
+    "backend/tests/test_verified_menu_search.py": 24.139
+  },
+  "selected_file_test_seconds_total": 214.572,
+  "new_test_files_default_to_core": true,
+  "all_three_partitions_required": true,
+  "browser_binaries_installed_for": [
+    "core",
+    "planner"
+  ],
+  "integration_files_have_no_browser_launches": true,
+  "hosted_after_status": "pending_new_PR_CI",
+  "note": "File totals predict balancing only; actual hosted wall time must be measured separately."
+}

@@ -131,3 +131,13 @@ eller receptändringar. A 281,31 kr i båda slutprov och B2:s hela korg identisk
 731,20 kr. Alla 2 835 kvittohashar verifierade. Se
 [rapporten](reviews/reviewed-drained-foods-20261027.md). Full täckning återstår;
 ägarens fortsättning utan total tidsgräns och ordinarie resurs-/källkrav består.
+
+## Produktfakta och nästa kontrollpunkt 2026-10-28
+
+1 802/2 200 hela korgar inklusive uppskattningar, +18; exakt 1 062 hela och
+1 064 insatslösta, 398 insatshinder kvar. Alla tidigare korgar och original
+består. Risnudlar, sardiner och svart löste har 19 nya exakta relationer.
+A 281,31 kr i båda slutprov och B2:s hela korg identisk 731,20 kr; samtliga
+2 866 kvittohashar passerar. [Rapport](reviews/product-facts-20261028.md).
+Full täckning återstår. Samma obegränsade totaljournal och resurs-/källkrav;
+CI balanseras till tre obligatoriska partitioner med alla testnoder kvar.

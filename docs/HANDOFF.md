@@ -1,3 +1,32 @@
+# 2026-10-28: 1 802 hela korgar, ytterligare +18
+
+[Rapport](reviews/product-facts-20261028.md): exakt 1 062 hela/1 064
+insatslösta och 1 802 inklusive uppskattningar. 398 insatshinder kvar.
+Alla 2 200 original, 2 462 aktiva och tidigare korgar består. 19 nya
+exakt granskade relationer: Garant platta torra risnudlar, Eldorado
+sardiner 120/85 g och Ahmad Tea osmaksat Ceylon-löste 500 g. Inga priser
+eller recept ändrade. All annan fakta/personliga fält består; sardinernas
+avrunna näring är okänd. Torrt-form-undantaget kräver exakt granskad relation.
+
+A 281,31 kr i båda slutprov; B2:s hela korg identisk 731,20 kr.
+API/save/GET 52,04/53,76/32,36 s, separat förberedelse 96,31/75,83/76,33 s.
+Alla 2 866 kvittohashar och aktuella beroenden passerar. Metod
+249dbc07d415409a312427445504480a2e6dd5580ac267acfab9f9b6f1af65b3.
+Fakta: .local/coverage-next-20261028/facts-final-v2.json,
+SHA b56734ee54f2453c5e14bb1cbd38a1404ddd4a201259c51a15a88bfda09765e3.
+Slutproven finns i .local/coverage-next-20261028/final-v2; tidigare
+underkänt A-återprov bevaras i dess överkatalog. 338 riktade tester samt
+Ruff/compileall passerar. Full klassning är identisk för alla 89 458 produkter
+med två begränsade rena textcacher. CI har tre obligatoriska partitioner,
+4 103 noder exakt en gång; green hosted PR-CI krävs före integration.
+PR #26 är redan integrerad / main 5c329aa, hosted 4 100 tester utan fel.
+
+Fortsätt med återstående mängd-/sortimentsbevis och gemensam äggberedning.
+Stjärnäggs 1-kg-vikt är styrkt, men ofullständig och motstridig sammansättning
+är inte godkänd. Källa och exakt scope behövs före ny handlare/allowlist.
+Ägaren har ingen total tidsgräns; samma journal och resurs-/operationslås.
+Ingen produktions-/betaaktivering, legacy standard och V2 opt-in.
+
 # 2026-10-28: Ytterligare 37 hela receptkorgar verifierade
 
 [Rapport](reviews/reviewed-drained-foods-20261027.md): 1 784/2 200 hela

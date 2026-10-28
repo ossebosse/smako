@@ -231,13 +231,17 @@ def recipe_product(recipe, name, product, fact=None):
     return False
 
 
-def ingredient_product(canonical, form, requirements, product, fact=None):
+def ingredient_product(canonical, form, requirements, product, fact=None, *, reviewed_only=False):
     for requirement in requirements:
         if requirement.startswith("pack:intake_all_"):
             key = requirement.removeprefix("pack:")
             row = entries().get(key)
-            if row and row["name"] == canonical and row["form"] == form and compatible(key, product, fact):
-                return True
+            if row and row["name"] == canonical and row["form"] == form:
+                if reviewed_only:
+                    if row["kind"] == "definition_only" and reviewed_definition(row, product, fact):
+                        return True
+                elif compatible(key, product, fact):
+                    return True
     return False
 
 
