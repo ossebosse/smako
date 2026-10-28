@@ -15,12 +15,14 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Senast aktiverade appkod är `f596e1102fd7`,
-  app-BUILD_ID `app-f596e1102fd7-09770600`; schedulerkod är `2b65533af00d`, BUILD_ID
+  senaste aktiveringsrapport. Senast aktiverade appkod är `fac3a7e021a0`,
+  app-BUILD_ID `app-fac3a7e021a0-9fcadbe1`; schedulerkod är `2b65533af00d`, BUILD_ID
   `beta-scheduler-2b65533af00d-contracts1`.
   [Samlad aktivering](releases/beta-ica-recipes-20261028/ACTIVATED.md) innehåller
   ICA/tvånattspolicy och hela det integrerade recept-/beräkningsarbetet.
   Windowsuppgiftens registreringsbyte återstår med administratörsrättighet.
+  [Senaste dashboardrättning och driftkontroll](releases/dashboard-operations-20261028/ACTIVATED.md)
+  visar ICA-baspriser, Willys körjournaler och kvarvarande Coop-källfel.
   Tidigare runtimefunktioner för admin bevarades med granskad exakt patchning;
   config.py är därför inte en ren kopia av main. Historiskt
   [medlemskap](releases/membership-20261021/ACTIVATED.md) och dess tre additiva
@@ -45,8 +47,8 @@ git pull --ff-only
 git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
-# Ersätt f596e1102fd7 med senast aktiverade appkod enligt aktuell releasejournal.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit f596e1102fd7 --commit main --workdir .local/beta-release
+# Ersätt fac3a7e021a0 med senast aktiverade appkod enligt aktuell releasejournal.
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit fac3a7e021a0 --commit main --workdir .local/beta-release
 ```
 
 Arbetskopian ska vara ren; paketet läser enbart committade Git-blobbar.

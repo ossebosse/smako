@@ -1,3 +1,33 @@
+# 2026-10-28: Dashboard rättad, Malmö-Willys kvitterat, Coop-källfel kvarstår
+
+Ägarens driftgranskning är dokumenterad i
+[aktiveringsjournalen](releases/dashboard-operations-20261028/ACTIVATED.md).
+Appkod `fac3a7e021a0`, main-merge `c965426`, har grön PR- och main-CI.
+BUILD_ID `app-fac3a7e021a0-9fcadbe1` är aktiv sedan 22:02:31 UTC.
+Scheduler `beta-scheduler-2b65533af00d-contracts1` består. Fyra appfiler
+patchades mot verifierad faktisk bas; backup `20261028T214850Z`, tidigare
+planer/profiler/konton och båda pris-ID:n verifierades. Retention är complete.
+
+Dashboarden visar nu baspriser separat: Gunnesbo 1 926, Clemenstorget 38
+(äldre LKG), Caroli 1 213 och Västra Hamnen 1 432. Prispolicyn och nästa
+måndag/torsdagstid är rättade. Alla sju Willys-reklamblad får sin befintliga
+lyckade körhistorik i vyn. Publikt script verifierades som exakt kandidat;
+admin utan inloggning gav 401 och båda kommunernas ready gav nytt BUILD_ID.
+
+Malmö-Willys paket `bbba3548e426` från 28 oktober var redan laddat. Normal
+återleverans återställde beständigt kvitto 21:35:49 UTC med `already_active`;
+pending_delivery är false, inga nya priser hämtades och källtiderna består.
+Lund-Willys senaste katalogobservationer är från 27 oktober. Windowsuppgiften
+är fortfarande på gammalt paket/dagligt schema; administratörsskriptet nedan
+återstår. Det steget ska inte påstås klart utifrån en lyckad manuell kvittens.
+
+Coop har fortfarande fyra Lund- och sex Malmöbutiker avvisade på
+`row.environmentalCode`, samt tre verifierade erbjudandesidetimeouter i
+Malmö och separat X:-tra Nydala-fel. Online Syd 730400 har äldre kvalificerad
+LKG och schemafel kring kampanjernas maxantal. Ingen prisgrind har sänkts.
+Fortsatt källrättning behöver belägg för nya fält, negativt prov och pinnad
+runtime; använd befintliga driftlås och källvägar. Se exakt underlag i journalen.
+
 # 2026-10-28: Samlad beta aktiverad på servern, Windowsregistrering återstår
 
 Ägarens beställda Malmö ICA, tvånattspolicy och hela det integrerade

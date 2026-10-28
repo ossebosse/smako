@@ -5,6 +5,11 @@ omfattar ICA-baspriser, hela recept-/beräkningsarbetet och serverhämtning
 måndag/torsdag 03:17 svensk tid. Windowsreläets befintliga uppgiftsregistrering
 kräver fortfarande administratör; serverstatus bevisar inte dess veckoschema.
 
+[Driftkontroll och dashboardrättning 28 oktober](releases/dashboard-operations-20261028/ACTIVATED.md)
+bekräftar ICA-baspriser, återställd Malmö-Willyskvittens och Willys reklamblads-
+historik. Coop har fortfarande separata schema-/hämtningsfel; journalen skiljer
+dem från användbara äldre priser och från Windowsuppgiftens registrering.
+
 ## Prispolicy från 2026-10-15
 
 Kvalificerade baspriser behålls tills en validerad ersättning finns, för alla

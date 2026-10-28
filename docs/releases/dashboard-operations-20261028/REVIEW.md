@@ -46,6 +46,9 @@ det nytillkomna fältet `row.environmentalCode` i offentliga butikssvaret.
 Tidigare godkända, fortfarande giltiga kampanjer finns kvar. Malmö Central,
 Kornettsgatan, Djupadal och X:-tra Nydala saknar dessutom godkänd källa och
 har separata återkommande fel; de får inte beskrivas som uppdaterade.
+Malmö Central, Kornettsgatan och Djupadal har verifierade timeoutkedjor i
+`public_offer_fetch`, vid väntan på erbjudandekorten på butikssidan. X:-tra
+Nydalas aktuella fel ska fortfarande hållas separat från dessa tre.
 
 Coop Online Syd `730400` är en separat online-/leveranskontext. Den använder
 17 oktobers kvalificerade baspriser. Det senaste kompletta avvisade försöket
@@ -59,6 +62,34 @@ Lund-Willys senaste kvitterade källa är från 27 oktober, med cirka 37 timmars
 slutkvitto efter ett tidigare transportfel. Ett avgränsat återupptagande
 använder befintligt verifierat paket och normala import-/kvittensvägen;
 ny källinsamling är uttryckligen spärrad i den körningen.
+Återupptagandet avslutades **21:35:49 UTC** med `already_active` för exakt
+`bbba3548e426de8f7a191f3abe3d92c8597bd233ea69ab554d6306271ce378da`.
+Det beständiga kvittot motsvarar nu samma laddade Malmöversion; efterföljande
+driftkontroll visar `pending_delivery=false`. Ingen ny prisinsamling startades.
+
+Alla sju fysiska Willys-reklambladskontexter har lyckade befintliga
+kommunjournaler från 27 oktober. Den granskade journalläsaren hittade exakt
+deras källidentiteter och projekterade nästa hämtning till 29 oktober
+03:17 svensk tid. Dessa saknade visad historik, inte tillgängliga kampanjer.
+
+## Verifiering av rättningen
+
+PR42 kod `fac3a7e021a06038c76c2a281bc8c7623f026a34` är integrerad som
+`c965426254bfab0e3ac1058216215534a588de7f`.
+[Alla CI-delar passerade](https://github.com/ossebosse/smako/actions/runs/40773482626).
+Riktade offlineprov, Ruff och compileall passerade. Schemafallen omfattar
+sommar-/vintertid, exakt startgräns och nästa måndag efter torsdag.
+Journalläsarens prov bevarar gamla källtider, felräknare och filinnehåll för
+ICA, Coop och Willys. Browserprovet visar alla fyra ICA-basantal från fångat
+admin-API. Ingen ny publik meny används som prestandabevis för denna rättning.
+
+Exakt slutkandidat `app-fac3a7e021a0-9fcadbe1` passerade normal lifespan-
+uppstart och automatisk förberedelse för båda kommunerna: 189,66 s,
+minnestopp 2 474 385 408 byte, 2 CPU/3 GiB och inget nätverk. Alla 2 462
+varianter för portioner 1–4 förbereddes med noll persistensfel och inga
+syntetiska sparade planer/profiler. Metodsignaturen är
+`c3a22c355cab23ac192976cbdfa4545f81e9c270bd54e9d040893cc051f6ad58`.
+Detta skiljs från den faktiska aktiveringen och kontrollen av den publika appen.
 
 Windowsuppgiften använder fortfarande det tidigare paketet och dagliga
 starttider. Byte till nytt paket och veckoschema kräver fortfarande

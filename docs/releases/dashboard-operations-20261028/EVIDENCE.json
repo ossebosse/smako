@@ -1,0 +1,648 @@
+{
+  "schema": "smako-dashboard-operations-20261028-v1",
+  "recorded_at": "2026-10-28T22:05:41.788080+00:00",
+  "code_commit": "fac3a7e021a06038c76c2a281bc8c7623f026a34",
+  "main_merge": "c965426254bfab0e3ac1058216215534a588de7f",
+  "pull_request": "https://github.com/ossebosse/smako/pull/42",
+  "ci": "https://github.com/ossebosse/smako/actions/runs/40773482626",
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-28T22:02:31.048284+00:00",
+    "runtimes": {
+      "app": {
+        "image": "sha256:542132871f644fc1f1c186e5966e105ec4ea6cbb76249699b7493d5948ff47e3",
+        "base_image": "sha256:d33eafe41e887d3b427ca2c85e0ef95309413b4de989a4eefb3ef170e55f16ac",
+        "build_id": "app-fac3a7e021a0-9fcadbe1"
+      }
+    },
+    "readiness": {
+      "Lund": {
+        "status": "ready",
+        "database": "ok",
+        "plan_store": "ok",
+        "price_universe": {
+          "active": true,
+          "required_contexts_usable": true,
+          "missing_required_context_ids": [],
+          "usable_context_ids": [
+            "context:coop:23eaae11c9661e68",
+            "context:coop:698f7b6528879df2",
+            "context:coop:709f87b60ef8c210",
+            "context:coop:95aeb1242c92bd40",
+            "context:coop:a35d1de8aaaf5b41",
+            "context:coop:a5a6ee957014972a",
+            "context:coop:db7c87478187339f",
+            "context:coop:e6ab1bde1aaf6609",
+            "context:coop:e9ccea03a65e7252",
+            "context:coop:f0f14586a4a5abfa",
+            "context:coop:fee53e0e0c90eab3",
+            "context:hemkop:3288e04edd97e349",
+            "context:hemkop:756955d0e6e05f23",
+            "context:ica:0edf5d52980ffcd7",
+            "context:ica:1a19476898da3fb0",
+            "context:ica:24c415e3af6438b4",
+            "context:ica:2d734344abd8c685",
+            "context:ica:46850f1523580803",
+            "context:ica:602d84df14d47e3d",
+            "context:ica:7b8c7bd0161c50dc",
+            "context:ica:7f1f6e52c3152f98",
+            "context:ica:979e70ce1f577bc4",
+            "context:ica:b7a8ac31980d0bd7",
+            "context:ica:b7ad17cc0a7001fd",
+            "context:ica:cb840c0edbf56816",
+            "context:lidl:05f1cb3d9fc89bc3",
+            "context:lidl:46dd1e85257757e0",
+            "context:willys:383650ec6ff5a636",
+            "context:willys:4a671428fc484e43",
+            "context:willys:f3f63d6851275fcc"
+          ],
+          "requires_attention": true,
+          "warning_age_hours": 36.0,
+          "stale_age_hours": 48.0,
+          "status": "degraded",
+          "price_universe_id": "price-universe:0c617164ed822450e72b218929fe7c02f6647a2d07f08426c0ee89e0f9b590a2",
+          "built_at": "2026-10-28 20:20:45.882420+00:00",
+          "oldest_price_age_hours": 860.231,
+          "oldest_usable_price_age_hours": 860.231,
+          "hours_until_oldest_usable_stale": null,
+          "usable_context_count": 30,
+          "excluded_stale_context_count": 0,
+          "excluded_stale_context_ids": [],
+          "retained_older_base_context_ids": [
+            "context:coop:23eaae11c9661e68",
+            "context:ica:979e70ce1f577bc4"
+          ],
+          "base_price_policy": "retain-until-replaced",
+          "product_count": 2400
+        },
+        "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+        "build_id": "app-fac3a7e021a0-9fcadbe1",
+        "features": {
+          "complete_recipes_enabled": true,
+          "variation_intent_enabled": true
+        }
+      },
+      "Malmo": {
+        "status": "ready",
+        "database": "ok",
+        "plan_store": "ok",
+        "price_universe": {
+          "active": true,
+          "required_contexts_usable": true,
+          "missing_required_context_ids": [],
+          "usable_context_ids": [
+            "context:citygross:33b01007b20e8988",
+            "context:coop:00d3c70860d97cae",
+            "context:coop:0af1a8138f910d90",
+            "context:coop:20e4633ad51e8d1f",
+            "context:coop:55469b5a21f9b46e",
+            "context:coop:6ccb60b8518dcfba",
+            "context:coop:7249b37ed1aa3b58",
+            "context:coop:788d290977d9807c",
+            "context:coop:80003f1b518a562e",
+            "context:coop:91472761912c55cf",
+            "context:coop:a06d1b2d64d5a880",
+            "context:coop:c964acbfeb697ff3",
+            "context:coop:cd18dbdf6f755166",
+            "context:coop:df2cb6829ff429e8",
+            "context:coop:f4e6dfa3fada9ab1",
+            "context:hemkop:363b00fb95065cf0",
+            "context:hemkop:559cb3b5b4885cdf",
+            "context:hemkop:7c2684c2238e291f",
+            "context:hemkop:ac1b35fa13bf792f",
+            "context:ica:07cdc317da3830a1",
+            "context:ica:094e21ba74aa33a2",
+            "context:ica:0a956c41111c4892",
+            "context:ica:0b4e04c736b28d7f",
+            "context:ica:0f3dfa38926580b4",
+            "context:ica:225fe3aad581eb30",
+            "context:ica:2ebe48fc8b94954d",
+            "context:ica:39388ccbeef44cc9",
+            "context:ica:3dea560861dd40c3",
+            "context:ica:40cf35f5cc4291d2",
+            "context:ica:5e27ad28cca298dd",
+            "context:ica:687e279d959c4fd5",
+            "context:ica:6a256df3bd824770",
+            "context:ica:7510f4e03751e496",
+            "context:ica:9298d28d85680b25",
+            "context:ica:93d67e8c62b80044",
+            "context:ica:a8b6a86d31e92f9a",
+            "context:ica:b6344d523dff467d",
+            "context:ica:b7da1e7d4e75ddec",
+            "context:ica:c7d64306e198b5c0",
+            "context:ica:d39e9477fc04e9cd",
+            "context:ica:d4f389e027dfd2aa",
+            "context:ica:e97cb5c51269702d",
+            "context:ica:ec2fb2e2de118f35",
+            "context:lidl:02003cfd003cb278",
+            "context:lidl:0ae4f1f209de4e0f",
+            "context:lidl:311b7dff422ef34e",
+            "context:lidl:32e1429a0ee8d968",
+            "context:lidl:94c92b23e9747b89",
+            "context:lidl:df8c739c183feea8",
+            "context:lidl:ef2d86773be8fad3",
+            "context:lidl:f9b1e1c4921e9aa1",
+            "context:willys:4c7406e2a0cbcdf4",
+            "context:willys:5adaf178f6561faa",
+            "context:willys:6e2de1b8bdc14801",
+            "context:willys:91fc2ae693ecdec6",
+            "context:willys:9e19db13968fa0c6",
+            "context:willys:aa4f80feaf2b85d5",
+            "context:willys:b69aa27a99e005be",
+            "context:willys:bbd37ea3cd468706",
+            "context:willys:f34dc63a3595b2c9",
+            "context:willys:fc5fbe8cd6399ad8"
+          ],
+          "requires_attention": true,
+          "warning_age_hours": 36.0,
+          "stale_age_hours": 48.0,
+          "status": "fresh",
+          "price_universe_id": "price-universe:b756752d4509a2c3597b676c7780e7a2c8a4fb0c2e7c332322d32a433cc5bee9",
+          "built_at": "2026-10-28 20:33:17.492845+00:00",
+          "oldest_price_age_hours": 70.23,
+          "oldest_usable_price_age_hours": 34.73,
+          "hours_until_oldest_usable_stale": null,
+          "usable_context_count": 61,
+          "excluded_stale_context_count": 0,
+          "excluded_stale_context_ids": [],
+          "retained_older_base_context_ids": [],
+          "base_price_policy": "retain-until-replaced",
+          "product_count": 2675
+        },
+        "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+        "build_id": "app-fac3a7e021a0-9fcadbe1",
+        "features": {
+          "complete_recipes_enabled": true,
+          "variation_intent_enabled": true
+        }
+      }
+    },
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 314,
+      "personal_private_state": 123,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    },
+    "price_manifests_preserved": true,
+    "mounts_preserved": true,
+    "only_environment_change": "BUILD_ID",
+    "cpu_quiet_samples": [
+      0.03,
+      0.02
+    ],
+    "backup": "/srv/smako/backups/20261028T214850Z",
+    "operation_lock": true
+  },
+  "automatic_startup_qa": {
+    "status": "passed",
+    "build_id": "app-fac3a7e021a0-9fcadbe1",
+    "seconds": 189.66,
+    "method_signature": "c3a22c355cab23ac192976cbdfa4545f81e9c270bd54e9d040893cc051f6ad58",
+    "memory_peak_bytes": 2474385408,
+    "normal_lifespan": true,
+    "automatic_preparation": {
+      "status": "ready",
+      "universes": [
+        {
+          "universe_id": "price-universe:0c617164ed822450e72b218929fe7c02f6647a2d07f08426c0ee89e0f9b590a2",
+          "shared_preparation": {
+            "ready": true,
+            "content_variants": 2462,
+            "portion_views": {
+              "1": 2462,
+              "2": 2462,
+              "3": 2462,
+              "4": 2462
+            },
+            "persistence_failures": 0
+          },
+          "status": "ready",
+          "fact_rows": 42064,
+          "seconds": 35.042
+        },
+        {
+          "universe_id": "price-universe:b756752d4509a2c3597b676c7780e7a2c8a4fb0c2e7c332322d32a433cc5bee9",
+          "shared_preparation": {
+            "ready": true,
+            "content_variants": 2462,
+            "portion_views": {
+              "1": 2462,
+              "2": 2462,
+              "3": 2462,
+              "4": 2462
+            },
+            "persistence_failures": 0
+          },
+          "status": "ready",
+          "fact_rows": 71765,
+          "seconds": 42.457
+        }
+      ],
+      "library": {
+        "status": "ready",
+        "seconds": 27.501
+      }
+    },
+    "synthetic_rows": {
+      "consumer_plan_revisions": 0,
+      "personal_private_state": 0
+    },
+    "network": "none"
+  },
+  "live_dashboard": {
+    "status": "passed",
+    "checked_at": "2026-10-28T22:03:30.770643+00:00",
+    "build_id": "app-fac3a7e021a0-9fcadbe1",
+    "ica": [
+      {
+        "city": "Lund",
+        "name": "ICA Kvantum Malmborgs Clemenstorget",
+        "base_prices": 38
+      },
+      {
+        "city": "Lund",
+        "name": "Maxi ICA Stormarknad Gunnesbo, Lund",
+        "base_prices": 1926
+      },
+      {
+        "city": "Malmö",
+        "name": "ICA Kvantum Malmborgs Caroli",
+        "base_prices": 1213
+      },
+      {
+        "city": "Malmö",
+        "name": "Maxi ICA Stormarknad Västra Hamnen",
+        "base_prices": 1432
+      }
+    ],
+    "willys_flyer_history": [
+      {
+        "city": "Lund",
+        "name": "Willys Hemma Lund Stortorget",
+        "last_success_at": "2026-10-27T11:00:16.949348Z",
+        "next_fetch_at": "2026-10-29T02:17:00Z"
+      },
+      {
+        "city": "Malmö",
+        "name": "Willys Hemma Malmö Lindängen",
+        "last_success_at": "2026-10-27T11:23:44.295729Z",
+        "next_fetch_at": "2026-10-29T02:17:00Z"
+      },
+      {
+        "city": "Malmö",
+        "name": "Willys Hemma Malmö Lugnet",
+        "last_success_at": "2026-10-27T11:23:46.250740Z",
+        "next_fetch_at": "2026-10-29T02:17:00Z"
+      },
+      {
+        "city": "Malmö",
+        "name": "Willys Hemma Malmö Möllevången",
+        "last_success_at": "2026-10-27T11:23:46.250740Z",
+        "next_fetch_at": "2026-10-29T02:17:00Z"
+      },
+      {
+        "city": "Malmö",
+        "name": "Willys Hemma Malmö Söderkulla",
+        "last_success_at": "2026-10-27T11:23:46.250740Z",
+        "next_fetch_at": "2026-10-29T02:17:00Z"
+      },
+      {
+        "city": "Malmö",
+        "name": "Willys Hemma Oxie Centrum",
+        "last_success_at": "2026-10-27T11:23:46.250740Z",
+        "next_fetch_at": "2026-10-29T02:17:00Z"
+      },
+      {
+        "city": "Malmö",
+        "name": "Willys Malmö Rosengård",
+        "last_success_at": "2026-10-27T11:23:37.848257Z",
+        "next_fetch_at": "2026-10-29T02:17:00Z"
+      }
+    ],
+    "next_refresh": {
+      "next_scheduled_at": "2026-10-29T03:17:00+01:00",
+      "next_scheduled_at_utc": "2026-10-29T02:17:00+00:00"
+    },
+    "ready": {
+      "Lund": {
+        "status": "ready",
+        "build_id": "app-fac3a7e021a0-9fcadbe1",
+        "price_universe_id": "price-universe:0c617164ed822450e72b218929fe7c02f6647a2d07f08426c0ee89e0f9b590a2",
+        "required_contexts_usable": true
+      },
+      "Malmö": {
+        "status": "ready",
+        "build_id": "app-fac3a7e021a0-9fcadbe1",
+        "price_universe_id": "price-universe:b756752d4509a2c3597b676c7780e7a2c8a4fb0c2e7c332322d32a433cc5bee9",
+        "required_contexts_usable": true
+      }
+    },
+    "unauthenticated_admin_http": 401,
+    "public_script_hash_verified": true,
+    "external_price_requests": 0
+  },
+  "malmo_willys_receipt_recovery": {
+    "exit_code": 0,
+    "expected_sha256": "bbba3548e426de8f7a191f3abe3d92c8597bd233ea69ab554d6306271ce378da",
+    "receipt_matches": true,
+    "observed_from": "2026-10-28T16:33:29.863750+00:00",
+    "completed_at": "2026-10-28T21:35:49.719277+00:00",
+    "server": {
+      "activation": "already_active",
+      "snapshot_id": "3a17dda7eb10464786a088816987d538",
+      "universe_id": "price-universe:b756752d4509a2c3597b676c7780e7a2c8a4fb0c2e7c332322d32a433cc5bee9"
+    },
+    "new_source_collection_permitted": false
+  },
+  "coop_unresolved_sources": {
+    "1281": [
+      {
+        "store_id": "3659",
+        "name": "Coop Värpinge Lund",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T14:27:30.499598+00:00",
+        "last_success": "2026-10-25T23:32:17.209769+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      },
+      {
+        "store_id": "1158",
+        "name": "Coop Veberöd",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T14:27:30.499598+00:00",
+        "last_success": "2026-10-25T23:32:35.350023+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      },
+      {
+        "store_id": "3820",
+        "name": "Coop Klostergården",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T14:27:30.499598+00:00",
+        "last_success": "2026-10-25T23:32:53.106561+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      },
+      {
+        "store_id": "3813",
+        "name": "Coop Mårtenstorget",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T14:27:30.499598+00:00",
+        "last_success": "2026-10-25T23:33:00.963339+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      }
+    ],
+    "1280": [
+      {
+        "store_id": "3823",
+        "name": "Coop Värnhem",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T17:00:10.671590+00:00",
+        "last_success": "2026-10-25T23:52:26.820788+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      },
+      {
+        "store_id": "3833",
+        "name": "Coop Malmö Central",
+        "status": "failed",
+        "failed_attempts": 69,
+        "last_attempt": "2026-10-28T13:00:10.802861+00:00",
+        "last_success": null,
+        "current_error_codes": [],
+        "current_schema_reasons": []
+      },
+      {
+        "store_id": "3835",
+        "name": "Coop Kornettsgatan",
+        "status": "failed",
+        "failed_attempts": 69,
+        "last_attempt": "2026-10-28T13:00:10.802861+00:00",
+        "last_success": null,
+        "current_error_codes": [],
+        "current_schema_reasons": []
+      },
+      {
+        "store_id": "3816",
+        "name": "Coop Norra Parkgatan",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T17:00:10.671590+00:00",
+        "last_success": "2026-10-25T23:52:38.584199+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      },
+      {
+        "store_id": "3831",
+        "name": "Coop Djupadal",
+        "status": "failed",
+        "failed_attempts": 69,
+        "last_attempt": "2026-10-28T13:00:10.802861+00:00",
+        "last_success": null,
+        "current_error_codes": [],
+        "current_schema_reasons": []
+      },
+      {
+        "store_id": "3834",
+        "name": "Coop Kirseberg",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T17:00:10.671590+00:00",
+        "last_success": "2026-10-25T23:52:50.601683+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      },
+      {
+        "store_id": "3815",
+        "name": "Coop Bulltofta",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T17:00:10.671590+00:00",
+        "last_success": "2026-10-25T23:52:58.268850+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      },
+      {
+        "store_id": "3819",
+        "name": "Coop Oxie",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T17:00:10.671590+00:00",
+        "last_success": "2026-10-25T23:53:07.615890+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      },
+      {
+        "store_id": "3830",
+        "name": "Coop Limhamn",
+        "status": "rejected",
+        "failed_attempts": 14,
+        "last_attempt": "2026-10-28T17:00:10.671590+00:00",
+        "last_success": "2026-10-25T23:53:15.379158+00:00",
+        "current_error_codes": [
+          "schema_changed"
+        ],
+        "current_schema_reasons": [
+          "Coop shared structured response rejected: public_structured_schema_unrecognized; new public offer fields require schema review: row.environmentalCode"
+        ]
+      },
+      {
+        "store_id": "3829",
+        "name": "X:-Tra Nydala",
+        "status": "failed",
+        "failed_attempts": 69,
+        "last_attempt": "2026-10-28T13:00:10.802861+00:00",
+        "last_success": null,
+        "current_error_codes": [],
+        "current_schema_reasons": []
+      }
+    ]
+  },
+  "coop_online": {
+    "context": "730400",
+    "scope": "online_fulfillment",
+    "last_qualified_observed_at": "2026-10-17T23:30:19.591880+00:00",
+    "rejected_snapshot": "875e4d32e7da4aa0a8f4f388edea5747",
+    "reason": "schema change: promotion max-use fields missing; requires reviewed source contract",
+    "original_files_hash_verified": 821,
+    "original_bytes_verified": 42722655,
+    "reproduction_external_calls": 0
+  },
+  "willys_lund": {
+    "last_success_observations": "2026-10-27T08:32-08:52Z",
+    "qualified_prices_retained": true,
+    "new_collection_performed": false
+  },
+  "windows_task": {
+    "active_release": "2464596b6f07",
+    "installed_new_release": "2b65533af00d",
+    "registration_status": "pending_administrator",
+    "actual_triggers": "01:30,09:30,17:30 daily",
+    "last_result": 1,
+    "target_triggers": "Mon,Thu 03:17 Europe/Stockholm"
+  },
+  "post_activation_retention": {
+    "applied": true,
+    "categories": [
+      {
+        "applied": true,
+        "kind": "backups",
+        "max_bytes": 34359738368,
+        "max_count": 3,
+        "minimum_exceeds_budget": false,
+        "protected": [
+          "20261028T214850Z",
+          "20261028T205455Z"
+        ],
+        "reclaimable_bytes": 0,
+        "removed": [],
+        "retained_bytes": 26355686700,
+        "retained_count": 3,
+        "unknown": []
+      },
+      {
+        "applied": true,
+        "kind": "price_artifacts",
+        "protected": [
+          "523ce31eb0fb2f2934887e24445c954064d15820b6eb4a85e5f21f415f7c670b.json",
+          "6436c10fa768470177104fff724149110b1601805a89707c74d4641da8c463c1.json"
+        ],
+        "reclaimable_bytes": 0,
+        "removed": []
+      },
+      {
+        "applied": true,
+        "kind": "price_artifacts",
+        "protected": [
+          "4e295b6ebcc78eed0ecafc95a76e32da57685de5f2e37d4a5cb2438bacd0cee0.json",
+          "e2a9533ad44feae7d393c99aa0a0b206fc9d198c64478470b510fbccc3e56380.json"
+        ],
+        "reclaimable_bytes": 0,
+        "removed": []
+      },
+      {
+        "applied": true,
+        "kind": "build_staging",
+        "reclaimable_bytes": 0,
+        "removed": []
+      },
+      {
+        "applied": true,
+        "kind": "refresh_reports",
+        "reclaimable_bytes": 0,
+        "removed": []
+      },
+      {
+        "applied": true,
+        "kind": "source_history",
+        "raw_files_removed": 0,
+        "reclaimable_bytes": 0,
+        "retired": [],
+        "reusable_database_bytes": 3035291648
+      },
+      {
+        "applied": true,
+        "kind": "municipal_attempts",
+        "reclaimable_bytes": 0,
+        "removed": []
+      }
+    ],
+    "observed_at": "2026-10-28T22:02:34.755400+00:00",
+    "reclaimable_bytes": 0,
+    "schema": "smako-storage-maintenance-v1",
+    "status": "complete",
+    "maintenance_code_sha256": "c2cf487f2f2fbf1a78cddf79723d70eb6033cd9dd639b077124343c1e52d1bca"
+  },
+  "new_external_price_requests": 0,
+  "limits": [
+    "Coop source failures remain unresolved; no weaker source/price/identity qualification was applied.",
+    "Clemenstorget base prices retain their original September observation time.",
+    "Windows weekly registration still requires administrator execution.",
+    "No additional menu latency or full-library coverage claim is made by this dashboard release."
+  ]
+}
