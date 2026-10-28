@@ -1,0 +1,76 @@
+{
+  "append_only_fixture_sha256": "630ceb3b3e3a3c253ef7d99622e346102d725a5837d6720460302aeb408f8456",
+  "conclusion": "failure",
+  "failed_tests": [
+    "backend.tests.test_frozen_recipe_quality::test_all_amended_versions_keep_history_and_original_library_and_source_bytes",
+    "backend.tests.test_mint_review::test_mint_recipe_review_preserves_history_quantities_and_leaf_recipes",
+    "backend.tests.test_pwa_readiness::test_service_worker_only_caches_static_shell_and_never_api_or_posts",
+    "backend.tests.test_all_intake_links::test_entire_intake_is_imported_and_scales_without_changing_original_library",
+    "backend.tests.test_owned_planner_artifacts::test_qualification_and_verified_menu_survive_new_planner_instances",
+    "backend.tests.test_owned_planner_artifacts::test_new_owned_delivery_competes_on_both_cache_paths[True-prepared]",
+    "backend.tests.test_owned_planner_artifacts::test_new_owned_delivery_competes_on_both_cache_paths[True-certificate]",
+    "backend.tests.test_owned_planner_artifacts::test_new_owned_delivery_competes_on_both_cache_paths[False-prepared]",
+    "backend.tests.test_owned_planner_artifacts::test_new_owned_delivery_competes_on_both_cache_paths[False-certificate]",
+    "backend.tests.test_owned_planner_artifacts::test_other_owners_delivery_cannot_invalidate_or_enter_prepared_candidates",
+    "backend.tests.test_owned_planner_artifacts::test_full_library_legacy_candidate_competes_independently_once[cheaper]",
+    "backend.tests.test_owned_planner_artifacts::test_full_library_legacy_candidate_competes_independently_once[invalid]",
+    "backend.tests.test_owned_planner_artifacts::test_full_library_legacy_candidate_competes_independently_once[search_miss]",
+    "backend.tests.test_owned_planner_artifacts::test_capacity_cache_requires_current_full_qualification_views"
+  ],
+  "first_hosted_run": 40618021232,
+  "fixture_matches_real_pre_reissue_manifest": true,
+  "full_scope_receipts_and_API_price_proofs_reused_without_edits": true,
+  "head_sha": "d050aee36190dd9b96afe737067e575906ccd2e2",
+  "local_verification": {
+    "cache_history_and_offline_contracts": {
+      "errors": 0,
+      "failures": 0,
+      "local_copy": ".local/egg-preparation-20261028/ci-contract-repairs.xml",
+      "sha256": "fd925f91e224a3e1d64df459651c25a6751c8f60ee1d142e56433cb87f7a891c",
+      "skipped": 0,
+      "tests": 54
+    },
+    "intake_successor_map": {
+      "errors": 0,
+      "failures": 0,
+      "local_copy": ".local/egg-preparation-20261028/ci-intake-map-repair.xml",
+      "sha256": "64cd20bd5d3db09ed9bd23ee64e1d9a567296e23c2db5fe5d577805eebe1ebd2",
+      "skipped": 0,
+      "tests": 1
+    }
+  },
+  "partitions": {
+    "backend-tests-core": {
+      "errors": 0,
+      "failures": 3,
+      "skipped": 63,
+      "tests": 3528
+    },
+    "backend-tests-integration": {
+      "errors": 0,
+      "failures": 1,
+      "skipped": 0,
+      "tests": 460
+    },
+    "backend-tests-planner": {
+      "errors": 0,
+      "failures": 10,
+      "skipped": 0,
+      "tests": 133
+    }
+  },
+  "repairs": [
+    "Intake/frozen/mint tests follow reviewed egg successors while verifying exact issued intermediate versions and source preservation.",
+    "Owned-certificate tests pin the real complete append-only pre-reissue library; the production reissue-invalidation guard remains unchanged and its independent tests pass.",
+    "Presentation-only service-worker cache v19 lists the exact new personal.js version; API/POST/private-price caching remains prohibited."
+  ],
+  "runtime_models_services_recipe_and_facts_unchanged": true,
+  "tests_removed_or_skipped_to_clear_failure": false,
+  "totals": {
+    "errors": 0,
+    "failures": 14,
+    "skipped": 63,
+    "tests": 4121
+  },
+  "unchanged_method_signature": "8756c56dfd1329d0bb62336df84765ba821a61b382b70fea7769e810326d631a"
+}

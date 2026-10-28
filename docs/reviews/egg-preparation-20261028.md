@@ -84,6 +84,18 @@ PR #27:s genomförda CI tog 500 s (8:20) mot PR #26:s 701 s (11:41), med
 Denna ändrings hosted CI och integrationsstatus registreras vid leverans.
 Legacy är fortsatt standard; ingen beta-/produktionsaktivering ingår.
 
+Första hosted-körningen hade 14 fel med tre gemensamma orsaker: äldre tester
+följde inte de nya efterföljarna, certifikatstester förutsatte en obruten kedja
+trots en avsiktlig receptåterutgivning, och offline-skalets assetlista saknade
+den nya klientversionen. Efterföljarkartor och kontroller av exakt utgivna
+mellanversioner är rättade. Certifikatstesterna använder nu det verkliga
+föregående, kompletta append-only-biblioteket; den oberoende spärren mot
+återanvändning vid återutgivning är oförändrad. Offline-skalet har cache v19
+och rätt klientfil, med API/POST fortsatt utanför cachen. De 55 berörda lokala
+kontrollerna passerar. Runtime-modeller, tjänster, recept och fakta är
+oförändrade, så de hashbundna korg-/prisproven ovan återanvänds.
+[Reparation och testunderlag](egg-preparation-20261028/ci-repairs.json).
+
 ## Fortsättning
 
 Tamarind, bladmynta, masa harina, citrongräs och pärlkorn är fortfarande stora
