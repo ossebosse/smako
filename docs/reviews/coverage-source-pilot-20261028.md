@@ -155,15 +155,23 @@ Tre handlaridentiteter är tillagda utan nya ordinarie källstrategier.
 i insamling, upptäckt, status, byggare och benchmark. Pilotens nya
 identiteter är inte tillåtelse till automatisk insamling eller aktivering.
 
-Den automatiska råinsamlingen har stannat före handlaranrop eftersom
-serverns ordinarie `run_daily_refresh.py` höll operationslåset från
-08:30 UTC. Läskontrollen 09:27 UTC visade en levande CPU-arbetande process,
-inte en övergiven låsfil. Ingen process har avbrutits och inget lås tagits
-över. Den manuella webbläsargranskningen hålls separat från råinsamling
-och kvalificering. En ny ordinarie refresh tog låset 09:45 UTC. Ett köat
-pilotförsök väntar högst 45 minuter med normala låsförsök och noll
-handlaranrop före erhållen lease. Aktuell lokal försöksstatus finns i
-`.local/specialist-pilot-20261028/collection-status.json` och dess attempts.
+Den automatiska råinsamlingen väntade på serverns ordinarie refresh.
+Den begränsade kön fick sedan både serverns och den lokala reläprocessens
+ordinarie operationslås. Inga processer avbröts eller lås togs över.
+Insamlingen 10:25–10:26 UTC sparade tio hashkontrollerade råposter:
+nio HTTP 200 och den exakta Maseca-artikeln HTTP 404. Insamlaren avslutades
+korrekt med kod 2 för ofullständigt sortiment. [Källrapporten](specialist-pilot-20261028/source-collection.json)
+binder varje observation till snapshot, URL, tid och hash.
+
+Pongs maskinläsbara priser är också 20/25/33 kr och löser därför inte
+avvikelsen mot gästkassan. Med24s rådata bekräftar däremot exakt GTIN
+5765228120453, artikel 9576, 400 g polerade kornkärnor och ordinarie 31 kr.
+Den aktuella leveranssidan anger DHL Service Point 39 kr, fri frakt över
+499 kr. [Köpvillkoren](https://www.med24.se/koepvillkor-hos-med24-se) binder
+fraktavgifterna till Sverige. Exakt 499 kr har motstridig gränsformulering
+och är inte kvalificerat. Med24 kan därför utredas som separat lokal
+leveranskandidat; ingen ny helkorg eller prisaktivering är ännu räknad.
+Det nya underlagets verkliga klocka hålls isär från den frysta referensen.
 
 ## Verifiering av oförändrat huvudunderlag
 

@@ -13,10 +13,12 @@ Lokal insamlare för fem artiklar/tio sidor använder befintliga råsnapshot,
 explicit opt-in, avbryter vid åtkomststopp och gör ingen aktivering.
 Tre nya handlaridentiteter utökar inte standardurvalet: samma sex kedjor
 i insamling, status, upptäckt och byggare; saknad strategi stoppar piloten.
-Ordinarie serverrefresh har spärrat råinsamlingen. Ett begränsat köat försök
-väntar på samma ordinarie lås. Läs aktuell status/attempt under
-`.local/specialist-pilot-20261028`; inga lås får tas över. Senast observerade
-ordinarie refresh tog leasen 09:45 UTC, efter den tidigare från 08:30.
+Råinsamlingen fick båda ordinarie operationslåsen och slutfördes 10:26 UTC:
+Nio HTTP 200 och artikel 944 HTTP 404. Inga lås togs över. Rådata bekräftar
+Pongs priskonflikter samt Med24s GTIN 5765228120453, 400 g och 31 kr.
+Se [källinsamlingen](reviews/specialist-pilot-20261028/source-collection.json).
+Med24s publicerade frakt avser Sverige; fortsatt lokal kandidat måste
+inkludera frakt i butiksval, summa och audit innan nya korgar kan räknas.
 
 Slutlig fryst referens är omverifierad på metod `f3383a626a10bf63fd02bd9fdd0e9fd7c63e303332e18ac8ab359c8e425a608d`:
 2 200 original, 2 462 aktiva, 2 932 kvitton; 1 066 exakt hela och 1 864
@@ -26,7 +28,9 @@ inklusive uppskattningar, inga förluster. A 278,76 kr två gånger på
 bevarades. Fulla underlag: `.local/specialist-pilot-20261028/final-v1`.
 
 92 riktade tester, Ruff/compileall passerar. Alla tidigare 4 201 CI-noder
-bevaras exakt en gång, 11 nya tillkommer. Hosted CI krävs före integration.
+bevaras exakt en gång, 11 nya tillkommer. Första head eb8a9b6 har verifierad
+hosted CI: 4 212 noder, noll fel, 63 historiska skippar, 443 s (7:23).
+Slutlig head måste också passera före integration.
 En bredare grocery-svit avbröts efter 600 s; fem observerade ICA-fel har
 återskapats även med oförändrad main och är inte gröna. Se separat
 [teststatus](reviews/specialist-pilot-20261028/test-status.json).
