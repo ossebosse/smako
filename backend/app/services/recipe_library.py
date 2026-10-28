@@ -65,8 +65,8 @@ def _structural_check(recipe: Recipe) -> None:
     for i in recipe.ingredients:
         if not i.canonical_name or not i.form or i.component not in components:
             raise ValueError("Ingrediensen saknar identitet, form eller komponent.")
-        if i.unit not in {"g", "ml"} or (i.form != "as_sold" and i.unit != "g"):
-            raise ValueError("Mängden kräver en uttryckligt kvalificerad gram-/volymgrund.")
+        if i.unit not in {"g", "ml", "st"} or (i.form != "as_sold" and i.unit != "g"):
+            raise ValueError("Mängden kräver kvalificerad massa, volym eller antal som såld.")
         if not (i.quantity_min and i.quantity_max and i.quantity_step):
             raise ValueError("Ingrediensen saknar godkänt mängdintervall.")
         if not i.quantity_min <= i.quantity <= i.quantity_max:

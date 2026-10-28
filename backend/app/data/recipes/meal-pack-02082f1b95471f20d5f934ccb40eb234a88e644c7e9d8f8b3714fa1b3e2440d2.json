@@ -1,0 +1,736 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 14,
+        "base_id": "smako-mexican-snack-whole-charred-corn",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majskolv|as_sold",
+                "name": "Hel fryst förvälld majskolv, antal inklusive oätlig mittkolv",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja, volym som såld (ml)",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt, vikt som såld (g)",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Hel grillstekt majskolv med limeyoghurt"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell, vikt som såld (g)",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice, volym som såld (ml)",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Ost, vikt som såld (g)",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Limeyoghurt med ost"
+          }
+        ],
+        "content_sha256": "b8db275ecb180209762bb4933abfbdf383691bcd4fc1a3e8050c92fe0ebf1492",
+        "content_source": {
+          "active_minutes": 14,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "whole-corn-review-20261028",
+          "priority": 1,
+          "proposal_id": "smako-mexican-snack-whole-charred-corn",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "3692fecd767f2e5c7504bd34a38dc73be8f5ecec54c86be750fdfef95cf00c0f",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "Köksvåg",
+          "Måttkanna och måttsats",
+          "Skål",
+          "Sked och gaffel",
+          "Kniv och skärbräda",
+          "Digital kökstermometer",
+          "Kastrull",
+          "Grillpanna",
+          "Bakpensel",
+          "Tång",
+          "Liten kastrull",
+          "Liten släppbelagd stekpanna",
+          "Finmaskig sil",
+          "Rivjärn",
+          "Visp",
+          "Serveringsskål"
+        ],
+        "estimated_minutes": 24,
+        "family": "whole-charred-corn",
+        "fish": false,
+        "flavor_profile": [
+          "majskolv"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "majskolv",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Systematiskt innehållsgranskad utvecklingsimport 2026-10-26. AI-författad, inte provlagad. Ingredienser, användning, stegberoenden, tidskedja, råvaruform, namngivna processgrupper och diet kontrollerade. Källoriginal smako-recept-paket-145.json, rad 0, SHA-256 b71bd0ceca8227be17fcb9accadcf2cb2be43dc6516e10d9baba75dcf92bbaf2. Produktköp, diet, näring, allergener och eko prövas fortsatt för faktiska produkter och användarval. Granskad fryst kolvberedning 2026-10-28: Explicit frozen whole-cob adaptation: one whole blanched frozen cob per serving replaces the previous 180-g raw whole-cob specification. Exact manufacturer pack count does not establish individual or edible mass. Original recipe bytes remain in history. Heating time is an author estimate with a doneness check; not cooking-tested.",
+          "reviewed_at": "2026-10-28"
+        },
+        "side": "Limeyoghurt med ost",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "majskolv|as_sold",
+              "rapsolja|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Ta fram angivet antal hela frysta förvällda majskolvar. Antalet avser hela kolvar inklusive oätlig mittkolv; ingen gramvikt per kolv antas. Koka upp 1000 ml vatten och lägg i kolvarna direkt från frysen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 10,
+            "id": "s2",
+            "ingredient_keys": [
+              "majskolv|as_sold",
+              "rapsolja|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka tio minuter tills kolvarna är genomvarma och kornen mjuka; kontrollera att ingen fryst kärna finns kvar och fortsätt vid behov enligt förpackningen. Lyft upp och torka ytan med rent kökspapper. Tiden är en författaruppskattning."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "majskolv|as_sold",
+              "rapsolja|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Pensla kolven med hela oljemängden. Stek i het grillpanna och vrid runt tills flera sidor fått brynta fläckar. Fördela saltet över kornen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "limejuice|as_sold",
+              "ost|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Riv osten fint och rör med yoghurt och limejuice. Fördela över eller vid sidan av den varma kolven. Den hårda mittkolven äts inte."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "limejuice|as_sold",
+              "majskolv|as_sold",
+              "ost|as_sold",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den angivna mängden av huvudkomponenten med limeyoghurt med ost som en mellanmålsportion."
+          }
+        ],
+        "total_minutes": 24,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 10
+      },
+      "ingredients": [
+        {
+          "canonical_name": "majskolv",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "majskolv",
+          "product_requirements": [
+            "pack:intake_all_shape_frozen_whole_corn_count"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "side",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Ta fram angivet antal hela frysta förvällda majskolvar. Antalet avser hela kolvar inklusive oätlig mittkolv; ingen gramvikt per kolv antas. Koka upp 1000 ml vatten och lägg i kolvarna direkt från frysen.",
+        "Sjud cirka tio minuter tills kolvarna är genomvarma och kornen mjuka; kontrollera att ingen fryst kärna finns kvar och fortsätt vid behov enligt förpackningen. Lyft upp och torka ytan med rent kökspapper. Tiden är en författaruppskattning.",
+        "Pensla kolven med hela oljemängden. Stek i het grillpanna och vrid runt tills flera sidor fått brynta fläckar. Fördela saltet över kornen.",
+        "Riv osten fint och rör med yoghurt och limejuice. Fördela över eller vid sidan av den varma kolven. Den hårda mittkolven äts inte.",
+        "Servera hela den angivna mängden av huvudkomponenten med limeyoghurt med ost som en mellanmålsportion."
+      ],
+      "name": "Hel grillstekt majskolv med limeyoghurt – enkel",
+      "preparation": {
+        "family": "whole-charred-corn",
+        "input_forms": {
+          "limejuice": "as_sold",
+          "majskolv": "as_sold",
+          "ost": "as_sold",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "b8db275ecb180209762bb4933abfbdf383691bcd4fc1a3e8050c92fe0ebf1492",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 18,
+        "base_id": "smako-mexican-snack-whole-charred-corn",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "majskolv|as_sold",
+                "name": "Hel fryst förvälld majskolv, antal inklusive oätlig mittkolv",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja, volym som såld (ml)",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt, vikt som såld (g)",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Hel grillstekt majskolv med limeyoghurt"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell, vikt som såld (g)",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice, volym som såld (ml)",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Ost, vikt som såld (g)",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Limeyoghurt med ost"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat, rå ätlig vikt",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander, fryst hackad, ätlig vikt vägd direkt ur förpackningen",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök, rå ätlig vikt",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Tomat och koriander"
+          }
+        ],
+        "content_sha256": "6a402197f99be324c808dfcbfe4a1b8bba090d27feed46ddbc15d2b73b6dce1d",
+        "content_source": {
+          "active_minutes": 18,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "whole-corn-review-20261028",
+          "priority": 1,
+          "proposal_id": "smako-mexican-snack-whole-charred-corn",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "3692fecd767f2e5c7504bd34a38dc73be8f5ecec54c86be750fdfef95cf00c0f",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "Köksvåg",
+          "Måttkanna och måttsats",
+          "Skål",
+          "Sked och gaffel",
+          "Kniv och skärbräda",
+          "Digital kökstermometer",
+          "Kastrull",
+          "Grillpanna",
+          "Bakpensel",
+          "Tång",
+          "Liten kastrull",
+          "Liten släppbelagd stekpanna",
+          "Finmaskig sil",
+          "Rivjärn",
+          "Visp",
+          "Serveringsskål"
+        ],
+        "estimated_minutes": 28,
+        "family": "whole-charred-corn",
+        "fish": false,
+        "flavor_profile": [
+          "majskolv"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "majskolv",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "Systematiskt innehållsgranskad utvecklingsimport 2026-10-26. AI-författad, inte provlagad. Ingredienser, användning, stegberoenden, tidskedja, råvaruform, namngivna processgrupper och diet kontrollerade. Källoriginal smako-recept-paket-145.json, rad 1, SHA-256 b71bd0ceca8227be17fcb9accadcf2cb2be43dc6516e10d9baba75dcf92bbaf2. Produktköp, diet, näring, allergener och eko prövas fortsatt för faktiska produkter och användarval. Beredningsrättning 1.0.2: uttryckligt granskad produktform och faktisk användning; tider är författaruppskattningar, inte provlagning. Granskad fryst kolvberedning 2026-10-28: Explicit frozen whole-cob adaptation: one whole blanched frozen cob per serving replaces the previous 180-g raw whole-cob specification. Exact manufacturer pack count does not establish individual or edible mass. Original recipe bytes remain in history. Heating time is an author estimate with a doneness check; not cooking-tested.",
+          "reviewed_at": "2026-10-28"
+        },
+        "side": "Limeyoghurt med ost, Tomat och koriander",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "koriander|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst koriander. Tillsätt direkt från frysen när ingrediensen används i instruktionen; den ska inte skalas, ansas eller hackas på nytt. Behåll hela den uppvägda ätliga mängden."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "majskolv|as_sold",
+              "rapsolja|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Ta fram angivet antal hela frysta förvällda majskolvar. Antalet avser hela kolvar inklusive oätlig mittkolv; ingen gramvikt per kolv antas. Koka upp 1000 ml vatten och lägg i kolvarna direkt från frysen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "majskolv|as_sold",
+              "rapsolja|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka tio minuter tills kolvarna är genomvarma och kornen mjuka; kontrollera att ingen fryst kärna finns kvar och fortsätt vid behov enligt förpackningen. Lyft upp och torka ytan med rent kökspapper. Tiden är en författaruppskattning."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 7,
+            "id": "s4",
+            "ingredient_keys": [
+              "majskolv|as_sold",
+              "rapsolja|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Pensla kolven med hela oljemängden. Stek i het grillpanna och vrid runt tills flera sidor fått brynta fläckar. Fördela saltet över kornen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "limejuice|as_sold",
+              "ost|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Riv osten fint och rör med yoghurt och limejuice. Fördela över eller vid sidan av den varma kolven. Den hårda mittkolven äts inte."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "koriander|raw_edible",
+              "rödlök|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Finhacka tomat och rödlök och tillsätt den frysta finhackade koriandern och servera som saftigt tillbehör till kolven."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "koriander|raw_edible",
+              "limejuice|as_sold",
+              "majskolv|as_sold",
+              "ost|as_sold",
+              "rapsolja|as_sold",
+              "rödlök|raw_edible",
+              "salt|as_sold",
+              "tomat|raw_edible",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den angivna mängden av huvudkomponenten med limeyoghurt med ost, tomat och koriander som en mellanmålsportion."
+          }
+        ],
+        "total_minutes": 28,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.3",
+        "waiting_minutes": 10
+      },
+      "ingredients": [
+        {
+          "canonical_name": "majskolv",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "majskolv",
+          "product_requirements": [
+            "pack:intake_all_shape_frozen_whole_corn_count"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "side",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst koriander. Tillsätt direkt från frysen när ingrediensen används i instruktionen; den ska inte skalas, ansas eller hackas på nytt. Behåll hela den uppvägda ätliga mängden.",
+        "Ta fram angivet antal hela frysta förvällda majskolvar. Antalet avser hela kolvar inklusive oätlig mittkolv; ingen gramvikt per kolv antas. Koka upp 1000 ml vatten och lägg i kolvarna direkt från frysen.",
+        "Sjud cirka tio minuter tills kolvarna är genomvarma och kornen mjuka; kontrollera att ingen fryst kärna finns kvar och fortsätt vid behov enligt förpackningen. Lyft upp och torka ytan med rent kökspapper. Tiden är en författaruppskattning.",
+        "Pensla kolven med hela oljemängden. Stek i het grillpanna och vrid runt tills flera sidor fått brynta fläckar. Fördela saltet över kornen.",
+        "Riv osten fint och rör med yoghurt och limejuice. Fördela över eller vid sidan av den varma kolven. Den hårda mittkolven äts inte.",
+        "Finhacka tomat och rödlök och tillsätt den frysta finhackade koriandern och servera som saftigt tillbehör till kolven.",
+        "Servera hela den angivna mängden av huvudkomponenten med limeyoghurt med ost, tomat och koriander som en mellanmålsportion."
+      ],
+      "name": "Hel grillstekt majskolv med limeyoghurt – utökad",
+      "preparation": {
+        "family": "whole-charred-corn",
+        "input_forms": {
+          "koriander": "raw_edible",
+          "limejuice": "as_sold",
+          "majskolv": "as_sold",
+          "ost": "as_sold",
+          "rapsolja": "as_sold",
+          "rödlök": "raw_edible",
+          "salt": "as_sold",
+          "tomat": "raw_edible",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "6a402197f99be324c808dfcbfe4a1b8bba090d27feed46ddbc15d2b73b6dce1d",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    }
+  ]
+}

@@ -38,6 +38,23 @@ def test_shared_ingredients_reduce_subsets_without_changing_package_winner():
     assert actual.total==25 and actual.stores[0].items[0].packages_needed==1
 
 
+@pytest.mark.parametrize('cap', [2, 3])
+def test_sparse_store_coverage_preserves_every_complete_checkout_choice(cap):
+    shops = [f's{i:02d}' for i in range(12)]
+    rows = {'ris':tuple(product('ris', f'rice-{s}', s, 500, 10 + i) for i,s in enumerate(shops)),
+            'linser':tuple(product('linser', f'lentil-{s}', s, 500, 15 - i)
+                           for i,s in enumerate(shops) if i % 4 == 0),
+            'bröd':tuple(product('bröd', f'bread-{s}', s, 500, 14 - i)
+                         for i,s in enumerate(shops) if i % 3 == 0)}
+    required = [NormalizedIngredient(canonical_name=n, required_quantity=600, unit='g') for n in rows]
+    results = []
+    for prune in (False, True):
+        optimizer = BasketOptimizer(prune_dominated_stores=prune)
+        with optimizer.quote_cache():
+            results.append(optimizer.optimize(required, rows, [store(s) for s in shops], cap).model_dump())
+    assert results[0] == results[1]
+
+
 def test_forced_nutrition_and_organic_alternatives_keep_exact_best_qualified_basket():
     required=[NormalizedIngredient(canonical_name=n,required_quantity=500,unit='g') for n in ['linser','ris']]
     choices={n:[product(n,f'{n}-low','a',500,10),product(n,f'{n}-high','b',500,18)] for n in ['linser','ris']}

@@ -18,6 +18,7 @@ from app.services.recipe_library import current_recipes
 MINT_REVIEW = Path('docs/reviews/recipe-four-staples-20261027/recipe-review.json')
 EGG_REVIEW = Path('docs/reviews/egg-preparation-20261028/recipe-review.json')
 MINT_LEAF_REVIEW = Path('docs/reviews/mint-leaf-preparation-20261028/recipe-review.json')
+CORN_REVIEW = Path('docs/reviews/whole-corn-20261028/recipe-review.json')
 
 
 def reviewed_recipe_transition(scope, compared_scope, variants):
@@ -26,7 +27,7 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
     This changes comparison identities, never old checkout receipts or outcomes.
     Unknown recipe/manifest drift still fails closed.
     """
-    review = next((row for path in (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW) if path.exists()
+    review = next((row for path in (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW) if path.exists()
                    and (row := json.loads(path.read_bytes()))
                    and scope['manifest_sha256'] == row['before_manifest_file_sha256']
                    and compared_scope['manifest_sha256'] == row['after_manifest_file_sha256']), None)
@@ -94,7 +95,8 @@ def imported_recipes():
                       ('week-search-and-cache-20261026/recipe-review.json', 'corrected'),
                       ('recipe-four-staples-20261027/recipe-review.json', 'corrected'),
                       ('egg-preparation-20261028/recipe-review.json', 'corrected'),
-                      ('mint-leaf-preparation-20261028/recipe-review.json', 'corrected')]:
+                      ('mint-leaf-preparation-20261028/recipe-review.json', 'corrected'),
+                      ('whole-corn-20261028/recipe-review.json', 'corrected')]:
         for row in json.loads((Path('docs/reviews') / file).read_bytes())[key]:
             replacements[row['previous_id']] = row['runtime_id']
     active = {identity(r): r for r in current_recipes()}

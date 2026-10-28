@@ -635,6 +635,78 @@
           "composition_sha256": "b0e7b46e22f689bdb85a2ce14897b8ee7a968b529bac95ac593aa149c2979b9e"
         }
       ]
+    },
+    {
+      "name": "majskolv",
+      "form": "as_sold",
+      "unit": "st",
+      "requirements": [
+        "pack:intake_all_shape_frozen_whole_corn_count"
+      ],
+      "kind": "definition_only",
+      "definition": "Hel fryst förvälld majskolv, antal inklusive oätlig mittkolv; ingen ätlig gramvikt antas.",
+      "required_classification": "culinary_input:frozen_whole_corn:as_sold:st",
+      "review_basis": "Exact manufacturer whole-piece count. Separate authored frozen recipe versions; no edible nutrient yield.",
+      "gross_inedible_mass": true,
+      "evidence": [],
+      "reviewed_links": [
+        {
+          "store_id": "context:citygross:33b01007b20e8988",
+          "product_id": "5ae68b2370b44bcfbcae6831f5799586",
+          "gtin": "7310500019628",
+          "name": "Majskolvar",
+          "brand": "FINDUS",
+          "category": "Fryst > Frysta grönsaker & kryddor > Grönsaker",
+          "package_quantity": 400.0,
+          "package_unit": "g",
+          "sale_model": "fixed_package",
+          "source_snapshot_id": "827b0b54768343de912acceff8e075bf",
+          "source_provenance": {
+            "source_provider": "own",
+            "source_channel": "catalog",
+            "source_snapshot_id": "827b0b54768343de912acceff8e075bf",
+            "source_observed_at": "2026-10-21T22:46:49.735756Z",
+            "source_role": "basket",
+            "fallback_used": false,
+            "chain": "citygross",
+            "store_id": "context:citygross:33b01007b20e8988",
+            "store_name": "Malmö Hyllie",
+            "provider_store_id": "3211",
+            "price_context": "online_store",
+            "coverage": "full_online_catalog",
+            "semantic_confidence": "high",
+            "quantity_confidence": "exact",
+            "retailer_product_id": "100722988_ST",
+            "retailer_id_namespace": "citygross:online-product",
+            "maximum_purchase_units": 25,
+            "official_product_url": "https://www.citygross.se/matvaror/fryst/frysta-gronsaker-och-kryddor/findus-majskolvar-p100722988_ST",
+            "quantity_limit_source_url": "https://www.citygross.se/static/js/main.07a64bf6.js"
+          },
+          "source_sha256": "8cf9d49a6574fc81c760ce07070cf5ad2d418b46821fa6c4f9bae7bb64a3ecee",
+          "retailer_product_id": "100722988_ST",
+          "composition_sha256": "1745a9359ff4a7d5ce6cbc7538f8874896947947c1896ff6861203ccec765505",
+          "retrieval_sha256": "db10e77acb173b66cffecaf6d09ebf2d17018820354668c07535f709ff4a2d3b",
+          "review": "Exact existing CityGross consumer GTIN and 400-g pack; manufacturer declares two whole blanched frozen cobs. Count is exact, individual/edible mass unknown. Never approve raw-corn recipes.",
+          "quantity": {
+            "method": "reviewed_declared_piece_count_v1",
+            "basis": "as_sold",
+            "unit": "st",
+            "confidence": "exact",
+            "usable_quantity": 2,
+            "declared_net_quantity": 400,
+            "source": {
+              "evidence_kind": "reviewed_manufacturer_count_declaration",
+              "url": "https://www.findus.se/var-mat/gronsaker/majskolvar",
+              "consumer_gtin": "7310500019628",
+              "declared_net_g": 400,
+              "declared_piece_count": 2,
+              "sha256": "180b9ef4febb8249b2cacf2ad2644be478b3cabc4433c4ca3625a12ae54589ed",
+              "normalized_extraction": "docs\\reviews\\whole-corn-20261028\\manufacturer-declaration.json",
+              "raw_http_body_not_claimed": true
+            }
+          }
+        }
+      ]
     }
   ]
 }
