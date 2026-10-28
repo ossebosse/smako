@@ -88,3 +88,79 @@ def enrich_ingredients(prepared, original):
             conflicts=tuple(sorted(set(fact.conflicts) | set(row.get("reference_conflicts", [])))),
         )
     return result
+
+
+@lru_cache(maxsize=1)
+def issued_compositions():
+    """Composition already accepted by the issued exact ingredient registry."""
+    from app.services.intake_product_links import composition_signature, entries
+    from app.services.personal_policy import ProductFacts
+
+    path = PATH.with_name("issued-compositions-20261028.json")
+    document = json.loads(path.read_bytes())
+    assert document["schema"] == "smako-issued-compositions-v1"
+    approved = {
+        json.dumps(proof, sort_keys=True, ensure_ascii=False)
+        for row in entries().values() for proof in row.get("reviewed_links", ())
+    }
+    index = {}
+    for row in document["products"]:
+        proof = row["proof"]
+        assert json.dumps(proof, sort_keys=True, ensure_ascii=False) in approved
+        assert row["ingredients"] and row["ingredients_complete"] is True
+        composition = ProductFacts(
+            source="issued-composition-review", source_product_id=proof["product_id"],
+            source_snapshot_id=proof["source_snapshot_id"],
+            ingredients=tuple(row["ingredients"]), ingredients_complete=True,
+            ingredient_evidence_kind=row["ingredient_evidence_kind"],
+        )
+        assert composition_signature(composition) == proof["composition_sha256"]
+        assert row["sources"] and all(s.get("sha256") for s in row["sources"])
+        identity = ("gtin", proof["gtin"]) if proof.get("gtin") else (
+            "article", proof["retailer_product_id"])
+        index.setdefault((proof["store_id"], *identity), []).append(row)
+    return index
+
+
+def enrich_issued_compositions(prepared, original):
+    """Fill missing reviewed composition; all other facts and prices stay intact."""
+    from app.services.intake_product_links import _review_identity
+    from app.services.personal_policy import ProductFacts
+
+    result = dict(original)
+    index = issued_compositions()
+    for product in prepared.universe.products:
+        provenance = product.source_provenance
+        if provenance is None:
+            continue
+        key = (product.store_id, product.product_id)
+        fact = result.get(key)
+        article = provenance.retailer_product_id or (fact.retailer_product_id if fact else None)
+        rows = index.get((product.store_id, "gtin", product.gtin), ())
+        rows = (*rows, *index.get((product.store_id, "article", article), ()))
+        for row in rows:
+            ingredients = tuple(row["ingredients"])
+            if fact and fact.ingredients and tuple(fact.ingredients) != ingredients:
+                continue  # A differing current declaration requires another review.
+            prior = fact or ProductFacts(
+                source="issued-reviewed-composition", source_product_id=product.product_id,
+                source_snapshot_id=provenance.source_snapshot_id, retailer_product_id=article,
+                observed_at=row["proof"]["source_provenance"]["source_observed_at"],
+            )
+            candidate = replace(prior, ingredients=ingredients, ingredients_complete=True,
+                                ingredient_evidence_kind=row["ingredient_evidence_kind"])
+            if not _review_identity(row["proof"], product, candidate):
+                continue
+            if candidate == prior:
+                break
+            evidence = tuple({**source,
+                "reviewed_original_binding": {k: source.get(k) for k in (
+                    "bound_product_id", "bound_store_id", "bound_snapshot_id")},
+                "bound_product_id": product.product_id, "bound_store_id": product.store_id,
+                "bound_snapshot_id": provenance.source_snapshot_id,
+                "identity_method": "issued_exact_context_product_package_composition",
+            } for source in row["sources"])
+            result[key] = replace(candidate, field_sources={**prior.field_sources,
+                "ingredients": (*prior.field_sources.get("ingredients", ()), *evidence)})
+            break
+    return result

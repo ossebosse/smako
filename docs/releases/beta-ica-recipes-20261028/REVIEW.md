@@ -49,6 +49,35 @@ Ordinarie driftlås, backup, kandidatkontroll, återställningsväg och efterkon
 gäller. Windowsreläets befintliga uppgift ska bindas till verifierat paket och
 måndag/torsdag 03:17 svensk tid. Ingen genomförd aktivering påstås i denna fil.
 
+## Granskade ingrediensfakta i vanlig faktaladdning
+
+Inför aktiveringen hittades en verklig integrationslucka: 66 redan granskade
+produktdeklarationer var med i det frysta faktaunderlaget men saknades i den
+vanliga faktaladdningen. De finns nu i en liten versionshanterad projektion
+under `backend/app/data/ingredients/issued-compositions-20261028.json`.
+Varje post måste finnas exakt i befintlig utgiven ingrediensregistry och
+ge samma tidigare godkända sammansättningshash. En oregistrerad äldre
+pektinkoppling uteslöts. Exporten binder faktaunderlagets hash ovan.
+
+Befintlig `reviewed_ingredients` kompletterar endast saknad sammansättning.
+Den återanvänder samma exakta produkt-, förpacknings-, käll- och butiksgate
+som receptkvalificeringen. Ny prisgeneration kräver fortfarande samma
+verifierade livsmedelsidentitet; originalkällans observationstid och tidigare
+bindning bevaras i evidensen. Avvikande aktuell deklaration eller konflikt
+skrivs aldrig över. Priser, mängder, näring, allergenkontroller, personliga
+godkännanden och övriga befintliga fakta ändras inte av denna komplettering.
+76 riktade nya tester inklusive vanlig faktaladdning, identitetsgränser och
+ny prisgeneration passerar. Befintliga faktaladdnings-/Axfood-/offertfaktatester
+passerar separat. Ny metodhash måste användas för härledda cacheartefakter;
+de historiska täckningssiffrorna ovan skrivs inte om till nya mätningar.
+
+Det senaste granskade Axfood-detaljarkivet är
+`b11ed75863be1547755ee78be5143ba737d5ea3564acc1cadaa0feb6b4ebf0a8`:
+111 verifierade Willys- och 12 Hemköpsdokument samt 18 negativa svar.
+Det installeras med hashkontroll och skyddade filer i befintlig datavolym;
+`AXFOOD_PRODUCT_DETAIL_ROOT` binder den exakta releasen. Detta aktiverar
+faktaläsaren och startar ingen ny produktdetaljinsamling.
+
 Skyddat operatörsunderlag: `.local/beta-all-20261028/` och serverns
 `/srv/app/var/reports/beta-all-20261028/`. Dessa innehåller inga källnycklar
 i publicerade rapporter och checkas inte in.
