@@ -1007,6 +1007,8 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
     result.update(reviewed)
     from app.services.official_product_facts import supplement_catalog_facts
     supplemented = supplement_catalog_facts(prepared.universe.products, result)
+    from app.services.reviewed_ingredients import enrich_issued_compositions
+    supplemented = enrich_issued_compositions(prepared, supplemented)
     if not reviewed and supplemented == catalog:
         return catalog  # Preserve the hash-verified retained-source cache.
     return FactsCollection(supplemented)
