@@ -1,0 +1,53 @@
+{
+  "workflow_sha256": "175ec7498ca59c3d93ea975f8ce9e2cc3784102e34c47498cbc875e95da7874c",
+  "all_prior_4170_nodes_preserved": true,
+  "same_test_nodes_exactly_once": true,
+  "partitions": {
+    "all": {
+      "count": 4170,
+      "node_ids_sha256": "4e1694dda7f5db38c1d77fb3adb8be3c9effa8a4aab2da011e5abfafd43046ec"
+    },
+    "planner": {
+      "count": 125,
+      "node_ids_sha256": "83d3b55af9f19ab83ec5a82843b08d269a9614bc2f60a54afff73bc3277379af"
+    },
+    "integration": {
+      "count": 597,
+      "node_ids_sha256": "d0edee798b00225324b585cfd190f0a6a3dbb783159b94443f941890fe302540"
+    },
+    "core": {
+      "count": 3448,
+      "node_ids_sha256": "87059effc63330a8165edd03de1ca0e53bd9426b4bc2394f9fe9a62bc797282b"
+    }
+  },
+  "measured_repartition": [
+    {
+      "source": "mint-leaf-review-20261028",
+      "old_test_seconds": {
+        "core": 429.1099999999873,
+        "integration": 192.99300000000113,
+        "planner": 268.04400000000015
+      },
+      "projected_test_seconds": {
+        "core": 328.6829999999971,
+        "planner": 245.1650000000002,
+        "integration": 316.2990000000012
+      },
+      "projection_not_hosted_wall_time": true
+    },
+    {
+      "source": "remaining-source-review-20261028",
+      "old_test_seconds": {
+        "core": 401.62399999999286,
+        "integration": 149.81400000000002,
+        "planner": 385.50699999999995
+      },
+      "projected_test_seconds": {
+        "core": 308.6349999999994,
+        "planner": 351.379,
+        "integration": 276.93100000000015
+      },
+      "projection_not_hosted_wall_time": true
+    }
+  ]
+}
