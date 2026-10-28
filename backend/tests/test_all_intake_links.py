@@ -200,6 +200,10 @@ def test_entire_intake_is_imported_and_scales_without_changing_original_library(
     successors = {r["previous_id"]: r["runtime_id"] for r in corn["corrected"]}
     replacements = {k: successors.get(v, v) for k, v in replacements.items()}
     replacements.update(successors)
+    top_five = json.loads((ROOT.parents[3] / "docs/reviews/top-five-ingredients-20261028/recipe-review.json").read_bytes())
+    successors = {r["previous_id"]: r["runtime_id"] for r in top_five["corrected"]}
+    replacements = {k: successors.get(v, v) for k, v in replacements.items()}
+    replacements.update(successors)
     assert len(report["recipes"]) == 2200
     assert len({r["source_id"] for r in report["recipes"]}) == 2200
     assert report["status"] == {"accepted": 2155, "already_imported": 45}
