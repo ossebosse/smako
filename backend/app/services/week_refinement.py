@@ -13,7 +13,7 @@ from app.services.recipe_candidate_validator import recipe_id
 from app.services.stable_candidate_pool import stratified_candidate_shortlist
 
 
-def surplus_summary(basket):
+def surplus_summary(basket, *, preparations=()):
     """Allocate paid merchandise to unused usable quantity; never a saving.
 
     Currency fractions and package equivalents are dimensionless comparisons.
@@ -21,20 +21,35 @@ def surplus_summary(basket):
     cannot masquerade as zero surplus. Estimates retain their explicit status.
     """
     value, packages = Decimal(0), Decimal(0)
+    component_unused = defaultdict(Decimal)
+    for preparation in preparations:
+        purchased = Decimal(str(preparation["purchase_input_quantity_g"]))
+        if purchased <= 0:
+            continue
+        # Allocate the population-estimated coproduct surplus proportionally
+        # between purchased input and existing raw stock. This is a search
+        # signal only; no future value is subtracted from checkout or booked.
+        total = Decimal(str(preparation["input_quantity_g"]))
+        surplus = sum((Decimal(str(q)) for q in preparation["estimated_surplus_g"].values()), Decimal(0))
+        component_unused[preparation["purchase_key"]] += surplus * purchased / total
+    preparation_value = Decimal(0)
     quantities = defaultdict(Decimal)
     unknown, estimated = 0, False
     for store in basket.stores:
         for item in store.items:
             paid = item.merchandise_total
             usable = Decimal(str(item.purchased_usable_quantity))
-            unused = Decimal(str(item.waste_quantity))
+            extra = component_unused.get(item.ingredient, Decimal(0))
+            unused = Decimal(str(item.waste_quantity)) + extra
             if (paid is None or usable <= 0 or unused < 0 or unused > usable
                     or item.quantity_confidence == "unknown" or item.purchase_units):
                 unknown += 1
                 continue
             estimated |= item.quantity_confidence == "estimated"
+            estimated |= extra > 0
             fraction = unused / usable
             value += Decimal(str(paid)) * fraction
+            preparation_value += Decimal(str(paid)) * extra / usable
             packages += Decimal(item.packages_needed) * fraction
             quantities[item.unit] += unused
     return {
@@ -46,11 +61,14 @@ def surplus_summary(basket):
         "method": "proportional_paid_merchandise_cost_of_unused_usable_quantity",
         "deposit_included": False,
         "deducted_from_checkout": False,
+        **({"preparation_unused_purchase_value": float(money(preparation_value)),
+            "preparation_basis": "estimated_coproduct_mass_proportional_to_purchased_edible_input"}
+           if preparations else {}),
     }
 
 
-def surplus_key(basket):
-    summary = surplus_summary(basket)
+def surplus_key(basket, *, preparations=()):
+    summary = surplus_summary(basket, preparations=preparations)
     return (summary["unknown_lines"], summary["unused_purchase_value"] or 0,
             summary["unused_package_equivalents"] or 0)
 

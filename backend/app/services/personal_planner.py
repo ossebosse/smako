@@ -229,7 +229,13 @@ class PersonalPlanner:
         self.by_identity = {
             (p.store_id, p.product_id): i for i, p in enumerate(prepared.universe.products)
         }
-        self.items = available_items(state, plan_id=plan_id) if self.spec.use_pantry else []
+        self.items = available_items(state, plan_id=plan_id)
+        if not self.spec.use_pantry:
+            owned = {r.get("item_id") for e in state.get("ledger", [])
+                     if e["plan_id"] == plan_id and e["action"] in {"purchase", "prepare"}
+                     for r in e["rows"]}
+            owned.update(state.get("legacy_purchase_lots", {}).get(plan_id, []))
+            self.items = [i for i in self.items if i["id"] in owned]
         self.meals = {m.meal_type: m for m in self.spec.meals}
         # Exact declarations may identify food classes absent from a brand's
         # short retail name. Keep this projection request-local; never change
@@ -304,6 +310,8 @@ class PersonalPlanner:
         return entry[1]
 
     def nutrition_evidence(self, product, name, unit, requested, recipe):
+        from app.services.egg_preparation import METHOD, component
+        egg_component = component(recipe, name)
         if recipe is not None and recipe.preparation is not None:
             from app.services.recipe_preparation import input_evidence_identity
 
@@ -316,7 +324,7 @@ class PersonalPlanner:
             identity = input_evidence_identity(recipe, name, self.recipe_computations)
             if identity is None:
                 return None
-            recipe_key = ("prepared_input", identity)
+            recipe_key = ("prepared_input", identity, METHOD if egg_component else None)
         else:
             # Legacy evidence methods can depend on the entire recipe.
             recipe_key = ("legacy", self.recipe_computations.key(recipe))
@@ -345,6 +353,13 @@ class PersonalPlanner:
         fact = self.source_facts(product)
         from app.services.official_product_facts import project_usable_quantity
         product = project_usable_quantity(product, fact, allow_estimates=self.request.purchase_planning_mode == 'estimated', required_unit=unit)
+        from app.services.egg_preparation import component, nutrition, plain_source
+        egg_component = component(recipe, name)
+        if egg_component:
+            if (not self.spec.allow_nutrition_estimates or self.request.purchase_planning_mode != "estimated"
+                    or unit != "g" or not fact or fact.conflicts or not plain_source(product, fact)):
+                return None
+            return nutrition(egg_component, product.product_id)
         if fact and fact.source == 'verified_exact_catalog_declaration':
             from app.services.offer_catalog_facts import matches_product
 
@@ -504,6 +519,28 @@ class PersonalPlanner:
         purchase_units=False,
         recipe=None,
     ):
+        from app.services.egg_preparation import component, edible_input, plain_source
+
+        egg_component = component(recipe, name)
+        if egg_component:
+            from app.services.recipe_library import validate_recipe_design
+
+            self.recipe_computations.get(recipe, validate_recipe_design)
+            if self.request.purchase_planning_mode != "estimated" or unit != "g":
+                raise PolicyConflict("Separering av hela ägg kräver uttryckligt uppskattningsläge och grambehov.", code="DATA_BLOCKED")
+            candidates = self.resolve("ägg", edible_input(**{"yolk" if egg_component == "äggula" else "white": quantity}),
+                "g", product_key=product_key, properties=properties, profile=profile,
+                organic_animals=organic_animals, food=food)
+            candidates = [(i, c) for i, c in candidates
+                          if plain_source(self.prepared.universe.products[i], self.source_facts(c))]
+            if not candidates:
+                raise PolicyConflict("Inga kvalificerade rena hönsägg för separering.", code="DATA_BLOCKED")
+            for i, _candidate in candidates:
+                product = self.prepared.universe.products[i]
+                if (product.store_id, product.product_id) in self.product_trace.products:
+                    self.product_trace.event(product, recipe, name, "preparation_source", "passed",
+                        "issued egg-separation operand; qualified edible whole-egg input, shared purchase and measured outputs required")
+            return candidates
         cache_key = (
             name,
             unit,
@@ -897,6 +934,9 @@ class PersonalPlanner:
                            if self.complete and source_ingredient is not None else {}),
                     }
                     row["demand_key"] = demand_key(row)
+                    from app.services.egg_preparation import METHOD, component
+                    if component(recipe, row["name"]):
+                        row["preparation"] = METHOD
                     built.append(row)
                 template = (meal, tuple(built))
                 remember_bounded(self._need_row_templates, template_key, template, 4096)
@@ -953,7 +993,7 @@ class PersonalPlanner:
         purchased_ids = {
             r.get("item_id")
             for e in self.state.get("ledger", [])
-            if e["plan_id"] == self.plan_id and e["action"] == "purchase"
+            if e["plan_id"] == self.plan_id and e["action"] in {"purchase", "prepare"}
             for r in e["rows"]
         }
         purchased_ids.update(self.state.get("legacy_purchase_lots", {}).get(self.plan_id, []))
@@ -962,7 +1002,14 @@ class PersonalPlanner:
                 continue
             if item["unusable"] or item["unit"] != row["unit"] or available[item["id"]] <= 0:
                 continue
-            if item["product_key"]:
+            origin = item.get("prepared_origin")
+            if origin:
+                if (origin["method"] != row.get("preparation") or origin["product_key"] not in keys
+                        or item["name"] != row["name"] or item.get("form") != "raw_edible"):
+                    continue
+            elif item["product_key"]:
+                if row.get("preparation"):
+                    continue  # A whole-egg lot is an input, not a separated output.
                 if item["product_key"] not in keys:
                     continue
             else:
@@ -984,13 +1031,14 @@ class PersonalPlanner:
             if (
                 row.get("nutrients")
                 and not item["product_key"]
+                and not origin
                 and (not self.spec.allow_nutrition_estimates or not item.get("nutrition_reference"))
             ):
                 raise PolicyConflict(
                     f"{item['name']}: skafferivarans exakta produkt och näringsdeklaration saknas. För generiskt underlag krävs uppskattningsläge och bekräftat livsmedel/beredningsstatus i Skafferi.",
                     code="DATA_BLOCKED",
                 )
-            if row["organic_animals"] and not item["product_key"]:
+            if row["organic_animals"] and not item["product_key"] and not origin:
                 raise PolicyConflict(
                     f"{item['name']}: skafferivarans animaliska innehåll/ekostatus saknar produktunderlag.",
                     code="DATA_BLOCKED",
@@ -1006,6 +1054,7 @@ class PersonalPlanner:
                     "demand_key": row["demand_key"],
                     "product_key": item["product_key"],
                     "nutrition_reference": item.get("nutrition_reference"),
+                    **({"prepared_origin": origin} if origin else {}),
                 }
             )
             remaining -= used
@@ -1013,6 +1062,52 @@ class PersonalPlanner:
             if remaining < 1e-8:
                 return 0, allocations
         return remaining, allocations
+
+    def _prepare_egg_groups(self, groups, rows, allocations, available):
+        from app.services.egg_preparation import METHOD, edible_input
+
+        preparations = []
+        for group in groups:
+            demands = [r for r in rows if r["demand_key"] in group["demand_keys"]]
+            components = [r for r in demands if r.get("preparation") == METHOD]
+            if not components:
+                continue
+            if any(r["name"] not in {"ägg", "äggula", "äggvita"} or r["unit"] != "g" for r in demands):
+                raise PolicyConflict("Äggberedning kan bara dela rå ägginsats.")
+            yolk = sum(r["unallocated_quantity"] for r in components if r["name"] == "äggula")
+            white = sum(r["unallocated_quantity"] for r in components if r["name"] == "äggvita")
+            whole = sum(r["unallocated_quantity"] for r in demands if not r.get("preparation"))
+            required = edible_input(yolk, white)
+            prep_key = "prepare:" + hashlib.sha256(json.dumps(sorted(r["demand_key"] for r in components)).encode()).hexdigest()
+            keys = {self.product_keys[i] for i in group["positions"]}
+            raw = []
+            remaining = required
+            for item in self.items:
+                if (item["unusable"] or item["unit"] != "g" or item.get("prepared_origin")
+                        or item["product_key"] not in keys or remaining <= 1e-8):
+                    continue
+                used = min(remaining, available[item["id"]])
+                if used <= 1e-8:
+                    continue
+                allocation = {"item_id": item["id"], "quantity": used, "unit": "g", "name": "ägg",
+                    "source": prep_key, "demand_key": prep_key, "product_key": item["product_key"],
+                    "kind": "preparation_input", "method": METHOD}
+                raw.append(allocation)
+                allocations.append(allocation)
+                available[item["id"]] -= used
+                remaining -= used
+            preparation = {"id": prep_key, "method": METHOD, "input_quantity_g": required,
+                "purchase_input_quantity_g": remaining, "input_allocations": raw,
+                "outputs": [{"name": r["name"], "quantity": r["unallocated_quantity"], "unit": "g",
+                             "source": r["source"], "demand_key": r["demand_key"]} for r in components],
+                "estimated_outputs_g": {"äggula": required / 3, "äggvita": required * 2 / 3},
+                "estimated_surplus_g": {"äggula": max(0, required / 3 - yolk), "äggvita": max(0, required * 2 / 3 - white)},
+                "status": "WEIGH_OUTPUTS_BEFORE_CONSUMPTION"}
+            group.update(name="ägg", quantity=whole + remaining, preparation=preparation)
+            for row in components:
+                row["preparation_sources"] = sorted({a["product_key"] for a in raw})
+            preparations.append(preparation)
+        return preparations
 
     def basket(self, slots, *, final=True, _retained=None):
         from app.services.plan_jobs import check_cancelled
@@ -1136,6 +1231,7 @@ class PersonalPlanner:
             allocations.extend(allocation)
             if quantity <= 0:
                 continue
+            row["unallocated_quantity"] = quantity
             if _retained is not None:
                 previous = retained_needs.get(row["demand_key"])
                 item = retained_items.get(previous["key"]) if previous else None
@@ -1181,6 +1277,8 @@ class PersonalPlanner:
                 code="DATA_BLOCKED",
                 stage="product_qualification",
             )
+        preparations = self._prepare_egg_groups(groups, rows, allocations, available)
+        groups = [g for g in groups if g["quantity"] > 1e-8]
         ingredients, candidate_map = [], {}
         for n, group in enumerate(groups):
             key = f"{group['name']} [{n + 1}]"
@@ -1190,6 +1288,8 @@ class PersonalPlanner:
                     raise PolicyConflict("Tidigare gemensamma ingrediensbehov kunde inte återskapas.")
                 key = original["key"]
             group["key"] = key
+            if group.get("preparation"):
+                group["preparation"]["purchase_key"] = key
             for row in rows:
                 if row["demand_key"] in group["demand_keys"]:
                     row["purchase_key"] = key
@@ -1353,7 +1453,7 @@ class PersonalPlanner:
             "groups": groups,
             "allocations": allocations,
             "remaining_demands": [
-                {k: v for k, v in r.items() if k not in {"profile", "organic_animals", "nutrients"}}
+                {k: v for k, v in r.items() if k not in {"profile", "organic_animals", "nutrients", "unallocated_quantity"}}
                 for r in rows
             ],
             "available_surplus": [
@@ -1367,6 +1467,7 @@ class PersonalPlanner:
                 if available[i["id"]] > 1e-8
             ],
             "checks": checks,
+            "preparations": preparations,
             "audit": audit,
             "larger_purchase_cost": max(0, float(money(basket.total - ordinary_total)))
             if self.spec.surplus_mode == "allow_larger"
@@ -2035,12 +2136,14 @@ class PersonalPlanner:
             if not (profile.exclusions or profile.allergies):
                 continue
             positions = set()
+            for key in need.get("preparation_sources", ()):
+                positions.update(self.index.groups.get(key, ()))
             item = purchased.get(need.get("purchase_key"))
             if item:
                 positions.add(self.by_identity[(item.store_id, item.product_id)])
             for allocation in allocations:
                 if allocation["demand_key"] == need["demand_key"]:
-                    positions.update(self.index.groups.get(allocation.get("product_key"), ()))
+                    positions.update(self.index.groups.get(allocation.get("prepared_origin", {}).get("product_key") or allocation.get("product_key"), ()))
             for position in sorted(positions):
                 p = self.prepared.universe.products[position]
                 fact = self.source_facts(p)
@@ -2110,7 +2213,8 @@ class PersonalPlanner:
             for need in needs:
                 selected = selected_products.get(need.get("purchase_key"))
                 pantry = tuple(
-                    (a["name"], a["quantity"], a.get("product_key"), a.get("nutrition_reference"))
+                    (a["name"], a["quantity"], a.get("product_key"), a.get("nutrition_reference"),
+                     a.get("prepared_origin", {}).get("product_key"))
                     for a in allocations
                     if a["demand_key"] == need["demand_key"]
                 )
@@ -2178,6 +2282,7 @@ class PersonalPlanner:
                         for allocation in pantry:
                             if (
                                 not allocation.get("product_key")
+                                and not allocation.get("prepared_origin")
                                 and self.spec.allow_nutrition_estimates
                             ):
                                 from app.services.nutrition_reference import (
@@ -2217,7 +2322,7 @@ class PersonalPlanner:
                                     evidence = pantry_evidence(slot.recipe, need["name"], identity)
                                 contributions.append((allocation["quantity"], evidence, "pantry"))
                                 continue
-                            positions = self.index.groups.get(allocation.get("product_key"), ())
+                            positions = self.index.groups.get(allocation.get("prepared_origin", {}).get("product_key") or allocation.get("product_key"), ())
                             evidence = [
                                 self.nutrition_evidence(
                                     self.prepared.universe.products[i],
@@ -2268,6 +2373,10 @@ class PersonalPlanner:
                                 if selected
                                 else None
                             )
+                            if fact is None and not selected and need.get("preparation_sources"):
+                                positions = self.index.groups.get(need["preparation_sources"][0], ())
+                                fact = next((f for i in positions if (f := self.nutrition_evidence(
+                                    self.prepared.universe.products[i], need["name"], need["unit"], requested, slot.recipe))), None)
                             contributions.append((quantity, fact, "purchase"))
                         for quantity, fact, origin in contributions:
                             if (
@@ -2637,7 +2746,7 @@ class PersonalPlanner:
                 result = self._create(replace_slot=replace_slot, balanced_reference=balanced_reference)
             retain_library_comparison()
             if incumbents:
-                winner = min([result, *incumbents], key=lambda p: self._week_purchase_key(p.optimized_basket))
+                winner = min([result, *incumbents], key=lambda p: self._week_purchase_key(p.optimized_basket, p.personal.preparations))
                 if winner is not result:
                     result = self._retain_scope_incumbent(winner, incumbent_scopes[id(winner)])
                 result.personal.checks.setdefault("scope_comparison", {}).update({
@@ -2653,7 +2762,7 @@ class PersonalPlanner:
             if not any(scope.get("library") == "before_content_pack" for scope in incumbent_scopes.values()):
                 retain_library_comparison()
             if incumbents:
-                winner = min(incumbents, key=lambda p: self._week_purchase_key(p.optimized_basket))
+                winner = min(incumbents, key=lambda p: self._week_purchase_key(p.optimized_basket, p.personal.preparations))
                 result = self._retain_scope_incumbent(winner, incumbent_scopes[id(winner)], error=exc)
                 result.personal.checks["scope_comparison"].update({
                     "retained_valid_incumbents": len(incumbents),
@@ -2773,9 +2882,9 @@ class PersonalPlanner:
             selected.append([s for s in group if not s.recipe or self._recipe_id(s.recipe) in by_meal[meal_type]])
         return selected
 
-    def _week_purchase_key(self, basket):
+    def _week_purchase_key(self, basket, preparations=()):
         from app.services.week_refinement import surplus_key
-        return (money(basket.total), surplus_key(basket) if self.spec.surplus_mode == "minimize" else ())
+        return (money(basket.total), surplus_key(basket, preparations=preparations) if self.spec.surplus_mode == "minimize" else ())
 
     @timed_stage("memory_reclamation")
     def _release_idle_memory(self, *, recent=False):
@@ -2980,7 +3089,7 @@ class PersonalPlanner:
 
             chosen, result, report = verified_search(search, audit=audit,
                 accepts=lambda chosen: accepts(chosen, final=True),
-                rank=lambda chosen, result: (self._week_purchase_key(result["basket"]),
+                rank=lambda chosen, result: (self._week_purchase_key(result["basket"], result.get("preparations", ())),
                                              search_kwargs["score"](chosen, result)), budget=budget,
                 previous=previous)
             incumbent = chosen, result
@@ -3030,7 +3139,7 @@ class PersonalPlanner:
             try:
                 chosen, result, report = verified_search(cached_tracks, audit=cached_audit,
                     accepts=lambda chosen: accepts(chosen, final=True),
-                    rank=lambda chosen, result: (self._week_purchase_key(result["basket"]),
+                    rank=lambda chosen, result: (self._week_purchase_key(result["basket"], result.get("preparations", ())),
                                                  search_kwargs["score"](chosen, result)),
                     budget=SearchBudget(IMPROVEMENT_EVALUATIONS, IMPROVEMENT_PROPOSALS), previous=prior)
             except (ValueError, IncompleteBasketError):
@@ -3094,7 +3203,7 @@ class PersonalPlanner:
 
         chosen, result, report = verified_search(tracks, audit=audit,
             accepts=lambda slots: accepts(slots, final=True),
-            rank=lambda slots, result: (self._week_purchase_key(result["basket"]),
+            rank=lambda slots, result: (self._week_purchase_key(result["basket"], result.get("preparations", ())),
                                        search_kwargs["score"](slots, result)),
             previous=previous, budget=SearchBudget(1, 1))
         result["checks"]["reaudited_previous_menu"] = {**report, "qualification_rejections": rejections}
@@ -3262,7 +3371,7 @@ class PersonalPlanner:
 
         chosen, result, report = verified_search(tracks, audit=audit,
             accepts=lambda chosen: accepts(chosen, final=True),
-            rank=lambda chosen, value: (self._week_purchase_key(value["basket"]), score(chosen, value)),
+            rank=lambda chosen, value: (self._week_purchase_key(value["basket"], value.get("preparations", ())), score(chosen, value)),
             previous=((winner, evaluate(winner, final=False)),), budget=SearchBudget(1, 1))
         if (report["audit_rejected"] or report["constraint_rejected"]
                 or money(result["basket"].total) != money(prepared["certificate"]["total"])):
@@ -3650,7 +3759,7 @@ class PersonalPlanner:
             library_kwargs["retention_score"] = lambda chosen, result: (result["basket"].total, score(chosen, result))
             from app.services.week_refinement import qualified_joint_proposals
             library_kwargs["refinement_score"] = lambda chosen, result: (
-                self._week_purchase_key(result["basket"]), score(chosen, result))
+                self._week_purchase_key(result["basket"], result.get("preparations", ())), score(chosen, result))
             library_kwargs["joint_proposals"] = lambda groups, anchor: qualified_joint_proposals(
                 groups, anchor, self.variant_search_evidence)
             def select_seed_options(groups, *, refinement=False):
@@ -3792,7 +3901,7 @@ class PersonalPlanner:
         result["checks"]["allowed_store_ids"] = sorted(self.store_ids)
         from app.services.week_refinement import surplus_summary
         result["checks"]["purchase_surplus"] = {
-            **surplus_summary(result["basket"]),
+            **surplus_summary(result["basket"], preparations=result["preparations"]),
             "tie_break_enabled": self.spec.surplus_mode == "minimize",
             "description": "Kvarvarande andel av betald varukostnad, utan pant. Jämförs först vid samma inköpssumma; dras aldrig av från köpbeloppet. Mängder i olika enheter redovisas separat.",
         }
@@ -3808,6 +3917,8 @@ class PersonalPlanner:
             cost_known = all(item.merchandise_total is not None and item.purchased_usable_quantity for item in purchased_items)
             used_cost = (float(money(sum(item.merchandise_total * item.required_quantity / item.purchased_usable_quantity
                                        for item in purchased_items))) if cost_known else None)
+            if used_cost is not None and result["preparations"]:
+                used_cost = float(money(max(0, used_cost - result["checks"]["purchase_surplus"]["preparation_unused_purchase_value"])))
             result["checks"]["new_purchase_used_cost"] = used_cost
             result["checks"]["used_ingredient_cost"] = used_cost if not result["allocations"] else None
             result["checks"]["used_cost_basis"] = {
@@ -3884,6 +3995,15 @@ class PersonalPlanner:
             for i in g.items
             if i.waste_quantity > 0
         ]
+        for preparation in result["preparations"]:
+            source_keys = {a["product_key"] for a in preparation["input_allocations"]}
+            source_keys.update(n["selected_product_key"] for n in needs
+                               if n.get("preparation", {}).get("id") == preparation["id"])
+            for name, quantity in preparation["estimated_surplus_g"].items():
+                if quantity > 1e-8:
+                    surplus.append({"name": name, "quantity": quantity, "unit": "g", "product_key": None,
+                        "kind": "preparation_output", "form": "raw_edible", "method": preparation["method"],
+                        "origin_product_keys": sorted(source_keys), "quantity_status": "ESTIMATED"})
         portions = sum(r.servings for r in recipes)
         status = self.prepared.status(
             now=self.now,
@@ -3937,6 +4057,7 @@ class PersonalPlanner:
                 remaining_demands=result["remaining_demands"],
                 consumed_demands=consumed_demands(self.state, self.plan_id),
                 available_surplus=result["available_surplus"],
+                preparations=result["preparations"],
             ),
         )
 
@@ -3944,7 +4065,7 @@ class PersonalPlanner:
         """Read-only previews: hypothetical future surplus never enters real stock."""
         from copy import deepcopy
 
-        from app.models.personal import MealSettings, PantryItem
+        from app.models.personal import MealSettings, PantryItem, PreparedOrigin
 
         surplus = plan.personal.future_surplus
         if not surplus:
@@ -3959,8 +4080,12 @@ class PersonalPlanner:
                     quantity=s["quantity"],
                     unit=s["unit"],
                     product_key=s["product_key"],
+                    **({"form": "raw_edible", "prepared_origin": PreparedOrigin(method=s["method"],
+                        product_key=s["origin_product_keys"][0], operation_id="future-preview")}
+                       if s.get("kind") == "preparation_output" else {}),
                 ).model_dump()
                 for s in surplus
+                if s.get("kind") != "preparation_output" or len(s["origin_product_keys"]) == 1
             ],
             "reservations": {},
             "events": {},
@@ -3971,6 +4096,7 @@ class PersonalPlanner:
         spec = self.spec.model_copy(
             update={
                 "pantry_revision": 0,
+                "use_pantry": True,
                 "extras": [],
                 "slots": None,
                 "meals": [meal],

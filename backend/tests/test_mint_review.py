@@ -78,9 +78,12 @@ def test_mint_recipe_review_preserves_history_quantities_and_leaf_recipes():
     manifest = manifest_entries()
     issued = {identity(r): r for r in load_entries([*manifest['current'], *manifest['history']], ROOT)}
     active = {identity(r): r for r in current_recipes()}
+    egg = json.loads((ROOT.parents[3] / 'docs/reviews/egg-preparation-20261028/recipe-review.json').read_bytes())
+    successors = {r['previous_id']: r['runtime_id'] for r in egg['corrected']}
     assert len(active) == 2462 and len(review['corrected']) == 91 and len(review['verified_unchanged']) == 40
     for row in review['corrected']:
-        before, after = issued[row['previous_id']], active[row['runtime_id']]
+        before, after = issued[row['previous_id']], issued[row['runtime_id']]
+        assert successors.get(row['runtime_id'], row['runtime_id']) in active
         assert row['previous_id'] not in active
         assert before.design.content_sha256 == row['before_content_sha256']
         assert after.design.content_sha256 == row['content_sha256']
@@ -88,7 +91,8 @@ def test_mint_recipe_review_preserves_history_quantities_and_leaf_recipes():
             (i.canonical_name, i.quantity, i.unit, i.form) for i in after.ingredients]
         assert after.design.active_minutes == before.design.active_minutes + 1
     for row in review['verified_unchanged']:
-        recipe = active[row['runtime_id']]
+        recipe = issued[row['runtime_id']]
+        assert successors.get(row['runtime_id'], row['runtime_id']) in active
         assert recipe.design.content_sha256 == row['content_sha256']
         assert all('pack:' + LEAF in i.product_requirements for i in recipe.ingredients if i.canonical_name == 'mynta')
 

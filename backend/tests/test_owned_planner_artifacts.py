@@ -1,5 +1,6 @@
 from copy import deepcopy
 from dataclasses import replace
+from pathlib import Path
 
 import pytest
 from app.services.library_publications import publications
@@ -9,6 +10,31 @@ from app.services.planner_context import planner_context
 
 from backend.tests.test_complete_scope_incumbents import fixture, planner
 from backend.tests.test_personal_planning_v2 import NOW
+
+
+@pytest.fixture(scope="module", autouse=True)
+def append_only_library_for_certificate_contracts():
+    """Exercise reuse against a real complete append-only library snapshot.
+
+    A later recipe reissue deliberately breaks the publication chain. These
+    private-cache contracts need an append-only domain; the independent
+    publication tests retain the mandatory reissue-invalidation checks.
+    """
+    import json
+
+    from app.services import meal_library_content
+    from app.services.recipe_library import reset_library_caches
+
+    manifest = json.loads((Path(__file__).parent / "fixtures/append-only-library-before-egg-20261028.json").read_bytes())
+    target = (meal_library_content.ROOT / "library-manifest.json").resolve()
+    original = meal_library_content.read_json
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(meal_library_content, "read_json",
+                      lambda path: deepcopy(manifest) if Path(path).resolve() == target else original(path))
+        reset_library_caches()
+        assert publications(), "The pinned cache-test domain must have a complete publication chain"
+        yield
+    reset_library_caches()
 
 
 def test_owned_artifact_survives_restart_and_cannot_cross_owner(tmp_path):

@@ -87,6 +87,49 @@ def submit(page, captured):
     return captured[-1]
 
 
+def test_measured_egg_preparation_preserves_method_input_and_both_outputs(choices, tmp_path):
+    from app.services.egg_preparation import METHOD
+
+    from backend.tests.test_personal_booked_revisions import setup_plan
+
+    page, url, captured = choices
+    _p, _plans, _private, saved, _stock = setup_plan(tmp_path)
+    envelope = saved.model_dump(mode="json")
+    envelope["plan"]["personal"]["preparations"] = [{"id": "prep", "method": METHOD,
+        "input_quantity_g": 90, "purchase_input_quantity_g": 0,
+        "input_allocations": [{"item_id": "egg-lot", "product_key": "a" * 32}],
+        "estimated_outputs_g": {"äggula": 30, "äggvita": 60},
+        "estimated_surplus_g": {"äggula": 0, "äggvita": 20}}]
+    private = {"revision": 7, "profile": {}, "events": {}, "ledger": [],
+        "account": {"message": "Privat syntetisk testgäst"}, "items": [{"id": "egg-lot", "name": "ägg",
+            "quantity": 100, "unit": "g", "product_key": "a" * 32, "reserved": 90, "available": 10,
+            "food": True, "unusable": False}],
+        "reservations": {saved.plan_id: [{"item_id": "egg-lot", "quantity": 90, "kind": "preparation_input"}]}}
+
+    def respond(route):
+        body = route.request.post_data_json
+        captured.append(body)
+        mutation = PersonalMutation.model_validate(body)
+        assert mutation.action == "prepare"
+        route.fulfill(content_type="application/json", body=json.dumps({"saved": envelope, "state": private}))
+
+    page.route("**/api/personal/state", lambda route: route.fulfill(content_type="application/json", body=json.dumps(private)))
+    page.route("**/api/plans/" + saved.plan_id, lambda route: route.fulfill(content_type="application/json", body=json.dumps(envelope)))
+    page.route("**/api/personal/plans/*/change", respond)
+    page.goto(url.split("#")[0] + "#plan=" + saved.plan_id)
+    page.locator('[data-open="shopping"]').click()
+    page.get_by_role("button", name="Bokför uppmätt äggberedning").click()
+    dialog = page.get_by_role("dialog")
+    fields = dialog.locator('input[type="number"]')
+    fields.nth(0).fill("90")
+    fields.nth(1).fill("30")
+    fields.nth(2).fill("60")
+    dialog.get_by_role("button", name="Bokför insats och båda utfall").click()
+    expect(dialog).not_to_be_attached()
+    assert captured[-1]["preparation"] == {"method": METHOD, "inputs": {"egg-lot": 90}, "yolk_g": 30, "white_g": 60}
+    assert captured[-1]["pantry_revision"] == 7 and captured[-1]["operation_id"]
+
+
 def test_current_variation_origins_and_deliberate_old_draft_migration(choices):
     page,url,captured=choices
     page.route('**/api/recipe-library',lambda route:route.fulfill(content_type='application/json',

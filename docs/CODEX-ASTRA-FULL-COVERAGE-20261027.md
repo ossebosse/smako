@@ -141,3 +141,18 @@ A 281,31 kr i båda slutprov och B2:s hela korg identisk 731,20 kr; samtliga
 2 866 kvittohashar passerar. [Rapport](reviews/product-facts-20261028.md).
 Full täckning återstår. Samma obegränsade totaljournal och resurs-/källkrav;
 CI balanseras till tre obligatoriska partitioner med alla testnoder kvar.
+
+
+## Gemensam äggberedning: nästa verifierade kontrollpunkt 2026-10-28
+
+1 828/2 200 hela korgar inklusive uppskattningar, +26; exakt 1 062 hela och
+1 064 insatslösta, 372 insatshinder kvar. Alla original och tidigare korgar
+består. Versionerad äggseparering delar inköp, reserverar rå insats och
+bokför uppmätta gula/vita separat i befintlig transaktionsjournal.
+A 281,31 kr två gånger och B2:s hela korg identisk 731,20 kr; alla 2 892
+kvittohashar passerar. Se [rapport](reviews/egg-preparation-20261028.md).
+Samma obegränsade totaljournal och resurs-/källkrav gäller. Full täckning
+återstår. Fem exakta torrvaror hos tre nya handlare har ett separat
+[beslutsunderlag](reviews/coverage-source-pilot-20261028.md); utökningen
+är inte beslutad här. Ingen driftaktivering ingår. Hosted CI och
+integration måste passera innan denna kontrollpunkt integreras.

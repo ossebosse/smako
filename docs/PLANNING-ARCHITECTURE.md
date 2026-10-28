@@ -1,5 +1,22 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Versionerad gemensam äggberedning
+
+Exakt utgivet receptinnehåll kan ange hen_egg_separation_estimate_v1 via en
+metodoperand i befintliga ingredienskrav. Endast uttryckligt uppskattningsläge
+får planera insatsen: helt ägg + max(3 × gula, 1,5 × vita), i kvalificerade
+ätbara gram. Inga komponentpaket eller nya prisvägar skapas. Befintlig
+resolve, gemensam inköpsgruppering, mängdresolver, checkout och audit består.
+
+PersonalStore bokför uppmätt köp, reserverad rå insats och faktiskt uppmätta
+separata utfall i samma transaktion/journal. Beredda partier har egen
+komponentidentitet och metod-/produktursprung. De kvalificeras på nytt för
+aktuell kost, allergi, eko och separat tillåten komponentnäringsuppskattning.
+Kort utbyte sparas sanningsenligt men blockerar förbrukning. Delvis förbrukning,
+omplanering och frigivning bevarar verkligt lager och historik. Båda utfallen
+delar köp; komponentöverskott och paketrest redovisas separat. Inget framtida
+restvärde krediteras i checkout. Se [granskningen](reviews/egg-preparation-20261028.md).
+
 ## Exakt granskad torr form och ren textklassning
 
 Vatten i en innehållsdeklaration är en konservativ våtformsheuristik. Den
@@ -71,13 +88,13 @@ strömmen av fulla menyförslag fortsätter parallellt i samma seriella sökning
 Det är en ändrad förslagsordning; deadline, slut-audit, sparning och alla
 hårda användarvillkor gäller fortfarande. Ingen global optimalitet påstås.
 
-**Beredning med flera utfall är ännu inte implementerad.** Enbart en ny
-mängdfaktor i `resolve` räcker inte: `personal_store` bokför i dag samma
-mängdenhet för inköp, reservation och förbrukning. Gula och vita från samma
+**Den tidigare spärren är löst för versionerad äggseparering enligt ovan.**
+Enbart en ny mängdfaktor i `resolve` räcker inte: före äggstödet bokförde
+`personal_store` samma mängdenhet för inköp, reservation och förbrukning. Gula och vita från samma
 ägg behöver en gemensam inköpsgrupp och separata uppmätta utfall, även vid
 delvis förbrukning, omplanering och återstående skafferi. Receptens
 insatsnäring och aktiva/vänt-/totaltider måste följa den granskade versionen.
-Nästa implementation ska utöka dessa befintliga vägar och deras förberedda
+Fler beredningsmetoder ska utöka dessa befintliga vägar och deras förberedda
 beroenden, inte lägga till en fristående berednings- eller prisdatabas.
 Se [källgranskningen och acceptansfallen](reviews/recipe-coverage-full-20261027/preparation-review.md).
 

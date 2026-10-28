@@ -16,6 +16,7 @@ from app.services.price_universe_runtime import PreparedPriceUniverseArtifact
 from app.services.recipe_library import current_recipes
 
 MINT_REVIEW = Path('docs/reviews/recipe-four-staples-20261027/recipe-review.json')
+EGG_REVIEW = Path('docs/reviews/egg-preparation-20261028/recipe-review.json')
 
 
 def reviewed_recipe_transition(scope, compared_scope, variants):
@@ -24,9 +25,11 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
     This changes comparison identities, never old checkout receipts or outcomes.
     Unknown recipe/manifest drift still fails closed.
     """
-    review = json.loads(MINT_REVIEW.read_bytes())
-    if (scope['manifest_sha256'] != review['before_manifest_file_sha256']
-            or compared_scope['manifest_sha256'] != review['after_manifest_file_sha256']):
+    review = next((row for path in (MINT_REVIEW, EGG_REVIEW) if path.exists()
+                   and (row := json.loads(path.read_bytes()))
+                   and scope['manifest_sha256'] == row['before_manifest_file_sha256']
+                   and compared_scope['manifest_sha256'] == row['after_manifest_file_sha256']), None)
+    if review is None:
         raise ValueError('Changed coverage comparison scope: unreviewed manifest transition')
     before = [r['current_id'] for r in variants]
     replacements = {r['previous_id']: r['runtime_id'] for r in review['corrected']}
@@ -88,7 +91,8 @@ def imported_recipes():
     replacements = {}
     for file, key in [('recipe-quality-and-planning-20261026/recipe-review.json', 'recipes'),
                       ('week-search-and-cache-20261026/recipe-review.json', 'corrected'),
-                      ('recipe-four-staples-20261027/recipe-review.json', 'corrected')]:
+                      ('recipe-four-staples-20261027/recipe-review.json', 'corrected'),
+                      ('egg-preparation-20261028/recipe-review.json', 'corrected')]:
         for row in json.loads((Path('docs/reviews') / file).read_bytes())[key]:
             replacements[row['previous_id']] = row['runtime_id']
     active = {identity(r): r for r in current_recipes()}
