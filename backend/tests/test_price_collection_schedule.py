@@ -171,3 +171,31 @@ def test_hemkop_empty_scope_waits_without_inventory_or_network(monkeypatch, tmp_
                         lambda *args, **kwargs: (area, tmp_path, True))
     result = asyncio.run(hemkop_municipal_job.run_source_job(now=local('2026-10-28', 12)))
     assert result['status'] == 'not_due' and result['external_price_requests'] == 0
+
+
+def test_relay_missed_start_waits_and_thursday_is_not_skipped(monkeypatch, tmp_path):
+    import json
+
+    from grocery_data import local_relay
+
+    monkeypatch.setenv('PRICE_COLLECTION_CADENCE', 'mon_thu')
+
+    def forbidden(*args):
+        raise AssertionError('No daytime collection, push or activation')
+
+    assert local_relay.run(tmp_path, now=local('2026-10-28', 12), collect=forbidden,
+                           push=forbidden, activate=forbidden) == 0
+    # A retained delivery from before Thursday's slot is not a Thursday fetch.
+    receipt = {'municipality_code': None, 'observed_from': local('2026-10-29', 1).isoformat()}
+    path = tmp_path / 'last-success.json'
+    path.write_text(json.dumps(receipt))
+    before = path.read_bytes()
+    calls = []
+
+    async def collect(args):
+        calls.append('collect')
+        return {'status': 'deferred'}
+
+    assert local_relay.run(tmp_path, now=local('2026-10-29'), collect=collect,
+                           push=forbidden, activate=forbidden) == 2
+    assert calls == ['collect'] and path.read_bytes() == before

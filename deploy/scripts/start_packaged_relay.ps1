@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory=$true)][string]$Workspace,
     [Parameter(Mandatory=$true)][string]$Config,
     [switch]$CheckInstall,
-    [switch]$Municipalities
+    [switch]$Municipalities,
+    [ValidateSet('legacy','mon_thu')][string]$CollectionCadence = 'legacy'
 )
 $ErrorActionPreference = 'Stop'
 $relayRoot = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
@@ -40,6 +41,7 @@ $relayPython = Join-Path $relayRoot '.venv/Scripts/python.exe'
 if (-not (Test-Path -LiteralPath $relayPython)) { throw 'Install the release environment first.' }
 $env:PYTHON_DOTENV_DISABLED = '1'
 $env:PYTHONDONTWRITEBYTECODE = '1'
+$env:PRICE_COLLECTION_CADENCE = $CollectionCadence
 $relayArgs = @('-I', '-B', (Join-Path $relayRoot 'scripts/run_packaged_relay.py'))
 if ($CheckInstall) { $relayArgs += '--check-install' }
 else { $relayArgs += @('--workspace', $relayWorkspace, '--config', $relayConfig) }

@@ -18,8 +18,12 @@ Samma policy används för ICA, Hemköp, Coop/X:-tra, City Gross, Lidl och Willy
 reklamblad i aktiverade kommuner. Schemalagda Willys-kataloger kommer via
 befintligt Windowsrelä med en veckotrigger måndag/torsdag 03:17, utan tidigare
 åttatimmarsrepetition. `set_price_collection_schedule.ps1` visar ändringen före
-`-Apply`, sparar föregående uppgift och bevarar konto, åtgärd och inställningar.
-Windows befintliga återhämtning efter missad start bevaras. Reläet och servern
+`-Apply`, sparar föregående uppgift och bevarar konto, transport och inställningar.
+Åtgärden binds till den verifierade reläversionen med `-CollectionCadence mon_thu`.
+Windows befintliga återhämtning efter missad start bevaras, men reläets egen
+policy väntar till nästa insamlingsnatt om en sådan start sker under dagen.
+En observation före torsdagens start får inte skjuta upp torsdagshämtningen.
+Reläet och servern
 använder fortfarande sina befintliga arbetslås och publiceringskvitton.
 
 `ICA_PRIMAT_BASE_ENABLED=true` låter det befintliga Primat-flödet planera en
