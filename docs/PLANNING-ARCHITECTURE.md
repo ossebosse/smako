@@ -1,5 +1,15 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Deklarerat antal hela varor i befintlig mängdväg
+
+Ett exakt granskat tillverkarantal får projicera användbar mängd i `st`
+för samma källprodukt och förpackning. Receptets form måste vara `as_sold`;
+gramvikten för inköpta förpackningar bevaras och får inte användas som
+ätlig styckevikt eller näringsgrund. När inköpsenheten är gram kräver den
+befintliga skafferijournalen uppmätt antal före förbrukning i stycken.
+Två explicita frysta majskolvsrecept använder denna väg. Se
+[granskningen](reviews/whole-corn-20261028.md).
+
 ## Versionerad bladplockning i befintlig beredning
 
 Samma metodval, inköpsgruppering och uppmätta PersonalStore-journal stödjer

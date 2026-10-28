@@ -124,6 +124,7 @@ def _quantity_reviews():
             if proof["quantity"].get("method") in {
                 "usda_sr28_refuse_v1", "matvaretabellen_edible_fraction_v1",
                 "reviewed_declared_drained_mass_v1",
+                "reviewed_declared_piece_count_v1",
             }:
                 key = (('gtin', proof['store_id'], proof['gtin']) if proof.get('gtin')
                        else ('article', proof['store_id'], proof['retailer_product_id'])
@@ -133,12 +134,12 @@ def _quantity_reviews():
 
 
 def project_reviewed_quantity(product, fact, *, allow_estimates=False, required_unit=None):
-    """Project edible mass on a copy; retain gross package mass and source time.
+    """Project reviewed usable quantity; retain gross package and source time.
 
     Declared drained contents are exact; population edible yields need consent.
     Every review retains the exact source product, context and gross package.
     """
-    if required_unit != "g":
+    if required_unit not in {"g", "st"}:
         return product
     article = (getattr(product.source_provenance, 'retailer_product_id', None)
                or getattr(fact, 'retailer_product_id', None))
@@ -147,6 +148,26 @@ def project_reviewed_quantity(product, fact, *, allow_estimates=False, required_
     proofs = [proof for key in keys for proof in _quantity_reviews().get(key, ())]
     for proof in proofs:
         q = proof["quantity"]
+        if q.get('method') == 'reviewed_declared_piece_count_v1':
+            quantity = q.get('usable_quantity')
+            source = q.get('source', {})
+            if (required_unit == 'st' and _review_identity(proof, product, fact)
+                    and fact is not None and fact.ingredients_complete
+                    and product.sale_model == 'fixed_package' and product.package_unit == 'g'
+                    and product.quantity_confidence == 'exact' and product.purchase_terms is None
+                    and q.get('confidence') == 'exact' and q.get('basis') == 'as_sold'
+                    and q.get('unit') == 'st' and q.get('declared_net_quantity') == product.package_quantity
+                    and isinstance(quantity, int) and not isinstance(quantity, bool) and 0 < quantity < 100000
+                    and source.get('evidence_kind') == 'reviewed_manufacturer_count_declaration'
+                    and source.get('sha256') and source.get('url')
+                    and source.get('consumer_gtin') == proof.get('gtin') == product.gtin
+                    and product.gtin is not None and source.get('declared_piece_count') == quantity
+                    and source.get('declared_net_g') == product.package_quantity):
+                return product.model_copy(update={'usable_quantity': quantity, 'usable_unit': 'st',
+                                                   'quantity_confidence': QuantityConfidence.EXACT})
+            continue
+        if required_unit != 'g':
+            continue
         if q.get('method') == 'reviewed_declared_drained_mass_v1':
             quantity = q.get('usable_quantity')
             if (_review_identity(proof, product, fact)

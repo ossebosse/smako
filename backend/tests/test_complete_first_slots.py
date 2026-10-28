@@ -150,6 +150,33 @@ def test_exhausted_proposals_never_invent_a_valid_result():
             accepts=lambda slots,final:not final,evaluate=lambda slots,final:0,score=lambda slots,result:result)
 
 
+@pytest.mark.parametrize('day_specific,expected', [
+    (False, ('00', '03', '06')), (True, ('00', '09', '21')),
+])
+def test_package_affinity_preserves_priority_ties_and_slot_specific_choices(monkeypatch, day_specific, expected):
+    from app.services import plan_jobs
+
+    groups = options([f'{i:02d}' for i in range(65)], days=3)
+    remaining = [30.0]
+    monkeypatch.setattr(plan_jobs, 'remaining_planning_seconds', lambda: remaining[0])
+    calls = []
+
+    def evaluate(slots, final):
+        assert final
+        assert [s.day for s in slots] == [1, 2, 3]
+        calls.append(tuple(s.recipe.name for s in slots))
+        remaining[0] = 11
+        return 10
+
+    chosen, cost = MenuOptimizer().optimize_slots(groups, complete_first=True,
+        accepts=lambda slots, final: len({s.recipe.name for s in slots}) == len(slots),
+        evaluate=evaluate, score=lambda slots, cost: cost,
+        candidate_priority=lambda slot: abs(int(slot.recipe.name) - (slot.day - 1) * 10) if day_specific else 0,
+        candidate_packages=lambda slot: {int(slot.recipe.name) % 3})
+    assert calls == [expected]
+    assert tuple(s.recipe.name for s in chosen) == expected and cost == 10
+
+
 @pytest.mark.parametrize('pool_size', [17, 65])
 def test_exchange_reopens_an_earlier_rank_after_shared_basket_changes(monkeypatch, pool_size):
     from app.services import plan_jobs

@@ -12,7 +12,7 @@ class RecipeComponentAmount(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid", allow_inf_nan=False)
     ingredient_key: str
     quantity: float = Field(gt=0, le=100000)
-    unit: Literal["g", "ml"]
+    unit: Literal["g", "ml", "st"]
     note: str = ""
     name: str
 

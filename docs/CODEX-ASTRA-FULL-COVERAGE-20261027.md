@@ -194,3 +194,25 @@ Fortsätt mot alla 2 200. Aktuella fakta och slutprov finns i
 .local/remaining-source-review-20261028/facts-reviewed-v1.json respektive final-v1.
 Samma obegränsade journal, resurs- och källkrav. Ny källpilot inväntar beslut.
 Ingen produktion/beta/scheduler/profil ändras.
+
+## Nästa verifierade kontrollpunkt: 1 864 hela korgar med verifierade hela majskolvar
+
+[Rapport](reviews/whole-corn-20261028.md): +2 i båda lägen; 1 068 exakt
+insatslösta/1 066 exakt hela, 1 864 inklusive uppskattningar, 336 kvar.
+Två uttryckliga frysta receptversioner, en kolv per portion och exakt
+två kolvar per befintlig Findus 400 g-artikel. Grossgram och antal hålls
+isär i befintlig resolver och skafferijournal. Ingen ätlig massa/näring
+antas. Alla original och tidigare korgar bevarade; inga nya priser.
+
+A 278.76/278.76, B2:s hela korg identisk 731,20.
+API 53.47/53.70/32.36 s; alla 2932 kvittohashar passerar.
+587 riktade tester, Ruff/compileall. Alla 4201 CI-noder exakt en gång,
+4 170 tidigare bevarade. Hosted CI krävs före integration.
+PR32 integrerad 8270a9f med grön CI 7:44 mot tidigare 8:30.
+
+Fortsätt mot alla 2 200. Slutfakta och prov i
+.local/additional-source-review-20261028/facts-reviewed-v1.json och final-v3.
+Mung/belugastudien ännu inte kvalificerad; exakt organisk mungkomplettering
+väntar på främmande aktiv serverlease. Ny källpilot har uppdaterat
+beslutsunderlag men inväntar beslut. Samma obegränsade journal och
+resurs-/operationskrav; ingen produktion/beta/scheduler/profil ändras.

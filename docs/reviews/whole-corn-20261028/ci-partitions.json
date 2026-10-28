@@ -1,0 +1,56 @@
+{
+  "workflow_sha256": "175ec7498ca59c3d93ea975f8ce9e2cc3784102e34c47498cbc875e95da7874c",
+  "same_test_nodes_exactly_once": true,
+  "all_prior_4170_nodes_preserved": true,
+  "added_nodes": [
+    "backend/tests/test_complete_first_slots.py::test_package_affinity_preserves_priority_ties_and_slot_specific_choices[False-expected0]",
+    "backend/tests/test_complete_first_slots.py::test_package_affinity_preserves_priority_ties_and_slot_specific_choices[True-expected1]",
+    "backend/tests/test_store_dominance_oracle.py::test_sparse_store_coverage_preserves_every_complete_checkout_choice[2]",
+    "backend/tests/test_store_dominance_oracle.py::test_sparse_store_coverage_preserves_every_complete_checkout_choice[3]",
+    "backend/tests/test_whole_corn_count.py::test_count_and_gross_mass_stay_separate_in_purchase_and_consumption",
+    "backend/tests/test_whole_corn_count.py::test_count_cannot_be_declared_as_raw_edible_mass",
+    "backend/tests/test_whole_corn_count.py::test_count_requires_complete_exact_manufacturer_proof[consumer_gtin]",
+    "backend/tests/test_whole_corn_count.py::test_count_requires_complete_exact_manufacturer_proof[declared_net_g]",
+    "backend/tests/test_whole_corn_count.py::test_count_requires_complete_exact_manufacturer_proof[declared_piece_count]",
+    "backend/tests/test_whole_corn_count.py::test_count_requires_complete_exact_manufacturer_proof[evidence_kind]",
+    "backend/tests/test_whole_corn_count.py::test_count_requires_complete_exact_manufacturer_proof[sha256]",
+    "backend/tests/test_whole_corn_count.py::test_count_requires_complete_exact_manufacturer_proof[url]",
+    "backend/tests/test_whole_corn_count.py::test_declared_count_buys_whole_packages_and_preserves_gross_source",
+    "backend/tests/test_whole_corn_count.py::test_different_product_or_uncertain_package_cannot_borrow_count[brand-Other]",
+    "backend/tests/test_whole_corn_count.py::test_different_product_or_uncertain_package_cannot_borrow_count[gtin-unreviewed]",
+    "backend/tests/test_whole_corn_count.py::test_different_product_or_uncertain_package_cannot_borrow_count[name-Majskorn]",
+    "backend/tests/test_whole_corn_count.py::test_different_product_or_uncertain_package_cannot_borrow_count[package_quantity-800]",
+    "backend/tests/test_whole_corn_count.py::test_different_product_or_uncertain_package_cannot_borrow_count[package_unit-ml]",
+    "backend/tests/test_whole_corn_count.py::test_different_product_or_uncertain_package_cannot_borrow_count[quantity_confidence-estimated]",
+    "backend/tests/test_whole_corn_count.py::test_different_product_or_uncertain_package_cannot_borrow_count[sale_model-sold_by_weight]",
+    "backend/tests/test_whole_corn_count.py::test_different_product_or_uncertain_package_cannot_borrow_count[source_provenance-None]",
+    "backend/tests/test_whole_corn_count.py::test_different_product_or_uncertain_package_cannot_borrow_count[store_id-other-context]",
+    "backend/tests/test_whole_corn_count.py::test_frozen_successors_scale_count_and_keep_originals_and_unknown_nutrition",
+    "backend/tests/test_whole_corn_count.py::test_invalid_or_unverified_count_is_not_a_quantity[-1]",
+    "backend/tests/test_whole_corn_count.py::test_invalid_or_unverified_count_is_not_a_quantity[0]",
+    "backend/tests/test_whole_corn_count.py::test_invalid_or_unverified_count_is_not_a_quantity[100000]",
+    "backend/tests/test_whole_corn_count.py::test_invalid_or_unverified_count_is_not_a_quantity[2.0]",
+    "backend/tests/test_whole_corn_count.py::test_invalid_or_unverified_count_is_not_a_quantity[2.5]",
+    "backend/tests/test_whole_corn_count.py::test_invalid_or_unverified_count_is_not_a_quantity[None]",
+    "backend/tests/test_whole_corn_count.py::test_invalid_or_unverified_count_is_not_a_quantity[True]",
+    "backend/tests/test_whole_corn_count.py::test_new_price_reuses_content_but_requires_current_facts_and_context"
+  ],
+  "partitions": {
+    "all": {
+      "count": 4201,
+      "node_ids_sha256": "cc3b3129a7d916fa667433687e92a30c261b2fab84cabec6d3cb1769a75f8ee8"
+    },
+    "planner": {
+      "count": 125,
+      "node_ids_sha256": "83d3b55af9f19ab83ec5a82843b08d269a9614bc2f60a54afff73bc3277379af"
+    },
+    "integration": {
+      "count": 597,
+      "node_ids_sha256": "d0edee798b00225324b585cfd190f0a6a3dbb783159b94443f941890fe302540"
+    },
+    "core": {
+      "count": 3479,
+      "node_ids_sha256": "da9a9b38165e1a9a51fe5fa5d81c0da072bc310e3f2be8b3fed35b1a1c5d2060"
+    }
+  }
+}

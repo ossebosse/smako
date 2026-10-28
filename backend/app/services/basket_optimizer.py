@@ -483,10 +483,16 @@ class BasketOptimizer:
                           for store, quote in by_store.items()}
                          if type(self.verification_policy) is BasketVerificationPolicy else None)
                 masks = []
+                missing_mask = None
                 for target in store_ids:
                     quote = by_store.get(target)
                     if quote is None:
-                        masks.append(sum(1 << i for i, source in enumerate(store_ids) if source not in by_store))
+                        # Every missing target has the same missing sources.
+                        # Sparse lines otherwise rebuild this identical mask
+                        # once per store, in every singleton qualification.
+                        if missing_mask is None:
+                            missing_mask = sum(1 << i for i, source in enumerate(store_ids) if source not in by_store)
+                        masks.append(missing_mask)
                         continue
                     rank = ranks[target] if ranks is not None else self.verification_policy.rank_for_quote(quote)
                     masks.append(sum(1 << i for i, source in enumerate(store_ids)

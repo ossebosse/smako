@@ -1531,7 +1531,8 @@ class MenuOptimizer:
         priority = lambda slot: priorities[id(slot)]
         packages = candidate_packages or (lambda slot: frozenset())
         ordered = [sorted(group, key=priority) for group in groups]  # Python's stable tie order.
-        package_sets = {id(slot): packages(slot) for group in groups for slot in group}
+        package_sets = {id(slot): frozenset(packages(slot)) for group in groups for slot in group}
+        distinct_packages = set(package_sets.values())
         rows = [{'depth':i+1, 'attempt':1, 'beam_width':0, 'library_phase':'complete_first',
             'proposals':0, 'constraints_rejected':0, 'evaluation_rejected':0, 'priced':0,
             'retained':0, 'beam_pruned':0, 'evaluations_executed':0, 'evaluation_cache_hits':0}
@@ -1669,8 +1670,14 @@ class MenuOptimizer:
                     checkpoint()
                     trace['anchors_considered'] += 1
                     affinity = package_sets[id(anchor)]
+                    # Days often share the same qualified products. Compute
+                    # package overlap once per distinct set, not once per slot.
+                    # Each group is already stably priority-sorted, so sorting
+                    # only by overlap preserves the previous (overlap, priority)
+                    # ordering, including day-specific priorities and ties.
+                    affinity_scores = {values: -len(affinity & values) for values in distinct_packages}
                     orders = [[anchor], *[sorted(group,
-                        key=lambda slot: (-len(affinity & package_sets[id(slot)]), priority(slot)))
+                        key=lambda slot: affinity_scores[package_sets[id(slot)]])
                         for group in ordered[1:]]]
                     # Rotate anchors before one incompatible prefix consumes all
                     # checkout time; no truncated branch becomes an impossibility proof.

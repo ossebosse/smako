@@ -69,7 +69,7 @@ def library_vocabulary(recipes, *, reviewed_path=REVIEWED_VOCABULARY):
         key = f"{row['name']}|{row['form']}"
         requirements = row["requirements"]
         if (key in seen or canonicalize_ingredient_name(row["name"]) != row["name"]
-                or row["unit"] not in {"g", "ml"}
+                or row["unit"] not in {"g", "ml", "st"}
                 or row["form"] not in {"dry", "raw_edible", "as_sold", "preserved_drained", "cooked_drained"}
                 or (row["form"] != "as_sold" and row["unit"] != "g")
                 or not requirements or not row["review_basis"] or not row["evidence"]
