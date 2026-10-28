@@ -1,3 +1,9 @@
+> **Avslutad 2026-10-28 på ägarens instruktion.** Externa nätbutiker ingår
+> inte i fortsatt arbete. PR #34 stängdes utan merge. Ingen pilotkälla eller
+> prisuppgift har aktiverats. Fysisk butik och nätpublicerade butikspriser för
+> samma butik krävs för en ny handlare. Kontrollera befintliga alternativ och
+> Smakos bortsortering först. Texten nedan är historiskt beslutsunderlag.
+
 # Begränsad lokal källpilot för kvarvarande torra råvaror
 
 Detta är ett beslutsunderlag, inte aktiverade källor eller nya verifierade

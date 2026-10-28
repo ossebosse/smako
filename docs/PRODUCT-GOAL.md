@@ -5,6 +5,15 @@ uppdrag. Läs också [planeringsarkitekturen](PLANNING-ARCHITECTURE.md) och
 aktuellt uppdrag i [HANDOFF](HANDOFF.md). Dokumentet beskriver mål, inte ett
 påstående om att nuvarande implementation redan uppfyller dem.
 
+Ägarens förtydligande 2026-10-28: kontrollera alltid möjliga alternativ i
+befintliga butiker och om Smako har sorterat bort en lämplig vara innan
+saknat sortiment används som förklaring. En ny handlare kräver verifierad
+fysisk butik med nätpublicerade butikspriser för samma butik. Separata
+nätbutiker med leveranspriser ingår inte. Den föreslagna externa källpiloten
+är avslutad utan integration; befintliga onlinekontexter får inte märkas
+om till fysiska butikspriser. Kulinariskt olika alternativ behöver tydligt
+granskade receptversioner med rätt mängder och tillagning.
+
 ## Högsta utvecklingsprioritet: hela receptbiblioteket ska fungera
 
 Ägarbeslut 2026-10-27: **gör alla 2 200 importerade receptvarianter

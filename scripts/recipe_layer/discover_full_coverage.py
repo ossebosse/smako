@@ -16,9 +16,9 @@ from full_coverage_worklist import NOTES
 from grocery_data.app.services.axfood_detail_archive import read_document, verify_release
 
 ALIASES = {
-    'tamarindpasta': r'tamarind', 'masa harina': r'harina|maseca|minsa|nixtamal|majsmjol',
+    'tamarindpasta': r'tamarind', 'masa harina': r'harina|maseca|minsa|nixtamal|majsmjol|majsstarkelse',
     'nötkött': r'notkott|biff|innanlar|hogrev|entrecote|fransyska|notstek|ryggbit|rostas|oxfile|flankstek|ytterlar|notrulle',
-    'pärlkorn': r'parlkorn|matkorn|korngryn|barley', 'klibbigt ris': r'klibb|sticky|glutin|sushi',
+    'pärlkorn': r'parlkorn|matkorn|kornris|korngryn|barley', 'klibbigt ris': r'klibb|sticky|glutin|sushi',
     'bambuskott': r'bambusk|bamboo', 'tapiokastärkelse': r'tapiok|tapioc|cassava',
     'äggula': r'agg', 'äggvita': r'agg', 'rimmat fläsk': r'flask|bacon',
     'klibbigt rismjöl': r'rismjol|glutin|rice flour', 'tapiokapärlor': r'tapiok|tapioc',

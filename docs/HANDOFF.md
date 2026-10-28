@@ -1,3 +1,41 @@
+# 2026-10-28: Nya nätbutiker stoppade, befintliga alternativ först
+
+Ägaren har återkallat spåret med externa nätbutiker. PR #34 är stängd utan
+merge; inga nya handlaridentiteter eller pilotinsamlare integreras i main.
+Källgranskningen och dess råunderlag bevaras på den stängda arbetsgrenen.
+Ingen prisaktivering, produktionsändring eller fraktimplementation gjordes.
+Samma budgetjournal behåller även pilotens förbrukning.
+
+Arbetsordningen för samtliga kvarvarande varor är nu uttrycklig:
+kontrollera först alternativ i befintliga butiker och om Smako har sorterat
+bort en lämplig produkt. En ny butik får bara övervägas när fysisk butik
+och nätpublicerade butikspriser för rätt butik är verifierade. Ett separat
+online-/fraktpris uppfyller inte det kravet. Ingen befintlig Coop-onlinekontext
+får döpas om till fysisk hyllprisdata.
+
+Kontrollera Hemköps Maizena artikel 100181152_ST mot receptens behov av
+masa harina, och granska pärlkornsalternativ via befintligt sortiment och
+Smakos faktiska sök-/klassningsbeslut. Kulinariskt olika ersättningar kräver
+tydlig receptversion med granskade mängder och tillagning, inte falska alias.
+Tidigare 1 864 hela korgar och nämnaren 2 200 består.
+
+[Genomförd granskning](reviews/existing-store-alternatives-20261028.md):
+Maizena 100181152_ST finns i nio kontexter och samtliga godkänns för
+majsstärkelse; den är inte masa harina. Frebaco Kornris 101364286_ST /
+7312560036232 finns redan i fem katalogkontexter med pris och två separata
+fysiska Coop-erbjudanden. Granskningsregexen missade ordet kornris och är
+nu rättad. Ingen automatisk ingrediens- eller prisauktorisering införs.
+421 riktade tester samt Ruff/compileall passerar. Runtime och matdata är
+oförändrade; pre-pilotens exakta metodhash 1bd67745a63fbcac37fda42e641f304b6e125f1f81e084651a61c36d411d9e83
+är återställd efter två rena radslutsskillnader vid branchbytet.
+
+Nästa konkreta kvalificering är Frebacos kornris i befintliga kontexter:
+tillverkaren anger lätt polerat korn och 13–15 minuter i rikligt vatten;
+vissa av de 27 aktuella recepten anger 30–40 minuter och absorption.
+Granska hela formen och anpassa tillagningen i tydliga receptversioner där
+det behövs innan nya korgar räknas. Korngryn och matvete finns också som
+redan understödda alternativ. Ingen extern källpilot får återupptas.
+
 # 2026-10-28: 1 864 hela korgar med verifierade hela majskolvar
 
 [Rapport](reviews/whole-corn-20261028.md): +2 i båda lägen; 1 068 exakt

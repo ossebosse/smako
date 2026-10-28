@@ -69,6 +69,13 @@
 - Preserve the existing snapshot, source-strategy, promotion, PriceUniverse,
   GroceryContext, PhysicalStore, provider and CLI architecture. Do not create
   parallel pricing, promotion, assortment or refresh systems.
+- Owner clarification 2026-10-28: for every blocked ingredient, first inspect
+  alternatives at existing stores and whether Smako rejected a suitable product.
+  A new retailer requires a verified physical shop and online-published prices
+  for that physical shop; a separate delivery/webshop price is insufficient.
+  The external delivery-source pilot was withdrawn; do not integrate or resume it.
+  Culinary substitutions require explicit reviewed recipe versions, not false
+  identity aliases. Preserve the exact scope of existing online contexts.
 - PriceUniverse is shared and source-driven. Community evidence stays advisory,
   and `USER_SPECIFIC` offers must never enter the shared artifact.
 - Keep product identity and price scope exact. Fuzzy names may suggest manual
