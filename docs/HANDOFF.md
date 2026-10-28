@@ -12,6 +12,7 @@ A 278.76/278.76, hela B2 identisk 731,20.
 API 53.72/52.47/32.63 s.
 Alla 3166 kvittofiler verifierade. 335 riktade tester,
 Ruff/compileall; alla 4258 CI-noder exakt en gång, 4 202 gamla bevarade.
+450 ytterligare tester verifierar uppdaterade historiska versionskedjor.
 Grön hosted CI krävs före integration. Offertkopiering och nyckelberäkning
 snabbas upp utan ändrade priser, krav eller sökbudget.
 

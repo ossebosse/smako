@@ -71,7 +71,11 @@ oberoende prov; hela B2-korgen är identisk med tidigare 731,20 kr.
 Alla 3166 aktuella kvittofiler och deras beroenden
 är hashkontrollerade. [Slutkontroll](top-five-ingredients-20261028/verification.json).
 
-335 riktade tester, Ruff och compileall passerar. CI:s 4258 testnoder
+335 riktade tester, Ruff och compileall passerar. Första CI-körningen hittade
+fem fel i tre äldre testers versionskedjor. Kedjorna följer nu även de nya
+granskade versionerna; alla tidigare påståenden om original och tillagning
+behålls. Samtliga 450 tester i dessa tre filer passerar också lokalt.
+[Kontroll](top-five-ingredients-20261028/successor-tests.json). CI:s 4258 testnoder
 förekommer exakt en gång och alla 4 202 tidigare noder finns kvar.
 Grön hosted CI krävs före integration; inget testurval har minskats.
 

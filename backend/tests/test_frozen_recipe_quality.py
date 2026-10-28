@@ -78,6 +78,9 @@ def test_all_amended_versions_keep_history_and_original_library_and_source_bytes
     corn = json.loads((ROOT.parents[3] / "docs/reviews/whole-corn-20261028/recipe-review.json").read_bytes())
     latest = {r["previous_id"]: r["runtime_id"] for r in corn["corrected"]}
     successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
+    top_five = json.loads((ROOT.parents[3] / "docs/reviews/top-five-ingredients-20261028/recipe-review.json").read_bytes())
+    latest = {r["previous_id"]: r["runtime_id"] for r in top_five["corrected"]}
+    successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     assert report["affected_variants"] == 337
     assert len(current) == 2462
     for row in report["recipes"]:
