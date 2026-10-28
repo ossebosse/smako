@@ -198,6 +198,21 @@ def maintain(database, raw_root, *, universe, operations, now, apply=False):
         def protected_pending():
             preview_checked = set()
             while batch := list(islice(pending, limit)):
+                # Retired metadata intentionally outlives its raw body. Avoid
+                # repeating relational evidence scans for already absent files;
+                # any surviving body still gets the fresh protection check.
+                existing = []
+                for row in batch:
+                    relative = Path(row[0])
+                    if relative.is_absolute() or ".." in relative.parts or "\\" in row[0]:
+                        raise ValueError("raw retention reference escaped its root")
+                    path = raw_root / relative
+                    safe_root(path.parent)
+                    if path.exists():
+                        existing.append(row)
+                batch = existing
+                if not batch:
+                    continue
                 identities = {row[3] for row in batch} - protected
                 if not apply:
                     identities -= preview_checked

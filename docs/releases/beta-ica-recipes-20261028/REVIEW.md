@@ -78,6 +78,23 @@ Det installeras med hashkontroll och skyddade filer i befintlig datavolym;
 `AXFOOD_PRODUCT_DETAIL_ROOT` binder den exakta releasen. Detta aktiverar
 faktaläsaren och startar ingen ny produktdetaljinsamling.
 
+## Bounded återkörning av underhåll inför bytet
+
+Första förkontrollen avbröts med SIGINT i vår egen underhållsprocess;
+ingen extern insamling avbröts. Den hade fastnat i upprepade relationsprober
+för pensionerad råmetadata vars kroppar redan saknas. Ett läsande prov gav
+1 000 pensionerade råreferenser och noll befintliga filer. Ingen image hade
+byggts eller aktiverats. Tidigare slutförda snapshottransaktioner består.
+
+`snapshot_retention` filtrerar nu säkert redan saknade kroppar före dessa
+prober. Alla befintliga kroppar går fortfarande genom färsk relationskontroll,
+sökvägs-, hash- och ändringskontroll före borttagning. Råmetadata behålls.
+Ett regressionstest med 200 extra saknade kroppar verifierar både preview
+och apply utan upprepade relationsprober och att otillåtna sökvägar stoppas.
+Befintliga skydds-, avbrotts-/återförsöks- och underhållstester passerar.
+Det korrigerade, granskade underhållet används också i det avgränsade
+förkontroll-/backupförloppet innan den nya schedulern är aktiverad.
+
 Skyddat operatörsunderlag: `.local/beta-all-20261028/` och serverns
 `/srv/app/var/reports/beta-all-20261028/`. Dessa innehåller inga källnycklar
 i publicerade rapporter och checkas inte in.
