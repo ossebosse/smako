@@ -3,8 +3,8 @@
 Ägarens beställda Malmö ICA, tvånattspolicy och hela det integrerade
 recept-/beräkningsarbetet är nu aktiverade på servern. Se
 [aktiveringsjournal och slutprov](releases/beta-ica-recipes-20261028/ACTIVATED.md).
-Kod `2b65533af00d`, main-merge `2f033b8`, har grön CI. Appen kör
-`beta-all-2b65533af00d`; slutlig scheduler kör
+Slutlig appkod `f596e1102fd7`, main-merge `45fa207`, har grön CI. Appen kör
+`app-f596e1102fd7-09770600` sedan 21:04:28 UTC; slutlig scheduler kör
 `beta-scheduler-2b65533af00d-contracts1`. 2 462 aktiva varianter och 66
 granskade ingrediensdeklarationer ingår i vanlig faktaladdning.
 
@@ -21,7 +21,7 @@ prisbyggen hittade detta innan felaktiga priser kunde publiceras. Fyra
 redan granskade main-filer korrigerades; båda fullständiga byggen passerade
 utan nätverk med 2 CPU/3 GiB. En cronuppstartsrace återställde ett första
 byte; slutligt byte väntar på rätt jobb och bevarade appens container-ID,
-profiler och planer. Senaste verifierade releasebackup: `20261028T193735Z`.
+profiler och planer. Senaste verifierade releasebackup: `20261028T205455Z`.
 
 Windows fullpaket `2b65533af00d` är installerat och kontrollerat, men UAC
 avbröts och S4U-registreringen kräver administratör. Uppgiften använder
@@ -31,12 +31,23 @@ administratör och verifiera faktisk XML/03:17 måndag-torsdag. Ett pågående
 reläjobb ska få avslutas. Installerat paket är inte registrerat veckoschema.
 Skyddat återupptagnings-/verifieringsunderlag finns i `.local/beta-all-20261028/`.
 
-Kompletterande appändring `1cf46ed` förbereder det gemensamma V2-underlaget
+Kompletterande appändring i PR41 förbereder det gemensamma V2-underlaget
 automatiskt efter uppstart och prisreload, inklusive portioner 1–4. Den är
-ännu inte aktiverad vid denna journalpunkt. Lund/Malmö gästprov passerade
+aktiverad och exakt kandidat passerade normal uppstart för båda städerna
+på 191,98 s med 2 CPU/3 GiB, noll syntetiska planer/profiler och noll nätanrop.
+Lund/Malmö gästprov på första appbilden passerade
 50,45/53,02 s med tre recept/två portioner och reviderad hel korg efter manuell
 gemensam förberedelse; första kalla Malmöprovet var ofullständigt vid 60,48 s.
-Nästa steg är grön CI, prov av exakt kandidatbild och separat appaktivering.
+Den historiska täckningen 2 024/2 200 är fortsatt en fryst referensmätning,
+inte ett nytt mått på full täckning med dagens priser eller alla användarval.
+Slutlig app gav godkända publika gästmenyer i Lund/Malmö på 50,89/52,36 s,
+med helkorgsrevision och identisk återläsning. Första Lundprovet efter bytet
+var ofullständigt vid 64,34 s; orsaken är inte fastställd. Det räknas inte
+som lyckad kall latens. Ingen manuell förberedelse kördes efter sista bytet.
+Ordinarie retention är complete och egna inaktiva diagnostikkopior är
+pensionerade under driftlåset efter verifierad backup. Windowsregistreringen
+är den kvarvarande aktiveringsåtgärden; se journal och sekretessrensad
+[EVIDENCE.json](releases/beta-ica-recipes-20261028/EVIDENCE.json).
 
 # 2026-10-28: Två insamlingsnätter och ICA Primat förberett, aktivering återstår
 

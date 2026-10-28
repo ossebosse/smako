@@ -1,19 +1,25 @@
 # Samlad beta 2026-10-28: server aktiverad, Windowsregistrering återstår
 
 App och första schedulerbilden aktiverades **2026-10-28 18:51:14 UTC** på
-https://beta.smako.nu. Båda kommunernas `/ready` svarade med
-`beta-all-2b65533af00d`. Ägarens beställning omfattar Malmö ICA,
+https://beta.smako.nu. Slutlig appkomplettering aktiverades **21:04:28 UTC**;
+båda kommunernas `/ready` svarar med `app-f596e1102fd7-09770600`.
+Ägarens beställning omfattar Malmö ICA,
 två insamlingsnätter och hela det integrerade recept-/beräkningsarbetet.
 
 ## Pinnar och granskning
 
-- Kod: `2b65533af00d6355bd9370a18b9f613337c7ed2d`, integrerad på main som
+- Samlad grundkod: `2b65533af00d6355bd9370a18b9f613337c7ed2d`, main
   `2f033b83aa3f259fe00945425c64780d55164ea1`.
-- App: `sha256:e60cabb6ffcf8d452d5d3071dca634e2bc20bbf4f32ab0990cf6e0d937b8cf73`.
+- Slutlig appkod: `f596e1102fd710a262fd834ae431f0d071a4e9d2`, main
+  `45fa207b6a2531405e23780d7c5239a54517d80c` efter PR41.
+- App: `sha256:d33eafe41e887d3b427ca2c85e0ef95309413b4de989a4eefb3ef170e55f16ac`,
+  BUILD_ID `app-f596e1102fd7-09770600`, ovanpå första appbilden
+  `sha256:e60cabb6ffcf8d452d5d3071dca634e2bc20bbf4f32ab0990cf6e0d937b8cf73`.
 - Slutlig scheduler: `sha256:00d69bd1f4d5d4c6fa5a5fd6dc10d8eab9adef79654fb8669433a3112c37173d`,
   BUILD_ID `beta-scheduler-2b65533af00d-contracts1`, aktiverad 19:43:52 UTC.
 - [Grön CI på main](https://github.com/ossebosse/smako/actions/runs/40733422872),
-  efter PR37–40. [Granskning och riktade prov](REVIEW.md).
+  efter PR37–40 och [grön CI efter PR41](https://github.com/ossebosse/smako/actions/runs/40763603004).
+  [Granskning och riktade prov](REVIEW.md).
 
 Bilderna byggdes på de faktiska tidigare driftbilderna. 373 deklarerade
 appfiler och 429 schedulerfiler hashkontrollerades; övriga runtimefiler och
@@ -31,7 +37,8 @@ Det befintliga driftlåset hölls genom källprov, förberedelse, full backup oc
 imagebyte. Ordinarie insamlingar fick avslutas före låstilldelningen.
 Den första verifierade, roterande backupen är `20261028T183259Z`. Inför
 slutligt schedulerbyte verifierades `20261028T193735Z`, inklusive båda
-SQLite-databaserna och båda kommunernas återställningsunderlag. Samtliga
+SQLite-databaserna och båda kommunernas återställningsunderlag. Slutlig
+appaktivering verifierade ny backup `20261028T205455Z`. Samtliga
 tidigare plan-/profil-/kontorader jämfördes som hashmultimängder och finns kvar.
 Mountar, proxy och övrig miljö bevarades. Prismanifesten var oförändrade vid
 själva imagebytet. Rollback bevarar föregående bilder och återställer inga databaser.
@@ -86,6 +93,10 @@ Det granskade Axfood-detaljarkivet `b11ed75863be1547755ee78be5143ba737d5ea3564ac
 använder både detta arkiv och de 66 tidigare utgivna kompositionsgranskningarna.
 De två privata kvalificeringsdatabaserna togs bort under driftlåset först
 efter godkänd kanonisk backup; 14 420 819 968 byte frigjordes.
+Efter slutlig appaktivering verifierades kanoniska aktiva artefakters hash
+och identitet igen under driftlåset. Endast den egna diagnostiska SQLite-
+kopian och två privata, inaktiva byggartefakter pensionerades: ytterligare
+7 495 313 963 byte. Slutlig ordinarie lagringsretention är complete.
 
 ## Windows kräver fortfarande administratör
 
@@ -128,13 +139,52 @@ av alla 2 462 varianter i båda kommunerna klarade 175,33 s med 2 CPU/3 GiB
 och minnestopp 2 121 519 104 byte. Tidigare förberedelse 1/4 klarade också
 183,48 s, 2 561 286 144 byte. Dessa tider är skilda från API-menyproven.
 
-Ordinarie uppstart laddade hittills fakta och bibliotek men anropade inte
+Ordinarie uppstart laddade tidigare fakta och bibliotek men anropade inte
 den gemensamma aktuella källförberedelsen; prisreload schemalade inte heller
-denna. Arbetsgrenen `1cf46ed` kompletterar den befintliga bakgrundsarbetaren
-och anropar den efter godkänd ny runtimeaktivering. Denna kompletterande
-apprelease väntar på CI och faktisk aktivering vid denna journalpunkt.
+denna. PR41 kompletterar den befintliga bakgrundsarbetaren och anropar den
+efter godkänd ny runtimeaktivering. Ändringen är aktiverad i slutlig appbild;
+två appfiler ändrades och 1 004 andra runtimefiler hashkontrollerades oförändrade.
+Scheduler, mountar, priser och övrig miljö bevarades; enbart BUILD_ID ändrades.
+
+Exakt kandidatbild passerade vanlig lifespan-uppstart utan nätverk med
+2 CPU/3 GiB: 191,98 s, minnestopp 2 542 624 768 byte. Den automatiska
+bakgrundsförberedelsen rapporterade ready för båda pris-ID:n och samtliga
+2 462 varianter för portioner 1–4, noll persistensfel och noll syntetiska
+plan-/profilrader. Metodsignaturen är
+`aaf300e88babbc6fa096c83c62a2ab5eb837a3cf23e12cda1a5ebd6ebbd43967`.
+Detta är gemensam receptförberedelse, inte färdiga menyer eller ett bevis
+för att alla varianter klarar varje användares krav.
+
+## Slutprov på aktiverad app
+
+Publika gästprov med samma tre middagar/två portioner, högst två butiker inom
+tre kilometer, passerade på slutlig BUILD_ID: Lund **201 / 50,89 s**, Malmö
+**201 / 52,36 s**. Hela korgrevisionen och avstämningen av summor passerade,
+okända mängder var noll och två återläsningar per plan var identiska.
+Tidigare gästgränser består: fem recept/fyra portioner gav korrekt 403.
+
+Det första Lundförsöket efter slutligt appbyte gav **422 / SEARCH_INCOMPLETE
+vid 64,34 s**, utan slutkontrollerad meny eller utförlig diagnostik. Det
+bevaras separat och räknas inte som framgång. Nästa försök använde samma krav
+och en ny syntetisk gäst. Ingen manuell källförberedelse kördes efter detta
+appbyte. Ett senare godkänt försök bevisar inte latens för det första kalla
+anropet. Orsaken till den extra tiden är inte fastställd.
+
+Driftkontroll 21:08 UTC bekräftade laddat/publicerat Lund-ID, ready och
+tillräckligt lagringsutrymme. Alla 13 registrerade pipelineincidenter var
+recovered; inga HTTP 5xx-metriker fanns i det aktuella dygnsfönstret. Äldre
+källor behåller sina synliga åldersvarningar och kan fortfarande ha egna
+insamlingsfel; inga kvalitetsgränser ändrades för att göra status grön.
+
+Den frysta referenstäckningen 2 024/2 200 hela uppskattningskorgar,
+1 140 hela exakta korgar och 176 kvarvarande blockerade importer är historisk.
+Den mäts inte om av dessa två gästprov och är inte ett påstående om full
+täckning med dagens priser, alla valkombinationer eller global optimalitet.
+Maskinläsbart, sekretessrensat slutunderlag: [EVIDENCE.json](EVIDENCE.json).
 
 Skyddat råunderlag finns i `.local/beta-all-20261028/` och serverns
 `/opt/smako/evidence/beta-all-2b65533af00d/` samt
 `/srv/app/var/reports/beta-all-20261028/`. Inga privata profiler, cookies,
-källnycklar, databaser eller full miljökonfiguration checkas in.
+källnycklar, databaser eller full miljökonfiguration checkas in. Slutlig app
+har även `.local/beta-recipes-autoprep-20261028/` och
+`/opt/smako/evidence/app-f596e1102fd7-09770600/` som skyddat råunderlag.

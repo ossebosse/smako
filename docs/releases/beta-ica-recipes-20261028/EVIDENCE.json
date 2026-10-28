@@ -1,0 +1,406 @@
+{
+  "schema": "smako-beta-ica-recipes-20261028-v1",
+  "recorded_at": "2026-10-28T21:10:05.346517+00:00",
+  "url": "https://beta.smako.nu",
+  "app": {
+    "code_commit": "f596e1102fd710a262fd834ae431f0d071a4e9d2",
+    "main_merge": "45fa207b6a2531405e23780d7c5239a54517d80c",
+    "activated_at": "2026-10-28T21:04:28.961412+00:00",
+    "image": "sha256:d33eafe41e887d3b427ca2c85e0ef95309413b4de989a4eefb3ef170e55f16ac",
+    "policy": {
+      "BUILD_ID": "app-f596e1102fd7-09770600",
+      "PRICE_COLLECTION_CADENCE": "mon_thu",
+      "ICA_PRIMAT_BASE_ENABLED": "true",
+      "DEMAND_REFRESH_ENABLED": "true",
+      "DEMAND_REFRESH_CRON": "2,17,32,47 * * * *",
+      "DAILY_REFRESH_CRON": "17 03 * * 1,4",
+      "DAILY_REFRESH_SCHEDULE": "03:17 Europe/Stockholm Mon,Thu",
+      "COOP_RETRY_ENABLED": "false",
+      "COOP_RETRY_SCHEDULE": "",
+      "LIBRARY_SEARCH_POLICY": "smako-current-library-v2",
+      "LIBRARY_MERGE_GENERATIONS": "false",
+      "AXFOOD_PRODUCT_DETAIL_ROOT": "/srv/app/var/grocery/axfood-product-details/releases/b11ed75863be1547755ee78be5143ba737d5ea3564acc1cadaa0feb6b4ebf0a8",
+      "TZ": "Europe/Stockholm"
+    }
+  },
+  "scheduler": {
+    "code_commit": "2b65533af00d6355bd9370a18b9f613337c7ed2d",
+    "activated_at": "2026-10-28T19:43:52.874667+00:00",
+    "image": "sha256:00d69bd1f4d5d4c6fa5a5fd6dc10d8eab9adef79654fb8669433a3112c37173d",
+    "policy": {
+      "BUILD_ID": "beta-scheduler-2b65533af00d-contracts1",
+      "PRICE_COLLECTION_CADENCE": "mon_thu",
+      "ICA_PRIMAT_BASE_ENABLED": "true",
+      "DEMAND_REFRESH_ENABLED": "true",
+      "DEMAND_REFRESH_CRON": "2,17,32,47 * * * *",
+      "DAILY_REFRESH_CRON": "17 03 * * 1,4",
+      "DAILY_REFRESH_SCHEDULE": "03:17 Europe/Stockholm Mon,Thu",
+      "COOP_RETRY_ENABLED": "false",
+      "COOP_RETRY_SCHEDULE": "",
+      "LIBRARY_SEARCH_POLICY": "smako-current-library-v2",
+      "LIBRARY_MERGE_GENERATIONS": "false",
+      "AXFOOD_PRODUCT_DETAIL_ROOT": "/srv/app/var/grocery/axfood-product-details/releases/b11ed75863be1547755ee78be5143ba737d5ea3564acc1cadaa0feb6b4ebf0a8",
+      "TZ": "Europe/Stockholm"
+    }
+  },
+  "initial_combined_activation_at": "2026-10-28T18:51:14.289069+00:00",
+  "backup": "20261028T205455Z",
+  "preservation": {
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 312,
+      "personal_private_state": 121,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    },
+    "price_manifests_preserved": true,
+    "mounts_preserved": true,
+    "only_environment_change": "BUILD_ID",
+    "operation_lock": true
+  },
+  "server_schedule": {
+    "timezone": "Europe/Stockholm",
+    "external_fetch_start": "03:17 Mon,Thu",
+    "bounded_retry_window": "03:17-06:17 Mon,Thu",
+    "backup": "02:47 daily",
+    "local_worker": "2,17,32,47 * * * *",
+    "actual_cron": "SHELL=/bin/sh\nPATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n47 02 * * * root . /run/grocery-beta-environment && cd /srv/app && runuser -u app -- python deploy/scripts/backup_sqlite.py >> /proc/1/fd/1 2>> /proc/1/fd/2\n2,17,32,47 * * * * root . /run/grocery-beta-environment && cd /srv/app && runuser -u app -- python deploy/scripts/run_daily_refresh.py >> /proc/1/fd/1 2>> /proc/1/fd/2\n"
+  },
+  "windows": {
+    "status": "not_applied",
+    "reason": "administrator_rights_required_UAC_cancelled",
+    "installed_release": "2b65533af00d",
+    "active_release": "2464596b6f07",
+    "actual_schedule": "01:30,09:30,17:30 daily",
+    "last_task_result": 1,
+    "next_start_observed": "2026-10-29T01:30:00+01:00",
+    "manual_script": ".local/beta-all-20261028/activate_windows_admin.ps1",
+    "target_schedule": "03:17 Mon,Thu Europe/Stockholm"
+  },
+  "readiness": {
+    "lund": {
+      "status": "ready",
+      "build_id": "app-f596e1102fd7-09770600",
+      "price_universe_id": "price-universe:0c617164ed822450e72b218929fe7c02f6647a2d07f08426c0ee89e0f9b590a2",
+      "required_contexts_usable": true,
+      "requires_attention": true
+    },
+    "malmo": {
+      "status": "ready",
+      "build_id": "app-f596e1102fd7-09770600",
+      "price_universe_id": "price-universe:b756752d4509a2c3597b676c7780e7a2c8a4fb0c2e7c332322d32a433cc5bee9",
+      "required_contexts_usable": true,
+      "requires_attention": true
+    }
+  },
+  "ica": {
+    "malmo_physical_municipal_stores": 24,
+    "malmo_resolved_primat_contexts": 11,
+    "successful_request_count_per_city": 49,
+    "collection_scope": "one resolution plus 48 ingredient searches; not exhaustive SKU crawl",
+    "sources": [
+      {
+        "city": "Malmö",
+        "store": "ICA Kvantum Malmborgs Caroli",
+        "provider_store_id": "1004490",
+        "priced_records": 1213,
+        "observed_at": "2026-10-28T18:29:12.632026+00:00",
+        "current_primat_capability": "FULL"
+      },
+      {
+        "city": "Malmö",
+        "store": "Maxi ICA Stormarknad Västra Hamnen",
+        "provider_store_id": "1003569",
+        "priced_records": 1432,
+        "observed_at": "2026-10-28T18:29:12.632026+00:00",
+        "current_primat_capability": "FULL"
+      },
+      {
+        "city": "Lund",
+        "store": "Maxi ICA Stormarknad Gunnesbo",
+        "provider_store_id": "1088004",
+        "priced_records": 1926,
+        "observed_at": "2026-10-28T17:58:27.736369+00:00",
+        "current_primat_capability": "FULL"
+      },
+      {
+        "city": "Lund",
+        "store": "ICA Supermarket Clemenstorget",
+        "provider_store_id": "1004409",
+        "priced_records": 38,
+        "observed_at": "2026-09-23T01:48:38.441364+00:00",
+        "current_primat_capability": "offers_only",
+        "base_price_status": "retained_qualified_LKG"
+      }
+    ]
+  },
+  "recipe_inputs": {
+    "active_variants": 2462,
+    "imported_variants": 2200,
+    "approved_issued_compositions": 66,
+    "method_signature": "aaf300e88babbc6fa096c83c62a2ab5eb837a3cf23e12cda1a5ebd6ebbd43967",
+    "axfood_archive": "b11ed75863be1547755ee78be5143ba737d5ea3564acc1cadaa0feb6b4ebf0a8",
+    "historical_frozen_coverage": {
+      "whole_estimated": 2024,
+      "whole_exact": 1140,
+      "imported_denominator": 2200,
+      "remaining_blocked": 176
+    }
+  },
+  "normal_startup_qa": {
+    "status": "passed",
+    "build_id": "app-f596e1102fd7-09770600",
+    "seconds": 191.98,
+    "memory_peak_bytes": 2542624768,
+    "normal_lifespan": true,
+    "automatic_preparation": {
+      "status": "ready",
+      "universes": [
+        {
+          "universe_id": "price-universe:0c617164ed822450e72b218929fe7c02f6647a2d07f08426c0ee89e0f9b590a2",
+          "shared_preparation": {
+            "ready": true,
+            "content_variants": 2462,
+            "portion_views": {
+              "1": 2462,
+              "2": 2462,
+              "3": 2462,
+              "4": 2462
+            },
+            "persistence_failures": 0
+          },
+          "status": "ready",
+          "fact_rows": 42064,
+          "seconds": 35.788
+        },
+        {
+          "universe_id": "price-universe:b756752d4509a2c3597b676c7780e7a2c8a4fb0c2e7c332322d32a433cc5bee9",
+          "shared_preparation": {
+            "ready": true,
+            "content_variants": 2462,
+            "portion_views": {
+              "1": 2462,
+              "2": 2462,
+              "3": 2462,
+              "4": 2462
+            },
+            "persistence_failures": 0
+          },
+          "status": "ready",
+          "fact_rows": 71765,
+          "seconds": 43.89
+        }
+      ],
+      "library": {
+        "status": "ready",
+        "seconds": 28.284
+      }
+    },
+    "synthetic_rows": {
+      "consumer_plan_revisions": 0,
+      "personal_private_state": 0
+    },
+    "network": "none"
+  },
+  "startup_resource_limits": {
+    "cpus": 2,
+    "memory_bytes": 3221225472
+  },
+  "public_guest_acceptance": {
+    "build_id": "app-f596e1102fd7-09770600",
+    "guest_limit_enforced": true,
+    "cases": [
+      {
+        "case": "lund-0",
+        "http_status": 201,
+        "seconds": 50.89,
+        "stages": [
+          {
+            "stage": "queued",
+            "progress": null,
+            "seconds": 0.08
+          },
+          {
+            "stage": "product_facts",
+            "progress": null,
+            "seconds": 3.25
+          },
+          {
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 125,
+              "total": 1033,
+              "unit": "recipes"
+            },
+            "seconds": 26.69
+          },
+          {
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 525,
+              "total": 1033,
+              "unit": "recipes"
+            },
+            "seconds": 29.75
+          },
+          {
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 1033,
+              "total": 1033,
+              "unit": "recipes"
+            },
+            "seconds": 33.59
+          },
+          {
+            "stage": "week_search",
+            "progress": null,
+            "seconds": 36.73
+          }
+        ],
+        "passed": true,
+        "recipes": 3,
+        "servings": 2,
+        "stores": 2,
+        "audit_passed": true,
+        "identical_saved_get": true,
+        "paid": 222.08
+      },
+      {
+        "case": "malmo-0",
+        "http_status": 201,
+        "seconds": 52.36,
+        "stages": [
+          {
+            "stage": "queued",
+            "progress": null,
+            "seconds": 1.97
+          },
+          {
+            "stage": "product_facts",
+            "progress": null,
+            "seconds": 5.03
+          },
+          {
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 0,
+              "total": 1033,
+              "unit": "recipes"
+            },
+            "seconds": 27.28
+          },
+          {
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 100,
+              "total": 1033,
+              "unit": "recipes"
+            },
+            "seconds": 30.34
+          },
+          {
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 175,
+              "total": 1033,
+              "unit": "recipes"
+            },
+            "seconds": 33.45
+          },
+          {
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 500,
+              "total": 1033,
+              "unit": "recipes"
+            },
+            "seconds": 36.58
+          },
+          {
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 1033,
+              "total": 1033,
+              "unit": "recipes"
+            },
+            "seconds": 41.49
+          },
+          {
+            "stage": "week_search",
+            "progress": null,
+            "seconds": 44.56
+          }
+        ],
+        "passed": true,
+        "recipes": 3,
+        "servings": 2,
+        "stores": 2,
+        "audit_passed": true,
+        "identical_saved_get": true,
+        "paid": 222.08
+      }
+    ],
+    "earlier_incomplete_attempts": [
+      {
+        "case": "lund-0",
+        "http_status": 422,
+        "seconds": 64.34
+      }
+    ]
+  },
+  "guest_limits": {
+    "recipes": 5,
+    "servings": 4,
+    "http_status": 403,
+    "expected_guest_limits": {
+      "recipes": 3,
+      "servings": 2
+    }
+  },
+  "earlier_app_acceptance": {
+    "lund_seconds": 50.45,
+    "malmo_seconds": 53.02,
+    "malmo_initial_incomplete_seconds": 60.48,
+    "incomplete_counted_as_success": false
+  },
+  "retention": {
+    "status": "complete",
+    "observed_at": "2026-10-28T21:04:31.535339+00:00",
+    "maintenance_code_sha256": "c2cf487f2f2fbf1a78cddf79723d70eb6033cd9dd639b077124343c1e52d1bca",
+    "reclaimed_bytes": 16260855,
+    "own_copy_cleanup": [
+      {
+        "stage": "diagnostic_copies_retired",
+        "bytes": 7495313963
+      },
+      {
+        "stage": "post_activation_maintenance",
+        "status": "complete",
+        "observed_at": "2026-10-28T21:09:30.343603+00:00",
+        "reclaimable_bytes": 0
+      }
+    ]
+  },
+  "operations": {
+    "checked_at": "2026-10-28T21:08:05.528593+00:00",
+    "pipeline_incidents": {
+      "total": 13,
+      "unrecovered": 0
+    },
+    "recent_http_5xx_metric_count": 0
+  },
+  "ci": [
+    "https://github.com/ossebosse/smako/actions/runs/40762190458",
+    "https://github.com/ossebosse/smako/actions/runs/40763603004"
+  ],
+  "limits": [
+    "Windows weekly registration is still pending administrator execution.",
+    "Source observation-age warnings remain; qualified base prices persist until validated replacement.",
+    "Campaigns retain actual expiry dates; no source timestamp is renewed.",
+    "Initial final-app Lund request timed out; retries are recorded separately and do not prove cold-request latency.",
+    "Two passing guest cases do not prove every constraint combination, 100% live recipe coverage, or global optimality."
+  ]
+}
