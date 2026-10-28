@@ -1,3 +1,20 @@
+# 2026-10-28: PR31 integrerad, snabbare verifiering under arbete
+
+PR #31 är integrerad på main `84c39008b3dc15a5262a0f372070a40866aeb271`.
+Alla 4 170 hosted testnoder passerade utan fel, 63 historiska data-skippar,
+510 sekunder. Samtliga leveranshashar verifierades efter integration.
+Aktuella [CI-förbättringar](reviews/ci-balance-20261028.md) bevarar hela
+testurvalet och alla skalningskontroller. Runtime/data är oförändrade;
+PR31:s hashstabila korgverifiering återanvänds. Hosted CI måste passera
+även för den nya testindelningen innan den integreras.
+
+Fortsätt mot alla 2 200; fortsatt 1 862 hela inklusive uppskattningar och
+338 kvar. Nio kokta mungböns-/linsvarianter har en ny primärstudie, men
+produktanvisningarnas beredning skiljer sig och gross/rensad torr massa
+måste hållas isär. Se tillämpningsgranskningen i CI-rapportens underlag.
+Ingen ny beredning är aktiverad. Ny källpilot inväntar fortfarande beslut.
+Samma obegränsade journal och resurs-/operationsgränser; ingen aktivering.
+
 # 2026-10-28: 1862 hela korgar efter exakt granskade tunna risnudlar
 
 [Rapport](reviews/thin-rice-noodles-20261028.md): +0 hela inklusive

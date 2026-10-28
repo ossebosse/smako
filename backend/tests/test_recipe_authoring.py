@@ -110,16 +110,21 @@ def test_author_registers_each_amount_once_with_decimals():
 
 
 def test_issued_water_steps_scale_as_before():
-    """The 11 issued single-amount water steps keep their exact scaled text."""
+    """Every issued water step keeps its exact text at all five serving counts."""
     from app.services.meal_library_content import manifest_entries
     from app.services.recipe_library import _scaled, current_recipes
 
-    steps = [(r, s) for r in current_recipes(len(manifest_entries()["current"]))
-             for s in r.design.steps if s.scalable_amounts and "vatten" in s.text]
-    assert len(steps) >= 11
-    for recipe, step in steps:
-        index = recipe.design.steps.index(step)
+    checked_steps = 0
+    for recipe in current_recipes(len(manifest_entries()["current"])):
+        steps = [(index, step) for index, step in enumerate(recipe.design.steps)
+                 if step.scalable_amounts and "vatten" in step.text]
+        if not steps:
+            continue
+        checked_steps += len(steps)
         for servings in (1, 2, 4, 8, 12):
-            text = _scaled(recipe, servings).design.steps[index].text
-            for _token, quantity in step.scalable_amounts:
-                assert f"{quantity * servings / recipe.servings:g} ml".replace(".", ",") in text
+            scaled = _scaled(recipe, servings)
+            for index, step in steps:
+                text = scaled.design.steps[index].text
+                for _token, quantity in step.scalable_amounts:
+                    assert f"{quantity * servings / recipe.servings:g} ml".replace(".", ",") in text
+    assert checked_steps >= 11

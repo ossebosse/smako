@@ -59,19 +59,28 @@ jobs:
         run: |
           planner_tests=(
             backend/tests/test_owned_planner_artifacts.py
-            backend/tests/test_complete_scope_incumbents.py
             backend/tests/test_own_provider.py
             backend/tests/test_own_provider_grocery_data_contract.py
             backend/tests/test_personal_choices_browser.py
           )
           # These measured long-running contracts do not launch browsers.
           # Keep new tests in core automatically; every partition is required.
+          # PR30/31 JUnit timings leave this group substantially underloaded.
+          # Move whole files, preserving the complete node set exactly once.
           integration_tests=(
+            backend/tests/test_complete_scope_incumbents.py
             backend/tests/test_coop_municipality_provider.py
             backend/tests/test_all_intake_links.py
             backend/tests/test_diversity_mode_api_contract.py
             backend/tests/test_optimized_llm_improvement.py
             backend/tests/test_verified_menu_search.py
+            backend/tests/test_personal_planning_v2.py
+            backend/tests/test_category_recipe_search.py
+            backend/tests/test_recipe_content_pack.py
+            backend/tests/test_ecological_search_bounds.py
+            backend/tests/test_citygross_municipality_provider.py
+            backend/tests/test_personal_booked_revisions.py
+            backend/tests/test_promotion_groups.py
           )
           if [ "$TEST_SUITE" = planner ]; then
             targets=("${planner_tests[@]}")
