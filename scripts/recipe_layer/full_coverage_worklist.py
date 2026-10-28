@@ -11,10 +11,10 @@ from pathlib import Path
 NOTES = {
     'mynta': ('quantity', 'Generic trimmed mint has a reviewed estimated yield for exact 25-g packs. Keep explicit leaf-only demand separate and source its own yield; reject rooted 429-g pots. Original 2200 IDs are retained through reviewed recipe versions.'),
     'tamarindpasta': ('assortment', '435-ml Chua Hah Seng concentrate has unproved strength and mass. Find a priced seedless unsweetened paste; do not equate concentrate to paste.'),
-    'masa harina': ('assortment', 'PAN precooked cornmeal is not verified nixtamalised masa. Search approved catalogues for exact Maseca/Minsa/nixtamalised SKU.'),
+    'masa harina': ('assortment', 'Check existing-store alternatives first. Maizena 100181152_ST is already supported as starch, not nixtamalised dough flour; PAN precooked cornmeal is also distinct. Any culinary adaptation needs a reviewed recipe version.'),
     'citrongräs': ('quantity', '50-g whole stems exist. Need tender trimmed-core yield; tea, powder and seasoned dumplings are excluded.'),
     'nötkött': ('product_relation', 'Inspect authored cut/cooking requirements and exact boneless beef candidates (strips, steak, stewing cuts); do not substitute mince or a slow cut in a quick preparation.'),
-    'pärlkorn': ('assortment', 'Urtekram 1012040/400 g polished barley is a source lead without a priced exact SKU. Cut GoGreen korngryn is not the same form.'),
+    'pärlkorn': ('product_relation', 'Frebaco Kornris 101364286_ST / 7312560036232 already exists in five priced catalogue contexts plus two physical Coop offer contexts. Earlier research omitted kornris. Review exact polished-barley identity and 13-15 minute cooking against each recipe before qualification; GoGreen cut korngryn and matvete are separate supported alternatives. No external delivery retailer.'),
     'klibbigt ris': ('product_relation', 'Search glutinous/sticky rice aliases; verify rice variety from composition. Jasmine and sushi rice are negative controls.'),
     'bambuskott': ('product_relation', 'Search bambuskott/bambuskotts aliases; bind plain shoots and source-declared drained grams.'),
     'räkor': ('product_relation', 'Existing 400/200-g and 870/500-g packs need exact cooked, peeled and drained source binding. Shell-on and raw shrimp are separate.'),

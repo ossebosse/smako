@@ -25,7 +25,7 @@ def inspect(args):
                  "råa räkor": "räkor", "kalvlägg med ben": "kalvlägg"}.get(name, name)
         alternatives = {
             "tamarindpasta": ["tamarind"], "äppelcidervinäger": ["vinäger"],
-            "masa harina": ["masa"], "pärlkorn": ["korn"], "senapsfrön": ["senapsfrö"],
+            "masa harina": ["masa", "majsmjöl", "majsstärkelse"], "pärlkorn": ["korn", "kornris", "matkorn"], "senapsfrön": ["senapsfrö"],
             "klibbigt ris": ["sticky"], "havregrädde": ["imat"], "bambuskott": ["bambu"],
             "tapiokastärkelse": ["tapioka"], "tapiokapärlor": ["tapioka"],
             "gula ärtor": ["ärtor gula", "gula ärter"], "kokosflingor": ["kokos", "riven kokos"],
