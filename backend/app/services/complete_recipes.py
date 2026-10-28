@@ -262,8 +262,17 @@ def product_form_compatible(recipe, name, product, fact):
         return False
     if form == "raw_edible" and re.search(r"torkad|pulver|granulat|kokt|grillad|stekt|panerad|nugget|rökt|gravad|rimmad|marinerad", text):
         return False
-    if form == "dry" and (re.search(r"kokt|färdig|konserv|avrun", text) or "vatten" in composition):
-        return False
+    if form == "dry":
+        if re.search(r"kokt|färdig|konserv|avrun", text):
+            return False
+        if "vatten" in composition:
+            from app.services.intake_product_links import ingredient_product
+
+            # Dry formed noodles may declare manufacturing water. Only an
+            # exact reviewed dry-form relation can override this heuristic;
+            # a matching name, net grams or generic classification cannot.
+            if not ingredient_product(canonical, form, requirements, product, fact, reviewed_only=True):
+                return False
     if form in {"cooked_drained", "preserved_drained"}:
         return bool(fact and any(e.get("basis") == "drained" and e.get("unit") == "g"
                                 and e.get("quantity") == product.usable_quantity and e.get("source")

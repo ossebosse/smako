@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        suite: [core, planner]
+        suite: [core, planner, integration]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,6 +31,7 @@ jobs:
       - name: Install
         run: python -m pip install -r requirements-dev.txt
       - name: Use the Ubuntu archive for system dependencies
+        if: matrix.suite != 'integration'
         # Avoid prolonged downloads from the runner's Azure mirror.
         # Keep Ubuntu's suites, signing keys and package verification unchanged.
         run: |
@@ -40,6 +41,7 @@ jobs:
             fi
           done
       - name: Browsers for UI tests
+        if: matrix.suite != 'integration'
         run: python -m playwright install --with-deps chromium webkit
       - name: Startup check
         run: python scripts/dev.py --check
@@ -62,11 +64,22 @@ jobs:
             backend/tests/test_own_provider_grocery_data_contract.py
             backend/tests/test_personal_choices_browser.py
           )
+          # These measured long-running contracts do not launch browsers.
+          # Keep new tests in core automatically; every partition is required.
+          integration_tests=(
+            backend/tests/test_coop_municipality_provider.py
+            backend/tests/test_all_intake_links.py
+            backend/tests/test_diversity_mode_api_contract.py
+            backend/tests/test_optimized_llm_improvement.py
+            backend/tests/test_verified_menu_search.py
+          )
           if [ "$TEST_SUITE" = planner ]; then
             targets=("${planner_tests[@]}")
+          elif [ "$TEST_SUITE" = integration ]; then
+            targets=("${integration_tests[@]}")
           else
             targets=(backend/tests)
-            for path in "${planner_tests[@]}"; do targets+=("--ignore=$path"); done
+            for path in "${planner_tests[@]}" "${integration_tests[@]}"; do targets+=("--ignore=$path"); done
           fi
           python scripts/verify_offline.py "${targets[@]}" -m "not live" -q --no-header -rfEs --durations=30 --junitxml=.local/verification/backend-tests.xml
       - name: Preserve test timings

@@ -1,5 +1,15 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Exakt granskad torr form och ren textklassning
+
+Vatten i en innehållsdeklaration är en konservativ våtformsheuristik. Den
+kan nu övervinnas enbart av befintlig exakt granskad torr produktrelation,
+med samma källidentitet, sammansättning och mängd; kokt/färdig vara blockeras.
+Två rena namn-/kategorifunktioner använder begränsad memoization av enbart
+oföränderliga textresultat. Produktfakta, priser och personliga beslut cachas
+inte av detta. Fulla klassningssvar för alla 89 458 produkter är identiska.
+Se [granskningen](reviews/product-facts-20261028.md).
+
 ## Granskad avrunnen massa även för färdigkokta räkor
 
 Samma befintliga exakta mängdprojektion accepterar cooked_drained och

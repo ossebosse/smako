@@ -1,0 +1,184 @@
+{
+  "schema": "smako-product-facts-delivery-v1",
+  "base_main": "5c329aa45fd2e2f75505be0506f5d05dc9820860",
+  "branch": "fix/remaining-product-facts-20261028",
+  "integration_status": "validated_pending_hosted_CI_and_merge",
+  "full_coverage_goal_complete": false,
+  "verification": {
+    "scope_sha256": "c80a984b334ee722bdbbff0fa0a773c2f73a608f03bed522a2dbabd835064e19",
+    "method_signature": "249dbc07d415409a312427445504480a2e6dd5580ac267acfab9f9b6f1af65b3",
+    "denominator": 2200,
+    "active_variants": 2462,
+    "receipt_count": 2866,
+    "outcomes": {
+      "estimated:verified": 1802,
+      "exact:verified": 1062,
+      "exact:data_blocked": 1136,
+      "estimated:data_blocked": 398,
+      "exact:checkout_blocked": 2
+    },
+    "lost_original_ids": [],
+    "all_receipt_hashes_and_dependencies_verified": true,
+    "all_saved_full_requests_unchanged": true,
+    "older_budget_journals_unchanged": true,
+    "all_original_worklist_groups_reviewed": 76,
+    "runtime_preparation_enabled": false,
+    "legacy_remains_default": true,
+    "production_activation": false,
+    "price_regression_gate_passed": true,
+    "price_regressions": {}
+  },
+  "focused_tests": {
+    "passed": 338,
+    "errors": 0,
+    "failures": 0,
+    "junit_sha256": "15c33cacf55271e3671b567f0190704d238e3ca56306720ea8f704af80c7c4a0",
+    "ruff_changed_python_files": 5,
+    "compileall": "passed",
+    "source_review_drained_nutrition_guard_verified_by_facts_preservation": true,
+    "same_ci_nodes_exactly_once": 4103
+  },
+  "file_hash_basis": "Verified Windows working-file bytes; all public raw source files, benchmark registrations and full checkouts remain ignored.",
+  "files": {
+    ".gitattributes": {
+      "sha256": "e3db64484f500e1a4abb24dc26eaab30c58925a7dd9a5240b5ad3822c03788cb",
+      "bytes": 3113
+    },
+    ".github/workflows/tests.yml": {
+      "sha256": "53d8d77f572532684d0e226892ebb73cbb4dc07557e034d64cce6366dcc0f100",
+      "bytes": 4072
+    },
+    "backend/app/data/ingredients/intake-all-20261026.json": {
+      "sha256": "c24e585c5260246703f3399128baa0434be9ed38ecc2acb589028ebf9c47689f",
+      "bytes": 2177244
+    },
+    "backend/app/services/complete_recipes.py": {
+      "sha256": "43a1cf072419c6a76cc6a31a3b4fda01e770da300187f5a604629566f83ce87c",
+      "bytes": 42992
+    },
+    "backend/app/services/intake_product_links.py": {
+      "sha256": "27c6289f77710617733c1c894a0d14d1be32221cd32fc9971ddb52ab6e95cb2c",
+      "bytes": 14800
+    },
+    "backend/app/services/product_semantics.py": {
+      "sha256": "438e45476ec82b48ef42cb764dd76bce7f5156cbb2b3bc5be94a8e7a5f59bb03",
+      "bytes": 94609
+    },
+    "backend/tests/test_reviewed_rice_fish_tea.py": {
+      "sha256": "4a957d1264fa824cd849d3e7aaed17e8d62f95cc9a41ec6d460efa0c563304ee",
+      "bytes": 3898
+    },
+    "docs/CODEX-ASTRA-FULL-COVERAGE-20261027.md": {
+      "sha256": "1b1f9c5d2b7c0d386c198ec0deb8717bcccd67c41f37943f3bf1f6d6b7122946",
+      "bytes": 8919
+    },
+    "docs/HANDOFF.md": {
+      "sha256": "c746e19c97ab4dfe6eaf2b5eeddaf7fd6f7f33733239a751a5da557ea8e56d02",
+      "bytes": 390268
+    },
+    "docs/PLANNING-ARCHITECTURE.md": {
+      "sha256": "c191574814ace2688f85d906215df26475e2dce8cdc47ee64a7b83b12a133da5",
+      "bytes": 24622
+    },
+    "docs/PRODUCT-GOAL.md": {
+      "sha256": "5f8136d06fae6b170868a763dfbb01117d0e984dd58310824be9aa09e218b990",
+      "bytes": 10908
+    },
+    "docs/reviews/product-facts-20261028.md": {
+      "sha256": "be296df9d6ae6b00d0a3e62d20634c4037516c2a2961d8b201ccb45caf6e33b2",
+      "bytes": 7177
+    },
+    "docs/reviews/product-facts-20261028/A-comparison.json": {
+      "sha256": "b77753dee8b85fa06e3bcbbc9ac09a6e230fac26d38fc9fd9106f437c1766605",
+      "bytes": 1066
+    },
+    "docs/reviews/product-facts-20261028/A-repeat-comparison.json": {
+      "sha256": "ca69bb0b8ef90f1abddd36f040707e47ef6a7d5f4dafe582bc4f1d55b241ac94",
+      "bytes": 678
+    },
+    "docs/reviews/product-facts-20261028/B2-comparison.json": {
+      "sha256": "a26242d0764eea671c6d5b36102aff1e872c130145e6f79d85dea0e6e31cae95",
+      "bytes": 1071
+    },
+    "docs/reviews/product-facts-20261028/additional-source-findings.json": {
+      "sha256": "b4cedb9cb1452dce6d05ce480af660dc8cc23bb056ebb008638749c4ffc898a2",
+      "bytes": 5120
+    },
+    "docs/reviews/product-facts-20261028/basket-receipts.json": {
+      "sha256": "10ae19242714dd80d2e9b9d940021ae30f983f26a3c8c42dc22750431c8a1be7",
+      "bytes": 1136402
+    },
+    "docs/reviews/product-facts-20261028/blockers.json": {
+      "sha256": "ff9fcc5f3e8b9d36569ebad2d8f83f2e81606adffc38463f40dd3e17d6c2a479",
+      "bytes": 78693
+    },
+    "docs/reviews/product-facts-20261028/ci-balancing-review.json": {
+      "sha256": "c144bbd7fae261ed0c26716906ed265ed191fce6662765a22c72e2d13b1e71b2",
+      "bytes": 1057
+    },
+    "docs/reviews/product-facts-20261028/ci-partitions.json": {
+      "sha256": "3619890896ab3bcf2e62693dd34dd7615e02db2baeb85d3c58bcc82cba353669",
+      "bytes": 719
+    },
+    "docs/reviews/product-facts-20261028/coverage.json": {
+      "sha256": "7cae2a9f5fb8b6226385fcdc996c3cc95f72ba2ed5b0f1d6804db519a55dde7c",
+      "bytes": 4878593
+    },
+    "docs/reviews/product-facts-20261028/facts-preservation.json": {
+      "sha256": "ea665e44e9b04a393547aba46bb09fd81d56fa852f9423831d06248c1d18dd97",
+      "bytes": 6217
+    },
+    "docs/reviews/product-facts-20261028/focused-verification.json": {
+      "sha256": "25d26892bffe09f9e41a1c95cf88bf058d46278b218cf31874a507cb671e89c8",
+      "bytes": 326
+    },
+    "docs/reviews/product-facts-20261028/group-assessments.json": {
+      "sha256": "4676ac814fd8ac12b23513a6a42f8a6bb9d95f912446c69f81aa347a1450744a",
+      "bytes": 22273
+    },
+    "docs/reviews/product-facts-20261028/newly-verified.json": {
+      "sha256": "784dcdc40d45ebd320a94c9c9d0a995cecec5084b309d1ca8cf4a62eb74e37ea",
+      "bytes": 12930
+    },
+    "docs/reviews/product-facts-20261028/pr26-hosted-ci.json": {
+      "sha256": "ac660c05d65cd7b17764aac4fa98681e675423def5106cff1416df5648dda3eb",
+      "bytes": 1290
+    },
+    "docs/reviews/product-facts-20261028/registry-preservation.json": {
+      "sha256": "53b7f2aaf257514cb424daf5168744c9e9df2bd993ae67ea18d7c0e18f093791",
+      "bytes": 283
+    },
+    "docs/reviews/product-facts-20261028/search-timing-review.json": {
+      "sha256": "1f2f9b86b5b7db465c3be290b26853788150a9ada4e2d6c0e61d7dc387cee84d",
+      "bytes": 3699
+    },
+    "docs/reviews/product-facts-20261028/source-review.json": {
+      "sha256": "8b890b3df8149cde358b0e1b045f28a327a13eb4b759e8233196af1b2c37a5e6",
+      "bytes": 84218
+    },
+    "docs/reviews/product-facts-20261028/text-classification-equivalence.json": {
+      "sha256": "2a2802b177762c4d4b1d535f5faf05525d346724a275dc846f4f5aede65a9cf3",
+      "bytes": 1004
+    },
+    "docs/reviews/product-facts-20261028/verification.json": {
+      "sha256": "570c14f63003bc6ece9a246406ce27b6600bc6653b96e6b92b2faa3013865301",
+      "bytes": 851
+    },
+    "docs/reviews/product-facts-20261028/work-matrix.json": {
+      "sha256": "b7829e1a8131909140840cbe14074e87091864333e16695a862a09150d6baae2",
+      "bytes": 7423456
+    },
+    "docs/reviews/product-facts-20261028/work-matrix.md": {
+      "sha256": "364fa483c9a12eaa459b1db3c946f05644581a3f3b3387f74abe52640d66b831",
+      "bytes": 22691
+    },
+    "docs/reviews/recipe-coverage-full-20261027/budget.json": {
+      "sha256": "45a0c2f1ca3f769d7da9849d76c00529406cd6002e7b8cfdfc1955a0ca79c642",
+      "bytes": 72866
+    },
+    "scripts/recipe_layer/review_rice_fish_tea.py": {
+      "sha256": "7dd668ba83cfbc2bf13d76bbc41ff615648766f0f52049476b99663c5aaa3773",
+      "bytes": 10813
+    }
+  }
+}
