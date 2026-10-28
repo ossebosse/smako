@@ -1,3 +1,23 @@
+# 2026-10-28: 1862 hela korgar efter exakt granskade tunna risnudlar
+
+[Rapport](reviews/thin-rice-noodles-20261028.md): +0 hela inklusive
+uppskattningar, exakt 1066 insatslösta/1064 hela och 338 kvar.
+Alla original, 2 462 aktiva och tidigare korgar består. Två exakta 400-g-artiklar
+i 14 befintliga kontexter; inga nya priser, recept eller runtimeändringar.
+Tunna torra nudlar kvalificeras separat från breda/runda. Näringskonflikten
+bevaras, okända personliga fält och näringsvärden består.
+
+A 278.76/278.76 kr, B2:s hela korg identisk 731,20 kr.
+API 52.01/51.96/33.19 s.
+Alla 2928 kvittohashar verifierade. 72 riktade tester, Ruff/compileall;
+4170 CI-noder exakt en gång. Grön hosted CI krävs före integration.
+PR #30 är integrerad 3eef049, grön CI 4 151 tester utan fel på 8:54.
+
+Fortsätt mot alla 2 200. Aktuella fakta och slutprov finns i
+.local/remaining-source-review-20261028/facts-reviewed-v1.json respektive final-v1.
+Samma obegränsade journal, resurs- och källkrav. Ny källpilot inväntar beslut.
+Ingen produktion/beta/scheduler/profil ändras.
+
 # 2026-10-28: 1862 hela korgar, uppmätta myntablad
 
 [Slutrapporten](reviews/mint-leaf-preparation-20261028.md) ger 32 nya hela

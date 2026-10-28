@@ -19,7 +19,7 @@ Alla 2 200 varianter är importerade och aktiva; tillsammans med de tidigare
 uttryckligen tillåtna mängduppskattningar i den frysta Malmöreferensen.
 Verifierade hela tvåbutikskorgar är 1 064 respektive 1 862. De inkluderande
 talen innehåller de exakta. 338 varianter har fortfarande insatshinder;
-100-procentsmålet kvarstår. Se [rapporten](reviews/mint-leaf-preparation-20261028.md).
+100-procentsmålet kvarstår. Se [rapporten](reviews/thin-rice-noodles-20261028.md).
 
 Håll isär tre nivåer: registrerat recept, produkt-/mängdstöd för varje
 ingrediens och fullständig giltig inköpskorg för receptet. De två sista ska

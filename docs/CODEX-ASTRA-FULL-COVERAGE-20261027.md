@@ -174,3 +174,23 @@ integration. Samma journal och operations-/resursgränser, ingen aktivering.
 ## Uppmätta myntablad, nästa verifierade kontrollpunkt
 
 1862/2200 hela inklusive uppskattningar, +32; exakt 1066 insatslösta/1064 hela, 338 kvar. Alla original och tidigare korgar bevaras. 40 uttryckliga beredningsversioner och befintligt gemensamt lager klarar uppmätt råinsats, bladutfall, svinn, delvis förbrukning och omräkning. Källa och oberoende referensbrygga är uppskattningar, aldrig exakta paketutbyten. A 278.76/278.76 kr; B2:s hela korg identisk 731,20 kr. Alla 2928 kvittofiler verifierade. [Rapport](reviews/mint-leaf-preparation-20261028.md). Samma obegränsade journal och resurs-/källkrav; full täckning återstår. Hosted CI krävs före integration.
+
+## Tunna torra risnudlar: nästa verifierade kontrollpunkt
+
+[Rapport](reviews/thin-rice-noodles-20261028.md): +0 hela inklusive
+uppskattningar, exakt 1066 insatslösta/1064 hela och 338 kvar.
+Alla original, 2 462 aktiva och tidigare korgar består. Två exakta 400-g-artiklar
+i 14 befintliga kontexter; inga nya priser, recept eller runtimeändringar.
+Tunna torra nudlar kvalificeras separat från breda/runda. Näringskonflikten
+bevaras, okända personliga fält och näringsvärden består.
+
+A 278.76/278.76 kr, B2:s hela korg identisk 731,20 kr.
+API 52.01/51.96/33.19 s.
+Alla 2928 kvittohashar verifierade. 72 riktade tester, Ruff/compileall;
+4170 CI-noder exakt en gång. Grön hosted CI krävs före integration.
+PR #30 är integrerad 3eef049, grön CI 4 151 tester utan fel på 8:54.
+
+Fortsätt mot alla 2 200. Aktuella fakta och slutprov finns i
+.local/remaining-source-review-20261028/facts-reviewed-v1.json respektive final-v1.
+Samma obegränsade journal, resurs- och källkrav. Ny källpilot inväntar beslut.
+Ingen produktion/beta/scheduler/profil ändras.
