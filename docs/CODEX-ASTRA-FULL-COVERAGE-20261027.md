@@ -216,3 +216,26 @@ Mung/belugastudien ännu inte kvalificerad; exakt organisk mungkomplettering
 väntar på främmande aktiv serverlease. Ny källpilot har uppdaterat
 beslutsunderlag men inväntar beslut. Samma obegränsade journal och
 resurs-/operationskrav; ingen produktion/beta/scheduler/profil ändras.
+
+## Nästa verifierade kontrollpunkt: Fem största grupperna lösta med befintliga butiker
+
+[Rapport](reviews/top-five-ingredients-20261028.md): 2 024/2 200 hela
+uppskattningskorgar, +160; 176 kvar. Exakt 1 142 insatslösta/1 140 hela,
++74 hela. 192 uttryckliga receptversioner och 24 exakta befintliga
+produktrelationer löser tamarindpasta, masa harina, citrongräs, pärlkorn
+och klibbigt ris. 32 berörda varianter har andra hinder. Alla original,
+2 462 aktiva varianter och tidigare korgar består. Inga nya handlare/priser.
+Alternativen är författade och inte provlagade; okända personliga fakta består.
+
+A 278.76/278.76, hela B2 identisk 731,20.
+API 53.72/52.47/32.63 s.
+Alla 3166 kvittofiler verifierade. 335 riktade tester,
+Ruff/compileall; alla 4258 CI-noder exakt en gång, 4 202 gamla bevarade.
+Grön hosted CI krävs före integration. Offertkopiering och nyckelberäkning
+snabbas upp utan ändrade priser, krav eller sökbudget.
+
+Aktuella fakta och slutprov: .local/top-five-ingredients-20261028/
+facts-reviewed-v1.json respektive final-v3. Samma obegränsade journal,
+en tung arbetare, två CPU, 3 GiB. Fortsätt återstående 176 via befintliga
+butiker och granskade alternativ; återuppta inte den externa källpiloten.
+Ingen produktion/beta/scheduler/profil ändras.

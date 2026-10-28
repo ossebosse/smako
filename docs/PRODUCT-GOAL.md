@@ -24,11 +24,11 @@ och pris-/kvalitetskraven kvarstår; en liten köpbar delmängd räcker inte.
 
 Alla 2 200 varianter är importerade och aktiva; tillsammans med de tidigare
 262 finns 2 462 aktiva varianter. Senaste kontrollen 2026-10-28 visar
-1 068 med stöd för samtliga ingredienser i exakt läge och 1 864 inklusive
+1 142 med stöd för samtliga ingredienser i exakt läge och 2 024 inklusive
 uttryckligen tillåtna mängduppskattningar i den frysta Malmöreferensen.
-Verifierade hela tvåbutikskorgar är 1 066 respektive 1 864. De inkluderande
-talen innehåller de exakta. 336 varianter har fortfarande insatshinder;
-100-procentsmålet kvarstår. Se [rapporten](reviews/whole-corn-20261028.md).
+Verifierade hela tvåbutikskorgar är 1 140 respektive 2 024. De inkluderande
+talen innehåller de exakta. 176 varianter har fortfarande insatshinder;
+100-procentsmålet kvarstår. Se [rapporten](reviews/top-five-ingredients-20261028.md).
 
 Håll isär tre nivåer: registrerat recept, produkt-/mängdstöd för varje
 ingrediens och fullständig giltig inköpskorg för receptet. De två sista ska

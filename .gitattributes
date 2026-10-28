@@ -52,3 +52,9 @@
 /docs/reviews/ci-balance-20261028/*.json -text whitespace=cr-at-eol
 /backend/app/data/recipes/reviewed-whole-corn-20261028/*.json -text whitespace=cr-at-eol
 /docs/reviews/whole-corn-20261028/*.json -text whitespace=cr-at-eol
+# Preserve issued alternatives and their exact evidence bytes on every checkout.
+/backend/app/data/recipes/reviewed-top-five-20261028/**/*.json -text whitespace=cr-at-eol
+/backend/app/data/recipes/reviewed-top-five-20261028/*.json -text whitespace=cr-at-eol
+/docs/reviews/top-five-ingredients-20261028/*.json -text whitespace=cr-at-eol
+# This runtime file already uses LF in the verified Windows reference.
+/backend/app/services/basket_calculator.py text eol=lf
