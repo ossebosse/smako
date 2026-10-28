@@ -243,7 +243,7 @@ def test_query_surface_is_exactly_the_shared_versioned_48() -> None:
     assert surface.sha256 == "11c054baeb08e5033fc00882a4d0e494362fc84a5b829217828abb677fa7f89f"
 
 
-def test_immutable_loader_excludes_offers_and_probable_but_retains_old_links(
+def test_readonly_loader_excludes_offers_and_probable_but_retains_old_links(
     tmp_path: Path,
 ) -> None:
     database = _mapping_database(tmp_path / "mapping.sqlite", extra_offers_only=True)
@@ -274,6 +274,31 @@ def test_immutable_loader_excludes_offers_and_probable_but_retains_old_links(
     retained = load_eligible_primat_contexts(database, now=NOW)
     assert [row.provider_context_id for row in retained] == ["primat:ica:1088004"]
     assert retained[0].data_age_hours == 49
+
+
+def test_loader_observes_committed_live_wal_without_checkpoint(tmp_path: Path) -> None:
+    import sqlite3
+
+    database = _mapping_database(tmp_path / "mapping.sqlite")
+    with sqlite3.connect(database) as writer:
+        assert writer.execute("PRAGMA journal_mode=WAL").fetchone()[0] == "wal"
+        writer.execute("PRAGMA wal_autocheckpoint=0")
+        writer.execute(
+            "UPDATE store_context_links SET basket_eligible=0 "
+            "WHERE grocery_context_id='primat:ica:1004409'"
+        )
+        writer.commit()
+        assert Path(str(database) + "-wal").stat().st_size > 0
+        before = database.read_bytes()
+        eligible = load_eligible_primat_contexts(database, now=NOW)
+        assert [row.provider_context_id for row in eligible] == ["primat:ica:1088004"]
+        assert database.read_bytes() == before
+        writer.execute(
+            "UPDATE store_context_links SET basket_eligible=1 "
+            "WHERE grocery_context_id='primat:ica:1004409'"
+        )
+        writer.commit()
+        assert len(load_eligible_primat_contexts(database, now=NOW)) == 2
 
 
 def test_bundle_revalidates_unselected_context_and_rejects_conflicts(

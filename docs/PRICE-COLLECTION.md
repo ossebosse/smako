@@ -35,6 +35,10 @@ aktuell butiksupplösning innan produkter godkänns. Det befintliga kontraktet
 ny fullständig produktkatalog. Butiker med enbart erbjudandekontext räknas inte
 som baspriskällor. Inga nya butikskopplingar eller källfakta fabriceras.
 
+Primats verifierade register läses med SQLite `mode=ro` och `query_only`.
+En levande databas får ha sparade ändringar i WAL; `immutable=1` används
+inte här eftersom det kan dölja både nya kopplingar och återkallade godkännanden.
+
 Kvalificerade baspriser behålls tills en validerad ersättning finns. Varningar
 vid 36/48 timmar består, även när åldern är väntad mellan körningarna. Kampanjer
 gäller enbart inom sina verkliga källdatum; en lokal datumövergång får byggas

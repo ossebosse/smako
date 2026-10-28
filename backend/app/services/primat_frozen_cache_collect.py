@@ -240,7 +240,7 @@ def load_eligible_primat_contexts(
     chains: frozenset[Chain] = frozenset({Chain.ICA}),
     allow_stale_identity_seed: bool = False,
 ) -> tuple[EligiblePrimatContext, ...]:
-    """Read active, strong, full links through immutable SQLite.
+    """Read active, strong, full links through read-only SQLite.
 
     Qualified catalog observations remain usable as they age. Before a live
     collection, callers must still revalidate the exact provider identity.
@@ -260,7 +260,10 @@ def load_eligible_primat_contexts(
     if not resolved.is_file():
         raise ValueError("explicit database must be a regular SQLite file")
     connection = sqlite3.connect(
-        f"file:{resolved.as_posix()}?mode=ro&immutable=1",
+        # Production may have committed registry updates in a live WAL. An
+        # immutable connection ignores that WAL and can miss newly qualified
+        # contexts (or retain a mapping revoked since the last checkpoint).
+        f"file:{resolved.as_posix()}?mode=ro",
         uri=True,
     )
     connection.row_factory = sqlite3.Row
