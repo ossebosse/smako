@@ -867,7 +867,8 @@ def test_refresh_runner_and_network_limits_load_from_environment(
 
 
 @pytest.mark.asyncio
-async def test_reload_validates_projection_before_atomic_swap() -> None:
+@pytest.mark.parametrize("warmup_error", [False, True])
+async def test_reload_validates_projection_before_atomic_swap(warmup_error) -> None:
     old = SimpleNamespace(universe=SimpleNamespace(universe_id="old"))
     candidate = SimpleNamespace(universe=SimpleNamespace(universe_id="new", key=SimpleNamespace(scope_id="city:lund")))
     events: list[str] = []
@@ -906,6 +907,14 @@ async def test_reload_validates_projection_before_atomic_swap() -> None:
         events.append("prewarmed")
         return SimpleNamespace(status="complete")
 
+    def facts_warmer(_settings: Settings, universes: Any) -> Any:
+        assert universes == (candidate,)
+        assert events[-1] == "swapped"
+        events.append("facts_scheduled")
+        if warmup_error:
+            raise OSError("shared cache unavailable")
+        return {"status": "scheduled"}
+
     application = SimpleNamespace(state=SimpleNamespace())
     result = await reload_active_price_universe(
         application,
@@ -914,10 +923,13 @@ async def test_reload_validates_projection_before_atomic_swap() -> None:
         staging_manager_factory=Staging,
         projection_builder=project,
         prewarm_runner=prewarm,
+        source_facts_warmer=facts_warmer,
         active_manager=Active(),
     )
 
-    assert events == ["validated", "projected", "swapped", "prewarmed"]
+    assert events == ["validated", "projected", "swapped", "facts_scheduled", "prewarmed"]
+    assert application.state.source_facts_prewarm == (
+        {"status": "failed", "error_type": "OSError"} if warmup_error else {"status": "scheduled"})
     assert result["old_price_universe_id"] == "old"
     assert result["new_price_universe_id"] == "new"
     assert result["changed"] is True
@@ -1092,6 +1104,7 @@ async def test_repeated_reload_preserves_loaded_caches_after_validation(scope):
         pytest.fail('same universe must not rebuild projections')
     result = await reload_active_price_universe(SimpleNamespace(state=SimpleNamespace()),
         Settings(price_universe_required=False), artifact_store_factory=Store,
-        staging_manager_factory=Staging, active_manager=Active(), projection_builder=project)
+        staging_manager_factory=Staging, active_manager=Active(), projection_builder=project,
+        source_facts_warmer=project)
     assert events == ['hash_checked', 'validated']
     assert not result['changed'] and result['new_price_universe_id'] == 'same'
