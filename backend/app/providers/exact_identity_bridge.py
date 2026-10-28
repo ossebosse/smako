@@ -12,7 +12,7 @@ from zoneinfo import ZoneInfo
 from app.models import OfferKind, OfferMetadata, Product, Store
 from app.providers.base import GroceryPriceProvider
 
-from grocery_data.app.domain.enums import Chain, CoverageLevel
+from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS, Chain, CoverageLevel
 from grocery_data.app.domain.promotion_pricing import (
     MembershipProgram,
     PromotionEligibility,
@@ -548,7 +548,7 @@ class ExactIdentityBridgeProvider(GroceryPriceProvider):
 
     def report(self) -> dict[str, object]:
         report: dict[str, dict[str, object]] = {}
-        for chain in Chain:
+        for chain in DEFAULT_SOURCE_CHAINS:
             rows = [row for row in self._offers if row.identity.chain is chain]
             if not rows:
                 continue

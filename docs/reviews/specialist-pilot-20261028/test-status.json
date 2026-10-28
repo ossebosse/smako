@@ -1,0 +1,35 @@
+{
+  "focused": {
+    "passed": 92,
+    "failures": 0,
+    "errors": 0,
+    "ruff": "passed",
+    "compileall": "passed"
+  },
+  "broad_grocery_suite": {
+    "collected": 1954,
+    "status": "incomplete_deadline_exceeded",
+    "maximum_seconds": 600,
+    "complete_junit_available": false,
+    "gate_pass_claimed": false
+  },
+  "confirmed_existing_ica_failures": {
+    "count": 5,
+    "main": "b0f0aadd606eecc9cb4984463eeedb7116a06869",
+    "test_nodes": [
+      "grocery_data.tests.test_ica_flyer_pipeline::test_actual_local_and_central_egg_campaigns_share_one_purchase_cap",
+      "grocery_data.tests.test_ica_flyer_pipeline::test_real_89_boxes_have_concrete_source_ids_and_lineage_not_campaign_only",
+      "grocery_data.tests.test_ica_quality_real_sources::test_real_deposit_unknown_remains_quarantined_without_changing_denominator[1004339-2774-45-rejected1]",
+      "grocery_data.tests.test_ica_quality_real_sources::test_real_deposit_unknown_remains_quarantined_without_changing_denominator[1004598-15172-56-rejected0]",
+      "grocery_data.tests.test_ica_real_flyer_comparison::test_all_94_priority_ad_boxes_keep_exact_source_ids_and_blockers"
+    ],
+    "same_nodes_fail_on_main": true,
+    "baseline_method": "In-memory import overlay of every modified tracked Python module from git main; working files and fixtures unchanged",
+    "interpretation": "Historical expectations disagree with existing ICA parser results; no tests skipped or expectations relaxed by this pilot"
+  },
+  "evidence": {
+    "default-scope-tests.xml": "7e50eaaef43d14652971717c6d155aee3f57fe727d5202ea6cf79e787411a37d",
+    "grocery-failures-focused.xml": "b4a4cb3b36d7f5c11765a3b8b8dfae55859a57633923dad9b1599f53e3df47a9",
+    "grocery-main-baseline.xml": "406f90fc1ee629b595b208fe7a30373ec5cf40c295eaf0fae2edfd90483759c1"
+  }
+}

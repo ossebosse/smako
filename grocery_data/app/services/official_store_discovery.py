@@ -28,6 +28,7 @@ from grocery_data.app.domain import (
     StoreDiscoveryErrorCode,
     is_complete_catalog_coverage,
 )
+from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS
 from grocery_data.app.domain.source_strategy import SourceChannel, SourceProvider
 from grocery_data.app.services.store_coverage import (
     ExactStoreIdentityMatcher,
@@ -713,7 +714,7 @@ def live_official_store_adapters(
 ) -> dict[Chain, OfficialStoreDiscoveryAdapter]:
     """Build only the requested bounded adapters (all six by default)."""
 
-    requested = set(chains) if chains is not None else set(Chain)
+    requested = set(chains) if chains is not None else set(DEFAULT_SOURCE_CHAINS)
     adapters: dict[Chain, OfficialStoreDiscoveryAdapter] = {}
     if Chain.WILLYS in requested:
         adapters[Chain.WILLYS] = SourceStoreOfficialAdapter(
@@ -763,7 +764,7 @@ def live_official_store_adapters(
             allow_empty_result=True,
             empty_city_outcome="no_lund_context",
         )
-    unknown = requested - set(Chain)
+    unknown = requested - set(DEFAULT_SOURCE_CHAINS)
     if unknown:
         raise ValueError("unknown official store-discovery chain")
     return adapters
@@ -780,7 +781,7 @@ def fixture_official_store_adapters(
         raise TypeError("official-store fixture lacks chains")
     return {
         chain: FixtureOfficialStoreAdapter(chain, chains[chain.value])
-        for chain in Chain
+        for chain in DEFAULT_SOURCE_CHAINS
         if isinstance(chains.get(chain.value), dict)
     }
 

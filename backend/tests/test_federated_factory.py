@@ -7,6 +7,7 @@ from app.providers import FederatedGroceryPriceProvider
 from app.providers.factory import create_price_provider
 
 from grocery_data.app.domain import Chain, CoverageLevel
+from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS
 from grocery_data.app.domain.source_strategy import (
     CHAIN_SOURCE_STRATEGIES,
     OWN_CATALOG,
@@ -40,7 +41,7 @@ async def test_explicit_federated_factory_wires_strategy_roles_and_flags() -> No
             by_provider[SourceProvider.OWN].chains
         )
         assert Chain.ICA not in by_provider[SourceProvider.OWN].chains
-        assert by_provider[SourceProvider.PRIMAT].chains == frozenset(Chain)
+        assert by_provider[SourceProvider.PRIMAT].chains == frozenset(DEFAULT_SOURCE_CHAINS)
         assert by_provider[SourceProvider.PRIMAT].coverage_by_chain[Chain.ICA] is (
             CoverageLevel.FULL_CATALOG
         )
@@ -49,7 +50,7 @@ async def test_explicit_federated_factory_wires_strategy_roles_and_flags() -> No
         assert all(
             binding.source.provider is SourceProvider.OWN for binding in provider.offer_bindings
         )
-        assert provider.offer_bindings[0].chains == frozenset(Chain)
+        assert provider.offer_bindings[0].chains == frozenset(DEFAULT_SOURCE_CHAINS)
     finally:
         await provider.aclose()
 

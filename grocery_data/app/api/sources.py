@@ -10,7 +10,12 @@ from grocery_data.app.api.common import active_snapshots, freshness_for_snapshot
 from grocery_data.app.api.dependencies import get_session
 from grocery_data.app.config import GroceryDataSettings
 from grocery_data.app.connectors import SOURCE_COVERAGE
-from grocery_data.app.domain.enums import Chain, ConnectorStatus, is_complete_catalog_coverage
+from grocery_data.app.domain.enums import (
+    DEFAULT_SOURCE_CHAINS,
+    Chain,
+    ConnectorStatus,
+    is_complete_catalog_coverage,
+)
 from grocery_data.app.domain.source_strategy import (
     SourceProvider,
     SourceRef,
@@ -160,7 +165,7 @@ def _strategy_status(
 @router.get("/status")
 def source_status(session: SessionDep) -> dict[str, Any]:
     settings = GroceryDataSettings.from_env()
-    items = [_strategy_status(session, chain, settings) for chain in Chain]
+    items = [_strategy_status(session, chain, settings) for chain in DEFAULT_SOURCE_CHAINS]
     return {
         "checked_at": datetime.now(tz=UTC),
         "own_sources_only": settings.own_sources_only,

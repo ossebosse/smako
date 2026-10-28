@@ -53,6 +53,7 @@ from grocery_data.app.domain.community_evidence import (
     EvidenceVerificationStatus,
     ModerationDecision,
 )
+from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS
 from grocery_data.app.domain.physical_price import (
     PhysicalPriceComparison,
     PhysicalPriceObservation,
@@ -334,7 +335,7 @@ async def _stores(args: argparse.Namespace) -> int:
     registry = ConnectorRegistry()
     results = []
     exit_code = 0
-    chains = list(Chain) if args.chain == "all" else [Chain(args.chain)]
+    chains = list(DEFAULT_SOURCE_CHAINS) if args.chain == "all" else [Chain(args.chain)]
     for chain in chains:
         descriptor = next(item for item in registry.descriptors() if item.chain == chain)
         if not descriptor.implemented:
@@ -381,7 +382,7 @@ async def _stores(args: argparse.Namespace) -> int:
 
 
 async def _collect(args: argparse.Namespace) -> int:
-    chains = list(Chain) if args.chain == "all" else [Chain(args.chain)]
+    chains = list(DEFAULT_SOURCE_CHAINS) if args.chain == "all" else [Chain(args.chain)]
     ica_transport = getattr(args, "ica_transport", "http")
     context_store_id = getattr(args, "context_store_id", None)
     if ica_transport == "browser" and (
@@ -586,7 +587,7 @@ def _collect_all_plan(
     descriptors = {item.chain: item for item in connector_registry.descriptors()}
     targets: list[tuple[Chain, str, tuple[str, ...]]] = []
     skipped: list[dict[str, object]] = []
-    for chain in Chain:
+    for chain in DEFAULT_SOURCE_CHAINS:
         if selected_chains and chain not in selected_chains:
             continue
         descriptor = descriptors[chain]
@@ -1539,7 +1540,7 @@ def _daily_refresh_dry_run(args: argparse.Namespace) -> dict[str, object]:
     refresh_external = not bool(getattr(args, "no_external_refresh", False))
     selected_external = any(
         source_strategy_for(chain).primary_source.provider is SourceProvider.PRIMAT
-        for chain in Chain
+        for chain in DEFAULT_SOURCE_CHAINS
     )
     explicit_caches = _external_cache_inputs(args, tuple(postal_codes))
     external_city_plans: list[dict[str, object]] = []
@@ -2487,7 +2488,7 @@ async def _daily_refresh_managed(args: argparse.Namespace) -> int:
         # absence of context mappings never selects OWN-only implicitly.
         external_required_for_universe = not getattr(settings, "own_sources_only", False) and any(
             source_strategy_for(chain).primary_source.provider is SourceProvider.PRIMAT
-            for chain in Chain
+            for chain in DEFAULT_SOURCE_CHAINS
         )
         # --chain narrows OWN collection work, not the federated universe.
         # A targeted Hemköp refresh still needs the complete external cache
@@ -4353,11 +4354,11 @@ def _parser() -> argparse.ArgumentParser:
     stores = sub.add_parser("stores", help="rediscover official chain stores")
     stores.add_argument("--city", required=True)
     stores.add_argument(
-        "--chain", choices=["all", *(chain.value for chain in Chain)], default="all"
+        "--chain", choices=["all", *(chain.value for chain in DEFAULT_SOURCE_CHAINS)], default="all"
     )
     collect = sub.add_parser("collect", help="collect, validate and promote a city snapshot")
     collect.add_argument(
-        "--chain", choices=["all", *(chain.value for chain in Chain)], required=True
+        "--chain", choices=["all", *(chain.value for chain in DEFAULT_SOURCE_CHAINS)], required=True
     )
     collect.add_argument("--city", action="append", required=True)
     collect.add_argument(
@@ -4392,7 +4393,7 @@ def _parser() -> argparse.ArgumentParser:
     collect_all.add_argument(
         "--chain",
         action="append",
-        choices=[chain.value for chain in Chain],
+        choices=[chain.value for chain in DEFAULT_SOURCE_CHAINS],
         help="restrict collection to one or more configured chains",
     )
     collect_all.add_argument(
@@ -4415,7 +4416,7 @@ def _parser() -> argparse.ArgumentParser:
     daily_refresh.add_argument(
         "--chain",
         action="append",
-        choices=[chain.value for chain in Chain],
+        choices=[chain.value for chain in DEFAULT_SOURCE_CHAINS],
         help="debug only: restrict collection to one or more configured chains",
     )
     daily_refresh.add_argument(
@@ -4577,12 +4578,12 @@ def _parser() -> argparse.ArgumentParser:
     health = sub.add_parser("health", help="show connector health")
     del health
     replay = sub.add_parser("replay", help="reparse immutable raw responses without network")
-    replay.add_argument("--chain", choices=[chain.value for chain in Chain], required=True)
+    replay.add_argument("--chain", choices=[chain.value for chain in DEFAULT_SOURCE_CHAINS], required=True)
     replay.add_argument("--snapshot-id", required=True)
     replay.add_argument("--promote", action="store_true")
     replay.add_argument("--accept-schema-change", action="store_true")
     canary = sub.add_parser("canary", help="run a tiny opt-in live connector check")
-    canary.add_argument("chain", choices=[chain.value for chain in Chain])
+    canary.add_argument("chain", choices=[chain.value for chain in DEFAULT_SOURCE_CHAINS])
     canary.add_argument("--city", default="Lund")
     canary.add_argument(
         "--store",
@@ -4650,7 +4651,7 @@ def _parser() -> argparse.ArgumentParser:
         "analyze-unknown-purchase-model",
         help="diagnose products whose purchase model remains unknown",
     )
-    unknown.add_argument("--chain", choices=[chain.value for chain in Chain], required=True)
+    unknown.add_argument("--chain", choices=[chain.value for chain in DEFAULT_SOURCE_CHAINS], required=True)
     unknown.add_argument("--snapshot", default="active")
     unknown.add_argument("--top-limit", type=int, default=20)
     unknown.add_argument("--sample-limit", type=int, default=20)
@@ -4745,7 +4746,7 @@ def _parser() -> argparse.ArgumentParser:
         help="report sampled physical-vs-digital accuracy for one physical store",
     )
     physical_report.add_argument("--store")
-    physical_report.add_argument("--chain", choices=[chain.value for chain in Chain])
+    physical_report.add_argument("--chain", choices=[chain.value for chain in DEFAULT_SOURCE_CHAINS])
     physical_report.add_argument("--city")
     physical_reconcile = sub.add_parser(
         "reconcile-physical-session",
@@ -4814,7 +4815,7 @@ def _parser() -> argparse.ArgumentParser:
     store_coverage.add_argument("--city", required=True)
     store_coverage.add_argument(
         "--chain",
-        choices=["all", *(chain.value for chain in Chain)],
+        choices=["all", *(chain.value for chain in DEFAULT_SOURCE_CHAINS)],
         default="all",
         help="run all official locators or one bounded chain locator (default all)",
     )
@@ -4858,7 +4859,7 @@ def _parser() -> argparse.ArgumentParser:
         help="list recent privacy-safe community reports for moderation",
     )
     community_list.add_argument("--store")
-    community_list.add_argument("--chain", choices=[chain.value for chain in Chain])
+    community_list.add_argument("--chain", choices=[chain.value for chain in DEFAULT_SOURCE_CHAINS])
     community_list.add_argument("--type", choices=[value.value for value in CommunityEvidenceType])
     community_list.add_argument(
         "--status",

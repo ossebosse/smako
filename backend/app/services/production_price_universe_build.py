@@ -46,6 +46,7 @@ from sqlalchemy.pool import NullPool
 from grocery_data.app.api.catalog import router as catalog_router
 from grocery_data.app.api.registry import router as registry_router
 from grocery_data.app.domain import Chain, CoverageLevel, is_complete_catalog_coverage
+from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS
 from grocery_data.app.domain.source_strategy import (
     CHAIN_SOURCE_STRATEGIES,
     OWN_CATALOG,
@@ -417,7 +418,7 @@ def _load_external_cache(
 
     configured_primat_chains = frozenset(
         chain
-        for chain in Chain
+        for chain in DEFAULT_SOURCE_CHAINS
         if PRIMAT_CATALOG in CHAIN_SOURCE_STRATEGIES[chain].configured_catalog_sources
     )
     eligible_candidates = load_eligible_primat_contexts(
@@ -622,7 +623,7 @@ async def build_city_price_universe(
         own_sources_only=external_cache is None,
         max_price_age_hours=max_price_age_hours,
         use_member_prices=False,
-        memberships={chain: False for chain in Chain},
+        memberships={chain: False for chain in DEFAULT_SOURCE_CHAINS},
     )
     identity_bridge = load_exact_identity_bridge(
         database,
@@ -769,7 +770,7 @@ async def build_city_price_universe(
                     city=normalized_city,
                     postal_codes=(normalized_postal,),
                     provider=provider,
-                    memberships={chain.value: False for chain in Chain},
+                    memberships={chain.value: False for chain in DEFAULT_SOURCE_CHAINS},
                     selector=service.economic_selector,
                     built_at=now,
                 )

@@ -349,7 +349,9 @@ def test_central_source_policy_enforcement_is_fail_closed() -> None:
 
 
 def test_every_production_connector_declares_source_policy() -> None:
+    from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS
+
     registry = ConnectorRegistry()
-    for chain in Chain:
+    for chain in DEFAULT_SOURCE_CHAINS:
         connector = registry.create(chain)
         assert isinstance(connector.source_policy, SourcePolicy)

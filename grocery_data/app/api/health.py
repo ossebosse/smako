@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import UTC, datetime
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
@@ -17,7 +17,7 @@ from grocery_data.app.api.dependencies import get_session
 from grocery_data.app.api.sources import _strategy_status
 from grocery_data.app.config import GroceryDataSettings
 from grocery_data.app.connectors import SOURCE_COVERAGE
-from grocery_data.app.domain.enums import Chain, ConnectorStatus
+from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS, Chain, ConnectorStatus
 from grocery_data.app.monitoring import SchemaDiff
 from grocery_data.app.storage import ConnectorHealthRepository
 from grocery_data.app.storage.models import (
@@ -238,7 +238,7 @@ def _connector_response(
 
 @router.get("/health")
 def health(session: SessionDep) -> dict:
-    connectors = [_connector_response(session, chain, include_detail=False) for chain in Chain]
+    connectors = [_connector_response(session, chain, include_detail=False) for chain in DEFAULT_SOURCE_CHAINS]
     known = [item for item in connectors if item["status"] != ConnectorStatus.UNKNOWN.value]
     return {
         "status": overall_status([item["status"] for item in connectors]),
@@ -260,7 +260,7 @@ def health(session: SessionDep) -> dict:
 
 @router.get("/health/connectors")
 def connectors_health(session: SessionDep) -> dict:
-    items = [_connector_response(session, chain, include_detail=False) for chain in Chain]
+    items = [_connector_response(session, chain, include_detail=False) for chain in DEFAULT_SOURCE_CHAINS]
     return {
         "items": items,
         "count": len(items),
@@ -273,4 +273,6 @@ def connector_health_detail(
     chain: Chain,
     session: SessionDep,
 ) -> dict:
+    if chain not in DEFAULT_SOURCE_CHAINS:
+        raise HTTPException(status_code=404, detail="Source is not enabled in the connector registry")
     return _connector_response(session, chain, include_detail=True)

@@ -26,7 +26,7 @@ from app.services.primat_frozen_cache_collect import (
 from app.services.primat_phase_c_export import FrozenExternalCacheBundle, write_closed_json
 from scripts.benchmark_lund_phase_c import _BoundedPrimatProvider
 
-from grocery_data.app.domain import Chain
+from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS
 from grocery_data.app.domain.source_strategy import SourceProvider, source_strategy_for
 from grocery_data.app.services.refresh_diagnostics import source_failure_diagnostic
 
@@ -61,7 +61,7 @@ def _primat_primary_contexts(database: Path, *, city: str, max_age_hours: float)
         database,
         city=city,
         max_age_hours=max_age_hours,
-        chains=frozenset(Chain),
+        chains=frozenset(DEFAULT_SOURCE_CHAINS),
         allow_stale_identity_seed=True,
     )
     return tuple(

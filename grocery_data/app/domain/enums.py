@@ -8,6 +8,18 @@ class Chain(StrEnum):
     HEMKOP = "hemkop"
     LIDL = "lidl"
     CITY_GROSS = "citygross"
+    # Explicit local, five-article pilot. No default source strategy or
+    # production collector is enabled by declaring these identities.
+    EXTREMEFOOD = "extremefood"
+    MED24 = "med24"
+    PONGMARKET = "pongmarket"
+
+
+# Enum membership represents identity, not permission to collect or activate a
+# source. Existing implicit/default scopes stay fixed during the local pilot.
+DEFAULT_SOURCE_CHAINS = (
+    Chain.ICA, Chain.COOP, Chain.WILLYS, Chain.HEMKOP, Chain.LIDL, Chain.CITY_GROSS,
+)
 
 
 class CoverageLevel(StrEnum):

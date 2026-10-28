@@ -1,3 +1,43 @@
+# 2026-10-28: Godkänd lokal femartikelpilot, isolerade källor och kassaprov
+
+Ägaren har sagt ”Ja, genomför den lokala piloten”. Fråga inte om samma
+godkännande igen. [Pilotrapport](reviews/coverage-source-pilot-20261028.md)
+och [observationer](reviews/specialist-pilot-20261028/observations.json).
+Fyra köpbara kandidater: Med24s pärlkorn och Pongs tre torra artiklar.
+Maseca artikel 944 återfanns inte. Pongs listpriser skiljer sig från exakt
+gästkassa; treartikelskorgen kostar 185 kr med DHL, avgift och avrundning.
+Med24s slutliga leveransval kräver e-post. Inga köp eller personuppgifter.
+Noll nya Smako-korgar räknas innan källa, avgifter och checkout kvalificeras.
+
+Lokal insamlare för fem artiklar/tio sidor använder befintliga råsnapshot,
+explicit opt-in, avbryter vid åtkomststopp och gör ingen aktivering.
+Tre nya handlaridentiteter utökar inte standardurvalet: samma sex kedjor
+i insamling, status, upptäckt och byggare; saknad strategi stoppar piloten.
+Ordinarie serverrefresh har spärrat råinsamlingen. Ett begränsat köat försök
+väntar på samma ordinarie lås. Läs aktuell status/attempt under
+`.local/specialist-pilot-20261028`; inga lås får tas över. Senast observerade
+ordinarie refresh tog leasen 09:45 UTC, efter den tidigare från 08:30.
+
+Slutlig fryst referens är omverifierad på metod `f3383a626a10bf63fd02bd9fdd0e9fd7c63e303332e18ac8ab359c8e425a608d`:
+2 200 original, 2 462 aktiva, 2 932 kvitton; 1 066 exakt hela och 1 864
+inklusive uppskattningar, inga förluster. A 278,76 kr två gånger på
+52,16/52,11 s; B2:s hela korg identisk 731,20 kr. Ett isolerat omprov med
+20 s sökram tog 2,34 s efter 7,83 s kandidatuppbyggnad; övriga 2 931 kvitton
+bevarades. Fulla underlag: `.local/specialist-pilot-20261028/final-v1`.
+
+92 riktade tester, Ruff/compileall passerar. Alla tidigare 4 201 CI-noder
+bevaras exakt en gång, 11 nya tillkommer. Hosted CI krävs före integration.
+En bredare grocery-svit avbröts efter 600 s; fem observerade ICA-fel har
+återskapats även med oförändrad main och är inte gröna. Se separat
+[teststatus](reviews/specialist-pilot-20261028/test-status.json).
+
+PR33 är integrerad på main `b0f0aadd606eecc9cb4984463eeedb7116a06869`;
+4 201 CI-noder utan fel, 63 historiska skippar, 454 s (7:34).
+Den organiska mungkompletteringen är insamlad men beredningsstudien passar
+fortfarande inte produktens blötläggnings-/kokanvisning. Tamarindens
+gram/koncentration återstår. Fortsätt mot 2 200 i samma obegränsade journal.
+Ingen beta, produktion, scheduler eller profil ändras.
+
 # 2026-10-28: 1 864 hela korgar med verifierade hela majskolvar
 
 [Rapport](reviews/whole-corn-20261028.md): +2 i båda lägen; 1 068 exakt

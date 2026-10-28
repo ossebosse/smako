@@ -1700,6 +1700,7 @@ async def _provider_for(
     from app.providers.own import OwnGroceryPriceProvider
 
     from grocery_data.app.domain import Chain, CoverageLevel
+    from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS
     from grocery_data.app.domain.source_strategy import OWN_CATALOG, PRIMAT_CATALOG
 
     engine, session_factory, compatibility_needed = _read_only_engine(path)
@@ -1748,8 +1749,8 @@ async def _provider_for(
             ProviderBinding(
                 source=PRIMAT_CATALOG,
                 provider=external_provider,
-                chains=frozenset(Chain),
-                coverage_by_chain={chain: CoverageLevel.FULL_CATALOG for chain in Chain},
+                chains=frozenset(DEFAULT_SOURCE_CHAINS),
+                coverage_by_chain={chain: CoverageLevel.FULL_CATALOG for chain in DEFAULT_SOURCE_CHAINS},
             )
         )
     provider = FederatedGroceryPriceProvider(
@@ -1757,7 +1758,7 @@ async def _provider_for(
         allow_fallback=False,
         own_sources_only=mode == "own-only",
         max_price_age_hours=max_price_age_hours,
-        memberships={chain: False for chain in Chain},
+        memberships={chain: False for chain in DEFAULT_SOURCE_CHAINS},
     )
     return provider, client, engine, compatibility_needed, external_provider
 

@@ -12,6 +12,7 @@ from grocery_data.app.connectors.ica import IcaConnector
 from grocery_data.app.connectors.lidl import LidlConnector
 from grocery_data.app.connectors.willys import WillysConnector
 from grocery_data.app.domain import Chain, CoverageLevel
+from grocery_data.app.domain.enums import DEFAULT_SOURCE_CHAINS
 
 
 class ConnectorDescriptor(BaseModel):
@@ -126,11 +127,13 @@ class ConnectorRegistry:
     def create(self, chain: Chain) -> GroceryConnector:
         factory = self._factories.get(chain)
         if factory is None:
-            descriptor = SOURCE_COVERAGE[chain]
+            descriptor = SOURCE_COVERAGE.get(chain)
+            if descriptor is None:
+                raise NotImplementedError(f"{chain.value} is not enabled in the default connector registry")
             raise NotImplementedError(
                 f"{chain.value} connector is not implemented: {descriptor.limitation}"
             )
         return factory()
 
     def descriptors(self) -> tuple[ConnectorDescriptor, ...]:
-        return tuple(SOURCE_COVERAGE[chain] for chain in Chain)
+        return tuple(SOURCE_COVERAGE[chain] for chain in DEFAULT_SOURCE_CHAINS)

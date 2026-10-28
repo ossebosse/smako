@@ -1,12 +1,15 @@
 # Begränsad lokal källpilot för kvarvarande torra råvaror
 
-Detta är ett beslutsunderlag, inte aktiverade källor eller nya verifierade
+Ägaren godkände 2026-10-28 uttryckligen: ”Ja, genomför den lokala piloten”.
+Godkännandet omfattar de fem artiklarna nedan, lokal implementation,
+källanrop och kvalificering inklusive leveransavgifter och butikstak.
+Ingen produktionsaktivering ingår. Detta är ännu inte nya verifierade
 korgar. Senast verifierade lokala resultat är 1 864/2 200 i den frysta
 Malmöreferensen. Det underlaget och dess priser/tider ska bevaras.
 
-## Föreslagen omfattning
+## Godkänd omfattning
 
-Tillåt lokal implementation och kvalificering av exakt fem konsumentartiklar
+Lokal implementation och kvalificering av exakt fem konsumentartiklar
 hos tre nya handlare, genom befintliga provider-, snapshot-, GroceryContext-
 och PriceUniverse-vägar. Inga fullständiga butikscrawlar ingår.
 
@@ -41,9 +44,10 @@ nyinsamlade kvalificerade prisobservationer och får inte ge förnyade källtide
 - [Med24s egen produktsida](https://www.med24.se/matvaror/mjoel-gryn-och-bakning/korn-och-gryn/paerlkorn-m-m/urtekram-food-paerlkorn-eko-400-g)
   anger 400 g och kornkärnor. Den visade EAN 5765228120453 skiljer sig från
   tidigare andra källors kod; inga GTIN-relationer kopieras över utan bevis.
-  [Egen varumärkeslista](https://www.med24.se/urtekram) skilde tidigare 31 kr
-  från 24 kr medlemspris. Senaste produktutdraget saknar läsbart pris.
-  Piloten kräver en aktuell kvalificerad publik grundprisobservation.
+  En färsk manuell webbläsarkontroll skiljer 31 kr vanligt pris från
+  24 kr medlemspris. Gästkorgen bekräftar 31 kr. Medlemspriset används inte.
+  GTIN visas inte i den färska synliga sidan; den äldre koden får därför
+  inte ensam etablera en aktuell relation till en annan källas artikel.
 - [Pong Markets egen bakningslista](https://pongmarket.se/bakning/) namnger
   de tre exakta artikelkoderna ovan. En annan språkversion visar exempelvis
   ett kartongantal vid pärlorna. De tre svenska produktsidorna har nu lästs
@@ -85,9 +89,53 @@ checkoutkontrakt med verifierat leveransområde och obligatoriska avgifter,
 så att butikstak och totalsumma fortsatt blir riktiga. Att bara lägga in
 varupriser i Malmöreferensen är inte en färdig integration.
 
-## Vad ett ja innebär
+## Genomförd manuell käll- och kassagranskning
 
-Ett ja tillåter den avgränsade lokala piloten och dess nödvändiga källanrop,
+Alla fem godkända artiklar har granskats i publik webbläsare 2026-10-28.
+De fyra Med24-/Pong-artiklarna är köpbara kandidater. ExtremeFoods
+historiska URL visar inga tillgängliga produkter. En offentlig sökning
+efter Maseca ger sex andra resultat, ingen godkänd artikel 944.
+Andra märken har inte ersatt den. Ingen marknadsfrånvaro påstås.
+
+[Strukturerade observationer](specialist-pilot-20261028/observations.json)
+skiljer artikelidentitet, synligt listpris, gästers kassapris och avgifter.
+De är manuella forskningsobservationer, inte ett aktiverat prissnapshot.
+
+| Pong-artikel | Produktsidans belopp | Specificerad gästkassa |
+| --- | ---: | ---: |
+| BW0003, tapiokastärkelse 400 g | 20 kr | 20,47 kr |
+| PMSM0014, små torra pärlor 400 g | 25 kr | 25,14 kr |
+| PMSM0031, klibbrismjöl 500 g | 33 kr | 32,63 kr |
+
+Pongs postnummerkontroll för referensområdet 21120 erbjuder torrvaror
+med DHL till ombud. Kyl-/frysleverans är inte tillgänglig där.
+En av varje artikel ger 78,24 kr varusumma, 69 kr DHL, 38,16 kr
+tilläggsavgift och två kassajusteringar på −0,01 respektive −0,39 kr:
+**185 kr totalt**. En ensam BW0003 kostade **128 kr inklusive avgifter**.
+Kassan visar alltså andra exakta belopp än produktsidorna och den allmänna
+texten om 39 kr plockavgift. Ingen automatisk moms- eller avrundningsregel
+härleds från detta fåtal korgar. Ett generellt vikt-/beloppsbundet
+leveransavtal och exakt maskinläsbar prisbindning återstår.
+
+Med24s gästkorg bekräftar 31 kr för artikel 9576. Slutligt leveransval
+kräver e-post före nästa steg; inga personuppgifter har fyllts i.
+Publicerad DHL-frakt 39 kr, korgens annons om frakt från 35 kr och
+fri-frakt-gränsen kvalificerar inte samma geografiskt bundna leveransval.
+Samtliga tillfälliga testartiklar har tagits bort. Inga köp gjordes.
+
+Butikstaket gäller oförändrat: en vanlig matbutik plus Pong använder två
+kontexter; en matbutik plus Pong och Med24 använder tre och är inte en
+tillåten tvåbutikskorg. Ingen sådan korg har räknats som godkänd.
+
+**Noll nya verifierade Smako-korgar från piloten hittills.** De återfunna
+fyra artiklarnas grupper hade 57 ensamblockerade varianter i arbetsmatrisen;
+det är fortfarande villkorad potential. Hela pilotens ursprungliga 88
+inkluderade även 31 masa-varianter vars godkända artikel inte återfanns.
+De 1 864 tidigare hela korgarna och nämnaren 2 200 består.
+
+## Lokal implementation och fortsatta kvalificeringsvillkor
+
+Godkännandet tillåter den avgränsade lokala piloten och dess nödvändiga källanrop,
 exakta produkt-/mängdgranskning, tester och ett separat kandidatunderlag.
 Kandidatpriser får inte räknas som levererade helkorgar förrän även rätt
 leveransområde, faktiska obligatoriska avgifter och ordinarie checkout kan
@@ -95,10 +143,56 @@ verifieras. Avgifter ska följa befintlig arkitektur; okänd avgift blir ett
 ärligt hinder. Individuella rabattkoder, medlemserbjudanden utan kvalificerat
 villkorsstöd och personliga erbjudanden används inte.
 
+Den begränsade insamlaren använder befintlig `RawFetch`, `RawBatch`,
+oföränderliga råsnapshot och operationslås. Bara tio explicit listade
+produkt-/villkorssidor ingår, fem av dem produkter. Separat opt-in krävs,
+omdirigeringar följs inte, åtkomststopp avbryter källan och nya misslyckade
+försök skriver inte över tidigare underlag. Insamlaren rapporterar
+ofullständiga försök som sådana och aktiverar aldrig priser.
+
+Tre handlaridentiteter är tillagda utan nya ordinarie källstrategier.
+`DEFAULT_SOURCE_CHAINS` bevarar exakt de tidigare sex standardkedjorna
+i insamling, upptäckt, status, byggare och benchmark. Pilotens nya
+identiteter är inte tillåtelse till automatisk insamling eller aktivering.
+
+Den automatiska råinsamlingen har stannat före handlaranrop eftersom
+serverns ordinarie `run_daily_refresh.py` höll operationslåset från
+08:30 UTC. Läskontrollen 09:27 UTC visade en levande CPU-arbetande process,
+inte en övergiven låsfil. Ingen process har avbrutits och inget lås tagits
+över. Den manuella webbläsargranskningen hålls separat från råinsamling
+och kvalificering. En ny ordinarie refresh tog låset 09:45 UTC. Ett köat
+pilotförsök väntar högst 45 minuter med normala låsförsök och noll
+handlaranrop före erhållen lease. Aktuell lokal försöksstatus finns i
+`.local/specialist-pilot-20261028/collection-status.json` och dess attempts.
+
+## Verifiering av oförändrat huvudunderlag
+
+[Kvittoverifieringen](specialist-pilot-20261028/verification.json) bevarar
+alla 2 200 original, 2 462 aktiva recept och 2 932 kvittofiler på aktuell
+metod. Fortsatt 1 066 exakt hela och 1 864 inklusive uppskattningar, inga
+förluster. A kostar 278,76 kr två gånger, API/spara/läs 52,16/52,11 s.
+B2:s hela korg är identisk med tidigare, 731,20 kr.
+
+Ett exakt fall nådde den korta genomgångens sökdeadline. Det isolerade
+omprovet använde samma källor, recept, mängd- och butikskrav, en sökram
+på 20 s och ordinarie slutlig audit: 2,34 s checkout efter 7,83 s
+kandidatuppbyggnad. De andra 2 931 kvittona hashkontrollerades och
+bevarades. Ingen pris-, fräschhets- eller kvalitetsgrind ändrades.
+
+92 riktade tester samt Ruff och compileall passerar.
+[CI-inventeringen](specialist-pilot-20261028/ci-partitions.json) bevarar
+alla tidigare 4 201 noder exakt en gång och lägger till 11, totalt 4 212.
+Hosted CI måste passera på leveransens exakta head före integration.
+[Separat teststatus](specialist-pilot-20261028/test-status.json) redovisar
+att den bredare grocery-sviten inte blev färdig inom 600 s. Dess fem
+observerade fel gäller äldre ICA-förväntningar och återkommer med main:s
+oförändrade moduler; de har varken dolts, hoppats över eller räknats gröna.
+
 Ingen beta-/produktionsaktivering, schedulerändring, breddad Coop-allowlist,
 inloggningsautomation eller ändring av den frysta jämförelsen ingår.
 
-Beslutet behövs eftersom det aktuella uppdragets punkt 5 säger: ”Först om
+Det tidigare beslutskravet kom från uppdragets punkt 5: ”Först om
 en ny handlare, källa eller allowlist behövs ska ett konkret separat
-beslutsunderlag tas fram.” Arbetet med beredningar och befintliga källor
-kan fortsätta oberoende av beslutet.
+beslutsunderlag tas fram.” Ägarens ja gäller denna pilot och ska inte
+efterfrågas igen. Kvalificering inom de fem artiklarna får fortsätta;
+en annan artikel eller produktionsaktivering ingår inte i beslutet.

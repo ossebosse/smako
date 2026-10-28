@@ -10,6 +10,7 @@ from sqlalchemy import exists, func, or_, select
 from sqlalchemy.orm import Session
 
 from grocery_data.app.domain.enums import (
+    DEFAULT_SOURCE_CHAINS,
     Chain,
     CoverageLevel,
     PriceContextState,
@@ -272,7 +273,7 @@ class PriceContextAuditor:
 
         chain_reports: dict[str, ChainPriceContextSummary] = {}
         all_items: list[PriceContextAuditItem] = []
-        for chain in Chain:
+        for chain in DEFAULT_SOURCE_CHAINS:
             stores = tuple(
                 sorted(by_chain[chain], key=lambda row: (row.name, row.physical_store_id))
             )

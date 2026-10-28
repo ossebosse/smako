@@ -1,0 +1,106 @@
+{
+  "schema": "smako-five-article-local-source-review-v1",
+  "authorization": "Owner approved the five-article local pilot on 2026-10-28; no production activation",
+  "observation_date": "2026-10-28",
+  "observation_method": "Manual public browser review, including unauthenticated guest cart previews",
+  "qualification": "research_only_not_an_active_price_snapshot",
+  "reference_postal_code": "21120",
+  "personal_information_submitted": false,
+  "orders_placed": false,
+  "test_carts_restored": true,
+  "articles": [
+    {
+      "chain": "extremefood",
+      "retailer_article_id": "944",
+      "name": "Maseca masa harina 1 kg",
+      "url": "https://www.extremefood.se/mexikansk_mat/944-maseca-vitt-mexikanskt-majsmjol-1kg.html",
+      "result": "not_recovered_as_current_buyable_article",
+      "evidence": "The historical URL displays no available products. Public Maseca search returns six other results, none the approved article. This does not prove market absence.",
+      "substitution_performed": false
+    },
+    {
+      "chain": "med24",
+      "retailer_article_id": "9576",
+      "name": "Urtekram Food Pärlkorn eko 400 g",
+      "url": "https://www.med24.se/matvaror/mjoel-gryn-och-bakning/korn-och-gryn/paerlkorn-m-m/urtekram-food-paerlkorn-eko-400-g",
+      "net_g": 400,
+      "declared_ingredient": "barley kernels, organic",
+      "public_ordinary_price_sek": "31.00",
+      "guest_cart_unit_price_sek": "31.00",
+      "excluded_member_price_sek": "24.00",
+      "availability": "in_stock",
+      "gtin_status": "Earlier web extraction showed 5765228120453; not present in the fresh visible browser text, so no cross-source GTIN binding is issued",
+      "delivery": "Public DHL terms say 39 SEK and free above 499 SEK. Exact boundary and final geographic checkout are unqualified. The guest cart advertised shipping from 35 SEK, while checkout requires email before delivery selection.",
+      "result": "article_observed_delivery_contract_pending"
+    },
+    {
+      "chain": "pongmarket",
+      "retailer_article_id": "BW0003",
+      "name": "Cock Brand tapioca starch 400 g",
+      "url": "https://pongmarket.se/tapiokamj%C3%B6l-400g-cock-brand-kina/",
+      "gtin": "084909000798",
+      "net_g": 400,
+      "declared_ingredients": {"tapioca_starch_percent": 98, "water_percent": 2},
+      "availability": "in_stock",
+      "displayed_product_price_sek": "20",
+      "guest_checkout_unit_price_sek": "20.47",
+      "result": "exact_article_observed_list_price_does_not_equal_checkout_price"
+    },
+    {
+      "chain": "pongmarket",
+      "retailer_article_id": "PMSM0014",
+      "name": "Cock Brand small dry tapioca pearls 400 g",
+      "url": "https://pongmarket.se/tapioka-p%C3%A4rlor-sm%C3%A5-400g-cock-brand/",
+      "gtin": "8858826308976",
+      "net_g": 400,
+      "declared_ingredients": {"tapioca_starch_percent": 98, "water_percent": 2},
+      "availability": "in_stock",
+      "displayed_product_price_sek": "25",
+      "guest_checkout_unit_price_sek": "25.14",
+      "result": "exact_article_observed_list_price_does_not_equal_checkout_price"
+    },
+    {
+      "chain": "pongmarket",
+      "retailer_article_id": "PMSM0031",
+      "name": "Xin Liang glutinous rice flour 500 g",
+      "url": "https://pongmarket.se/mj%C3%B6l-klibbigt-ris-500g-xin-liang-kina/",
+      "gtin": "6970603300064",
+      "net_g": 500,
+      "declared_ingredient": "glutinous rice",
+      "availability": "in_stock",
+      "displayed_product_price_sek": "33",
+      "guest_checkout_unit_price_sek": "32.63",
+      "nutrition_status": "Conflict: the source gives 1538 kJ and 542 kcal; no nutrient values imported",
+      "result": "exact_article_observed_list_price_does_not_equal_checkout_price"
+    }
+  ],
+  "pong_guest_checkout": {
+    "url": "https://pongmarket.se/checkout.php",
+    "selected_delivery": "DHL parcel to a service point in Sweden; dry goods only",
+    "area_probe": "21120 offers dry-goods shipment; refrigerated/frozen delivery unavailable",
+    "articles_each_quantity": {"BW0003": 1, "PMSM0014": 1, "PMSM0031": 1},
+    "product_subtotal_sek": "78.24",
+    "shipping_sek": "69.00",
+    "additional_fee_sek": "38.16",
+    "checkout_adjustments_sek": ["-0.01", "-0.39"],
+    "total_sek": "185.00",
+    "single_BW0003_total_sek": "128.00",
+    "qualification_limit": "These are observed guest baskets, not a verified tariff for arbitrary quantities, weight bands, thresholds or future purchases. No personal discounts or inferred tax conversion are used."
+  },
+  "store_cap_review": {
+    "existing_reference_cap": 2,
+    "each_new_retailer_consumes_one_context_slot": true,
+    "one_existing_grocer_plus_pong": 2,
+    "one_existing_grocer_plus_med24_plus_pong": 3,
+    "three_context_combination_allowed_under_existing_cap": false,
+    "actual_candidate_basket_verification": "not_run_without_qualified_source_and_fee_contract"
+  },
+  "shared_reference": {
+    "imported_variants": 2200,
+    "previous_verified_whole_including_estimates": 1864,
+    "pilot_new_verified_whole": 0,
+    "price_universe_changed": false,
+    "source_timestamps_renewed": false,
+    "default_source_selection_expanded": false
+  }
+}

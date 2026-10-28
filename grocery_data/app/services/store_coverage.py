@@ -12,6 +12,7 @@ from sqlalchemy import exists, func, select
 from sqlalchemy.orm import Session
 
 from grocery_data.app.domain.enums import (
+    DEFAULT_SOURCE_CHAINS,
     Chain,
     Confidence,
     ConnectorStatus,
@@ -371,7 +372,7 @@ class StoreCoverageAuditor:
             registry_by_chain[Chain(row.chain)].append(row)
 
         chain_reports: dict[str, ChainStoreCoverage] = {}
-        for chain in Chain:
+        for chain in DEFAULT_SOURCE_CHAINS:
             entries, matched = self._entries_for_chain(
                 chain=chain,
                 official=official_by_chain[chain],
