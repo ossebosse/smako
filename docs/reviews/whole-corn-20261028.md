@@ -60,9 +60,12 @@ proven; hela B2-korgen är identisk med tidigare 731,20 kr. Alla
 2932 kvittofiler och aktuella beroenden är hashkontrollerade.
 Inga gamla korgar förloras. Inget globalt optimum påstås.
 
-587 riktade tester, Ruff och compileall passerar. CI har 4201
+595 riktade tester, Ruff och compileall passerar. CI har 4201
 noder exakt en gång; samtliga 4 170 tidigare noder är autentiserade och
-bevarade. Grön hosted CI krävs före integration. PR #32 är redan
+bevarade. Första CI-körningen fångade en saknad historisk efterträdare i ett test.
+Testets versionskedja är rättad med oförändrade kontroller av originalbyte;
+alla åtta berörda tester passerar. Runtime och data är oförändrade, så
+korg- och prisproven återanvänds. Grön hosted CI krävs före integration. PR #32 är redan
 integrerad på main 8270a9f; dess CI tog 7:44 mot tidigare 8:30 med hela
 testurvalet kvar, [verifierat underlag](whole-corn-20261028/prior-hosted-ci.json).
 

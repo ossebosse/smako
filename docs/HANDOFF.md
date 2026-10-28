@@ -9,7 +9,7 @@ antas. Alla original och tidigare korgar bevarade; inga nya priser.
 
 A 278.76/278.76, B2:s hela korg identisk 731,20.
 API 53.47/53.70/32.36 s; alla 2932 kvittohashar passerar.
-587 riktade tester, Ruff/compileall. Alla 4201 CI-noder exakt en gång,
+595 riktade tester, Ruff/compileall. Alla 4201 CI-noder exakt en gång,
 4 170 tidigare bevarade. Hosted CI krävs före integration.
 PR32 integrerad 8270a9f med grön CI 7:44 mot tidigare 8:30.
 
