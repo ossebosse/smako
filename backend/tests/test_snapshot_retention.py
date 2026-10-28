@@ -301,3 +301,42 @@ def test_preview_reference_work_does_not_multiply_with_raw_page_count(history, m
     result = maintain(database, raw, apply=True, **kwargs)
     assert result["raw_files_removed"] == 201
     assert not (raw / "extra-pages").exists()
+
+
+def test_missing_retired_bodies_do_not_repeat_relational_probes(history, monkeypatch):
+    import hashlib
+
+    import grocery_data.app.services.snapshot_retention as retention
+
+    database, raw, kwargs = history
+    maintain(database, raw, apply=True, **kwargs)
+    with sqlite3.connect(database) as db:
+        db.row_factory = sqlite3.Row
+        template = dict(db.execute(
+            "SELECT * FROM raw_snapshots WHERE catalog_snapshot_id='snapshot-1'").fetchone())
+        columns = list(template)
+        sql = ("INSERT INTO raw_snapshots (" + ",".join('"' + name + '"' for name in columns)
+               + ") VALUES (" + ",".join("?" for _ in columns) + ")")
+        for number in range(200):
+            relative = f"already-removed/{number}.json"
+            values = {**template, "id": f"removed-{number}", "payload_location": relative,
+                      "request_fingerprint": hashlib.sha256(relative.encode()).hexdigest()}
+            db.execute(sql, [values[column] for column in columns])
+    original = retention.protected_snapshots
+    probes = []
+
+    def observed(connection, **options):
+        if "snapshot-1" in options["snapshot_ids"]:
+            probes.append(tuple(options["snapshot_ids"]))
+        return original(connection, **options)
+
+    monkeypatch.setattr(retention, "protected_snapshots", observed)
+    for apply in (False, True):
+        result = maintain(database, raw, apply=apply, **kwargs)
+        assert result["retired"] == [] and result["raw_files_removed"] == 0
+    assert probes == []
+    with sqlite3.connect(database) as db:
+        assert db.execute("SELECT count(*) FROM raw_snapshots").fetchone()[0] == 208
+        db.execute("UPDATE raw_snapshots SET payload_location='../outside' WHERE id='removed-0'")
+    with pytest.raises(ValueError, match="escaped"):
+        maintain(database, raw, apply=True, **kwargs)

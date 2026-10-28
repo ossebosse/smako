@@ -1,3 +1,17 @@
+# 2026-10-28: Samlad betaaktivering beställd, under arbete
+
+Ägaren har nu uttryckligen beställt Malmö ICA samt aktivering av hela
+recept-/beräkningsarbetet och tvånattsschemat. Se
+[samlad granskning](releases/beta-ica-recipes-20261028/REVIEW.md).
+PR38 (WAL-synliga Primatkopplingar) och PR39 (66 tidigare granskade
+ingrediensdeklarationer i vanlig faktaladdning) är integrerade med grön CI.
+Malmö Caroli och Maxi Västra Hamnen har exakt ID-koppling och godkänt
+avgränsat produktprov; slutlig basinsamling/publicering och appbyte återstår.
+Serverns ursprungliga images är ännu aktiva. Windows UAC avbröts igen;
+uppgiften använder fortfarande sitt äldre schema och en körning pågår.
+Varken installerat paket eller grön main får beskrivas som betaaktivering.
+Återupptagningsunderlag finns i `.local/beta-all-20261028/`.
+
 # 2026-10-28: Två insamlingsnätter och ICA Primat förberett, aktivering återstår
 
 Ägaruppdrag: aktivera ICA-baspriser via Primat och hämta alla aktiverade bas-
