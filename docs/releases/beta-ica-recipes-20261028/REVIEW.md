@@ -98,3 +98,86 @@ förkontroll-/backupförloppet innan den nya schedulern är aktiverad.
 Skyddat operatörsunderlag: `.local/beta-all-20261028/` och serverns
 `/srv/app/var/reports/beta-all-20261028/`. Dessa innehåller inga källnycklar
 i publicerade rapporter och checkas inte in.
+
+## Slutlig kandidatverifiering
+
+Kodreferens `2b65533af00d6355bd9370a18b9f613337c7ed2d`, integrerad via PR40
+som `2f033b8`, har grön hosted CI även på main. De slutliga bilderna har
+BUILD_ID `beta-all-2b65533af00d`. 373 appfiler och 429 schedulerfiler
+verifierades mot deklarerade filhashar; övriga runtimefiler och befintliga
+admininställningar bevarades. Git-blobbarna för receptdata används exakt,
+inklusive deras deklarerade radslut. Inga beroenden eller databasscheman ändras.
+
+Exakt appimage klarar import, alla 2 462 aktiva varianter och samtliga
+66 utgivna kompositionskopplingar. Nätverkslös förberedelse av båda verkliga
+prisunderlagen, portioner 1/4, klarade 186,81 s med 2 CPU och 3 GiB-gräns;
+uppmätt minnestopp var 2 980 331 520 byte. Detta mäter förberedelse,
+inte konsumentens menyberäkning. Båda kommunernas körplaner var utan
+källanrop på onsdagen och källor förföll på torsdagen enligt veckopolicyn.
+
+Den slutliga insamlingen gav 2 645 produktposter för Malmös två godkända
+ICA-kontexter. Lund gav 1 964 poster: aktuell hämtning från Maxi Gunnesbo
+och kvalificerad tidigare data för Clemenstorget. Primat anger numera
+Clemenstorget som offers-only; dess tidigare baspriser behålls enligt
+ordinarie LKG-policy med ursprunglig observationstid. Ingen erbjudandekontext
+uppgraderas. Varje lyckad kommunhämtning använde 49 anrop; en separat
+rate-limit-händelse bevaras i operatörsunderlaget och följdes av väntan.
+
+Windows fullpaket `2b65533af00d` är installerat och verifierat, men den
+befintliga S4U-uppgiften kräver administratörsrättighet för registreringsbytet.
+Den hade återgått till Ready när försöket gjordes. Ingen ändring registrerades;
+det äldre schemat kan därför inte beskrivas som aktiverad tvånattspolicy.
+Faktisk serveraktivering och publika slutprov journalförs separat.
+
+## Modellavvikelse hittad vid första prispubliceringen
+
+Första fullständiga prisbygget efter imagebytet behöll korrekt de gamla
+prismanifesten när ett `AttributeError` uppstod. Aktuell incident är
+`pipeline-bb0aba4c93d836fce99a07bc`, Lund 18:56:50 UTC, med samma fel även
+i Malmö. Stacken går genom ekonomiskt urval och `BasketCalculator.quote_item`
+till saknat `ProductCandidate.purchase_units`.
+
+Den första schedulerpaketeringen hade bevarat fyra äldre runtimeavvikelser
+genom exakt kommuterande patchning. Dessa var saknade redan granskade
+funktioner i förhållande till main, inte nödvändiga driftutökningar. Att
+patchningen kommuterar bevisar inte modellkompatibilitet. Appens motsvarande
+filer var redan identiska med main; dess image behöver inte ändras.
+
+Ett korrigerat schedulerpaket installerar exakt main-versionen av
+`models/product.py`, `services/beta_observability.py`,
+`services/price_universe_runtime.py` och `services/product_search.py`.
+Det återställer bland annat köpantalsfältet, räknad viktgräns med validering,
+kommunval, befintlig feldiagnostik och publicerings-/cachekontrakt. Alla
+övriga runtimefiler och all konfiguration jämförs med den då faktiskt aktiva
+schedulerbilden. Ingen pris- eller mängdgräns kringgås.
+
+Den misslyckade Malmöbyggarens färdigställda, integritetskontrollerade
+slutna SQLite-underlag behölls som en avgränsad diagnostikfil före dess
+temporärkatalog togs bort. Det används skrivskyddat med oförändringskontroll
+för båda kommunernas fullständiga kandidatbyggen och samma slutna ICA-cacher.
+De faktiska byggena, med nätverket avstängt, måste passera före schedulerbytet.
+Ordinarie managed refresh validerar sedan kandidaterna och snapshotlinjerna
+igen före atomisk publicering. Laddning måste bekräftas med exakt pris-ID
+per kommun; ett återladdningssvar med oförändrat gammalt ID räcker inte.
+
+## Gemensam receptförberedelse i det vanliga körflödet
+
+Det första publika Malmöprovet för tre recept/två portioner nådde 60-sekunders-
+gränsen innan sökningen hann börja. Det fanns 455 individuellt kvalificerade
+recept, noll prissatta kombinationer och inget omöjlighetsbevis. Samma krav
+gav en helt reviderad meny på 53,02 s efter gemensam förberedelse 1–4.
+Den tidigare förberedelsen 1/4 täckte inte hela den vanliga gästvägen.
+
+Den befintliga `schedule_source_facts_prewarm` förbereder nu även aktuellt
+bibliotek, portionsvyer, deklarationer och ingredienspositioner med samma
+verifierade universe/faktamappning. Detta gäller endast uttrycklig
+`smako-current-library-v2`; legacy/V1 behåller sitt tidigare faktaladdningsflöde.
+Den körs efter uppstart och varje ny godkänd runtimeaktivering. En upprepad
+leverans av samma pris-ID behåller sina cacher. Bakgrundsarbeten serialiseras,
+tar ingen plannerplats och skapar inga menyer eller köpbeslut. Cachefel blir
+synlig partial/failed-status och ändrar aldrig en godkänd prisaktivering.
+
+Riktade tester täcker exakt scope/faktabindning och portioner 1–4, avstängd
+funktion, legacy, cachefel, högst en tung förberedelse samt validering/atomiskt
+byte före schemaläggning. Fel i den valfria schemaläggningen behåller giltiga
+priser; samma pris-ID startar inte om förberedelsen. Ruff och compileall passerar.

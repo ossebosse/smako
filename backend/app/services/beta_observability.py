@@ -1104,6 +1104,7 @@ async def reload_active_price_universe(
     staging_manager_factory: Callable[[], Any] | None = None,
     projection_builder: Callable[..., Any] | None = None,
     prewarm_runner: Callable[..., Any] | None = None,
+    source_facts_warmer: Callable[..., Any] | None = None,
     active_manager: Any = GLOBAL_PREPARED_PRICE_UNIVERSES,
 ) -> dict[str, Any]:
     """Validate and precompute a disk candidate before one atomic runtime swap."""
@@ -1148,6 +1149,14 @@ async def reload_active_price_universe(
         raise RuntimeError("PriceUniverse pricing projection could not be prepared")
     old = active_manager.activate(candidate)
     application.state.pricing_projection_prewarm = projection
+    try:
+        if source_facts_warmer is None:
+            from app.services.source_facts_prewarm import schedule_source_facts_prewarm
+            source_facts_warmer = schedule_source_facts_prewarm
+        application.state.source_facts_prewarm = source_facts_warmer(settings, (candidate,))
+    except Exception as exc:  # Optional preparation never rejects valid prices.
+        application.state.source_facts_prewarm = {"status": "failed", "error_type": type(exc).__name__}
+        LOGGER.exception("optional source facts prewarm failed after valid universe activation")
     try:
         if settings.price_universe_prewarm_enabled and not custom_prewarm_runner:
             from app.services.plan_prewarm import schedule_plan_prewarm

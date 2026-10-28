@@ -15,12 +15,16 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Senast aktiverade appkod är `c253cbd9ef93`,
-  BUILD_ID `app-c253cbd9ef93-9940259d`.
-  [Aktiveringen](releases/membership-20261021/ACTIVATED.md) inför
-  medlemskap och tre additiva kontotabeller; efterretention pågår vid
-  journalföringen. Den bevarar basbildens äldre admin-inställning
-  som saknas i main; config.py ändrades inte. Se även
+  senaste aktiveringsrapport. Senast aktiverade app-/schedulerkod är
+  `2b65533af00d`, app-BUILD_ID `beta-all-2b65533af00d` och scheduler-BUILD_ID
+  `beta-scheduler-2b65533af00d-contracts1`.
+  [Samlad aktivering](releases/beta-ica-recipes-20261028/ACTIVATED.md) innehåller
+  ICA/tvånattspolicy och hela det integrerade recept-/beräkningsarbetet.
+  Windowsuppgiftens registreringsbyte återstår med administratörsrättighet.
+  Tidigare runtimefunktioner för admin bevarades med granskad exakt patchning;
+  config.py är därför inte en ren kopia av main. Historiskt
+  [medlemskap](releases/membership-20261021/ACTIVATED.md) och dess tre additiva
+  kontotabeller består. Se även
   [basbildens granskning](releases/planner-startup-20261018/ACTIVATED.md)
   innan en ny ändring av config.py paketeras.
 
@@ -41,8 +45,8 @@ git pull --ff-only
 git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
-# Ersätt c253cbd9ef93 med senast aktiverade appkod enligt aktuell releasejournal.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit c253cbd9ef93 --commit main --workdir .local/beta-release
+# Ersätt 2b65533af00d med senast aktiverade appkod enligt aktuell releasejournal.
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 2b65533af00d --commit main --workdir .local/beta-release
 ```
 
 Arbetskopian ska vara ren; paketet läser enbart committade Git-blobbar.
@@ -139,7 +143,16 @@ Spara aldrig full compose-miljö, cookies, privata profiler eller backupfiler i 
 ## Andra releasetyper
 
 För ny server, scheduler, databasmigrering eller Windowsrelä behövs separat
-verifierad plan. Befintlig paketerare är:
+verifierad plan.
+
+En samlad release måste prova faktisk schedulerbild mot ett helt inaktivt
+prisbygge i berörda kommuner. Kommuterande filpatchar bevisar inte kompatibla
+produktmodeller: jämför också konsumentens och byggarens fält-/köpkontrakt.
+Schedulerns cronfil skapas under uppstart; invänta och verifiera färdiga jobb
+innan en saknad fil betraktas som startfel. Se
+[incident och korrigering](releases/beta-ica-recipes-20261028/REVIEW.md).
+
+Befintlig paketerare är:
 
 ```powershell
 .venv/Scripts/python.exe scripts/build_release.py --commit main --output .local/full-release

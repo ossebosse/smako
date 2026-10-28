@@ -1,5 +1,10 @@
 # Gemensam driftstatus och avgränsad reparation
 
+Senaste [samlade betaaktivering](releases/beta-ica-recipes-20261028/ACTIVATED.md)
+omfattar ICA-baspriser, hela recept-/beräkningsarbetet och serverhämtning
+måndag/torsdag 03:17 svensk tid. Windowsreläets befintliga uppgiftsregistrering
+kräver fortfarande administratör; serverstatus bevisar inte dess veckoschema.
+
 ## Prispolicy från 2026-10-15
 
 Kvalificerade baspriser behålls tills en validerad ersättning finns, för alla
