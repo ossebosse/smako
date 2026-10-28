@@ -35,16 +35,20 @@ from app.services.basket_calculator import (
     BasketCalculator,
     BasketItemQuote,
     GroupPricingError,
+    _fail_closed_non_fixed_price,
     money,
+    validate_purchase_unit_limit,
 )
 from app.services.ingredient_normalizer import (
     canonicalize_ingredient_name,
+    normalize_quantity,
 )
 from app.services.performance_trace import (
     increment_performance_counter,
     record_performance_seconds,
 )
 from app.services.price_universe import PackageCostCache, PriceUniverse
+from app.services.purchase_quantity_resolver import PurchaseQuantityResolver
 
 type _CandidateFingerprint = tuple[object, ...]
 type _QuoteCacheKey = tuple[str, Decimal, str, _CandidateFingerprint]
@@ -269,6 +273,8 @@ class QuoteCacheStats:
     optimistic_store_subset_evaluations: int = 0
     optimistic_store_subsets_infeasible: int = 0
     calculations: int = 0
+    fixed_template_hits: int = 0
+    fixed_template_misses: int = 0
 
 
 @dataclass(frozen=True, slots=True)
@@ -307,6 +313,9 @@ class StoreSubsetCacheStats:
 
 @dataclass(slots=True)
 class _QuoteCacheSession:
+    # Same frozen source object and whole package count, inside this request.
+    # Quantity resolution and purchase limits are still checked on every use.
+    fixed_package_templates: dict[tuple, tuple[ProductCandidate, BasketItemQuote]] = field(default_factory=dict)
     dominance_rows: dict = field(default_factory=dict)
     promotion_structure_rows: dict[int, tuple[tuple, tuple, tuple]] = field(default_factory=dict)
     promotion_structure_candidates: int = 0
@@ -611,6 +620,8 @@ class BasketOptimizer:
                     session.stats.optimistic_store_subsets_infeasible
                 ),
                 "package_calculations": session.stats.calculations,
+                "fixed_package_template_hits": session.stats.fixed_template_hits,
+                "fixed_package_template_misses": session.stats.fixed_template_misses,
                 "cache_hits": (
                     session.stats.hits
                     + session.stats.quote_set_hits
@@ -902,6 +913,31 @@ class BasketOptimizer:
                 resolution_warning=None,
                 source_provenance=item.source_provenance or candidate.source_provenance,
             )
+        if (session is not None and calculator_type is BasketCalculator
+                and getattr(quote_method, '__func__', None) is BasketCalculator.quote_item
+                and type(self.calculator.resolver) is PurchaseQuantityResolver
+                and candidate.sale_model == SaleModel.FIXED_PACKAGE and not candidate.variable_weight
+                and candidate.quantity_confidence == QuantityConfidence.EXACT
+                and not (candidate.purchase_terms or candidate.purchase_units
+                         or candidate.offers or candidate.promotion_groups)):
+            required, unit = normalize_quantity(ingredient.required_quantity, ingredient.unit)
+            checkout, _warning = _fail_closed_non_fixed_price(candidate)
+            resolution = self.calculator.resolver.resolve(checkout, required_quantity=required, required_unit=unit)
+            if resolution.resolved:
+                validate_purchase_unit_limit(checkout, resolution.packages_needed)
+                key = (id(candidate), resolution.usable_unit, resolution.packages_needed)
+                cached = session.fixed_package_templates.get(key)
+                if cached is not None and cached[0] is candidate:
+                    session.stats.fixed_template_hits += 1
+                    return dataclass_replace(cached[1], ingredient=ingredient.canonical_name,
+                        required_quantity=float(resolution.required_quantity),
+                        waste_quantity=float(resolution.waste_quantity))
+                quote = quote_method(ingredient, candidate)
+                session.stats.fixed_template_misses += 1
+                if len(session.fixed_package_templates) >= 8192:
+                    session.fixed_package_templates.pop(next(iter(session.fixed_package_templates)))
+                session.fixed_package_templates[key] = (candidate, quote)
+                return quote
         return quote_method(ingredient, candidate)
 
     def _candidate_quotes(

@@ -156,3 +156,17 @@ Samma obegränsade totaljournal och resurs-/källkrav gäller. Full täckning
 [beslutsunderlag](reviews/coverage-source-pilot-20261028.md); utökningen
 är inte beslutad här. Ingen driftaktivering ingår. Hosted CI och
 integration måste passera innan denna kontrollpunkt integreras.
+
+## Nästa verifierade kontrollpunkt: frysta edamamebaljor
+
+1830/2200 hela inklusive uppskattningar, exakt1066 insatslösta/1064 hela,
+370 kvar. Nio exakta befintliga Garant500g-kontexter kvalificeras för
+receptens uttryckliga grossvikt i frysta baljor. Vanligt Atairpektin
+godkänns inte för gult högmetoxylerat konfektpektin i originalstegen.
+Den första provisoriska kopplingen är borttagen före slutkontrollen.
+Inga recept, källpriser, observationstider eller personliga fält ändras.
+A278,76 i båda nya ägare, B2:s hela korg identisk731,20; alla2896
+kvittofiler passerar. Befintlig offertcache har säker fastpaketsåteranvändning,
+alla156920 fulla offerter identiska och78 riktade tester passerar.
+Se [rapporten](reviews/plain-food-facts-20261028.md). HostedCI krävs före
+integration. Samma journal och operations-/resursgränser, ingen aktivering.
