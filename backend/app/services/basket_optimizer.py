@@ -426,6 +426,10 @@ def _named_quote(quote, ingredient):
     """A reused quote carries the current purchase line's name; nothing else differs."""
     if quote.ingredient == ingredient.canonical_name:
         return quote
+    if type(quote) is BasketItemQuote:
+        return quote.with_request(ingredient=ingredient.canonical_name,
+                                  required_quantity=quote.required_quantity,
+                                  waste_quantity=quote.waste_quantity)
     return dataclass_replace(quote, ingredient=ingredient.canonical_name)
 
 
@@ -810,6 +814,10 @@ class BasketOptimizer:
             return self._calculate_quote_uncached(ingredient, candidate)
 
         key = self._quote_cache_key(session, ingredient, candidate)
+        return self._quote_for_key(session, key, ingredient, candidate)
+
+    def _quote_for_key(self, session, key, ingredient, candidate):
+        """Use an already computed exact key within the current cache session."""
         cached = session.quotes.get(key)
         if cached is not None:
             session.stats.hits += 1
@@ -942,7 +950,7 @@ class BasketOptimizer:
                 cached = session.fixed_package_templates.get(key)
                 if cached is not None and cached[0] is candidate:
                     session.stats.fixed_template_hits += 1
-                    return dataclass_replace(cached[1], ingredient=ingredient.canonical_name,
+                    return cached[1].with_request(ingredient=ingredient.canonical_name,
                         required_quantity=float(resolution.required_quantity),
                         waste_quantity=float(resolution.waste_quantity))
                 quote = quote_method(ingredient, candidate)
@@ -986,6 +994,7 @@ class BasketOptimizer:
         # prices.
         cacheable = (
             session is not None
+            and type(self) is BasketOptimizer
             and type(self.calculator) is BasketCalculator
             and isinstance(candidates, tuple)
         )
@@ -1017,7 +1026,11 @@ class BasketOptimizer:
         keyed: list[tuple[_QuoteCacheKey, BasketItemQuote]] = []
         for candidate in candidates:
             try:
-                quote = self._calculate_quote(ingredient, candidate)
+                if key is not None:
+                    quote_key = self._quote_cache_key(session, ingredient, candidate)
+                    quote = self._quote_for_key(session, quote_key, ingredient, candidate)
+                else:
+                    quote = self._calculate_quote(ingredient, candidate)
             except ValueError:
                 # A candidate in the wrong physical dimension is not a valid
                 # product for this normalised requirement.
@@ -1025,7 +1038,7 @@ class BasketOptimizer:
             if self.verification_policy.allows_quote(quote):
                 calculated.append(quote)
                 if key is not None:
-                    keyed.append((self._quote_cache_key(session, ingredient, candidate), quote))
+                    keyed.append((quote_key, quote))
         result = tuple(calculated)
         if key is not None and session is not None:
             session.quote_sets[key] = _QuoteSetCacheEntry(

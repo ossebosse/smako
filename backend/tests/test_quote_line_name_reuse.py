@@ -1,9 +1,10 @@
 import gc
 import weakref
-from dataclasses import dataclass
+from dataclasses import dataclass, fields, replace
 from types import SimpleNamespace
 
 import pytest
+from app.services.basket_calculator import BasketItemQuote
 from app.services.basket_optimizer import _QUOTE_LINE_SUFFIX, BasketOptimizer, _named_quote
 
 
@@ -24,6 +25,23 @@ def test_reused_quote_carries_the_current_line_name_and_nothing_else_changes():
     reused = _named_quote(cached, SimpleNamespace(canonical_name="basilika [2]"))
     assert reused == _Quote("basilika [2]", 17.5)
     assert _named_quote(cached, SimpleNamespace(canonical_name="basilika [13]")) is cached
+
+
+def test_specialized_frozen_copy_retains_every_authoritative_field_and_future_defaults():
+    # Distinct sentinels also populate optional fields: adding a new field must
+    # fail this test unless the specialized copy explicitly preserves it.
+    values = {field.name: object() for field in fields(BasketItemQuote)}
+    original = BasketItemQuote(**values)
+    changed = {'ingredient': 'current line', 'required_quantity': 115.5, 'waste_quantity': 384.5}
+    copied = original.with_request(**changed)
+    expected = replace(original, **changed)
+    assert copied == expected and type(copied) is BasketItemQuote
+    assert all(getattr(original, name) is value for name, value in values.items())
+    assert all(getattr(copied, name) is value for name, value in values.items() if name not in changed)
+    assert _named_quote(original, SimpleNamespace(canonical_name='current line')) == replace(
+        original, ingredient='current line')
+    with pytest.raises(AttributeError):
+        copied.total_price = 0
 
 
 @pytest.mark.parametrize('field', ['named', 'items', 'line_free_quote_sets', 'subset_memberships', 'vector_groups'])

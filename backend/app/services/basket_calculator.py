@@ -462,6 +462,72 @@ class BasketItemQuote:
     purchase_units: bool = False
     checkout_offers: tuple = ()
 
+    def with_request(self, *, ingredient, required_quantity, waste_quantity):
+        """Copy only demand fields while retaining every authoritative quote field.
+
+        The built-in hot path avoids dataclasses.replace field discovery on
+        every package-template hit. The normal frozen constructor still runs.
+        Tests compare every field, including future optional additions.
+        """
+        return BasketItemQuote(
+            ingredient=ingredient,
+            product_id=self.product_id,
+            product_name=self.product_name,
+            gtin=self.gtin,
+            chain=self.chain,
+            price_context_type=self.price_context_type,
+            coverage=self.coverage,
+            store_id=self.store_id,
+            store_name=self.store_name,
+            match_score=self.match_score,
+            required_quantity=required_quantity,
+            unit=self.unit,
+            canonical_food=self.canonical_food,
+            food_family=self.food_family,
+            product_role=self.product_role,
+            product_form=self.product_form,
+            semantic_confidence=self.semantic_confidence,
+            semantic_evidence=self.semantic_evidence,
+            sale_model=self.sale_model,
+            sale_price=self.sale_price,
+            sale_unit=self.sale_unit,
+            comparison_price=self.comparison_price,
+            comparison_unit=self.comparison_unit,
+            piece_price=self.piece_price,
+            estimated_piece_weight=self.estimated_piece_weight,
+            estimated_piece_weight_unit=self.estimated_piece_weight_unit,
+            package_quantity=self.package_quantity,
+            package_unit=self.package_unit,
+            usable_quantity=self.usable_quantity,
+            usable_unit=self.usable_unit,
+            quantity_confidence=self.quantity_confidence,
+            variable_weight=self.variable_weight,
+            packages_needed=self.packages_needed,
+            purchased_quantity=self.purchased_quantity,
+            purchased_unit=self.purchased_unit,
+            purchased_usable_quantity=self.purchased_usable_quantity,
+            waste_quantity=waste_quantity,
+            unit_price=self.unit_price,
+            base_checkout_unit_price=self.base_checkout_unit_price,
+            total_price=self.total_price,
+            regular_total_price=self.regular_total_price,
+            regular_unit_price=self.regular_unit_price,
+            purchase_date=self.purchase_date,
+            price_contract_id=self.price_contract_id,
+            eligibility=self.eligibility,
+            price_mechanism=self.price_mechanism,
+            membership_program=self.membership_program,
+            offer_description=self.offer_description,
+            applied_offer=self.applied_offer,
+            resolution_warning=self.resolution_warning,
+            source_provenance=self.source_provenance,
+            purchase_terms=self.purchase_terms,
+            pending_group_checkout=self.pending_group_checkout,
+            conditional_variant_choice=self.conditional_variant_choice,
+            purchase_units=self.purchase_units,
+            checkout_offers=self.checkout_offers,
+        )
+
     def to_basket_item(self) -> BasketItem:
         """Build the public, fully validated model for a selected quote."""
 
