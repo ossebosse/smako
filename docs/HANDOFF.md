@@ -1,18 +1,46 @@
-# 2026-10-28: Samlad betaaktivering beställd, under arbete
+# 2026-10-28: Samlad beta aktiverad på servern, Windowsregistrering återstår
 
-Ägaren har nu uttryckligen beställt Malmö ICA samt aktivering av hela
-recept-/beräkningsarbetet och tvånattsschemat. Se
-[samlad granskning](releases/beta-ica-recipes-20261028/REVIEW.md).
-PR38 (WAL-synliga Primatkopplingar) och PR39 (66 tidigare granskade
-ingrediensdeklarationer i vanlig faktaladdning) är integrerade med grön CI.
-Malmö Caroli och Maxi Västra Hamnen har exakt ID-koppling och godkänt
-avgränsat produktprov; slutlig basinsamling/publicering och appbyte återstår.
-Serverns ursprungliga images är ännu aktiva. Windows UAC avbröts igen;
-uppgiften använder fortfarande sitt äldre schema och en körning pågår.
-Varken installerat paket eller grön main får beskrivas som betaaktivering.
-Återupptagningsunderlag finns i `.local/beta-all-20261028/`.
+Ägarens beställda Malmö ICA, tvånattspolicy och hela det integrerade
+recept-/beräkningsarbetet är nu aktiverade på servern. Se
+[aktiveringsjournal och slutprov](releases/beta-ica-recipes-20261028/ACTIVATED.md).
+Kod `2b65533af00d`, main-merge `2f033b8`, har grön CI. Appen kör
+`beta-all-2b65533af00d`; slutlig scheduler kör
+`beta-scheduler-2b65533af00d-contracts1`. 2 462 aktiva varianter och 66
+granskade ingrediensdeklarationer ingår i vanlig faktaladdning.
+
+Malmö har 24 officiella fysiska ICA-butiker och två kvalificerade Primat-
+baskällor: Caroli och Maxi Västra Hamnen, 2 645 insamlade produktposter.
+Lund har färska Gunnesbopriser och kvalificerad LKG för Clemenstorget, vars
+aktuella Primat-täckning är offers-only. Ursprungliga källtider består.
+Båda kommunernas nya pris-ID:n är publicerade och bekräftat laddade via
+publik scoped readiness. Servern hämtar aktiverade källor måndag/torsdag 03:17
+svensk tid; kvartskontroller gäller även lokala övergångar, inte daglig hämtning.
+
+Första schedulerpaketet bevarade äldre modellavvikelser. Fullständiga
+prisbyggen hittade detta innan felaktiga priser kunde publiceras. Fyra
+redan granskade main-filer korrigerades; båda fullständiga byggen passerade
+utan nätverk med 2 CPU/3 GiB. En cronuppstartsrace återställde ett första
+byte; slutligt byte väntar på rätt jobb och bevarade appens container-ID,
+profiler och planer. Senaste verifierade releasebackup: `20261028T193735Z`.
+
+Windows fullpaket `2b65533af00d` är installerat och kontrollerat, men UAC
+avbröts och S4U-registreringen kräver administratör. Uppgiften använder
+fortfarande `2464596b6f07` och äldre starttider. Nästa operatör ska köra det
+förberedda `.local/beta-all-20261028/activate_windows_admin.ps1` som
+administratör och verifiera faktisk XML/03:17 måndag-torsdag. Ett pågående
+reläjobb ska få avslutas. Installerat paket är inte registrerat veckoschema.
+Skyddat återupptagnings-/verifieringsunderlag finns i `.local/beta-all-20261028/`.
+
+Kompletterande appändring `1cf46ed` förbereder det gemensamma V2-underlaget
+automatiskt efter uppstart och prisreload, inklusive portioner 1–4. Den är
+ännu inte aktiverad vid denna journalpunkt. Lund/Malmö gästprov passerade
+50,45/53,02 s med tre recept/två portioner och reviderad hel korg efter manuell
+gemensam förberedelse; första kalla Malmöprovet var ofullständigt vid 60,48 s.
+Nästa steg är grön CI, prov av exakt kandidatbild och separat appaktivering.
 
 # 2026-10-28: Två insamlingsnätter och ICA Primat förberett, aktivering återstår
+
+Historiskt granskningsläge 15:25 UTC; serverstatus ersätts av aktiveringen ovan.
 
 Ägaruppdrag: aktivera ICA-baspriser via Primat och hämta alla aktiverade bas-
 och kampanjkällor nätterna mot måndag/torsdag. PR #37 är integrerad på main

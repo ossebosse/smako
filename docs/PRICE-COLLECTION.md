@@ -45,5 +45,5 @@ gäller enbart inom sina verkliga källdatum; en lokal datumövergång får bygg
 och publiceras mellan insamlingsnätterna. Backup fortsätter dagligen. Separat
 dagligt Coop-återförsök stängs av i denna konfiguration.
 
-Se aktuell aktiveringsjournal i `docs/releases/ica-twice-weekly-20261028/`.
-Versionshanterade standarder ändrar inte i sig en installerad beta.
+Se [aktuell serveraktivering och kvarvarande Windowsregistrering](releases/beta-ica-recipes-20261028/ACTIVATED.md).
+Versionshanterade standarder ändrar inte i sig en installerad beta eller Windowsuppgift.

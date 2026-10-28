@@ -1,5 +1,10 @@
 # ICA-baspriser och två insamlingsnätter: förberett, inte aktiverat
 
+Senare status: [samlad serveraktivering](../beta-ica-recipes-20261028/ACTIVATED.md)
+ersätter denna förberedelses aktuella driftstatus. Serverns app och scheduler
+är nu bytta tillsammans med receptarbetet; Windowsregistreringen kräver
+fortfarande administratör. Nedan bevaras granskningsläget 15:25 UTC.
+
 Status 2026-10-28 15:25 UTC: implementationen är integrerad via
 [PR #37](https://github.com/ossebosse/smako/pull/37), merge `49be2f6`.
 Granskad kod och paketeringsreferens är `3ebff6ab6e33219c6fc9739adcbf93b9aeb0fc7e`.
