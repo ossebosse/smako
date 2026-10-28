@@ -1,3 +1,23 @@
+# 2026-10-28: Två insamlingsnätter och ICA Primat förberett, aktivering återstår
+
+Ägaruppdrag: aktivera ICA-baspriser via Primat och hämta alla aktiverade bas-
+och kampanjkällor nätterna mot måndag/torsdag. PR #37 är integrerad på main
+`49be2f6`, granskad kod/paket `3ebff6ab6e33`, med grön hosted CI i alla tre
+testdelar. Se [förberedelsejournalen](releases/ica-twice-weekly-20261028/PREPARED.md)
+och [körpolicyn](PRICE-COLLECTION.md). Källtider, kampanjdatum och åldersvarningar
+bevaras. Ingen aktivering får påstås utifrån main eller installerat paket.
+
+Serverförsöket avslutades 15:25 UTC med upptaget ordinarie driftlås efter
+avgränsad väntan; den aktiva insamlingen från 14:45 fick fortsätta.
+Inga live Primat-anrop eller serverbyten gjordes. Windows nya relä är installerat
+och integritets-/importkontrollerat separat, men UAC-dialogen avbröts och
+uppgiften använder fortfarande 2464596b6f07 med sitt tidigare schema.
+Allt återupptagningsunderlag finns i `.local/ica-twice-weekly/`; ingen väntande
+aktiveringsprocess lämnades igång. Återuppta först efter ny drift-/uppgiftskontroll
+och bekräfta faktiska bilder, cron, båda kommunernas ready och Windowsregistrering.
+Endast två ICA-baspriskontexter i Lund är idag verifierade i registret;
+Malmö saknar ännu sådana kopplingar. Nya källfakta får inte fabriceras.
+
 # 2026-10-28: Fem största grupperna lösta med befintliga butiker
 
 [Rapport](reviews/top-five-ingredients-20261028.md): 2 024/2 200 hela
