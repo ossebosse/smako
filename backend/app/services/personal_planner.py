@@ -310,8 +310,8 @@ class PersonalPlanner:
         return entry[1]
 
     def nutrition_evidence(self, product, name, unit, requested, recipe):
-        from app.services.egg_preparation import METHOD, component
-        egg_component = component(recipe, name)
+        from app.services.ingredient_preparations import method_for
+        method = method_for(recipe, name)
         if recipe is not None and recipe.preparation is not None:
             from app.services.recipe_preparation import input_evidence_identity
 
@@ -324,7 +324,7 @@ class PersonalPlanner:
             identity = input_evidence_identity(recipe, name, self.recipe_computations)
             if identity is None:
                 return None
-            recipe_key = ("prepared_input", identity, METHOD if egg_component else None)
+            recipe_key = ("prepared_input", identity, method)
         else:
             # Legacy evidence methods can depend on the entire recipe.
             recipe_key = ("legacy", self.recipe_computations.key(recipe))
@@ -353,13 +353,13 @@ class PersonalPlanner:
         fact = self.source_facts(product)
         from app.services.official_product_facts import project_usable_quantity
         product = project_usable_quantity(product, fact, allow_estimates=self.request.purchase_planning_mode == 'estimated', required_unit=unit)
-        from app.services.egg_preparation import component, nutrition, plain_source
-        egg_component = component(recipe, name)
-        if egg_component:
+        from app.services.ingredient_preparations import method_for, nutrition, source_qualified
+        method = method_for(recipe, name)
+        if method:
             if (not self.spec.allow_nutrition_estimates or self.request.purchase_planning_mode != "estimated"
-                    or unit != "g" or not fact or fact.conflicts or not plain_source(product, fact)):
+                    or unit != "g" or not fact or fact.conflicts or not source_qualified(method, product, fact)):
                 return None
-            return nutrition(egg_component, product.product_id)
+            return nutrition(method, canonicalize_ingredient_name(name), product.product_id)
         if fact and fact.source == 'verified_exact_catalog_declaration':
             from app.services.offer_catalog_facts import matches_product
 
@@ -518,28 +518,35 @@ class PersonalPlanner:
         campaign_choice=False,
         purchase_units=False,
         recipe=None,
+        _reviewed_source_key=None,
     ):
-        from app.services.egg_preparation import component, edible_input, plain_source
+        from app.services.ingredient_preparations import (
+            input_quantity,
+            method_for,
+            source_name,
+            source_qualified,
+            source_requirement,
+        )
 
-        egg_component = component(recipe, name)
-        if egg_component:
+        method = method_for(recipe, name)
+        if method:
             from app.services.recipe_library import validate_recipe_design
 
             self.recipe_computations.get(recipe, validate_recipe_design)
             if self.request.purchase_planning_mode != "estimated" or unit != "g":
-                raise PolicyConflict("Separering av hela ägg kräver uttryckligt uppskattningsläge och grambehov.", code="DATA_BLOCKED")
-            candidates = self.resolve("ägg", edible_input(**{"yolk" if egg_component == "äggula" else "white": quantity}),
+                raise PolicyConflict("Beredningen kräver uttryckligt uppskattningsläge och grambehov.", code="DATA_BLOCKED")
+            candidates = self.resolve(source_name(method), input_quantity(method, {canonicalize_ingredient_name(name): quantity}),
                 "g", product_key=product_key, properties=properties, profile=profile,
-                organic_animals=organic_animals, food=food)
+                organic_animals=organic_animals, food=food, _reviewed_source_key=source_requirement(method))
             candidates = [(i, c) for i, c in candidates
-                          if plain_source(self.prepared.universe.products[i], self.source_facts(c))]
+                          if source_qualified(method, self.prepared.universe.products[i], self.source_facts(c), c)]
             if not candidates:
-                raise PolicyConflict("Inga kvalificerade rena hönsägg för separering.", code="DATA_BLOCKED")
+                raise PolicyConflict("Ingen exakt kvalificerad råvara för beredningen.", code="DATA_BLOCKED")
             for i, _candidate in candidates:
                 product = self.prepared.universe.products[i]
                 if (product.store_id, product.product_id) in self.product_trace.products:
                     self.product_trace.event(product, recipe, name, "preparation_source", "passed",
-                        "issued egg-separation operand; qualified edible whole-egg input, shared purchase and measured outputs required")
+                        "issued preparation operand; qualified source input, shared purchase and measured output required")
             return candidates
         cache_key = (
             name,
@@ -551,6 +558,7 @@ class PersonalPlanner:
             food,
             campaign_choice,
             purchase_units,
+            _reviewed_source_key,
             self.recipe_computations.forms_for(recipe, canonicalize_ingredient_name(name))
             if self.complete and recipe and recipe.preparation else None,
         )
@@ -692,9 +700,15 @@ class PersonalPlanner:
 
             reviewed_apple = canonical == 'äpple' and reviewed_reference(
                 product, canonical, self.source_facts(product)) == 588
+            from app.services.intake_product_links import compatible as reviewed_source_product
             from app.services.intake_product_links import recipe_product as reviewed_intake_product
 
             reviewed_intake = self.complete and recipe is not None and reviewed_intake_product(recipe, name, product, self.source_facts(product))
+            if _reviewed_source_key:
+                # An already validated issued preparation requests its exact
+                # reviewed raw source. Reuse the same identity/quantity gate
+                # and the ordinary policy, price and checkout pipeline below.
+                reviewed_intake = reviewed_source_product(_reviewed_source_key, product, self.source_facts(product))
             if canonical == "kvarg" and not product_key and not reviewed_quark:
                 note(i, "recipe_match", "stopped", "plain quark identity/composition not established")
                 continue
@@ -934,9 +948,10 @@ class PersonalPlanner:
                            if self.complete and source_ingredient is not None else {}),
                     }
                     row["demand_key"] = demand_key(row)
-                    from app.services.egg_preparation import METHOD, component
-                    if component(recipe, row["name"]):
-                        row["preparation"] = METHOD
+                    from app.services.ingredient_preparations import method_for
+                    method = method_for(recipe, row["name"])
+                    if method:
+                        row["preparation"] = method
                     built.append(row)
                 template = (meal, tuple(built))
                 remember_bounded(self._need_row_templates, template_key, template, 4096)
@@ -1004,12 +1019,13 @@ class PersonalPlanner:
                 continue
             origin = item.get("prepared_origin")
             if origin:
-                if (origin["method"] != row.get("preparation") or origin["product_key"] not in keys
-                        or item["name"] != row["name"] or item.get("form") != "raw_edible"):
+                from app.services.ingredient_preparations import stock_matches
+                if (not stock_matches(origin, item, row) or origin["product_key"] not in keys
+                        or item.get("form") != "raw_edible"):
                     continue
             elif item["product_key"]:
                 if row.get("preparation"):
-                    continue  # A whole-egg lot is an input, not a separated output.
+                    continue  # A source lot is an input, not a prepared output.
                 if item["product_key"] not in keys:
                     continue
             else:
@@ -1063,21 +1079,31 @@ class PersonalPlanner:
                 return 0, allocations
         return remaining, allocations
 
-    def _prepare_egg_groups(self, groups, rows, allocations, available):
-        from app.services.egg_preparation import METHOD, edible_input
+    def _prepare_groups(self, groups, rows, allocations, available):
+        from app.services.ingredient_preparations import (
+            component_names,
+            estimated_outputs,
+            input_quantity,
+            source_name,
+        )
 
         preparations = []
         for group in groups:
             demands = [r for r in rows if r["demand_key"] in group["demand_keys"]]
-            components = [r for r in demands if r.get("preparation") == METHOD]
+            components = [r for r in demands if r.get("preparation")]
             if not components:
                 continue
-            if any(r["name"] not in {"ägg", "äggula", "äggvita"} or r["unit"] != "g" for r in demands):
-                raise PolicyConflict("Äggberedning kan bara dela rå ägginsats.")
-            yolk = sum(r["unallocated_quantity"] for r in components if r["name"] == "äggula")
-            white = sum(r["unallocated_quantity"] for r in components if r["name"] == "äggvita")
+            methods = {r['preparation'] for r in components}
+            if len(methods) != 1:
+                raise PolicyConflict("Olika beredningar kräver separata insatsgrupper.")
+            method = next(iter(methods))
+            source = source_name(method)
+            names = component_names(method)
+            if any(r['name'] not in {source, *names} or r['unit'] != 'g' for r in demands):
+                raise PolicyConflict("Beredningen kan bara dela sin kvalificerade råvaruinsats.")
+            amounts = {name: sum(r['unallocated_quantity'] for r in components if r['name'] == name) for name in names}
             whole = sum(r["unallocated_quantity"] for r in demands if not r.get("preparation"))
-            required = edible_input(yolk, white)
+            required = input_quantity(method, amounts)
             prep_key = "prepare:" + hashlib.sha256(json.dumps(sorted(r["demand_key"] for r in components)).encode()).hexdigest()
             keys = {self.product_keys[i] for i in group["positions"]}
             raw = []
@@ -1089,21 +1115,22 @@ class PersonalPlanner:
                 used = min(remaining, available[item["id"]])
                 if used <= 1e-8:
                     continue
-                allocation = {"item_id": item["id"], "quantity": used, "unit": "g", "name": "ägg",
+                allocation = {"item_id": item["id"], "quantity": used, "unit": "g", "name": source,
                     "source": prep_key, "demand_key": prep_key, "product_key": item["product_key"],
-                    "kind": "preparation_input", "method": METHOD}
+                    "kind": "preparation_input", "method": method}
                 raw.append(allocation)
                 allocations.append(allocation)
                 available[item["id"]] -= used
                 remaining -= used
-            preparation = {"id": prep_key, "method": METHOD, "input_quantity_g": required,
+            outputs = estimated_outputs(method, required)
+            preparation = {"id": prep_key, "method": method, "input_quantity_g": required,
                 "purchase_input_quantity_g": remaining, "input_allocations": raw,
                 "outputs": [{"name": r["name"], "quantity": r["unallocated_quantity"], "unit": "g",
                              "source": r["source"], "demand_key": r["demand_key"]} for r in components],
-                "estimated_outputs_g": {"äggula": required / 3, "äggvita": required * 2 / 3},
-                "estimated_surplus_g": {"äggula": max(0, required / 3 - yolk), "äggvita": max(0, required * 2 / 3 - white)},
+                "estimated_outputs_g": outputs,
+                "estimated_surplus_g": {name: max(0, q - amounts[name]) for name, q in outputs.items()},
                 "status": "WEIGH_OUTPUTS_BEFORE_CONSUMPTION"}
-            group.update(name="ägg", quantity=whole + remaining, preparation=preparation)
+            group.update(name=source, quantity=whole + remaining, preparation=preparation)
             for row in components:
                 row["preparation_sources"] = sorted({a["product_key"] for a in raw})
             preparations.append(preparation)
@@ -1277,7 +1304,7 @@ class PersonalPlanner:
                 code="DATA_BLOCKED",
                 stage="product_qualification",
             )
-        preparations = self._prepare_egg_groups(groups, rows, allocations, available)
+        preparations = self._prepare_groups(groups, rows, allocations, available)
         groups = [g for g in groups if g["quantity"] > 1e-8]
         ingredients, candidate_map = [], {}
         for n, group in enumerate(groups):
@@ -3996,12 +4023,13 @@ class PersonalPlanner:
             if i.waste_quantity > 0
         ]
         for preparation in result["preparations"]:
+            from app.services.ingredient_preparations import stock_name
             source_keys = {a["product_key"] for a in preparation["input_allocations"]}
             source_keys.update(n["selected_product_key"] for n in needs
                                if n.get("preparation", {}).get("id") == preparation["id"])
             for name, quantity in preparation["estimated_surplus_g"].items():
                 if quantity > 1e-8:
-                    surplus.append({"name": name, "quantity": quantity, "unit": "g", "product_key": None,
+                    surplus.append({"name": stock_name(preparation['method'], name), "quantity": quantity, "unit": "g", "product_key": None,
                         "kind": "preparation_output", "form": "raw_edible", "method": preparation["method"],
                         "origin_product_keys": sorted(source_keys), "quantity_status": "ESTIMATED"})
         portions = sum(r.servings for r in recipes)

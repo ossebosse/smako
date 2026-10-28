@@ -1,3 +1,25 @@
+# 2026-10-28: 1862 hela korgar, uppmätta myntablad
+
+[Slutrapporten](reviews/mint-leaf-preparation-20261028.md) ger 32 nya hela
+korgar inklusive uppskattningar. Exakt 1066 insatslösta/1064 hela,
+338 insatshinder kvar. Alla original, 2 462 aktiva och gamla korgar består.
+40 separata versioner plockar och väger blad. Begränsad primärstudie och
+oberoende grovrensningsreferens används uttryckligen som inköpsuppskattning;
+tio exakta befintliga källkontexter, inga nya priser eller bladnäringsantaganden.
+Samma gemensamma inköp och journal bokför uppmätt råinsats, blad och svinn.
+Kort utbyte stoppar förbrukning. Verkligt källprov klarar delat köp, halv
+förbrukning, omräkning utan nya köp och oförändrad historik med skafferi av.
+
+A 278.76/278.76 kr, B2:s hela korg identisk 731,20 kr;
+API 51.98/53.72/32.45 s.
+2928 aktuella kvittofiler verifierade. 74 riktade tester, båda browsermotorer,
+Ruff/compileall, 53 ytterligare optimerarprov och 4151 CI-noder exakt en gång. Grön hosted CI krävs före integration.
+PR #29 är integrerad ebf4f48, grön CI 4 134 tester utan fel på 8:08.
+
+Fortsätt mot samtliga 2 200. Oförändrad fryst Malmöreferens och fakta-v3;
+samma obegränsade journal/resurs-/operationsgränser. Separat källpilot är
+inte aktiverad. Ingen produktion/beta/scheduler/profil ändras.
+
 # 2026-10-28: 1 830 hela korgar och oförändrad exakt prisväg
 
 [Slutkontrollen](reviews/plain-food-facts-20261028.md) ger +2 i båda lägen:

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Literal
+from typing import Annotated, Literal
 from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -170,7 +170,7 @@ class ShoppingWrite(PrivateModel):
 
 
 class PreparedOrigin(PrivateModel):
-    method: Literal["hen_egg_separation_estimate_v1"]
+    method: Literal["hen_egg_separation_estimate_v1", "mint_leaf_trimming_estimate_v1"]
     product_key: str = Field(pattern=r"^[a-f0-9]{32}$")
     operation_id: str = Field(pattern=r"^[a-zA-Z0-9-]{8,64}$")
 
@@ -192,6 +192,25 @@ class EggSeparation(PrivateModel):
         return self
 
 
+class MintLeafTrimming(PrivateModel):
+    method: Literal["mint_leaf_trimming_estimate_v1"]
+    inputs: dict[str, float] = Field(min_length=1, max_length=50)
+    leaf_g: float = Field(gt=0, le=100000)
+
+    @model_validator(mode="after")
+    def conservation(self):
+        import math
+
+        if any(not math.isfinite(q) or q <= 0 for q in self.inputs.values()):
+            raise ValueError("Ange positiva uppmätta mängder ätbar råmynta före bladplockning.")
+        if self.leaf_g > sum(self.inputs.values()) + 1e-7:
+            raise ValueError("De uppmätta myntabladen ska rymmas i den uppmätta råinsatsen.")
+        return self
+
+
+type IngredientPreparation = Annotated[EggSeparation | MintLeafTrimming, Field(discriminator='method')]
+
+
 class PantryItem(PrivateModel):
     id: str = Field(default_factory=lambda: uuid4().hex, min_length=1, max_length=64)
     name: str = Field(min_length=1, max_length=120)
@@ -206,9 +225,12 @@ class PantryItem(PrivateModel):
 
     @model_validator(mode="after")
     def reference_identity(self):
-        if self.prepared_origin and (self.product_key or self.nutrition_reference or self.unit != "g"
-                                     or self.name not in {"äggula", "äggvita"} or self.form != "raw_edible"):
-            raise ValueError("Beredda äggdelar har egen rå gramidentitet och separat ursprungsprodukt.")
+        if self.prepared_origin:
+            names = ({'äggula', 'äggvita'} if self.prepared_origin.method == 'hen_egg_separation_estimate_v1'
+                     else {'myntablad'})
+            if (self.product_key or self.nutrition_reference or self.unit != 'g'
+                    or self.name not in names or self.form != 'raw_edible'):
+                raise ValueError("Beredda utfall har egen rå gramidentitet och separat ursprungsprodukt.")
         if self.nutrition_reference:
             from app.services.nutrition_reference import validate_pantry_reference
 
@@ -317,7 +339,7 @@ class PersonalMutation(PrivateModel):
         default=None, exclude_if=lambda value: value is None
     )
     measured_purchase_quantities: dict[str, float] = Field(default_factory=dict, max_length=200)
-    preparation: EggSeparation | None = Field(default=None, exclude_if=lambda v: v is None)
+    preparation: IngredientPreparation | None = Field(default=None, exclude_if=lambda v: v is None)
     consume_fraction: float = Field(default=1, gt=0, le=1)
     operation_id: str | None = Field(default=None, pattern=r"^[a-zA-Z0-9-]{8,64}$")
 

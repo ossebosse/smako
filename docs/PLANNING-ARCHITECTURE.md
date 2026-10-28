@@ -1,5 +1,18 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Versionerad bladplockning i befintlig beredning
+
+Samma metodval, inköpsgruppering och uppmätta PersonalStore-journal stödjer
+myntablad från tio redan exakt granskade råmyntakontexter. Exakt utgivet
+recept och uppskattningsval krävs. Den befintliga produktrelationen används
+även vid råvarans kandidatsökning; ingen fuzzy auktorisering eller separat
+prisväg. Bladgram × 0,85 / 0,5464 är en uttrycklig brygga mellan två oberoende
+begränsade referenser. Faktiska insats-/bladgram och svinn bokförs; kort utbyte
+stoppar förbrukning. Bladpartier har egen identitet, okänd näring/hållbarhet
+och omprövas mot aktuell källprodukt och personliga krav. Äggstödet består.
+Se [granskningen](reviews/mint-leaf-preparation-20261028.md).
+
+
 ## Oförändrat paketantal i befintlig offertcache
 
 En anropsägd, begränsad metadataoffert får återanvändas för samma frysta

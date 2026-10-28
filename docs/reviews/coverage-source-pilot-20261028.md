@@ -1,7 +1,7 @@
 # Begränsad lokal källpilot för kvarvarande torra råvaror
 
 Detta är ett beslutsunderlag, inte aktiverade källor eller nya verifierade
-korgar. Senast verifierade lokala resultat är 1 830/2 200 i den frysta
+korgar. Senast verifierade lokala resultat är 1 862/2 200 i den frysta
 Malmöreferensen. Det underlaget och dess priser/tider ska bevaras.
 
 ## Föreslagen omfattning

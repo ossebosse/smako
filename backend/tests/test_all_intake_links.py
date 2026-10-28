@@ -191,6 +191,10 @@ def test_entire_intake_is_imported_and_scales_without_changing_original_library(
     successors = {r["previous_id"]: r["runtime_id"] for r in egg["corrected"]}
     replacements = {k: successors.get(v, v) for k, v in replacements.items()}
     replacements.update(successors)
+    leaf = json.loads((ROOT.parents[3] / "docs/reviews/mint-leaf-preparation-20261028/recipe-review.json").read_bytes())
+    successors = {r["previous_id"]: r["runtime_id"] for r in leaf["corrected"]}
+    replacements = {k: successors.get(v, v) for k, v in replacements.items()}
+    replacements.update(successors)
     current = {identity(r): r for r in current_recipes()}
     assert len(report["recipes"]) == 2200
     assert len({r["source_id"] for r in report["recipes"]}) == 2200

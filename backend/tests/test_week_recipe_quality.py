@@ -13,6 +13,10 @@ REPORT=ROOT.parents[3]/'docs/reviews/week-search-and-cache-20261026/recipe-revie
 REVIEW=json.loads(REPORT.read_bytes())
 MINT=json.loads((ROOT.parents[3]/'docs/reviews/recipe-four-staples-20261027/recipe-review.json').read_bytes())
 SUCCESSORS={r['previous_id']:r for r in MINT['corrected']}
+for directory in ('egg-preparation-20261028', 'mint-leaf-preparation-20261028'):
+    latest = json.loads((ROOT.parents[3] / 'docs/reviews' / directory / 'recipe-review.json').read_bytes())
+    replacements = {r['previous_id']: r for r in latest['corrected']}
+    SUCCESSORS = {k: replacements.get(v['runtime_id'], v) for k, v in SUCCESSORS.items()} | replacements
 
 
 def current(rid):

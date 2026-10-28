@@ -1,0 +1,44 @@
+{
+  "workflow_sha256": "53d8d77f572532684d0e226892ebb73cbb4dc07557e034d64cce6366dcc0f100",
+  "same_test_nodes_exactly_once": true,
+  "all_prior_4134_nodes_preserved": true,
+  "added_nodes": [
+    "backend/tests/test_mint_leaf_preparation.py::test_changed_source_and_quantity_conflict_still_block_leaf_method",
+    "backend/tests/test_mint_leaf_preparation.py::test_conservation_is_enforced_before_any_stock_write[inputs0-1]",
+    "backend/tests/test_mint_leaf_preparation.py::test_conservation_is_enforced_before_any_stock_write[inputs1-1]",
+    "backend/tests/test_mint_leaf_preparation.py::test_conservation_is_enforced_before_any_stock_write[inputs2-11]",
+    "backend/tests/test_mint_leaf_preparation.py::test_conservation_is_enforced_before_any_stock_write[inputs3-0]",
+    "backend/tests/test_mint_leaf_preparation.py::test_direct_and_other_method_or_plan_reservations_are_protected",
+    "backend/tests/test_mint_leaf_preparation.py::test_discriminated_api_and_reference_do_not_claim_a_pack_guarantee",
+    "backend/tests/test_mint_leaf_preparation.py::test_generic_and_leaf_demands_share_purchase_without_double_allocating_raw_mint",
+    "backend/tests/test_mint_leaf_preparation.py::test_issued_leaf_method_preserves_gross_purchase_and_cannot_borrow_generic_nutrients",
+    "backend/tests/test_mint_leaf_preparation.py::test_leaf_stock_requires_current_exact_source_and_never_borrows_raw_mint_mass",
+    "backend/tests/test_mint_leaf_preparation.py::test_measured_leaf_loss_partial_consumption_release_and_idempotency",
+    "backend/tests/test_mint_leaf_preparation.py::test_old_leaf_recipe_and_edited_method_are_not_authority",
+    "backend/tests/test_mint_leaf_preparation.py::test_short_leaf_yield_is_real_but_never_counts_as_ready",
+    "backend/tests/test_optimizer.py::test_dominance_preserves_exact_rank_missing_coverage_and_repricing[False]",
+    "backend/tests/test_optimizer.py::test_dominance_preserves_exact_rank_missing_coverage_and_repricing[True]",
+    "backend/tests/test_personal_choices_browser.py::test_measured_mint_preparation_preserves_leaf_identity_and_estimate_disclosure[chromium]",
+    "backend/tests/test_personal_choices_browser.py::test_measured_mint_preparation_preserves_leaf_identity_and_estimate_disclosure[webkit]"
+  ],
+  "collection_method": "one complete collection; unchanged workflow targets partition nodes by exact file; previous complete node set authenticated against green PR29 JUnit and its partition digest",
+  "previous_node_set_authenticated_and_repartitioned": true,
+  "partitions": {
+    "all": {
+      "count": 4151,
+      "node_ids_sha256": "55407bc18e2f7b5cafb443ac4683507044b80bde56af77a87681b50ccd09e15e"
+    },
+    "planner": {
+      "count": 135,
+      "node_ids_sha256": "251b6fc7f93ee8b975d98b71c651efe563749c48561e244bdd73df5f543db43b"
+    },
+    "integration": {
+      "count": 460,
+      "node_ids_sha256": "ea419507f94c4b55d1eead04b30d7df36e74e1ae9050ee1369f5115c254041e5"
+    },
+    "core": {
+      "count": 3556,
+      "node_ids_sha256": "38b0dca59778ad28c0762ca657fbeffb1f3748e481f4431955b7abb68e1d3e28"
+    }
+  }
+}

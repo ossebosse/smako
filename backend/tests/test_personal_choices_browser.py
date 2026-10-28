@@ -90,21 +90,32 @@ def submit(page, captured):
 def test_measured_egg_preparation_preserves_method_input_and_both_outputs(choices, tmp_path):
     from app.services.egg_preparation import METHOD
 
+    _measured_preparation(choices, tmp_path, METHOD, False)
+
+
+def test_measured_mint_preparation_preserves_leaf_identity_and_estimate_disclosure(choices, tmp_path):
+    from app.services.ingredient_preparations import MINT_LEAVES
+
+    _measured_preparation(choices, tmp_path, MINT_LEAVES, True)
+
+
+def _measured_preparation(choices, tmp_path, method, mint):
     from backend.tests.test_personal_booked_revisions import setup_plan
 
     page, url, captured = choices
     _p, _plans, _private, saved, _stock = setup_plan(tmp_path)
     envelope = saved.model_dump(mode="json")
-    envelope["plan"]["personal"]["preparations"] = [{"id": "prep", "method": METHOD,
-        "input_quantity_g": 90, "purchase_input_quantity_g": 0,
-        "input_allocations": [{"item_id": "egg-lot", "product_key": "a" * 32}],
-        "estimated_outputs_g": {"äggula": 30, "äggvita": 60},
-        "estimated_surplus_g": {"äggula": 0, "äggvita": 20}}]
+    lot, name, quantity = ('mint-lot', 'mynta', 40) if mint else ('egg-lot', 'ägg', 90)
+    envelope["plan"]["personal"]["preparations"] = [{"id": "prep", "method": method,
+        "input_quantity_g": quantity, "purchase_input_quantity_g": 0,
+        "input_allocations": [{"item_id": lot, "product_key": "a" * 32}],
+        "estimated_outputs_g": {'mynta': 25} if mint else {"äggula": 30, "äggvita": 60},
+        "estimated_surplus_g": {'mynta': 0} if mint else {"äggula": 0, "äggvita": 20}}]
     private = {"revision": 7, "profile": {}, "events": {}, "ledger": [],
-        "account": {"message": "Privat syntetisk testgäst"}, "items": [{"id": "egg-lot", "name": "ägg",
-            "quantity": 100, "unit": "g", "product_key": "a" * 32, "reserved": 90, "available": 10,
+        "account": {"message": "Privat syntetisk testgäst"}, "items": [{"id": lot, "name": name,
+            "quantity": 100, "unit": "g", "product_key": "a" * 32, "reserved": quantity, "available": 100-quantity,
             "food": True, "unusable": False}],
-        "reservations": {saved.plan_id: [{"item_id": "egg-lot", "quantity": 90, "kind": "preparation_input"}]}}
+        "reservations": {saved.plan_id: [{"item_id": lot, "quantity": quantity, "kind": "preparation_input", "method": method}]}}
 
     def respond(route):
         body = route.request.post_data_json
@@ -118,15 +129,20 @@ def test_measured_egg_preparation_preserves_method_input_and_both_outputs(choice
     page.route("**/api/personal/plans/*/change", respond)
     page.goto(url.split("#")[0] + "#plan=" + saved.plan_id)
     page.locator('[data-open="shopping"]').click()
-    page.get_by_role("button", name="Bokför uppmätt äggberedning").click()
+    if mint:
+        expect(page.locator('#shopping-content')).to_contain_text('begränsat studieexempel')
+        expect(page.locator('#shopping-content')).to_contain_text('alla stjälkar')
+    page.get_by_role("button", name="Bokför uppmätt bladplockning" if mint else "Bokför uppmätt äggberedning").click()
     dialog = page.get_by_role("dialog")
     fields = dialog.locator('input[type="number"]')
-    fields.nth(0).fill("90")
-    fields.nth(1).fill("30")
-    fields.nth(2).fill("60")
-    dialog.get_by_role("button", name="Bokför insats och båda utfall").click()
+    fields.nth(0).fill(str(quantity))
+    fields.nth(1).fill("25" if mint else "30")
+    if not mint:
+        fields.nth(2).fill("60")
+    dialog.get_by_role("button", name="Bokför insats och myntablad" if mint else "Bokför insats och båda utfall").click()
     expect(dialog).not_to_be_attached()
-    assert captured[-1]["preparation"] == {"method": METHOD, "inputs": {"egg-lot": 90}, "yolk_g": 30, "white_g": 60}
+    assert captured[-1]["preparation"] == {'method': method, 'inputs': {lot: quantity},
+        **({'leaf_g': 25} if mint else {'yolk_g': 30, 'white_g': 60})}
     assert captured[-1]["pantry_revision"] == 7 and captured[-1]["operation_id"]
 
 
