@@ -66,7 +66,7 @@ def test_grouping_allocates_raw_stock_once_and_exposes_coproduct_surplus():
             for name, q, source in [("äggula", 30, "y"), ("äggvita", 40, "w"), ("ägg", 20, "e")]]
     groups = [{"name": "äggula", "quantity": 90, "positions": {0}, "demand_keys": ["y", "w", "e"]}]
     allocations = []
-    result = planner._prepare_egg_groups(groups, rows, allocations, available)
+    result = planner._prepare_groups(groups, rows, allocations, available)
     assert groups[0]["quantity"] == 60  # 20 whole + (90 separation - 50 stock).
     assert result[0]["estimated_surplus_g"] == {"äggula": 0, "äggvita": 20}
     assert sum(r["quantity"] for r in allocations) == 50

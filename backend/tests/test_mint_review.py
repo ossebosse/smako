@@ -80,6 +80,9 @@ def test_mint_recipe_review_preserves_history_quantities_and_leaf_recipes():
     active = {identity(r): r for r in current_recipes()}
     egg = json.loads((ROOT.parents[3] / 'docs/reviews/egg-preparation-20261028/recipe-review.json').read_bytes())
     successors = {r['previous_id']: r['runtime_id'] for r in egg['corrected']}
+    leaf = json.loads((ROOT.parents[3] / 'docs/reviews/mint-leaf-preparation-20261028/recipe-review.json').read_bytes())
+    latest = {r['previous_id']: r['runtime_id'] for r in leaf['corrected']}
+    successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     assert len(active) == 2462 and len(review['corrected']) == 91 and len(review['verified_unchanged']) == 40
     for row in review['corrected']:
         before, after = issued[row['previous_id']], issued[row['runtime_id']]

@@ -124,6 +124,34 @@ def test_fixed_template_does_not_reuse_injected_calculator_or_resolver_work():
             assert stats.fixed_template_hits == stats.fixed_template_misses == 0
 
 
+@pytest.mark.parametrize('custom_policy', [False, True])
+def test_dominance_preserves_exact_rank_missing_coverage_and_repricing(custom_policy):
+    from app.services.basket_optimizer import BasketVerificationPolicy
+
+    class CustomPolicy(BasketVerificationPolicy):
+        pass
+
+    policy = CustomPolicy.strict_live() if custom_policy else BasketVerificationPolicy.strict_live()
+    optimizer = BasketOptimizer(verification_policy=policy, prune_dominated_stores=True)
+    calculator = BasketCalculator()
+    lines = []
+    for name, prices in [('ris', {'a': 10, 'b': 5, 'c': 10}), ('bönor', {'a': 10, 'b': 5, 'c': 11, 'd': 1})]:
+        ingredient = NormalizedIngredient(canonical_name=name, required_quantity=1, unit='g')
+        quotes = tuple(calculator.quote_item(ingredient, product(name, name+s, s, 500, price).model_copy(update={
+            'sale_model': 'fixed_package', 'semantic_confidence': 'exact',
+            'quantity_confidence': 'estimated' if s == 'b' else 'exact'})) for s, price in prices.items())
+        lines.append((ingredient, quotes, None))
+    stores = ('a', 'b', 'c', 'd')
+    assert optimizer._undominated_store_ids(stores, lines) == ('a', 'b', 'd')
+    # A cheaper estimate cannot dominate a different exact verification rank;
+    # missing coverage stays explicit, and changed quotes are checked anew.
+    from dataclasses import replace
+
+    ingredient, quotes, _ = lines[0]
+    repriced = tuple(replace(q, total_price=q.total_price / 2) if q.store_id == 'c' else q for q in quotes)
+    assert optimizer._undominated_store_ids(stores, [(ingredient, repriced, None), lines[1]]) == stores
+
+
 def multi_store_case():
     ingredients = [
         NormalizedIngredient(canonical_name="pasta", required_quantity=500, unit="g"),

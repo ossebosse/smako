@@ -475,16 +475,23 @@ class BasketOptimizer:
             masks = session.dominance_rows.get(cache_key) if session and cache_key else None
             if masks is None:
                 by_store = self._cheapest_quotes_by_store(quotes, key)
+                # Each immutable line quote has one verification rank. The
+                # pairwise dominance matrix used to classify the same source
+                # quote again for every target store. Keep custom policies on
+                # their original call path; the built-in policy is frozen.
+                ranks = ({store: self.verification_policy.rank_for_quote(quote)
+                          for store, quote in by_store.items()}
+                         if type(self.verification_policy) is BasketVerificationPolicy else None)
                 masks = []
                 for target in store_ids:
                     quote = by_store.get(target)
                     if quote is None:
                         masks.append(sum(1 << i for i, source in enumerate(store_ids) if source not in by_store))
                         continue
-                    rank = self.verification_policy.rank_for_quote(quote)
+                    rank = ranks[target] if ranks is not None else self.verification_policy.rank_for_quote(quote)
                     masks.append(sum(1 << i for i, source in enumerate(store_ids)
                         if (other := by_store.get(source)) is not None
-                        and self.verification_policy.rank_for_quote(other) == rank
+                        and (ranks[source] if ranks is not None else self.verification_policy.rank_for_quote(other)) == rank
                         and other.total_price <= quote.total_price))
                 masks = tuple(masks)
                 if session and cache_key:
