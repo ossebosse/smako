@@ -41,6 +41,7 @@ def offer_collection_history(city, database, *, now=None):
     roots = {
         "ica": Path(os.getenv("ICA_STRUCTURED_OFFERS_ROOT", str(parent / "ica-structured-offers"))),
         "coop": Path(os.getenv("COOP_MUNICIPAL_OFFERS_ROOT", str(parent / "coop-municipal-offers"))),
+        "willys": Path(os.getenv("WILLYS_FLYER_ROOT", str(parent / "willys-flyer"))),
     }
     result = {}
     for chain, root in roots.items():

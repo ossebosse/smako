@@ -5,11 +5,12 @@ import pytest
 from app.services.store_collection_history import offer_collection_history
 
 
-@pytest.mark.parametrize("chain", ["ica", "coop"])
+@pytest.mark.parametrize("chain", ["ica", "coop", "willys"])
 def test_dashboard_projects_current_cadence_without_changing_source_history(tmp_path, monkeypatch, chain):
     monkeypatch.setenv("PRICE_COLLECTION_CADENCE", "mon_thu")
     monkeypatch.setenv("ICA_STRUCTURED_OFFERS_ROOT", str(tmp_path))
     monkeypatch.setenv("COOP_MUNICIPAL_OFFERS_ROOT", str(tmp_path))
+    monkeypatch.setenv("WILLYS_FLYER_ROOT", str(tmp_path))
     row = {"store_id": "123", "selected": True, "status": "failed", "failed_attempts": 14,
            "last_success": "2026-10-25T23:32:17+00:00", "last_attempt": "2026-10-28T14:27:30+00:00",
            "next_fetch_at": "2026-10-28T20:27:30+00:00"}

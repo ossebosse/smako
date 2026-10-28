@@ -29,6 +29,9 @@ tid, eftersom läsaren enbart accepterar det tidigare dagliga formatet.
 - Projektera nästa erbjudandehämtning genom samma befintliga körpolicy
   som sourcejobbet. Ingen journal eller observationstid skrivs om.
 - Läs måndag/torsdag i nästa schematid, med svensk sommar-/vintertid.
+- Läs också Willys reklamblads befintliga kommunala körjournal, med exakt
+  butik/kommun. Dess giltiga priser visades redan, men senaste insamling
+  visades som okänd eftersom endast ICA/Coop ingick i journalläsaren.
 
 De tre tidigare driftspecifika dashboardmodulerna registrerades först som
 oförändrad källbas från aktiv image (`b4acc7f`). Detta ger exakt granskbar
