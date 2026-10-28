@@ -15,6 +15,7 @@
     box.append(node("span", `${scope(c.scope)} · ${c.source || "Källa saknas"}`, "sub"));
     const list = node("dl");
     field(list, "Tillgängliga i Smako", `${number(c.available_prices)} priser`);
+    field(list, "Tillgängliga baspriser", c.available_base_prices == null ? "Antal saknas" : number(c.available_base_prices));
     if(c.available_campaign_prices) field(list, "Verifierade kampanjpriser", number(c.available_campaign_prices));
     if(c.next_campaign_end) field(list, "Nästa kampanjslut (inklusive)", c.next_campaign_end);
     field(list, "Insamlade i aktiv snapshot", c.collected_prices == null ? "Antal saknas" : number(c.collected_prices));
@@ -30,7 +31,7 @@
     if(c.collection.duration_seconds != null) field(list, "Tidsåtgång", `${number(Math.round(c.collection.duration_seconds / 60))} min`);
     box.append(list);
     if(c.attention_reasons.length) box.append(node("p", c.attention_reasons.join(" "), "reason"));
-    if(c.collection.retained_snapshot) box.append(node("p", "Tidigare godkänt underlag finns kvar. Prisernas ålder och kampanjernas verifierade giltighet avgör vad som kan användas.", "sub"));
+    if(c.collection.retained_snapshot) box.append(node("p", "Tidigare godkänt underlag finns kvar. Kvalificerade baspriser behålls tills de ersätts; kampanjpriser följer sina verifierade giltighetsdatum.", "sub"));
     if(c.campaign_valid) box.append(node("p", "Verifierade kampanjpriser följer erbjudandenas giltighetsdatum. Åldern visas separat och betyder i sig inte att insamlingen har misslyckats.", "sub"));
     if(c.collection.status === "unknown") box.append(node("p", "Ett verifierat insamlingsresultat saknas för detta underlag. Det betyder inte att insamlingen har misslyckats.", "sub"));
     if(c.collection.next_fetch_at) box.append(node("p", "Planerad tid är tidigaste nästa försök. En pågående insamling eller väntan efter ett fel kan påverka starttiden.", "sub"));
@@ -70,7 +71,7 @@
     $("runtime-note").hidden = data.runtime_active;
     $("runtime-note").textContent = `Ingen aktiv prisversion är laddad för ${data.city} i denna applikation. Insamlade underlag visas separat och räknas inte som tillgängliga priser.`;
     $("other-panel").hidden = !data.other_contexts.length;$("other").replaceChildren(...data.other_contexts.map(context));
-    $("policy").textContent = `Åldersstyrda priser: färska under ${data.warning_age_hours} timmar, åldersvarning från ${data.warning_age_hours} timmar och spärrade från ${data.stale_age_hours} timmar. Endast verifierade ICA-kampanjer omfattas av undantaget och följer sin giltighetsperiod. Insamlingsfel visas separat även om priser fortfarande är giltiga. Uppdateras automatiskt var 60:e sekund. Tider visas i svensk tid.`;
+    $("policy").textContent = `Prisernas ålder varnas från ${data.warning_age_hours} timmar och markeras som gammal från ${data.stale_age_hours} timmar. Kvalificerade baspriser behålls tills de ersätts. Kampanjpriser i alla kedjor följer sina verifierade giltighetsdatum. Serverns ordinarie hämtning: ${data.server_collection_schedule || "Schema saknas"}. Willys-kataloger hämtas via Windowsreläets separata uppgift. Insamlingsfel visas separat även om priser fortfarande är giltiga. Uppdateras automatiskt var 60:e sekund. Tider visas i svensk tid.`;
     renderStores();$("updated").textContent = `Senast kontrollerat ${date(data.checked_at)} · ${data.city}`;
   }
   async function get(url, signal) {const response=await fetch(url,{credentials:"same-origin",cache:"no-store",signal});if(!response.ok) throw new Error(response.status===401 || response.status===403 ? "Admininloggningen behöver förnyas. Ladda om sidan för att logga in." : "Kunde inte hämta driftstatus. Försök igen.");return response.json();}

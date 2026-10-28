@@ -702,6 +702,21 @@ def test_refresh_status_reports_timeout_and_next_daily_schedule(tmp_path: Path) 
     assert after["next_scheduled_at"] == "2026-09-02T03:17:00+02:00"
 
 
+@pytest.mark.parametrize(("clock", "expected"), [
+    ("2026-10-28T21:00:00+00:00", "2026-10-29T02:17:00+00:00"),
+    ("2026-10-29T02:17:00+00:00", "2026-11-02T02:17:00+00:00"),
+    ("2026-10-24T20:00:00+00:00", "2026-10-26T02:17:00+00:00"),
+    ("2026-03-28T20:00:00+00:00", "2026-03-30T01:17:00+00:00"),
+])
+def test_refresh_status_reports_next_collection_night(tmp_path, clock, expected):
+    settings = Settings(price_universe_required=False,
+                        refresh_report_dir=tmp_path / "missing",
+                        refresh_runner_status_path=tmp_path / "runner.json",
+                        daily_refresh_schedule="03:17 Europe/Stockholm Mon,Thu")
+    result = latest_refresh_status(settings, now=datetime.fromisoformat(clock))
+    assert result["next_scheduled_at_utc"] == expected
+
+
 def test_deferred_runtime_reload_is_degraded_and_exposes_safe_id_mismatch(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

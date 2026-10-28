@@ -12,6 +12,7 @@ from sqlalchemy import func, or_, select
 from sqlalchemy.orm import Session
 
 from grocery_data.app.domain.campaign_validity import STOCKHOLM, is_campaign_only
+from grocery_data.app.services.campaign_refresh_policy import twice_weekly
 from grocery_data.app.services.freshness import FreshnessPolicy, assess_freshness
 from grocery_data.app.services.price_context_audit import PriceContextAuditor
 from grocery_data.app.storage.models import (
@@ -39,7 +40,7 @@ def _describe_context(context):
         reasons.append("Inga tillgängliga priser i detta underlag.")
     if not context["campaign_only"] and context["freshness"] in {"aging", "stale"}:
         reasons.append("Underlaget har passerat varningsgränsen för ålder." if
-                       context["freshness"] == "aging" else "Underlaget har passerat åldersgränsen för användning.")
+                       context["freshness"] == "aging" else "Underlaget har passerat 48-timmarsvarningen. Kvalificerade baspriser behålls tills de ersätts.")
     price_status = ("campaign" if context["campaign_valid"] else
                     "expired" if context["campaign_only"] and not context["available_prices"] else
                     context["freshness"] if context["available_prices"] or context["freshness"] == "stale"
@@ -138,7 +139,7 @@ def municipal_store_status(
         )
     }
     context_cache: dict[tuple, dict[str, Any]] = {}
-    offer_history = offer_collection_history(city, session.get_bind().url.database)
+    offer_history = offer_collection_history(city, session.get_bind().url.database, now=now)
     local_stores = {
         (s.chain, s.external_id): s.id
         for s in session.scalars(select(StoreModel).where(StoreModel.is_active.is_(True)))
@@ -357,6 +358,8 @@ def municipal_store_status(
         "runtime_active": prepared is not None,
         "warning_age_hours": policy.warning_age_hours,
         "stale_age_hours": policy.stale_age_hours,
+        "server_collection_schedule": "Måndag och torsdag 03:17 svensk tid" if twice_weekly()
+        else "Enligt källornas ordinarie schema",
         "summary": {
             "physical_stores": len(stores),
             "stores_with_prices": sum(

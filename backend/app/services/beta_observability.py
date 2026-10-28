@@ -531,7 +531,9 @@ def _next_daily_schedule(
     if not schedule:
         return None, None
     parts = schedule.split()
-    if len(parts) != 2 or not re.fullmatch(r"\d{2}:\d{2}", parts[0]):
+    if len(parts) not in {2, 3} or not re.fullmatch(r"\d{2}:\d{2}", parts[0]):
+        return None, None
+    if len(parts) == 3 and parts[2] != "Mon,Thu":
         return None, None
     hours, minutes = (int(value) for value in parts[0].split(":"))
     if hours > 23 or minutes > 59:
@@ -552,8 +554,8 @@ def _next_daily_schedule(
         minutes,
         tzinfo=zone,
     )
-    if candidate <= local_now:
-        next_date = local_now.date() + timedelta(days=1)
+    while candidate <= local_now or len(parts) == 3 and candidate.weekday() not in {0, 3}:
+        next_date = candidate.date() + timedelta(days=1)
         candidate = datetime(
             next_date.year,
             next_date.month,

@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from grocery_data.app.domain.municipality import municipality_code
+from grocery_data.app.services.campaign_refresh_policy import scheduled_source_times
 
 
 def _timestamp(value):
@@ -30,11 +31,12 @@ def _mapping(value):
     return value if isinstance(value, dict) else {}
 
 
-def offer_collection_history(city, database):
+def offer_collection_history(city, database, *, now=None):
     """Index by exact chain/store identity, within a verified municipality."""
     code = municipality_code(city)
     if not code:
         return {}
+    now = now or datetime.now(UTC)
     parent = Path(database or "var/grocery/grocery_data.sqlite").parent
     roots = {
         "ica": Path(os.getenv("ICA_STRUCTURED_OFFERS_ROOT", str(parent / "ica-structured-offers"))),
@@ -61,6 +63,10 @@ def offer_collection_history(city, database):
         for identity, row in rows:
             if not isinstance(identity, str) or not identity or not isinstance(row, dict):
                 continue
+            # Project the same deployed policy as the source job. Saved legacy
+            # retry times are evidence, not the current collection schedule.
+            row = dict(row)
+            scheduled_source_times([row], state=state, now=now)
             failures = row.get("failed_attempts", 0)
             failures = failures if isinstance(failures, int) and failures >= 0 else 0
             raw_status = row.get("status")
