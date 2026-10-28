@@ -15,11 +15,11 @@ och pris-/kvalitetskraven kvarstår; en liten köpbar delmängd räcker inte.
 
 Alla 2 200 varianter är importerade och aktiva; tillsammans med de tidigare
 262 finns 2 462 aktiva varianter. Senaste kontrollen 2026-10-28 visar
-1 064 med stöd för samtliga ingredienser i exakt läge och 1 802 inklusive
+1 064 med stöd för samtliga ingredienser i exakt läge och 1 828 inklusive
 uttryckligen tillåtna mängduppskattningar i den frysta Malmöreferensen.
-Verifierade hela tvåbutikskorgar är 1 062 respektive 1 802. De inkluderande
-talen innehåller de exakta. 398 varianter har fortfarande insatshinder;
-100-procentsmålet kvarstår. Se [rapporten](reviews/product-facts-20261028.md).
+Verifierade hela tvåbutikskorgar är 1 062 respektive 1 828. De inkluderande
+talen innehåller de exakta. 372 varianter har fortfarande insatshinder;
+100-procentsmålet kvarstår. Se [rapporten](reviews/egg-preparation-20261028.md).
 
 Håll isär tre nivåer: registrerat recept, produkt-/mängdstöd för varje
 ingrediens och fullständig giltig inköpskorg för receptet. De två sista ska

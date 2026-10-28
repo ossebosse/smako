@@ -129,11 +129,16 @@ def main(args):
         current_by_original = {v['original_id']: v['current_id'] for v in report['variants']}
         assert all(row['current_ids'] == [current_by_original[rid] for rid in row['original_ids']]
                    for row in matrix['groups'])
+    from app.services.egg_preparation import METHOD, component
+    prepared_recipes = [identity(recipe) for recipe in recipes
+                        if any(component(recipe, i.canonical_name) for i in recipe.ingredients)]
     result = {'scope_sha256': digest(scope), 'method_signature': scope['method_signature'],
         'denominator': 2200, 'active_variants': 2462, 'receipt_count': len(paths), 'outcomes': dict(counts),
         'lost_original_ids': [], 'all_receipt_hashes_and_dependencies_verified': True,
         'all_saved_full_requests_unchanged': True, 'older_budget_journals_unchanged': True,
-        'all_original_worklist_groups_reviewed': 76, 'runtime_preparation_enabled': False,
+        'all_original_worklist_groups_reviewed': 76, 'runtime_preparation_enabled': bool(prepared_recipes),
+        'runtime_preparation_methods': [METHOD] if prepared_recipes else [],
+        'runtime_preparation_recipe_ids': prepared_recipes,
         'legacy_remains_default': True, 'production_activation': False,
         'price_regression_gate_passed': not price_regressions, 'price_regressions': price_regressions}
     write(args.report / 'verification.json', result)

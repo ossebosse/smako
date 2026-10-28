@@ -5553,3 +5553,18 @@ Lidl-fixturelucka är fortsatt öppna. Hela ursprungliga nämnaren kvarstår:
 38 Willys variant-/intervallfall och 81 regionalt aktuella Lidl-livsmedel
 har kvarstående hinder, utöver övriga dokumenterade grupper. Detta är
 inte full täckning. Ingen produktion, Windows-/schemaändring eller modell-API.
+
+
+## Gemensam äggberedning: nästa verifierade kontrollpunkt 2026-10-28
+
+1 828/2 200 hela korgar inklusive uppskattningar, +26; exakt 1 062 hela och
+1 064 insatslösta, 372 insatshinder kvar. Alla original och tidigare korgar
+består. Versionerad äggseparering delar inköp, reserverar rå insats och
+bokför uppmätta gula/vita separat i befintlig transaktionsjournal.
+A 281,31 kr två gånger och B2:s hela korg identisk 731,20 kr; alla 2 892
+kvittohashar passerar. Se [rapport](reviews/egg-preparation-20261028.md).
+Samma obegränsade totaljournal och resurs-/källkrav gäller. Full täckning
+återstår. Fem exakta torrvaror hos tre nya handlare har ett separat
+[beslutsunderlag](reviews/coverage-source-pilot-20261028.md); utökningen
+är inte beslutad här. Ingen driftaktivering ingår. Hosted CI och
+integration måste passera innan denna kontrollpunkt integreras.

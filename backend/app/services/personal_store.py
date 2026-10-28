@@ -11,9 +11,10 @@ from collections import defaultdict
 from copy import deepcopy
 from datetime import UTC, datetime
 from hashlib import sha256
+from math import isfinite
 from uuid import uuid4
 
-from app.models.personal import PantryItem, TasteProfile
+from app.models.personal import EggSeparation, PantryItem, PreparedOrigin, TasteProfile
 
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS personal_private_state (
@@ -165,6 +166,14 @@ class PersonalStore:
                     reserved[row["item_id"]] += row["quantity"]
             old = {i["id"]: i for i in state["items"]}
             new = {i.id: i for i in items}
+            for item in items:
+                if item.prepared_origin and item.prepared_origin.model_dump() != old.get(item.id, {}).get("prepared_origin"):
+                    raise PersonalConflict("Beredningsursprung skapas endast av bokförd uppmätt beredning.")
+                if old.get(item.id, {}).get("prepared_origin") and (
+                    not item.prepared_origin or any(getattr(item, k) != old[item.id][k]
+                                                   for k in ("name", "unit", "product_key", "form", "food"))
+                ):
+                    raise PersonalConflict("Beredningsursprung och utfallsidentitet får inte skrivas om.")
             for identity, quantity in reserved.items():
                 item = new.get(identity)
                 if quantity and (
@@ -221,8 +230,15 @@ class PersonalStore:
             return write_state(connection, owner, state, revision)
 
     def inventory_action(
-        self, owner, saved, action, pantry_revision, *, operation_id=None, consume_fraction=1, measured_purchase_quantities=None
+        self, owner, saved, action, pantry_revision, *, operation_id=None, consume_fraction=1, measured_purchase_quantities=None,
+        preparation=None,
     ):
+        if preparation is not None:
+            preparation = EggSeparation.model_validate(preparation)
+        if (action == "prepare") != (preparation is not None) or (action == "prepare" and not operation_id):
+            raise PersonalConflict("Beredning kräver ett unikt ID och uppmätt insats/utfall.")
+        payload = {"measured_purchase_quantities": measured_purchase_quantities or {},
+                   "preparation": preparation.model_dump(mode="json") if preparation else None}
         with self.plans._connect() as connection:
             connection.execute("BEGIN IMMEDIATE")
             state = read_state(connection, owner)
@@ -241,6 +257,7 @@ class PersonalStore:
                 if (
                     prior["revision"] != saved.revision
                     or prior.get("fraction", 1) != consume_fraction
+                    or ("payload" in prior and prior["payload"] != payload)
                 ):
                     raise PersonalConflict("Åtgärds-ID har redan använts med annat innehåll.")
                 return state
@@ -275,11 +292,11 @@ class PersonalStore:
                         if item.conditional_variant_choice:
                             raise PersonalConflict('Välj den faktiskt köpta produktvarianten före bokföring i skafferiet.')
                         quantity = item.purchased_usable_quantity
-                        if item.quantity_confidence == 'estimated':
+                        if item.quantity_confidence == 'estimated' or need.get("preparation") or item.unit != item.purchased_unit:
                             quantity = (measured_purchase_quantities or {}).get(item.store_id + '|' + item.product_id + '|' + item.ingredient)
-                            if quantity is None or quantity < item.required_quantity:
+                            if quantity is None or not isfinite(quantity) or quantity < item.required_quantity:
                                 raise PersonalConflict('Ange verklig användbar inköpsmängd som täcker behovet; annars räkna om planen.')
-                        if quantity is None or item.unit != item.purchased_unit:
+                        if quantity is None:
                             raise PersonalConflict(
                                 "Verklig inköpt mängd behöver verifieras före bokföring."
                             )
@@ -305,6 +322,8 @@ class PersonalStore:
                         )
                         remaining = item.required_quantity
                         for demand in demands:
+                            if demand.get("preparation"):
+                                continue
                             if (
                                 demand["source"] not in need["sources"]
                                 or demand["unit"] != item.unit
@@ -328,11 +347,23 @@ class PersonalStore:
                             )
                             remaining -= used
                             demand["quantity"] -= used
+                        if need.get("preparation"):
+                            prep = need["preparation"]
+                            used = prep["purchase_input_quantity_g"]
+                            if abs(remaining - used) > 1e-7:
+                                raise PersonalConflict("Beredningsinsatsen stämmer inte med inköpet.")
+                            if used > 1e-8:
+                                rows.append({"item_id": identity, "quantity": used, "unit": "g", "name": "ägg",
+                                    "source": prep["id"], "demand_key": prep["id"], "kind": "preparation_input",
+                                    "method": prep["method"], "product_key": item_key})
+                            remaining -= used
                         if remaining > 1e-7:
                             raise PersonalConflict(
                                 "Inköpet saknar verifierad koppling till planens behov."
                             )
                 state["reservations"][saved.plan_id] = rows
+            elif action == "prepare":
+                booked, preparation_record = self._prepare_eggs(state, saved, preparation, operation_id)
             elif action == "consume":
                 if any(g.items for g in saved.plan.optimized_basket.stores) and not revision_purchased(
                     state, saved.plan_id, saved.revision
@@ -341,6 +372,12 @@ class PersonalStore:
                 rows = state["reservations"].get(saved.plan_id)
                 if rows is None:
                     raise PersonalConflict("Planens reservation är frigjord. Beräkna om först.")
+                if any(r.get("kind") == "preparation_input" for r in rows):
+                    raise PersonalConflict("Separera och bokför uppmätt gula/vita före förbrukning.")
+                for demand in self._unconsumed_component_demands(state, saved):
+                    reserved = sum(r["quantity"] for r in rows if r.get("demand_key") == demand["demand_key"])
+                    if reserved + 1e-7 < demand["quantity"]:
+                        raise PersonalConflict("Uppmätt beredningsutfall täcker inte återstående behov. Räkna om eller komplettera.")
                 amounts = defaultdict(float)
                 booked = []
                 for row in rows:
@@ -366,10 +403,83 @@ class PersonalStore:
                     "recorded_at": datetime.now(UTC).isoformat(),
                     "rows": booked,
                     "fraction": consume_fraction,
+                    "payload": payload,
+                    **({"preparation": preparation_record} if action == "prepare" else {}),
                     "total": saved.plan.optimized_basket.total if action == "purchase" else None,
                 }
             )
             return write_state(connection, owner, state, pantry_revision)
+
+    @staticmethod
+    def _unconsumed_component_demands(state, saved):
+        consumed = defaultdict(float)
+        for row in consumed_demands(state, saved.plan_id):
+            consumed[row["demand_key"]] += row["quantity"]
+        return [{**r, "quantity": max(0, r.get("original_quantity", r["quantity"]) - consumed[r["demand_key"]])}
+                for r in saved.plan.personal.remaining_demands if r.get("preparation")]
+
+    @staticmethod
+    def _prepare_eggs(state, saved, preparation, operation_id):
+        from app.services.egg_preparation import METHOD
+
+        if not saved.plan.personal.preparations:
+            raise PersonalConflict("Planen saknar granskad äggberedning.")
+        rows = state["reservations"].get(saved.plan_id)
+        if rows is None:
+            raise PersonalConflict("Planens reservation är frigjord. Räkna om först.")
+        inputs = []
+        available = {i["id"]: i for i in available_items(state, plan_id=saved.plan_id)}
+        allowed = {a["product_key"] for p in saved.plan.personal.preparations for a in p["input_allocations"]}
+        allowed.update(n["selected_product_key"] for n in saved.plan.personal.needs if n.get("preparation"))
+        for identity, quantity in preparation.inputs.items():
+            item = available.get(identity)
+            protected = sum(r["quantity"] for r in rows if r["item_id"] == identity and r.get("kind") != "preparation_input")
+            if (not item or item["unusable"] or item["unit"] != "g" or item.get("prepared_origin")
+                    or not item.get("product_key") or item["product_key"] not in allowed
+                    or quantity > item["available"] - protected + 1e-7):
+                raise PersonalConflict("Ägginsatsen saknar kvalificerat disponibelt parti eller är reserverad för annat behov.")
+            inputs.append({"item_id": identity, "quantity": quantity, "unit": "g", "product_key": item["product_key"]})
+        keys = {r["product_key"] for r in inputs}
+        if len(keys) != 1:
+            raise PersonalConflict("Separera olika produktidentiteter i egna uppmätta beredningsomgångar.")
+        product_key = next(iter(keys))
+        compatible_demands = set()
+        for planned in saved.plan.personal.preparations:
+            source_keys = {a["product_key"] for a in planned["input_allocations"]}
+            source_keys.update(n["selected_product_key"] for n in saved.plan.personal.needs
+                               if n.get("preparation", {}).get("id") == planned["id"])
+            if product_key in source_keys:
+                compatible_demands.update(r["demand_key"] for r in planned["outputs"])
+        # Book physical reality even for a short yield. Readiness below remains
+        # blocked until measured component stock covers the original demands.
+        for item in state["items"]:
+            if item["id"] in preparation.inputs:
+                item["quantity"] = max(0, item["quantity"] - preparation.inputs[item["id"]])
+        state["reservations"][saved.plan_id] = rows = [r for r in rows if not (
+            r.get("kind") == "preparation_input" and r.get("product_key") == product_key)]
+        demands = PersonalStore._unconsumed_component_demands(state, saved)
+        booked = []
+        for name, quantity in (("äggula", preparation.yolk_g), ("äggvita", preparation.white_g)):
+            if quantity <= 0:
+                continue
+            item = PantryItem(name=name, quantity=quantity, unit="g", form="raw_edible",
+                prepared_origin=PreparedOrigin(method=METHOD, product_key=next(iter(keys)), operation_id=operation_id))
+            state["items"].append(item.model_dump())
+            booked.append({"item_id": item.id, "name": name, "quantity": quantity, "unit": "g",
+                           "prepared_origin": item.prepared_origin.model_dump()})
+            remaining = quantity
+            for demand in demands:
+                if demand["name"] != name or demand["demand_key"] not in compatible_demands:
+                    continue
+                already = sum(r["quantity"] for r in rows if r.get("demand_key") == demand["demand_key"])
+                used = min(remaining, max(0, demand["quantity"] - already))
+                if used > 1e-8:
+                    rows.append({"item_id": item.id, "name": name, "quantity": used, "unit": "g",
+                        "source": demand["source"], "demand_key": demand["demand_key"],
+                        "prepared_origin": item.prepared_origin.model_dump()})
+                    remaining -= used
+        return booked, {"method": METHOD, "inputs": inputs, "outputs": booked,
+                        "loss_g": max(0, sum(preparation.inputs.values()) - preparation.yolk_g - preparation.white_g)}
 
     @staticmethod
     def _remaining_purchase_demands(saved, allocations):

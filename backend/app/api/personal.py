@@ -184,6 +184,16 @@ def pantry_update(payload: PantryWrite, request: Request, response: Response):
                 )
             product = prepared.universe.products[positions[0]]
             if product.usable_unit and item.unit != product.usable_unit:
+                from app.services.official_product_facts import (
+                    is_plain_shell_egg,
+                    project_usable_quantity,
+                )
+                if is_plain_shell_egg(product.name, product.brand) and item.unit == "g":
+                    from app.services.personal_source_facts import load_retained_facts
+                    facts = load_retained_facts(prepared)
+                    product = project_usable_quantity(product, facts.get((product.store_id, product.product_id)),
+                        allow_estimates=True, required_unit=item.unit)
+            if product.usable_unit and item.unit != product.usable_unit:
                 raise PolicyConflict(
                     f"{product.name}: verifierad lagerenhet är {product.usable_unit}; ingen omräkning till {item.unit} finns."
                 )
@@ -301,7 +311,7 @@ async def _change_plan_body(plan_id, payload, request, response):
             "saved": plans.get_owned(plan_id, owner_actor_hash=owner, revision=prior),
             "state": public_state(state, request),
         }
-    if payload.action in {"purchase", "consume", "release"}:
+    if payload.action in {"purchase", "prepare", "consume", "release"}:
         try:
             target = plans.get_owned(plan_id, owner_actor_hash=owner, revision=payload.revision)
         except PlanNotFoundError as exc:
@@ -314,6 +324,7 @@ async def _change_plan_body(plan_id, payload, request, response):
             operation_id=payload.operation_id,
             consume_fraction=payload.consume_fraction,
             measured_purchase_quantities=payload.measured_purchase_quantities,
+            preparation=payload.preparation,
         )
         return {"saved": saved, "state": public_state(state, request)}
     if saved.revision != payload.revision:
