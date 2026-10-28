@@ -149,14 +149,14 @@ def next_scheduled_refresh(
     *,
     now: datetime | None = None,
 ) -> datetime | None:
-    """Resolve the next ``HH:MM Europe/Stockholm`` operational schedule."""
+    """Resolve a daily clock time, optionally restricted to ``Mon,Thu``."""
 
     if not schedule:
         return None
     parts = schedule.strip().split()
-    if len(parts) != 2:
+    if len(parts) not in {2, 3} or (len(parts) == 3 and parts[2] != 'Mon,Thu'):
         return None
-    clock, zone_name = parts
+    clock, zone_name = parts[:2]
     clock_parts = clock.split(":")
     if len(clock_parts) != 2 or not all(value.isdigit() for value in clock_parts):
         return None
@@ -189,6 +189,9 @@ def next_scheduled_refresh(
             minute,
             tzinfo=zone,
         )
+    if len(parts) == 3:
+        while candidate.weekday() not in {0, 3}:
+            candidate += timedelta(days=1)
     return candidate.astimezone(UTC)
 
 

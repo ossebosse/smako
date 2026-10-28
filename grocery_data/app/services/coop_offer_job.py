@@ -83,8 +83,12 @@ def _source_plan(*, environment=None, now=None):
                      bool(w.get("valid_to") and (not w.get("valid_from") or w["valid_from"] <= day) and day <= w["valid_to"]))
                     for w in r.get("windows", [])]} for r in values] for identity, values in refs.items()}
     fingerprint = hashlib.sha256(json.dumps({"config": config, "sources": applicability}, sort_keys=True).encode()).hexdigest()
+    from grocery_data.app.services.campaign_refresh_policy import scheduled_source_times
+    inventory_fetch = scheduled_source_times(rows, state=state, now=now, environment=environment)
     due = [r["store_id"] for r in rows if not r.get("next_fetch_at") or datetime.fromisoformat(r["next_fetch_at"]) <= now]
     inventory_due = config["enabled"] and (not state or datetime.fromisoformat(state["selection"]["next_inventory_check"]) <= now)
+    if inventory_fetch is not None:
+        inventory_due = config["enabled"] and inventory_fetch <= now
     publication = state.get("publication", {})
     changed = bool(state) and (fingerprint != publication.get("reloaded_fingerprint")
                               or publication.get("status") == "publication_or_reload_pending")
