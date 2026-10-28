@@ -1,3 +1,24 @@
+# 2026-10-28: 1 830 hela korgar och oförändrad exakt prisväg
+
+[Slutkontrollen](reviews/plain-food-facts-20261028.md) ger +2 i båda lägen:
+1 066 exakt insatslösta/1 064 hela, 1 830 inklusive uppskattningar, 370 kvar.
+Alla original, 2 462 aktiva och tidigare korgar består. Nio exakta Garant
+frysta edamamebaljor kvalificeras för receptens grossvikt. Vanligt Atair-
+pektin avvisas efter full stegläsning: gult högmetoxylerat konfektpektin krävs.
+Alla andra fakta och befintliga personliga/näringsfält består.
+
+Befintlig anropscache återanvänder exakt fastpaketsmetadata efter ordinarie
+mängdresolver/köpgräns; 156 920 fulla offerter identiska, isolerad median
+6,517→6,089 s. A 278,76 kr i två nya ägare, API 53,66/53,70 s;
+B2:s hela korg identisk 731,20 kr, 32,78 s. 2 896 kvittofiler verifierade.
+78 riktade tester, Ruff/compileall passerar; 4 134 CI-noder exakt en gång.
+Grön hosted PR-CI krävs före integration. PR #28 redan integrerad fb94b67,
+hosted 4 121 noder utan fel på 8:06. Slutfakta och aktuellt metodhash i rapporten.
+
+Fortsätt mot alla 2 200. Risnudelkön saknar ännu serverlease; inga anrop eller
+låsövertaganden. Ny källpilot har separat beslutsunderlag, ingen aktivering.
+Samma obegränsade journal, en tung arbetare, två CPU och 3 GiB består.
+
 # 2026-10-28: 1 802 hela korgar, ytterligare +18
 
 [Rapport](reviews/product-facts-20261028.md): exakt 1 062 hela/1 064

@@ -70,6 +70,60 @@ def test_cheapest_purchase_not_lowest_unit_price() -> None:
     assert option.total == 90
 
 
+def test_same_fixed_package_count_reuses_every_quote_field_with_current_quantity():
+    candidate = product('ris', 'fixed', 's1', 500, 19).model_copy(update={
+        'sale_model': 'fixed_package', 'quantity_confidence': 'exact'})
+    optimizer = BasketOptimizer()
+    calculator = BasketCalculator()
+    with optimizer.quote_cache() as stats:
+        for amount, name in [(1, 'ris'), (125.25, 'ris [2]'), (500, 'ris [3]'), (500.01, 'ris'), (999, 'ris')]:
+            ingredient = NormalizedIngredient(canonical_name=name, required_quantity=amount, unit='g')
+            assert optimizer._calculate_quote(ingredient, candidate) == calculator.quote_item(ingredient, candidate)
+        assert stats.fixed_template_hits == 3 and stats.fixed_template_misses == 2
+    with optimizer.quote_cache() as next_request:
+        optimizer._calculate_quote(NormalizedIngredient(canonical_name='ris', required_quantity=5, unit='g'), candidate)
+        assert next_request.fixed_template_hits == 0 and next_request.fixed_template_misses == 1
+
+
+def test_fixed_template_preserves_source_cap_errors_and_repriced_copy():
+    from app.models.provenance import SourceProvenance
+
+    candidate = product('ris', 'fixed', 's1', 500, 19).model_copy(update={
+        'sale_model': 'fixed_package', 'quantity_confidence': 'exact',
+        'source_provenance': SourceProvenance(source_provider='own', source_channel='catalog', source_role='basket',
+            source_snapshot_id='reviewed-source', source_observed_at='2026-10-23T06:00:00Z', maximum_purchase_units=1)})
+    optimizer = BasketOptimizer()
+    with optimizer.quote_cache():
+        optimizer._calculate_quote(NormalizedIngredient(canonical_name='ris', required_quantity=1, unit='g'), candidate)
+        with pytest.raises(ValueError, match='purchase-unit limit exceeded'):
+            optimizer._calculate_quote(NormalizedIngredient(canonical_name='ris', required_quantity=501, unit='g'), candidate)
+        changed = candidate.model_copy(update={'price': 7, 'effective_price': 7})
+        ingredient = NormalizedIngredient(canonical_name='ris', required_quantity=2, unit='g')
+        assert optimizer._calculate_quote(ingredient, changed) == BasketCalculator().quote_item(ingredient, changed)
+        with pytest.raises(ValueError, match='Incompatible units'):
+            optimizer._calculate_quote(ingredient.model_copy(update={'unit': 'ml'}), candidate)
+
+
+def test_fixed_template_does_not_reuse_injected_calculator_or_resolver_work():
+    from app.services.purchase_quantity_resolver import PurchaseQuantityResolver
+
+    class CustomResolver(PurchaseQuantityResolver):
+        pass
+
+    class CustomCalculator(BasketCalculator):
+        pass
+
+    candidate = product('ris', 'fixed', 's1', 500, 19).model_copy(update={
+        'sale_model': 'fixed_package', 'quantity_confidence': 'exact'})
+    for calculator in [CustomCalculator(), BasketCalculator(CustomResolver())]:
+        optimizer = BasketOptimizer(calculator)
+        with optimizer.quote_cache() as stats:
+            for q in [1, 2]:
+                i = NormalizedIngredient(canonical_name='ris', required_quantity=q, unit='g')
+                assert optimizer._calculate_quote(i, candidate) == calculator.quote_item(i, candidate)
+            assert stats.fixed_template_hits == stats.fixed_template_misses == 0
+
+
 def multi_store_case():
     ingredients = [
         NormalizedIngredient(canonical_name="pasta", required_quantity=500, unit="g"),

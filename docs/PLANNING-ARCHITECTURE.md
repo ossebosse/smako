@@ -1,5 +1,15 @@
 # Planeringsarkitektur för Smakos produktmål
 
+## Oförändrat paketantal i befintlig offertcache
+
+En anropsägd, begränsad metadataoffert får återanvändas för samma frysta
+exakta fasta kandidatobjekt, användbara enhet och antal hela paket. Den
+ordinarie mängdresolvern och källans köpgräns gäller varje gång; namn,
+aktuellt behov och rest kommer från den aktuella upplösningen. Erbjudanden,
+kampanjgrupper, PurchaseTerms, uppskattningar och egna kalkylatorer/resolvers
+behåller ordinarie vägar. Ingen separat pris- eller lagerberäkning införs.
+Se [likhets- och prisgrindarna](reviews/plain-food-facts-20261028.md).
+
 ## Versionerad gemensam äggberedning
 
 Exakt utgivet receptinnehåll kan ange hen_egg_separation_estimate_v1 via en
