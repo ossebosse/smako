@@ -441,7 +441,11 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     import sqlite3
     from datetime import timedelta
 
-    from grocery_data.app.services.campaign_refresh_policy import base_fetch_due
+    from grocery_data.app.services.campaign_refresh_policy import (
+        base_fetch_due,
+        scheduled_source_times,
+        twice_weekly,
+    )
 
     env = os.environ if environment is None else environment
     city = env.get("REFRESH_CITY", "Lund")
@@ -454,7 +458,8 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     if manifest is None:
         retry = state.get("retry_at")
         state_path.parent.mkdir(parents=True, exist_ok=True)
-        return {"bootstrap": True, "city": city, "work_due": not retry or datetime.fromisoformat(retry) <= now,
+        return {"bootstrap": True, "city": city, "work_due": (not retry or datetime.fromisoformat(retry) <= now)
+                and base_fetch_due(None, now=now, environment=env) <= now,
                 "reason": "municipality_needs_first_manifest", "state": state,
                 "state_path": str(state_path), "due_sources": [], "external_price_requests": 0}
     required = set(filter(None, env.get("PRICE_UNIVERSE_REQUIRED_CONTEXT_IDS", "").split(",")))
@@ -486,6 +491,8 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     _area, offer_location = source_location(city, offer_root, environment=env)
     pointer = offer_location / 'structured-source.json'
     offers = json.loads(pointer.read_bytes()) if pointer.exists() else {}
+    ica_inventory_fetch = scheduled_source_times(offers.get('store_schedule', {}).values(),
+                                                state=offers, now=now, environment=env)
     from grocery_data.app.services.hemkop_municipal_job import source_plan as hemkop_source_plan
     hemkop_plan = hemkop_source_plan(city=city, environment=env, now=now)
     offer_enabled = env.get('ICA_STRUCTURED_OFFERS_ENABLED', 'false').casefold() == 'true'
@@ -530,7 +537,11 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
                 item['observations'].append(row[1]); item['snapshots'].append(row[0])
             else:
                 item['missing'] = True
-    if any(s['source_provenance']['source_provider'] == 'primat' for s in state['base_scope']):
+    primat_enabled = env.get('ICA_PRIMAT_BASE_ENABLED', 'false').casefold() == 'true'
+    if primat_enabled:
+        from app.services.production_primat_refresh import plan_city_primat_refresh
+        primat_enabled = bool(plan_city_primat_refresh(database, city, 48)['contexts'])
+    if primat_enabled or any(s['source_provenance']['source_provider'] == 'primat' for s in state['base_scope']):
         from grocery_data.app.services.closed_provider_cache_store import (
             ClosedProviderCacheArtifactStore,
         )
@@ -545,11 +556,11 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     due_sources = []
     for key, source in sources.items():
         observed = min((datetime.fromisoformat(x) for x in source['observations']), default=None)
-        # The local relay owns its independent durable 35-hour timer. A VPS
-        # campaign tick cannot advance it; do not advertise an earlier fetch.
+        # The relay owns its durable observation and registered trigger. A
+        # campaign tick cannot advance that independent collection schedule.
         relay_source = key == 'willys' and env.get('WILLYS_COLLECTION_LOCATION') == 'LOCAL_RELAY'
-        due = now if observed is None or source.get('missing') else base_fetch_due(
-            observed, now=now, campaign_at=None if relay_source else campaign_at)
+        due = base_fetch_due(None if source.get('missing') else observed,
+            now=now, campaign_at=None if relay_source else campaign_at, environment=env)
         retry = state.get('source_retries', {}).get(key)
         if source.get('contexts'):
             context_times = []
@@ -557,7 +568,8 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
             for identity, context in source['contexts'].items():
                 stamp = context['observed_at']
                 context_due = base_fetch_due(datetime.fromisoformat(stamp), now=now,
-                    campaign_at=campaign_at) if stamp else now
+                    campaign_at=campaign_at, environment=env) if stamp else base_fetch_due(
+                        None, now=now, environment=env)
                 context_retry = state.get('source_context_retries', {}).get(key, {}).get(identity)
                 if context_retry and context_retry['snapshots'] == context['snapshots']:
                     context_due = max(context_due, datetime.fromisoformat(context_retry['retry_at']))
@@ -571,6 +583,8 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
         source.update(next_fetch_at=due.isoformat(), reason='local_relay_35h_deadline' if relay_source else 'base_35h_deadline_or_campaign_coalescing',
                       observed_at=observed.isoformat() if observed else None,
                       hard_stop_at=(observed + timedelta(hours=48)).isoformat() if observed else None)
+        if twice_weekly(env):
+            source['reason'] = 'mon_thu_collection'
         if due <= now:
             due_sources.append(key)
     transitions = [datetime.fromisoformat(v['next_transition_at']) for v in offers.get('store_schedule', {}).values() if v.get('next_transition_at')]
@@ -578,6 +592,8 @@ def demand_refresh_plan(*, now: datetime, environment=None) -> dict:
     local_transition = any(last < t <= now for t in transitions)
     offer_due = offer_enabled and (not offers or any(t <= now for t in campaign_times)
         or datetime.fromisoformat(offers['next_inventory_at']) <= now)
+    if ica_inventory_fetch is not None:
+        offer_due = offer_enabled and (ica_inventory_fetch <= now or any(t <= now for t in campaign_times))
     fingerprint = hashlib.sha256(json.dumps({'base': {k:v['snapshots'] for k,v in sources.items()},
         'offers': offers.get('database') if offer_enabled else None, 'hemkop_municipal': hemkop_plan['fingerprint'], 'coop': coop_plan['fingerprint'], 'citygross': citygross_plan['fingerprint'], 'lidl': lidl_plan['fingerprint'], 'willys_flyer': willys_flyer_plan['fingerprint']}, sort_keys=True).encode()).hexdigest()
     changed = fingerprint != state.get('published_sources')
@@ -735,6 +751,10 @@ def _run_demand_locked(lock, *, started_at):
     if 'primat' not in plan['due_sources']:
         command.append('--no-external-refresh')
     overrides = plan.get('source_context_overrides', {})
+    if os.getenv('ICA_PRIMAT_BASE_ENABLED', 'false').casefold() == 'true' and 'primat' in plan['sources']:
+        # Other municipalities keep OWN-only. Closed-cache validation still
+        # gates every exact context before publication.
+        overrides['OWN_SOURCES_ONLY'] = 'false'
     if os.getenv('MUNICIPAL_REFRESH_SCOPE') and 'hemkop' in plan['due_sources']:
         # Completed stores are already separately promoted. Bound a turn to the
         # oldest due store so the next municipality gets the shared worker too.

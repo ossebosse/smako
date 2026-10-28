@@ -53,11 +53,13 @@ def _validate_display_schedule(
         len(fields) != 5
         or not fields[0].isdigit()
         or not fields[1].isdigit()
-        or fields[2:] != ["*", "*", "*"]
+        or fields[2:4] != ["*", "*"]
+        or fields[4] not in {"*", "1,4"}
     ):
         raise ValueError(f"{name} must correspond to one fixed daily clock time")
     parts = display_schedule.strip().split()
-    if len(parts) != 2 or parts[1] != "Europe/Stockholm":
+    expected_days = [] if fields[4] == "*" else ["Mon,Thu"]
+    if len(parts) != 2 + len(expected_days) or parts[1] != "Europe/Stockholm" or parts[2:] != expected_days:
         raise ValueError(f"{name} must use HH:MM Europe/Stockholm")
     clock = parts[0].split(":")
     if len(clock) != 2 or not all(value.isdigit() for value in clock):
@@ -121,11 +123,13 @@ def main() -> None:
         os.getenv("DAILY_REFRESH_SCHEDULE", "03:17 Europe/Stockholm"),
         name="DAILY_REFRESH_SCHEDULE",
     )
-    _validate_display_schedule(
-        coop_retry,
-        os.getenv("COOP_RETRY_SCHEDULE", "06:17 Europe/Stockholm"),
-        name="COOP_RETRY_SCHEDULE",
-    )
+    jobs = scheduled_jobs()
+    if any(name == 'COOP_RETRY_CRON' for name, _ in jobs):
+        _validate_display_schedule(
+            coop_retry,
+            os.getenv("COOP_RETRY_SCHEDULE", "06:17 Europe/Stockholm"),
+            name="COOP_RETRY_SCHEDULE",
+        )
     environment_path = Path("/run/grocery-beta-environment")
     _write_environment(environment_path)
 
@@ -145,7 +149,7 @@ def main() -> None:
             f"{schedules[name]} root {command_prefix}runuser -u app -- "
             f"python deploy/scripts/{script} "
             ">> /proc/1/fd/1 2>> /proc/1/fd/2\n"
-            for name, script in scheduled_jobs()
+            for name, script in jobs
         ), encoding="utf-8",
     )
     cron_file.chmod(0o644)

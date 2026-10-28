@@ -108,6 +108,8 @@ def run(
     capacity_check=None,
     collection_seconds=7200,
 ):
+    from grocery_data.app.services.campaign_refresh_policy import base_fetch_due, twice_weekly
+
     now = now or datetime.now(UTC)
     workspace = workspace.resolve()
     workspace.mkdir(parents=True, exist_ok=True)
@@ -128,7 +130,7 @@ def run(
     log(
         "task_start",
         expected_daily_time=None if ((workspace / "demand-refresh-enabled").exists() or (workspace / "source-scope.json").exists()) else "01:30",
-        schedule_policy="base_35h" if ((workspace / "demand-refresh-enabled").exists() or (workspace / "source-scope.json").exists()) else "daily",
+        schedule_policy="mon_thu" if twice_weekly() else "base_35h" if ((workspace / "demand-refresh-enabled").exists() or (workspace / "source-scope.json").exists()) else "daily",
         schedule_timezone="Europe/Stockholm",
         invocation_kind="scheduled_or_manual_not_inferred",
     )
@@ -151,7 +153,13 @@ def run(
             if receipt.get("municipality_code") != municipality:
                 receipt = {}  # Never reuse another scope's success/timer.
             demand_enabled = demand_policy.exists() or municipality is not None
-            if demand_enabled and receipt.get("observed_from"):
+            if twice_weekly():
+                stamp = receipt.get('observed_from')
+                due = base_fetch_due(datetime.fromisoformat(stamp) if stamp else None, now=now)
+                if due > now:
+                    log('not_due', next_fetch_at=due.isoformat(), external_price_requests=0)
+                    return 0
+            elif demand_enabled and receipt.get("observed_from"):
                 observed = datetime.fromisoformat(receipt["observed_from"])
                 if now < observed + timedelta(hours=35):
                     log("not_due", next_fetch_at=(observed + timedelta(hours=35)).isoformat(),
@@ -232,7 +240,7 @@ def run(
             receipt = {
                 "sha256": digest,
                 "municipality_code": municipality,
-                "next_fetch_at": (observed + timedelta(hours=35)).isoformat(),
+                "next_fetch_at": base_fetch_due(observed, now=now).isoformat(),
                 "artifact": str(candidate),
                 "collection_day": observed.astimezone(ZoneInfo("Europe/Stockholm"))
                 .date()
@@ -282,6 +290,7 @@ def main():
 def run_municipalities(workspace, transport, *, scopes=None, run_scope=run, budget_seconds=10200):
     """Use the server's one registry; each municipality keeps its own receipts."""
     from grocery_data.app.domain.municipality import municipality_name
+    from grocery_data.app.services.campaign_refresh_policy import base_fetch_due, twice_weekly
     from grocery_data.app.services.willys_municipal_scope import relay_municipality
     from grocery_data.relay_storage import receiver_capacity
 
@@ -315,7 +324,7 @@ def run_municipalities(workspace, transport, *, scopes=None, run_scope=run, budg
             observed = receipt.get("observed_from") if receipt.get("municipality_code") == code else None
             stamp = datetime.fromisoformat(observed) if observed else None
             items.append({"municipality_code": code,
-                "work_due": not stamp or now >= stamp + timedelta(hours=35),
+                "work_due": base_fetch_due(stamp, now=now) <= now if twice_weekly() else not stamp or now >= stamp + timedelta(hours=35),
                 "deadline": (stamp + timedelta(hours=48)).isoformat() if stamp else None})
         ordered = order_work(items, state, now=now)
         save_state(journal, state)

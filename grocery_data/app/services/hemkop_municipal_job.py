@@ -27,12 +27,17 @@ def source_plan(*, city=None, environment=None, now=None):
     area, root, enabled = configuration(city, environment=environment)
     state = read(root / 'source-state.json') if enabled else {}
     schedules = state.get('store_schedule', {})
+    from grocery_data.app.services.campaign_refresh_policy import scheduled_source_times
+    inventory_fetch = scheduled_source_times(schedules.values(), state=state, now=now,
+                                             environment=environment)
     for schedule in schedules.values():
-        if schedule.get('last_success_at') and not schedule.get('failed_attempts'):
+        if inventory_fetch is None and schedule.get('last_success_at') and not schedule.get('failed_attempts'):
             schedule['next_fetch_at'] = min(datetime.fromisoformat(schedule['next_fetch_at']),
                 datetime.fromisoformat(schedule['last_success_at']) + timedelta(hours=35)).isoformat()
     due = [k for k, v in schedules.items() if datetime.fromisoformat(v['next_fetch_at']) <= now]
     inventory_due = enabled and (not state or datetime.fromisoformat(state['next_inventory_at']) <= now)
+    if inventory_fetch is not None:
+        inventory_due = enabled and inventory_fetch <= now
     fingerprint = hashlib.sha256(json.dumps({'area': area.model_dump(mode='json'), 'enabled': enabled,
         'database': state.get('database'), 'approved': state.get('approved_store_ids')}, sort_keys=True).encode()).hexdigest()
     return {'enabled': enabled, 'work_due': bool(enabled and (inventory_due or due)),
@@ -146,7 +151,8 @@ async def run_source_job(*, city=None, environment=None, now=None):
             write(root / 'source-state.json', prior)
         env = os.environ if environment is None else environment
         database = Path(make_url(env.get('GROCERY_DATABASE_URL', 'sqlite:///var/grocery/grocery_data.sqlite')).database)
-        persist_official_inventory(prior['inventory'], database)
+        if prior.get('inventory'):
+            persist_official_inventory(prior['inventory'], database)
         return {**prior, 'status': 'not_due', 'external_price_requests': 0}
     attempt = root / 'attempts' / (now.strftime('%Y%m%dT%H%M%S') + '-' + uuid4().hex[:8])
     attempt.mkdir(parents=True)
@@ -235,6 +241,7 @@ async def run_source_job(*, city=None, environment=None, now=None):
                 outcomes[identity] = {'status': 'source_failed_lkg_retained', 'error_type': type(exc).__name__,
                     'reason': str(exc)[:250], 'own_rows': None}
         current = {'status': 'municipal_optional_source', 'inventory': inventory,
+            'inventory_checked_at': now.isoformat() if plan['inventory_due'] else prior.get('inventory_checked_at'),
             'database': str(database), 'locator': str(attempt / 'locator.json') if plan['inventory_due'] else prior['locator'],
             'approved_store_ids': sorted(approved), 'store_schedule': schedules, 'outcomes': outcomes,
             'next_inventory_at': (now + timedelta(hours=72)).isoformat() if plan['inventory_due'] else prior['next_inventory_at'],

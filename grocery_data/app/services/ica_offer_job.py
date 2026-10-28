@@ -57,15 +57,23 @@ async def run_structured_offer_job(*, city: str, root: Path, now=None, force=Fal
     independent store LKGs; the explicit source pointer is consumed by the normal
     PriceUniverse builder. It does not activate a PriceUniverse by itself.
     """
-    from grocery_data.app.services.campaign_refresh_policy import campaign_schedule
+    from grocery_data.app.services.campaign_refresh_policy import (
+        campaign_schedule,
+        scheduled_source_times,
+    )
     now = now or datetime.now(UTC)
     area, base = source_location(city, root, persist=True)
     base.mkdir(parents=True, exist_ok=True)
     pointer = base / 'structured-source.json'
     previous = json.loads(pointer.read_bytes()) if pointer.exists() else {}
     schedule = previous.get('store_schedule', {})
+    inventory_fetch = scheduled_source_times(schedule.values(), state=previous, now=now)
     due = {k for k, v in schedule.items() if datetime.fromisoformat(v['next_fetch_at']) <= now}
     inventory_due = not previous or datetime.fromisoformat(previous['next_inventory_at']) <= now
+    if inventory_fetch is not None:
+        inventory_due = inventory_fetch <= now
+        if not due and not inventory_due:
+            return {**previous, 'status': 'not_due', 'network_requests': 0, 'changed': False}
     if previous and not due and not inventory_due and not force:
         return {**previous, 'status': 'not_due', 'network_requests': 0, 'changed': False}
     attempt = base / (now.strftime('%Y%m%dT%H%M%S') + '-' + uuid4().hex[:8])
@@ -137,6 +145,7 @@ async def run_structured_offer_job(*, city: str, root: Path, now=None, force=Fal
             # and never modify the release's mandatory catalog contexts.
             ids = sorted(municipal_stores(coverage))
         current = {'status': 'partial_structured_source', 'changed': True,
+            'inventory_checked_at': now.isoformat(),
             'database': str(database), 'coverage': coverage, 'store_schedule': schedules,
             'ica_offer_store_ids': ids, 'excluded_store_ids': sorted(excluded),
             'inventory_approved': proposal['inventory_approved'], 'observed_at': now.isoformat(),
