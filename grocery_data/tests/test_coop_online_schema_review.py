@@ -43,7 +43,7 @@ def test_review_is_version_chain_surface_and_type_bound():
     path = "730400:coop_product_category_page:$[].results.items[].localProduct.code"
     diff = SchemaDiff(added=(path,))
     assert _review_schema_diff(Chain.COOP, "coop-parser-v1", diff) == diff
-    assert _review_schema_diff(Chain.COOP, "coop-online-catalog-parser-v5", diff) == diff
+    assert _review_schema_diff(Chain.COOP, "coop-online-catalog-parser-v6", diff) == diff
     assert _review_schema_diff(Chain.ICA, VERSION, diff) == diff
     wrong_surface = SchemaDiff(added=(path.replace("category_page", "offer_page"),))
     assert _review_schema_diff(Chain.COOP, VERSION, wrong_surface) == wrong_surface

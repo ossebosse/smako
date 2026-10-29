@@ -339,6 +339,18 @@ def _verified_piece_limit(promotion: dict[str, Any]) -> int | None:
     return int(value)
 
 
+def _verified_available_promotions(row: dict[str, Any]) -> bool:
+    """A type summary cannot establish price, membership or purchase terms."""
+    if "availablePromotions" not in row:
+        return True  # Earlier reviewed responses have no presentation summary.
+    summary = row["availablePromotions"]
+    known = {"FIXED_PRICE", "MULTI_BUY_FIXED_PRICE", "PERCENTAGE_DISCOUNT"}
+    return (isinstance(summary, list)
+            and all(isinstance(value, str) and value in known for value in summary)
+            and len(summary) == len(set(summary))
+            and set(summary) == {offer.get("type") for offer in row.get("onlinePromotions") or []})
+
+
 def _purchase_fingerprint(product: SourceProduct) -> str:
     """Fingerprint all identity and purchase semantics, excluding placement/lineage."""
 
@@ -372,7 +384,7 @@ def _purchase_fingerprint(product: SourceProduct) -> str:
 class CoopOnlineCatalogParser:
     """Parser for Coop's regional online product context, separate from offers."""
 
-    parser_version = "coop-online-catalog-parser-v4"
+    parser_version = "coop-online-catalog-parser-v5"
 
     @staticmethod
     def terminal_categories(document: RawFetch) -> tuple[tuple[str, str], ...]:
@@ -518,8 +530,11 @@ class CoopOnlineCatalogParser:
         ]
         withheld_limits = [offer for offer in offers
                            if not offer.source_payload.get("purchase_limit_verified")]
+        summary_verified = _verified_available_promotions(row)
+        withheld_summary = list(offers) if not summary_verified else []
         exposed_offers = tuple(offer for offer in offers
-                               if offer not in withheld_uncertain and offer not in withheld_limits)
+                               if offer not in withheld_uncertain and offer not in withheld_limits
+                               and offer not in withheld_summary)
         matching_unconditional = [offer for offer in exposed_offers
                                   if not offer.member_only
                                   and offer.type is not PromotionType.MULTIBUY
@@ -581,6 +596,9 @@ class CoopOnlineCatalogParser:
                 "raw_comparative_price_unit": row.get("comparativePriceUnit"),
                 "comparison_unit_verified": comparison_unit is not None,
                 "active_promotion_ids": [offer.external_id for offer in offers],
+                "available_promotion_types": row.get("availablePromotions"),
+                "available_promotion_summary_verified": summary_verified,
+                "withheld_summary_promotion_ids": [offer.external_id for offer in withheld_summary],
                 "withheld_uncertain_promotion_ids": [
                     offer.external_id for offer in withheld_uncertain
                 ],
