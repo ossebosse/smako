@@ -287,6 +287,13 @@ def _active_offers(
         external_id = str(promotion.get("id") or "").strip()
         if not external_id:
             raise CoopSchemaError("Coop online promotion lacks identity")
+        piece_limit = _verified_piece_limit(promotion)
+        # The shared multipack model limits complete discounted groups, while
+        # Coop's explicit Styck cap counts individual packages. Never multiply
+        # a piece cap by the bundle quantity in checkout.
+        offer_limit = (piece_limit // quantity if piece_limit is not None
+                       and promotion_type is PromotionType.MULTIBUY else piece_limit)
+        limit_verified = offer_limit is not None and offer_limit > 0
         offers.append(
             SourceOffer(
                 external_id=external_id,
@@ -296,10 +303,11 @@ def _active_offers(
                 price=price,
                 quantity=quantity,
                 member_only=member_value,
-                max_quantity=_verified_piece_limit(promotion),
+                max_quantity=offer_limit if limit_verified else None,
                 description=str(promotion.get("message") or source_type).strip(),
                 source_payload={
-                    "purchase_limit_verified": _verified_piece_limit(promotion) is not None,
+                    "purchase_limit_verified": limit_verified,
+                    "source_max_piece_quantity": piece_limit,
                     "source_type": source_type,
                     "piece_price": str(_b2c_price(promotion.get("piecePriceData")) or "") or None,
                     "comparative_price": str(

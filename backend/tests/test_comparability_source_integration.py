@@ -196,8 +196,10 @@ def test_scan_full_shopping_baskets(tmp_path):
         )
 
 
-@pytest.mark.parametrize("verified_limit,expected_total", [(False, 21.8), (True, 15)])
-def test_garlic_quantity_and_multibuy_full_shopping_basket(verified_limit, expected_total):
+@pytest.mark.parametrize("verified_limit,grams,expected_total", [
+    (False, 60, 21.8), (True, 60, 15), (True, 342, 51.8),
+])
+def test_garlic_quantity_and_multibuy_full_shopping_basket(verified_limit, grams, expected_total):
     from app.config import Settings
     from app.models import PlanRequest
     from app.models.personal import ExtraNeed, PersonalPlanning
@@ -250,7 +252,7 @@ def test_garlic_quantity_and_multibuy_full_shopping_basket(verified_limit, expec
                 ExtraNeed(
                     kind="exact",
                     query="Vitlök",
-                    quantity=60,
+                    quantity=grams,
                     unit="g",
                     product_key=found["product_key"],
                     confirmed=True,
@@ -267,5 +269,5 @@ def test_garlic_quantity_and_multibuy_full_shopping_basket(verified_limit, expec
     ).create()
     assert plan.optimized_basket.total == expected_total
     item = plan.optimized_basket.stores[0].items[0]
-    assert item.packages_needed == 2 and item.package_quantity == 57
+    assert item.packages_needed == (grams + 56) // 57 and item.package_quantity == 57
     assert plan.personal.checks["checkout_audit"]["passed"]

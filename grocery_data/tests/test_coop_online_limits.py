@@ -53,3 +53,19 @@ def test_verified_piece_cap_is_retained_in_offer_and_missing_raw_limit_is_not_ac
         del promotion["maxNumberOfUse"]
     product = parser.parse_product(row, store=_store(), reference="synthetic:limit", fetched_at=OBSERVED_AT)
     assert not product.offers and product.sale_price == product.regular_price
+
+
+@pytest.mark.parametrize("pieces,groups", [(5, 2), (4, 2), (3, 1), (2, 1), (1, 0)])
+def test_multibuy_piece_cap_limits_complete_discounted_groups(pieces, groups):
+    row = _fixture_row("online_api_multibuy_730400.json")
+    for promotion in row["onlinePromotions"]:
+        promotion.update(maxNumberOfUse=4500,
+                         maxNumberOfUseWithUnit={"unit": "Styck", "value": pieces})
+    product = CoopOnlineCatalogParser().parse_product(row, store=_store(), reference="synthetic:group-cap", fetched_at=OBSERVED_AT)
+    if groups:
+        assert product.offers[0].quantity == 2
+        assert product.offers[0].max_quantity == groups
+        assert product.offers[0].source_payload["source_max_piece_quantity"] == pieces
+    else:
+        assert not product.offers
+    assert product.sale_price == product.regular_price
