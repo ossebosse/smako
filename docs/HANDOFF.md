@@ -1,3 +1,16 @@
+# 2026-10-29: Återstående Coop-källfel rättade och laddade
+
+Se [aktiveringsjournalen](releases/coop-remaining-sources-20261029/ACTIVATED.md).
+App `source-ops-2600390d3943`, scheduler `source-ops-47b1f0fdb717`; PR 44–46 och slutlig main-CI är gröna.
+Fyra Malmö-källor är verifierat tomma med lyckad kontroll/noll fel och nästa måndag 03:17.
+Lunds Online Syd har en färskt kvalificerad/laddad fullkatalog med 11237 produkter.
+Malmös befintliga butiksscope består. Okända kampanjgränser och motstridiga typsammanfattningar
+ger baspris; flerpackets styckgräns räknas till hela köpgrupper. Tidigare 2925 fysiska
+kampanjpriser/källtider och ICA-baspriser består. Källtider från fullhämtningen återanvändes.
+Backup `20261029T100721Z`, användarrader, kommunernas laddning och exakta runtimefiler är verifierade.
+Recept-/beräkningskod och serverns tvånattspolicy består. Windowsregistreringen återstår
+med administratör enligt nedan. Äldre rapporter är historiskt underlag.
+
 # 2026-10-29: Coop environmentalCode rättat, tio butiker uppdaterade
 
 Se [aktivering och butiksresultat](releases/coop-environmental-code-20261029/ACTIVATED.md).

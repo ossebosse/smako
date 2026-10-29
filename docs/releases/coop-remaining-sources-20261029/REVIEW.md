@@ -29,13 +29,13 @@ Befintlig fullkataloggräns, 730400-allowlist, normalisering, hälsokontroller,
 LKG och atomisk publicering behålls. Online Syd förblir onlinepris och får
 aldrig räknas som fysiskt baspris. Må-/torsdagspolicyn ändras inte.
 
-Apppaketet omfattar 12 granskade käll-/läsarfiler, schedulerpaketet 9.
+Apppaketet omfattar 13 granskade käll-/läsarfiler, schedulerpaketet 10.
 Scheduler får inga dashboardfiler. Paket baseras på verkligt aktiva
 `source-ops-1d092bc85f91`-bilder med exakt filhashkontroll och bevarar övrig
 recept-, beräknings-, autentiserings- och driftkod. Aktivering kräver grön CI,
 verifierad backup, befintligt gemensamt driftlås och kommunvis runtimekontroll.
 
-Lokalt har 118 fokuserade tester för parser, gränsvillkor, butiksläsare,
+Lokalt har fokuserade tester för parser, gränsvillkor, butiksläsare,
 schemaavgränsning och dashboard passerat; kompletterande kommun-/jobbtester
 journalförs separat. Ruff och compileall passerar. Verklig insamling,
 publicering och laddning ska redovisas separat i aktiveringsjournalen.
@@ -45,3 +45,6 @@ Appens Coop-katalogparser är i verkligheten v2. Dess tre historiska Git-baser
 collectorn ersätts; Hemköp och Willys behåller exakt sina aktiva bytes. De två
 rena Coop-modulerna får granskad v4 inklusive tidigare v3-presentationsgranskning.
 Scheduler använder sin befintliga v3-bas utan denna appanpassning.
+
+Slutlig fullkatalog-/gränskomplettering finns i [ONLINE-REVIEW.md](ONLINE-REVIEW.md),
+och verklig laddning finns i [ACTIVATED.md](ACTIVATED.md).

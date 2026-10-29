@@ -1,9 +1,13 @@
 # Gemensam driftstatus och avgränsad reparation
 
+[Senaste Coop-källrättning](releases/coop-remaining-sources-20261029/ACTIVATED.md)
+verifierar fyra tomma Malmö-källor och ny kvalificerad/laddad Online Syd-katalog i Lund.
+Malmös befintliga butiksscope består. Okända kampanjvillkor ger baspris. Äldre rapporter
+nedan är historiska; Windowsregistreringen återstår fortsatt med administratör.
+
 [Coops insamlingsfält rättat 29 oktober](releases/coop-environmental-code-20261029/ACTIVATED.md)
-bekräftar tio färskt uppdaterade butiker och parser v7 i båda processerna.
-Separata hämtnings-/katalogfel och Windowsregistreringen redovisas fortsatt
-som kvarstående; tidigare 28-oktoberrapport är historiskt underlag.
+bekräftar de tio tidigare uppdaterade butikerna. De separata Coop-fel som
+återstod då är åtgärdade i den senaste källrättningen ovan.
 
 Senaste [samlade betaaktivering](releases/beta-ica-recipes-20261028/ACTIVATED.md)
 omfattar ICA-baspriser, hela recept-/beräkningsarbetet och serverhämtning
@@ -12,8 +16,8 @@ kräver fortfarande administratör; serverstatus bevisar inte dess veckoschema.
 
 [Driftkontroll och dashboardrättning 28 oktober](releases/dashboard-operations-20261028/ACTIVATED.md)
 bekräftar ICA-baspriser, återställd Malmö-Willyskvittens och Willys reklamblads-
-historik. Coop har fortfarande separata schema-/hämtningsfel; journalen skiljer
-dem från användbara äldre priser och från Windowsuppgiftens registrering.
+historik. Journalen skiljer de dåvarande Coop-felen från användbara äldre
+priser och från Windowsuppgiftens registrering.
 
 ## Prispolicy från 2026-10-15
 

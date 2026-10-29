@@ -1,5 +1,8 @@
 # Komplettering efter fullkatalog 2026-10-29
 
+Detta är granskningen före det slutliga schedulerbytet. Verklig aktivering,
+återspelning och laddning är bekräftade i [ACTIVATED.md](ACTIVATED.md).
+
 App och scheduler kör redan source-ops-2600390d3943. Fyra tomma Malmö-källor
 är verifierade i dashboarden med lyckad kontroll, noll fel och noll priskontexter.
 

@@ -1,0 +1,397 @@
+{
+  "recorded_at": "2026-10-29T10:54:08.500113+00:00",
+  "runtimes": {
+    "scheduler": {
+      "image": "sha256:5e2684e49176e27fc077fa7021b9fb81da4bcdbd167f78e7587c2bd5ef0cae55",
+      "base_image": "sha256:54ed906a039a0a704af71f8ef96c7b3051f44312b773a2155a069d17826e1e4d",
+      "tag": "smako-scheduler:source-ops-47b1f0fdb717",
+      "build_id": "source-ops-47b1f0fdb717",
+      "commit": "47b1f0fdb7178deaed266fcb29660c2a92f870dc",
+      "files": {
+        "grocery_data/app/connectors/coop/online_catalog_parser.py": "6d6d7641fc7e562530fc15945c9dab5be5817a9f882c172fd00838ac8f683e8d",
+        "grocery_data/app/connectors/coop/schema_review.py": "78ce627b84c1e5081a3b7f145c59374023e46bb070505c82ff65b101e1e1274b",
+        "grocery_data/app/services/collector.py": "0371bbc42f0dc810fe9a27a55407e279debcc2092dc16881032b6b28359e766d"
+      },
+      "only_reviewed_files_changed": true,
+      "unchanged_runtime_files": 998
+    },
+    "app": {
+      "image": "sha256:11068cd153f6dc7aed4b4cea2cc9630aa05912993f89584b074302b309c3b29c",
+      "base_image": "sha256:11068cd153f6dc7aed4b4cea2cc9630aa05912993f89584b074302b309c3b29c",
+      "tag": "sha256:11068cd153f6dc7aed4b4cea2cc9630aa05912993f89584b074302b309c3b29c",
+      "build_id": "source-ops-2600390d3943",
+      "commit": "2600390d3943720058988d3452f8da6eb2772d4d",
+      "files": {},
+      "only_reviewed_files_changed": true,
+      "unchanged_runtime": true,
+      "unchanged_runtime_files": 1006
+    }
+  },
+  "source_review": {
+    "ci_commit": "47b1f0fdb7178deaed266fcb29660c2a92f870dc",
+    "main_ci_runs": [
+      40855326236
+    ],
+    "runtime_bytes_match_ci": true,
+    "pr": 46,
+    "reviewed_commit": "47b1f0fdb7178deaed266fcb29660c2a92f870dc",
+    "main_merge_commit": "2e0b87a7c6d55fbabdf225920630a78136c9da27",
+    "merged": true,
+    "all_checks_success": true
+  },
+  "initial_activation": {
+    "status": "activated",
+    "at": "2026-10-29T08:54:44.133202+00:00",
+    "backup": "/srv/smako/backups/20261029T084441Z",
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 314,
+      "personal_private_state": 123,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    }
+  },
+  "final_source_activation": {
+    "status": "activated",
+    "at": "2026-10-29T10:18:36.341802+00:00",
+    "backup": "/srv/smako/backups/20261029T100721Z",
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 314,
+      "personal_private_state": 123,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    }
+  },
+  "full_retained_canary": {
+    "status": "full_retained_canary_passed",
+    "parser": "coop-online-catalog-parser-v5",
+    "products": 11237,
+    "raw_files_verified": 818,
+    "network": {
+      "count": 0
+    },
+    "oldest_observed_at": "2026-10-29T08:56:22.714511+00:00",
+    "newest_observed_at": "2026-10-29T09:23:34.913377+00:00",
+    "summary_withheld_products": 3,
+    "limit_withheld_products": 1328,
+    "exposed_offers": 24,
+    "schema_diff_reviewed": true,
+    "snapshot_promoted": false
+  },
+  "canonical_repair": {
+    "started_at": "2026-10-29T10:36:19.630799+00:00",
+    "status": "complete",
+    "exit_code": 0,
+    "completed_at": "2026-10-29T10:37:40.035197+00:00"
+  },
+  "publication": [
+    {
+      "municipality_code": "1281",
+      "city": "Lund",
+      "price_universe_id": "price-universe:0f311e3d5107ad4480721d9ab3d16cf480eaab293367b26e3dc98e1300aa7082",
+      "loaded": true,
+      "normal_refresh_exit_code": 0,
+      "online": {
+        "snapshot_id": "335b406f160a49c7bf351ceece8fcf6e",
+        "products": 11237,
+        "oldest_observed_at": "2026-10-29T08:56:22.714511+00:00",
+        "newest_observed_at": "2026-10-29T09:23:30.978844+00:00",
+        "products_with_withheld_limit_promotions": 1328,
+        "promoted": true
+      },
+      "online_in_scope": true
+    },
+    {
+      "municipality_code": "1280",
+      "city": "Malmö",
+      "price_universe_id": "price-universe:e8ed718b6d66124375aac4b7ec42b70ec6f80f7f32cca86f1f65a22b960d0289",
+      "loaded": true,
+      "normal_refresh_exit_code": 0,
+      "online": {
+        "snapshot_id": "335b406f160a49c7bf351ceece8fcf6e",
+        "products": 11237,
+        "oldest_observed_at": "2026-10-29T08:56:22.714511+00:00",
+        "newest_observed_at": "2026-10-29T09:23:30.978844+00:00",
+        "products_with_withheld_limit_promotions": 1328,
+        "promoted": true
+      },
+      "online_in_scope": false,
+      "empty_stores": [
+        {
+          "store_id": "3833",
+          "name": "Coop Malmö Central",
+          "status": "confirmed_no_qualified_rows",
+          "last_success": "2026-10-29T08:31:30.228591+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3835",
+          "name": "Coop Kornettsgatan",
+          "status": "confirmed_no_qualified_rows",
+          "last_success": "2026-10-29T08:32:03.326486+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3831",
+          "name": "Coop Djupadal",
+          "status": "confirmed_no_qualified_rows",
+          "last_success": "2026-10-29T08:32:36.521576+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3829",
+          "name": "X:-Tra Nydala",
+          "status": "confirmed_no_qualified_rows",
+          "last_success": "2026-10-29T08:41:36.678467+00:00",
+          "failed_attempts": 0
+        }
+      ]
+    }
+  ],
+  "dashboard": {
+    "cities": [
+      {
+        "city": "Lund",
+        "build_id": "source-ops-2600390d3943",
+        "price_universe_id": "price-universe:0f311e3d5107ad4480721d9ab3d16cf480eaab293367b26e3dc98e1300aa7082",
+        "empty_stores": [],
+        "preserved_coop_campaign_stores": [
+          {
+            "id": "3659",
+            "campaign_prices": 278,
+            "observed_at": "2026-10-29T05:42:37.427839Z"
+          },
+          {
+            "id": "1158",
+            "campaign_prices": 315,
+            "observed_at": "2026-10-29T05:42:44.935849Z"
+          },
+          {
+            "id": "3820",
+            "campaign_prices": 278,
+            "observed_at": "2026-10-29T05:42:53.345792Z"
+          },
+          {
+            "id": "3813",
+            "campaign_prices": 315,
+            "observed_at": "2026-10-29T05:43:01.210499Z"
+          }
+        ],
+        "online": {
+          "context_id": "context:coop:23eaae11c9661e68",
+          "scope": "online_price",
+          "snapshot_id": "335b406f160a49c7bf351ceece8fcf6e",
+          "available_base_prices": 11237,
+          "available_campaign_prices": 0,
+          "observed_at": "2026-10-29T08:56:22.714511Z",
+          "collection": {
+            "status": "succeeded",
+            "started_at": "2026-10-29T10:36:19.770816Z",
+            "finished_at": "2026-10-29T10:37:39.938042Z",
+            "duration_seconds": 80.167226,
+            "error": null,
+            "retained_snapshot": false
+          }
+        },
+        "ica_base_prices": [
+          {
+            "context": "context:ica:979e70ce1f577bc4",
+            "base_prices": 38,
+            "observed_at": "2026-09-23T01:48:38.441364Z"
+          },
+          {
+            "context": "context:ica:46850f1523580803",
+            "base_prices": 1926,
+            "observed_at": "2026-10-29T04:14:41.346877Z"
+          }
+        ],
+        "schedule": "Måndag och torsdag 03:17 svensk tid"
+      },
+      {
+        "city": "Malmö",
+        "build_id": "source-ops-2600390d3943",
+        "price_universe_id": "price-universe:e8ed718b6d66124375aac4b7ec42b70ec6f80f7f32cca86f1f65a22b960d0289",
+        "empty_stores": [
+          {
+            "id": "3833",
+            "name": "Coop Malmö Central",
+            "status": "empty",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "source_empty": true,
+              "store_name": "Coop Malmö Central",
+              "last_attempt_at": "2026-10-29T08:41:34.433039Z",
+              "last_success_at": "2026-10-29T08:31:30.228591Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null
+            },
+            "price_contexts": 0
+          },
+          {
+            "id": "3835",
+            "name": "Coop Kornettsgatan",
+            "status": "empty",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "source_empty": true,
+              "store_name": "Coop Kornettsgatan",
+              "last_attempt_at": "2026-10-29T08:41:34.433039Z",
+              "last_success_at": "2026-10-29T08:32:03.326486Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null
+            },
+            "price_contexts": 0
+          },
+          {
+            "id": "3831",
+            "name": "Coop Djupadal",
+            "status": "empty",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "source_empty": true,
+              "store_name": "Coop Djupadal",
+              "last_attempt_at": "2026-10-29T08:41:34.433039Z",
+              "last_success_at": "2026-10-29T08:32:36.521576Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null
+            },
+            "price_contexts": 0
+          },
+          {
+            "id": "3829",
+            "name": "X:-Tra Nydala",
+            "status": "empty",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "source_empty": true,
+              "store_name": "X:-Tra Nydala",
+              "last_attempt_at": "2026-10-29T08:41:34.433039Z",
+              "last_success_at": "2026-10-29T08:41:36.678467Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null
+            },
+            "price_contexts": 0
+          }
+        ],
+        "preserved_coop_campaign_stores": [
+          {
+            "id": "3823",
+            "campaign_prices": 295,
+            "observed_at": "2026-10-29T05:44:06.891419Z"
+          },
+          {
+            "id": "3816",
+            "campaign_prices": 278,
+            "observed_at": "2026-10-29T05:44:14.558687Z"
+          },
+          {
+            "id": "3834",
+            "campaign_prices": 278,
+            "observed_at": "2026-10-29T05:44:22.145417Z"
+          },
+          {
+            "id": "3815",
+            "campaign_prices": 315,
+            "observed_at": "2026-10-29T05:44:29.861671Z"
+          },
+          {
+            "id": "3819",
+            "campaign_prices": 295,
+            "observed_at": "2026-10-29T05:44:38.154462Z"
+          },
+          {
+            "id": "3830",
+            "campaign_prices": 278,
+            "observed_at": "2026-10-29T05:44:45.747690Z"
+          }
+        ],
+        "online": null,
+        "ica_base_prices": [
+          {
+            "context": "context:ica:07cdc317da3830a1",
+            "base_prices": 1213,
+            "observed_at": "2026-10-29T03:15:29.984918Z"
+          },
+          {
+            "context": "context:ica:a8b6a86d31e92f9a",
+            "base_prices": 1432,
+            "observed_at": "2026-10-29T03:15:29.984918Z"
+          }
+        ],
+        "schedule": "Måndag och torsdag 03:17 svensk tid"
+      }
+    ],
+    "admin_without_auth": 401
+  },
+  "obsolete_source_retention": {
+    "status": "obsolete_scheduler_grandparent_retired",
+    "removed_image": "sha256:6a11786a93f0f7b4b9028dc53234197231c1c1c3fe23c8a93eddd19086a23527",
+    "removed_tags": [
+      "smako-scheduler:coop-field-base-2600390d3943",
+      "smako-scheduler:coop-field-base-371149d2e00e",
+      "smako-scheduler:source-ops-1d092bc85f91"
+    ],
+    "before_free_bytes": 15810519040,
+    "after_free_bytes": 15810523136,
+    "active_and_immediate_rollback_images_preserved": [
+      "sha256:11068cd153f6dc7aed4b4cea2cc9630aa05912993f89584b074302b309c3b29c",
+      "sha256:54ed906a039a0a704af71f8ef96c7b3051f44312b773a2155a069d17826e1e4d",
+      "sha256:5e2684e49176e27fc077fa7021b9fb81da4bcdbd167f78e7587c2bd5ef0cae55",
+      "sha256:64dfe8c387fc7e27f32ea2d1af858a891e20095993454a07a4b6ee84f67c27b6"
+    ],
+    "surviving_layer_lists_unchanged": true,
+    "containers_volumes_backups_untouched": true
+  },
+  "obsolete_combined_source_retention": {
+    "status": "obsolete_scheduler_grandparent_retired",
+    "removed_image": "sha256:00d69bd1f4d5d4c6fa5a5fd6dc10d8eab9adef79654fb8669433a3112c37173d",
+    "removed_tags": [
+      "smako-scheduler:beta-scheduler-2b65533af00d-contracts1",
+      "smako-scheduler:coop-field-base-1d092bc85f91",
+      "smako-scheduler:coop-field-base-57d0c679b6b9"
+    ],
+    "before_free_bytes": 15810465792,
+    "after_free_bytes": 17345667072,
+    "active_and_immediate_rollback_images_preserved": [
+      "sha256:11068cd153f6dc7aed4b4cea2cc9630aa05912993f89584b074302b309c3b29c",
+      "sha256:54ed906a039a0a704af71f8ef96c7b3051f44312b773a2155a069d17826e1e4d",
+      "sha256:5e2684e49176e27fc077fa7021b9fb81da4bcdbd167f78e7587c2bd5ef0cae55",
+      "sha256:64dfe8c387fc7e27f32ea2d1af858a891e20095993454a07a4b6ee84f67c27b6"
+    ],
+    "surviving_layer_lists_unchanged": true,
+    "containers_volumes_backups_untouched": true
+  },
+  "recipe_calculation_files_unchanged": true,
+  "source_observations_not_restamped": true,
+  "final_operations": {
+    "checked_at": "2026-10-29T10:51:41.621743+00:00",
+    "storage": {
+      "free_bytes": 17246007296,
+      "required_estimate_bytes": 16569432344,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "source_incidents": [
+      {
+        "incident_id": "source-5bee65424ddcdca6ed78c16d",
+        "status": "source_recovered"
+      },
+      {
+        "incident_id": "source-c861b36e7feaec4e533683b5",
+        "status": "source_recovered"
+      }
+    ],
+    "unknown_required_contexts_count": 0
+  }
+}

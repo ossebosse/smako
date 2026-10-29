@@ -15,16 +15,22 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Senast aktiverade källkod för båda processerna är
-  `1d092bc85f91`, BUILD_ID `source-ops-1d092bc85f91`.
-  [Coop-fälträttning och tio uppdaterade butiker](releases/coop-environmental-code-20261029/ACTIVATED.md)
-  är en fyrfils-patch ovanpå appbas `fac3a7e021a0` och schedulerbas `2b65533af00d`.
+  senaste aktiveringsrapport. Aktiva BUILD_ID är `source-ops-2600390d3943`
+  för appen och `source-ops-47b1f0fdb717` för scheduler.
+  [Senaste Coop-källrättning](releases/coop-remaining-sources-20261029/ACTIVATED.md)
+  dokumenterar de skilda faktiska baserna: första app-/källrättningen 2600390d3943
+  följdes av tre schedulerfiler 47b1f0fdb717. Appens äldre Coop-baser/collector
+  kräver den dokumenterade exakta backporteringen; kopiera inte hela main över runtime.
+  Recept-/beräkningskod består. Två adminfiler i första releasen gav normal cacheinvalidering.
+  Den tidigare [Coop-fälträttningen](releases/coop-environmental-code-20261029/ACTIVATED.md)
+  uppdaterade tio butiker med en fyrfils-patch ovanpå appbas `fac3a7e021a0`
+  och schedulerbas `2b65533af00d`.
   Använd faktiskt aktiv fil/image som bas vid nästa exakt granskade release.
   [Samlad aktivering](releases/beta-ica-recipes-20261028/ACTIVATED.md) innehåller
   ICA/tvånattspolicy och hela det integrerade recept-/beräkningsarbetet.
   Windowsuppgiftens registreringsbyte återstår med administratörsrättighet.
   [Senaste dashboardrättning och driftkontroll](releases/dashboard-operations-20261028/ACTIVATED.md)
-  visar ICA-baspriser, Willys körjournaler och kvarvarande Coop-källfel.
+  visar ICA-baspriser, Willys körjournaler och de då kvarvarande Coop-källfelen.
   Tidigare runtimefunktioner för admin bevarades med granskad exakt patchning;
   config.py är därför inte en ren kopia av main. Historiskt
   [medlemskap](releases/membership-20261021/ACTIVATED.md) och dess tre additiva
@@ -50,7 +56,7 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 1d092bc85f91 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 2600390d3943 --commit main --workdir .local/beta-release
 ```
 
 Arbetskopian ska vara ren; paketet läser enbart committade Git-blobbar.
