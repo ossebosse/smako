@@ -223,13 +223,14 @@ def _review_schema_diff(
             return diff
         reviewed = reviewed_lidl_schema_diff(diff)
     elif chain == Chain.COOP and parser_version in {
-        "coop-online-catalog-parser-v1", "coop-online-catalog-parser-v2", "coop-online-catalog-parser-v3", "coop-online-catalog-parser-v4",
+        "coop-online-catalog-parser-v1", "coop-online-catalog-parser-v2", "coop-online-catalog-parser-v3", "coop-online-catalog-parser-v4", "coop-online-catalog-parser-v5",
     }:
         from grocery_data.app.connectors.coop.schema_review import reviewed_coop_online_schema_diff
 
         reviewed = reviewed_coop_online_schema_diff(
-            diff, presentation_metadata=parser_version in {"coop-online-catalog-parser-v3", "coop-online-catalog-parser-v4"},
-            withheld_unknown_limits=parser_version == "coop-online-catalog-parser-v4",
+            diff, presentation_metadata=parser_version in {"coop-online-catalog-parser-v3", "coop-online-catalog-parser-v4", "coop-online-catalog-parser-v5"},
+            withheld_unknown_limits=parser_version in {"coop-online-catalog-parser-v4", "coop-online-catalog-parser-v5"},
+            promotion_type_summary=parser_version == "coop-online-catalog-parser-v5",
         )
     elif chain == Chain.HEMKOP and parser_version in {"hemkop-parser-v1", "hemkop-parser-v1.1-picking-contract", "hemkop-parser-v1.2-counted-weight", "hemkop-parser-v1.3-reviewed-catalog", "hemkop-parser-v1.4-delegated-context"}:
         from grocery_data.app.connectors.hemkop.schema_review import (
