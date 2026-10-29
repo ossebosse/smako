@@ -15,8 +15,12 @@ produktidentiteter, priser eller köpvillkor från den. Andra värden, typer och
 nya okända fält kräver fortfarande källgranskning. Pris-, kampanj-, kommun-,
 butiks- och radkvalificering är oförändrade.
 
-Avsedd release ändrar endast `grocery_data/app/connectors/coop/parser.py`
-och `structured_offers.py` ovanpå de faktiska aktiva app- och schedulerbilderna.
+Avsedd release ändrar `grocery_data/app/connectors/coop/parser.py`,
+`structured_offers.py`, `grocery_data/app/services/offer_rows.py` och
+`backend/app/providers/coop_municipality_offers.py` ovanpå de faktiska aktiva
+app- och schedulerbilderna. Radkvalificeringens felmetadata följer parserns
+version; prisbyggarens explicita versionslista omfattar nu även granskad v7.
+Paketeringsverktyget tillåter just denna Coop-läsare i en källrelease.
 Runtimekonfiguration, recept, konton, scheman och övriga filer bevaras.
 Lagringsretention, befintligt driftlås, verifierad backup, kandidatkontroll och
 normal kvalificering/publicering gäller som tidigare. Inget aktivt jobb avbryts.

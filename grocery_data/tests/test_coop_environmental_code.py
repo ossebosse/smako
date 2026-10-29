@@ -41,6 +41,7 @@ def test_metadata_on_parents_and_children_preserves_prices_and_all_blockers(acco
     assert [p.external_product_id for p in changed_accepted.products] == [p.external_product_id for p in accepted.products]
     assert changed_evidence['shared_blockers'] == evidence['shared_blockers']
     assert changed_evidence['decisions'] == evidence['decisions']
+    assert changed_accepted.failures and all(f.parser_version == PARSER for f in changed_accepted.failures)
     for before, after in zip(baseline.products, changed.products, strict=True):
         # Only the raw source record and its content hash may differ.
         old, new = before.model_dump(mode='json'), after.model_dump(mode='json')

@@ -67,7 +67,8 @@ def selected_paths(changed, *, axfood_reader_only=False):
             raise ValueError('Axfood reader release requires every reviewed reader dependency')
         return sorted(AXFOOD_READER_FILES)
     return [x for x in changed if x.startswith(('grocery_data/app/', 'deploy/scripts/'))
-            or x in ('grocery_data/__main__.py', 'grocery_data/ops.py', 'backend/app/services/price_universe.py')]
+            or x in ('grocery_data/__main__.py', 'grocery_data/ops.py', 'backend/app/services/price_universe.py',
+                     'backend/app/providers/coop_municipality_offers.py')]
 
 
 def main():
