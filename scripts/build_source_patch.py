@@ -90,7 +90,9 @@ def coop_app_backport(path, base, after):
 
 
 def selected_paths(changed, *, axfood_reader_only=False, include_source_dashboard=False,
-                   coop_syd_base=False):
+                   coop_syd_base=False, coop_syd_facts=False):
+    if coop_syd_facts:
+        return [x for x in changed if x == 'backend/app/services/personal_source_facts.py']
     if axfood_reader_only:
         if not AXFOOD_READER_FILES <= set(changed):
             raise ValueError('Axfood reader release requires every reviewed reader dependency')
@@ -101,6 +103,7 @@ def selected_paths(changed, *, axfood_reader_only=False, include_source_dashboar
                      'grocery_data/scripts/collect_coop_municipality.py')
             or (include_source_dashboard and x in SOURCE_DASHBOARD_FILES)
             or (coop_syd_base and x in {'backend/app/providers/coop_syd_base.py',
+                                       'backend/app/services/price_universe_runtime.py',
                                        'backend/app/services/production_price_universe_build.py'})]
 
 
@@ -120,7 +123,9 @@ def main():
     p.add_argument('--coop-online-app-backport', action='store_true',
                    help='Reviewed historical app-only Coop bases; preserve all non-Coop collector branches')
     p.add_argument('--coop-syd-base', action='store_true',
-                   help='Include the two reviewed Stora Coop build/provider dependencies')
+                   help='Include the reviewed Stora Coop provider/build/version dependencies')
+    p.add_argument('--coop-syd-facts', action='store_true',
+                   help='Package only the exact retained-facts reader for the serving app')
     args = p.parse_args()
     for name in ('base_commit', 'parent_commit', 'commit'):
         setattr(args, name, git('rev-parse', '--verify', getattr(args, name)+'^{commit}').decode().strip())
@@ -131,7 +136,7 @@ def main():
     changed = git('diff', '--name-only', args.parent_commit, args.commit).decode().splitlines()
     selected = selected_paths(changed, axfood_reader_only=args.axfood_reader_only,
                               include_source_dashboard=args.include_source_dashboard,
-                              coop_syd_base=args.coop_syd_base)
+                              coop_syd_base=args.coop_syd_base, coop_syd_facts=args.coop_syd_facts)
     if not selected:
         raise ValueError('empty source patch')
     runtime = json.loads(args.base_files.read_bytes()) if args.base_files else None

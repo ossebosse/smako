@@ -124,7 +124,7 @@ def test_retained_cache_cannot_bless_a_changed_target_identity(tmp_path):
             (donor.product_id,'coop',raw['id'],'730400','raw:fixture#results.items[0]','raw',snapshot))
         con.execute('INSERT INTO raw_snapshots VALUES (?,?,?,?)',
             ('raw',hashlib.sha256(payload).hexdigest(),'catalog.json',snapshot))
-    pool = SimpleNamespace(universe=SimpleNamespace(products=[donor,target],universe_id='same-source-version'),
+    pool = SimpleNamespace(stores=(), universe=SimpleNamespace(products=[donor,target],universe_id='same-source-version'),
                            product_search_index=SimpleNamespace(groups={}))
     before = load_retained_facts(pool,database=db,raw_root=tmp_path)
     assert (target.store_id,target.product_id) in before

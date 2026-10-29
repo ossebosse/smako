@@ -767,6 +767,16 @@ async def build_city_price_universe(
     try:
         service = MealPlanService(_build_settings())
         manager = PreparedPriceUniverseManager()
+        from app.services.price_universe_runtime import SOURCE_STRATEGY_VERSION
+
+        strategy_version = SOURCE_STRATEGY_VERSION
+        if coop_syd_base_inventory is not None:
+            from app.providers.coop_syd_base import assigned_stores
+
+            from grocery_data.app.domain.coop_syd_base import POLICY_VERSION
+
+            if assigned_stores(coop_syd_base_inventory):
+                strategy_version += "+" + POLICY_VERSION
         build_started = perf_counter()
         with activate_performance_trace() as trace, _network_disabled() as attempts:
             try:
@@ -777,6 +787,7 @@ async def build_city_price_universe(
                     memberships={chain.value: False for chain in Chain},
                     selector=service.economic_selector,
                     built_at=now,
+                    source_strategy_version=strategy_version,
                 )
             finally:
                 network_attempts = attempts["count"]

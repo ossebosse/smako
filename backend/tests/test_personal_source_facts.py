@@ -295,6 +295,52 @@ def _single_label_store(root):
     return universe, db_path, raw
 
 
+@pytest.mark.parametrize("fault", [None, "destination", "source", "snapshot", "namespace", "scope", "hash"])
+def test_stora_coop_source_aliases_keep_exact_raw_facts_for_each_destination(tmp_path, fault):
+    from dataclasses import replace
+
+    from app.models import Store
+    from app.services.personal_source_facts import _load_retained_catalog_facts
+
+    original, database, raw = _single_label_store(tmp_path)
+    source_id = "a886e74ad0e74a0e991f903cdebc2180"
+    with sqlite3.connect(database) as db:
+        db.execute("UPDATE products SET id=?", (source_id,))
+        if fault == "snapshot":
+            db.execute("UPDATE products SET catalog_snapshot_id='other'")
+    base = original.universe.products[0]
+    rows, stores = [], []
+    for identity in ["3850", "3853"]:
+        provenance = base.source_provenance.model_copy(update={
+            "source_role": "owner_assigned_base_price", "price_context": "online_fulfillment",
+            **({"provider_store_id": "other"} if fault == "source" else {}),
+        })
+        product_id = source_id + (":other:" if fault == "namespace" else ":stora-syd:") + identity
+        rows.append(base.model_copy(update={
+            "product_id": product_id, "store_id": identity, "chain": "coop",
+            "price_context_type": "online_fulfillment" if fault == "scope" else "physical_store",
+            "source_provenance": provenance,
+        }))
+        stores.append(Store(store_id=identity, name=identity, city="Malmö", chain="coop",
+            price_context_type="physical_store",
+            physical_store_external_id="other" if fault == "destination" else identity))
+    if fault == "hash":
+        (raw / "page.json").write_bytes(b"{}")
+    target = prepared(*rows)
+    target = replace(target, stores=tuple(stores))
+    facts = _load_retained_catalog_facts(target, database=database, raw_root=raw)
+    if fault is not None:
+        assert not facts
+        return
+    assert len(facts) == 2
+    for row in rows:
+        fact = facts[(row.store_id, row.product_id)]
+        assert fact.organic is True and fact.nutrition["protein_g"] == 3.5
+        assert fact.ingredients and fact.observed_at == base.source_provenance.source_observed_at.isoformat()
+        assert fact.source_product_id == row.product_id and fact.source_snapshot_id == "v2-frozen"
+        assert row.price == base.price
+
+
 @pytest.mark.parametrize("fault", ["read_error", "changed_between_hashes"])
 def test_failed_projection_is_never_persisted_and_the_retry_recovers(tmp_path, monkeypatch, fault):
     """Review 2026-10-18 P2: a projection that hit a read fault must not reach the disk cache."""
