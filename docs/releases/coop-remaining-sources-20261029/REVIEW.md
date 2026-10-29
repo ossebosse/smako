@@ -39,3 +39,9 @@ Lokalt har 118 fokuserade tester för parser, gränsvillkor, butiksläsare,
 schemaavgränsning och dashboard passerat; kompletterande kommun-/jobbtester
 journalförs separat. Ruff och compileall passerar. Verklig insamling,
 publicering och laddning ska redovisas separat i aktiveringsjournalen.
+
+Appens Coop-katalogparser är i verkligheten v2. Dess tre historiska Git-baser
+är explicit hashbundna i paketeraren. Endast Coop-grenen i den äldre gemensamma
+collectorn ersätts; Hemköp och Willys behåller exakt sina aktiva bytes. De två
+rena Coop-modulerna får granskad v4 inklusive tidigare v3-presentationsgranskning.
+Scheduler använder sin befintliga v3-bas utan denna appanpassning.
