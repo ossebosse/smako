@@ -1,3 +1,21 @@
+# 2026-10-29: Coop environmentalCode rättat, tio butiker uppdaterade
+
+Se [aktivering och butiksresultat](releases/coop-environmental-code-20261029/ACTIVATED.md).
+Main-merge `d15f5f4ab049`, kod `1d092bc85f91`,
+grön PR-CI. Både app och scheduler använder `source-ops-1d092bc85f91`.
+Färska kampanjpriser är publicerade/laddade för fyra Lund- och sex Malmöbutiker;
+dashboardens insamling visar succeeded, failed_attempts=0, totalt 2925 priser.
+Parser v7 bevarar endast granskad `environmentalCode="A"` som opak metadata;
+prisbyggarens versionslista och kvalificeringens felmetadata följer v7.
+46 offline- och 36 ytterligare tester är godkända, båda bilderna verifierade.
+Backup `20261029T060304Z`, tidigare användarrader och mountar
+verifierade; retention complete. Receptmetodhash och tvånattspolicy består.
+
+Separata Coop-fel återstår för Malmö Central, Kornettsgatan, Djupadal,
+X:-tra Nydala samt Online Syds katalogkontrakt. Online Syd är fortfarande
+onlinekontext, inte fysiska butikers baspriser. Windowsregistreringen nedan
+återstår fortfarande; den ändrades inte av denna release.
+
 # 2026-10-28: Dashboard rättad, Malmö-Willys kvitterat, Coop-källfel kvarstår
 
 Ägarens driftgranskning är dokumenterad i

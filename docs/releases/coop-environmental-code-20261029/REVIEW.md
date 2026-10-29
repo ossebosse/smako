@@ -32,10 +32,16 @@ Nydala samt Coop Online Syds katalogkontrakt omfattas inte av detta fältstöd.
 Deras tidigare underlag och felhistorik ska bevaras. Coop Online Syd är fortsatt
 en onlinekontext, inte baspriser för fysiska Coop-butiker.
 
-Aktivering och färska butiksresultat dokumenteras först när de är verifierade.
+Verifierad aktivering och färska butiksresultat finns i [ACTIVATED.md](ACTIVATED.md).
 
-Lokal verifiering: 101 test godkända (52,93 s): miljöfält, schemaövergång,
+Första schema-/insamlingskontroll: 101 test godkända (52,93 s): miljöfält, schemaövergång,
 fysisk strukturerad insamling, connector, offer acceptance, kommunjobb,
 kommunkontrakt, routning och browserintegritet. Ruff, compileall och
 `git diff --check` godkända. Negativa prov täcker okända värden/typer och
 nya villkor; fulla historiska Lund-/Malmöunderlag ger identiska prisbeslut.
+
+Slutlig versions-/läsar- och paketeringskontroll: 46 tester med spärrat externt
+nät och noll åtkomstöverträdelser, samt 36 ytterligare Coop-tester. Både PR-
+och main-CI är gröna. Slutkandidatens vanliga läsare godkände 2 925 erbjudanden
+från tio verkliga butiker utan nätanrop eller ändrade källtider. Samma priser
+och lyckade körhistorik verifierades därefter i den aktiva dashboarden.

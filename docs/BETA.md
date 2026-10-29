@@ -15,9 +15,11 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Senast aktiverade appkod är `fac3a7e021a0`,
-  app-BUILD_ID `app-fac3a7e021a0-9fcadbe1`; schedulerkod är `2b65533af00d`, BUILD_ID
-  `beta-scheduler-2b65533af00d-contracts1`.
+  senaste aktiveringsrapport. Senast aktiverade källkod för båda processerna är
+  `1d092bc85f91`, BUILD_ID `source-ops-1d092bc85f91`.
+  [Coop-fälträttning och tio uppdaterade butiker](releases/coop-environmental-code-20261029/ACTIVATED.md)
+  är en fyrfils-patch ovanpå appbas `fac3a7e021a0` och schedulerbas `2b65533af00d`.
+  Använd faktiskt aktiv fil/image som bas vid nästa exakt granskade release.
   [Samlad aktivering](releases/beta-ica-recipes-20261028/ACTIVATED.md) innehåller
   ICA/tvånattspolicy och hela det integrerade recept-/beräkningsarbetet.
   Windowsuppgiftens registreringsbyte återstår med administratörsrättighet.
@@ -47,8 +49,8 @@ git pull --ff-only
 git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
-# Ersätt fac3a7e021a0 med senast aktiverade appkod enligt aktuell releasejournal.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit fac3a7e021a0 --commit main --workdir .local/beta-release
+# Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 1d092bc85f91 --commit main --workdir .local/beta-release
 ```
 
 Arbetskopian ska vara ren; paketet läser enbart committade Git-blobbar.

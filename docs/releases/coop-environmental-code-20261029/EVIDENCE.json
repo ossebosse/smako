@@ -1,0 +1,470 @@
+{
+  "schema": "smako-coop-field-repair-v1",
+  "reviewed_commit": "1d092bc85f9156e092ab928fba2a531ba7e04107",
+  "main_merge_commit": "d15f5f4ab0494b46496339c4366a844b0fb0dc91",
+  "pr": "https://github.com/ossebosse/smako/pull/43",
+  "ci": "https://github.com/ossebosse/smako/actions/runs/40825672342",
+  "main_ci": "https://github.com/ossebosse/smako/actions/runs/40826387252",
+  "runtimes": {
+    "app": {
+      "image": "sha256:64dfe8c387fc7e27f32ea2d1af858a891e20095993454a07a4b6ee84f67c27b6",
+      "base_image": "sha256:542132871f644fc1f1c186e5966e105ec4ea6cbb76249699b7493d5948ff47e3",
+      "tag": "smako-app:source-ops-1d092bc85f91",
+      "build_id": "source-ops-1d092bc85f91",
+      "commit": "1d092bc85f9156e092ab928fba2a531ba7e04107",
+      "files": {
+        "backend/app/providers/coop_municipality_offers.py": "0b531271b28df7eed2684ed7c333696c3aad98f5551299f2149f97f20265e9cc",
+        "grocery_data/app/connectors/coop/parser.py": "a6dc4d0c459637873384f11b0c525b5d08812076ff125d65a30f6f0da17eb432",
+        "grocery_data/app/connectors/coop/structured_offers.py": "4f1e1a1b42a0bdc8b67788a6937dd9949547181e4683661ad0f21aceb05d7adc",
+        "grocery_data/app/services/offer_rows.py": "81e4397fe8c097ddae9f08d135174ee854afb693540c407422eb6d0352361c10"
+      },
+      "only_reviewed_files_changed": true,
+      "unchanged_runtime_files": 1002
+    },
+    "scheduler": {
+      "image": "sha256:6a11786a93f0f7b4b9028dc53234197231c1c1c3fe23c8a93eddd19086a23527",
+      "base_image": "sha256:00d69bd1f4d5d4c6fa5a5fd6dc10d8eab9adef79654fb8669433a3112c37173d",
+      "tag": "smako-scheduler:source-ops-1d092bc85f91",
+      "build_id": "source-ops-1d092bc85f91",
+      "commit": "1d092bc85f9156e092ab928fba2a531ba7e04107",
+      "files": {
+        "backend/app/providers/coop_municipality_offers.py": "0b531271b28df7eed2684ed7c333696c3aad98f5551299f2149f97f20265e9cc",
+        "grocery_data/app/connectors/coop/parser.py": "a6dc4d0c459637873384f11b0c525b5d08812076ff125d65a30f6f0da17eb432",
+        "grocery_data/app/connectors/coop/structured_offers.py": "4f1e1a1b42a0bdc8b67788a6937dd9949547181e4683661ad0f21aceb05d7adc",
+        "grocery_data/app/services/offer_rows.py": "81e4397fe8c097ddae9f08d135174ee854afb693540c407422eb6d0352361c10"
+      },
+      "only_reviewed_files_changed": true,
+      "unchanged_runtime_files": 997
+    }
+  },
+  "activated_at": "2026-10-29T06:11:42.343421+00:00",
+  "backup_bundle": "20261029T060304Z",
+  "existing_state_preserved": {
+    "consumer_plan_revisions": 314,
+    "personal_private_state": 123,
+    "member_accounts": 2,
+    "member_sessions": 1,
+    "member_auth_attempts": 4,
+    "planner_owned_artifacts": 0
+  },
+  "price_manifests_preserved_during_code_swap": true,
+  "mounts_preserved": true,
+  "environment_changes": [
+    "BUILD_ID"
+  ],
+  "retention_after_activation": "complete",
+  "parser": "coop-parser-v7",
+  "reviewed_field": {
+    "name": "environmentalCode",
+    "type": "string",
+    "values": [
+      "A"
+    ],
+    "interpretation": "opaque source metadata; no inferred product facts or purchase eligibility"
+  },
+  "local_checks": {
+    "offline_reader_schema_release_tests": 46,
+    "additional_coop_tests": 36,
+    "ruff": true,
+    "compileall": true,
+    "offline_access_violations": 0
+  },
+  "source_revalidation": {
+    "network": {
+      "count": 0
+    },
+    "municipalities": [
+      {
+        "municipality_code": "1281",
+        "stores": 4,
+        "accepted_by_current_reader": {
+          "1158": 315,
+          "3659": 278,
+          "3813": 315,
+          "3820": 278
+        },
+        "database_unchanged": true,
+        "decisions_unchanged": true
+      },
+      {
+        "municipality_code": "1280",
+        "stores": 6,
+        "accepted_by_current_reader": {
+          "3815": 315,
+          "3816": 278,
+          "3819": 295,
+          "3823": 295,
+          "3830": 278,
+          "3834": 278
+        },
+        "database_unchanged": true,
+        "decisions_unchanged": true
+      }
+    ]
+  },
+  "publication": [
+    {
+      "municipality_code": "1281",
+      "city": "Lund",
+      "price_universe_id": "price-universe:9e45dc8ffb89a769d2fe0ee8d13488aa692ff67448a50885503ad112f5c79205",
+      "loaded": true,
+      "normal_refresh_exit_code": 2,
+      "source_snapshots": [
+        "065303e03f4f4318beaabfb035aa001e",
+        "3dc62df71e3a4d66a93b34619e8ac734",
+        "644c4b666b5b4f5eb3459cc827ab6c6a",
+        "88b7e2a0afd84955b7071619d1d0c7dd"
+      ],
+      "stores": [
+        {
+          "store_id": "3659",
+          "name": "Coop Värpinge Lund",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:42:37.427839+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "1158",
+          "name": "Coop Veberöd",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:42:44.935849+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3820",
+          "name": "Coop Klostergården",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:42:53.345792+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3813",
+          "name": "Coop Mårtenstorget",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:43:01.210499+00:00",
+          "failed_attempts": 0
+        }
+      ],
+      "loaded_confirmed_at": "2026-10-29T06:24:06.156847+00:00",
+      "recovery": "read-only verification of ordinary runtime confirmation; no source collection or timestamp changes"
+    },
+    {
+      "municipality_code": "1280",
+      "city": "Malmö",
+      "price_universe_id": "price-universe:e8ed718b6d66124375aac4b7ec42b70ec6f80f7f32cca86f1f65a22b960d0289",
+      "loaded": true,
+      "normal_refresh_exit_code": 0,
+      "source_snapshots": [
+        "56722a82326b4992af55131415b5c66c",
+        "7250e121704748f4bb1df3dff7987740",
+        "a19c9d011f7c43b48d02d20106a22242",
+        "a9a5096664784b49a38717cad864bfa2",
+        "aa5e55f901c64fc684bcd1724bbf01e6",
+        "ef7e400290f54f4ebe0a21cbde78ce71"
+      ],
+      "stores": [
+        {
+          "store_id": "3823",
+          "name": "Coop Värnhem",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:44:06.891419+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3816",
+          "name": "Coop Norra Parkgatan",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:44:14.558687+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3834",
+          "name": "Coop Kirseberg",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:44:22.145417+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3815",
+          "name": "Coop Bulltofta",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:44:29.861671+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3819",
+          "name": "Coop Oxie",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:44:38.154462+00:00",
+          "failed_attempts": 0
+        },
+        {
+          "store_id": "3830",
+          "name": "Coop Limhamn",
+          "status": "partial_candidate",
+          "last_success": "2026-10-29T05:44:45.747690+00:00",
+          "failed_attempts": 0
+        }
+      ],
+      "loaded_confirmed_at": "2026-10-29T06:47:11.436230+00:00",
+      "recovery": "read-only verification of ordinary runtime confirmation; no source collection or timestamp changes"
+    }
+  ],
+  "live_dashboard": {
+    "cities": [
+      {
+        "city": "Lund",
+        "build_id": "source-ops-1d092bc85f91",
+        "price_universe_id": "price-universe:9e45dc8ffb89a769d2fe0ee8d13488aa692ff67448a50885503ad112f5c79205",
+        "stores": [
+          {
+            "id": "3659",
+            "name": "Coop Värpinge Lund",
+            "available_campaign_prices": 278,
+            "observed_at": "2026-10-29T05:42:37.427839Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:42:32.969393Z",
+              "last_success_at": "2026-10-29T05:42:37.427839Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          },
+          {
+            "id": "1158",
+            "name": "Coop Veberöd",
+            "available_campaign_prices": 315,
+            "observed_at": "2026-10-29T05:42:44.935849Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:42:32.969393Z",
+              "last_success_at": "2026-10-29T05:42:44.935849Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          },
+          {
+            "id": "3820",
+            "name": "Coop Klostergården",
+            "available_campaign_prices": 278,
+            "observed_at": "2026-10-29T05:42:53.345792Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:42:32.969393Z",
+              "last_success_at": "2026-10-29T05:42:53.345792Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          },
+          {
+            "id": "3813",
+            "name": "Coop Mårtenstorget",
+            "available_campaign_prices": 315,
+            "observed_at": "2026-10-29T05:43:01.210499Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:42:32.969393Z",
+              "last_success_at": "2026-10-29T05:43:01.210499Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          }
+        ],
+        "remaining_other_source_failures": [],
+        "server_collection_schedule": "Måndag och torsdag 03:17 svensk tid"
+      },
+      {
+        "city": "Malmö",
+        "build_id": "source-ops-1d092bc85f91",
+        "price_universe_id": "price-universe:e8ed718b6d66124375aac4b7ec42b70ec6f80f7f32cca86f1f65a22b960d0289",
+        "stores": [
+          {
+            "id": "3823",
+            "name": "Coop Värnhem",
+            "available_campaign_prices": 295,
+            "observed_at": "2026-10-29T05:44:06.891419Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:44:02.432493Z",
+              "last_success_at": "2026-10-29T05:44:06.891419Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          },
+          {
+            "id": "3816",
+            "name": "Coop Norra Parkgatan",
+            "available_campaign_prices": 278,
+            "observed_at": "2026-10-29T05:44:14.558687Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:44:02.432493Z",
+              "last_success_at": "2026-10-29T05:44:14.558687Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          },
+          {
+            "id": "3834",
+            "name": "Coop Kirseberg",
+            "available_campaign_prices": 278,
+            "observed_at": "2026-10-29T05:44:22.145417Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:44:02.432493Z",
+              "last_success_at": "2026-10-29T05:44:22.145417Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          },
+          {
+            "id": "3815",
+            "name": "Coop Bulltofta",
+            "available_campaign_prices": 315,
+            "observed_at": "2026-10-29T05:44:29.861671Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:44:02.432493Z",
+              "last_success_at": "2026-10-29T05:44:29.861671Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          },
+          {
+            "id": "3819",
+            "name": "Coop Oxie",
+            "available_campaign_prices": 295,
+            "observed_at": "2026-10-29T05:44:38.154462Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:44:02.432493Z",
+              "last_success_at": "2026-10-29T05:44:38.154462Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          },
+          {
+            "id": "3830",
+            "name": "Coop Limhamn",
+            "available_campaign_prices": 278,
+            "observed_at": "2026-10-29T05:44:45.747690Z",
+            "collection": {
+              "status": "succeeded",
+              "history_source": "municipal_offer_job",
+              "last_attempt_at": "2026-10-29T05:44:02.432493Z",
+              "last_success_at": "2026-10-29T05:44:45.747690Z",
+              "next_fetch_at": "2026-11-02T02:17:00Z",
+              "failed_attempts": 0,
+              "error": null,
+              "retained_snapshot": false
+            }
+          }
+        ],
+        "remaining_other_source_failures": [],
+        "server_collection_schedule": "Måndag och torsdag 03:17 svensk tid"
+      }
+    ],
+    "admin_without_auth": 401,
+    "remaining_municipal_source_failures": [
+      {
+        "municipality": "1280",
+        "store_id": "3833",
+        "name": "Coop Malmö Central",
+        "status": "failed",
+        "failed_attempts": 70,
+        "last_attempt": "2026-10-29T03:17:05.290686+00:00",
+        "last_success": null
+      },
+      {
+        "municipality": "1280",
+        "store_id": "3835",
+        "name": "Coop Kornettsgatan",
+        "status": "failed",
+        "failed_attempts": 70,
+        "last_attempt": "2026-10-29T03:17:05.290686+00:00",
+        "last_success": null
+      },
+      {
+        "municipality": "1280",
+        "store_id": "3831",
+        "name": "Coop Djupadal",
+        "status": "failed",
+        "failed_attempts": 70,
+        "last_attempt": "2026-10-29T03:17:05.290686+00:00",
+        "last_success": null
+      },
+      {
+        "municipality": "1280",
+        "store_id": "3829",
+        "name": "X:-Tra Nydala",
+        "status": "failed",
+        "failed_attempts": 70,
+        "last_attempt": "2026-10-29T03:17:05.290686+00:00",
+        "last_success": null
+      }
+    ],
+    "retained_online_context": [
+      {
+        "store_id": "730400",
+        "snapshot_id": "5290133068f34ecca461ebb20d0fbb6b",
+        "observed_at": "2026-10-17T23:30:19.591880+00:00",
+        "freshness": "STALE",
+        "qualified": true,
+        "base_prices_usable": true
+      }
+    ]
+  },
+  "remaining_separate_sources": [
+    "Coop Malmö Central 3833",
+    "Coop Kornettsgatan 3835",
+    "Coop Djupadal 3831",
+    "X:-tra Nydala 3829",
+    "Coop Online Syd 730400 catalogue contract"
+  ],
+  "superseded_owned_candidate_retention": {
+    "status": "superseded_owned_candidates_retired",
+    "before_free_bytes": 9771204608,
+    "after_free_bytes": 17748770816,
+    "removed": [
+      {
+        "image": "sha256:c4dad7bec1feab77d4fce74dfb896d1671cf1dab1a5853bfd9a6d4915c85eba7",
+        "tag": "smako-app:source-ops-57d0c679b6b9",
+        "bytes": 2297752159
+      },
+      {
+        "image": "sha256:66b0e158787b5653a51f8c5d24226bdae6c2d037bd0b02341512d308986aaf88",
+        "tag": "smako-scheduler:source-ops-57d0c679b6b9",
+        "bytes": 2295844873
+      }
+    ],
+    "active_and_rollback_images_preserved": true,
+    "no_container_or_volume_removed": true
+  }
+}

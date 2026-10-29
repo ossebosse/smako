@@ -1,5 +1,10 @@
 # Gemensam driftstatus och avgränsad reparation
 
+[Coops insamlingsfält rättat 29 oktober](releases/coop-environmental-code-20261029/ACTIVATED.md)
+bekräftar tio färskt uppdaterade butiker och parser v7 i båda processerna.
+Separata hämtnings-/katalogfel och Windowsregistreringen redovisas fortsatt
+som kvarstående; tidigare 28-oktoberrapport är historiskt underlag.
+
 Senaste [samlade betaaktivering](releases/beta-ica-recipes-20261028/ACTIVATED.md)
 omfattar ICA-baspriser, hela recept-/beräkningsarbetet och serverhämtning
 måndag/torsdag 03:17 svensk tid. Windowsreläets befintliga uppgiftsregistrering
