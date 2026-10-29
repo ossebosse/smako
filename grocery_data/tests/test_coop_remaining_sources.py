@@ -81,3 +81,38 @@ async def test_verified_absent_publication_preserves_observation_and_unknown_sta
     evidence.pop("publication_status")
     result, _ = await pipeline.collect_xtra({}, {}, tmp_path)
     assert result["status"] == "blocked_or_incomplete_publications"
+
+
+@pytest.mark.parametrize("known_empty", [True, False])
+async def test_disabled_flyer_runs_real_import_only_for_verified_empty_response(tmp_path, monkeypatch, known_empty):
+    from grocery_data.scripts import collect_coop_physical_offers as pipeline
+    store, batch = source()
+    store = store.model_copy(update={"source_fields": {**store.source_fields, "disable_store_offers_flyer": True}})
+    envelope = json.loads(batch.documents[0].payload)
+    empty(envelope)
+    if not known_empty:
+        envelope["structured_offers"]["data"] = {"sortingGroups": []}
+    batch = batch.model_copy(update={"documents": (batch.documents[0].model_copy(
+        update={"payload": json.dumps(envelope).encode()}),)})
+    class Client:
+        async def _get(self, *args, **kwargs):
+            return batch.documents[0]
+    class Public:
+        client = Client()
+        def parse_stores(self, *args):
+            return [store]
+        async def fetch_offers(self, *args):
+            return batch
+        async def aclose(self):
+            pass
+    monkeypatch.setattr(pipeline, "CoopConnector", Public)
+    report = await pipeline.collect({"stores": [{"store": store.model_dump(mode="json")}]},
+                                    {store.external_id}, tmp_path / "attempt")
+    row = report["stores"][0]
+    if known_empty:
+        extracted = json.loads((tmp_path / "attempt/sources" / (store.external_id + "-extracted.json")).read_bytes())
+        assert not extracted["products"] and not extracted["failures"]
+        assert row["status"] == "rejected" and not row["qualification"]["shared_blockers"]
+        assert not row["partial_snapshot_promoted"] and row["own"] == 0
+    else:
+        assert row["status"] == "failed" and row["own"] == 0

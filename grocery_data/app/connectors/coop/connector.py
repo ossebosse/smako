@@ -100,6 +100,20 @@ class CoopRowApprovedOfferConnector(CoopConnector):
     async def fetch_catalog(self, store):
         return self.offers
 
+    def catalog_eligible(self, store):
+        if super().catalog_eligible(store):
+            return True
+        # A disabled flyer can still have a verified, explicitly empty public
+        # response. Parse it to record absence; an empty snapshot cannot promote.
+        # Do not make non-empty/unknown disabled feeds eligible for prices.
+        from grocery_data.app.connectors.coop.structured_offers import confirmed_empty_response
+        try:
+            envelope = self.offers.documents[0].json_payload()
+            return (store == self.store and len(self.offers.documents) == 1
+                    and confirmed_empty_response([envelope["structured_offers"]], store))
+        except (KeyError, TypeError, ValueError, IndexError):
+            return False
+
     def parse_catalog(self, raw, references, store):
         from grocery_data.app.services.offer_rows import qualify_rows
         self.extracted = self.parser.parse_catalog(raw, references, store)
