@@ -29,3 +29,20 @@ ingen ny nättraversering eller omstämpling görs.
 Lunds befintliga prisversion har den kanoniska onlinekontexten
 context:coop:23eaae11c9661e68. Malmö har ingen sådan kontext i sitt valda scope
 och ska behålla sina butikskopplade källor. Källreparationen utökar inga val.
+
+## Styckgräns och flerpack
+
+Kandidat cb5b510fca04 drogs tillbaka vid sista granskningen före aktivering:
+Shared Offer.max_quantity räknar rabatterade grupper för flerpack, medan Coops
+Styck-gräns räknar enskilda förpackningar. V5 konverterar därför styckgränsen
+till antalet fullständiga grupper och behåller ursprunglig styckgräns som evidens.
+En för liten gräns för en enda grupp medför att kampanjen undanhålls.
+
+Verifierad checkout: sex 57g-vitlöksförpackningar, ordinarie 10,90 kr, två för
+15 kr och en syntetisk verifierad gräns om fem styck ger 51,80 kr: två grupper
+för 30 kr plus två ordinarie förpackningar för 21,80 kr. Både databas, OWN-API,
+prisnormalisering och checkout-audit ingår. Ingen rabatt får tillämpas på fler
+hela grupper än styckgränsen medger. Den kompletta sparade hämtningen används
+även för den slutliga kandidatreprisen, utan fler nätanrop eller omstämpling.
+App och scheduler ligger kvar på 2600390d3943 tills den rättade källbilden godkänts.
+Backup 20261029T095005Z verifierades under det avbrutna aktiveringsförsöket.
