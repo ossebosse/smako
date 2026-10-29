@@ -139,7 +139,7 @@ class CoopMunicipalityOfferProvider(IcaAreaOfferProvider):
                     terms = product.purchase_terms
                     bound = bool(terms and terms.model_dump(mode='json') == fields.get('purchase_terms') and terms.usage != 'blocked')
                     if (
-                        ev.get("parser_version") not in ({"xtra-pdf-text-v1", "xtra-pdf-text-v2"} if official["source_fields"]["concept"] == "X:-tra" else {"coop-parser-v3", "coop-parser-v4", "coop-parser-v5", "coop-parser-v6"})
+                        ev.get("parser_version") not in ({"xtra-pdf-text-v1", "xtra-pdf-text-v2"} if official["source_fields"]["concept"] == "X:-tra" else {"coop-parser-v3", "coop-parser-v4", "coop-parser-v5", "coop-parser-v6", "coop-parser-v7"})
                         or not ev.get("scope_key", "").endswith(":offer-rows")
                         or fields.get("coop_physical_policy") != ("coop-xtra-pdf-text-v1" if official["source_fields"]["concept"] == "X:-tra" else "coop-physical-structured-v1")
                         or fields.get("coop_purchase_qualified") is not True

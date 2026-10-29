@@ -75,7 +75,7 @@ async def test_missing_optional_database_keeps_base(tmp_path):
 
 
 @pytest.mark.parametrize("duplicate_base", [False, True])
-@pytest.mark.parametrize("parser_version", [None, "coop-parser-v3", "coop-parser-v4", "coop-parser-v5"])
+@pytest.mark.parametrize("parser_version", [None, "coop-parser-v3", "coop-parser-v4", "coop-parser-v5", "coop-parser-v6", "coop-parser-v7"])
 async def test_actual_rows_locality_inventory_caps_and_wrong_store(
     tmp_path, monkeypatch, duplicate_base, parser_version
 ):

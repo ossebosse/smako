@@ -15,10 +15,10 @@ from grocery_data.app.domain import ParseFailure, ProductParseResult, SourceOffe
 from grocery_data.app.domain.purchase_terms import PurchaseTerms
 
 POLICY = "coop-physical-structured-v1"
-PARSER = "coop-parser-v6"
+PARSER = "coop-parser-v7"
 _ROW_KEYS = ("id", "externalId", "campaignStartDate", "campaignEndDate", "weekNumber",
              "storeLedgerAccountNumber", "channelCodes", "roleDescriptions", "eagId", "isPil",
-             "ageRestriction", "simplifiedAgeRestriction", "weeklyTip")
+             "ageRestriction", "simplifiedAgeRestriction", "weeklyTip", "environmentalCode")
 _PRICE_KEYS = ("discountValue", "isMemberPrice", "isItemPriceDiscount", "minimumAmount",
                "unit", "dealType", "termStyle", "quantity", "isPercentageDiscount", "steps",
                "buyAmount", "payAmount", "claim")
@@ -61,6 +61,12 @@ def sanitized_response(payload):
             raise ValueError("new public offer fields require schema review: " + ", ".join(unknown))
         if "weeklyTip" in value and type(value["weeklyTip"]) is not bool:
             raise ValueError("row.weeklyTip requires boolean schema review")
+        # Public Lund/Malmö responses observed 2026-10-29 use this opaque
+        # metadata code. Retain it as evidence; it proves neither product facts
+        # nor purchase eligibility. Other values still require source review.
+        if "environmentalCode" in value and (
+                not isinstance(value["environmentalCode"], str) or value["environmentalCode"] != "A"):
+            raise ValueError("row.environmentalCode has unreviewed value or type; requires schema review")
         price = value.get("priceInformation", {})
         for field in ("buyAmount", "payAmount"):
             if field in price and (type(price[field]) is not int or price[field] < 1):

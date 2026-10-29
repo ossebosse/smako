@@ -23,3 +23,10 @@ def test_runtime_semantic_changes_or_missing_files_are_never_normalized_away(bas
     runtime = {"files": {"module.py": base64.b64encode(actual).decode() if actual is not None else None}}
     with pytest.raises(ValueError, match="differs"):
         module.exact_runtime_base(base, "module.py", runtime)
+
+
+def test_coop_source_release_includes_its_explicit_reader_only():
+    paths = ['grocery_data/app/connectors/coop/structured_offers.py',
+             'backend/app/providers/coop_municipality_offers.py',
+             'backend/app/services/personal_planner.py', 'backend/app/config.py']
+    assert module.selected_paths(paths) == paths[:2]
