@@ -140,6 +140,16 @@ async def test_smaller_coop_is_not_assigned_and_online_prices_remain_a_separate_
     assert await provider.get_store_products(small.store_id) == []
 
 
+async def test_piece_checkout_cannot_retain_an_online_discount():
+    own = source()
+    own.products["online-local"] = [product(sale_model="sold_by_piece", piece_price=9)]
+    provider = CoopSydBaseProvider(Provider(), own, inventory=inventory("1281", "Lund"))
+    stores = await provider.find_stores("22350")
+    p = (await provider.get_store_products(stores[0].store_id))[0]
+    assert p.piece_price == p.price == p.effective_price == p.sale_price == 15.5
+    assert p.offers == [] and p.member_price is None
+
+
 @pytest.mark.parametrize("change", ["ledger", "unknown_municipality", "wrong_source", "duplicate_source", "foreign_product"])
 async def test_no_assignment_for_unverified_destination_or_source(change):
     inv = inventory("1281", "Lund")

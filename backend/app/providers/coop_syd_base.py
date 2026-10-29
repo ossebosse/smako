@@ -119,6 +119,7 @@ class CoopSydBaseProvider(GroceryPriceProvider):
                     "store_id": context, "store_name": target.name,
                     "price_context_type": "physical_store", "coverage": "full_online_catalog",
                     "price": p.price, "effective_price": p.price, "sale_price": p.price,
+                    "piece_price": p.price if str(p.sale_model) == "sold_by_piece" else p.piece_price,
                     "member_price": None, "offers": [], "promotion_groups": (),
                     "purchase_terms": None, "conditional_price_signal": False,
                     "conditional_variant_choice": False,
