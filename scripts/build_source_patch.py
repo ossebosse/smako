@@ -89,7 +89,8 @@ def coop_app_backport(path, base, after):
     return base[:start] + after[new_start:new_end] + base[end:]
 
 
-def selected_paths(changed, *, axfood_reader_only=False, include_source_dashboard=False):
+def selected_paths(changed, *, axfood_reader_only=False, include_source_dashboard=False,
+                   coop_syd_base=False):
     if axfood_reader_only:
         if not AXFOOD_READER_FILES <= set(changed):
             raise ValueError('Axfood reader release requires every reviewed reader dependency')
@@ -98,7 +99,9 @@ def selected_paths(changed, *, axfood_reader_only=False, include_source_dashboar
             or x in ('grocery_data/__main__.py', 'grocery_data/ops.py', 'backend/app/services/price_universe.py',
                      'backend/app/providers/coop_municipality_offers.py',
                      'grocery_data/scripts/collect_coop_municipality.py')
-            or (include_source_dashboard and x in SOURCE_DASHBOARD_FILES)]
+            or (include_source_dashboard and x in SOURCE_DASHBOARD_FILES)
+            or (coop_syd_base and x in {'backend/app/providers/coop_syd_base.py',
+                                       'backend/app/services/production_price_universe_build.py'})]
 
 
 def main():
@@ -116,6 +119,8 @@ def main():
                    help='Include the three explicit municipal source dashboard dependencies in the app image')
     p.add_argument('--coop-online-app-backport', action='store_true',
                    help='Reviewed historical app-only Coop bases; preserve all non-Coop collector branches')
+    p.add_argument('--coop-syd-base', action='store_true',
+                   help='Include the two reviewed Stora Coop build/provider dependencies')
     args = p.parse_args()
     for name in ('base_commit', 'parent_commit', 'commit'):
         setattr(args, name, git('rev-parse', '--verify', getattr(args, name)+'^{commit}').decode().strip())
@@ -125,7 +130,8 @@ def main():
         raise ValueError('invalid pinned image identity')
     changed = git('diff', '--name-only', args.parent_commit, args.commit).decode().splitlines()
     selected = selected_paths(changed, axfood_reader_only=args.axfood_reader_only,
-                              include_source_dashboard=args.include_source_dashboard)
+                              include_source_dashboard=args.include_source_dashboard,
+                              coop_syd_base=args.coop_syd_base)
     if not selected:
         raise ValueError('empty source patch')
     runtime = json.loads(args.base_files.read_bytes()) if args.base_files else None
