@@ -3,6 +3,7 @@
 import json
 from datetime import datetime
 
+import pytest
 from app.providers.own import OwnGroceryPriceProvider
 
 from grocery_data.app.api.catalog import _product_item, _promotion_item
@@ -195,7 +196,8 @@ def test_scan_full_shopping_baskets(tmp_path):
         )
 
 
-def test_garlic_quantity_and_multibuy_full_shopping_basket():
+@pytest.mark.parametrize("verified_limit,expected_total", [(False, 21.8), (True, 15)])
+def test_garlic_quantity_and_multibuy_full_shopping_basket(verified_limit, expected_total):
     from app.config import Settings
     from app.models import PlanRequest
     from app.models.personal import ExtraNeed, PersonalPlanning
@@ -206,6 +208,12 @@ def test_garlic_quantity_and_multibuy_full_shopping_basket():
 
     evidence = json.loads((ROOT / "product-036a35871545499789de7cf99ddd0451.json").read_bytes())
     row = evidence["record"]
+    if verified_limit:
+        # Explicitly synthetic limits exercise basket maths independently. The
+        # unmodified retained response must use ordinary prices under v4.
+        for promotion in row.get("onlinePromotions", []):
+            promotion.update(maxNumberOfUse=4500,
+                             maxNumberOfUseWithUnit={"unit": "Styck", "value": 5.0})
     meta = evidence["raw"]
     at = datetime.fromisoformat(meta["fetched_at"])
     store = SourceStore(
@@ -257,7 +265,7 @@ def test_garlic_quantity_and_multibuy_full_shopping_basket():
         {"id": "garlic", "revision": 0, "items": [], "reservations": {}, "events": {}},
         now=NOW,
     ).create()
-    assert plan.optimized_basket.total == 15
+    assert plan.optimized_basket.total == expected_total
     item = plan.optimized_basket.stores[0].items[0]
     assert item.packages_needed == 2 and item.package_quantity == 57
     assert plan.personal.checks["checkout_audit"]["passed"]
