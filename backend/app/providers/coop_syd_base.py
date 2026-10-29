@@ -69,10 +69,20 @@ class CoopSydBaseProvider(GroceryPriceProvider):
                     or lineage.provider_store_id != SOURCE_CONTEXT_ID):
                 raise PriceProviderError("Coop Online Syd base source lacks exact lineage")
             rows = await self.own.get_store_products(source.store_id)
-            ordinary = [p for p in rows if p.price is not None and p.price > 0
-                        and p.source_provenance
-                        and p.source_provenance.provider_store_id == SOURCE_CONTEXT_ID
-                        and p.source_provenance.source_snapshot_id == lineage.source_snapshot_id]
+            ordinary = []
+            for product in rows:
+                if product.price is None or product.price <= 0:
+                    continue
+                provenance = product.source_provenance
+                # OWN catalog rows use the verified local StoreModel ID;
+                # store discovery supplies its exact public 730400 mapping.
+                if (product.store_id != source.store_id or product.chain != "coop"
+                        or not provenance or provenance.source_provider != "own"
+                        or provenance.source_channel != "catalog"
+                        or provenance.provider_store_id not in {SOURCE_CONTEXT_ID, source.store_id}
+                        or provenance.source_snapshot_id != lineage.source_snapshot_id):
+                    raise PriceProviderError("Coop Online Syd product lineage changed")
+                ordinary.append(product)
             if not ordinary:
                 raise PriceProviderError("Coop Online Syd has no qualified ordinary prices")
             for identity, official in self.targets.items():
@@ -114,6 +124,8 @@ class CoopSydBaseProvider(GroceryPriceProvider):
                     "conditional_variant_choice": False,
                     "source_provenance": p.source_provenance.model_copy(update={
                         "store_id": context, "source_role": "owner_assigned_base_price",
+                        "provider_store_id": SOURCE_CONTEXT_ID,
+                        "price_context": source.price_context_type,
                     }),
                 }) for p in ordinary]
                 self.diagnostics[identity] = {

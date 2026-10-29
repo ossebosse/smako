@@ -80,7 +80,8 @@ def physical(official):
     ("1281", "Lund", {"2696"}), ("1280", "Malmö", {"3850", "3853"}),
 ])
 @pytest.mark.parametrize("has_campaign", [False, True])
-async def test_one_physical_checkout_ordinary_source_and_unchanged_campaign(code, city, expected, has_campaign):
+@pytest.mark.parametrize("native_product_id", [False, True])
+async def test_one_physical_checkout_ordinary_source_and_unchanged_campaign(code, city, expected, has_campaign, native_product_id):
     inv = inventory(code, city)
     targets = assigned_stores(inv)
     assert set(targets) == expected
@@ -92,7 +93,14 @@ async def test_one_physical_checkout_ordinary_source_and_unchanged_campaign(code
                            valid_from=date(2026, 10, 26), valid_to=date(2026, 11, 1),
                        )])
     base = Provider([shop] if has_campaign else [], {shop.store_id: [campaign]} if has_campaign else {})
-    provider = CoopSydBaseProvider(base, source(), inventory=inv)
+    own = source()
+    if native_product_id:
+        own.products["online-local"] = [p.model_copy(update={
+            "source_provenance": p.source_provenance.model_copy(update={
+                "provider_store_id": "online-local", "price_context": None,
+            }),
+        }) for p in own.products["online-local"]]
+    provider = CoopSydBaseProvider(base, own, inventory=inv)
     stores = await provider.find_stores("22350" if city == "Lund" else "21120")
     assert len(stores) == len(expected) and len({s.store_id for s in stores}) == len(stores)
     for target in stores:
@@ -132,7 +140,7 @@ async def test_smaller_coop_is_not_assigned_and_online_prices_remain_a_separate_
     assert await provider.get_store_products(small.store_id) == []
 
 
-@pytest.mark.parametrize("change", ["ledger", "unknown_municipality", "wrong_source", "duplicate_source"])
+@pytest.mark.parametrize("change", ["ledger", "unknown_municipality", "wrong_source", "duplicate_source", "foreign_product"])
 async def test_no_assignment_for_unverified_destination_or_source(change):
     inv = inventory("1281", "Lund")
     row = next(r for r in inv["stores"] if r["store"]["external_id"] == "2696")
@@ -143,8 +151,11 @@ async def test_no_assignment_for_unverified_destination_or_source(change):
         row["geographic_evidence"]["status"] = "unknown"
     elif change == "wrong_source":
         own.stores = [own.stores[0].model_copy(update={"source_store_id": "730500"})]
-    else:
+    elif change == "duplicate_source":
         own.stores *= 2
+    else:
+        own.products["online-local"][0] = product(source_provenance=product().source_provenance.model_copy(
+            update={"provider_store_id": "foreign-store"}))
     with pytest.raises((ValueError, PriceProviderError)):
         provider = CoopSydBaseProvider(Provider(), own, inventory=inv)
         await provider.find_stores("22350")
