@@ -28,3 +28,24 @@ def test_dashboard_projects_current_cadence_without_changing_source_history(tmp_
     assert result["last_success_at"].isoformat() == row["last_success"]
     assert result["failed_attempts"] == 14 and result["status"] == "failed"
     assert path.read_bytes() == original
+
+
+def test_confirmed_empty_store_has_history_without_a_synthetic_price_context(tmp_path, monkeypatch):
+    from app.services.store_operations import _describe_store
+    monkeypatch.setenv("COOP_MUNICIPAL_OFFERS_ROOT", str(tmp_path))
+    directory = tmp_path / "1280"
+    directory.mkdir()
+    row = {"store_id": "3829", "name": "X:-Tra Nydala", "selected": True,
+           "status": "confirmed_no_qualified_rows", "failed_attempts": 0,
+           "last_success": "2026-10-29T08:00:00+00:00", "last_attempt": "2026-10-29T08:00:01+00:00"}
+    (directory / "source-state.json").write_text(json.dumps({"municipality_code": "1280",
+        "selection": {"municipality_code": "1280", "stores": [row]}}))
+    history = offer_collection_history("Malmö", str(tmp_path / "db.sqlite"))[("coop", "3829")]
+    assert history["source_empty"] and history["status"] == "succeeded"
+    assert not offer_collection_history("Lund", str(tmp_path / "db.sqlite"))
+    store = {"contexts": [], "collection": history}
+    _describe_store(store)
+    assert store["status"] == "empty" and not store["needs_attention"] and store["contexts"] == []
+    history.update(status="failed", source_empty=False)
+    _describe_store(store)
+    assert store["status"] == "failed" and store["needs_attention"]

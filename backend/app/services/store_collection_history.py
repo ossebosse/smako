@@ -82,6 +82,8 @@ def offer_collection_history(city, database, *, now=None):
             result[(chain, str(identity))] = {
                 "status": "failed" if failed else "succeeded" if succeeded else "unknown",
                 "history_source": "municipal_offer_job",
+                "source_empty": succeeded and not failed and raw_status == "confirmed_no_qualified_rows",
+                "store_name": row.get("name") if isinstance(row.get("name"), str) else None,
                 "last_attempt_at": _timestamp(row.get("last_attempt_at") or row.get("last_attempt")),
                 "last_success_at": _timestamp(row.get("last_success_at") or row.get("last_success")),
                 "next_fetch_at": _timestamp(row.get("next_fetch_at")),

@@ -28,8 +28,14 @@ _PRESENTATION_PATH = re.compile(
 )
 
 
+_LIMIT_PATH = re.compile(
+    r"730400:coop_product_category_page:\$\[\]\.results\.items\[\]\."
+    r"onlinePromotions\[\]\.(?:maxNumberOfUse|maxNumberOfUseWithUnit(?:\.(?:unit|value))?)\Z"
+)
+
+
 def reviewed_coop_online_schema_diff(
-    diff: SchemaDiff, *, presentation_metadata: bool = False,
+    diff: SchemaDiff, *, presentation_metadata: bool = False, withheld_unknown_limits: bool = False,
 ) -> SchemaDiff:
     """Review only the enumerated optional paths; never review type changes."""
     def reviewed(path: str) -> bool:
@@ -39,6 +45,7 @@ def reviewed_coop_online_schema_diff(
 
     return SchemaDiff(
         added=tuple(path for path in diff.added if not reviewed(path)),
-        removed=tuple(path for path in diff.removed if not reviewed(path)),
+        removed=tuple(path for path in diff.removed if not reviewed(path)
+                      and not (withheld_unknown_limits and _LIMIT_PATH.fullmatch(path))),
         type_changed=diff.type_changed,
     )

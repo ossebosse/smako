@@ -192,7 +192,9 @@ async def run_offer_job(*, environment=None, now=None):
         try:
             outcome, _ = await collect_xtra(row, inventory, attempt / ("xtra-" + identity))
             outcomes[identity] = outcome
-            if outcome["status"] == "partial_text_candidate":
+            if outcome["status"] == "confirmed_no_qualified_rows":
+                references[identity] = []
+            elif outcome["status"] == "partial_text_candidate":
                 refs = []
                 for edition in outcome["editions"]:
                     if edition.get("own"):

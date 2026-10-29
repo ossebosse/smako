@@ -30,3 +30,12 @@ def test_coop_source_release_includes_its_explicit_reader_only():
              'backend/app/providers/coop_municipality_offers.py',
              'backend/app/services/personal_planner.py', 'backend/app/config.py']
     assert module.selected_paths(paths) == paths[:2]
+
+
+def test_coop_source_release_includes_explicit_collection_and_dashboard_dependencies():
+    paths = ['grocery_data/scripts/collect_coop_municipality.py',
+             'backend/app/services/store_collection_history.py',
+             'backend/app/services/store_operations.py', 'backend/app/static/admin.js',
+             'grocery_data/scripts/unrelated.py', 'backend/app/static/consumer.js']
+    assert module.selected_paths(paths) == paths[:1]
+    assert module.selected_paths(paths, include_source_dashboard=True) == paths[:4]

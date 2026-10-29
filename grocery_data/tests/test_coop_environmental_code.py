@@ -18,7 +18,7 @@ def test_observed_public_environmental_rows_are_retained():
         data = {'sortingGroups': [{'id': 'alla', 'offerAmount': 1, 'offers': [row]}]}
         assert sanitized_response(data) == data
         assert row['environmentalCode'] == 'A'
-    assert CoopParser.parser_version == PARSER == 'coop-parser-v7'
+    assert CoopParser.parser_version == PARSER == 'coop-parser-v8'
 
 
 @pytest.mark.parametrize('account', ['3839', '3815'])  # Lund and Malmö.

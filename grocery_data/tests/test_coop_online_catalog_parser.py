@@ -53,6 +53,19 @@ def _fixture_row(name: str) -> dict[str, object]:
     return deepcopy(payload["results"]["items"][0])  # type: ignore[index]
 
 
+def _capped_fixture(name: str) -> dict[str, object]:
+    """Synthetic explicit piece limits for independent promotion-math tests.
+
+    The saved evidence has no caps and is tested unmodified in the v4 guards.
+    """
+    payload = _fixture(name)
+    for row in payload["results"]["items"]:
+        for promotion in row.get("onlinePromotions", []):
+            promotion.update(maxNumberOfUse=4500,
+                             maxNumberOfUseWithUnit={"unit": "Styck", "value": 5.0})
+    return payload
+
+
 def _milk() -> dict[str, object]:
     return _fixture_row("online_api_milk_730400.json")
 
@@ -195,7 +208,7 @@ def test_customer_private_is_b2c_and_never_manufactures_membership() -> None:
 
 def test_verified_fixed_promotion_separates_base_and_effective_price() -> None:
     document = _document(
-        _fixture("online_api_soy_promotion_730400.json"),
+        _capped_fixture("online_api_soy_promotion_730400.json"),
         kind=COOP_ONLINE_PROMOTION_KIND,
         take=50,
     )
@@ -222,7 +235,7 @@ def test_verified_fixed_promotion_separates_base_and_effective_price() -> None:
 
 def test_multibuy_preserves_bundle_condition_instead_of_flattening_promotion_price() -> None:
     document = _document(
-        _fixture("online_api_multibuy_730400.json"),
+        _capped_fixture("online_api_multibuy_730400.json"),
         kind=COOP_ONLINE_PROMOTION_KIND,
         take=50,
     )
@@ -246,7 +259,7 @@ def test_multibuy_preserves_bundle_condition_instead_of_flattening_promotion_pri
 
 def test_approximate_weight_package_preserves_member_price_and_average_weight() -> None:
     document = _document(
-        _fixture("online_api_variable_weight_member_730400.json"),
+        _capped_fixture("online_api_variable_weight_member_730400.json"),
         kind=COOP_ONLINE_PROMOTION_KIND,
         take=50,
     )
@@ -316,7 +329,7 @@ def test_vikt_sales_unit_is_explicit_sold_by_weight_semantics() -> None:
 
 
 def test_percentage_discount_preserves_both_verified_percentage_fields() -> None:
-    row = _fixture_row("online_api_percentage_discount_730400.json")
+    row = _capped_fixture("online_api_percentage_discount_730400.json")["results"]["items"][0]
 
     product = CoopOnlineCatalogParser().parse_product(
         row,
@@ -435,7 +448,7 @@ def test_unproven_weight_piece_promotion_is_withheld_from_basket_math() -> None:
 
 def test_only_matching_current_fixed_promotion_sets_effective_price() -> None:
     document = _document(
-        _fixture("online_api_competing_fixed_promotions_730400.json"),
+        _capped_fixture("online_api_competing_fixed_promotions_730400.json"),
         kind=COOP_ONLINE_PROMOTION_KIND,
         take=50,
     )
@@ -740,7 +753,7 @@ def test_percentage_discount_product_persists_through_bundle_repository() -> Non
                 created_at=OBSERVED_AT,
             )
             document = _document(
-                _fixture("online_api_percentage_discount_730400.json"),
+                _capped_fixture("online_api_percentage_discount_730400.json"),
                 kind=COOP_ONLINE_PROMOTION_KIND,
                 take=50,
             )

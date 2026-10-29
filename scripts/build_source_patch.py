@@ -61,14 +61,22 @@ AXFOOD_READER_FILES = frozenset({
 })
 
 
-def selected_paths(changed, *, axfood_reader_only=False):
+SOURCE_DASHBOARD_FILES = frozenset({
+    'backend/app/services/store_collection_history.py',
+    'backend/app/services/store_operations.py', 'backend/app/static/admin.js',
+})
+
+
+def selected_paths(changed, *, axfood_reader_only=False, include_source_dashboard=False):
     if axfood_reader_only:
         if not AXFOOD_READER_FILES <= set(changed):
             raise ValueError('Axfood reader release requires every reviewed reader dependency')
         return sorted(AXFOOD_READER_FILES)
     return [x for x in changed if x.startswith(('grocery_data/app/', 'deploy/scripts/'))
             or x in ('grocery_data/__main__.py', 'grocery_data/ops.py', 'backend/app/services/price_universe.py',
-                     'backend/app/providers/coop_municipality_offers.py')]
+                     'backend/app/providers/coop_municipality_offers.py',
+                     'grocery_data/scripts/collect_coop_municipality.py')
+            or (include_source_dashboard and x in SOURCE_DASHBOARD_FILES)]
 
 
 def main():
@@ -82,6 +90,8 @@ def main():
                    help='Private {image,files} JSON with base64 bytes from the pinned runtime')
     p.add_argument('--axfood-reader-only', action='store_true',
                    help='Separate reviewed three-file Axfood reader package; exclude planner/scheduler deltas')
+    p.add_argument('--include-source-dashboard', action='store_true',
+                   help='Include the three explicit municipal source dashboard dependencies in the app image')
     args = p.parse_args()
     for name in ('base_commit', 'parent_commit', 'commit'):
         setattr(args, name, git('rev-parse', '--verify', getattr(args, name)+'^{commit}').decode().strip())
@@ -90,7 +100,8 @@ def main():
     if not re.fullmatch('sha256:[a-f0-9]{64}', args.base_image) or not re.fullmatch('[a-z0-9:._-]+', args.base_tag):
         raise ValueError('invalid pinned image identity')
     changed = git('diff', '--name-only', args.parent_commit, args.commit).decode().splitlines()
-    selected = selected_paths(changed, axfood_reader_only=args.axfood_reader_only)
+    selected = selected_paths(changed, axfood_reader_only=args.axfood_reader_only,
+                              include_source_dashboard=args.include_source_dashboard)
     if not selected:
         raise ValueError('empty source patch')
     runtime = json.loads(args.base_files.read_bytes()) if args.base_files else None
