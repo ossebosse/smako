@@ -83,6 +83,11 @@
 - `own:coop:730400` is Coop Online Syd: `ONLINE_FULFILLMENT` with
   `online_price`. It is not a physical Lund shelf-price context. Keep Coop's
   physical offer feeds separate.
+- Owner override 2026-10-29: assign this source's ordinary prices to Stora Coop
+  Lund, Coop Forum/Stora Coop Jägersro and Stora Coop Stadion as their base-price
+  source. Retain exact source lineage/times and the Online Syd price label;
+  keep each destination's own campaigns and exclude smaller Coop/X:-tra stores.
+  This explicitly authorizes the Lund/Malmö association and beta activation.
 - Production Coop crawling is restricted to
   `COOP_ALLOW_FULL_CRAWL=true` and `COOP_ONLINE_CONTEXT_IDS=730400`. Never
   broaden this allowlist without separately verified source and scope evidence.

@@ -521,6 +521,7 @@ async def build_city_price_universe(
     coop_municipality_inventory: dict | None = None,
     coop_offer_sources: tuple | list = (),
     coop_offer_source_errors: tuple | list = (),
+    coop_syd_base_inventory: dict | None = None,
     lidl_municipal_enabled: bool = False,
     lidl_sources: tuple | list = (),
     lidl_source_errors: tuple | list = (),
@@ -751,6 +752,10 @@ async def build_city_price_universe(
                 willys_flyer_errors.append({"status": "source_setup_failed", "error_type": type(exc).__name__})
         provider = WillysFlyerProvider(provider, willys_flyer_loaded,
                                                allow_empty_base=external_cache is None)
+    if coop_syd_base_inventory is not None:
+        from app.providers.coop_syd_base import CoopSydBaseProvider
+
+        provider = CoopSydBaseProvider(provider, own, inventory=coop_syd_base_inventory)
     setup_ms = (perf_counter() - setup_started) * 1000
 
     staging = output.with_name(f".{output.name}.{uuid4().hex}.candidate")

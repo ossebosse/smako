@@ -57,6 +57,18 @@ def enabled_rows(state, config):
             and (r["concept"] != "X:-tra" or config["xtra_enabled"])] if config["enabled"] else []
 
 
+def _syd_base_snapshot(environment):
+    env = os.environ if environment is None else environment
+    database = Path(make_url(env.get("GROCERY_DATABASE_URL", "sqlite:///var/grocery/grocery_data.sqlite")).database)
+    try:
+        with sqlite3.connect(f"file:{database.resolve().as_posix()}?mode=ro", uri=True) as db:
+            row = db.execute("SELECT id FROM catalog_snapshots WHERE chain='coop' "
+                "AND scope_key='coop:online:730400' AND is_active=1 AND state='promoted'").fetchone()
+        return row[0] if row else None
+    except (OSError, sqlite3.Error):
+        return None
+
+
 def source_plan(*, environment=None, now=None):
     try:
         return _source_plan(environment=environment, now=now)
@@ -82,7 +94,11 @@ def _source_plan(*, environment=None, now=None):
         "windows": [(w.get("valid_from"), w.get("valid_to"),
                      bool(w.get("valid_to") and (not w.get("valid_from") or w["valid_from"] <= day) and day <= w["valid_to"]))
                     for w in r.get("windows", [])]} for r in values] for identity, values in refs.items()}
-    fingerprint = hashlib.sha256(json.dumps({"config": config, "sources": applicability}, sort_keys=True).encode()).hexdigest()
+    from grocery_data.app.domain.coop_syd_base import POLICY_VERSION, TARGETS
+    base_policy = POLICY_VERSION if config["municipality_code"] in TARGETS else None
+    fingerprint = hashlib.sha256(json.dumps({"config": config, "sources": applicability,
+        "stora_coop_syd_base_policy": base_policy,
+        "stora_coop_syd_base_snapshot": _syd_base_snapshot(environment) if base_policy else None}, sort_keys=True).encode()).hexdigest()
     from grocery_data.app.services.campaign_refresh_policy import scheduled_source_times
     inventory_fetch = scheduled_source_times(rows, state=state, now=now, environment=environment)
     due = [r["store_id"] for r in rows if not r.get("next_fetch_at") or datetime.fromisoformat(r["next_fetch_at"]) <= now]
@@ -243,7 +259,8 @@ def _source_inputs(*, city, environment=None):
             except (OSError, ValueError) as exc:
                 # Corrupt optional source is excluded, never substituted by another store.
                 errors.append({"store_id": identity, "status": "approved_source_unreadable", "error_type": type(exc).__name__})
-    return {"coop_offer_sources": list(grouped.values()), "coop_offer_source_errors": errors}
+    return {"coop_offer_sources": list(grouped.values()), "coop_offer_source_errors": errors,
+            "coop_syd_base_inventory": state.get("inventory")}
 
 
 def record_build(**kwargs):

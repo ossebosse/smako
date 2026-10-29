@@ -5,6 +5,12 @@ uppdrag. Läs också [planeringsarkitekturen](PLANNING-ARCHITECTURE.md) och
 aktuellt uppdrag i [HANDOFF](HANDOFF.md). Dokumentet beskriver mål, inte ett
 påstående om att nuvarande implementation redan uppfyller dem.
 
+Ägarbeslut 2026-10-29: Coop Online Syds baspriser ska användas för Stora Coop
+Lund, Coop Forum/Stora Coop Jägersro och Stora Coop Stadion. Detta är en
+uttrycklig koppling av en angiven priskälla till dessa tre butiker. Källans
+verkliga observationer och onlineursprung behålls och butikernas egna kampanjer
+ligger kvar. Mindre Coop och X:-tra omfattas inte av kopplingen.
+
 Ägarens förtydligande 2026-10-28: kontrollera alltid möjliga alternativ i
 befintliga butiker och om Smako har sorterat bort en lämplig vara innan
 saknat sortiment används som förklaring. En ny handlare kräver verifierad
