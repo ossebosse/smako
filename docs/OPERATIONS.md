@@ -1,5 +1,15 @@
 # Gemensam driftstatus och avgränsad reparation
 
+Se [aktiveringen](releases/stora-coop-syd-base-20261029/ACTIVATED.md).
+Stora Coop Lund (2696), Forum Jägersro (3850) och Stadion (3853) har vardera
+11237 baspriser från Online Syd och 454 egna kampanjposter. Mindre Coop/X:-tra
+är oförändrade. Butiksvalens källmärkning och verklig varusökning är verifierade.
+App och scheduler `source-ops-8a53beb80e43`; PR47–49 och slutlig main-CI gröna.
+Faktaläsaren följer samma exakta källprodukt för ingredienser och näring.
+Versionspolicyn ger distinkta laddade pris-ID:n i båda kommunerna.
+Backup `20261029T211156Z`, tidigare användarrader och mountar verifierade.
+Recept-/checkoutregler och tvånattspolicy består. Äldre journaler är historiska.
+
 [Senaste Coop-källrättning](releases/coop-remaining-sources-20261029/ACTIVATED.md)
 verifierar fyra tomma Malmö-källor och ny kvalificerad/laddad Online Syd-katalog i Lund.
 Malmös befintliga butiksscope består. Okända kampanjvillkor ger baspris. Äldre rapporter

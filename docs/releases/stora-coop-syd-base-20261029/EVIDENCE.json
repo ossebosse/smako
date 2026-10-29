@@ -1,0 +1,380 @@
+{
+  "recorded_at": "2026-10-29T21:35:07.007003+00:00",
+  "runtimes": {
+    "app": {
+      "image": "sha256:c81c507598a418dc5378492ec678cf9f32c1e2cde21e168e2b2634ffefb6fbd4",
+      "base_image": "sha256:11068cd153f6dc7aed4b4cea2cc9630aa05912993f89584b074302b309c3b29c",
+      "tag": "smako-app:source-ops-8a53beb80e43",
+      "build_id": "source-ops-8a53beb80e43",
+      "commit": "8a53beb80e437633e9fd945dcde3e1ca84bd529d",
+      "files": {
+        "backend/app/services/personal_source_facts.py": "a69d6cc8725b4467f77ae7d6b9e113956bce3ccdbfcaa467a2f22bb3aee3b85d"
+      },
+      "only_reviewed_files_changed": true,
+      "unchanged_runtime_files": 1005
+    },
+    "scheduler": {
+      "image": "sha256:35b377c863c183c93167df2d1ab1766319cd11efbfc5252d2d247f3d93e38c23",
+      "base_image": "sha256:8eba4de88566dbdddd029192593a942b9a53f2673dd56723e78bd24ecf4771d6",
+      "tag": "smako-scheduler:source-ops-8a53beb80e43",
+      "build_id": "source-ops-8a53beb80e43",
+      "commit": "8a53beb80e437633e9fd945dcde3e1ca84bd529d",
+      "files": {
+        "backend/app/services/price_universe_runtime.py": "8dde1fa23ba80ab61121c825bd4570b0d11758264152d13ab1f9615ba72d9576",
+        "backend/app/services/production_price_universe_build.py": "ec6a59fb582e03b94afcdc2ddee14276238a3f3fbfd92d768ca0bdca8cefeb1c"
+      },
+      "only_reviewed_files_changed": true,
+      "unchanged_runtime_files": 1001
+    }
+  },
+  "main_review": {
+    "ci_commit": "8a53beb80e437633e9fd945dcde3e1ca84bd529d",
+    "main_ci_runs": [
+      40952916814
+    ],
+    "runtime_bytes_match_ci": true,
+    "pr": 49,
+    "reviewed_commit": "8a53beb80e437633e9fd945dcde3e1ca84bd529d",
+    "main_merge_commit": "178a323adbd4e20d175cdc96d9adc284475024b2",
+    "merged": true,
+    "all_checks_success": true
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-29T21:24:52.509976+00:00",
+    "backup": "/srv/smako/backups/20261029T211156Z",
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 315,
+      "personal_private_state": 124,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    },
+    "mounts_preserved": true,
+    "price_manifests_preserved": true,
+    "environment_changes": [
+      "BUILD_ID"
+    ]
+  },
+  "source_canary": {
+    "status": "stora_coop_source_canary_passed",
+    "network_attempts": 0,
+    "source_snapshot_unchanged": true,
+    "cities": [
+      {
+        "city": "Lund",
+        "stores": [
+          {
+            "store_id": "2696",
+            "name": "Stora Coop Lund",
+            "context_id": "context:coop:a35d1de8aaaf5b41",
+            "base_products": 11237,
+            "campaign_products": 454,
+            "unchanged_campaigns": true,
+            "price_label": "Baspris från Coop Online Syd",
+            "snapshot_ids": [
+              "335b406f160a49c7bf351ceece8fcf6e"
+            ],
+            "oldest_observed_at": "2026-10-29T08:56:22.714511+00:00",
+            "newest_observed_at": "2026-10-29T09:23:30.978844+00:00"
+          }
+        ],
+        "other_physical_stores": 9
+      },
+      {
+        "city": "Malmö",
+        "stores": [
+          {
+            "store_id": "3850",
+            "name": "Coop Forum Jägersro",
+            "context_id": "context:coop:20e4633ad51e8d1f",
+            "base_products": 11237,
+            "campaign_products": 454,
+            "unchanged_campaigns": true,
+            "price_label": "Baspris från Coop Online Syd",
+            "snapshot_ids": [
+              "335b406f160a49c7bf351ceece8fcf6e"
+            ],
+            "oldest_observed_at": "2026-10-29T08:56:22.714511+00:00",
+            "newest_observed_at": "2026-10-29T09:23:30.978844+00:00"
+          },
+          {
+            "store_id": "3853",
+            "name": "Stora Coop Stadion",
+            "context_id": "context:coop:c964acbfeb697ff3",
+            "base_products": 11237,
+            "campaign_products": 454,
+            "unchanged_campaigns": true,
+            "price_label": "Baspris från Coop Online Syd",
+            "snapshot_ids": [
+              "335b406f160a49c7bf351ceece8fcf6e"
+            ],
+            "oldest_observed_at": "2026-10-29T08:56:22.714511+00:00",
+            "newest_observed_at": "2026-10-29T09:23:30.978844+00:00"
+          }
+        ],
+        "other_physical_stores": 12
+      }
+    ]
+  },
+  "facts_canary": {
+    "status": "stora_coop_facts_canary_passed",
+    "assigned_facts": 11237,
+    "ingredients": 7816,
+    "nutrition": 6830,
+    "milk_nutrition_and_ingredients_verified": true,
+    "source_observed_from": "2026-10-29T08:56:22.714511+00:00",
+    "source_observed_to": "2026-10-29T09:23:30.978844+00:00"
+  },
+  "publication": [
+    {
+      "city": "Lund",
+      "municipality_code": "1281",
+      "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+      "previous_price_universe_id": "price-universe:0f311e3d5107ad4480721d9ab3d16cf480eaab293367b26e3dc98e1300aa7082",
+      "loaded": true,
+      "publication_exit_code": 0,
+      "snapshot_ids": [
+        "065303e03f4f4318beaabfb035aa001e",
+        "2375cf427ac749c18d98d0eef7f4f63b",
+        "28bddec5c1d042ac9702aeb714c1a3bd",
+        "2956296d46a94c599fd98be292fafe73",
+        "29732fed7fc74384955aa7d4fce10ed7",
+        "335b406f160a49c7bf351ceece8fcf6e",
+        "3871679c7aa445818a2ee196dbf3583f",
+        "3c08156daaa248f4aa7847253aa5a12f",
+        "3dc62df71e3a4d66a93b34619e8ac734",
+        "3de643990d0a4a9fa2855b9047ac52ab",
+        "52e0242b7f1943aa88c830f3ce41107d",
+        "54e1f3c6639146c390ee15b38c969f23",
+        "644c4b666b5b4f5eb3459cc827ab6c6a",
+        "7663fb28690f4fd3a50f0a1aef393f93",
+        "872f4ec70b30455189c9adef8ff04b04",
+        "88b7e2a0afd84955b7071619d1d0c7dd",
+        "8b57ea2272b9466fbad3f97264706b64",
+        "8c59c03fa7484987a321829321f4142b",
+        "988959340aec42c88bd3a9a453346aba",
+        "a2bdeec4d40a4070acea832c16ae6553",
+        "b23cb952c9244803aae59a849dffd399",
+        "b34cfd1a61e0480babdf496382586003",
+        "bb96902c8e3b43aea00aaf24a2171554",
+        "bd2d3a66343747bfa463504981ad522d",
+        "be04663d0b0d4515b9aa4548a00687e7",
+        "d3846ccbeb45457e9dd5d67180ba31ff",
+        "da0de2157c914e6697803570e618fd3e",
+        "f3d0a6e53e324de1b5fd741e93720be9",
+        "fe3c511e34524c958ae0de90e4f8ade3",
+        "primat-request-1e02ca1f4cf1479ca05ae40d6900be45",
+        "primat-request-89107cc5d17f406b9a833d6b9c02483c"
+      ],
+      "source_policy": {
+        "policy": "stora-coop-syd-base-v1",
+        "stores": {
+          "2696": {
+            "base_products": 11237,
+            "context_id": "context:coop:a35d1de8aaaf5b41",
+            "source_observed_at": "2026-10-29T08:56:22.714511+00:00",
+            "source_snapshot_id": "335b406f160a49c7bf351ceece8fcf6e"
+          }
+        }
+      },
+      "original_artifact_sha256": "5ac114cb40c1e3a12b3f4de3dfd16bf9cd5ed89b736a3e75c39182b4075e9169",
+      "versioned_artifact_sha256": "c0b781902b3b4f3fe1e3d2fb04b1929a8a625a10c2350addee44233e3c3712d5",
+      "only_two_identity_strings_changed": true,
+      "source_and_product_bytes_unchanged": true,
+      "municipal_receipts_reused": [
+        "coop_municipal",
+        "lidl_municipal",
+        "willys_flyer"
+      ],
+      "superseded_pending_runtime_acknowledged": false,
+      "built_at": "2026-10-29T20:17:12.230156+00:00"
+    },
+    {
+      "city": "Malmö",
+      "municipality_code": "1280",
+      "price_universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+      "previous_price_universe_id": "price-universe:d376f9cf2c8f1fbba988804b1cb46e48031e1e3ce73cdc62164b56bfb927a268",
+      "loaded": true,
+      "publication_exit_code": 0,
+      "snapshot_ids": [
+        "01bb427b7f874f919e59a13d623dd2b9",
+        "115c0f83854346999272804841cb1bae",
+        "1265e4dd1b4a4f8793bd66e53bdbf5d2",
+        "13319ee79ea8412086625d3cf777689f",
+        "27c6d1c325cd43cdb4004f5f07f2852d",
+        "335b406f160a49c7bf351ceece8fcf6e",
+        "36bbf6e267124f84ade8f2fd39f6a37b",
+        "3a17dda7eb10464786a088816987d538",
+        "40503299747740679c7bc0194fc91c37",
+        "41af148fe70a4ce29490be61d588eaab",
+        "4388677776a445929ba0bbe87ae216d0",
+        "4ad260df9b984df59554a16f83e01775",
+        "4b397b91f0614cf08d82a6f533fe4ff9",
+        "4d0ea54fd4ef49ffa65015bb0283de36",
+        "4da6ed21787d4e9f965ea343958e27d3",
+        "4dd1f1f7bdb54baf9e2b15bfd51db734",
+        "56722a82326b4992af55131415b5c66c",
+        "5fc62bc0b8f74d0b858765dc66b02bf2",
+        "60167125188e4aa78583fc3315f81cb7",
+        "60c7483930de4153a62394edd2708ff9",
+        "677ccf7718004efabb45b9875cb21e0f",
+        "7250e121704748f4bb1df3dff7987740",
+        "74c5bb3028cf43d5ab30b53754efd21b",
+        "74e7ae03becf4985aa290cea711cd036",
+        "7567c576c36a48e98858753608843828",
+        "7ef298d32f124b7ca9484eb49ff90579",
+        "7fb4e9eb766c48c6b82a6e0eeeb7408b",
+        "8495ac8c2f2643b3b41e360c32dbb94b",
+        "856d83f3d8644442b8a8ef4bb12fc673",
+        "877a5dfe9b814d7ca61abe7dee799fb2",
+        "915b793664da4f29b399abf4ec3bd045",
+        "95068e9f063443859e44c4b558b7dba4",
+        "9648f4ad73f84a19bfeb1d5f42b4ea21",
+        "9b2520cd26fe4b14ae85168fc29b9f7c",
+        "a19c9d011f7c43b48d02d20106a22242",
+        "a646f59f76024a95a5cb17c7941ce7c5",
+        "a8828e6c9e51486f994c4979e989610c",
+        "a9a5096664784b49a38717cad864bfa2",
+        "aa308af7527746dfaf510fb41ff64acd",
+        "aa5e55f901c64fc684bcd1724bbf01e6",
+        "b0c4d08621604e4289b77a28a0b5be6c",
+        "b1ebebcc76124db4b16ec88db83daf43",
+        "b2e7db3e61b444cdbcda044a597587c6",
+        "b77a2010c7a441b0a2140e934cf21248",
+        "beaba6b766fb4fbc95e1f1b0317601f7",
+        "c00628e66c2544168037ef7f1f7d0359",
+        "c35ae77d56434310ab848d555db5ebea",
+        "c564ac1e00324b8b94a6afb543b54380",
+        "c82c121e29294b40920490872d69708a",
+        "d139c9ffdbb74b32a40440e8d02089d4",
+        "d3cead291c814a2c937ecffe2cb81509",
+        "d7cd256cd916452a84d25d9a475fedaf",
+        "de49c3b550d94093b6d6f5429aa778db",
+        "df5e1c41b2d2400db8c38c550c4f1937",
+        "e1b47da74e7044628ce67d244c9bd29e",
+        "ecefa5b21f8843f1b914865919a33133",
+        "ef7e400290f54f4ebe0a21cbde78ce71",
+        "f22056a425164c5fbd2114a07adeb0b4",
+        "f9bcb694c78e4406b1e58f70b1de6fea",
+        "primat-request-d5d2d65ed5a1460cb6811521ca4a3a83"
+      ],
+      "source_policy": {
+        "policy": "stora-coop-syd-base-v1",
+        "stores": {
+          "3850": {
+            "base_products": 11237,
+            "context_id": "context:coop:20e4633ad51e8d1f",
+            "source_observed_at": "2026-10-29T08:56:22.714511+00:00",
+            "source_snapshot_id": "335b406f160a49c7bf351ceece8fcf6e"
+          },
+          "3853": {
+            "base_products": 11237,
+            "context_id": "context:coop:c964acbfeb697ff3",
+            "source_observed_at": "2026-10-29T08:56:22.714511+00:00",
+            "source_snapshot_id": "335b406f160a49c7bf351ceece8fcf6e"
+          }
+        }
+      },
+      "original_artifact_sha256": "8e1b55bfbc28d3141c62bd10e3754c53711823fe480e3e59dccacfdbec057278",
+      "versioned_artifact_sha256": "91b1a86de95d1b66d01ad393df6bbe1b59fab788d13e79fd5b41f4401566afcc",
+      "only_two_identity_strings_changed": true,
+      "source_and_product_bytes_unchanged": true,
+      "municipal_receipts_reused": [
+        "coop_municipal",
+        "citygross_municipal",
+        "lidl_municipal",
+        "willys_flyer"
+      ],
+      "superseded_pending_runtime_acknowledged": true,
+      "built_at": "2026-10-29T20:41:04.624905+00:00"
+    }
+  ],
+  "beta_verification": {
+    "status": "stora_coop_beta_verified",
+    "cities": [
+      {
+        "city": "Lund",
+        "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "stores": [
+          {
+            "store_id": "2696",
+            "name": "Stora Coop Lund",
+            "context_id": "context:coop:a35d1de8aaaf5b41",
+            "base_prices": 11237,
+            "campaign_prices": 454,
+            "price_label": "Baspris från Coop Online Syd",
+            "source_snapshot_id": "335b406f160a49c7bf351ceece8fcf6e",
+            "source_observed_at": "2026-10-29T08:56:22.714511+00:00"
+          }
+        ],
+        "smaller_coop_and_xtra_not_assigned": true,
+        "milk_quotes": [
+          {
+            "store": "Stora Coop Lund",
+            "price": 15.5,
+            "observed_at": "2026-10-29T09:01:17.089893Z"
+          }
+        ],
+        "schedule": "Måndag och torsdag 03:17 svensk tid"
+      },
+      {
+        "city": "Malmö",
+        "price_universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+        "stores": [
+          {
+            "store_id": "3850",
+            "name": "Coop Forum Jägersro",
+            "context_id": "context:coop:20e4633ad51e8d1f",
+            "base_prices": 11237,
+            "campaign_prices": 454,
+            "price_label": "Baspris från Coop Online Syd",
+            "source_snapshot_id": "335b406f160a49c7bf351ceece8fcf6e",
+            "source_observed_at": "2026-10-29T08:56:22.714511+00:00"
+          },
+          {
+            "store_id": "3853",
+            "name": "Stora Coop Stadion",
+            "context_id": "context:coop:c964acbfeb697ff3",
+            "base_prices": 11237,
+            "campaign_prices": 454,
+            "price_label": "Baspris från Coop Online Syd",
+            "source_snapshot_id": "335b406f160a49c7bf351ceece8fcf6e",
+            "source_observed_at": "2026-10-29T08:56:22.714511+00:00"
+          }
+        ],
+        "smaller_coop_and_xtra_not_assigned": true,
+        "milk_quotes": [
+          {
+            "store": "Coop Forum Jägersro",
+            "price": 15.5,
+            "observed_at": "2026-10-29T09:01:17.089893Z"
+          },
+          {
+            "store": "Stora Coop Stadion",
+            "price": 15.5,
+            "observed_at": "2026-10-29T09:01:17.089893Z"
+          }
+        ],
+        "schedule": "Måndag och torsdag 03:17 svensk tid"
+      }
+    ]
+  },
+  "source_observations_preserved": true,
+  "recipe_and_checkout_rules_preserved": true,
+  "post_publication_operations": {
+    "checked_at": "2026-10-29T21:36:27.924661+00:00",
+    "runtime": "source-ops-8a53beb80e43",
+    "ready_http_status": 200,
+    "unknown_required_contexts": [],
+    "recent_http_error_metric_count": 0,
+    "storage_maintenance_status": "complete",
+    "storage_capacity_estimate": {
+      "free_bytes": 10770169856,
+      "required_estimate_bytes": 16610826206,
+      "adequate": false,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    }
+  }
+}
