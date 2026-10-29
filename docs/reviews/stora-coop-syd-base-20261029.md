@@ -33,3 +33,18 @@ införs; befintlig tvånattspolicy och driftlås gäller.
 
 Offlineprov använder riktiga sparade kommun-/locatorunderlag och separata
 syntetiska prisexempel. Verklig aktivering och laddning dokumenteras separat.
+
+Publiceringskontrollen upptäckte att samma råsnapshots gav samma universe-ID
+före och efter den nya butikstilldelningen. Den ordinarie byggaren inkluderar
+nu den explicita tilldelningspolicyn i sin befintliga source_strategy_version.
+Det ändrar artefaktens identitet utan att skapa snapshot-ID eller observationer.
+Båda byggcachens nycklar använder samma version; standardbyggen behåller sin
+tidigare version. Versionsbyte och återanvändning provas separat.
+
+Faktaläsaren följer det exakta produkt-ID:t `<käll-UUID>:stora-syd:<butiks-ID>`
+till samma sparade Coop-produkt. Det kräver ägartilldelningsrollen, katalogkanal,
+källbutik 730400, onlineursprung och identisk fysisk destination. Snapshot,
+råprodukt-ID, dokumenthash och ordinarie faktaregler kontrolleras som tidigare.
+Samma källa kan ge fakta till båda Malmöbutikerna utan en separat onlinekontext
+som faktadonator. Saknad eller avvikande bindning förblir okänd. Pris,
+observationstid och personliga beräkningsregler ändras inte av faktaprojektionen.

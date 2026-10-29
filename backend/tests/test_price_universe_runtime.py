@@ -295,6 +295,26 @@ async def _build_prepared(
 
 
 @pytest.mark.asyncio
+async def test_source_assignment_policy_changes_universe_and_invalidates_build_cache():
+    manager, original, provider, selector = await _build_prepared()
+    version = original.universe.key.source_strategy_version + "+stora-coop-syd-base-v1"
+    changed = await manager.build_and_activate(
+        city="Lund", postal_codes=[POSTAL_CODE], provider=provider,
+        memberships={}, selector=selector, built_at=OBSERVED_AT,
+        source_strategy_version=version,
+    )
+    assert changed.universe.universe_id != original.universe.universe_id
+    assert changed.universe.key.snapshot_ids == original.universe.key.snapshot_ids
+    calls = selector.calls
+    reused = await manager.build_and_activate(
+        city="Lund", postal_codes=[POSTAL_CODE], provider=provider,
+        memberships={}, selector=selector, built_at=OBSERVED_AT,
+        source_strategy_version=version,
+    )
+    assert reused is changed and selector.calls == calls
+
+
+@pytest.mark.asyncio
 async def test_complete_recipe_startup_reuses_ingredient_preparation_after_reload(tmp_path, monkeypatch):
     from app.services import meal_prepared_artifacts as artifacts
     from app.services.product_search import ProductSearchIndex

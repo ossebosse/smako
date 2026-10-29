@@ -1037,6 +1037,7 @@ class PreparedPriceUniverseManager:
         memberships: Mapping[str, bool],
         selector: EconomicIngredientSelector,
         built_at: datetime | None = None,
+        source_strategy_version: str = SOURCE_STRATEGY_VERSION,
     ) -> PreparedPriceUniverse:
         """Materialise, validate and prepare a universe outside meal requests."""
 
@@ -1080,7 +1081,7 @@ class PreparedPriceUniverseManager:
                 postal_codes=normalized_postals,
                 snapshot_ids=store_snapshots,
                 memberships=membership_vector,
-                source_strategy_version=SOURCE_STRATEGY_VERSION,
+                source_strategy_version=source_strategy_version,
                 normalizer_version=NORMALIZER_VERSION,
                 taxonomy_version=TAXONOMY_VERSION,
             )
@@ -1142,7 +1143,7 @@ class PreparedPriceUniverseManager:
                 postal_codes=normalized_postals,
                 snapshot_ids=snapshots,
                 memberships=membership_vector,
-                source_strategy_version=SOURCE_STRATEGY_VERSION,
+                source_strategy_version=source_strategy_version,
                 normalizer_version=NORMALIZER_VERSION,
                 taxonomy_version=TAXONOMY_VERSION,
             )

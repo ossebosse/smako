@@ -22,7 +22,7 @@ from threading import Lock, RLock
 
 from app.services.personal_policy import ProductFacts
 
-FACTS_VERSION = "retained-catalog-facts-v11-nutrition-extras"
+FACTS_VERSION = "retained-catalog-facts-v12-stora-coop-source-aliases"
 _CACHE = {}
 _LOCK = RLock()
 _KEY_LOCKS = {}
@@ -772,6 +772,24 @@ def raw_product(document, reference):
     return value
 
 
+def _catalog_source_id(product, stores):
+    """Resolve only the exact, owner-assigned Online Syd product namespace."""
+    provenance = product.source_provenance
+    if provenance.source_role != "owner_assigned_base_price":
+        return product.product_id
+    store = stores.get(product.store_id)
+    match = re.fullmatch(r"([0-9a-f]{32}):stora-syd:([0-9]+)", product.product_id)
+    if (product.chain != "coop" or provenance.source_channel != "catalog"
+            or provenance.provider_store_id != "730400"
+            or provenance.price_context != "online_fulfillment"
+            or product.price_context_type != "physical_store"
+            or not store or store.chain != "coop"
+            or store.price_context_type != "physical_store"
+            or not match or match[2] != store.physical_store_external_id):
+        return None
+    return match[1]
+
+
 def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
     from sqlalchemy.engine import make_url
 
@@ -786,14 +804,20 @@ def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
     raw_root = Path(raw_root or settings.raw_snapshot_root).resolve()
     if not Path(database).is_file():
         return {}
-    targets = {
-        p.product_id: p
+    targets = [
+        p
         for p in prepared.universe.products
         if p.chain in {"coop", "hemkop", "willys"}
         and p.source_provenance
         and p.source_provenance.source_provider == "own"
-    }
-    snapshots = {p.source_provenance.source_snapshot_id for p in targets.values()}
+    ]
+    stores = {s.store_id: s for s in prepared.stores}
+    by_source_id = defaultdict(list)
+    for product in targets:
+        source_id = _catalog_source_id(product, stores)
+        if source_id is not None:
+            by_source_id[source_id].append(product)
+    snapshots = {p.source_provenance.source_snapshot_id for p in targets}
     result = {}
     if not snapshots:
         return result
@@ -813,14 +837,6 @@ def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
                 (snapshot, snapshot),
             )
             for row in rows:
-                product = targets.get(row["id"])
-                if product is None or product.source_provenance.source_snapshot_id != snapshot:
-                    continue
-                if (
-                    product.chain != row["chain"]
-                    or product.source_provenance.provider_store_id != row["store_external_id"]
-                ):
-                    continue
                 location = row["payload_location"]
                 if location not in resolved_paths:
                     candidate = (raw_root / location).resolve()
@@ -830,7 +846,11 @@ def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
                 path = resolved_paths[location]
                 if path is None:
                     continue
-                source_rows.append((snapshot, row, product, path))
+                for product in by_source_id.get(row["id"], ()):
+                    if (product.source_provenance.source_snapshot_id == snapshot
+                            and product.chain == row["chain"]
+                            and product.source_provenance.provider_store_id == row["store_external_id"]):
+                        source_rows.append((snapshot, row, product, path))
 
     # A telemetry/profile write in this same SQLite database changes its
     # mtime, but cannot change these public source facts. Key the actual
@@ -843,7 +863,7 @@ def _load_retained_catalog_facts(prepared, *, database=None, raw_root=None):
                   p.package_quantity, p.package_unit, p.usable_quantity, p.usable_unit,
                   str(p.sale_model), p.coverage, p.price_context_type,
                   p.source_provenance.model_dump(mode="json"))
-                 for p in targets.values()]},
+                 for p in targets]},
             ensure_ascii=False,
             separators=(",", ":"),
         ).encode()
