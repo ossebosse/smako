@@ -21,9 +21,20 @@ def publication_links(html, store):
         raise ValueError("official store identity/address changed")
     visible = {a.get("href") for a in soup.select("a[href]")}
     current = raw.get("weeklyOffersLink")
-    if not current:
+    visible_publications = {u for u in visible if urlsplit(u).hostname == "dr.coop.se"}
+    alternate_publications = any(
+        ".pdf" in urlsplit(a["href"]).path.lower()
+        or (urlsplit(a["href"]).path not in {"", "/"}
+            and any(word in a.get_text(" ", strip=True).casefold()
+                    for word in ("reklamblad", "veckans priser", "erbjudanden")))
+        for a in soup.select("a[href]"))
+    if "weeklyOffersLink" in raw and current == "" and not visible_publications and not alternate_publications:
+        # The identified official Nydala page explicitly has no publication.
+        # A missing/null field or an alternate publication is not this shape.
+        return []
+    if not isinstance(current, str) or not current:
         raise ValueError("current publication field missing from official store page")
-    links = {current} | {u for u in visible if urlsplit(u).hostname == "dr.coop.se"}
+    links = {current} | visible_publications
     for url in links:
         parsed = urlsplit(url)
         if (parsed.scheme != "https" or parsed.username or parsed.password
@@ -48,6 +59,8 @@ async def fetch_publications(row, output):
         links=publication_links(response.text,store)
         result.update(store_page_sha256=hashlib.sha256(response.content).hexdigest(),
                       store_page_observed_at=datetime.now(UTC).isoformat(),discovered_links=links)
+        if not links:
+            result["publication_status"] = "confirmed_no_current_publication"
         for number,link in enumerate(links,1):
             folder=output/str(number);folder.mkdir()
             meta={"store_id":store["external_id"],"source_url":link,"status":"unknown"}

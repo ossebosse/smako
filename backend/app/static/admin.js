@@ -6,6 +6,7 @@
   const labels = {fresh:"Färskt underlag", aging:"Äldre underlag", stale:"För gammalt underlag", missing:"Priser saknas", broken:"Fel i underlaget", succeeded:"Lyckades", failed:"Insamling misslyckad", running:"Pågår enligt körloggen", unknown:"Körhistorik saknas", attention:"Behöver tillsyn", campaign:"Giltiga kampanjer", expired:"Kampanjpriser saknas"};
   const scope = value => ({online_price:"Onlinepris", online_fulfillment:"Online / leverans", regional_online:"Regionalt onlinepris", regional:"Regionala erbjudanden", regional_context:"Regionala erbjudanden", physical_store:"Butikskopplat pris", store_specific:"Butikskopplat pris", store_linked:"Butikskopplat pris"}[String(value).toLowerCase()] || value || "Omfattning okänd");
   const node = (tag, text, cls) => {const n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; return n;};
+  labels.empty = "Kontrollerad · inga erbjudanden";
   const badge = status => node("span", labels[status] || status, `badge ${status}`);
   let city = "Lund", data, busy = false, generation = 0;
   function field(list, title, value) {const div = node("div");div.append(node("dt", title), node("dd", value));list.append(div);}
@@ -51,7 +52,14 @@
       if(s.attention_reasons.length) name.append(node("span", s.attention_reasons.join(" "), "sub reason"));
       const prices = node("span", number(s.contexts.reduce((total,c) => total+c.available_prices,0)), "price-total");prices.append(node("span", "tillgängliga priser", "sub"));
       summary.append(node("span", "›", "arrow"), name, badge(s.status), prices);row.append(summary);
-      if (!s.contexts.length) row.append(node("p", "Ingen verifierad priskälla är kopplad till butiken ännu.", "context"));
+      if (!s.contexts.length && s.collection) {
+        const box = node("div", null, "context"), list = node("dl");
+        box.append(node("p", s.source_message || labels[s.collection.status] || "Körhistorik saknas"));
+        field(list, "Senaste försök", date(s.collection.last_attempt_at));
+        field(list, "Senaste lyckade kontroll", date(s.collection.last_success_at));
+        field(list, "Nästa hämtning tidigast", date(s.collection.next_fetch_at));
+        box.append(list);row.append(box);
+      } else if (!s.contexts.length) row.append(node("p", "Ingen verifierad priskälla är kopplad till butiken ännu.", "context"));
       for (const c of s.contexts) row.append(context(c));fragment.append(row);
     }
     if (!rows.length) fragment.append(node("p", data.stores.length ? "Inga butiker matchar filtret." : "Inga fysiska butiker finns registrerade för kommunen i denna databas.", "empty"));

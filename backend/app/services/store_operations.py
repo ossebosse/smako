@@ -55,6 +55,11 @@ def _describe_context(context):
 
 def _describe_store(row):
     contexts = row["contexts"]
+    collection = row.get("collection", {})
+    if collection.get("source_empty") and not any(c["available_prices"] for c in contexts):
+        row.update(status="empty", attention_reasons=[], needs_attention=False,
+                   source_message="Källan kontrollerades. Inga aktuella kvalificerade erbjudanden finns publicerade.")
+        return
     priority = {"failed": 0, "stale": 1, "expired": 2, "missing": 3,
                 "broken": 3, "aging": 4, "campaign": 5, "fresh": 6}
     row["status"] = min((c["status"] for c in contexts),
@@ -63,6 +68,8 @@ def _describe_store(row):
         reason for c in contexts for reason in c["attention_reasons"]
     )) if contexts else ["Ingen verifierad priskälla är kopplad till butiken."]
     row["needs_attention"] = not contexts or any(c["needs_attention"] for c in contexts)
+    if collection.get("status") == "failed" and not contexts:
+        row.update(status="failed", attention_reasons=["Senaste insamlingen misslyckades."], needs_attention=True)
 
 
 def _latest_collection(session: Session, snapshot_id: str | None) -> dict[str, Any]:
@@ -329,6 +336,18 @@ def municipal_store_status(
                 None,
             )
         )
+    for (chain, external_id), history in offer_history.items():
+        matches = identities.get((chain, external_id), [])
+        identity = matches[0].id if len(matches) == 1 else f"runtime:{chain}:{external_id}"
+        row = by_id.get(identity)
+        if row is None and chain == "coop" and history.get("store_name"):
+            # A verified municipal source with no products has no runtime price
+            # context. Preserve its coverage and history without inventing one.
+            row = {"id": identity, "name": history["store_name"], "chain": chain,
+                   "address": None, "state": "municipal_source_identity", "contexts": []}
+            by_id[identity] = row
+        if row is not None:
+            row["collection"] = history
     stores = sorted(by_id.values(), key=lambda row: (row["chain"], row["name"], row["id"]))
     for row in stores:
         _describe_store(row)

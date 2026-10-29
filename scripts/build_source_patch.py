@@ -61,14 +61,44 @@ AXFOOD_READER_FILES = frozenset({
 })
 
 
-def selected_paths(changed, *, axfood_reader_only=False):
+SOURCE_DASHBOARD_FILES = frozenset({
+    'backend/app/services/store_collection_history.py',
+    'backend/app/services/store_operations.py', 'backend/app/static/admin.js',
+})
+COOP_APP_BASE_REFS = {
+    'grocery_data/app/connectors/coop/online_catalog_parser.py': '50d1a87bf513640fbb1e07256c6c037f304e8252',
+    'grocery_data/app/connectors/coop/schema_review.py': 'b235e51ec39ea2367e157e5ddf2da750de1afcdc',
+    'grocery_data/app/services/collector.py': 'a162f948eb98243b313a888d7a5fbae8161f25ab',
+}
+
+
+def coop_app_backport(path, base, after):
+    """Reviewed v2 app lineage: replace only Coop's shared-collector branch."""
+    if path not in COOP_APP_BASE_REFS or base is None or after is None:
+        raise ValueError('unreviewed Coop app backport path')
+    if path != 'grocery_data/app/services/collector.py':
+        return after  # Dedicated Coop modules, with their exact historical Git base.
+    def span(data):
+        start = data.index(b'    elif chain == Chain.COOP and parser_version')
+        end = data.index(b'    elif chain == Chain.HEMKOP and parser_version', start)
+        if data.count(b'    elif chain == Chain.COOP and parser_version') != 1:
+            raise ValueError('ambiguous Coop collector branch')
+        return start, end
+    start, end = span(base)
+    new_start, new_end = span(after)
+    return base[:start] + after[new_start:new_end] + base[end:]
+
+
+def selected_paths(changed, *, axfood_reader_only=False, include_source_dashboard=False):
     if axfood_reader_only:
         if not AXFOOD_READER_FILES <= set(changed):
             raise ValueError('Axfood reader release requires every reviewed reader dependency')
         return sorted(AXFOOD_READER_FILES)
     return [x for x in changed if x.startswith(('grocery_data/app/', 'deploy/scripts/'))
             or x in ('grocery_data/__main__.py', 'grocery_data/ops.py', 'backend/app/services/price_universe.py',
-                     'backend/app/providers/coop_municipality_offers.py')]
+                     'backend/app/providers/coop_municipality_offers.py',
+                     'grocery_data/scripts/collect_coop_municipality.py')
+            or (include_source_dashboard and x in SOURCE_DASHBOARD_FILES)]
 
 
 def main():
@@ -82,6 +112,10 @@ def main():
                    help='Private {image,files} JSON with base64 bytes from the pinned runtime')
     p.add_argument('--axfood-reader-only', action='store_true',
                    help='Separate reviewed three-file Axfood reader package; exclude planner/scheduler deltas')
+    p.add_argument('--include-source-dashboard', action='store_true',
+                   help='Include the three explicit municipal source dashboard dependencies in the app image')
+    p.add_argument('--coop-online-app-backport', action='store_true',
+                   help='Reviewed historical app-only Coop bases; preserve all non-Coop collector branches')
     args = p.parse_args()
     for name in ('base_commit', 'parent_commit', 'commit'):
         setattr(args, name, git('rev-parse', '--verify', getattr(args, name)+'^{commit}').decode().strip())
@@ -90,7 +124,8 @@ def main():
     if not re.fullmatch('sha256:[a-f0-9]{64}', args.base_image) or not re.fullmatch('[a-z0-9:._-]+', args.base_tag):
         raise ValueError('invalid pinned image identity')
     changed = git('diff', '--name-only', args.parent_commit, args.commit).decode().splitlines()
-    selected = selected_paths(changed, axfood_reader_only=args.axfood_reader_only)
+    selected = selected_paths(changed, axfood_reader_only=args.axfood_reader_only,
+                              include_source_dashboard=args.include_source_dashboard)
     if not selected:
         raise ValueError('empty source patch')
     runtime = json.loads(args.base_files.read_bytes()) if args.base_files else None
@@ -98,9 +133,11 @@ def main():
         raise ValueError("runtime file inventory does not match the pinned image and selected files")
     files, base_hashes, hashes = {}, {}, {}
     for path in selected:
-        base = blob(args.base_commit, path)
+        backport = args.coop_online_app_backport and path in COOP_APP_BASE_REFS
+        base = blob(COOP_APP_BASE_REFS[path] if backport else args.base_commit, path)
         actual = exact_runtime_base(base, path, runtime) if runtime is not None else base
-        result = transplant(base, blob(args.parent_commit, path), blob(args.commit, path))
+        result = (coop_app_backport(path, base, blob(args.commit, path)) if backport else
+                  transplant(base, blob(args.parent_commit, path), blob(args.commit, path)))
         if result is None:
             raise ValueError('source file deletion requires separate packaging review')
         files[path] = result
@@ -112,6 +149,8 @@ def main():
                 'files': hashes, 'base_files': base_hashes}
     if args.axfood_reader_only:
         manifest['scope'] = 'axfood-reader-only; no planner, scheduler or price changes'
+    if args.coop_online_app_backport:
+        manifest['coop_app_base_refs'] = COOP_APP_BASE_REFS
     from beta_release_workers.image_config import final_image_config, flatten_instructions
     inspected = json.loads(args.base_config.read_bytes())
     if not isinstance(inspected, list) or len(inspected) != 1 or inspected[0]['Id'] != args.base_image:

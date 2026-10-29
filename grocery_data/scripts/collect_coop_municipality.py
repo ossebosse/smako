@@ -43,6 +43,15 @@ async def collect_xtra(row, inventory, output):
     from grocery_data.scripts.import_xtra_pdf_text import run as import_pdf
 
     publications=await fetch_publications(row,output)
+    if (publications.get("publication_status") == "confirmed_no_current_publication"
+            and publications["editions"] == [] and publications.get("discovered_links") == []
+            and publications.get("store_page_sha256") and publications.get("store_page_observed_at")):
+        publications.update(status="confirmed_no_qualified_rows",own=0,quarantine=0,
+                            price_universe=0,windows=[],
+                            observed_at=publications["store_page_observed_at"],
+                            source_version=[publications["store_page_sha256"]])
+        (output/"result.json").write_text(json.dumps(publications,ensure_ascii=False,indent=2),encoding="utf8")
+        return publications,[]
     products=[];windows=[];own=0;quarantine=0;observations=[];seen={}
     for edition in publications["editions"]:
         if edition["status"]!="text_ready":continue

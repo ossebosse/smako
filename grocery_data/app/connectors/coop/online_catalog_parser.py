@@ -296,9 +296,10 @@ def _active_offers(
                 price=price,
                 quantity=quantity,
                 member_only=member_value,
-                max_quantity=_positive_int(promotion.get("maxNumberOfUseWithUnit")),
+                max_quantity=_verified_piece_limit(promotion),
                 description=str(promotion.get("message") or source_type).strip(),
                 source_payload={
+                    "purchase_limit_verified": _verified_piece_limit(promotion) is not None,
                     "source_type": source_type,
                     "piece_price": str(_b2c_price(promotion.get("piecePriceData")) or "") or None,
                     "comparative_price": str(
@@ -319,6 +320,23 @@ def _active_offers(
             )
         )
     return tuple(offers)
+
+
+def _verified_piece_limit(promotion: dict[str, Any]) -> int | None:
+    """Only the explicit positive integral piece cap is currently actionable.
+
+    Absent/null/weight caps cannot establish an unlimited promotion. The raw
+    response retains those terms; v4 withholds the offer and retains base price.
+    """
+    limit = promotion.get("maxNumberOfUseWithUnit")
+    raw = promotion.get("maxNumberOfUse")
+    if (not isinstance(limit, dict) or limit.get("unit") != "Styck"
+            or type(raw) is not int or raw <= 0 or type(limit.get("value")) not in {int, float}):
+        return None
+    value = _decimal(limit.get("value"))
+    if value is None or value <= 0 or value != value.to_integral_value():
+        return None
+    return int(value)
 
 
 def _purchase_fingerprint(product: SourceProduct) -> str:
@@ -354,7 +372,7 @@ def _purchase_fingerprint(product: SourceProduct) -> str:
 class CoopOnlineCatalogParser:
     """Parser for Coop's regional online product context, separate from offers."""
 
-    parser_version = "coop-online-catalog-parser-v3"
+    parser_version = "coop-online-catalog-parser-v4"
 
     @staticmethod
     def terminal_categories(document: RawFetch) -> tuple[tuple[str, str], ...]:
@@ -484,13 +502,6 @@ class CoopOnlineCatalogParser:
                 == raw_promotion_price
             )
 
-        matching_unconditional = [
-            offer
-            for offer in offers
-            if not offer.member_only
-            and offer.type is not PromotionType.MULTIBUY
-            and matches_product_promotion(offer)
-        ]
         # A kg-rate promotion whose product-level price is only an estimated
         # piece total is actionable solely when the package itself explicitly
         # says it is an approximate-weight piece. Otherwise retain the raw
@@ -505,7 +516,14 @@ class CoopOnlineCatalogParser:
             and offer.price != raw_promotion_price
             and _decimal(offer.source_payload.get("piece_price")) == raw_promotion_price
         ]
-        exposed_offers = tuple(offer for offer in offers if offer not in withheld_uncertain)
+        withheld_limits = [offer for offer in offers
+                           if not offer.source_payload.get("purchase_limit_verified")]
+        exposed_offers = tuple(offer for offer in offers
+                               if offer not in withheld_uncertain and offer not in withheld_limits)
+        matching_unconditional = [offer for offer in exposed_offers
+                                  if not offer.member_only
+                                  and offer.type is not PromotionType.MULTIBUY
+                                  and matches_product_promotion(offer)]
         sale_price = matching_unconditional[0].price if matching_unconditional else base_price
         fixed_member_prices = [
             offer.price
@@ -566,6 +584,8 @@ class CoopOnlineCatalogParser:
                 "withheld_uncertain_promotion_ids": [
                     offer.external_id for offer in withheld_uncertain
                 ],
+                "withheld_unverified_limit_promotion_ids": [offer.external_id for offer in withheld_limits],
+                "withheld_limit_reason": "purchase_limit_unverified" if withheld_limits else None,
                 "withheld_promotion_reason": (
                     "weight_piece_semantics_unproven" if withheld_uncertain else None
                 ),

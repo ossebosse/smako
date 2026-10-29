@@ -15,7 +15,7 @@ from grocery_data.app.domain import ParseFailure, ProductParseResult, SourceOffe
 from grocery_data.app.domain.purchase_terms import PurchaseTerms
 
 POLICY = "coop-physical-structured-v1"
-PARSER = "coop-parser-v7"
+PARSER = "coop-parser-v8"
 _ROW_KEYS = ("id", "externalId", "campaignStartDate", "campaignEndDate", "weekNumber",
              "storeLedgerAccountNumber", "channelCodes", "roleDescriptions", "eagId", "isPil",
              "ageRestriction", "simplifiedAgeRestriction", "weeklyTip", "environmentalCode")
@@ -43,6 +43,11 @@ def confirmed_empty_response(captures, store):
             or evidence.get("source_url") != f"https://external.api.coop.se/dke/offers/sorting-groups/{ledger}"):
         return False
     data = evidence.get("data")
+    # Three identified Malmö pages return HTTP 200 + {} when no public offers
+    # exist (2026-10-29). Preserve the actual response rather than inventing a
+    # group/count. The browser and parser also require a matching empty DOM.
+    if isinstance(data, dict) and not data:
+        return True
     groups = data.get("sortingGroups") if isinstance(data, dict) else None
     return (isinstance(groups, list) and all(isinstance(g, dict) for g in groups)
             and sum(g.get("id") == "alla" for g in groups) == 1
@@ -51,6 +56,8 @@ def confirmed_empty_response(captures, store):
 
 
 def sanitized_response(payload):
+    if isinstance(payload, dict) and not payload:
+        return {}
     def row(value):
         known_row = {*_ROW_KEYS, "priceInformation", "content", "clusterInteriorOffers",
                      "otherLogos", "unifiedSplash", "categoryGroup", "categoryTeam"}
@@ -145,6 +152,14 @@ def parse_structured(envelope, *, store, document, reference):
     if evidence.get("error"):
         fail("Coop shared structured response rejected: " + str(evidence["error"])
              + ("; " + str(evidence["schema_review_reason"]) if evidence.get("schema_review_reason") else ""))
+        return ProductParseResult(failures=failures)
+    if isinstance(evidence.get("data"), dict) and not evidence["data"]:
+        if (confirmed_empty_response([evidence], store)
+                and type(envelope.get("captured_total")) is int
+                and envelope["captured_total"] == 0 and envelope.get("cards") == []
+                and envelope.get("declared_total") in (None, 0)):
+            return ProductParseResult()
+        fail("Coop empty public response conflicts with DOM evidence")
         return ProductParseResult(failures=failures)
     try:
         groups = evidence["data"]["sortingGroups"]
