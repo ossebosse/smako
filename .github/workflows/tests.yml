@@ -101,10 +101,59 @@ jobs:
 
   backend:
     if: always()
-    needs: backend-tests
+    needs: [backend-tests, coverage-overview]
     runs-on: ubuntu-latest
     steps:
       - name: Require every test partition
         env:
           TEST_RESULT: ${{ needs.backend-tests.result }}
-        run: test "$TEST_RESULT" = success
+          COVERAGE_RESULT: ${{ needs.coverage-overview.result }}
+        run: test "$TEST_RESULT" = success && test "$COVERAGE_RESULT" = success
+
+  coverage-overview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements-dev.txt
+            requirements-dev.lock
+      - name: Install
+        run: python -m pip install -r requirements-dev.txt
+      - name: Fetch hash-pinned public reference
+        run: python scripts/coverage_reference_asset.py fetch --output .local/coverage-inputs
+      - name: Measure products, all recipes and final baskets offline
+        env:
+          PYTHON_DOTENV_DISABLED: "1"
+          PYTHONUTF8: "1"
+        run: >-
+          python scripts/coverage_overview.py
+          --reference ci/coverage-reference.json --input-root .local/coverage-inputs
+          --baskets --variant-seconds 5 --output .local/coverage-overview
+      - name: Require complete evidence and preserve resolved original recipes
+        run: >-
+          python scripts/check_coverage_overview.py
+          --report .local/coverage-overview/overview.json
+          --output .local/coverage-overview/comparison.json
+      - name: Show coverage overview
+        if: always()
+        run: |
+          if [ -f .local/coverage-overview/summary.md ]; then
+            cat .local/coverage-overview/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo 'Coverage measurement did not finish. Missing results are unknown; inspect the logs and partial artifact.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Preserve complete overview for developers and agents
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-overview
+          path: .local/coverage-overview/
+          if-no-files-found: warn
+          retention-days: 30

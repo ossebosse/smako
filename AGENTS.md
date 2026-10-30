@@ -1,5 +1,18 @@
 # Project rules
 
+## Product/recipe overview in CI
+
+- Start coverage questions with `docs/COVERAGE-OVERVIEW.md` and the latest
+  successful main CI `coverage-overview` artifact. Check its code SHA, frozen
+  source date and scope before quoting numbers; it is not live beta status.
+- Preserve all 2,200 original import IDs. Distinguish product candidates,
+  complete ingredient support and audited whole baskets; timeouts are unknown.
+  Read the ranked blockers and recipe opportunities before recommending more
+  imports. Never call an unvisited product rejected or a collector key a new food.
+- Reference data and regression baselines change only with reviewed evidence;
+  never regenerate a baseline merely to turn CI green. See the same document
+  for the cold/warm/new-request performance proposal and existing trace tools.
+
 ## Product purpose and current architecture
 
 - Read `docs/PRODUCT-GOAL.md` and `docs/PLANNING-ARCHITECTURE.md` before
