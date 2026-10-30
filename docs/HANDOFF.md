@@ -4,10 +4,12 @@ Gren `ui/mobile-configurator-20261030`. `/` svarar 302 till `/personal` (med
 query), den tidigare sidan finns på `/klassisk` (även i återställningsläget).
 Manifestets `start_url` är `/personal`; `id` är oförändrat `/`.
 
-Under 850 px visas Mina val som en konfigurator: fasta stegflikar (Plats,
-Måltider, Butiker, Smak, Recept, Mer, Sammanfattning), ett steg i taget och en
-fast bottenrad med Nästa/Skapa plan. En tidigare veckobild/sammanfattningspanel
-togs bort efter användarens granskning. Ej aktiverat: den här datorn saknar
+Under 850 px visas Mina val som en konfigurator efter användarens
+skärmdumpar av Volvos mobila bilkonfigurator: toppfält med Klar och område,
+en illustration per steg och ett ark med handtag (tryck eller dra) med stora
+flikar (Plats, Måltider, Butiker, Smak, Recept, Mer). Val visas som rutor och
+tillägg som Lägg till-knappar; de speglar befintliga select-/kryssrutor. Klar
+öppnar sammanfattningen med Skapa plan. Ej aktiverat: den här datorn saknar
 SSH-alias `smako`; releasen görs från operatörsdatorn enligt `docs/BETA.md`.
 `configurator.js` visar bara befintliga fält per steg; värden, validering och
 anrop ägs fortfarande av `personal.js` och `shopping-location.js`. Datorvyn är

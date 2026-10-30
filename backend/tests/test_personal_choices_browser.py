@@ -81,7 +81,7 @@ def mobile_configurator(page):
     """On mobile widths Mina val is a step-by-step configurator."""
     if not page.evaluate("matchMedia('(max-width: 849px)').matches"):
         return False
-    expect(page.locator(".config-bar")).to_be_visible()
+    expect(page.locator(".config-top")).to_be_visible()
     return True
 
 
@@ -93,10 +93,8 @@ def config_step(page, title):
 def submit(page, captured):
     before = len(captured)
     if mobile_configurator(page):
-        config_step(page, "Sammanfattning")
-        page.locator(".config-next").click()
-    else:
-        page.locator("#choice-submit").click()
+        page.locator(".config-done").click()
+    page.locator("#choice-submit").click()
     expect(page.locator("#personal-status")).to_contain_text("Testet fångar")
     assert len(captured) == before + 1
     # Validate against the actual API contracts, not a copy of frontend rules.

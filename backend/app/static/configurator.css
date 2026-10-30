@@ -1,4 +1,5 @@
-/* Mobile step-by-step "Mina val" (configurator.js). Only active below 850px
+/* Mobile "build your plan" (configurator.js): a picture per step under a
+   pull-up sheet, modelled on car configurators. Only active below 850px
    while body.config-mode is set; desktop styles stay in choices.css. */
 @media(max-width:849px) {
   /* One scrollable row instead of wrapping menu buttons on every mobile view. */
@@ -7,10 +8,39 @@
   .personal-app .personal-nav button {flex:0 0 auto;min-height:40px;padding:8px 14px;border:1px solid var(--sm-border);border-radius:999px;background:#fff;font-size:13px;white-space:nowrap;}
   .personal-app .personal-nav button[aria-current] {border-color:var(--sm-primary);}
 }
-.config-mode .personal-header {padding-top:14px;padding-bottom:10px;}
-.config-mode.personal-app .personal-header .brand {font-size:30px;letter-spacing:-1px;}
-.config-mode .personal-header>span,.config-mode .personal-footer {display:none;}
-.config-mode main#personal-main {padding-top:0;padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));}
+
+.config-mode {--config-top:calc(64px + env(safe-area-inset-top,0px));--config-hero:min(46vh,420px);overflow:hidden;background:#fff;}
+.config-mode .personal-header,.config-mode .personal-nav,.config-mode .personal-footer,.config-mode .skip-link {display:none;}
+.config-mode #personal-status:not(:empty) {position:fixed;z-index:40;top:calc(var(--config-top) + 8px);left:12px;right:12px;box-shadow:0 6px 20px #143f3524;}
+
+/* Top bar: done on the left, where the plan applies on the right. */
+.config-top {position:fixed;z-index:30;top:0;left:0;right:0;height:var(--config-top);box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:env(safe-area-inset-top,0px) 16px 0;background:#fff;}
+.personal-app .config-done {margin:0;min-height:42px;padding:8px 24px;border:0;border-radius:999px;background:var(--sm-primary);color:#fff;font:600 16px/1 system-ui,sans-serif;}
+.personal-app .config-done:disabled {opacity:.4;}
+.config-top-text {margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;min-width:0;font-family:system-ui,sans-serif;}
+.config-top-title {font-size:16px;color:var(--sm-ink);}
+.config-top-area {font-size:14px;color:var(--sm-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw;}
+.personal-app .config-close {flex:0 0 40px;width:40px;min-height:40px;margin:0;padding:0;border:0;border-radius:50%;background:#ececea;color:var(--sm-ink);font-size:24px;line-height:1;}
+
+/* The picture fills the space the collapsed sheet leaves free. */
+.config-hero {position:fixed;z-index:1;top:var(--config-top);left:0;right:0;height:var(--config-hero);background:#f1f1ef;overflow:hidden;}
+.config-hero svg {display:block;width:100%;height:100%;}
+
+/* The step view itself becomes the sheet. */
+.config-mode #personal-choices {position:fixed;z-index:10;left:0;right:0;bottom:0;top:var(--config-drag,calc(var(--config-top) + var(--config-hero) - 18px));box-sizing:border-box;margin:0;padding:0 20px calc(28px + env(safe-area-inset-bottom,0px));overflow-y:auto;overscroll-behavior:contain;background:#fff;border-radius:18px 18px 0 0;box-shadow:0 -8px 24px #143f3514;transition:top .3s ease;font-family:system-ui,sans-serif;}
+.config-mode.config-expanded #personal-choices {top:var(--config-drag,calc(var(--config-top) + 96px));}
+.config-mode.config-dragging #personal-choices {transition:none;}
+.config-sheet-head {position:sticky;z-index:2;top:0;margin:0 -20px;padding:0 20px;background:#fff;}
+.personal-app .config-handle {display:flex;justify-content:center;align-items:center;width:100%;min-height:30px;margin:0;padding:10px 0 6px;border:0;background:transparent;touch-action:none;cursor:grab;}
+.config-handle-bar {width:44px;height:5px;border-radius:3px;background:#cfd3cf;}
+.config-tabs {display:flex;gap:24px;overflow-x:auto;scrollbar-width:none;padding:2px 0 14px;}
+.config-tabs::-webkit-scrollbar {display:none;}
+.personal-app .config-tab {flex:0 0 auto;margin:0;padding:4px 0;min-height:44px;border:0;background:transparent;color:#b4bbb6;font:400 30px/1.1 system-ui,sans-serif;letter-spacing:-.01em;}
+.personal-app .config-tab[aria-current] {color:var(--sm-ink);}
+.config-tab.is-locked {opacity:.55;}
+.config-hint:empty {display:none;}
+#personal-choices .config-hint {margin:0 0 12px;padding:10px 12px;border-radius:10px;background:#fff2d6;color:#603d13;font-size:14px;}
+
 .config-mode .config-off,
 .config-mode .choices-intro,
 .config-mode .choice-shortcuts,
@@ -18,35 +48,30 @@
 .config-mode #extra-choices>p,
 .config-mode #go-to-meals {display:none!important;}
 .config-mode #location-title {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
-.config-mode #personal-choices .extra-choices {border:0;background:transparent;padding:0;margin:0;}
 .config-mode #personal-choices .choices-workspace {display:block;}
-.config-mode .choice-summary {position:static;}
-.config-mode .choice-summary>button#choice-submit {display:none;}
+.config-mode #personal-choices .extra-choices {border:0;background:transparent;padding:0;margin:0;}
 
-/* Step tabs stay at the top while the step scrolls. */
-.config-head {position:sticky;top:0;z-index:20;margin:0 calc(50% - 50vw);background:#fff;box-shadow:0 1px 0 var(--sm-border);}
+/* Flat sections instead of cards, like the option lists in the sheet. */
+.config-mode #personal-choices :is(.location-card,fieldset.choices-primary,.extra-choices fieldset,#taste-choices,#organic-choices,#pantry-choices,#surplus-choices) {margin:0 0 8px;padding:0 0 20px;border:0;border-bottom:1px solid #e6e8e4;border-radius:0;background:transparent;box-shadow:none;}
+.config-mode #personal-choices legend {padding:0;margin:8px 0 6px;background:transparent;font:600 20px/1.3 system-ui,sans-serif;letter-spacing:0;}
+.config-mode #personal-choices h2 {font-family:system-ui,sans-serif;letter-spacing:0;}
+.config-mode #personal-choices p {color:#4b5b52;}
+.config-mode .choice-summary {position:static;background:#f6f7f4;}
 
-.config-tabs {display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;background:#fff;}
-.config-tabs::-webkit-scrollbar {display:none;}
-.personal-app .config-tab {flex:0 0 auto;display:flex;align-items:center;gap:6px;margin:0;padding:12px 10px;min-height:46px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--sm-muted);font:600 14px/1 system-ui,sans-serif;}
-.personal-app .config-tab[aria-current] {color:var(--sm-ink);border-bottom-color:var(--sm-ink);}
-.config-tab-number {display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid currentColor;font-size:11px;}
-.config-tab.is-done .config-tab-number {background:var(--sm-primary);border-color:var(--sm-primary);color:#fff;}
-.config-tab.is-locked {opacity:.45;}
+/* Choices as tiles: the selected one gets a dark frame. */
+.config-tiles {display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:8px 0 16px;}
+.config-tiles::-webkit-scrollbar {display:none;}
+.personal-app .config-tile {flex:1 0 30%;min-height:72px;margin:0;padding:10px 8px;border:2px solid transparent;border-radius:4px;background:#f4f5f2;color:var(--sm-ink);font:600 14px/1.25 system-ui,sans-serif;}
+.personal-app .config-tile[aria-checked=true] {border-color:var(--sm-ink);background:#eef1ec;}
+.config-mode :is(#location-store-mode,#location-radius,#surplus-mode) {position:absolute;width:1px;height:1px;min-height:0;padding:0;margin:0;opacity:0;pointer-events:none;}
 
-.config-step-intro {padding:20px 0 4px;}
-#personal-choices .config-step-title {font-size:28px;margin:0;outline:none;}
-#personal-choices .config-step-lead {margin:4px 0 0;color:var(--sm-muted);font-size:15px;}
-.config-hint:empty {display:none;}
-#personal-choices .config-hint {margin:10px 0 0;padding:10px 12px;border-radius:10px;background:#fff2d6;color:#603d13;}
-.config-mode #personal-choices .location-card,.config-mode #personal-choices fieldset.choices-primary,.config-mode #personal-choices .extra-choices fieldset {margin:16px 0;border-radius:16px;}
+/* Add-ons: a pill button in place of the switch; the real checkbox sits on top. */
+.config-mode label:has(>.config-pill) {position:relative;display:flex;align-items:center;gap:12px;min-height:60px;margin:0;padding:8px 0;border-bottom:1px solid #e6e8e4;font:500 16px/1.35 system-ui,sans-serif;}
+.config-mode label:has(>.config-pill) input[type=checkbox] {position:absolute;z-index:1;right:0;top:50%;transform:translateY(-50%);width:112px;height:44px;margin:0;opacity:0;cursor:pointer;}
+.config-pill {order:2;flex:0 0 112px;margin-left:auto;display:inline-grid;place-items:center;min-height:44px;border-radius:999px;background:var(--sm-ink);color:#fff;font:600 15px/1 system-ui,sans-serif;}
+.config-pill.is-on {background:#e4e7e2;color:var(--sm-ink);}
+.config-mode label:has(input:focus-visible)>.config-pill {outline:3px solid #247b66;outline-offset:3px;}
 
-/* Bottom bar: where you are, what you have built, and the next step. */
-.config-bar {position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--sm-border);box-shadow:0 -6px 20px #143f3512;}
-.personal-app .config-back {flex:0 0 44px;width:44px;min-height:44px;margin:0;padding:0;border:1px solid #b8cabf;border-radius:50%;background:#fff;color:var(--sm-ink);font-size:24px;line-height:1;}
-.personal-app .config-back:disabled {opacity:.35;}
-.config-bar-text {flex:1;min-width:0;display:flex;flex-direction:column;}
-.config-bar-step {font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--sm-muted);}
-.config-bar-summary {font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.personal-app .config-next {flex:0 1 auto;margin:0;min-height:48px;padding:12px 18px;border-radius:999px;background:var(--sm-primary);color:#fff;border:1px solid var(--sm-primary);font:700 14px/1.2 system-ui,sans-serif;max-width:58%;}
-.personal-app .config-next:disabled {opacity:.5;}
+.config-foot {padding:12px 0 8px;}
+.personal-app .config-next {width:100%;min-height:52px;margin:0;border:1px solid var(--sm-ink);border-radius:999px;background:#fff;color:var(--sm-ink);font:600 16px/1.2 system-ui,sans-serif;}
+@media(prefers-reduced-motion:reduce) {.config-mode #personal-choices {transition:none;}}
