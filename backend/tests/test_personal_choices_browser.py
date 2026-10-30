@@ -866,6 +866,7 @@ def test_exact_item_added_in_the_configurator_carries_its_generic(choices):
     page.locator(".config-next").click()
     config_step(page, "Varor")
     page.locator("#shopping-query").fill("mjölk")
+    page.locator(".shopping-exact-toggle").click()
     page.locator("#shopping-specific-results button", has_text="Arla Mellanmjölk").click()
     dialog = page.locator("#personal-dialog")
     expect(dialog).to_contain_text("Hör till: Mjölk")
@@ -873,4 +874,49 @@ def test_exact_item_added_in_the_configurator_carries_its_generic(choices):
     expect(page.locator("#extras-list")).to_contain_text("Hör till: mjölk (1,5 %)")
     assert classified[0]["product_keys"] == [key] and classified[0]["query"] == "mjölk"
     assert saved[-1]["items"][0]["generic"] == {"query": "mjölk", "properties": ["1,5 %"]}
+    expect(page.locator(".config-tab[aria-current]")).to_have_text("Varor")
+
+
+def test_generic_items_are_added_in_one_tap_from_the_typed_text(choices):
+    page, url, _captured = choices
+    saved = []
+    curated = {"name": "Mjölk", "query": "mjölk", "kind": "generic", "quantity": 1000, "unit": "ml",
+               "properties": [], "food": True}
+    page.route("**/api/personal/shopping-suggestions**", lambda r: r.fulfill(
+        content_type="application/json",
+        body=json.dumps({"status": "available", "generics": [curated], "products": []})))
+
+    def interpret(route):
+        text = route.request.post_data_json["text"]
+        body = ({"query": "mjölk 1,5 %", "quantity": 1000, "unit": "ml", "properties": ["1,5 %"]}
+                if text.endswith("1 l") else {"query": text, "properties": []})
+        route.fulfill(content_type="application/json", body=json.dumps({**body, "confirmed": False}))
+    page.route("**/api/personal/interpret-extra", interpret)
+
+    def shopping(route):
+        saved.append(route.request.post_data_json["items"])
+        route.fulfill(content_type="application/json", body=json.dumps(
+            {"revision": len(saved), "items": [], "reservations": {}, "profile": {}}))
+    page.route("**/api/personal/shopping-list", shopping)
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(url)
+    page.locator("#customer-postcode").fill("223 50")
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("Lund kommun")
+    page.locator(".config-next").click()
+    config_step(page, "Varor")
+    query = page.locator("#shopping-query")
+    query.fill("mjölk 1,5 % 1 l")
+    expect(page.locator("#shopping-generic-results .primary-button")).to_have_text("Lägg till Mjölk 1,5 % · 1 l")
+    query.press("Enter")
+    expect(page.locator("#extras-list")).to_contain_text("Mjölk 1,5 % · 1 l")
+    first = saved[-1][0]
+    assert (first["kind"], first["query"], first["quantity"], first["unit"], first["properties"], first["confirmed"]) == (
+        "generic", "mjölk 1,5 %", 1000, "ml", ["1,5 %"], True)
+    query.fill("mjölk")
+    expect(page.locator("#shopping-generic-results .primary-button")).to_have_text("Lägg till Mjölk · 1 l")
+    expect(page.locator("#shopping-generic-results")).not_to_contain_text("Välj en exakt produkt")
+    page.locator("#shopping-generic-results .primary-button").click()
+    expect(page.locator("#extras-list article")).to_have_count(2)
+    assert saved[-1][1]["query"] == "mjölk" and saved[-1][1]["quantity"] == 1000
     expect(page.locator(".config-tab[aria-current]")).to_have_text("Varor")

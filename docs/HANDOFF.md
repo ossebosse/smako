@@ -20,7 +20,11 @@ generisk vara och kontrollerar att varje vald produkt hämtas av den (samma
 kanoniska index och ingredienssökning som planeraren, `properties_match`, ingen
 namnlikhet). Nya rader utan koppling avvisas vid sparning; tidigare sparade
 rader och vanliga val behålls och kan redigeras. Planeraren kontrollerar
-kopplingen igen en gång per förfrågan. Ej aktiverat: den här datorn saknar
+kopplingen igen en gång per förfrågan. Generiska varor är huvudvägen i sökningen:
+den skrivna texten tolkas av `/api/personal/interpret-extra` och läggs till med ett
+tryck (Enter) när mängd finns eller en kurerad vara med samma namn finns; annars
+välj mängd. Exakta produkter ligger bakom ”Välj en exakt produkt i stället”.
+Releaseverifieringens shoppingskript följer det nya flödet. Ej aktiverat: den här datorn saknar
 SSH-alias `smako`; releasen görs från operatörsdatorn enligt `docs/BETA.md`.
 `configurator.js` visar bara befintliga fält per steg; värden, validering och
 anrop ägs fortfarande av `personal.js` och `shopping-location.js`. Datorvyn är

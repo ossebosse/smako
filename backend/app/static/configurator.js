@@ -15,7 +15,7 @@
   // sheet, so items are added before the plan and optimised with the recipes.
   const itemsBox=el("section",null,"config-items");itemsBox.setAttribute("aria-labelledby","config-items-title");
   const itemsTitle=el("h2","Egna varor");itemsTitle.id="config-items-title";
-  itemsBox.append(itemsTitle,el("p","Lägg till en generisk vara som ”mjölk 1,5 % 1 l” eller en exakt produkt. Varorna räknas i samma korg som recepten, så billigaste kombinationen väljs för allt tillsammans."));
+  itemsBox.append(itemsTitle,el("p","Skriv vad du behöver, till exempel ”mjölk 1,5 % 1 l”, och tryck Lägg till. Smako väljer billigaste varianten tillsammans med recepten, eller bara för dina varor om du inte planerar måltider."));
   const movedItems=()=>[$('shopping-search-box'),$('shopping-search-status'),$('cancel-alternative'),$('shopping-common')?.previousElementSibling,$('shopping-common'),$('shopping-draft-status'),$('extras-list')].filter(Boolean);
   const itemSlots=new Map();
   const steps=[

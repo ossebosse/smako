@@ -60,7 +60,9 @@ with sync_playwright() as pw:
         expect(page.locator("#add-shopping-item")).to_be_enabled(timeout=120000)
         page.wait_for_load_state("networkidle")
         page.locator("#shopping-query").fill("mjölk")
-        page.locator("#shopping-generic-results button").first.click()
+        page.locator("#shopping-generic-results").get_by_role(
+            "button", name="Annan mängd eller egenskap…", exact=True
+        ).click()
         page.get_by_label("Önskad mängd", exact=True).fill("500")
         page.get_by_role("button", name="Bekräfta och lägg till", exact=True).click()
         expect(page.locator("#extras-list article")).to_have_count(1)

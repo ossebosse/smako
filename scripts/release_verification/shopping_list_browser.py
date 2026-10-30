@@ -72,10 +72,10 @@ with sync_playwright() as pw:
         expect(page.locator("#calculate-own-list")).to_be_enabled(timeout=90000)
         page.wait_for_load_state("networkidle")
         page.locator("#shopping-query").fill("spaghetti")
+        # A generic item is added in one tap with its shown amount.
         page.locator("#shopping-generic-results").get_by_role(
-            "button", name="Spaghetti · 500 g", exact=True
+            "button", name="Lägg till Spaghetti · 500 g", exact=True
         ).click()
-        page.get_by_role("button", name="Bekräfta och lägg till", exact=True).click()
         expect(page.locator("#extras-list article")).to_have_count(1)
         with page.expect_response(
             lambda response: "/shopping-suggestions?" in response.url and "mj" in response.url
@@ -237,6 +237,7 @@ with sync_playwright() as pw:
                 for row in suggestions
                 if 2 <= len(row["matches"]) <= 8 and row["package_unit"] == "g"
             )
+            page.locator(".shopping-exact-toggle").click()
             page.locator("#shopping-specific-results").get_by_role(
                 "button", name=choice["display_name"] + " · " + choice["package"], exact=True
             ).click()
