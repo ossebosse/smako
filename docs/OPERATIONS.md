@@ -1,5 +1,12 @@
 # Gemensam driftstatus och avgränsad reparation
 
+Senaste appaktivering: [mobilkonfigurator och egna varor, 30 oktober](releases/mobile-configurator-20261030/ACTIVATED.md).
+App `app-562afbb53344-92f00d23`; scheduler `source-ops-8a53beb80e43`.
+Båda kommunernas readiness, tidigare användarrader och oförändrade
+prismanifest verifierades. Retention complete; installerad backup-/schema-
+policy består. Den konservativa kapacitetsvarningen och prisernas
+åldersvarningar ska fortsatt följas. Nedan följer källaktiveringens belägg.
+
 Se [aktiveringen](releases/stora-coop-syd-base-20261029/ACTIVATED.md).
 Stora Coop Lund (2696), Forum Jägersro (3850) och Stadion (3853) har vardera
 11237 baspriser från Online Syd och 454 egna kampanjposter. Mindre Coop/X:-tra

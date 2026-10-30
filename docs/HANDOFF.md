@@ -1,3 +1,32 @@
+# 2026-10-30: Mobilkonfigurator och egna varor aktiverade i betan
+
+PR [51](https://github.com/ossebosse/smako/pull/51) är integrerad på `main`
+(`b3316106adb292`). PR50 med CI-överblicken låg redan där. Se
+[aktivering och verifiering](releases/mobile-configurator-20261030/ACTIVATED.md).
+App `app-562afbb53344-92f00d23`; schedulern består på `source-ops-8a53beb80e43`.
+Startsidan går till `/personal`, den tidigare till `/klassisk`. Mobilt finns
+bild-/kompaktläge och egna varor före planeringen; generiska varor läggs till
+direkt och exakta val kontrolleras mot sin generiska vara.
+
+PR- och main-CI gröna; 51 riktade tester och 66 browserprov godkända, ett
+förväntat fel. Separat telemetrikontroll: 41 godkända; main-CI:s första
+oförändrade tidstest passerade vid omkörning utan ändrad gräns. Exakt image,
+checkout och återläsning av sparad plan verifierade. Första publika mobilprovet
+med en middag för två plus mjölk gav SEARCH_INCOMPLETE efter 63,406 s utan
+slutkontrollerad lista; samma breda kombination nådde gränsen igen.
+Separat avgränsat prov (italiensk middag, två portioner, mjölk, max en butik)
+gav 40,14 s och passerad checkout-audit. Det bevisar
+inte lyckad latens för breda val; appens regler och tidsgränser ändrades inte.
+
+Tidigare plan-/profil-/konto-/sessionsrader, mountar och prismanifest bevarade.
+Ny releasebackup `20261030T220550Z`. Utrymme frigjordes genom att
+först arkivera/hashverifiera en extra backup lokalt och sedan förrotera den
+med befintlig retention, med två verifierade återställningskopior kvar.
+Installerad policy och scheman består; retention efter aktivering complete.
+Prisernas åldersvarningar och serverns kapacitetsvarning följs fortsatt.
+
+---
+
 # 2026-10-30: Startsidan går till /personal, mobil steg-för-steg i Mina val – ej aktiverat
 
 Gren `ui/mobile-configurator-20261030`. `/` svarar 302 till `/personal` (med

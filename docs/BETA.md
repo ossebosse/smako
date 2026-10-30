@@ -15,7 +15,11 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Aktivt BUILD_ID är `source-ops-8a53beb80e43` för båda rollerna.
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-562afbb53344-92f00d23`;
+  schedulern är `source-ops-8a53beb80e43`.
+  [Mobilkonfigurator och egna varor](releases/mobile-configurator-20261030/ACTIVATED.md)
+  är senaste appaktiveringen. De 15 appfilerna matchar kod `562afbb53344`
+  på main; övriga tidigare runtimeanpassningar består.
   [Stora Coop-kopplingen](releases/stora-coop-syd-base-20261029/ACTIVATED.md)
   dokumenterar de separata faktiska baserna och den exakta slutpatchen.
   [Senaste Coop-källrättning](releases/coop-remaining-sources-20261029/ACTIVATED.md)
@@ -57,7 +61,7 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 8a53beb80e43 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 562afbb53344 --commit main --workdir .local/beta-release
 ```
 
 Arbetskopian ska vara ren; paketet läser enbart committade Git-blobbar.
