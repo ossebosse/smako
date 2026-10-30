@@ -1,6 +1,8 @@
-/* Mobile "build your plan" presentation of the existing "Mina val" form:
-   a picture per step, and a sheet with a handle that is pulled up to show
-   every choice. It only shows, hides and mirrors the controls that
+/* Mobile "build your plan" presentation of the existing "Mina val" form, in
+   two layouts the viewer can switch between: "bild" (a picture per step and a
+   sheet with a handle that is pulled up) and "kompakt" (step tabs and a fixed
+   bottom bar). Both share the steps and controls, and only show, hide and
+   mirror what
    personal.js and shopping-location.js already own; values, validation and
    submission stay with them. Desktop keeps the full form. No API calls. */
 (() => {
@@ -19,17 +21,19 @@
   const movedItems=()=>[$('shopping-search-box'),$('shopping-search-status'),$('cancel-alternative'),$('shopping-common')?.previousElementSibling,$('shopping-common'),$('shopping-draft-status'),$('extras-list')].filter(Boolean);
   const itemSlots=new Map();
   const steps=[
-    {title:"Plats",art:"place",nodes:()=>[$('location-step')]},
-    {title:"Måltider",art:"meals",nodes:()=>[gate.querySelector(':scope>p:not(.sr-only)'),$('meal-settings'),fieldsetOf('extra-meal-toggles')]},
-    {title:"Butiker",art:"stores",nodes:()=>[fieldsetOf('store-count-control')]},
-    {title:"Smak",art:"taste",nodes:()=>[$('taste-choices')]},
-    {title:"Recept",art:"recipes",nodes:()=>[$('complete-recipe-controls')]},
-    {title:"Mer",art:"more",nodes:()=>[$('organic-choices'),$('pantry-choices'),$('surplus-choices')]},
-    {title:"Varor",art:"items",nodes:()=>[itemsBox]},
-    {title:"Sammanfattning",art:"done",tab:false,nodes:()=>[document.querySelector('.choice-summary')]},
+    {title:"Plats",lead:"Var vill du handla?",art:"place",nodes:()=>[$('location-step')]},
+    {title:"Måltider",lead:"Hur många måltider och portioner?",art:"meals",nodes:()=>[gate.querySelector(':scope>p:not(.sr-only)'),$('meal-settings'),fieldsetOf('extra-meal-toggles')]},
+    {title:"Butiker",lead:"Hur många butiker får korgen delas på?",art:"stores",nodes:()=>[fieldsetOf('store-count-control')]},
+    {title:"Smak",lead:"Vad gillar du – och vad måste undvikas?",art:"taste",nodes:()=>[$('taste-choices')]},
+    {title:"Recept",lead:"Vilka recept passar dig?",art:"recipes",nodes:()=>[$('complete-recipe-controls')]},
+    {title:"Mer",lead:"Ekologiskt, skafferi och överskott",art:"more",nodes:()=>[$('organic-choices'),$('pantry-choices'),$('surplus-choices')]},
+    {title:"Varor",lead:"Egna varor i samma korg",art:"items",nodes:()=>[itemsBox]},
+    {title:"Sammanfattning",lead:"Din plan i korthet",art:"done",nodes:()=>[document.querySelector('.choice-summary')]},
   ];
   const summaryIndex=steps.length-1;
   let active=0,on=false,extraWasOpen=false,awaitingLocation=false,expanded=false;
+  const LAYOUTS={bild:"Bild",kompakt:"Kompakt"},LAYOUT_KEY="smako.configurator.layout";
+  let layout="bild";try{if(LAYOUTS[localStorage.getItem(LAYOUT_KEY)])layout=localStorage.getItem(LAYOUT_KEY);}catch(_){}
 
   // Flat illustrations stand in for the car pictures; no image dependencies.
   const svg=body=>`<svg viewBox="0 0 360 220" preserveAspectRatio="xMidYMid slice" role="presentation" focusable="false" xmlns="http://www.w3.org/2000/svg">${body}</svg>`;
@@ -43,20 +47,29 @@
     items:svg('<rect width="360" height="220" fill="#f3ede2"/><rect x="104" y="22" width="152" height="186" rx="8" fill="#fff"/>'+[58,92,126,160].map((y,i)=>`<rect x="124" y="${y}" width="18" height="18" rx="4" fill="${i<2?"#164b3e":"#fff"}" stroke="#164b3e" stroke-width="2"/>${i<2?`<path d="M128 ${y+9}l4 4 7-8" stroke="#fff" stroke-width="2.5" fill="none"/>`:""}<rect x="152" y="${y+5}" width="${[80,64,88,56][i]}" height="8" rx="4" fill="#d9dfd6"/>`).join("")+'<circle cx="286" cy="164" r="26" fill="#f6f1e7" stroke="#e0a458" stroke-width="4"/><rect x="62" y="132" width="30" height="58" rx="6" fill="#e9efe4" stroke="#7fa36a" stroke-width="3"/>'),
     done:svg('<rect width="360" height="220" fill="#e9efe4"/><path d="M118 80h124l-12 112H130z" fill="#164b3e"/><path d="M146 80c0-46 68-46 68 0" stroke="#164b3e" stroke-width="9" fill="none"/><circle cx="160" cy="56" r="20" fill="#7fa36a"/><circle cx="196" cy="50" r="16" fill="#c5523f"/><circle cx="180" cy="66" r="14" fill="#e0a458"/><path d="M160 136l14 14 28-30" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'),
   };
-
+  // Shared: step tabs, intro with the layout switch, and the hint.
   const top=el("div",null,"config-top"),done=el("button","Klar","config-done"),topText=el("div",null,"config-top-text"),close=el("button","×","config-close");
   done.type="button";close.type="button";close.setAttribute("aria-label","Stäng Mina val");
   const topTitle=el("span","Mina val","config-top-title"),topArea=el("span",null,"config-top-area");topText.append(topTitle,topArea);top.append(done,topText,close);
   const hero=el("div",null,"config-hero");hero.setAttribute("aria-hidden","true");
   const handle=el("button",null,"config-handle");handle.type="button";handle.append(el("span",null,"config-handle-bar"));
   const tabs=el("nav",null,"config-tabs");tabs.setAttribute("aria-label","Steg i Mina val");
-  const tabButtons=steps.map((step,index)=>{if(step.tab===false)return null;const b=el("button",step.title,"config-tab");b.type="button";b.addEventListener("click",()=>go(index));tabs.append(b);return b;}).filter(Boolean);
+  const tabButtons=steps.map((step,index)=>{const b=el("button",null,`config-tab${index===summaryIndex?" config-tab-summary":""}`);b.type="button";b.append(el("span",String(index+1),"config-tab-number"),el("span",step.title,"config-tab-title"));b.addEventListener("click",()=>go(index));tabs.append(b);return b;});
   const sheetHead=el("div",null,"config-sheet-head");sheetHead.append(handle,tabs);
+  const stepTitle=el("h2",null,"config-step-title");stepTitle.tabIndex=-1;
+  const stepLead=el("p",null,"config-step-lead"),stepText=el("div",null,"config-step-text");stepText.append(stepTitle,stepLead);
+  const switcher=el("div",null,"config-switch");switcher.setAttribute("role","radiogroup");switcher.setAttribute("aria-label","Visning");
+  const switchButtons=Object.entries(LAYOUTS).map(([key,label])=>{const b=el("button",label,"config-switch-option");b.type="button";b.setAttribute("role","radio");b.dataset.layout=key;b.addEventListener("click",()=>setLayout(key));switcher.append(b);return b;});
+  const intro=el("div",null,"config-step-intro");intro.append(stepText,switcher);
   const hint=el("p",null,"config-hint");hint.setAttribute("role","status");
+  // Bild: a next button at the end of the sheet. Kompakt: a fixed bottom bar.
   const foot=el("div",null,"config-foot"),next=el("button",null,"config-next");next.type="button";foot.append(next);
+  const bar=el("div",null,"config-bar"),back=el("button","‹","config-back"),barText=el("div",null,"config-bar-text"),barNext=el("button",null,"primary-button config-bar-next");
+  back.type="button";back.setAttribute("aria-label","Föregående steg");barNext.type="button";
+  const barStep=el("span",null,"config-bar-step"),barTitle=el("span",null,"config-bar-title");barText.append(barStep,barTitle);bar.append(back,barText,barNext);
   const locked=index=>index>0&&gate.disabled;
 
-  // Volvo-style tiles and "Lägg till" pills mirror existing selects/checkboxes.
+  // Tiles and "Lägg till" pills mirror existing selects/checkboxes in both layouts.
   const tileSets=[["location-store-mode",{radius:"Nära mig",municipality:"Hela kommunen",specific:"Välj själv"}],["location-radius"],["surplus-mode",{minimize:"Minsta överskott",allow_larger:"Större köp"}]].map(([id,labels])=>{
     const selectNode=$(id);if(!selectNode)return null;
     const row=el("div",null,"config-tiles");row.setAttribute("role","radiogroup");row.setAttribute("aria-label",selectNode.closest("label")?.firstChild?.textContent?.trim()||id);
@@ -71,39 +84,51 @@
   }
 
   function setExpanded(value){
-    expanded=value;document.body.classList.toggle("config-expanded",expanded);
+    expanded=value;document.body.classList.toggle("config-expanded",expanded&&layout==="bild");
     handle.setAttribute("aria-expanded",String(expanded));handle.setAttribute("aria-label",expanded?"Visa mindre av valen":"Visa alla val");
     view.style.removeProperty("--config-drag");
   }
 
+  function setLayout(key){
+    layout=key;try{localStorage.setItem(LAYOUT_KEY,key);}catch(_){}
+    for(const b of switchButtons)b.setAttribute("aria-checked",String(b.dataset.layout===layout));
+    if(!on)return;
+    document.body.classList.toggle("config-bild",layout==="bild");document.body.classList.toggle("config-kompakt",layout==="kompakt");
+    document.body.classList.remove("config-dragging");setExpanded(expanded);
+    go(active,{focus:false});
+  }
+
   function updateChrome(){
-    tabButtons.forEach((b,i)=>{if(i===active)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current");b.classList.toggle("is-locked",locked(i));});
-    const postcode=$('customer-postcode')?.value.trim();
+    tabButtons.forEach((b,i)=>{if(i===active)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current");b.classList.toggle("is-locked",locked(i));b.classList.toggle("is-done",i<active&&!locked(i));});
+    const postcode=$('customer-postcode')?.value.trim(),submit=$('choice-submit');
     topArea.textContent=gate.disabled?"Ange postnummer":`Nära ${postcode}`;
-    done.disabled=gate.disabled;
-    if(active===summaryIndex)next.textContent="‹ Tillbaka till valen";
-    else if(active===0&&gate.disabled)next.textContent="Fortsätt till måltider";
-    else if(active===summaryIndex-1)next.textContent="Klar – granska planen";
-    else next.textContent=`Nästa: ${steps[active+1].title}`;
+    done.disabled=gate.disabled;back.disabled=active===0;
+    barStep.textContent=`Steg ${active+1} av ${steps.length}`;barTitle.textContent=steps[active].title;
+    const gated=active===0&&gate.disabled,onward=gated?"Fortsätt till måltider":active<summaryIndex?`Nästa: ${steps[active+1].title}`:"";
+    next.textContent=active===summaryIndex?"‹ Tillbaka till valen":active===summaryIndex-1?"Klar – granska planen":onward;
+    if(active===summaryIndex){barNext.textContent=submit?.textContent||"Skapa plan";barNext.disabled=!!submit?.disabled;}
+    else{barNext.textContent=onward;barNext.disabled=false;}
   }
 
   function render(){
     const visible=new Set(steps[active].nodes().filter(Boolean));
     steps.forEach(step=>step.nodes().forEach(n=>n&&n.classList.toggle("config-off",!visible.has(n))));
     hero.innerHTML=art[steps[active].art];
+    stepTitle.textContent=steps[active].title;stepLead.textContent=steps[active].lead;
     view.classList.toggle("config-summary",active===summaryIndex);
     syncTiles();updateChrome();
   }
 
-  function go(index){
+  function go(index,{focus=true}={}){
     if(index<0||index>=steps.length)return;
     if(locked(index)){hint.textContent="Ange postnummer och välj butiker först.";index=0;}else hint.textContent="";
-    active=index;render();view.scrollTop=0;
-    tabButtons[Math.min(index,tabButtons.length-1)]?.scrollIntoView({block:"nearest",inline:"center",behavior:"instant"});
+    active=index;render();
+    tabButtons[index].scrollIntoView({block:"nearest",inline:"center",behavior:"instant"});
+    if(layout==="bild")view.scrollTop=0;
+    else{window.scrollTo({top:0,behavior:"instant"});if(focus)stepTitle.focus({preventScroll:true});}
   }
 
-  next.addEventListener("click",()=>{
-    if(active===summaryIndex){go(summaryIndex-1);return;}
+  function advance(){
     if(active===0&&gate.disabled){
       const confirm=$('confirm-location');
       if(confirm&&!confirm.closest("[hidden]")&&!confirm.disabled){awaitingLocation=true;confirm.click();}
@@ -111,43 +136,49 @@
       return;
     }
     go(active+1);
-  });
+  }
+  next.addEventListener("click",()=>{if(active===summaryIndex)go(summaryIndex-1);else advance();});
+  barNext.addEventListener("click",()=>{if(active===summaryIndex)$('choice-submit')?.click();else advance();});
+  back.addEventListener("click",()=>go(active-1));
   done.addEventListener("click",()=>{go(summaryIndex);setExpanded(true);});
-  // "Fortsätt lägga till varor" opens the shopping list on desktop; here it stays in the sheet.
+  // "Fortsätt lägga till varor" opens the shopping list on desktop; here it stays in Mina val.
   $('choice-add-items')?.addEventListener("click",event=>{if(!on)return;event.stopImmediatePropagation();go(steps.findIndex(step=>step.art==="items"));setExpanded(true);},true);
   close.addEventListener("click",()=>document.querySelector('.personal-nav [data-open="plan"]')?.click());
 
-  // Tap the handle to toggle; drag it to pull the sheet up or down.
+  // Bild: tap the handle to toggle; drag it to pull the sheet up or down.
   let drag=null;
   handle.addEventListener("pointerdown",event=>{drag={y:event.clientY,start:view.getBoundingClientRect().top,moved:false};handle.setPointerCapture(event.pointerId);});
   handle.addEventListener("pointermove",event=>{if(!drag)return;const dy=event.clientY-drag.y;if(Math.abs(dy)>6)drag.moved=true;if(drag.moved){view.style.setProperty("--config-drag",`${Math.max(0,drag.start+dy)}px`);document.body.classList.add("config-dragging");}});
   const endDrag=event=>{if(!drag)return;const dy=event.clientY-drag.y,moved=drag.moved;drag=null;document.body.classList.remove("config-dragging");setExpanded(moved?dy<0||(Math.abs(dy)<40&&expanded):!expanded);};
   handle.addEventListener("pointerup",endDrag);handle.addEventListener("pointercancel",endDrag);
-  view.addEventListener("scroll",()=>{if(on&&!expanded&&view.scrollTop>12)setExpanded(true);},{passive:true});
-  view.addEventListener("focusin",event=>{if(on&&!expanded&&event.target.matches("input:not([type=checkbox]),textarea,select"))setExpanded(true);});
+  view.addEventListener("scroll",()=>{if(on&&layout==="bild"&&!expanded&&view.scrollTop>12)setExpanded(true);},{passive:true});
+  view.addEventListener("focusin",event=>{if(on&&layout==="bild"&&!expanded&&event.target.matches("input:not([type=checkbox]),textarea,select"))setExpanded(true);});
 
   // shopping-location.js opens the gate on confirm; continue to meals then.
-  $('confirm-location')?.addEventListener("click",()=>{awaitingLocation=true;});
-  new MutationObserver(()=>{if(!on)return;if(awaitingLocation&&!gate.disabled){awaitingLocation=false;go(1);}else if(locked(active))go(0);else{syncTiles();updateChrome();}}).observe(gate,{attributes:true,attributeFilter:["disabled"]});
+  // Capture first: the gate observer runs between the button's own listeners.
+  document.addEventListener("click",event=>{if(event.target.closest?.('#confirm-location'))awaitingLocation=true;},true);
+  new MutationObserver(()=>{if(!on)return;if(awaitingLocation&&!gate.disabled){awaitingLocation=false;go(1);}else if(locked(active))go(0,{focus:false});else{syncTiles();updateChrome();}}).observe(gate,{attributes:true,attributeFilter:["disabled"]});
+  const submit=$('choice-submit');if(submit)new MutationObserver(()=>on&&updateChrome()).observe(submit,{attributes:true,attributeFilter:["disabled"],childList:true,characterData:true,subtree:true});
   form.addEventListener("input",()=>on&&syncTiles());form.addEventListener("change",()=>on&&(syncTiles(),updateChrome()));
 
   function enter(){
     if(on)return;on=true;extraWasOpen=extra?.open??false;if(extra)extra.open=true;
-    document.body.classList.add("config-mode");document.body.prepend(top,hero);
-    view.prepend(sheetHead,hint);view.append(foot);
+    document.body.classList.add("config-mode");document.body.prepend(top,hero);document.body.append(bar);
+    view.prepend(sheetHead,intro,hint);view.append(foot);
     for(const set of tileSets)set.selectNode.closest("label").after(set.row);
     for(const {box,pill} of pills)box.after(pill);
     for(const node of movedItems()){const slot=document.createComment("config-item");node.before(slot);itemSlots.set(node,slot);itemsBox.append(node);}
     view.querySelector('.choice-summary')?.before(itemsBox);
-    setExpanded(window.innerHeight<600);
+    expanded=window.innerHeight<600;
     // A confirmed location (e.g. restored) starts at the meals, like a resumed build.
-    go(active===0&&!gate.disabled?1:active);
+    if(active===0&&!gate.disabled)active=1;
+    setLayout(layout);
   }
   function exit(){
     if(!on)return;on=false;if(extra)extra.open=extraWasOpen;
-    document.body.classList.remove("config-mode","config-expanded","config-dragging");view.classList.remove("config-summary");
+    document.body.classList.remove("config-mode","config-bild","config-kompakt","config-expanded","config-dragging");view.classList.remove("config-summary");
     for(const [node,slot] of itemSlots){slot.replaceWith(node);}itemSlots.clear();
-    for(const n of [top,hero,sheetHead,hint,foot,itemsBox,...tileSets.map(s=>s.row),...pills.map(p=>p.pill)])n.remove();
+    for(const n of [top,hero,bar,sheetHead,intro,hint,foot,itemsBox,...tileSets.map(s=>s.row),...pills.map(p=>p.pill)])n.remove();
     document.querySelectorAll(".config-off").forEach(n=>n.classList.remove("config-off"));
   }
   const sync=()=>{if(mobile.matches&&!view.hidden)enter();else exit();};

@@ -24,7 +24,12 @@ kopplingen igen en gång per förfrågan. Generiska varor är huvudvägen i sök
 den skrivna texten tolkas av `/api/personal/interpret-extra` och läggs till med ett
 tryck (Enter) när mängd finns eller en kurerad vara med samma namn finns; annars
 välj mängd. Exakta produkter ligger bakom ”Välj en exakt produkt i stället”.
-Releaseverifieringens shoppingskript följer det nya flödet. Ej aktiverat: den här datorn saknar
+Releaseverifieringens shoppingskript följer det nya flödet. Konfiguratorn har
+två layouter med en växel Bild/Kompakt i varje steg (sparas i localStorage):
+Bild = bild och ark med handtag; Kompakt = numrerade stegflikar och fast
+bottenrad med Nästa/Skapa plan. Båda delar steg, rutor, Lägg till-knappar och
+Varor. Rättat: tryck direkt på Fortsätt till måltider gick inte vidare till
+Måltider i konfiguratorn. Ej aktiverat: den här datorn saknar
 SSH-alias `smako`; releasen görs från operatörsdatorn enligt `docs/BETA.md`.
 `configurator.js` visar bara befintliga fält per steg; värden, validering och
 anrop ägs fortfarande av `personal.js` och `shopping-location.js`. Datorvyn är

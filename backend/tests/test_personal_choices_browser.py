@@ -81,7 +81,7 @@ def mobile_configurator(page):
     """On mobile widths Mina val is a step-by-step configurator."""
     if not page.evaluate("matchMedia('(max-width: 849px)').matches"):
         return False
-    expect(page.locator(".config-top")).to_be_visible()
+    expect(page.locator("body.config-mode")).to_have_count(1)
     return True
 
 
@@ -92,9 +92,13 @@ def config_step(page, title):
 
 def submit(page, captured):
     before = len(captured)
-    if mobile_configurator(page):
-        page.locator(".config-done").click()
-    page.locator("#choice-submit").click()
+    if mobile_configurator(page) and page.locator("body.config-kompakt").count():
+        config_step(page, "Sammanfattning")
+        page.locator(".config-bar-next").click()
+    else:
+        if page.locator("body.config-bild").count():
+            page.locator(".config-done").click()
+        page.locator("#choice-submit").click()
     expect(page.locator("#personal-status")).to_contain_text("Testet fångar")
     assert len(captured) == before + 1
     # Validate against the actual API contracts, not a copy of frontend rules.
@@ -827,7 +831,7 @@ def test_shopping_items_are_added_before_the_plan_on_mobile_and_desktop(choices)
     page.locator(".config-done").click()
     expect(page.locator("#choice-summary-lines")).to_contain_text("Egna varor")
     page.locator("#choice-add-items").click()
-    expect(page.locator(".config-tab[aria-current]")).to_have_text("Varor")
+    expect(page.locator(".config-tab[aria-current] .config-tab-title")).to_have_text("Varor")
     page.set_viewport_size({"width": 1280, "height": 900})
     expect(page.locator(".config-top")).to_have_count(0)
     page.locator("#choice-add-items").click()
@@ -874,7 +878,7 @@ def test_exact_item_added_in_the_configurator_carries_its_generic(choices):
     expect(page.locator("#extras-list")).to_contain_text("Hör till: mjölk (1,5 %)")
     assert classified[0]["product_keys"] == [key] and classified[0]["query"] == "mjölk"
     assert saved[-1]["items"][0]["generic"] == {"query": "mjölk", "properties": ["1,5 %"]}
-    expect(page.locator(".config-tab[aria-current]")).to_have_text("Varor")
+    expect(page.locator(".config-tab[aria-current] .config-tab-title")).to_have_text("Varor")
 
 
 def test_generic_items_are_added_in_one_tap_from_the_typed_text(choices):
@@ -919,4 +923,33 @@ def test_generic_items_are_added_in_one_tap_from_the_typed_text(choices):
     page.locator("#shopping-generic-results .primary-button").click()
     expect(page.locator("#extras-list article")).to_have_count(2)
     assert saved[-1][1]["query"] == "mjölk" and saved[-1][1]["quantity"] == 1000
-    expect(page.locator(".config-tab[aria-current]")).to_have_text("Varor")
+    expect(page.locator(".config-tab[aria-current] .config-tab-title")).to_have_text("Varor")
+
+
+def test_mobile_layout_switch_keeps_choices_and_is_remembered(choices):
+    page, url, captured = choices
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(url)
+    expect(page.locator("body.config-bild")).to_have_count(1)
+    expect(page.locator(".config-hero")).to_be_visible()
+    page.locator("#customer-postcode").fill("223 50")
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("Lund kommun")
+    page.locator(".config-next").click()
+    page.locator("#dinner-count-value").fill("4")
+    page.get_by_role("radio", name="Kompakt").click()
+    expect(page.locator("body.config-kompakt")).to_have_count(1)
+    expect(page.locator(".config-hero")).to_be_hidden()
+    expect(page.locator(".config-bar")).to_be_visible()
+    expect(page.locator(".config-tab[aria-current]")).to_contain_text("Måltider")
+    expect(page.locator("#dinner-count-value")).to_have_value("4")
+    page.locator(".config-bar-next").click()
+    expect(page.locator(".config-tab[aria-current]")).to_contain_text("Butiker")
+    page.reload()
+    expect(page.locator("body.config-kompakt")).to_have_count(1)
+    choose_location(page)
+    assert submit(page, captured)["personal"]["meals"][0]["meal_type"] == "dinner"
+    page.get_by_role("radio", name="Bild").click()
+    expect(page.locator("body.config-bild")).to_have_count(1)
+    expect(page.locator(".config-bar")).to_be_hidden()
+    expect(page.locator(".config-hero")).to_be_visible()
