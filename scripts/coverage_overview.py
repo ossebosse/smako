@@ -375,6 +375,8 @@ def main(args):
               "code_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
               "analyzer_sha256": file_sha(__file__), "imported_recipe_count": len(references),
               "active_recipe_count": len(recipes), "source_loading_seconds": time.perf_counter() - started,
+              "measurement": {"basket_checks_requested": args.baskets,
+                              "variant_deadline_seconds": args.variant_seconds, "network_disabled": True},
               "environment": {"platform": platform.platform(), "python": platform.python_version(), "cpus": os.cpu_count()},
               "scope_sha256": digest(scope), "modes": {}}
     write_json(args.output / "overview.json", report)
