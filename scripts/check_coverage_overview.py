@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import argparse
+import csv
+import gzip
 import json
 from pathlib import Path
 
@@ -53,6 +55,38 @@ def baseline(report):
                 for mode, data in report["modes"].items()}}
 
 
+def validate_product_details(report, directory):
+    """Check the product→recipe edge file, not just its aggregate headline."""
+    from collections import Counter
+    for mode, data in report["modes"].items():
+        recipes, seen, counts = data["recipes"], set(), Counter()
+        with gzip.open(directory / (mode + "-products.csv.gz"), "rt", encoding="utf-8", newline="") as stream:
+            for row in csv.DictReader(stream):
+                key = (row["store_id"], row["product_id"])
+                if key in seen:
+                    raise ValueError("Duplicate product row")
+                seen.add(key)
+                indexes = [int(i) for i in row["recipe_indexes"].split(";") if i]
+                if (len(indexes) != len(set(indexes)) or any(i < 0 or i >= len(recipes) for i in indexes)
+                        or len(indexes) != int(row["recipe_variants"])):
+                    raise ValueError("Invalid product→recipe references")
+                if int(row["base_dishes"]) != len({recipes[i]["base_id"] for i in indexes}):
+                    raise ValueError("Product recipe breadth does not match its references")
+                if row["status"] not in {"recipe_candidate", "rejected_in_tested_paths", "not_demonstrated"}:
+                    raise ValueError("Unknown product state")
+                if bool(indexes) != (row["status"] == "recipe_candidate"):
+                    raise ValueError("Product candidate requires an observed recipe path")
+                if (row["candidate_in_verified_recipe"] == "True") != any(recipes[i]["basket"] == "verified" for i in indexes):
+                    raise ValueError("Product whole-recipe label does not match checked baskets")
+                counts[row["status"]] += 1
+        expected = data["products"]
+        if (len(seen) != expected["retained_product_rows"]
+                or counts["recipe_candidate"] != expected["recipe_candidate_rows"]
+                or counts["rejected_in_tested_paths"] != expected["rejected_in_tested_paths_rows"]
+                or counts["not_demonstrated"] != expected["not_demonstrated_rows"]):
+            raise ValueError("Product detail file does not match the complete inventory")
+
+
 def compare(report, prior):
     validate(report)
     if prior.get("schema") != "smako-coverage-baseline-v1":
@@ -93,6 +127,7 @@ if __name__ == "__main__":
         args.baseline.write_text(json.dumps(baseline(current), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     else:
         comparison = compare(current, json.loads(args.baseline.read_bytes()))
+        validate_product_details(current, args.report.parent)
         if args.output:
             args.output.write_text(json.dumps(comparison, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         print(json.dumps({"passed": comparison["passed"], "fully_checked": comparison["fully_checked"],

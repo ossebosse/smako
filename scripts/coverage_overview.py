@@ -168,6 +168,7 @@ def run_mode(prepared, facts, recipes, originals, scope, mode, args):
     planner.product_trace = trace
     planner.diagnostics.product_trace = None
     accepted, viable, selected = set(), set(), set()
+    recipe_indexes_by_product = defaultdict(list)
     scopes, rows, groups = {}, [], {}
     phase = {"planner_load": time.perf_counter() - started, "input_resolution": 0.0, "checkout": 0.0}
     for index, (rid, original) in enumerate(recipes):
@@ -220,6 +221,8 @@ def run_mode(prepared, facts, recipes, originals, scope, mode, args):
                 groups[group]["input_resolved"].add(rid)
                 if row["basket"] == "verified":
                     groups[group]["verified"].add(rid)
+        for product_key in recipe_products:
+            recipe_indexes_by_product[product_key].append(index)
         rows.append(row)
         if index % 200 == 0:
             print(json.dumps({"mode": mode, "recipes_checked": index + 1,
@@ -260,13 +263,16 @@ def run_mode(prepared, facts, recipes, originals, scope, mode, args):
     product_file = args.output / (mode + "-products.csv.gz")
     with gzip.open(product_file, "wt", encoding="utf-8", newline="") as stream:
         writer = csv.writer(stream)
-        writer.writerow(["store_id", "product_id", "name", "category", "gtin", "status", "candidate_in_verified_recipe", "bought", "stop_stages"])
+        writer.writerow(["store_id", "product_id", "name", "category", "gtin", "status", "candidate_in_verified_recipe", "bought", "stop_stages",
+                         "recipe_variants", "base_dishes", "recipe_indexes"])
         for p in prepared.universe.products:
             key = (p.store_id, p.product_id)
             stages = sorted(s for s, keys in trace.stops.items() if key in keys)
             status = "recipe_candidate" if key in accepted else "rejected_in_tested_paths" if stages else "not_demonstrated"
+            indexes = recipe_indexes_by_product[key]
             writer.writerow([p.store_id, p.product_id, p.name, p.category, getattr(p, "gtin", None), status,
-                             key in viable, key in selected, ";".join(stages)])
+                             key in viable, key in selected, ";".join(stages), len(indexes),
+                             len({rows[i]["base_id"] for i in indexes}), ";".join(map(str, indexes))])
     group_rows = [{"ingredient": key, "recipe_variants": len(v["recipes"]), "base_dishes": len(v["base_dishes"]),
                    "candidate_product_rows": len(v["candidates"]), "input_resolved_recipes": len(v["input_resolved"]),
                    "verified_recipes": len(v["verified"]), "recipe_ids": sorted(v["recipes"])} for key, v in sorted(groups.items())]

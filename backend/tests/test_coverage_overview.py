@@ -1,4 +1,5 @@
 """Coverage must preserve denominators, actual decisions and unknown outcomes."""
+import csv
 import gzip
 import json
 import sys
@@ -9,7 +10,7 @@ from types import SimpleNamespace
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
-from check_coverage_overview import baseline, compare, validate
+from check_coverage_overview import baseline, compare, validate, validate_product_details
 from coverage_overview import (
     CoverageTrace,
     gap_queries,
@@ -66,7 +67,7 @@ def report_fixture():
         ("universe_sha256", "u"), ("facts_sha256", "f"), ("clock", "2026-10-23T00:00:00+00:00"),
         ("store_ids", ["s"]), ("max_stores", 2), ("servings", {"dinner": 4}), ("pantry", False),
         ("conditions", {"exact": {}, "estimated": {}}), ("imported_reference_ids_sha256", "ids"))}
-    rows = [{"id": str(i), "original_import_id": "original-" + str(i), "blocking_scope_ids": [],
+    rows = [{"id": str(i), "base_id": "base-" + str(i), "original_import_id": "original-" + str(i), "blocking_scope_ids": [],
              "basket": "verified", "checkout": {"audit_passed": True, "store_count": 1, "evidence_sha256": "receipt"}}
             for i in range(2200)]
     rows[-1].update(basket="data_blocked", blocking_scope_ids=["missing"])
@@ -170,6 +171,34 @@ def test_reference_packaging_rejects_private_or_unrelated_payloads(tmp_path, doc
     path.write_text(json.dumps(document))
     with pytest.raises(ValueError):
         review_projection(path, "facts")
+
+
+@pytest.mark.parametrize("damage", [None, "duplicate", "wrong_index", "missing_edge", "wrong_breadth", "false_whole_recipe"])
+def test_product_recipe_links_are_checked_against_actual_report_rows(tmp_path, damage):
+    rows = [{"store_id": "s", "product_id": str(i), "status": status, "recipe_indexes": "0" if i == 0 else "",
+             "recipe_variants": 1 if i == 0 else 0, "base_dishes": 1 if i == 0 else 0,
+             "candidate_in_verified_recipe": "True" if i == 0 else "False"}
+            for i, status in enumerate(["recipe_candidate", "rejected_in_tested_paths", "not_demonstrated"])]
+    if damage == "duplicate":
+        rows.append(rows[0])
+    elif damage == "wrong_index":
+        rows[0]["recipe_indexes"] = "2200"
+    elif damage == "missing_edge":
+        rows[0].update(recipe_indexes="", recipe_variants=0, base_dishes=0)
+    elif damage == "wrong_breadth":
+        rows[0]["base_dishes"] = 2
+    elif damage == "false_whole_recipe":
+        rows[0]["candidate_in_verified_recipe"] = "False"
+    for mode in ("exact", "estimated"):
+        with gzip.open(tmp_path / (mode + "-products.csv.gz"), "wt", newline="") as stream:
+            writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+            writer.writeheader()
+            writer.writerows(rows)
+    if damage:
+        with pytest.raises(ValueError):
+            validate_product_details(report_fixture(), tmp_path)
+    else:
+        validate_product_details(report_fixture(), tmp_path)
 
 
 def test_real_resolver_trace_is_not_limited_to_production_campaign_sample():

@@ -90,6 +90,12 @@ grundrätter, antal produktkandidater samt hur många recept som klarar samtliga
 ingredienser respektive hela korgen. Detta skiljer många varianter av samma
 grundrätt från verklig receptbredd.
 
+Produkt-CSV:n innehåller också antal receptvarianter, antal olika grundrätter
+och `recipe_indexes` för **just den produktens faktiska kandidatvägar**.
+Indexen är nollbaserade positioner i `modes.<läge>.recipes` i samma JSON-fil.
+Det gör det möjligt att slå upp exakt vilka recept en enskild vara kan stödja,
+utan att anta att varje produkt i en råvarugrupp passar alla dess recept.
+
 `recipe_opportunities` prövar kända författarnamn/alias genom befintlig generisk
 produktresolver. Den listar kvarvarande produktposter som har sådant
 kandidatstöd men som inget befintligt recept använder:

@@ -1,3 +1,24 @@
+# 2026-10-30: Samlad CI-överblick för varor och recept
+
+Starta i [COVERAGE-OVERVIEW.md](COVERAGE-OVERVIEW.md). Det nya obligatoriska
+jobbet `coverage-overview` ger Summary, JSON, regressionsjämförelse och
+produkt-CSV med faktiska produkt→receptkopplingar. Ingen serverkod aktiveras.
+PR50 följer införandet. Baseline är 2 200 ursprungliga import-ID:n; hela
+aktuella biblioteket mäts dessutom. Oprövade produkter och tidsgränser är okända,
+inte avvisade eller lyckade. Samma antal lyckade recept får inte dölja förlorade ID:n.
+
+Referensen är Malmöpriser 23 oktober/fakta 28 oktober, 89 458 produktposter,
+inte aktuell beta eller den senare Stora Coop-kopplingen. Första fulla lokala
+och hosted körning gav 1 142/2 024 insatslösta och 1 140/2 024 hela importerade
+korgar (exakt/uppskattning), utan förlorade original-ID:n. Produktkandidater:
+3 425/3 891. Uppskattat läge: 22 505 observerat stoppade och 63 062 ännu ej
+visat användbara poster. Läs scope och kod-SHA innan talen återanvänds.
+
+Prestandadokumentet föreslår separata kalla och varma menyprov med nya val,
+kö/förberedelse/checkout/audit/sparning/återläsning. Täckningsjobbets väggtid
+är inventeringstid, inte tid till levererad veckomeny. Referensbyte och
+baselinebyte ska granskas; regenerera aldrig baseline för att tysta röd CI.
+
 # 2026-10-29: Syd-baspriser hos tre Stora Coop, aktiverat
 
 Se [aktiveringen](releases/stora-coop-syd-base-20261029/ACTIVATED.md).
