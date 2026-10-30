@@ -87,7 +87,7 @@ def pack(args):
     output = args.output
     output.mkdir(parents=True, exist_ok=True)
     manifest = {"schema": "smako-coverage-reference-v1", "name": args.name, "clock": args.clock,
-                "source_scope": "Frozen Malmö PriceUniverse 2026-10-23, public reviewed product facts 2026-10-28",
+                "source_scope": args.name,
                 "includes_private_user_data": False, "files": {}}
     for name in ("universe", "facts"):
         source = getattr(args, name)
