@@ -22,9 +22,8 @@
   let active=0,on=false,extraWasOpen=false,awaitingLocation=false;
 
   const hero=el("div",null,"config-hero");hero.setAttribute("aria-hidden","true");
-  const week=el("div",null,"config-week"),headline=el("p",null,"config-headline"),subline=el("p",null,"config-subline");
-  const days=["M","T","O","T","F","L","S"].map(d=>{const day=el("span",null,"config-day");day.append(el("span",d,"config-day-label"),el("span",null,"config-plate"),el("span",null,"config-extras"));week.append(day);return day;});
-  hero.append(week,headline,subline);
+  const stats=el("div",null,"config-stats"),headline=el("p",null,"config-headline"),subline=el("p",null,"config-subline");
+  hero.append(stats,headline,subline);
   const tabs=el("nav",null,"config-tabs");tabs.setAttribute("aria-label","Steg i Mina val");
   const tabButtons=steps.map((step,index)=>{const b=el("button",null,"config-tab");b.type="button";b.dataset.step=String(index);b.append(el("span",String(index+1),"config-tab-number"),el("span",step.title));b.addEventListener("click",()=>go(index));tabs.append(b);return b;});
   const head=el("div",null,"config-head");head.append(hero,tabs);
@@ -42,13 +41,13 @@
   function updateHero(){
     const dinners=Math.max(0,Math.min(7,Math.round(value("dinner-count")??0))),servings=value("dinner-servings");
     const extras=["breakfast","snack"].filter(enabled).map(t=>({type:t,count:Math.min(7,Math.round(value(`${t}-count`)??0))}));
-    days.forEach((day,i)=>{day.classList.toggle("is-planned",i<dinners);day.querySelector(".config-extras").replaceChildren(...extras.filter(e=>i<e.count).map(e=>el("span",null,`config-dot config-dot-${e.type}`)));});
+    const stores=value("max-stores");
+    const tile=(number,label)=>{const t=el("span",null,"config-stat");t.append(el("span",number==null?"–":String(number),"config-stat-number"),el("span",label,"config-stat-label"));return t;};
+    stats.replaceChildren(tile(dinners,dinners===1?"Middag":"Middagar"),tile(servings,"Portioner"),tile(stores,stores===1?"Max butik":"Max butiker"),
+      ...extras.map(e=>tile(e.count,e.type==="breakfast"?"Frukost":"Mellanmål")));
     headline.textContent=`${dinners} ${dinners===1?"middag":"middagar"}${servings?` · ${servings} portioner`:""}`;
-    const parts=[];const postcode=$('customer-postcode')?.value.trim();if(postcode&&!gate.disabled)parts.push(`Postnummer ${postcode}`);
-    const stores=value("max-stores");if(stores)parts.push(`max ${stores} ${stores===1?"butik":"butiker"}`);
-    for(const e of extras)parts.push(`${e.count} ${e.type==="breakfast"?"frukost":"mellanmål"}`);
-    subline.textContent=parts.join(" · ")||"Börja med ditt postnummer";
-    
+    const postcode=$('customer-postcode')?.value.trim();
+    subline.textContent=postcode&&!gate.disabled?`Handla nära postnummer ${postcode}`:"Börja med ditt postnummer";
   }
 
   function updateBar(){

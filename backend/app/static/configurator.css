@@ -23,25 +23,18 @@
 .config-mode .choice-summary {position:static;}
 .config-mode .choice-summary>button#choice-submit {display:none;}
 
-/* Sticky visual of the week that updates with every choice, like a car render. */
+/* Sticky summary of the plan being built that updates with every choice. */
 .config-head {position:sticky;top:0;z-index:20;margin:0 calc(50% - 50vw);background:var(--sm-bg);box-shadow:0 1px 0 var(--sm-border);}
-.config-hero {padding:14px 16px 10px;background:linear-gradient(180deg,var(--sm-tint),var(--sm-bg));text-align:center;transition:padding .2s ease;}
-.config-week {display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-width:360px;margin:0 auto;}
-.config-day {display:flex;flex-direction:column;align-items:center;gap:4px;}
-.config-day-label {font:700 10px/1 system-ui,sans-serif;letter-spacing:.08em;color:var(--sm-muted);}
-.config-plate {width:100%;max-width:40px;aspect-ratio:1;border-radius:50%;border:2px dashed #b8cabf;background:#fff;box-sizing:border-box;transition:background .25s ease,border-color .25s ease,transform .25s ease;}
-.config-day.is-planned .config-plate {border:5px solid #fff;background:radial-gradient(circle at 50% 50%,#e0a458 0 28%,#7fa36a 29% 47%,#c5523f 48% 62%,#f3eadb 63%);box-shadow:0 0 0 1px var(--sm-border),0 3px 8px #143f3522;transform:scale(1.04);}
-.config-extras {display:flex;gap:3px;min-height:6px;}
-.config-dot {width:6px;height:6px;border-radius:50%;}
-.config-dot-breakfast {background:#e0a458;}
-.config-dot-snack {background:#7fa36a;}
-.config-headline {margin:10px 0 0!important;font:700 22px/1.2 Georgia,serif!important;letter-spacing:-.02em;color:var(--sm-ink);}
-.config-subline {margin:2px 0 0!important;font-size:13px!important;color:var(--sm-muted);}
-.config-head.is-compact .config-hero {padding-top:8px;padding-bottom:6px;}
-.config-head.is-compact .config-plate {max-width:24px;border-width:2px;}
-.config-head.is-compact .config-day.is-planned .config-plate {border-width:3px;}
-.config-head.is-compact .config-day-label,.config-head.is-compact .config-subline,.config-head.is-compact .config-extras {display:none;}
-.config-head.is-compact .config-headline {margin-top:4px!important;font-size:16px!important;}
+.config-hero {padding:14px 16px 12px;background:linear-gradient(180deg,var(--sm-tint),var(--sm-bg));text-align:center;transition:padding .2s ease;}
+.config-stats {display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:420px;margin:0 auto;}
+.config-stat {flex:1 1 0;min-width:72px;max-width:110px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px 8px;border:1px solid var(--sm-border);border-radius:14px;background:#fff;}
+.config-stat-number {font:700 26px/1 Georgia,serif;color:var(--sm-ink);font-variant-numeric:tabular-nums;}
+.config-stat-label {font-size:11px;font-weight:650;color:var(--sm-muted);white-space:nowrap;}
+.config-headline {display:none;margin:0!important;font:700 16px/1.2 Georgia,serif!important;letter-spacing:-.02em;color:var(--sm-ink);}
+.config-subline {margin:8px 0 0!important;font-size:13px!important;color:var(--sm-muted);}
+.config-head.is-compact .config-hero {padding-top:8px;padding-bottom:8px;}
+.config-head.is-compact .config-stats,.config-head.is-compact .config-subline {display:none;}
+.config-head.is-compact .config-headline {display:block;}
 
 /* Step tabs: one row, underline on the current step. */
 .config-tabs {display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;background:#fff;}
@@ -68,4 +61,4 @@
 .config-bar-summary {font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .personal-app .config-next {flex:0 1 auto;margin:0;min-height:48px;padding:12px 18px;border-radius:999px;background:var(--sm-primary);color:#fff;border:1px solid var(--sm-primary);font:700 14px/1.2 system-ui,sans-serif;max-width:58%;}
 .personal-app .config-next:disabled {opacity:.5;}
-@media(prefers-reduced-motion:reduce) {.config-plate,.config-hero {transition:none;}}
+@media(prefers-reduced-motion:reduce) {.config-hero {transition:none;}}

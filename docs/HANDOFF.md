@@ -4,8 +4,8 @@ Gren `ui/mobile-configurator-20261030`. `/` svarar 302 till `/personal` (med
 query), den tidigare sidan finns på `/klassisk` (även i återställningsläget).
 Manifestets `start_url` är `/personal`; `id` är oförändrat `/`.
 
-Under 850 px visas Mina val som en konfigurator: veckobild som uppdateras med
-valen, stegflikar (Plats, Måltider, Butiker, Smak, Recept, Mer,
+Under 850 px visas Mina val som en konfigurator: sammanfattningsrutor (antal
+middagar, portioner, max butiker m.m.) som uppdateras med valen, stegflikar (Plats, Måltider, Butiker, Smak, Recept, Mer,
 Sammanfattning) och en fast bottenrad med Nästa/Skapa plan.
 `configurator.js` visar bara befintliga fält per steg; värden, validering och
 anrop ägs fortfarande av `personal.js` och `shopping-location.js`. Datorvyn är
