@@ -11,6 +11,13 @@
   if(!view||!form||!gate)return;
   const mobile=window.matchMedia("(max-width: 849px)");
   const fieldsetOf=id=>$(id)?.closest("fieldset");
+  // The shopping list's own search, common choices and rows move into the
+  // sheet, so items are added before the plan and optimised with the recipes.
+  const itemsBox=el("section",null,"config-items");itemsBox.setAttribute("aria-labelledby","config-items-title");
+  const itemsTitle=el("h2","Egna varor");itemsTitle.id="config-items-title";
+  itemsBox.append(itemsTitle,el("p","Lägg till en generisk vara som ”mjölk 1,5 % 1 l” eller en exakt produkt. Varorna räknas i samma korg som recepten, så billigaste kombinationen väljs för allt tillsammans."));
+  const movedItems=()=>[$('shopping-search-box'),$('shopping-search-status'),$('cancel-alternative'),$('shopping-common')?.previousElementSibling,$('shopping-common'),$('shopping-draft-status'),$('extras-list')].filter(Boolean);
+  const itemSlots=new Map();
   const steps=[
     {title:"Plats",art:"place",nodes:()=>[$('location-step')]},
     {title:"Måltider",art:"meals",nodes:()=>[gate.querySelector(':scope>p:not(.sr-only)'),$('meal-settings'),fieldsetOf('extra-meal-toggles')]},
@@ -18,6 +25,7 @@
     {title:"Smak",art:"taste",nodes:()=>[$('taste-choices')]},
     {title:"Recept",art:"recipes",nodes:()=>[$('complete-recipe-controls')]},
     {title:"Mer",art:"more",nodes:()=>[$('organic-choices'),$('pantry-choices'),$('surplus-choices')]},
+    {title:"Varor",art:"items",nodes:()=>[itemsBox]},
     {title:"Sammanfattning",art:"done",tab:false,nodes:()=>[document.querySelector('.choice-summary')]},
   ];
   const summaryIndex=steps.length-1;
@@ -32,6 +40,7 @@
     taste:svg('<rect width="360" height="220" fill="#eef0e2"/><path d="M90 170c-40-50-10-120 60-130-10 60-20 100-60 130z" fill="#7fa36a"/><path d="M90 170c20-40 40-80 60-130" stroke="#4f7a45" stroke-width="3" fill="none"/><path d="M190 60c30 10 60 50 40 110-40-20-60-70-40-110z" fill="#c5523f"/><path d="M190 60c-4-14 4-24 14-28" stroke="#4f7a45" stroke-width="5" fill="none"/><circle cx="290" cy="150" r="30" fill="#e0a458"/><circle cx="282" cy="142" r="7" fill="#fff" opacity=".5"/><circle cx="270" cy="70" r="14" fill="#7fa36a"/><circle cx="292" cy="62" r="11" fill="#9cc086"/>'),
     recipes:svg('<rect width="360" height="220" fill="#f3ead9"/><rect x="96" y="28" width="168" height="168" rx="10" fill="#fff" transform="rotate(-4 180 112)"/><rect x="120" y="54" width="90" height="12" rx="6" fill="#164b3e" transform="rotate(-4 180 112)"/>'+[84,104,124,144,164].map(y=>`<rect x="122" y="${y}" width="${y%40?110:80}" height="7" rx="3.5" fill="#d9dfd6" transform="rotate(-4 180 112)"/>`).join("")+'<circle cx="270" cy="160" r="30" fill="#c5523f"/><rect x="246" y="150" width="48" height="10" rx="5" fill="#a3402f"/>'),
     more:svg('<rect width="360" height="220" fill="#e6efe6"/><rect x="58" y="70" width="80" height="110" rx="14" fill="#fff"/><rect x="66" y="56" width="64" height="20" rx="6" fill="#c5523f"/><rect x="72" y="110" width="52" height="40" rx="6" fill="#e0a458" opacity=".6"/><path d="M240 180c-70-10-80-90-20-130 40 50 60 90 20 130z" fill="#7fa36a"/><path d="M240 180c-10-40-20-80-20-130" stroke="#4f7a45" stroke-width="3" fill="none"/><circle cx="300" cy="80" r="22" fill="#e0a458"/>'),
+    items:svg('<rect width="360" height="220" fill="#f3ede2"/><rect x="104" y="22" width="152" height="186" rx="8" fill="#fff"/>'+[58,92,126,160].map((y,i)=>`<rect x="124" y="${y}" width="18" height="18" rx="4" fill="${i<2?"#164b3e":"#fff"}" stroke="#164b3e" stroke-width="2"/>${i<2?`<path d="M128 ${y+9}l4 4 7-8" stroke="#fff" stroke-width="2.5" fill="none"/>`:""}<rect x="152" y="${y+5}" width="${[80,64,88,56][i]}" height="8" rx="4" fill="#d9dfd6"/>`).join("")+'<circle cx="286" cy="164" r="26" fill="#f6f1e7" stroke="#e0a458" stroke-width="4"/><rect x="62" y="132" width="30" height="58" rx="6" fill="#e9efe4" stroke="#7fa36a" stroke-width="3"/>'),
     done:svg('<rect width="360" height="220" fill="#e9efe4"/><path d="M118 80h124l-12 112H130z" fill="#164b3e"/><path d="M146 80c0-46 68-46 68 0" stroke="#164b3e" stroke-width="9" fill="none"/><circle cx="160" cy="56" r="20" fill="#7fa36a"/><circle cx="196" cy="50" r="16" fill="#c5523f"/><circle cx="180" cy="66" r="14" fill="#e0a458"/><path d="M160 136l14 14 28-30" stroke="#fff" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'),
   };
 
@@ -104,6 +113,8 @@
     go(active+1);
   });
   done.addEventListener("click",()=>{go(summaryIndex);setExpanded(true);});
+  // "Fortsätt lägga till varor" opens the shopping list on desktop; here it stays in the sheet.
+  $('choice-add-items')?.addEventListener("click",event=>{if(!on)return;event.stopImmediatePropagation();go(steps.findIndex(step=>step.art==="items"));setExpanded(true);},true);
   close.addEventListener("click",()=>document.querySelector('.personal-nav [data-open="plan"]')?.click());
 
   // Tap the handle to toggle; drag it to pull the sheet up or down.
@@ -126,6 +137,8 @@
     view.prepend(sheetHead,hint);view.append(foot);
     for(const set of tileSets)set.selectNode.closest("label").after(set.row);
     for(const {box,pill} of pills)box.after(pill);
+    for(const node of movedItems()){const slot=document.createComment("config-item");node.before(slot);itemSlots.set(node,slot);itemsBox.append(node);}
+    view.querySelector('.choice-summary')?.before(itemsBox);
     setExpanded(window.innerHeight<600);
     // A confirmed location (e.g. restored) starts at the meals, like a resumed build.
     go(active===0&&!gate.disabled?1:active);
@@ -133,7 +146,8 @@
   function exit(){
     if(!on)return;on=false;if(extra)extra.open=extraWasOpen;
     document.body.classList.remove("config-mode","config-expanded","config-dragging");view.classList.remove("config-summary");
-    for(const n of [top,hero,sheetHead,hint,foot,...tileSets.map(s=>s.row),...pills.map(p=>p.pill)])n.remove();
+    for(const [node,slot] of itemSlots){slot.replaceWith(node);}itemSlots.clear();
+    for(const n of [top,hero,sheetHead,hint,foot,itemsBox,...tileSets.map(s=>s.row),...pills.map(p=>p.pill)])n.remove();
     document.querySelectorAll(".config-off").forEach(n=>n.classList.remove("config-off"));
   }
   const sync=()=>{if(mobile.matches&&!view.hidden)enter();else exit();};

@@ -151,6 +151,7 @@
       }
     }
     add("Handla i",`Max ${sliderValue("max-stores")} inköpsställen`);
+    add("Egna varor",extras.length?`${extras.length} ${extras.length===1?"vara":"varor"}, optimeras med recepten`:"Inga ännu");
     $('choice-submit').disabled=$('planning-choices').disabled||busy;
     const submitLabel=window.SmakoRecipes.pendingJob('personal')?'Återuppta statuskontrollen':'Skapa plan och inköpslista';
     // A blur/change can occur between pointer-down and click. Keep the button's
@@ -260,7 +261,7 @@
   function renderExtras(){const out=$('extras-list');out.replaceChildren();for(const row of extras){const card=el("article",null,"personal-card");card.append(el("strong",`${row.query} · ${number(row.quantity)} ${row.purchase_units?"köpförpackningar":row.unit}`),el("p",`${row.kind==="campaign"?"Villkorat kampanjval":row.kind==="exact"?"Exakt produkt låst":row.kind==="one_of"?"Antingen eller – väljs i hela korgen":"Generisk vara"}${row.properties.length?` · ${row.properties.join(" · ")}`:""} · ${row.use_pantry?"Skafferi får användas":"Ska köpas utöver recepten"}`));card.append(button("Ta bort extrarad",async()=>{extras=extras.filter(e=>e.id!==row.id);await saveShopping();renderExtras();}));if(row.kind==="one_of")card.append(el("p",`Antingen ${row.alternative_names?.join(" eller ")||`${row.alternatives.length} valda produkter`}. Minst ${number(row.quantity)} ${row.unit} totalt av den valda produkten.`));
       if(row.kind==="generic")card.append(button("Ändra vara",()=>extraDialog(null,false,row,row.id)));
       if(["exact","one_of"].includes(row.kind))card.append(button("Lägg till ett antingen-eller-alternativ",async()=>{alternativeTarget=row.id;$('cancel-alternative').hidden=false;$('shopping-search-status').textContent=`Välj en annan exakt produkt för minst ${number(row.quantity)} ${row.unit}.`;$('shopping-query').focus();}));
-      card.append(button("Ändra mängd",async()=>{const box=el("div"),amount=input("number",row.quantity,{min:row.purchase_units?"1":"0.001",max:"100000",step:row.purchase_units?"1":"any",required:true});box.append(field(`Minsta mängd (${row.purchase_units?"köpförpackningar":row.unit})`,amount),button("Spara mängd",async()=>{if(!amount.checkValidity())throw new Error("Ange en positiv mängd.");row.quantity=Number(amount.value);await saveShopping();renderExtras();$('personal-dialog').close();},true));openDialog(box);}));out.append(card);} }
+      card.append(button("Ändra mängd",async()=>{const box=el("div"),amount=input("number",row.quantity,{min:row.purchase_units?"1":"0.001",max:"100000",step:row.purchase_units?"1":"any",required:true});box.append(field(`Minsta mängd (${row.purchase_units?"köpförpackningar":row.unit})`,amount),button("Spara mängd",async()=>{if(!amount.checkValidity())throw new Error("Ange en positiv mängd.");row.quantity=Number(amount.value);await saveShopping();renderExtras();$('personal-dialog').close();},true));openDialog(box);}));out.append(card);} updateChoiceSummary();}
 
   $('calculate-extras').addEventListener("click",()=>void task(async()=>{await saveShopping();if(saved){await change("extras",{extras});}else{await accept(await api("/api/plans",requestPayload({standalone:true})));}show("shopping");}));
 

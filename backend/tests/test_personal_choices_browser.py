@@ -143,7 +143,7 @@ def _measured_preparation(choices, tmp_path, method, mint):
     page.route("**/api/plans/" + saved.plan_id, lambda route: route.fulfill(content_type="application/json", body=json.dumps(envelope)))
     page.route("**/api/personal/plans/*/change", respond)
     page.goto(url.split("#")[0] + "#plan=" + saved.plan_id)
-    page.locator('[data-open="shopping"]').click()
+    page.locator('.personal-nav [data-open="shopping"]').click()
     if mint:
         expect(page.locator('#shopping-content')).to_contain_text('begränsat studieexempel')
         expect(page.locator('#shopping-content')).to_contain_text('alla stjälkar')
@@ -812,3 +812,25 @@ async def test_recalculation_passes_estimates_without_rewriting_saved_history(tm
     assert captured[0].purchase_planning_mode == "estimated"
     assert plans.get_owned(saved.plan_id, owner_actor_hash=OWNER).model_dump_json() == original
     assert private.read(OWNER) == stock
+
+
+def test_shopping_items_are_added_before_the_plan_on_mobile_and_desktop(choices):
+    page, url, _captured = choices
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(url)
+    page.locator("#customer-postcode").fill("223 50")
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("Lund kommun")
+    page.locator(".config-next").click()
+    config_step(page, "Varor")
+    expect(page.locator(".config-items #shopping-query")).to_be_visible()
+    page.locator(".config-done").click()
+    expect(page.locator("#choice-summary-lines")).to_contain_text("Egna varor")
+    page.locator("#choice-add-items").click()
+    expect(page.locator(".config-tab[aria-current]")).to_have_text("Varor")
+    page.set_viewport_size({"width": 1280, "height": 900})
+    expect(page.locator(".config-top")).to_have_count(0)
+    page.locator("#choice-add-items").click()
+    expect(page.locator("#personal-shopping #shopping-query")).to_be_visible()
+    page.locator("#shopping-back-to-choices").click()
+    expect(page.locator("#choice-submit")).to_be_visible()

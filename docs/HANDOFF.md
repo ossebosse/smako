@@ -9,7 +9,11 @@ skärmdumpar av Volvos mobila bilkonfigurator: toppfält med Klar och område,
 en illustration per steg och ett ark med handtag (tryck eller dra) med stora
 flikar (Plats, Måltider, Butiker, Smak, Recept, Mer). Val visas som rutor och
 tillägg som Lägg till-knappar; de speglar befintliga select-/kryssrutor. Klar
-öppnar sammanfattningen med Skapa plan. Ej aktiverat: den här datorn saknar
+öppnar sammanfattningen med Skapa plan. Fliken Varor flyttar inköpslistans
+befintliga sökning, vanliga val och rader in i arket; sammanfattningen visar
+Egna varor och Fortsätt lägga till varor (på dator öppnas Inköpslista, med väg
+tillbaka). Varorna följer som tidigare med i `personal.extras` och optimeras i
+samma korg som recepten. Ej aktiverat: den här datorn saknar
 SSH-alias `smako`; releasen görs från operatörsdatorn enligt `docs/BETA.md`.
 `configurator.js` visar bara befintliga fält per steg; värden, validering och
 anrop ägs fortfarande av `personal.js` och `shopping-location.js`. Datorvyn är

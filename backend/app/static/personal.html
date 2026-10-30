@@ -8,15 +8,15 @@
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
   <link rel="stylesheet" href="/static/personal.css?v=option3-1" />
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
-  <link rel="stylesheet" href="/static/choices.css?v=option3-1" />
-  <link rel="stylesheet" href="/static/configurator.css?v=configurator-20261030d" />
+  <link rel="stylesheet" href="/static/choices.css?v=items-20261030" />
+  <link rel="stylesheet" href="/static/configurator.css?v=configurator-20261030e" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
   <script src="/static/complete-recipes.js?v=ingredients-20261012" defer></script>
   <script src="/static/shopping-location.js?v=location-20261011" defer></script>
   <script src="/static/choice-controls.js?v=option3-1" defer></script>
-  <script src="/static/personal.js?v=mint-leaf-preparation-20261028" defer></script>
+  <script src="/static/personal.js?v=items-20261030" defer></script>
   <script src="/static/product-search.js?v=comparability-20261010" defer></script>
-  <script src="/static/configurator.js?v=configurator-20261030d" defer></script>
+  <script src="/static/configurator.js?v=configurator-20261030e" defer></script>
 </head>
 <body class="personal-app">
   <a class="skip-link" href="#personal-main">Hoppa till innehållet</a>
@@ -53,6 +53,7 @@
       <p>Uppskattad vikt och kostnad räknas med när underlag finns. Viktvarornas slutbelopp beror på uppvägning.</p>
       <button type="button" class="primary-button" id="calculate-extras">Beräkna inköpslistan</button>
       <button type="button" class="secondary-button" id="calculate-own-list">Beräkna bara mina varor – utan recept</button>
+      <button type="button" class="secondary-button" id="shopping-back-to-choices" data-open="choices">Tillbaka till Mina val och skapa plan med recept</button>
       <p>Om en plan redan är öppen läggs varorna till dess recept. Välj ”utan recept” för en fristående lista. Butikstak, postnummer och medlemskap väljs under Mina val.</p>
     </section>
     <section data-view="pantry" id="personal-pantry" hidden><h1>Mitt skafferi</h1><p id="account-status">Ditt skafferi sparas i gästsessionen. Skapa konto för att nå det på fler enheter.</p>
@@ -118,7 +119,7 @@
         <button id="generate-plan" type="submit" class="primary-button">Skapa plan och inköpslista</button>
         </fieldset>
       </form>
-      <aside class="choice-summary" aria-labelledby="choice-summary-title"><p class="eyebrow">Din plan i korthet</p><h2 id="choice-summary-title">En god vecka börjar här.</h2><dl id="choice-summary-lines"></dl><p>Dina måltider planeras tillsammans i en gemensam inköpskorg.</p><button type="button" class="primary-button" id="choice-submit" disabled>Skapa plan och inköpslista</button><p class="small">Dina val och tidigare plan behålls om beräkningen inte kan slutföras.</p></aside>
+      <aside class="choice-summary" aria-labelledby="choice-summary-title"><p class="eyebrow">Din plan i korthet</p><h2 id="choice-summary-title">En god vecka börjar här.</h2><dl id="choice-summary-lines"></dl><p>Dina måltider och egna varor planeras tillsammans i en gemensam inköpskorg.</p><button type="button" class="secondary-button" id="choice-add-items" data-open="shopping">Fortsätt lägga till varor</button><button type="button" class="primary-button" id="choice-submit" disabled>Skapa plan och inköpslista</button><p class="small">Dina val och tidigare plan behålls om beräkningen inte kan slutföras.</p></aside>
       </div>
     </section>
   </main>
