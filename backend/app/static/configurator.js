@@ -1,5 +1,5 @@
 /* Mobile step-by-step presentation of the existing "Mina val" form. It only
-   shows, hides and summarises the controls that personal.js and
+   shows and hides the controls that personal.js and
    shopping-location.js already own; values, validation and submission stay
    with them. Desktop keeps the full form. No API calls. */
 (() => {
@@ -21,12 +21,9 @@
   ];
   let active=0,on=false,extraWasOpen=false,awaitingLocation=false;
 
-  const hero=el("div",null,"config-hero");hero.setAttribute("aria-hidden","true");
-  const stats=el("div",null,"config-stats"),headline=el("p",null,"config-headline"),subline=el("p",null,"config-subline");
-  hero.append(stats,headline,subline);
   const tabs=el("nav",null,"config-tabs");tabs.setAttribute("aria-label","Steg i Mina val");
   const tabButtons=steps.map((step,index)=>{const b=el("button",null,"config-tab");b.type="button";b.dataset.step=String(index);b.append(el("span",String(index+1),"config-tab-number"),el("span",step.title));b.addEventListener("click",()=>go(index));tabs.append(b);return b;});
-  const head=el("div",null,"config-head");head.append(hero,tabs);
+  const head=el("div",null,"config-head");head.append(tabs);
   const stepTitle=el("h2",null,"config-step-title");stepTitle.tabIndex=-1;
   const stepLead=el("p",null,"config-step-lead"),hint=el("p",null,"config-hint");hint.setAttribute("role","status");
   const intro=el("div",null,"config-step-intro");intro.append(stepTitle,stepLead,hint);
@@ -34,21 +31,7 @@
   back.type="button";back.setAttribute("aria-label","Föregående steg");next.type="button";
   const barStep=el("span",null,"config-bar-step"),barSummary=el("span",null,"config-bar-summary");barText.append(barStep,barSummary);bar.append(back,barText,next);
 
-  const value=id=>{const n=$(`${id}-value`);const v=Number(String(n?.value||"").replace(",","."));return Number.isFinite(v)&&n?.value!==""?v:null;};
-  const enabled=type=>type==="dinner"||$(`enable-${type}`)?.checked;
   const locked=index=>index>0&&gate.disabled;
-
-  function updateHero(){
-    const dinners=Math.max(0,Math.min(7,Math.round(value("dinner-count")??0))),servings=value("dinner-servings");
-    const extras=["breakfast","snack"].filter(enabled).map(t=>({type:t,count:Math.min(7,Math.round(value(`${t}-count`)??0))}));
-    const stores=value("max-stores");
-    const tile=(number,label)=>{const t=el("span",null,"config-stat");t.append(el("span",number==null?"–":String(number),"config-stat-number"),el("span",label,"config-stat-label"));return t;};
-    stats.replaceChildren(tile(dinners,dinners===1?"Middag":"Middagar"),tile(servings,"Portioner"),tile(stores,stores===1?"Max butik":"Max butiker"),
-      ...extras.map(e=>tile(e.count,e.type==="breakfast"?"Frukost":"Mellanmål")));
-    headline.textContent=`${dinners} ${dinners===1?"middag":"middagar"}${servings?` · ${servings} portioner`:""}`;
-    const postcode=$('customer-postcode')?.value.trim();
-    subline.textContent=postcode&&!gate.disabled?`Handla nära postnummer ${postcode}`:"Börja med ditt postnummer";
-  }
 
   function updateBar(){
     tabButtons.forEach((b,i)=>{if(i===active)b.setAttribute("aria-current","step");else b.removeAttribute("aria-current");b.classList.toggle("is-locked",locked(i));b.classList.toggle("is-done",i<active&&!locked(i));});
@@ -63,7 +46,7 @@
     const visible=new Set(steps[active].nodes().filter(Boolean));
     steps.forEach(step=>step.nodes().forEach(n=>n&&n.classList.toggle("config-off",!visible.has(n))));
     stepTitle.textContent=steps[active].title;stepLead.textContent=steps[active].lead;
-    updateBar();updateHero();
+    updateBar();
   }
 
   function go(index,{focus=true}={}){
@@ -90,9 +73,6 @@
   $('confirm-location')?.addEventListener("click",()=>{awaitingLocation=true;});
   new MutationObserver(()=>{if(!on)return;if(awaitingLocation&&!gate.disabled){awaitingLocation=false;go(1);}else if(locked(active))go(0,{focus:false});else updateBar();}).observe(gate,{attributes:true,attributeFilter:["disabled"]});
   const submit=$('choice-submit');if(submit)new MutationObserver(()=>on&&updateBar()).observe(submit,{attributes:true,attributeFilter:["disabled"],childList:true,characterData:true,subtree:true});
-  form.addEventListener("input",()=>on&&updateHero());form.addEventListener("change",()=>on&&updateHero());
-  document.addEventListener("click",event=>{if(on&&event.target.closest("dialog"))setTimeout(updateHero);});
-  window.addEventListener("scroll",()=>{if(on)head.classList.toggle("is-compact",window.scrollY>48);},{passive:true});
 
   function enter(){
     if(on)return;on=true;extraWasOpen=extra?.open??false;if(extra)extra.open=true;

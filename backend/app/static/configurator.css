@@ -23,20 +23,9 @@
 .config-mode .choice-summary {position:static;}
 .config-mode .choice-summary>button#choice-submit {display:none;}
 
-/* Sticky summary of the plan being built that updates with every choice. */
-.config-head {position:sticky;top:0;z-index:20;margin:0 calc(50% - 50vw);background:var(--sm-bg);box-shadow:0 1px 0 var(--sm-border);}
-.config-hero {padding:14px 16px 12px;background:linear-gradient(180deg,var(--sm-tint),var(--sm-bg));text-align:center;transition:padding .2s ease;}
-.config-stats {display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:420px;margin:0 auto;}
-.config-stat {flex:1 1 0;min-width:72px;max-width:110px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px 8px;border:1px solid var(--sm-border);border-radius:14px;background:#fff;}
-.config-stat-number {font:700 26px/1 Georgia,serif;color:var(--sm-ink);font-variant-numeric:tabular-nums;}
-.config-stat-label {font-size:11px;font-weight:650;color:var(--sm-muted);white-space:nowrap;}
-.config-headline {display:none;margin:0!important;font:700 16px/1.2 Georgia,serif!important;letter-spacing:-.02em;color:var(--sm-ink);}
-.config-subline {margin:8px 0 0!important;font-size:13px!important;color:var(--sm-muted);}
-.config-head.is-compact .config-hero {padding-top:8px;padding-bottom:8px;}
-.config-head.is-compact .config-stats,.config-head.is-compact .config-subline {display:none;}
-.config-head.is-compact .config-headline {display:block;}
+/* Step tabs stay at the top while the step scrolls. */
+.config-head {position:sticky;top:0;z-index:20;margin:0 calc(50% - 50vw);background:#fff;box-shadow:0 1px 0 var(--sm-border);}
 
-/* Step tabs: one row, underline on the current step. */
 .config-tabs {display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;background:#fff;}
 .config-tabs::-webkit-scrollbar {display:none;}
 .personal-app .config-tab {flex:0 0 auto;display:flex;align-items:center;gap:6px;margin:0;padding:12px 10px;min-height:46px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--sm-muted);font:600 14px/1 system-ui,sans-serif;}
@@ -61,4 +50,3 @@
 .config-bar-summary {font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .personal-app .config-next {flex:0 1 auto;margin:0;min-height:48px;padding:12px 18px;border-radius:999px;background:var(--sm-primary);color:#fff;border:1px solid var(--sm-primary);font:700 14px/1.2 system-ui,sans-serif;max-width:58%;}
 .personal-app .config-next:disabled {opacity:.5;}
-@media(prefers-reduced-motion:reduce) {.config-hero {transition:none;}}
