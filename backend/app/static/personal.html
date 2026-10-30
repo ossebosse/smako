@@ -6,15 +6,17 @@
   <meta name="theme-color" content="#173e35" />
   <title>Smako · Min plan och skafferi</title>
   <link rel="stylesheet" href="/static/styles.css?v=personal-v2-1" />
-  <link rel="stylesheet" href="/static/personal.css?v=option3-1" />
+  <link rel="stylesheet" href="/static/personal.css?v=generic-first-20261030" />
   <link rel="stylesheet" href="/static/complete-recipes.css?v=complete-recipes-1" />
-  <link rel="stylesheet" href="/static/choices.css?v=option3-1" />
+  <link rel="stylesheet" href="/static/choices.css?v=items-20261030" />
+  <link rel="stylesheet" href="/static/configurator.css?v=configurator-20261030h" />
   <script src="/scanner-assets/physical-barcode-scanner.js" defer></script>
   <script src="/static/complete-recipes.js?v=ingredients-20261012" defer></script>
   <script src="/static/shopping-location.js?v=location-20261011" defer></script>
   <script src="/static/choice-controls.js?v=option3-1" defer></script>
-  <script src="/static/personal.js?v=mint-leaf-preparation-20261028" defer></script>
+  <script src="/static/personal.js?v=generic-first-20261030b" defer></script>
   <script src="/static/product-search.js?v=comparability-20261010" defer></script>
+  <script src="/static/configurator.js?v=configurator-20261030h" defer></script>
 </head>
 <body class="personal-app">
   <a class="skip-link" href="#personal-main">Hoppa till innehållet</a>
@@ -51,6 +53,7 @@
       <p>Uppskattad vikt och kostnad räknas med när underlag finns. Viktvarornas slutbelopp beror på uppvägning.</p>
       <button type="button" class="primary-button" id="calculate-extras">Beräkna inköpslistan</button>
       <button type="button" class="secondary-button" id="calculate-own-list">Beräkna bara mina varor – utan recept</button>
+      <button type="button" class="secondary-button" id="shopping-back-to-choices" data-open="choices">Tillbaka till Mina val och skapa plan med recept</button>
       <p>Om en plan redan är öppen läggs varorna till dess recept. Välj ”utan recept” för en fristående lista. Butikstak, postnummer och medlemskap väljs under Mina val.</p>
     </section>
     <section data-view="pantry" id="personal-pantry" hidden><h1>Mitt skafferi</h1><p id="account-status">Ditt skafferi sparas i gästsessionen. Skapa konto för att nå det på fler enheter.</p>
@@ -116,11 +119,11 @@
         <button id="generate-plan" type="submit" class="primary-button">Skapa plan och inköpslista</button>
         </fieldset>
       </form>
-      <aside class="choice-summary" aria-labelledby="choice-summary-title"><p class="eyebrow">Din plan i korthet</p><h2 id="choice-summary-title">En god vecka börjar här.</h2><dl id="choice-summary-lines"></dl><p>Dina måltider planeras tillsammans i en gemensam inköpskorg.</p><button type="button" class="primary-button" id="choice-submit" disabled>Skapa plan och inköpslista</button><p class="small">Dina val och tidigare plan behålls om beräkningen inte kan slutföras.</p></aside>
+      <aside class="choice-summary" aria-labelledby="choice-summary-title"><p class="eyebrow">Din plan i korthet</p><h2 id="choice-summary-title">En god vecka börjar här.</h2><dl id="choice-summary-lines"></dl><p>Dina måltider och egna varor planeras tillsammans i en gemensam inköpskorg.</p><button type="button" class="secondary-button" id="choice-add-items" data-open="shopping">Fortsätt lägga till varor</button><button type="button" class="primary-button" id="choice-submit" disabled>Skapa plan och inköpslista</button><p class="small">Dina val och tidigare plan behålls om beräkningen inte kan slutföras.</p></aside>
       </div>
     </section>
   </main>
-  <footer class="personal-footer"><a href="/">Tidigare middagsplanering och feedback</a><a href="/static/privacy.html">Integritet och radera mina data</a><span id="personal-version"></span></footer>
+  <footer class="personal-footer"><a href="/klassisk">Tidigare middagsplanering och feedback</a><a href="/static/privacy.html">Integritet och radera mina data</a><span id="personal-version"></span></footer>
   <dialog id="personal-dialog"><div id="dialog-body"></div><button type="button" id="dialog-close" class="secondary-button">Stäng</button></dialog>
   <dialog id="location-stores-dialog" aria-labelledby="location-stores-title"><h2 id="location-stores-title">Välj specifika butiker</h2><p>Bocka i de butiker och priskanaler du vill jämföra.</p><div id="location-store-list" class="store-picker-list"></div><p id="location-modal-status" role="status"></p><button id="location-stores-done" type="button" class="primary-button">Klart</button></dialog>
 </body></html>

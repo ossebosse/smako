@@ -14,7 +14,7 @@ def test_manifest_describes_root_scoped_standalone_consumer_app() -> None:
     manifest = json.loads((STATIC / "manifest.webmanifest").read_text(encoding="utf-8"))
 
     assert manifest["id"] == "/"
-    assert manifest["start_url"] == "/"
+    assert manifest["start_url"] == "/personal"
     assert manifest["scope"] == "/"
     assert manifest["display"] == "standalone"
     assert manifest["lang"] == "sv-SE"

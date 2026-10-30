@@ -114,6 +114,13 @@ class MealSettings(PrivateModel):
         return self
 
 
+class GenericRef(PrivateModel):
+    """The generic item an exact, either/or or campaign row falls under."""
+
+    query: str = Field(min_length=1, max_length=120)
+    properties: list[str] = Field(default_factory=list, max_length=15)
+
+
 class ExtraNeed(PrivateModel):
     id: str = Field(default_factory=lambda: uuid4().hex, min_length=1, max_length=64)
     kind: Literal["generic", "exact", "campaign", "one_of"] = "generic"
@@ -128,6 +135,8 @@ class ExtraNeed(PrivateModel):
     confirmed: bool = False
     use_pantry: bool = False
     food: bool = True
+    # Optional for rows saved before the link existed; new rows get it on save.
+    generic: GenericRef | None = Field(default=None, exclude_if=lambda value: value is None)
 
     @model_validator(mode="after")
     def identity(self):
@@ -151,10 +160,28 @@ class ExtraNeed(PrivateModel):
             raise ValueError("Villkorat kampanjval kräver hela antal och får inte använda skafferi.")
         if self.kind == "generic" and self.product_key:
             raise ValueError("En generisk vara kan inte ha en låst produktidentitet.")
+        if self.kind == "generic" and self.generic is not None:
+            raise ValueError("En generisk vara är sin egen generiska vara.")
+        if self.generic and any(not p.strip() or len(p) > 100 for p in self.generic.properties):
+            raise ValueError("Ogiltig egenskap för den generiska varan.")
         if any(not p.strip() or len(p) > 100 for p in self.properties):
             raise ValueError("Ogiltig produktegenskap.")
         if not self.confirmed:
             raise ValueError("Bekräfta varan och dess tolkade egenskaper före beräkning.")
+        return self
+
+
+class ProductGenericQuery(PrivateModel):
+    query: str = Field(min_length=1, max_length=120)
+    postal_code: str = Field(min_length=5, max_length=6)
+    product_keys: list[str] = Field(min_length=1, max_length=8)
+    generic: GenericRef | None = None
+
+    @model_validator(mode="after")
+    def keys(self):
+        import re
+        if any(not re.fullmatch(r"[a-f0-9]{32}", key) for key in self.product_keys):
+            raise ValueError("Ogiltig produktidentitet.")
         return self
 
 

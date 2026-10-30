@@ -23,6 +23,7 @@ from app.models.personal import (
     PantryWrite,
     PersonalMutation,
     PersonalPlanning,
+    ProductGenericQuery,
     ProfileWrite,
     ShoppingWrite,
     TasteProfile,
@@ -146,6 +147,33 @@ def shopping_suggestions(request: Request, response: Response, q: str = "", post
         products = price_free_products({"results": rows})
     return {"generics": generic, "products": products, "status": "available",
             "identity_rule": "verified_gtin_and_package; otherwise separate source identity"}
+
+
+@router.post("/product-generic")
+def product_generic(payload: ProductGenericQuery, request: Request, response: Response):
+    """The generic an exact choice falls under, checked as the planner checks it."""
+    from app.services.product_search import ProductSearchRequest
+    from app.services.shopping_list import classify_products, falls_under
+
+    context(request, response)
+    try:
+        search = ProductSearchRequest(query=payload.query, postal_code=payload.postal_code)
+    except ValueError as exc:
+        raise HTTPException(422, "Kontrollera varunamn och postnummer.") from exc
+    prepared = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(search.postal_code, {})
+    if prepared is None:
+        raise HTTPException(409, "Produktunderlag saknas för valt postnummer.")
+    if payload.generic is not None:
+        generic = payload.generic.model_dump()
+        if not falls_under(prepared, payload.product_keys, generic):
+            raise HTTPException(422, f"Produkten hör inte till {generic['query']}. Lägg till den som en egen rad.")
+        return {"generic": generic}
+    generic = classify_products(prepared, payload.query, payload.product_keys)
+    if generic is None:
+        raise HTTPException(422, "Produkten kunde inte placeras under en generisk vara. "
+                                 "Sök med ett bredare varunamn eller lägg till en generisk vara.")
+    return {"generic": {"query": generic["query"], "properties": generic["properties"]},
+            "name": generic["name"]}
 
 
 @router.post("/interpret-extra")

@@ -320,7 +320,7 @@ def run_case(browser, engine, mobile, personal, args):
     error_events = []
     navigation_events = []
     traces=[];injected=[]
-    fault={'scenario':args.transport_fault,'enabled':True,'aborts':0,'away_url':args.base+('/' if personal else '/personal'), 'injected':injected}
+    fault={'scenario':args.transport_fault,'enabled':True,'aborts':0,'away_url':args.base+('/klassisk' if personal else '/personal'), 'injected':injected}
     context.expose_binding('__smakoTrace',lambda source,data:traces.append({**data,'observed_utc':datetime.now(UTC).isoformat()}))
     context.expose_binding('__smakoUnhandled',lambda source,data:errors.append('unhandledrejection: '+data['message']))
     context.add_init_script("window.__smakoDocument=crypto.randomUUID();window.addEventListener('smako:plan-transport',e=>{window.__smakoTrace({...e.detail,document_id:window.__smakoDocument}).catch(()=>{});});")
@@ -378,7 +378,7 @@ def run_case(browser, engine, mobile, personal, args):
     page.on("requestfailed", lambda request: failures.append({"url": request.url, "method": request.method, "failure": request.failure,
         "request_id": request.headers.get('x-request-id'), "observed_utc": datetime.now(UTC).isoformat()}))
     try:
-        page.goto(args.base + ("/personal" if personal else "/"), wait_until="domcontentloaded")
+        page.goto(args.base + ("/personal" if personal else "/klassisk"), wait_until="domcontentloaded")
         if personal:
             expect(page.locator("#generate-plan")).to_be_enabled(timeout=30000)
             page.locator('[data-open="choices"]').first.click()
@@ -619,7 +619,7 @@ def run_case(browser, engine, mobile, personal, args):
                 page.screenshot(path=str(target / "flag-off-saved-plan.png"), full_page=True)
         # A separate clean owner must not gain access to the saved private result.
         other = browser.new_context(ignore_https_errors=args.ignore_https_errors)
-        other.request.get(args.base + "/", timeout=30000)
+        other.request.get(args.base + "/klassisk", timeout=30000)
         denied = other.request.get(f"{args.base}/api/plans/{envelope['plan_id']}", timeout=30000)
         report["other_owner_status"] = denied.status
         assert denied.status in {403, 404}

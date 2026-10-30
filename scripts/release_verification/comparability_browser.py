@@ -66,6 +66,7 @@ with sync_playwright() as pw:
                     )
                 assert choices, data
                 row = choices[0]
+                page.locator(".shopping-exact-toggle").click()
                 page.locator("#shopping-specific-results").get_by_role(
                     "button", name=row["display_name"] + " · " + row["package"], exact=True
                 ).first.click()

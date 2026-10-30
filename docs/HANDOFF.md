@@ -1,3 +1,45 @@
+# 2026-10-30: Startsidan går till /personal, mobil steg-för-steg i Mina val – ej aktiverat
+
+Gren `ui/mobile-configurator-20261030`. `/` svarar 302 till `/personal` (med
+query), den tidigare sidan finns på `/klassisk` (även i återställningsläget).
+Manifestets `start_url` är `/personal`; `id` är oförändrat `/`.
+
+Under 850 px visas Mina val som en konfigurator efter användarens
+skärmdumpar av Volvos mobila bilkonfigurator: toppfält med Klar och område,
+en illustration per steg och ett ark med handtag (tryck eller dra) med stora
+flikar (Plats, Måltider, Butiker, Smak, Recept, Mer). Val visas som rutor och
+tillägg som Lägg till-knappar; de speglar befintliga select-/kryssrutor. Klar
+öppnar sammanfattningen med Skapa plan. Fliken Varor flyttar inköpslistans
+befintliga sökning, vanliga val och rader in i arket; sammanfattningen visar
+Egna varor och Fortsätt lägga till varor (på dator öppnas Inköpslista, med väg
+tillbaka). Varorna följer som tidigare med i `personal.extras` och optimeras i
+samma korg som recepten. Varje inköpsrad hör nu till en generisk vara: exakta,
+antingen-eller- och kampanjrader får `generic` (fråga och egenskaper).
+`POST /api/personal/product-generic` väljer först kurerad, sedan skriven
+generisk vara och kontrollerar att varje vald produkt hämtas av den (samma
+kanoniska index och ingredienssökning som planeraren, `properties_match`, ingen
+namnlikhet). Nya rader utan koppling avvisas vid sparning; tidigare sparade
+rader och vanliga val behålls och kan redigeras. Planeraren kontrollerar
+kopplingen igen en gång per förfrågan. Generiska varor är huvudvägen i sökningen:
+den skrivna texten tolkas av `/api/personal/interpret-extra` och läggs till med ett
+tryck (Enter) när mängd finns eller en kurerad vara med samma namn finns; annars
+välj mängd. Exakta produkter ligger bakom ”Välj en exakt produkt i stället”.
+Releaseverifieringens shoppingskript följer det nya flödet. Konfiguratorn har
+två layouter med en växel Bild/Kompakt i varje steg (sparas i localStorage):
+Bild = bild och ark med handtag; Kompakt = numrerade stegflikar och fast
+bottenrad med Nästa/Skapa plan. Båda delar steg, rutor, Lägg till-knappar och
+Varor. Rättat: tryck direkt på Fortsätt till måltider gick inte vidare till
+Måltider i konfiguratorn. Ej aktiverat: den här datorn saknar
+SSH-alias `smako`; releasen görs från operatörsdatorn enligt `docs/BETA.md`.
+`configurator.js` visar bara befintliga fält per steg; värden, validering och
+anrop ägs fortfarande av `personal.js` och `shopping-location.js`. Datorvyn är
+oförändrad. Verifieringsskript som testar den publika sidan pekar nu på
+`/klassisk`. Lokalt: Chromium-sviten för val/medlemskap/recept passerar; tre
+WebKit-fel finns identiskt på main före ändringen. Ingen release eller
+aktivering är gjord.
+
+---
+
 # 2026-10-30: Samlad CI-överblick för varor och recept
 
 Starta i [COVERAGE-OVERVIEW.md](COVERAGE-OVERVIEW.md). Det nya obligatoriska

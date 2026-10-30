@@ -135,9 +135,12 @@ def test_optimized_plan_exposes_search_metadata_and_legacy_comparison(
 
 def test_static_frontend_and_health_are_served() -> None:
     client = TestClient(app)
-    root = client.get("/")
+    redirect = client.get("/?return_case=x", follow_redirects=False)
+    root = client.get("/klassisk")
     health = client.get("/api/health")
 
+    assert redirect.status_code == 302
+    assert redirect.headers["location"] == "/personal?return_case=x"
     assert root.status_code == 200
     assert "Billigaste veckomenyn" in root.text
     assert 'id="recipes"' in root.text

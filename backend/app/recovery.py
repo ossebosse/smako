@@ -52,7 +52,7 @@ async def restrict_operations(request: Request, call_next):
         request.method == "GET" and path.startswith("/api/plans/") and len(path.split("/")) == 4
     )
     public_read = request.method in {"GET", "HEAD"} and (
-        path in {"/", "/personal", "/health", "/ready", "/api/health"}
+        path in {"/", "/personal", "/klassisk", "/health", "/ready", "/api/health"}
         or path.startswith("/static/")
     )
     if not (authentication or plan_read or public_read):
@@ -134,6 +134,7 @@ app.mount("/static", StaticFiles(directory=static), name="static")
 
 @app.get("/")
 @app.get("/personal")
+@app.get("/klassisk")
 def index():
     return FileResponse(
         static / "index.html",

@@ -65,8 +65,9 @@ with sync_playwright() as pw:
 
         coffee = search("Kaffe")
         expect(page.locator("#shopping-suggestions button").first).to_have_text(
-            "Bryggkaffe · 500 g"
+            "Lägg till ”Kaffe” – välj mängd"
         )
+        expect(page.locator("#shopping-generic-results")).to_contain_text("Lägg till Bryggkaffe · 500 g")
         labels = page.locator("#shopping-specific-results button").all_text_contents()
         assert labels and len(labels) == len(set(labels))
         assert "Bryggkaffe" in labels[0] and "null" not in " ".join(labels)
@@ -91,6 +92,7 @@ with sync_playwright() as pw:
         product = next(
             p for p in milk["products"] if p["package_unit"] == "ml" and len(p["matches"]) == 1
         )
+        page.locator(".shopping-exact-toggle").click()
         page.locator("#shopping-specific-results").get_by_role(
             "button", name=product["display_name"] + " · " + product["package"], exact=True
         ).click()
@@ -103,6 +105,7 @@ with sync_playwright() as pw:
         product = next(
             p for p in pasta["products"] if 1 < len(p["matches"]) <= 8 and p["package_unit"] == "g"
         )
+        page.locator(".shopping-exact-toggle").click()
         page.locator("#shopping-specific-results").get_by_role(
             "button", name=product["display_name"] + " · " + product["package"], exact=True
         ).click()
