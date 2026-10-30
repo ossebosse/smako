@@ -834,3 +834,43 @@ def test_shopping_items_are_added_before_the_plan_on_mobile_and_desktop(choices)
     expect(page.locator("#personal-shopping #shopping-query")).to_be_visible()
     page.locator("#shopping-back-to-choices").click()
     expect(page.locator("#choice-submit")).to_be_visible()
+
+
+def test_exact_item_added_in_the_configurator_carries_its_generic(choices):
+    page, url, _captured = choices
+    key = "c" * 32
+    product = {"product_key": key, "name": "Mellanmjölk 1,5 %", "display_name": "Arla Mellanmjölk 1,5 %",
+               "package": "1 l", "package_quantity": 1000, "package_unit": "ml", "selectable": True,
+               "matches": [{"product_key": key, "display_name": "Arla Mellanmjölk 1,5 %"}]}
+    saved, classified = [], []
+    page.route("**/api/personal/shopping-suggestions**", lambda r: r.fulfill(
+        content_type="application/json",
+        body=json.dumps({"status": "available", "generics": [], "products": [product]})))
+
+    def classify(route):
+        classified.append(route.request.post_data_json)
+        route.fulfill(content_type="application/json", body=json.dumps(
+            {"generic": {"query": "mjölk", "properties": ["1,5 %"]}, "name": "Mjölk"}))
+    page.route("**/api/personal/product-generic", classify)
+
+    def shopping(route):
+        saved.append(route.request.post_data_json)
+        route.fulfill(content_type="application/json", body=json.dumps(
+            {"revision": 1, "items": [], "reservations": {}, "profile": {}}))
+    page.route("**/api/personal/shopping-list", shopping)
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(url)
+    page.locator("#customer-postcode").fill("223 50")
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("Lund kommun")
+    page.locator(".config-next").click()
+    config_step(page, "Varor")
+    page.locator("#shopping-query").fill("mjölk")
+    page.locator("#shopping-specific-results button", has_text="Arla Mellanmjölk").click()
+    dialog = page.locator("#personal-dialog")
+    expect(dialog).to_contain_text("Hör till: Mjölk")
+    dialog.get_by_role("button", name="Bekräfta och lägg till").click()
+    expect(page.locator("#extras-list")).to_contain_text("Hör till: mjölk (1,5 %)")
+    assert classified[0]["product_keys"] == [key] and classified[0]["query"] == "mjölk"
+    assert saved[-1]["items"][0]["generic"] == {"query": "mjölk", "properties": ["1,5 %"]}
+    expect(page.locator(".config-tab[aria-current]")).to_have_text("Varor")

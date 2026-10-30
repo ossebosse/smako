@@ -13,7 +13,14 @@ tillägg som Lägg till-knappar; de speglar befintliga select-/kryssrutor. Klar
 befintliga sökning, vanliga val och rader in i arket; sammanfattningen visar
 Egna varor och Fortsätt lägga till varor (på dator öppnas Inköpslista, med väg
 tillbaka). Varorna följer som tidigare med i `personal.extras` och optimeras i
-samma korg som recepten. Ej aktiverat: den här datorn saknar
+samma korg som recepten. Varje inköpsrad hör nu till en generisk vara: exakta,
+antingen-eller- och kampanjrader får `generic` (fråga och egenskaper).
+`POST /api/personal/product-generic` väljer först kurerad, sedan skriven
+generisk vara och kontrollerar att varje vald produkt hämtas av den (samma
+kanoniska index och ingredienssökning som planeraren, `properties_match`, ingen
+namnlikhet). Nya rader utan koppling avvisas vid sparning; tidigare sparade
+rader och vanliga val behålls och kan redigeras. Planeraren kontrollerar
+kopplingen igen en gång per förfrågan. Ej aktiverat: den här datorn saknar
 SSH-alias `smako`; releasen görs från operatörsdatorn enligt `docs/BETA.md`.
 `configurator.js` visar bara befintliga fält per steg; värden, validering och
 anrop ägs fortfarande av `personal.js` och `shopping-location.js`. Datorvyn är

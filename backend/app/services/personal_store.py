@@ -215,12 +215,18 @@ class PersonalStore:
             if "shopping_items" in state and state["shopping_items"] == rows:
                 return state
             prior = {identity(row) for row in state.get("shopping_items", [])}
+            prior_ids = {row["id"] for row in state.get("shopping_items", [])}
             common = {row["key"]: row for row in state.get("shopping_common", [])}
             now = datetime.now(UTC).isoformat()
             for row in rows:
                 key = identity(row)
                 if key in prior:
                     continue
+                # Every new row falls under a generic. Earlier saved rows (also
+                # when edited) and common choices predate the link and are kept.
+                if (row["kind"] != "generic" and not row.get("generic")
+                        and row["id"] not in prior_ids and key not in common):
+                    raise PersonalConflict(f"Välj vilken generisk vara {row['query']} hör till innan den sparas.")
                 previous = common.get(key, {})
                 common[key] = {"key": key, "item": row, "count": min(previous.get("count", 0) + 1, 1000000),
                                "last_used": now}

@@ -4,7 +4,7 @@ from pathlib import Path
 import pytest
 from app.config import Settings
 from app.models import PlanRequest, Product, Store
-from app.models.personal import ExtraNeed, PersonalPlanning
+from app.models.personal import ExtraNeed, GenericRef, PersonalPlanning
 from app.services.economic_ingredient_selector import EconomicIngredientPool
 from app.services.personal_planner import PersonalPlanner
 from app.services.personal_policy import PolicyConflict, interpretation
@@ -61,7 +61,7 @@ from app.services.plan_store import PlanOwnerMismatchError, PlanStore
 
 
 def test_new_purchase_units_saved_restart_and_private_owner(tmp_path):
-    extra=ExtraNeed(kind='exact',query='Aluminiumfolie',quantity=2,unit='st',purchase_units=True,product_key='a'*32,confirmed=True)
+    extra=ExtraNeed(kind='exact',query='Aluminiumfolie',quantity=2,unit='st',purchase_units=True,product_key='a'*32,confirmed=True,generic=GenericRef(query='aluminiumfolie'))
     store=PersonalStore(PlanStore(tmp_path/'plans.sqlite'))
     state=store.update_shopping('a'*64,0,[extra])
     assert state['shopping_items'][0]['purchase_units']

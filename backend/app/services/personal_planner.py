@@ -225,6 +225,7 @@ class PersonalPlanner:
                                      code="DATA_BLOCKED", stage="store_cap")
             self.store_ids &= set(request.allowed_store_ids)
         self.index = prepared.product_search_index
+        self._generic_verified = set()  # extras checked against their generic once per request
         self.product_keys = {i: k for k, positions in self.index.groups.items() for i in positions}
         self.by_identity = {
             (p.store_id, p.product_id): i for i, p in enumerate(prepared.universe.products)
@@ -970,6 +971,16 @@ class PersonalPlanner:
                 raise PolicyConflict(
                     f"Bekräfta och behåll egenskapen {', '.join(expected)} för {extra.query}."
                 )
+            if extra.generic is not None and extra.id not in self._generic_verified:
+                from app.services.shopping_list import falls_under
+
+                keys = extra.alternatives or [extra.product_key]
+                if not falls_under(self.prepared, keys, extra.generic.model_dump()):
+                    raise PolicyConflict(
+                        f"{extra.query} hör inte till den generiska varan {extra.generic.query}. "
+                        "Välj varan igen i inköpslistan."
+                    )
+                self._generic_verified.add(extra.id)
             rows.append(
                 {
                     "name": extra.query,
