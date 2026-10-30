@@ -1,5 +1,17 @@
 # Tester
 
+## Varor och recept i CI
+
+Jobbet `coverage-overview` räknar om hela bibliotekets produkt-/recepttäckning
+mot en hash-låst offentlig Malmöreferens. Summary, full JSON och produktstatus
+sparas som artefakten `coverage-overview` i 30 dagar. Även detta jobb krävs av
+den gemensamma `backend`-grinden. Hela importnämnaren, förlorade originalrecept
+och ofullständiga korgkontroller bevakas. Körning och definitioner:
+[COVERAGE-OVERVIEW.md](COVERAGE-OVERVIEW.md).
+
+Genereringens kall-/varmprestanda har ett separat konkret förslag där; tiderna
+i täckningsjobbet är inventeringstid, inte latens för en veckomeny.
+
 ```powershell
 .venv\Scripts\python.exe scripts\verify_offline.py backend/tests -m "not live" -q -rfEs
 ```
