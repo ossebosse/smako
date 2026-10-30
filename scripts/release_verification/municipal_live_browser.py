@@ -118,7 +118,7 @@ def main():
         for engine in ("chromium", "webkit"):
             browser = getattr(playwright, engine).launch()
             try:
-                for path, label in (("/", "public"), ("/personal#choices", "personal")):
+                for path, label in (("/klassisk", "public"), ("/personal#choices", "personal")):
                     results.append(verify_case(browser, args, engine, path, label))
             finally:
                 browser.close()

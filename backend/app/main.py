@@ -22,8 +22,8 @@ from app.services.price_universe_runtime import (
     PreparedPriceUniverseManager,
 )
 from app.services.pricing_projection_prewarm import precompute_pricing_semantics
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
+from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from grocery_data.app.api.community_evidence import install_community_evidence_api
@@ -164,7 +164,19 @@ app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 @app.get("/", include_in_schema=False)
-async def index() -> FileResponse:
+async def index(request: Request) -> RedirectResponse:
+    """Send visitors to the personal planner; keep the query (e.g. return cases)."""
+
+    query = request.url.query
+    return RedirectResponse(
+        "/personal" + (f"?{query}" if query else ""),
+        status_code=302,
+        headers={"Cache-Control": "no-store"},
+    )
+
+
+@app.get("/klassisk", include_in_schema=False)
+async def classic_planning_page() -> FileResponse:
     return FileResponse(STATIC_DIR / "index.html")
 
 

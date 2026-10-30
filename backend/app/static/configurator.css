@@ -1,0 +1,71 @@
+/* Mobile step-by-step "Mina val" (configurator.js). Only active below 850px
+   while body.config-mode is set; desktop styles stay in choices.css. */
+@media(max-width:849px) {
+  /* One scrollable row instead of wrapping menu buttons on every mobile view. */
+  .personal-app .personal-nav {flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:6px;padding-top:0;padding-bottom:8px;-webkit-overflow-scrolling:touch;}
+  .personal-app .personal-nav::-webkit-scrollbar {display:none;}
+  .personal-app .personal-nav button {flex:0 0 auto;min-height:40px;padding:8px 14px;border:1px solid var(--sm-border);border-radius:999px;background:#fff;font-size:13px;white-space:nowrap;}
+  .personal-app .personal-nav button[aria-current] {border-color:var(--sm-primary);}
+}
+.config-mode .personal-header {padding-top:14px;padding-bottom:10px;}
+.config-mode.personal-app .personal-header .brand {font-size:30px;letter-spacing:-1px;}
+.config-mode .personal-header>span,.config-mode .personal-footer {display:none;}
+.config-mode main#personal-main {padding-top:0;padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));}
+.config-mode .config-off,
+.config-mode .choices-intro,
+.config-mode .choice-shortcuts,
+.config-mode #extra-choices>summary,
+.config-mode #extra-choices>p,
+.config-mode #go-to-meals {display:none!important;}
+.config-mode #location-title {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;}
+.config-mode #personal-choices .extra-choices {border:0;background:transparent;padding:0;margin:0;}
+.config-mode #personal-choices .choices-workspace {display:block;}
+.config-mode .choice-summary {position:static;}
+.config-mode .choice-summary>button#choice-submit {display:none;}
+
+/* Sticky visual of the week that updates with every choice, like a car render. */
+.config-head {position:sticky;top:0;z-index:20;margin:0 calc(50% - 50vw);background:var(--sm-bg);box-shadow:0 1px 0 var(--sm-border);}
+.config-hero {padding:14px 16px 10px;background:linear-gradient(180deg,var(--sm-tint),var(--sm-bg));text-align:center;transition:padding .2s ease;}
+.config-week {display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;max-width:360px;margin:0 auto;}
+.config-day {display:flex;flex-direction:column;align-items:center;gap:4px;}
+.config-day-label {font:700 10px/1 system-ui,sans-serif;letter-spacing:.08em;color:var(--sm-muted);}
+.config-plate {width:100%;max-width:40px;aspect-ratio:1;border-radius:50%;border:2px dashed #b8cabf;background:#fff;box-sizing:border-box;transition:background .25s ease,border-color .25s ease,transform .25s ease;}
+.config-day.is-planned .config-plate {border:5px solid #fff;background:radial-gradient(circle at 50% 50%,#e0a458 0 28%,#7fa36a 29% 47%,#c5523f 48% 62%,#f3eadb 63%);box-shadow:0 0 0 1px var(--sm-border),0 3px 8px #143f3522;transform:scale(1.04);}
+.config-extras {display:flex;gap:3px;min-height:6px;}
+.config-dot {width:6px;height:6px;border-radius:50%;}
+.config-dot-breakfast {background:#e0a458;}
+.config-dot-snack {background:#7fa36a;}
+.config-headline {margin:10px 0 0!important;font:700 22px/1.2 Georgia,serif!important;letter-spacing:-.02em;color:var(--sm-ink);}
+.config-subline {margin:2px 0 0!important;font-size:13px!important;color:var(--sm-muted);}
+.config-head.is-compact .config-hero {padding-top:8px;padding-bottom:6px;}
+.config-head.is-compact .config-plate {max-width:24px;border-width:2px;}
+.config-head.is-compact .config-day.is-planned .config-plate {border-width:3px;}
+.config-head.is-compact .config-day-label,.config-head.is-compact .config-subline,.config-head.is-compact .config-extras {display:none;}
+.config-head.is-compact .config-headline {margin-top:4px!important;font-size:16px!important;}
+
+/* Step tabs: one row, underline on the current step. */
+.config-tabs {display:flex;overflow-x:auto;scrollbar-width:none;padding:0 8px;background:#fff;}
+.config-tabs::-webkit-scrollbar {display:none;}
+.personal-app .config-tab {flex:0 0 auto;display:flex;align-items:center;gap:6px;margin:0;padding:12px 10px;min-height:46px;border:0;border-bottom:2px solid transparent;border-radius:0;background:transparent;color:var(--sm-muted);font:600 14px/1 system-ui,sans-serif;}
+.personal-app .config-tab[aria-current] {color:var(--sm-ink);border-bottom-color:var(--sm-ink);}
+.config-tab-number {display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;border:1px solid currentColor;font-size:11px;}
+.config-tab.is-done .config-tab-number {background:var(--sm-primary);border-color:var(--sm-primary);color:#fff;}
+.config-tab.is-locked {opacity:.45;}
+
+.config-step-intro {padding:20px 0 4px;}
+#personal-choices .config-step-title {font-size:28px;margin:0;outline:none;}
+#personal-choices .config-step-lead {margin:4px 0 0;color:var(--sm-muted);font-size:15px;}
+.config-hint:empty {display:none;}
+#personal-choices .config-hint {margin:10px 0 0;padding:10px 12px;border-radius:10px;background:#fff2d6;color:#603d13;}
+.config-mode #personal-choices .location-card,.config-mode #personal-choices fieldset.choices-primary,.config-mode #personal-choices .extra-choices fieldset {margin:16px 0;border-radius:16px;}
+
+/* Bottom bar: where you are, what you have built, and the next step. */
+.config-bar {position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--sm-border);box-shadow:0 -6px 20px #143f3512;}
+.personal-app .config-back {flex:0 0 44px;width:44px;min-height:44px;margin:0;padding:0;border:1px solid #b8cabf;border-radius:50%;background:#fff;color:var(--sm-ink);font-size:24px;line-height:1;}
+.personal-app .config-back:disabled {opacity:.35;}
+.config-bar-text {flex:1;min-width:0;display:flex;flex-direction:column;}
+.config-bar-step {font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--sm-muted);}
+.config-bar-summary {font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.personal-app .config-next {flex:0 1 auto;margin:0;min-height:48px;padding:12px 18px;border-radius:999px;background:var(--sm-primary);color:#fff;border:1px solid var(--sm-primary);font:700 14px/1.2 system-ui,sans-serif;max-width:58%;}
+.personal-app .config-next:disabled {opacity:.5;}
+@media(prefers-reduced-motion:reduce) {.config-plate,.config-hero {transition:none;}}

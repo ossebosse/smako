@@ -30,7 +30,7 @@ with sync_playwright() as pw:
         )
         result = {}
         try:
-            page.goto(a.base + "/")
+            page.goto(a.base + "/klassisk")
             page.wait_for_load_state("networkidle")
             page.locator("#onboarding-cta").click()
             page.locator("#product-query").fill("Aluminiumfolie")

@@ -77,9 +77,26 @@ def choices(request):
     thread.join()
 
 
+def mobile_configurator(page):
+    """On mobile widths Mina val is a step-by-step configurator."""
+    if not page.evaluate("matchMedia('(max-width: 849px)').matches"):
+        return False
+    expect(page.locator(".config-bar")).to_be_visible()
+    return True
+
+
+def config_step(page, title):
+    if mobile_configurator(page):
+        page.locator(".config-tab", has_text=title).click()
+
+
 def submit(page, captured):
     before = len(captured)
-    page.locator("#choice-submit").click()
+    if mobile_configurator(page):
+        config_step(page, "Sammanfattning")
+        page.locator(".config-next").click()
+    else:
+        page.locator("#choice-submit").click()
     expect(page.locator("#personal-status")).to_contain_text("Testet fångar")
     assert len(captured) == before + 1
     # Validate against the actual API contracts, not a copy of frontend rules.
@@ -508,6 +525,7 @@ def test_drag_keyboard_focus_and_modal_scroll(choices):
     page.goto(url)
     choose_location(page)
     page.set_viewport_size({"width": 390, "height": 420})
+    config_step(page, "Måltider")
     page.locator("#dinner-weight-open").click()
     dialog = page.locator("#dinner-weight-dialog")
     track = dialog.locator(".interval-track")
