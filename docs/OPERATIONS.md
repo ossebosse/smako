@@ -1,6 +1,12 @@
 # Gemensam driftstatus och avgränsad reparation
 
-Senaste appaktivering: [mobilkonfigurator och egna varor, 30 oktober](releases/mobile-configurator-20261030/ACTIVATED.md).
+Senaste appaktivering: [mobilmeny och Översikt, 31 oktober](releases/mobile-overview-20261031/ACTIVATED.md).
+App `app-bbf62d741a99-320a0495`; scheduler `source-ops-8a53beb80e43`.
+Lund/Malmö ready, tidigare användarrader och prismanifest verifierade.
+Ny verifierad releasebackup; retention complete. Den konservativa
+kapacitetsvarningen kvarstår. Backend och scheman består.
+
+Föregående appaktivering: [mobilkonfigurator och egna varor, 30 oktober](releases/mobile-configurator-20261030/ACTIVATED.md).
 App `app-562afbb53344-92f00d23`; scheduler `source-ops-8a53beb80e43`.
 Båda kommunernas readiness, tidigare användarrader och oförändrade
 prismanifest verifierades. Retention complete; installerad backup-/schema-

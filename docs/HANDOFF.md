@@ -1,3 +1,27 @@
+# 2026-10-31: Mobilmeny och Översikt aktiverade
+
+[PR52](https://github.com/ossebosse/smako/pull/52) är integrerad på main
+(`3f52b0ead817`). App `app-bbf62d741a99-320a0495`; scheduler består på
+`source-ops-8a53beb80e43`. Se [aktiveringsjournalen](releases/mobile-overview-20261031/ACTIVATED.md).
+Mobilmenyn ligger bakom menyknappen; Bild/Kompakt/Översikt väljs i menyn.
+Översikt har åtta stegkort med ett öppet i taget och fast Skapa plan-knapp.
+
+108 riktade tester, Chromium/WebKit, Ruff/compileall, PR- och main-CI gröna.
+Exakt image: fyra statiska filer ändrade, 1004 övriga runtimefiler
+oförändrade. Publikt Översiktsprov med italiensk middag för två, mjölk och
+max en butik gav 46,25 s, verifierad checkout och identisk återläsning.
+Första publika planprovet nådde tidsgränsen; omkörningen efter avslutad
+lagringsefterkontroll lyckades. Sparat layoutval och datornavigation verifierade.
+Bred menylatens är inte omvärderad eller löst av denna UI-ändring.
+
+Backup `20261031T080325Z`, tidigare användarrader, mountar och
+prismanifest verifierade. En extra äldre backup arkiverades/hashverifierades
+lokalt före förrotation; två verifierade kopior behölls och den nya backupen
+återställde den tredje. Installerad policy/scheman består. Retention complete;
+kapacitetsvarningen och prisernas åldersvarningar kvarstår.
+
+---
+
 # 2026-10-31: Mobilmeny bakom menyknapp och tredje layouten Översikt – ej aktiverat
 
 Gren `ui/mobile-configurator-20261030`, ovanpå `main` `8b58d5a`. Under 850 px
