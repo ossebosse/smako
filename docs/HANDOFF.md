@@ -1,3 +1,23 @@
+# 2026-10-31: Menytimeout utredd, mindre faktarbete aktiverat
+
+[PR 55](https://github.com/ossebosse/smako/pull/55), main `c5fdd5f91172`.
+App `app-cd15469e50f9-fa1f8fd2`; scheduler source-ops-8a53beb80e43.
+[Utredning](reviews/menu-timeout-20261031/REPORT.md) och
+[aktiveringsjournal](releases/menu-facts-deadline-20261031/ACTIVATED.md).
+Två bortkastade faktahashningar tas bort; samtliga 54 515 faktaposter och
+slutversionen identiska. Varmt isolerat prov 33,372 → 25,910 s, samma verifierade
+110,55 kr. Kallt prov fortfarande timeout 60,017 s; kallstart är inte löst.
+De två äldre felreferensernas exakta steg är okända. Första publika provet: **63,032 s**,
+110,55 kr, passerad checkout och identisk sparad återläsning. Ny gäst, samma typ av menyval;
+ingen omkörning. Inga JavaScriptfel. **Tidsmålet 60 s missades**, även om menyn levererades
+och funktionskontrollerna passerade.
+140 riktade fall, Ruff/compileall, PR- och main-CI gröna (4 402 pass, 63 skip).
+En runtimefil ändrad, 1010 andra oförändrade. Full releasebackup
+/srv/smako/backups/20261031T152015Z, tidigare användarrader, mountar och prismanifest verifierade.
+Retention complete; ingen schema-/schedulerändring.
+
+---
+
 # 2026-10-31: Planinformationens kontrast rättad och aktiverad
 
 [PR 54](https://github.com/ossebosse/smako/pull/54) är på main

@@ -1,0 +1,239 @@
+{
+  "schema": "smako-menu-timeout-review-v1",
+  "source_commit": "cd15469e50f9360cf644b799ffc6aef08bc8e94d",
+  "pull_request": "https://github.com/ossebosse/smako/pull/55",
+  "historical_failures": [
+    {
+      "reference": "dfe86e97-9feb-46a9-9233-bc2704820ce9",
+      "seconds": 61.875
+    },
+    {
+      "reference": "b545916b-de1d-40bd-b682-c7f41683e87c",
+      "seconds": 61.719
+    }
+  ],
+  "historical_stage": "unknown; HTTP422 metrics exist, no retained stage/exception evidence",
+  "scope": "Lund 22350, 3 km / 17 selected contexts, one Italian dinner for two, 10-15 ingredients, milk 1 l, estimated quantities explicitly allowed, max one store",
+  "image_before": "sha256:db904d14fd788105c637c48684c336d94fcd56ac945b9edf277b3cfbf037bd5c",
+  "price_universe": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+  "isolated_scope": "Actual beta image and read-only public source mounts, network none, 4 GiB, synthetic owner/new PlanStore. Reviewed function injected only into isolated candidate process; exact built image checked separately. No HTTP/admission/browser time in planner timings. Fresh process restored prices separately.",
+  "baseline": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "seconds": 61.449,
+      "total": null,
+      "audit": null,
+      "error_type": "PlanningDeadlineExceeded",
+      "stages": [
+        {
+          "stage": "product_facts",
+          "seconds": 2.763
+        },
+        {
+          "stage": "candidate_qualification",
+          "seconds": 49.567
+        }
+      ],
+      "engine_timings": {
+        "product_facts": 39.87590627465397,
+        "memory_reclamation": 1.9422032935544848,
+        "candidate_generation_and_qualification": 11.874098997563124
+      },
+      "facts_version": null,
+      "fact_count": null
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "seconds": 33.372,
+      "total": 110.55,
+      "audit": true,
+      "error_type": null,
+      "stages": [
+        {
+          "stage": "product_facts",
+          "seconds": 0.036
+        },
+        {
+          "stage": "candidate_qualification",
+          "seconds": 23.946
+        },
+        {
+          "stage": "week_search",
+          "seconds": 32.713
+        },
+        {
+          "stage": "final_audit",
+          "seconds": 33.044
+        },
+        {
+          "stage": "saving",
+          "seconds": 33.117
+        }
+      ],
+      "engine_timings": {
+        "product_facts": 17.280977372080088,
+        "memory_reclamation": 3.915594016201794,
+        "package_calculation": 0.9369606571272016,
+        "nutrition": 0.016197698190808296,
+        "candidate_generation_and_qualification": 6.744893894530833,
+        "week_search": 0.3307596491649747,
+        "audit": 0.0015161959454417229,
+        "total": 11.099696829915047
+      },
+      "facts_version": null,
+      "fact_count": null
+    }
+  ],
+  "candidate": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "seconds": 60.017,
+      "total": null,
+      "audit": null,
+      "error_type": "PlanningDeadlineExceeded",
+      "stages": [
+        {
+          "stage": "product_facts",
+          "seconds": 2.743
+        },
+        {
+          "stage": "candidate_qualification",
+          "seconds": 44.676
+        }
+      ],
+      "engine_timings": {
+        "product_facts": 35.11059414036572,
+        "memory_reclamation": 1.9141950169578195,
+        "package_calculation": 0.6717071644961834,
+        "nutrition": 0.005224552005529404,
+        "candidate_generation_and_qualification": 15.325785747729242
+      },
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "seconds": 25.91,
+      "total": 110.55,
+      "audit": true,
+      "error_type": null,
+      "stages": [
+        {
+          "stage": "product_facts",
+          "seconds": 0.027
+        },
+        {
+          "stage": "candidate_qualification",
+          "seconds": 18.868
+        },
+        {
+          "stage": "week_search",
+          "seconds": 25.23
+        },
+        {
+          "stage": "final_audit",
+          "seconds": 25.583
+        },
+        {
+          "stage": "saving",
+          "seconds": 25.657
+        }
+      ],
+      "engine_timings": {
+        "product_facts": 12.272217916324735,
+        "memory_reclamation": 3.943134233355522,
+        "package_calculation": 0.871250064112246,
+        "nutrition": 0.016422522254288197,
+        "candidate_generation_and_qualification": 4.35590341873467,
+        "week_search": 0.3531395150348544,
+        "audit": 0.0014765504747629166,
+        "total": 8.760665540583432
+      },
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515
+    }
+  ],
+  "facts_equivalence": {
+    "kind": "facts_equivalence",
+    "all_fields_equal": true,
+    "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+    "fact_count": 54515,
+    "baseline_warm_reload_seconds": 19.547653606161475
+  },
+  "startup_price_loading_seconds": {
+    "baseline": 91.52386836148798,
+    "candidate": 96.83396681584418
+  },
+  "public_before": {
+    "seconds": 42.0,
+    "ui_rendered": true,
+    "stages": [
+      {
+        "seconds": 3.594,
+        "body": {
+          "status": "pending",
+          "stage": "queued",
+          "progress": null
+        }
+      },
+      {
+        "seconds": 5.657,
+        "body": {
+          "status": "pending",
+          "stage": "product_facts",
+          "progress": null
+        }
+      },
+      {
+        "seconds": 31.938,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": null
+        }
+      },
+      {
+        "seconds": 34.094,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 100,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      },
+      {
+        "seconds": 38.094,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 339,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      }
+    ],
+    "extra_checkout_reload_assertion": false
+  },
+  "tests": {
+    "distinct_verified_cases": 140,
+    "ruff": "passed",
+    "compileall": "passed",
+    "node_ids_sha256": "e72c54bebc0d18b04af8051cdb2d0c86c58b7bfe1d3a5c5dcc2ea170ebed7c34"
+  },
+  "limits": [
+    "Two earlier failures have no recoverable exact stage history.",
+    "One cold and one warm isolated request per version; not p95 or concurrency proof.",
+    "Candidate cold request still times out during qualification.",
+    "First price restoration takes about 90-97 s outside the reported request budget.",
+    "No constraints, product identity, price quality, current audit or timeout were relaxed."
+  ]
+}

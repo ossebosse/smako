@@ -1,0 +1,236 @@
+{
+  "schema": "smako-menu-facts-activation-v1",
+  "pull_request": "https://github.com/ossebosse/smako/pull/55",
+  "main_merge": "c5fdd5f911724d137fb1588c1b02bbe8cfd74e5e",
+  "pr_ci": {
+    "conclusion": "success",
+    "headSha": "cd15469e50f9360cf644b799ffc6aef08bc8e94d",
+    "status": "completed",
+    "url": "https://github.com/ossebosse/smako/actions/runs/41213328652",
+    "totals": {
+      "tests": 4465,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 63
+    }
+  },
+  "main_ci": {
+    "conclusion": "success",
+    "headSha": "c5fdd5f911724d137fb1588c1b02bbe8cfd74e5e",
+    "status": "completed",
+    "url": "https://github.com/ossebosse/smako/actions/runs/41214201313",
+    "totals": {
+      "tests": 4465,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 63
+    }
+  },
+  "candidate": {
+    "image": "sha256:baf58c65ec96af10604548dcb6e8e1b8e5d4e96fe813678caa8d0e416c4e6912",
+    "base_image": "sha256:db904d14fd788105c637c48684c336d94fcd56ac945b9edf277b3cfbf037bd5c",
+    "build_id": "app-cd15469e50f9-fa1f8fd2",
+    "tag": "smako-app:app-cd15469e50f9-fa1f8fd2",
+    "commit": "cd15469e50f9360cf644b799ffc6aef08bc8e94d",
+    "files": {
+      "backend/app/services/personal_source_facts.py": {
+        "before": "a69d6cc8725b4467f77ae7d6b9e113956bce3ccdbfcaa467a2f22bb3aee3b85d",
+        "after": "72dbed249c25d098ab95fc95ed5d82d1650be93ae889d2a94fa5081023e5aaee"
+      }
+    },
+    "package_sha256": "fa1f8fd2a0c0db1ec0048eba564c2e5552e2167df1125b7b3aba0ccb9302adfe",
+    "only_reviewed_files_changed": true,
+    "unchanged_runtime_files": 1010,
+    "flattened_runtime_configuration_verified": true
+  },
+  "candidate_functional_checks": {
+    "status": "passed",
+    "fixture": "comparability-products-20261010",
+    "checkout_total": 59.9,
+    "checkout_audit": true,
+    "generic_classification": true,
+    "unrelated_generic_rejected": true,
+    "missing_link_rejected": true,
+    "saved_rows_reopened": true,
+    "legacy_json_preserved": true,
+    "http_routes_and_api": true,
+    "network": "none",
+    "production_mounts": false,
+    "image": "sha256:baf58c65ec96af10604548dcb6e8e1b8e5d4e96fe813678caa8d0e416c4e6912"
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-31T15:33:37.426665+00:00",
+    "runtimes": {
+      "app": {
+        "image": "sha256:baf58c65ec96af10604548dcb6e8e1b8e5d4e96fe813678caa8d0e416c4e6912",
+        "base_image": "sha256:db904d14fd788105c637c48684c336d94fcd56ac945b9edf277b3cfbf037bd5c",
+        "build_id": "app-cd15469e50f9-fa1f8fd2"
+      }
+    },
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 326,
+      "personal_private_state": 139,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    },
+    "price_manifests_preserved": true,
+    "mounts_preserved": true,
+    "only_environment_change": "BUILD_ID",
+    "cpu_quiet_samples": [
+      0.03,
+      0.03
+    ],
+    "backup": "/srv/smako/backups/20261031T152015Z",
+    "operation_lock": true
+  },
+  "readiness": {
+    "22350": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-cd15469e50f9-fa1f8fd2",
+      "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+    },
+    "21120": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-cd15469e50f9-fa1f8fd2",
+      "price_universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02"
+    }
+  },
+  "public_probe": {
+    "status": "passed",
+    "started_at": "2026-10-31T15:34:41.716229+00:00",
+    "expected_build_id": "app-cd15469e50f9-fa1f8fd2",
+    "scope": "New guest, one Italian dinner for two plus milk, max one store, 3 km; actual plan information colors in all themes and saved checkout",
+    "attempts": [
+      {
+        "attempt": 1,
+        "seconds": 63.032,
+        "status": "rendered",
+        "request_sha256": "198668abb75c29c120442d442551e98203c93cea6aaebc6b994dde1a7ce1331e"
+      }
+    ],
+    "stages": [
+      {
+        "seconds": 5.188,
+        "body": {
+          "status": "pending",
+          "stage": "product_facts",
+          "progress": null
+        }
+      },
+      {
+        "seconds": 51.36,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": null
+        }
+      },
+      {
+        "seconds": 53.422,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 0,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      },
+      {
+        "seconds": 55.532,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 150,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      },
+      {
+        "seconds": 58.844,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 339,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      }
+    ],
+    "checkout_audit": true,
+    "total": 110.55,
+    "verification_status": "VERIFIED",
+    "identical_saved_reload": true,
+    "public_attempts": 1,
+    "contrast": [
+      {
+        "layout": "bild",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      },
+      {
+        "layout": "kompakt",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      },
+      {
+        "layout": "oversikt",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      },
+      {
+        "layout": "desktop",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      }
+    ],
+    "errors": [],
+    "finished_at": "2026-10-31T15:36:01.879866+00:00",
+    "functional_status": "passed",
+    "latency_target_seconds": 60,
+    "latency_target_met": false
+  },
+  "storage": {
+    "before": {
+      "free_bytes": 51772723200,
+      "required_estimate_bytes": 15208305368,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "after": {
+      "free_bytes": 51760910336,
+      "required_estimate_bytes": 15200996488,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "maintenance_status": "complete"
+  },
+  "remaining_limit": "Fully cold isolated candidate still times out during qualification; this release removes measured overhead but does not prove reliable cold delivery under 60 seconds."
+}
