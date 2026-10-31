@@ -5,10 +5,10 @@ skapas (Skapa plan, Beräkna egen lista eller återanslutning) ersätts knappen 
 en panel (`plan-progress.js/.css`): på dator i sammanfattningen där knappen
 satt, på mobil som kort längst ner i alla tre layouterna. Statusraden överst
 döljs medan panelen visas men skrivs som förut. Panelen visar serverns
-rapporterade steg som rubrik och prickar, befintlig stegtext, mätta räknare
-(`completed/total` recept eller steg) som stapel och procent, samt förfluten
-tid. Procent visas bara för sådana mätta räknare; prickarna är steg, inte
-tidsuppskattning. Tecknad animation: påsen ritas, varor faller i, bock när
+rapporterade steg som rubrik, befintlig stegtext, en stapel och förfluten tid.
+Stapeln fylls bara efter mätta räknare (`completed/total` recept eller steg,
+visade som ”120 av 285 recept prövade”); utan räknare rör den sig obestämt.
+Ingen procent och ingen tidsuppskattning visas. Tecknad animation: påsen ritas, varor faller i, bock när
 planen är klar (0,9 s innan planen öppnas), påsen lutar vid fel; minskad
 rörelse respekteras. Avbryt anropar befintliga `DELETE /api/plan-jobs/{id}`
 (först när jobbets status-URL finns); när statusläsningen sedan får

@@ -8,12 +8,9 @@
 .plan-progress-body {width:100%;min-width:0;}
 .plan-progress .plan-progress-title {margin:0;font:700 18px/1.25 system-ui,sans-serif;}
 .plan-progress .plan-progress-detail {margin:4px 0 0;font-size:14px;line-height:1.4;color:var(--sm-muted,#586a60);}
-.plan-progress-steps {display:flex;gap:5px;margin:12px 0 0;padding:0;list-style:none;}
-.plan-progress-steps li {flex:1;height:5px;border-radius:3px;background:#e3e8e1;transition:background .3s ease;}
-.plan-progress-steps li.is-done {background:var(--pp-primary);}
-.plan-progress-steps li.is-current {background:linear-gradient(90deg,var(--pp-primary) 0 40%,#9cc086 50%,var(--pp-primary) 60% 100%);background-size:250% 100%;animation:pp-shimmer 1.6s linear infinite;}
-.plan-progress-meter {height:8px;margin:10px 0 0;border-radius:4px;background:#e9ede7;overflow:hidden;}
+.plan-progress-meter {height:8px;margin:12px 0 0;border-radius:4px;background:#e9ede7;overflow:hidden;}
 .plan-progress-fill {display:block;height:100%;width:0;border-radius:4px;background:repeating-linear-gradient(-45deg,var(--pp-primary) 0 8px,#2c6a57 8px 16px);background-size:23px 100%;transition:width .6s ease;animation:pp-stripes 1s linear infinite;}
+.plan-progress-meter.is-waiting .plan-progress-fill {width:35%;transition:none;animation:pp-stripes 1s linear infinite,pp-wait 1.6s ease-in-out infinite;}
 .plan-progress .plan-progress-meta {display:flex;justify-content:space-between;gap:12px;margin:8px 0 0;font-size:13px;color:var(--sm-muted,#586a60);font-variant-numeric:tabular-nums;}
 .plan-progress-count:empty {display:none;}
 .plan-progress-clock {margin-left:auto;}
@@ -57,7 +54,7 @@
 @keyframes pp-bounce {0%,60%,100% {transform:none;}70% {transform:translateY(2px) scale(1.03,.95);}82% {transform:translateY(-1px) scale(.99,1.02);}}
 @keyframes pp-hop {0% {transform:none;}40% {transform:translateY(-8px) scale(.97,1.04);}75% {transform:translateY(1px) scale(1.04,.96);}100% {transform:none;}}
 @keyframes pp-look {0%,100% {transform:rotate(0);}25% {transform:rotate(-6deg);}75% {transform:rotate(6deg);}}
-@keyframes pp-shimmer {from {background-position:100% 0;}to {background-position:-150% 0;}}
+@keyframes pp-wait {from {transform:translateX(-100%);}to {transform:translateX(290%);}}
 @keyframes pp-stripes {to {background-position:23px 0;}}
 
 /* Mobile: a card at the bottom, where the create button sits in every layout. */
@@ -71,6 +68,6 @@
 @keyframes pp-rise {from {opacity:0;transform:translateY(40px);}}
 
 @media(prefers-reduced-motion:reduce) {
-  .plan-progress,.plan-progress *,.plan-progress-fill,.plan-progress-steps li {animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important;}
+  .plan-progress,.plan-progress *,.plan-progress-fill {animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important;}
   .plan-progress[data-state=running] .pp-item {display:none;}
 }

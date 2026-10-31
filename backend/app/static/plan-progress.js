@@ -1,15 +1,14 @@
 /* Progress panel for creating a plan. It takes the place of the create button
    (inline on desktop, as a bottom card on mobile) and shows the server's
    reported stage, measured counts and elapsed time, with a drawn animation and
-   a cancel button. Percentages appear only for counts the server measured;
-   the stage dots are steps, not an estimate of remaining time. personal.js
+   a cancel button. The bar fills only for counts the server measured; without
+   them it runs as an indeterminate bar, never an estimate. personal.js
    owns the request; this file only renders what it is told. */
 (() => {
   "use strict";
   const el=(tag,text,cls)=>{const n=document.createElement(tag);if(text!=null)n.textContent=text;if(cls)n.className=cls;return n;};
   const mobile=window.matchMedia("(max-width: 849px)");
-  // Stages in the order the planner reports them (complete-recipes.js has the long texts).
-  const STEPS=["queued","library_preparation","product_facts","candidate_qualification","week_search","final_audit","saving"];
+  // Planner stages (complete-recipes.js has the long texts).
   const TITLES={starting:"Skickar dina val till köket",queued:"Ställer oss i kön",library_preparation:"Bläddrar i receptboken",
     product_facts:"Kollar hyllor och priser",candidate_qualification:"Provsmakar recepten",week_search:"Pusslar ihop veckan",
     final_audit:"Dubbelkollar inköpslistan",saving:"Packar kassen",cancelling:"Avbryter…",reconnecting:"Tappade kontakten – återansluter",
@@ -35,12 +34,11 @@
   const body=el("div",null,"plan-progress-body");
   const title=el("p",null,"plan-progress-title");title.id="plan-progress-title";
   const detail=el("p",null,"plan-progress-detail");detail.setAttribute("role","status");detail.setAttribute("aria-live","polite");
-  const steps=el("ol",null,"plan-progress-steps");steps.setAttribute("aria-hidden","true");const dots=STEPS.map(()=>steps.appendChild(el("li")));
-  const meter=el("div",null,"plan-progress-meter"),fill=el("span",null,"plan-progress-fill");meter.append(fill);
+  const meter=el("div",null,"plan-progress-meter"),fill=el("span",null,"plan-progress-fill");meter.setAttribute("aria-hidden","true");meter.append(fill);
   const meta=el("p",null,"plan-progress-meta"),count=el("span",null,"plan-progress-count"),clock=el("span",null,"plan-progress-clock");meta.append(count,clock);
   const actions=el("div",null,"plan-progress-actions"),cancel=el("button","Avbryt","plan-progress-cancel"),close=el("button","Stäng","plan-progress-close");
   cancel.type=close.type="button";actions.append(cancel,close);
-  body.append(title,detail,steps,meter,meta,actions);panel.append(visual,body);
+  body.append(title,detail,meter,meta,actions);panel.append(visual,body);
 
   let state=null,timer=null,anchor=null,startedAt=0,onCancel=null,canCancel=()=>false,closeTimer=null;
   const elapsed=()=>{const s=Math.max(0,Math.round((Date.now()-startedAt)/1000));return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`;};
@@ -60,13 +58,18 @@
     anchor=target;startedAt=since||Date.now();onCancel=cancelAction;canCancel=cancellable;
     setState("running");panel.dataset.stage="starting";
     title.textContent=TITLES.starting;detail.textContent="Alla måltider räknas mot samma korg. En stor plan kan ta flera minuter. Dina val och senaste plan finns kvar medan du väntar.";
-    count.textContent="";clock.textContent=elapsed();fill.style.width="0%";meter.hidden=true;steps.hidden=false;
-    dots.forEach(d=>d.className="");
+    count.textContent="";clock.textContent=elapsed();measure(null);meter.hidden=false;
     // Restart the drawing animation for each new plan.
     visual.innerHTML=art;
     place();refreshCancel();
     clearInterval(timer);timer=setInterval(()=>{clock.textContent=elapsed();},1000);
     return api;
+  }
+  // Fills by a measured count, otherwise runs without claiming how far it has come.
+  function measure(p){
+    const valid=p&&Number.isSafeInteger(p.completed)&&Number.isSafeInteger(p.total)&&p.total>0&&p.completed>=0&&p.completed<=p.total&&UNITS[p.unit];
+    meter.classList.toggle("is-waiting",!valid);fill.style.width=valid?`${100*p.completed/p.total}%`:"";
+    count.textContent=valid?`${p.completed} av ${p.total} ${UNITS[p.unit]}`:"";
   }
   function update(text,data){
     if(state!=="running")return;
@@ -74,21 +77,14 @@
     panel.dataset.stage=stage;title.textContent=TITLES[stage]||TITLES.working;
     // The measured count gets its own line under the bar.
     if(text)detail.textContent=data?.progress?text.replace(/ \d+ av \d+ [^.]+\.$/,""):text;
-    const index=STEPS.indexOf(stage);
-    if(index>=0)dots.forEach((d,i)=>{d.className=i<index?"is-done":i===index?"is-current":"";});
-    const p=data?.progress;
-    if(p&&Number.isSafeInteger(p.completed)&&Number.isSafeInteger(p.total)&&p.total>0&&p.completed>=0&&p.completed<=p.total&&UNITS[p.unit]){
-      const percent=Math.round(100*p.completed/p.total);
-      meter.hidden=false;fill.style.width=`${percent}%`;meter.setAttribute("aria-hidden","true");
-      count.textContent=`${percent} % · ${p.completed} av ${p.total} ${UNITS[p.unit]}`;
-    }else if(data){meter.hidden=true;count.textContent="";}
+    if(data)measure(data.progress);
     refreshCancel();
   }
   // Resolves after the check has been drawn, so the result follows the animation.
   function finish(){
     if(state!=="running")return Promise.resolve();
-    clearInterval(timer);setState("done");panel.dataset.stage="saving";dots.forEach(d=>d.className="is-done");
-    title.textContent="Klart! Din plan är packad";detail.textContent="Öppnar planen och inköpslistan…";meter.hidden=true;count.textContent="";
+    clearInterval(timer);setState("done");panel.dataset.stage="saving";
+    title.textContent="Klart! Din plan är packad";detail.textContent="Öppnar planen och inköpslistan…";meter.classList.remove("is-waiting");fill.style.width="100%";count.textContent="";
     const wait=window.matchMedia("(prefers-reduced-motion: reduce)").matches?150:900;
     return new Promise(resolve=>setTimeout(()=>{hide();resolve();},wait));
   }
