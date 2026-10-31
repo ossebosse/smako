@@ -3,11 +3,27 @@
 import hashlib
 import json
 import re
+from collections import defaultdict
 
 from app.models.product import QuantityConfidence
 from app.services.personal_policy import ProductFacts
 
 from grocery_data.app.services.product_declarations import exact_declaration
+
+
+def _declarations_by_name(rows):
+    """Narrow repeated lookups; exact_declaration still checks the full identity.
+
+    Build from this call's rows, including aliases and ambiguous duplicates.
+    No declaration or product decision survives into another projection.
+    """
+    from grocery_data.app.services.product_declarations import identity_text
+
+    indexed = defaultdict(list)
+    for row in rows:
+        for name in {identity_text(n) for n in row.get("identity_names", [row["name"]])}:
+            indexed[name].append(row)
+    return indexed
 
 
 def declared_facts(products):
@@ -110,13 +126,15 @@ def _supplement_named_catalog_facts(products, original):
     from dataclasses import replace
 
     from grocery_data.app.domain.identifiers import InvalidGtinError
-    from grocery_data.app.services.product_declarations import declarations
+    from grocery_data.app.services.product_declarations import declarations, identity_text
 
     rows = [r for r in declarations() if r.get("parser") in {"gogreen-linked-product-declaration-v1", "zeinas-explicit-juice-declaration-v1"}
             or (r.get("parser") == "garant-explicit-gs1-declaration-v1"
                 and r.get("binding_requirement") == "unique_exact_complete_brand_variant_fixed_pack")]
     image_bound_rows = [r for r in declarations()
                         if r.get("parser") == "supplier-validoo-exact-gtin-v1"]
+    named = _declarations_by_name(rows)
+    image_named = _declarations_by_name(image_bound_rows)
     result = dict(original)
     for p in products:
         prov = p.source_provenance
@@ -126,8 +144,9 @@ def _supplement_named_catalog_facts(products, original):
             continue
         key = (p.store_id, p.product_id)
         prior = result.get(key)
+        name = identity_text(p.name)
         row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit,
-                                gtin=p.gtin, rows=rows)
+                                gtin=p.gtin, rows=named.get(name, ()))
         image_source = None
         if row is None and prior and image_bound_rows:
             sources = prior.field_sources.get("retailer_image_gtin", ())
@@ -137,7 +156,7 @@ def _supplement_named_catalog_facts(products, original):
                 image_source = valid[0]
                 try:
                     row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit,
-                                            gtin=image_source["gtin"], rows=image_bound_rows)
+                                            gtin=image_source["gtin"], rows=image_named.get(name, ()))
                 except InvalidGtinError:
                     continue
         if row is None:
@@ -186,9 +205,9 @@ def _supplement_culinary_attributes(products, original):
     """
     from dataclasses import replace
 
-    from grocery_data.app.services.product_declarations import culinary_declarations
+    from grocery_data.app.services.product_declarations import culinary_declarations, identity_text
 
-    rows = culinary_declarations()
+    named = _declarations_by_name(culinary_declarations())
     result = dict(original)
     for p in products:
         prior = result.get((p.store_id, p.product_id))
@@ -199,7 +218,8 @@ def _supplement_culinary_attributes(products, original):
             continue
         # A matching GTIN is not needed for a unique complete named pack, but
         # no absent supplier GTIN may veto the retailer's independent GTIN.
-        row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit, rows=rows)
+        row = exact_declaration(p.name, p.brand, p.package_quantity, p.package_unit,
+                                rows=named.get(identity_text(p.name), ()))
         if row is None or row.get('parser') != 'santa-maria-explicit-culinary-v1':
             continue
         source = {**row['source'], 'source': row['source']['url'],
@@ -305,6 +325,9 @@ def supplement_catalog_facts(products, original):
     rows = [r for r in declarations() if r.get("parser") in {
         "dabas-consumer-quantity-v1", "dabas-base-quantity-v2",
         "garant-explicit-gs1-declaration-v1", "oetker-counted-package-v1"}]
+    by_gtin = defaultdict(list)
+    for row in rows:
+        by_gtin[row['gtin'].zfill(14)].append(row)
     result = _supplement_culinary_attributes(products, _supplement_named_catalog_facts(products, original))
     for p in products:
         if not p.source_provenance or (p.purchase_terms and p.purchase_terms.identity_scope != "product"):
@@ -320,8 +343,8 @@ def supplement_catalog_facts(products, original):
                 continue
         except InvalidGtinError:
             continue
-        matches = [r for r in rows if r['gtin'].zfill(14) == gtin.zfill(14)
-                   and identity_text(r['brand']) == identity_text(p.brand or '')
+        matches = [r for r in by_gtin.get(gtin.zfill(14), ())
+                   if identity_text(r['brand']) == identity_text(p.brand or '')
                    and _supplier_package_matches(p, r, image_source)]
         if len(matches) != 1:
             continue

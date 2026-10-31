@@ -351,6 +351,7 @@ def test_failed_projection_is_never_persisted_and_the_retry_recovers(tmp_path, m
     universe, db_path, raw = _single_label_store(tmp_path)
     monkeypatch.setenv("RECIPE_PREPARATION_CACHE_ROOT", str(tmp_path / "cache"))
     source_facts._CACHE.clear()
+
     read = Path.read_bytes
 
     def faulty(path):
@@ -368,3 +369,30 @@ def test_failed_projection_is_never_persisted_and_the_retry_recovers(tmp_path, m
     retry = source_facts._load_retained_catalog_facts(universe, database=db_path, raw_root=raw)
     assert len(retry) == 1
     source_facts._CACHE.clear()
+
+
+def test_new_projection_and_disk_restore_preserve_full_facts_and_version(tmp_path, monkeypatch):
+    from app.services import personal_source_facts as source
+
+    universe, database, raw = _single_label_store(tmp_path)
+    monkeypatch.setenv("RECIPE_PREPARATION_CACHE_ROOT", str(tmp_path / "cache"))
+    source._CACHE.clear()
+    try:
+        fresh = source._load_retained_catalog_facts(universe, database=database, raw_root=raw)
+        assert fresh and fresh.version == source.facts_version(fresh)
+        assert len(list((tmp_path / "cache" / "source_facts").glob("*.json"))) == 1
+        source._CACHE.clear()
+
+        def unexpected_projection(*args):
+            raise AssertionError("Valid persisted facts should restore without reprojecting")
+
+        monkeypatch.setattr(source, "complete_identity_facts", unexpected_projection)
+        restored = source._load_retained_catalog_facts(universe, database=database, raw_root=raw)
+        assert restored is not fresh and restored == fresh
+        assert restored.version == fresh.version == source.facts_version(restored)
+        # Restoring JSON must preserve tuple-valued fields as well as provenance.
+        fact = next(iter(restored.values()))
+        assert isinstance(fact.ingredients, tuple)
+        assert all(isinstance(values, tuple) for values in fact.field_sources.values())
+    finally:
+        source._CACHE.clear()

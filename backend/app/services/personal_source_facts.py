@@ -938,12 +938,16 @@ def _project_facts(key, cacheable, hashes, source_rows, prepared, result):
                 continue  # Missing or conflicting evidence remains unknown.
         return complete_identity_facts(prepared, result)
     if cacheable:
-        from dataclasses import asdict
-
         from app.services.meal_prepared_artifacts import prepared as read_prepared
+        computed = None
+
         def compute_projection():
-            return [{"store_id":store,"product_id":product,"facts":asdict(fact)}
-                    for (store,product),fact in project().items()]
+            nonlocal computed
+            computed = project()
+            # The artifact writer only serializes these values. Avoid deep-copying
+            # every source tree and then rebuilding the facts we just computed.
+            return [{"store_id":store,"product_id":product,"facts":_fact_json(fact)}
+                    for (store,product),fact in computed.items()]
         def restore_projection(rows):
             projected = {}
             for row in rows:
@@ -957,9 +961,10 @@ def _project_facts(key, cacheable, hashes, source_rows, prepared, result):
             # Only a projection whose every read and second hash succeeded may
             # be persisted. The identity marker retires disk artefacts written
             # before this rule, which could hold partial projections.
-            projected = restore_projection(read_prepared(
+            rows = read_prepared(
                 "source_facts", [*key, "complete-projection-v2"], compute_projection,
-                storable=lambda: nonlocal_cacheable[0]))
+                storable=lambda: nonlocal_cacheable[0])
+            projected = computed if computed is not None else restore_projection(rows)
         except (ValueError,KeyError,TypeError):
             projected = project()
     else:

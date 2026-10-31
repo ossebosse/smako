@@ -51,6 +51,42 @@ def test_conflicting_nutrition_remains_blocked():
     assert "supplier_nutrition_conflict" in f.conflicts
 
 
+def test_indexed_declarations_preserve_aliases_ambiguity_and_current_rows(monkeypatch):
+    from copy import deepcopy
+
+    from grocery_data.app.services import product_declarations as registry
+
+    row = deepcopy(next(r for r in declarations() if r.get("parser") == "gogreen-linked-product-declaration-v1"))
+    # Two printed aliases with the same normalized spelling are one declaration.
+    row["identity_names"] = ["Röda speciallinser", "RÖDA  SPECIALLINSER"]
+    rows = [row]
+    monkeypatch.setattr(registry, "declarations", lambda: rows)
+    p = red_lentils(name="Röda speciallinser")
+    key = (p.store_id, p.product_id)
+    assert supplement_catalog_facts([p], {})[key].nutrition == row["nutrition"]
+    assert not supplement_catalog_facts([red_lentils()], {})
+    rows.append(deepcopy(row))
+    assert key not in supplement_catalog_facts([p], {})  # duplicate remains ambiguous
+    rows.pop()
+    rows[0]["identity_names"] = ["En annan variant"]
+    assert key not in supplement_catalog_facts([p], {})  # no stale name decision
+
+
+def test_indexed_supplier_gtin_keeps_duplicate_declarations_ambiguous(monkeypatch):
+    from copy import deepcopy
+
+    from grocery_data.app.services import product_declarations as registry
+
+    p = product("Kefir Naturell", 1000, "g", 30, brand="Skånemejerier", gtin="7310867511407")
+    rows = [deepcopy(r) for r in declarations() if (r.get("gtin") or "").zfill(14) == p.gtin.zfill(14)]
+    assert rows
+    monkeypatch.setattr(registry, "declarations", lambda: rows)
+    key = (p.store_id, p.product_id)
+    assert key in supplement_catalog_facts([p], {})
+    rows.extend(deepcopy(rows))
+    assert key not in supplement_catalog_facts([p], {})
+
+
 def test_zeta_480g_drained_quantity_does_not_certify_drained_nutrients():
     p = product("Vita Bönor Stora", 480, "g", 19.95, brand="Zeta", gtin="7350027796831")
     f = supplement_catalog_facts([p], {})[(p.store_id, p.product_id)]
