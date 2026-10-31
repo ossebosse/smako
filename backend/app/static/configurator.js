@@ -7,7 +7,8 @@
    shopping-location.js already own; values, validation and submission stay
    with them. Desktop keeps the full form. No API calls.
    On mobile the main menu sits behind a menu button in the top left corner,
-   together with the layout switch. */
+   together with the layout switch. body[data-ui] names the chosen layout for
+   the plan and shopping list themes. */
 (() => {
   "use strict";
   const $=id=>document.getElementById(id);
@@ -119,7 +120,7 @@
   function setLayout(key){
     layout=key;try{localStorage.setItem(LAYOUT_KEY,key);}catch(_){}
     for(const b of switchButtons)b.setAttribute("aria-checked",String(b.dataset.layout===layout));
-    closeMenu({focus:false});
+    closeMenu({focus:false});document.body.dataset.ui=layout;
     if(!on)return;
     for(const key of Object.keys(LAYOUTS))document.body.classList.toggle(`config-${key}`,layout===key);
     placeMenuButton();
@@ -235,6 +236,8 @@
     mobile.addEventListener("change",()=>closeMenu({focus:false}));
   }
   for(const b of switchButtons)b.setAttribute("aria-checked",String(b.dataset.layout===layout));
+  // The plan and shopping list follow the chosen layout's theme too (plan-view.css).
+  document.body.dataset.ui=layout;
 
   const sync=()=>{if(mobile.matches&&!view.hidden)enter();else exit();};
   mobile.addEventListener("change",sync);

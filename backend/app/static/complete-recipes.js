@@ -481,13 +481,24 @@
     return text;
   }
   const jobKey=scope=>`smako.planJob.${scope}`;
-  function clearPrivateDrafts(){for(const key of ["smako.planJob.public","smako.planJob.personal","smako.recipeChoices.public","smako.recipeChoices.personal","smako.personal.requestDraft"])storage.remove(key);}
+  function clearPrivateDrafts(){for(const key of ["smako.planJob.public","smako.planJob.personal","smako.recipeChoices.public","smako.recipeChoices.personal","smako.personal.requestDraft"])storage.remove(key);
+    // Shopping list ticks (personal.js) are kept across visits until sign-out.
+    try{for(const key of Object.keys(localStorage))if(key.startsWith("smako.shopping."))localStorage.removeItem(key);}catch(_){/* Optional. */}}
   function pendingJob(scope) {
     const saved=storage.get(jobKey(scope));
     if(validJobUrl(saved?.url))return saved;
     return /^[a-f0-9-]{32,36}$/.test(saved?.requestId||"")?{...saved,url:null}:null;
   }
   function forgetJob(scope) {storage.remove(jobKey(scope));}
+  // Asks the server to stop a started job; the status reader then ends with
+  // planner_job_expired. A job without a status URL has not started yet.
+  async function cancelJob(scope) {
+    const job=pendingJob(scope);if(!job?.url)throw new Error("Beräkningen har inte startat ännu och kan inte avbrytas.");
+    const response=await fetch(job.url,{method:"DELETE",headers:{Accept:"application/json"},cache:"no-store"});
+    if(response.status===409)throw new Error("Beräkningen är redan klar. Planen öppnas strax.");
+    if(response.status===404){forgetJob(scope);return;}
+    if(response.status!==202)throw new Error("Beräkningen kunde inte avbrytas. Den fortsätter.");
+  }
   // One reader per document. Navigation aborts this reader, never the server job.
   const documentId=crypto.randomUUID();
   let reader=null, generation=0, leaving=false;
@@ -591,10 +602,10 @@
         }
         flow.url=data.status_url;flow.failures=0;flow.disconnectedAt=null;
         storage.set(jobKey(scope),{url:flow.url,requestId:flow.requestId,context:context||saved?.context,started_at:flow.startedAt});
-        onProgress(jobProgress(data));
+        onProgress(jobProgress(data),data);
         await delay(2000,flow);target=flow.url;options={};
       }
     }finally{signal?.removeEventListener("abort",abort);if(reader===flow)reader=null;}
   }
-  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,membershipSummary,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,jobRequest,pendingJob,forgetJob,clearPrivateDrafts,storage});
+  window.SmakoRecipes=Object.freeze({controls,renderRecipe,recipeFeedback,searchNotice,financials,membershipSummary,productDetails,diagnostics,ingredientCount,nutritionNumber,nutritionInformation,mealDescription,cookingPresentation,cuisines,jobRequest,pendingJob,forgetJob,cancelJob,clearPrivateDrafts,storage});
 })();

@@ -1,0 +1,73 @@
+/* Progress panel for creating a plan (plan-progress.js): replaces the create
+   button inline on desktop and as a bottom card on mobile. The bag is drawn
+   on start, ingredients drop into it while the planner works, and a check is
+   drawn when the plan is ready. */
+.plan-progress {--pp-bg:#fff;--pp-ink:var(--sm-ink,#143f35);--pp-primary:var(--sm-primary,#164b3e);display:flex;flex-direction:column;align-items:center;gap:6px;margin:12px 0 0;padding:18px 18px 16px;text-align:center;border:1px solid var(--sm-border,#d7dfd7);border-radius:20px;background:var(--pp-bg);color:var(--pp-ink);font-family:system-ui,sans-serif;box-shadow:0 10px 30px #143f351a;}
+.plan-progress-art {width:96px;color:var(--pp-ink);}
+.plan-progress-art svg {display:block;width:100%;height:auto;overflow:visible;}
+.plan-progress-body {width:100%;min-width:0;}
+.plan-progress .plan-progress-title {margin:0;font:700 18px/1.25 system-ui,sans-serif;}
+.plan-progress .plan-progress-detail {margin:4px 0 0;font-size:14px;line-height:1.4;color:var(--sm-muted,#586a60);}
+.plan-progress-meter {height:8px;margin:12px 0 0;border-radius:4px;background:#e9ede7;overflow:hidden;}
+.plan-progress-fill {display:block;height:100%;width:0;border-radius:4px;background:repeating-linear-gradient(-45deg,var(--pp-primary) 0 8px,#2c6a57 8px 16px);background-size:23px 100%;transition:width .6s ease;animation:pp-stripes 1s linear infinite;}
+.plan-progress-meter.is-waiting .plan-progress-fill {width:35%;transition:none;animation:pp-stripes 1s linear infinite,pp-wait 1.6s ease-in-out infinite;}
+.plan-progress .plan-progress-meta {display:flex;justify-content:space-between;gap:12px;margin:8px 0 0;font-size:13px;color:var(--sm-muted,#586a60);font-variant-numeric:tabular-nums;}
+.plan-progress-count:empty {display:none;}
+.plan-progress-clock {margin-left:auto;}
+.plan-progress-actions {display:flex;justify-content:center;gap:8px;margin:12px 0 0;}
+.plan-progress-actions:not(:has(button:not([hidden]))) {display:none;}
+.personal-app .plan-progress :is(.plan-progress-cancel,.plan-progress-close) {flex:0 0 auto;margin:0;min-height:44px;padding:8px 22px;border:1px solid var(--pp-ink);border-radius:999px;background:#fff;color:var(--pp-ink);font:600 15px/1 system-ui,sans-serif;cursor:pointer;}
+.personal-app .plan-progress .plan-progress-cancel:disabled {opacity:.45;cursor:default;}
+.plan-progress [hidden] {display:none!important;}
+
+/* The panel takes the create button's place while the plan is made; after an
+   error the button is back for another try. Its messages replace the status line. */
+.plan-progress-busy :is(#choice-submit,#calculate-own-list),
+.plan-progress-open #personal-status {display:none!important;}
+
+/* Drawing: the bag and handle are drawn once, then ingredients keep dropping in. */
+.pp-draw {stroke-dasharray:1;stroke-dashoffset:1;animation:pp-draw .9s ease-out forwards;}
+.pp-handle {animation-delay:.35s;}
+.pp-eye,.pp-smile {opacity:0;animation:pp-appear .3s ease-out .9s forwards;}
+.pp-item {opacity:0;transform-box:fill-box;transform-origin:center;}
+.plan-progress[data-state=running] .pp-item {animation:pp-drop 2.4s cubic-bezier(.45,0,.55,1) infinite;}
+.plan-progress[data-state=running] .pp-item-1 {animation-delay:1s;}
+.plan-progress[data-state=running] .pp-item-2 {animation-delay:1.8s;}
+.plan-progress[data-state=running] .pp-item-3 {animation-delay:2.6s;}
+.pp-bag {transform-box:fill-box;transform-origin:50% 100%;}
+.plan-progress[data-state=running] .pp-bag {animation:pp-bounce .8s ease-in-out 1s infinite;}
+.plan-progress[data-stage=cancelling] .pp-item,.plan-progress[data-stage=reconnecting] .pp-item {animation-play-state:paused;}
+.plan-progress[data-stage=reconnecting] .pp-bag {animation:pp-look 1.6s ease-in-out infinite;}
+.pp-check {stroke-dasharray:1;stroke-dashoffset:1;opacity:0;}
+.plan-progress[data-state=done] .pp-bag-front {fill:var(--pp-primary);transition:fill .25s ease;}
+.plan-progress[data-state=done] :is(.pp-eye,.pp-smile) {display:none;}
+.plan-progress[data-state=done] .pp-check {opacity:1;animation:pp-draw .45s ease-out .15s forwards;}
+.plan-progress[data-state=done] .pp-bag {animation:pp-hop .5s ease-out;}
+.plan-progress[data-state=error] .pp-bag {transform:rotate(-8deg);transition:transform .4s ease;}
+.plan-progress[data-state=error] .pp-smile {transform:translateY(8px) scaleY(-1);transform-box:fill-box;transform-origin:center;}
+.plan-progress:is([data-state=error],[data-state=cancelled]) .pp-item {display:none;}
+.plan-progress[data-state=cancelled] .plan-progress-art {opacity:.55;}
+
+@keyframes pp-draw {to {stroke-dashoffset:0;}}
+@keyframes pp-appear {to {opacity:1;}}
+@keyframes pp-drop {0% {opacity:0;transform:translateY(-26px) rotate(-25deg);}12% {opacity:1;}55% {opacity:1;transform:translateY(30px) rotate(12deg);}56%,100% {opacity:0;transform:translateY(30px);}}
+@keyframes pp-bounce {0%,60%,100% {transform:none;}70% {transform:translateY(2px) scale(1.03,.95);}82% {transform:translateY(-1px) scale(.99,1.02);}}
+@keyframes pp-hop {0% {transform:none;}40% {transform:translateY(-8px) scale(.97,1.04);}75% {transform:translateY(1px) scale(1.04,.96);}100% {transform:none;}}
+@keyframes pp-look {0%,100% {transform:rotate(0);}25% {transform:rotate(-6deg);}75% {transform:rotate(6deg);}}
+@keyframes pp-wait {from {transform:translateX(-100%);}to {transform:translateX(290%);}}
+@keyframes pp-stripes {to {background-position:23px 0;}}
+
+/* Mobile: a card at the bottom, where the create button sits in every layout. */
+@media(max-width:849px) {
+  .plan-progress {position:fixed;z-index:60;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));margin:0;box-shadow:0 -4px 40px #143f3533;animation:pp-rise .35s cubic-bezier(.2,.9,.3,1.2);}
+  .plan-progress-art {width:112px;}
+  .personal-app .plan-progress :is(.plan-progress-cancel,.plan-progress-close) {min-width:140px;}
+  .plan-progress-open :is(.config-bar,.config-cta) {display:none!important;}
+  .plan-progress-open main#personal-main {padding-bottom:calc(300px + env(safe-area-inset-bottom,0px));}
+}
+@keyframes pp-rise {from {opacity:0;transform:translateY(40px);}}
+
+@media(prefers-reduced-motion:reduce) {
+  .plan-progress,.plan-progress *,.plan-progress-fill {animation-duration:.01ms!important;animation-iteration-count:1!important;transition:none!important;}
+  .plan-progress[data-state=running] .pp-item {display:none;}
+}
