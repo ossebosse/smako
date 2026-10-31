@@ -1,3 +1,22 @@
+# 2026-10-31: Mindre dubbelarbete i faktaladdningen aktiverat
+
+[PR 56](https://github.com/ossebosse/smako/pull/56), main `86cbd41efcf6`.
+App `app-b05b953576b7-fc1840af`; scheduler source-ops-8a53beb80e43.
+[Mätning](reviews/menu-work-reduction-20261031/REPORT.md) och
+[aktiveringsjournal](releases/menu-work-reduction-20261031/ACTIVATED.md).
+Onödig djupkopiering/återställning borttagen, deklarationer söks via anropslokala
+index med samma exakta kontroller. Alla 54 515 faktaposter/versionen identiska.
+Kallt isolerat prov: tidigare timeout 60,024 s, nu verifierad/sparad meny 55,273 s.
+Varmt: 26,905 → 24,947 s. Lyckade prov: 110,55 kr.
+Första publika menyprovet levererade på **43,547 s**, med passerad checkout, pris 110,55 kr och identisk sparad återläsning. Inga JavaScriptfel. 60-sekundersmålet klarades i detta prov.
+Enstaka prov, ingen p95-/samtidighets-/fullvalsgaranti. Prisåterställning cirka
+92 s separat. 134 riktade fall, Ruff/compileall och PR-/main-CI gröna
+(4 405 pass, 63 skip). Två runtimefiler ändrade, 1009 andra bevarade.
+Full backup /srv/smako/backups/20261031T201056Z; tidigare användarrader, miljö, mountar och priser
+verifierade. Retention complete; inga schemaändringar.
+
+---
+
 # 2026-10-31: Menytimeout utredd, mindre faktarbete aktiverat
 
 [PR 55](https://github.com/ossebosse/smako/pull/55), main `c5fdd5f91172`.

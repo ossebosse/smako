@@ -1,0 +1,240 @@
+{
+  "schema": "smako-menu-work-reduction-activation-v1",
+  "pull_request": "https://github.com/ossebosse/smako/pull/56",
+  "main_merge": "86cbd41efcf6284fa0d807739f2373946ef340bf",
+  "verified_source_tree": "3870201967f204db818059061e0fcb5e80b103bd",
+  "pr_ci": {
+    "conclusion": "success",
+    "headSha": "b05b953576b77fb546e2e853a0fbef4c478c807d",
+    "status": "completed",
+    "url": "https://github.com/ossebosse/smako/actions/runs/41236679714",
+    "totals": {
+      "tests": 4468,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 63
+    }
+  },
+  "main_ci": {
+    "conclusion": "success",
+    "headSha": "86cbd41efcf6284fa0d807739f2373946ef340bf",
+    "status": "completed",
+    "url": "https://github.com/ossebosse/smako/actions/runs/41237414450",
+    "totals": {
+      "tests": 4468,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 63
+    }
+  },
+  "candidate": {
+    "image": "sha256:50ae810d8f4b4d71ea98c8c5150ca1531deff13d4d6fe9a6dcc0f09a6676bed5",
+    "base_image": "sha256:baf58c65ec96af10604548dcb6e8e1b8e5d4e96fe813678caa8d0e416c4e6912",
+    "build_id": "app-b05b953576b7-fc1840af",
+    "tag": "smako-app:app-b05b953576b7-fc1840af",
+    "commit": "b05b953576b77fb546e2e853a0fbef4c478c807d",
+    "files": {
+      "backend/app/services/official_product_facts.py": {
+        "before": "a33cf085d266631e9b83293524c97720b9a3101ca6a56ba6256851d79b49a35d",
+        "after": "0caf1842ea8e9be7a1da2f21416fc4de0d8b09edd72d1a15170168a8b520abc3"
+      },
+      "backend/app/services/personal_source_facts.py": {
+        "before": "72dbed249c25d098ab95fc95ed5d82d1650be93ae889d2a94fa5081023e5aaee",
+        "after": "096b6c2201375f931b84dee9721bca96454c89667922abb795a205d73102363f"
+      }
+    },
+    "package_sha256": "fc1840af33b06aeebf65b1f28bf1864967411a8e9c237315d49057c3782c0976",
+    "only_reviewed_files_changed": true,
+    "unchanged_runtime_files": 1009,
+    "flattened_runtime_configuration_verified": true
+  },
+  "candidate_functional_checks": {
+    "status": "passed",
+    "fixture": "comparability-products-20261010",
+    "checkout_total": 59.9,
+    "checkout_audit": true,
+    "generic_classification": true,
+    "unrelated_generic_rejected": true,
+    "missing_link_rejected": true,
+    "saved_rows_reopened": true,
+    "legacy_json_preserved": true,
+    "http_routes_and_api": true,
+    "network": "none",
+    "production_mounts": false,
+    "image": "sha256:50ae810d8f4b4d71ea98c8c5150ca1531deff13d4d6fe9a6dcc0f09a6676bed5"
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-31T20:21:52.356115+00:00",
+    "runtimes": {
+      "app": {
+        "image": "sha256:50ae810d8f4b4d71ea98c8c5150ca1531deff13d4d6fe9a6dcc0f09a6676bed5",
+        "base_image": "sha256:baf58c65ec96af10604548dcb6e8e1b8e5d4e96fe813678caa8d0e416c4e6912",
+        "build_id": "app-b05b953576b7-fc1840af"
+      }
+    },
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 327,
+      "personal_private_state": 140,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    },
+    "price_manifests_preserved": true,
+    "mounts_preserved": true,
+    "only_environment_change": "BUILD_ID",
+    "cpu_quiet_samples": [
+      0.03,
+      0.03
+    ],
+    "backup": "/srv/smako/backups/20261031T201056Z",
+    "operation_lock": true
+  },
+  "readiness": {
+    "22350": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-b05b953576b7-fc1840af",
+      "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+    },
+    "21120": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-b05b953576b7-fc1840af",
+      "price_universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02"
+    }
+  },
+  "public_probe": {
+    "status": "passed",
+    "started_at": "2026-10-31T20:24:21.831247+00:00",
+    "expected_build_id": "app-b05b953576b7-fc1840af",
+    "scope": "New guest, one Italian dinner for two plus milk, max one store, 3 km; actual plan information colors in all themes and saved checkout",
+    "attempts": [
+      {
+        "attempt": 1,
+        "seconds": 43.547,
+        "status": "rendered",
+        "request_sha256": "89d7c15069e82cedf32d1ca5a78b397ef8f440f0ea5c47a263ce5aa601bad842"
+      }
+    ],
+    "stages": [
+      {
+        "seconds": 4.984,
+        "body": {
+          "status": "pending",
+          "stage": "product_facts",
+          "progress": null
+        }
+      },
+      {
+        "seconds": 31.797,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": null
+        }
+      },
+      {
+        "seconds": 33.859,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 0,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      },
+      {
+        "seconds": 35.984,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 125,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      },
+      {
+        "seconds": 39.469,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 339,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      }
+    ],
+    "checkout_audit": true,
+    "total": 110.55,
+    "verification_status": "VERIFIED",
+    "identical_saved_reload": true,
+    "public_attempts": 1,
+    "contrast": [
+      {
+        "layout": "bild",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      },
+      {
+        "layout": "kompakt",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      },
+      {
+        "layout": "oversikt",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      },
+      {
+        "layout": "desktop",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      }
+    ],
+    "errors": [],
+    "latency_target_seconds": 60,
+    "latency_target_met": true,
+    "finished_at": "2026-10-31T20:25:21.762991+00:00"
+  },
+  "storage": {
+    "before": {
+      "free_bytes": 49154629632,
+      "required_estimate_bytes": 15205932248,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "after": {
+      "free_bytes": 47917117440,
+      "required_estimate_bytes": 15207613208,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "maintenance_status": "complete"
+  },
+  "scope_limit": "Single cold/warm samples and first public guest probe; not p95, concurrency or all choice combinations."
+}

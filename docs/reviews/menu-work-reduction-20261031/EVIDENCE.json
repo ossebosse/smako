@@ -1,0 +1,192 @@
+{
+  "schema": "smako-menu-work-reduction-v1",
+  "source_commit": "b05b953576b77fb546e2e853a0fbef4c478c807d",
+  "pull_request": "https://github.com/ossebosse/smako/pull/56",
+  "scope": "Lund 22350, 3 km / 17 selected contexts, one Italian dinner for two, 10-15 ingredients, milk 1 l, estimated quantities allowed, max one store",
+  "isolation": "Exact active image/configuration including Axfood release; public source mounts read-only, network none, 4 GiB, synthetic owner and new private test stores. Candidate modules loaded only inside isolated process. Baseline equality recomputed with original modules and a separate empty artifact root.",
+  "price_universe": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+  "image_before": "sha256:baf58c65ec96af10604548dcb6e8e1b8e5d4e96fe813678caa8d0e416c4e6912",
+  "baseline": [
+    {
+      "attempt": 1,
+      "status": "failed",
+      "seconds": 60.024,
+      "total": null,
+      "audit": null,
+      "error_type": "PlanningDeadlineExceeded",
+      "stages": [
+        {
+          "stage": "product_facts",
+          "seconds": 2.625
+        },
+        {
+          "stage": "candidate_qualification",
+          "seconds": 44.967
+        }
+      ],
+      "engine_timings": {
+        "product_facts": 35.413793568499386,
+        "memory_reclamation": 1.8777645835652947,
+        "package_calculation": 0.6516691027209163,
+        "nutrition": 0.005169138312339783,
+        "candidate_generation_and_qualification": 15.04130820184946
+      },
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "seconds": 26.905,
+      "total": 110.55,
+      "audit": true,
+      "error_type": null,
+      "stages": [
+        {
+          "stage": "product_facts",
+          "seconds": 0.021
+        },
+        {
+          "stage": "candidate_qualification",
+          "seconds": 19.58
+        },
+        {
+          "stage": "week_search",
+          "seconds": 26.224
+        },
+        {
+          "stage": "final_audit",
+          "seconds": 26.564
+        },
+        {
+          "stage": "saving",
+          "seconds": 26.637
+        }
+      ],
+      "engine_timings": {
+        "product_facts": 12.871948394924402,
+        "memory_reclamation": 4.059118861332536,
+        "package_calculation": 0.9323045024648309,
+        "nutrition": 0.01739276386797428,
+        "candidate_generation_and_qualification": 4.556608529761434,
+        "week_search": 0.3398529291152954,
+        "audit": 0.0014759683981537819,
+        "total": 9.070451934821904
+      },
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515
+    }
+  ],
+  "candidate": [
+    {
+      "attempt": 1,
+      "status": "passed",
+      "seconds": 55.273,
+      "total": 110.55,
+      "audit": true,
+      "error_type": null,
+      "stages": [
+        {
+          "stage": "product_facts",
+          "seconds": 2.558
+        },
+        {
+          "stage": "candidate_qualification",
+          "seconds": 36.276
+        },
+        {
+          "stage": "week_search",
+          "seconds": 54.645
+        },
+        {
+          "stage": "final_audit",
+          "seconds": 54.972
+        },
+        {
+          "stage": "saving",
+          "seconds": 55.038
+        }
+      ],
+      "engine_timings": {
+        "product_facts": 26.862673200666904,
+        "memory_reclamation": 3.739017078652978,
+        "package_calculation": 0.9379955204203725,
+        "nutrition": 0.01670732442289591,
+        "candidate_generation_and_qualification": 16.427810282446444,
+        "week_search": 0.32666444778442383,
+        "audit": 0.0014121681451797485,
+        "total": 20.59606354124844
+      },
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515
+    },
+    {
+      "attempt": 2,
+      "status": "passed",
+      "seconds": 24.947,
+      "total": 110.55,
+      "audit": true,
+      "error_type": null,
+      "stages": [
+        {
+          "stage": "product_facts",
+          "seconds": 0.046
+        },
+        {
+          "stage": "candidate_qualification",
+          "seconds": 18.148
+        },
+        {
+          "stage": "week_search",
+          "seconds": 24.247
+        },
+        {
+          "stage": "final_audit",
+          "seconds": 24.605
+        },
+        {
+          "stage": "saving",
+          "seconds": 24.678
+        }
+      ],
+      "engine_timings": {
+        "product_facts": 11.615115765482187,
+        "memory_reclamation": 3.6930641662329435,
+        "package_calculation": 0.8847257867455482,
+        "nutrition": 0.017290426418185234,
+        "candidate_generation_and_qualification": 4.162785203196108,
+        "week_search": 0.35845777578651905,
+        "audit": 0.0011614887043833733,
+        "total": 8.315893923863769
+      },
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515
+    }
+  ],
+  "facts_equivalence": {
+    "kind": "facts_equivalence",
+    "all_fields_equal": true,
+    "fact_count": 54515,
+    "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca"
+  },
+  "separate_price_restore_seconds": {
+    "before": 91.79412610642612,
+    "after": 92.23039529751986
+  },
+  "runtime_ast_bound_to_measured_and_tested_code": {
+    "backend/app/services/official_product_facts.py": "0caf1842ea8e9be7a1da2f21416fc4de0d8b09edd72d1a15170168a8b520abc3",
+    "backend/app/services/personal_source_facts.py": "096b6c2201375f931b84dee9721bca96454c89667922abb795a205d73102363f"
+  },
+  "tests": {
+    "distinct_verified_cases": 134,
+    "ruff": "passed",
+    "compileall": "passed",
+    "node_ids_sha256": "7754a78dffffc12ea4c9c0b8a3d416ccc32b82076187df6fd9c17a4c8f7a65aa"
+  },
+  "limits": [
+    "One cold and one warm sample per version; not p95, concurrency or full choice catalogue evidence.",
+    "Price restoration/process startup and HTTP/admission/browser time are excluded from isolated request timing.",
+    "The cold baseline timed out and therefore has no completed basket.",
+    "The warm samples are new test stores/owners with the same choices, not a new-choice benchmark."
+  ]
+}
