@@ -17,6 +17,7 @@ import hashlib
 import math
 import os
 import re
+import stat
 import sys
 from collections import OrderedDict
 from dataclasses import replace
@@ -27,7 +28,9 @@ from pathlib import Path
 from app.services.personal_source_facts import project_raw_facts
 
 from grocery_data.app.services.axfood_detail_archive import (
+    CODE,
     VERSION,
+    DetailEvidence,
     read_document,
     same_gtin,
     verify_release,
@@ -37,6 +40,57 @@ AXFOOD_CHAINS = ("willys", "hemkop")
 _DETAIL_FIELDS = ("ingredients", "nutrition_basis", "nutrition_unit", "nutrition_limits")
 DETAIL_READ_MAX_ENTRIES = 32768
 DETAIL_READ_MAX_BYTES = 32 * 1024 * 1024
+DETAIL_DIRECTORY_MAX_BYTES = 8 * 1024 * 1024
+
+
+def _directory_stamp(info):
+    return (info.st_dev, info.st_ino, info.st_mode, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def _missing_detail_index(root):
+    """Bounded per-projection names, solely to establish absent file pairs.
+
+    Never infer absence from the publication manifest: an unlisted, corrupt or
+    revoked file must still reach the ordinary reader. Symlink directories and
+    failed/changed listings use that reader too. A fresh lstat before every
+    negative lookup detects additions, replacements and permission changes.
+    """
+    result, retained = {}, 256
+    try:
+        resolved = root.resolve()
+        for chain in AXFOOD_CHAINS:
+            if retained + 512 > DETAIL_DIRECTORY_MAX_BYTES:
+                return result
+            path = root / chain
+            before = path.lstat()
+            if not stat.S_ISDIR(before.st_mode) or not path.resolve().is_relative_to(resolved):
+                continue
+            names, size = set(), 256
+            with os.scandir(path) as entries:
+                for entry in entries:
+                    names.add(entry.name)
+                    size += sys.getsizeof(entry.name)
+                    if retained + size + sys.getsizeof(names) > DETAIL_DIRECTORY_MAX_BYTES:
+                        return result
+            if _directory_stamp(path.lstat()) == _directory_stamp(before):
+                result[chain] = (path, _directory_stamp(before), names)
+                retained += size + sys.getsizeof(names)
+    except (OSError, RuntimeError):
+        # A missing/unreadable directory is not itself evidence of missing files.
+        pass
+    return result
+
+
+def _known_missing_pair(index, chain, code):
+    if not isinstance(code, str) or not CODE.fullmatch(code) or chain not in index:
+        return False
+    path, stamp, names = index[chain]
+    if f"{code}.json" in names or f"{code}.meta.json" in names:
+        return False
+    try:
+        return _directory_stamp(path.lstat()) == stamp
+    except OSError:
+        return False
 
 
 def _detail_bytes(key, evidence):
@@ -152,6 +206,7 @@ def merge_axfood_details(products, facts, root=None):
     # including misses, while every product still gets its own GTIN binding and
     # provenance. No cross-call raw-document cache can hide later corruption.
     documents, retained_bytes = OrderedDict(), sys.getsizeof(OrderedDict())
+    missing_index = _missing_detail_index(root) if manifest is not None else {}
 
     def read(chain, code):
         nonlocal retained_bytes
@@ -161,7 +216,10 @@ def merge_axfood_details(products, facts, root=None):
         if key in documents:
             documents.move_to_end(key)
             return documents[key][0]
-        evidence = read_document(root, chain, code, manifest=manifest)
+        if _known_missing_pair(missing_index, chain, code):
+            evidence = DetailEvidence("missing")
+        else:
+            evidence = read_document(root, chain, code, manifest=manifest)
         size = _detail_bytes(key, evidence)
         if size <= DETAIL_READ_MAX_BYTES and DETAIL_READ_MAX_ENTRIES > 0:
             while documents and (len(documents) >= DETAIL_READ_MAX_ENTRIES
