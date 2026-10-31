@@ -6,7 +6,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-from complete_recipe_browser import record_response, wait_operation
+from complete_recipe_browser import open_view, record_response, wait_operation
 from playwright.sync_api import expect, sync_playwright
 
 parser = argparse.ArgumentParser()
@@ -121,7 +121,7 @@ with sync_playwright() as pw:
         page.reload()
         page.wait_for_load_state("networkidle")
         expect(page.locator("#extras-list article")).to_have_count(2)
-        page.get_by_role("button", name="Inköpslista", exact=True).click()
+        open_view(page, "shopping")
         page.wait_for_load_state("networkidle")
         begin = len(observed)
         page.locator("#calculate-own-list").dblclick()

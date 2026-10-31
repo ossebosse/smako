@@ -11,6 +11,14 @@ from pathlib import Path
 from playwright.sync_api import expect, sync_playwright
 
 
+def open_view(page, view):
+    """On mobile the main menu sits behind the top-left menu button."""
+    toggle = page.locator(".menu-toggle")
+    if toggle.is_visible():
+        toggle.click()
+    page.locator(f'.personal-nav [data-open="{view}"]').click()
+
+
 def verify_case(browser, args, engine, path, label):
     context = browser.new_context(
         viewport={"width": 390, "height": 844},
@@ -27,7 +35,7 @@ def verify_case(browser, args, engine, path, label):
         report["permissions_policy"] = policy
         assert "geolocation=()" not in policy, "Deployed proxy denies geolocation"
         if label == "personal":
-            page.locator('.personal-nav [data-open="choices"]').click()
+            open_view(page, "choices")
         if page.locator("#onboarding-dialog[open]").count():
             page.locator("#onboarding-cta").click()
         municipality = page.locator("#municipality")

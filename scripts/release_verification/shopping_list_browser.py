@@ -14,7 +14,7 @@ from urllib.parse import urlsplit
 from playwright.sync_api import expect, sync_playwright
 
 sys.path.insert(0, str(Path("scripts/release_verification").resolve()))
-from complete_recipe_browser import record_response, wait_operation
+from complete_recipe_browser import open_view, record_response, wait_operation
 from transport_evidence import classify_navigation_aborts
 
 parser = argparse.ArgumentParser(
@@ -113,7 +113,7 @@ with sync_playwright() as pw:
         page.reload()
         expect(page.locator("#calculate-own-list")).to_be_enabled(timeout=90000)
         expect(page.locator("#extras-list article")).to_have_count(2)
-        page.get_by_role("button", name="Inköpslista", exact=True).click()
+        open_view(page, "shopping")
         page.wait_for_load_state("networkidle")
         begin = len(observed)
         phase[0] = "standalone"
@@ -146,7 +146,7 @@ with sync_playwright() as pw:
         assert loaded["plan"] == saved["plan"]
         assert saved["plan"]["personal"]["checks"]["checkout_audit"]["passed"]
         phase[0] = "recalculate"
-        page.get_by_role("button", name="Min plan", exact=True).click()
+        open_view(page, "plan")
         begin = len(observed)
         page.get_by_role("button", name="Räkna om med aktuellt skafferi/pris", exact=True).click()
         wait_operation(page, observed, begin, timeout=180)
@@ -179,7 +179,7 @@ with sync_playwright() as pw:
         mixed = None
         mixed_generation = None
         if engine == "chromium":
-            page.get_by_role("button", name="Mina val", exact=True).click()
+            open_view(page, "choices")
             page.locator("#recipe-style").select_option("library")
             page.locator("#meal-dinner-level").select_option("simple")
             page.locator("#dinner-count").fill("1")
@@ -203,7 +203,7 @@ with sync_playwright() as pw:
                 len(mixed["request"]["personal"]["extras"]) == 2
                 and mixed["plan"]["personal"]["checks"]["checkout_audit"]["passed"]
             )
-        page.get_by_role("button", name="Inköpslista", exact=True).click()
+        open_view(page, "shopping")
         page.wait_for_load_state("networkidle")
         page.screenshot(path=str(r / (engine + "-shopping.png")), full_page=True)
         grouped = None
@@ -220,7 +220,7 @@ with sync_playwright() as pw:
             page.reload()
             expect(page.locator("#calculate-own-list")).to_be_enabled(timeout=90000)
             expect(page.locator("#extras-list article")).to_have_count(0)
-            page.get_by_role("button", name="Inköpslista", exact=True).click()
+            open_view(page, "shopping")
             page.wait_for_load_state("networkidle")
             phase[0] = "group suggestions"
             with page.expect_response(

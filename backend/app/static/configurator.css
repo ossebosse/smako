@@ -1,15 +1,33 @@
-/* Mobile "build your plan" (configurator.js) in two layouts the viewer can
+/* Mobile "build your plan" (configurator.js) in three layouts the viewer can
    switch between: .config-bild (a picture per step under a pull-up sheet,
-   modelled on car configurators) and .config-kompakt (step tabs and a fixed
-   bottom bar). Only active below 850px while body.config-mode is set;
-   desktop styles stay in choices.css. */
+   modelled on car configurators), .config-kompakt (step tabs and a fixed
+   bottom bar) and .config-oversikt (every step as a card, one open at a time).
+   Only active below 850px while body.config-mode is set; desktop styles stay
+   in choices.css. The mobile main menu lives here too. */
+.menu-toggle,.menu-backdrop,.menu-layout {display:none;}
 @media(max-width:849px) {
-  /* One scrollable row instead of wrapping menu buttons on every mobile view. */
-  .personal-app .personal-nav {flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:6px;padding-top:0;padding-bottom:8px;-webkit-overflow-scrolling:touch;}
-  .personal-app .personal-nav::-webkit-scrollbar {display:none;}
-  .personal-app .personal-nav button {flex:0 0 auto;min-height:40px;padding:8px 14px;border:1px solid var(--sm-border);border-radius:999px;background:#fff;font-size:13px;white-space:nowrap;}
-  .personal-app .personal-nav button[aria-current] {border-color:var(--sm-primary);}
+  /* The main menu slides in from the left behind the menu button. */
+  .personal-app .personal-header {justify-content:flex-start;gap:8px;}
+  .personal-app .personal-header>span {margin-left:auto;}
+  .personal-app .menu-toggle {display:inline-grid;place-items:center;flex:0 0 44px;width:44px;min-height:44px;margin:0 0 0 -10px;padding:0;border:0;border-radius:50%;background:transparent;color:var(--sm-ink);cursor:pointer;}
+  .personal-app .menu-toggle:hover {background:#eef1ec;}
+  .menu-toggle-bars,.menu-toggle-bars::before,.menu-toggle-bars::after {display:block;width:20px;height:2px;border-radius:1px;background:currentColor;}
+  .menu-toggle-bars {position:relative;}
+  .menu-toggle-bars::before,.menu-toggle-bars::after {content:"";position:absolute;left:0;}
+  .menu-toggle-bars::before {top:-6px;}
+  .menu-toggle-bars::after {top:6px;}
+  .personal-app .personal-nav {position:fixed;z-index:70;top:0;bottom:0;left:0;width:min(84vw,320px);max-width:none;margin:0;box-sizing:border-box;display:flex;flex-direction:column;flex-wrap:nowrap;gap:2px;padding:calc(18px + env(safe-area-inset-top,0px)) 14px calc(18px + env(safe-area-inset-bottom,0px));overflow-y:auto;background:#fff;box-shadow:8px 0 32px #143f3533;transform:translateX(-105%);visibility:hidden;transition:transform .25s ease,visibility 0s linear .25s;}
+  .menu-open .personal-nav {transform:none;visibility:visible;transition:transform .25s ease;}
+  .personal-app .personal-nav::before {content:"Smako";padding:4px 16px 14px;font:700 26px/1 system-ui,sans-serif;letter-spacing:-.5px;color:var(--sm-ink);}
+  .personal-app .personal-nav>button {flex:0 0 auto;width:100%;min-height:52px;margin:0;padding:12px 16px;border:0;border-radius:12px;background:transparent;color:var(--sm-ink);text-align:left;font:600 17px/1.2 system-ui,sans-serif;white-space:normal;}
+  .personal-app .personal-nav>button[aria-current] {background:#eef1ec;color:var(--sm-ink);}
+  .menu-backdrop {display:block;position:fixed;inset:0;z-index:65;background:#0d241e66;opacity:0;pointer-events:none;transition:opacity .25s ease;}
+  .menu-open .menu-backdrop {opacity:1;pointer-events:auto;}
+  .menu-open {overflow:hidden;}
+  .menu-layout {display:block;margin-top:auto;padding:18px 4px 0;border-top:1px solid #e6e8e4;}
+  .personal-app .menu-layout-title {margin:0 0 8px;font:600 13px/1.3 system-ui,sans-serif;color:var(--sm-muted);}
 }
+@media(max-width:849px) and (prefers-reduced-motion:reduce) {.personal-app .personal-nav,.menu-backdrop {transition:none;}}
 
 /* ---------- Shared by both layouts ---------- */
 .config-mode .config-off,
@@ -28,11 +46,10 @@
 .config-hint:empty {display:none;}
 #personal-choices .config-hint {margin:0 0 12px;padding:10px 12px;border-radius:10px;background:#fff2d6;color:#603d13;font-size:14px;}
 
-/* The intro row carries the layout switch in both layouts. */
-.config-step-intro {display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+/* The layout switch sits in the mobile menu. */
 .config-step-text {min-width:0;}
-.config-switch {flex:0 0 auto;display:inline-flex;padding:3px;border-radius:999px;background:#eceeea;}
-.personal-app .config-switch-option {margin:0;min-height:32px;padding:4px 12px;border:0;border-radius:999px;background:transparent;color:var(--sm-muted);font:600 13px/1 system-ui,sans-serif;}
+.config-switch {display:flex;padding:3px;border-radius:999px;background:#eceeea;}
+.personal-app .config-switch-option {flex:1 1 0;margin:0;min-height:40px;padding:4px 10px;border:0;border-radius:999px;background:transparent;color:var(--sm-muted);font:600 14px/1 system-ui,sans-serif;}
 .personal-app .config-switch-option[aria-checked=true] {background:#fff;color:var(--sm-ink);box-shadow:0 1px 3px #143f3526;}
 
 /* Choices as tiles: the selected one gets a dark frame. */
@@ -57,13 +74,16 @@
 
 /* ---------- Bild: picture and pull-up sheet ---------- */
 .config-bild {--config-top:calc(64px + env(safe-area-inset-top,0px));--config-hero:min(46vh,420px);overflow:hidden;background:#fff;}
-.config-bild .personal-header,.config-bild .personal-nav,.config-bild .personal-footer,.config-bild .skip-link {display:none;}
+.config-bild .personal-header,.config-bild .personal-footer,.config-bild .skip-link {display:none;}
 .config-bild #personal-status:not(:empty) {position:fixed;z-index:40;top:calc(var(--config-top) + 8px);left:12px;right:12px;box-shadow:0 6px 20px #143f3524;}
 .config-kompakt .config-top,.config-kompakt .config-hero,.config-kompakt .config-handle,.config-kompakt .config-foot,
-.config-bild .config-bar,.config-bild .config-tab-summary,.config-bild .config-tab-number,.config-bild .config-step-text {display:none!important;}
+.config-bild .config-bar,.config-bild .config-tab-summary,.config-bild .config-tab-number,.config-bild .config-step-intro,
+.config-oversikt :is(.config-top,.config-hero,.config-sheet-head,.config-step-intro,.config-bar),
+.config-ov-head,.config-cards,.config-cta {display:none!important;}
 
 /* Top bar: done on the left, where the plan applies on the right. */
 .config-top {position:fixed;z-index:30;top:0;left:0;right:0;height:var(--config-top);box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:env(safe-area-inset-top,0px) 16px 0;background:#fff;}
+.config-top .menu-toggle {margin:0 -4px 0 -8px;}
 .personal-app .config-done {margin:0;min-height:42px;padding:8px 24px;border:0;border-radius:999px;background:var(--sm-primary);color:#fff;font:600 16px/1 system-ui,sans-serif;}
 .personal-app .config-done:disabled {opacity:.4;}
 .config-top-text {margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;min-width:0;font-family:system-ui,sans-serif;}
@@ -85,11 +105,10 @@
 .config-bild .config-tabs {gap:24px;padding:2px 0 14px;}
 .config-bild.personal-app .config-tab {flex:0 0 auto;margin:0;padding:4px 0;min-height:44px;border:0;background:transparent;color:#b4bbb6;font:400 30px/1.1 system-ui,sans-serif;letter-spacing:-.01em;}
 .config-bild.personal-app .config-tab[aria-current] {color:var(--sm-ink);}
-.config-bild .config-step-intro {justify-content:flex-end;margin:-4px 0 8px;}
 
 /* Flat sections instead of cards, like the option lists in the sheet. */
-.config-bild #personal-choices :is(.location-card,fieldset.choices-primary,.extra-choices fieldset,#taste-choices,#organic-choices,#pantry-choices,#surplus-choices) {margin:0 0 8px;padding:0 0 20px;border:0;border-bottom:1px solid #e6e8e4;border-radius:0;background:transparent;box-shadow:none;}
-.config-bild #personal-choices legend {padding:0;margin:8px 0 6px;background:transparent;font:600 20px/1.3 system-ui,sans-serif;letter-spacing:0;}
+:is(.config-bild,.config-oversikt) #personal-choices :is(.location-card,fieldset.choices-primary,.extra-choices fieldset,#taste-choices,#organic-choices,#pantry-choices,#surplus-choices) {margin:0 0 8px;padding:0 0 20px;border:0;border-bottom:1px solid #e6e8e4;border-radius:0;background:transparent;box-shadow:none;}
+:is(.config-bild,.config-oversikt) #personal-choices legend {padding:0;margin:8px 0 6px;background:transparent;font:600 20px/1.3 system-ui,sans-serif;letter-spacing:0;}
 .config-bild #personal-choices h2 {font-family:system-ui,sans-serif;letter-spacing:0;}
 .config-bild #personal-choices p {color:#4b5b52;}
 .config-bild .choice-summary {background:#f6f7f4;}
@@ -112,7 +131,7 @@
 #personal-choices .config-step-lead {margin:4px 0 0;color:var(--sm-muted);font-size:15px;}
 .config-kompakt #personal-choices .config-hint {margin-top:10px;}
 .config-kompakt #personal-choices :is(.location-card,fieldset.choices-primary,.extra-choices fieldset) {margin:16px 0;border-radius:16px;}
-.config-kompakt .choice-summary>button#choice-submit {display:none;}
+:is(.config-kompakt,.config-oversikt) .choice-summary>button#choice-submit {display:none;}
 .config-bar {position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;align-items:center;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--sm-border);box-shadow:0 -6px 20px #143f3512;}
 .personal-app .config-back {flex:0 0 44px;width:44px;min-height:44px;margin:0;padding:0;border:1px solid #b8cabf;border-radius:50%;background:#fff;color:var(--sm-ink);font-size:24px;line-height:1;}
 .personal-app .config-back:disabled {opacity:.35;}
@@ -121,5 +140,35 @@
 .config-bar-title {font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .personal-app .config-bar-next {flex:0 1 auto;margin:0;min-height:48px;padding:12px 18px;border-radius:999px;background:var(--sm-primary);color:#fff;border:1px solid var(--sm-primary);font:700 14px/1.2 system-ui,sans-serif;max-width:58%;}
 .personal-app .config-bar-next:disabled {opacity:.5;}
+
+/* ---------- Översikt: every step as a card, one open at a time ---------- */
+.config-oversikt .personal-header>span,.config-oversikt .personal-footer {display:none;}
+.config-oversikt main#personal-main {padding-top:0;padding-bottom:calc(100px + env(safe-area-inset-bottom,0px));}
+.config-oversikt #personal-choices {font-family:system-ui,sans-serif;}
+.config-oversikt .config-ov-head {display:block!important;padding:4px 0 14px;}
+.config-oversikt #personal-choices .config-ov-head h2 {margin:0;font:700 30px/1.15 system-ui,sans-serif;letter-spacing:-.02em;}
+.config-oversikt #personal-choices .config-ov-area {margin:6px 0 0;color:var(--sm-muted);font-size:15px;}
+.config-oversikt .config-cards {display:flex!important;flex-direction:column;gap:10px;}
+.config-oversikt .config-cards-before {margin-bottom:14px;}
+.config-oversikt .config-foot+.config-cards {margin-top:6px;}
+.config-oversikt .config-cards:empty {display:none!important;}
+.personal-app .config-card {display:flex;align-items:center;gap:14px;width:100%;margin:0;padding:14px 16px;border:1px solid #e1e5df;border-radius:16px;background:#fff;color:var(--sm-ink);text-align:left;font:inherit;box-shadow:0 1px 2px #143f350d;cursor:pointer;}
+.personal-app .config-card:focus-visible {outline:3px solid #247b66;outline-offset:2px;}
+.config-card-number {flex:0 0 32px;height:32px;display:inline-grid;place-items:center;border-radius:50%;background:#eef1ec;font:700 14px/1 system-ui,sans-serif;}
+.config-card.is-done .config-card-number {background:var(--sm-primary);color:#fff;font-size:0;}
+.config-card.is-done .config-card-number::after {content:"✓";font-size:16px;}
+.config-card-text {flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;}
+.config-card-title {font:700 17px/1.25 system-ui,sans-serif;}
+.config-card-summary {display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font:400 14px/1.35 system-ui,sans-serif;color:var(--sm-muted);}
+.config-card-chevron {flex:0 0 9px;width:9px;height:9px;margin:-4px 4px 0 0;border-right:2px solid #8a968e;border-bottom:2px solid #8a968e;transform:rotate(45deg);}
+.personal-app .config-card[aria-expanded=true] {background:var(--sm-primary);border-color:var(--sm-primary);color:#fff;box-shadow:0 8px 20px #143f3529;}
+.config-card[aria-expanded=true] .config-card-number {background:#ffffff2e;color:#fff;}
+.config-card[aria-expanded=true] .config-card-summary {color:#ffffffd0;}
+.config-card[aria-expanded=true] .config-card-chevron {margin-top:4px;border-color:#fff;transform:rotate(-135deg);}
+.config-card.is-locked {opacity:.5;}
+.config-oversikt .config-foot {padding:4px 0 8px;}
+.config-oversikt .config-cta {display:block!important;position:fixed;z-index:30;left:0;right:0;bottom:0;padding:18px 16px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(#fff0,#fff 40%);}
+.personal-app .config-cta-button {display:block;width:100%;min-height:54px;margin:0;text-align:center;border-radius:999px;font:700 16px/1.2 system-ui,sans-serif;box-shadow:0 6px 18px #143f3533;}
+.personal-app .config-cta-button:disabled {opacity:.55;box-shadow:none;}
 
 @media(prefers-reduced-motion:reduce) {.config-bild #personal-choices {transition:none;}}

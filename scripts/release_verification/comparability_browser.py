@@ -6,7 +6,7 @@ import time
 import urllib.request
 from pathlib import Path
 
-from complete_recipe_browser import record_response, wait_operation
+from complete_recipe_browser import open_view, record_response, wait_operation
 from playwright.sync_api import expect, sync_playwright
 
 p = argparse.ArgumentParser()
@@ -48,7 +48,7 @@ with sync_playwright() as pw:
             page.wait_for_load_state("networkidle")
 
             def choose(query, campaign=False, page=page):
-                page.get_by_role("button", name="Inköpslista", exact=True).click()
+                open_view(page, "shopping")
                 page.get_by_role("button", name="Lägg till vara", exact=True).click()
                 with page.expect_response(lambda r: "/shopping-suggestions?" in r.url) as response:
                     page.locator("#shopping-query").fill(query)
@@ -82,7 +82,7 @@ with sync_playwright() as pw:
             page.reload()
             page.wait_for_load_state("networkidle")
             expect(page.locator("#extras-list")).to_contain_text("2 köpförpackningar")
-            page.get_by_role("button", name="Inköpslista", exact=True).click()
+            open_view(page, "shopping")
             begin = len(observed)
             page.locator("#calculate-own-list").dblclick()
             operation, _ = wait_operation(page, observed, begin, timeout=180)
@@ -130,7 +130,7 @@ with sync_playwright() as pw:
             page.wait_for_load_state("networkidle")
             page.reload()
             page.wait_for_load_state("networkidle")
-            page.get_by_role("button", name="Inköpslista", exact=True).click()
+            open_view(page, "shopping")
             expect(page.locator("#shopping-content .personal-total")).to_be_visible(timeout=30000)
             page.screenshot(path=str(a.output / (engine + "-campaign.png")))
             other = browser.new_context()

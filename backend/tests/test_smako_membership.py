@@ -286,6 +286,8 @@ def test_browser_guest_registration_pantry_migration_and_sign_in(membership, bro
             page.get_by_role("button", name="Spara mitt gästskafferi", exact=False).click()
             page.get_by_role("button", name="Öppna mitt skafferi").click()
             expect(page.locator("#pantry-list")).to_contain_text("Ris")
+            if page.locator(".menu-toggle").is_visible():
+                page.locator(".menu-toggle").click()
             page.locator("#account-nav").click()
             out = Path(".local/membership")
             out.mkdir(parents=True, exist_ok=True)

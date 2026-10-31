@@ -212,7 +212,7 @@ with sync_playwright() as pw:
             before = len(starts)
             page.goto(a.base + "/personal?return_case=real_job#shopping")
             expect(page.locator("#shopping-content .personal-total")).to_be_visible()
-            expect(page.get_by_role("button", name="Min plan", exact=True)).to_be_enabled()
+            expect(page.locator('.personal-nav [data-open="plan"]')).to_be_enabled()
             page.wait_for_function("!SmakoRecipes.pendingJob('personal')", timeout=15000)
             expect(page.locator("#calculate-own-list")).to_be_enabled()
             assert reconnect_calls == ["GET", "GET"] and len(starts) == before

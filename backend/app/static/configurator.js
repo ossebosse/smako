@@ -1,10 +1,13 @@
 /* Mobile "build your plan" presentation of the existing "Mina val" form, in
-   two layouts the viewer can switch between: "bild" (a picture per step and a
-   sheet with a handle that is pulled up) and "kompakt" (step tabs and a fixed
-   bottom bar). Both share the steps and controls, and only show, hide and
-   mirror what
-   personal.js and shopping-location.js already own; values, validation and
-   submission stay with them. Desktop keeps the full form. No API calls. */
+   three layouts the viewer can switch between: "bild" (a picture per step and
+   a sheet with a handle that is pulled up), "kompakt" (step tabs and a fixed
+   bottom bar) and "oversikt" (every step as a card saying what is chosen, one
+   open at a time, and a fixed create button). All share the steps and
+   controls, and only show, hide and mirror what personal.js and
+   shopping-location.js already own; values, validation and submission stay
+   with them. Desktop keeps the full form. No API calls.
+   On mobile the main menu sits behind a menu button in the top left corner,
+   together with the layout switch. */
 (() => {
   "use strict";
   const $=id=>document.getElementById(id);
@@ -32,7 +35,7 @@
   ];
   const summaryIndex=steps.length-1;
   let active=0,on=false,extraWasOpen=false,awaitingLocation=false,expanded=false;
-  const LAYOUTS={bild:"Bild",kompakt:"Kompakt"},LAYOUT_KEY="smako.configurator.layout";
+  const LAYOUTS={bild:"Bild",kompakt:"Kompakt",oversikt:"Översikt"},LAYOUT_KEY="smako.configurator.layout";
   let layout="bild";try{if(LAYOUTS[localStorage.getItem(LAYOUT_KEY)])layout=localStorage.getItem(LAYOUT_KEY);}catch(_){}
 
   // Flat illustrations stand in for the car pictures; no image dependencies.
@@ -60,7 +63,7 @@
   const stepLead=el("p",null,"config-step-lead"),stepText=el("div",null,"config-step-text");stepText.append(stepTitle,stepLead);
   const switcher=el("div",null,"config-switch");switcher.setAttribute("role","radiogroup");switcher.setAttribute("aria-label","Visning");
   const switchButtons=Object.entries(LAYOUTS).map(([key,label])=>{const b=el("button",label,"config-switch-option");b.type="button";b.setAttribute("role","radio");b.dataset.layout=key;b.addEventListener("click",()=>setLayout(key));switcher.append(b);return b;});
-  const intro=el("div",null,"config-step-intro");intro.append(stepText,switcher);
+  const intro=el("div",null,"config-step-intro");intro.append(stepText);
   const hint=el("p",null,"config-hint");hint.setAttribute("role","status");
   // Bild: a next button at the end of the sheet. Kompakt: a fixed bottom bar.
   const foot=el("div",null,"config-foot"),next=el("button",null,"config-next");next.type="button";foot.append(next);
@@ -68,6 +71,30 @@
   back.type="button";back.setAttribute("aria-label","Föregående steg");barNext.type="button";
   const barStep=el("span",null,"config-bar-step"),barTitle=el("span",null,"config-bar-title");barText.append(barStep,barTitle);bar.append(back,barText,barNext);
   const locked=index=>index>0&&gate.disabled;
+  // Översikt: a heading, one card per step around the open step, and a fixed create button.
+  const ovHead=el("div",null,"config-ov-head"),ovArea=el("p",null,"config-ov-area");ovHead.append(el("h2","Bygg din plan"),ovArea);
+  const cardsBefore=el("div",null,"config-cards config-cards-before"),cardsAfter=el("div",null,"config-cards");
+  const cards=steps.map((step,index)=>{const b=el("button",null,"config-card");b.type="button";
+    const text=el("span",null,"config-card-text");text.append(el("span",step.title,"config-card-title"),el("span",null,"config-card-summary"));
+    b.append(el("span",String(index+1),"config-card-number"),text,el("span",null,"config-card-chevron"));b.addEventListener("click",()=>go(index));return b;});
+  const cta=el("div",null,"config-cta"),ctaButton=el("button",null,"primary-button config-cta-button");ctaButton.type="button";cta.append(ctaButton);
+  // The summary lines personal.js already keeps up to date say what each card holds.
+  function cardSummary(step){
+    const lines=[...document.querySelectorAll('#choice-summary-lines dt')].map(dt=>[dt.textContent,dt.nextElementSibling?.textContent||""]);
+    const pick=label=>lines.find(([l])=>l===label)?.[1];
+    if(step.art==="place")return gate.disabled?"Ange postnummer och välj butiker":pick("Område")||topArea.textContent;
+    if(step.art==="meals")return lines.filter(([l])=>!["Område","Handla i","Egna varor"].includes(l)).map(([l,v])=>`${l} ${v}`).join(" · ")||step.lead;
+    if(step.art==="stores")return pick("Handla i")||step.lead;
+    if(step.art==="items")return pick("Egna varor")||step.lead;
+    return step.lead;
+  }
+  function updateCards(){
+    cards.forEach((card,i)=>{card.setAttribute("aria-expanded",String(i===active));card.classList.toggle("is-locked",locked(i));
+      card.classList.toggle("is-done",i<active&&!locked(i));card.querySelector(".config-card-summary").textContent=cardSummary(steps[i]);});
+    ovArea.textContent=gate.disabled?"Börja med var du vill handla.":`${topArea.textContent} · tryck på ett steg för att ändra det`;
+    const submit=$('choice-submit');ctaButton.textContent=gate.disabled?"Ange postnummer först":submit?.textContent||"Skapa plan";ctaButton.disabled=!!submit?.disabled;
+  }
+  ctaButton.addEventListener("click",()=>$('choice-submit')?.click());
 
   // Tiles and "Lägg till" pills mirror existing selects/checkboxes in both layouts.
   const tileSets=[["location-store-mode",{radius:"Nära mig",municipality:"Hela kommunen",specific:"Välj själv"}],["location-radius"],["surplus-mode",{minimize:"Minsta överskott",allow_larger:"Större köp"}]].map(([id,labels])=>{
@@ -92,8 +119,10 @@
   function setLayout(key){
     layout=key;try{localStorage.setItem(LAYOUT_KEY,key);}catch(_){}
     for(const b of switchButtons)b.setAttribute("aria-checked",String(b.dataset.layout===layout));
+    closeMenu({focus:false});
     if(!on)return;
-    document.body.classList.toggle("config-bild",layout==="bild");document.body.classList.toggle("config-kompakt",layout==="kompakt");
+    for(const key of Object.keys(LAYOUTS))document.body.classList.toggle(`config-${key}`,layout===key);
+    placeMenuButton();
     document.body.classList.remove("config-dragging");setExpanded(expanded);
     go(active,{focus:false});
   }
@@ -108,6 +137,7 @@
     next.textContent=active===summaryIndex?"‹ Tillbaka till valen":active===summaryIndex-1?"Klar – granska planen":onward;
     if(active===summaryIndex){barNext.textContent=submit?.textContent||"Skapa plan";barNext.disabled=!!submit?.disabled;}
     else{barNext.textContent=onward;barNext.disabled=false;}
+    updateCards();
   }
 
   function render(){
@@ -116,6 +146,7 @@
     hero.innerHTML=art[steps[active].art];
     stepTitle.textContent=steps[active].title;stepLead.textContent=steps[active].lead;
     view.classList.toggle("config-summary",active===summaryIndex);
+    cardsBefore.replaceChildren(...cards.slice(0,active+1));cardsAfter.replaceChildren(...cards.slice(active+1));
     syncTiles();updateChrome();
   }
 
@@ -125,6 +156,7 @@
     active=index;render();
     tabButtons[index].scrollIntoView({block:"nearest",inline:"center",behavior:"instant"});
     if(layout==="bild")view.scrollTop=0;
+    else if(layout==="oversikt"){const card=cards[index];window.scrollTo({top:index?Math.max(0,card.getBoundingClientRect().top+window.scrollY-12):0,behavior:"instant"});if(focus)card.focus({preventScroll:true});}
     else{window.scrollTo({top:0,behavior:"instant"});if(focus)stepTitle.focus({preventScroll:true});}
   }
 
@@ -159,12 +191,13 @@
   document.addEventListener("click",event=>{if(event.target.closest?.('#confirm-location'))awaitingLocation=true;},true);
   new MutationObserver(()=>{if(!on)return;if(awaitingLocation&&!gate.disabled){awaitingLocation=false;go(1);}else if(locked(active))go(0,{focus:false});else{syncTiles();updateChrome();}}).observe(gate,{attributes:true,attributeFilter:["disabled"]});
   const submit=$('choice-submit');if(submit)new MutationObserver(()=>on&&updateChrome()).observe(submit,{attributes:true,attributeFilter:["disabled"],childList:true,characterData:true,subtree:true});
+  const summaryLines=$('choice-summary-lines');if(summaryLines)new MutationObserver(()=>on&&updateCards()).observe(summaryLines,{childList:true,subtree:true,characterData:true});
   form.addEventListener("input",()=>on&&syncTiles());form.addEventListener("change",()=>on&&(syncTiles(),updateChrome()));
 
   function enter(){
     if(on)return;on=true;extraWasOpen=extra?.open??false;if(extra)extra.open=true;
     document.body.classList.add("config-mode");document.body.prepend(top,hero);document.body.append(bar);
-    view.prepend(sheetHead,intro,hint);view.append(foot);
+    view.prepend(ovHead,sheetHead,intro,hint,cardsBefore);view.append(foot,cardsAfter);document.body.append(cta);
     for(const set of tileSets)set.selectNode.closest("label").after(set.row);
     for(const {box,pill} of pills)box.after(pill);
     for(const node of movedItems()){const slot=document.createComment("config-item");node.before(slot);itemSlots.set(node,slot);itemsBox.append(node);}
@@ -176,11 +209,33 @@
   }
   function exit(){
     if(!on)return;on=false;if(extra)extra.open=extraWasOpen;
-    document.body.classList.remove("config-mode","config-bild","config-kompakt","config-expanded","config-dragging");view.classList.remove("config-summary");
+    document.body.classList.remove("config-mode","config-bild","config-kompakt","config-oversikt","config-expanded","config-dragging");view.classList.remove("config-summary");
     for(const [node,slot] of itemSlots){slot.replaceWith(node);}itemSlots.clear();
-    for(const n of [top,hero,bar,sheetHead,intro,hint,foot,itemsBox,...tileSets.map(s=>s.row),...pills.map(p=>p.pill)])n.remove();
+    for(const n of [top,hero,bar,cta,ovHead,cardsBefore,cardsAfter,sheetHead,intro,hint,foot,itemsBox,...tileSets.map(s=>s.row),...pills.map(p=>p.pill)])n.remove();
     document.querySelectorAll(".config-off").forEach(n=>n.classList.remove("config-off"));
+    placeMenuButton();
   }
+  // Mobile main menu: the view buttons and the layout switch slide in from the
+  // left behind a menu button, which sits in the header or in Bild's top bar.
+  const nav=document.querySelector('.personal-nav'),header=document.querySelector('.personal-header');
+  const menuButton=el("button",null,"menu-toggle"),backdrop=el("div",null,"menu-backdrop");
+  menuButton.type="button";menuButton.setAttribute("aria-label","Meny");menuButton.setAttribute("aria-expanded","false");
+  menuButton.append(el("span",null,"menu-toggle-bars"));
+  const menuLayout=el("div",null,"menu-layout");menuLayout.append(el("p","Visning av Mina val","menu-layout-title"),switcher);
+  function placeMenuButton(){const host=on&&layout==="bild"?top:header;if(host&&menuButton.parentNode!==host)host.prepend(menuButton);}
+  function openMenu(){document.body.classList.add("menu-open");menuButton.setAttribute("aria-expanded","true");(nav.querySelector("[aria-current]")||nav.querySelector("button"))?.focus();}
+  function closeMenu({focus=true}={}){if(!document.body.classList.contains("menu-open"))return;document.body.classList.remove("menu-open");menuButton.setAttribute("aria-expanded","false");if(focus)menuButton.focus();}
+  if(nav&&header){
+    nav.id||="personal-menu";menuButton.setAttribute("aria-controls",nav.id);
+    nav.append(menuLayout);document.body.append(backdrop);placeMenuButton();
+    menuButton.addEventListener("click",()=>document.body.classList.contains("menu-open")?closeMenu():openMenu());
+    backdrop.addEventListener("click",()=>closeMenu());
+    nav.addEventListener("click",event=>{if(event.target.closest("[data-open]"))closeMenu({focus:false});});
+    document.addEventListener("keydown",event=>{if(event.key==="Escape")closeMenu();});
+    mobile.addEventListener("change",()=>closeMenu({focus:false}));
+  }
+  for(const b of switchButtons)b.setAttribute("aria-checked",String(b.dataset.layout===layout));
+
   const sync=()=>{if(mobile.matches&&!view.hidden)enter();else exit();};
   mobile.addEventListener("change",sync);
   new MutationObserver(sync).observe(view,{attributes:true,attributeFilter:["hidden"]});
