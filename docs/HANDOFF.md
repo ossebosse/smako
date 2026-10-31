@@ -1,3 +1,27 @@
+# 2026-10-31: Förloppspanel, planvy och inköpslista aktiverade
+
+[PR 53](https://github.com/ossebosse/smako/pull/53) är på main
+(`96506c07b02c`). App `app-56caf4ab5f6e-d90dabe8`; scheduler
+`source-ops-8a53beb80e43`. Se [aktiveringsjournalen](releases/plan-shopping-ui-20261031/ACTIVATED.md).
+120 riktade tester, Ruff/compileall, PR- och main-CI gröna. Åtta statiska filer
+ändrade; 1003 andra runtimefiler och runtimekonfiguration verifierade.
+Publik riktig avbrytning och därefter italiensk middag för två med mjölk,
+max en butik: 43,39 s, verifierad checkout och identisk återläsning.
+Plan/listteman, bestående bockar/strykningar och oförändrad sparad korg verifierade.
+Avbrutet förprov betyder att tiden inte ska räknas som kallstart.
+Första kompletta planförsöket nådde SEARCH_INCOMPLETE; tiden ovan gäller en
+omkörning med samma val. Pålitlig leverans inom tidsgränsen är inte bevisad.
+Backup `20261031T103156Z`, tidigare användarrader, mountar och prismanifest
+bevarade. En äldre extra backup säkrades lokalt före förrotation; två kopior
+behölls och den nya återställde tredje kopian. Installerad policy/scheman består.
+Retention complete. Kapacitetsvarningen, tidigare ordinarie backupfel och
+prisåldersvarningar kvarstår. Bred planlatens är inte omvärderad av denna UI-release.
+Den första aktiveringen stoppades av utrymmeskontrollen; ett avslutat releasearkiv
+från 16 oktober säkrades/hashverifierades lokalt före borttagning av dess oanvända
+serverfil. Två aktuella återställningskopior och föreskriven reserv bevarades.
+
+---
+
 # 2026-10-31: Enklare Min plan och inköpslista, ett tema per layout – ej aktiverat
 
 Gren `ui/mobile-configurator-20261030`. Min plan: ett sammanfattningskort

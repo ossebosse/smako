@@ -1,5 +1,21 @@
 # Lagring och säker arkivering
 
+## Flyttat avslutat releasearkiv, 2026-10-31
+
+Vid [plan-/listaktiveringen](releases/plan-shopping-ui-20261031/ACTIVATED.md)
+flyttades den redan verifierade gzip-filen
+`/opt/smako/evidence/joint-week-refinement-e041451/backup-20261016T131323Z.tar.gz`
+till en åtkomstskyddad operatörskopia i
+`D:\Projects\Smako\.local\beta-plan-ui-20261031\protected-backup\legacy-joint-week-recovery.tar`.
+Den innehåller ursprunglig gzip-fil, privat inventarium, kvitto och återställningsanvisning.
+Gzip-filens tidigare dokumenterade SHA-256 verifierades både på servern och lokalt.
+Först därefter togs just den oanvända serverfilen bort under driftlåset, med oförändrade
+containrar och två aktuella återställningskopior kvar. Ursprungligt inventarium/kvitto
+finns kvar på servern, liksom en privat EXTERNAL-ARCHIVED-markör med återställningsväg.
+Äldre tabeller nedan är historiska; just denna gzip-fil finns nu i operatörskopian.
+Installerad retention, reserv, aktiva databaser och användardata ändrades inte.
+
+
 ## Automatisk retention, 2026-10-20
 
 Aktiverad på target 2026-10-20 15:37 UTC i schedulern
