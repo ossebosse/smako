@@ -1,6 +1,7 @@
 import threading
 from types import SimpleNamespace
 
+import pytest
 from app.services.source_facts_prewarm import schedule_source_facts_prewarm
 
 
@@ -17,6 +18,28 @@ def _prepare(prepared, facts, *, portions):
     assert portions == (1, 2, 3, 4)
     return {"ready": True, "persistence_failures": 0, "content_variants": 2462,
             "portion_views": {str(n): 2462 for n in portions}}
+
+
+@pytest.mark.parametrize("policy, historical", [
+    ("smako-current-library-v2", False), ("smako-verified-reference-v1", True), ("legacy", True),
+])
+def test_policy_prepares_required_indexes_without_eager_history(monkeypatch, policy, historical):
+    from app.services import recipe_library
+
+    calls = []
+    for name in ("_registered", "_registered_history", "_current_issued_index",
+                 "_issued_index", "_registered_portions"):
+        monkeypatch.setattr(recipe_library, name,
+                            lambda *args, name=name: calls.append((name, args)))
+    result = schedule_source_facts_prewarm(_settings(policy=policy), [_universe("u")],
+        loader=lambda p: {}, preparer=_prepare, start=False)
+    assert result["status"] == "ready"
+    assert (("_registered_history", ()) in calls) is historical
+    index = "_issued_index" if historical else "_current_issued_index"
+    other = "_current_issued_index" if historical else "_issued_index"
+    assert [(name, args) for name, args in calls if name == index] == [
+        (index, (n,)) for n in (1, 2, 3, 4)]
+    assert not any(name == other for name, _ in calls)
 
 
 def test_loads_each_active_universe_with_the_shared_loader():

@@ -20,20 +20,23 @@ from typing import Any
 _PREPARATION_LOCK = threading.RLock()
 
 
-def warm_recipe_library(servings=(1, 2, 3, 4)) -> None:
-    """Build the process caches every complete-recipe request validates against.
+def warm_recipe_library(servings=(1, 2, 3, 4), *, current_only=False) -> None:
+    """Prepare exact issued values for the selected planning policy.
 
-    After a restart the first plan otherwise prepares the whole current and
-    historical library (about 20 s on one CPU for 176 dinners) inside the user's
-    job. These are the same lru-cached functions the planner calls; nothing is
-    recomputed differently and no user data is involved.
+    Current-library planning does not need historical portion trees at startup.
+    Saved older recipes still use validate_recipe_design's historical fallback
+    on demand. Legacy/reference planning retains its full preparation.
     """
     from app.services import recipe_library
 
     recipe_library._registered()
-    recipe_library._registered_history()
+    if not current_only:
+        recipe_library._registered_history()
     for count in servings:
-        recipe_library._issued_index(count)
+        if current_only:
+            recipe_library._current_issued_index(count)
+        else:
+            recipe_library._issued_index(count)
         recipe_library._registered_portions(count)
 
 
@@ -55,7 +58,10 @@ def schedule_source_facts_prewarm(settings, universes, *, loader=None, start=Tru
         report["status"] = "running"
         started = perf_counter()
         try:
-            (library_warmer or warm_recipe_library)()
+            if library_warmer is not None:
+                library_warmer()
+            else:
+                warm_recipe_library(current_only=prepare_sources)
             report["library"] = {"status": "ready"}
         except Exception as exc:  # noqa: BLE001 - a failed warm-up must never affect serving.
             report["library"] = {"status": "failed", "error_type": type(exc).__name__}

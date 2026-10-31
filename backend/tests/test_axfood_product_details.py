@@ -224,6 +224,112 @@ def test_projection_document_reuse_is_bounded_and_never_crosses_calls(
     assert len(calls) == 2 * expected_reads
 
 
+def test_missing_index_does_not_hide_new_or_orphan_files(tmp_path):
+    from app.services import axfood_product_details as reader
+
+    (tmp_path / "willys").mkdir()
+    (tmp_path / "hemkop").mkdir()
+    index = reader._missing_detail_index(tmp_path)
+    assert reader._known_missing_pair(index, "willys", "missing_ST")
+    assert not reader._known_missing_pair(index, "willys", "../secret")
+    assert not reader._known_missing_pair(index, "unknown", "missing_ST")
+    orphan = tmp_path / "willys/missing_ST.json"
+    orphan.write_text("{}")
+    assert not reader._known_missing_pair(index, "willys", "missing_ST")
+    fresh = reader._missing_detail_index(tmp_path)
+    assert not reader._known_missing_pair(fresh, "willys", "missing_ST")
+    assert reader.read_document(tmp_path, "willys", "missing_ST").status == "corrupt_pair"
+
+
+def test_missing_index_is_bounded_and_unreadable_listing_falls_back(tmp_path, monkeypatch):
+    from app.services import axfood_product_details as reader
+
+    (tmp_path / "willys").mkdir()
+    (tmp_path / "willys/present.json").write_text("{}")
+    monkeypatch.setattr(reader, "DETAIL_DIRECTORY_MAX_BYTES", 1)
+    assert reader._missing_detail_index(tmp_path) == {}
+    monkeypatch.setattr(reader, "DETAIL_DIRECTORY_MAX_BYTES", 8 * 1024 * 1024)
+    def denied(path):
+        raise PermissionError("test")
+    monkeypatch.setattr(reader.os, "scandir", denied)
+    assert reader._missing_detail_index(tmp_path) == {}
+
+
+def test_missing_index_falls_back_after_directory_replacement(tmp_path):
+    from app.services import axfood_product_details as reader
+
+    directory = tmp_path / "willys"
+    directory.mkdir()
+    index = reader._missing_detail_index(tmp_path)
+    directory.rename(tmp_path / "old")
+    directory.mkdir()
+    assert not reader._known_missing_pair(index, "willys", "absent")
+
+
+def test_missing_index_rejects_a_listing_changed_during_scan(tmp_path, monkeypatch):
+    from app.services import axfood_product_details as reader
+
+    directory = tmp_path / "willys"
+    directory.mkdir()
+    scandir = reader.os.scandir
+    def changed(path):
+        listing = scandir(path)
+        (path / "new.meta.json").write_text("{}")
+        return listing
+    monkeypatch.setattr(reader.os, "scandir", changed)
+    assert reader._missing_detail_index(tmp_path) == {}
+
+
+@pytest.mark.parametrize("metadata", [{"revoked": True}, {"http_status": 404}, {}])
+def test_missing_index_never_skips_metadata_only_evidence(tmp_path, metadata):
+    from app.services import axfood_product_details as reader
+
+    directory = tmp_path / "willys"
+    directory.mkdir()
+    (directory / "only.meta.json").write_text(json.dumps(metadata))
+    index = reader._missing_detail_index(tmp_path)
+    assert not reader._known_missing_pair(index, "willys", "only")
+
+
+def test_missing_index_never_trusts_symlink_directory(tmp_path):
+    from app.services import axfood_product_details as reader
+
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    root = tmp_path / "release"
+    root.mkdir()
+    try:
+        (root / "willys").symlink_to(outside, target_is_directory=True)
+    except OSError:
+        pytest.skip("Directory symlinks unavailable")
+    assert not reader._known_missing_pair(reader._missing_detail_index(root), "willys", "absent")
+    assert reader.read_document(root, "willys", "absent").status == "unsafe_path"
+
+
+def test_published_missing_pairs_avoid_reads_but_present_evidence_is_validated(tmp_path, monkeypatch):
+    from app.services import axfood_product_details as reader
+
+    from grocery_data.app.services.axfood_detail_archive import publish_release
+
+    staging = tmp_path / "staging/run"
+    store(staging, "willys", detail())
+    store(staging, "hemkop", detail(code="unrelated"))
+    release = publish_release(tmp_path, "run")
+    products = [_Product("hemkop")]
+    original, calls = reader.read_document, []
+    def read(*args, **kwargs):
+        calls.append(args[1:3])
+        return original(*args, **kwargs)
+    monkeypatch.setattr(reader, "read_document", read)
+    facts = {("s1", "p1"): catalogue_fact()}
+    optimized = reader.merge_axfood_details(products, facts, release)
+    assert calls == [("willys", detail()["code"])]
+    monkeypatch.setattr(reader, "_missing_detail_index", lambda root: {})
+    expected = {("s1", "p1"): catalogue_fact()}
+    assert reader.merge_axfood_details(products, expected, release) == optimized
+    assert facts == expected
+
+
 def test_merge_binds_by_exact_code_and_keeps_catalogue_evidence(tmp_path):
     store(tmp_path, "willys", detail())
     facts = {("s1", "p1"): catalogue_fact()}
