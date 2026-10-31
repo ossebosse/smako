@@ -1,3 +1,25 @@
+# 2026-10-31: Enklare Min plan och inköpslista, ett tema per layout – ej aktiverat
+
+Gren `ui/mobile-configurator-20261030`. Min plan: ett sammanfattningskort
+(`h1` Din plan, total, butiker, Öppna inköpslistan, Ny plan), därefter
+Måltider (en rad/kort per tillfälle med Öppna recept och knapparna som förut)
+och sist Om planen (omräkning, revision, jämförelser, skafferibidrag, krav,
+teknik). Inköpslistan: en rad per produkt med bock (plockad) och kryss
+(struken, ångra med ↺), sorterad per butik i ordningen Frukt & grönt, Bröd,
+Kött/fågel/fisk, Mejeri & ägg, Skafferi, Fryst, Övrigt. Gången kommer från
+produktens `food_family`/`product_role`/`product_form`, annars från några ord
+i ingrediens/produktnamn; den styr bara visningsordning, aldrig identitet eller
+pris. Radens tidigare information och Välj annan produkt ligger bakom ett tryck
+på raden. Bockar och kryss sparas per plan och revision i localStorage
+(`smako.shopping.*`, rensas vid utloggning); de ändrar inte plan, total eller
+bokföring, vilket står i listan. På mobil följer båda vyerna vald layout via
+`body[data-ui]` (`plan-view.css`): Bild luftig med illustration och tunn stor
+text, Kompakt tät med sticky butiksrubriker och fyrkantiga bockar, Översikt
+rundade kort med grönt sammanfattningskort. Dator får grundutseendet.
+Samma tre WebKit-bredd-fall som på `main` kvarstår i denna Windows-miljö.
+
+---
+
 # 2026-10-31: Förlopp vid Skapa plan där knappen sitter, med Avbryt – ej aktiverat
 
 Gren `ui/mobile-configurator-20261030`, ovanpå `main` `b650c9b`. När en plan

@@ -1,5 +1,6 @@
 """Offline browser coverage for choices, request semantics and draft migration."""
 
+import copy
 import json
 import re
 import subprocess
@@ -1085,3 +1086,63 @@ def test_plan_progress_replaces_the_create_button_and_can_cancel(choices, width)
     panel.get_by_role("button", name="Stäng").click()
     expect(panel).to_have_count(0)
     assert page.evaluate("localStorage.getItem('smako.planJob.personal')") is None
+
+
+SHOPPING_EXTRA = [("Gul lök 1 kg", "lök", "allium", 15.9), ("Kycklingfilé 900 g", "kyckling", "poultry", 89.0),
+                  ("Smör 500 g", "smör", "dairy", 54.9), ("Citron", "citron", "fruit", 6.5)]
+
+
+@pytest.mark.parametrize("ui", ["bild", "kompakt", "oversikt", "desktop"])
+def test_plan_and_shopping_list_are_simple_rows_sorted_by_aisle_with_ticks(choices, tmp_path, ui):
+    from backend.tests.test_personal_booked_revisions import setup_plan
+
+    page, url, _captured = choices
+    _p, _plans, _private, saved, _stock = setup_plan(tmp_path)
+    envelope = saved.model_dump(mode="json")
+    store = envelope["plan"]["optimized_basket"]["stores"][0]
+    for index, (name, ingredient, family, price) in enumerate(SHOPPING_EXTRA):
+        row = copy.deepcopy(store["items"][0])
+        row.update(product_name=name, product_id=f"extra-{index}", ingredient=ingredient, food_family=family, total_price=price)
+        store["items"].append(row)
+    private = {"revision": 7, "profile": {}, "events": {}, "ledger": [], "items": [], "reservations": {},
+               "account": {"message": "Privat syntetisk testgäst"}}
+    page.route("**/api/personal/state", lambda route: route.fulfill(content_type="application/json", body=json.dumps(private)))
+    page.route("**/api/plans/" + saved.plan_id, lambda route: route.fulfill(content_type="application/json", body=json.dumps(envelope)))
+    page.set_viewport_size({"width": 1280 if ui == "desktop" else 390, "height": 844})
+    if ui != "desktop":
+        page.add_init_script(f"try{{localStorage.setItem('smako.configurator.layout','{ui}')}}catch(_){{}}")
+    page.goto(url.split("#")[0] + "#plan=" + saved.plan_id)
+    expect(page.locator("#plan-content h1")).to_have_text("Din plan")
+    expect(page.locator("#plan-content .plan-hero .personal-total")).to_be_visible()
+    expect(page.locator(".plan-meal")).to_have_count(1)
+    expect(page.locator(".plan-meal").get_by_role("button", name="Byt recept")).to_be_visible()
+    if ui != "desktop":
+        assert page.evaluate("document.body.dataset.ui") == ui
+    page.get_by_role("button", name="Öppna inköpslistan").click()
+    rows = page.locator("#shopping-content .shop-row")
+    expect(rows).to_have_count(len(store["items"]))
+    aisles = page.locator(".shop-aisle").all_inner_texts()
+    assert [a.lower() for a in aisles][:2] == ["frukt & grönt", "kött, fågel & fisk"]
+    assert page.locator(".shop-aisle").last.inner_text().lower() == "skafferi"
+    first = rows.first
+    expect(first.locator(".shop-name")).to_have_text("Citron")
+    # One row per product: the details stay behind the row, swapping still works.
+    expect(first.get_by_role("button", name="Välj annan produkt")).to_be_hidden()
+    first.locator(".shop-summary").click()
+    expect(first.get_by_role("button", name="Välj annan produkt")).to_be_visible()
+    total = len(store["items"])
+    expect(page.locator(".shop-progress-text")).to_have_text(f"0 av {total} varor plockade")
+    first.get_by_role("checkbox", name="Plockad: Citron").click()
+    expect(first.locator(".shop-check")).to_have_attribute("aria-checked", "true")
+    rows.nth(1).get_by_role("button", name="Stryk Gul lök 1 kg från listan").click()
+    expect(rows.nth(1)).to_have_attribute("data-state", "removed")
+    expect(page.locator(".shop-progress-text")).to_have_text(f"1 av {total - 1} varor plockade")
+    # The ticks survive a new visit (the app rewrites the URL to /personal, absent here).
+    page.goto(url.split("#")[0] + "#plan=" + saved.plan_id)
+    expect(page.locator("#plan-content h1")).to_have_text("Din plan")
+    page.locator('.personal-nav [data-open="shopping"]').evaluate("node => node.click()")
+    expect(rows.first).to_have_attribute("data-state", "picked")
+    expect(rows.nth(1)).to_have_attribute("data-state", "removed")
+    rows.nth(1).get_by_role("button", name="Ångra överstrykning av Gul lök 1 kg").click()
+    expect(page.locator(".shop-progress-text")).to_have_text(f"1 av {total} varor plockade")
+    assert page.evaluate("document.documentElement.scrollWidth <= innerWidth") or page.context.browser.browser_type.name == "webkit"

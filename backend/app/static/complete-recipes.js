@@ -481,7 +481,9 @@
     return text;
   }
   const jobKey=scope=>`smako.planJob.${scope}`;
-  function clearPrivateDrafts(){for(const key of ["smako.planJob.public","smako.planJob.personal","smako.recipeChoices.public","smako.recipeChoices.personal","smako.personal.requestDraft"])storage.remove(key);}
+  function clearPrivateDrafts(){for(const key of ["smako.planJob.public","smako.planJob.personal","smako.recipeChoices.public","smako.recipeChoices.personal","smako.personal.requestDraft"])storage.remove(key);
+    // Shopping list ticks (personal.js) are kept across visits until sign-out.
+    try{for(const key of Object.keys(localStorage))if(key.startsWith("smako.shopping."))localStorage.removeItem(key);}catch(_){/* Optional. */}}
   function pendingJob(scope) {
     const saved=storage.get(jobKey(scope));
     if(validJobUrl(saved?.url))return saved;

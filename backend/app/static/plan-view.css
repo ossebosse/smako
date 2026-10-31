@@ -1,0 +1,148 @@
+/* Min plan and the shopping list (personal.js renderPlan/renderShopping).
+   A shared, calm base for every width, and on mobile one theme per chosen
+   layout (body[data-ui], set by configurator.js): bild = airy with large light
+   type, kompakt = dense with sticky store headers, oversikt = rounded cards. */
+
+/* ---------- Min plan: base ---------- */
+#plan-content .plan-hero {margin:8px 0 0;padding:22px;border:1px solid var(--sm-border);border-radius:20px;background:#fff;}
+#plan-content .plan-hero h1 {margin:0 0 6px;font:700 12px/1.2 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--sm-muted);}
+#plan-content .plan-hero .personal-total {margin:2px 0 4px;font:800 42px/1.05 system-ui,sans-serif;letter-spacing:-.02em;}
+#plan-content .plan-hero p {margin:4px 0;font-size:14px;color:var(--sm-muted);}
+#plan-content .plan-hero .plan-hero-sub {font-size:15px;font-weight:650;color:var(--sm-ink);}
+.plan-hero-stores {display:grid;gap:6px;margin:14px 0;padding:0;list-style:none;}
+.plan-hero-stores li {display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:12px;background:var(--sm-tint);font-size:15px;}
+.plan-hero-actions {gap:8px;margin-top:6px;}
+.personal-app .plan-hero-actions button {flex:0 1 auto;min-height:46px;padding:10px 20px;border-radius:999px;font-weight:700;}
+.personal-app .plan-hero-actions .secondary-button {background:#fff;border:1px solid #b8cabf;color:var(--sm-ink);}
+#plan-content :is(.plan-meals,.plan-about)>h2 {margin:30px 0 8px;font:700 22px/1.2 system-ui,sans-serif;}
+.plan-meal {padding:16px 0;border-bottom:1px solid #e3e7e1;}
+#plan-content .plan-meal .plan-meal-day {margin:0;font:700 12px/1.2 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--sm-muted);}
+#plan-content .plan-meal h3 {margin:4px 0 2px;font:700 19px/1.25 system-ui,sans-serif;}
+#plan-content .plan-meal>p {margin:2px 0;font-size:14px;color:var(--sm-muted);}
+.personal-app .plan-meal>details {margin:8px 0 0;padding:0;border:0;}
+.personal-app .plan-meal>details>summary {display:inline-flex;align-items:center;min-height:40px;color:var(--sm-primary);}
+.plan-meal.is-empty h3 {color:var(--sm-muted);}
+.plan-meal-actions {margin-top:6px;}
+.personal-app .plan-meal-actions button {flex:0 0 auto;width:auto;min-height:36px;margin:0;padding:6px 14px;border:1px solid var(--sm-border);border-radius:999px;background:#fff;color:var(--sm-ink);font:600 13px/1.2 system-ui,sans-serif;}
+.plan-about {margin-top:12px;font-size:14px;color:var(--sm-muted);}
+.plan-about>p {margin:6px 0;}
+
+/* ---------- Inköpslista: base ---------- */
+#shopping-content>.personal-total {margin:4px 0 0;}
+.shop-total-note {display:block;font:500 14px/1.4 system-ui,sans-serif;letter-spacing:0;color:var(--sm-muted);}
+.shop-progress {margin:10px 0 18px;}
+#shopping-content .shop-progress-text {margin:0 0 6px;font-weight:700;color:var(--sm-ink);}
+.shop-progress-meter {height:8px;border-radius:4px;background:#e6ebe4;overflow:hidden;}
+.shop-progress-fill {display:block;height:100%;width:0;border-radius:4px;background:var(--sm-primary);transition:width .35s ease;}
+#shopping-content .shop-progress-hint {margin:8px 0 0;font-size:13px;color:var(--sm-muted);}
+.shop-store {margin:18px 0 26px;}
+.shop-store-head {display:flex;align-items:baseline;gap:10px;padding:0 0 8px;border-bottom:2px solid var(--sm-ink);}
+#shopping-content .shop-store-head h2 {flex:1;min-width:0;margin:0;font:700 21px/1.2 system-ui,sans-serif;}
+.shop-store-count {font-size:13px;color:var(--sm-muted);font-variant-numeric:tabular-nums;}
+.shop-store-total {font-weight:700;font-variant-numeric:tabular-nums;}
+.shop-store.is-done .shop-store-count::before {content:"✓ ";color:var(--sm-primary);}
+#shopping-content .shop-aisle {margin:16px 0 2px;font:700 12px/1.2 system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--sm-muted);}
+.shop-list {margin:0;padding:0;list-style:none;}
+.shop-row {display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:start;gap:4px 12px;padding:6px 0;border-bottom:1px solid #e6e9e4;}
+.personal-app .shop-check {position:relative;flex:none;width:28px;height:28px;min-height:0;margin:9px 0 0;padding:0;border:2px solid #9aa79f;border-radius:50%;background:#fff;cursor:pointer;transition:background .15s ease,border-color .15s ease,transform .15s ease;}
+.personal-app .shop-check[aria-checked=true] {border-color:var(--sm-primary);background:var(--sm-primary);}
+.shop-check[aria-checked=true]::after {content:"";position:absolute;left:8px;top:3px;width:7px;height:13px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg);}
+.personal-app .shop-check:active {transform:scale(.9);}
+.personal-app .shop-check:disabled {opacity:.35;cursor:default;}
+.personal-app .shop-more {margin:0;padding:0;border:0;min-width:0;}
+.personal-app .shop-summary {display:flex;align-items:baseline;gap:10px;min-height:46px;padding:8px 0;list-style:none;font-weight:400;}
+.shop-summary::-webkit-details-marker {display:none;}
+.shop-main {flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.shop-name {font:600 16px/1.3 system-ui,sans-serif;color:var(--sm-ink);overflow-wrap:anywhere;}
+.shop-meta {font-size:13px;color:var(--sm-muted);}
+.shop-meta:empty {display:none;}
+.shop-price {font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.shop-more-body {padding:0 0 10px;font-size:13px;color:var(--sm-muted);}
+.shop-more-body>* {margin:4px 0;}
+.shop-more-body>strong {display:block;color:var(--sm-ink);}
+.personal-app .shop-more-body button {margin-top:6px;}
+.personal-app .shop-remove {flex:none;width:40px;height:40px;min-height:0;margin:3px -6px 0 0;padding:0;border:0;border-radius:50%;background:transparent;color:#8a968e;font-size:22px;line-height:1;cursor:pointer;}
+.personal-app .shop-remove:hover {background:#eef1ec;color:var(--sm-ink);}
+.shop-row[data-state=picked] :is(.shop-name,.shop-price) {color:var(--sm-muted);}
+.shop-row[data-state=picked] .shop-name {text-decoration:line-through;text-decoration-thickness:1px;}
+.shop-row[data-state=removed] .shop-more {opacity:.45;}
+.shop-row[data-state=removed] :is(.shop-name,.shop-price) {text-decoration:line-through;text-decoration-thickness:2px;}
+#shopping-content .shop-after-title {margin:32px 0 8px;font:700 20px/1.2 system-ui,sans-serif;}
+
+@media(max-width:849px) {
+  /* ---------- Bild: airy, large light type, a picture over the total ---------- */
+  [data-ui=bild] :is(#personal-plan,#personal-shopping) h1:not(#plan-content h1) {font-family:system-ui,sans-serif;font-weight:300;letter-spacing:-.02em;}
+  [data-ui=bild] #plan-content .plan-hero {padding:0;border:0;border-radius:0;background:transparent;}
+  [data-ui=bild] #plan-content .plan-hero::before {content:"";display:block;height:150px;margin:0 -14px 18px;background:#e9efe4 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 150'%3E%3Cpath d='M-10 120C80 95 140 150 230 118S330 70 380 85' stroke='%23fff' stroke-width='14' fill='none'/%3E%3Ccircle cx='96' cy='52' r='16' fill='%237fa36a'/%3E%3Ccircle cx='272' cy='96' r='12' fill='%23e0a458'/%3E%3Cpath d='M142 56h76l-8 72h-60z' fill='%23164b3e'/%3E%3Cpath d='M160 56c0-30 40-30 40 0' stroke='%23164b3e' stroke-width='7' fill='none'/%3E%3Ccircle cx='166' cy='40' r='13' fill='%237fa36a'/%3E%3Ccircle cx='192' cy='34' r='11' fill='%23c5523f'/%3E%3Cpath d='M164 92l12 12 22-24' stroke='%23fff' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/cover no-repeat;}
+  [data-ui=bild] #plan-content .plan-hero .personal-total {font-size:54px;font-weight:300;letter-spacing:-.03em;}
+  [data-ui=bild] .plan-hero-stores li {padding:12px 0;border-radius:0;border-bottom:1px solid #e6e8e4;background:transparent;}
+  [data-ui=bild].personal-app .plan-hero-actions button {flex:1 1 100%;min-height:52px;}
+  [data-ui=bild] #plan-content :is(.plan-meals,.plan-about)>h2 {font-size:30px;font-weight:300;letter-spacing:-.01em;}
+  [data-ui=bild] .plan-meal {padding:20px 0;}
+  [data-ui=bild] #plan-content .plan-meal h3 {font-size:24px;font-weight:400;letter-spacing:-.01em;}
+  [data-ui=bild] #shopping-content>.personal-total {font-size:44px;font-weight:300;letter-spacing:-.02em;}
+  [data-ui=bild] .shop-progress-meter {height:3px;}
+  [data-ui=bild] .shop-store-head {padding:6px 0 10px;border-bottom:1px solid #e6e8e4;}
+  [data-ui=bild] #shopping-content .shop-store-head h2 {font-size:30px;font-weight:300;letter-spacing:-.01em;}
+  [data-ui=bild] .shop-row {border-bottom-color:#eef0ec;padding:8px 0;}
+  [data-ui=bild] .shop-name {font-size:17px;font-weight:400;}
+  [data-ui=bild].personal-app .shop-check {width:30px;height:30px;border-width:1.5px;border-color:#b5bdb7;}
+  [data-ui=bild] .shop-check[aria-checked=true]::after {left:9px;top:4px;}
+  [data-ui=bild] .shop-store.is-done .shop-store-head h2 {color:var(--sm-muted);}
+
+  /* ---------- Kompakt: dense, sticky store headers, square ticks ---------- */
+  [data-ui=kompakt] #plan-content .plan-hero {display:grid;grid-template-columns:1fr auto;align-items:end;gap:2px 12px;padding:14px 16px;border-radius:14px;}
+  [data-ui=kompakt] #plan-content .plan-hero>* {grid-column:1/-1;}
+  [data-ui=kompakt] #plan-content .plan-hero h1 {grid-column:1;}
+  [data-ui=kompakt] #plan-content .plan-hero .personal-total {grid-column:1;font-size:30px;}
+  [data-ui=kompakt] #plan-content .plan-hero .plan-hero-sub {grid-column:2;grid-row:1/3;align-self:end;text-align:right;font-size:13px;}
+  [data-ui=kompakt] .plan-hero-stores {display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 8px;}
+  [data-ui=kompakt] .plan-hero-stores li {padding:5px 10px;border-radius:6px;font-size:13px;gap:8px;}
+  [data-ui=kompakt].personal-app .plan-hero-actions button {min-height:40px;padding:8px 14px;border-radius:8px;font-size:14px;}
+  [data-ui=kompakt] #plan-content :is(.plan-meals,.plan-about)>h2 {margin-top:20px;font-size:17px;}
+  [data-ui=kompakt] .plan-meal {display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:12px;padding:12px 0;}
+  [data-ui=kompakt] .plan-meal>* {grid-column:2;}
+  [data-ui=kompakt] #plan-content .plan-meal .plan-meal-day {grid-column:1;grid-row:1/span 3;padding-top:3px;font-size:11px;line-height:1.35;letter-spacing:.04em;}
+  [data-ui=kompakt] #plan-content .plan-meal h3 {margin-top:0;font-size:16px;}
+  [data-ui=kompakt].personal-app .plan-meal-actions button {min-height:32px;padding:4px 10px;border-radius:6px;font-size:12px;}
+  [data-ui=kompakt] .shop-progress {display:grid;grid-template-columns:auto 1fr;align-items:center;gap:6px 12px;}
+  [data-ui=kompakt] #shopping-content .shop-progress-text {margin:0;font-size:13px;}
+  [data-ui=kompakt] .shop-progress-hint {grid-column:1/-1;}
+  [data-ui=kompakt] .shop-store {margin:10px 0 16px;}
+  [data-ui=kompakt] .shop-store-head {position:sticky;z-index:5;top:0;margin:0 -14px;padding:10px 14px;border-bottom:1px solid var(--sm-border);background:var(--sm-bg);}
+  [data-ui=kompakt] #shopping-content .shop-store-head h2 {font-size:16px;}
+  [data-ui=kompakt] #shopping-content .shop-aisle {margin:0 -14px;padding:6px 14px;background:#eef1ea;font-size:11px;}
+  [data-ui=kompakt] .shop-row {gap:0 10px;padding:0;}
+  [data-ui=kompakt].personal-app .shop-check {width:22px;height:22px;margin-top:11px;border-radius:5px;}
+  [data-ui=kompakt] .shop-check[aria-checked=true]::after {left:6px;top:1px;width:6px;height:11px;}
+  [data-ui=kompakt].personal-app .shop-summary {min-height:44px;padding:6px 0;}
+  [data-ui=kompakt] .shop-name {font-size:15px;}
+  [data-ui=kompakt] .shop-meta {font-size:12px;}
+  [data-ui=kompakt].personal-app .shop-remove {width:36px;height:36px;margin-top:4px;font-size:20px;}
+
+  /* ---------- Översikt: rounded cards, a green summary card ---------- */
+  [data-ui=oversikt] #plan-content .plan-hero {border:0;background:var(--sm-primary);color:#fff;box-shadow:0 10px 26px #143f3533;}
+  [data-ui=oversikt] #plan-content .plan-hero :is(h1,p,.plan-hero-sub) {color:#ffffffd9;}
+  [data-ui=oversikt] #plan-content .plan-hero .personal-total {color:#fff;}
+  [data-ui=oversikt] .plan-hero-stores li {background:#ffffff1f;color:#fff;}
+  [data-ui=oversikt].personal-app .plan-hero-actions .primary-button {background:#fff;border-color:#fff;color:var(--sm-primary);}
+  [data-ui=oversikt].personal-app .plan-hero-actions .secondary-button {background:transparent;border-color:#ffffff80;color:#fff;}
+  [data-ui=oversikt] .plan-meals {display:flex;flex-direction:column;gap:10px;}
+  [data-ui=oversikt] .plan-meal {padding:16px;border:1px solid #e1e5df;border-radius:16px;background:#fff;box-shadow:0 1px 2px #143f350d;}
+  [data-ui=oversikt] #plan-content .plan-meal .plan-meal-day {display:inline-block;padding:4px 10px;border-radius:999px;background:var(--sm-tint);color:var(--sm-primary);letter-spacing:.04em;}
+  [data-ui=oversikt] #plan-content .plan-meal h3 {margin-top:8px;}
+  [data-ui=oversikt] .plan-about {padding:4px 16px 8px;border-radius:16px;background:#fff;border:1px solid #e1e5df;}
+  [data-ui=oversikt] .shop-progress {padding:14px 16px;border-radius:16px;background:var(--sm-primary);color:#fff;}
+  [data-ui=oversikt] #shopping-content .shop-progress-text {color:#fff;}
+  [data-ui=oversikt] #shopping-content .shop-progress-hint {color:#ffffffc7;}
+  [data-ui=oversikt] .shop-progress-meter {height:10px;border-radius:5px;background:#ffffff33;}
+  [data-ui=oversikt] .shop-progress-fill {background:#9cc086;}
+  [data-ui=oversikt] .shop-store {padding:6px 16px 10px;border:1px solid #e1e5df;border-radius:18px;background:#fff;box-shadow:0 1px 2px #143f350d;}
+  [data-ui=oversikt] .shop-store-head {padding:10px 0;border-bottom:0;}
+  [data-ui=oversikt] .shop-store.is-done {border-color:var(--sm-primary);}
+  [data-ui=oversikt] #shopping-content .shop-aisle {display:inline-block;margin:12px 0 4px;padding:4px 10px;border-radius:999px;background:var(--sm-tint);color:var(--sm-primary);letter-spacing:.04em;}
+  [data-ui=oversikt] .shop-list .shop-row:last-child {border-bottom:0;}
+  [data-ui=oversikt].personal-app .shop-check {border-color:#c3cec6;}
+  [data-ui=oversikt].personal-app .shop-check[aria-checked=true] {border-color:#4f8f5e;background:#4f8f5e;}
+}
+@media(prefers-reduced-motion:reduce) {.shop-progress-fill,.personal-app .shop-check {transition:none;}}
