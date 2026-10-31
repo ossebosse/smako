@@ -1024,3 +1024,63 @@ def test_overview_layout_shows_every_step_as_a_card_and_creates_the_plan(choices
     assert body["personal"]["meals"][0]["meal_type"] == "dinner"
     page.reload()
     expect(page.locator("body.config-oversikt")).to_have_count(1)
+
+
+@pytest.mark.parametrize("width", [390, 1280])
+def test_plan_progress_replaces_the_create_button_and_can_cancel(choices, width):
+    page, url, captured = choices
+    page.set_viewport_size({"width": width, "height": 844})
+    job = "/api/plan-jobs/" + "a" * 32
+    calls = []
+
+    def planner(route):
+        method, path = route.request.method, route.request.url.split("?")[0]
+        calls.append(method)
+        pending = {"status": "pending", "status_url": job, "request_id": "r"}
+        if path.endswith("/api/plans"):
+            captured.append(route.request.post_data_json)
+            body, status = {**pending, "stage": "queued", "progress": None}, 202
+        elif method == "DELETE":
+            body, status = {"status": "cancelling", "status_url": job}, 202
+        elif "DELETE" in calls:
+            route.fulfill(status=404, content_type="application/json", headers={"X-Error-Code": "planner_job_expired"},
+                          body=json.dumps({"detail": "Planeringsförsöket har gått ut. Skapa menyn igen."}))
+            return
+        else:
+            body = {**pending, "stage": "candidate_qualification",
+                    "progress": {"completed": 2, "total": 5, "unit": "recipes"}}
+            status = 202
+        route.fulfill(status=status, content_type="application/json", body=json.dumps(body))
+
+    page.route("**/api/plans", planner)
+    page.route("**/api/plan-jobs/**", planner)
+    page.goto(url)
+    if width < 850:
+        page.locator("#customer-postcode").fill("223 50")
+        page.locator("#check-postcode").click()
+        expect(page.locator("#location-status")).to_contain_text("Lund kommun")
+        page.locator(".config-next").click()
+        page.locator(".config-done").click()
+    else:
+        choose_location(page)
+    page.locator("#choice-submit").click()
+    panel = page.locator(".plan-progress")
+    expect(panel).to_be_visible()
+    expect(page.locator("#choice-submit")).to_be_hidden()
+    expect(page.locator("#personal-status")).to_be_hidden()
+    if width >= 850:
+        # Inline where the button was, not at the top of the page.
+        assert page.evaluate("document.querySelector('#choice-submit').nextElementSibling.matches('.plan-progress')")
+    expect(panel.locator(".plan-progress-title")).to_have_text("Provsmakar recepten")
+    expect(panel.locator(".plan-progress-count")).to_have_text("40 % · 2 av 5 recept prövade")
+    expect(panel.locator(".plan-progress-steps .is-current")).to_have_count(1)
+    cancel = panel.get_by_role("button", name="Avbryt")
+    expect(cancel).to_be_enabled()
+    cancel.click()
+    expect(panel.locator(".plan-progress-title")).to_have_text("Beräkningen avbröts")
+    expect(page.locator("#personal-status")).to_contain_text("Beräkningen avbröts. Dina val")
+    assert "DELETE" in calls
+    expect(page.locator("#choice-submit")).to_be_visible()
+    panel.get_by_role("button", name="Stäng").click()
+    expect(panel).to_have_count(0)
+    assert page.evaluate("localStorage.getItem('smako.planJob.personal')") is None

@@ -1,3 +1,23 @@
+# 2026-10-31: Förlopp vid Skapa plan där knappen sitter, med Avbryt – ej aktiverat
+
+Gren `ui/mobile-configurator-20261030`, ovanpå `main` `b650c9b`. När en plan
+skapas (Skapa plan, Beräkna egen lista eller återanslutning) ersätts knappen av
+en panel (`plan-progress.js/.css`): på dator i sammanfattningen där knappen
+satt, på mobil som kort längst ner i alla tre layouterna. Statusraden överst
+döljs medan panelen visas men skrivs som förut. Panelen visar serverns
+rapporterade steg som rubrik och prickar, befintlig stegtext, mätta räknare
+(`completed/total` recept eller steg) som stapel och procent, samt förfluten
+tid. Procent visas bara för sådana mätta räknare; prickarna är steg, inte
+tidsuppskattning. Tecknad animation: påsen ritas, varor faller i, bock när
+planen är klar (0,9 s innan planen öppnas), påsen lutar vid fel; minskad
+rörelse respekteras. Avbryt anropar befintliga `DELETE /api/plan-jobs/{id}`
+(först när jobbets status-URL finns); när statusläsningen sedan får
+`planner_job_expired` visas ”Beräkningen avbröts. Dina val och din senaste plan
+finns kvar.” Vid fel syns felet i panelen och knappen kommer tillbaka.
+Samma tre WebKit-bredd-fall som på `main` kvarstår i denna Windows-miljö.
+
+---
+
 # 2026-10-31: Mobilmeny och Översikt aktiverade
 
 [PR52](https://github.com/ossebosse/smako/pull/52) är integrerad på main
