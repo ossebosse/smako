@@ -1,3 +1,22 @@
+# 2026-10-31: Mobilmeny bakom menyknapp och tredje layouten Översikt – ej aktiverat
+
+Gren `ui/mobile-configurator-20261030`, ovanpå `main` `8b58d5a`. Under 850 px
+ligger huvudmenyn (Min plan, Inköpslista, Skafferi, Sök varor, Mina val,
+konto) bakom en menyknapp uppe till vänster och glider in från vänster
+(stängs med val, bakgrundstryck eller Escape). Knappen sitter i sidhuvudet,
+i Bild-läget i toppfältet före Klar. Växeln för visning av Mina val ligger nu
+i menyn, inte i varje steg. Ny tredje layout Översikt: alla steg som kort
+med vad som är valt (från sammanfattningens befintliga rader), ett öppet åt
+gången, Nästa-knapp under det öppna steget och en fast Skapa plan-knapp som
+trycker på befintliga `#choice-submit`. Samma steg, kontroller, Varor och
+validering som Bild/Kompakt; inga API-ändringar. Dator oförändrad.
+Releaseverifieringens mobila skript och medlemstestet öppnar menyn först.
+WebKit-fallen med horisontell bredd (`scrollWidth`) vid 390 px i
+`test_draft_restores…`, `test_ingredient_interval…` och medlemstestet
+misslyckas även på oförändrad `main` i denna Windows-miljö.
+
+---
+
 # 2026-10-30: Mobilkonfigurator och egna varor aktiverade i betan
 
 PR [51](https://github.com/ossebosse/smako/pull/51) är integrerad på `main`

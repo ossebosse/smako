@@ -25,6 +25,14 @@ from playwright.sync_api import Error as BrowserError
 from playwright.sync_api import expect, sync_playwright
 
 
+def open_view(page, view):
+    """On mobile the main menu sits behind the top-left menu button."""
+    toggle = page.locator(".menu-toggle")
+    if toggle.is_visible():
+        toggle.click()
+    page.locator(f'.personal-nav [data-open="{view}"]').click()
+
+
 def dump(path: Path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -381,7 +389,7 @@ def run_case(browser, engine, mobile, personal, args):
         page.goto(args.base + ("/personal" if personal else "/klassisk"), wait_until="domcontentloaded")
         if personal:
             expect(page.locator("#generate-plan")).to_be_enabled(timeout=30000)
-            page.locator('[data-open="choices"]').first.click()
+            page.locator('[data-open="choices"]:visible').first.click()
         elif page.locator("#onboarding-dialog").is_visible():
             page.locator("#onboarding-cta").click()
         if args.meal_request:
@@ -527,7 +535,7 @@ def run_case(browser, engine, mobile, personal, args):
         assert digest(read_saved(context, args.base, envelope["plan_id"])) == digest(envelope)
         if args.recipe_mode == "complete" and not getattr(args, "allow_beta", False):
             if personal:
-                page.locator('.personal-nav [data-open="plan"]').click()
+                open_view(page, "plan")
             open_recipes(page, personal)
             page.get_by_role("button", name="Så blev rätten", exact=True).first.click()
             page.locator("#recipe-feedback-taste").select_option("4")
@@ -556,7 +564,7 @@ def run_case(browser, engine, mobile, personal, args):
         assert report["identical_saved_reload"]
         if not args.skip_mutations:
             if personal:
-                page.locator('.personal-nav [data-open="plan"]').click()
+                open_view(page, "plan")
             open_recipes(page, personal)
             previous = envelope
             start = len(observed)

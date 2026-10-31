@@ -1,6 +1,7 @@
 """Offline browser coverage for choices, request semantics and draft migration."""
 
 import json
+import re
 import subprocess
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
@@ -92,7 +93,9 @@ def config_step(page, title):
 
 def submit(page, captured):
     before = len(captured)
-    if mobile_configurator(page) and page.locator("body.config-kompakt").count():
+    if mobile_configurator(page) and page.locator("body.config-oversikt").count():
+        page.locator(".config-cta-button").click()
+    elif mobile_configurator(page) and page.locator("body.config-kompakt").count():
         config_step(page, "Sammanfattning")
         page.locator(".config-bar-next").click()
     else:
@@ -926,6 +929,14 @@ def test_generic_items_are_added_in_one_tap_from_the_typed_text(choices):
     expect(page.locator(".config-tab[aria-current] .config-tab-title")).to_have_text("Varor")
 
 
+def choose_layout(page, name):
+    """The layout switch sits in the mobile menu behind the top-left button."""
+    page.locator(".menu-toggle").click()
+    expect(page.locator(".personal-nav")).to_be_visible()
+    page.get_by_role("radio", name=name).click()
+    expect(page.locator("body.menu-open")).to_have_count(0)
+
+
 def test_mobile_layout_switch_keeps_choices_and_is_remembered(choices):
     page, url, captured = choices
     page.set_viewport_size({"width": 390, "height": 844})
@@ -937,7 +948,7 @@ def test_mobile_layout_switch_keeps_choices_and_is_remembered(choices):
     expect(page.locator("#location-status")).to_contain_text("Lund kommun")
     page.locator(".config-next").click()
     page.locator("#dinner-count-value").fill("4")
-    page.get_by_role("radio", name="Kompakt").click()
+    choose_layout(page, "Kompakt")
     expect(page.locator("body.config-kompakt")).to_have_count(1)
     expect(page.locator(".config-hero")).to_be_hidden()
     expect(page.locator(".config-bar")).to_be_visible()
@@ -949,7 +960,67 @@ def test_mobile_layout_switch_keeps_choices_and_is_remembered(choices):
     expect(page.locator("body.config-kompakt")).to_have_count(1)
     choose_location(page)
     assert submit(page, captured)["personal"]["meals"][0]["meal_type"] == "dinner"
-    page.get_by_role("radio", name="Bild").click()
+    choose_layout(page, "Bild")
     expect(page.locator("body.config-bild")).to_have_count(1)
     expect(page.locator(".config-bar")).to_be_hidden()
     expect(page.locator(".config-hero")).to_be_visible()
+
+
+def test_mobile_menu_hides_main_navigation_behind_top_left_button(choices):
+    page, url, _captured = choices
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(url)
+    nav = page.locator(".personal-nav")
+    expect(nav).to_be_hidden()
+    toggle = page.locator(".menu-toggle")
+    box = toggle.bounding_box()
+    assert box["x"] < 40 and box["y"] < 40
+    toggle.click()
+    expect(toggle).to_have_attribute("aria-expanded", "true")
+    expect(nav.get_by_role("radio", name="Översikt")).to_be_visible()
+    page.keyboard.press("Escape")
+    expect(nav).to_be_hidden()
+    toggle.click()
+    nav.locator('[data-open="shopping"]').click()
+    expect(nav).to_be_hidden()
+    expect(page.locator("#personal-shopping")).to_be_visible()
+    # The header button opens the same menu outside Mina val.
+    page.locator(".menu-toggle").click()
+    nav.locator('[data-open="choices"]').click()
+    expect(page.locator("body.config-mode")).to_have_count(1)
+    page.set_viewport_size({"width": 1280, "height": 900})
+    expect(page.locator(".menu-toggle")).to_be_hidden()
+    expect(nav.locator('[data-open="plan"]')).to_be_visible()
+    expect(nav.locator(".menu-layout")).to_be_hidden()
+
+
+def test_overview_layout_shows_every_step_as_a_card_and_creates_the_plan(choices):
+    page, url, captured = choices
+    page.set_viewport_size({"width": 390, "height": 844})
+    page.goto(url)
+    choose_layout(page, "Översikt")
+    expect(page.locator("body.config-oversikt")).to_have_count(1)
+    cards = page.locator(".config-card")
+    expect(cards).to_have_count(8)
+    expect(page.locator(".config-hero")).to_be_hidden()
+    expect(page.locator(".config-tabs")).to_be_hidden()
+    expect(page.locator(".config-cta-button")).to_be_disabled()
+    expect(page.locator("#customer-postcode")).to_be_visible()
+    page.locator("#customer-postcode").fill("223 50")
+    page.locator("#check-postcode").click()
+    expect(page.locator("#location-status")).to_contain_text("Lund kommun")
+    page.locator(".config-next").click()
+    expect(page.locator('.config-card[aria-expanded="true"]')).to_contain_text("Måltider")
+    expect(page.locator("#dinner-count-value")).to_be_visible()
+    page.locator("#dinner-count-value").fill("4")
+    page.locator("#dinner-count-value").blur()
+    expect(cards.nth(1)).to_contain_text("4 ×")
+    expect(cards.nth(0)).to_have_class(re.compile("is-done"))
+    cards.filter(has_text="Varor").click()
+    expect(page.locator(".config-items #shopping-query")).to_be_visible()
+    expect(page.locator("#dinner-count-value")).to_be_hidden()
+    expect(page.locator(".config-cta-button")).to_be_enabled()
+    body = submit(page, captured)
+    assert body["personal"]["meals"][0]["meal_type"] == "dinner"
+    page.reload()
+    expect(page.locator("body.config-oversikt")).to_have_count(1)
