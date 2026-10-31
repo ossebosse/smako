@@ -1004,9 +1004,11 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
     from app.services.axfood_product_details import configured_root, merge_axfood_details
     if configured_root() is not None:
         # Copy: the retained catalogue facts are a shared, hash-verified cache.
-        catalog = FactsCollection(dict(catalog))
+        # Only the completed projection needs a version. Hashing this private
+        # intermediate before/after details repeats full-library work whose
+        # versions are discarded by the remaining enrichment below.
+        catalog = dict(catalog)
         merge_axfood_details(prepared.universe.products, catalog)
-        catalog.version = facts_version(catalog)
     if any(eligible(p) for p in prepared.universe.products):
         from sqlalchemy.engine import make_url
 
@@ -1029,6 +1031,6 @@ def load_retained_facts(prepared, *, database=None, raw_root=None):
     supplemented = supplement_catalog_facts(prepared.universe.products, result)
     from app.services.reviewed_ingredients import enrich_issued_compositions
     supplemented = enrich_issued_compositions(prepared, supplemented)
-    if not reviewed and supplemented == catalog:
+    if not reviewed and supplemented == catalog and isinstance(catalog, FactsCollection):
         return catalog  # Preserve the hash-verified retained-source cache.
     return FactsCollection(supplemented)
