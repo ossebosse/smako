@@ -15,12 +15,12 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-b05b953576b7-fc1840af`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-327fa573eb3f-0541cf49`;
   schedulern är `source-ops-8a53beb80e43`.
-  [Mindre dubbelarbete i faktaladdningen](releases/menu-work-reduction-20261031/ACTIVATED.md)
-  är senaste appaktiveringen. Två Pythonfiler från kod `b05b953576b7`;
-  kallt isolerat prov levererade inom 60 s. Se journalens avgränsning och publika prov.
-  [Föregående faktarättning](releases/menu-facts-deadline-20261031/ACTIVATED.md)
+  [Mindre uppvärmning och färre filkontroller](releases/prewarm-detail-reads-20261031/ACTIVATED.md)
+  är senaste appaktiveringen. Två Pythonfiler från kod `327fa573eb3f`;
+  fem isolerade menyer snabbare med identiska korgar. Se journalens publika prov.
+  [Föregående faktarättning](releases/menu-work-reduction-20261031/ACTIVATED.md)
   och övrig runtime består.
   [Stora Coop-kopplingen](releases/stora-coop-syd-base-20261029/ACTIVATED.md)
   dokumenterar de separata faktiska baserna och den exakta slutpatchen.

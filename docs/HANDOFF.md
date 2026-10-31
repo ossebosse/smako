@@ -1,3 +1,24 @@
+# 2026-10-31: Mindre uppvärmning och färre filkontroller aktiverat
+
+[PR 57](https://github.com/ossebosse/smako/pull/57), main `3eb21dc7feaf`.
+App `app-327fa573eb3f-0541cf49`; scheduler source-ops-8a53beb80e43.
+[Mätning](reviews/prewarm-detail-reads-20261031/REPORT.md) och
+[aktiveringsjournal](releases/prewarm-detail-reads-20261031/ACTIVATED.md).
+Aktuella recept värms utan äldre historik; gamla planer valideras vid behov.
+Anropslokala kataloglistor minskar säkra negativa filuppslag. Ändringar,
+korruption och återkallelser går fortsatt genom ordinarie kontroller.
+Fem jämförda menyer snabbare med identiska recept/korgar/priser och alla
+54 515 fakta/versionen identiska. Kallt 56,118 → 49,688 s; nya svenska och
+grekiska val cirka 26–27 → 22 s. Receptuppvärmning 31,946 → 17,203 s,
+cirka 67 MiB lägre toppminne. Minnesstädningens skydd består.
+Första publika menyprovet levererade på **53.500 s**, med passerad checkout, pris 110.55 kr och identisk sparad återläsning. Inga JavaScriptfel. 60-sekundersmålet klarades i detta prov. Föregående versions engångsprov var 43,547 s; det nya publika provet var alltså långsammare. Ingen publik latensvinst är visad av dessa två separata körningar, och orsaken till skillnaden är inte fastställd.
+Enstaka fall, ingen p95-/samtidighets-/fullvalsgaranti. 131 lokala riktade
+fall och PR-/main-CI gröna (4 417 pass, 63 skip). Två runtimefiler ändrade,
+1009 andra bevarade. Full backup /srv/smako/backups/20261031T213203Z; tidigare användarrader,
+miljö, mountar och priser verifierade. Retention complete; inga schemaändringar.
+
+---
+
 # 2026-10-31: Mindre dubbelarbete i faktaladdningen aktiverat
 
 [PR 56](https://github.com/ossebosse/smako/pull/56), main `86cbd41efcf6`.

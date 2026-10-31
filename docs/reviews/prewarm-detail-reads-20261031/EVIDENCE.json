@@ -1,0 +1,397 @@
+{
+  "schema": "smako-prewarm-detail-reads-v1",
+  "source_commit": "327fa573eb3f92d604cbf2d15a62b458837d8876",
+  "pull_request": "https://github.com/ossebosse/smako/pull/57",
+  "merge_commit": "3eb21dc7feafcb071648d2ddfd9b0043a460f73b",
+  "base_image": "sha256:50ae810d8f4b4d71ea98c8c5150ca1531deff13d4d6fe9a6dcc0f09a6676bed5",
+  "price_universe": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+  "scope": "One dinner, 10–15 ingredients, milk 1 l, Lund 22350/17 selected contexts, max one store, explicit estimated quantities/nutrition, empty pantry; Italian 2 portions cold/repeat, Swedish 2, Greek 2, Italian 1.",
+  "isolation": "Exact active image and planning environment including Axfood release; network none, read-only public mounts, 4 GiB, tmpfs and new synthetic PlanStore for each request. No production private store mounted. Changed modules injected only in isolated process; their ASTs match the release package.",
+  "baseline": [
+    {
+      "case": "italian-cold",
+      "status": "passed",
+      "seconds": 56.118,
+      "total": 110.55,
+      "audit": true,
+      "basket_sha256": "2470ea3205b4eff53b358784ed30d0ba7111eae4cfedfba9f35d4a951d642645",
+      "recipes": [
+        [
+          "smako-italian-spinach-whitebean-ravioli",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2356400,
+      "engine_timings": {
+        "product_facts": 27.736474918201566,
+        "memory_reclamation": 3.584757606498897,
+        "package_calculation": 0.987255809828639,
+        "nutrition": 0.017581251449882984,
+        "candidate_generation_and_qualification": 16.211411382071674,
+        "week_search": 0.32618007250130177,
+        "audit": 0.0014302423223853111,
+        "total": 20.227628785185516
+      }
+    },
+    {
+      "case": "italian-repeat",
+      "status": "passed",
+      "seconds": 26.327,
+      "total": 110.55,
+      "audit": true,
+      "basket_sha256": "2470ea3205b4eff53b358784ed30d0ba7111eae4cfedfba9f35d4a951d642645",
+      "recipes": [
+        [
+          "smako-italian-spinach-whitebean-ravioli",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2356400,
+      "engine_timings": {
+        "product_facts": 12.145725924521685,
+        "memory_reclamation": 3.7402376448735595,
+        "package_calculation": 0.9225818645209074,
+        "nutrition": 0.017766517587006092,
+        "candidate_generation_and_qualification": 4.285470181144774,
+        "week_search": 0.32560355961322784,
+        "audit": 0.0011676596477627754,
+        "total": 8.453917755745351
+      }
+    },
+    {
+      "case": "swedish-new",
+      "status": "passed",
+      "seconds": 26.77,
+      "total": 104.23,
+      "audit": true,
+      "basket_sha256": "70bac26a9f1de4cab9aff21844fb771c80c77caff9615fb33f3683314a8c4746",
+      "recipes": [
+        [
+          "smako-intake-roesti",
+          "1.0.0",
+          "6e8c5a64-simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2356400,
+      "engine_timings": {
+        "product_facts": 11.866075038909912,
+        "memory_reclamation": 3.839280778542161,
+        "package_calculation": 1.0031868927180767,
+        "nutrition": 0.015867644920945168,
+        "candidate_generation_and_qualification": 5.204362943768501,
+        "week_search": 0.2940691551193595,
+        "audit": 0.0013556797057390213,
+        "total": 9.444100459106266
+      }
+    },
+    {
+      "case": "greek-new",
+      "status": "passed",
+      "seconds": 26.167,
+      "total": 106.9,
+      "audit": true,
+      "basket_sha256": "f7eb5a2abbf4ce238dfb9b11447c93ce556402b257e07eb61182cc2cef666c2d",
+      "recipes": [
+        [
+          "smako-greek-mushroom-feta-stuffed-potatoes",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2356400,
+      "engine_timings": {
+        "product_facts": 11.947207611985505,
+        "memory_reclamation": 3.7406187234446406,
+        "package_calculation": 0.9696804918348789,
+        "nutrition": 0.021222032606601715,
+        "candidate_generation_and_qualification": 4.730133009143174,
+        "week_search": 0.40120632015168667,
+        "audit": 0.0013581151142716408,
+        "total": 8.985315456055105
+      }
+    },
+    {
+      "case": "italian-one-new",
+      "status": "passed",
+      "seconds": 28.904,
+      "total": 88.61,
+      "audit": true,
+      "basket_sha256": "0817d0e6d66506ab1ec4ecccf6312e2ef7a304e89f3dff73823b7b8a4a966a44",
+      "recipes": [
+        [
+          "smako-italian-whitebean-tomato-bread-porridge",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2356400,
+      "engine_timings": {
+        "product_facts": 12.377568060532212,
+        "memory_reclamation": 3.732415202073753,
+        "package_calculation": 0.9283815091475844,
+        "nutrition": 0.017450044862926006,
+        "candidate_generation_and_qualification": 7.150818206369877,
+        "week_search": 0.3342166915535927,
+        "audit": 0.0013087904080748558,
+        "total": 11.32123679574579
+      }
+    }
+  ],
+  "candidate": [
+    {
+      "case": "italian-cold",
+      "status": "passed",
+      "seconds": 49.688,
+      "total": 110.55,
+      "audit": true,
+      "basket_sha256": "2470ea3205b4eff53b358784ed30d0ba7111eae4cfedfba9f35d4a951d642645",
+      "recipes": [
+        [
+          "smako-italian-spinach-whitebean-ravioli",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2354832,
+      "engine_timings": {
+        "product_facts": 21.75092463940382,
+        "memory_reclamation": 3.6972007006406784,
+        "package_calculation": 0.9242439270019531,
+        "nutrition": 0.016751802526414394,
+        "candidate_generation_and_qualification": 16.056600846350193,
+        "week_search": 0.3207807373255491,
+        "audit": 0.0015639066696166992,
+        "total": 20.178812002763152
+      }
+    },
+    {
+      "case": "italian-repeat",
+      "status": "passed",
+      "seconds": 20.925,
+      "total": 110.55,
+      "audit": true,
+      "basket_sha256": "2470ea3205b4eff53b358784ed30d0ba7111eae4cfedfba9f35d4a951d642645",
+      "recipes": [
+        [
+          "smako-italian-spinach-whitebean-ravioli",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2354832,
+      "engine_timings": {
+        "product_facts": 7.0246091317385435,
+        "memory_reclamation": 3.8248793091624975,
+        "package_calculation": 0.8952345438301563,
+        "nutrition": 0.01743757165968418,
+        "candidate_generation_and_qualification": 4.3341451762244105,
+        "week_search": 0.321102874353528,
+        "audit": 0.001206032931804657,
+        "total": 8.581223444081843
+      }
+    },
+    {
+      "case": "swedish-new",
+      "status": "passed",
+      "seconds": 21.703,
+      "total": 104.23,
+      "audit": true,
+      "basket_sha256": "70bac26a9f1de4cab9aff21844fb771c80c77caff9615fb33f3683314a8c4746",
+      "recipes": [
+        [
+          "smako-intake-roesti",
+          "1.0.0",
+          "6e8c5a64-simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2354832,
+      "engine_timings": {
+        "product_facts": 6.969700710847974,
+        "memory_reclamation": 3.8639249997213483,
+        "package_calculation": 1.0611899383366108,
+        "nutrition": 0.017711837776005268,
+        "candidate_generation_and_qualification": 5.278375514782965,
+        "week_search": 0.32104713656008244,
+        "audit": 0.0014648279175162315,
+        "total": 9.569939505308867
+      }
+    },
+    {
+      "case": "greek-new",
+      "status": "passed",
+      "seconds": 21.639,
+      "total": 106.9,
+      "audit": true,
+      "basket_sha256": "f7eb5a2abbf4ce238dfb9b11447c93ce556402b257e07eb61182cc2cef666c2d",
+      "recipes": [
+        [
+          "smako-greek-mushroom-feta-stuffed-potatoes",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2354832,
+      "engine_timings": {
+        "product_facts": 7.0330186150968075,
+        "memory_reclamation": 3.9672838877886534,
+        "package_calculation": 1.078229428268969,
+        "nutrition": 0.02435568906366825,
+        "candidate_generation_and_qualification": 4.9252582006156445,
+        "week_search": 0.4870253847911954,
+        "audit": 0.0016818223521113396,
+        "total": 9.508350593037903
+      }
+    },
+    {
+      "case": "italian-one-new",
+      "status": "passed",
+      "seconds": 26.555,
+      "total": 88.61,
+      "audit": true,
+      "basket_sha256": "0817d0e6d66506ab1ec4ecccf6312e2ef7a304e89f3dff73823b7b8a4a966a44",
+      "recipes": [
+        [
+          "smako-italian-whitebean-tomato-bread-porridge",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "peak_rss_kib": 2354832,
+      "engine_timings": {
+        "product_facts": 8.381970618851483,
+        "memory_reclamation": 3.926740384660661,
+        "package_calculation": 0.8842141954228282,
+        "nutrition": 0.016932878643274307,
+        "candidate_generation_and_qualification": 7.440628866665065,
+        "week_search": 0.3372548157349229,
+        "audit": 0.0014467546716332436,
+        "total": 11.80933741480112
+      }
+    }
+  ],
+  "facts_equivalence": {
+    "kind": "facts_equivalence",
+    "all_fields_equal": true,
+    "fact_count": 54515,
+    "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca"
+  },
+  "recipe_prewarm": {
+    "baseline": {
+      "seconds": 31.94606435112655,
+      "peak_rss_kib": 419636,
+      "historical_materialized": 1,
+      "current_views": {
+        "1": {
+          "count": 2462,
+          "sha256": "f637bf9a0d3170540bf919dd4afe7141954a121d4f13e5da16b57b06370fc762"
+        },
+        "2": {
+          "count": 2462,
+          "sha256": "64d4b57c863b77d1966a93e486b739f747eecb6b7fc030dd5de22a6e7dac28be"
+        },
+        "3": {
+          "count": 2462,
+          "sha256": "ccaf9ecbd7f5719c46ee4e2cdf665119165d56c6278d416fdda9f23b4aa5f28b"
+        },
+        "4": {
+          "count": 2462,
+          "sha256": "c60847d2e93518cc101e72e35c2095169ebf625ee2bc75365c159bfdfa9bb74a"
+        }
+      },
+      "historical_validation_after_warmup": true
+    },
+    "candidate": {
+      "seconds": 17.202701178379357,
+      "peak_rss_kib": 350640,
+      "historical_materialized": 0,
+      "current_views": {
+        "1": {
+          "count": 2462,
+          "sha256": "f637bf9a0d3170540bf919dd4afe7141954a121d4f13e5da16b57b06370fc762"
+        },
+        "2": {
+          "count": 2462,
+          "sha256": "64d4b57c863b77d1966a93e486b739f747eecb6b7fc030dd5de22a6e7dac28be"
+        },
+        "3": {
+          "count": 2462,
+          "sha256": "ccaf9ecbd7f5719c46ee4e2cdf665119165d56c6278d416fdda9f23b4aa5f28b"
+        },
+        "4": {
+          "count": 2462,
+          "sha256": "c60847d2e93518cc101e72e35c2095169ebf625ee2bc75365c159bfdfa9bb74a"
+        }
+      },
+      "historical_validation_after_warmup": true
+    }
+  },
+  "separate_price_restore_seconds": {
+    "baseline": 92.19893845077604,
+    "candidate": 91.86014251690358
+  },
+  "runtime_files": {
+    "backend/app/services/axfood_product_details.py": {
+      "before": "9750b53e63ddec6f7b1002fa1ba2dd7214265519397bda9d13595efbb2db3486",
+      "after": "e83db9d8063e2f0abf631f68a83473fabfcc7c3fc40c050fd40388711bb8906f"
+    },
+    "backend/app/services/source_facts_prewarm.py": {
+      "before": "5568d8ec63afacf5914437adc669c1978b93cc1b699f72d0b7b5fad61844afff",
+      "after": "c71810f73dd59d8a28c1da95189fb8a3aa2399e9f3785775526edc618023a468"
+    }
+  },
+  "measurement_inputs": {
+    "source_commit": "327fa573eb3f92d604cbf2d15a62b458837d8876",
+    "module_ast_sha256": {
+      "backend/app/services/axfood_product_details.py": "c687538fad7d2703492b2db24a5b7f3580d16c86816937bc19a1a6a91c28c336",
+      "backend/app/services/source_facts_prewarm.py": "03b839724487158a721e0a0fb6ccb51ffb50f0bdda2586f889f701995ee57eeb"
+    },
+    "measurement_inputs": {
+      "probe.py": "7186df97372cfdca1b611bda5447a511a1061221e5855325277b677398647a67",
+      "run_probe.py": "6fae787b6c60907d53c2ae913a0a981339e4d3f98d8efc15d3e87819289d0b8a",
+      "request.json": "e85fc4a492a0cde1154adfb0be3282404aa506c1cbe850595ad08ca8cda4adf5",
+      "planning-env.json": "aa40f2f59c07c2765d809f4e034690f89188b3e825feec96e43cd1fb950ac9b4",
+      "runtime.json": "f80b41d9da2648ba6809abeb087641fe5b576c5c8272dda404ecfa5d0538f414"
+    }
+  },
+  "tests": {
+    "focused_passed": 131,
+    "focused_skipped": 1,
+    "ruff": "passed",
+    "compileall": "passed",
+    "pr_ci_run": 41242633350,
+    "tests": 4480,
+    "passed": 4417,
+    "skipped": 63,
+    "failures": 0,
+    "errors": 0
+  },
+  "limits": [
+    "One sample per case/version; not p95, concurrency or the full choice catalogue.",
+    "Isolated plan timings include construction, audit, save and exact owned GET; exclude separate price restore, HTTP/admission and UI.",
+    "Recipe warm-up is a separate cold process/cache measurement, not full application startup. Historical work is deferred to older-plan validation.",
+    "An initial harness failed on frozen RecipePreferences before planning and is excluded.",
+    "Memory collector safeguards remain unchanged; isolated planning peak RSS is essentially unchanged."
+  ]
+}

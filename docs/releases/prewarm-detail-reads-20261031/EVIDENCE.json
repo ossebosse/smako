@@ -1,0 +1,228 @@
+{
+  "schema": "smako-prewarm-detail-reads-activation-v1",
+  "pull_request": "https://github.com/ossebosse/smako/pull/57",
+  "main_merge": "3eb21dc7feafcb071648d2ddfd9b0043a460f73b",
+  "verified_source_tree": "d3983c0adb35b5839ddebcd8d03e3a74efbe4fd7",
+  "pr_ci": {
+    "conclusion": "success",
+    "headSha": "327fa573eb3f92d604cbf2d15a62b458837d8876",
+    "status": "completed",
+    "url": "https://github.com/ossebosse/smako/actions/runs/41242633350",
+    "totals": {
+      "tests": 4480,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 63
+    }
+  },
+  "main_ci": {
+    "conclusion": "success",
+    "headSha": "3eb21dc7feafcb071648d2ddfd9b0043a460f73b",
+    "status": "completed",
+    "url": "https://github.com/ossebosse/smako/actions/runs/41243602156",
+    "totals": {
+      "tests": 4480,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 63
+    }
+  },
+  "candidate": {
+    "image": "sha256:0c0f1720e9dd38555980ac1fc0e4c0f9402c242379570fa08fe69c5f87be73a6",
+    "base_image": "sha256:50ae810d8f4b4d71ea98c8c5150ca1531deff13d4d6fe9a6dcc0f09a6676bed5",
+    "build_id": "app-327fa573eb3f-0541cf49",
+    "tag": "smako-app:app-327fa573eb3f-0541cf49",
+    "commit": "327fa573eb3f92d604cbf2d15a62b458837d8876",
+    "files": {
+      "backend/app/services/axfood_product_details.py": {
+        "before": "9750b53e63ddec6f7b1002fa1ba2dd7214265519397bda9d13595efbb2db3486",
+        "after": "e83db9d8063e2f0abf631f68a83473fabfcc7c3fc40c050fd40388711bb8906f"
+      },
+      "backend/app/services/source_facts_prewarm.py": {
+        "before": "5568d8ec63afacf5914437adc669c1978b93cc1b699f72d0b7b5fad61844afff",
+        "after": "c71810f73dd59d8a28c1da95189fb8a3aa2399e9f3785775526edc618023a468"
+      }
+    },
+    "package_sha256": "0541cf49e1612521b8ff72c515a2dc817b1c0ebc7811d614926d65e19ea28094",
+    "only_reviewed_files_changed": true,
+    "unchanged_runtime_files": 1009,
+    "flattened_runtime_configuration_verified": true
+  },
+  "candidate_functional_checks": {
+    "status": "passed",
+    "fixture": "comparability-products-20261010",
+    "checkout_total": 59.9,
+    "checkout_audit": true,
+    "generic_classification": true,
+    "unrelated_generic_rejected": true,
+    "missing_link_rejected": true,
+    "saved_rows_reopened": true,
+    "legacy_json_preserved": true,
+    "http_routes_and_api": true,
+    "network": "none",
+    "production_mounts": false,
+    "image": "sha256:0c0f1720e9dd38555980ac1fc0e4c0f9402c242379570fa08fe69c5f87be73a6"
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-31T21:41:47.238688+00:00",
+    "runtimes": {
+      "app": {
+        "image": "sha256:0c0f1720e9dd38555980ac1fc0e4c0f9402c242379570fa08fe69c5f87be73a6",
+        "base_image": "sha256:50ae810d8f4b4d71ea98c8c5150ca1531deff13d4d6fe9a6dcc0f09a6676bed5",
+        "build_id": "app-327fa573eb3f-0541cf49"
+      }
+    },
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 328,
+      "personal_private_state": 141,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    },
+    "price_manifests_preserved": true,
+    "mounts_preserved": true,
+    "only_environment_change": "BUILD_ID",
+    "cpu_quiet_samples": [
+      0.02,
+      0.04
+    ],
+    "backup": "/srv/smako/backups/20261031T213203Z",
+    "operation_lock": true
+  },
+  "readiness": {
+    "22350": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-327fa573eb3f-0541cf49",
+      "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+    },
+    "21120": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-327fa573eb3f-0541cf49",
+      "price_universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02"
+    }
+  },
+  "public_probe": {
+    "status": "passed",
+    "started_at": "2026-10-31T21:43:08.486771+00:00",
+    "expected_build_id": "app-327fa573eb3f-0541cf49",
+    "scope": "New guest, one Italian dinner for two plus milk, max one store, 3 km; actual plan information colors in all themes and saved checkout",
+    "attempts": [
+      {
+        "attempt": 1,
+        "seconds": 53.5,
+        "status": "rendered",
+        "request_sha256": "8c8912fc957ce8999ef3b4c9217b73254ae9ec1b9f83e5d953526a7e8015b4cc"
+      }
+    ],
+    "stages": [
+      {
+        "seconds": 4.766,
+        "body": {
+          "status": "pending",
+          "stage": "product_facts",
+          "progress": null
+        }
+      },
+      {
+        "seconds": 41.532,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 0,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      },
+      {
+        "seconds": 45.828,
+        "body": {
+          "status": "pending",
+          "stage": "candidate_qualification",
+          "progress": {
+            "completed": 175,
+            "total": 339,
+            "unit": "recipes"
+          }
+        }
+      },
+      {
+        "seconds": 49.11,
+        "body": {
+          "status": "pending",
+          "stage": "week_search",
+          "progress": null
+        }
+      }
+    ],
+    "checkout_audit": true,
+    "total": 110.55,
+    "verification_status": "VERIFIED",
+    "identical_saved_reload": true,
+    "public_attempts": 1,
+    "contrast": [
+      {
+        "layout": "bild",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      },
+      {
+        "layout": "kompakt",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      },
+      {
+        "layout": "oversikt",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      },
+      {
+        "layout": "desktop",
+        "paragraph_colors": [
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)",
+          "rgb(105, 79, 22)"
+        ]
+      }
+    ],
+    "errors": [],
+    "latency_target_seconds": 60,
+    "latency_target_met": true,
+    "finished_at": "2026-10-31T21:44:15.540524+00:00"
+  },
+  "storage": {
+    "before": {
+      "free_bytes": 44322324480,
+      "required_estimate_bytes": 15208519608,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "after": {
+      "free_bytes": 44669681664,
+      "required_estimate_bytes": 15202108888,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "maintenance_status": "complete"
+  },
+  "scope_limit": "One sample per isolated case/version and one public guest probe; not p95, concurrency or all choice combinations."
+}
