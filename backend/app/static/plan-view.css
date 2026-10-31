@@ -7,7 +7,7 @@
 #plan-content .plan-hero {margin:8px 0 0;padding:22px;border:1px solid var(--sm-border);border-radius:20px;background:#fff;}
 #plan-content .plan-hero h1 {margin:0 0 6px;font:700 12px/1.2 system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--sm-muted);}
 #plan-content .plan-hero .personal-total {margin:2px 0 4px;font:800 42px/1.05 system-ui,sans-serif;letter-spacing:-.02em;}
-#plan-content .plan-hero p {margin:4px 0;font-size:14px;color:var(--sm-muted);}
+#plan-content .plan-hero > p:not(.data-note) {margin:4px 0;font-size:14px;color:var(--sm-muted);}
 #plan-content .plan-hero .plan-hero-sub {font-size:15px;font-weight:650;color:var(--sm-ink);}
 .plan-hero-stores {display:grid;gap:6px;margin:14px 0;padding:0;list-style:none;}
 .plan-hero-stores li {display:flex;justify-content:space-between;gap:12px;padding:10px 14px;border-radius:12px;background:var(--sm-tint);font-size:15px;}
@@ -122,7 +122,7 @@
 
   /* ---------- Översikt: rounded cards, a green summary card ---------- */
   [data-ui=oversikt] #plan-content .plan-hero {border:0;background:var(--sm-primary);color:#fff;box-shadow:0 10px 26px #143f3533;}
-  [data-ui=oversikt] #plan-content .plan-hero :is(h1,p,.plan-hero-sub) {color:#ffffffd9;}
+  [data-ui=oversikt] #plan-content .plan-hero > :is(h1,p:not(.data-note),.plan-hero-sub) {color:#ffffffd9;}
   [data-ui=oversikt] #plan-content .plan-hero .personal-total {color:#fff;}
   [data-ui=oversikt] .plan-hero-stores li {background:#ffffff1f;color:#fff;}
   [data-ui=oversikt].personal-app .plan-hero-actions .primary-button {background:#fff;border-color:#fff;color:var(--sm-primary);}
