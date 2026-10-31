@@ -1,11 +1,15 @@
 # Gemensam driftstatus och avgränsad reparation
 
-Senaste appaktivering: [förloppspanel, planvy och inköpslista](releases/plan-shopping-ui-20261031/ACTIVATED.md).
+Senaste appaktivering: [läsbar planinformation](releases/plan-notice-contrast-20261031/ACTIVATED.md).
+App `app-2d2181aabfb4-a98bfc56`; scheduler source-ops-8a53beb80e43.
+Tre statiska filer; Lund/Malmö ready, användarrader och prismanifest bevarade.
+Ny verifierad backup, retention complete. Den tidigare kapacitetsvarningen är borta vid efterkontrollen.
+
+Föregående appaktivering: [förloppspanel, planvy och inköpslista](releases/plan-shopping-ui-20261031/ACTIVATED.md).
 App `app-56caf4ab5f6e-d90dabe8`; scheduler `source-ops-8a53beb80e43`.
 Lund/Malmö ready; användarrader, mountar och prismanifest verifierade.
 Ny verifierad releasebackup; retention complete. Kapacitetsvarningen och
 ordinarie backupens tidigare lagringsfel kvarstår. Backend och scheman består.
-
 
 Föregående appaktivering: [mobilmeny och Översikt, 31 oktober](releases/mobile-overview-20261031/ACTIVATED.md).
 App `app-bbf62d741a99-320a0495`; scheduler `source-ops-8a53beb80e43`.

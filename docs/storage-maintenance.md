@@ -1,5 +1,23 @@
 # Lagring och säker arkivering
 
+## Arkiverad oanvänd appbild och byggcache, 2026-10-31
+
+Vid [kontrasträttningen](releases/plan-notice-contrast-20261031/ACTIVATED.md)
+säkrades den tidigare aktiverade bilden `app-562afbb53344-92f00d23` i en
+åtkomstskyddad operatörskopia på D: under
+`.local/beta-plan-contrast-20261031/protected-archive/app-562afbb53344-image.tar.gz`.
+Alla åtta OCI-blobbar, exakt image-ID och tagg verifierades innan just den
+oanvända bildens serverreferenser togs bort utan force. Ordinarie automatiska
+regler ändrades inte: detta var en separat engångsgranskning av ägarskap,
+tidigare aktivering samt alla container- och effektiva Compose-referenser.
+Enbart oanvänd BuildKit-cache rensades därefter. Journalen redovisar uppmätt
+nettovinst, inte summan av överlappande logiska Dockerstorlekar.
+Aktiva, återställnings- och kandidatbilder samt alla containrar bevarades.
+Privat IMAGE-EXTERNAL-ARCHIVED-markör vid den äldre releasens underlag
+anger lokal kopia och återställningssteg. Ladda tillbaka exporten och verifiera
+image-ID/tagg före användning av historiska overrides. Inga volymer eller
+levande databaser ändrades av städningen.
+
 ## Flyttat avslutat releasearkiv, 2026-10-31
 
 Vid [plan-/listaktiveringen](releases/plan-shopping-ui-20261031/ACTIVATED.md)
@@ -14,7 +32,6 @@ containrar och två aktuella återställningskopior kvar. Ursprungligt inventari
 finns kvar på servern, liksom en privat EXTERNAL-ARCHIVED-markör med återställningsväg.
 Äldre tabeller nedan är historiska; just denna gzip-fil finns nu i operatörskopian.
 Installerad retention, reserv, aktiva databaser och användardata ändrades inte.
-
 
 ## Automatisk retention, 2026-10-20
 

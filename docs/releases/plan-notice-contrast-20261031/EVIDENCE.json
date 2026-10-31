@@ -1,0 +1,424 @@
+{
+  "schema": "smako-plan-notice-contrast-activation-v1",
+  "code_commit": "2d2181aabfb4ce305818d68d80787b57fc2738d1",
+  "main_merge": "8af918289149eddee59dc8e4718ede52ffa248ce",
+  "pull_request": "https://github.com/ossebosse/smako/pull/54",
+  "main_ci": {
+    "attempt": 1,
+    "conclusion": "success",
+    "headSha": "8af918289149eddee59dc8e4718ede52ffa248ce",
+    "status": "completed",
+    "url": "https://github.com/ossebosse/smako/actions/runs/41195297376",
+    "partitions": {
+      "backend-tests-core": {
+        "tests": 3711,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 63
+      },
+      "backend-tests-integration": {
+        "tests": 603,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "backend-tests-planner": {
+        "tests": 149,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "pr_ci": {
+    "run": 41194551706,
+    "conclusion": "success",
+    "partitions": {
+      "backend-tests-core": {
+        "tests": 3711,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 63
+      },
+      "backend-tests-integration": {
+        "tests": 603,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "backend-tests-planner": {
+        "tests": 149,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "local_tests": {
+    "tests": 20,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "offline_contrast": {
+    "status": "passed",
+    "scope": "Synthetic offline UI, both search information and direct price warning; four layouts; computed colors and visual inspection",
+    "cases": [
+      {
+        "layout": "bild",
+        "notes": [
+          {
+            "background": "rgb(255, 242, 214)",
+            "colors": [
+              "rgb(105, 79, 22)"
+            ]
+          },
+          {
+            "background": "rgb(255, 242, 214)",
+            "colors": [
+              "rgb(105, 79, 22)"
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "kompakt",
+        "notes": [
+          {
+            "background": "rgb(255, 242, 214)",
+            "colors": [
+              "rgb(105, 79, 22)"
+            ]
+          },
+          {
+            "background": "rgb(255, 242, 214)",
+            "colors": [
+              "rgb(105, 79, 22)"
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "oversikt",
+        "notes": [
+          {
+            "background": "rgb(255, 242, 214)",
+            "colors": [
+              "rgb(105, 79, 22)"
+            ]
+          },
+          {
+            "background": "rgb(255, 242, 214)",
+            "colors": [
+              "rgb(105, 79, 22)"
+            ]
+          }
+        ]
+      },
+      {
+        "layout": "desktop",
+        "notes": [
+          {
+            "background": "rgb(255, 242, 214)",
+            "colors": [
+              "rgb(105, 79, 22)"
+            ]
+          },
+          {
+            "background": "rgb(255, 242, 214)",
+            "colors": [
+              "rgb(105, 79, 22)"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "candidate": {
+    "image": "sha256:db904d14fd788105c637c48684c336d94fcd56ac945b9edf277b3cfbf037bd5c",
+    "base_image": "sha256:dce7c82f153c78e5aec896416c16a12dbb69d883b5f54ac0174be99ff7b34698",
+    "build_id": "app-2d2181aabfb4-a98bfc56",
+    "tag": "smako-app:app-2d2181aabfb4-a98bfc56",
+    "commit": "2d2181aabfb4ce305818d68d80787b57fc2738d1",
+    "files": {
+      "backend/app/static/personal.html": {
+        "before": "3c529d0c2ed1e7dc8562d5a7e4c230e4786a2cf625a6c46cdfdd5678c27f6950",
+        "after": "4d8bdfd0408016c62254fcf6a18095a4314d6e74276852ff6d0696cd8ffa8c83"
+      },
+      "backend/app/static/plan-view.css": {
+        "before": "a000823dba69cca29f1db286a80b5ccdb2ff3604d07b9a3ec11dfd712c836dde",
+        "after": "5d07786d7556c5a632e6b2259fa3930c69d8cb434b07e7bb262f2ee36eb9a8c6"
+      },
+      "backend/app/static/service-worker.js": {
+        "before": "30a801e09624d08fe0d7fb6fbaf58be5380a88d9de9a73770df3aa62bf3862ad",
+        "after": "31a30eab700a8a07320cf5c08105ed70484e8e94b079e10e35341dd483a6efa8"
+      }
+    },
+    "package_sha256": "a98bfc56cf238d3be09d3f405de8a62eb5428fa752f3f7f6ead2bcb0c60689f0",
+    "only_reviewed_files_changed": true,
+    "unchanged_runtime_files": 1008,
+    "flattened_runtime_configuration_verified": true
+  },
+  "candidate_functional_checks": {
+    "status": "passed",
+    "fixture": "comparability-products-20261010",
+    "checkout_total": 59.9,
+    "checkout_audit": true,
+    "generic_classification": true,
+    "unrelated_generic_rejected": true,
+    "missing_link_rejected": true,
+    "saved_rows_reopened": true,
+    "legacy_json_preserved": true,
+    "http_routes_and_api": true,
+    "network": "none",
+    "production_mounts": false,
+    "image": "sha256:db904d14fd788105c637c48684c336d94fcd56ac945b9edf277b3cfbf037bd5c"
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-10-31T11:23:44.824820+00:00",
+    "runtimes": {
+      "app": {
+        "image": "sha256:db904d14fd788105c637c48684c336d94fcd56ac945b9edf277b3cfbf037bd5c",
+        "base_image": "sha256:dce7c82f153c78e5aec896416c16a12dbb69d883b5f54ac0174be99ff7b34698",
+        "build_id": "app-2d2181aabfb4-a98bfc56"
+      }
+    },
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 323,
+      "personal_private_state": 134,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    },
+    "price_manifests_preserved": true,
+    "mounts_preserved": true,
+    "only_environment_change": "BUILD_ID",
+    "cpu_quiet_samples": [
+      0.03,
+      0.03
+    ],
+    "backup": "/srv/smako/backups/20261031T111141Z",
+    "operation_lock": true
+  },
+  "readiness": {
+    "22350": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-2d2181aabfb4-a98bfc56",
+      "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+    },
+    "21120": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-2d2181aabfb4-a98bfc56",
+      "price_universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02"
+    }
+  },
+  "storage": {
+    "before": {
+      "free_bytes": 2514960384,
+      "required_estimate_bytes": 15204745688,
+      "adequate": false,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "after": {
+      "free_bytes": 32907767808,
+      "required_estimate_bytes": 15200114808,
+      "adequate": true,
+      "basis": "2*(database+WAL+SHM)+2*active_artifact+512MiB; queue growth not guaranteed"
+    },
+    "maintenance_status": "complete",
+    "prerotation": {
+      "kind": "backups",
+      "removed": [
+        "20261030T220550Z"
+      ],
+      "reclaimable_bytes": 8942452885,
+      "protected": [
+        "20261031T103156Z",
+        "20261031T080325Z"
+      ],
+      "unknown": [],
+      "max_count": 2,
+      "max_bytes": 34359738368,
+      "retained_bytes": 18002804336,
+      "retained_count": 2,
+      "minimum_exceeds_budget": false,
+      "applied": true,
+      "operation_lock": true,
+      "setting_scope": "this maintenance process only; installed policy unchanged"
+    },
+    "backups_after": {
+      "applied": true,
+      "kind": "backups",
+      "max_bytes": 34359738368,
+      "max_count": 3,
+      "minimum_exceeds_budget": false,
+      "protected": [
+        "20261031T111141Z",
+        "20261031T103156Z"
+      ],
+      "reclaimable_bytes": 0,
+      "removed": [],
+      "retained_bytes": 27020203457,
+      "retained_count": 3,
+      "unknown": []
+    },
+    "image_archive_and_unused_cache_cleanup": {
+      "status": "archived_external",
+      "image": "sha256:d6b0b3c238edd29df9755c7f157e38149be467fab759783ef73df356f879eaaf",
+      "tag": "smako-app:app-562afbb53344-92f00d23",
+      "archive_sha256": "00a86b454460ea1d199a5736f397021afbfc6b23d055e62e33a7b0296d82662f",
+      "archive_bytes": 601099173,
+      "verified_oci_blobs": 8,
+      "image_digest_preserved": true,
+      "tag_preserved": true,
+      "operation_lock": true,
+      "container_and_effective_compose_references_checked": true,
+      "prior_activation_receipt_verified": true,
+      "at": "2026-10-31T11:09:40.415974+00:00",
+      "free_before": 7562076160,
+      "protected_images": [
+        "sha256:dce7c82f153c78e5aec896416c16a12dbb69d883b5f54ac0174be99ff7b34698",
+        "sha256:cb6bc2f48c7862a38fb6748fcfc6e57658cdc2e69e3ce30791c4b791524b76ce",
+        "sha256:db904d14fd788105c637c48684c336d94fcd56ac945b9edf277b3cfbf037bd5c"
+      ],
+      "retained_current_bundles": [
+        "20261031T080325Z",
+        "20261031T103156Z"
+      ],
+      "restore": "Upload the verified tar.gz from the operator copy; gzip -dc it into docker image load; verify the preserved image digest and tag before using historical overrides.",
+      "free_after": 41906200576,
+      "containers_unchanged": true,
+      "effective_compose_unchanged": true,
+      "protected_images_unchanged": true,
+      "image_removed_without_force": true,
+      "unused_build_cache_only": true,
+      "backup_preflight": {
+        "status": "adequate"
+      },
+      "cache_summary": "Total:\t45.26GB"
+    }
+  },
+  "live_shopping": {
+    "status": "passed",
+    "started_at": "2026-10-31T11:30:44.618538+00:00",
+    "expected_build_id": "app-2d2181aabfb4-a98bfc56",
+    "scope": "Separate public shopping-only probe: one litre milk, no meals, max one store, 3 km; does not replace failed menu attempts",
+    "seconds": 11.687,
+    "checkout_audit": true,
+    "total": 10.95,
+    "verification_status": "VERIFIED",
+    "identical_saved_reload": true,
+    "pick_remembered": true,
+    "saved_basket_unchanged": true,
+    "recipe_count": 0,
+    "extras_count": 1,
+    "errors": [],
+    "finished_at": "2026-10-31T11:31:03.172495+00:00"
+  },
+  "live_menu_probe": {
+    "status": "failed",
+    "started_at": "2026-10-31T11:25:36.368918+00:00",
+    "expected_build_id": "app-2d2181aabfb4-a98bfc56",
+    "scope": "New guest, one Italian dinner for two plus milk, max one store, 3 km; actual plan information colors in all themes and saved checkout",
+    "attempts": [
+      {
+        "attempt": 1,
+        "seconds": 61.875,
+        "status": "SEARCH_INCOMPLETE",
+        "request_sha256": "5b2342dea7c05d407412de96e8d3c6a8f22958fdd2187bc73e9ba9af485e448f",
+        "message": "Sökningen är ofullständig efter tidsgränsen. Ingen slutkontrollerad lista kunde levereras. Dina krav har inte ändrats. Fel-ID: dfe86e97-9feb-46a9-9233-bc2704820ce9"
+      },
+      {
+        "attempt": 2,
+        "seconds": 61.719,
+        "status": "SEARCH_INCOMPLETE",
+        "request_sha256": "5b2342dea7c05d407412de96e8d3c6a8f22958fdd2187bc73e9ba9af485e448f",
+        "message": "Sökningen är ofullständig efter tidsgränsen. Ingen slutkontrollerad lista kunde levereras. Dina krav har inte ändrats. Fel-ID: b545916b-de1d-40bd-b682-c7f41683e87c"
+      }
+    ],
+    "error_type": "AssertionError",
+    "error": "Both identical bounded attempts reached SEARCH_INCOMPLETE",
+    "errors": [],
+    "finished_at": "2026-10-31T11:27:59.227199+00:00"
+  },
+  "live_assets": {
+    "status": "passed",
+    "scope": "Exact public HTML/CSS/service-worker bytes match verified candidate",
+    "files": [
+      {
+        "path": "backend/app/static/personal.html",
+        "http": 200,
+        "sha256": "4d8bdfd0408016c62254fcf6a18095a4314d6e74276852ff6d0696cd8ffa8c83"
+      },
+      {
+        "path": "backend/app/static/plan-view.css",
+        "http": 200,
+        "sha256": "5d07786d7556c5a632e6b2259fa3930c69d8cb434b07e7bb262f2ee36eb9a8c6"
+      },
+      {
+        "path": "backend/app/static/service-worker.js",
+        "http": 200,
+        "sha256": "31a30eab700a8a07320cf5c08105ed70484e8e94b079e10e35341dd483a6efa8"
+      }
+    ]
+  },
+  "menu_incidents": [
+    {
+      "checked_at": "2026-10-31T11:29:23.809402+00:00",
+      "status": "observed",
+      "http_metrics": [
+        {
+          "request_id": "dfe86e97-9feb-46a9-9233-bc2704820ce9",
+          "created_at": "2026-10-31T11:26:56.307469+00:00",
+          "endpoint": "/api/plan-jobs/{job_id}",
+          "method": "GET",
+          "status_code": 422,
+          "error_code": "http_422",
+          "duration_ms": 0.933,
+          "plan_id": null,
+          "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "build_id": "app-2d2181aabfb4-a98bfc56"
+        }
+      ],
+      "exception_evidence": {
+        "status": "observed",
+        "updated_at": "2026-10-21T12:50:40.692034+00:00",
+        "incidents": []
+      }
+    },
+    {
+      "checked_at": "2026-10-31T11:29:26.302952+00:00",
+      "status": "observed",
+      "http_metrics": [
+        {
+          "request_id": "b545916b-de1d-40bd-b682-c7f41683e87c",
+          "created_at": "2026-10-31T11:27:58.141237+00:00",
+          "endpoint": "/api/plan-jobs/{job_id}",
+          "method": "GET",
+          "status_code": 422,
+          "error_code": "http_422",
+          "duration_ms": 1.204,
+          "plan_id": null,
+          "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "build_id": "app-2d2181aabfb4-a98bfc56"
+        }
+      ],
+      "exception_evidence": {
+        "status": "observed",
+        "updated_at": "2026-10-21T12:50:40.692034+00:00",
+        "incidents": []
+      }
+    }
+  ],
+  "periodic_backup_status_after": {
+    "error_type": "InsufficientStorageError",
+    "observed_at": "2026-10-31T07:48:00.246086+00:00",
+    "retry_at": "2026-10-31T08:17:03.406996+00:00",
+    "status": "failed"
+  }
+}

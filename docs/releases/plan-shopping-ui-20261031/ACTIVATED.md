@@ -84,7 +84,7 @@ Ordinarie backupens tidigare InsufficientStorageError ska inte räknas som
 åtgärdat av en verifierad releasebackup.
 
 Livegranskningen visade också låg kontrast i Översikts ljusa informationsruta.
-Den rättas med en separat CSS-release efter denna verifierade aktivering.
+Den är rättad i [uppföljande CSS-release](../plan-notice-contrast-20261031/ACTIVATED.md).
 UI-ändringen ändrar inte beräkningens tidsgränser. Tidigare breda
 SEARCH_INCOMPLETE-resultat är inte omvärderade eller lösta av detta avgränsade
 prov, som heller inte bevisar global optimalitet. Prisåldersvarningar och

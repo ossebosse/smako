@@ -1,3 +1,24 @@
+# 2026-10-31: Planinformationens kontrast rättad och aktiverad
+
+[PR 54](https://github.com/ossebosse/smako/pull/54) är på main
+(`8af918289149`). App `app-2d2181aabfb4-a98bfc56`; scheduler består på
+source-ops-8a53beb80e43. Se [journalen](releases/plan-notice-contrast-20261031/ACTIVATED.md).
+Ljus informationsruta i Översikt behåller nu brun text; direkta prisvarningar
+undantas också från kortets textfärg. Tre statiska filer ändrade, 1008
+övriga runtimefiler oförändrade. Fyra offlinevyer, 20 tester, PR- och main-CI gröna.
+Publika menyprov: försök 1: SEARCH_INCOMPLETE, 61,875 s; försök 2: SEARCH_INCOMPLETE, 61,719 s; ingen slutkontrollerad meny levererades.
+Identisk request användes. Separat varuprov utan måltider gav 11,687 s,
+verifierad checkout, identisk återläsning och bestående bock. Det ersätter inte
+menyproven. Kontrast verifierad syntetiskt; publika HTML/CSS/SW hashexakta.
+Backup 20261031T111141Z, tidigare användarrader,
+mountar och prismanifest verifierade. Två verifierade kopior behölls före
+ny backup, tre efteråt. Retention complete. Den tidigare kapacitetsvarningen är borta vid efterkontrollen. Prisåldersvarningar består.
+En oanvänd äldre appbild säkrades lokalt och hashverifierades före borttagning,
+följt av enbart oanvänd byggcache. Aktiva/rollback-/kandidatbilder och alla
+containrar bevarades. Se journalens återställningsanvisning.
+
+---
+
 # 2026-10-31: Förloppspanel, planvy och inköpslista aktiverade
 
 [PR 53](https://github.com/ossebosse/smako/pull/53) är på main
