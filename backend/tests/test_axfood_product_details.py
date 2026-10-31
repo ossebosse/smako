@@ -123,6 +123,42 @@ def catalogue_fact():
                         retailer_product_id="101548687_ST", organic=False)
 
 
+@pytest.mark.parametrize("has_document", [False, True])
+def test_completed_source_projection_has_a_current_version_without_mutating_catalogue(
+    tmp_path, monkeypatch, has_document
+):
+    from app.services import personal_source_facts as source
+
+    from backend.tests.test_personal_planning_v2 import prepared, product
+    from grocery_data.app.services.axfood_detail_archive import publish_release
+
+    raw = detail()
+    staging = tmp_path / "staging" / "projection"
+    staging.mkdir(parents=True)
+    store(staging, "willys", raw if has_document else detail(code="999_ST"))
+    release = publish_release(tmp_path, "projection")
+    monkeypatch.setenv("AXFOOD_PRODUCT_DETAIL_ROOT", str(release))
+    pool = prepared(product("Fusilli", 500, "g", 20, store="willys", identity="p1", gtin=raw["ean"]))
+    key = ("willys", "p1")
+    catalogue = source.FactsCollection({key: catalogue_fact()})
+    catalogue_version = catalogue.version
+    monkeypatch.setattr(source, "_load_retained_catalog_facts", lambda *a, **kw: catalogue)
+
+    result = source.load_retained_facts(pool)
+    assert isinstance(result, source.FactsCollection)
+    assert result.version == source.facts_version(result)
+    assert result[key].nutrition == (project(raw).nutrition if has_document else {})
+    assert catalogue[key] == catalogue_fact() and catalogue.version == catalogue_version
+
+    if has_document:
+        # A later read still checks actual bytes even with a cached manifest.
+        (release / "willys" / (raw["code"] + ".json")).write_text("{}")
+        rechecked = source.load_retained_facts(pool)
+        assert rechecked[key].nutrition == {}
+        assert rechecked.version == source.facts_version(rechecked) != result.version
+        assert catalogue[key] == catalogue_fact() and catalogue.version == catalogue_version
+
+
 def test_equal_lentil_declarations_do_not_conflict_on_projector_wording(tmp_path):
     # The frozen 2026-10-23 comparison found these equal values blocked solely
     # by the official/Axfood projector labels. This is an identity/unit fixture,
