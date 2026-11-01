@@ -219,6 +219,8 @@ def standardize(source, vocabulary, *, reviewed_at):
                   "waiting_minutes": waiting, "total_minutes": total}
         if row.get("level", "crafted") != "crafted":
             design["dinner_level"] = row["level"]
+        if row.get("servings_multiple") is not None:
+            design["servings_multiple"] = row['servings_multiple']
         if row.get("unmeasured_processes"):
             if any(set(p) != {'step', 'ingredients', 'operation', 'description'}
                    for p in row['unmeasured_processes']):

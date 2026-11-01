@@ -13,8 +13,10 @@ Den senast mottagna ZIP-filen med 24 grundrätter / 62 varianter har 37
 importerade varianter och 25 kvar i kön. Ett godkänt syskon gör inte hela
 familjen godkänd.
 
-Originalfilerna är bytebevarade. Alla nya receptversioner heter 1.0.1 och
-är **inte provlagade**. Tider och nya kulinariska doser är granskade
+Originalfilerna är bytebevarade. Först utfärdades 157 versioner 1.0.1;
+50 fick därefter granskade efterföljare 1.0.2 för portionsinstruktioner,
+satsstorlek eller fiskmetadata. De 50 ersatta versionerna är återkallade
+men bytebevarade. Samtliga recept är **inte provlagade**. Tider och nya kulinariska doser är granskade
 författaruppskattningar. De 3 625 tidigare utgivna versionerna, samtliga
 2 570 tidigare aktuella varianter och de 2 200 ursprungsreferenserna bevaras.
 Ingen betaaktivering, insamling eller ändring av användarprofiler ingår.
@@ -82,6 +84,18 @@ Detta är kategorisering för användarval, ingen produktidentitetsalias.
 Äldre innehållshashar skrivs inte om. Framtida författande använder samma
 fisknamn när metadata skapas.
 
+En separat portionsgranskning rättar fasta livsmedelsmängder i text,
+konservantal och processvatten som tidigare skrevs exempelvis ”85 ml hett
+vatten” eller ”300 ml kokvatten”. Ingrediensmängder, enheter, former och
+produktkrav är identiska i de 50 efterföljarna. Processvattnet skalas nu
+uttryckligt; temperaturer och mått ändras inte. Murgh musallam och fläsklägg
+har sex varianter med `servings_multiple=4`: endast 4, 8 eller 12 portioner,
+med flera hela stycken vid större satser. Övriga portionsval finns kvar men
+väljer andra recept. [Granskningen](portion-corrections.json) och
+[det nya korgprovet](qualification-portion-corrections.json) binder samtliga
+50 efterföljare; 50/50 passerar uppskattat inköp och 19/50 exakt inköp.
+Totalen ovan räknar varje aktuell variant en gång.
+
 Exporten till nästa receptförfrågan tar nu med separat granskade
 enhetsalternativ och processförluster. Den nya gramfilen för filmjölk tappas
 alltså inte bort när ml fortfarande är standardenheten. En riktad kontroll
@@ -113,8 +127,11 @@ importerna gjordes successivt och har inte samma manifest. Det här är
 enskilda fullständiga korgprov, **ingen ny mätning av varm menyplaneringstid**.
 
 [Sammanställningen](summary.json) och [manifestövergången](library-transition.json)
-är maskinläsbara. Övergången tillåter bara nya disjunkta, hashbundna paket.
-Gammalt innehåll, återkallelser och referens-ID:n får inte ändras. Ingen
+är maskinläsbara. Övergången tillåter nya disjunkta, hashbundna paket och
+uttryckliga återkallelser av just de 50 nyutgivna föregångarna, bundna till
+efterföljare av samma bas/variant. Inga versioner som fanns före denna
+omgång får återkallas eller ändras. Tidigare återkallelser och referens-ID:n
+bevaras. Ingen
 täckningsbaslinje regenereras för att göra testresultat gröna.
 
 Den samlade riktade verifieringen gav **679 godkända tester** i två körningar:

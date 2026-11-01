@@ -112,7 +112,7 @@ def test_author_registers_each_amount_once_with_decimals():
 def test_issued_water_steps_scale_as_before():
     """Every issued water step keeps its exact text at all five serving counts."""
     from app.services.meal_library_content import manifest_entries
-    from app.services.recipe_library import _scaled, current_recipes
+    from app.services.recipe_library import _scaled, current_recipes, supports_servings
 
     checked_steps = 0
     for recipe in current_recipes(len(manifest_entries()["current"])):
@@ -122,6 +122,10 @@ def test_issued_water_steps_scale_as_before():
             continue
         checked_steps += len(steps)
         for servings in (1, 2, 4, 8, 12):
+            if not supports_servings(recipe, servings):
+                with pytest.raises(ValueError, match='satser'):
+                    _scaled(recipe, servings)
+                continue
             scaled = _scaled(recipe, servings)
             for index, step in steps:
                 text = scaled.design.steps[index].text

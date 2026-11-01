@@ -5,7 +5,14 @@ import json
 from pathlib import Path
 
 import pytest
-from app.services.meal_library_content import ROOT, encoded, identity, validate_pack_bytes
+from app.services.meal_library_content import (
+    ROOT,
+    encoded,
+    identity,
+    load_entries,
+    manifest_entries,
+    validate_pack_bytes,
+)
 from app.services.recipe_library import current_recipes
 
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
@@ -25,7 +32,8 @@ def sha(raw):
 def test_each_issued_stage_matches_reviewed_source_changes_and_complete_basket_proof(scripts):
     from admit_expansion_round2_20261101 import amount_changes
 
-    active = {identity(r): r for r in current_recipes()}
+    manifest = manifest_entries()
+    issued = {identity(r): r for r in load_entries(manifest['current'] + manifest['history'])}
     accepted = set()
     for stage in range(1, 23):
         authors = json.loads((AUTHORED / f'authoring-stage{stage}.json').read_bytes())['recipes']
@@ -51,7 +59,7 @@ def test_each_issued_stage_matches_reviewed_source_changes_and_complete_basket_p
             assert record['source_id'] not in accepted
             accepted.add(record['source_id'])
             ids.add(record['runtime_id'])
-            recipe = active[record['runtime_id']]
+            recipe = issued[record['runtime_id']]
             assert recipe.design.content_sha256 == record['content_sha256']
             assert recipe.design.provenance.cooking_test == record['cooking_test'] == 'not_cooked'
         baskets = proof['modes']['estimated']['recipes']
@@ -73,8 +81,12 @@ def test_every_received_identity_has_one_final_decision_and_old_imports_are_reta
     assert summary['current_variants'] == 2727 and summary['current_bases'] == 1041
     assert summary['preserved_issued_variants'] == 3625
     assert summary['original_reference_ids'] == 2200
+    assert summary['corrected_new_versions'] == 50 and summary['batch_limited_variants'] == 6
     assert not summary['beta_activation'] and summary['cooking_test'] == 'not_cooked'
+    active = {identity(r): r for r in current_recipes()}
     for row in rows:
+        if row['status'] == 'imported_reviewed_version':
+            assert active[row['runtime_id']].design.content_sha256 == row['content_sha256']
         if row['status'] == 'pending_qualified_input':
             assert row['input_blocks'] and all(b['code'] == 'DATA_BLOCKED' for b in row['input_blocks'])
         if row['status'] == 'pending_register_or_authoring':
@@ -122,6 +134,24 @@ def test_second_additive_transition_preserves_old_content_and_original_compariso
     mutated['after_manifest']['current'].pop(0)
     with pytest.raises(ValueError, match='unreviewed additive manifest'):
         checked_additive_transition(mutated)
+    for change in ('baseline', 'hash', 'successor', 'duplicate', 'unexplained'):
+        mutated = copy.deepcopy(review)
+        row = mutated['superseded_new_versions'][0]
+        if change == 'baseline':
+            old_id = ids[0]
+            mutated['new_revocations'][old_id] = 'Unauthorized baseline revocation'
+            mutated['after_manifest']['revocations'][old_id] = 'Unauthorized baseline revocation'
+        elif change == 'hash':
+            row['previous_content_sha256'] = 'changed'
+        elif change == 'successor':
+            row['runtime_id'] = ids[0]
+        elif change == 'duplicate':
+            mutated['superseded_new_versions'].append(copy.deepcopy(row))
+        else:
+            mutated['superseded_new_versions'].pop()
+        mutated['after_manifest_file_sha256'] = sha(encoded(mutated['after_manifest']))
+        with pytest.raises(ValueError, match='unreviewed new-version revocations'):
+            checked_additive_transition(mutated)
 
 
 def test_unqualified_stage_cannot_be_finalized(scripts, tmp_path, monkeypatch):

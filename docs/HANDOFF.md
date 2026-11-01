@@ -36,6 +36,13 @@ vid äldre förseglade metadata. Fiskavstängning och menyfördelning är testad
 skaldjur fyller fortfarande inte en fiskkvot. Författarexporten innehåller
 `unit_options` och okända processförluster för nästa leveransunderlag.
 
+Portionsgranskningen gav 50 efterföljare 1.0.2 med oförändrade livsmedels-
+mängder. Processvatten och fasta konserv-/vikthänvisningar är rättade;
+sex varianter med hel kyckling/fläsklägg kräver satser om fyra portioner.
+Alla 50 har nya godkända slutliga korgprov (19 även exakt). De 50 nyutgivna
+föregångarna är återkallade, bytebevarade och spårade i manifestövergången;
+inga versioner från före denna arbetsomgång berörs.
+
 ---
 
 # 2026-11-01: Första hinderomgången (historisk, före senaste 24/62-leveransen)

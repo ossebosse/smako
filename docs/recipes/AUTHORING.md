@@ -38,6 +38,11 @@ näringsuppskattning eller en tidigare cachepost som bevis för dessa gränser.
 Produkt-, kost-, allergen-, butiks- och priskontroller gäller som vanligt.
 En fullständigt kontrollerad varukorg utan näringsgränser är därför inte ett
 bevis för näringsvärden. Mätningar kräver ett framtida separat granskat underlag.
+`servings_multiple` kan ange ett granskat helt portionssteg, exempelvis 4
+för en fylld hel kyckling som bara godkänns för 4, 8 eller 12 portioner.
+Användaren får fortfarande välja andra portionsantal; då väljs andra recept.
+Detta avrundar inte inköp eller tillåter automatiskt rester från en större sats.
+
 Gamla receptversioner omtolkas inte: ändrad process kräver ny innehållsgranskad
 version med eget innehållshash. Funktionen ersätter inte provlagning.
 

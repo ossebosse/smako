@@ -112,6 +112,7 @@ class RecipeDesign(BaseModel):
                                      exclude_if=lambda v: v is None)
     unmeasured_processes: tuple[RecipeUnmeasuredProcess, ...] | None = Field(
         default=None, min_length=1, exclude_if=lambda v: v is None)
+    servings_multiple: int | None = Field(default=None, ge=1, le=12, exclude_if=lambda v: v is None)
 
 
 class RecipePreparation(BaseModel):

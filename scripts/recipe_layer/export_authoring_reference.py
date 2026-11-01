@@ -54,6 +54,7 @@ def export(output: Path) -> dict:
             "instructions": recipe.instructions,
             "preparation_version": recipe.preparation.version if recipe.preparation else None,
             "unmeasured_processes": [p.model_dump(mode="json") for p in d.unmeasured_processes or ()],
+            "servings_multiple": d.servings_multiple,
             "active_minutes": d.active_minutes,
             "waiting_minutes": d.waiting_minutes,
             "total_minutes": d.total_minutes or d.estimated_minutes,

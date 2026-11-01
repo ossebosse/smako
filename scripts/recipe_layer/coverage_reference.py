@@ -25,11 +25,15 @@ ROUND2_REVIEW = Path('docs/reviews/recipe-unblock-round2-20261101/library-transi
 
 
 def checked_additive_transition(review):
-    """Verify that the reviewed edge only appends disjoint, hash-bound recipes."""
+    """Append disjoint recipes; reviewed successors may retire only new versions."""
     from app.services.meal_library_content import encoded, identity, load_entries
 
     before, after = review['before_manifest'], review['after_manifest']
     expected = {**before, 'current': before['current'] + review['added_entries']}
+    revoked = review.get('new_revocations', {})
+    corrections = review.get('superseded_new_versions', [])
+    if revoked:
+        expected['revocations'] = {**before.get('revocations', {}), **revoked}
     if (after != expected or review['corrected']
             or hashlib.sha256(encoded(before)).hexdigest() != review['before_manifest_file_sha256']
             or hashlib.sha256(encoded(after)).hexdigest() != review['after_manifest_file_sha256']):
@@ -39,6 +43,22 @@ def checked_additive_transition(review):
     declared = {r['runtime_id']: r['content_sha256'] for r in review['added']}
     if not added or old.intersection(added) or added != declared or len(declared) != len(review['added']):
         raise ValueError('Changed coverage comparison scope: unreviewed additive recipes')
+    correction_ids = [r['previous_id'] for r in corrections]
+    successors = [r['runtime_id'] for r in corrections]
+    if (set(revoked) != set(correction_ids) or len(set(correction_ids)) != len(correction_ids)
+            or len(set(successors)) != len(successors) or set(revoked).intersection(old)
+            or set(successors).intersection(revoked)):
+        raise ValueError('Changed coverage comparison scope: unreviewed new-version revocations')
+    for row in corrections:
+        previous_id, successor_id = row['previous_id'], row['runtime_id']
+        previous_parts, successor_parts = previous_id.split(':'), successor_id.split(':')
+        if (not revoked[previous_id] or previous_id not in added or successor_id not in added
+                or added[previous_id] != row['previous_content_sha256']
+                or added[successor_id] != row['content_sha256']
+                or len(previous_parts) != 3 or len(successor_parts) != 3
+                or previous_parts[::2] != successor_parts[::2]
+                or tuple(map(int, successor_parts[1].split('.'))) <= tuple(map(int, previous_parts[1].split('.')))):
+            raise ValueError('Changed coverage comparison scope: unreviewed new-version revocations')
     return review
 
 

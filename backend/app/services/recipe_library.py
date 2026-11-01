@@ -54,6 +54,8 @@ def _structural_check(recipe: Recipe) -> None:
     d = recipe.design
     if d is None:
         raise ValueError("Receptet saknar versionsbundet innehåll.")
+    if not supports_servings(recipe, recipe.servings):
+        raise ValueError("Receptet kräver ett helt antal godkända satser.")
     keys = {ingredient_key(i) for i in recipe.ingredients}
     if len(keys) != len(recipe.ingredients):
         raise ValueError("Samla samma ingrediens och form innan antal och köp beräknas.")
@@ -219,7 +221,14 @@ def _scale_amount_tokens(text, amounts, factor):
     return pattern.sub(lambda m: scaled[m.group(0)], text)
 
 
+def supports_servings(recipe: Recipe, servings: int) -> bool:
+    multiple = recipe.design.servings_multiple if recipe.design else None
+    return multiple is None or servings % multiple == 0
+
+
 def _scaled(recipe: Recipe, servings: int) -> Recipe:
+    if not supports_servings(recipe, servings):
+        raise ValueError(f"Receptet tillagas i satser om {recipe.design.servings_multiple} portioner.")
     if servings == recipe.servings:
         # Native four-/one-portion authoring is already complete. Do not add
         # the old two-portion scaling allowance to an unchanged recipe.
@@ -318,7 +327,7 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
 def _registered_portions(servings: int) -> tuple[Recipe, ...]:
     if not 1 <= servings <= 12:
         raise ValueError("Antal portioner måste vara mellan 1 och 12.")
-    return tuple(_scaled(r, servings) for r in _registered())
+    return tuple(_scaled(r, servings) for r in _registered() if supports_servings(r, servings))
 
 
 @lru_cache(maxsize=12)
@@ -330,9 +339,12 @@ def _registered_historical_portions(servings: int) -> tuple[Recipe, ...]:
     # Serializing the entire scaled library into a disk payload retained a second
     # model tree and large temporary dictionaries while building the issued index.
     current = {id(source): (source, scaled) for source, scaled in
-               zip(_registered(), _registered_portions(servings), strict=True)}
+               zip((r for r in _registered() if supports_servings(r, servings)),
+                   _registered_portions(servings), strict=True)}
     result = []
     for source in _registered_history():
+        if not supports_servings(source, servings):
+            continue
         existing = current.get(id(source))
         recipe = existing[1] if existing is not None and existing[0] is source else _scaled(source, servings)
         _structural_check(recipe)
@@ -496,7 +508,7 @@ def meal_candidates(meal, preferences, *, include_supplement=True, generation=No
     # Filter unscaled metadata by meal type first. Irrelevant categories never
     # trigger quantity scaling, product matching or basket construction.
     for recipe in (_registered() if generation is None else current_recipes(generation)):
-        if meal.meal_type not in recipe.design.meal_types:
+        if meal.meal_type not in recipe.design.meal_types or not supports_servings(recipe, meal.servings):
             continue
         if not include_supplement and recipe.design.content_source is not None:
             continue
