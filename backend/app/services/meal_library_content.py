@@ -171,6 +171,12 @@ def validate_pack_bytes(source, *, label="content pack"):
                     "safety_sources":[],
                     "storage_note":"Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
                 }
+            if data["design"].get("unmeasured_processes"):
+                data["design"]["content_source"]["method_note"] = (
+                    "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. "
+                    "Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; "
+                    "receptet kan inte styrka valda närings- eller viktgränser. "
+                    "Inköp och personliga kostkrav kontrolleras för samtliga insatser.")
             data.pop("preparation", None)
             recipe = Recipe.model_validate(data)
             d = recipe.design
@@ -195,7 +201,7 @@ def validate_pack_bytes(source, *, label="content pack"):
                 raise ValueError(f"{ref}.design.method: rå animalisk ingrediens kräver varm metod")
             sha = content_hash(recipe)
             recipe = recipe.model_copy(update={"design": d.model_copy(update={"content_sha256": sha}),
-                "preparation": RecipePreparation(version="smako-authored-input-v2",
+                "preparation": RecipePreparation(version=("smako-authored-losses-v3" if d.unmeasured_processes else "smako-authored-input-v2"),
                     origin="smako_recipe_design", parent_sha256=sha, family=d.family,
                     input_forms={i.canonical_name:i.form for i in recipe.ingredients})})
             _structural_check(recipe)

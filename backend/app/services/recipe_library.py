@@ -104,11 +104,21 @@ def _structural_check(recipe: Recipe) -> None:
         raise ValueError("Beroendena ryms inte inom den uppskattade tillagningstiden.")
     if recipe.instructions != [s.text for s in d.steps]:
         raise ValueError("Visade instruktioner skiljer sig från den granskade tillagningsplanen.")
+    step_keys = {s.id: set(s.ingredient_keys) for s in d.steps}
+    process_pairs = set()
+    for process in d.unmeasured_processes or ():
+        pair = (process.step_id, process.operation)
+        if (pair in process_pairs or not process.ingredient_keys
+                or len(set(process.ingredient_keys)) != len(process.ingredient_keys)
+                or not set(process.ingredient_keys) <= step_keys.get(process.step_id, set())):
+            raise ValueError("Okänd processförlust måste vara entydigt bunden till stegets verkliga ingredienser.")
+        process_pairs.add(pair)
     if content_hash(recipe) != d.content_sha256:
         raise ValueError("Receptets innehåll har ändrats utan ny granskad version.")
     p = recipe.preparation
     if (p is None or p.parent_sha256 != d.content_sha256 or p.family != d.family
-            or p.input_forms != {i.canonical_name: i.form for i in recipe.ingredients}):
+            or p.input_forms != {i.canonical_name: i.form for i in recipe.ingredients}
+            or ((p.version == "smako-authored-losses-v3") != bool(d.unmeasured_processes))):
         raise ValueError("Beredningsmetoden är inte bunden till receptets exakta innehåll.")
 
 

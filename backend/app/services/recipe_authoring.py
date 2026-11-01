@@ -217,6 +217,15 @@ def standardize(source, vocabulary, *, reviewed_at):
                   "waiting_minutes": waiting, "total_minutes": total}
         if row.get("level", "crafted") != "crafted":
             design["dinner_level"] = row["level"]
+        if row.get("unmeasured_processes"):
+            if any(set(p) != {'step', 'ingredients', 'operation', 'description'}
+                   for p in row['unmeasured_processes']):
+                raise ValueError(f"{where}: okända fält i processförlust; inga förlustfaktorer stöds")
+            design["unmeasured_processes"] = [{
+                "step_id": f"s{process['step']}",
+                "ingredient_keys": [names.get(canonicalize_ingredient_name(n), n) for n in process['ingredients']],
+                "operation": process['operation'], "description": process['description'],
+            } for process in row['unmeasured_processes']]
         recipe = {"name": row["name"], "servings": row["servings"], "ingredients": ingredients,
                   "instructions": [s["text"] for s in steps], "design": design}
         recipe["design"]["ingredient_count"] = ingredient_count(Recipe.model_validate(recipe))

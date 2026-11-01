@@ -21,6 +21,24 @@ Per recept: `base_id`, `name`, `servings`, `meal_type` (dinner/breakfast/snack),
   ska avvika från bibliotekets standard för samma `namn|form`.
 - `steps`: `text`, `uses` (ingrediensnamn), `minutes`, valfritt `after`
   (stegnummer från 1) och `passive: true` för väntetid (ugn, sjudning, jäsning).
+- Valfritt `unmeasured_processes`: granskad avrinning eller borttagning där
+  slutligt utbyte saknas. Varje post har exakt `step` (stegnummer från 1),
+  `ingredients` (namn som används i det steget), `operation` och `description`.
+  Tillåtna operationer är `drain_after_cooking`, `remove_after_infusion`,
+  `deep_fry_and_drain`, `strain_whey` och `peel_after_cooking`.
+  Ingen absorptionsprocent, densitet eller annan förlustfaktor accepteras.
+
+Ett sådant recept får det separata beredningskontraktet
+`smako-authored-losses-v3`. Hela råvaruinsatsen måste kunna köpas, inklusive
+frityrolja eller mjölk vars vassle senare silas bort. Näring och färdig
+portionsvikt visas som **okända**. Receptet stoppas om användaren har valt
+närings- eller portionsviktsgränser; det får inte använda en insatsbaserad
+näringsuppskattning eller en tidigare cachepost som bevis för dessa gränser.
+Produkt-, kost-, allergen-, butiks- och priskontroller gäller som vanligt.
+En fullständigt kontrollerad varukorg utan näringsgränser är därför inte ett
+bevis för näringsvärden. Mätningar kräver ett framtida separat granskat underlag.
+Gamla receptversioner omtolkas inte: ändrad process kräver ny innehållsgranskad
+version med eget innehållshash. Funktionen ersätter inte provlagning.
 
 ## Det verktyget standardiserar
 

@@ -1,7 +1,9 @@
 """Measured edible input method for explicitly designed recipes.
 
-This is a macro estimate per portion, not a retention model. All specified food
-and juices are served. Added water may evaporate: no cooked mass is inferred.
+The v1/v2 macro estimate assumes all specified food and juices are served.
+The explicit v3 process-loss contract carries purchase inputs but cannot provide
+served nutrition or weight. It never supplies a guessed retention coefficient.
+Added water may evaporate: no cooked mass is inferred.
 The recipe design and ingredient form must validate independently of nutrition.
 Original recipes remain immutable; adaptations record their full content hash.
 """
@@ -16,6 +18,13 @@ from app.services.ingredient_normalizer import canonicalize_ingredient_name as c
 from app.services.recipe_computation_cache import RecipeComputationCache
 
 VERSION = "smako-edible-input-v1"
+
+
+def has_unmeasured_process(recipe):
+    """Whole input remains a purchase need; served nutrients are unknown."""
+    return bool(recipe and recipe.design and recipe.design.unmeasured_processes)
+
+
 # Culinary design choices in ml per serving, NOT measured oil uptake or yield.
 # A small measured saute base for wet dishes; more for oven/pan surface coverage.
 OIL = {
@@ -223,6 +232,8 @@ def validate(recipe):
 def basis(recipe):
     if not validate(recipe):
         return None
+    if has_unmeasured_process(recipe):
+        raise ValueError("Receptets avrinning, silning eller borttagning har okänt utbyte. Näringsgränser kan inte verifieras; ingen förlustfaktor har antagits.")
     from app.services.reviewed_warm_meals import SOURCES
 
     return {
@@ -254,6 +265,8 @@ def input_evidence_identity(recipe, name, recipe_cache):
     """
     if not recipe_cache.get(recipe, validate):
         return None
+    if has_unmeasured_process(recipe):
+        return None
     return (recipe.preparation.version, recipe.preparation.family,
             recipe.preparation.input_forms.get(canonical(name)))
 
@@ -272,6 +285,8 @@ def input_evidence(recipe, product, name, unit, qualified, fact, *, recipe_cache
     # its key snapshots mutable recipe lists/forms and every frozen design field.
     valid_recipe = validate(recipe) if recipe_cache is None else recipe_cache.get(recipe, validate)
     if not valid_recipe:
+        return None
+    if has_unmeasured_process(recipe):
         return None
     form = recipe.preparation.input_forms.get(canonical(name))
     if not form or unit not in {"g", "ml"} or (fact and fact.conflicts):
@@ -401,6 +416,8 @@ def wrap_evidence(recipe, name, evidence):
     """One provenance-preserving input calculation for bought and pantry food."""
     from app.services.nutrition_reference import NutritionEvidence
 
+    if has_unmeasured_process(recipe):
+        return None
     form = recipe.preparation.input_forms[canonical(name)]
     unit = evidence.nutrition_unit
     fields = {
@@ -439,6 +456,8 @@ def pantry_evidence(recipe, name, identity):
     from app.services.nutrition_reference import MAPPINGS, reference_evidence
 
     validate(recipe)
+    if has_unmeasured_process(recipe):
+        return None
     form = recipe.preparation.input_forms.get(canonical(name))
     state = MAPPINGS[identity][1]
     compatible = {

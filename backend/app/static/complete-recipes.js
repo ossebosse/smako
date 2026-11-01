@@ -339,6 +339,7 @@
     const count=design.ingredient_count??ingredientCount(recipe);
     const timing=design.total_minutes!=null?`uppskattad total tid ${number(design.total_minutes)} min · aktiv ${number(design.active_minutes)} min${design.waiting_minutes?` · väntan ${number(design.waiting_minutes)} min`:""}`:`uppskattad tid ${number(design.estimated_minutes)} min`;
     intro.append(el("p",`${recipe.servings} portioner · ${count} ingredienser · ${timing}`,"complete-recipe-facts"));
+    if(design.unmeasured_processes?.length)intro.append(el("p","Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Näring och färdig portionsvikt är ännu okända.","recipe-method-note"));
     const demands=(personal?.remaining_demands||[]).filter(row=>row.source===slotId&&!['salt','peppar','svartpeppar','vitpeppar','vatten'].includes(row.name));
     if(demands.length===count&&demands.every(row=>row.original_quantity==null||Math.abs(row.original_quantity-row.quantity)<0.000001)){
       let home=0,partial=0;
