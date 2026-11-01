@@ -1,3 +1,22 @@
+# 2026-11-01: Återanvändbar arbetsgång för nya receptförfrågningar
+
+Ägaren har skickat uppdraget om 1 000 nya grundrätter till Chat: 750 middagar,
+125 frukostar och 125 mellanmål, totalt 2 750 varianter. Ett tillägg prioriterar
+relevanta otäckta livsmedel och belagd efterfrågan; det är framtaget, inte
+bekräftat skickat. Ingen ny receptleverans är mottagen/importerad här.
+
+Börja nästa receptförfrågan med [REQUESTING-RECIPES](recipes/REQUESTING-RECIPES.md).
+Den innehåller ägarens preferenser, aktuell beställningsjournal, återanvändbar
+mall, exportkommando och metod för aktuellt täckningsunderlag. Daterade skickbara
+instruktioner finns i Git; stora exportfiler ligger lokalt och kan återskapas.
+AGENTS, AUTHORING, produktmålet och täckningsöverblicken länkar till arbetsgången.
+Appkod, receptmanifest och beta ändras inte av dokumentationsarbetet.
+Exportverktyget är provkört mot 934 grundrätter/2 462 varianter: JSON/hashar,
+skydd mot överskriven export och native kontroll av formatexemplet passerar.
+Ruff, compileall, dokumentlänkar och bevarade instruktionstexter är kontrollerade.
+
+---
+
 # 2026-11-01: Billigare menysökning prövad; nuvarande sökning behålls
 
 [PR 60](https://github.com/ossebosse/smako/pull/60) är mergad efter gröna kontroller.

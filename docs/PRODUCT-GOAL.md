@@ -103,6 +103,16 @@ innebär inte att okända allergener eller ekologiska egenskaper får antas.
 
 ### Grundrätter med olika ingrediensantal
 
+Ägarens tillägg 2026-11-01: nästa receptförfrågan ska prioritera klassiska,
+tillräckligt olika grundrätter jämnt över stödda matkök och använda dokumenterad
+produkttäckning för att välja relevanta matvaror som ännu saknar receptstöd.
+Belagd popularitet/användning i svensk vardagsmat väger in, med okänd evidens
+och tekniska produkt-/formhinder särredovisade. Den beställda nya samlingen är
+1 000 grundrätter (750 middagar, 125 frukostar, 125 mellanmål), med 2 750
+fullständiga varianter som mål. Detta medger författarunderlaget parallellt med
+fortsatt täckningsarbete; det innebär inte att nya recept är mottagna eller
+importerade. Se [bestående arbetsgång och beställningsjournal](recipes/REQUESTING-RECIPES.md).
+
 Ägarens tillägg 2026-10-25: samma grundrätt ska där det är matmässigt rimligt
 ha en enkel, en vardaglig och en utökad variant med olika ingrediensantal.
 Exempelvis ska både enkel och mer utvecklad spaghetti med köttfärssås kunna

@@ -1,5 +1,17 @@
 # Project rules
 
+## Requests for more recipes
+
+- For recipe expansion briefs, start with `docs/recipes/REQUESTING-RECIPES.md`
+  and its reusable template/export command. Check the dated request journal
+  before starting another batch; the 2026-11-01 request is for 1,000 bases.
+  The owner authorized preparing this brief alongside ongoing coverage work;
+  an authoring request does not itself import recipes or activate beta.
+- Owner preference: classic dishes, balanced cuisines, meaningful ingredient-count
+  variants and strict culinary deduplication. Prioritize real uncovered food
+  ingredients using coverage evidence and supported demand signals. Product-row
+  counts are not popularity; form/fact blockers are not automatically recipe gaps.
+
 ## Product/recipe overview in CI
 
 - Start coverage questions with `docs/COVERAGE-OVERVIEW.md` and the latest

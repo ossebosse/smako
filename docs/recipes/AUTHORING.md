@@ -1,5 +1,10 @@
 # Lägga in recept med `author`
 
+För en ny förfrågan till Chat: börja med
+[arbetsgången för fler recept](REQUESTING-RECIPES.md), dess mall och exportverktyg.
+Den binder författaruppdraget till aktuellt bibliotek, produkttäckning och ägarens
+preferenser. Följ nedanstående format vid leverans och mottagning.
+
 `author` gör ett kompakt receptutkast till ett vanligt `smako-meal-pack-v1`-paket
 och kan i samma körning importera, förbereda och kvalificera det. Författaren
 skriver bara det en kock bestämmer; allt Smako härleder räknas fram på samma sätt

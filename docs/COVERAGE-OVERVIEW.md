@@ -85,6 +85,11 @@ göra ett prov grönt.
 
 ## 3. Vilka recept ska läggas till?
 
+För ägarens återkommande receptbeställningar, använd
+[arbetsgång, mall och aktuell beställningsjournal](recipes/REQUESTING-RECIPES.md).
+Den beskriver hur denna rapport blir ett författarunderlag, med verkliga
+ingrediensluckor, separat teknisk granskning och belagda efterfrågesignaler.
+
 `ingredient_coverage` binder varje råvara/form/enhet till recept-ID:n,
 grundrätter, antal produktkandidater samt hur många recept som klarar samtliga
 ingredienser respektive hela korgen. Detta skiljer många varianter av samma

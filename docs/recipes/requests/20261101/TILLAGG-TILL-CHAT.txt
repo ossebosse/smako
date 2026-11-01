@@ -1,0 +1,69 @@
+TILLÄGG TILL PÅGÅENDE SMAKO-UPPDRAG: PRIORITERA INGREDIENSER SOM BREDDAR PRODUKTTÄCKNINGEN
+
+Detta kompletterar uppdraget med 1 000 nya grundrätter och 2 750 varianter. Behåll 750 middagar, 125 frukostar och 125 mellanmål, de tidigare kvoterna för sex matkök, klassikerprioriteringen, variantkraven, dubblettgranskningen och filformatet. Beställningen utökas inte med ytterligare 1 000 rätter. Använd detta tillägg i den återstående kandidaturvalet och granska redan föreslagna kandidater mot det utan att tappa ID:n eller bokföring.
+
+NY PREFERENS
+Välj i första hand nya, kulinariskt tydliga rätter som kan ge användning åt relevanta livsmedel i vårt produktunderlag som befintliga recept ännu inte täcker. Vid likvärdiga kandidater ska råvaror som används brett i svensk vardagsmat prioriteras framför smala specialvaror, när efterfrågan kan beläggas eller bedömningen uttryckligen markeras som osäker. En ny rätt ska bidra med mer än ett nytt namn eller ett enkelt råvarubyte.
+
+UNDERLAG OCH OMFATTNING
+tackningsunderlag.json kommer från senaste lyckade main-CI som kontrollerades: körning 41289274705, kod 4a0c636cfe82cf654830cd1779238ba62acf876c. Den använder samma receptbibliotek som den tidigare bilagan: 934 grundrätter och 2 462 varianter. Produktreferensen är fryst Malmödata: priser från 23 oktober och produktfakta från 28 oktober 2026. Den är inte en inventering av dagens beta eller alla butiker i Sverige.
+
+Den omfattar 89 458 produktposter. En post är en produkt i en butik/priskontext, inte en unik råvara eller ett köp. Samma förpackning kan förekomma i flera butiker. Produktunderlaget innehåller också varor som inte ska användas i recept.
+
+Läs båda lägena, exact och estimated, separat. estimated förutsätter uttryckligen tillåtna uppskattningar och får inte beskrivas som exakt stöd. I produktfilerna betyder:
+- recipe_candidate: minst ett befintligt recept har en godkänd kandidatväg för produkten.
+- rejected_in_tested_paths: något provat flöde avvisade produkten och ingen godkänd väg hittades; inte bevis för att den alltid är oanvändbar.
+- not_demonstrated: inget stöd har demonstrerats; inte bevis för att recept saknas.
+
+CSV-filerna är gzip-komprimerade UTF-8. recipe_indexes är nollbaserade positioner i modes.<läge>.recipes i tackningsunderlag.json; indexordningen är bevarad. Den kompakta receptlistan visar identitet, namn och grundrätt. Använd det tidigare fullständiga receptunderlaget för innehållsjämförelser. recipe_opportunities har konkreta produktexempel och ingredient_coverage binder råvara/form/enhet till befintliga recept och grundrätter.
+
+AVGÖR FÖRST VAD SOM SAKNAS
+Klassificera varje ingrediensspår innan det prioriteras:
+A. Recept-/ingredienslucka: relevant köpt råvara eller form saknar författad användning. Nytt recept och ibland ny granskad ingrediensidentitet behövs.
+B. Liten receptbredd: råvaran fungerar men har få olika grundrätter. Bedöm vilka genuint nya klassiker som breddar användningen.
+C. Produkt-/form-/mängdhinder: råvaran finns redan i recepten, men vissa produkter passar inte deras identitet, form eller faktaunderlag. Fler snarlika recept löser inte detta. Lägg hindret i en separat teknisk granskningslista.
+D. Oklart eller irrelevant: produktidentiteten måste granskas, eller varan hör inte naturligt till middag/frukost/mellanmål. Varken städprodukter eller generella oklassificerade kategorier är receptluckor.
+
+Generiska sökningar ger bara ledtrådar. Rapportens buljongträffar inkluderar exempelvis Fiskbullar i Buljong. Matvaran måste identifieras innan den används som receptingrediens. Råvarunamn och interna söknycklar är inte bevis på rätt identitet. Märkes- och storleksvarianter ska normalt inte ge nya grundrätter.
+
+KONKRETA STARTSPÅR
+preliminara-ingrediensspar.json innehåller åtta granskade startspår med exakta produktreferenser och tydliga begränsningar. De är inte en försäljningsrankning, fullständig klassificering eller verifierad täckningsvinst.
+
+Första prioritet att granska:
+- Olivolja: relevant för grekisk och italiensk mat, saknas som egen författaridentitet i registret. Ett avgränsat urval av sex produktnamn ger 127 poster i 22 kontexter utan befintlig receptkandidat. Kontrollera ren olivolja kontra blandolja och smaksatt olja. Att byta rapsolja mot olivolja i en befintlig rätt gör den inte till en ny grundrätt.
+- Salsiccia och andra tydligt identifierade matlagningskorvar: skilj färsk/rå, tillagad och torkad korv. Salsicciaurvalet har 38 poster i tio kontexter. Falukorv och hemgjorda korvrätter finns redan och måste ingå i likhetskontrollen.
+- Bacon: urvalet har 72 poster i nio kontexter. Granska skillnaden mot befintliga rätter med rimmat fläsk; bacon är inte ett fritt alias för andra fläskprodukter.
+- Köpt buljong/fond: urvalet har 100 poster i nio kontexter. Hemlagade buljonger finns redan. Identitet, animaliskt/vegetariskt innehåll, koncentration, dosering och spädning måste stämma. Ett tillskott av buljong är inte ensamt en ny grundrätt.
+
+Nästa spår: färdig pesto (101 poster i nio kontexter i urvalet), identifierade frysta grönsaksblandningar samt olika chorizoprodukter. Färdig pesto och hemlagad pesto täcker olika inköpsvaror. Chorizons verkliga form och tradition måste passa rätten; generisk svensk/spansk chorizo får inte automatiskt behandlas som rå mexikansk chorizo. De sex kökskvoterna gäller fortfarande.
+
+Kycklinghjärta och kycklingmage är andra observerade luckor med mindre sortimentsbredd i referensen. Granska dem efter de bredare startspåren om ingen bättre efterfrågeevidens tillkommer. Påstå inte att deras popularitet är uppmätt som låg.
+
+Alla dessa urval bygger på namngivna produktposter. Innehåll, form, enhet och användbar mängd måste kvalificeras innan någon hävdar att produkterna faktiskt kommer att fungera i ett nytt recept. Saknade ingrediensidentiteter ska följa det tidigare uppdragets registerforslag.json; uppfinn inga produktkrav eller alias.
+
+Bröd, pasta, ost, kyckling och flera andra stora råvarugrupper har redan recept. Deras många otäckta produkter ska först granskas som form-/produktfrågor. En verkligt ny form kan motivera en ny rätt, men inte ett påstående om att hela gruppen saknar recept.
+
+HUR POPULARITET SKA ANVÄNDAS
+Vårt täckningsunderlag har ingen försäljningsvolym eller köp-/ätfrekvens per produkt. Antal artikelnummer, varumärken, butiksposter eller hyllvarianter är därför inte ett popularitetsmått. Räknad sortimentsbredd är en separat tillgänglighetssignal.
+
+popularitetskallor.json innehåller granskade utgångskällor från SCB (försäljningsvärde 2025) och Jordbruksverket (konsumtionsberäkningar 2024). De ger breda kategorisignaler, inte en rangordning mellan exempelvis pesto, salsiccia och kycklinghjärta. Löpande försäljningsvärde påverkas av priset och är inte samma sak som såld mängd eller antal användare.
+
+Sök, när det behövs, mer specifik tillförlitlig svensk försäljnings-/konsumtionsstatistik. Ange källa, år, geografiskt område, mått och om det gäller kategorin eller den exakta råvaran. Skilj sådan evidens från receptsökningar, trendlistor och egen kulinarisk bedömning. Hitta inte på popularitetspoäng. Saknas tillräcklig evidens ska populariteten stå som okänd; en praktisk vardagsbedömning får anges separat med motivering.
+
+PRIORITERA UTAN ATT TAPPA RECEPTKVALITET
+Bedöm i denna ordning:
+1. Är det ett relevant livsmedel med en verklig innehållslucka eller en tydligt underrepresenterad form?
+2. Finns belagd efterfrågan, eller en öppet motiverad och osäker vardagsbedömning?
+3. Hur bred är tillgången i det dokumenterade underlaget: skilda kontexter, produkter och matvaruformer? Redovisa både butiksposter och kända GTIN; saknat GTIN är okänd deduplicering, inte bevis på ny vara.
+4. Kan ingrediensen ge en genuint ny klassisk rätt i rätt kök och måltid, med rimliga mängder och fungerande varianter?
+5. Hur mycket NY bredd tillför nästa förslag efter redan valda kandidater? Hundra nya rätter med samma olja täcker inte hundra gånger fler produkter.
+
+Använd detta som en preferens inom kvalitetskraven och kökskvoterna. Tvinga inte in en råvara i fel tradition och lägg inte till oväsentliga ingredienser. Vanliga ingredienser som redan är täckta får självklart vara stöd i en rätt som introducerar ett relevant nytt livsmedel. Om ett förslag hör till en befintlig grundrätt ska det ligga i den separata förbättringslistan och inte räknas bland de 1 000.
+
+TILLÄGG TILL LEVERANSEN
+Skapa ingrediensprioritering.json med råvara/form, typ av lucka, prioritet och motivering, efterfrågeevidens/okänt, produktreferenser, registerbehov och tekniska hinder.
+För varje ny grundrätt, ange i kandidatregistret vilka prioriterade ingredienser den adresserar och varför rätten skiljer sig från tidigare innehåll. Skriv aldrig uppskattad eller framtida produktnytta som uppmätt täckning.
+Redovisa i leveransöversikten: antal nya grundrätter per prioriterad råvara, antal nya råvaror/former, överlapp mellan förslagen, återstående luckor och vilka frågor som måste lösas i Smako. Skilj föreslagen användning, ingrediens-/produktsupport och verifierad hel inköpskorg.
+Efter import ska Smako mäta faktisk täckningsvinst och eventuell förlust mot samma frysta referens samt separat kontrollera aktuellt betaunderlag. Chat ska inte påstå att dessa kontroller har körts.
+
+Börja med att läsa tilläggets data och uppdatera kandidatprioriteringen. Fortsätt sedan det pågående uppdraget med samma ID-register och kumulativa leveransbokföring.
