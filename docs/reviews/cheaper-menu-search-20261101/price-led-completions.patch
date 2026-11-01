@@ -1,0 +1,84 @@
+--- a/backend/app/services/menu_optimizer.py
++++ b/backend/app/services/menu_optimizer.py
+@@ -1681,10 +1681,15 @@
+                         for group in ordered[1:]]]
+                     # Rotate anchors before one incompatible prefix consumes all
+                     # checkout time; no truncated branch becomes an impossibility proof.
+-                    for number, menu in enumerate(completions([], orders, node_limit=4096)):
+-                        propose(menu)
+-                        if incumbent is not None or number >= 15:
+-                            break
++                    # Package overlap and singleton cost are different signals.
++                    # A high-overlap completion can be expensive; also propose a
++                    # price-led complete menu for this anchor before moving on.
++                    # Neither signal certifies the joint cost or prunes options.
++                    for proposal_orders in (orders, [[anchor], *ordered[1:]]):
++                        for number, menu in enumerate(completions([], proposal_orders, node_limit=4096)):
++                            propose(menu)
++                            if incumbent is not None or number >= 15:
++                                break
+                     if incumbent is None:
+                         continue
+                     if exchange_revision != trace['improvements']:
+--- a/backend/tests/test_complete_first_slots.py
++++ b/backend/tests/test_complete_first_slots.py
+@@ -205,6 +205,59 @@
+     assert calls.index(('01', '00', '01')) < calls.index(('00', '00', '01'))
+     assert len(calls) <= 25 and trace[-1]['exchange_restarts'] >= 2
+     assert trace[-1]['anchors_deferred'] > 0
++
++
++def test_price_led_completion_crosses_a_package_affinity_local_minimum(monkeypatch):
++    from app.services import plan_jobs
++
++    groups = options([f'{i:02d}' for i in range(65)], days=3)
++    remaining, calls = [30.0], []
++    monkeypatch.setattr(plan_jobs, 'remaining_planning_seconds', lambda: remaining[0])
++
++    def priority(slot):
++        preferred = {1: ['00'], 2: ['01', '03'], 3: ['02', '04']}[slot.day]
++        return preferred.index(slot.recipe.name) if slot.recipe.name in preferred else 10+int(slot.recipe.name)
++
++    def evaluate(slots, final):
++        assert final
++        names = tuple(s.recipe.name for s in slots)
++        calls.append(names)
++        if len(calls) == 3:
++            remaining[0] = 11
++        return {('00', '03', '04'): 100, ('00', '01', '02'): 50}.get(names, 150)
++
++    chosen, cost = MenuOptimizer().optimize_slots(groups, complete_first=True,
++        accepts=lambda slots, final: len({s.recipe.name for s in slots}) == len(slots),
++        evaluate=evaluate, score=lambda slots, value: value, candidate_priority=priority,
++        candidate_packages=lambda s: {'shared'} if s.recipe.name in {'00', '03', '04'} else {s.recipe.name})
++    # Both cheaper replacements are needed; either single change costs 150.
++    assert calls[:2] == [('00', '03', '04'), ('00', '01', '02')]
++    assert cost == 50 and tuple(s.recipe.name for s in chosen) == ('00', '01', '02')
++
++
++def test_price_led_completion_must_pass_joint_checkout(monkeypatch):
++    from app.services import plan_jobs
++
++    remaining, calls = [30.0], []
++    monkeypatch.setattr(plan_jobs, 'remaining_planning_seconds', lambda: remaining[0])
++    groups = options([f'{i:02d}' for i in range(65)], days=3)
++
++    def evaluate(slots, final):
++        assert final
++        names = tuple(s.recipe.name for s in slots)
++        calls.append(names)
++        if len(calls) == 2:
++            remaining[0] = 11
++            raise ValueError('Cheaper singleton choices fail the joint nutrition/organic checks')
++        return 100
++
++    chosen, cost = MenuOptimizer().optimize_slots(groups, complete_first=True,
++        accepts=lambda slots, final: len({s.recipe.name for s in slots}) == len(slots),
++        evaluate=evaluate, score=lambda slots, value: value,
++        candidate_priority=lambda s: int(s.recipe.name),
++        candidate_packages=lambda s: {int(s.recipe.name) % 3})
++    assert calls == [('00', '03', '06'), ('00', '01', '02')]
++    assert cost == 100 and tuple(s.recipe.name for s in chosen) == ('00', '03', '06')
+ 
+ 
+ @pytest.mark.parametrize('amount,expected', [(200,10),(400,17)])

@@ -1,0 +1,3976 @@
+{
+  "baseline_commit": "5aa723b2dbda485ad47d482ccbc822c0e607e809",
+  "baseline_code_commit": "b7c8d0506e23f434abdc5a5fecc53639c2de2f1d",
+  "baseline_image": "sha256:a396c7774515c738a6b3909fb2b776d897bc48b29ddfc2d1064264f2ff97b8ad",
+  "baseline_build": "app-b7c8d0506e23-c18e4ba9",
+  "source_hashes": {
+    "baseline-optimizer.py": "f03d5cf462b879fafeec4973add14701252fff81347917029342bf2b7e0b4c5f",
+    "candidate1-optimizer.py": "4bcaffcbf918f7a89575794ecf58677200616e0963dd69dcc22559e962ebe47e",
+    "candidate2-optimizer.py": "43d22ea6f2598b466ee2f29f148d814cdf3bb8af5276ab86844cc54cf09767ff",
+    "probe.py": "5fe20a49c6a0283923b08fdac701d103ec9e793ee87ef80a31dc9195e5e43de8",
+    "compare2-probe.py": "0d33ac31104c2d3a914c55951a5aad7d2ff03c894f6a9b14fa6a9b04bfec7b57",
+    "paired-cases.json": "fa8374e0c067669aad5ffd7654a23eba884215dc9d7ca6b48da65d9f82a2a8f0"
+  },
+  "exploratory": [
+    {
+      "label": "baseline1",
+      "raw_sha256": "cc42a6fc6bef8c4f75c1b198ff5e219d6e234b42707b7ba0f90a2ac9a7b19f66",
+      "preparation": [
+        {
+          "kind": "loaded",
+          "seconds": 94.1016005165875,
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+        },
+        {
+          "kind": "pricing_warm",
+          "seconds": 12.90183512121439,
+          "status": "miss_filled"
+        },
+        {
+          "kind": "source_warm",
+          "mode": "current",
+          "seconds": 86.39696153532714,
+          "report": {
+            "status": "ready",
+            "universes": [
+              {
+                "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 54515,
+                "seconds": 28.253
+              },
+              {
+                "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 95998,
+                "seconds": 46.607
+              }
+            ],
+            "library": {
+              "status": "ready",
+              "seconds": 11.529
+            }
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "case": "italian-prime",
+          "status": "passed",
+          "seconds": 24.15341347362846,
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            [
+              "smako-italian-spinach-whitebean-ravioli",
+              "1.0.0",
+              "simple"
+            ]
+          ],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.701943104155362,
+            "memory_reclamation": 2.33273914642632,
+            "package_calculation": 0.9450934669002891,
+            "nutrition": 0.017414193600416183,
+            "candidate_generation_and_qualification": 7.0984870083630085,
+            "week_search": 0.35719276033341885,
+            "audit": 0.001480989158153534,
+            "total": 9.894849921576679
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 139,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 139,
+              "retained": 8,
+              "beam_pruned": 131,
+              "evaluations_executed": 139,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 139,
+              "equivalent_pruned": 0
+            }
+          ],
+          "peak_rss_kib": 2409144
+        },
+        {
+          "case": "three-one-store",
+          "status": "passed",
+          "seconds": 51.203218151815236,
+          "total": 185.83,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "aa08c0248d4c85fe956a5ff69ae8755e4ae131c7068a84b34bc9ebd9388e6352",
+          "recipes": [
+            [
+              "smako-dinner-tofu-pasta-ragu",
+              "1.2.0",
+              "base"
+            ],
+            [
+              "smako-italian-lentil-pasta-onepot-soup",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-dinner-lentil-carrot-soup",
+              "1.2.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Pastapanna med smulad tofu",
+            "Italienskinspirerad pasta- och linssoppa med rotselleri – enkel",
+            "Len lins- och morotssoppa"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.709657339379191,
+            "memory_reclamation": 2.5942213665694,
+            "package_calculation": 17.086525871418417,
+            "nutrition": 0.2272946946322918,
+            "candidate_generation_and_qualification": 15.853692607954144,
+            "week_search": 17.727212829515338,
+            "audit": 0.0019998298957943916,
+            "total": 36.449869750998914
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 227,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 776
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 713,
+              "constraints_rejected": 486,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 2530,
+              "constraints_rejected": 2351,
+              "evaluation_rejected": 178,
+              "priced": 1305,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 1484,
+              "evaluation_cache_hits": 54,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.0662918696179986,
+              "first_valid_request_seconds": 30.413692133501172,
+              "first_valid_cost": "351.13",
+              "full_candidates": 1305,
+              "improvements": 6,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2328,
+              "anchors_total": 776,
+              "anchors_considered": 227,
+              "exchange_restarts": 5,
+              "max_full_evaluation_seconds": 0.07587118539959192,
+              "search_seconds": 17.655265416018665,
+              "anchors_deferred": 549,
+              "candidate_options_total": 2328,
+              "candidate_options_considered": 1767,
+              "candidate_options_deferred": 561,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1531,
+              "compact_seen_bytes": 761549,
+              "best_search_cost": "185.83"
+            }
+          ],
+          "peak_rss_kib": 2463388
+        },
+        {
+          "case": "three-three-stores",
+          "status": "passed",
+          "seconds": 52.03450628183782,
+          "total": 182.39,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96",
+          "recipes": [
+            [
+              "smako-dinner-potato-tofu-cabbage-pan",
+              "1.0.0",
+              "base"
+            ],
+            [
+              "smako-greek-mushroom-feta-stuffed-potatoes",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-intake-roesti",
+              "1.0.0",
+              "6e8c5a64-simple"
+            ]
+          ],
+          "names": [
+            "Potatispanna med tofu och mjuk kål",
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Rårakor med keso och varm rödbeta – enkel"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.792220577597618,
+            "memory_reclamation": 2.479763829149306,
+            "package_calculation": 19.339132813736796,
+            "nutrition": 0.24363938812166452,
+            "candidate_generation_and_qualification": 14.52859202772379,
+            "week_search": 19.19812765903771,
+            "audit": 0.00403102021664381,
+            "total": 36.528604578226805
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 267,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 836
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 888,
+              "constraints_rejected": 621,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 3620,
+              "constraints_rejected": 3841,
+              "evaluation_rejected": 0,
+              "priced": 1340,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 1340,
+              "evaluation_cache_hits": 34,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.08241413440555334,
+              "first_valid_request_seconds": 28.964386386796832,
+              "first_valid_cost": "324.54",
+              "full_candidates": 1340,
+              "improvements": 8,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2508,
+              "anchors_total": 836,
+              "anchors_considered": 267,
+              "exchange_restarts": 6,
+              "max_full_evaluation_seconds": 0.1189557695761323,
+              "search_seconds": 19.118192231282592,
+              "anchors_deferred": 569,
+              "candidate_options_total": 2508,
+              "candidate_options_considered": 2087,
+              "candidate_options_deferred": 421,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1821,
+              "compact_seen_bytes": 883032,
+              "best_search_cost": "182.39"
+            }
+          ],
+          "peak_rss_kib": 2530172
+        },
+        {
+          "case": "five-three-stores",
+          "status": "passed",
+          "seconds": 51.995400118641555,
+          "total": 252.58,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "7bbead1dc957170f7a499561d78ae84c5af93fadcc8a3a78ab30e3154836388e",
+          "recipes": [
+            [
+              "smako-intake-bakedpotato",
+              "1.0.0",
+              "8f233d7b-simple"
+            ],
+            [
+              "smako-dinner-tofu-pasta-ragu",
+              "1.2.0",
+              "base"
+            ],
+            [
+              "smako-greek-mushroom-feta-stuffed-potatoes",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-dinner-potato-tofu-cabbage-pan",
+              "1.0.0",
+              "base"
+            ],
+            [
+              "smako-dinner-lentil-carrot-soup",
+              "1.2.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Bakpotatis med rökig linsröra – enkel",
+            "Pastapanna med smulad tofu",
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Potatispanna med tofu och mjuk kål",
+            "Len lins- och morotssoppa"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.6642243498936296,
+            "memory_reclamation": 2.5679723396897316,
+            "package_calculation": 17.93089214619249,
+            "nutrition": 0.23752002138644457,
+            "candidate_generation_and_qualification": 14.298875890672207,
+            "week_search": 19.280164932832122,
+            "audit": 0.0030933795496821404,
+            "total": 36.48428119812161
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 211,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 836
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 699,
+              "constraints_rejected": 488,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 2892,
+              "constraints_rejected": 2681,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 4,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 4673,
+              "constraints_rejected": 4462,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 5,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 6963,
+              "constraints_rejected": 8005,
+              "evaluation_rejected": 0,
+              "priced": 987,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 988,
+              "evaluation_cache_hits": 71,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.11976336129009724,
+              "first_valid_request_seconds": 28.96498823724687,
+              "first_valid_cost": "511.65",
+              "full_candidates": 987,
+              "improvements": 13,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 4180,
+              "anchors_total": 836,
+              "anchors_considered": 211,
+              "exchange_restarts": 9,
+              "max_full_evaluation_seconds": 0.08547947742044926,
+              "search_seconds": 19.154954466968775,
+              "anchors_deferred": 625,
+              "candidate_options_total": 4180,
+              "candidate_options_considered": 3290,
+              "candidate_options_deferred": 890,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 2238,
+              "compact_seen_bytes": 1315580,
+              "best_search_cost": "252.58"
+            }
+          ],
+          "peak_rss_kib": 2517692
+        },
+        {
+          "case": "italian-three",
+          "status": "passed",
+          "seconds": 27.838731676340103,
+          "total": 253.85,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "b7c960ce1d98274c4b132303755e295b28cd81e33e4e29a1b7822faab2ebd549",
+          "recipes": [
+            [
+              "smako-italian-spinach-whitebean-ravioli",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-italian-minestrone-whitebean-pasta-vegetables",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-italian-pasta-e-ceci",
+              "1.1.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel",
+            "Italienskinspirerad minestrone med vita bönor och pasta – enkel",
+            "Pasta e ceci med tomat, morot, spenat och ost"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.611690598540008,
+            "memory_reclamation": 2.4332653852179646,
+            "package_calculation": 5.0326374070718884,
+            "nutrition": 0.08266208320856094,
+            "candidate_generation_and_qualification": 4.2874498050659895,
+            "week_search": 6.335590346716344,
+            "audit": 0.0023114047944545746,
+            "total": 13.185499722138047
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 143,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 143
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 431,
+              "constraints_rejected": 288,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 2073,
+              "constraints_rejected": 2065,
+              "evaluation_rejected": 0,
+              "priced": 436,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 436,
+              "evaluation_cache_hits": 13,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.023983068764209747,
+              "first_valid_request_seconds": 18.33838064223528,
+              "first_valid_cost": "272.57",
+              "full_candidates": 436,
+              "improvements": 2,
+              "stop_reason": "enumerated_proposals",
+              "singleton_priorities_computed": 429,
+              "anchors_total": 143,
+              "anchors_considered": 143,
+              "exchange_restarts": 2,
+              "max_full_evaluation_seconds": 0.08736383821815252,
+              "search_seconds": 6.31716213747859,
+              "anchors_deferred": 0,
+              "candidate_options_total": 429,
+              "candidate_options_considered": 429,
+              "candidate_options_deferred": 0,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 567,
+              "compact_seen_bytes": 253818,
+              "best_search_cost": "253.85"
+            }
+          ],
+          "peak_rss_kib": 2541424
+        },
+        {
+          "case": "swedish-three",
+          "status": "passed",
+          "seconds": 30.091445981524885,
+          "total": 246.86,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "738cfe601abda19d760fffb44d736de9f41b3842db25012d222f7c463e3665e3",
+          "recipes": [
+            [
+              "smako-swedish-lentil-root-soup",
+              "1.1.0",
+              "base"
+            ],
+            [
+              "smako-growth-20261018-lentils-paprika",
+              "1.0.0",
+              "base"
+            ],
+            [
+              "smako-intake-bakedpotato",
+              "1.0.0",
+              "ce4aea47-simple"
+            ]
+          ],
+          "names": [
+            "Matig linssoppa med morot, potatis och örtyoghurt",
+            "Röda linser i paprikasås med spenat, med ris",
+            "Bakpotatis med ägg- och senapsröra – enkel"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 7.1578130619600415,
+            "memory_reclamation": 2.3295039366930723,
+            "package_calculation": 6.7610224867239594,
+            "nutrition": 0.09179615415632725,
+            "candidate_generation_and_qualification": 4.5016471687704325,
+            "week_search": 8.392059698700905,
+            "audit": 0.0050503965467214584,
+            "total": 15.35200689919293
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 137,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 137
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 413,
+              "constraints_rejected": 276,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 1707,
+              "constraints_rejected": 1828,
+              "evaluation_rejected": 0,
+              "priced": 596,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 596,
+              "evaluation_cache_hits": 72,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.029353536665439606,
+              "first_valid_request_seconds": 19.00845698080957,
+              "first_valid_cost": "324.54",
+              "full_candidates": 596,
+              "improvements": 9,
+              "stop_reason": "enumerated_proposals",
+              "singleton_priorities_computed": 411,
+              "anchors_total": 137,
+              "anchors_considered": 137,
+              "exchange_restarts": 9,
+              "max_full_evaluation_seconds": 0.08786878269165754,
+              "search_seconds": 8.372780764475465,
+              "anchors_deferred": 0,
+              "candidate_options_total": 411,
+              "candidate_options_considered": 411,
+              "candidate_options_deferred": 0,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 846,
+              "compact_seen_bytes": 366101,
+              "best_search_cost": "246.86"
+            }
+          ],
+          "peak_rss_kib": 2511284
+        }
+      ],
+      "process_max_rss_kib": 2789312
+    },
+    {
+      "label": "candidate1",
+      "raw_sha256": "1c3ea0e6584f94308770445ed55948b71a689b81786d2034ab9a74e45f1f3c8d",
+      "preparation": [
+        {
+          "kind": "loaded",
+          "seconds": 92.85018618777394,
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+        },
+        {
+          "kind": "pricing_warm",
+          "seconds": 13.082801284268498,
+          "status": "miss_filled"
+        },
+        {
+          "kind": "source_warm",
+          "mode": "current",
+          "seconds": 84.34692065510899,
+          "report": {
+            "status": "ready",
+            "universes": [
+              {
+                "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 54515,
+                "seconds": 27.722
+              },
+              {
+                "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 95998,
+                "seconds": 45.608
+              }
+            ],
+            "library": {
+              "status": "ready",
+              "seconds": 11.011
+            }
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "case": "italian-prime",
+          "status": "passed",
+          "seconds": 24.27947220019996,
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            [
+              "smako-italian-spinach-whitebean-ravioli",
+              "1.0.0",
+              "simple"
+            ]
+          ],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.799816796556115,
+            "memory_reclamation": 2.310545517131686,
+            "package_calculation": 0.9186216210946441,
+            "nutrition": 0.016979219391942024,
+            "candidate_generation_and_qualification": 7.099259622395039,
+            "week_search": 0.3381972387433052,
+            "audit": 0.0014364328235387802,
+            "total": 9.852116029709578
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 139,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 139,
+              "retained": 8,
+              "beam_pruned": 131,
+              "evaluations_executed": 139,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 139,
+              "equivalent_pruned": 0
+            }
+          ],
+          "peak_rss_kib": 2414344
+        },
+        {
+          "case": "three-one-store",
+          "status": "passed",
+          "seconds": 51.38641097676009,
+          "total": 185.83,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "e3400a5ac6e773c9c9c2a9fd0c9cad066344ef60a4dd60d1e6ee3f47c0871030",
+          "recipes": [
+            [
+              "smako-dinner-lentil-carrot-soup",
+              "1.2.0",
+              "base"
+            ],
+            [
+              "smako-dinner-tofu-pasta-ragu",
+              "1.2.0",
+              "base"
+            ],
+            [
+              "smako-italian-lentil-pasta-onepot-soup",
+              "1.0.0",
+              "simple"
+            ]
+          ],
+          "names": [
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Italienskinspirerad pasta- och linssoppa med rotselleri – enkel"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 7.158148703165352,
+            "memory_reclamation": 2.803508121520281,
+            "package_calculation": 15.21988169848919,
+            "nutrition": 0.19604577776044607,
+            "candidate_generation_and_qualification": 18.81350083835423,
+            "week_search": 13.054774813354015,
+            "audit": 0.0022992612794041634,
+            "total": 35.00948074553162
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 145,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 776
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 433,
+              "constraints_rejected": 288,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 1617,
+              "constraints_rejected": 1615,
+              "evaluation_rejected": 106,
+              "priced": 890,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 997,
+              "evaluation_cache_hits": 249,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.09274281095713377,
+              "first_valid_request_seconds": 35.11722426023334,
+              "first_valid_cost": "351.13",
+              "full_candidates": 890,
+              "improvements": 10,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2328,
+              "anchors_total": 776,
+              "anchors_considered": 145,
+              "exchange_restarts": 8,
+              "joint_proposals": 380,
+              "joint_evaluations": 115,
+              "joint_improvements": 3,
+              "max_full_evaluation_seconds": 0.08592486009001732,
+              "search_seconds": 12.97577000129968,
+              "anchors_deferred": 631,
+              "candidate_options_total": 2328,
+              "candidate_options_considered": 1244,
+              "candidate_options_deferred": 1084,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1052,
+              "compact_seen_bytes": 500795,
+              "best_search_cost": "185.83"
+            }
+          ],
+          "peak_rss_kib": 2451380
+        },
+        {
+          "case": "three-three-stores",
+          "status": "passed",
+          "seconds": 51.95772512815893,
+          "total": 182.39,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "2de314ed539e9c8b5c4650e07fe66bfca8f9c2f62b44a5ea365e23f665c5b254",
+          "recipes": [
+            [
+              "smako-greek-mushroom-feta-stuffed-potatoes",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-dinner-potato-tofu-cabbage-pan",
+              "1.0.0",
+              "base"
+            ],
+            [
+              "smako-intake-roesti",
+              "1.0.0",
+              "6e8c5a64-simple"
+            ]
+          ],
+          "names": [
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Potatispanna med tofu och mjuk kål",
+            "Rårakor med keso och varm rödbeta – enkel"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.6868048291653395,
+            "memory_reclamation": 2.520959543995559,
+            "package_calculation": 19.847712009213865,
+            "nutrition": 0.23715357948094606,
+            "candidate_generation_and_qualification": 14.279385413974524,
+            "week_search": 19.60716685000807,
+            "audit": 0.0037746690213680267,
+            "total": 36.71540922205895
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 269,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 836
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 895,
+              "constraints_rejected": 626,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 3713,
+              "constraints_rejected": 4009,
+              "evaluation_rejected": 0,
+              "priced": 1420,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 1421,
+              "evaluation_cache_hits": 106,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.07762275263667107,
+              "first_valid_request_seconds": 28.55823133699596,
+              "first_valid_cost": "324.54",
+              "full_candidates": 1420,
+              "improvements": 10,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2508,
+              "anchors_total": 836,
+              "anchors_considered": 269,
+              "exchange_restarts": 6,
+              "joint_proposals": 215,
+              "joint_evaluations": 72,
+              "joint_improvements": 3,
+              "max_full_evaluation_seconds": 0.10098956432193518,
+              "search_seconds": 19.527013834565878,
+              "anchors_deferred": 567,
+              "candidate_options_total": 2508,
+              "candidate_options_considered": 2101,
+              "candidate_options_deferred": 407,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1949,
+              "compact_seen_bytes": 926457,
+              "best_search_cost": "182.39"
+            }
+          ],
+          "peak_rss_kib": 2536652
+        },
+        {
+          "case": "five-three-stores",
+          "status": "passed",
+          "seconds": 51.96881012059748,
+          "total": 252.58,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "f9a3c8048f4c3d826ad80e58a9f608ae88f9014e534dbf3796cb861ff2fa414c",
+          "recipes": [
+            [
+              "smako-greek-mushroom-feta-stuffed-potatoes",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-dinner-lentil-carrot-soup",
+              "1.2.0",
+              "base"
+            ],
+            [
+              "smako-dinner-tofu-pasta-ragu",
+              "1.2.0",
+              "base"
+            ],
+            [
+              "smako-intake-bakedpotato",
+              "1.0.0",
+              "8f233d7b-simple"
+            ],
+            [
+              "smako-dinner-potato-tofu-cabbage-pan",
+              "1.0.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Len lins- och morotssoppa",
+            "Pastapanna med smulad tofu",
+            "Bakpotatis med rökig linsröra – enkel",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.736674902960658,
+            "memory_reclamation": 2.6107671707868576,
+            "package_calculation": 17.54127301182598,
+            "nutrition": 0.2532722298055887,
+            "candidate_generation_and_qualification": 14.348753808997571,
+            "week_search": 19.106646086089313,
+            "audit": 0.00407232902944088,
+            "total": 36.39458868280053
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 207,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 836
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 680,
+              "constraints_rejected": 473,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 2711,
+              "constraints_rejected": 2504,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 4,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 4481,
+              "constraints_rejected": 4274,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 5,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 6610,
+              "constraints_rejected": 8033,
+              "evaluation_rejected": 0,
+              "priced": 980,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 981,
+              "evaluation_cache_hits": 308,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.15168170724064112,
+              "first_valid_request_seconds": 29.205614142119884,
+              "first_valid_cost": "511.65",
+              "full_candidates": 980,
+              "improvements": 17,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 4180,
+              "anchors_total": 836,
+              "anchors_considered": 207,
+              "exchange_restarts": 11,
+              "joint_proposals": 652,
+              "joint_evaluations": 42,
+              "joint_improvements": 6,
+              "max_full_evaluation_seconds": 0.09168480150401592,
+              "search_seconds": 18.95962897874415,
+              "anchors_deferred": 629,
+              "candidate_options_total": 4180,
+              "candidate_options_considered": 3212,
+              "candidate_options_deferred": 968,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 2347,
+              "compact_seen_bytes": 1360260,
+              "best_search_cost": "252.58"
+            }
+          ],
+          "peak_rss_kib": 2517092
+        },
+        {
+          "case": "italian-three",
+          "status": "passed",
+          "seconds": 28.666052129119635,
+          "total": 253.85,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "b7c960ce1d98274c4b132303755e295b28cd81e33e4e29a1b7822faab2ebd549",
+          "recipes": [
+            [
+              "smako-italian-spinach-whitebean-ravioli",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-italian-minestrone-whitebean-pasta-vegetables",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-italian-pasta-e-ceci",
+              "1.1.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel",
+            "Italienskinspirerad minestrone med vita bönor och pasta – enkel",
+            "Pasta e ceci med tomat, morot, spenat och ost"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.796363580971956,
+            "memory_reclamation": 2.461672231554985,
+            "package_calculation": 5.336958487518132,
+            "nutrition": 0.08185375574976206,
+            "candidate_generation_and_qualification": 4.429555932059884,
+            "week_search": 6.798087192699313,
+            "audit": 0.0025610821321606636,
+            "total": 13.82843135483563
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 143,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 143
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 431,
+              "constraints_rejected": 288,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 2073,
+              "constraints_rejected": 2159,
+              "evaluation_rejected": 0,
+              "priced": 476,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 476,
+              "evaluation_cache_hits": 62,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.02620345912873745,
+              "first_valid_request_seconds": 18.617172423750162,
+              "first_valid_cost": "272.57",
+              "full_candidates": 476,
+              "improvements": 2,
+              "stop_reason": "enumerated_proposals",
+              "singleton_priorities_computed": 429,
+              "anchors_total": 143,
+              "anchors_considered": 143,
+              "exchange_restarts": 2,
+              "joint_proposals": 183,
+              "joint_evaluations": 43,
+              "joint_improvements": 0,
+              "max_full_evaluation_seconds": 0.09351492673158646,
+              "search_seconds": 6.779234473593533,
+              "anchors_deferred": 0,
+              "candidate_options_total": 429,
+              "candidate_options_considered": 429,
+              "candidate_options_deferred": 0,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 669,
+              "compact_seen_bytes": 287274,
+              "best_search_cost": "253.85"
+            }
+          ],
+          "peak_rss_kib": 2567496
+        },
+        {
+          "case": "swedish-three",
+          "status": "passed",
+          "seconds": 32.04840053617954,
+          "total": 246.86,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "b0a8d252ddb13a7df50ddd442504788256a5c50a76601e51d786a40d21f31616",
+          "recipes": [
+            [
+              "smako-intake-bakedpotato",
+              "1.0.0",
+              "ce4aea47-simple"
+            ],
+            [
+              "smako-swedish-lentil-root-soup",
+              "1.1.0",
+              "base"
+            ],
+            [
+              "smako-growth-20261018-lentils-paprika",
+              "1.0.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Bakpotatis med ägg- och senapsröra – enkel",
+            "Matig linssoppa med morot, potatis och örtyoghurt",
+            "Röda linser i paprikasås med spenat, med ris"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.7608811585232615,
+            "memory_reclamation": 2.3146959636360407,
+            "package_calculation": 8.326580747030675,
+            "nutrition": 0.11837945133447647,
+            "candidate_generation_and_qualification": 4.593261675909162,
+            "week_search": 10.665519588626921,
+            "audit": 0.00437917560338974,
+            "total": 17.6985502820462
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 137,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 137
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 413,
+              "constraints_rejected": 276,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 1707,
+              "constraints_rejected": 2032,
+              "evaluation_rejected": 0,
+              "priced": 775,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 775,
+              "evaluation_cache_hits": 451,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.029876054264605045,
+              "first_valid_request_seconds": 18.62145938165486,
+              "first_valid_cost": "324.54",
+              "full_candidates": 775,
+              "improvements": 11,
+              "stop_reason": "enumerated_proposals",
+              "singleton_priorities_computed": 411,
+              "anchors_total": 137,
+              "anchors_considered": 137,
+              "exchange_restarts": 10,
+              "joint_proposals": 729,
+              "joint_evaluations": 169,
+              "joint_improvements": 5,
+              "max_full_evaluation_seconds": 0.08454012498259544,
+              "search_seconds": 10.644381013698876,
+              "anchors_deferred": 0,
+              "candidate_options_total": 411,
+              "candidate_options_considered": 411,
+              "candidate_options_deferred": 0,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 975,
+              "compact_seen_bytes": 408413,
+              "best_search_cost": "246.86"
+            }
+          ],
+          "peak_rss_kib": 2499792
+        }
+      ],
+      "process_max_rss_kib": 2794252
+    },
+    {
+      "label": "candidate2",
+      "raw_sha256": "50ebecfec87bdf8cc079fea79cf86da79ec30e2c37720af986cb3405008d7e08",
+      "preparation": [
+        {
+          "kind": "loaded",
+          "seconds": 96.72444562241435,
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+        },
+        {
+          "kind": "pricing_warm",
+          "seconds": 12.75972007215023,
+          "status": "miss_filled"
+        },
+        {
+          "kind": "source_warm",
+          "mode": "current",
+          "seconds": 85.10995672270656,
+          "report": {
+            "status": "ready",
+            "universes": [
+              {
+                "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 54515,
+                "seconds": 27.652
+              },
+              {
+                "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 95998,
+                "seconds": 46.4
+              }
+            ],
+            "library": {
+              "status": "ready",
+              "seconds": 11.051
+            }
+          }
+        }
+      ],
+      "measurements": [
+        {
+          "case": "italian-prime",
+          "status": "passed",
+          "seconds": 24.067801414988935,
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            [
+              "smako-italian-spinach-whitebean-ravioli",
+              "1.0.0",
+              "simple"
+            ]
+          ],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.722681093961,
+            "memory_reclamation": 2.3312907088547945,
+            "package_calculation": 0.9525583339855075,
+            "nutrition": 0.017383143305778503,
+            "candidate_generation_and_qualification": 7.325720003806055,
+            "week_search": 0.3239434901624918,
+            "audit": 0.0015161260962486267,
+            "total": 10.086497575044632
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 139,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 139,
+              "retained": 8,
+              "beam_pruned": 131,
+              "evaluations_executed": 139,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 139,
+              "equivalent_pruned": 0
+            }
+          ],
+          "peak_rss_kib": 2411324
+        },
+        {
+          "case": "three-one-store",
+          "status": "passed",
+          "seconds": 51.29498144052923,
+          "total": 185.83,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "aa08c0248d4c85fe956a5ff69ae8755e4ae131c7068a84b34bc9ebd9388e6352",
+          "recipes": [
+            [
+              "smako-dinner-tofu-pasta-ragu",
+              "1.2.0",
+              "base"
+            ],
+            [
+              "smako-italian-lentil-pasta-onepot-soup",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-dinner-lentil-carrot-soup",
+              "1.2.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Pastapanna med smulad tofu",
+            "Italienskinspirerad pasta- och linssoppa med rotselleri – enkel",
+            "Len lins- och morotssoppa"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.865415780805051,
+            "memory_reclamation": 2.5999995693564415,
+            "package_calculation": 17.161316993646324,
+            "nutrition": 0.23355099745094776,
+            "candidate_generation_and_qualification": 16.00752632971853,
+            "week_search": 17.36185766942799,
+            "audit": 0.002412918023765087,
+            "total": 36.30517727509141
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 379,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 776
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 766,
+              "constraints_rejected": 387,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 2446,
+              "constraints_rejected": 2105,
+              "evaluation_rejected": 148,
+              "priced": 1271,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 1420,
+              "evaluation_cache_hits": 55,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.08230780065059662,
+              "first_valid_request_seconds": 30.809977425262332,
+              "first_valid_cost": "351.13",
+              "full_candidates": 1271,
+              "improvements": 5,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2328,
+              "anchors_total": 776,
+              "anchors_considered": 190,
+              "exchange_restarts": 4,
+              "max_full_evaluation_seconds": 0.0842461921274662,
+              "search_seconds": 17.28348333388567,
+              "anchors_deferred": 586,
+              "candidate_options_total": 2328,
+              "candidate_options_considered": 1560,
+              "candidate_options_deferred": 768,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1455,
+              "compact_seen_bytes": 720507,
+              "best_search_cost": "185.83"
+            }
+          ],
+          "peak_rss_kib": 2459276
+        },
+        {
+          "case": "three-three-stores",
+          "status": "passed",
+          "seconds": 51.98498389311135,
+          "total": 182.39,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "5b1da4b1acd33a01e506800a0dc92d96452c8092e0da275c63284ba913edd9da",
+          "recipes": [
+            [
+              "smako-greek-mushroom-feta-stuffed-potatoes",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-intake-roesti",
+              "1.0.0",
+              "6e8c5a64-simple"
+            ],
+            [
+              "smako-dinner-potato-tofu-cabbage-pan",
+              "1.0.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Rårakor med keso och varm rödbeta – enkel",
+            "Potatispanna med tofu och mjuk kål"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.87136519420892,
+            "memory_reclamation": 2.654589760117233,
+            "package_calculation": 19.468568437732756,
+            "nutrition": 0.23243932984769344,
+            "candidate_generation_and_qualification": 14.111494928598404,
+            "week_search": 19.167277741245925,
+            "audit": 0.004409742541611195,
+            "total": 36.24376336298883
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 505,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 836
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 1094,
+              "constraints_rejected": 589,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 3991,
+              "constraints_rejected": 3958,
+              "evaluation_rejected": 0,
+              "priced": 1369,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 1370,
+              "evaluation_cache_hits": 175,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.09068639483302832,
+              "first_valid_request_seconds": 29.006849782541394,
+              "first_valid_cost": "324.54",
+              "full_candidates": 1369,
+              "improvements": 8,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2508,
+              "anchors_total": 836,
+              "anchors_considered": 253,
+              "exchange_restarts": 6,
+              "max_full_evaluation_seconds": 0.08653150778263807,
+              "search_seconds": 19.08553779684007,
+              "anchors_deferred": 583,
+              "candidate_options_total": 2508,
+              "candidate_options_considered": 2031,
+              "candidate_options_deferred": 477,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1828,
+              "compact_seen_bytes": 879093,
+              "best_search_cost": "182.39"
+            }
+          ],
+          "peak_rss_kib": 2521808
+        },
+        {
+          "case": "five-three-stores",
+          "status": "passed",
+          "seconds": 51.97010645829141,
+          "total": 252.58,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "18dafea1e0f81330ab23b160aa520bc492b858441ed7cdc6591f592e4ecd56b1",
+          "recipes": [
+            [
+              "smako-greek-mushroom-feta-stuffed-potatoes",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-dinner-tofu-pasta-ragu",
+              "1.2.0",
+              "base"
+            ],
+            [
+              "smako-dinner-potato-tofu-cabbage-pan",
+              "1.0.0",
+              "base"
+            ],
+            [
+              "smako-dinner-lentil-carrot-soup",
+              "1.2.0",
+              "base"
+            ],
+            [
+              "smako-intake-bakedpotato",
+              "1.0.0",
+              "8f233d7b-simple"
+            ]
+          ],
+          "names": [
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Pastapanna med smulad tofu",
+            "Potatispanna med tofu och mjuk kål",
+            "Len lins- och morotssoppa",
+            "Bakpotatis med rökig linsröra – enkel"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.836837286129594,
+            "memory_reclamation": 2.838333174586296,
+            "package_calculation": 17.860943047329783,
+            "nutrition": 0.24621286150068045,
+            "candidate_generation_and_qualification": 14.290465117432177,
+            "week_search": 18.91761198360473,
+            "audit": 0.004487590864300728,
+            "total": 36.4279162697494
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 340,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 836
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 716,
+              "constraints_rejected": 376,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 2517,
+              "constraints_rejected": 2177,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 4,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 4155,
+              "constraints_rejected": 3815,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 5,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 5941,
+              "constraints_rejected": 6636,
+              "evaluation_rejected": 0,
+              "priced": 955,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 956,
+              "evaluation_cache_hits": 45,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.16111221816390753,
+              "first_valid_request_seconds": 29.398301095701754,
+              "first_valid_cost": "511.65",
+              "full_candidates": 955,
+              "improvements": 7,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 4180,
+              "anchors_total": 836,
+              "anchors_considered": 170,
+              "exchange_restarts": 5,
+              "max_full_evaluation_seconds": 0.13397833332419395,
+              "search_seconds": 18.770273381844163,
+              "anchors_deferred": 666,
+              "candidate_options_total": 4180,
+              "candidate_options_considered": 3047,
+              "candidate_options_deferred": 1133,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1975,
+              "compact_seen_bytes": 1171583,
+              "best_search_cost": "252.58"
+            }
+          ],
+          "peak_rss_kib": 2512716
+        },
+        {
+          "case": "italian-three",
+          "status": "passed",
+          "seconds": 30.330133120529354,
+          "total": 253.85,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "b7c960ce1d98274c4b132303755e295b28cd81e33e4e29a1b7822faab2ebd549",
+          "recipes": [
+            [
+              "smako-italian-spinach-whitebean-ravioli",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-italian-minestrone-whitebean-pasta-vegetables",
+              "1.0.0",
+              "simple"
+            ],
+            [
+              "smako-italian-pasta-e-ceci",
+              "1.1.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel",
+            "Italienskinspirerad minestrone med vita bönor och pasta – enkel",
+            "Pasta e ceci med tomat, morot, spenat och ost"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.733227115124464,
+            "memory_reclamation": 2.4417663095518947,
+            "package_calculation": 6.195335396565497,
+            "nutrition": 0.10039284266531467,
+            "candidate_generation_and_qualification": 4.301893846131861,
+            "week_search": 8.790001831948757,
+            "audit": 0.0024335673078894615,
+            "total": 15.660021958872676
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 286,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 143
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 577,
+              "constraints_rejected": 291,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 8975,
+              "constraints_rejected": 8824,
+              "evaluation_rejected": 0,
+              "priced": 576,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 576,
+              "evaluation_cache_hits": 16,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.028152352198958397,
+              "first_valid_request_seconds": 18.323243484832346,
+              "first_valid_cost": "272.57",
+              "full_candidates": 576,
+              "improvements": 2,
+              "stop_reason": "enumerated_proposals",
+              "singleton_priorities_computed": 429,
+              "anchors_total": 143,
+              "anchors_considered": 143,
+              "exchange_restarts": 2,
+              "max_full_evaluation_seconds": 0.08504207246005535,
+              "search_seconds": 8.766584374010563,
+              "anchors_deferred": 0,
+              "candidate_options_total": 429,
+              "candidate_options_considered": 429,
+              "candidate_options_deferred": 0,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 706,
+              "compact_seen_bytes": 326042,
+              "best_search_cost": "253.85"
+            }
+          ],
+          "peak_rss_kib": 2542852
+        },
+        {
+          "case": "swedish-three",
+          "status": "passed",
+          "seconds": 31.750947354361415,
+          "total": 246.86,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "da4e2799669e76d48187b9da23b7da421977c0db98302558f9edb0c3702655d2",
+          "recipes": [
+            [
+              "smako-growth-20261018-lentils-paprika",
+              "1.0.0",
+              "base"
+            ],
+            [
+              "smako-intake-bakedpotato",
+              "1.0.0",
+              "ce4aea47-simple"
+            ],
+            [
+              "smako-swedish-lentil-root-soup",
+              "1.1.0",
+              "base"
+            ]
+          ],
+          "names": [
+            "Röda linser i paprikasås med spenat, med ris",
+            "Bakpotatis med ägg- och senapsröra – enkel",
+            "Matig linssoppa med morot, potatis och örtyoghurt"
+          ],
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "engine_timings": {
+            "product_facts": 6.946939313784242,
+            "memory_reclamation": 2.4763145679607987,
+            "package_calculation": 7.676547138020396,
+            "nutrition": 0.10029743053019047,
+            "candidate_generation_and_qualification": 4.55115083232522,
+            "week_search": 9.916057218797505,
+            "audit": 0.0035370653495192528,
+            "total": 17.088332270272076
+          },
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 274,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 137
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 553,
+              "constraints_rejected": 279,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 7387,
+              "constraints_rejected": 7273,
+              "evaluation_rejected": 0,
+              "priced": 563,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 563,
+              "evaluation_cache_hits": 100,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.03115395549684763,
+              "first_valid_request_seconds": 19.092639261856675,
+              "first_valid_cost": "324.54",
+              "full_candidates": 563,
+              "improvements": 7,
+              "stop_reason": "enumerated_proposals",
+              "singleton_priorities_computed": 411,
+              "anchors_total": 137,
+              "anchors_considered": 137,
+              "exchange_restarts": 5,
+              "max_full_evaluation_seconds": 0.0862946342676878,
+              "search_seconds": 9.896831708028913,
+              "anchors_deferred": 0,
+              "candidate_options_total": 411,
+              "candidate_options_considered": 411,
+              "candidate_options_deferred": 0,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 716,
+              "compact_seen_bytes": 323461,
+              "best_search_cost": "246.86"
+            }
+          ],
+          "peak_rss_kib": 2535776
+        }
+      ],
+      "process_max_rss_kib": 2777676
+    }
+  ],
+  "paired": {
+    "raw_sha256": "3b46c65e3b55f8f2b28f8a935b73eda7dccdae223cb7eaedc03b7bfdcdcc303a",
+    "candidate_source_sha256": "9640ee3e354f1d733a8e48e1dffb97215e9254e69c34d8a28e1f6a251c4dd8f6",
+    "operation_lease": true,
+    "preparation": [
+      {
+        "kind": "loaded",
+        "seconds": 92.82391013205051,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+      },
+      {
+        "kind": "pricing_warm",
+        "seconds": 26.272215265780687,
+        "status": "miss_filled"
+      },
+      {
+        "kind": "source_warm",
+        "mode": "current",
+        "seconds": 81.22668728325516,
+        "report": {
+          "status": "ready",
+          "universes": [
+            {
+              "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+              "shared_preparation": {
+                "ready": true,
+                "content_variants": 2462,
+                "portion_views": {
+                  "1": 2462,
+                  "2": 2462,
+                  "3": 2462,
+                  "4": 2462
+                },
+                "persistence_failures": 0
+              },
+              "status": "ready",
+              "fact_rows": 54515,
+              "seconds": 27.874
+            },
+            {
+              "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+              "shared_preparation": {
+                "ready": true,
+                "content_variants": 2462,
+                "portion_views": {
+                  "1": 2462,
+                  "2": 2462,
+                  "3": 2462,
+                  "4": 2462
+                },
+                "persistence_failures": 0
+              },
+              "status": "ready",
+              "fact_rows": 95998,
+              "seconds": 42.307
+            }
+          ],
+          "library": {
+            "status": "ready",
+            "seconds": 11.039
+          }
+        }
+      }
+    ],
+    "measurements": [
+      {
+        "case": "A",
+        "algorithm": "baseline",
+        "budget_seconds": 60,
+        "status": "failed",
+        "seconds": 16.496394341811538,
+        "total": null,
+        "audit": null,
+        "saved_owned_read": null,
+        "error_type": "PolicyConflict",
+        "error": "Valda priskontexter saknas eller är för gamla: context:ica:89adf2bc4a5fc50b, context:ica:f0d2c31124015463",
+        "price_id": null,
+        "facts_version": null,
+        "fact_count": null,
+        "basket_sha256": null,
+        "recipes": null,
+        "engine_timings": null,
+        "search_diagnostics": null,
+        "peak_rss_kib": 2605040
+      },
+      {
+        "case": "A",
+        "algorithm": "candidate",
+        "budget_seconds": 60,
+        "status": "failed",
+        "seconds": 16.160109968855977,
+        "total": null,
+        "audit": null,
+        "saved_owned_read": null,
+        "error_type": "PolicyConflict",
+        "error": "Valda priskontexter saknas eller är för gamla: context:ica:89adf2bc4a5fc50b, context:ica:f0d2c31124015463",
+        "price_id": null,
+        "facts_version": null,
+        "fact_count": null,
+        "basket_sha256": null,
+        "recipes": null,
+        "engine_timings": null,
+        "search_diagnostics": null,
+        "peak_rss_kib": 2616080
+      },
+      {
+        "case": "B2",
+        "algorithm": "baseline",
+        "budget_seconds": 60,
+        "status": "failed",
+        "seconds": 16.38775084912777,
+        "total": null,
+        "audit": null,
+        "saved_owned_read": null,
+        "error_type": "PolicyConflict",
+        "error": "Valda priskontexter saknas eller är för gamla: context:ica:89adf2bc4a5fc50b, context:ica:f0d2c31124015463",
+        "price_id": null,
+        "facts_version": null,
+        "fact_count": null,
+        "basket_sha256": null,
+        "recipes": null,
+        "engine_timings": null,
+        "search_diagnostics": null,
+        "peak_rss_kib": 2616280
+      },
+      {
+        "case": "B2",
+        "algorithm": "candidate",
+        "budget_seconds": 60,
+        "status": "failed",
+        "seconds": 16.487035586498678,
+        "total": null,
+        "audit": null,
+        "saved_owned_read": null,
+        "error_type": "PolicyConflict",
+        "error": "Valda priskontexter saknas eller är för gamla: context:ica:89adf2bc4a5fc50b, context:ica:f0d2c31124015463",
+        "price_id": null,
+        "facts_version": null,
+        "fact_count": null,
+        "basket_sha256": null,
+        "recipes": null,
+        "engine_timings": null,
+        "search_diagnostics": null,
+        "peak_rss_kib": 2612196
+      },
+      {
+        "case": "lund-seven",
+        "algorithm": "candidate",
+        "budget_seconds": 60,
+        "status": "passed",
+        "seconds": 49.07309388462454,
+        "total": 328.98,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "a9e98b33f9612885190d669fc6a7259ebc1057bbf036366a019d2b473af706ce",
+        "recipes": [
+          [
+            "smako-italian-minestrone-whitebean-pasta-vegetables",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-italian-pea-walnut-pasta-roast-carrot",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-dinner-potato-tofu-cabbage-pan",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-dinner-pea-cottage-pasta",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-dinner-lentil-carrot-soup",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-dinner-lentil-spinach-rice-pot",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-dinner-tofu-pasta-ragu",
+            "1.2.0",
+            "base"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.738468348048627,
+          "memory_reclamation": 2.50687303673476,
+          "package_calculation": 12.607097445055842,
+          "nutrition": 0.17397803254425526,
+          "candidate_generation_and_qualification": 19.244108902290463,
+          "week_search": 12.037948779761791,
+          "audit": 0.005650392733514309,
+          "total": 34.15121471974999
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 200,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 836
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 420,
+            "constraints_rejected": 220,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 1180,
+            "constraints_rejected": 980,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 4,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 1960,
+            "constraints_rejected": 1760,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 5,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 3101,
+            "constraints_rejected": 2901,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 6,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 3857,
+            "constraints_rejected": 3657,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 7,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 5004,
+            "constraints_rejected": 5680,
+            "evaluation_rejected": 0,
+            "priced": 477,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 478,
+            "evaluation_cache_hits": 232,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.23788048792630434,
+            "first_valid_request_seconds": 36.36119080334902,
+            "first_valid_cost": "687.59",
+            "full_candidates": 477,
+            "improvements": 11,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 5852,
+            "anchors_total": 836,
+            "anchors_considered": 100,
+            "exchange_restarts": 10,
+            "max_full_evaluation_seconds": 0.11765329167246819,
+            "search_seconds": 11.879317700862885,
+            "anchors_deferred": 736,
+            "candidate_options_total": 5852,
+            "candidate_options_considered": 3330,
+            "candidate_options_deferred": 2522,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 1239,
+            "compact_seen_bytes": 877348,
+            "best_search_cost": "328.98"
+          }
+        ],
+        "peak_rss_kib": 2455392
+      },
+      {
+        "case": "lund-seven",
+        "algorithm": "baseline",
+        "budget_seconds": 60,
+        "status": "passed",
+        "seconds": 49.119020155631006,
+        "total": 321.98,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "082c243945fc48695434989a24aa9248ca6c768eaf29c7b74c6a05eb02c7212c",
+        "recipes": [
+          [
+            "smako-dinner-tofu-pasta-ragu",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-italian-minestrone-whitebean-pasta-vegetables",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-dinner-pea-cottage-pasta",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-dinner-lentil-spinach-rice-pot",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-dinner-lentil-carrot-soup",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-dinner-potato-tofu-cabbage-pan",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-indian-peas-spinach-reduced-milk-sauce",
+            "1.0.0",
+            "simple"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.8823268208652735,
+          "memory_reclamation": 2.546786000020802,
+          "package_calculation": 14.414439108222723,
+          "nutrition": 0.2117995684966445,
+          "candidate_generation_and_qualification": 14.366460771299899,
+          "week_search": 16.302616661414504,
+          "audit": 0.0039801932871341705,
+          "total": 33.569229491986334
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 154,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 836
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 489,
+            "constraints_rejected": 335,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 1712,
+            "constraints_rejected": 1558,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 4,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 3004,
+            "constraints_rejected": 2850,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 5,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 4405,
+            "constraints_rejected": 4251,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 6,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 5315,
+            "constraints_rejected": 5161,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 7,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 7161,
+            "constraints_rejected": 8397,
+            "evaluation_rejected": 0,
+            "priced": 607,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 608,
+            "evaluation_cache_hits": 298,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.1744726886972785,
+            "first_valid_request_seconds": 32.047654242254794,
+            "first_valid_cost": "687.59",
+            "full_candidates": 607,
+            "improvements": 17,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 5852,
+            "anchors_total": 836,
+            "anchors_considered": 154,
+            "exchange_restarts": 14,
+            "max_full_evaluation_seconds": 0.10440482664853334,
+            "search_seconds": 16.142961806617677,
+            "anchors_deferred": 682,
+            "candidate_options_total": 5852,
+            "candidate_options_considered": 3902,
+            "candidate_options_deferred": 1950,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 1962,
+            "compact_seen_bytes": 1393003,
+            "best_search_cost": "321.98"
+          }
+        ],
+        "peak_rss_kib": 2541432
+      },
+      {
+        "case": "lund-distribution",
+        "algorithm": "candidate",
+        "budget_seconds": 60,
+        "status": "passed",
+        "seconds": 49.101731463335454,
+        "total": 456.97,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "dfe05ec49cf1fd0db98a62ddf28802b7d2772df20365841bb39c483bb17853a2",
+        "recipes": [
+          [
+            "smako-dinner-chicken-tomato-pilaf",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-dinner-lentil-carrot-soup",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-dinner-lentil-spinach-rice-pot",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-swedish-braised-pressed-pork-crisp-slices",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-intake-roesti",
+            "1.0.0",
+            "93ec3412-simple"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.872588320635259,
+          "memory_reclamation": 2.515672312118113,
+          "package_calculation": 14.753598409704864,
+          "nutrition": 0.1900233756750822,
+          "candidate_generation_and_qualification": 8.812552656047046,
+          "week_search": 21.250517115928233,
+          "audit": 0.004071255214512348,
+          "total": 33.05471732933074
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 473,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 744
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 1001,
+            "constraints_rejected": 528,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 8808,
+            "constraints_rejected": 8335,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 4,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 21778,
+            "constraints_rejected": 21305,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 5,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 59184,
+            "constraints_rejected": 60731,
+            "evaluation_rejected": 0,
+            "priced": 632,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 633,
+            "evaluation_cache_hits": 180,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.11556437239050865,
+            "first_valid_request_seconds": 26.989193785004318,
+            "first_valid_cost": "584.89",
+            "full_candidates": 632,
+            "improvements": 3,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 3720,
+            "anchors_total": 744,
+            "anchors_considered": 237,
+            "exchange_restarts": 2,
+            "max_full_evaluation_seconds": 0.11728721112012863,
+            "search_seconds": 21.136279438622296,
+            "anchors_deferred": 507,
+            "candidate_options_total": 3720,
+            "candidate_options_considered": 3106,
+            "candidate_options_deferred": 614,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 2072,
+            "compact_seen_bytes": 1227456,
+            "best_search_cost": "456.97"
+          }
+        ],
+        "peak_rss_kib": 2534264
+      },
+      {
+        "case": "lund-distribution",
+        "algorithm": "baseline",
+        "budget_seconds": 60,
+        "status": "passed",
+        "seconds": 49.10277639795095,
+        "total": 456.97,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "a1faa8b70b3233840c71188a9afe1c42217da213caae3bfa94096a46eb1dbd2b",
+        "recipes": [
+          [
+            "smako-dinner-lentil-carrot-soup",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-dinner-lentil-spinach-rice-pot",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-dinner-chicken-tomato-pilaf",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-intake-roesti",
+            "1.0.0",
+            "93ec3412-simple"
+          ],
+          [
+            "smako-swedish-braised-pressed-pork-crisp-slices",
+            "1.0.0",
+            "simple"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.798091620206833,
+          "memory_reclamation": 2.557131940498948,
+          "package_calculation": 16.70569645613432,
+          "nutrition": 0.2250455543398857,
+          "candidate_generation_and_qualification": 8.807636293582618,
+          "week_search": 21.777135441079736,
+          "audit": 0.003491358831524849,
+          "total": 33.56792569067329
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 359,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 744
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 1111,
+            "constraints_rejected": 752,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 7707,
+            "constraints_rejected": 7348,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 4,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 13905,
+            "constraints_rejected": 13546,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 5,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 27723,
+            "constraints_rejected": 30303,
+            "evaluation_rejected": 1,
+            "priced": 669,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 671,
+            "evaluation_cache_hits": 329,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.1328594759106636,
+            "first_valid_request_seconds": 26.537293553352356,
+            "first_valid_cost": "584.89",
+            "full_candidates": 669,
+            "improvements": 8,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 3720,
+            "anchors_total": 744,
+            "anchors_considered": 359,
+            "exchange_restarts": 8,
+            "max_full_evaluation_seconds": 0.11496173031628132,
+            "search_seconds": 21.617118002846837,
+            "anchors_deferred": 385,
+            "candidate_options_total": 3720,
+            "candidate_options_considered": 3410,
+            "candidate_options_deferred": 310,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 3603,
+            "compact_seen_bytes": 2082744,
+            "best_search_cost": "456.97"
+          }
+        ],
+        "peak_rss_kib": 2561748
+      },
+      {
+        "case": "three-three-stores",
+        "algorithm": "candidate",
+        "budget_seconds": 60,
+        "status": "passed",
+        "seconds": 49.09266503993422,
+        "total": 182.39,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "5b1da4b1acd33a01e506800a0dc92d96452c8092e0da275c63284ba913edd9da",
+        "recipes": [
+          [
+            "smako-greek-mushroom-feta-stuffed-potatoes",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-intake-roesti",
+            "1.0.0",
+            "6e8c5a64-simple"
+          ],
+          [
+            "smako-dinner-potato-tofu-cabbage-pan",
+            "1.0.0",
+            "base"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.70941324159503,
+          "memory_reclamation": 2.549672440625727,
+          "package_calculation": 17.641038097441196,
+          "nutrition": 0.21803413145244122,
+          "candidate_generation_and_qualification": 14.250454194843769,
+          "week_search": 16.545396731235087,
+          "audit": 0.003565180115401745,
+          "total": 33.67474613059312
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 445,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 836
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 969,
+            "constraints_rejected": 524,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 3490,
+            "constraints_rejected": 3468,
+            "evaluation_rejected": 0,
+            "priced": 1202,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 1203,
+            "evaluation_cache_hits": 151,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.08639694005250931,
+            "first_valid_request_seconds": 31.634681167081,
+            "first_valid_cost": "324.54",
+            "full_candidates": 1202,
+            "improvements": 8,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 2508,
+            "anchors_total": 836,
+            "anchors_considered": 223,
+            "exchange_restarts": 6,
+            "max_full_evaluation_seconds": 0.08642293978482485,
+            "search_seconds": 16.4643737655133,
+            "anchors_deferred": 613,
+            "candidate_options_total": 2508,
+            "candidate_options_considered": 1865,
+            "candidate_options_deferred": 643,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 1612,
+            "compact_seen_bytes": 792280,
+            "best_search_cost": "182.39"
+          }
+        ],
+        "peak_rss_kib": 2582788
+      },
+      {
+        "case": "three-three-stores",
+        "algorithm": "baseline",
+        "budget_seconds": 60,
+        "status": "passed",
+        "seconds": 49.050259473733604,
+        "total": 182.39,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96",
+        "recipes": [
+          [
+            "smako-dinner-potato-tofu-cabbage-pan",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-greek-mushroom-feta-stuffed-potatoes",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-intake-roesti",
+            "1.0.0",
+            "6e8c5a64-simple"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.703915877267718,
+          "memory_reclamation": 2.581515190191567,
+          "package_calculation": 17.292519537732005,
+          "nutrition": 0.21706020552664995,
+          "candidate_generation_and_qualification": 14.746721903793514,
+          "week_search": 16.080299836583436,
+          "audit": 0.00625294353812933,
+          "total": 33.74522409029305
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 239,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 836
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 793,
+            "constraints_rejected": 554,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 3304,
+            "constraints_rejected": 3516,
+            "evaluation_rejected": 0,
+            "priced": 1183,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 1183,
+            "evaluation_cache_hits": 33,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.09249053988605738,
+            "first_valid_request_seconds": 32.092332661151886,
+            "first_valid_cost": "324.54",
+            "full_candidates": 1183,
+            "improvements": 8,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 2508,
+            "anchors_total": 836,
+            "anchors_considered": 239,
+            "exchange_restarts": 6,
+            "max_full_evaluation_seconds": 0.08042479306459427,
+            "search_seconds": 16.000179585069418,
+            "anchors_deferred": 597,
+            "candidate_options_total": 2508,
+            "candidate_options_considered": 1962,
+            "candidate_options_deferred": 546,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 1627,
+            "compact_seen_bytes": 806781,
+            "best_search_cost": "182.39"
+          }
+        ],
+        "peak_rss_kib": 2569592
+      },
+      {
+        "case": "swedish-three",
+        "algorithm": "candidate",
+        "budget_seconds": 60,
+        "status": "passed",
+        "seconds": 32.311325462535024,
+        "total": 246.86,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "da4e2799669e76d48187b9da23b7da421977c0db98302558f9edb0c3702655d2",
+        "recipes": [
+          [
+            "smako-growth-20261018-lentils-paprika",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-intake-bakedpotato",
+            "1.0.0",
+            "ce4aea47-simple"
+          ],
+          [
+            "smako-swedish-lentil-root-soup",
+            "1.1.0",
+            "base"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.7497590985149145,
+          "memory_reclamation": 2.5112863816320896,
+          "package_calculation": 7.870572477579117,
+          "nutrition": 0.10601483378559351,
+          "candidate_generation_and_qualification": 4.782884404063225,
+          "week_search": 10.139218389987946,
+          "audit": 0.0045677851885557175,
+          "total": 17.587448834441602
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 274,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 137
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 553,
+            "constraints_rejected": 279,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 7387,
+            "constraints_rejected": 7273,
+            "evaluation_rejected": 0,
+            "priced": 563,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 563,
+            "evaluation_cache_hits": 100,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.030780430883169174,
+            "first_valid_request_seconds": 21.79932595230639,
+            "first_valid_cost": "324.54",
+            "full_candidates": 563,
+            "improvements": 7,
+            "stop_reason": "enumerated_proposals",
+            "singleton_priorities_computed": 411,
+            "anchors_total": 137,
+            "anchors_considered": 137,
+            "exchange_restarts": 5,
+            "max_full_evaluation_seconds": 0.08577181585133076,
+            "search_seconds": 10.118209002539515,
+            "anchors_deferred": 0,
+            "candidate_options_total": 411,
+            "candidate_options_considered": 411,
+            "candidate_options_deferred": 0,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 716,
+            "compact_seen_bytes": 323461,
+            "best_search_cost": "246.86"
+          }
+        ],
+        "peak_rss_kib": 2607296
+      },
+      {
+        "case": "swedish-three",
+        "algorithm": "baseline",
+        "budget_seconds": 60,
+        "status": "passed",
+        "seconds": 31.02963726967573,
+        "total": 246.86,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "738cfe601abda19d760fffb44d736de9f41b3842db25012d222f7c463e3665e3",
+        "recipes": [
+          [
+            "smako-swedish-lentil-root-soup",
+            "1.1.0",
+            "base"
+          ],
+          [
+            "smako-growth-20261018-lentils-paprika",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-intake-bakedpotato",
+            "1.0.0",
+            "ce4aea47-simple"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.896174654364586,
+          "memory_reclamation": 2.414790923707187,
+          "package_calculation": 7.246490532532334,
+          "nutrition": 0.10521287564188242,
+          "candidate_generation_and_qualification": 4.566044504754245,
+          "week_search": 9.113903927616775,
+          "audit": 0.004307106137275696,
+          "total": 16.226518446579576
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 137,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 137
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 413,
+            "constraints_rejected": 276,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 1707,
+            "constraints_rejected": 1828,
+            "evaluation_rejected": 0,
+            "priced": 596,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 596,
+            "evaluation_cache_hits": 72,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.035440610721707344,
+            "first_valid_request_seconds": 21.58059704490006,
+            "first_valid_cost": "324.54",
+            "full_candidates": 596,
+            "improvements": 9,
+            "stop_reason": "enumerated_proposals",
+            "singleton_priorities_computed": 411,
+            "anchors_total": 137,
+            "anchors_considered": 137,
+            "exchange_restarts": 9,
+            "max_full_evaluation_seconds": 0.0968642933294177,
+            "search_seconds": 9.092909004539251,
+            "anchors_deferred": 0,
+            "candidate_options_total": 411,
+            "candidate_options_considered": 411,
+            "candidate_options_deferred": 0,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 846,
+            "compact_seen_bytes": 366101,
+            "best_search_cost": "246.86"
+          }
+        ],
+        "peak_rss_kib": 2535436
+      },
+      {
+        "case": "extended-3-dinners",
+        "algorithm": "baseline",
+        "budget_seconds": 75,
+        "status": "passed",
+        "seconds": 64.04491897206753,
+        "total": 182.39,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96",
+        "recipes": [
+          [
+            "smako-dinner-potato-tofu-cabbage-pan",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-greek-mushroom-feta-stuffed-potatoes",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-intake-roesti",
+            "1.0.0",
+            "6e8c5a64-simple"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.782864028587937,
+          "memory_reclamation": 2.715574557892978,
+          "package_calculation": 28.69443302694708,
+          "nutrition": 0.3243317250162363,
+          "candidate_generation_and_qualification": 14.791831523180008,
+          "week_search": 31.187903630547225,
+          "audit": 0.004094390198588371,
+          "total": 49.03161783795804
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 374,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 836
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 1208,
+            "constraints_rejected": 834,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 5069,
+            "constraints_rejected": 5313,
+            "evaluation_rejected": 0,
+            "priced": 1964,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 1965,
+            "evaluation_cache_hits": 34,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.0848785201087594,
+            "first_valid_request_seconds": 16.997356412932277,
+            "first_valid_cost": "324.54",
+            "full_candidates": 1964,
+            "improvements": 8,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 2508,
+            "anchors_total": 836,
+            "anchors_considered": 374,
+            "exchange_restarts": 6,
+            "max_full_evaluation_seconds": 2.653763717971742,
+            "search_seconds": 31.09314072225243,
+            "anchors_deferred": 462,
+            "candidate_options_total": 2508,
+            "candidate_options_considered": 2389,
+            "candidate_options_deferred": 119,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 2573,
+            "compact_seen_bytes": 1164313,
+            "best_search_cost": "182.39"
+          }
+        ],
+        "peak_rss_kib": 2549288
+      },
+      {
+        "case": "extended-3-dinners",
+        "algorithm": "candidate",
+        "budget_seconds": 75,
+        "status": "passed",
+        "seconds": 64.06341111380607,
+        "total": 182.39,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "5b1da4b1acd33a01e506800a0dc92d96452c8092e0da275c63284ba913edd9da",
+        "recipes": [
+          [
+            "smako-greek-mushroom-feta-stuffed-potatoes",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-intake-roesti",
+            "1.0.0",
+            "6e8c5a64-simple"
+          ],
+          [
+            "smako-dinner-potato-tofu-cabbage-pan",
+            "1.0.0",
+            "base"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.9744991371408105,
+          "memory_reclamation": 2.657969670370221,
+          "package_calculation": 28.417129557579756,
+          "nutrition": 0.3181053586304188,
+          "candidate_generation_and_qualification": 14.53313965536654,
+          "week_search": 30.721018059179187,
+          "audit": 0.003340831957757473,
+          "total": 48.243739964440465
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 708,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 836
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 1515,
+            "constraints_rejected": 807,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 5384,
+            "constraints_rejected": 5272,
+            "evaluation_rejected": 0,
+            "priced": 1904,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 1905,
+            "evaluation_cache_hits": 330,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.09488354995846748,
+            "first_valid_request_seconds": 17.48824714589864,
+            "first_valid_cost": "324.54",
+            "full_candidates": 1904,
+            "improvements": 8,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 2508,
+            "anchors_total": 836,
+            "anchors_considered": 354,
+            "exchange_restarts": 6,
+            "max_full_evaluation_seconds": 2.504409447312355,
+            "search_seconds": 30.611588736996055,
+            "anchors_deferred": 482,
+            "candidate_options_total": 2508,
+            "candidate_options_considered": 2343,
+            "candidate_options_deferred": 165,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 2483,
+            "compact_seen_bytes": 1129143,
+            "best_search_cost": "182.39"
+          }
+        ],
+        "peak_rss_kib": 2600636
+      },
+      {
+        "case": "extended-5-dinners",
+        "algorithm": "baseline",
+        "budget_seconds": 75,
+        "status": "passed",
+        "seconds": 64.10162516310811,
+        "total": 252.58,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "7bbead1dc957170f7a499561d78ae84c5af93fadcc8a3a78ab30e3154836388e",
+        "recipes": [
+          [
+            "smako-intake-bakedpotato",
+            "1.0.0",
+            "8f233d7b-simple"
+          ],
+          [
+            "smako-dinner-tofu-pasta-ragu",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-greek-mushroom-feta-stuffed-potatoes",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-dinner-potato-tofu-cabbage-pan",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-dinner-lentil-carrot-soup",
+            "1.2.0",
+            "base"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.705240437760949,
+          "memory_reclamation": 2.6077246693894267,
+          "package_calculation": 26.271768294274807,
+          "nutrition": 0.333590354770422,
+          "candidate_generation_and_qualification": 14.692470011301339,
+          "week_search": 30.892149234190583,
+          "audit": 0.004660090431571007,
+          "total": 48.55457109771669
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 280,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 836
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 925,
+            "constraints_rejected": 645,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 3779,
+            "constraints_rejected": 3499,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 4,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 5896,
+            "constraints_rejected": 5616,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 5,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 8828,
+            "constraints_rejected": 10164,
+            "evaluation_rejected": 0,
+            "priced": 1380,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 1381,
+            "evaluation_cache_hits": 73,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.15939805284142494,
+            "first_valid_request_seconds": 17.411594319157302,
+            "first_valid_cost": "511.65",
+            "full_candidates": 1380,
+            "improvements": 13,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 4180,
+            "anchors_total": 836,
+            "anchors_considered": 280,
+            "exchange_restarts": 9,
+            "max_full_evaluation_seconds": 2.619746002368629,
+            "search_seconds": 30.75063897576183,
+            "anchors_deferred": 556,
+            "candidate_options_total": 4180,
+            "candidate_options_considered": 3729,
+            "candidate_options_deferred": 451,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 2994,
+            "compact_seen_bytes": 1812216,
+            "best_search_cost": "252.58"
+          }
+        ],
+        "peak_rss_kib": 2566784
+      },
+      {
+        "case": "extended-5-dinners",
+        "algorithm": "candidate",
+        "budget_seconds": 75,
+        "status": "passed",
+        "seconds": 64.0814007865265,
+        "total": 252.58,
+        "audit": true,
+        "saved_owned_read": true,
+        "error_type": null,
+        "error": null,
+        "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+        "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+        "fact_count": 54515,
+        "basket_sha256": "18dafea1e0f81330ab23b160aa520bc492b858441ed7cdc6591f592e4ecd56b1",
+        "recipes": [
+          [
+            "smako-greek-mushroom-feta-stuffed-potatoes",
+            "1.0.0",
+            "simple"
+          ],
+          [
+            "smako-dinner-tofu-pasta-ragu",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-dinner-potato-tofu-cabbage-pan",
+            "1.0.0",
+            "base"
+          ],
+          [
+            "smako-dinner-lentil-carrot-soup",
+            "1.2.0",
+            "base"
+          ],
+          [
+            "smako-intake-bakedpotato",
+            "1.0.0",
+            "8f233d7b-simple"
+          ]
+        ],
+        "engine_timings": {
+          "product_facts": 6.9361373456195,
+          "memory_reclamation": 2.5406435169279575,
+          "package_calculation": 26.24725926015526,
+          "nutrition": 0.3371924553066492,
+          "candidate_generation_and_qualification": 14.71149102319032,
+          "week_search": 30.614213863387704,
+          "audit": 0.0044447192922234535,
+          "total": 48.19342046417296
+        },
+        "search_diagnostics": [
+          {
+            "depth": 1,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 474,
+            "constraints_rejected": 0,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0,
+            "first_slot_priority_rows": 836
+          },
+          {
+            "depth": 2,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 1026,
+            "constraints_rejected": 552,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 3,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 3669,
+            "constraints_rejected": 3195,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 4,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 5785,
+            "constraints_rejected": 5311,
+            "evaluation_rejected": 0,
+            "priced": 0,
+            "retained": 0,
+            "beam_pruned": 0,
+            "evaluations_executed": 0,
+            "evaluation_cache_hits": 0
+          },
+          {
+            "depth": 5,
+            "attempt": 1,
+            "beam_width": 0,
+            "library_phase": "complete_first",
+            "proposals": 8616,
+            "constraints_rejected": 9553,
+            "evaluation_rejected": 0,
+            "priced": 1382,
+            "retained": 1,
+            "beam_pruned": 0,
+            "evaluations_executed": 1383,
+            "evaluation_cache_hits": 46,
+            "finalization_reserve_seconds": 12,
+            "full_results_retained_limit": 2,
+            "compact_seen_limit": 4096,
+            "first_valid_search_seconds": 0.15252067707479,
+            "first_valid_request_seconds": 17.68798386864364,
+            "first_valid_cost": "511.65",
+            "full_candidates": 1382,
+            "improvements": 7,
+            "stop_reason": "reserved_current_checkout_audit_save_time",
+            "singleton_priorities_computed": 4180,
+            "anchors_total": 836,
+            "anchors_considered": 237,
+            "exchange_restarts": 5,
+            "max_full_evaluation_seconds": 2.713436745107174,
+            "search_seconds": 30.466832441277802,
+            "anchors_deferred": 599,
+            "candidate_options_total": 4180,
+            "candidate_options_considered": 3528,
+            "candidate_options_deferred": 652,
+            "safely_excluded_options": 0,
+            "compact_seen_entries": 2776,
+            "compact_seen_bytes": 1694662,
+            "best_search_cost": "252.58"
+          }
+        ],
+        "peak_rss_kib": 2634240
+      }
+    ],
+    "process_max_rss_kib": 2774508
+  },
+  "decision": "Neither experimental proposal ordering is accepted; application code and beta are unchanged."
+}
