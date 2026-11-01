@@ -16,6 +16,7 @@ PATH = Path(__file__).parents[1] / "data/ingredients/intake-all-20261026.json"
 def entries():
     rows = json.loads(PATH.read_bytes())["ingredients"]
     rows.extend(json.loads(PATH.with_name("recipe-shapes-20261026.json").read_bytes())["ingredients"])
+    rows.extend(json.loads(PATH.with_name("expansion-20261101.json").read_bytes())["ingredients"])
     return {row["requirements"][0].removeprefix("pack:"): row for row in rows}
 
 
@@ -113,6 +114,29 @@ def reviewed_definition(row, product, fact):
                 and quantity["confidence"] == product.quantity_confidence
                 and quantity["basis"] == row["form"]):
             return True
+    return False
+
+
+def reviewed_drained_quantity(canonical, form, requirements, product, fact):
+    """A source-bound declared drained mass can also live in the review registry."""
+    for requirement in requirements:
+        row = entries().get(requirement.removeprefix('pack:'), {})
+        if row.get('name') != canonical or row.get('form') != form:
+            continue
+        for proof in row.get('reviewed_links', ()):
+            quantity = proof['quantity']
+            if (quantity.get('method') == 'reviewed_declared_drained_mass_v1'
+                    and quantity.get('form_evidence_location') == 'review_registry'
+                    and _review_identity(proof, product, fact)
+                    and product.sale_model == 'fixed_package' and product.purchase_terms is None
+                    and product.package_unit == product.usable_unit == quantity['unit'] == 'g'
+                    and quantity.get('declared_net_quantity') == product.package_quantity
+                    and 0 < quantity['usable_quantity'] == product.usable_quantity <= product.package_quantity
+                    and quantity['basis'] == form and form in {'preserved_drained', 'cooked_drained'}
+                    and product.quantity_confidence == quantity['confidence'] == 'exact'
+                    and quantity.get('source', {}).get('sha256')
+                    and quantity.get('label_source', {}).get('sha256')):
+                return True
     return False
 
 

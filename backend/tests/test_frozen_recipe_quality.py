@@ -82,7 +82,7 @@ def test_all_amended_versions_keep_history_and_original_library_and_source_bytes
     latest = {r["previous_id"]: r["runtime_id"] for r in top_five["corrected"]}
     successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     assert report["affected_variants"] == 337
-    assert len(current) == 2462
+    assert len(current) == 2570
     for row in report["recipes"]:
         assert row["previous_id"] in issued and row["previous_id"] in manifest["revocations"]
         assert row["previous_id"] not in current and successors.get(row["runtime_id"], row["runtime_id"]) in current

@@ -43,7 +43,7 @@ BEEF_SPECIFIC_CUTS = {
     "beef_roasting_cut": r"rostbiff|fransyska|notrulle",
     "beef_lean_strips_cut": r"innanlar|ytterlar|rostbiff|fransyska|flankstek",
 }
-PACK_KEYS = PACK_KEYS | BEEF_SPECIFIC_CUTS.keys() | {"rye_bread"}
+PACK_KEYS = PACK_KEYS | BEEF_SPECIFIC_CUTS.keys() | {"rye_bread", "spaghetti", "stewing_macaroni"}
 
 
 def intake_whole_identity(canonical, form, label, composition):
@@ -88,6 +88,8 @@ def compatible(keys, product, fact):
         "chicken_thigh": r"kyckling\s*lårfilé", "chicken_breast": r"kyckling\s*(?:bröst)?filé|kycklingbröst",
         "cod": r"torsk(?:filé|rygg)?", "pork_mince": r"fläskfärs", "small_pasta": r"risoni|kritharaki|orzo",
         "pasta": r"penne|fusilli|makaroner|rigatoni|farfalle|orecchiette",
+        "spaghetti": r"\b(?:spaghetti|spagetti)\b",
+        "stewing_macaroni": r"\bgammaldags idealmakaroner\b|\bidealmakaroner gammaldags\b",
         "rice_noodles": r"risnudlar", "egg_noodles": r"äggnudlar", "pita": r"pitabröd",
         "tortilla": r"vete", "gnocchi": r"gnocchi", "peanuts": r"jordnötter",
     }

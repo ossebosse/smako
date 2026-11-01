@@ -62,6 +62,11 @@ _MEAT_OR_FISH = frozenset(
         "rimmat fläsk",
         "rökt lax",
         "varmrökt lax",
+        "fläskkarré", "kalvfärs", "guanciale", "fisksås", "sardeller",
+        "hel kyckling", "nötinnanlår", "högrev", "nötstek", "getkött",
+        "nöthjärta", "oxtunga", "nötblod", "räkpasta", "torkade räkor",
+        "svensk ansjovis", "svensk ansjovis med spad", "isterband", "ister",
+        "nötkött för snabbstekning", "ostronsås",
     }
 )
 _MEAT_OR_FISH_FAMILIES = frozenset(
@@ -96,6 +101,7 @@ _OTHER_ANIMAL = frozenset(
         "färskost",
         "kefir",
         "filmjölk",
+        "parmesan", "pecorino romano", "ghee", "mjölkpulver", "evaporerad mjölk",
     }
 )
 _OTHER_ANIMAL_FAMILIES = frozenset({"dairy", "egg"})

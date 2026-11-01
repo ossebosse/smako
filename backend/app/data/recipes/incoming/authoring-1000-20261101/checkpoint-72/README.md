@@ -1,5 +1,7 @@
 # Receptcheckpoint: 72 grundrätter / 199 varianter
 
+**Senare hinderarbete:** delar av denna leverans har nu granskats och importerats. Se [aktuell åtgärdsrapport](../../../../../../../docs/reviews/recipe-unblock-20261101/REPORT.md) och dess variantkö; mottagningsresultaten nedan är historiska. Ingen betaaktivering ingår.
+
 **Komplett receptleverans mottagen 2026-11-01; granskade utkast, inte importerade.**
 ZIP-filen kompletterar den tidigare [rapportmottagningen](../checkpoint-72-reports/README.md).
 De fyra tidigare rapporterna och samtliga sex pakethashar stämmer byte för byte.
@@ -61,7 +63,9 @@ Jämför fortsättningen med både aktuellt bibliotek och denna checkpoint.
 Bevara kandidatbesluten: 72 författade, 7 öppna gränsfall och 5 avvisade.
 
 **Senare mottagning samma dag:** tre fortsättningar ger totalt 165 bas-ID:n /
-439 variant-ID:n; nästa nyskrivna paket är 019. Ett separat 72/194-arkiv saknas.
+439 variant-ID:n; nästa nyskrivna paket är 019. Ägaren har förtydligat att
+författarens hänvisning till ett separat 72/194-arkiv är felaktig: inget sådant
+arkiv finns eller ska efterfrågas. Små ZIP-leveranser fortsätter löpande.
 Följ [den aktuella beställningsjournalen](../../../../../../../docs/recipes/REQUESTING-RECIPES.md)
 och [fortsättningarnas rapport](../../../../../../../docs/reviews/recipe-continuations-20261101/REPORT.md)
 för dagens totalsiffror och konflikter. Denna checkpoint räknas bara en gång.

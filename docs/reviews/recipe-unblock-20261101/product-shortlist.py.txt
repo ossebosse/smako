@@ -1,0 +1,65 @@
+"""Read-only shortlist of retained products; matches are not approvals."""
+import hashlib
+import json
+import re
+from collections import Counter
+from pathlib import Path
+
+from app.services.ingredient_normalizer import _search_text
+
+WORK = Path('.local/recipe-unblock-20261101')
+ranked = json.loads((WORK / 'initial-blockers.json').read_bytes())['blockers']
+reference = json.loads(Path('ci/coverage-reference.json').read_bytes())
+inputs = {}
+for key in ['universe', 'facts']:
+    raw = (Path('.local/coverage-inputs') / (key + '.json')).read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == reference['files'][key]['sha256']
+    inputs[key] = json.loads(raw)
+products = inputs['universe']['universe']['products']
+facts = {tuple(k): v for k, v in inputs['facts']['facts']}
+extra = {
+    'ostronsås': ['oyster sauce'], 'porteröl': ['porter'], 'kryddnejlika': ['nejlikor'], 'parmesan': ['parmigiano'], 'fisksås': ['fish sauce'],
+    'makrutlimeblad': ['limeblad', 'kaffir'], 'grön chili': ['chili gron'],
+    'räkpasta': ['shrimp paste'], 'curryblad': ['curry leaves'],
+    'ättiksprit 12 procent': ['attiksprit', 'attika'], 'thaibasilika': ['thai basil'],
+    'anchochili': ['ancho'], 'guajillochili': ['guajillo'],
+    'pandanblad': ['pandan'], 'kashmirichilipulver': ['kashmir'],
+    'nötinnanlår': ['innanlar'], 'malen ingefära': ['ingefara malen'],
+    'toor dal': ['toor', 'tuvar'], 'färsk chili': ['chili'],
+    'bockhornsklöverblad': ['methi'], 'nötkött för snabbstekning': ['ryggbiff', 'innanlar', 'entrecote'],
+    'hel kyckling': ['kyckling hel'], 'svensk ansjovis': ['ansjovis'],
+    'svensk ansjovis med spad': ['ansjovis'], 'hårt tunnbröd': ['tunnbrod'],
+    'mörkt muscovadosocker': ['muscovado'], 'grönsaksbuljong': ['buljong gronsak'],
+    'ung jackfrukt': ['jackfruit', 'jackfrukt'], 'hominy': ['hominy'],
+    'mexikansk färsk chorizo': ['chorizo'], 'evaporerad mjölk': ['evaporated'],
+    'skalad mungdal': ['mung'], 'skalade mungbönor': ['mung'],
+    'rostade jordnötter': ['jordnotter'], 'färska majskorn': ['majs'],
+    'blåmusslor med skal': ['blamusslor'], 'svartögda bönor': ['black eye'],
+    'blötlagd stockfisk': ['stockfisk', 'stoccafisso'], 'nötstek': ['rostbiff', 'fransyska'],
+    'rimmat fläsklägg med ben': ['flasklagg'], 'oxsvans med ben': ['oxsvans'],
+    'surdegsfralla med hård skorpa': ['surdegsfralla'],
+    'pavbröd': ['pav'], 'vitt vin': ['matlagningsvin'], 'rött vin': ['matlagningsvin'],
+    'rödvin': ['matlagningsvin'], 'senapsolja': ['mustard oil'], 'palmsocker': ['palm sugar'],
+}
+groups = {}
+texts = [(p, _search_text(p['name'])) for p in products]
+for entry in ranked:
+    name = entry['identity'].split('|')[0]
+    queries = [_search_text(name), *extra.get(name, [])]
+    patterns = [re.compile(r'\b' + re.escape(q) + r'\b') for q in queries]
+    rows = []
+    for p, text in texts:
+        if not any(pattern.search(text) for pattern in patterns):
+            continue
+        fact = facts.get((p['store_id'], p['product_id']))
+        if fact and fact.get('source_snapshot_id') != (p.get('source_provenance') or {}).get('source_snapshot_id'):
+            fact = None
+        rows.append({'product': p, 'facts': fact})
+    groups[entry['identity']] = {'queries': queries, 'products': rows}
+(WORK / 'product-inventory.json').write_text(json.dumps(
+    {'reference': reference, 'groups': groups}, ensure_ascii=False), encoding='utf8')
+for entry in ranked:
+    key = entry['identity']; rows = groups[key]['products']
+    labels = Counter((r['product']['name'], r['product'].get('brand'),
+                      r['product']['package_unit'], bool(r['facts'])) for r in rows)
+    print(key, len(rows), json.dumps(list(labels.items())[:15], ensure_ascii=False), flush=True)

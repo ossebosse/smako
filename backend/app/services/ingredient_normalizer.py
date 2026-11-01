@@ -122,7 +122,7 @@ CANONICAL_ALIASES: dict[str, tuple[str, ...]] = {
     ),
     "linser": ("lins", "linser", "röda linser", "roda linser"),
     "kikärtor": ("kikärta", "kikärtor", "kikärter", "kikarta", "kikartor"),
-    "pasta": ("pasta", "spaghetti", "spagetti", "makaroner", "penne"),
+    "pasta": ("pasta", "spaghetti", "spagetti", "makaroner", "idealmakaroner", "penne"),
     "ris": ("ris", "matris", "basmatiris", "jasminris"),
     "potatis": ("potatis", "potatisar"),
     "couscous": ("couscous",),
@@ -220,6 +220,8 @@ _PRECISE_NAMES = {
         "gröna linser", "svarta linser", "gula ärtor", "klibbigt ris",
         "rimmat fläsk", "rökt lax", "varmrökt lax", "äggula", "kokta ägg",
         "kondenserad mjölk", "puffat ris",
+        "bruna bönor", "evaporerad mjölk", "svartögda bönor", "färska majskorn",
+        "grönsaksbuljong", "hel kyckling",
     )
 }
 _PRECISE_NAMES.update({"farsk koriander": "koriander", "radisor": "rädisa"})

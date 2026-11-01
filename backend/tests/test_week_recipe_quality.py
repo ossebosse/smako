@@ -80,7 +80,7 @@ def test_all_rye_variants_reject_pita_and_contradictory_formula(row):
 def test_superseded_versions_keep_exact_content_and_new_versions_are_current():
     m=manifest_entries();issued={identity(r):r for r in load_entries([*m['current'],*m['history']],ROOT)}
     active={identity(r) for r in current_recipes()}
-    assert len(active)==2462
+    assert len(active)==2570
     for row in REVIEW['corrected']:
         assert row['previous_id'] in m['revocations'] and row['previous_id'] not in active
         assert issued[row['previous_id']].design.content_sha256==row['before_content_sha256']

@@ -1,5 +1,7 @@
 # Receptfortsättning: 22 grundrätter / 54 varianter
 
+**Senare hinderarbete:** delar av denna leverans har nu granskats och importerats. Se [aktuell åtgärdsrapport](../../../../../../../docs/reviews/recipe-unblock-20261101/REPORT.md) och dess variantkö; mottagningsresultaten nedan är historiska. Ingen betaaktivering ingår.
+
 **Mottagen 2026-11-01 som utkast. Inte importerad eller betaaktiverad.**
 Originalpaket 007–008 samt 14 bevarade källfiler finns under `source/`.
 [SOURCE-MANIFEST.json](source/SOURCE-MANIFEST.json) binder originalens byte,
@@ -12,10 +14,10 @@ Resultat, konkreta innehållshinder och nästa arbete finns i
 och [native-kvittot](../../../../../../../docs/reviews/recipe-continuations-20261101/NATIVE-AUDIT-22.json).
 
 Totalt faktiskt mottaget inom beställningen är nu 165 bas-ID:n / 439 variant-ID:n.
-Författarens senare totalsiffror inkluderar ett saknat separat arkiv med
-72 grundrätter / 194 varianter. Det har paket-ID 007–011, varav 007–008
-återanvänds med andra hashvärden i 22-leveransen. Identifiera original med
-leveransmapp + hash och utred rapporterade ID-/konceptkrockar före import.
+Ägaren har därefter bekräftat att något separat 72/194-arkiv inte finns.
+Författarens hänvisningar till detta är felaktiga och stoppar inte fortsatt
+gransknings-/importarbete. De refererade extra ID:na räknas inte som mottagna.
+Nya leveranser väntas löpande med cirka 10–40 grundrätter per ZIP.
 
 Nästa nyskrivna paket är **019**. Följ den uppdaterade
 [beställningsjournalen](../../../../../../../docs/recipes/REQUESTING-RECIPES.md).

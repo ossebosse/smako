@@ -20,29 +20,60 @@ EGG_REVIEW = Path('docs/reviews/egg-preparation-20261028/recipe-review.json')
 MINT_LEAF_REVIEW = Path('docs/reviews/mint-leaf-preparation-20261028/recipe-review.json')
 CORN_REVIEW = Path('docs/reviews/whole-corn-20261028/recipe-review.json')
 TOP_FIVE_REVIEW = Path('docs/reviews/top-five-ingredients-20261028/recipe-review.json')
+EXPANSION_REVIEW = Path('docs/reviews/recipe-unblock-20261101/library-transition.json')
+
+
+def checked_additive_transition(review):
+    """Verify that the reviewed edge only appends disjoint, hash-bound recipes."""
+    from app.services.meal_library_content import encoded, identity, load_entries
+
+    before, after = review['before_manifest'], review['after_manifest']
+    expected = {**before, 'current': before['current'] + review['added_entries']}
+    if (after != expected or review['corrected']
+            or hashlib.sha256(encoded(before)).hexdigest() != review['before_manifest_file_sha256']
+            or hashlib.sha256(encoded(after)).hexdigest() != review['after_manifest_file_sha256']):
+        raise ValueError('Changed coverage comparison scope: unreviewed additive manifest')
+    old = {identity(r) for r in load_entries(before['current'] + before['history'])}
+    added = {identity(r): r.design.content_sha256 for r in load_entries(review['added_entries'])}
+    declared = {r['runtime_id']: r['content_sha256'] for r in review['added']}
+    if not added or old.intersection(added) or added != declared or len(declared) != len(review['added']):
+        raise ValueError('Changed coverage comparison scope: unreviewed additive recipes')
+    return review
 
 
 def reviewed_recipe_transition(scope, compared_scope, variants):
-    """Allow only the recorded manifest transition and complete successor set.
+    """Follow only recorded manifest edges and complete successor sets.
 
     This changes comparison identities, never old checkout receipts or outcomes.
     Unknown recipe/manifest drift still fails closed.
     """
-    review = next((row for path in (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW) if path.exists()
-                   and (row := json.loads(path.read_bytes()))
-                   and scope['manifest_sha256'] == row['before_manifest_file_sha256']
-                   and compared_scope['manifest_sha256'] == row['after_manifest_file_sha256']), None)
-    if review is None:
-        raise ValueError('Changed coverage comparison scope: unreviewed manifest transition')
     before = [r['current_id'] for r in variants]
-    replacements = {r['previous_id']: r['runtime_id'] for r in review['corrected']}
-    after = [replacements.get(r, r) for r in before]
-    if (digest(before) != scope['recipe_ids_sha256']
-            or digest(after) != compared_scope['recipe_ids_sha256']
-            or not set(replacements) <= set(before)
-            or len(set(after)) != len(after)):
+    if digest(before) != scope['recipe_ids_sha256'] or len(set(before)) != len(before):
         raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
-    return after
+    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW)
+    reviews = [(path, json.loads(path.read_bytes())) for path in paths if path.exists()]
+    pending = [(scope['manifest_sha256'], before)]
+    visited = set()
+    while pending:
+        manifest, ids = pending.pop(0)
+        if (manifest, tuple(ids)) in visited:
+            continue
+        visited.add((manifest, tuple(ids)))
+        if manifest == compared_scope['manifest_sha256']:
+            if digest(ids) != compared_scope['recipe_ids_sha256']:
+                raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
+            return ids
+        for path, review in reviews:
+            if manifest != review['before_manifest_file_sha256']:
+                continue
+            if path == EXPANSION_REVIEW:
+                checked_additive_transition(review)
+            replacements = {r['previous_id']: r['runtime_id'] for r in review['corrected']}
+            after = [replacements.get(r, r) for r in ids]
+            if not set(replacements) <= set(ids) or len(set(after)) != len(after):
+                raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
+            pending.append((review['after_manifest_file_sha256'], after))
+    raise ValueError('Changed coverage comparison scope: unreviewed manifest transition')
 
 
 def digest(value):
