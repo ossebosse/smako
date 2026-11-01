@@ -5,6 +5,10 @@ prisvinst i jämförelserna. Appkoden är återställd till main och betan ligge
 kvar på `app-b7c8d0506e23-c18e4ba9`. Ordinarie 60-sekundersbudget består.
 Detta visar inte att nuvarande menyer är globalt billigast.
 
+[Slutlig budgetkontroll av sju middagar](BUDGET.md): även 60, 65 och 75 s
+budget gav samma 321,98-kronorskorg. Fem ytterligare godkända anrop;
+totalt 35 godkända och fyra blockerade försök. Ingen runtimeändring.
+
 ## Förslag och beslut
 
 1. Samtidiga tvåreceptbyten: högst åtta prioriterade alternativ per plats,
@@ -91,3 +95,7 @@ Prisordning och paketlikhet är heuristik, inga giltighetsintyg eller
 kostnadsgränser. Enstaka prov är inga p95-/samtidighets-/fullvalsgarantier.
 Råunderlag och körhjälpare finns under `.local/cheaper-menus-20261101/`.
 Referensdata och gamla mätningar är inte omskrivna.
+
+För 75-s-försöken används separat uppmätt väggtid. Originalspårets
+`first_valid_request_seconds` antar 60 s och är inte ett giltigt
+anropsmått vid den utökade försöksbudgeten.

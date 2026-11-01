@@ -1,13 +1,15 @@
-# 2026-11-01: Två prövade sökförslag gav ingen godkänd prisvinst
+# 2026-11-01: Billigare menysökning prövad; nuvarande sökning behålls
 
-[Uppvärmda prisjämförelser](reviews/cheaper-menu-search-20261101/REPORT.md):
-parbyten och extra prisordnade hela menyförslag är avvisade och återställda.
-Samma pris i sex matchade fall; det utökade sjudagarsprovet godkänner inte
-prisordningsändringen. 75 s budget gav inga besparingar för tre/fem middagar.
-30 godkända, sparade/återlästa menyer; fyra äldre Malmöprov blockerade av
-saknade/underkända valda ICA-kontexter, utan lättade krav. Se mätgränserna.
-Endast dokumentation och arkiverade patchar; appkod och beta är oförändrade
-på **app-b7c8d0506e23-c18e4ba9**. Ingen tidsgräns eller inställning ändrad.
+[PR 60](https://github.com/ossebosse/smako/pull/60) är mergad efter gröna kontroller.
+[Prisjämförelsen](reviews/cheaper-menu-search-20261101/REPORT.md) avvisar
+parbyten och extra prisordnade hela menyförslag; appkoden är återställd.
+[Slutligt sjudagarsprov](reviews/cheaper-menu-search-20261101/BUDGET.md):
+60/65/75 s budget gav samma 321,98 kr, med cirka 49/54/64 s leverans.
+Inte heller tre/fem middagar blev billigare av 75 s budget.
+35 godkända, sparade/ägt återlästa menyer; fyra äldre Malmöprov blockerade
+av oförändrad kontroll av valda ICA-kontexter. Se mätgränser och körordning.
+Endast dokumentation/arkiverade patchar. App, 60-s-gräns och beta består
+på **app-b7c8d0506e23-c18e4ba9**; ingen ny aktivering eller inställningsändring.
 
 ---
 

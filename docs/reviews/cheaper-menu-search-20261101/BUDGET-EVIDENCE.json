@@ -1,0 +1,1030 @@
+{
+  "baseline_image": "sha256:a396c7774515c738a6b3909fb2b776d897bc48b29ddfc2d1064264f2ff97b8ad",
+  "raw_sha256": "e9ea57ed669c2a2017e4c328e4eea40e391a56252ee3b740f6f0a57bd725ce87",
+  "probe_sha256": "8fc303ca4eced7cf5b1f5a2ffcd1ec505deb2baa354be1d48f0f75a41e19e8d7",
+  "operation_lease": true,
+  "budget_cases_sha256": "d0e6498751938931a24a4b1fc4b043cd761ffe8cfb459144578e8da824e357e1",
+  "identical_request_except_external_deadline": true,
+  "preparation": [
+    {
+      "kind": "loaded",
+      "seconds": 92.39614380709827,
+      "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+    },
+    {
+      "kind": "pricing_warm",
+      "seconds": 12.518809822387993,
+      "status": "miss_filled"
+    },
+    {
+      "kind": "source_warm",
+      "mode": "current",
+      "seconds": 84.3831697134301,
+      "report": {
+        "status": "ready",
+        "universes": [
+          {
+            "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+            "shared_preparation": {
+              "ready": true,
+              "content_variants": 2462,
+              "portion_views": {
+                "1": 2462,
+                "2": 2462,
+                "3": 2462,
+                "4": 2462
+              },
+              "persistence_failures": 0
+            },
+            "status": "ready",
+            "fact_rows": 54515,
+            "seconds": 27.195
+          },
+          {
+            "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+            "shared_preparation": {
+              "ready": true,
+              "content_variants": 2462,
+              "portion_views": {
+                "1": 2462,
+                "2": 2462,
+                "3": 2462,
+                "4": 2462
+              },
+              "persistence_failures": 0
+            },
+            "status": "ready",
+            "fact_rows": 95998,
+            "seconds": 46.172
+          }
+        ],
+        "library": {
+          "status": "ready",
+          "seconds": 11.01
+        }
+      }
+    }
+  ],
+  "measurements": [
+    {
+      "case": "seven-prime",
+      "algorithm": "baseline",
+      "budget_seconds": 60,
+      "status": "passed",
+      "seconds": 49.088137592189014,
+      "total": 321.98,
+      "audit": true,
+      "saved_owned_read": true,
+      "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "basket_sha256": "082c243945fc48695434989a24aa9248ca6c768eaf29c7b74c6a05eb02c7212c",
+      "recipes": [
+        [
+          "smako-dinner-tofu-pasta-ragu",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-italian-minestrone-whitebean-pasta-vegetables",
+          "1.0.0",
+          "simple"
+        ],
+        [
+          "smako-dinner-pea-cottage-pasta",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-spinach-rice-pot",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-carrot-soup",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-dinner-potato-tofu-cabbage-pan",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-indian-peas-spinach-reduced-milk-sauce",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "engine_timings": {
+        "product_facts": 6.594844536855817,
+        "memory_reclamation": 2.487532751634717,
+        "package_calculation": 12.610253216698766,
+        "nutrition": 0.1658608615398407,
+        "candidate_generation_and_qualification": 20.039323899894953,
+        "week_search": 11.434461052529514,
+        "audit": 0.004063962027430534,
+        "total": 34.28957218769938
+      },
+      "search_diagnostics": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 111,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0,
+          "first_slot_priority_rows": 836
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 357,
+          "constraints_rejected": 246,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 1144,
+          "constraints_rejected": 1033,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 2065,
+          "constraints_rejected": 1954,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 3231,
+          "constraints_rejected": 3120,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 6,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 3949,
+          "constraints_rejected": 3838,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 7,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 5189,
+          "constraints_rejected": 6076,
+          "evaluation_rejected": 0,
+          "priced": 445,
+          "retained": 1,
+          "beam_pruned": 0,
+          "evaluations_executed": 445,
+          "evaluation_cache_hits": 213,
+          "finalization_reserve_seconds": 12,
+          "full_results_retained_limit": 2,
+          "compact_seen_limit": 4096,
+          "first_valid_search_seconds": 0.21242495719343424,
+          "first_valid_request_seconds": 36.94105882383883,
+          "first_valid_cost": "687.59",
+          "full_candidates": 445,
+          "improvements": 17,
+          "stop_reason": "reserved_current_checkout_audit_save_time",
+          "singleton_priorities_computed": 5852,
+          "anchors_total": 836,
+          "anchors_considered": 111,
+          "exchange_restarts": 14,
+          "max_full_evaluation_seconds": 0.10763664823025465,
+          "search_seconds": 11.271428206935525,
+          "anchors_deferred": 725,
+          "candidate_options_total": 5852,
+          "candidate_options_considered": 3501,
+          "candidate_options_deferred": 2351,
+          "safely_excluded_options": 0,
+          "compact_seen_entries": 1407,
+          "compact_seen_bytes": 1038598,
+          "best_search_cost": "321.98"
+        }
+      ],
+      "peak_rss_kib": 2453764
+    },
+    {
+      "case": "seven-60-a",
+      "algorithm": "baseline",
+      "budget_seconds": 60,
+      "status": "passed",
+      "seconds": 49.009462730027735,
+      "total": 321.98,
+      "audit": true,
+      "saved_owned_read": true,
+      "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "basket_sha256": "082c243945fc48695434989a24aa9248ca6c768eaf29c7b74c6a05eb02c7212c",
+      "recipes": [
+        [
+          "smako-dinner-tofu-pasta-ragu",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-italian-minestrone-whitebean-pasta-vegetables",
+          "1.0.0",
+          "simple"
+        ],
+        [
+          "smako-dinner-pea-cottage-pasta",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-spinach-rice-pot",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-carrot-soup",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-dinner-potato-tofu-cabbage-pan",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-indian-peas-spinach-reduced-milk-sauce",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "engine_timings": {
+        "product_facts": 6.741116901859641,
+        "memory_reclamation": 2.5623414078727365,
+        "package_calculation": 14.537622371688485,
+        "nutrition": 0.20783668290823698,
+        "candidate_generation_and_qualification": 14.22711147647351,
+        "week_search": 16.496455010958016,
+        "audit": 0.004404852166771889,
+        "total": 33.62932975869626
+      },
+      "search_diagnostics": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 161,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0,
+          "first_slot_priority_rows": 836
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 509,
+          "constraints_rejected": 348,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 1756,
+          "constraints_rejected": 1595,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 3077,
+          "constraints_rejected": 2916,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 4524,
+          "constraints_rejected": 4363,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 6,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 5493,
+          "constraints_rejected": 5332,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 7,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 7388,
+          "constraints_rejected": 8687,
+          "evaluation_rejected": 0,
+          "priced": 642,
+          "retained": 1,
+          "beam_pruned": 0,
+          "evaluations_executed": 643,
+          "evaluation_cache_hits": 298,
+          "finalization_reserve_seconds": 12,
+          "full_results_retained_limit": 2,
+          "compact_seen_limit": 4096,
+          "first_valid_search_seconds": 0.18243285082280636,
+          "first_valid_request_seconds": 31.84098496194929,
+          "first_valid_cost": "687.59",
+          "full_candidates": 642,
+          "improvements": 17,
+          "stop_reason": "reserved_current_checkout_audit_save_time",
+          "singleton_priorities_computed": 5852,
+          "anchors_total": 836,
+          "anchors_considered": 161,
+          "exchange_restarts": 14,
+          "max_full_evaluation_seconds": 0.1057961331680417,
+          "search_seconds": 16.34346655011177,
+          "anchors_deferred": 675,
+          "candidate_options_total": 5852,
+          "candidate_options_considered": 3974,
+          "candidate_options_deferred": 1878,
+          "safely_excluded_options": 0,
+          "compact_seen_entries": 2067,
+          "compact_seen_bytes": 1462255,
+          "best_search_cost": "321.98"
+        }
+      ],
+      "peak_rss_kib": 2525168
+    },
+    {
+      "case": "seven-65",
+      "algorithm": "baseline",
+      "budget_seconds": 65,
+      "status": "passed",
+      "seconds": 54.07859120704234,
+      "total": 321.98,
+      "audit": true,
+      "saved_owned_read": true,
+      "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "basket_sha256": "082c243945fc48695434989a24aa9248ca6c768eaf29c7b74c6a05eb02c7212c",
+      "recipes": [
+        [
+          "smako-dinner-tofu-pasta-ragu",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-italian-minestrone-whitebean-pasta-vegetables",
+          "1.0.0",
+          "simple"
+        ],
+        [
+          "smako-dinner-pea-cottage-pasta",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-spinach-rice-pot",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-carrot-soup",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-dinner-potato-tofu-cabbage-pan",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-indian-peas-spinach-reduced-milk-sauce",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "engine_timings": {
+        "product_facts": 6.787119727581739,
+        "memory_reclamation": 2.467607442289591,
+        "package_calculation": 17.022401463240385,
+        "nutrition": 0.2587593123316765,
+        "candidate_generation_and_qualification": 13.981281104497612,
+        "week_search": 21.83209940046072,
+        "audit": 0.0033874791115522385,
+        "total": 38.62182604614645
+      },
+      "search_diagnostics": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 205,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0,
+          "first_slot_priority_rows": 836
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 672,
+          "constraints_rejected": 467,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 2383,
+          "constraints_rejected": 2178,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 3979,
+          "constraints_rejected": 3774,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 5982,
+          "constraints_rejected": 5777,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 6,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 7278,
+          "constraints_rejected": 7073,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 7,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 9487,
+          "constraints_rejected": 11187,
+          "evaluation_rejected": 0,
+          "priced": 872,
+          "retained": 1,
+          "beam_pruned": 0,
+          "evaluations_executed": 872,
+          "evaluation_cache_hits": 298,
+          "finalization_reserve_seconds": 12,
+          "full_results_retained_limit": 2,
+          "compact_seen_limit": 4096,
+          "first_valid_search_seconds": 0.18326333723962307,
+          "first_valid_request_seconds": 26.529203762300313,
+          "first_valid_cost": "687.59",
+          "full_candidates": 872,
+          "improvements": 17,
+          "stop_reason": "reserved_current_checkout_audit_save_time",
+          "singleton_priorities_computed": 5852,
+          "anchors_total": 836,
+          "anchors_considered": 206,
+          "exchange_restarts": 14,
+          "max_full_evaluation_seconds": 0.09598488360643387,
+          "search_seconds": 21.657035022974014,
+          "anchors_deferred": 630,
+          "candidate_options_total": 5852,
+          "candidate_options_considered": 4384,
+          "candidate_options_deferred": 1468,
+          "safely_excluded_options": 0,
+          "compact_seen_entries": 2741,
+          "compact_seen_bytes": 2013149,
+          "best_search_cost": "321.98"
+        }
+      ],
+      "peak_rss_kib": 2530436
+    },
+    {
+      "case": "seven-75",
+      "algorithm": "baseline",
+      "budget_seconds": 75,
+      "status": "passed",
+      "seconds": 64.1447505634278,
+      "total": 321.98,
+      "audit": true,
+      "saved_owned_read": true,
+      "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "basket_sha256": "082c243945fc48695434989a24aa9248ca6c768eaf29c7b74c6a05eb02c7212c",
+      "recipes": [
+        [
+          "smako-dinner-tofu-pasta-ragu",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-italian-minestrone-whitebean-pasta-vegetables",
+          "1.0.0",
+          "simple"
+        ],
+        [
+          "smako-dinner-pea-cottage-pasta",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-spinach-rice-pot",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-carrot-soup",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-dinner-potato-tofu-cabbage-pan",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-indian-peas-spinach-reduced-milk-sauce",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "engine_timings": {
+        "product_facts": 6.610697417519987,
+        "memory_reclamation": 2.6111748814582825,
+        "package_calculation": 23.510606390424073,
+        "nutrition": 0.3213044572621584,
+        "candidate_generation_and_qualification": 14.297033227980137,
+        "week_search": 31.629042685963213,
+        "audit": 0.004854652099311352,
+        "total": 48.892847773618996
+      },
+      "search_diagnostics": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 261,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0,
+          "first_slot_priority_rows": 836
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 868,
+          "constraints_rejected": 607,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 3174,
+          "constraints_rejected": 2913,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 5028,
+          "constraints_rejected": 4767,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 7623,
+          "constraints_rejected": 7362,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 6,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 9452,
+          "constraints_rejected": 9191,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 7,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 12150,
+          "constraints_rejected": 14345,
+          "evaluation_rejected": 0,
+          "priced": 1161,
+          "retained": 1,
+          "beam_pruned": 0,
+          "evaluations_executed": 1161,
+          "evaluation_cache_hits": 298,
+          "finalization_reserve_seconds": 12,
+          "full_results_retained_limit": 2,
+          "compact_seen_limit": 4096,
+          "first_valid_search_seconds": 0.21388574596494436,
+          "first_valid_request_seconds": 16.77533688209951,
+          "first_valid_cost": "687.59",
+          "full_candidates": 1161,
+          "improvements": 17,
+          "stop_reason": "reserved_current_checkout_audit_save_time",
+          "singleton_priorities_computed": 5852,
+          "anchors_total": 836,
+          "anchors_considered": 262,
+          "exchange_restarts": 14,
+          "max_full_evaluation_seconds": 2.5315628414973617,
+          "search_seconds": 31.44107343070209,
+          "anchors_deferred": 574,
+          "candidate_options_total": 5852,
+          "candidate_options_considered": 4931,
+          "candidate_options_deferred": 921,
+          "safely_excluded_options": 0,
+          "compact_seen_entries": 3581,
+          "compact_seen_bytes": 2564300,
+          "best_search_cost": "321.98"
+        }
+      ],
+      "peak_rss_kib": 2553096
+    },
+    {
+      "case": "seven-60-b",
+      "algorithm": "baseline",
+      "budget_seconds": 60,
+      "status": "passed",
+      "seconds": 49.08389006089419,
+      "total": 321.98,
+      "audit": true,
+      "saved_owned_read": true,
+      "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+      "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+      "fact_count": 54515,
+      "basket_sha256": "082c243945fc48695434989a24aa9248ca6c768eaf29c7b74c6a05eb02c7212c",
+      "recipes": [
+        [
+          "smako-dinner-tofu-pasta-ragu",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-italian-minestrone-whitebean-pasta-vegetables",
+          "1.0.0",
+          "simple"
+        ],
+        [
+          "smako-dinner-pea-cottage-pasta",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-spinach-rice-pot",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-dinner-lentil-carrot-soup",
+          "1.2.0",
+          "base"
+        ],
+        [
+          "smako-dinner-potato-tofu-cabbage-pan",
+          "1.0.0",
+          "base"
+        ],
+        [
+          "smako-indian-peas-spinach-reduced-milk-sauce",
+          "1.0.0",
+          "simple"
+        ]
+      ],
+      "engine_timings": {
+        "product_facts": 6.572559643536806,
+        "memory_reclamation": 2.7049177018925548,
+        "package_calculation": 14.619444993324578,
+        "nutrition": 0.21262843906879425,
+        "candidate_generation_and_qualification": 13.932181212119758,
+        "week_search": 16.937645515426993,
+        "audit": 0.004902033135294914,
+        "total": 33.92489750031382
+      },
+      "search_diagnostics": [
+        {
+          "depth": 1,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 162,
+          "constraints_rejected": 0,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0,
+          "first_slot_priority_rows": 836
+        },
+        {
+          "depth": 2,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 513,
+          "constraints_rejected": 351,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 3,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 1763,
+          "constraints_rejected": 1601,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 4,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 3086,
+          "constraints_rejected": 2924,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 5,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 4534,
+          "constraints_rejected": 4372,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 6,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 5505,
+          "constraints_rejected": 5343,
+          "evaluation_rejected": 0,
+          "priced": 0,
+          "retained": 0,
+          "beam_pruned": 0,
+          "evaluations_executed": 0,
+          "evaluation_cache_hits": 0
+        },
+        {
+          "depth": 7,
+          "attempt": 1,
+          "beam_width": 0,
+          "library_phase": "complete_first",
+          "proposals": 7405,
+          "constraints_rejected": 8718,
+          "evaluation_rejected": 0,
+          "priced": 652,
+          "retained": 1,
+          "beam_pruned": 0,
+          "evaluations_executed": 653,
+          "evaluation_cache_hits": 298,
+          "finalization_reserve_seconds": 12,
+          "full_results_retained_limit": 2,
+          "compact_seen_limit": 4096,
+          "first_valid_search_seconds": 0.22837662417441607,
+          "first_valid_request_seconds": 31.476199382916093,
+          "first_valid_cost": "687.59",
+          "full_candidates": 652,
+          "improvements": 17,
+          "stop_reason": "reserved_current_checkout_audit_save_time",
+          "singleton_priorities_computed": 5852,
+          "anchors_total": 836,
+          "anchors_considered": 162,
+          "exchange_restarts": 14,
+          "max_full_evaluation_seconds": 0.10207278188318014,
+          "search_seconds": 16.755595836788416,
+          "anchors_deferred": 674,
+          "candidate_options_total": 5852,
+          "candidate_options_considered": 4000,
+          "candidate_options_deferred": 1852,
+          "safely_excluded_options": 0,
+          "compact_seen_entries": 2092,
+          "compact_seen_bytes": 1479041,
+          "best_search_cost": "321.98"
+        }
+      ],
+      "peak_rss_kib": 2539812
+    }
+  ],
+  "process_peak_rss_kib": 2771576,
+  "ready_after": {
+    "22350": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-b7c8d0506e23-c18e4ba9",
+      "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+    },
+    "21120": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-b7c8d0506e23-c18e4ba9",
+      "price_universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02"
+    }
+  },
+  "operation_status_after": {
+    "checked_at": "2026-11-01T08:26:52.028784+00:00",
+    "runtime": "source-ops-8a53beb80e43",
+    "storage_maintenance": "complete",
+    "runner": {
+      "completed_at": "2026-11-01T08:17:02.961851+00:00",
+      "exit_code": 2,
+      "runtime_reload": {
+        "reason": "operation_lock_held",
+        "status": "not_attempted"
+      },
+      "started_at": "2026-11-01T08:17:02.960703+00:00",
+      "status": "degraded"
+    }
+  }
+}
