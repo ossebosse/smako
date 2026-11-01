@@ -199,7 +199,8 @@ def validate_pack_bytes(source, *, label="content pack"):
                                          "ägg", "äggula", "äggvita", "fisk", "lax"}
                     and i.form == "raw_edible")
                     or (i.form == "as_sold" and i.canonical_name in {
-                        "ägg", "hel kyckling", "oxsvans med ben", "rimmat fläsklägg", "nötblod"})
+                        "ägg", "hel kyckling", "oxsvans med ben", "rimmat fläsklägg", "nötblod",
+                        "ungnötslever", "råa skalade vannameiräkor", "blåmusselkött utan skal"})
                     for i in recipe.ingredients):
                 raise ValueError(f"{ref}.design.method: rå animalisk ingrediens kräver varm metod")
             sha = content_hash(recipe)

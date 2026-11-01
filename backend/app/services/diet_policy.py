@@ -52,6 +52,7 @@ _MEAT_OR_FISH = frozenset(
         "räkor",
         "skaldjur",
         "råa räkor",
+        "råa skalade vannameiräkor", "blåmusselkött utan skal",
         "musslor",
         "bläckfisk",
         "makrill",
@@ -63,11 +64,11 @@ _MEAT_OR_FISH = frozenset(
         "rökt lax",
         "varmrökt lax",
         "fläskkarré", "kalvfärs", "guanciale", "fisksås", "sardeller",
-        "hel kyckling", "nötinnanlår", "högrev", "nötstek", "getkött",
+        "hel kyckling", "nötinnanlår", "högrev", "nötstek", "getkött", "ungnötslever",
         "nöthjärta", "oxtunga", "nötblod", "räkpasta", "torkade räkor",
         "svensk ansjovis", "svensk ansjovis med spad", "isterband", "ister",
         "nötkött för snabbstekning", "ostronsås", "worcestershiresås",
-        "oxsvans med ben", "rimmat fläsklägg",
+        "oxsvans med ben", "rimmat fläsklägg", "ätklar inläggningssill", "corned beef på burk",
     }
 )
 _MEAT_OR_FISH_FAMILIES = frozenset(

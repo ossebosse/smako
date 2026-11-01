@@ -9,6 +9,34 @@ from app.services.personal_policy import ProductFacts
 
 TARGET = Path('backend/app/data/ingredients/expansion-round2-20261101.json')
 REVIEWS = {
+    'ätklar inläggningssill|preserved_drained|g': (
+        [('5minuters Sill Hela Filéer', 'Abba')],
+        'Abba 5-minuterssill hela filéer, färdigbehandlad och ätklar direkt enligt tillverkaren. Inte rå salt sill som måste vattnas ur eller läggas in. Förpackning 430 g med 210 g deklarerad avrunnen sill; butikens 210 g är redan avrunnen jämförmängd. Ingen ytterligare avdragsfaktor eller näringsöverföring från lagen.',
+        'https://www.mathem.se/se/products/10375-abba-sill-hela-fileer-5-minuter/'),
+    'saltgurka|preserved_drained|g': (
+        [('Saltgurka Hel', 'Felix')],
+        'Felix hela saltgurkor med senapsfrö i saltare ättikslag. Inte alias för sötsur ättiksgurka eller smörgåsgurka. 700 g burk med 340 g deklarerad avrunnen gurka; butikens 340 g är redan avrunnen jämförmängd. Endast explicit receptanpassning med egen mängd; ingen lag konsumeras.',
+        'https://www.mathem.se/se/products/9544-felix-saltgurka-hel/'),
+    'corned beef på burk|as_sold|g': (
+        [('Corned Beef', 'Al Madina')],
+        'Al Madina Corned Beef i 340 g-konserv, färdigkokt saltat finfördelat nötkött. Inte rå rimmad oxbringa, rå köttfärs eller skivad pastrami. Hela deklarerade konservinnehållet används inklusive fett och gelé. Egen receptversion och ny dos, ingen rå-kokt-konvertering eller överförd näringsdeklaration.',
+        'https://www.almadina.se/products'),
+    'ungnötslever|as_sold|g': (
+        [('Ungnötslever i Bit Sverige', 'Garant')],
+        'Rå ungnötslever i hel bit från Garant, inköpt bruttovikt före eventuell putsning av hinnor. Inte fläsklever, kalvlever, leverpastej eller djurfoder. Källans variabla cirka 800 g och kilopris bevaras; tillverkarens aktuella cirka 600 g byts inte in i referensen. Ny receptversion anger byte från gris till ungnöt och okänt putsutbyte.',
+        'https://www.garantskafferiet.se/vara-produkter/svenskt-kott--fagel/not-flask--kalv/ungnotslever-600g/'),
+    'kokbanan med skal|as_sold|g': (
+        [('Kokbanan', None)],
+        'Hel kokbanan/matbanan inklusive tjockt oätligt skal, inte vanlig dessertbanan. Källans variabla cirka 300 g och kilopris bevaras. Receptet kräver mogen gul/svartfläckig frukt och anger kontroll före matlagning; butiksunderlaget bevisar inte mognadsgrad. Ingen skalad vikt, mogen andel eller skalprocent antas.',
+        'https://www.hemkop.se/produkt/Kokbanan-100153496_KG'),
+    'råa skalade vannameiräkor|as_sold|g': (
+        [('Vannameiräka Utan Skal 26/30 Fryst', 'Miramar')],
+        'Miramar råa skalade vannameiräkor 26/30 i 400 g-förpackning, GTIN 7350001292809 och artikel 101240180_ST. Hela deklarerade produkten innehåller även vatten, salt och antioxidationsmedel; 90 procent i ingredienslistan används inte som avrunnen andel. Inte kokta räkor eller skalbärande räkor. Kylupptining och genomkokning krävs.',
+        'https://www.dabas.com/productsheet/07350001292809'),
+    'blåmusselkött utan skal|as_sold|g': (
+        [('Musslor', 'Garant')],
+        'Garant djupfrysta chilenska blåmusslor utan skal, Mytilus chilensis, 200 g. Artikel 101502109_ST, GTIN 7311043004386. Inte levande musslor med skal, vongole eller musslor i konservlag. Ingen skalandel eller rå/kokt viktkonvertering antas; uppvägd fryst produkt genomhettas enligt förpackningen i granskad receptversion.',
+        'https://www.garantskafferiet.se/vara-produkter/fisk--skaldjur/kott-fagel--fisk/blamusslor-utan-skal/'),
     'rostade saltade pistaschkärnor|as_sold|g': (
         [('Pistaschkärnor Utan Skal Rostade Och Saltade', 'Garant')],
         'Garant 65 g rostade saltade pistaschkärnor utan skal. Tillverkarens specifika pistaschkärnor-sida bekräftar ätliga kärnor och salt 1,8 procent. Inte råa osaltade nötter eller den separata äldre pistaschnötter-sidan med motstridigt skalbesked. Explicit saltad garnityr i nya receptversioner; ingen skalandel antas.',
@@ -156,14 +184,17 @@ def main(args):
     for key, (labels, definition, source_url) in REVIEWS.items():
         name, form, unit = key.split('|')
         gross_variable = key in {'hel kyckling|as_sold|g', 'oxsvans med ben|as_sold|g',
-                                 'rimmat fläsklägg|as_sold|g'}
+                                 'rimmat fläsklägg|as_sold|g', 'ungnötslever|as_sold|g',
+                                 'kokbanan med skal|as_sold|g'}
         requirement = 'intake_all_round2_' + hashlib.sha256(key.encode()).hexdigest()[:12]
         links = []
         for candidate in candidates.values():
             p, fact = candidate['product'], candidate['facts']
             if (p['name'], p.get('brand')) not in labels:
                 continue
-            if name == 'svensk ansjovis' and p['package_quantity'] != 79:
+            drained = {'svensk ansjovis': (125, 79), 'ätklar inläggningssill': (430, 210),
+                       'saltgurka': (700, 340)}.get(name)
+            if drained and p['package_quantity'] != drained[1]:
                 continue
             if (not fact or fact['conflicts'] or p['package_unit'] != unit
                     or p['usable_unit'] != unit or not p['package_quantity']
@@ -189,17 +220,20 @@ def main(args):
                                    'usable_quantity': p['usable_quantity']})
             if source_url:
                 proof['culinary_source_url'] = source_url
-            if name == 'svensk ansjovis':
-                excerpt = 'Grebbestads Ansjovisfilé 125 g x 20 (skarpsillvikt 79 g).'
+            if drained:
+                net, usable = drained
+                excerpt = {'svensk ansjovis': 'Grebbestads Ansjovisfilé 125 g x 20 (skarpsillvikt 79 g).',
+                           'ätklar inläggningssill': '430 g, Abba. Avrunnen vikt: 210 gram. Leverantör: Orkla Foods Sverige.',
+                           'saltgurka': '700 g, Felix. Avrunnen vikt: 340 gram. Leverantör: Orkla Foods Sverige.'}[name]
                 source = {'url': source_url, 'reviewed_excerpt': excerpt,
                           'sha256': hashlib.sha256(excerpt.encode()).hexdigest(),
                           'sha256_scope': 'UTF-8 reviewed excerpt, not the HTML response',
                           'evidence_kind': 'reviewed_manufacturer_drained_mass',
-                          'declared_net_g': 125, 'declared_drained_g': 79,
+                          'declared_net_g': net, 'declared_drained_g': usable,
                           'reviewed_at': '2026-11-01'}
                 proof['quantity'].update(method='reviewed_source_already_drained_mass_v1',
                     form_evidence_location='review_registry', source_quantity_basis='declared_drained',
-                    declared_net_quantity=125, declared_drained_quantity=79,
+                    declared_net_quantity=net, declared_drained_quantity=usable,
                     source=source, label_source=source)
             if name == 'filmjölk' and p['brand'] in {'Garant', 'Garant Eko'}:
                 proof['culinary_source_url'] = ('https://production.garantskafferiet.se/vara-produkter/mejeri/fil--yoghurt/ekologisk-fil-3-/'

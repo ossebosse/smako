@@ -106,7 +106,7 @@ def test_whole_shell_eggs_are_counted_without_claiming_raw_or_boiled_weight():
     assert vocabulary['ägg|as_sold'] == ('st', row['requirements'])
 
 
-@pytest.mark.parametrize('name', ['hel kyckling', 'oxsvans med ben', 'rimmat fläsklägg'])
+@pytest.mark.parametrize('name', ['hel kyckling', 'oxsvans med ben', 'rimmat fläsklägg', 'ungnötslever'])
 def test_gross_variable_mass_is_not_an_edible_weight_or_exact_purchase(name):
     row = next(r for r in ROWS if r['name'] == name)
     assert row['gross_inedible_mass'] and row['form'] == 'as_sold'
@@ -128,23 +128,25 @@ def test_fish_based_worcestershire_keeps_vegetarian_and_vegan_exclusions():
     assert _excluded_by_diet('worcestershiresås', DietPreference.VEGAN)
 
 
-def test_source_already_drained_quantity_is_not_reduced_again_or_used_as_gross(monkeypatch):
+@pytest.mark.parametrize('name,net,drained', [
+    ('svensk ansjovis', 125, 79), ('ätklar inläggningssill', 430, 210), ('saltgurka', 700, 340)])
+def test_source_already_drained_quantity_is_not_reduced_again_or_used_as_gross(monkeypatch, name, net, drained):
     from app.services import intake_product_links
 
-    row = copy.deepcopy(next(r for r in ROWS if r['name'] == 'svensk ansjovis'))
+    row = copy.deepcopy(next(r for r in ROWS if r['name'] == name))
     p, f = source(row)
     key = row['requirements'][0].removeprefix('pack:')
     monkeypatch.setattr(intake_product_links, 'entries', lambda: {key: row})
     def accepted(product=p, form='preserved_drained'):
         return reviewed_drained_quantity(row['name'], form, row['requirements'], product, f)
-    assert accepted() and p.usable_quantity == p.package_quantity == 79
+    assert accepted() and p.usable_quantity == p.package_quantity == drained
     assert project_reviewed_quantity(p, f, required_unit='g') is p
     assert not accepted(form='as_sold')
-    assert not accepted(p.model_copy(update={'usable_quantity': 125}))
-    assert not accepted(p.model_copy(update={'package_quantity': 125}))
+    assert not accepted(p.model_copy(update={'usable_quantity': net}))
+    assert not accepted(p.model_copy(update={'package_quantity': net}))
     assert not accepted(p.model_copy(update={'quantity_confidence': 'estimated'}))
     proof = row['reviewed_links'][0]['quantity']
-    proof['source']['declared_drained_g'] = 125
+    proof['source']['declared_drained_g'] = net
     assert not accepted()
 
 
@@ -152,3 +154,20 @@ def test_new_pecorino_is_separate_from_romano_and_remains_nonvegan():
     vocabulary = library_vocabulary(current_recipes())
     assert vocabulary['lagrad pecorino|as_sold'][1] != vocabulary.get('pecorino romano|as_sold', (None, []))[1]
     assert _excluded_by_diet('lagrad pecorino', DietPreference.VEGAN)
+
+
+@pytest.mark.parametrize('name', ['råa skalade vannameiräkor', 'blåmusselkött utan skal',
+                                  'ätklar inläggningssill', 'corned beef på burk'])
+def test_shellfish_adaptations_do_not_pass_vegetarian_or_vegan_requests(name):
+    assert _excluded_by_diet(name, DietPreference.VEGETARIAN)
+    assert _excluded_by_diet(name, DietPreference.VEGAN)
+
+
+def test_plantain_peel_never_becomes_edible_raw_mass():
+    row = next(r for r in ROWS if r['name'] == 'kokbanan med skal')
+    assert row['gross_inedible_mass'] and row['form'] == 'as_sold'
+    p, f = source(row)
+    key = row['requirements'][0].removeprefix('pack:')
+    assert compatible(key, p, f)
+    assert not compatible(key, p.model_copy(update={'quantity_confidence': 'exact'}), f)
+    assert row['requirements'] != library_vocabulary([])['matbanan|raw_edible'][1]
