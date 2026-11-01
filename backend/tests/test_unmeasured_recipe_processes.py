@@ -123,3 +123,22 @@ def test_metadata_and_version_are_part_of_the_content_seal(recipe):
     changed = recipe.model_copy(update={'preparation': recipe.preparation.model_copy(update={'version': 'smako-authored-input-v2'})})
     with pytest.raises(ValueError, match='Beredningsmetoden'):
         recipe_library._structural_check(changed)
+
+
+@pytest.mark.parametrize('name,unit', [('ägg', 'st'), ('hel kyckling', 'g'),
+                                     ('oxsvans med ben', 'g'), ('rimmat fläsklägg', 'g')])
+@pytest.mark.parametrize('method', ['salad', 'cold_assembly', 'refrigerated_assembly'])
+def test_gross_raw_animal_inputs_still_require_a_hot_method(name, unit, method):
+    document = source()
+    row = document['recipes'][0]
+    row['components'][0]['ingredients'][0].update(name=name, unit=unit)
+    row['steps'][0]['uses'][0] = name
+    row['unmeasured_processes'][0]['ingredients'][0] = name
+    vocabulary = {f'{name}|as_sold': (unit, []), 'rapsolja|as_sold': ('ml', [])}
+    warm, _ = standardize(document, vocabulary, reviewed_at='2026-11-01')
+    assert not validate_pack_bytes(encoded(warm))['rejections']
+    row['method'] = method
+    cold, _ = standardize(document, vocabulary, reviewed_at='2026-11-01')
+    result = validate_pack_bytes(encoded(cold))
+    assert not result['recipes']
+    assert 'rå animalisk ingrediens kräver varm metod' in result['rejections'][0]['reason']

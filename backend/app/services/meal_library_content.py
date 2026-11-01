@@ -191,13 +191,16 @@ def validate_pack_bytes(source, *, label="content pack"):
             if not all(c.amounts for c in d.components):
                 raise ValueError(f"{ref}.design.components: komponentmängder krävs")
             if d.method in {"cold_assembly", "refrigerated_assembly", "salad"} and any(
-                    i.canonical_name in {"kyckling", "kalkon", "nötfärs", "fläskfärs", "blandfärs",
+                    (i.canonical_name in {"kyckling", "kalkon", "nötfärs", "fläskfärs", "blandfärs",
                                          "nötkött", "lammkött", "lammfärs", "fläskkött", "fläsklever",
                                          "kycklinglever", "råa räkor", "bläckfisk", "musslor", "makrill",
                                          "fläskkarré", "kalvfärs", "nötinnanlår", "högrev", "nötstek",
                                          "nötkött för snabbstekning", "hel kyckling", "rimmat fläsk",
                                          "ägg", "äggula", "äggvita", "fisk", "lax"}
-                    and i.form == "raw_edible" for i in recipe.ingredients):
+                    and i.form == "raw_edible")
+                    or (i.form == "as_sold" and i.canonical_name in {
+                        "ägg", "hel kyckling", "oxsvans med ben", "rimmat fläsklägg"})
+                    for i in recipe.ingredients):
                 raise ValueError(f"{ref}.design.method: rå animalisk ingrediens kräver varm metod")
             sha = content_hash(recipe)
             recipe = recipe.model_copy(update={"design": d.model_copy(update={"content_sha256": sha}),

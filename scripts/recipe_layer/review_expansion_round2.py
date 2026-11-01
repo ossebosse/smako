@@ -9,6 +9,18 @@ from app.services.personal_policy import ProductFacts
 
 TARGET = Path('backend/app/data/ingredients/expansion-round2-20261101.json')
 REVIEWS = {
+    'hel kyckling|as_sold|g': (
+        [('Kyckling Hel Färsk Sverige', 'Garant')],
+        'Hel rå färsk kyckling som bruttovikt inklusive skinn och ben. Källans rörliga förpackningsvikt och kilopris behålls; endast uppskattat inköpsläge. Ingen ätlig andel eller tillagad portionsvikt antas.',
+        'https://www.garantskafferiet.se/vara-produkter/svenskt-kott--fagel/fagel/farsk-hel-kyckling/'),
+    'oxsvans med ben|as_sold|g': (
+        [('Oxsvans i Bitar Sverige', 'Garant')],
+        'Råa oxsvansbitar som inköpt bruttovikt med ben; inte benfritt nötkött, färdig fond eller uppmätt ätlig vikt. Källans variabla vikt och kilopris behålls. Ben tas bort i granskad tillagning utan antagen utbytesandel.',
+        None),
+    'rimmat fläsklägg|as_sold|g': (
+        [('Fläsklägg Rimmad Sverige', 'Moab')],
+        'Rå rimmad fläsklägg som inköpt bruttovikt. Moab säljer både med och utan ben och den frysta butiksetiketten fastställer inte vilken; receptet måste fungera för båda och avlägsna eventuella ben och seg svål. Ingen benfri ätlig mängd eller kokt vikt antas. Variabel vikt/kilopris kräver uppskattat inköpsläge.',
+        'https://www.moab.se/konsument'),
     'ägg|as_sold|st': (
         [('Ägg 6p Frigående Inomhus Medium/large', 'Garant'),
          ('Ägg 10p Frigående Inomhus Large', 'Garant'),
@@ -115,6 +127,8 @@ def main(args):
     rows = []
     for key, (labels, definition, source_url) in REVIEWS.items():
         name, form, unit = key.split('|')
+        gross_variable = key in {'hel kyckling|as_sold|g', 'oxsvans med ben|as_sold|g',
+                                 'rimmat fläsklägg|as_sold|g'}
         requirement = 'intake_all_round2_' + hashlib.sha256(key.encode()).hexdigest()[:12]
         links = []
         for candidate in candidates.values():
@@ -124,8 +138,9 @@ def main(args):
             if (not fact or fact['conflicts'] or p['package_unit'] != unit
                     or p['usable_unit'] != unit or not p['package_quantity']
                     or p['usable_quantity'] != p['package_quantity']
-                    or p['sale_model'] != 'fixed_package' or p.get('purchase_terms')
-                    or p['quantity_confidence'] != 'exact'):
+                    or p['sale_model'] != ('variable_weight_package' if gross_variable else 'fixed_package')
+                    or p.get('purchase_terms')
+                    or p['quantity_confidence'] != ('estimated' if gross_variable else 'exact')):
                 continue
             provenance = p['source_provenance']
             assert fact['source_product_id'] == p['product_id']
@@ -139,8 +154,8 @@ def main(args):
                          composition_sha256=composition_signature(ProductFacts(**fact)),
                          review='2026-11-01: Individually reviewed whole label, source package and culinary form. '
                                 + definition + ' No nutrition/allergen/organic approval.',
-                         quantity={'method': 'reviewed_plain_fixed_contents_v1',
-                                   'basis': form, 'unit': unit, 'confidence': 'exact',
+                         quantity={'method': ('reviewed_as_sold_source_mass_v1' if gross_variable else 'reviewed_plain_fixed_contents_v1'),
+                                   'basis': form, 'unit': unit, 'confidence': p['quantity_confidence'],
                                    'usable_quantity': p['usable_quantity']})
             if source_url:
                 proof['culinary_source_url'] = source_url
@@ -164,6 +179,8 @@ def main(args):
                      'review_basis': 'Exact source/product/package bindings; culinary review only. ' + definition,
                      'evidence': [{'kind': 'reviewed_whole_label_and_form', 'source_url': source_url}],
                      'reviewed_links': links})
+        if gross_variable or key == 'ägg|as_sold|st':
+            rows[-1]['gross_inedible_mass'] = True
     TARGET.write_text(json.dumps({'schema_version': 'smako-authoring-vocabulary-v1',
         'reviewed_at': '2026-11-01', 'source_scope': reference['source_scope'],
         'universe_sha256': reference['files']['universe']['sha256'],

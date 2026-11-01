@@ -102,6 +102,23 @@ def test_whole_shell_eggs_are_counted_without_claiming_raw_or_boiled_weight():
     assert vocabulary['ägg|as_sold'] == ('st', row['requirements'])
 
 
+@pytest.mark.parametrize('name', ['hel kyckling', 'oxsvans med ben', 'rimmat fläsklägg'])
+def test_gross_variable_mass_is_not_an_edible_weight_or_exact_purchase(name):
+    row = next(r for r in ROWS if r['name'] == name)
+    assert row['gross_inedible_mass'] and row['form'] == 'as_sold'
+    for proof in row['reviewed_links']:
+        q = proof['quantity']
+        assert q['method'] == 'reviewed_as_sold_source_mass_v1'
+        assert q['confidence'] == 'estimated' and q['usable_quantity'] == proof['package_quantity']
+        assert 'edible_fraction' not in q
+    p, f = source(row)
+    key = row['requirements'][0].removeprefix('pack:')
+    assert compatible(key, p, f)
+    assert not compatible(key, p.model_copy(update={'quantity_confidence': 'exact'}), f)
+    assert _excluded_by_diet(name, DietPreference.VEGETARIAN)
+    assert _excluded_by_diet(name, DietPreference.VEGAN)
+
+
 def test_fish_based_worcestershire_keeps_vegetarian_and_vegan_exclusions():
     assert _excluded_by_diet('worcestershiresås', DietPreference.VEGETARIAN)
     assert _excluded_by_diet('worcestershiresås', DietPreference.VEGAN)
