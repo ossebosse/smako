@@ -1,4 +1,35 @@
-# 2026-11-01: Tre receptfortsättningar mottagna; äldre 72/194-arkiv saknas
+# 2026-11-01: Receptens största registerhinder lösta, granskade familjer importerade
+
+Se [åtgärdsrapporten](reviews/recipe-unblock-20261101/REPORT.md) och dess
+maskinläsbara kö. 37 nya ingrediensidentiteter har granskade produktkopplingar;
+native-kompatibla utkast ökar från 98 till 189 av 439. **41 hela familjer / 108
+varianter** är innehållsgranskade och importerade som version 1.0.1, med
+oförändrade ursprungliga ingrediensmängder. Aktuellt bibliotek är **975 baser /
+2 570 varianter**. Samtliga 3 517 tidigare utgivna versioner och de 2 200
+ursprungsreferenserna är bevarade. Ingen betaaktivering ingår i detta arbete.
+
+Rapportens kvalificeringskvitton skiljer exakt inköp från tillåtna
+uppskattningar och fullständiga korgar från enbart lösta ingredienser.
+Kvarvarande hinder finns per ingrediens och variant, med konkreta orsaker.
+Fortsätt med den kön och befintliga butikskällor; inga påhittade utbyten,
+nya råvarualias eller automatiska importer. Nya ZIP ska räknas om med
+`scripts/recipe_layer/audit_expansion_queue.py` före innehållsgranskning.
+
+## Ägarens rättelse
+
+Ägaren bekräftar att det inte finns något separat 72/194-arkiv. Tidigare
+författarhänvisningar och vår uppmaning nedan att begära filen är därmed
+inaktuella. Faktiskt mottaget är 165 grundrätts-ID:n / 439 varianter.
+Fortsätt ta emot ZIP med cirka 10–40 rätter; räkna och granska verkligt innehåll.
+Ingen leverans ska stoppas i väntan på det obefintliga arkivet.
+
+Aktuellt uppdrag: åtgärda hinder för de mottagna recepten, störst antal
+berörda varianter först, och släpp in granskade recept genom ordinarie flöde.
+Se den uppdaterade [beställningsjournalen](recipes/REQUESTING-RECIPES.md).
+
+---
+
+# 2026-11-01: Tre receptfortsättningar mottagna (historisk bedömning, rättad ovan)
 
 [Mottagningsrapport](reviews/recipe-continuations-20261101/REPORT.md):
 ytterligare **93 baser / 240 varianter**, totalt faktiskt mottaget **165/439**.
@@ -12,7 +43,7 @@ kompatibla gruppen. Ingen import, produktkvalificering eller betaaktivering.
 
 Senare författarrapporter räknar med en **annan** 72-rättersleverans:
 `smako-fortsattning-72-nya-grundratter-194-varianter-20261101.zip`.
-Be om det originalet. Författarens 235/629 är inte faktiskt mottaget;
+Hänvisningen är enligt ägarens senare rättelse felaktig. Författarens 235/629 är inte faktiskt mottaget;
 70 bas-ID:n/190 variant-ID:n finns bara som referenser. Författaren rapporterar
 innehållskrockar för Miang kham/Kluai buat chi och konceptöverlapp för fyra
 andra rätter. Saknade paket 007–011 återanvänder 007–008 med andra hashvärden

@@ -1,0 +1,90 @@
+"""Frozen ordinary resolver and whole-basket probes, without import."""
+import json
+import os
+import sys
+import time
+from collections import Counter
+from pathlib import Path
+from types import SimpleNamespace
+
+os.environ['RECIPE_PREPARATION_CACHE_ROOT'] = str(Path('.local/recipe-unblock-20261101/preparation').resolve())
+sys.path.insert(0, str(Path('scripts/recipe_layer').resolve()))
+from coverage_reference import load_reference, planner_for
+from app.models.personal import MealSlot
+from app.services.plan_jobs import PlanningDeadlineExceeded, planning_deadline
+from app.models.recipe import RecipeIngredient
+from app.services.meal_library_content import identity, validate_pack_bytes
+from app.services.recipe_library import current_recipes
+
+WORK = Path('.local/recipe-unblock-20261101')
+args = SimpleNamespace(universe=Path('.local/coverage-inputs/universe.json'),
+                       facts=Path('.local/coverage-inputs/facts.json'),
+                       clock='2026-10-23T06:00:02.869273+00:00')
+prepared, facts, refs, issued, scope = load_reference(args)
+recipes = validate_pack_bytes(Path('backend/app/data/recipes/reviewed-expansion-20261101/standardized.json').read_bytes())['recipes']
+prior_ids = {r['id'] for name in ('qualification-first-33.json', 'qualification-next-15.json', 'qualification-next-35.json') for r in json.loads((Path('docs/reviews/recipe-unblock-20261101') / name).read_bytes())['modes']['estimated']['recipes']}
+recipes = [r for r in recipes if identity(r) not in prior_ids]
+registry = json.loads(Path('backend/app/data/ingredients/expansion-20261101.json').read_bytes())['ingredients']
+report = {'scope': scope, 'registry_count': len(registry), 'native_recipes': len(recipes), 'modes': {}}
+template = current_recipes()[0]
+print('Loaded reference', len(prepared.universe.products), flush=True)
+for mode in ('exact', 'estimated'):
+    planner = planner_for(mode, prepared, facts, scope)
+    profile = planner._merged_profile(planner.meals['dinner'])
+    singles = []
+    for row in registry:
+        ingredient = RecipeIngredient(name=row['name'], canonical_name=row['name'], form=row['form'],
+                                      quantity=10, unit=row['unit'], product_requirements=row['requirements'])
+        synthetic = template.model_copy(update={'ingredients': [ingredient], 'preparation': template.preparation.model_copy(update={'input_forms': {row['name']: row['form']}})})
+        record = {'identity': row['name']+'|'+row['form']}
+        try:
+            found = planner.resolve(row['name'], 10, row['unit'], profile=profile, organic_animals=False, recipe=synthetic)
+            record.update(status='resolved', candidates=len(found), examples=[{
+                'product_id':prepared.universe.products[n].product_id, 'store_id':prepared.universe.products[n].store_id,
+                'name':prepared.universe.products[n].name,'usable_quantity':c.usable_quantity,'unit':c.usable_unit}
+                for n,c in found[:2]])
+        except ValueError as exc:
+            record.update(status='blocked',reason=str(exc),code=getattr(exc,'code',None))
+        singles.append(record)
+    report['modes'][mode] = {'ingredients': singles, 'recipes': []}
+    (WORK/'qualification-next-14.json').write_text(json.dumps(report,ensure_ascii=False,indent=2,default=str)+'\n',encoding='utf8')
+    print(mode, 'individual', dict(Counter(r['status'] for r in singles)), flush=True)
+    for r in singles:
+        if r['status'] != 'resolved': print(r, flush=True)
+    if '--ingredients-only' in sys.argv:
+        continue
+    shared = {}
+    for n, recipe in enumerate(recipes):
+        start = time.perf_counter(); blocked = []
+        meal = planner.meals[recipe.design.meal_types[0]]
+        for ingredient in recipe.ingredients:
+            key = (ingredient.canonical_name, ingredient.form, ingredient.unit, ingredient.quantity,
+                   tuple(ingredient.product_requirements or ()))
+            if key not in shared:
+                try:
+                    found = planner.resolve(ingredient.canonical_name,ingredient.quantity,ingredient.unit,
+                                            profile=planner._merged_profile(meal),organic_animals=False,recipe=recipe)
+                    shared[key] = None
+                except ValueError as exc:
+                    shared[key] = str(exc)
+            if shared[key]: blocked.append({'identity':key[0]+'|'+key[1],'reason':shared[key]})
+        record = {'id':identity(recipe),'name':recipe.name,'input_blocks':blocked}
+        if blocked:
+            record['status']='data_blocked'
+        else:
+            try:
+                clean = planner.clean_recipe(recipe,meal)
+                with planning_deadline(20):
+                    result = planner.basket([MealSlot(id='probe-1',day=1,meal_type=recipe.design.meal_types[0],recipe=clean)],final=True)
+                assert result['audit'].passed and result['basket'].store_count <= planner.request.max_stores
+                record.update(status='verified',audit=result['audit'].model_dump(mode='json'),
+                              basket=result['basket'].model_dump(mode='json'))
+            except PlanningDeadlineExceeded:
+                record.update(status='search_incomplete')
+            except ValueError as exc:
+                record.update(status='checkout_blocked',reason=str(exc),code=getattr(exc,'code',None))
+        record['seconds']=round(time.perf_counter()-start,4)
+        report['modes'][mode]['recipes'].append(record)
+        (WORK/'qualification-next-14.json').write_text(json.dumps(report,ensure_ascii=False,indent=2,default=str)+'\n',encoding='utf8')
+        if n%20==0: print(mode,n+1,dict(Counter(r['status'] for r in report['modes'][mode]['recipes'])),flush=True)
+    print(mode,dict(Counter(r['status'] for r in report['modes'][mode]['recipes'])),flush=True)

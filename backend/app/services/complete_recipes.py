@@ -274,7 +274,9 @@ def product_form_compatible(recipe, name, product, fact):
             if not ingredient_product(canonical, form, requirements, product, fact, reviewed_only=True):
                 return False
     if form in {"cooked_drained", "preserved_drained"}:
-        return bool(fact and any(e.get("basis") == "drained" and e.get("unit") == "g"
+        from app.services.intake_product_links import reviewed_drained_quantity
+
+        return reviewed_drained_quantity(canonical, form, requirements, product, fact) or bool(fact and any(e.get("basis") == "drained" and e.get("unit") == "g"
                                 and e.get("quantity") == product.usable_quantity and e.get("source")
                                 for e in fact.field_sources.get("usable_quantity", ())))
     return True
@@ -533,6 +535,8 @@ def _whole_food_identity(canonical, form, product, fact, requirements=()):
     if canonical in grains:
         if canonical == "pasta" and "pack:small_pasta" in requirements:
             return form == "dry" and simple(r"(?:risoni|kritharaki|orzo)(?: pasta)?", "original|durumvete|durum")
+        if canonical == "pasta" and "pack:stewing_macaroni" in requirements:
+            return form == "dry" and simple(r"(?:gammaldags idealmakaroner|idealmakaroner gammaldags)")
         return form == "dry" and simple(grains[canonical], "fullkorn|fullkorns|glutenfri|glutenfritt|snabb|original|durumvete|durum|malet|fint|finmalet|special|siktat|torkade|delade|skalade|split")
     legumes = {"kikärtor": "kikärtor|kikärter", "kidneybönor": "kidneybönor|röda kidneybönor", "svarta bönor": "svarta bönor", "bönor": "bönor|vita bönor|stora vita bönor|vita bönor stora", "majs": "majs|majskorn|sockermajs", "ärtor": "ärtor|gröna ärtor"}
     if canonical in legumes:

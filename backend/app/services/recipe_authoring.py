@@ -34,6 +34,7 @@ SCHEMA = "smako-recipe-authoring-v1"
 MEAT = {"kyckling", "nötfärs", "fläskfärs", "blandfärs", "fläskkött", "kalkon"}
 FISH = {"fisk", "lax", "torsk", "tonfisk"}
 FISH.update({"makrill", "rökt makrill", "sardiner", "matjessill", "stenbitsrom", "rökt lax", "varmrökt lax"})
+FISH.update({"sardeller", "fisksås", "ostronsås"})
 REVIEWED_VOCABULARY = Path(__file__).parents[1] / "data/ingredients/authoring-20261025.json"
 AUTHORING_REQUIREMENTS = {"aggnudlar": ("pack:egg_noodles",)}
 SAFETY = {
@@ -60,8 +61,8 @@ def library_vocabulary(recipes, *, reviewed_path=REVIEWED_VOCABULARY):
 
     document = json.loads(reviewed_path.read_bytes())
     if reviewed_path == REVIEWED_VOCABULARY:
-        additional = reviewed_path.with_name("intake-all-20261026.json")
-        document["ingredients"].extend(json.loads(additional.read_bytes())["ingredients"])
+        for name in ("intake-all-20261026.json", "expansion-20261101.json"):
+            document["ingredients"].extend(json.loads(reviewed_path.with_name(name).read_bytes())["ingredients"])
     if document["schema_version"] != "smako-authoring-vocabulary-v1":
         raise ValueError("Okänd schema för granskat ingrediensvokabulär")
     seen = set()

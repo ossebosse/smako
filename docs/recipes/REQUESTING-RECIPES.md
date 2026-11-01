@@ -28,6 +28,16 @@ till grund för detta dokument. Läs också [produktmålet](../PRODUCT-GOAL.md),
 
 ## Aktuell beställning och redan skickat underlag
 
+**Senaste importstatus 2026-11-01:** 41 av de 165 mottagna grundrätterna,
+108 av 439 varianter, är nu granskade och importerade som nya versioner.
+Biblioteket har 975 baser / 2 570 varianter. De nedanstående mottagnings- och
+tidsrapporterna beskriver tidigare steg före importen. Ingen betaaktivering
+har gjorts i hinderarbetet. Utgå från [åtgärdsrapporten](../reviews/recipe-unblock-20261101/REPORT.md),
+[hela variantkön](../reviews/recipe-unblock-20261101/queue.json) och
+[ingredienshindren i prioritetsordning](../reviews/recipe-unblock-20261101/ingredient-blockers.json).
+Ta med både originalutkast och granskade efterföljare i dubblettunderlaget;
+de är samma grundrätter och ska inte räknas två gånger.
+
 **2026-11-01: instruktioner skickade till Chat enligt ägaren.** Beställningen
 är 1 000 nya grundrätter: 750 middagar, 125 frukostar och 125 mellanmål.
 Tre varianter per middag och två per frukost/mellanmål ger 2 750 variantposter.
@@ -40,7 +50,7 @@ och [importgranskning](../reviews/recipe-checkpoint-72-20261101/REPORT.md).
 63 föreslagna namn/form-identiteter behöver sakgranskning, inklusive två
 olämpliga normaliseringar. Beredning av frysta insatser, processolja och
 råvaruformer behöver också hanteras före import. Inga recept från denna
-beställning är ännu importerade eller betaaktiverade.
+beställning var då importerade eller betaaktiverade.
 
 [Isolerad varm tidsjämförelse](../reviews/recipe-checkpoint-72-timing-20261101/REPORT.md):
 2 462 → 2 512 varianter gav en middag 21,236 → 21,612 s och tre middagar
@@ -54,22 +64,29 @@ Mätningen ändrar inte importstatus eller kvarstående innehållskrav.
 43 mellanmål. De nya filerna har 48 native-kompatibla och 192 ingrediens-
 blockerade varianter. Innehållshinder kvarstår även i den kompatibla gruppen.
 Se [samlad mottagning och granskning](../reviews/recipe-continuations-20261101/REPORT.md).
-Ingen import eller betaaktivering har gjorts från dessa fortsättningar.
+Vid den mottagningskontrollen gjordes ingen import eller betaaktivering.
 
-Författarens totalsiffra 235/629 inkluderar ett **ännu inte mottaget** arkiv:
-`smako-fortsattning-72-nya-grundratter-194-varianter-20261101.zip`.
-Det är en annan leverans än checkpointen med 199 varianter. Referenser anger
-70 ytterligare bas-ID:n / 190 variant-ID:n efter överlapp med 22-leveransen.
-Be om originalet och granska innehållskonflikterna innan totalsiffran höjs.
-Det saknade arkivets paket 007–011 krockar på paket-ID 007–008 med 22-leveransen;
-spåra alltid leveransmapp + filhash och skriv inte över något original.
+**Ägarens rättelse 2026-11-01:** det finns inget separat 72/194-arkiv.
+Hänvisningarna till det i författarens rapporter är felaktiga och ska inte
+utlösa fler efterfrågningar eller hindra importarbete. Räkna endast faktiskt
+mottagna receptfiler (165/439 hittills), inte de 70/190 refererade extra ID:na.
+Nya ZIP-leveranser kommer löpande med cirka 10–40 grundrätter åt gången.
+Varje leverans ska bytebevaras och räknas efter sitt faktiska innehåll;
+kontrollera ID, innehåll och koncept mot biblioteket och alla mottagna utkast.
+Rapporterade krockar mot det obefintliga arkivet är obestyrkta, inte bevisade
+dubbletter. Verkliga ID-krockar ska fortfarande utredas utan överskrivning.
+
+Ägaren har nu gett uppdraget att åtgärda hindren och släppa in godkända recept,
+med de hinder som blockerar flest varianter först. Skilj löst registerhinder,
+verifierat produktstöd, granskad receptberedning och importerad hel familj.
+Sakgranska identiteter/former och använd befintliga produkt-/beredningsvägar.
 
 Nästa nyskrivna författarpaket är **019**; återstående mål mot faktiskt
 mottagna utkast är **835 grundrätter / 2 311 varianter**, fördelat på
 641 middagar, 112 frukostar och 82 mellanmål. Detta är inte en slutlig
 nyhetsbedömning av de 165 baserna. Bevara deras ID:n, räkna inte pilotpaketet
 igen och ta med alla mottagna recept i nästa dubblettunderlag även före import.
-Följ rapportens separata lista över ännu saknade äldre ID:n.
+Författarens referenser till obefintliga äldre leveranser är inte mottagna recept.
 [Återkoppling på checkpointen](requests/20261101/ATGARDER-CHECKPOINT-72-TILL-CHAT.txt)
 är förberedd, inte skickad. Ingrediensprioriteringens tidigare tillägg är också
 framtaget; det är fortfarande inte uttryckligen bekräftat att ägaren skickat det.

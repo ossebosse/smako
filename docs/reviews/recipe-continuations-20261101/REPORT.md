@@ -1,5 +1,12 @@
 # Tre receptfortsättningar mottagna 2026-11-01
 
+> Ägarens rättelse senare 2026-11-01: något separat 72/194-arkiv finns inte.
+> Rapportens slutsats nedan att begära det är återkallad. Författarens
+> arkivhänvisningar och konflikter mot det är obestyrkta metadata; de ska
+> inte stoppa arbetet med faktiskt mottagna 165 baser / 439 varianter.
+> Fortsatta leveranser kommer med cirka 10–40 rätter per ZIP.
+
+
 **93 grundrätter / 240 varianter mottagna som utkast. Ingen import eller
 betaaktivering.** Tillsammans med den tidigare checkpointen finns faktiskt
 165 grundrätts-ID:n / 439 variant-ID:n i mottagningen. Detta är inte ett

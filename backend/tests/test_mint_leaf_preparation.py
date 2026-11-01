@@ -71,7 +71,7 @@ def test_old_leaf_recipe_and_edited_method_are_not_authority(planner):
     review = json.loads((ROOT.parents[3] / 'docs/reviews/mint-leaf-preparation-20261028/recipe-review.json').read_bytes())
     manifest = manifest_entries()
     all_issued = {identity(r): r for r in load_entries([*manifest['current'], *manifest['history']])}
-    assert len(review['corrected']) == 40 and len(current_recipes()) == 2462
+    assert len(review['corrected']) == 40 and len(current_recipes()) == 2570
     for row in review['corrected']:
         before, after = (all_issued[row[k]] for k in ('previous_id', 'runtime_id'))
         assert before.design.content_sha256 == row['previous_sha256']

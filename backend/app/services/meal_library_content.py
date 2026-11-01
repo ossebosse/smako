@@ -188,6 +188,8 @@ def validate_pack_bytes(source, *, label="content pack"):
                     i.canonical_name in {"kyckling", "kalkon", "nötfärs", "fläskfärs", "blandfärs",
                                          "nötkött", "lammkött", "lammfärs", "fläskkött", "fläsklever",
                                          "kycklinglever", "råa räkor", "bläckfisk", "musslor", "makrill",
+                                         "fläskkarré", "kalvfärs", "nötinnanlår", "högrev", "nötstek",
+                                         "nötkött för snabbstekning", "hel kyckling", "rimmat fläsk",
                                          "ägg", "äggula", "äggvita", "fisk", "lax"}
                     and i.form == "raw_edible" for i in recipe.ingredients):
                 raise ValueError(f"{ref}.design.method: rå animalisk ingrediens kräver varm metod")

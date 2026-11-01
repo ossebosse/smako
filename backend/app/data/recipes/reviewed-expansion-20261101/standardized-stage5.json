@@ -1,0 +1,4383 @@
+{
+  "pack_id": "reviewed-expansion-20261101",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 17,
+        "base_id": "smako-swedish-flygande-jacob",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "kyckling",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "banan|raw_edible",
+                "name": "banan",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "grädde",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "jordnötter|as_sold",
+                "name": "jordnötter",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomatpuré|as_sold",
+                "name": "tomatpuré",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cayennepeppar|dry",
+                "name": "cayennepeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "gratang",
+            "name": "Kyckling- och banangratäng"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "gryta",
+          "ugn",
+          "ugnsform",
+          "stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 65,
+        "family": "flygande jacob",
+        "fish": false,
+        "flavor_profile": [
+          "banan",
+          "jordnöt",
+          "krämig chili"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Vardagsanpassning med hemlagad tomat-chilibas. Enkel saknar bacon; standard/utökad har rimmat fläsk i stället för bacon. Kycklingen tillagas från rå insats före gratineringen. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Sätt ugnen på 200 °C över-/undervärme. Skär kycklingen i jämnstora bitar och lägg i gratängformen med gratängens salt och 50 ml vatten. Täck formen med lock eller folie."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ugnsbaka kycklingen cirka 25 minuter till minst 74 °C i de tjockaste bitarna. Ta av locket och behåll all sky i samma form till gratängen; inget avkok hälls bort."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 4,
+            "id": "s3",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "cayennepeppar|dry",
+              "grädde|as_sold",
+              "kyckling|raw_edible",
+              "tomatpuré|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Blanda grädde, tomatpuré och cayennepeppar. Skiva bananen och lägg ovanpå kycklingen. Häll över hela såsen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "jordnötter|as_sold",
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Gratinera i mitten av ugnen cirka 20 minuter tills såsen bubblar och mitten når minst 74 °C. Strö över jordnötter först efter gräddningen så att de behåller sin krispighet."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 23,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s4",
+              "s7"
+            ],
+            "duration_minutes": 3,
+            "id": "s8",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "grädde|as_sold",
+              "jordnötter|as_sold",
+              "kyckling|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att ris och gratäng är klara och varma. Fördela kyckling, banan, all sås, jordnötter och ris mellan fyra tallrikar."
+          }
+        ],
+        "total_minutes": 65,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 48
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "banan",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "banan",
+          "product_requirements": [
+            "pack:intake_all_973660201bf8"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "jordnötter",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "jordnötter",
+          "product_requirements": [
+            "pack:peanuts"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomatpuré",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "tomatpuré",
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cayennepeppar",
+          "component": "gratang",
+          "form": "dry",
+          "name": "cayennepeppar",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 200 °C över-/undervärme. Skär kycklingen i jämnstora bitar och lägg i gratängformen med gratängens salt och 50 ml vatten. Täck formen med lock eller folie.",
+        "Ugnsbaka kycklingen cirka 25 minuter till minst 74 °C i de tjockaste bitarna. Ta av locket och behåll all sky i samma form till gratängen; inget avkok hälls bort.",
+        "Blanda grädde, tomatpuré och cayennepeppar. Skiva bananen och lägg ovanpå kycklingen. Häll över hela såsen.",
+        "Gratinera i mitten av ugnen cirka 20 minuter tills såsen bubblar och mitten når minst 74 °C. Strö över jordnötter först efter gräddningen så att de behåller sin krispighet.",
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Kontrollera att ris och gratäng är klara och varma. Fördela kyckling, banan, all sås, jordnötter och ris mellan fyra tallrikar."
+      ],
+      "name": "Flygande Jacob med hemlagad chilibas – enkel",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 26,
+        "base_id": "smako-swedish-flygande-jacob",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "kyckling",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "banan|raw_edible",
+                "name": "banan",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "grädde",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "jordnötter|as_sold",
+                "name": "jordnötter",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomatpuré|as_sold",
+                "name": "tomatpuré",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cayennepeppar|dry",
+                "name": "cayennepeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rimmat fläsk|raw_edible",
+                "name": "rimmat fläsk",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "äppelcidervinäger",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "gratang",
+            "name": "Kyckling- och banangratäng"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "gryta",
+          "ugn",
+          "ugnsform",
+          "stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 74,
+        "family": "flygande jacob",
+        "fish": false,
+        "flavor_profile": [
+          "banan",
+          "jordnöt",
+          "krämig chili"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Vardagsanpassning med hemlagad tomat-chilibas. Enkel saknar bacon; standard/utökad har rimmat fläsk i stället för bacon. Kycklingen tillagas från rå insats före gratineringen. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Sätt ugnen på 200 °C över-/undervärme. Skär kycklingen i jämnstora bitar och lägg i gratängformen med gratängens salt och 50 ml vatten. Täck formen med lock eller folie."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ugnsbaka kycklingen cirka 25 minuter till minst 74 °C i de tjockaste bitarna. Ta av locket och behåll all sky i samma form till gratängen; inget avkok hälls bort."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 9,
+            "id": "s3",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna rimmat fläsk och stek i torr panna på medelvärme tills det är genomlagat och lätt knaprigt. Fördela fläsk och det utsmälta fettet över kycklingen; inget extra stekfett behövs."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 4,
+            "id": "s4",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "cayennepeppar|dry",
+              "grädde|as_sold",
+              "kyckling|raw_edible",
+              "strösocker|dry",
+              "tomatpuré|as_sold",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Blanda grädde, tomatpuré och cayennepeppar med gratängens äppelcidervinäger och strösocker. Skiva bananen och lägg ovanpå kycklingen. Häll över hela såsen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "jordnötter|as_sold",
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Gratinera i mitten av ugnen cirka 20 minuter tills såsen bubblar och mitten når minst 74 °C. Strö över jordnötter först efter gräddningen så att de behåller sin krispighet."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 23,
+            "id": "s7",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s5",
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "grädde|as_sold",
+              "jordnötter|as_sold",
+              "kyckling|raw_edible",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att ris och gratäng är klara och varma. Fördela kyckling, banan, all sås, jordnötter och ris mellan fyra tallrikar."
+          }
+        ],
+        "total_minutes": 74,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 48
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "banan",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "banan",
+          "product_requirements": [
+            "pack:intake_all_973660201bf8"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "jordnötter",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "jordnötter",
+          "product_requirements": [
+            "pack:peanuts"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomatpuré",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "tomatpuré",
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cayennepeppar",
+          "component": "gratang",
+          "form": "dry",
+          "name": "cayennepeppar",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rimmat fläsk",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "rimmat fläsk",
+          "product_requirements": [
+            "pack:intake_all_9215891a1827"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "gratang",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 200 °C över-/undervärme. Skär kycklingen i jämnstora bitar och lägg i gratängformen med gratängens salt och 50 ml vatten. Täck formen med lock eller folie.",
+        "Ugnsbaka kycklingen cirka 25 minuter till minst 74 °C i de tjockaste bitarna. Ta av locket och behåll all sky i samma form till gratängen; inget avkok hälls bort.",
+        "Tärna rimmat fläsk och stek i torr panna på medelvärme tills det är genomlagat och lätt knaprigt. Fördela fläsk och det utsmälta fettet över kycklingen; inget extra stekfett behövs.",
+        "Blanda grädde, tomatpuré och cayennepeppar med gratängens äppelcidervinäger och strösocker. Skiva bananen och lägg ovanpå kycklingen. Häll över hela såsen.",
+        "Gratinera i mitten av ugnen cirka 20 minuter tills såsen bubblar och mitten når minst 74 °C. Strö över jordnötter först efter gräddningen så att de behåller sin krispighet.",
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Kontrollera att ris och gratäng är klara och varma. Fördela kyckling, banan, all sås, jordnötter och ris mellan fyra tallrikar."
+      ],
+      "name": "Flygande Jacob med hemlagad chilibas – standard",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 32,
+        "base_id": "smako-swedish-flygande-jacob",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kyckling|raw_edible",
+                "name": "kyckling",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "banan|raw_edible",
+                "name": "banan",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "grädde",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "jordnötter|as_sold",
+                "name": "jordnötter",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomatpuré|as_sold",
+                "name": "tomatpuré",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cayennepeppar|dry",
+                "name": "cayennepeppar",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rimmat fläsk|raw_edible",
+                "name": "rimmat fläsk",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "äppelcidervinäger",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "gratang",
+            "name": "Kyckling- och banangratäng"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "äppelcidervinäger",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "sallad",
+            "name": "Kålsallad"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "gryta",
+          "ugn",
+          "ugnsform",
+          "stekpanna",
+          "termometer"
+        ],
+        "estimated_minutes": 80,
+        "family": "flygande jacob",
+        "fish": false,
+        "flavor_profile": [
+          "banan",
+          "jordnöt",
+          "krämig chili"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "kyckling",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Vardagsanpassning med hemlagad tomat-chilibas. Enkel saknar bacon; standard/utökad har rimmat fläsk i stället för bacon. Kycklingen tillagas från rå insats före gratineringen. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Sätt ugnen på 200 °C över-/undervärme. Skär kycklingen i jämnstora bitar och lägg i gratängformen med gratängens salt och 50 ml vatten. Täck formen med lock eller folie."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ugnsbaka kycklingen cirka 25 minuter till minst 74 °C i de tjockaste bitarna. Ta av locket och behåll all sky i samma form till gratängen; inget avkok hälls bort."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 9,
+            "id": "s3",
+            "ingredient_keys": [
+              "kyckling|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tärna rimmat fläsk och stek i torr panna på medelvärme tills det är genomlagat och lätt knaprigt. Fördela fläsk och det utsmälta fettet över kycklingen; inget extra stekfett behövs."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 4,
+            "id": "s4",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "cayennepeppar|dry",
+              "grädde|as_sold",
+              "kyckling|raw_edible",
+              "strösocker|dry",
+              "tomatpuré|as_sold",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Blanda grädde, tomatpuré och cayennepeppar med gratängens äppelcidervinäger och strösocker. Skiva bananen och lägg ovanpå kycklingen. Häll över hela såsen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 20,
+            "id": "s5",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "jordnötter|as_sold",
+              "kyckling|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Gratinera i mitten av ugnen cirka 20 minuter tills såsen bubblar och mitten når minst 74 °C. Strö över jordnötter först efter gräddningen så att de behåller sin krispighet."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 23,
+            "id": "s7",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 6,
+            "id": "s9",
+            "ingredient_keys": [
+              "morot|raw_edible",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "vitkål|raw_edible",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Strimla vitkål och riv morot. Massera kålen kort med salladens salt; vänd i morot, rapsolja och salladens äppelcidervinäger."
+          },
+          {
+            "depends_on": [
+              "s5",
+              "s9"
+            ],
+            "duration_minutes": 3,
+            "id": "s10",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "grädde|as_sold",
+              "jordnötter|as_sold",
+              "kyckling|raw_edible",
+              "morot|raw_edible",
+              "ris|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera att ris och gratäng är klara och varma. Fördela kyckling, banan, all sås, jordnötter och ris mellan fyra tallrikar och servera kålsalladen intill."
+          }
+        ],
+        "total_minutes": 80,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 48
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kyckling",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "kyckling",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "banan",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "banan",
+          "product_requirements": [
+            "pack:intake_all_973660201bf8"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "jordnötter",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "jordnötter",
+          "product_requirements": [
+            "pack:peanuts"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomatpuré",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "tomatpuré",
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cayennepeppar",
+          "component": "gratang",
+          "form": "dry",
+          "name": "cayennepeppar",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rimmat fläsk",
+          "component": "gratang",
+          "form": "raw_edible",
+          "name": "rimmat fläsk",
+          "product_requirements": [
+            "pack:intake_all_9215891a1827"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "gratang",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "gratang",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 200 °C över-/undervärme. Skär kycklingen i jämnstora bitar och lägg i gratängformen med gratängens salt och 50 ml vatten. Täck formen med lock eller folie.",
+        "Ugnsbaka kycklingen cirka 25 minuter till minst 74 °C i de tjockaste bitarna. Ta av locket och behåll all sky i samma form till gratängen; inget avkok hälls bort.",
+        "Tärna rimmat fläsk och stek i torr panna på medelvärme tills det är genomlagat och lätt knaprigt. Fördela fläsk och det utsmälta fettet över kycklingen; inget extra stekfett behövs.",
+        "Blanda grädde, tomatpuré och cayennepeppar med gratängens äppelcidervinäger och strösocker. Skiva bananen och lägg ovanpå kycklingen. Häll över hela såsen.",
+        "Gratinera i mitten av ugnen cirka 20 minuter tills såsen bubblar och mitten når minst 74 °C. Strö över jordnötter först efter gräddningen så att de behåller sin krispighet.",
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Strimla vitkål och riv morot. Massera kålen kort med salladens salt; vänd i morot, rapsolja och salladens äppelcidervinäger.",
+        "Kontrollera att ris och gratäng är klara och varma. Fördela kyckling, banan, all sås, jordnötter och ris mellan fyra tallrikar och servera kålsalladen intill."
+      ],
+      "name": "Flygande Jacob med hemlagad chilibas – utökad",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 45,
+        "base_id": "smako-swedish-stuvade-makaroner",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Torra makaroner, inte snabbmakaroner",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 1000.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "muskot|dry",
+                "name": "Muskot",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Mjölkstuvade makaroner"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "falukorv|as_sold",
+                "name": "Falukorv",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Stekt falukorv"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "tjockbottnad kastrull",
+          "stekpanna"
+        ],
+        "estimated_minutes": 45,
+        "family": "milk_absorption_macaroni",
+        "fish": false,
+        "flavor_profile": [
+          "mjölkstuvning",
+          "muskot"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "pasta och falukorv",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Makaronerna kokas direkt i mjölk utan mjölredning och utan ugnsgratäng. Pastamängden är angiven som torr vikt, inte en omräkning från deciliter. Tidsuppskattningen utgår från en kock och räknar mjölkens tillsyn som aktiv tid. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "falukorv",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm mjölken i en stor tjockbottnad kastrull under uppsikt tills den precis börjar sjuda. Rör ner gammaldags idealmakaroner och salt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ],
+              [
+                "200 ml",
+                200.0
+              ]
+            ],
+            "text": "Sjud på låg värme utan lock i omkring 20–25 minuter. Rör ofta längs hela bottnen så att mjölken inte bränner fast; tiden räknas här som aktiv tillsyn. Makaronerna ska vara mjuka och stuvningen krämig. Tillsätt vid behov 50 ml vatten åt gången, högst 200 ml vatten, om den tjocknar innan pastan är genomkokt."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "muskot|dry",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner muskot och svartpeppar och ta av kastrullen från värmen. Lägg på lock så att stuvningen hålls varm medan korven steks."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "falukorv|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär falukorven i skivor. Smält smöret i en panna på medelvärme och stek skivorna i två omgångar, omkring två minuter per sida, tills de har färg och är ordentligt genomvarma. Fördela även steksmöret mellan portionerna."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Rör upp stuvningen, värm varsamt en minut vid behov och fördela med den stekta korven."
+          }
+        ],
+        "total_minutes": 45,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "product_requirements": [
+            "pack:stewing_macaroni"
+          ],
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 1000.0,
+          "quantity_max": 1000.0,
+          "quantity_min": 1000.0,
+          "quantity_step": 1000.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "muskot",
+          "component": "c1",
+          "form": "dry",
+          "name": "muskot",
+          "product_requirements": [
+            "pack:intake_all_33f4eb9d910f"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.5,
+          "quantity_max": 2.5,
+          "quantity_min": 2.5,
+          "quantity_step": 2.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "falukorv",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "falukorv",
+          "product_requirements": [
+            "pack:intake_all_5fa00ecbfc81"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Värm mjölken i en stor tjockbottnad kastrull under uppsikt tills den precis börjar sjuda. Rör ner gammaldags idealmakaroner och salt.",
+        "Sjud på låg värme utan lock i omkring 20–25 minuter. Rör ofta längs hela bottnen så att mjölken inte bränner fast; tiden räknas här som aktiv tillsyn. Makaronerna ska vara mjuka och stuvningen krämig. Tillsätt vid behov 50 ml vatten åt gången, högst 200 ml vatten, om den tjocknar innan pastan är genomkokt.",
+        "Rör ner muskot och svartpeppar och ta av kastrullen från värmen. Lägg på lock så att stuvningen hålls varm medan korven steks.",
+        "Skär falukorven i skivor. Smält smöret i en panna på medelvärme och stek skivorna i två omgångar, omkring två minuter per sida, tills de har färg och är ordentligt genomvarma. Fördela även steksmöret mellan portionerna.",
+        "Rör upp stuvningen, värm varsamt en minut vid behov och fördela med den stekta korven."
+      ],
+      "name": "Stuvade makaroner med stekt falukorv – med stekt falukorv",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 59,
+        "base_id": "smako-swedish-stuvade-makaroner",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Torra makaroner, inte snabbmakaroner",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 1000.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "muskot|dry",
+                "name": "Muskot",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Mjölkstuvade makaroner"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "falukorv|as_sold",
+                "name": "Falukorv",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Stekt falukorv"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ärtor|as_sold",
+                "name": "Frysta ärtor",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "senap|as_sold",
+                "name": "Senap",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Grönsaker och senap"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "tjockbottnad kastrull",
+          "stekpanna",
+          "liten kastrull"
+        ],
+        "estimated_minutes": 59,
+        "family": "milk_absorption_macaroni",
+        "fish": false,
+        "flavor_profile": [
+          "mjölkstuvning",
+          "muskot"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "pasta och falukorv",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Makaronerna kokas direkt i mjölk utan mjölredning och utan ugnsgratäng. Pastamängden är angiven som torr vikt, inte en omräkning från deciliter. Tidsuppskattningen utgår från en kock och räknar mjölkens tillsyn som aktiv tid. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "falukorv och grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 14,
+            "id": "s1",
+            "ingredient_keys": [
+              "morot|raw_edible",
+              "ärtor|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "600 ml",
+                600.0
+              ]
+            ],
+            "text": "Skala och skiva moroten. Koka upp 600 ml vatten i en liten kastrull och koka moroten i sex minuter. Lägg i ärtorna och koka ytterligare tre minuter eller enligt förpackningen. Häll av och håll varmt under lock."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 7,
+            "id": "s2",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm mjölken i en stor tjockbottnad kastrull under uppsikt tills den precis börjar sjuda. Rör ner gammaldags idealmakaroner och salt."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 25,
+            "id": "s3",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ],
+              [
+                "200 ml",
+                200.0
+              ]
+            ],
+            "text": "Sjud på låg värme utan lock i omkring 20–25 minuter. Rör ofta längs hela bottnen så att mjölken inte bränner fast; tiden räknas här som aktiv tillsyn. Makaronerna ska vara mjuka och stuvningen krämig. Tillsätt vid behov 50 ml vatten åt gången, högst 200 ml vatten, om den tjocknar innan pastan är genomkokt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 1,
+            "id": "s4",
+            "ingredient_keys": [
+              "muskot|dry",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner muskot och svartpeppar och ta av kastrullen från värmen. Lägg på lock så att stuvningen hålls varm medan korven steks."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 10,
+            "id": "s5",
+            "ingredient_keys": [
+              "falukorv|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär falukorven i skivor. Smält smöret i en panna på medelvärme och stek skivorna i två omgångar, omkring två minuter per sida, tills de har färg och är ordentligt genomvarma. Fördela även steksmöret mellan portionerna."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "senap|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör upp stuvningen, värm varsamt en minut vid behov och fördela med den stekta korven, varma morötter, ärtor och senap."
+          }
+        ],
+        "total_minutes": 59,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "product_requirements": [
+            "pack:stewing_macaroni"
+          ],
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 1000.0,
+          "quantity_max": 1000.0,
+          "quantity_min": 1000.0,
+          "quantity_step": 1000.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "muskot",
+          "component": "c1",
+          "form": "dry",
+          "name": "muskot",
+          "product_requirements": [
+            "pack:intake_all_33f4eb9d910f"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.5,
+          "quantity_max": 2.5,
+          "quantity_min": 2.5,
+          "quantity_step": 2.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "falukorv",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "falukorv",
+          "product_requirements": [
+            "pack:intake_all_5fa00ecbfc81"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ärtor",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "ärtor",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "senap",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "senap",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala och skiva moroten. Koka upp 600 ml vatten i en liten kastrull och koka moroten i sex minuter. Lägg i ärtorna och koka ytterligare tre minuter eller enligt förpackningen. Häll av och håll varmt under lock.",
+        "Värm mjölken i en stor tjockbottnad kastrull under uppsikt tills den precis börjar sjuda. Rör ner gammaldags idealmakaroner och salt.",
+        "Sjud på låg värme utan lock i omkring 20–25 minuter. Rör ofta längs hela bottnen så att mjölken inte bränner fast; tiden räknas här som aktiv tillsyn. Makaronerna ska vara mjuka och stuvningen krämig. Tillsätt vid behov 50 ml vatten åt gången, högst 200 ml vatten, om den tjocknar innan pastan är genomkokt.",
+        "Rör ner muskot och svartpeppar och ta av kastrullen från värmen. Lägg på lock så att stuvningen hålls varm medan korven steks.",
+        "Skär falukorven i skivor. Smält smöret i en panna på medelvärme och stek skivorna i två omgångar, omkring två minuter per sida, tills de har färg och är ordentligt genomvarma. Fördela även steksmöret mellan portionerna.",
+        "Rör upp stuvningen, värm varsamt en minut vid behov och fördela med den stekta korven, varma morötter, ärtor och senap."
+      ],
+      "name": "Stuvade makaroner med stekt falukorv – med ärtor, morot och senap",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 65,
+        "base_id": "smako-swedish-stuvade-makaroner",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pasta|dry",
+                "name": "Torra makaroner, inte snabbmakaroner",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 1000.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "muskot|dry",
+                "name": "Muskot",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Mjölkstuvade makaroner"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "falukorv|as_sold",
+                "name": "Falukorv",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c2",
+            "name": "Stekt falukorv"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ärtor|as_sold",
+                "name": "Frysta ärtor",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "senap|as_sold",
+                "name": "Senap",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c3",
+            "name": "Grönsaker och senap"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "Äppelcidervinäger",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "dill|raw_edible",
+                "name": "Dill",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c4",
+            "name": "Snabbinlagd dillgurka"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "tjockbottnad kastrull",
+          "stekpanna",
+          "liten kastrull"
+        ],
+        "estimated_minutes": 65,
+        "family": "milk_absorption_macaroni",
+        "fish": false,
+        "flavor_profile": [
+          "mjölkstuvning",
+          "muskot"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "pasta och falukorv",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Makaronerna kokas direkt i mjölk utan mjölredning och utan ugnsgratäng. Pastamängden är angiven som torr vikt, inte en omräkning från deciliter. Tidsuppskattningen utgår från en kock och räknar mjölkens tillsyn som aktiv tid. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "falukorv och grönsaker",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "gurka|raw_edible",
+              "strösocker|dry",
+              "äppelcidervinäger|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Rör samman äppelcidervinäger, socker och 30 ml vatten i en skål tills sockret lösts. Skiva gurkan tunt, hacka dillen och vänd ner. Ställ i kylskåp medan resten lagas; detta är en snabb salladsinläggning, inte en hållbar konservering."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 14,
+            "id": "s2",
+            "ingredient_keys": [
+              "morot|raw_edible",
+              "ärtor|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "600 ml",
+                600.0
+              ]
+            ],
+            "text": "Skala och skiva moroten. Koka upp 600 ml vatten i en liten kastrull och koka moroten i sex minuter. Lägg i ärtorna och koka ytterligare tre minuter eller enligt förpackningen. Häll av och håll varmt under lock."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "pasta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm mjölken i en stor tjockbottnad kastrull under uppsikt tills den precis börjar sjuda. Rör ner gammaldags idealmakaroner och salt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 25,
+            "id": "s4",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "pasta|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ],
+              [
+                "200 ml",
+                200.0
+              ]
+            ],
+            "text": "Sjud på låg värme utan lock i omkring 20–25 minuter. Rör ofta längs hela bottnen så att mjölken inte bränner fast; tiden räknas här som aktiv tillsyn. Makaronerna ska vara mjuka och stuvningen krämig. Tillsätt vid behov 50 ml vatten åt gången, högst 200 ml vatten, om den tjocknar innan pastan är genomkokt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "muskot|dry",
+              "svartpeppar|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner muskot och svartpeppar och ta av kastrullen från värmen. Lägg på lock så att stuvningen hålls varm medan korven steks."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 10,
+            "id": "s6",
+            "ingredient_keys": [
+              "falukorv|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skär falukorven i skivor. Smält smöret i en panna på medelvärme och stek skivorna i två omgångar, omkring två minuter per sida, tills de har färg och är ordentligt genomvarma. Fördela även steksmöret mellan portionerna."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 2,
+            "id": "s7",
+            "ingredient_keys": [
+              "senap|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör upp stuvningen, värm varsamt en minut vid behov och fördela med den stekta korven, varma morötter, ärtor och senap samt dillgurksalladen med hela sin dressing, serverad i separata skålar."
+          }
+        ],
+        "total_minutes": 65,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "pasta",
+          "component": "c1",
+          "form": "dry",
+          "name": "pasta",
+          "product_requirements": [
+            "pack:stewing_macaroni"
+          ],
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 1000.0,
+          "quantity_max": 1000.0,
+          "quantity_min": 1000.0,
+          "quantity_step": 1000.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "muskot",
+          "component": "c1",
+          "form": "dry",
+          "name": "muskot",
+          "product_requirements": [
+            "pack:intake_all_33f4eb9d910f"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.5,
+          "quantity_max": 2.5,
+          "quantity_min": 2.5,
+          "quantity_step": 2.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "c1",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "falukorv",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "falukorv",
+          "product_requirements": [
+            "pack:intake_all_5fa00ecbfc81"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "c2",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ärtor",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "ärtor",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "c3",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "senap",
+          "component": "c3",
+          "form": "as_sold",
+          "name": "senap",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "c4",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "c4",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "c4",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "dill",
+          "component": "c4",
+          "form": "raw_edible",
+          "name": "dill",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Rör samman äppelcidervinäger, socker och 30 ml vatten i en skål tills sockret lösts. Skiva gurkan tunt, hacka dillen och vänd ner. Ställ i kylskåp medan resten lagas; detta är en snabb salladsinläggning, inte en hållbar konservering.",
+        "Skala och skiva moroten. Koka upp 600 ml vatten i en liten kastrull och koka moroten i sex minuter. Lägg i ärtorna och koka ytterligare tre minuter eller enligt förpackningen. Häll av och håll varmt under lock.",
+        "Värm mjölken i en stor tjockbottnad kastrull under uppsikt tills den precis börjar sjuda. Rör ner gammaldags idealmakaroner och salt.",
+        "Sjud på låg värme utan lock i omkring 20–25 minuter. Rör ofta längs hela bottnen så att mjölken inte bränner fast; tiden räknas här som aktiv tillsyn. Makaronerna ska vara mjuka och stuvningen krämig. Tillsätt vid behov 50 ml vatten åt gången, högst 200 ml vatten, om den tjocknar innan pastan är genomkokt.",
+        "Rör ner muskot och svartpeppar och ta av kastrullen från värmen. Lägg på lock så att stuvningen hålls varm medan korven steks.",
+        "Skär falukorven i skivor. Smält smöret i en panna på medelvärme och stek skivorna i två omgångar, omkring två minuter per sida, tills de har färg och är ordentligt genomvarma. Fördela även steksmöret mellan portionerna.",
+        "Rör upp stuvningen, värm varsamt en minut vid behov och fördela med den stekta korven, varma morötter, ärtor och senap samt dillgurksalladen med hela sin dressing, serverad i separata skålar."
+      ],
+      "name": "Stuvade makaroner med stekt falukorv – med grönsaker och snabbinlagd dillgurka",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 16,
+        "base_id": "smako-mexican-molletes",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 85.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "Svarta bönor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Ost",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "toast",
+            "name": "Bröd med bönkräm och ost"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "g"
+              }
+            ],
+            "id": "salsa",
+            "name": "Tomatsalsa"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "kastrull",
+          "plåt"
+        ],
+        "estimated_minutes": 23,
+        "family": "öppet bönbröd med smält gratinerad ost",
+        "fish": false,
+        "flavor_profile": [
+          "bönor",
+          "ost",
+          "tomat"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "oven",
+        "primary_ingredient": "svarta bönor",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Frukostportion. Osötat bröd används som vardagsanpassning av bolillo; ingen särskild produktform påstås vara verifierad. Ostens löpe behöver granskas före vegetarisk märkning. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bönkräm och tomatsalsa på bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "25 ml",
+                25.0
+              ]
+            ],
+            "text": "Sätt ugnen på 225 °C. Mosa de kokta avrunna bönorna i en liten kastrull med 25 ml vatten. Värm under omrörning tills de är genomheta och så fasta att de går att breda."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg brödet i ett jämnt öppet lager på bakplåtspapper. Bred på smöret och rosta kort i den varma ugnen tills ytan känns lätt spröd."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "ost|as_sold",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "text": "Fördela all bönkräm över brödet och täck med riven ost. Ställ tillbaka i ugnen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 7,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Gratinera cirka 7 minuter tills osten smält och fått enstaka bruna fläckar. Bönlagret ska vara genomvarmt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 4,
+            "id": "s5",
+            "ingredient_keys": [
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Finhacka tomaten. Servera salsan på eller intill de varma molletes direkt, så att brödet inte blir blött i förväg."
+          }
+        ],
+        "total_minutes": 23,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 7
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bröd",
+          "component": "toast",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 85.0,
+          "quantity_max": 85.0,
+          "quantity_min": 85.0,
+          "quantity_step": 85.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svarta bönor",
+          "component": "toast",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "toast",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "toast",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 225 °C. Mosa de kokta avrunna bönorna i en liten kastrull med 25 ml vatten. Värm under omrörning tills de är genomheta och så fasta att de går att breda.",
+        "Lägg brödet i ett jämnt öppet lager på bakplåtspapper. Bred på smöret och rosta kort i den varma ugnen tills ytan känns lätt spröd.",
+        "Fördela all bönkräm över brödet och täck med riven ost. Ställ tillbaka i ugnen.",
+        "Gratinera cirka 7 minuter tills osten smält och fått enstaka bruna fläckar. Bönlagret ska vara genomvarmt.",
+        "Finhacka tomaten. Servera salsan på eller intill de varma molletes direkt, så att brödet inte blir blött i förväg."
+      ],
+      "name": "Molletes – gratinerat bröd med bönkräm – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 18,
+        "base_id": "smako-mexican-molletes",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 85.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svarta bönor|cooked_drained",
+                "name": "Svarta bönor",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Ost",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "toast",
+            "name": "Bröd med bönkräm och ost"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "Koriander",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "salsa",
+            "name": "Tomatsalsa"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "ugn",
+          "kastrull",
+          "plåt"
+        ],
+        "estimated_minutes": 25,
+        "family": "öppet bönbröd med smält gratinerad ost",
+        "fish": false,
+        "flavor_profile": [
+          "bönor",
+          "ost",
+          "tomat"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "oven",
+        "primary_ingredient": "svarta bönor",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Frukostportion. Osötat bröd används som vardagsanpassning av bolillo; ingen särskild produktform påstås vara verifierad. Ostens löpe behöver granskas före vegetarisk märkning. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bönkräm och tomatsalsa på bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "koriander|raw_edible",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "25 ml",
+                25.0
+              ]
+            ],
+            "text": "Sätt ugnen på 225 °C. Mosa de kokta avrunna bönorna i en liten kastrull med 25 ml vatten. Värm under omrörning tills de är genomheta och så fasta att de går att breda. Rör ner den frysta hackade koriandern i bönkrämen och genomhetta enligt förpackningen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 5,
+            "id": "s2",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg brödet i ett jämnt öppet lager på bakplåtspapper. Bred på smöret och rosta kort i den varma ugnen tills ytan känns lätt spröd."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "ost|as_sold",
+              "svarta bönor|cooked_drained"
+            ],
+            "parallel_group": null,
+            "text": "Fördela all bönkräm över brödet och täck med riven ost. Ställ tillbaka i ugnen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 7,
+            "id": "s4",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Gratinera cirka 7 minuter tills osten smält och fått enstaka bruna fläckar. Bönlagret ska vara genomvarmt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 4,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "limejuice|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Finhacka tomaten och löken och vänd med limejuicen. Servera salsan på eller intill de varma molletes direkt, så att brödet inte blir blött i förväg."
+          }
+        ],
+        "total_minutes": 25,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 7
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bröd",
+          "component": "toast",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 85.0,
+          "quantity_max": 85.0,
+          "quantity_min": 85.0,
+          "quantity_step": 85.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svarta bönor",
+          "component": "toast",
+          "form": "cooked_drained",
+          "name": "svarta bönor",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "toast",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "toast",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "salsa",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "salsa",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 225 °C. Mosa de kokta avrunna bönorna i en liten kastrull med 25 ml vatten. Värm under omrörning tills de är genomheta och så fasta att de går att breda. Rör ner den frysta hackade koriandern i bönkrämen och genomhetta enligt förpackningen.",
+        "Lägg brödet i ett jämnt öppet lager på bakplåtspapper. Bred på smöret och rosta kort i den varma ugnen tills ytan känns lätt spröd.",
+        "Fördela all bönkräm över brödet och täck med riven ost. Ställ tillbaka i ugnen.",
+        "Gratinera cirka 7 minuter tills osten smält och fått enstaka bruna fläckar. Bönlagret ska vara genomvarmt.",
+        "Finhacka tomaten och löken och vänd med limejuicen. Servera salsan på eller intill de varma molletes direkt, så att brödet inte blir blött i förväg."
+      ],
+      "name": "Molletes – gratinerat bröd med bönkräm – utökad",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 35,
+        "base_id": "smako-greek-bourdeto",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Benfri vit fisk i stora portionsbitar",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver",
+                "note": "",
+                "quantity": 9.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cayennepeppar|dry",
+                "name": "Cayennepeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              }
+            ],
+            "id": "fisk",
+            "name": "Fisk i löksås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "potatis",
+            "name": "Kokt potatis"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "vid gryta med lock",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 800,
+        "family": "Bourdeto",
+        "fish": true,
+        "flavor_profile": [
+          "paprika",
+          "chili",
+          "lök"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Paprikaversion utan tomat; källor beskriver även andra varianter. Den enkla versionen behåller samma löksås. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokt potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp den frysta benfria fiskfilén. Lägg i ett täckt kärl i kylskåp och behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina fisken helt i kylskåp enligt förpackningen. Planera 12 timmar och förläng vid behov tills ingen iskärna återstår. All upptiningssaft ska hettas upp i såsen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 9,
+            "id": "s3",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "gul lök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skala och skiva löken mycket tunt. Använd upptinad benfri fiskfilé och kontrollera att inga ben finns kvar. Spara all upptiningssaft till såsen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "olivolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm olivoljan i en vid gryta. Mjukstek löken på låg till medelhög värme under omrörning i 15 minuter utan att den blir mörk."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "cayennepeppar|dry",
+              "fisk|raw_edible",
+              "paprikapulver|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "400 ml",
+                400.0
+              ]
+            ],
+            "text": "Rör ner paprika, cayenne och salt. Fräs försiktigt en minut och häll i 400 ml vatten samt all upptiningssaft från fisken."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 15,
+            "id": "s6",
+            "ingredient_keys": [
+              "gul lök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt löksåsen småsjuda under lock 15 minuter. Den ska bli sammanhängande och röd av paprikan."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg fisken i såsen i ett lager. Sjud försiktigt under lock cirka tio minuter tills mitten håller minst 63 °C och fisken skivar sig. Vänd inte sönder bitarna."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 6,
+            "id": "s8",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Skala potatisen och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan salt; koka upp."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 20,
+            "id": "s9",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela potatisdelens salt över den kokta potatisen. Servera huvudrätten med samtliga tillbehör och fördela komponenterna jämnt över portionerna."
+          }
+        ],
+        "total_minutes": 800,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 765
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "fisk",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 9.0,
+          "quantity_max": 9.0,
+          "quantity_min": 9.0,
+          "quantity_step": 9.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cayennepeppar",
+          "component": "fisk",
+          "form": "dry",
+          "name": "cayennepeppar",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "potatis",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp den frysta benfria fiskfilén. Lägg i ett täckt kärl i kylskåp och behåll all vätska.",
+        "Tina fisken helt i kylskåp enligt förpackningen. Planera 12 timmar och förläng vid behov tills ingen iskärna återstår. All upptiningssaft ska hettas upp i såsen.",
+        "Skala och skiva löken mycket tunt. Använd upptinad benfri fiskfilé och kontrollera att inga ben finns kvar. Spara all upptiningssaft till såsen.",
+        "Värm olivoljan i en vid gryta. Mjukstek löken på låg till medelhög värme under omrörning i 15 minuter utan att den blir mörk.",
+        "Rör ner paprika, cayenne och salt. Fräs försiktigt en minut och häll i 400 ml vatten samt all upptiningssaft från fisken.",
+        "Låt löksåsen småsjuda under lock 15 minuter. Den ska bli sammanhängande och röd av paprikan.",
+        "Lägg fisken i såsen i ett lager. Sjud försiktigt under lock cirka tio minuter tills mitten håller minst 63 °C och fisken skivar sig. Vänd inte sönder bitarna.",
+        "Skala potatisen och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan salt; koka upp.",
+        "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering.",
+        "Fördela potatisdelens salt över den kokta potatisen. Servera huvudrätten med samtliga tillbehör och fördela komponenterna jämnt över portionerna."
+      ],
+      "name": "Bourdeto – fisk i het löksås – paprikastark fisk med potatis",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 35,
+        "base_id": "smako-greek-bourdeto",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Benfri vit fisk i stora portionsbitar",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver",
+                "note": "",
+                "quantity": 9.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cayennepeppar|dry",
+                "name": "Cayennepeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "fisk",
+            "name": "Fisk i löksås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "potatis",
+            "name": "Kokt potatis"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "vid gryta med lock",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 800,
+        "family": "Bourdeto",
+        "fish": true,
+        "flavor_profile": [
+          "paprika",
+          "chili",
+          "lök"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Paprikaversion utan tomat; källor beskriver även andra varianter. Den enkla versionen behåller samma löksås. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokt potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp den frysta benfria fiskfilén. Lägg i ett täckt kärl i kylskåp och behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina fisken helt i kylskåp enligt förpackningen. Planera 12 timmar och förläng vid behov tills ingen iskärna återstår. All upptiningssaft ska hettas upp i såsen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 9,
+            "id": "s3",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "gul lök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skala och skiva löken mycket tunt. Använd upptinad benfri fiskfilé och kontrollera att inga ben finns kvar. Spara all upptiningssaft till såsen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm olivoljan i en vid gryta. Mjukstek löken på låg till medelhög värme under omrörning i 15 minuter utan att den blir mörk. Hacka vitlöken och låt den fräsa med de sista två minuterna."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "cayennepeppar|dry",
+              "fisk|raw_edible",
+              "paprikapulver|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "400 ml",
+                400.0
+              ]
+            ],
+            "text": "Rör ner paprika, cayenne och salt. Fräs försiktigt en minut och häll i 400 ml vatten samt all upptiningssaft från fisken."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 15,
+            "id": "s6",
+            "ingredient_keys": [
+              "gul lök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt löksåsen småsjuda under lock 15 minuter. Den ska bli sammanhängande och röd av paprikan."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg fisken i såsen i ett lager. Sjud försiktigt under lock cirka tio minuter tills mitten håller minst 63 °C och fisken skivar sig. Vänd inte sönder bitarna. Blanda ner citronjuicen sist."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 6,
+            "id": "s8",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Skala potatisen och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan salt; koka upp."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 20,
+            "id": "s9",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela potatisdelens salt över den kokta potatisen. Servera huvudrätten med samtliga tillbehör och fördela komponenterna jämnt över portionerna."
+          }
+        ],
+        "total_minutes": 800,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 765
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "fisk",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 9.0,
+          "quantity_max": 9.0,
+          "quantity_min": 9.0,
+          "quantity_step": 9.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cayennepeppar",
+          "component": "fisk",
+          "form": "dry",
+          "name": "cayennepeppar",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "potatis",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp den frysta benfria fiskfilén. Lägg i ett täckt kärl i kylskåp och behåll all vätska.",
+        "Tina fisken helt i kylskåp enligt förpackningen. Planera 12 timmar och förläng vid behov tills ingen iskärna återstår. All upptiningssaft ska hettas upp i såsen.",
+        "Skala och skiva löken mycket tunt. Använd upptinad benfri fiskfilé och kontrollera att inga ben finns kvar. Spara all upptiningssaft till såsen.",
+        "Värm olivoljan i en vid gryta. Mjukstek löken på låg till medelhög värme under omrörning i 15 minuter utan att den blir mörk. Hacka vitlöken och låt den fräsa med de sista två minuterna.",
+        "Rör ner paprika, cayenne och salt. Fräs försiktigt en minut och häll i 400 ml vatten samt all upptiningssaft från fisken.",
+        "Låt löksåsen småsjuda under lock 15 minuter. Den ska bli sammanhängande och röd av paprikan.",
+        "Lägg fisken i såsen i ett lager. Sjud försiktigt under lock cirka tio minuter tills mitten håller minst 63 °C och fisken skivar sig. Vänd inte sönder bitarna. Blanda ner citronjuicen sist.",
+        "Skala potatisen och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan salt; koka upp.",
+        "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering.",
+        "Fördela potatisdelens salt över den kokta potatisen. Servera huvudrätten med samtliga tillbehör och fördela komponenterna jämnt över portionerna."
+      ],
+      "name": "Bourdeto – fisk i het löksås – med vitlök och citron",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 41,
+        "base_id": "smako-greek-bourdeto",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fisk|raw_edible",
+                "name": "Benfri vit fisk i stora portionsbitar",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "paprikapulver|dry",
+                "name": "Paprikapulver",
+                "note": "",
+                "quantity": 9.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "cayennepeppar|dry",
+                "name": "Cayennepeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "Vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "fisk",
+            "name": "Fisk i löksås"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "potatis",
+            "name": "Kokt potatis"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sallad|raw_edible",
+                "name": "Sallad",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "Rödvinsvinäger",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              }
+            ],
+            "id": "gront",
+            "name": "Grön sallad och bröd"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "vid gryta med lock",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 806,
+        "family": "Bourdeto",
+        "fish": true,
+        "flavor_profile": [
+          "paprika",
+          "chili",
+          "lök"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "fisk",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Paprikaversion utan tomat; källor beskriver även andra varianter. Den enkla versionen behåller samma löksås. Innehållsgranskad 2026-11-01 med produktform och mängdenhet; inte provlagad. Alla ursprungliga receptmängder bevarade.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokt potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp den frysta benfria fiskfilén. Lägg i ett täckt kärl i kylskåp och behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina fisken helt i kylskåp enligt förpackningen. Planera 12 timmar och förläng vid behov tills ingen iskärna återstår. All upptiningssaft ska hettas upp i såsen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 9,
+            "id": "s3",
+            "ingredient_keys": [
+              "fisk|raw_edible",
+              "gul lök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skala och skiva löken mycket tunt. Använd upptinad benfri fiskfilé och kontrollera att inga ben finns kvar. Spara all upptiningssaft till såsen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "olivolja|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Värm olivoljan i en vid gryta. Mjukstek löken på låg till medelhög värme under omrörning i 15 minuter utan att den blir mörk. Hacka vitlöken och låt den fräsa med de sista två minuterna."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "cayennepeppar|dry",
+              "fisk|raw_edible",
+              "paprikapulver|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "400 ml",
+                400.0
+              ]
+            ],
+            "text": "Rör ner paprika, cayenne och salt. Fräs försiktigt en minut och häll i 400 ml vatten samt all upptiningssaft från fisken."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 15,
+            "id": "s6",
+            "ingredient_keys": [
+              "gul lök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt löksåsen småsjuda under lock 15 minuter. Den ska bli sammanhängande och röd av paprikan."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "fisk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg fisken i såsen i ett lager. Sjud försiktigt under lock cirka tio minuter tills mitten håller minst 63 °C och fisken skivar sig. Vänd inte sönder bitarna. Blanda ner citronjuicen sist."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 6,
+            "id": "s8",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Skala potatisen och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan salt; koka upp."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 20,
+            "id": "s9",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 6,
+            "id": "s10",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "gurka|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "sallad|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skiva gurkan, riv salladen och vänd med vinäger. Skär brödet och servera det till fiskspadet."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Fördela potatisdelens salt över den kokta potatisen. Servera huvudrätten med samtliga tillbehör och fördela komponenterna jämnt över portionerna."
+          }
+        ],
+        "total_minutes": 806,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 765
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fisk",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "fisk",
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "paprikapulver",
+          "component": "fisk",
+          "form": "dry",
+          "name": "paprikapulver",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 9.0,
+          "quantity_max": 9.0,
+          "quantity_min": 9.0,
+          "quantity_step": 9.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "cayennepeppar",
+          "component": "fisk",
+          "form": "dry",
+          "name": "cayennepeppar",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "fisk",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "fisk",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "potatis",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "gront",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sallad",
+          "component": "gront",
+          "form": "raw_edible",
+          "name": "sallad",
+          "product_requirements": [
+            "pack:intake_all_16d63b25fed0"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "gront",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "gront",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp den frysta benfria fiskfilén. Lägg i ett täckt kärl i kylskåp och behåll all vätska.",
+        "Tina fisken helt i kylskåp enligt förpackningen. Planera 12 timmar och förläng vid behov tills ingen iskärna återstår. All upptiningssaft ska hettas upp i såsen.",
+        "Skala och skiva löken mycket tunt. Använd upptinad benfri fiskfilé och kontrollera att inga ben finns kvar. Spara all upptiningssaft till såsen.",
+        "Värm olivoljan i en vid gryta. Mjukstek löken på låg till medelhög värme under omrörning i 15 minuter utan att den blir mörk. Hacka vitlöken och låt den fräsa med de sista två minuterna.",
+        "Rör ner paprika, cayenne och salt. Fräs försiktigt en minut och häll i 400 ml vatten samt all upptiningssaft från fisken.",
+        "Låt löksåsen småsjuda under lock 15 minuter. Den ska bli sammanhängande och röd av paprikan.",
+        "Lägg fisken i såsen i ett lager. Sjud försiktigt under lock cirka tio minuter tills mitten håller minst 63 °C och fisken skivar sig. Vänd inte sönder bitarna. Blanda ner citronjuicen sist.",
+        "Skala potatisen och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan salt; koka upp.",
+        "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering.",
+        "Skiva gurkan, riv salladen och vänd med vinäger. Skär brödet och servera det till fiskspadet.",
+        "Fördela potatisdelens salt över den kokta potatisen. Servera huvudrätten med samtliga tillbehör och fördela komponenterna jämnt över portionerna."
+      ],
+      "name": "Bourdeto – fisk i het löksås – med bröd och grön sallad",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}
