@@ -282,6 +282,7 @@ async def test_unreachable_search_state_is_collected_before_next_build(monkeypat
     import weakref
 
     from app.services import planner_admission
+    from app.services.planner_memory import consume_admission_cleanup
 
     class SearchState:
         pass
@@ -307,12 +308,32 @@ async def test_unreachable_search_state_is_collected_before_next_build(monkeypat
             events.append('build')
             assert reference() is None
             assert planner_admission.memory_cleanup_seconds.get() >= 0
+            assert await asyncio.to_thread(consume_admission_cleanup)
+            assert not await asyncio.to_thread(consume_admission_cleanup)
             return 'same valid result'
 
         controller = PlannerAdmissionController(max_concurrent=1)
         assert await controller.run('new-request', build) == 'same valid result'
         assert events == ['collect', 'build']
         assert planner_admission.memory_cleanup_seconds.get() == 0
+        assert not consume_admission_cleanup()
     finally:
         if enabled:
             gc.enable()
+
+
+@pytest.mark.asyncio
+async def test_failed_admitted_job_cannot_lend_its_cleanup_to_a_later_job():
+    from app.services.planner_memory import consume_admission_cleanup
+
+    controller = PlannerAdmissionController(max_concurrent=1)
+    async def broken():
+        raise RuntimeError("synthetic failure before create")
+    with pytest.raises(RuntimeError):
+        await controller.run("failed", broken)
+    assert not consume_admission_cleanup()
+
+    async def next_job():
+        return await asyncio.to_thread(consume_admission_cleanup)
+    assert await controller.run("next", next_job)
+    assert not consume_admission_cleanup()

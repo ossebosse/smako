@@ -23,7 +23,7 @@ from app.services.price_universe_runtime import (
 )
 from app.services.pricing_projection_prewarm import precompute_pricing_semantics
 from fastapi import FastAPI, Request
-from fastapi.responses import FileResponse, RedirectResponse
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
 from grocery_data.app.api.community_evidence import install_community_evidence_api
@@ -161,6 +161,18 @@ install_community_evidence_api(
     create_tables=False,
 )
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+
+@app.get("/ready/preparation", include_in_schema=False)
+def warm_preparation_status(request: Request) -> JSONResponse:
+    from app.services.source_facts_prewarm import preparation_status
+
+    snapshot = preparation_status(getattr(request.app.state, "source_facts_prewarm", None),
+        (row.universe.universe_id for row in GLOBAL_PREPARED_PRICE_UNIVERSES.active_universes()))
+    settings = getattr(request.app.state, "beta_settings", None) or get_settings()
+    snapshot["build_id"] = settings.build_id
+    return JSONResponse(snapshot, status_code=200 if snapshot["status"] == "ready" else 202,
+                        headers={"Cache-Control": "no-store"})
 
 
 @app.get("/", include_in_schema=False)

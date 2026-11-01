@@ -20,6 +20,7 @@ import re
 import stat
 import sys
 from collections import OrderedDict
+from collections.abc import Sequence
 from dataclasses import replace
 from decimal import Decimal, InvalidOperation
 from functools import lru_cache
@@ -41,6 +42,7 @@ _DETAIL_FIELDS = ("ingredients", "nutrition_basis", "nutrition_unit", "nutrition
 DETAIL_READ_MAX_ENTRIES = 32768
 DETAIL_READ_MAX_BYTES = 32 * 1024 * 1024
 DETAIL_DIRECTORY_MAX_BYTES = 8 * 1024 * 1024
+DETAIL_PROJECTION_MAX_BYTES = 8 * 1024 * 1024
 
 
 def _directory_stamp(info):
@@ -52,8 +54,8 @@ def _missing_detail_index(root):
 
     Never infer absence from the publication manifest: an unlisted, corrupt or
     revoked file must still reach the ordinary reader. Symlink directories and
-    failed/changed listings use that reader too. A fresh lstat before every
-    negative lookup detects additions, replacements and permission changes.
+    failed/changed listings use that reader too. Directory stamps are checked
+    before each negative lookup, or before publishing a private batch result.
     """
     result, retained = {}, 256
     try:
@@ -82,13 +84,25 @@ def _missing_detail_index(root):
 
 
 def _known_missing_pair(index, chain, code):
-    if not isinstance(code, str) or not CODE.fullmatch(code) or chain not in index:
+    if not _listed_missing_pair(index, chain, code):
         return False
-    path, stamp, names = index[chain]
-    if f"{code}.json" in names or f"{code}.meta.json" in names:
-        return False
+    path, stamp, _ = index[chain]
     try:
         return _directory_stamp(path.lstat()) == stamp
+    except OSError:
+        return False
+
+
+def _listed_missing_pair(index, chain, code):
+    if not isinstance(code, str) or not CODE.fullmatch(code) or chain not in index:
+        return False
+    _, _, names = index[chain]
+    return f"{code}.json" not in names and f"{code}.meta.json" not in names
+
+
+def _missing_index_unchanged(index):
+    try:
+        return all(_directory_stamp(path.lstat()) == stamp for path, stamp, _ in index.values())
     except OSError:
         return False
 
@@ -202,14 +216,39 @@ def merge_axfood_details(products, facts, root=None):
     elif "staging" in root.parts:
         stats["rejections"]["unpublished_staging"] = 1
         return stats
+    missing_index = _missing_detail_index(root) if manifest is not None else {}
+    if (missing_index and isinstance(products, Sequence) and type(facts) is dict
+            and sys.getsizeof(facts) <= DETAIL_PROJECTION_MAX_BYTES):
+        # Project privately so newly added/orphan/revoked pairs cannot be hidden
+        # by a stale directory listing. Check again before publishing any changes.
+        # Only the shallow mapping is copied; unchanged fact objects are shared.
+        pending = facts.copy()
+        projected = _merge_projection(products, pending, root, manifest, stats, missing_index,
+                                      batch_missing=True)
+        if _missing_index_unchanged(missing_index):
+            facts.update(pending)
+            return projected
+        del pending
+        # Retry once through the authoritative reader, with no negative index.
+        # Discard both provisional facts and counters; do not apply details twice.
+        missing_index = {}
+    return _merge_projection(products, facts, root, manifest, stats, missing_index)
+
+
+def _merge_projection(products, facts, root, manifest, stats, missing_index, *, batch_missing=False):
+    stats = {**stats, "rejections": dict(stats["rejections"])}
     # A publication is immutable. Validate each article once in this projection,
     # including misses, while every product still gets its own GTIN binding and
     # provenance. No cross-call raw-document cache can hide later corruption.
     documents, retained_bytes = OrderedDict(), sys.getsizeof(OrderedDict())
-    missing_index = _missing_detail_index(root) if manifest is not None else {}
+    missing = DetailEvidence("missing")
 
     def read(chain, code):
         nonlocal retained_bytes
+        if batch_missing and _listed_missing_pair(missing_index, chain, code):
+            # Absence is already represented by the bounded directory index.
+            # No duplicate per-article cache entry or deep size walk is needed.
+            return missing
         if not isinstance(code, str):
             return read_document(root, chain, code, manifest=manifest)
         key = (chain, code)

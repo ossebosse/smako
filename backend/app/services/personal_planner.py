@@ -2720,7 +2720,13 @@ class PersonalPlanner:
 
     def create(self, *, replace_slot=None, balanced_reference=None, _compare_scopes=True):
         started = perf_counter()
-        self._release_idle_memory()
+        from app.services.planner_memory import consume_admission_cleanup
+        # Admission has already reclaimed old cycles before this job's fact
+        # loading. Collect its young temporaries here without rescanning every
+        # live shared graph. Direct/legacy calls and the full pre-search guard
+        # retain their existing collection. Only one create may claim the GC.
+        self._release_idle_memory(recent=(self.complete and self.current_library_search
+                                          and consume_admission_cleanup()))
         incumbents = []
         incumbent_scopes = {}
         if (self.complete and not self.current_library_search and _compare_scopes and self.request.diversity_mode == "cheapest"

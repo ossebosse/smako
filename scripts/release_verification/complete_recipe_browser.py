@@ -477,6 +477,12 @@ def run_case(browser, engine, mobile, personal, args):
         report["form_layout"] = observe_layout(page)
         assert report["form_layout"]["noHorizontalPageOverflow"]
         start = len(observed)
+        if args.warm_build_id:
+            from warm_preparation import wait_for_warm_preparation
+
+            report["warm_preparation"] = wait_for_warm_preparation(
+                context.request, args.base, build_id=args.warm_build_id,
+                universe_ids=args.warm_universe_id, timeout=args.warm_timeout)
         clicked_at = time.monotonic()
         page.locator("#generate-plan" if personal else "#submit-button").dblclick()
         generation, envelope = wait_operation(page, observed, start, timeout=args.timeout, reload_after=args.reload_after, offline_seconds=args.offline_seconds, fault=fault)
@@ -678,6 +684,9 @@ def run_case(browser, engine, mobile, personal, args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--warm-build-id", help="Require completed preparation before timing this build")
+    parser.add_argument("--warm-universe-id", action="append", default=[], help="Exact active universe; repeat for every municipality")
+    parser.add_argument("--warm-timeout", type=float, default=300, help="Maximum preparation wait, outside menu latency")
     parser.add_argument("--base", required=True)
     parser.add_argument("--output", type=Path, required=True, help="Private ignored evidence directory")
     parser.add_argument("--browser", choices=["chromium", "webkit", "both"], default="chromium")
@@ -722,6 +731,8 @@ def main():
     parser.add_argument("--allow-nonlocal-isolated-target", action="store_true")
     parser.add_argument("--allow-beta", action="store_true", help="Authorized beta acceptance, without fault injection or synthetic feedback")
     args = parser.parse_args()
+    if bool(args.warm_build_id) != bool(args.warm_universe_id):
+        parser.error("--warm-build-id and --warm-universe-id must be supplied together")
     args.base = args.base.rstrip("/")
     args.meal_request=json.loads(args.meal_request.read_text(encoding="utf8")) if args.meal_request else None
     if args.meal_request:
