@@ -1,0 +1,229 @@
+{
+  "status": "22 ytterligare grundrätter / 54 varianter: fristående strukturkontroll godkänd, men fortfarande AI-författade receptutkast för separat granskning/import i Smako.",
+  "scope": "Endast de nya receptpaketen 007 och 008. Originalleveransens 72 grundrätter / 199 varianter ingår INTE som recept i denna ZIP.",
+  "counts": {
+    "new_bases": 22,
+    "new_variants": 54,
+    "previous_bases": 72,
+    "previous_variants": 199,
+    "cumulative_bases": 94,
+    "cumulative_variants": 253,
+    "target_bases": 1000,
+    "target_variants": 2750,
+    "remaining_bases": 906,
+    "remaining_variants": 2497,
+    "accepted_distinct_new_bases": 22,
+    "schema_checked_new_bases": 22,
+    "schema_checked_new_variants": 54,
+    "new_known_identity_whole_bases": 5,
+    "new_known_identity_package_variants": 11,
+    "new_register_blocked_bases": 17,
+    "new_register_blocked_variants": 40,
+    "new_unresolved_candidates_not_counted": 1,
+    "new_rejected_candidates_not_counted": 1,
+    "new_variant_deficit_inside_authored_bases": 0,
+    "native_smako_approved_variants": 0,
+    "provcooked_variants": 0
+  },
+  "structural_error_count": 0,
+  "structural_errors": [],
+  "tool_versions": {
+    "python": "3.13.5",
+    "jsonschema": "4.26.0"
+  },
+  "actual_machine_checks": {
+    "unique_pack_id": 2,
+    "package_size_under_16MiB": 2,
+    "only_new_packages": 2,
+    "json_schema_packages": 2,
+    "unique_variant_identity": 54,
+    "no_reserved_or_previous_base_collision": 54,
+    "version_1_0_0": 54,
+    "ascii_base_id": 54,
+    "meal_servings": 54,
+    "ingredient_use_complete_no_unknown_uses": 54,
+    "positive_finite_quantity": 495,
+    "no_requirements_override": 495,
+    "standard_unit": 495,
+    "single_form_per_canonical_name": 54,
+    "known_only_package": 11,
+    "earlier_acyclic_dependencies": 334,
+    "positive_step_minutes": 334,
+    "no_unscalable_dl_l_process_water": 334,
+    "standalone_step_texts": 334,
+    "authoring_time_limits": 54,
+    "variant_metric_present": 54,
+    "reported_ingredient_count_matches": 54,
+    "reported_time_matches": 54,
+    "reported_registry_blockers_match": 54,
+    "draft_status_explicit": 54,
+    "unknown_identity_explicit_proposal": 103,
+    "proposal_exact_affected_variant": 103,
+    "complete_variant_family": 22,
+    "family_not_split_between_packages": 22,
+    "stable_base_identity": 22,
+    "meaningfully_distinct_ingredient_counts": 22,
+    "expected_actual_new_counts": 1,
+    "overview_counts": 1,
+    "cumulative_count_no_double_import": 1,
+    "registry_affected_count": 1,
+    "no_unused_current_registry_proposal": 1,
+    "quota_cell_actual_matches": 18,
+    "quota_deficit_arithmetic": 18,
+    "all_interval_exceptions_recorded": 1,
+    "package_manifest_hash_and_counts": 2
+  },
+  "standalone_validation_script": "kontroll/validera.py",
+  "standalone_validation_result": "kontroll/slutkontroll.json",
+  "run_command": "python kontroll/validera.py",
+  "dependency": "jsonschema",
+  "whole_library_read": {
+    "existing_bases": 934,
+    "existing_variants": 2462,
+    "previous_additional_bases": 72,
+    "previous_additional_variants": 199,
+    "reference_ingredient_identities": 284,
+    "read_evidence": "kontroll/inlasningskontroll.json"
+  },
+  "similarity_review": {
+    "before_authorship": {
+      "candidates": 24,
+      "reference_variant_comparisons": 63864,
+      "candidate_pairs": 276,
+      "evidence": "kontroll/beslut-fore-forfattning.json"
+    },
+    "after_authorship": {
+      "authored_bases": 22,
+      "authored_variants": 54,
+      "reference_variant_comparisons": 143694,
+      "all_new_variant_pairs": 1431,
+      "method": "0,35 tecken-TF-IDF namn + 0,30 ord-TF-IDF full text + 0,35 ingrediens-Jaccard; inga matematiska trösklar används som kulinariskt godkännande. Alla nya par jämförda; syskonvarianter exkluderade vid närmaste andra grundrätt.",
+      "evidence": "kontroll/likhetsurval-efter.json"
+    },
+    "new_candidate_decisions": {
+      "accept": 22,
+      "review_not_authored_or_counted": 1,
+      "reject_not_authored_or_counted": 1
+    },
+    "manual_review_scope": "AI-redaktionell jämförelse av konceptankare, relevanta fullständiga recept och närmaste träffar. Ingen mänsklig slutgranskning. Låg maskinell likhet är inte i sig bevis på ny rätt."
+  },
+  "source_records_for_new_recipes": 23,
+  "source_access_limitations": "Exakt åtkomstnivå och eventuella utdrags-/hämtbegränsningar redovisas per post i kallor.json. Källorna verifierar inte de egna mängderna eller tillagningsresultaten.",
+  "warning_groups": [
+    {
+      "code": "REGISTER_REVIEW",
+      "severity": "blocks_native_import_for_affected_variants",
+      "identity_count": 30,
+      "new_identity_proposals_not_previously_proposed": 16,
+      "directly_affected_bases": 17,
+      "directly_affected_variants": 40,
+      "whole_family_held_variants": 43,
+      "detail": "Paket 008 håller samman hela receptfamiljer. Tre av dess varianter använder i sig bara kända identiteter, men syskonvarianterna är blockerade. Inga nya produktkrav har hittats på."
+    },
+    {
+      "code": "INGREDIENT_COUNT_EXCEPTIONS",
+      "severity": "editorial_review",
+      "variant_count": 9,
+      "detail": "Verkliga antal och kulinariska motiveringar finns i leveransoversikt.json. Inga ingredienser har lagts till enbart för att nå riktmärken."
+    },
+    {
+      "code": "NO_DINNER_DEFAULT_FILTER_VARIANT",
+      "severity": "filter_limitation",
+      "base_ids": [
+        "smako-italian-pasta-cacio-pepe"
+      ],
+      "detail": "Cacio e pepe har 2, 5 respektive 9 räknade ingredienser. Ingen variant når middagens nuvarande standardfilter 10–15."
+    },
+    {
+      "code": "PROCESS_YIELD_TEXTURE",
+      "severity": "requires_test_cooking",
+      "base_ids": [
+        "smako-mexican-nicuatole-majspudding",
+        "smako-indian-shrikhand",
+        "smako-swedish-bohuslansk-aggost"
+      ],
+      "detail": "Nicuatoles sättning samt avrinning och verkligt utbyte för shrikhand/äggost behöver verifieras med faktisk råvara och provlagning."
+    },
+    {
+      "code": "LONG_COOKING_VARIABILITY",
+      "severity": "estimated_time_uncertainty",
+      "base_ids": [
+        "smako-italian-pasta-alla-genovese",
+        "smako-mexican-chilorio"
+      ],
+      "detail": "Köttets mörhet kan kräva upp till ytterligare cirka 60 minuter utöver den beräknade arbetsföljden. Stegen anger färdighetskontroll, och översikten redovisar osäkerheten."
+    },
+    {
+      "code": "SOURCES_NOT_RECIPE_VALIDATION",
+      "severity": "evidence_limit",
+      "detail": "Kulinariska källor styrker identitet/ursprung i angiven omfattning, inte dessa egenförfattade mängder, kostprofiler eller produktbindningar. Vissa källor har bara kunnat läsas som utdrag."
+    },
+    {
+      "code": "ALL_DRAFTS_UNTESTED",
+      "severity": "not_ready_for_automatic_activation",
+      "variant_count": 54,
+      "detail": "Samtliga varianter är AI-författade och inte provlagade. Även paketet med kända identiteter kräver Smakos ordinarie granskning och importerprocess."
+    }
+  ],
+  "not_performed": [
+    "Smakos egen author/validate/diff/import/prepare",
+    "Produktbindning, butikstillgång eller köpbarhet",
+    "Näringsberäkning och prisoptimering",
+    "Provlagning",
+    "Mänsklig redaktionell granskning"
+  ],
+  "does_not_claim": [
+    "Full beställning på 1000 grundrätter",
+    "Mänskligt kulinariskt godkännande",
+    "Smakos godkännandestämplar",
+    "Verifierad näring, allergenfrihet, löpe eller butikstillgång",
+    "Betaaktivering eller publicering"
+  ],
+  "packages": [
+    {
+      "file": "paket/007-kanda-identiteter.json",
+      "pack_id": "smako-expansion-1000-20261101-007",
+      "base_count": 5,
+      "variant_count": 11,
+      "base_ids": [
+        "smako-mexican-nicuatole-majspudding",
+        "smako-indian-thalipeeth-rostade-mjol",
+        "smako-indian-gajar-halwa",
+        "smako-swedish-stuvade-makaroner",
+        "smako-swedish-bohuslansk-aggost"
+      ],
+      "requires_register_review": false,
+      "bytes": 58469,
+      "sha256": "e29240048b84317186dff2d6ce00b6620728ddc15f5427c775082b7945d940a5"
+    },
+    {
+      "file": "paket/008-registergranskning.json",
+      "pack_id": "smako-expansion-1000-20261101-008",
+      "base_count": 17,
+      "variant_count": 43,
+      "base_ids": [
+        "smako-greek-melitzanosalata",
+        "smako-greek-kollyva-veteskal",
+        "smako-italian-spaghetti-aglio-olio",
+        "smako-italian-pasta-cacio-pepe",
+        "smako-italian-pasta-alla-norma",
+        "smako-italian-pasta-alla-genovese",
+        "smako-italian-testaroli-basilika",
+        "smako-italian-zuppa-valpellinentze",
+        "smako-mexican-chilorio",
+        "smako-mexican-frijoles-puercos",
+        "smako-indian-chicken-65-pannstekt",
+        "smako-indian-shrikhand",
+        "smako-thai-pad-pak-boong",
+        "smako-thai-miang-kham",
+        "smako-thai-kluai-buat-chi",
+        "smako-thai-khanom-mo-kaeng",
+        "smako-swedish-gubbrora-ansjovis"
+      ],
+      "requires_register_review": true,
+      "bytes": 255680,
+      "sha256": "eb9f5f091615e0126554018f23b68efcde13d3fdcd9ed20eb1eda48384f6ace0"
+    }
+  ],
+  "archive_integrity": "SHA256SUMS.txt innehåller kontrollsummor för leveransens filer. ZIP-integritet och nytt receptantal verifieras efter paketering; extern arkivverifiering sparas bredvid ZIP-filen."
+}

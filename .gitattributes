@@ -65,3 +65,11 @@
 # Preserve benchmark request and executed probe hashes across checkouts.
 /docs/reviews/recipe-checkpoint-72-timing-20261101/*.json -text whitespace=cr-at-eol
 /docs/reviews/recipe-checkpoint-72-timing-20261101/*.py.txt -text whitespace=cr-at-eol
+# Preserve continuation originals and their hash-bound offline audit evidence.
+/backend/app/data/recipes/incoming/authoring-1000-20261101/continuation-22/source/** -text whitespace=cr-at-eol
+/backend/app/data/recipes/incoming/authoring-1000-20261101/continuation-41/source/** -text whitespace=cr-at-eol
+/backend/app/data/recipes/incoming/authoring-1000-20261101/continuation-30/source/** -text whitespace=cr-at-eol
+# This supplied original has a hash-bound trailing blank line; do not rewrite it.
+/backend/app/data/recipes/incoming/authoring-1000-20261101/continuation-30/source/RECEPTINDEX.txt -text whitespace=cr-at-eol,-blank-at-eof
+/docs/reviews/recipe-continuations-20261101/*.json -text whitespace=cr-at-eol
+/docs/reviews/recipe-continuations-20261101/*.py.txt -text whitespace=cr-at-eol

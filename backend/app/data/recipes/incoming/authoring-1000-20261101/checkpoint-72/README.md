@@ -54,11 +54,17 @@ frityrolja och råvarornas form. Det finns också en
 [förberedd återkoppling till Chat](../../../../../../../docs/recipes/requests/20261101/ATGARDER-CHECKPOINT-72-TILL-CHAT.txt),
 som inte har skickats.
 
-Fortsätt beställningen från paket **007**, med **928 grundrätter / 2 551
+Vid denna checkpoint: fortsätt från paket **007**, med **928 grundrätter / 2 551
 varianter** kvar räknat mot mottagna utkast. Dessa resttal betyder inte att
 de första 72 är slutligt godkända som tillräckligt olika nya grundrätter.
 Jämför fortsättningen med både aktuellt bibliotek och denna checkpoint.
 Bevara kandidatbesluten: 72 författade, 7 öppna gränsfall och 5 avvisade.
+
+**Senare mottagning samma dag:** tre fortsättningar ger totalt 165 bas-ID:n /
+439 variant-ID:n; nästa nyskrivna paket är 019. Ett separat 72/194-arkiv saknas.
+Följ [den aktuella beställningsjournalen](../../../../../../../docs/recipes/REQUESTING-RECIPES.md)
+och [fortsättningarnas rapport](../../../../../../../docs/reviews/recipe-continuations-20261101/REPORT.md)
+för dagens totalsiffror och konflikter. Denna checkpoint räknas bara en gång.
 
 Kör om den ordinarie mottagningskontrollen från projektroten:
 

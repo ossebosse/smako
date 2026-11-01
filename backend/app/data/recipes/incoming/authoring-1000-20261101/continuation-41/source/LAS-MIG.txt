@@ -1,0 +1,103 @@
+SMAKO – SEPARAT FORTSÄTTNING, 1 NOVEMBER 2026
+41 NYA GRUNDRÄTTER / 108 FULLSTÄNDIGA RECEPTVARIANTER
+
+STATUS
+AI-författade receptutkast för separat granskning/import i Smako.
+Inte provlagade. Inte godkända av Smakos egen import- eller produktkontroll.
+Inga tidigare receptpaket ingår. Detta är en fortsättning, inte slutleveransen
+av beställningen på 1 000 grundrätter och 2 750 receptvarianter.
+
+UTFALL I JUST DENNA ZIP
+26 middagar, 3 frukostar, 12 mellanmål = 41 grundrätter.
+Middag har tre varianter; frukost och mellanmål har två. Totalt 108 varianter.
+Alla 41 levererade grundrätter har kompletta variantfamiljer.
+Grekiskt: 8 grundrätter / 19 varianter.
+Italienskt: 6 / 17. Mexikanskt: 6 / 16. Indiskt: 8 / 21.
+Thailändskt: 7 / 19. Svenskt: 6 / 16.
+
+RECEPTPAKET – IMPORTERA INTE ÖVERSIKTSFILER SOM RECEPT
+paket/smako-expansion-1000-20261101-012.json: 6 grundrätter / 12 varianter.
+  Endast ingrediensidentiteter i referensregistret. Detta innebär INTE
+  att produkterna, tiderna, mängderna eller importen är godkända.
+paket/smako-expansion-1000-20261101-013.json: 12 grundrätter / 33 varianter.
+paket/smako-expansion-1000-20261101-014.json: 12 grundrätter / 33 varianter.
+paket/smako-expansion-1000-20261101-015.json: 11 grundrätter / 30 varianter.
+  Paket 013–015 behöver registergranskning. Hela receptfamiljer hålls ihop:
+  35 grundrätter / 96 varianter ligger i dessa paket, men 93 av varianterna
+  använder direkt en föreslagen ingrediensidentitet. De övriga tre följer
+  med sina familjer. Totalt finns 56 ingrediensförslag med exakta referenser.
+
+VARIANTER OCH INGREDIENSANTAL
+Samtliga grundrätter har olika verkligt räknade ingrediensantal mellan
+varianterna. Nio avvikelser från riktmärkena är särskilt motiverade i
+leveransoversikt.json. Alla 26 middagsgrundrätter har minst en variant med
+10–15 räknade ingredienser. Antalet är inte ett påstående om inköpspris.
+
+LIKETSGRANSKNING
+Hela originalbiblioteket ingick: 934 grundrätter och 2 462 varianter,
+inklusive omärkta och flerköksmärkta rätter. Alla tillgängliga tidigare
+leveranser inkluderades också: 447 inlämnade variantrader, motsvarande
+164 unika bas-ID:n och 443 unika variant/version-ID:n före semantisk
+sammanslagning. Totalt ingick 2 909 referensrader i jämförelserna.
+Kandidaterna jämfördes innan författningen; efter författningen gjordes
+ny jämförelse med faktiska ingredienser och steg. Maskinell rangordning
+kompletterades med AI-redaktionell kulinarisk bedömning.
+Av 54 kandidatposter: 41 accepterade, 9 avvisade, 4 kvar i review.
+Ett redan skrivet riscrêpeförslag med tre varianter togs bort efter den
+sista likhetsgranskningen. Det ingår INTE i recepten eller leveransantalet.
+Granskningsbeslut är inte ett slutligt Smako-godkännande.
+
+VIKTIGT OM ÄLDRE LEVERANSER OCH TOTALKVOT
+De tidigare ZIP-filerna överlappar både i ID:n och i rättkoncept.
+Två äldre thailändska familjer har dessutom samma ID:n med olika innehåll.
+Se tidigare-leveranskonflikter.json. Denna ZIP återanvänder inga äldre ID:n
+eller receptpaket och skriver inte om de äldre filerna.
+Den råa unionen efter denna ZIP är 205 bas-ID:n / 551 variant-ID:n.
+Detta är INTE ett verifierat antal kulinariskt olika grundrätter.
+Återstående 795 bas-ID:n / 2 199 varianter är därför endast preliminära
+räkneställningar; underskottet kan öka när äldre överlapp slås ihop.
+Köks-/måltidskvoter och denna leverans bidrag redovisas per cell i
+leveransoversikt.json och checkpoint.json. Ingen kvot har flyttats mellan kök.
+
+FAKTISKT KÖRDA KONTROLLER
+Fristående Python/jsonschema-kontroll: noll strukturella fel.
+Kontrollerar schema, UTF-8 JSON, ID:n, kompletta variantfamiljer, kvoter,
+portioner, ingrediensantal, positiva mängder, identiteter/enheter eller
+uttryckliga blockerare, ingrediensanvändning i steg, beroenden och tider,
+paketindelning, filstorlekar och överensstämmelse med register/översikter.
+149 varningsposter: 9 ingrediensriktmärkesundantag, 93 varianter med
+registergranskning, 46 varianter med särskilda författarflaggor och en
+samlad varning om de äldre leveranskonflikterna. Varningarna är inte 149
+olika fel; kategorierna överlappar mellan varianter. Se kontrollrapport.json.
+Tider är uppskattningar, inte uppmätta provlagningstider. Konservativ,
+sekventiell tidsplanering används utan påstådda parallellvinster.
+
+INTE GENOMFÖRT
+Smakos native author/validate/diff/import/prepare, produktbindning,
+köpbarhet, butikstillgång, näringsberäkning, allergen-/kostgodkännande,
+prisberäkning, provlagning och betaaktivering. Inga sådana godkännanden
+har satts i recepten. Även paket 012 behöver fortsatt granskning.
+
+FILKARTA
+RECEPTINDEX.txt: läsbar lista över alla 41 nya rätter och deras varianter.
+paket/*.json: enbart de fyra nya receptpaketen, enligt authoring-schemat.
+kandidatregister.json: kulinariska identiteter, beslut, käll- och variantreferenser.
+dubblettgranskning.json: före-/efterjämförelser, närmaste träffar och motiveringar.
+leveransoversikt.json: antal, kvoter, kostavsikt, tider, ingrediensantal och blockerare.
+registerforslag.json: 56 föreslagna identiteter med exakt användning.
+befintliga-recept-forslag.json: förbättringar som inte räknas som nya grundrätter.
+kallor.json: faktiskt använda källor, vad de stödjer och deras begränsningar.
+kontrollrapport.json: faktiskt körd strukturkontroll, fel, varningar och ej körda kontroller.
+tidigare-leveranskonflikter.json: observerade överlapp mellan äldre leveranser.
+checkpoint.json: stabila ID:n, kandidatbeslut, kvoter och nästa paketnummer 016.
+kontroll/: schema, författaranvisning, referensmanifest, ingrediensregister,
+  reserverade/tidigare ID:n, jämförelsematriser/index, källdata för träffurval,
+  rättningslogg och körbar fristående validator. Träffurvalen är gransknings-
+  underlag, INTE extra receptpaket för import.
+SHA256SUMS.txt: kontrollsummor för alla övriga filer i ZIP-filen.
+
+KÖRA OM STRUKTURKONTROLLEN
+Kräver Python 3 och paketet jsonschema. Kör från leveransmappen:
+  python kontroll/validera.py
+Det skriver om kontrollrapport.json; dess checksumma ändras då eftersom
+rapportens körtid uppdateras. Originalets SHA256SUMS avser leveransögonblicket.

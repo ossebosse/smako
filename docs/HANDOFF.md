@@ -1,3 +1,31 @@
+# 2026-11-01: Tre receptfortsättningar mottagna; äldre 72/194-arkiv saknas
+
+[Mottagningsrapport](reviews/recipe-continuations-20261101/REPORT.md):
+ytterligare **93 baser / 240 varianter**, totalt faktiskt mottaget **165/439**.
+49 originalfiler från tre ZIP är bytebevarade med fullständiga arkivinventarier.
+Alla 240 klarar schema och rapporternas ingrediens-/tidsaritmetik.
+48 klarar native, diff, offline förberedelse och skalning till 1/4/12 portioner;
+192 har ingredienshinder (105 ursprungliga namn/form-förslag, 103 kanoniska).
+Tre redan blockerade Kosha mangsho-varianter överstiger aktiv tidsgräns.
+Frysta insatser, frityrolja och avrinning behöver innehållsgranskas även i den
+kompatibla gruppen. Ingen import, produktkvalificering eller betaaktivering.
+
+Senare författarrapporter räknar med en **annan** 72-rättersleverans:
+`smako-fortsattning-72-nya-grundratter-194-varianter-20261101.zip`.
+Be om det originalet. Författarens 235/629 är inte faktiskt mottaget;
+70 bas-ID:n/190 variant-ID:n finns bara som referenser. Författaren rapporterar
+innehållskrockar för Miang kham/Kluai buat chi och konceptöverlapp för fyra
+andra rätter. Saknade paket 007–011 återanvänder 007–008 med andra hashvärden
+än 22-leveransen. Bevara båda provenienserna, inga automatiska överskrivningar.
+
+[Beställningsjournalen](recipes/REQUESTING-RECIPES.md) fortsätter från **019**,
+med **835 baser / 2 311 varianter** kvar mot faktiskt mottagna utkast.
+Ingen slutlig kulinarisk nyhetsbedömning; alla mottagna utkast ska ingå i
+nästa dubblettunderlag. Tidseffekten av dessa 240 är inte mätt. Den tidigare
+mätningen nedan gäller enbart checkpointens 50 tekniskt kompatibla varianter.
+
+---
+
 # 2026-11-01: Receptcheckpointens tidseffekt uppmätt i isolerat varmt läge
 
 [Mätningen](reviews/recipe-checkpoint-72-timing-20261101/REPORT.md) jämför

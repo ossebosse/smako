@@ -1,0 +1,81 @@
+SMAKO – 22 YTTERLIGARE GRUNDRÄTTER / 54 RECEPTVARIANTER
+Separat fortsättning, paket 007–008, 1 november 2026
+
+STATUS
+AI-författade receptutkast för separat granskning/import i Smako.
+Inte provlagade. Inte importerade, produktbundna, näringsberäknade eller
+aktiverade i beta. Strukturkontroll är inte ett Smako-godkännande.
+
+DETTA ÄR EN NY LEVERANS
+Receptpaketen innehåller ENBART 22 ytterligare grundrätter och 54 varianter.
+De ursprungliga 72 grundrätterna / 199 varianterna finns INTE i paket/.
+Du behöver inte importera de tidigare paketen 001–006 igen.
+Kumulativa översikter och historiska granskningsfiler finns för kontinuitet;
+de är inte receptpaket och ska inte importeras som sådana.
+
+ANTAL
+Nytt: 10 middagar (30 varianter), 2 frukostar (4 varianter) och
+10 mellanmål (20 varianter). Totalt 22 grundrätter / 54 fullständiga varianter.
+Grekiskt 2, italienskt 6, mexikanskt 3, indiskt 4, thailändskt 4, svenskt 3.
+Tidigare: 72 / 199. Kumulativt författat: 94 grundrätter / 253 varianter.
+Återstående till 1000 / 2750: 906 grundrätter / 2497 varianter.
+Ingen variant saknas inom de 22 levererade receptfamiljerna.
+Kvarstående kvoter redovisas per kök och måltid, utan omfördelning.
+Nästa paketnummer är 009.
+
+PAKET – UTF-8 JSON, smako-recipe-authoring-v1
+paket/007-kanda-identiteter.json
+  5 grundrätter / 11 varianter. Alla ingrediensidentiteter finns i referensen.
+  Detta betyder INTE importklart, provlagat eller produktgodkänt.
+paket/008-registergranskning.json
+  17 grundrätter / 43 varianter. Hela familjer hålls samman för granskning.
+  40 varianter använder sammanlagt 30 identiteter som kräver registerbeslut;
+  16 av dessa identiteter är nya förslag jämfört med föregående leverans.
+  Tre varianter använder bara kända identiteter men hålls med sina familjer.
+  Inga påhittade alias eller produktkrav ska användas för att kringgå behovet.
+
+FILER
+RECEPTINDEX.txt              Endast de 22 nya rätterna med varianter och tider.
+kandidatregister.json       Kumulativa kandidatbeslut och kulinariska identiteter.
+leveransoversikt.json       Kumulativa kvoter; nya antal, kostavsikt, tider,
+                            ingrediensantal, undantag och blockerare.
+dubblettgranskning.json     Jämförelse före och efter författning samt motiv.
+registerforslag.json        Namn/form/enhet och exakt berörda varianter.
+befintliga-recept-forslag.json
+                            Förslag för äldre base_id, inte nya grundrätter.
+kallor.json                 Använda källor, vad de stödjer och åtkomstbegränsningar.
+kontrollrapport.json        Faktiskt körda kontroller, varningar och begränsningar.
+checkpoint.json            Samtliga tidigare/nya ID:n, kvoter och nästa paket.
+SHA256SUMS.txt              SHA-256 för samtliga övriga filer i leveransen.
+kontroll/validera.py        Fristående strukturkontroll, kräver Python/jsonschema.
+kontroll/slutkontroll.json  Senast körda maskinkontrollens fullständiga utfall.
+kontroll/                  Referensschema/register, ID-spärrlista, inläsnings-
+                            bevis och likhetsmatriser med index.
+historik/                  Tidigare leveransens oförändrade granskningsfiler,
+                            INTE de gamla receptpaketen.
+
+GRANSKNING
+Alla 934 befintliga grundrätter / 2462 varianter och de tidigare 72 / 199
+lästes in, inklusive omärkta och flerköksmärkta rätter. De nya kandidaterna
+jämfördes med hela detta underlag och med varandra innan författningen.
+24 kandidater behandlades: 22 accepterade i AI-redaktionell granskning,
+1 avvisad och 1 olöst gränsfall. Avial fördes till befintligt recept i stället
+för att räknas igen. Gränsfallet tsigareli är inte författat eller räknat.
+Efter författningen jämfördes också samtliga 54 faktiska varianter.
+Maskinell likhet har inte ensam använts som kulinariskt godkännande.
+
+KVARSTÅENDE KVALITETSFRÅGOR
+Nio motiverade avvikelser från ingrediensriktmärkena redovisas. Cacio e pepe
+saknar en naturlig variant i middagsstandardfiltret 10–15; antalen är 2/5/9.
+Nicuatoles sättning samt shrikhand/äggosts avrinning och utbyte måste provas.
+Genovese och chilorio kan kräva längre tid för mört kött. Alla tider är
+författaruppskattningar och väntetider har inkluderats.
+Källorna styrker rättidentitet i angiven omfattning, inte dessa mängder.
+Kostavsikt är inte en slutlig kost-, allergen- eller produktklassificering.
+
+KONTROLL / FORTSÄTTNING
+Kör från leveransmappen: python kontroll/validera.py
+Kräver paketet jsonschema. Kontrollen kan köras offline på filerna i ZIP.
+Smakos egen author -> validate -> diff -> import -> prepare-kedja har INTE
+körts. Berörda registerförslag måste först granskas. Behåll base_id, version
+och variant_id vid fortsatt arbete. Ingen dubblerad samlad receptfil ingår.

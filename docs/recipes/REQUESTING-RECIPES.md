@@ -48,10 +48,28 @@ beställning är ännu importerade eller betaaktiverade.
 deklarerade valen, inte hela leveransen eller 1 000 nya grundrätter.
 Mätningen ändrar inte importstatus eller kvarstående innehållskrav.
 
-Nästa författarpaket är **007**; återstående mål mot mottagna utkast är
-**928 grundrätter / 2 551 varianter**. Detta är inte en slutlig nyhetsbedömning
-av de första 72 baserna. Bevara deras ID:n, räkna inte pilotpaketet igen och
-ta med checkpointens recept i nästa dubblettunderlag även före import.
+**Tre fortsättningar mottagna senare 2026-11-01:** ytterligare 93 grundrätter /
+240 varianter (22/54, 41/108 och 30/78). Totalt faktiskt mottaget är nu
+**165 grundrätts-ID:n / 439 variant-ID:n**: 109 middagar, 13 frukostar,
+43 mellanmål. De nya filerna har 48 native-kompatibla och 192 ingrediens-
+blockerade varianter. Innehållshinder kvarstår även i den kompatibla gruppen.
+Se [samlad mottagning och granskning](../reviews/recipe-continuations-20261101/REPORT.md).
+Ingen import eller betaaktivering har gjorts från dessa fortsättningar.
+
+Författarens totalsiffra 235/629 inkluderar ett **ännu inte mottaget** arkiv:
+`smako-fortsattning-72-nya-grundratter-194-varianter-20261101.zip`.
+Det är en annan leverans än checkpointen med 199 varianter. Referenser anger
+70 ytterligare bas-ID:n / 190 variant-ID:n efter överlapp med 22-leveransen.
+Be om originalet och granska innehållskonflikterna innan totalsiffran höjs.
+Det saknade arkivets paket 007–011 krockar på paket-ID 007–008 med 22-leveransen;
+spåra alltid leveransmapp + filhash och skriv inte över något original.
+
+Nästa nyskrivna författarpaket är **019**; återstående mål mot faktiskt
+mottagna utkast är **835 grundrätter / 2 311 varianter**, fördelat på
+641 middagar, 112 frukostar och 82 mellanmål. Detta är inte en slutlig
+nyhetsbedömning av de 165 baserna. Bevara deras ID:n, räkna inte pilotpaketet
+igen och ta med alla mottagna recept i nästa dubblettunderlag även före import.
+Följ rapportens separata lista över ännu saknade äldre ID:n.
 [Återkoppling på checkpointen](requests/20261101/ATGARDER-CHECKPOINT-72-TILL-CHAT.txt)
 är förberedd, inte skickad. Ingrediensprioriteringens tidigare tillägg är också
 framtaget; det är fortfarande inte uttryckligen bekräftat att ägaren skickat det.

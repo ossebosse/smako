@@ -1,0 +1,160 @@
+{
+  "status": "Fristående kontroller körda; inga native Smako-kontroller.",
+  "run_at": "2026-11-01T18:10:00.476186+00:00",
+  "tool": "Python 3 + jsonschema Draft202012Validator; egna deterministiska kontroller och fullständig likhetsrangordning.",
+  "counts": {
+    "authored_base_count": 30,
+    "authored_variant_count": 78,
+    "accepted_as_distinct_ai_editorial_base_count": 30,
+    "unresolved_new_candidate_count": 0,
+    "rejected_candidate_count": 7,
+    "schema_checked_variants": 78,
+    "structural_error_count": 0,
+    "known_identities_only_base_count": 7,
+    "known_identities_only_variant_count": 15,
+    "registry_held_base_count": 23,
+    "registry_held_family_variant_count": 63,
+    "directly_unknown_identity_variant_count": 59,
+    "ingredient_proposal_count": 49,
+    "time_blocked_variant_count": 3,
+    "time_blocked_base_count": 1,
+    "ingredient_range_exception_count": 5,
+    "missing_required_variants": 0,
+    "import_approved_count": 0,
+    "provlagade_count": 0
+  },
+  "structural_errors": [],
+  "warnings": [
+    {
+      "code": "ingredient_range_exception",
+      "variant": "smako-italian-budino-riso-toscana:1.0.0:simple",
+      "message": "6 i stället för 3–5. Sex ingredienser behövs även i enkel variant för ett verkligt pajskal och risfyllning; ingen komponent utelämnas för att klara 3–5. Utökad har åtta."
+    },
+    {
+      "code": "ingredient_range_exception",
+      "variant": "smako-mexican-mucbipollo-ugn:1.0.0:simple",
+      "message": "8 i stället för 5–7. Enkel behöver åtta faktiska ingredienser för skal, blad och riktig kol-fyllning; standard tillför syra och vitlök, utökad bygger ut achiotearomen med två integrerade kryddor."
+    },
+    {
+      "code": "time_limit_blocker",
+      "variant": "smako-indian-kosha-mangsho:1.0.0:simple",
+      "message": "active_over_180: active=192, total=335, wait=143"
+    },
+    {
+      "code": "time_limit_blocker",
+      "variant": "smako-indian-kosha-mangsho:1.0.0:standard",
+      "message": "active_over_180: active=192, total=335, wait=143"
+    },
+    {
+      "code": "time_limit_blocker",
+      "variant": "smako-indian-kosha-mangsho:1.0.0:extended",
+      "message": "active_over_180: active=197, total=340, wait=143"
+    },
+    {
+      "code": "ingredient_range_exception",
+      "variant": "smako-indian-mangalore-buns:1.0.0:simple",
+      "message": "6 i stället för 3–5. Enkel sex ingredienser: mjöl, banan, yoghurt, bikarbonat, spiskummin och frityrolja är funktionella. Utökad åtta genom en kokos-limedipp, med yoghurt återanvänd mellan komponenter."
+    },
+    {
+      "code": "ingredient_range_exception",
+      "variant": "smako-swedish-kolbulle:1.0.0:extended",
+      "message": "10 i stället för 12–15. Fem ingredienser i enkel och åtta i standard. Utökad stannar vid tio: morot och senap utvecklar den riktiga kålsalladen, men ytterligare dekorativa råvaror behövs inte. Därmed finns en naturlig middagsvariant inom 10–15 utan konstlad utfyllnad."
+    },
+    {
+      "code": "ingredient_range_exception",
+      "variant": "smako-swedish-mandelmusslor:1.0.0:simple",
+      "message": "6 i stället för 3–5. Enkel har sex nödvändiga ingredienser för mandelskal och klassisk bär-gräddfyllning. Utökad åtta genom vaniljgrädde och ett funktionellt tunt chokladskikt; inga extra garneringar behövs."
+    }
+  ],
+  "warning_count": 8,
+  "warning_counts_by_code": {
+    "ingredient_range_exception": 5,
+    "time_limit_blocker": 3
+  },
+  "blocking_findings": {
+    "unknown_identities": 49,
+    "registry_held_variants": 63,
+    "directly_unknown_variants": 59,
+    "time_limit_variants": 3
+  },
+  "checked": [
+    "UTF-8 JSON-parsning av alla receptpaket",
+    "JSON Schema för varje variant",
+    "Obligatoriska versions-, variant- och utkastfält",
+    "Unika nya base_id och base_id/version/variant_id",
+    "Noll krockar mot ursprungliga reserverade ID:n och samtliga tidigare paket",
+    "Portionsmål och fullständiga variantfamiljer",
+    "Unika kanoniska namn/former och numeriskt positiva mängder",
+    "Exakta enheter mot känt register eller uttryckligt registerförslag",
+    "Ingrediensanvändning via uses; redaktionell läsning av tillagningen",
+    "Giltiga beroenden, stegminuter och passiva moment",
+    "Aktiv tid, kritisk väg, väntetid och redovisade gränsöverskridanden",
+    "Ingrediensantal, ordnad skillnad inom familjer och riktmärkesundantag",
+    "Maxstorlek per receptpaket under 16 MiB",
+    "Initial jämförelse före författning och ny jämförelse av verkliga varianttexter",
+    "Kvoter hålls isär per kök och måltid utan omflyttning"
+  ],
+  "not_run": [
+    "Smakos native author/validate/diff/import/prepare",
+    "produktbindning och köpbarhet",
+    "närings- och kostklassificering",
+    "provlagning",
+    "betaaktivering"
+  ],
+  "limitations": [
+    "Ingrediensanvändningens maskinkontroll bevisar inte att en tillagning fungerar; alla recept är oprövade utkast.",
+    "Likhetsmått rangordnar träffar och är inget automatiskt kulinariskt godkännande.",
+    "Saltstyrka, råvaruvariation, frityroljeupptag, ben/silrester och produktkrav behöver granskas.",
+    "Ingen körtid eller provlagning har uppmätts."
+  ],
+  "reference_counts": {
+    "reference_bases": 934,
+    "reference_variant_rows": 2462,
+    "prior_variant_rows": 555,
+    "prior_unique_base_ids": 205,
+    "prior_unique_variant_version_ids": 551,
+    "all_comparison_rows": 3017,
+    "all_reference_sources": [
+      "Smako-41-nya-grundratter-108-varianter/paket/smako-expansion-1000-20261101-015.json",
+      "Smako-41-nya-grundratter-108-varianter/paket/smako-expansion-1000-20261101-012.json",
+      "Smako-41-nya-grundratter-108-varianter/paket/smako-expansion-1000-20261101-014.json",
+      "Smako-41-nya-grundratter-108-varianter/paket/smako-expansion-1000-20261101-013.json",
+      "Smako-22-nya-grundratter-54-varianter/paket/008-registergranskning.json",
+      "Smako-22-nya-grundratter-54-varianter/paket/007-kanda-identiteter.json",
+      "smako-recept-delcheckpoint-72-grundratter-199-varianter-20261101/smako-leverans-20261101/paket/005-registergranskning.json",
+      "smako-recept-delcheckpoint-72-grundratter-199-varianter-20261101/smako-leverans-20261101/paket/002-registergranskning.json",
+      "smako-recept-delcheckpoint-72-grundratter-199-varianter-20261101/smako-leverans-20261101/paket/006-kanda-identiteter.json",
+      "smako-recept-delcheckpoint-72-grundratter-199-varianter-20261101/smako-leverans-20261101/paket/001-pilot-kanda-identiteter.json",
+      "smako-recept-delcheckpoint-72-grundratter-199-varianter-20261101/smako-leverans-20261101/paket/004-registergranskning.json",
+      "smako-recept-delcheckpoint-72-grundratter-199-varianter-20261101/smako-leverans-20261101/paket/003-registergranskning.json",
+      "smako-fortsattning-72-nya-grundratter-194-varianter-20261101/smako-fortsattning-20261101/paket/smako-expansion-1000-20261101-009.json",
+      "smako-fortsattning-72-nya-grundratter-194-varianter-20261101/smako-fortsattning-20261101/paket/smako-expansion-1000-20261101-011.json",
+      "smako-fortsattning-72-nya-grundratter-194-varianter-20261101/smako-fortsattning-20261101/paket/smako-expansion-1000-20261101-010.json",
+      "smako-fortsattning-72-nya-grundratter-194-varianter-20261101/smako-fortsattning-20261101/paket/smako-expansion-1000-20261101-007.json",
+      "smako-fortsattning-72-nya-grundratter-194-varianter-20261101/smako-fortsattning-20261101/paket/smako-expansion-1000-20261101-008.json"
+    ],
+    "ingredients": 284,
+    "unassigned_reference_bases": 35,
+    "multicuisine_reference_bases": 5
+  },
+  "actual_variant_comparisons": 235326,
+  "actual_new_variant_pair_matrix_entries": 6084,
+  "recipe_pack_sizes_bytes": {
+    "paket/smako-expansion-1000-20261101-016.json": 82588,
+    "paket/smako-expansion-1000-20261101-017.json": 235215,
+    "paket/smako-expansion-1000-20261101-018.json": 207674
+  },
+  "pilot_status": "Ingen ny pilot skapas. Tidigare pilot finns bara i referensmaterialet och räknas inte i denna deltas 30 grundrätter.",
+  "old_delivery_conflicts": "Se historik/tidigare-leveranskonflikter.json; dessa är inte korrigerade genom att nya ID:n skapas.",
+  "archive_preflight": {
+    "all_required_files_present": true,
+    "all_json_files_parse": true,
+    "json_files_checked": 33,
+    "sqlite_integrity": "ok",
+    "comparison_reference_rows": 3017,
+    "independent_recheck_file": "kontroll/oberoende-omkontroll.json",
+    "pack_count": 3,
+    "base_count": 30,
+    "variant_count": 78
+  }
+}

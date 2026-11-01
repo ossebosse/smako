@@ -1,0 +1,194 @@
+"""Independent delivery bookkeeping and native checks; no publication."""
+import hashlib
+import json
+import os
+import subprocess
+import sys
+from collections import Counter, defaultdict
+from datetime import UTC, datetime
+from pathlib import Path
+
+ROOT = Path('D:/Projects/Smako')
+WORK = ROOT / '.local/recipe-continuations-20261101'
+INCOMING = ROOT / 'backend/app/data/recipes/incoming/authoring-1000-20261101'
+sys.path.insert(0, str(ROOT / '.local/recipe-authoring-1000-20261101/validation-deps'))
+os.environ['RECIPE_PREPARATION_CACHE_ROOT'] = str(WORK / 'preparation-cache')
+from jsonschema import Draft202012Validator
+from app.services.ingredient_normalizer import canonicalize_ingredient_name as canon
+from app.services.intake_product_links import entries as product_entries
+from app.services.meal_library_content import MANIFEST, encoded, identity, load_entries, manifest_entries, pack_diff, validate_pack_bytes
+from app.services.meal_prepared_artifacts import prepare_content
+from app.services.recipe_authoring import library_vocabulary, standardize
+from app.services.recipe_library import _scaled, _structural_check, current_recipes
+
+
+def read(path):
+    return json.loads(path.read_bytes())
+
+
+def ref(row):
+    return f"{row['base_id']}:{row.get('version','1.0.0')}:{row['variant_id']}"
+
+
+def source_rows(slug):
+    return [(path, row) for path in sorted((INCOMING / slug / 'source/paket').glob('*.json'))
+            for row in read(path)['recipes']]
+
+
+before = MANIFEST.read_bytes()
+current = current_recipes()
+manifest = manifest_entries()
+issued = load_entries(manifest['current'] + manifest['history'])
+vocab = library_vocabulary(current)
+definitions = product_entries()
+issued_ids = {identity(r) for r in issued}
+issued_bases = {r.design.base_id for r in issued}
+previous = source_rows('checkpoint-72')
+previous_ids = {ref(r) for _, r in previous}
+previous_bases = {r['base_id'] for _, r in previous}
+all_rows, summaries, details = [], [], []
+missing, canonical_missing, aliases, inherited = defaultdict(set), defaultdict(set), defaultdict(set), {}
+all_known, known_ids, time_blocks, schema_errors, metadata_errors = [], set(), [], [], []
+original_schema = INCOMING / 'checkpoint-72/source/kontroll/referens/leveransschema.json'
+
+for slug in ('continuation-22', 'continuation-41', 'continuation-30'):
+    source = INCOMING / slug / 'source'
+    schema_path = next(p for p in (source / 'kontroll').glob('*leveransschema.json'))
+    assert schema_path.read_bytes() == original_schema.read_bytes()
+    validator = Draft202012Validator(read(schema_path))
+    overview = read(source / 'leveransoversikt.json')
+    key = {'continuation-22':'variant_metrics', 'continuation-41':'variant_details', 'continuation-30':'variants'}[slug]
+    metrics = {x.get('variant_ref') or ref(x): x for x in overview[key]}
+    audit = read(WORK / slug / 'native-audit.json')
+    native = {r['id'] for r in audit['recipes'] if r['status'] == 'native_compatible'}
+    known_ids.update(native)
+    rows = source_rows(slug)
+    bases = defaultdict(list)
+    local_missing = defaultdict(set)
+    step_count = 0
+    for path in {p for p, _ in rows}:
+        schema_errors.extend({'file':str(path.relative_to(INCOMING)), 'path':list(e.absolute_path), 'error':e.message}
+                             for e in validator.iter_errors(read(path)))
+    for path, row in rows:
+        identifier = ref(row)
+        assert row['servings'] == (4 if row['meal_type'] == 'dinner' else 1)
+        assert row.get('version', '1.0.0') == '1.0.0'
+        assert not any('requirements' in item for c in row['components'] for item in c['ingredients'])
+        bases[row['base_id']].append(row)
+        all_rows.append((slug, path, row))
+        keys = set()
+        for component in row['components']:
+            for item in component['ingredients']:
+                literal = f"{item['name']}|{item['form']}"
+                canonical = f"{canon(item['name'])}|{item['form']}"
+                keys.add(literal)
+                if literal not in vocab:
+                    missing[literal].add(identifier)
+                    local_missing[literal].add(identifier)
+                if canonical not in vocab:
+                    canonical_missing[canonical].add(identifier)
+                if literal != canonical:
+                    aliases[(literal, canonical)].add(identifier)
+                if identifier in native:
+                    for requirement in vocab[canonical][1]:
+                        definition = definitions.get(requirement.removeprefix('pack:'))
+                        if definition and definition['kind'] in {'frozen_edible', 'definition_only'}:
+                            record = inherited.setdefault(canonical, {'kind':definition['kind'], 'definition':definition.get('definition'),
+                                                                      'requirement':requirement, 'variants':set()})
+                            record['variants'].add(identifier)
+        counted = {k for k in keys if k.split('|')[0] not in {'salt','svartpeppar','peppar','vatten'}}
+        m = metrics[identifier]
+        expected_count = m.get('ingredient_count', m.get('counted_ingredients'))
+        expected_missing = m.get('unknown_ingredient_keys', m.get('unknown_identity_keys'))
+        if len(counted) != expected_count or sorted(keys - vocab.keys()) != sorted(expected_missing):
+            metadata_errors.append({'id':identifier, 'count_actual':len(counted), 'count_reported':expected_count,
+                                    'unknown_actual':sorted(keys-vocab.keys()), 'unknown_reported':sorted(expected_missing)})
+        ends = {}
+        for n, step in enumerate(row['steps'], 1):
+            after = step.get('after', [])
+            assert all(1 <= d < n for d in after)
+            ends[n] = max((ends[d] for d in after), default=0) + step['minutes']
+        active = max(1, sum(s['minutes'] for s in row['steps'] if not s.get('passive', False)))
+        critical = max(ends.values())
+        total = max(critical, active)
+        waiting = total - active
+        timing = m.get('timing', m)
+        assert (active, critical, total, waiting) == (
+            timing['active_minutes'], timing['critical_path_minutes'], timing['total_minutes'],
+            timing.get('waiting_minutes', timing.get('wait_minutes'))), identifier
+        if active > 180 or total > 2880 or waiting > 1440:
+            time_blocks.append({'id':identifier, 'active_minutes':active, 'total_minutes':total, 'waiting_minutes':waiting})
+        step_count += len(row['steps'])
+        if identifier in native:
+            all_known.append(row)
+        details.append({'id':identifier,'delivery':slug,'file':path.relative_to(source).as_posix(),
+                        'ingredient_count':len(counted), 'active_minutes':active,'total_minutes':total,'waiting_minutes':waiting})
+    for base, variants in bases.items():
+        assert len({r['meal_type'] for r in variants}) == len({r['cuisine'] for r in variants}) == 1
+        expected = {'simple','standard','extended'} if variants[0]['meal_type'] == 'dinner' else {'simple','extended'}
+        assert {r['variant_id'] for r in variants} == expected
+    candidates = read(source / 'kandidatregister.json')['candidates']
+    accepted = {r['base_id'] for r in candidates if r['decision']=='accept' and r.get('authored')}
+    assert set(bases) <= accepted
+    assert not {r.get('base_id') for r in candidates if r['decision'] != 'accept'} & set(bases)
+    summaries.append({'delivery':slug, 'bases':len(bases),'variants':len(rows),'steps':step_count,
+                      'bases_by_meal':dict(Counter(r[0]['meal_type'] for r in bases.values())),
+                      'bases_by_cuisine':dict(Counter(r[0]['cuisine'] for r in bases.values())),
+                      'native_statuses':audit['statuses'], 'literal_unknown_count':len(local_missing),
+                      'canonical_unknown_count':audit['unknown_ingredient_identities'],
+                      'native_audit_sha256':hashlib.sha256((WORK/slug/'native-audit.json').read_bytes()).hexdigest()})
+
+ids = [ref(r) for _, _, r in all_rows]
+bases = {r['base_id'] for _, _, r in all_rows}
+assert len(set(ids)) == len(ids) == 240 and len(bases) == 93
+assert not (set(ids) & (issued_ids | previous_ids))
+assert not (bases & (issued_bases | previous_bases))
+pack, reports = standardize({'schema_version':'smako-recipe-authoring-v1',
+                             'pack_id':'continuations-22-41-30-native-probe-not-approved','recipes':all_known},
+                            vocab, reviewed_at='2026-11-01')
+raw = encoded(pack)
+(WORK / 'native-compatible-probe.json').write_bytes(raw)
+validated = validate_pack_bytes(raw, label='isolated continuation compatibility probe')
+assert not validated['rejections'] and len(validated['recipes']) == 48
+assert Counter(x['status'] for x in pack_diff(validated)) == {'new_recipe':48}
+prepared = prepare_content(validated['recipes'])
+assert {ref for refs in prepared['dependencies'].values() for ref in refs} == known_ids
+for recipe in validated['recipes']:
+    for servings in (1,4,12):
+        _structural_check(_scaled(recipe, servings))
+assert MANIFEST.read_bytes() == before
+
+claimed = read(INCOMING / 'continuation-30/source/kontroll/tidigare-identiteter.json')
+actual_before_30 = previous + [(p,r) for slug,p,r in all_rows if slug!='continuation-30']
+actual_prior_bases = {r['base_id'] for _, r in actual_before_30}
+actual_prior_ids = {ref(r) for _, r in actual_before_30}
+unreceived_bases = sorted(set(claimed['base_ids']) - actual_prior_bases)
+unreceived_ids = sorted(set(claimed['variant_version_ids']) - actual_prior_ids)
+assert not actual_prior_bases - set(claimed['base_ids'])
+assert not actual_prior_ids - set(claimed['variant_version_ids'])
+result = {
+    'schema':'smako-recipe-continuations-validation-v1', 'checked_at':datetime.now(UTC).isoformat(),
+    'code_revision':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+    'scope':'Offline preservation, native compatibility, structural scaling, timing arithmetic and ID reconciliation; no import, culinary approval, source-page verification or beta activation.',
+    'runtime_manifest_sha256':hashlib.sha256(before).hexdigest(), 'runtime_manifest_unchanged':True,
+    'current_library_variants':len(current), 'historical_and_current_issued_id_count':len(issued_ids),
+    'deliveries':summaries, 'new_bases':93, 'new_variants':240, 'step_count':sum(x['steps'] for x in summaries),
+    'combined_received_bases':len(bases | previous_bases), 'combined_received_variants':len(set(ids)|previous_ids),
+    'remaining_against_received_drafts':{'bases':1000-len(bases|previous_bases),'variants':2750-len(set(ids)|previous_ids)},
+    'id_collisions_current_historical_previous_or_within_new':[],
+    'schema_errors':schema_errors,'metadata_discrepancies':metadata_errors,
+    'all_reported_timing_arithmetic_matches':True, 'time_limit_blockers':time_blocks,
+    'native_compatible':48, 'blocked_unknown_ingredients':192,
+    'native_diff':{'new_recipe':48,'conflicts':0}, 'offline_prepared':48, 'scaling_checks':{'1':48,'4':48,'12':48},
+    'literal_unknown_count':len(missing),'canonical_unknown_count':len(canonical_missing),
+    'unknown_identities':[{'identity':k,'variants':len(v),'ids':sorted(v)} for k,v in sorted(missing.items(), key=lambda x:(-len(x[1]),x[0]))],
+    'normalizations_to_review':[{'literal':k[0],'canonical':k[1],'ids':sorted(v),'native_compatible_ids':sorted(v & known_ids)} for k,v in sorted(aliases.items())],
+    'inherited_inputs_to_review':[{'identity':k,**v,'variants':sorted(v['variants'])} for k,v in sorted(inherited.items())],
+    'native_probe_sha256':hashlib.sha256(raw).hexdigest(),
+    'unreceived_prior_base_ids':unreceived_bases, 'unreceived_prior_variant_ids':unreceived_ids,
+    'missing_archive':read(INCOMING/'continuation-30/source/kontroll/indata-kontrollsummor.json')['input_archives'][2],
+    'imported':0,'activated':0,'details':details,
+}
+(WORK/'VALIDATION.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+print(json.dumps({k:result[k] for k in ['deliveries','new_bases','new_variants','step_count','combined_received_bases','combined_received_variants','remaining_against_received_drafts','schema_errors','metadata_discrepancies','time_limit_blockers','literal_unknown_count','canonical_unknown_count','normalizations_to_review']},ensure_ascii=False))
+print('Unreceived',len(unreceived_bases),len(unreceived_ids))

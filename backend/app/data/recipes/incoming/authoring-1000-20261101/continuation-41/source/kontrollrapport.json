@@ -1,0 +1,1291 @@
+{
+  "status": "PASS_WITH_REVIEW_BLOCKERS",
+  "generated_utc": "2026-11-01T16:55:18.404511+00:00",
+  "tool": "Python 3.13.5; jsonschema 4.26.0",
+  "validator": "kontroll/validera.py",
+  "scope": "Fristående strukturkontroll av leveransfilerna, inte Smakos native-validator eller ett kulinariskt godkännande.",
+  "structural_error_count": 0,
+  "warning_record_count": 149,
+  "warning_counts_by_kind": {
+    "ingredient-guideline-exception": 9,
+    "registry-review-required": 93,
+    "author-review-flags": 46,
+    "previous-delivery-conflicts": 1
+  },
+  "counts": {
+    "new_bases": 41,
+    "new_variants": 108,
+    "packages": 4,
+    "known_identity_only_bases": 6,
+    "known_identity_only_package_variants": 12,
+    "registry_review_family_count": 35,
+    "variants_directly_using_proposed_identities": 93,
+    "proposed_identities": 56
+  },
+  "maximum_author_estimated_minutes": {
+    "active": 88,
+    "total": 346,
+    "waiting": 310
+  },
+  "packages": [
+    {
+      "path": "paket/smako-expansion-1000-20261101-012.json",
+      "pack_id": "smako-expansion-1000-20261101-012",
+      "bytes": 54549,
+      "base_count": 6,
+      "variant_count": 12
+    },
+    {
+      "path": "paket/smako-expansion-1000-20261101-013.json",
+      "pack_id": "smako-expansion-1000-20261101-013",
+      "bytes": 189508,
+      "base_count": 12,
+      "variant_count": 33
+    },
+    {
+      "path": "paket/smako-expansion-1000-20261101-014.json",
+      "pack_id": "smako-expansion-1000-20261101-014",
+      "bytes": 217873,
+      "base_count": 12,
+      "variant_count": 33
+    },
+    {
+      "path": "paket/smako-expansion-1000-20261101-015.json",
+      "pack_id": "smako-expansion-1000-20261101-015",
+      "bytes": 200369,
+      "base_count": 11,
+      "variant_count": 30
+    }
+  ],
+  "checks_executed": [
+    "UTF-8 JSON parsing",
+    "JSON Schema Draft 2020-12",
+    "explicit required recipe fields",
+    "unique package/base+version+variant IDs",
+    "reserved and previously delivered ID exclusion",
+    "complete variants per base, whole families per file",
+    "servings, cuisines and meal quotas",
+    "unique canonical ingredient count and explained exceptions",
+    "positive finite quantities and canonical units",
+    "identity registration or explicit proposal plus exact affected-variant references",
+    "no requirements overrides or multiple forms of one canonical name",
+    "step uses against ingredient list in both directions",
+    "valid backward dependencies and acyclic timing graph",
+    "active/critical-path/total/waiting time calculations and limits",
+    "known-only versus registration-review package separation",
+    "overview/checkpoint/candidate consistency",
+    "package file size"
+  ],
+  "additional_work_performed": {
+    "similarity_review": "dubblettgranskning.json",
+    "source_review": "kallor.json",
+    "input_readability_and_scope": "kontroll/inlasningskontroll.json"
+  },
+  "not_executed": [
+    "Smakos native author/validate/diff/import/prepare",
+    "produktbindning, köpbarhet och butikstillgång",
+    "näringsberäkning eller verifierade kost-/allergenklassificeringar",
+    "pris- eller besparingsberäkning",
+    "provlagning eller uppmätta tider",
+    "betaaktivering",
+    "slutlig sammanslagning av gamla leveranskonflikter"
+  ],
+  "errors": [],
+  "warnings": [
+    {
+      "kind": "ingredient-guideline-exception",
+      "reference": "smako-greek-portokalopita:1.0.0:simple",
+      "actual_count": 7,
+      "guideline": [
+        3,
+        5
+      ],
+      "explanation": "Filo, yoghurt, ägg, juice, socker, olja och bakpulver behövs för filokakans struktur; inga nödvändiga delar tas bort enbart för 3–5."
+    },
+    {
+      "kind": "ingredient-guideline-exception",
+      "reference": "smako-greek-portokalopita:1.0.0:extended",
+      "actual_count": 9,
+      "guideline": [
+        6,
+        8
+      ],
+      "explanation": "Mandeln och apelsinskalet ger en verklig textur-/aromutökning men grundkakan har redan sju nödvändiga ingredienser."
+    },
+    {
+      "kind": "ingredient-guideline-exception",
+      "reference": "smako-greek-tsigariasto-get:1.0.0:simple",
+      "actual_count": 3,
+      "guideline": [
+        5,
+        7
+      ],
+      "explanation": "Get, olivolja och bröd räcker för den tydliga egen-spadstekningen; fler råvaror skulle lämna den avsiktliga fåingrediensversionen."
+    },
+    {
+      "kind": "ingredient-guideline-exception",
+      "reference": "smako-italian-spaghetti-assassina:1.0.0:extended",
+      "actual_count": 11,
+      "guideline": [
+        12,
+        15
+      ],
+      "explanation": "Elva räknade ingredienser räcker för rostpasta, bönor och fullständig fänkålssallad. Ingen dekorativ tolfte råvara läggs till."
+    },
+    {
+      "kind": "ingredient-guideline-exception",
+      "reference": "smako-italian-spaghetti-bottarga:1.0.0:extended",
+      "actual_count": 11,
+      "guideline": [
+        12,
+        15
+      ],
+      "explanation": "Elva ingredienser räcker för romemulsion, rostad smula och komplett bön-/fänkål-/apelsinsallad."
+    },
+    {
+      "kind": "ingredient-guideline-exception",
+      "reference": "smako-indian-gulab-jamun:1.0.0:simple",
+      "actual_count": 8,
+      "guideline": [
+        3,
+        5
+      ],
+      "explanation": "Mjölkpulverdeg, friteringsolja och kryddsirap är alla nödvändiga. Att radera bindning eller fett för att nå fem skulle ge ett ofullständigt recept."
+    },
+    {
+      "kind": "ingredient-guideline-exception",
+      "reference": "smako-indian-gulab-jamun:1.0.0:extended",
+      "actual_count": 10,
+      "guideline": [
+        6,
+        8
+      ],
+      "explanation": "Pistage och svagt rosenvatten ger meningsfull utökning av en redan ingrediensrik mjölkdeg-/sirapskedja."
+    },
+    {
+      "kind": "ingredient-guideline-exception",
+      "reference": "smako-thai-khanom-jeen-nam-ngiao:1.0.0:simple",
+      "actual_count": 8,
+      "guideline": [
+        5,
+        7
+      ],
+      "explanation": "Åtta råvaror behövs för nudlar, fläsk, tomat, fermenterad smak, kapokblommor och ett fungerande fräs. En nödvändig identitetsingrediens tas inte bort."
+    },
+    {
+      "kind": "ingredient-guideline-exception",
+      "reference": "smako-swedish-drommar:1.0.0:simple",
+      "actual_count": 6,
+      "guideline": [
+        3,
+        5
+      ],
+      "explanation": "Mjöl, smör, olja, socker, hjorthornssalt och vanilj är den lilla klassiska degens sex funktionella ingredienser."
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-boureki-hania:1.0.0:simple",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-boureki-hania:1.0.0:standard",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-boureki-hania:1.0.0:extended",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-bourdeto:1.0.0:simple",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-bourdeto:1.0.0:standard",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-bourdeto:1.0.0:extended",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-tsigariasto-get:1.0.0:simple",
+      "identities": [
+        "getkött|raw_edible",
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-tsigariasto-get:1.0.0:standard",
+      "identities": [
+        "getkött|raw_edible",
+        "olivolja|as_sold",
+        "vitt vin|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-tsigariasto-get:1.0.0:extended",
+      "identities": [
+        "getkött|raw_edible",
+        "olivolja|as_sold",
+        "vitt vin|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-moustalevria:1.0.0:simple",
+      "identities": [
+        "druvmust|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-moustalevria:1.0.0:extended",
+      "identities": [
+        "druvmust|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-alevropita:1.0.0:simple",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-greek-alevropita:1.0.0:extended",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-greek-loukoumades:1.0.0:simple",
+      "flags": [
+        "processolja-kraver-naringsmodell"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-greek-loukoumades:1.0.0:extended",
+      "flags": [
+        "processolja-kraver-naringsmodell"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-spaghetti-assassina:1.0.0:simple",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-spaghetti-assassina:1.0.0:standard",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-spaghetti-assassina:1.0.0:extended",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-pasta-patate-provola:1.0.0:simple",
+      "identities": [
+        "olivolja|as_sold",
+        "rökt provola|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-pasta-patate-provola:1.0.0:standard",
+      "identities": [
+        "olivolja|as_sold",
+        "rökt provola|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-pasta-patate-provola:1.0.0:extended",
+      "identities": [
+        "olivolja|as_sold",
+        "rökt provola|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-cacciucco:1.0.0:simple",
+      "identities": [
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-italian-cacciucco:1.0.0:simple",
+      "flags": [
+        "musslor-skalvikt-och-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-cacciucco:1.0.0:standard",
+      "identities": [
+        "olivolja|as_sold",
+        "rött vin|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-italian-cacciucco:1.0.0:standard",
+      "flags": [
+        "musslor-skalvikt-och-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-cacciucco:1.0.0:extended",
+      "identities": [
+        "olivolja|as_sold",
+        "rött vin|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-italian-cacciucco:1.0.0:extended",
+      "flags": [
+        "musslor-skalvikt-och-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-zuppa-imperiale:1.0.0:simple",
+      "identities": [
+        "grönsaksbuljong|as_sold",
+        "parmesan|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-zuppa-imperiale:1.0.0:standard",
+      "identities": [
+        "grönsaksbuljong|as_sold",
+        "parmesan|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-zuppa-imperiale:1.0.0:extended",
+      "identities": [
+        "grönsaksbuljong|as_sold",
+        "parmesan|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-schiacciata-uva:1.0.0:simple",
+      "identities": [
+        "olivolja|as_sold",
+        "vindruvor|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-schiacciata-uva:1.0.0:extended",
+      "identities": [
+        "olivolja|as_sold",
+        "vindruvor|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-spaghetti-bottarga:1.0.0:simple",
+      "identities": [
+        "bottarga|as_sold",
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-spaghetti-bottarga:1.0.0:standard",
+      "identities": [
+        "bottarga|as_sold",
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-italian-spaghetti-bottarga:1.0.0:extended",
+      "identities": [
+        "bottarga|as_sold",
+        "olivolja|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-cochinita-pibil:1.0.0:simple",
+      "identities": [
+        "achiotepasta|as_sold",
+        "fläskkarré|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-cochinita-pibil:1.0.0:standard",
+      "identities": [
+        "achiotepasta|as_sold",
+        "fläskkarré|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-cochinita-pibil:1.0.0:extended",
+      "identities": [
+        "achiotepasta|as_sold",
+        "fläskkarré|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-tacos-lengua:1.0.0:simple",
+      "identities": [
+        "oxtunga|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-tacos-lengua:1.0.0:simple",
+      "flags": [
+        "oxtunga-as-sold-utbyte-och-kokforlust"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-tacos-lengua:1.0.0:standard",
+      "identities": [
+        "grön chili|raw_edible",
+        "lagerblad|dry",
+        "oxtunga|as_sold",
+        "tomatillo|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-tacos-lengua:1.0.0:standard",
+      "flags": [
+        "oxtunga-as-sold-utbyte-och-kokforlust"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-tacos-lengua:1.0.0:extended",
+      "identities": [
+        "grön chili|raw_edible",
+        "lagerblad|dry",
+        "oxtunga|as_sold",
+        "tomatillo|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-tacos-lengua:1.0.0:extended",
+      "flags": [
+        "oxtunga-as-sold-utbyte-och-kokforlust"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-arroz-tumbada:1.0.0:simple",
+      "flags": [
+        "musslor-skalvikt-och-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-arroz-tumbada:1.0.0:standard",
+      "identities": [
+        "epazote|raw_edible",
+        "grön chili|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-arroz-tumbada:1.0.0:standard",
+      "flags": [
+        "musslor-skalvikt-och-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-arroz-tumbada:1.0.0:extended",
+      "identities": [
+        "epazote|raw_edible",
+        "grön chili|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-arroz-tumbada:1.0.0:extended",
+      "flags": [
+        "musslor-skalvikt-och-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-chilpachole-jaiba:1.0.0:simple",
+      "identities": [
+        "anchochili|dry",
+        "krabbkött|cooked_drained"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-chilpachole-jaiba:1.0.0:standard",
+      "identities": [
+        "anchochili|dry",
+        "epazote|raw_edible",
+        "krabbkött|cooked_drained"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-chilpachole-jaiba:1.0.0:extended",
+      "identities": [
+        "anchochili|dry",
+        "epazote|raw_edible",
+        "krabbkött|cooked_drained"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-uchepos:1.0.0:simple",
+      "identities": [
+        "färska majskorn|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-uchepos:1.0.0:simple",
+      "flags": [
+        "farskmajs-starkelsehalt-och-angning-kraver-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-mexican-uchepos:1.0.0:extended",
+      "identities": [
+        "färska majskorn|raw_edible",
+        "grön chili|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-uchepos:1.0.0:extended",
+      "flags": [
+        "farskmajs-starkelsehalt-och-angning-kraver-provlagning"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-camotes-poblanos:1.0.0:simple",
+      "flags": [
+        "konfekt-konsistens-kraver-provlagning"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-mexican-camotes-poblanos:1.0.0:extended",
+      "flags": [
+        "konfekt-konsistens-kraver-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-ven-pongal:1.0.0:simple",
+      "identities": [
+        "ghee|as_sold",
+        "skalad mungdal|dry"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-ven-pongal:1.0.0:extended",
+      "identities": [
+        "curryblad|raw_edible",
+        "ghee|as_sold",
+        "skalad mungdal|dry"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-murgh-musallam:1.0.0:simple",
+      "identities": [
+        "hel kyckling|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-indian-murgh-musallam:1.0.0:simple",
+      "flags": [
+        "hel-fagel-benutbyte",
+        "fylld-kyckling-provlagning-och-temperaturkontroll"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-murgh-musallam:1.0.0:standard",
+      "identities": [
+        "hel kyckling|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-indian-murgh-musallam:1.0.0:standard",
+      "flags": [
+        "hel-fagel-benutbyte",
+        "fylld-kyckling-provlagning-och-temperaturkontroll"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-murgh-musallam:1.0.0:extended",
+      "identities": [
+        "hel kyckling|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-indian-murgh-musallam:1.0.0:extended",
+      "flags": [
+        "hel-fagel-benutbyte",
+        "fylld-kyckling-provlagning-och-temperaturkontroll"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-galouti-kebab:1.0.0:simple",
+      "identities": [
+        "ghee|as_sold",
+        "grön papaya|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-indian-galouti-kebab:1.0.0:simple",
+      "flags": [
+        "papayamorning-och-biffbindning-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-galouti-kebab:1.0.0:standard",
+      "identities": [
+        "ghee|as_sold",
+        "grön papaya|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-indian-galouti-kebab:1.0.0:standard",
+      "flags": [
+        "papayamorning-och-biffbindning-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-galouti-kebab:1.0.0:extended",
+      "identities": [
+        "ghee|as_sold",
+        "grön papaya|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-indian-galouti-kebab:1.0.0:extended",
+      "flags": [
+        "papayamorning-och-biffbindning-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-recheado-makrill:1.0.0:simple",
+      "identities": [
+        "kashmirchili|dry"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-recheado-makrill:1.0.0:standard",
+      "identities": [
+        "kashmirchili|dry"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-recheado-makrill:1.0.0:extended",
+      "identities": [
+        "kashmirchili|dry"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-olan:1.0.0:simple",
+      "identities": [
+        "curryblad|raw_edible",
+        "grön chili|raw_edible",
+        "svartögda bönor|cooked_drained",
+        "vaxpumpa|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-olan:1.0.0:standard",
+      "identities": [
+        "curryblad|raw_edible",
+        "grön chili|raw_edible",
+        "svartögda bönor|cooked_drained",
+        "vaxpumpa|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-olan:1.0.0:extended",
+      "identities": [
+        "curryblad|raw_edible",
+        "grön chili|raw_edible",
+        "svartögda bönor|cooked_drained",
+        "vaxpumpa|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-doi-maach:1.0.0:extended",
+      "identities": [
+        "grön chili|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-gulab-jamun:1.0.0:simple",
+      "identities": [
+        "ghee|as_sold",
+        "mjölkpulver|dry"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-indian-gulab-jamun:1.0.0:simple",
+      "flags": [
+        "processolja-kraver-naringsmodell",
+        "mjolkpulverdeg-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-indian-gulab-jamun:1.0.0:extended",
+      "identities": [
+        "ghee|as_sold",
+        "mjölkpulver|dry",
+        "pistagenötter|as_sold",
+        "rosenvatten|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-indian-gulab-jamun:1.0.0:extended",
+      "flags": [
+        "processolja-kraver-naringsmodell",
+        "mjolkpulverdeg-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-gaeng-ranjuan:1.0.0:simple",
+      "identities": [
+        "grön chili|raw_edible",
+        "räkpasta|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-gaeng-ranjuan:1.0.0:simple",
+      "flags": [
+        "aromingredienser-med-delvis-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-gaeng-ranjuan:1.0.0:standard",
+      "identities": [
+        "fisksås|as_sold",
+        "grön chili|raw_edible",
+        "räkpasta|as_sold",
+        "schalottenlök|raw_edible",
+        "thaibasilika|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-gaeng-ranjuan:1.0.0:standard",
+      "flags": [
+        "aromingredienser-med-delvis-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-gaeng-ranjuan:1.0.0:extended",
+      "identities": [
+        "fisksås|as_sold",
+        "grön chili|raw_edible",
+        "makrutlimeblad|raw_edible",
+        "palmsocker|as_sold",
+        "räkpasta|as_sold",
+        "schalottenlök|raw_edible",
+        "thaibasilika|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-gaeng-ranjuan:1.0.0:extended",
+      "flags": [
+        "aromingredienser-med-delvis-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-khanom-jeen-nam-ngiao:1.0.0:simple",
+      "identities": [
+        "fermenterade sojabönor|as_sold",
+        "torkade kapokblommor|dry"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-khanom-jeen-nam-ngiao:1.0.0:simple",
+      "flags": [
+        "kapokblommor-produktverifiering"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-khanom-jeen-nam-ngiao:1.0.0:standard",
+      "identities": [
+        "fermenterade sojabönor|as_sold",
+        "schalottenlök|raw_edible",
+        "torkade kapokblommor|dry"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-khanom-jeen-nam-ngiao:1.0.0:standard",
+      "flags": [
+        "kapokblommor-produktverifiering"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-khanom-jeen-nam-ngiao:1.0.0:extended",
+      "identities": [
+        "fermenterade sojabönor|as_sold",
+        "fläskrevben|as_sold",
+        "schalottenlök|raw_edible",
+        "torkade kapokblommor|dry"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-khanom-jeen-nam-ngiao:1.0.0:extended",
+      "flags": [
+        "kapokblommor-produktverifiering",
+        "revben-benutbyte",
+        "aromingredienser-med-delvis-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-tam-khanun:1.0.0:simple",
+      "identities": [
+        "räkpasta|as_sold",
+        "ung jackfrukt|preserved_drained"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-tam-khanun:1.0.0:standard",
+      "identities": [
+        "makrutlimeblad|raw_edible",
+        "räkpasta|as_sold",
+        "schalottenlök|raw_edible",
+        "ung jackfrukt|preserved_drained"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-tam-khanun:1.0.0:extended",
+      "identities": [
+        "makrutlimeblad|raw_edible",
+        "räkpasta|as_sold",
+        "schalottenlök|raw_edible",
+        "ung jackfrukt|preserved_drained"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-lon-tao-jiao:1.0.0:simple",
+      "identities": [
+        "fermenterade sojabönor|as_sold",
+        "palmsocker|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-lon-tao-jiao:1.0.0:standard",
+      "identities": [
+        "fermenterade sojabönor|as_sold",
+        "grön chili|raw_edible",
+        "palmsocker|as_sold",
+        "schalottenlök|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-lon-tao-jiao:1.0.0:extended",
+      "identities": [
+        "fermenterade sojabönor|as_sold",
+        "grön chili|raw_edible",
+        "palmsocker|as_sold",
+        "schalottenlök|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-gai-hor-bai-toey:1.0.0:simple",
+      "identities": [
+        "kycklinglårfilé|raw_edible",
+        "pandanblad|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-gai-hor-bai-toey:1.0.0:simple",
+      "flags": [
+        "processolja-kraver-naringsmodell",
+        "pandanomslag-ej-atligt",
+        "marinad-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-gai-hor-bai-toey:1.0.0:standard",
+      "identities": [
+        "kycklinglårfilé|raw_edible",
+        "palmsocker|as_sold",
+        "pandanblad|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-gai-hor-bai-toey:1.0.0:standard",
+      "flags": [
+        "processolja-kraver-naringsmodell",
+        "pandanomslag-ej-atligt",
+        "marinad-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-gai-hor-bai-toey:1.0.0:extended",
+      "identities": [
+        "kycklinglårfilé|raw_edible",
+        "palmsocker|as_sold",
+        "pandanblad|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-gai-hor-bai-toey:1.0.0:extended",
+      "flags": [
+        "processolja-kraver-naringsmodell",
+        "pandanomslag-ej-atligt",
+        "marinad-kassation"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-lot-chong-singapore:1.0.0:simple",
+      "identities": [
+        "pandanblad|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-lot-chong-singapore:1.0.0:simple",
+      "flags": [
+        "tapiokadeg-provlagning",
+        "pandanomslag-ej-atligt"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-lot-chong-singapore:1.0.0:extended",
+      "identities": [
+        "jackfrukt mogen|raw_edible",
+        "pandanblad|as_sold",
+        "ung kokosnöt fruktkött|raw_edible"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-lot-chong-singapore:1.0.0:extended",
+      "flags": [
+        "tapiokadeg-provlagning",
+        "pandanomslag-ej-atligt"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-woon-kati:1.0.0:simple",
+      "identities": [
+        "agar agar|dry",
+        "pandanblad|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-woon-kati:1.0.0:simple",
+      "flags": [
+        "agarstyrka-och-lagerfaste-provlagning",
+        "pandanomslag-ej-atligt"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-thai-woon-kati:1.0.0:extended",
+      "identities": [
+        "agar agar|dry",
+        "pandanblad|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-thai-woon-kati:1.0.0:extended",
+      "flags": [
+        "agarstyrka-och-lagerfaste-provlagning",
+        "pandanomslag-ej-atligt"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-biff-greta:1.0.0:simple",
+      "identities": [
+        "nötkött för snabbstekning|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-biff-greta:1.0.0:standard",
+      "identities": [
+        "nötkött för snabbstekning|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-biff-greta:1.0.0:extended",
+      "identities": [
+        "nötkött för snabbstekning|raw_edible"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-porterstek:1.0.0:simple",
+      "identities": [
+        "nötstek|raw_edible",
+        "porteröl|as_sold",
+        "svartvinbärssaft|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-porterstek:1.0.0:standard",
+      "identities": [
+        "enbär|dry",
+        "nötstek|raw_edible",
+        "porteröl|as_sold",
+        "svartvinbärssaft|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-porterstek:1.0.0:extended",
+      "identities": [
+        "enbär|dry",
+        "nötstek|raw_edible",
+        "porteröl|as_sold",
+        "svartvinbärsgelé|as_sold",
+        "svartvinbärssaft|as_sold"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-blodpalt:1.0.0:simple",
+      "identities": [
+        "nötblod|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-blodpalt:1.0.0:simple",
+      "flags": [
+        "livsmedelsblod-kylkedja",
+        "blodpalt-bindning-och-koktider-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-blodpalt:1.0.0:standard",
+      "identities": [
+        "nötblod|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-blodpalt:1.0.0:standard",
+      "flags": [
+        "livsmedelsblod-kylkedja",
+        "blodpalt-bindning-och-koktider-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-blodpalt:1.0.0:extended",
+      "identities": [
+        "nötblod|as_sold"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-blodpalt:1.0.0:extended",
+      "flags": [
+        "livsmedelsblod-kylkedja",
+        "blodpalt-bindning-och-koktider-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-sillsallad:1.0.0:simple",
+      "identities": [
+        "inläggningssill|preserved_drained",
+        "ättiksgurka|preserved_drained"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-sillsallad:1.0.0:simple",
+      "flags": [
+        "atklar-sill-produktverifiering"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-sillsallad:1.0.0:standard",
+      "identities": [
+        "inläggningssill|preserved_drained",
+        "ättiksgurka|preserved_drained"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-sillsallad:1.0.0:standard",
+      "flags": [
+        "atklar-sill-produktverifiering"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-sillsallad:1.0.0:extended",
+      "identities": [
+        "inläggningssill|preserved_drained",
+        "ättiksgurka|preserved_drained"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-sillsallad:1.0.0:extended",
+      "flags": [
+        "atklar-sill-produktverifiering"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-havreflarn:1.0.0:simple",
+      "flags": [
+        "flarn-spridning-och-graddning-provlagning"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-havreflarn:1.0.0:extended",
+      "flags": [
+        "flarn-spridning-och-graddning-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-drommar:1.0.0:simple",
+      "identities": [
+        "hjorthornssalt|dry"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-drommar:1.0.0:simple",
+      "flags": [
+        "mikrodos-hjorthornssalt-kraver-fin-vag-och-provlagning"
+      ]
+    },
+    {
+      "kind": "registry-review-required",
+      "reference": "smako-swedish-drommar:1.0.0:extended",
+      "identities": [
+        "hjorthornssalt|dry"
+      ]
+    },
+    {
+      "kind": "author-review-flags",
+      "reference": "smako-swedish-drommar:1.0.0:extended",
+      "flags": [
+        "mikrodos-hjorthornssalt-kraver-fin-vag-och-provlagning"
+      ]
+    },
+    {
+      "kind": "previous-delivery-conflicts",
+      "reference": "tidigare-leveranskonflikter.json",
+      "detail": "Tidigare leveranser har överlapp och ID-konflikter. Ingen slutlig kumulativ kulinarisk unikhet har påståtts. Nya filer återanvänder inte dessa ID:n."
+    }
+  ],
+  "interpretation": "Noll strukturella fel innebär inte importklarhet. Även kända identiteter måste genom Smakos produkt- och importgranskning; samtliga recept är oprövade AI-utkast."
+}

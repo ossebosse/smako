@@ -1,0 +1,84 @@
+SMAKO – SEPARAT FORTSÄTTNING 016–018
+30 nya grundrätter / 78 fullständiga receptvarianter
+
+STATUS
+AI-författade receptutkast för separat granskning/import i Smako.
+Inte provlagade. Inte importerade, produktbundna, näringsberäknade eller betaaktiverade.
+Inga tidigare receptpaket återlevereras. Ingen ny pilot skapas; tidigare pilot räknas inte här.
+
+INNEHÅLL OCH ANTAL
+18 middagar med tre varianter vardera (4 portioner).
+5 frukostar och 7 mellanmål med två varianter vardera (1 portion).
+Grekiskt 3 grundrätter / 8 varianter.
+Italienskt 7 / 19. Mexikanskt 6 / 15. Indiskt 6 / 15.
+Thailändskt 5 / 14. Svenskt 3 / 7.
+Inga föreskrivna varianter saknas inom de 30 levererade familjerna.
+
+PAKET OCH BLOCKERARE
+016: 7 hela familjer / 15 varianter, enbart kända ingrediensidentiteter.
+017: 12 hela familjer / 34 varianter, familjer hållna för registergranskning.
+018: 11 hela familjer / 29 varianter, familjer hållna för registergranskning.
+49 saknade ingrediensidentiteter är dokumenterade. Tidigare förslag är inte godkännanden.
+59 varianter använder direkt någon saknad identitet. Hela familjer hålls samman,
+vilket gör att 63 varianter ligger i registergranskningspaketen.
+Kosha mangsho har dessutom 192 / 192 / 197 minuters aktiv tid. Alla tre varianter
+överskrider AUTHORING.md:s aktiva gräns 180 minuter och får inte behandlas som
+importklara. Tiden har inte kapats eller falskt klassats som passiv.
+
+KVALITET OCH KONTROLLER
+Noll strukturella fel i JSON/schema och de fristående receptkontrollerna.
+Fem motiverade avvikelser från ingrediensriktmärkena. Se leveransoversikt.json.
+Alla 18 middagsfamiljer har minst en naturlig variant med 10–15 ingredienser.
+Likhetsunderlaget omfattar alla 934 ursprungliga grundrätter / 2 462 variantposter
+samt samtliga fyra tidigare faktiska leveranser, sammanlagt ytterligare 555 poster.
+Även köksomärkta och flerköksmärkta ursprungsrecept ingår.
+31 strukturerade kandidater jämfördes före författning; 30 accepterades och en
+avvisades. Sex tidigare inventeringsförslag har också behållits som avvisade.
+Efter författning jämfördes alla 78 faktiska varianter mot samtliga 3 017 poster,
+samt mot varandra. Redaktionella beslut och matriser finns i granskningsfilerna.
+AI-redaktionell bedömning är inte ett mänskligt godkännande eller provlagning.
+33 faktiskt lästa källor stöder rättidentiteterna. Mängder och instruktioner är
+självständigt författade; källorna är inte provlagningsintyg för dessa varianter.
+
+HISTORIK OCH KUMULATIVT ÅTERSTÅENDE
+Tidigare ZIP-filer innehåller ID-kollisioner och kulinariska överlapp, bland annat
+dubblerade paketnummer 007/008. Ingen äldre text väljs som vinnare automatiskt.
+Tidigare underlag har 205 unika base_id och 551 unika variant/version-ID, men detta
+är INTE ett intyg om 205 unika kulinariska rätter. Med denna deltas 30/78 blir det
+provisoriskt 235 / 629 ID-unika poster. Mätt på ID:n återstår minst 765 grundrätter
+och 2 121 varianter; faktiskt underskott kan bli större efter historikavstämning.
+Kvoter per kök/måltid redovisas utan omfördelning i leveransoversikt.json.
+Ursprungligt mål är fortfarande 1 000 nya grundrätter / 2 750 varianter.
+
+FILKARTA
+paket/*.json                 De enda receptfilerna för separat authoringgranskning.
+kandidatregister.json        Denna deltas kandidater, identitet, beslut och varianter.
+leveransoversikt.json        Kvoter, mängdräkning, tider, kostavsikt och blockerare.
+dubblettgranskning.json      Närmaste befintliga/nya träffar och kulinariska skäl.
+registerforslag.json         Nödvändiga, ännu ej godkända namn/form/enhetsförslag.
+befintliga-recept-forslag.json  Avvisade nya kandidater som hör till befintliga ID:n.
+kallor.json                  Faktiskt kontrollerade källor och begränsat stödområde.
+kontrollrapport.json         Körda kontroller, fel, varningar och det som inte körts.
+checkpoint.json              Färdiga ID:n, blockerare, kvoter; nästa paketnummer 019.
+RECEPTINDEX.txt              Läsbar lista över alla 30 familjer och deras tider.
+kontroll/                    Schema, referensidentiteter, jämförelseindex och matriser.
+historik/                    Äldre kandidatbeslut och dokumenterade leveranskonflikter.
+SHA256SUMS.json              Kontrollsummor för leveransfilerna, inte runtimehashar.
+
+LÄS INTE REFERENSINDEX SOM RECEPTPAKET
+SQLite-indexet och granskningsfilerna återger referensinformation endast för
+spårbarhet. Bara paket/*.json använder receptpaketsschemat. Ingen duplicerad
+samlad importfil finns.
+
+OMKONTROLL UTAN IMPORT
+Kräver Python och paketet jsonschema:
+  python kontroll/validera_leverans.py
+Skriptet gör fristående format-/strukturkontroller och listar register-/tidsblockerare.
+Exitkod 0 betyder inte Smako-godkännande. Native author/validate/diff/import/prepare,
+produktbindning, köpbarhet, portionsskalning i Smako, näring och provlagning återstår.
+
+SÄRSKILD PRODUKT-/MATLAGNINGSGRANSKNING
+Exakta ostar, stockfiskens insatsform, kommersiell tai pla, livsmedelsavsedd senapsolja,
+frityroljeupptag, ben/silrester och sammansatta produkter kräver separat granskning.
+Inga butikstillgångar, priser, besparingar, kost-/allergenattester eller godkännanden
+har antagits. Grundfamiljer med kända identiteter är inte automatiskt importklara.

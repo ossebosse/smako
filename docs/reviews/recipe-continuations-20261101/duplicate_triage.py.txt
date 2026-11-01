@@ -1,0 +1,86 @@
+"""Offline heuristic shortlist, not culinary deduplication approval."""
+import json
+import re
+import unicodedata
+from collections import defaultdict
+from difflib import SequenceMatcher
+from pathlib import Path
+
+from app.services.meal_library_content import identity
+from app.services.recipe_library import current_recipes
+
+ROOT = Path('backend/app/data/recipes/incoming/authoring-1000-20261101')
+
+
+def norm(value):
+    return re.sub(r'[^a-z0-9]+', ' ', ''.join(
+        c for c in unicodedata.normalize('NFD', value.lower())
+        if not unicodedata.combining(c))).strip()
+
+
+def words(value):
+    return set(norm(value).split()) - {
+        'smako', 'swedish', 'thai', 'indian', 'greek', 'italian', 'mexican',
+        'med', 'och', 'enkel', 'standard', 'utokad'}
+
+
+def keys(items):
+    return {x['name'] + '|' + x['form'] for x in items
+            if x['name'] not in {'salt', 'svartpeppar', 'peppar', 'vatten'}}
+
+
+groups = defaultdict(list)
+new_bases = set()
+for r in current_recipes():
+    groups[r.design.base_id].append({
+        'scope': 'current', 'id': identity(r), 'name': r.name,
+        'keys': keys([i.model_dump() for i in r.ingredients])})
+for slug in ('checkpoint-72', 'continuation-22', 'continuation-41', 'continuation-30'):
+    for path in sorted((ROOT / slug / 'source/paket').glob('*.json')):
+        for r in json.loads(path.read_bytes())['recipes']:
+            groups[r['base_id']].append({
+                'scope': slug,
+                'id': r['base_id'] + ':' + r.get('version', '1.0.0') + ':' + r['variant_id'],
+                'name': r['name'],
+                'keys': keys([i for c in r['components'] for i in c['ingredients']])})
+            if slug != 'checkpoint-72':
+                new_bases.add(r['base_id'])
+results = []
+for base in sorted(new_bases):
+    a = groups[base][0]
+    aname = norm(re.split(r' [–—] ', a['name'])[0])
+    awords = words(base)
+    candidates = []
+    for other, rows in groups.items():
+        if base == other:
+            continue
+        b = rows[0]
+        bname = norm(re.split(r' [–—] ', b['name'])[0])
+        bwords = words(other)
+        n = SequenceMatcher(None, aname, bname).ratio()
+        w = len(awords & bwords) / len(awords | bwords)
+        i, ar, br = max(
+            ((len(x['keys'] & y['keys']) / len(x['keys'] | y['keys']), x['id'], y['id'])
+             for x in groups[base] for y in rows))
+        candidates.append({
+            'other_base_id': other, 'other_scope': b['scope'],
+            'new_name': a['name'], 'other_name': b['name'],
+            'same_name_prefix': aname == bname,
+            'name_similarity': round(n, 4), 'slug_token_jaccard': round(w, 4),
+            'max_ingredient_jaccard': round(i, 4),
+            'ingredient_pair': [ar, br], 'rank_score': round(max(n, w) + i * .2, 4)})
+    results.append({'base_id': base, 'candidates': sorted(
+        candidates, key=lambda c: -c['rank_score'])[:3]})
+report = {
+    'scope': 'Heuristic shortlist against all current bases, prior checkpoint and new deliveries. '
+             'Names use the first variant per base, ingredient overlap uses all variants. '
+             'Scores only suggest manual review; no culinary uniqueness approval or automatic rejection. '
+             'Historical issued IDs separately checked in VALIDATION.json. Missing archive unavailable.',
+    'new_bases_screened': len(results), 'comparison_bases': len(groups), 'results': results}
+Path('.local/recipe-continuations-20261101/DUPLICATE-TRIAGE.json').write_text(
+    json.dumps(report, ensure_ascii=False, indent=2) + '\n', encoding='utf8')
+for row in results:
+    for c in row['candidates']:
+        if (c['same_name_prefix'] or c['name_similarity'] >= .75
+                or c['slug_token_jaccard'] >= .7 or c['max_ingredient_jaccard'] == 1):
+            print(row['base_id'], json.dumps(c, ensure_ascii=False))
