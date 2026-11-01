@@ -20,6 +20,29 @@ from typing import Any
 _PREPARATION_LOCK = threading.RLock()
 
 
+def preparation_status(report, active_universe_ids):
+    """Public, bounded evidence for a warm probe; HTTP health is separate.
+
+    An old/partial preparation or a report for only one replaced municipality
+    cannot certify all currently active universes. Never expose exception text.
+    """
+    report = report if isinstance(report, dict) else {}
+    statuses = {"not_run", "scheduled", "running", "ready", "partial", "failed"}
+    status = report.get("status")
+    status = status if status in statuses else "unknown"
+    library = report.get("library") or {}
+    library_status = library.get("status", "unknown")
+    library_status = library_status if library_status in statuses else "unknown"
+    rows = {row.get("universe_id"): row.get("status") for row in report.get("universes", ())}
+    universes = [{"universe_id": identifier,
+                  "status": rows.get(identifier) if rows.get(identifier) in statuses else "unknown"}
+                 for identifier in sorted(set(active_universe_ids))]
+    ready = (bool(universes) and status == "ready" and library_status == "ready"
+             and all(row["status"] == "ready" for row in universes))
+    return {"status": "ready" if ready else "not_ready", "preparation_status": status,
+            "library_status": library_status, "universes": universes}
+
+
 def warm_recipe_library(servings=(1, 2, 3, 4), *, current_only=False) -> None:
     """Prepare exact issued values for the selected planning policy.
 

@@ -141,7 +141,9 @@ class PlannerAdmissionController:
             cleanup_token = memory_cleanup_seconds.set(perf_counter() - cleanup_started)
 
             try:
-                value = await factory()
+                from app.services.planner_memory import admission_cleanup_scope
+                with admission_cleanup_scope():
+                    value = await factory()
             except BaseException as exc:
                 outcome = _Outcome[Result](error=exc)
                 if not outcome_future.done():

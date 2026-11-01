@@ -330,6 +330,87 @@ def test_published_missing_pairs_avoid_reads_but_present_evidence_is_validated(t
     assert facts == expected
 
 
+@pytest.mark.parametrize("mutation", ["orphan", "metadata", "replacement", "deleted", "unreadable"])
+def test_batch_discards_provisional_facts_when_missing_directory_changes(tmp_path, monkeypatch, mutation):
+    from app.services import axfood_product_details as reader
+
+    from grocery_data.app.services.axfood_detail_archive import publish_release
+
+    staging = tmp_path / "staging/run"
+    store(staging, "willys", detail())
+    store(staging, "hemkop", detail(code="unrelated"))
+    release = publish_release(tmp_path, "run")
+    products = [_Product("hemkop")]
+    original = {("s1", "p1"): catalogue_fact()}
+    facts = dict(original)
+    check = reader._missing_index_unchanged
+    checks = []
+
+    def mutate(index):
+        checks.append(True)
+        # The shared Willys document was projected privately, not yet published.
+        assert facts == original
+        directory = release / "hemkop"
+        if mutation == "orphan":
+            (directory / (detail()["code"] + ".json")).write_text("{}")
+        elif mutation == "metadata":
+            (directory / (detail()["code"] + ".meta.json")).write_text('{"revoked":true}')
+        elif mutation in {"replacement", "deleted"}:
+            directory.rename(release / "old-hemkop")
+            if mutation == "replacement":
+                directory.mkdir()
+        else:
+            lstat = type(directory).lstat
+            def denied(path, *args, **kwargs):
+                if path == directory:
+                    raise PermissionError("test")
+                return lstat(path, *args, **kwargs)
+            monkeypatch.setattr(type(directory), "lstat", denied)
+        assert not check(index)
+        return False
+
+    monkeypatch.setattr(reader, "_missing_index_unchanged", mutate)
+    result = reader.merge_axfood_details(products, facts, release)
+    assert checks == [True]
+    monkeypatch.setattr(reader, "_missing_detail_index", lambda root: {})
+    expected = dict(original)
+    assert reader.merge_axfood_details(products, expected, release) == result
+    assert facts == expected
+
+
+@pytest.mark.parametrize("fallback", [None, "budget", "generator"])
+def test_batch_missing_checks_scale_with_directories_and_fallback_is_replay_safe(tmp_path, monkeypatch, fallback):
+    from dataclasses import replace
+
+    from app.services import axfood_product_details as reader
+
+    from grocery_data.app.services.axfood_detail_archive import publish_release
+
+    staging = tmp_path / "staging/run"
+    store(staging, "willys", detail())
+    store(staging, "hemkop", detail(code="unrelated"))
+    release = publish_release(tmp_path, "run")
+    products, facts = [], {}
+    for i in range(100):
+        product = _Product("hemkop")
+        product.product_id = str(i)
+        products.append(product)
+        facts[(product.store_id, product.product_id)] = replace(catalogue_fact(), retailer_product_id=f"missing{i}")
+    calls = []
+    lstat = type(release).lstat
+    def counted(path, *args, **kwargs):
+        calls.append(path)
+        return lstat(path, *args, **kwargs)
+    monkeypatch.setattr(type(release), "lstat", counted)
+    if fallback == "budget":
+        monkeypatch.setattr(reader, "DETAIL_PROJECTION_MAX_BYTES", 1)
+    original = dict(facts)
+    result = reader.merge_axfood_details(iter(products) if fallback == "generator" else products, facts, release)
+    assert facts == original and result["no_document"] == 100
+    directory_checks = sum(path == release / "hemkop" or path == release / "willys" for path in calls)
+    assert directory_checks < 30 if fallback is None else directory_checks >= 200
+
+
 def test_merge_binds_by_exact_code_and_keeps_catalogue_evidence(tmp_path):
     store(tmp_path, "willys", detail())
     facts = {("s1", "p1"): catalogue_fact()}

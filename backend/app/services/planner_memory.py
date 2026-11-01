@@ -9,9 +9,50 @@ from __future__ import annotations
 import ctypes
 import gc
 import sys
+from contextlib import contextmanager
+from contextvars import ContextVar
+from dataclasses import dataclass, field
 from functools import lru_cache
+from threading import Lock
 
 from app.services.performance_trace import increment_performance_counter
+
+
+@dataclass
+class _AdmissionCleanup:
+    available: bool = True
+    lock: object = field(default_factory=Lock)
+
+
+_admission_cleanup: ContextVar[_AdmissionCleanup | None] = ContextVar(
+    "planner_admission_cleanup", default=None)
+
+
+@contextmanager
+def admission_cleanup_scope():
+    """One startup collection may reuse the admission's completed full GC.
+
+    The caller must have completed collection before entering. A mutable,
+    locked credit is shared with worker-thread context copies, but never with
+    another admitted job. Failure/cancellation restores the previous context.
+    """
+    token = _admission_cleanup.set(_AdmissionCleanup())
+    try:
+        yield
+    finally:
+        _admission_cleanup.reset(token)
+
+
+def consume_admission_cleanup() -> bool:
+    credit = _admission_cleanup.get()
+    if credit is None:
+        return False
+    with credit.lock:
+        if not credit.available:
+            return False
+        credit.available = False
+    increment_performance_counter("planner_full_collections_coordinated")
+    return True
 
 
 @lru_cache(maxsize=1)
