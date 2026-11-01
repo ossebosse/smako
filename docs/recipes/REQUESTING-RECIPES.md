@@ -42,6 +42,12 @@ olämpliga normaliseringar. Beredning av frysta insatser, processolja och
 råvaruformer behöver också hanteras före import. Inga recept från denna
 beställning är ännu importerade eller betaaktiverade.
 
+[Isolerad varm tidsjämförelse](../reviews/recipe-checkpoint-72-timing-20261101/REPORT.md):
+2 462 → 2 512 varianter gav en middag 21,236 → 21,612 s och tre middagar
+49,028 → 49,028 s. Detta gäller de 50 tekniskt testbara utkasten och de
+deklarerade valen, inte hela leveransen eller 1 000 nya grundrätter.
+Mätningen ändrar inte importstatus eller kvarstående innehållskrav.
+
 Nästa författarpaket är **007**; återstående mål mot mottagna utkast är
 **928 grundrätter / 2 551 varianter**. Detta är inte en slutlig nyhetsbedömning
 av de första 72 baserna. Bevara deras ID:n, räkna inte pilotpaketet igen och

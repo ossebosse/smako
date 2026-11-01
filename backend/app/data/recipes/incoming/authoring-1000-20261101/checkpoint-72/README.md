@@ -43,6 +43,12 @@ Läs [granskningen](../../../../../../../docs/reviews/recipe-checkpoint-72-20261
 [native-resultatet](../../../../../../../docs/reviews/recipe-checkpoint-72-20261101/NATIVE-AUDIT.json)
 och [valideringskvittot](../../../../../../../docs/reviews/recipe-checkpoint-72-20261101/VALIDATION.json).
 De skiljer strukturgodkännande från innehållsgranskning och köpbarhet.
+
+En separat [varm tidsjämförelse](../../../../../../../docs/reviews/recipe-checkpoint-72-timing-20261101/REPORT.md)
+prövar befintligt bibliotek plus de 50 tekniskt kompatibla utkasten i
+isolerade testprocesser. Den är inte en riktig import eller ett godkännande
+av innehållet; de övriga 149 varianternas tidseffekt är fortfarande omätt.
+
 Konkreta hinder gäller bland annat identitetsnormalisering, frysta insatser,
 frityrolja och råvarornas form. Det finns också en
 [förberedd återkoppling till Chat](../../../../../../../docs/recipes/requests/20261101/ATGARDER-CHECKPOINT-72-TILL-CHAT.txt),

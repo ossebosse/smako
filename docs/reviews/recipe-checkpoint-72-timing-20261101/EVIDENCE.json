@@ -1,0 +1,4553 @@
+{
+  "scope": "Isolated benchmark of 50 structurally compatible unapproved draft variants; no live import or activation.",
+  "runtime_before": {
+    "image": "sha256:a396c7774515c738a6b3909fb2b776d897bc48b29ddfc2d1064264f2ff97b8ad",
+    "build_id": "app-b7c8d0506e23-c18e4ba9",
+    "planning_env": {
+      "STABLE_CANDIDATE_BASE_COUNT": "120",
+      "COOP_ALLOW_FULL_CRAWL": "true",
+      "PLANNER_MAX_CONCURRENT_REQUESTS": "1",
+      "PRICE_UNIVERSE_PREWARM_CANDIDATE_COUNT": "80",
+      "LIBRARY_SEARCH_POLICY": "smako-current-library-v2",
+      "MEAL_PLAN_STRATEGY": "optimized",
+      "AXFOOD_PRODUCT_DETAIL_ROOT": "/srv/app/var/grocery/axfood-product-details/releases/b11ed75863be1547755ee78be5143ba737d5ea3564acc1cadaa0feb6b4ebf0a8",
+      "ALLOW_MOCK_FALLBACK": "false",
+      "STABLE_CANDIDATE_SEARCH_LIMIT": "160",
+      "LIBRARY_MERGE_GENERATIONS": "false",
+      "PLANNER_RATE_LIMIT_WINDOW_SECONDS": "60",
+      "HEMKOP_ALLOW_FULL_CRAWL": "true",
+      "PLANNER_MAX_QUEUED_REQUESTS": "4",
+      "PLANNER_NETWORK_RATE_LIMIT_REQUESTS": "40",
+      "PLANNER_RATE_LIMIT_REQUESTS": "8",
+      "STABLE_CANDIDATE_SEARCH_ENABLED": "true",
+      "ALLOW_PROVIDER_FALLBACK": "false"
+    },
+    "runtime_file_hashes": {
+      "services/recipe_library.py": "8241f6920f952808f5798d1222885c05c58cb089b5b5ded6028a17680eba85e5",
+      "services/personal_planner.py": "2260d1d0d382f9d161f1386e90b2aac590dda223d91adb0b0e44f407fe73e63c",
+      "services/meal_library_content.py": "232393c46575073c4525e6bbaa37e9105bc2e53a95647fec7abe209c1c7f4398",
+      "services/menu_optimizer.py": "f03d5cf462b879fafeec4973add14701252fff81347917029342bf2b7e0b4c5f",
+      "data/recipes/library-manifest.json": "68a142625914bdeae7d03d1d41d76f7a440ae2ab1239d2f31e2e4ebc435f3516"
+    },
+    "running_containers": [
+      "smako-app-1",
+      "smako-scheduler-1",
+      "smako-caddy-1"
+    ]
+  },
+  "experiment": {
+    "image": "sha256:a396c7774515c738a6b3909fb2b776d897bc48b29ddfc2d1064264f2ff97b8ad",
+    "clock": "2026-11-01T12:19:40.625053+00:00",
+    "env": {
+      "STABLE_CANDIDATE_BASE_COUNT": "120",
+      "COOP_ALLOW_FULL_CRAWL": "true",
+      "PLANNER_MAX_CONCURRENT_REQUESTS": "1",
+      "PRICE_UNIVERSE_PREWARM_CANDIDATE_COUNT": "80",
+      "LIBRARY_SEARCH_POLICY": "smako-current-library-v2",
+      "MEAL_PLAN_STRATEGY": "optimized",
+      "AXFOOD_PRODUCT_DETAIL_ROOT": "/srv/app/var/grocery/axfood-product-details/releases/b11ed75863be1547755ee78be5143ba737d5ea3564acc1cadaa0feb6b4ebf0a8",
+      "ALLOW_MOCK_FALLBACK": "false",
+      "STABLE_CANDIDATE_SEARCH_LIMIT": "160",
+      "LIBRARY_MERGE_GENERATIONS": "false",
+      "PLANNER_RATE_LIMIT_WINDOW_SECONDS": "60",
+      "HEMKOP_ALLOW_FULL_CRAWL": "true",
+      "PLANNER_MAX_QUEUED_REQUESTS": "4",
+      "PLANNER_NETWORK_RATE_LIMIT_REQUESTS": "40",
+      "PLANNER_RATE_LIMIT_REQUESTS": "8",
+      "STABLE_CANDIDATE_SEARCH_ENABLED": "true",
+      "ALLOW_PROVIDER_FALLBACK": "false",
+      "PYTHON_DOTENV_DISABLED": "1",
+      "APP_ENV": "test",
+      "GROCERY_DATABASE_URL": "sqlite+pysqlite:////srv/app/var/grocery/grocery_data.sqlite?timeout=30",
+      "GROCERY_RAW_SNAPSHOT_ROOT": "/srv/app/var/raw_snapshots",
+      "PLAN_STORE_PATH": "/tmp/plans.sqlite",
+      "PRICE_UNIVERSE_CACHE_ROOT": "/srv/app/var/price_universes",
+      "PRICE_UNIVERSE_CITY": "Lund",
+      "PRICE_UNIVERSE_REQUIRED": "true",
+      "PRICE_PROVIDER": "own",
+      "COMPLETE_RECIPES_ENABLED": "true",
+      "SOURCE_FACTS_PREWARM_ENABLED": "false",
+      "PRICE_UNIVERSE_PREWARM_ENABLED": "false",
+      "RECIPE_PREPARATION_CACHE_ROOT": "/tmp/recipe-cache",
+      "PROBE_CLOCK": "2026-11-01T12:19:40.625053+00:00"
+    },
+    "file_hashes": {
+      "probe.py": "3e1f85780c734a7941fab3f00e7c99d677a2b054531d8828326943c0c907a1e4",
+      "cases.json": "1b06fb825d95c47efd07bc9301b08896b7efbd547b121227835728c889613d1e",
+      "baseline-manifest.json": "68a142625914bdeae7d03d1d41d76f7a440ae2ab1239d2f31e2e4ebc435f3516",
+      "candidate-manifest.json": "a1193690b04908622d5da4679fa52b1cdf0a77bb7c8ab750ebeb56556e536efd",
+      "metadata.json": "e110a0a7facbab0b0ca0437fd933a1a35ade059a68f9a5227233a61cb97e5c89",
+      "meal-pack-44fa55c7f4194798a6ff745efabe3b84460c048afc666cae4670e3bb877e7f51.json": "44fa55c7f4194798a6ff745efabe3b84460c048afc666cae4670e3bb877e7f51"
+    },
+    "order": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "operation_lease": true
+  },
+  "candidate": {
+    "baseline_count": 2462,
+    "by_cuisine": {
+      "greek": 7,
+      "indian": 10,
+      "italian": 6,
+      "mexican": 10,
+      "swedish": 8,
+      "thai": 9
+    },
+    "candidate_count": 2512,
+    "content_approved": false,
+    "experimental_only": true,
+    "new_recipe_ids": [
+      "smako-greek-fanouropita:1.0.0:extended",
+      "smako-greek-fanouropita:1.0.0:simple",
+      "smako-greek-tomatokeftedes:1.0.0:extended",
+      "smako-greek-tomatokeftedes:1.0.0:simple",
+      "smako-greek-youvarlakia-avgolemono:1.0.0:extended",
+      "smako-greek-youvarlakia-avgolemono:1.0.0:simple",
+      "smako-greek-youvarlakia-avgolemono:1.0.0:standard",
+      "smako-indian-chicken-cafreal:1.0.0:extended",
+      "smako-indian-chicken-cafreal:1.0.0:simple",
+      "smako-indian-chicken-cafreal:1.0.0:standard",
+      "smako-indian-chivda:1.0.0:extended",
+      "smako-indian-chivda:1.0.0:simple",
+      "smako-indian-dal-baati:1.0.0:extended",
+      "smako-indian-dal-baati:1.0.0:simple",
+      "smako-indian-dal-baati:1.0.0:standard",
+      "smako-indian-sabudana-vada:1.0.0:extended",
+      "smako-indian-sabudana-vada:1.0.0:simple",
+      "smako-italian-fegato-veneziana-flasklever:1.0.0:extended",
+      "smako-italian-fegato-veneziana-flasklever:1.0.0:simple",
+      "smako-italian-fegato-veneziana-flasklever:1.0.0:standard",
+      "smako-italian-panforte:1.0.0:extended",
+      "smako-italian-panforte:1.0.0:simple",
+      "smako-italian-pizzoccheri:1.0.0:simple",
+      "smako-mexican-conchas:1.0.0:extended",
+      "smako-mexican-conchas:1.0.0:simple",
+      "smako-mexican-enfrijoladas:1.0.0:extended",
+      "smako-mexican-enfrijoladas:1.0.0:simple",
+      "smako-mexican-enfrijoladas:1.0.0:standard",
+      "smako-mexican-pan-de-elote:1.0.0:extended",
+      "smako-mexican-pan-de-elote:1.0.0:simple",
+      "smako-mexican-salpicon-de-res:1.0.0:extended",
+      "smako-mexican-salpicon-de-res:1.0.0:simple",
+      "smako-mexican-salpicon-de-res:1.0.0:standard",
+      "smako-swedish-aggakaka:1.0.0:extended",
+      "smako-swedish-aggakaka:1.0.0:simple",
+      "smako-swedish-aggakaka:1.0.0:standard",
+      "smako-swedish-flygande-jacob:1.0.0:extended",
+      "smako-swedish-flygande-jacob:1.0.0:simple",
+      "smako-swedish-flygande-jacob:1.0.0:standard",
+      "smako-swedish-kanelbullar:1.0.0:extended",
+      "smako-swedish-kanelbullar:1.0.0:simple",
+      "smako-thai-ma-hor:1.0.0:extended",
+      "smako-thai-ma-hor:1.0.0:simple",
+      "smako-thai-pa-tong-ko:1.0.0:extended",
+      "smako-thai-pa-tong-ko:1.0.0:simple",
+      "smako-thai-pad-woon-sen:1.0.0:extended",
+      "smako-thai-pad-woon-sen:1.0.0:simple",
+      "smako-thai-pad-woon-sen:1.0.0:standard",
+      "smako-thai-tub-tim-krob:1.0.0:extended",
+      "smako-thai-tub-tim-krob:1.0.0:simple"
+    ],
+    "published_file": "meal-pack-44fa55c7f4194798a6ff745efabe3b84460c048afc666cae4670e3bb877e7f51.json"
+  },
+  "sampler": "Host /proc/container-pid/status every 50ms, independent of Python GIL; short peaks may be missed.",
+  "comparisons": [
+    {
+      "case": "italian-prime",
+      "prime": true,
+      "baseline": {
+        "runs": 2,
+        "passed": 2,
+        "seconds": [
+          24.64809332881123,
+          24.356724853627384
+        ],
+        "cpu_seconds": [
+          24.654486485000007,
+          24.364976119000005
+        ],
+        "totals": [
+          110.55,
+          110.55
+        ],
+        "new_ids_selected": [
+          [],
+          []
+        ],
+        "median_seconds": 24.502409091219306,
+        "median_engine_timings": {
+          "audit": 0.0015011676587164402,
+          "candidate_generation_and_qualification": 7.293150539975613,
+          "memory_reclamation": 2.3994660824537277,
+          "nutrition": 0.01721110101789236,
+          "package_calculation": 0.9588107885792851,
+          "product_facts": 6.767161107622087,
+          "total": 10.139015957713127,
+          "week_search": 0.34230795269832015
+        },
+        "basket_hashes": [
+          "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099"
+        ]
+      },
+      "candidate": {
+        "runs": 2,
+        "passed": 2,
+        "seconds": [
+          24.092858185060322,
+          24.194967082701623
+        ],
+        "cpu_seconds": [
+          24.100382951,
+          24.202696118999995
+        ],
+        "totals": [
+          110.55,
+          110.55
+        ],
+        "new_ids_selected": [
+          [],
+          []
+        ],
+        "median_seconds": 24.143912633880973,
+        "median_engine_timings": {
+          "audit": 0.0018075034022331238,
+          "candidate_generation_and_qualification": 7.261059870943427,
+          "memory_reclamation": 2.3908690605312586,
+          "nutrition": 0.01720275916159153,
+          "package_calculation": 0.9450269681401551,
+          "product_facts": 6.575339233968407,
+          "total": 10.09601005865261,
+          "week_search": 0.335035084746778
+        },
+        "basket_hashes": [
+          "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099"
+        ]
+      },
+      "delta_seconds": -0.35849645733833313,
+      "delta_percent": -1.4631069785982966
+    },
+    {
+      "case": "italian-repeat",
+      "prime": false,
+      "baseline": {
+        "runs": 2,
+        "passed": 2,
+        "seconds": [
+          21.02019844762981,
+          21.451519645750523
+        ],
+        "cpu_seconds": [
+          21.013640681,
+          21.445716766000004
+        ],
+        "totals": [
+          110.55,
+          110.55
+        ],
+        "new_ids_selected": [
+          [],
+          []
+        ],
+        "median_seconds": 21.235859046690166,
+        "median_engine_timings": {
+          "audit": 0.0011922074481844902,
+          "candidate_generation_and_qualification": 4.218720867764205,
+          "memory_reclamation": 2.3296046019531786,
+          "nutrition": 0.016762001905590296,
+          "package_calculation": 0.8987570591270924,
+          "product_facts": 6.744074277114123,
+          "total": 6.9740174086764455,
+          "week_search": 0.3230096879415214
+        },
+        "basket_hashes": [
+          "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099"
+        ]
+      },
+      "candidate": {
+        "runs": 2,
+        "passed": 2,
+        "seconds": [
+          21.39070018939674,
+          21.832624468952417
+        ],
+        "cpu_seconds": [
+          21.38360141999999,
+          21.82430248099999
+        ],
+        "totals": [
+          110.55,
+          110.55
+        ],
+        "new_ids_selected": [
+          [],
+          []
+        ],
+        "median_seconds": 21.611662329174578,
+        "median_engine_timings": {
+          "audit": 0.0013657240197062492,
+          "candidate_generation_and_qualification": 4.308314198162407,
+          "memory_reclamation": 2.4382934323512018,
+          "nutrition": 0.01709269406273961,
+          "package_calculation": 0.9118910408578813,
+          "product_facts": 6.653675969224423,
+          "total": 7.188652390614152,
+          "week_search": 0.32778525399044156
+        },
+        "basket_hashes": [
+          "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099"
+        ]
+      },
+      "delta_seconds": 0.3758032824844122,
+      "delta_percent": 1.7696636696361248
+    },
+    {
+      "case": "three-dinners-new",
+      "prime": false,
+      "baseline": {
+        "runs": 2,
+        "passed": 2,
+        "seconds": [
+          49.01584809087217,
+          49.04032215848565
+        ],
+        "cpu_seconds": [
+          49.010557232,
+          49.03373889399998
+        ],
+        "totals": [
+          182.39,
+          182.39
+        ],
+        "new_ids_selected": [
+          [],
+          []
+        ],
+        "median_seconds": 49.02808512467891,
+        "median_engine_timings": {
+          "audit": 0.003946739714592695,
+          "candidate_generation_and_qualification": 16.21940836776048,
+          "memory_reclamation": 2.573974246159196,
+          "nutrition": 0.2165933344513178,
+          "package_calculation": 16.560765453614295,
+          "product_facts": 6.834466621745378,
+          "total": 33.99807787174359,
+          "week_search": 14.897990301251411
+        },
+        "basket_hashes": [
+          "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96",
+          "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96"
+        ]
+      },
+      "candidate": {
+        "runs": 2,
+        "passed": 2,
+        "seconds": [
+          49.028600444085896,
+          49.02810365334153
+        ],
+        "cpu_seconds": [
+          49.00753633000002,
+          49.016238138999995
+        ],
+        "totals": [
+          182.39,
+          182.39
+        ],
+        "new_ids_selected": [
+          [],
+          []
+        ],
+        "median_seconds": 49.028352048713714,
+        "median_engine_timings": {
+          "audit": 0.003240741789340973,
+          "candidate_generation_and_qualification": 16.475848328787833,
+          "memory_reclamation": 2.6304974709637463,
+          "nutrition": 0.20077219512313604,
+          "package_calculation": 16.6188847720623,
+          "product_facts": 6.696264928672463,
+          "total": 34.20079299993813,
+          "week_search": 14.773268745746464
+        },
+        "basket_hashes": [
+          "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96",
+          "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96"
+        ]
+      },
+      "delta_seconds": 0.00026692403480410576,
+      "delta_percent": 0.0005444308790060131
+    },
+    {
+      "case": "mixed-meals-new",
+      "prime": false,
+      "baseline": {
+        "runs": 2,
+        "passed": 1,
+        "seconds": [
+          49.06143592391163,
+          49.044265252538025
+        ],
+        "cpu_seconds": [
+          49.045373660999985,
+          49.04493188399999
+        ],
+        "totals": [
+          null,
+          112.64
+        ],
+        "new_ids_selected": [
+          null,
+          []
+        ],
+        "median_seconds": 49.044265252538025,
+        "median_engine_timings": {
+          "audit": 0.0023418543860316277,
+          "candidate_generation_and_qualification": 16.80977155826986,
+          "memory_reclamation": 2.7113118767738342,
+          "nutrition": 0.14720177371054888,
+          "package_calculation": 16.630611364729702,
+          "product_facts": 6.922656591050327,
+          "total": 33.40336487162858,
+          "week_search": 13.526799136772752
+        },
+        "basket_hashes": [
+          null,
+          "0585a2eb860713077a537de3c73e2aa0428ff1d6326e64531eb252eca0acd350"
+        ]
+      },
+      "candidate": {
+        "runs": 2,
+        "passed": 1,
+        "seconds": [
+          48.97978086862713,
+          49.00964002776891
+        ],
+        "cpu_seconds": [
+          48.961351193999974,
+          49.002934711999956
+        ],
+        "totals": [
+          null,
+          112.64
+        ],
+        "new_ids_selected": [
+          null,
+          []
+        ],
+        "median_seconds": 49.00964002776891,
+        "median_engine_timings": {
+          "audit": 0.0023639770224690437,
+          "candidate_generation_and_qualification": 16.76738603413105,
+          "memory_reclamation": 2.587770606391132,
+          "nutrition": 0.15588866919279099,
+          "package_calculation": 17.08734069019556,
+          "product_facts": 6.63636854942888,
+          "total": 33.768314806744456,
+          "week_search": 14.099205858074129
+        },
+        "basket_hashes": [
+          null,
+          "0585a2eb860713077a537de3c73e2aa0428ff1d6326e64531eb252eca0acd350"
+        ]
+      },
+      "delta_seconds": -0.03462522476911545,
+      "delta_percent": -0.07059994596885842
+    }
+  ],
+  "runs": [
+    {
+      "kind": "run_complete",
+      "run": "A1",
+      "library": "baseline",
+      "exit_code": 0,
+      "rows": [
+        {
+          "kind": "loaded",
+          "seconds": 92.59687130525708,
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+        },
+        {
+          "kind": "pricing_warm",
+          "seconds": 13.672575483098626,
+          "status": "miss_filled"
+        },
+        {
+          "kind": "source_warm",
+          "seconds": 85.98687329236418,
+          "count": 2462,
+          "library_signature": "68a142625914bdeae7d03d1d41d76f7a440ae2ab1239d2f31e2e4ebc435f3516",
+          "report": {
+            "status": "ready",
+            "universes": [
+              {
+                "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 54515,
+                "seconds": 27.626
+              },
+              {
+                "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 95998,
+                "seconds": 47.208
+              }
+            ],
+            "library": {
+              "status": "ready",
+              "seconds": 11.132
+            }
+          }
+        },
+        {
+          "kind": "case_started",
+          "case": "italian-prime",
+          "epoch": 1793535778.6530154
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            "smako-italian-spinach-whitebean-ravioli:1.0.0:simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 139,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 139,
+              "retained": 8,
+              "beam_pruned": 131,
+              "evaluations_executed": 139,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 139,
+              "equivalent_pruned": 0
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 339
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.844390737824142,
+            "memory_reclamation": 2.3539280146360397,
+            "package_calculation": 0.9676381526514888,
+            "nutrition": 0.0172209981828928,
+            "candidate_generation_and_qualification": 7.330049260519445,
+            "week_search": 0.34340007789433,
+            "audit": 0.0015203841030597687,
+            "total": 10.132034617476165
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.3811527621001005,
+          "attempt": 1,
+          "case": "italian-prime",
+          "prime": true,
+          "budget_seconds": 60,
+          "seconds": 24.64809332881123,
+          "cpu_seconds": 24.654486485000007,
+          "started_epoch": 1793535778.6530154,
+          "finished_epoch": 1793535803.3011098,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 945.353,
+              "personal_audit": 1.494,
+              "personal_candidate_generation": 2591.587,
+              "personal_candidate_generation_and_qualification": 7330.002,
+              "personal_facts_identity": 2519.494,
+              "personal_memory_reclamation": 2353.855,
+              "personal_nutrition": 12.435,
+              "personal_package_calculation": 992.843,
+              "personal_product_facts": 6844.3,
+              "personal_week_search": 343.318,
+              "planner_queue_wait": 0.011
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 279,
+                "wall_ms": 945.353,
+                "cpu_ms": 0.0,
+                "average_ms": 3.388,
+                "max_ms": 63.23
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 1.494,
+                "cpu_ms": 1.497,
+                "average_ms": 1.494,
+                "max_ms": 1.494
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2591.587,
+                "cpu_ms": 2590.745,
+                "average_ms": 2591.587,
+                "max_ms": 2591.587
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 7330.002,
+                "cpu_ms": 7328.411,
+                "average_ms": 7330.002,
+                "max_ms": 7330.002
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2519.494,
+                "cpu_ms": 2517.988,
+                "average_ms": 2519.494,
+                "max_ms": 2519.494
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2353.855,
+                "cpu_ms": 2353.427,
+                "average_ms": 1176.928,
+                "max_ms": 2350.604
+              },
+              "personal_nutrition": {
+                "calls": 279,
+                "wall_ms": 12.435,
+                "cpu_ms": 12.258,
+                "average_ms": 0.045,
+                "max_ms": 0.15
+              },
+              "personal_package_calculation": {
+                "calls": 283,
+                "wall_ms": 992.843,
+                "cpu_ms": 992.732,
+                "average_ms": 3.508,
+                "max_ms": 63.603
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6844.3,
+                "cpu_ms": 6842.193,
+                "average_ms": 6844.3,
+                "max_ms": 6844.3
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 343.318,
+                "cpu_ms": 343.296,
+                "average_ms": 343.318,
+                "max_ms": 343.318
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.011,
+                "cpu_ms": 0.011,
+                "average_ms": 0.011,
+                "max_ms": 0.011
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 283,
+              "cache_hits": 7869,
+              "cache_misses": 8265,
+              "fixed_package_template_hits": 2647,
+              "fixed_package_template_misses": 1489,
+              "menu_search_result_cache_hits": 112,
+              "menu_search_result_cache_misses": 1,
+              "package_cache_hits": 424,
+              "package_cache_misses": 5785,
+              "package_calculations": 5785,
+              "per_store_selection_cache_hits": 1382,
+              "per_store_selection_cache_misses": 631,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 1248,
+              "product_match_calculations": 1972,
+              "quote_set_cache_hits": 2666,
+              "quote_set_cache_misses": 631,
+              "quote_subset_pattern_cache_hits": 657,
+              "quote_subset_pattern_cache_misses": 265,
+              "quote_subset_vector_cache_hits": 2375,
+              "quote_subset_vector_cache_misses": 922,
+              "semantic_candidates_returned": 1827,
+              "semantic_comparisons": 1972,
+              "store_combinations": 1653,
+              "store_combinations_pruned_infeasible": 909,
+              "store_contexts_pruned_dominated": 1066,
+              "store_subset_cache_hits": 253,
+              "store_subset_cache_misses": 30,
+              "store_subsets_avoided_by_dominance": 1066
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.380103568546474,
+              "collected": 546
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00019110459834337234,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.3502217549830675,
+              "collected": 1248
+            }
+          ],
+          "process_high_water_kib": 2803008,
+          "sampled_peak_rss_kib": 2415428
+        },
+        {
+          "kind": "case_started",
+          "case": "italian-repeat",
+          "epoch": 1793535803.3020504
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            "smako-italian-spinach-whitebean-ravioli:1.0.0:simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 139,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 139,
+              "retained": 8,
+              "beam_pruned": 131,
+              "evaluations_executed": 139,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 139,
+              "equivalent_pruned": 0
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 339
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.606303239241242,
+            "memory_reclamation": 2.2913107434287667,
+            "package_calculation": 0.8841303987428546,
+            "nutrition": 0.016229286789894104,
+            "candidate_generation_and_qualification": 4.244262880645692,
+            "week_search": 0.32259634137153625,
+            "audit": 0.0011755144223570824,
+            "total": 6.960920561105013
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.2612961949780583,
+          "attempt": 2,
+          "case": "italian-repeat",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 21.02019844762981,
+          "cpu_seconds": 21.013640681,
+          "started_epoch": 1793535803.3020504,
+          "finished_epoch": 1793535824.322252,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 862.605,
+              "personal_audit": 1.155,
+              "personal_candidate_generation": 2603.789,
+              "personal_candidate_generation_and_qualification": 4244.225,
+              "personal_facts_identity": 2496.086,
+              "personal_memory_reclamation": 2291.229,
+              "personal_nutrition": 11.803,
+              "personal_package_calculation": 905.612,
+              "personal_product_facts": 6606.224,
+              "personal_week_search": 322.52,
+              "planner_queue_wait": 0.04
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 279,
+                "wall_ms": 862.605,
+                "cpu_ms": 0.0,
+                "average_ms": 3.092,
+                "max_ms": 50.326
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 1.155,
+                "cpu_ms": 1.156,
+                "average_ms": 1.155,
+                "max_ms": 1.155
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2603.789,
+                "cpu_ms": 2603.189,
+                "average_ms": 2603.789,
+                "max_ms": 2603.789
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 4244.225,
+                "cpu_ms": 4243.174,
+                "average_ms": 4244.225,
+                "max_ms": 4244.225
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2496.086,
+                "cpu_ms": 2495.446,
+                "average_ms": 2496.086,
+                "max_ms": 2496.086
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2291.229,
+                "cpu_ms": 2290.574,
+                "average_ms": 1145.614,
+                "max_ms": 2289.098
+              },
+              "personal_nutrition": {
+                "calls": 279,
+                "wall_ms": 11.803,
+                "cpu_ms": 11.713,
+                "average_ms": 0.042,
+                "max_ms": 0.142
+              },
+              "personal_package_calculation": {
+                "calls": 283,
+                "wall_ms": 905.612,
+                "cpu_ms": 905.374,
+                "average_ms": 3.2,
+                "max_ms": 50.631
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6606.224,
+                "cpu_ms": 6604.251,
+                "average_ms": 6606.224,
+                "max_ms": 6606.224
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 322.52,
+                "cpu_ms": 322.495,
+                "average_ms": 322.52,
+                "max_ms": 322.52
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.04,
+                "cpu_ms": 0.027,
+                "average_ms": 0.04,
+                "max_ms": 0.04
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 283,
+              "cache_hits": 7757,
+              "cache_misses": 8264,
+              "fixed_package_template_hits": 2647,
+              "fixed_package_template_misses": 1489,
+              "package_cache_hits": 424,
+              "package_cache_misses": 5785,
+              "package_calculations": 5785,
+              "per_store_selection_cache_hits": 1382,
+              "per_store_selection_cache_misses": 631,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 1221,
+              "quote_set_cache_hits": 2666,
+              "quote_set_cache_misses": 631,
+              "quote_subset_pattern_cache_hits": 657,
+              "quote_subset_pattern_cache_misses": 265,
+              "quote_subset_vector_cache_hits": 2375,
+              "quote_subset_vector_cache_misses": 922,
+              "store_combinations": 1653,
+              "store_combinations_pruned_infeasible": 909,
+              "store_contexts_pruned_dominated": 1066,
+              "store_subset_cache_hits": 253,
+              "store_subset_cache_misses": 30,
+              "store_subsets_avoided_by_dominance": 1066
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.260983668267727,
+              "collected": 17
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00012230221182107925,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.288629623129964,
+              "collected": 1221
+            }
+          ],
+          "process_high_water_kib": 2803008,
+          "sampled_peak_rss_kib": 2404148
+        },
+        {
+          "kind": "case_started",
+          "case": "three-dinners-new",
+          "epoch": 1793535824.3231072
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 182.39,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96",
+          "recipes": [
+            "smako-dinner-potato-tofu-cabbage-pan:1.0.0:base",
+            "smako-greek-mushroom-feta-stuffed-potatoes:1.0.0:simple",
+            "smako-intake-roesti:1.0.0:6e8c5a64-simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "names": [
+            "Potatispanna med tofu och mjuk kål",
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Rårakor med keso och varm rödbeta – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 235,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 836
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 780,
+              "constraints_rejected": 545,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 3142,
+              "constraints_rejected": 3350,
+              "evaluation_rejected": 0,
+              "priced": 1162,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 1163,
+              "evaluation_cache_hits": 33,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.08160701114684343,
+              "first_valid_request_seconds": 32.630316587165,
+              "first_valid_cost": "324.54",
+              "full_candidates": 1162,
+              "improvements": 8,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2508,
+              "anchors_total": 836,
+              "anchors_considered": 235,
+              "exchange_restarts": 6,
+              "max_full_evaluation_seconds": 0.0830404469743371,
+              "search_seconds": 15.4531305488199,
+              "anchors_deferred": 601,
+              "candidate_options_total": 2508,
+              "candidate_options_considered": 1937,
+              "candidate_options_deferred": 571,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1600,
+              "compact_seen_bytes": 796389,
+              "best_search_cost": "182.39"
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 2021
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.754935045726597,
+            "memory_reclamation": 2.5051819691434503,
+            "package_calculation": 16.797794312238693,
+            "nutrition": 0.2168870624154806,
+            "candidate_generation_and_qualification": 15.83732823934406,
+            "week_search": 15.480105639435351,
+            "audit": 0.0038452045992016792,
+            "total": 34.12707328610122
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.256357792764902,
+          "attempt": 3,
+          "case": "three-dinners-new",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 49.01584809087217,
+          "cpu_seconds": 49.010557232,
+          "started_epoch": 1793535824.3231072,
+          "finished_epoch": 1793535873.3389566,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 16579.822,
+              "personal_audit": 3.822,
+              "personal_candidate_generation": 2546.237,
+              "personal_candidate_generation_and_qualification": 15837.296,
+              "personal_facts_identity": 2534.825,
+              "personal_memory_reclamation": 2505.109,
+              "personal_nutrition": 179.536,
+              "personal_package_calculation": 16808.574,
+              "personal_product_facts": 6754.849,
+              "personal_week_search": 15480.019,
+              "planner_queue_wait": 0.007
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 1999,
+                "wall_ms": 16579.822,
+                "cpu_ms": 0.0,
+                "average_ms": 8.294,
+                "max_ms": 2494.8
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 3.822,
+                "cpu_ms": 3.824,
+                "average_ms": 3.822,
+                "max_ms": 3.822
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2546.237,
+                "cpu_ms": 2545.474,
+                "average_ms": 2546.237,
+                "max_ms": 2546.237
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 15837.296,
+                "cpu_ms": 15831.018,
+                "average_ms": 15837.296,
+                "max_ms": 15837.296
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2534.825,
+                "cpu_ms": 2534.294,
+                "average_ms": 2534.825,
+                "max_ms": 2534.825
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2505.109,
+                "cpu_ms": 2504.455,
+                "average_ms": 1252.555,
+                "max_ms": 2502.986
+              },
+              "personal_nutrition": {
+                "calls": 1999,
+                "wall_ms": 179.536,
+                "cpu_ms": 178.427,
+                "average_ms": 0.09,
+                "max_ms": 4.172
+              },
+              "personal_package_calculation": {
+                "calls": 2000,
+                "wall_ms": 16808.574,
+                "cpu_ms": 16802.87,
+                "average_ms": 8.404,
+                "max_ms": 2494.877
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6754.849,
+                "cpu_ms": 6753.011,
+                "average_ms": 6754.849,
+                "max_ms": 6754.849
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 15480.019,
+                "cpu_ms": 15476.093,
+                "average_ms": 15480.019,
+                "max_ms": 15480.019
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.007,
+                "cpu_ms": 0.006,
+                "average_ms": 0.007,
+                "max_ms": 0.007
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 2000,
+              "cache_hits": 68837,
+              "cache_misses": 146611,
+              "fixed_package_template_hits": 73533,
+              "fixed_package_template_misses": 2845,
+              "menu_search_result_cache_hits": 250,
+              "package_cache_hits": 6359,
+              "package_cache_misses": 102545,
+              "package_calculations": 102545,
+              "per_store_selection_cache_hits": 19392,
+              "per_store_selection_cache_misses": 11773,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 223,
+              "product_match_calculations": 878,
+              "quote_set_cache_hits": 16779,
+              "quote_set_cache_misses": 11925,
+              "quote_subset_pattern_cache_hits": 11143,
+              "quote_subset_pattern_cache_misses": 4578,
+              "quote_subset_vector_cache_hits": 12983,
+              "quote_subset_vector_cache_misses": 15721,
+              "semantic_candidates_returned": 797,
+              "semantic_comparisons": 878,
+              "store_combinations": 96823,
+              "store_combinations_pruned_infeasible": 39876,
+              "store_contexts_pruned_dominated": 8661,
+              "store_subset_cache_hits": 1931,
+              "store_subset_cache_misses": 69,
+              "store_subsets_avoided_by_dominance": 354755
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.2552304109558463,
+              "collected": 17
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00015873368829488754,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.502349019050598,
+              "collected": 223
+            }
+          ],
+          "process_high_water_kib": 2803008,
+          "sampled_peak_rss_kib": 2453828
+        },
+        {
+          "kind": "case_started",
+          "case": "mixed-meals-new",
+          "epoch": 1793535873.3398788
+        },
+        {
+          "kind": "result",
+          "status": "failed",
+          "error_type": "AttributeError",
+          "error": "'NoneType' object has no attribute 'base_id'",
+          "stack": [
+            "Traceback (most recent call last):",
+            "  File \"/probe/probe.py\", line 120, in main",
+            "    result = await controller.run(str(attempt), lambda: asyncio.to_thread(build, attempt, request))",
+            "             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+            "  File \"/srv/app/backend/app/services/planner_admission.py\", line 146, in run",
+            "    value = await factory()",
+            "            ^^^^^^^^^^^^^^^",
+            "  File \"/usr/local/lib/python3.12/asyncio/threads.py\", line 25, in to_thread",
+            "    return await loop.run_in_executor(None, func_call)",
+            "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+            "  File \"/usr/local/lib/python3.12/concurrent/futures/thread.py\", line 59, in run",
+            "    result = self.fn(*self.args, **self.kwargs)",
+            "             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+            "  File \"/probe/probe.py\", line 92, in build",
+            "    ids = [identity(s.recipe) for s in plan.personal.slots if s.recipe]",
+            "           ^^^^^^^^^^^^^^^^^^",
+            "  File \"/srv/app/backend/app/services/meal_library_content.py\", line 51, in identity",
+            "    return f\"{d.base_id}:{d.version}:{d.variant_id}\"",
+            "              ^^^^^^^^^",
+            "AttributeError: 'NoneType' object has no attribute 'base_id'"
+          ],
+          "attempt": 4,
+          "case": "mixed-meals-new",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 49.06143592391163,
+          "cpu_seconds": 49.045373660999985,
+          "started_epoch": 1793535873.3398788,
+          "finished_epoch": 1793535922.4013174,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 16783.832,
+              "personal_audit": 2.222,
+              "personal_candidate_generation": 2462.824,
+              "personal_candidate_generation_and_qualification": 16937.314,
+              "personal_facts_identity": 2448.023,
+              "personal_memory_reclamation": 2688.14,
+              "personal_nutrition": 116.61,
+              "personal_package_calculation": 16966.17,
+              "personal_product_facts": 6651.989,
+              "personal_week_search": 13910.48,
+              "planner_queue_wait": 0.006
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 1729,
+                "wall_ms": 16783.832,
+                "cpu_ms": 0.0,
+                "average_ms": 9.707,
+                "max_ms": 2555.03
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 2.222,
+                "cpu_ms": 2.224,
+                "average_ms": 2.222,
+                "max_ms": 2.222
+              },
+              "personal_candidate_generation": {
+                "calls": 3,
+                "wall_ms": 2462.824,
+                "cpu_ms": 2461.619,
+                "average_ms": 820.941,
+                "max_ms": 2459.936
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 3,
+                "wall_ms": 16937.314,
+                "cpu_ms": 16931.093,
+                "average_ms": 5645.771,
+                "max_ms": 14412.132
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2448.023,
+                "cpu_ms": 2446.91,
+                "average_ms": 2448.023,
+                "max_ms": 2448.023
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2688.14,
+                "cpu_ms": 2686.479,
+                "average_ms": 1344.07,
+                "max_ms": 2683.383
+              },
+              "personal_nutrition": {
+                "calls": 1719,
+                "wall_ms": 116.61,
+                "cpu_ms": 115.556,
+                "average_ms": 0.068,
+                "max_ms": 2.064
+              },
+              "personal_package_calculation": {
+                "calls": 1730,
+                "wall_ms": 16966.17,
+                "cpu_ms": 16961.676,
+                "average_ms": 9.807,
+                "max_ms": 2555.134
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6651.989,
+                "cpu_ms": 6649.888,
+                "average_ms": 6651.989,
+                "max_ms": 6651.989
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 13910.48,
+                "cpu_ms": 13907.029,
+                "average_ms": 13910.48,
+                "max_ms": 13910.48
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.006,
+                "cpu_ms": 0.006,
+                "average_ms": 0.006,
+                "max_ms": 0.006
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 1730,
+              "cache_hits": 54227,
+              "cache_misses": 125387,
+              "fixed_package_template_hits": 65574,
+              "fixed_package_template_misses": 4086,
+              "menu_search_result_cache_hits": 9,
+              "package_cache_hits": 8413,
+              "package_cache_misses": 93319,
+              "package_calculations": 93319,
+              "per_store_selection_cache_hits": 13369,
+              "per_store_selection_cache_misses": 8597,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 196,
+              "product_match_calculations": 2288,
+              "quote_set_cache_hits": 12616,
+              "quote_set_cache_misses": 8799,
+              "quote_subset_pattern_cache_hits": 8125,
+              "quote_subset_pattern_cache_misses": 3234,
+              "quote_subset_vector_cache_hits": 10045,
+              "quote_subset_vector_cache_misses": 11359,
+              "semantic_candidates_returned": 1881,
+              "semantic_comparisons": 2288,
+              "store_combinations": 107201,
+              "store_combinations_pruned_infeasible": 43714,
+              "store_contexts_pruned_dominated": 6914,
+              "store_subset_cache_hits": 1650,
+              "store_subset_cache_misses": 79,
+              "store_subsets_avoided_by_dominance": 309498
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.8853884479030967,
+              "collected": 287478
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00011767540127038956,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.683059678412974,
+              "collected": 196
+            }
+          ],
+          "process_high_water_kib": 2803008,
+          "measurement_error_after_audit_save_owned_read": true,
+          "sampled_peak_rss_kib": 2546568
+        },
+        {
+          "kind": "sequence_complete",
+          "epoch": 1793535922.401772
+        }
+      ],
+      "stderr": "",
+      "seconds": 349.5234607113525,
+      "sampled_peak_rss_kib": 2764784,
+      "kernel_peak_rss_kib": 2803008,
+      "raw_result_sha256": "80c4a0f6267e78e86e64ecb451e7026bce355b3b9b4dc2b22dd77c511bb59dc9"
+    },
+    {
+      "kind": "run_complete",
+      "run": "B1",
+      "library": "candidate",
+      "exit_code": 0,
+      "rows": [
+        {
+          "kind": "loaded",
+          "seconds": 93.94964687991887,
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+        },
+        {
+          "kind": "pricing_warm",
+          "seconds": 13.225045445375144,
+          "status": "miss_filled"
+        },
+        {
+          "kind": "source_warm",
+          "seconds": 84.28397680353373,
+          "count": 2512,
+          "library_signature": "a1193690b04908622d5da4679fa52b1cdf0a77bb7c8ab750ebeb56556e536efd",
+          "report": {
+            "status": "ready",
+            "universes": [
+              {
+                "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2512,
+                  "portion_views": {
+                    "1": 2512,
+                    "2": 2512,
+                    "3": 2512,
+                    "4": 2512
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 54515,
+                "seconds": 27.849
+              },
+              {
+                "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2512,
+                  "portion_views": {
+                    "1": 2512,
+                    "2": 2512,
+                    "3": 2512,
+                    "4": 2512
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 95998,
+                "seconds": 45.467
+              }
+            ],
+            "library": {
+              "status": "ready",
+              "seconds": 10.944
+            }
+          }
+        },
+        {
+          "kind": "case_started",
+          "case": "italian-prime",
+          "epoch": 1793536127.3757486
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            "smako-italian-spinach-whitebean-ravioli:1.0.0:simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 140,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 140,
+              "retained": 8,
+              "beam_pruned": 132,
+              "evaluations_executed": 140,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 140,
+              "equivalent_pruned": 0
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 343
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.548838881775737,
+            "memory_reclamation": 2.3551001017913222,
+            "package_calculation": 0.9411161243915558,
+            "nutrition": 0.01731826551258564,
+            "candidate_generation_and_qualification": 7.203656891360879,
+            "week_search": 0.34941322077065706,
+            "audit": 0.002019667997956276,
+            "total": 10.02181819267571
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.3264074390754104,
+          "attempt": 1,
+          "case": "italian-prime",
+          "prime": true,
+          "budget_seconds": 60,
+          "seconds": 24.092858185060322,
+          "cpu_seconds": 24.100382951,
+          "started_epoch": 1793536127.3757486,
+          "finished_epoch": 1793536151.4686086,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 917.727,
+              "personal_audit": 1.991,
+              "personal_candidate_generation": 2513.273,
+              "personal_candidate_generation_and_qualification": 7203.629,
+              "personal_facts_identity": 2449.33,
+              "personal_memory_reclamation": 2355.015,
+              "personal_nutrition": 12.656,
+              "personal_package_calculation": 966.939,
+              "personal_product_facts": 6548.751,
+              "personal_week_search": 349.325,
+              "planner_queue_wait": 0.007
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 281,
+                "wall_ms": 917.727,
+                "cpu_ms": 0.0,
+                "average_ms": 3.266,
+                "max_ms": 60.55
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 1.991,
+                "cpu_ms": 1.993,
+                "average_ms": 1.991,
+                "max_ms": 1.991
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2513.273,
+                "cpu_ms": 2512.59,
+                "average_ms": 2513.273,
+                "max_ms": 2513.273
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 7203.629,
+                "cpu_ms": 7201.755,
+                "average_ms": 7203.629,
+                "max_ms": 7203.629
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2449.33,
+                "cpu_ms": 2448.841,
+                "average_ms": 2449.33,
+                "max_ms": 2449.33
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2355.015,
+                "cpu_ms": 2354.536,
+                "average_ms": 1177.508,
+                "max_ms": 2351.435
+              },
+              "personal_nutrition": {
+                "calls": 281,
+                "wall_ms": 12.656,
+                "cpu_ms": 12.559,
+                "average_ms": 0.045,
+                "max_ms": 0.126
+              },
+              "personal_package_calculation": {
+                "calls": 285,
+                "wall_ms": 966.939,
+                "cpu_ms": 966.766,
+                "average_ms": 3.393,
+                "max_ms": 60.769
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6548.751,
+                "cpu_ms": 6546.867,
+                "average_ms": 6548.751,
+                "max_ms": 6548.751
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 349.325,
+                "cpu_ms": 349.28,
+                "average_ms": 349.325,
+                "max_ms": 349.325
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.007,
+                "cpu_ms": 0.007,
+                "average_ms": 0.007,
+                "max_ms": 0.007
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 285,
+              "cache_hits": 7918,
+              "cache_misses": 8361,
+              "fixed_package_template_hits": 2692,
+              "fixed_package_template_misses": 1490,
+              "menu_search_result_cache_hits": 116,
+              "menu_search_result_cache_misses": 1,
+              "package_cache_hits": 424,
+              "package_cache_misses": 5856,
+              "package_calculations": 5856,
+              "per_store_selection_cache_hits": 1394,
+              "per_store_selection_cache_misses": 638,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 1158,
+              "product_match_calculations": 1972,
+              "quote_set_cache_hits": 2679,
+              "quote_set_cache_misses": 638,
+              "quote_subset_pattern_cache_hits": 664,
+              "quote_subset_pattern_cache_misses": 267,
+              "quote_subset_vector_cache_hits": 2386,
+              "quote_subset_vector_cache_misses": 931,
+              "semantic_candidates_returned": 1827,
+              "semantic_comparisons": 1972,
+              "store_combinations": 1663,
+              "store_combinations_pruned_infeasible": 917,
+              "store_contexts_pruned_dominated": 1076,
+              "store_subset_cache_hits": 255,
+              "store_subset_cache_misses": 30,
+              "store_subsets_avoided_by_dominance": 1076
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.3236670857295394,
+              "collected": 711
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00018994230777025223,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.3510185070335865,
+              "collected": 1158
+            }
+          ],
+          "process_high_water_kib": 2806876,
+          "sampled_peak_rss_kib": 2415788
+        },
+        {
+          "kind": "case_started",
+          "case": "italian-repeat",
+          "epoch": 1793536151.46976
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            "smako-italian-spinach-whitebean-ravioli:1.0.0:simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 140,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 140,
+              "retained": 8,
+              "beam_pruned": 132,
+              "evaluations_executed": 140,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 140,
+              "equivalent_pruned": 0
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 343
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.570172326639295,
+            "memory_reclamation": 2.3119418332353234,
+            "package_calculation": 0.8937606466934085,
+            "nutrition": 0.01694523636251688,
+            "candidate_generation_and_qualification": 4.178988927043974,
+            "week_search": 0.33368794713169336,
+            "audit": 0.0011692540720105171,
+            "total": 6.929447454400361
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.426130101084709,
+          "attempt": 2,
+          "case": "italian-repeat",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 21.39070018939674,
+          "cpu_seconds": 21.38360141999999,
+          "started_epoch": 1793536151.46976,
+          "finished_epoch": 1793536172.8604612,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 871.966,
+              "personal_audit": 1.149,
+              "personal_candidate_generation": 2511.161,
+              "personal_candidate_generation_and_qualification": 4178.968,
+              "personal_facts_identity": 2581.499,
+              "personal_memory_reclamation": 2311.877,
+              "personal_nutrition": 12.418,
+              "personal_package_calculation": 913.94,
+              "personal_product_facts": 6570.078,
+              "personal_week_search": 333.619,
+              "planner_queue_wait": 0.011
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 281,
+                "wall_ms": 871.966,
+                "cpu_ms": 0.0,
+                "average_ms": 3.103,
+                "max_ms": 47.944
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 1.149,
+                "cpu_ms": 1.151,
+                "average_ms": 1.149,
+                "max_ms": 1.149
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2511.161,
+                "cpu_ms": 2510.294,
+                "average_ms": 2511.161,
+                "max_ms": 2511.161
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 4178.968,
+                "cpu_ms": 4177.758,
+                "average_ms": 4178.968,
+                "max_ms": 4178.968
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2581.499,
+                "cpu_ms": 2580.788,
+                "average_ms": 2581.499,
+                "max_ms": 2581.499
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2311.877,
+                "cpu_ms": 2311.231,
+                "average_ms": 1155.939,
+                "max_ms": 2309.272
+              },
+              "personal_nutrition": {
+                "calls": 281,
+                "wall_ms": 12.418,
+                "cpu_ms": 12.293,
+                "average_ms": 0.044,
+                "max_ms": 0.141
+              },
+              "personal_package_calculation": {
+                "calls": 285,
+                "wall_ms": 913.94,
+                "cpu_ms": 913.779,
+                "average_ms": 3.207,
+                "max_ms": 48.25
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6570.078,
+                "cpu_ms": 6567.022,
+                "average_ms": 6570.078,
+                "max_ms": 6570.078
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 333.619,
+                "cpu_ms": 333.585,
+                "average_ms": 333.619,
+                "max_ms": 333.619
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.011,
+                "cpu_ms": 0.012,
+                "average_ms": 0.011,
+                "max_ms": 0.011
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 285,
+              "cache_hits": 7802,
+              "cache_misses": 8360,
+              "fixed_package_template_hits": 2692,
+              "fixed_package_template_misses": 1490,
+              "package_cache_hits": 424,
+              "package_cache_misses": 5856,
+              "package_calculations": 5856,
+              "per_store_selection_cache_hits": 1394,
+              "per_store_selection_cache_misses": 638,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 1131,
+              "quote_set_cache_hits": 2679,
+              "quote_set_cache_misses": 638,
+              "quote_subset_pattern_cache_hits": 664,
+              "quote_subset_pattern_cache_misses": 267,
+              "quote_subset_vector_cache_hits": 2386,
+              "quote_subset_vector_cache_misses": 931,
+              "store_combinations": 1663,
+              "store_combinations_pruned_infeasible": 917,
+              "store_contexts_pruned_dominated": 1076,
+              "store_subset_cache_hits": 255,
+              "store_subset_cache_misses": 30,
+              "store_subsets_avoided_by_dominance": 1076
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.425725005567074,
+              "collected": 43
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00012375600636005402,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.308767349459231,
+              "collected": 1131
+            }
+          ],
+          "process_high_water_kib": 2806876,
+          "sampled_peak_rss_kib": 2416176
+        },
+        {
+          "kind": "case_started",
+          "case": "three-dinners-new",
+          "epoch": 1793536172.8612473
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 182.39,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96",
+          "recipes": [
+            "smako-dinner-potato-tofu-cabbage-pan:1.0.0:base",
+            "smako-greek-mushroom-feta-stuffed-potatoes:1.0.0:simple",
+            "smako-intake-roesti:1.0.0:6e8c5a64-simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "names": [
+            "Potatispanna med tofu och mjuk kål",
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Rårakor med keso och varm rödbeta – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 231,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 841
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 769,
+              "constraints_rejected": 538,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 3098,
+              "constraints_rejected": 3303,
+              "evaluation_rejected": 0,
+              "priced": 1142,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 1143,
+              "evaluation_cache_hits": 32,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.1010591872036457,
+              "first_valid_request_seconds": 32.998072874732316,
+              "first_valid_cost": "324.54",
+              "full_candidates": 1142,
+              "improvements": 8,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2523,
+              "anchors_total": 841,
+              "anchors_considered": 231,
+              "exchange_restarts": 6,
+              "max_full_evaluation_seconds": 0.07553661242127419,
+              "search_seconds": 15.10311373975128,
+              "anchors_deferred": 610,
+              "candidate_options_total": 2523,
+              "candidate_options_considered": 1920,
+              "candidate_options_deferred": 603,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1573,
+              "compact_seen_bytes": 785349,
+              "best_search_cost": "182.39"
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 2049
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.645343546755612,
+            "memory_reclamation": 2.685982341878116,
+            "package_calculation": 16.7299887239933,
+            "nutrition": 0.20363438874483109,
+            "candidate_generation_and_qualification": 16.248759990558028,
+            "week_search": 15.130124648101628,
+            "audit": 0.00363372266292572,
+            "total": 34.38734105974436
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.368940700776875,
+          "attempt": 3,
+          "case": "three-dinners-new",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 49.028600444085896,
+          "cpu_seconds": 49.00753633000002,
+          "started_epoch": 1793536172.8612473,
+          "finished_epoch": 1793536221.8898504,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 16517.561,
+              "personal_audit": 3.607,
+              "personal_candidate_generation": 2544.673,
+              "personal_candidate_generation_and_qualification": 16248.729,
+              "personal_facts_identity": 2447.426,
+              "personal_memory_reclamation": 2685.908,
+              "personal_nutrition": 166.444,
+              "personal_package_calculation": 16702.409,
+              "personal_product_facts": 6645.267,
+              "personal_week_search": 15130.022,
+              "planner_queue_wait": 0.006
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 1984,
+                "wall_ms": 16517.561,
+                "cpu_ms": 0.0,
+                "average_ms": 8.325,
+                "max_ms": 2649.51
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 3.607,
+                "cpu_ms": 3.61,
+                "average_ms": 3.607,
+                "max_ms": 3.607
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2544.673,
+                "cpu_ms": 2543.973,
+                "average_ms": 2544.673,
+                "max_ms": 2544.673
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 16248.729,
+                "cpu_ms": 16242.155,
+                "average_ms": 16248.729,
+                "max_ms": 16248.729
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2447.426,
+                "cpu_ms": 2446.815,
+                "average_ms": 2447.426,
+                "max_ms": 2447.426
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2685.908,
+                "cpu_ms": 2682.575,
+                "average_ms": 1342.954,
+                "max_ms": 2682.907
+              },
+              "personal_nutrition": {
+                "calls": 1984,
+                "wall_ms": 166.444,
+                "cpu_ms": 165.111,
+                "average_ms": 0.084,
+                "max_ms": 3.492
+              },
+              "personal_package_calculation": {
+                "calls": 1985,
+                "wall_ms": 16702.409,
+                "cpu_ms": 16692.556,
+                "average_ms": 8.414,
+                "max_ms": 2649.597
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6645.267,
+                "cpu_ms": 6643.626,
+                "average_ms": 6645.267,
+                "max_ms": 6645.267
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 15130.022,
+                "cpu_ms": 15122.491,
+                "average_ms": 15130.022,
+                "max_ms": 15130.022
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.006,
+                "cpu_ms": 0.006,
+                "average_ms": 0.006,
+                "max_ms": 0.006
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 1985,
+              "cache_hits": 68007,
+              "cache_misses": 144433,
+              "fixed_package_template_hits": 72515,
+              "fixed_package_template_misses": 2843,
+              "menu_search_result_cache_hits": 252,
+              "package_cache_hits": 6137,
+              "package_cache_misses": 101109,
+              "package_calculations": 101109,
+              "per_store_selection_cache_hits": 19177,
+              "per_store_selection_cache_misses": 11559,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 223,
+              "product_match_calculations": 878,
+              "quote_set_cache_hits": 16657,
+              "quote_set_cache_misses": 11712,
+              "quote_subset_pattern_cache_hits": 10982,
+              "quote_subset_pattern_cache_misses": 4501,
+              "quote_subset_vector_cache_hits": 12886,
+              "quote_subset_vector_cache_misses": 15483,
+              "semantic_candidates_returned": 797,
+              "semantic_comparisons": 878,
+              "store_combinations": 95760,
+              "store_combinations_pruned_infeasible": 39410,
+              "store_contexts_pruned_dominated": 8583,
+              "store_subset_cache_hits": 1916,
+              "store_subset_cache_misses": 69,
+              "store_subsets_avoided_by_dominance": 350756
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.368204053491354,
+              "collected": 43
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00011919718235731125,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.682282372377813,
+              "collected": 223
+            }
+          ],
+          "process_high_water_kib": 2806876,
+          "sampled_peak_rss_kib": 2460932
+        },
+        {
+          "kind": "case_started",
+          "case": "mixed-meals-new",
+          "epoch": 1793536221.890849
+        },
+        {
+          "kind": "result",
+          "status": "failed",
+          "error_type": "AttributeError",
+          "error": "'NoneType' object has no attribute 'base_id'",
+          "stack": [
+            "Traceback (most recent call last):",
+            "  File \"/probe/probe.py\", line 120, in main",
+            "    try:",
+            "         ",
+            "  File \"/srv/app/backend/app/services/planner_admission.py\", line 146, in run",
+            "    value = await factory()",
+            "            ^^^^^^^^^^^^^^^",
+            "  File \"/usr/local/lib/python3.12/asyncio/threads.py\", line 25, in to_thread",
+            "    return await loop.run_in_executor(None, func_call)",
+            "           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+            "  File \"/usr/local/lib/python3.12/concurrent/futures/thread.py\", line 59, in run",
+            "    result = self.fn(*self.args, **self.kwargs)",
+            "             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+            "  File \"/probe/probe.py\", line 92, in build",
+            "    ids = [identity(s.recipe) for s in plan.personal.slots if s.recipe and s.recipe.design]",
+            "           ^^^^^^^^^^^^^^^^^^",
+            "  File \"/srv/app/backend/app/services/meal_library_content.py\", line 51, in identity",
+            "    return f\"{d.base_id}:{d.version}:{d.variant_id}\"",
+            "              ^^^^^^^^^",
+            "AttributeError: 'NoneType' object has no attribute 'base_id'"
+          ],
+          "attempt": 4,
+          "case": "mixed-meals-new",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 48.97978086862713,
+          "cpu_seconds": 48.961351193999974,
+          "started_epoch": 1793536221.890849,
+          "finished_epoch": 1793536270.870631,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 17041.235,
+              "personal_audit": 2.204,
+              "personal_candidate_generation": 2604.27,
+              "personal_candidate_generation_and_qualification": 16255.681,
+              "personal_facts_identity": 2452.478,
+              "personal_memory_reclamation": 2584.74,
+              "personal_nutrition": 122.325,
+              "personal_package_calculation": 17225.175,
+              "personal_product_facts": 6632.685,
+              "personal_week_search": 14668.275,
+              "planner_queue_wait": 0.007
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 1823,
+                "wall_ms": 17041.235,
+                "cpu_ms": 0.0,
+                "average_ms": 9.348,
+                "max_ms": 2528.229
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 2.204,
+                "cpu_ms": 2.206,
+                "average_ms": 2.204,
+                "max_ms": 2.204
+              },
+              "personal_candidate_generation": {
+                "calls": 3,
+                "wall_ms": 2604.27,
+                "cpu_ms": 2603.521,
+                "average_ms": 868.09,
+                "max_ms": 2602.312
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 3,
+                "wall_ms": 16255.681,
+                "cpu_ms": 16250.424,
+                "average_ms": 5418.56,
+                "max_ms": 13948.176
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2452.478,
+                "cpu_ms": 2451.52,
+                "average_ms": 2452.478,
+                "max_ms": 2452.478
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2584.74,
+                "cpu_ms": 2583.874,
+                "average_ms": 1292.37,
+                "max_ms": 2580.099
+              },
+              "personal_nutrition": {
+                "calls": 1813,
+                "wall_ms": 122.325,
+                "cpu_ms": 121.093,
+                "average_ms": 0.067,
+                "max_ms": 4.118
+              },
+              "personal_package_calculation": {
+                "calls": 1824,
+                "wall_ms": 17225.175,
+                "cpu_ms": 17220.543,
+                "average_ms": 9.444,
+                "max_ms": 2528.286
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6632.685,
+                "cpu_ms": 6629.356,
+                "average_ms": 6632.685,
+                "max_ms": 6632.685
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 14668.275,
+                "cpu_ms": 14662.697,
+                "average_ms": 14668.275,
+                "max_ms": 14668.275
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.007,
+                "cpu_ms": 0.007,
+                "average_ms": 0.007,
+                "max_ms": 0.007
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 1824,
+              "cache_hits": 57565,
+              "cache_misses": 136839,
+              "fixed_package_template_hits": 72244,
+              "fixed_package_template_misses": 4094,
+              "menu_search_result_cache_hits": 9,
+              "package_cache_hits": 9009,
+              "package_cache_misses": 102295,
+              "package_calculations": 102295,
+              "per_store_selection_cache_hits": 14184,
+              "per_store_selection_cache_misses": 9289,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 196,
+              "product_match_calculations": 2288,
+              "quote_set_cache_hits": 13286,
+              "quote_set_cache_misses": 9525,
+              "quote_subset_pattern_cache_hits": 8723,
+              "quote_subset_pattern_cache_misses": 3464,
+              "quote_subset_vector_cache_hits": 10610,
+              "quote_subset_vector_cache_misses": 12187,
+              "semantic_candidates_returned": 1881,
+              "semantic_comparisons": 2288,
+              "store_combinations": 114651,
+              "store_combinations_pruned_infeasible": 46932,
+              "store_contexts_pruned_dominated": 7317,
+              "store_subset_cache_hits": 1744,
+              "store_subset_cache_misses": 79,
+              "store_subsets_avoided_by_dominance": 329712
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.857589681632817,
+              "collected": 289211
+            },
+            {
+              "generation": 1,
+              "seconds": 0.0001310901716351509,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.5798035729676485,
+              "collected": 196
+            }
+          ],
+          "process_high_water_kib": 2806876,
+          "measurement_error_after_audit_save_owned_read": true,
+          "sampled_peak_rss_kib": 2521268
+        },
+        {
+          "kind": "sequence_complete",
+          "epoch": 1793536270.8709662
+        }
+      ],
+      "stderr": "",
+      "seconds": 348.2811534209177,
+      "sampled_peak_rss_kib": 2779008,
+      "kernel_peak_rss_kib": 2806876,
+      "raw_result_sha256": "2f88188b3ac01a6abf0ff6fcdfd46529be3aebb6e17e06857ff29eb07c7b8a7c"
+    },
+    {
+      "kind": "run_complete",
+      "run": "B2",
+      "library": "candidate",
+      "exit_code": 0,
+      "rows": [
+        {
+          "kind": "loaded",
+          "seconds": 93.76530939061195,
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+        },
+        {
+          "kind": "pricing_warm",
+          "seconds": 13.038508661091328,
+          "status": "miss_filled"
+        },
+        {
+          "kind": "source_warm",
+          "seconds": 88.3633473534137,
+          "count": 2512,
+          "library_signature": "a1193690b04908622d5da4679fa52b1cdf0a77bb7c8ab750ebeb56556e536efd",
+          "report": {
+            "status": "ready",
+            "universes": [
+              {
+                "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2512,
+                  "portion_views": {
+                    "1": 2512,
+                    "2": 2512,
+                    "3": 2512,
+                    "4": 2512
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 54515,
+                "seconds": 28.286
+              },
+              {
+                "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2512,
+                  "portion_views": {
+                    "1": 2512,
+                    "2": 2512,
+                    "3": 2512,
+                    "4": 2512
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 95998,
+                "seconds": 48.281
+              }
+            ],
+            "library": {
+              "status": "ready",
+              "seconds": 11.771
+            }
+          }
+        },
+        {
+          "kind": "case_started",
+          "case": "italian-prime",
+          "epoch": 1793536479.5445688
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            "smako-italian-spinach-whitebean-ravioli:1.0.0:simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "non_library_recipe_count": 0,
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 140,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 140,
+              "retained": 8,
+              "beam_pruned": 132,
+              "evaluations_executed": 140,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 140,
+              "equivalent_pruned": 0
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 343
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.601839586161077,
+            "memory_reclamation": 2.426638019271195,
+            "package_calculation": 0.9489378118887544,
+            "nutrition": 0.01708725281059742,
+            "candidate_generation_and_qualification": 7.318462850525975,
+            "week_search": 0.32065694872289896,
+            "audit": 0.0015953388065099716,
+            "total": 10.17020192462951
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.198677239008248,
+          "attempt": 1,
+          "case": "italian-prime",
+          "prime": true,
+          "budget_seconds": 60,
+          "seconds": 24.194967082701623,
+          "cpu_seconds": 24.202696118999995,
+          "started_epoch": 1793536479.5445688,
+          "finished_epoch": 1793536503.7395425,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 926.991,
+              "personal_audit": 1.572,
+              "personal_candidate_generation": 2565.262,
+              "personal_candidate_generation_and_qualification": 7318.437,
+              "personal_facts_identity": 2548.867,
+              "personal_memory_reclamation": 2426.547,
+              "personal_nutrition": 12.401,
+              "personal_package_calculation": 973.736,
+              "personal_product_facts": 6601.758,
+              "personal_week_search": 320.584,
+              "planner_queue_wait": 0.01
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 281,
+                "wall_ms": 926.991,
+                "cpu_ms": 0.0,
+                "average_ms": 3.299,
+                "max_ms": 69.472
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 1.572,
+                "cpu_ms": 1.574,
+                "average_ms": 1.572,
+                "max_ms": 1.572
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2565.262,
+                "cpu_ms": 2564.658,
+                "average_ms": 2565.262,
+                "max_ms": 2565.262
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 7318.437,
+                "cpu_ms": 7316.748,
+                "average_ms": 7318.437,
+                "max_ms": 7318.437
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2548.867,
+                "cpu_ms": 2548.166,
+                "average_ms": 2548.867,
+                "max_ms": 2548.867
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2426.547,
+                "cpu_ms": 2426.124,
+                "average_ms": 1213.273,
+                "max_ms": 2423.079
+              },
+              "personal_nutrition": {
+                "calls": 281,
+                "wall_ms": 12.401,
+                "cpu_ms": 12.261,
+                "average_ms": 0.044,
+                "max_ms": 0.122
+              },
+              "personal_package_calculation": {
+                "calls": 285,
+                "wall_ms": 973.736,
+                "cpu_ms": 973.35,
+                "average_ms": 3.417,
+                "max_ms": 69.832
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6601.758,
+                "cpu_ms": 6600.263,
+                "average_ms": 6601.758,
+                "max_ms": 6601.758
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 320.584,
+                "cpu_ms": 320.455,
+                "average_ms": 320.584,
+                "max_ms": 320.584
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.01,
+                "cpu_ms": 0.009,
+                "average_ms": 0.01,
+                "max_ms": 0.01
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 285,
+              "cache_hits": 7918,
+              "cache_misses": 8361,
+              "fixed_package_template_hits": 2692,
+              "fixed_package_template_misses": 1490,
+              "menu_search_result_cache_hits": 116,
+              "menu_search_result_cache_misses": 1,
+              "package_cache_hits": 424,
+              "package_cache_misses": 5856,
+              "package_calculations": 5856,
+              "per_store_selection_cache_hits": 1394,
+              "per_store_selection_cache_misses": 638,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 1158,
+              "product_match_calculations": 1972,
+              "quote_set_cache_hits": 2679,
+              "quote_set_cache_misses": 638,
+              "quote_subset_pattern_cache_hits": 664,
+              "quote_subset_pattern_cache_misses": 267,
+              "quote_subset_vector_cache_hits": 2386,
+              "quote_subset_vector_cache_misses": 931,
+              "semantic_candidates_returned": 1827,
+              "semantic_comparisons": 1972,
+              "store_combinations": 1663,
+              "store_combinations_pruned_infeasible": 917,
+              "store_contexts_pruned_dominated": 1076,
+              "store_subset_cache_hits": 255,
+              "store_subset_cache_misses": 30,
+              "store_subsets_avoided_by_dominance": 1076
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.1965647721663117,
+              "collected": 711
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00018605496734380722,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.4226653203368187,
+              "collected": 1158
+            }
+          ],
+          "process_high_water_kib": 2806180,
+          "sampled_peak_rss_kib": 2414712
+        },
+        {
+          "kind": "case_started",
+          "case": "italian-repeat",
+          "epoch": 1793536503.7410934
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            "smako-italian-spinach-whitebean-ravioli:1.0.0:simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "non_library_recipe_count": 0,
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 140,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 140,
+              "retained": 8,
+              "beam_pruned": 132,
+              "evaluations_executed": 140,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 140,
+              "equivalent_pruned": 0
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 343
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.737179611809552,
+            "memory_reclamation": 2.56464503146708,
+            "package_calculation": 0.9300214350223541,
+            "nutrition": 0.01724015176296234,
+            "candidate_generation_and_qualification": 4.437639469280839,
+            "week_search": 0.32188256084918976,
+            "audit": 0.0015621939674019814,
+            "total": 7.447857326827943
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.3288084231317043,
+          "attempt": 2,
+          "case": "italian-repeat",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 21.832624468952417,
+          "cpu_seconds": 21.82430248099999,
+          "started_epoch": 1793536503.7410934,
+          "finished_epoch": 1793536525.5737152,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 907.061,
+              "personal_audit": 1.503,
+              "personal_candidate_generation": 2638.134,
+              "personal_candidate_generation_and_qualification": 4437.597,
+              "personal_facts_identity": 2562.762,
+              "personal_memory_reclamation": 2564.563,
+              "personal_nutrition": 12.672,
+              "personal_package_calculation": 951.55,
+              "personal_product_facts": 6737.096,
+              "personal_week_search": 321.773,
+              "planner_queue_wait": 0.015
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 281,
+                "wall_ms": 907.061,
+                "cpu_ms": 0.0,
+                "average_ms": 3.228,
+                "max_ms": 50.425
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 1.503,
+                "cpu_ms": 1.527,
+                "average_ms": 1.503,
+                "max_ms": 1.503
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2638.134,
+                "cpu_ms": 2637.296,
+                "average_ms": 2638.134,
+                "max_ms": 2638.134
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 4437.597,
+                "cpu_ms": 4436.171,
+                "average_ms": 4437.597,
+                "max_ms": 4437.597
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2562.762,
+                "cpu_ms": 2561.97,
+                "average_ms": 2562.762,
+                "max_ms": 2562.762
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2564.563,
+                "cpu_ms": 2563.946,
+                "average_ms": 1282.281,
+                "max_ms": 2561.522
+              },
+              "personal_nutrition": {
+                "calls": 281,
+                "wall_ms": 12.672,
+                "cpu_ms": 12.542,
+                "average_ms": 0.045,
+                "max_ms": 0.127
+              },
+              "personal_package_calculation": {
+                "calls": 285,
+                "wall_ms": 951.55,
+                "cpu_ms": 951.192,
+                "average_ms": 3.339,
+                "max_ms": 50.737
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6737.096,
+                "cpu_ms": 6732.759,
+                "average_ms": 6737.096,
+                "max_ms": 6737.096
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 321.773,
+                "cpu_ms": 321.661,
+                "average_ms": 321.773,
+                "max_ms": 321.773
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.015,
+                "cpu_ms": 0.015,
+                "average_ms": 0.015,
+                "max_ms": 0.015
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 285,
+              "cache_hits": 7802,
+              "cache_misses": 8360,
+              "fixed_package_template_hits": 2692,
+              "fixed_package_template_misses": 1490,
+              "package_cache_hits": 424,
+              "package_cache_misses": 5856,
+              "package_calculations": 5856,
+              "per_store_selection_cache_hits": 1394,
+              "per_store_selection_cache_misses": 638,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 1131,
+              "quote_set_cache_hits": 2679,
+              "quote_set_cache_misses": 638,
+              "quote_subset_pattern_cache_hits": 664,
+              "quote_subset_pattern_cache_misses": 267,
+              "quote_subset_vector_cache_hits": 2386,
+              "quote_subset_vector_cache_misses": 931,
+              "store_combinations": 1663,
+              "store_combinations_pruned_infeasible": 917,
+              "store_contexts_pruned_dominated": 1076,
+              "store_subset_cache_hits": 255,
+              "store_subset_cache_misses": 30,
+              "store_subsets_avoided_by_dominance": 1076
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.3282632706686854,
+              "collected": 43
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00015867315232753754,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.5609860392287374,
+              "collected": 1131
+            }
+          ],
+          "process_high_water_kib": 2806180,
+          "sampled_peak_rss_kib": 2414184
+        },
+        {
+          "kind": "case_started",
+          "case": "three-dinners-new",
+          "epoch": 1793536525.5746155
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 182.39,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96",
+          "recipes": [
+            "smako-dinner-potato-tofu-cabbage-pan:1.0.0:base",
+            "smako-greek-mushroom-feta-stuffed-potatoes:1.0.0:simple",
+            "smako-intake-roesti:1.0.0:6e8c5a64-simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "non_library_recipe_count": 0,
+          "names": [
+            "Potatispanna med tofu och mjuk kål",
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Rårakor med keso och varm rödbeta – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 226,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 841
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 753,
+              "constraints_rejected": 527,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 3065,
+              "constraints_rejected": 3265,
+              "evaluation_rejected": 0,
+              "priced": 1117,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 1118,
+              "evaluation_cache_hits": 32,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.0890910504385829,
+              "first_valid_request_seconds": 33.70370751712471,
+              "first_valid_cost": "324.54",
+              "full_candidates": 1117,
+              "improvements": 8,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2523,
+              "anchors_total": 841,
+              "anchors_considered": 226,
+              "exchange_restarts": 6,
+              "max_full_evaluation_seconds": 0.07391804084181786,
+              "search_seconds": 14.389828170649707,
+              "anchors_deferred": 615,
+              "candidate_options_total": 2523,
+              "candidate_options_considered": 1887,
+              "candidate_options_deferred": 636,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1538,
+              "compact_seen_bytes": 770074,
+              "best_search_cost": "182.39"
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 2049
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.7471863105893135,
+            "memory_reclamation": 2.5750126000493765,
+            "package_calculation": 16.507780820131302,
+            "nutrition": 0.197910001501441,
+            "candidate_generation_and_qualification": 16.70293666701764,
+            "week_search": 14.4164128433913,
+            "audit": 0.0028477609157562256,
+            "total": 34.0142449401319
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.4048112463206053,
+          "attempt": 3,
+          "case": "three-dinners-new",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 49.02810365334153,
+          "cpu_seconds": 49.016238138999995,
+          "started_epoch": 1793536525.5746155,
+          "finished_epoch": 1793536574.6027215,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 16296.798,
+              "personal_audit": 2.824,
+              "personal_candidate_generation": 2625.18,
+              "personal_candidate_generation_and_qualification": 16702.907,
+              "personal_facts_identity": 2488.22,
+              "personal_memory_reclamation": 2574.937,
+              "personal_nutrition": 160.736,
+              "personal_package_calculation": 16471.0,
+              "personal_product_facts": 6747.101,
+              "personal_week_search": 14416.316,
+              "planner_queue_wait": 0.007
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 1959,
+                "wall_ms": 16296.798,
+                "cpu_ms": 0.0,
+                "average_ms": 8.319,
+                "max_ms": 2742.844
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 2.824,
+                "cpu_ms": 2.826,
+                "average_ms": 2.824,
+                "max_ms": 2.824
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2625.18,
+                "cpu_ms": 2624.128,
+                "average_ms": 2625.18,
+                "max_ms": 2625.18
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 16702.907,
+                "cpu_ms": 16699.124,
+                "average_ms": 16702.907,
+                "max_ms": 16702.907
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2488.22,
+                "cpu_ms": 2487.508,
+                "average_ms": 2488.22,
+                "max_ms": 2488.22
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2574.937,
+                "cpu_ms": 2574.472,
+                "average_ms": 1287.469,
+                "max_ms": 2571.896
+              },
+              "personal_nutrition": {
+                "calls": 1959,
+                "wall_ms": 160.736,
+                "cpu_ms": 159.401,
+                "average_ms": 0.082,
+                "max_ms": 3.483
+              },
+              "personal_package_calculation": {
+                "calls": 1960,
+                "wall_ms": 16471.0,
+                "cpu_ms": 16468.734,
+                "average_ms": 8.404,
+                "max_ms": 2742.937
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6747.101,
+                "cpu_ms": 6745.115,
+                "average_ms": 6747.101,
+                "max_ms": 6747.101
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 14416.316,
+                "cpu_ms": 14413.669,
+                "average_ms": 14416.316,
+                "max_ms": 14416.316
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.007,
+                "cpu_ms": 0.007,
+                "average_ms": 0.007,
+                "max_ms": 0.007
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 1959,
+              "cache_hits": 66848,
+              "cache_misses": 141703,
+              "fixed_package_template_hits": 71158,
+              "fixed_package_template_misses": 2836,
+              "menu_search_result_cache_hits": 252,
+              "package_cache_hits": 5961,
+              "package_cache_misses": 99321,
+              "package_calculations": 99321,
+              "per_store_selection_cache_hits": 18777,
+              "per_store_selection_cache_misses": 11315,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 223,
+              "product_match_calculations": 878,
+              "quote_set_cache_hits": 16433,
+              "quote_set_cache_misses": 11469,
+              "quote_subset_pattern_cache_hits": 10795,
+              "quote_subset_pattern_cache_misses": 4367,
+              "quote_subset_vector_cache_hits": 12740,
+              "quote_subset_vector_cache_misses": 15162,
+              "semantic_candidates_returned": 797,
+              "semantic_comparisons": 878,
+              "store_combinations": 94014,
+              "store_combinations_pruned_infeasible": 38481,
+              "store_contexts_pruned_dominated": 8463,
+              "store_subset_cache_hits": 1890,
+              "store_subset_cache_misses": 69,
+              "store_subsets_avoided_by_dominance": 344852
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.4044473515823483,
+              "collected": 43
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00013795401901006699,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.571288234554231,
+              "collected": 223
+            }
+          ],
+          "process_high_water_kib": 2806180,
+          "sampled_peak_rss_kib": 2450120
+        },
+        {
+          "kind": "case_started",
+          "case": "mixed-meals-new",
+          "epoch": 1793536574.6034417
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 112.64,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "0585a2eb860713077a537de3c73e2aa0428ff1d6326e64531eb252eca0acd350",
+          "recipes": [
+            "smako-intake-roesti:1.0.0:6e8c5a64-simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "non_library_recipe_count": 2,
+          "names": [
+            "Rårakor med keso och varm rödbeta – enkel",
+            "Naturell kvarg med bröd",
+            "Naturell kvarg"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 306,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 841
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 306,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 306,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 925,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 926,
+              "evaluation_cache_hits": 14,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.09018627181649208,
+              "first_valid_request_seconds": 34.01588889025152,
+              "first_valid_cost": "133.25",
+              "full_candidates": 925,
+              "improvements": 3,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 851,
+              "anchors_total": 841,
+              "anchors_considered": 306,
+              "exchange_restarts": 3,
+              "max_full_evaluation_seconds": 0.12062121368944645,
+              "search_seconds": 14.07743789628148,
+              "anchors_deferred": 535,
+              "candidate_options_total": 851,
+              "candidate_options_considered": 708,
+              "candidate_options_deferred": 143,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 926,
+              "compact_seen_bytes": 545527,
+              "best_search_cost": "112.64"
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 2049
+            },
+            {
+              "meal_type": "breakfast",
+              "raw": 5
+            },
+            {
+              "meal_type": "snack",
+              "raw": 5
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.63636854942888,
+            "memory_reclamation": 2.587770606391132,
+            "package_calculation": 17.08734069019556,
+            "nutrition": 0.15588866919279099,
+            "candidate_generation_and_qualification": 16.76738603413105,
+            "week_search": 14.099205858074129,
+            "audit": 0.0023639770224690437,
+            "total": 33.768314806744456
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.794552802108228,
+          "attempt": 4,
+          "case": "mixed-meals-new",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 49.00964002776891,
+          "cpu_seconds": 49.002934711999956,
+          "started_epoch": 1793536574.6034417,
+          "finished_epoch": 1793536623.6130836,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 16890.538,
+              "personal_audit": 2.337,
+              "personal_candidate_generation": 2649.736,
+              "personal_candidate_generation_and_qualification": 16767.303,
+              "personal_facts_identity": 2506.253,
+              "personal_memory_reclamation": 2587.689,
+              "personal_nutrition": 123.059,
+              "personal_package_calculation": 17071.974,
+              "personal_product_facts": 6636.293,
+              "personal_week_search": 14099.097,
+              "planner_queue_wait": 0.006
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 1777,
+                "wall_ms": 16890.538,
+                "cpu_ms": 0.0,
+                "average_ms": 9.505,
+                "max_ms": 2531.717
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 2.337,
+                "cpu_ms": 2.339,
+                "average_ms": 2.337,
+                "max_ms": 2.337
+              },
+              "personal_candidate_generation": {
+                "calls": 3,
+                "wall_ms": 2649.736,
+                "cpu_ms": 2649.089,
+                "average_ms": 883.245,
+                "max_ms": 2647.693
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 3,
+                "wall_ms": 16767.303,
+                "cpu_ms": 16762.02,
+                "average_ms": 5589.101,
+                "max_ms": 14491.942
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2506.253,
+                "cpu_ms": 2505.55,
+                "average_ms": 2506.253,
+                "max_ms": 2506.253
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2587.689,
+                "cpu_ms": 2586.761,
+                "average_ms": 1293.844,
+                "max_ms": 2580.94
+              },
+              "personal_nutrition": {
+                "calls": 1767,
+                "wall_ms": 123.059,
+                "cpu_ms": 121.823,
+                "average_ms": 0.07,
+                "max_ms": 4.735
+              },
+              "personal_package_calculation": {
+                "calls": 1778,
+                "wall_ms": 17071.974,
+                "cpu_ms": 17065.019,
+                "average_ms": 9.602,
+                "max_ms": 2531.776
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6636.293,
+                "cpu_ms": 6634.71,
+                "average_ms": 6636.293,
+                "max_ms": 6636.293
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 14099.097,
+                "cpu_ms": 14089.15,
+                "average_ms": 14099.097,
+                "max_ms": 14099.097
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.006,
+                "cpu_ms": 0.006,
+                "average_ms": 0.006,
+                "max_ms": 0.006
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 1778,
+              "cache_hits": 55683,
+              "cache_misses": 131666,
+              "fixed_package_template_hits": 69471,
+              "fixed_package_template_misses": 4094,
+              "menu_search_result_cache_hits": 9,
+              "package_cache_hits": 8455,
+              "package_cache_misses": 98439,
+              "package_calculations": 98439,
+              "per_store_selection_cache_hits": 13816,
+              "per_store_selection_cache_misses": 8901,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 196,
+              "product_match_calculations": 2288,
+              "quote_set_cache_hits": 12980,
+              "quote_set_cache_misses": 9119,
+              "quote_subset_pattern_cache_hits": 8378,
+              "quote_subset_pattern_cache_misses": 3375,
+              "quote_subset_vector_cache_hits": 10346,
+              "quote_subset_vector_cache_misses": 11753,
+              "semantic_candidates_returned": 1881,
+              "semantic_comparisons": 2288,
+              "store_combinations": 110778,
+              "store_combinations_pruned_infeasible": 45233,
+              "store_contexts_pruned_dominated": 7137,
+              "store_subset_cache_hits": 1699,
+              "store_subset_cache_misses": 79,
+              "store_subsets_avoided_by_dominance": 320682
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.7941612722352147,
+              "collected": 287985
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00015400443226099014,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.5802833791822195,
+              "collected": 196
+            }
+          ],
+          "process_high_water_kib": 2806180,
+          "sampled_peak_rss_kib": 2578052
+        },
+        {
+          "kind": "sequence_complete",
+          "epoch": 1793536623.6134698
+        }
+      ],
+      "stderr": "",
+      "seconds": 352.2870357129723,
+      "sampled_peak_rss_kib": 2803880,
+      "kernel_peak_rss_kib": 2806180,
+      "raw_result_sha256": "523b1a51379a74a66cc00b6d3971ff2424605f5496369c12637bb1f2e434393e"
+    },
+    {
+      "kind": "run_complete",
+      "run": "A2",
+      "library": "baseline",
+      "exit_code": 0,
+      "rows": [
+        {
+          "kind": "loaded",
+          "seconds": 94.14282369241118,
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+        },
+        {
+          "kind": "pricing_warm",
+          "seconds": 12.837298713624477,
+          "status": "miss_filled"
+        },
+        {
+          "kind": "source_warm",
+          "seconds": 85.78206706792116,
+          "count": 2462,
+          "library_signature": "68a142625914bdeae7d03d1d41d76f7a440ae2ab1239d2f31e2e4ebc435f3516",
+          "report": {
+            "status": "ready",
+            "universes": [
+              {
+                "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 54515,
+                "seconds": 28.166
+              },
+              {
+                "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+                "shared_preparation": {
+                  "ready": true,
+                  "content_variants": 2462,
+                  "portion_views": {
+                    "1": 2462,
+                    "2": 2462,
+                    "3": 2462,
+                    "4": 2462
+                  },
+                  "persistence_failures": 0
+                },
+                "status": "ready",
+                "fact_rows": 95998,
+                "seconds": 46.501
+              }
+            ],
+            "library": {
+              "status": "ready",
+              "seconds": 11.091
+            }
+          }
+        },
+        {
+          "kind": "case_started",
+          "case": "italian-prime",
+          "epoch": 1793536829.3528826
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            "smako-italian-spinach-whitebean-ravioli:1.0.0:simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "non_library_recipe_count": 0,
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 139,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 139,
+              "retained": 8,
+              "beam_pruned": 131,
+              "evaluations_executed": 139,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 139,
+              "equivalent_pruned": 0
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 339
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.689931477420032,
+            "memory_reclamation": 2.4450041502714157,
+            "package_calculation": 0.9499834245070815,
+            "nutrition": 0.017201203852891922,
+            "candidate_generation_and_qualification": 7.256251819431782,
+            "week_search": 0.3412158275023103,
+            "audit": 0.0014819512143731117,
+            "total": 10.145997297950089
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.326092815026641,
+          "attempt": 1,
+          "case": "italian-prime",
+          "prime": true,
+          "budget_seconds": 60,
+          "seconds": 24.356724853627384,
+          "cpu_seconds": 24.364976119000005,
+          "started_epoch": 1793536829.3528826,
+          "finished_epoch": 1793536853.7096088,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 927.384,
+              "personal_audit": 1.461,
+              "personal_candidate_generation": 2541.09,
+              "personal_candidate_generation_and_qualification": 7256.222,
+              "personal_facts_identity": 2495.571,
+              "personal_memory_reclamation": 2444.933,
+              "personal_nutrition": 12.492,
+              "personal_package_calculation": 974.689,
+              "personal_product_facts": 6689.849,
+              "personal_week_search": 341.138,
+              "planner_queue_wait": 0.009
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 279,
+                "wall_ms": 927.384,
+                "cpu_ms": 0.0,
+                "average_ms": 3.324,
+                "max_ms": 73.314
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 1.461,
+                "cpu_ms": 1.462,
+                "average_ms": 1.461,
+                "max_ms": 1.461
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2541.09,
+                "cpu_ms": 2540.02,
+                "average_ms": 2541.09,
+                "max_ms": 2541.09
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 7256.222,
+                "cpu_ms": 7254.357,
+                "average_ms": 7256.222,
+                "max_ms": 7256.222
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2495.571,
+                "cpu_ms": 2495.049,
+                "average_ms": 2495.571,
+                "max_ms": 2495.571
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2444.933,
+                "cpu_ms": 2444.465,
+                "average_ms": 1222.466,
+                "max_ms": 2441.595
+              },
+              "personal_nutrition": {
+                "calls": 279,
+                "wall_ms": 12.492,
+                "cpu_ms": 12.318,
+                "average_ms": 0.045,
+                "max_ms": 0.141
+              },
+              "personal_package_calculation": {
+                "calls": 283,
+                "wall_ms": 974.689,
+                "cpu_ms": 974.587,
+                "average_ms": 3.444,
+                "max_ms": 73.653
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6689.849,
+                "cpu_ms": 6687.72,
+                "average_ms": 6689.849,
+                "max_ms": 6689.849
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 341.138,
+                "cpu_ms": 341.078,
+                "average_ms": 341.138,
+                "max_ms": 341.138
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.009,
+                "cpu_ms": 0.008,
+                "average_ms": 0.009,
+                "max_ms": 0.009
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 283,
+              "cache_hits": 7869,
+              "cache_misses": 8265,
+              "fixed_package_template_hits": 2647,
+              "fixed_package_template_misses": 1489,
+              "menu_search_result_cache_hits": 112,
+              "menu_search_result_cache_misses": 1,
+              "package_cache_hits": 424,
+              "package_cache_misses": 5785,
+              "package_calculations": 5785,
+              "per_store_selection_cache_hits": 1382,
+              "per_store_selection_cache_misses": 631,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 1248,
+              "product_match_calculations": 1972,
+              "quote_set_cache_hits": 2666,
+              "quote_set_cache_misses": 631,
+              "quote_subset_pattern_cache_hits": 657,
+              "quote_subset_pattern_cache_misses": 265,
+              "quote_subset_vector_cache_hits": 2375,
+              "quote_subset_vector_cache_misses": 922,
+              "semantic_candidates_returned": 1827,
+              "semantic_comparisons": 1972,
+              "store_combinations": 1653,
+              "store_combinations_pruned_infeasible": 909,
+              "store_contexts_pruned_dominated": 1066,
+              "store_subset_cache_hits": 253,
+              "store_subset_cache_misses": 30,
+              "store_subsets_avoided_by_dominance": 1066
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.323621983639896,
+              "collected": 546
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00017370283603668213,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.441179904155433,
+              "collected": 1248
+            }
+          ],
+          "process_high_water_kib": 2801604,
+          "sampled_peak_rss_kib": 2407980
+        },
+        {
+          "kind": "case_started",
+          "case": "italian-repeat",
+          "epoch": 1793536853.710354
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 110.55,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "ad570b1e91fba837e2c92684691b708db29549ddb27dc89ac9836a08fdab5099",
+          "recipes": [
+            "smako-italian-spinach-whitebean-ravioli:1.0.0:simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "non_library_recipe_count": 0,
+          "names": [
+            "Italienskinspirerad hemlagad ravioli med vita bönor och spenat – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 8,
+              "proposals": 139,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 139,
+              "retained": 8,
+              "beam_pruned": 131,
+              "evaluations_executed": 139,
+              "evaluation_cache_hits": 0,
+              "full_result_cache_entries_peak": 139,
+              "equivalent_pruned": 0
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 339
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.881845314987004,
+            "memory_reclamation": 2.3678984604775906,
+            "package_calculation": 0.9133837195113301,
+            "nutrition": 0.017294717021286488,
+            "candidate_generation_and_qualification": 4.193178854882717,
+            "week_search": 0.32342303451150656,
+            "audit": 0.001208900474011898,
+            "total": 6.987114256247878
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.3657028656452894,
+          "attempt": 2,
+          "case": "italian-repeat",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 21.451519645750523,
+          "cpu_seconds": 21.445716766000004,
+          "started_epoch": 1793536853.710354,
+          "finished_epoch": 1793536875.1618788,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 890.219,
+              "personal_audit": 1.188,
+              "personal_candidate_generation": 2447.991,
+              "personal_candidate_generation_and_qualification": 4193.144,
+              "personal_facts_identity": 2528.748,
+              "personal_memory_reclamation": 2367.826,
+              "personal_nutrition": 12.731,
+              "personal_package_calculation": 938.117,
+              "personal_product_facts": 6881.75,
+              "personal_week_search": 323.354,
+              "planner_queue_wait": 0.008
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 279,
+                "wall_ms": 890.219,
+                "cpu_ms": 0.0,
+                "average_ms": 3.191,
+                "max_ms": 49.717
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 1.188,
+                "cpu_ms": 1.189,
+                "average_ms": 1.188,
+                "max_ms": 1.188
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2447.991,
+                "cpu_ms": 2447.074,
+                "average_ms": 2447.991,
+                "max_ms": 2447.991
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 4193.144,
+                "cpu_ms": 4191.885,
+                "average_ms": 4193.144,
+                "max_ms": 4193.144
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2528.748,
+                "cpu_ms": 2528.096,
+                "average_ms": 2528.748,
+                "max_ms": 2528.748
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2367.826,
+                "cpu_ms": 2367.143,
+                "average_ms": 1183.913,
+                "max_ms": 2365.245
+              },
+              "personal_nutrition": {
+                "calls": 279,
+                "wall_ms": 12.731,
+                "cpu_ms": 12.598,
+                "average_ms": 0.046,
+                "max_ms": 0.128
+              },
+              "personal_package_calculation": {
+                "calls": 283,
+                "wall_ms": 938.117,
+                "cpu_ms": 937.947,
+                "average_ms": 3.315,
+                "max_ms": 50.019
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6881.75,
+                "cpu_ms": 6879.258,
+                "average_ms": 6881.75,
+                "max_ms": 6881.75
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 323.354,
+                "cpu_ms": 323.307,
+                "average_ms": 323.354,
+                "max_ms": 323.354
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.008,
+                "cpu_ms": 0.007,
+                "average_ms": 0.008,
+                "max_ms": 0.008
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 283,
+              "cache_hits": 7757,
+              "cache_misses": 8264,
+              "fixed_package_template_hits": 2647,
+              "fixed_package_template_misses": 1489,
+              "package_cache_hits": 424,
+              "package_cache_misses": 5785,
+              "package_calculations": 5785,
+              "per_store_selection_cache_hits": 1382,
+              "per_store_selection_cache_misses": 631,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 1221,
+              "quote_set_cache_hits": 2666,
+              "quote_set_cache_misses": 631,
+              "quote_subset_pattern_cache_hits": 657,
+              "quote_subset_pattern_cache_misses": 265,
+              "quote_subset_vector_cache_hits": 2375,
+              "quote_subset_vector_cache_misses": 922,
+              "store_combinations": 1653,
+              "store_combinations_pruned_infeasible": 909,
+              "store_contexts_pruned_dominated": 1066,
+              "store_subset_cache_hits": 253,
+              "store_subset_cache_misses": 30,
+              "store_subsets_avoided_by_dominance": 1066
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.3653709003701806,
+              "collected": 17
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00011638179421424866,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.3647326016798615,
+              "collected": 1221
+            }
+          ],
+          "process_high_water_kib": 2801604,
+          "sampled_peak_rss_kib": 2410952
+        },
+        {
+          "kind": "case_started",
+          "case": "three-dinners-new",
+          "epoch": 1793536875.1627936
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 182.39,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "c64cb8c95c517691d1b9dc44ba2f7b59a0dbcb6d88a8d3f5edfd5950d3e45d96",
+          "recipes": [
+            "smako-dinner-potato-tofu-cabbage-pan:1.0.0:base",
+            "smako-greek-mushroom-feta-stuffed-potatoes:1.0.0:simple",
+            "smako-intake-roesti:1.0.0:6e8c5a64-simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "non_library_recipe_count": 0,
+          "names": [
+            "Potatispanna med tofu och mjuk kål",
+            "Grekiskinspirerade bakpotatisar med svamp och feta – enkel",
+            "Rårakor med keso och varm rödbeta – enkel"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 215,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 836
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 717,
+              "constraints_rejected": 502,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 2942,
+              "constraints_rejected": 3139,
+              "evaluation_rejected": 0,
+              "priced": 1059,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 1060,
+              "evaluation_cache_hits": 32,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.08373440522700548,
+              "first_valid_request_seconds": 33.794942131266,
+              "first_valid_cost": "324.54",
+              "full_candidates": 1059,
+              "improvements": 8,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 2508,
+              "anchors_total": 836,
+              "anchors_considered": 215,
+              "exchange_restarts": 6,
+              "max_full_evaluation_seconds": 0.08202426787465811,
+              "search_seconds": 14.288985526189208,
+              "anchors_deferred": 621,
+              "candidate_options_total": 2508,
+              "candidate_options_considered": 1837,
+              "candidate_options_deferred": 671,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 1466,
+              "compact_seen_bytes": 741503,
+              "best_search_cost": "182.39"
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 2021
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.913998197764158,
+            "memory_reclamation": 2.6427665231749415,
+            "package_calculation": 16.323736594989896,
+            "nutrition": 0.21629960648715496,
+            "candidate_generation_and_qualification": 16.6014884961769,
+            "week_search": 14.315874963067472,
+            "audit": 0.004048274829983711,
+            "total": 33.86908245738596
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.325550558976829,
+          "attempt": 3,
+          "case": "three-dinners-new",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 49.04032215848565,
+          "cpu_seconds": 49.03373889399998,
+          "started_epoch": 1793536875.1627936,
+          "finished_epoch": 1793536924.2031186,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 16104.961,
+              "personal_audit": 4.019,
+              "personal_candidate_generation": 2653.298,
+              "personal_candidate_generation_and_qualification": 16601.451,
+              "personal_facts_identity": 2518.727,
+              "personal_memory_reclamation": 2642.689,
+              "personal_nutrition": 178.842,
+              "personal_package_calculation": 16293.325,
+              "personal_product_facts": 6913.888,
+              "personal_week_search": 14315.747,
+              "planner_queue_wait": 0.007
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 1896,
+                "wall_ms": 16104.961,
+                "cpu_ms": 0.0,
+                "average_ms": 8.494,
+                "max_ms": 2650.009
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 4.019,
+                "cpu_ms": 4.021,
+                "average_ms": 4.019,
+                "max_ms": 4.019
+              },
+              "personal_candidate_generation": {
+                "calls": 1,
+                "wall_ms": 2653.298,
+                "cpu_ms": 2652.463,
+                "average_ms": 2653.298,
+                "max_ms": 2653.298
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 1,
+                "wall_ms": 16601.451,
+                "cpu_ms": 16594.513,
+                "average_ms": 16601.451,
+                "max_ms": 16601.451
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2518.727,
+                "cpu_ms": 2518.044,
+                "average_ms": 2518.727,
+                "max_ms": 2518.727
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2642.689,
+                "cpu_ms": 2640.62,
+                "average_ms": 1321.345,
+                "max_ms": 2639.315
+              },
+              "personal_nutrition": {
+                "calls": 1896,
+                "wall_ms": 178.842,
+                "cpu_ms": 177.385,
+                "average_ms": 0.094,
+                "max_ms": 4.803
+              },
+              "personal_package_calculation": {
+                "calls": 1897,
+                "wall_ms": 16293.325,
+                "cpu_ms": 16286.863,
+                "average_ms": 8.589,
+                "max_ms": 2650.094
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6913.888,
+                "cpu_ms": 6912.079,
+                "average_ms": 6913.888,
+                "max_ms": 6913.888
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 14315.747,
+                "cpu_ms": 14310.275,
+                "average_ms": 14315.747,
+                "max_ms": 14315.747
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.007,
+                "cpu_ms": 0.007,
+                "average_ms": 0.007,
+                "max_ms": 0.007
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 1897,
+              "cache_hits": 64153,
+              "cache_misses": 136107,
+              "fixed_package_template_hits": 68191,
+              "fixed_package_template_misses": 2810,
+              "menu_search_result_cache_hits": 250,
+              "package_cache_hits": 5594,
+              "package_cache_misses": 95493,
+              "package_calculations": 95493,
+              "per_store_selection_cache_hits": 17992,
+              "per_store_selection_cache_misses": 10821,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 223,
+              "product_match_calculations": 878,
+              "quote_set_cache_hits": 15862,
+              "quote_set_cache_misses": 10975,
+              "quote_subset_pattern_cache_hits": 10365,
+              "quote_subset_pattern_cache_misses": 4192,
+              "quote_subset_vector_cache_hits": 12263,
+              "quote_subset_vector_cache_misses": 14557,
+              "semantic_candidates_returned": 797,
+              "semantic_comparisons": 878,
+              "store_combinations": 90900,
+              "store_combinations_pruned_infeasible": 37036,
+              "store_contexts_pruned_dominated": 8169,
+              "store_subset_cache_hits": 1827,
+              "store_subset_cache_misses": 69,
+              "store_subsets_avoided_by_dominance": 332838
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.32478004693985,
+              "collected": 17
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00014744233340024948,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.638654916547239,
+              "collected": 223
+            }
+          ],
+          "process_high_water_kib": 2801604,
+          "sampled_peak_rss_kib": 2451156
+        },
+        {
+          "kind": "case_started",
+          "case": "mixed-meals-new",
+          "epoch": 1793536924.2040415
+        },
+        {
+          "kind": "result",
+          "status": "passed",
+          "total": 112.64,
+          "audit": true,
+          "saved_owned_read": true,
+          "basket_sha256": "0585a2eb860713077a537de3c73e2aa0428ff1d6326e64531eb252eca0acd350",
+          "recipes": [
+            "smako-intake-roesti:1.0.0:6e8c5a64-simple"
+          ],
+          "new_recipe_ids_selected": [],
+          "non_library_recipe_count": 2,
+          "names": [
+            "Rårakor med keso och varm rödbeta – enkel",
+            "Naturell kvarg med bröd",
+            "Naturell kvarg"
+          ],
+          "search_diagnostics": [
+            {
+              "depth": 1,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 281,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0,
+              "first_slot_priority_rows": 836
+            },
+            {
+              "depth": 2,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 281,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 0,
+              "retained": 0,
+              "beam_pruned": 0,
+              "evaluations_executed": 0,
+              "evaluation_cache_hits": 0
+            },
+            {
+              "depth": 3,
+              "attempt": 1,
+              "beam_width": 0,
+              "library_phase": "complete_first",
+              "proposals": 281,
+              "constraints_rejected": 0,
+              "evaluation_rejected": 0,
+              "priced": 850,
+              "retained": 1,
+              "beam_pruned": 0,
+              "evaluations_executed": 851,
+              "evaluation_cache_hits": 14,
+              "finalization_reserve_seconds": 12,
+              "full_results_retained_limit": 2,
+              "compact_seen_limit": 4096,
+              "first_valid_search_seconds": 0.0910842390730977,
+              "first_valid_request_seconds": 34.58890563715249,
+              "first_valid_cost": "133.25",
+              "full_candidates": 850,
+              "improvements": 3,
+              "stop_reason": "reserved_current_checkout_audit_save_time",
+              "singleton_priorities_computed": 846,
+              "anchors_total": 836,
+              "anchors_considered": 281,
+              "exchange_restarts": 3,
+              "max_full_evaluation_seconds": 0.17894853558391333,
+              "search_seconds": 13.50500188022852,
+              "anchors_deferred": 555,
+              "candidate_options_total": 846,
+              "candidate_options_considered": 667,
+              "candidate_options_deferred": 179,
+              "safely_excluded_options": 0,
+              "compact_seen_entries": 851,
+              "compact_seen_bytes": 509942,
+              "best_search_cost": "112.64"
+            }
+          ],
+          "pool_diagnostics": [
+            {
+              "meal_type": "dinner",
+              "raw": 2021
+            },
+            {
+              "meal_type": "breakfast",
+              "raw": 5
+            },
+            {
+              "meal_type": "snack",
+              "raw": 5
+            }
+          ],
+          "engine_timings": {
+            "product_facts": 6.922656591050327,
+            "memory_reclamation": 2.7113118767738342,
+            "package_calculation": 16.630611364729702,
+            "nutrition": 0.14720177371054888,
+            "candidate_generation_and_qualification": 16.80977155826986,
+            "week_search": 13.526799136772752,
+            "audit": 0.0023418543860316277,
+            "total": 33.40336487162858
+          },
+          "price_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "facts_version": "retained-catalog-facts-v12-stora-coop-source-aliases:ea5e78629f44f6333276013de444522b0c6f70ca0833bc9ca4fee051008ff2ca",
+          "fact_count": 54515,
+          "admission_cleanup_seconds": 2.8332093004137278,
+          "attempt": 4,
+          "case": "mixed-meals-new",
+          "prime": false,
+          "budget_seconds": 60,
+          "seconds": 49.044265252538025,
+          "cpu_seconds": 49.04493188399999,
+          "started_epoch": 1793536924.2040415,
+          "finished_epoch": 1793536973.2483082,
+          "trace": {
+            "timings_ms": {
+              "basket_optimization": 16431.438,
+              "personal_audit": 2.313,
+              "personal_candidate_generation": 2533.47,
+              "personal_candidate_generation_and_qualification": 16809.679,
+              "personal_facts_identity": 2518.434,
+              "personal_memory_reclamation": 2711.204,
+              "personal_nutrition": 114.562,
+              "personal_package_calculation": 16607.958,
+              "personal_product_facts": 6922.562,
+              "personal_week_search": 13526.703,
+              "planner_queue_wait": 0.007
+            },
+            "span_statistics": {
+              "basket_optimization": {
+                "calls": 1697,
+                "wall_ms": 16431.438,
+                "cpu_ms": 0.0,
+                "average_ms": 9.683,
+                "max_ms": 2578.566
+              },
+              "personal_audit": {
+                "calls": 1,
+                "wall_ms": 2.313,
+                "cpu_ms": 2.315,
+                "average_ms": 2.313,
+                "max_ms": 2.313
+              },
+              "personal_candidate_generation": {
+                "calls": 3,
+                "wall_ms": 2533.47,
+                "cpu_ms": 2532.711,
+                "average_ms": 844.49,
+                "max_ms": 2531.312
+              },
+              "personal_candidate_generation_and_qualification": {
+                "calls": 3,
+                "wall_ms": 16809.679,
+                "cpu_ms": 16805.687,
+                "average_ms": 5603.226,
+                "max_ms": 14345.268
+              },
+              "personal_facts_identity": {
+                "calls": 1,
+                "wall_ms": 2518.434,
+                "cpu_ms": 2517.552,
+                "average_ms": 2518.434,
+                "max_ms": 2518.434
+              },
+              "personal_memory_reclamation": {
+                "calls": 2,
+                "wall_ms": 2711.204,
+                "cpu_ms": 2709.729,
+                "average_ms": 1355.602,
+                "max_ms": 2705.723
+              },
+              "personal_nutrition": {
+                "calls": 1687,
+                "wall_ms": 114.562,
+                "cpu_ms": 113.315,
+                "average_ms": 0.068,
+                "max_ms": 2.097
+              },
+              "personal_package_calculation": {
+                "calls": 1698,
+                "wall_ms": 16607.958,
+                "cpu_ms": 16605.896,
+                "average_ms": 9.781,
+                "max_ms": 2578.659
+              },
+              "personal_product_facts": {
+                "calls": 1,
+                "wall_ms": 6922.562,
+                "cpu_ms": 6920.689,
+                "average_ms": 6922.562,
+                "max_ms": 6922.562
+              },
+              "personal_week_search": {
+                "calls": 1,
+                "wall_ms": 13526.703,
+                "cpu_ms": 13524.525,
+                "average_ms": 13526.703,
+                "max_ms": 13526.703
+              },
+              "planner_queue_wait": {
+                "calls": 1,
+                "wall_ms": 0.007,
+                "cpu_ms": 0.006,
+                "average_ms": 0.007,
+                "max_ms": 0.007
+              }
+            },
+            "operation_counters": {
+              "basket_calculations": 1698,
+              "cache_hits": 52912,
+              "cache_misses": 122245,
+              "fixed_package_template_hits": 64032,
+              "fixed_package_template_misses": 4086,
+              "menu_search_result_cache_hits": 9,
+              "package_cache_hits": 8136,
+              "package_cache_misses": 91063,
+              "package_calculations": 91063,
+              "per_store_selection_cache_hits": 13056,
+              "per_store_selection_cache_misses": 8345,
+              "planner_allocator_trim_available": 2,
+              "planner_allocator_trim_released": 2,
+              "planner_full_collections_coordinated": 1,
+              "planner_memory_reclamation_calls": 2,
+              "planner_memory_reclamation_generation_1": 1,
+              "planner_memory_reclamation_generation_2": 1,
+              "planner_unreachable_objects_collected": 196,
+              "product_match_calculations": 2288,
+              "quote_set_cache_hits": 12368,
+              "quote_set_cache_misses": 8549,
+              "quote_subset_pattern_cache_hits": 7857,
+              "quote_subset_pattern_cache_misses": 3176,
+              "quote_subset_vector_cache_hits": 9868,
+              "quote_subset_vector_cache_misses": 11033,
+              "semantic_candidates_returned": 1881,
+              "semantic_comparisons": 2288,
+              "store_combinations": 104308,
+              "store_combinations_pruned_infeasible": 42363,
+              "store_contexts_pruned_dominated": 6769,
+              "store_subset_cache_hits": 1618,
+              "store_subset_cache_misses": 79,
+              "store_subsets_avoided_by_dominance": 301615
+            },
+            "depth_counters": {}
+          },
+          "collections": [
+            {
+              "generation": 2,
+              "seconds": 2.832815336063504,
+              "collected": 283349
+            },
+            {
+              "generation": 1,
+              "seconds": 0.00013434700667858124,
+              "collected": 0
+            },
+            {
+              "generation": 2,
+              "seconds": 2.70540701597929,
+              "collected": 196
+            }
+          ],
+          "process_high_water_kib": 2801604,
+          "sampled_peak_rss_kib": 2512060
+        },
+        {
+          "kind": "sequence_complete",
+          "epoch": 1793536973.2487366
+        }
+      ],
+      "stderr": "",
+      "seconds": 350.0783064542338,
+      "sampled_peak_rss_kib": 2778936,
+      "kernel_peak_rss_kib": 2801604,
+      "raw_result_sha256": "16ff4d02c2a5fc54cdd91f7376289b055429f7392bd6acaaaf79def160314353"
+    }
+  ],
+  "harness_revision": {
+    "original_sha256": "3e1f85780c734a7941fab3f00e7c99d677a2b054531d8828326943c0c907a1e4",
+    "corrected_sha256": "057c96655b258f07e28db257ae527d1c6afaf5e3befaf9af3ca3b4a491ba61de",
+    "original_runs": [
+      "A1",
+      "B1"
+    ],
+    "corrected_runs": [
+      "B2",
+      "A2"
+    ],
+    "reason": "Post-audit result serialization must tolerate recipes without library design. No planner changes. First two mixed-meal rows excluded from completed timing comparisons."
+  },
+  "runtime_after": {
+    "image": "sha256:a396c7774515c738a6b3909fb2b776d897bc48b29ddfc2d1064264f2ff97b8ad",
+    "build_id": "app-b7c8d0506e23-c18e4ba9",
+    "planning_env": {
+      "STABLE_CANDIDATE_BASE_COUNT": "120",
+      "COOP_ALLOW_FULL_CRAWL": "true",
+      "PLANNER_MAX_CONCURRENT_REQUESTS": "1",
+      "PRICE_UNIVERSE_PREWARM_CANDIDATE_COUNT": "80",
+      "LIBRARY_SEARCH_POLICY": "smako-current-library-v2",
+      "MEAL_PLAN_STRATEGY": "optimized",
+      "AXFOOD_PRODUCT_DETAIL_ROOT": "/srv/app/var/grocery/axfood-product-details/releases/b11ed75863be1547755ee78be5143ba737d5ea3564acc1cadaa0feb6b4ebf0a8",
+      "ALLOW_MOCK_FALLBACK": "false",
+      "STABLE_CANDIDATE_SEARCH_LIMIT": "160",
+      "LIBRARY_MERGE_GENERATIONS": "false",
+      "PLANNER_RATE_LIMIT_WINDOW_SECONDS": "60",
+      "HEMKOP_ALLOW_FULL_CRAWL": "true",
+      "PLANNER_MAX_QUEUED_REQUESTS": "4",
+      "PLANNER_NETWORK_RATE_LIMIT_REQUESTS": "40",
+      "PLANNER_RATE_LIMIT_REQUESTS": "8",
+      "STABLE_CANDIDATE_SEARCH_ENABLED": "true",
+      "ALLOW_PROVIDER_FALLBACK": "false"
+    },
+    "runtime_file_hashes": {
+      "services/recipe_library.py": "8241f6920f952808f5798d1222885c05c58cb089b5b5ded6028a17680eba85e5",
+      "services/personal_planner.py": "2260d1d0d382f9d161f1386e90b2aac590dda223d91adb0b0e44f407fe73e63c",
+      "services/meal_library_content.py": "232393c46575073c4525e6bbaa37e9105bc2e53a95647fec7abe209c1c7f4398",
+      "services/menu_optimizer.py": "f03d5cf462b879fafeec4973add14701252fff81347917029342bf2b7e0b4c5f",
+      "data/recipes/library-manifest.json": "68a142625914bdeae7d03d1d41d76f7a440ae2ab1239d2f31e2e4ebc435f3516"
+    },
+    "running_containers": [
+      "smako-app-1",
+      "smako-scheduler-1",
+      "smako-caddy-1"
+    ]
+  },
+  "verification": {
+    "complete_run_sequences": 4,
+    "complete_measurement_rows": 14,
+    "post_audit_recording_errors_excluded": 2,
+    "same_price_id_and_fact_version_in_complete_rows": true,
+    "same_basket_hash_within_each_case": true,
+    "new_draft_recipes_selected_in_complete_rows": 0,
+    "runtime_image_build_and_checked_files_unchanged": true,
+    "temporary_containers_removed_and_operation_lease_released": true,
+    "preserved_delivery_files_hash_verified": 12
+  },
+  "operations_after": {
+    "checked_at": "2026-11-01T12:43:35.265986+00:00",
+    "ready_http_status": 200,
+    "ready_status": "ready",
+    "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+    "price_universe_status": "degraded",
+    "storage_maintenance_status": "complete"
+  }
+}

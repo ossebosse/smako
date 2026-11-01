@@ -1,0 +1,110 @@
+"""Run four disposable containers sequentially under the existing operations lease."""
+import base64
+import json
+import subprocess
+import tempfile
+import time
+from pathlib import Path
+
+
+def emit(kind, **values):
+    print(json.dumps({'kind': kind, **values}), flush=True)
+
+
+def acquire(image):
+    code = (
+        'from pathlib import Path; import sys; '
+        'from grocery_data.app.services.manual_refresh_operations import RefreshRunLock,production_refresh_lock_path; '
+        'lock=RefreshRunLock(production_refresh_lock_path('
+        'Path("/srv/app/var/grocery/grocery_data.sqlite"),Path("/srv/app/var/price_universes"))); '
+        'lock.acquire(); print("LOCKED",flush=True); sys.stdin.readline(); lock.release()'
+    )
+    lease = subprocess.Popen([
+        'docker', 'run', '--rm', '-i', '--network', 'none', '--user', '0',
+        '--volumes-from', 'smako-app-1:ro',
+        '-v', '/srv/smako/data/price_universes/.refresh-locks:/srv/app/var/price_universes/.refresh-locks:rw',
+        '--entrypoint', 'python', image, '-c', code,
+    ], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    if lease.stdout.readline().strip() != 'LOCKED':
+        _, error = lease.communicate(timeout=30)
+        raise RuntimeError('Operations lease unavailable: ' + error[-1200:])
+    return lease
+
+
+runtime = json.loads(subprocess.check_output(['docker', 'inspect', 'smako-app-1']))[0]
+assert runtime['Image'] == PAYLOAD['image']
+lease = acquire(PAYLOAD['image'])
+try:
+    with tempfile.TemporaryDirectory(prefix='smako-recipe-timing-') as directory:
+        root = Path(directory)
+        root.chmod(0o755)
+        for name, value in PAYLOAD['files'].items():
+            assert Path(name).name == name
+            (root / name).write_bytes(base64.b64decode(value))
+        for run, library in [('A1', 'baseline'), ('B1', 'candidate'), ('B2', 'candidate'), ('A2', 'baseline')]:
+            cidfile = root / (run + '.cid')
+            args = ['docker', 'run', '--cidfile', str(cidfile), '--rm', '--network', 'none',
+                    '--read-only', '--memory', '4g', '--tmpfs', '/tmp:rw,nosuid,size=512m',
+                    '-v', '/srv/smako/data/grocery:/srv/app/var/grocery:ro',
+                    '-v', '/srv/smako/data/price_universes:/srv/app/var/price_universes:ro',
+                    '-v', '/srv/smako/data/raw_snapshots:/srv/app/var/raw_snapshots:ro',
+                    '-v', f'{root}:/probe:ro',
+                    '-v', f'{root}/{library}-manifest.json:/srv/app/backend/app/data/recipes/library-manifest.json:ro',
+                    '-v', f'{root}/{PAYLOAD["pack"]}:/srv/app/backend/app/data/recipes/{PAYLOAD["pack"]}:ro']
+            env = dict(PAYLOAD['env'])
+            env['PROBE_EXPECTED_COUNT'] = '2462' if library == 'baseline' else '2512'
+            for key, value in env.items():
+                args.extend(['-e', key + '=' + value])
+            args.extend(['--entrypoint', 'python', PAYLOAD['image'], '-u', '/probe/probe.py'])
+            log_path, error_path = root / f'{run}.stdout', root / f'{run}.stderr'
+            started = time.monotonic()
+            samples, pid, cursor = [], 0, 0
+            emit('run_started', run=run, library=library)
+            with log_path.open('wb') as log, error_path.open('wb') as error:
+                process = subprocess.Popen(args, stdout=log, stderr=error)
+                try:
+                    while process.poll() is None:
+                        if time.monotonic() - started > 1200:
+                            raise TimeoutError('Isolated benchmark exceeded 1200 seconds')
+                        if not pid and cidfile.exists() and cidfile.read_text().strip():
+                            inspected = subprocess.run(['docker', 'inspect', '--format', '{{.State.Pid}}', cidfile.read_text().strip()], capture_output=True, text=True)
+                            if inspected.returncode == 0:
+                                pid = int(inspected.stdout.strip())
+                        if pid:
+                            try:
+                                fields = dict(line.split(':', 1) for line in Path(f'/proc/{pid}/status').read_text().splitlines() if ':' in line)
+                                samples.append([time.time(), int(fields.get('VmRSS', '0 kB').split()[0]), int(fields.get('VmHWM', '0 kB').split()[0])])
+                            except (OSError, ValueError):
+                                pass
+                        with log_path.open('rb') as stream:
+                            stream.seek(cursor)
+                            for line in stream:
+                                if not line.endswith(b'\n'):
+                                    break
+                                cursor += len(line)
+                                try:
+                                    event = json.loads(line)
+                                    emit('progress', run=run, event={k: event.get(k) for k in ('kind', 'case', 'seconds', 'status', 'count')})
+                                except ValueError:
+                                    pass
+                        time.sleep(0.05)
+                finally:
+                    if process.poll() is None:
+                        if cidfile.exists() and cidfile.read_text().strip():
+                            subprocess.run(['docker', 'stop', '--time', '5', cidfile.read_text().strip()], capture_output=True, timeout=20)
+                        process.kill()
+                        process.wait(timeout=20)
+            rows = []
+            for line in log_path.read_text().splitlines():
+                try:
+                    rows.append(json.loads(line))
+                except ValueError:
+                    pass
+            emit('run_complete', run=run, library=library, exit_code=process.returncode,
+                 rows=rows, stderr=error_path.read_text()[-4000:], rss_samples=samples,
+                 seconds=time.monotonic() - started)
+            if process.returncode != 0:
+                raise RuntimeError('Benchmark process failed; remaining runs not started')
+finally:
+    lease.communicate(input='release\n', timeout=30)
+    emit('lease_released')

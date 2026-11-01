@@ -1,3 +1,29 @@
+# 2026-11-01: Receptcheckpointens tidseffekt uppmätt i isolerat varmt läge
+
+[Mätningen](reviews/recipe-checkpoint-72-timing-20261101/REPORT.md) jämför
+2 462 aktuella varianter med samma bibliotek plus 50 strukturellt kompatibla
+utkast. Fyra separata, uttryckligen uppvärmda processer i ordningen A–B–B–A,
+samma appbild, källor, frysta prisklocka, användarval och 60-sekundersgräns.
+
+En middag: **21,236 → 21,612 s** i medel (+0,376 s, cirka 1,8 %), med
+överlappande intervall. Tre middagar: **49,028 → 49,028 s**. Kandidatkontrollen
+för tre middagar ökade cirka 0,26 s; sökningen begränsas av samma tidsbudget.
+Samma korgar/priser i motsvarande fullständiga prov, inga nya utkast valda.
+Processens högsta RSS inklusive uppvärmning: 2 737,3 → 2 741,1 MiB.
+
+14 fullständiga mätposter klarar audit/sparning/ägd återläsning. Två första
+blandprov utesluts på grund av mätloggningens fel efter dessa kontroller;
+korrigerad loggning ger ett komplett blandpar på cirka 49 s. Det fallet
+använder enkla basalternativ för frukost/mellanmål, inte sökning bland nya
+författade recept där. Alla indata, räknare och begränsningar finns i rapporten.
+
+Ingen import i riktiga biblioteket eller betaaktivering. Appbild, manifest,
+planeringsmiljö och originalleverans är verifierat oförändrade; driftlåset
+är släppt och testcontainrar borttagna. De 149 registerblockerade varianterna
+och kommande 1 000 grundrätter är inte tidsmätta. Innehållshindren nedan består.
+
+---
+
 # 2026-11-01: Hela receptcheckpointen mottagen och granskad inför import
 
 ZIP-filen kompletterar de tidigare fyra rapporterna: alla sex paket med

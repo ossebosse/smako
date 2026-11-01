@@ -1,0 +1,133 @@
+"""Isolated warm library-size comparison; no optimizer or resolver patches."""
+import asyncio
+import dataclasses
+import gc
+import hashlib
+import json
+import os
+import resource
+import time
+import traceback
+from datetime import datetime
+from pathlib import Path
+
+from app.config import get_settings
+from app.main import load_configured_price_universe
+from app.models import PlanRequest
+from app.services import plan_jobs
+from app.services.meal_library_content import identity, library_signature
+from app.services.performance_trace import activate_performance_trace
+from app.services.personal_planner import PersonalPlanner
+from app.services.personal_store import PersonalStore
+from app.services.plan_store import PlanStore
+from app.services.planner_admission import PlannerAdmissionController, memory_cleanup_seconds
+from app.services.price_universe_runtime import GLOBAL_PREPARED_PRICE_UNIVERSES
+from app.services.pricing_projection_prewarm import precompute_pricing_semantics
+from app.services.recipe_library import current_recipes
+from app.services.source_facts_prewarm import schedule_source_facts_prewarm, warm_recipe_library
+
+
+def emit(kind, **data):
+    print(json.dumps({'kind': kind, **data}, default=str), flush=True)
+
+
+settings = get_settings()
+started = time.perf_counter()
+prepared = load_configured_price_universe(settings)
+emit('loaded', seconds=time.perf_counter() - started, price_id=prepared.universe.universe_id)
+started = time.perf_counter()
+projection = precompute_pricing_semantics(settings, prepared)
+emit('pricing_warm', seconds=time.perf_counter() - started, status=projection.status)
+started = time.perf_counter()
+report = schedule_source_facts_prewarm(
+    dataclasses.replace(settings, source_facts_prewarm_enabled=True),
+    GLOBAL_PREPARED_PRICE_UNIVERSES.active_universes(), start=False,
+    library_warmer=lambda: warm_recipe_library(current_only=True),
+)
+count = int(os.environ['PROBE_EXPECTED_COUNT'])
+assert report['status'] == 'ready' and report['library']['status'] == 'ready', report
+assert len(current_recipes()) == count
+assert {row['universe_id'] for row in report['universes']} == {
+    p.universe.universe_id for p in GLOBAL_PREPARED_PRICE_UNIVERSES.active_universes()
+}
+for row in report['universes']:
+    assert row['status'] == 'ready'
+    shared = row['shared_preparation']
+    assert shared['ready'] and shared['content_variants'] == count
+    assert shared['portion_views'] == {str(n): count for n in (1, 2, 3, 4)}
+    assert shared['persistence_failures'] == 0
+emit('source_warm', seconds=time.perf_counter() - started, count=count,
+     library_signature=library_signature(), report=report)
+
+fixed_clock = datetime.fromisoformat(os.environ['PROBE_CLOCK'])
+new_ids = set(json.loads(Path('/probe/metadata.json').read_text())['new_recipe_ids'])
+original_collect = gc.collect
+collections = []
+
+
+def counted_collect(*args, **kwargs):
+    started = time.perf_counter()
+    collected = original_collect(*args, **kwargs)
+    collections.append({'generation': args[0] if args else kwargs.get('generation', 2),
+                        'seconds': time.perf_counter() - started, 'collected': collected})
+    return collected
+
+
+gc.collect = counted_collect
+
+
+def build(attempt, request):
+    actor = hashlib.sha256(f'isolated-synthetic-{attempt}'.encode()).hexdigest()
+    store = PlanStore(Path('/tmp') / f'benchmark-{attempt}.sqlite')
+    state = PersonalStore(store).update_shopping(actor, 0, request.personal.extras)
+    assert state['revision'] == request.personal.pantry_revision
+    selected = GLOBAL_PREPARED_PRICE_UNIVERSES.get_for_request(request.postal_code, {})
+    assert selected is not None
+    planner = PersonalPlanner(request, settings, selected, state, now=fixed_clock)
+    plan = planner.create()
+    saved = store.create(request, plan, owner_actor_hash=actor)
+    assert store.get_owned(saved.plan_id, owner_actor_hash=actor) == saved
+    assert plan.personal.checks['checkout_audit']['passed']
+    plan_jobs.check_cancelled()
+    ids = [identity(s.recipe) for s in plan.personal.slots if s.recipe and s.recipe.design]
+    return {
+        'status': 'passed', 'total': plan.optimized_basket.total,
+        'audit': True, 'saved_owned_read': True,
+        'basket_sha256': hashlib.sha256(json.dumps(
+            plan.optimized_basket.model_dump(mode='json'), sort_keys=True).encode()).hexdigest(),
+        'recipes': ids, 'new_recipe_ids_selected': sorted(new_ids.intersection(ids)),
+        'non_library_recipe_count': sum(bool(s.recipe and not s.recipe.design) for s in plan.personal.slots),
+        'names': [s.recipe.name for s in plan.personal.slots if s.recipe],
+        'search_diagnostics': planner.diagnostics.search,
+        'pool_diagnostics': planner.diagnostics.pools,
+        'engine_timings': dict(planner.timings), 'price_id': selected.universe.universe_id,
+        'facts_version': planner.facts_version, 'fact_count': len(planner.facts),
+        'admission_cleanup_seconds': memory_cleanup_seconds.get(),
+    }
+
+
+async def main():
+    controller = PlannerAdmissionController()
+    cases = json.loads(Path('/probe/cases.json').read_text())
+    for attempt, case in enumerate(cases, 1):
+        request = PlanRequest.model_validate(case['request'])
+        collections.clear()
+        start = time.perf_counter()
+        cpu = time.process_time()
+        epoch = time.time()
+        emit('case_started', case=case['case'], epoch=epoch)
+        with activate_performance_trace() as trace, plan_jobs.planning_deadline(60):
+            try:
+                result = await controller.run(str(attempt), lambda: asyncio.to_thread(build, attempt, request))
+            except Exception as exc:
+                result = {'status': 'failed', 'error_type': type(exc).__name__,
+                          'error': str(exc)[:500], 'stack': traceback.format_exc().splitlines()[-24:]}
+            emit('result', **result, attempt=attempt, case=case['case'], prime=case['prime'],
+                 budget_seconds=60, seconds=time.perf_counter() - start,
+                 cpu_seconds=time.process_time() - cpu, started_epoch=epoch, finished_epoch=time.time(),
+                 trace=dataclasses.asdict(trace.snapshot()), collections=list(collections),
+                 process_high_water_kib=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
+    emit('sequence_complete', epoch=time.time())
+
+
+asyncio.run(main())
