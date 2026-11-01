@@ -31,16 +31,24 @@ till grund för detta dokument. Läs också [produktmålet](../PRODUCT-GOAL.md),
 **2026-11-01: instruktioner skickade till Chat enligt ägaren.** Beställningen
 är 1 000 nya grundrätter: 750 middagar, 125 frukostar och 125 mellanmål.
 Tre varianter per middag och två per frukost/mellanmål ger 2 750 variantposter.
-**Mottagning senare 2026-11-01:** fyra rapportbilagor redovisar 72 grundrätter
-och 199 varianter (55 middagar, 3 frukostar, 14 mellanmål). De sex receptpaketen
-och flera stödregister saknas i uppladdningen. Endast rapporter är mottagna;
-inga recept från denna beställning är ännu importerade. Se
-[mottagningsjournal och saknade filer](../../backend/app/data/recipes/incoming/authoring-1000-20261101/checkpoint-72-reports/README.md).
-Rapporternas metadata/ID:n är kontrollerade, men recepten är inte native-
-eller innehållsvaliderade. Nästa redovisade författarpaket är 007; återstående
-mål är 928 grundrätter/2 551 varianter. Bevara checkpointens ID:n och räkna
-inte pilotpaketet en gång till. Ingrediensprioriteringens tillägg är framtaget;
-det är fortfarande inte uttryckligen bekräftat att ägaren skickat just det.
+**Komplett mottagning senare 2026-11-01:** ZIP-filen kompletterar de fyra
+tidigare rapportbilagorna med alla sex receptpaketen och stödregister.
+72 grundrätter / 199 varianter är mottagna: 55 middagar, 3 frukostar och
+14 mellanmål. Se [aktuell mottagningsjournal](../../backend/app/data/recipes/incoming/authoring-1000-20261101/checkpoint-72/README.md)
+och [importgranskning](../reviews/recipe-checkpoint-72-20261101/REPORT.md).
+50 varianter passerar native strukturkontroll; 149 har registerhinder.
+63 föreslagna namn/form-identiteter behöver sakgranskning, inklusive två
+olämpliga normaliseringar. Beredning av frysta insatser, processolja och
+råvaruformer behöver också hanteras före import. Inga recept från denna
+beställning är ännu importerade eller betaaktiverade.
+
+Nästa författarpaket är **007**; återstående mål mot mottagna utkast är
+**928 grundrätter / 2 551 varianter**. Detta är inte en slutlig nyhetsbedömning
+av de första 72 baserna. Bevara deras ID:n, räkna inte pilotpaketet igen och
+ta med checkpointens recept i nästa dubblettunderlag även före import.
+[Återkoppling på checkpointen](requests/20261101/ATGARDER-CHECKPOINT-72-TILL-CHAT.txt)
+är förberedd, inte skickad. Ingrediensprioriteringens tidigare tillägg är också
+framtaget; det är fortfarande inte uttryckligen bekräftat att ägaren skickat det.
 
 Bevarade, skickbara texter finns i
 [ursprungligt uppdrag](requests/20261101/INSTRUKTIONER-TILL-CHAT.txt) och

@@ -110,8 +110,10 @@ Belagd popularitet/användning i svensk vardagsmat väger in, med okänd evidens
 och tekniska produkt-/formhinder särredovisade. Den beställda nya samlingen är
 1 000 grundrätter (750 middagar, 125 frukostar, 125 mellanmål), med 2 750
 fullständiga varianter som mål. Detta medger författarunderlaget parallellt med
-fortsatt täckningsarbete; det innebär inte att nya recept är mottagna eller
-importerade. Se [bestående arbetsgång och beställningsjournal](recipes/REQUESTING-RECIPES.md).
+fortsatt täckningsarbete. En första checkpoint med 72 grundrätter / 199
+varianter är nu mottagen och tekniskt granskad, med dokumenterade
+importhinder; inga av dessa utkast är ännu importerade. Se
+[bestående arbetsgång och beställningsjournal](recipes/REQUESTING-RECIPES.md).
 
 Ägarens tillägg 2026-10-25: samma grundrätt ska där det är matmässigt rimligt
 ha en enkel, en vardaglig och en utökad variant med olika ingrediensantal.

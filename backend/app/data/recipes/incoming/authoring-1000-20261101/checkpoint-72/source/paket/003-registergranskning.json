@@ -1,0 +1,5563 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-expansion-1000-20261101-003",
+  "recipes": [
+    {
+      "base_id": "smako-mexican-papadzules",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Papadzules – äggtortillas med pumpakärnssås – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "papadzules",
+      "primary": "kokta ägg",
+      "method": "pan",
+      "side": "majstortillas",
+      "flavor": [
+        "pumpakärna",
+        "epazote",
+        "tomat"
+      ],
+      "equipment": [
+        "mixer",
+        "stekpanna",
+        "kastrull",
+        "tortillapress eller kavel"
+      ],
+      "components": [
+        {
+          "id": "fyllning",
+          "name": "Äggfyllning",
+          "ingredients": [
+            {
+              "name": "kokta ägg",
+              "form": "cooked_drained",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "kokta ägg"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "karna",
+          "name": "Pumpakärnssås",
+          "ingredients": [
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "pumpakärnor"
+            },
+            {
+              "name": "epazote",
+              "form": "raw_edible",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "epazote"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "tomat",
+          "name": "Separat tomatsås",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomat"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "majsbrod",
+          "name": "Hemlagade majstortillas",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "masa harina"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda masa harina, tortillornas salt och 390 ml vatten till mjuk, sammanhängande deg. Knåda kort; den ska inte spricka när en liten bit plattas ut. Justera vid behov med 20 ml vatten.",
+          "uses": [
+            "masa harina",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Täck och låt majsdegen vila 15 minuter så att mjölet hinner binda vattnet.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i små bitar och pressa mellan två ark återanvändbart bakpapper till cirka 2 mm tjocka tortillas. Grädda i het torr panna cirka 1 minut per sida, i omgångar. Lägg under ren kökshandduk så att de håller sig mjuka; använd direkt i följande steg.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 24,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Rosta pumpakärnorna i torr panna på medelvärme under ständig omrörning tills de sväller och doftar nötigt. Ta upp på tallrik. Grovhacka epazote.",
+          "uses": [
+            "pumpakärnor",
+            "epazote"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Koka epazote med pumpasåsens salt och 550 ml vatten 5 minuter. Mixa hela örtspadet med pumpakärnorna till slät sås. Håll försiktigt varm, utan kraftig kokning som kan få såsen att skära sig.",
+          "uses": [
+            "epazote",
+            "pumpakärnor",
+            "salt"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Tärna tomaterna. Värm rapsoljan. Tillsätt tomat och tomatsåsens salt; sjud under omrörning tills tomaterna faller sönder till en fyllig sås. Håll tomat- och pumpakärnssås åtskilda.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 13,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Hacka de färdigkokta äggen och blanda med fyllningens salt. Värm tortillorna kort i torr panna om de hunnit kallna. Fyll med ägg och rulla samman. Fördela på fyra tallrikar, täck med varm pumpakärnssås och lägg tomatsåsen i en separat sträng över. Servera genast.",
+          "uses": [
+            "kokta ägg",
+            "salt",
+            "masa harina",
+            "pumpakärnor",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Yucatán: äggfyllda majstortillas, epazotedoftande pumpakärnssås och separat tomatsås. Receptet använder faktiskt färdigkokta skalade ägg som insats, inte dold rå äggkokning. En större avokadoservering i utökad version är vardagsanpassning."
+    },
+    {
+      "base_id": "smako-mexican-papadzules",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Papadzules – äggtortillas med pumpakärnssås – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "papadzules",
+      "primary": "kokta ägg",
+      "method": "pan",
+      "side": "majstortillas",
+      "flavor": [
+        "pumpakärna",
+        "epazote",
+        "tomat"
+      ],
+      "equipment": [
+        "mixer",
+        "stekpanna",
+        "kastrull",
+        "tortillapress eller kavel"
+      ],
+      "components": [
+        {
+          "id": "fyllning",
+          "name": "Äggfyllning",
+          "ingredients": [
+            {
+              "name": "kokta ägg",
+              "form": "cooked_drained",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "kokta ägg"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "karna",
+          "name": "Pumpakärnssås",
+          "ingredients": [
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "pumpakärnor"
+            },
+            {
+              "name": "epazote",
+              "form": "raw_edible",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "epazote"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            }
+          ]
+        },
+        {
+          "id": "tomat",
+          "name": "Separat tomatsås",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomat"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "chiliflakes",
+              "form": "dry",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "chiliflakes"
+            }
+          ]
+        },
+        {
+          "id": "majsbrod",
+          "name": "Hemlagade majstortillas",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "masa harina"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda masa harina, tortillornas salt och 390 ml vatten till mjuk, sammanhängande deg. Knåda kort; den ska inte spricka när en liten bit plattas ut. Justera vid behov med 20 ml vatten.",
+          "uses": [
+            "masa harina",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Täck och låt majsdegen vila 15 minuter så att mjölet hinner binda vattnet.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i små bitar och pressa mellan två ark återanvändbart bakpapper till cirka 2 mm tjocka tortillas. Grädda i het torr panna cirka 1 minut per sida, i omgångar. Lägg under ren kökshandduk så att de håller sig mjuka; använd direkt i följande steg.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 24,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Rosta pumpakärnorna i torr panna på medelvärme under ständig omrörning tills de sväller och doftar nötigt. Ta upp på tallrik. Grovhacka epazote och gul lök.",
+          "uses": [
+            "pumpakärnor",
+            "epazote",
+            "gul lök"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Koka epazote och gul lök med pumpasåsens salt och 550 ml vatten 5 minuter. Mixa hela örtspadet med pumpakärnorna till slät sås. Håll försiktigt varm, utan kraftig kokning som kan få såsen att skära sig.",
+          "uses": [
+            "epazote",
+            "pumpakärnor",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Tärna tomaterna. Värm rapsoljan och fräs hackad vitlök och chiliflakes kort. Tillsätt tomat och tomatsåsens salt; sjud under omrörning tills tomaterna faller sönder till en fyllig sås. Håll tomat- och pumpakärnssås åtskilda.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "chiliflakes"
+          ],
+          "minutes": 13,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Hacka de färdigkokta äggen och blanda med fyllningens salt. Värm tortillorna kort i torr panna om de hunnit kallna. Fyll med ägg och rulla samman. Fördela på fyra tallrikar, täck med varm pumpakärnssås och lägg tomatsåsen i en separat sträng över. Servera genast.",
+          "uses": [
+            "kokta ägg",
+            "salt",
+            "masa harina",
+            "pumpakärnor",
+            "tomat"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Yucatán: äggfyllda majstortillas, epazotedoftande pumpakärnssås och separat tomatsås. Receptet använder faktiskt färdigkokta skalade ägg som insats, inte dold rå äggkokning. En större avokadoservering i utökad version är vardagsanpassning."
+    },
+    {
+      "base_id": "smako-mexican-papadzules",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Papadzules – äggtortillas med pumpakärnssås – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "papadzules",
+      "primary": "kokta ägg",
+      "method": "pan",
+      "side": "majstortillas",
+      "flavor": [
+        "pumpakärna",
+        "epazote",
+        "tomat"
+      ],
+      "equipment": [
+        "mixer",
+        "stekpanna",
+        "kastrull",
+        "tortillapress eller kavel"
+      ],
+      "components": [
+        {
+          "id": "fyllning",
+          "name": "Äggfyllning",
+          "ingredients": [
+            {
+              "name": "kokta ägg",
+              "form": "cooked_drained",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "kokta ägg"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "karna",
+          "name": "Pumpakärnssås",
+          "ingredients": [
+            {
+              "name": "pumpakärnor",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "pumpakärnor"
+            },
+            {
+              "name": "epazote",
+              "form": "raw_edible",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "epazote"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 70,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            }
+          ]
+        },
+        {
+          "id": "tomat",
+          "name": "Separat tomatsås",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomat"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "chiliflakes",
+              "form": "dry",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "chiliflakes"
+            }
+          ]
+        },
+        {
+          "id": "sval",
+          "name": "Sval grönsakssallad",
+          "ingredients": [
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "avokado"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gurka"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "majsbrod",
+          "name": "Hemlagade majstortillas",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "masa harina"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda masa harina, tortillornas salt och 390 ml vatten till mjuk, sammanhängande deg. Knåda kort; den ska inte spricka när en liten bit plattas ut. Justera vid behov med 20 ml vatten.",
+          "uses": [
+            "masa harina",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Täck och låt majsdegen vila 15 minuter så att mjölet hinner binda vattnet.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i små bitar och pressa mellan två ark återanvändbart bakpapper till cirka 2 mm tjocka tortillas. Grädda i het torr panna cirka 1 minut per sida, i omgångar. Lägg under ren kökshandduk så att de håller sig mjuka; använd direkt i följande steg.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 24,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Rosta pumpakärnorna i torr panna på medelvärme under ständig omrörning tills de sväller och doftar nötigt. Ta upp på tallrik. Grovhacka epazote och gul lök.",
+          "uses": [
+            "pumpakärnor",
+            "epazote",
+            "gul lök"
+          ],
+          "minutes": 6,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Koka epazote och gul lök med pumpasåsens salt och 550 ml vatten 5 minuter. Mixa hela örtspadet med pumpakärnorna till slät sås. Håll försiktigt varm, utan kraftig kokning som kan få såsen att skära sig.",
+          "uses": [
+            "epazote",
+            "pumpakärnor",
+            "salt",
+            "gul lök"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Tärna tomaterna. Värm rapsoljan och fräs hackad vitlök och chiliflakes kort. Tillsätt tomat och tomatsåsens salt; sjud under omrörning tills tomaterna faller sönder till en fyllig sås. Håll tomat- och pumpakärnssås åtskilda.",
+          "uses": [
+            "tomat",
+            "rapsolja",
+            "salt",
+            "vitlök",
+            "chiliflakes"
+          ],
+          "minutes": 13,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Tärna avokado och gurka. Vänd med limejuice och salladens salt.",
+          "uses": [
+            "avokado",
+            "gurka",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Hacka de färdigkokta äggen och blanda med fyllningens salt. Värm tortillorna kort i torr panna om de hunnit kallna. Fyll med ägg och rulla samman. Fördela på fyra tallrikar, täck med varm pumpakärnssås och lägg tomatsåsen i en separat sträng över. Servera salladen bredvid. Servera genast.",
+          "uses": [
+            "kokta ägg",
+            "salt",
+            "masa harina",
+            "pumpakärnor",
+            "tomat",
+            "avokado",
+            "gurka"
+          ],
+          "minutes": 10,
+          "after": [
+            7
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Yucatán: äggfyllda majstortillas, epazotedoftande pumpakärnssås och separat tomatsås. Receptet använder faktiskt färdigkokta skalade ägg som insats, inte dold rå äggkokning. En större avokadoservering i utökad version är vardagsanpassning."
+    },
+    {
+      "base_id": "smako-mexican-chiles-en-nogada",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Chiles en nogada – fyllda poblano med valnötssås – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "chiles en nogada",
+      "primary": "fläskfärs",
+      "method": "oven",
+      "side": "fylld poblano",
+      "flavor": [
+        "valnöt",
+        "frukt",
+        "granatäpple"
+      ],
+      "equipment": [
+        "ugn",
+        "plåt",
+        "stekpanna",
+        "mixer",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "fyllning",
+          "name": "Fruktig färsfyllning",
+          "ingredients": [
+            {
+              "name": "poblano",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "poblano"
+            },
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "fläskfärs"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "äpple"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "svartpeppar"
+            }
+          ]
+        },
+        {
+          "id": "nogada",
+          "name": "Sval valnötssås",
+          "ingredients": [
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 130,
+              "unit": "g",
+              "role": "sauce",
+              "label": "valnötter"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "mjölk"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "karnor",
+          "name": "Syrlig servering",
+          "ingredients": [
+            {
+              "name": "granatäppelkärnor",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "granatäppelkärnor"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg valnötterna i mjölken i ett täckt kärl i kylskåp vid 4 °C; låt mjukna 60 minuter. Mjölken ska senare mixas med nötterna, inte hällas bort.",
+          "uses": [
+            "valnötter",
+            "mjölk"
+          ],
+          "minutes": 60,
+          "after": [],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 240 °C grill. Skölj poblano och lägg på plåt. Rosta nära grillelementet, vänd när skalet mörknar; skinnet ska blåsas upp och svartna fläckvis, inte köttet brännas bort.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 18,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dra av löst svartnat skal från poblano. Öppna längs ena sidan och ta bort kärnhuset utan att skära sönder frukterna. Sänk ugnen till 180 °C. Tärna äpplet.",
+          "uses": [
+            "poblano",
+            "äpple"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm rapsolja i pannan. Tillsätt fläskfärs och finfördela. Stek tills den är genomlagad och når 72 °C. Vänd ner äpple, fyllningens salt och svartpeppar. Sjud tills frukten mjuknat och fyllningen inte är vattnig.",
+          "uses": [
+            "rapsolja",
+            "fläskfärs",
+            "äpple",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 22,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Fyll poblano med all färsblandning och lägg i en form. Värm 12 minuter vid 180 °C, tills allt är varmt igen.",
+          "uses": [
+            "poblano",
+            "fläskfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa de mjuknade valnötterna och all mjölk med såsens salt till slät, tjock men hällbar sås. Tillsätt vid behov 30 ml vatten. Fördela de fyllda chilifrukterna mellan fyra tallrikar, skeda över sval nogada och granatäppelkärnor. Servera direkt.",
+          "uses": [
+            "valnötter",
+            "mjölk",
+            "salt",
+            "poblano",
+            "granatäppelkärnor"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Puebla-anknuten fylld poblano med fruktig färs och kall valnötssås, utan capeado. Enkel är en tydligt reducerad vardagsversion. Granatäpple behålls som syrlig kontrast, inte utbytbart dekorationsströ."
+    },
+    {
+      "base_id": "smako-mexican-chiles-en-nogada",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Chiles en nogada – fyllda poblano med valnötssås – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "chiles en nogada",
+      "primary": "fläskfärs",
+      "method": "oven",
+      "side": "fylld poblano",
+      "flavor": [
+        "valnöt",
+        "frukt",
+        "granatäpple"
+      ],
+      "equipment": [
+        "ugn",
+        "plåt",
+        "stekpanna",
+        "mixer",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "fyllning",
+          "name": "Fruktig färsfyllning",
+          "ingredients": [
+            {
+              "name": "poblano",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "poblano"
+            },
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "fläskfärs"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "äpple"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "svartpeppar"
+            },
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "päron"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "flavour",
+              "label": "russin"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomat"
+            }
+          ]
+        },
+        {
+          "id": "nogada",
+          "name": "Sval valnötssås",
+          "ingredients": [
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 130,
+              "unit": "g",
+              "role": "sauce",
+              "label": "valnötter"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "mjölk"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "karnor",
+          "name": "Syrlig servering",
+          "ingredients": [
+            {
+              "name": "granatäppelkärnor",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "granatäppelkärnor"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg valnötterna i mjölken i ett täckt kärl i kylskåp vid 4 °C; låt mjukna 60 minuter. Mjölken ska senare mixas med nötterna, inte hällas bort.",
+          "uses": [
+            "valnötter",
+            "mjölk"
+          ],
+          "minutes": 60,
+          "after": [],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 240 °C grill. Skölj poblano och lägg på plåt. Rosta nära grillelementet, vänd när skalet mörknar; skinnet ska blåsas upp och svartna fläckvis, inte köttet brännas bort.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 18,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dra av löst svartnat skal från poblano. Öppna längs ena sidan och ta bort kärnhuset utan att skära sönder frukterna. Sänk ugnen till 180 °C. Tärna äpplet och päronet samt tomaten.",
+          "uses": [
+            "poblano",
+            "äpple",
+            "päron",
+            "tomat"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm rapsolja i pannan. Tillsätt fläskfärs och finfördela. Stek tills den är genomlagad och når 72 °C. Vänd ner äpple, päron, russin och tomat, fyllningens salt och svartpeppar. Sjud tills frukten mjuknat och fyllningen inte är vattnig.",
+          "uses": [
+            "rapsolja",
+            "fläskfärs",
+            "äpple",
+            "salt",
+            "svartpeppar",
+            "päron",
+            "russin",
+            "tomat"
+          ],
+          "minutes": 22,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Fyll poblano med all färsblandning och lägg i en form. Värm 12 minuter vid 180 °C, tills allt är varmt igen.",
+          "uses": [
+            "poblano",
+            "fläskfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa de mjuknade valnötterna och all mjölk med såsens salt till slät, tjock men hällbar sås. Tillsätt vid behov 30 ml vatten. Fördela de fyllda chilifrukterna mellan fyra tallrikar, skeda över sval nogada och granatäppelkärnor. Servera direkt.",
+          "uses": [
+            "valnötter",
+            "mjölk",
+            "salt",
+            "poblano",
+            "granatäppelkärnor"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Puebla-anknuten fylld poblano med fruktig färs och kall valnötssås, utan capeado. Enkel är en tydligt reducerad vardagsversion. Granatäpple behålls som syrlig kontrast, inte utbytbart dekorationsströ."
+    },
+    {
+      "base_id": "smako-mexican-chiles-en-nogada",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Chiles en nogada – fyllda poblano med valnötssås – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "chiles en nogada",
+      "primary": "fläskfärs",
+      "method": "oven",
+      "side": "fylld poblano",
+      "flavor": [
+        "valnöt",
+        "frukt",
+        "granatäpple"
+      ],
+      "equipment": [
+        "ugn",
+        "plåt",
+        "stekpanna",
+        "mixer",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "fyllning",
+          "name": "Fruktig färsfyllning",
+          "ingredients": [
+            {
+              "name": "poblano",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "poblano"
+            },
+            {
+              "name": "fläskfärs",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "fläskfärs"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 280,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "äpple"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "svartpeppar"
+            },
+            {
+              "name": "päron",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "päron"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "flavour",
+              "label": "russin"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomat"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 130,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "mandel",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "g",
+              "role": "primary",
+              "label": "mandel"
+            }
+          ]
+        },
+        {
+          "id": "nogada",
+          "name": "Sval valnötssås",
+          "ingredients": [
+            {
+              "name": "valnötter",
+              "form": "as_sold",
+              "quantity": 130,
+              "unit": "g",
+              "role": "sauce",
+              "label": "valnötter"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 200,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "mjölk"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "färskost",
+              "form": "as_sold",
+              "quantity": 100,
+              "unit": "g",
+              "role": "sauce",
+              "label": "färskost"
+            }
+          ]
+        },
+        {
+          "id": "karnor",
+          "name": "Syrlig servering",
+          "ingredients": [
+            {
+              "name": "granatäppelkärnor",
+              "form": "raw_edible",
+              "quantity": 100,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "granatäppelkärnor"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg valnötterna i mjölken i ett täckt kärl i kylskåp vid 4 °C; låt mjukna 60 minuter. Mjölken ska senare mixas med nötterna, inte hällas bort.",
+          "uses": [
+            "valnötter",
+            "mjölk"
+          ],
+          "minutes": 60,
+          "after": [],
+          "passive": true
+        },
+        {
+          "text": "Sätt ugnen på 240 °C grill. Skölj poblano och lägg på plåt. Rosta nära grillelementet, vänd när skalet mörknar; skinnet ska blåsas upp och svartna fläckvis, inte köttet brännas bort.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 18,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 10,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dra av löst svartnat skal från poblano. Öppna längs ena sidan och ta bort kärnhuset utan att skära sönder frukterna. Sänk ugnen till 180 °C. Tärna äpplet och päronet samt tomaten. Hacka lök, vitlök och mandel.",
+          "uses": [
+            "poblano",
+            "äpple",
+            "päron",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "mandel"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm rapsolja i pannan och mjukstek lök/vitlök 4 minuter. Tillsätt fläskfärs och finfördela. Stek tills den är genomlagad och når 72 °C. Vänd ner äpple, päron, russin och tomat samt mandel, fyllningens salt och svartpeppar. Sjud tills frukten mjuknat och fyllningen inte är vattnig.",
+          "uses": [
+            "rapsolja",
+            "fläskfärs",
+            "äpple",
+            "salt",
+            "svartpeppar",
+            "päron",
+            "russin",
+            "tomat",
+            "gul lök",
+            "vitlök",
+            "mandel"
+          ],
+          "minutes": 22,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Fyll poblano med all färsblandning och lägg i en form. Värm 12 minuter vid 180 °C, tills allt är varmt igen.",
+          "uses": [
+            "poblano",
+            "fläskfärs"
+          ],
+          "minutes": 12,
+          "after": [
+            5
+          ],
+          "passive": true
+        },
+        {
+          "text": "Mixa de mjuknade valnötterna och all mjölk med såsens salt och färskost till slät, tjock men hällbar sås. Tillsätt vid behov 30 ml vatten. Fördela de fyllda chilifrukterna mellan fyra tallrikar, skeda över sval nogada och granatäppelkärnor. Servera direkt.",
+          "uses": [
+            "valnötter",
+            "mjölk",
+            "salt",
+            "poblano",
+            "granatäppelkärnor",
+            "färskost"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Puebla-anknuten fylld poblano med fruktig färs och kall valnötssås, utan capeado. Enkel är en tydligt reducerad vardagsversion. Granatäpple behålls som syrlig kontrast, inte utbytbart dekorationsströ."
+    },
+    {
+      "base_id": "smako-mexican-rajas-con-crema",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Rajas con crema – rostade poblano i gräddsås – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "rajas con crema",
+      "primary": "poblano",
+      "method": "pan",
+      "side": "majstortillas",
+      "flavor": [
+        "rostad poblano",
+        "grädde",
+        "majs"
+      ],
+      "equipment": [
+        "ugn",
+        "plåt",
+        "stekpanna",
+        "tortillapress eller kavel"
+      ],
+      "components": [
+        {
+          "id": "rajas",
+          "name": "Krämiga chilistrimlor",
+          "ingredients": [
+            {
+              "name": "poblano",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "poblano"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "grädde",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "grädde"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "majs"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "majsbrod",
+          "name": "Hemlagade majstortillas",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "masa harina"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda masa harina, tortillornas salt och 420 ml vatten till mjuk, sammanhängande deg. Knåda kort; den ska inte spricka när en liten bit plattas ut. Justera vid behov med 20 ml vatten.",
+          "uses": [
+            "masa harina",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Täck och låt majsdegen vila 15 minuter så att mjölet hinner binda vattnet.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i små bitar och pressa mellan två ark återanvändbart bakpapper till cirka 2 mm tjocka tortillas. Grädda i het torr panna cirka 1 minut per sida, i omgångar. Lägg under ren kökshandduk så att de håller sig mjuka; använd direkt i följande steg.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 24,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sätt ugnen på 240 °C grill. Skölj poblano och lägg på plåt. Rosta nära grillelementet, vänd när skalet mörknar; skinnet ska blåsas upp och svartna fläckvis, inte köttet brännas bort.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dra av löst skal, ta bort kärnhusen och skär poblano i breda strimlor. Skiva löken.",
+          "uses": [
+            "poblano",
+            "gul lök"
+          ],
+          "minutes": 9,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm rapsoljan och fräs lök på medelvärme tills den mjuknar utan hård färg. Vänd ner poblano och fryst majs och låt allt bli hett.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "poblano",
+            "majs"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Häll i grädde och rajasens salt. Sjud lugnt 6 minuter tills såsen omsluter grönsakerna.",
+          "uses": [
+            "grädde",
+            "salt"
+          ],
+          "minutes": 9,
+          "after": [
+            7
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm majstortillorna kort i torr panna om de kallnat. Fördela rajas mellan fyra portioner och servera med tortillorna.",
+          "uses": [
+            "masa harina",
+            "poblano",
+            "grädde"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Rostade, skalade poblano i strimlor med lök och grädde. Majs och senare bönor gör detta till en hel vardagsmiddag; tillagningen reduceras inte till rå paprikasås."
+    },
+    {
+      "base_id": "smako-mexican-rajas-con-crema",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Rajas con crema – rostade poblano i gräddsås – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "rajas con crema",
+      "primary": "poblano",
+      "method": "pan",
+      "side": "majstortillas",
+      "flavor": [
+        "rostad poblano",
+        "grädde",
+        "majs"
+      ],
+      "equipment": [
+        "ugn",
+        "plåt",
+        "stekpanna",
+        "tortillapress eller kavel"
+      ],
+      "components": [
+        {
+          "id": "rajas",
+          "name": "Krämiga chilistrimlor",
+          "ingredients": [
+            {
+              "name": "poblano",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "poblano"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "grädde",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "grädde"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "majs"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "mozzarella",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "g",
+              "role": "primary",
+              "label": "mozzarella"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "svarta bönor"
+            }
+          ]
+        },
+        {
+          "id": "majsbrod",
+          "name": "Hemlagade majstortillas",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "masa harina"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda masa harina, tortillornas salt och 420 ml vatten till mjuk, sammanhängande deg. Knåda kort; den ska inte spricka när en liten bit plattas ut. Justera vid behov med 20 ml vatten.",
+          "uses": [
+            "masa harina",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Täck och låt majsdegen vila 15 minuter så att mjölet hinner binda vattnet.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i små bitar och pressa mellan två ark återanvändbart bakpapper till cirka 2 mm tjocka tortillas. Grädda i het torr panna cirka 1 minut per sida, i omgångar. Lägg under ren kökshandduk så att de håller sig mjuka; använd direkt i följande steg.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 24,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sätt ugnen på 240 °C grill. Skölj poblano och lägg på plåt. Rosta nära grillelementet, vänd när skalet mörknar; skinnet ska blåsas upp och svartna fläckvis, inte köttet brännas bort.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dra av löst skal, ta bort kärnhusen och skär poblano i breda strimlor. Skiva löken och hacka vitlöken.",
+          "uses": [
+            "poblano",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 9,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm rapsoljan och fräs lök på medelvärme tills den mjuknar utan hård färg; tillsätt vitlök den sista minuten. Vänd ner poblano och fryst majs och låt allt bli hett.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "poblano",
+            "majs",
+            "vitlök"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Häll i grädde och rajasens salt. Skölj de kokta svarta bönorna, låt rinna av och vänd ner. Sjud lugnt 6 minuter tills såsen omsluter grönsakerna. Riv mozzarella och låt smälta i såsen.",
+          "uses": [
+            "grädde",
+            "salt",
+            "svarta bönor",
+            "mozzarella"
+          ],
+          "minutes": 9,
+          "after": [
+            7
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm majstortillorna kort i torr panna om de kallnat. Fördela rajas mellan fyra portioner och servera med tortillorna.",
+          "uses": [
+            "masa harina",
+            "poblano",
+            "grädde"
+          ],
+          "minutes": 5,
+          "after": [
+            8
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Rostade, skalade poblano i strimlor med lök och grädde. Majs och senare bönor gör detta till en hel vardagsmiddag; tillagningen reduceras inte till rå paprikasås."
+    },
+    {
+      "base_id": "smako-mexican-rajas-con-crema",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Rajas con crema – rostade poblano i gräddsås – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "rajas con crema",
+      "primary": "poblano",
+      "method": "pan",
+      "side": "majstortillas",
+      "flavor": [
+        "rostad poblano",
+        "grädde",
+        "majs"
+      ],
+      "equipment": [
+        "ugn",
+        "plåt",
+        "stekpanna",
+        "tortillapress eller kavel"
+      ],
+      "components": [
+        {
+          "id": "rajas",
+          "name": "Krämiga chilistrimlor",
+          "ingredients": [
+            {
+              "name": "poblano",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "poblano"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "grädde",
+              "form": "as_sold",
+              "quantity": 250,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "grädde"
+            },
+            {
+              "name": "majs",
+              "form": "as_sold",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "majs"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "mozzarella",
+              "form": "as_sold",
+              "quantity": 120,
+              "unit": "g",
+              "role": "primary",
+              "label": "mozzarella"
+            },
+            {
+              "name": "svarta bönor",
+              "form": "cooked_drained",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "svarta bönor"
+            }
+          ]
+        },
+        {
+          "id": "tomatsallad",
+          "name": "Frisk tomatsallad",
+          "ingredients": [
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomat"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "koriander"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "majsbrod",
+          "name": "Hemlagade majstortillas",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "masa harina"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda masa harina, tortillornas salt och 420 ml vatten till mjuk, sammanhängande deg. Knåda kort; den ska inte spricka när en liten bit plattas ut. Justera vid behov med 20 ml vatten.",
+          "uses": [
+            "masa harina",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Täck och låt majsdegen vila 15 minuter så att mjölet hinner binda vattnet.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 15,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i små bitar och pressa mellan två ark återanvändbart bakpapper till cirka 2 mm tjocka tortillas. Grädda i het torr panna cirka 1 minut per sida, i omgångar. Lägg under ren kökshandduk så att de håller sig mjuka; använd direkt i följande steg.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 24,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sätt ugnen på 240 °C grill. Skölj poblano och lägg på plåt. Rosta nära grillelementet, vänd när skalet mörknar; skinnet ska blåsas upp och svartna fläckvis, inte köttet brännas bort.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 18,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg de rostade frukterna i en värmetålig skål med lock. Låt ånga och svalna 10 minuter så att skalet lossnar.",
+          "uses": [
+            "poblano"
+          ],
+          "minutes": 10,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dra av löst skal, ta bort kärnhusen och skär poblano i breda strimlor. Skiva löken och hacka vitlöken.",
+          "uses": [
+            "poblano",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 9,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm rapsoljan och fräs lök på medelvärme tills den mjuknar utan hård färg; tillsätt vitlök den sista minuten. Vänd ner poblano och fryst majs och låt allt bli hett.",
+          "uses": [
+            "rapsolja",
+            "gul lök",
+            "poblano",
+            "majs",
+            "vitlök"
+          ],
+          "minutes": 10,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Häll i grädde och rajasens salt. Skölj de kokta svarta bönorna, låt rinna av och vänd ner. Sjud lugnt 6 minuter tills såsen omsluter grönsakerna. Riv mozzarella och låt smälta i såsen.",
+          "uses": [
+            "grädde",
+            "salt",
+            "svarta bönor",
+            "mozzarella"
+          ],
+          "minutes": 9,
+          "after": [
+            7
+          ],
+          "passive": false
+        },
+        {
+          "text": "Tärna tomater, hacka koriander och vänd med limejuice och salladens salt.",
+          "uses": [
+            "tomat",
+            "koriander",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm majstortillorna kort i torr panna om de kallnat. Fördela rajas mellan fyra portioner och servera med tortillorna och tomatsalladen.",
+          "uses": [
+            "masa harina",
+            "poblano",
+            "grädde",
+            "tomat"
+          ],
+          "minutes": 5,
+          "after": [
+            9
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Rostade, skalade poblano i strimlor med lök och grädde. Majs och senare bönor gör detta till en hel vardagsmiddag; tillagningen reduceras inte till rå paprikasås."
+    },
+    {
+      "base_id": "smako-mexican-tacos-al-pastor",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Tacos al pastor – ugnsanpassade chilimarinerade fläskskivor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tacos al pastor",
+      "primary": "fläskkarré",
+      "method": "oven",
+      "side": "majstortillas",
+      "flavor": [
+        "guajillo",
+        "achiote",
+        "ananas"
+      ],
+      "equipment": [
+        "ugn",
+        "plåt",
+        "mixer",
+        "stekpanna",
+        "tortillapress eller kavel",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "adobo",
+          "name": "Chilimarinerat fläsk",
+          "ingredients": [
+            {
+              "name": "fläskkarré",
+              "form": "raw_edible",
+              "quantity": 750,
+              "unit": "g",
+              "role": "primary",
+              "label": "fläskkarré"
+            },
+            {
+              "name": "guajillochili",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "guajillochili"
+            },
+            {
+              "name": "achiotepasta",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "achiotepasta"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "äppelcidervinäger"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "ananas",
+          "name": "Rostad ananas",
+          "ingredients": [
+            {
+              "name": "ananas",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "ananas"
+            }
+          ]
+        },
+        {
+          "id": "majsbrod",
+          "name": "Hemlagade majstortillas",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "masa harina"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Riv guajillochili i bitar och lägg i 250 ml vatten. Sjud 5 minuter och låt sedan mjukna av värmen 15 minuter.",
+          "uses": [
+            "guajillochili"
+          ],
+          "minutes": 20,
+          "after": [],
+          "passive": true
+        },
+        {
+          "text": "Mixa chilin med sitt blötläggningsvatten, achiotepasta, äppelcidervinäger, vitlök och köttets salt. Skär fläskkarré i 3–4 mm tjocka skivor tvärs fibrerna. Vänd noga i marinaden.",
+          "uses": [
+            "guajillochili",
+            "achiotepasta",
+            "äppelcidervinäger",
+            "vitlök",
+            "salt",
+            "fläskkarré"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Täck och marinera 4 timmar i kylskåp vid 4 °C. Håll råköttskärlet avskilt från färdig mat.",
+          "uses": [
+            "fläskkarré"
+          ],
+          "minutes": 240,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Blanda masa harina, tortillornas salt och 420 ml vatten till mjuk, sammanhängande deg. Knåda kort; den ska inte spricka när en liten bit plattas ut. Justera vid behov med 20 ml vatten.",
+          "uses": [
+            "masa harina",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Täck och låt majsdegen vila 15 minuter så att mjölet hinner binda vattnet.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 15,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i små bitar och pressa mellan två ark återanvändbart bakpapper till cirka 2 mm tjocka tortillas. Grädda i het torr panna cirka 1 minut per sida, i omgångar. Lägg under ren kökshandduk så att de håller sig mjuka; använd direkt i följande steg.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 24,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sätt ugnen på 230 °C över-/undervärme. Lägg fläskskivorna i ett glest lager på bakpapper; fördela all marinad tunt över köttet. Skiva ananas tunt och lägg bredvid. Använd två plåtar om köttet annars staplas.",
+          "uses": [
+            "fläskkarré",
+            "ananas"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Rosta cirka 18 minuter tills köttet är genomlagat, når minst 70 °C och har mörka kanter. Byt plats på plåtarna halvvägs och passa noga mot slutet. Förläng vid behov; rå marinad ska vara ordentligt genomhettad.",
+          "uses": [
+            "fläskkarré",
+            "ananas"
+          ],
+          "minutes": 18,
+          "after": [
+            7
+          ],
+          "passive": false
+        },
+        {
+          "text": "Hacka det rostade köttet och ananasen grovt. Värm tortillorna kort i torr panna och fördela på fyra portioner.",
+          "uses": [
+            "fläskkarré",
+            "ananas",
+            "masa harina"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Ugnsanpassning, inte traditionell vertikal trompo: tunna adobomarinerade karréskivor rostas i ett lager och hackas. Ananas tillsätts vid rostning, inte rå i lång marinering. Achiote/guajillo och rätt fläskdetalj kräver registergranskning."
+    },
+    {
+      "base_id": "smako-mexican-tacos-al-pastor",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Tacos al pastor – ugnsanpassade chilimarinerade fläskskivor – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tacos al pastor",
+      "primary": "fläskkarré",
+      "method": "oven",
+      "side": "majstortillas",
+      "flavor": [
+        "guajillo",
+        "achiote",
+        "ananas"
+      ],
+      "equipment": [
+        "ugn",
+        "plåt",
+        "mixer",
+        "stekpanna",
+        "tortillapress eller kavel",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "adobo",
+          "name": "Chilimarinerat fläsk",
+          "ingredients": [
+            {
+              "name": "fläskkarré",
+              "form": "raw_edible",
+              "quantity": 750,
+              "unit": "g",
+              "role": "primary",
+              "label": "fläskkarré"
+            },
+            {
+              "name": "guajillochili",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "guajillochili"
+            },
+            {
+              "name": "achiotepasta",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "achiotepasta"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "äppelcidervinäger"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "oregano"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "spiskummin"
+            },
+            {
+              "name": "apelsinjuice",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "apelsinjuice"
+            }
+          ]
+        },
+        {
+          "id": "ananas",
+          "name": "Rostad ananas",
+          "ingredients": [
+            {
+              "name": "ananas",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "ananas"
+            }
+          ]
+        },
+        {
+          "id": "majsbrod",
+          "name": "Hemlagade majstortillas",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "masa harina"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Riv guajillochili i bitar och lägg i 250 ml vatten. Sjud 5 minuter och låt sedan mjukna av värmen 15 minuter.",
+          "uses": [
+            "guajillochili"
+          ],
+          "minutes": 20,
+          "after": [],
+          "passive": true
+        },
+        {
+          "text": "Mixa chilin med sitt blötläggningsvatten, achiotepasta, äppelcidervinäger, vitlök och köttets salt samt oregano, spiskummin och apelsinjuice. Skär fläskkarré i 3–4 mm tjocka skivor tvärs fibrerna. Vänd noga i marinaden.",
+          "uses": [
+            "guajillochili",
+            "achiotepasta",
+            "äppelcidervinäger",
+            "vitlök",
+            "salt",
+            "fläskkarré",
+            "oregano",
+            "spiskummin",
+            "apelsinjuice"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Täck och marinera 4 timmar i kylskåp vid 4 °C. Håll råköttskärlet avskilt från färdig mat.",
+          "uses": [
+            "fläskkarré"
+          ],
+          "minutes": 240,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Blanda masa harina, tortillornas salt och 420 ml vatten till mjuk, sammanhängande deg. Knåda kort; den ska inte spricka när en liten bit plattas ut. Justera vid behov med 20 ml vatten.",
+          "uses": [
+            "masa harina",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Täck och låt majsdegen vila 15 minuter så att mjölet hinner binda vattnet.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 15,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i små bitar och pressa mellan två ark återanvändbart bakpapper till cirka 2 mm tjocka tortillas. Grädda i het torr panna cirka 1 minut per sida, i omgångar. Lägg under ren kökshandduk så att de håller sig mjuka; använd direkt i följande steg.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 24,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sätt ugnen på 230 °C över-/undervärme. Lägg fläskskivorna i ett glest lager på bakpapper; fördela all marinad tunt över köttet. Skiva ananas tunt och lägg bredvid. Använd två plåtar om köttet annars staplas.",
+          "uses": [
+            "fläskkarré",
+            "ananas"
+          ],
+          "minutes": 6,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Rosta cirka 18 minuter tills köttet är genomlagat, når minst 70 °C och har mörka kanter. Byt plats på plåtarna halvvägs och passa noga mot slutet. Förläng vid behov; rå marinad ska vara ordentligt genomhettad.",
+          "uses": [
+            "fläskkarré",
+            "ananas"
+          ],
+          "minutes": 18,
+          "after": [
+            7
+          ],
+          "passive": false
+        },
+        {
+          "text": "Hacka det rostade köttet och ananasen grovt. Värm tortillorna kort i torr panna och fördela på fyra portioner.",
+          "uses": [
+            "fläskkarré",
+            "ananas",
+            "masa harina"
+          ],
+          "minutes": 6,
+          "after": [
+            8
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Ugnsanpassning, inte traditionell vertikal trompo: tunna adobomarinerade karréskivor rostas i ett lager och hackas. Ananas tillsätts vid rostning, inte rå i lång marinering. Achiote/guajillo och rätt fläskdetalj kräver registergranskning."
+    },
+    {
+      "base_id": "smako-mexican-tacos-al-pastor",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Tacos al pastor – ugnsanpassade chilimarinerade fläskskivor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tacos al pastor",
+      "primary": "fläskkarré",
+      "method": "oven",
+      "side": "majstortillas",
+      "flavor": [
+        "guajillo",
+        "achiote",
+        "ananas"
+      ],
+      "equipment": [
+        "ugn",
+        "plåt",
+        "mixer",
+        "stekpanna",
+        "tortillapress eller kavel",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "adobo",
+          "name": "Chilimarinerat fläsk",
+          "ingredients": [
+            {
+              "name": "fläskkarré",
+              "form": "raw_edible",
+              "quantity": 750,
+              "unit": "g",
+              "role": "primary",
+              "label": "fläskkarré"
+            },
+            {
+              "name": "guajillochili",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "guajillochili"
+            },
+            {
+              "name": "achiotepasta",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "achiotepasta"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "äppelcidervinäger"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "oregano"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "spiskummin"
+            },
+            {
+              "name": "apelsinjuice",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "apelsinjuice"
+            }
+          ]
+        },
+        {
+          "id": "ananas",
+          "name": "Rostad ananas",
+          "ingredients": [
+            {
+              "name": "ananas",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "ananas"
+            }
+          ]
+        },
+        {
+          "id": "salsa",
+          "name": "Rostad tomatillosalsa",
+          "ingredients": [
+            {
+              "name": "tomatillo",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomatillo"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 90,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "koriander"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            }
+          ]
+        },
+        {
+          "id": "majsbrod",
+          "name": "Hemlagade majstortillas",
+          "ingredients": [
+            {
+              "name": "masa harina",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "masa harina"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Riv guajillochili i bitar och lägg i 250 ml vatten. Sjud 5 minuter och låt sedan mjukna av värmen 15 minuter.",
+          "uses": [
+            "guajillochili"
+          ],
+          "minutes": 20,
+          "after": [],
+          "passive": true
+        },
+        {
+          "text": "Mixa chilin med sitt blötläggningsvatten, achiotepasta, äppelcidervinäger, vitlök och köttets salt samt oregano, spiskummin och apelsinjuice. Skär fläskkarré i 3–4 mm tjocka skivor tvärs fibrerna. Vänd noga i marinaden.",
+          "uses": [
+            "guajillochili",
+            "achiotepasta",
+            "äppelcidervinäger",
+            "vitlök",
+            "salt",
+            "fläskkarré",
+            "oregano",
+            "spiskummin",
+            "apelsinjuice"
+          ],
+          "minutes": 12,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Täck och marinera 4 timmar i kylskåp vid 4 °C. Håll råköttskärlet avskilt från färdig mat.",
+          "uses": [
+            "fläskkarré"
+          ],
+          "minutes": 240,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Blanda masa harina, tortillornas salt och 420 ml vatten till mjuk, sammanhängande deg. Knåda kort; den ska inte spricka när en liten bit plattas ut. Justera vid behov med 20 ml vatten.",
+          "uses": [
+            "masa harina",
+            "salt"
+          ],
+          "minutes": 5,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Täck och låt majsdegen vila 15 minuter så att mjölet hinner binda vattnet.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 15,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Dela degen i små bitar och pressa mellan två ark återanvändbart bakpapper till cirka 2 mm tjocka tortillas. Grädda i het torr panna cirka 1 minut per sida, i omgångar. Lägg under ren kökshandduk så att de håller sig mjuka; använd direkt i följande steg.",
+          "uses": [
+            "masa harina"
+          ],
+          "minutes": 24,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Ta bort tomatillornas pappershölje och skölj den klibbiga ytan. Halvera dem och rosta tillsammans med klyftad lök och salsans vitlök i torr panna tills de är mjuka och fläckvis mörka. Mixa med koriander och salsans salt.",
+          "uses": [
+            "tomatillo",
+            "gul lök",
+            "vitlök",
+            "koriander",
+            "salt"
+          ],
+          "minutes": 17,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sätt ugnen på 230 °C över-/undervärme. Lägg fläskskivorna i ett glest lager på bakpapper; fördela all marinad tunt över köttet. Skiva ananas tunt och lägg bredvid. Använd två plåtar om köttet annars staplas.",
+          "uses": [
+            "fläskkarré",
+            "ananas"
+          ],
+          "minutes": 6,
+          "after": [
+            7
+          ],
+          "passive": false
+        },
+        {
+          "text": "Rosta cirka 18 minuter tills köttet är genomlagat, når minst 70 °C och har mörka kanter. Byt plats på plåtarna halvvägs och passa noga mot slutet. Förläng vid behov; rå marinad ska vara ordentligt genomhettad.",
+          "uses": [
+            "fläskkarré",
+            "ananas"
+          ],
+          "minutes": 18,
+          "after": [
+            8
+          ],
+          "passive": false
+        },
+        {
+          "text": "Hacka det rostade köttet och ananasen grovt. Värm tortillorna kort i torr panna och fördela på fyra portioner. Servera tomatillosalsan vid sidan.",
+          "uses": [
+            "fläskkarré",
+            "ananas",
+            "masa harina",
+            "tomatillo",
+            "gul lök",
+            "koriander"
+          ],
+          "minutes": 6,
+          "after": [
+            9
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Ugnsanpassning, inte traditionell vertikal trompo: tunna adobomarinerade karréskivor rostas i ett lager och hackas. Ananas tillsätts vid rostning, inte rå i lång marinering. Achiote/guajillo och rätt fläskdetalj kräver registergranskning."
+    },
+    {
+      "base_id": "smako-mexican-carne-en-su-jugo",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Carne en su jugo – nötkött i eget spad med bönor – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "carne en su jugo",
+      "primary": "nötinnanlår",
+      "method": "pot",
+      "side": "kokta bönor",
+      "flavor": [
+        "köttspad",
+        "tomatillo",
+        "rimmat fläsk"
+      ],
+      "equipment": [
+        "gryta",
+        "mixer",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "gryta",
+          "name": "Kött i eget spad",
+          "ingredients": [
+            {
+              "name": "nötinnanlår",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "nötinnanlår"
+            },
+            {
+              "name": "rimmat fläsk",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "flavour",
+              "label": "rimmat fläsk"
+            },
+            {
+              "name": "tomatillo",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomatillo"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "bönor"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "svartpeppar"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär nötinnanlår i mycket tunna skivor tvärs fibrerna och därefter i små rutor. Tärna det rimmade fläsket. Avlägsna tomatillohöljet, skölj och dela frukterna. Hacka lök och vitlök.",
+          "uses": [
+            "nötinnanlår",
+            "rimmat fläsk",
+            "tomatillo",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 13,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Lägg fläsket i kall gryta och värm långsamt tills fett smälter ut; stek krispigt och genomlagat. Lyft ur fläsket men behåll fettet. Lägg i nötkött och låt det mjukna på medelvärme så att det avger vätska. Bryn inte hårt och häll inte bort spadet.",
+          "uses": [
+            "rimmat fläsk",
+            "nötinnanlår"
+          ],
+          "minutes": 14,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Mixa tomatillo, gul lök, vitlök, limejuice, salt och svartpeppar med 650 ml vatten. Häll i köttgrytan och koka upp.",
+          "uses": [
+            "tomatillo",
+            "gul lök",
+            "vitlök",
+            "limejuice",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sjud varsamt under lock cirka 25 minuter, tills köttet är mört. Förläng vid behov för den valda detaljen. Rätten ska vara en koncentrerad buljong, inte reduceras till stekt kött.",
+          "uses": [
+            "nötinnanlår",
+            "tomatillo"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj de redan kokta bönorna, låt rinna av och värm i grytan 5 minuter. Smaka av utan att lägga till olistade ingredienser; såväl fläsk ger sälta.",
+          "uses": [
+            "bönor",
+            "nötinnanlår"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Fördela bönor, kött och spad i fyra djupa tallrikar. Lägg det genomstekta fläsket över så att det behåller sin textur.",
+          "uses": [
+            "bönor",
+            "nötinnanlår",
+            "rimmat fläsk"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Jalisco-anknuten rätt med tunt skuret nötkött som avger eget spad, grön tomatillosås och bönor. Rimmat fläsk ersätter bacon uttryckligen. Nötinnanlår används i stället för registrets generiska långkokskött."
+    },
+    {
+      "base_id": "smako-mexican-carne-en-su-jugo",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Carne en su jugo – nötkött i eget spad med bönor – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "carne en su jugo",
+      "primary": "nötinnanlår",
+      "method": "pot",
+      "side": "kokta bönor",
+      "flavor": [
+        "köttspad",
+        "tomatillo",
+        "rimmat fläsk"
+      ],
+      "equipment": [
+        "gryta",
+        "mixer",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "gryta",
+          "name": "Kött i eget spad",
+          "ingredients": [
+            {
+              "name": "nötinnanlår",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "nötinnanlår"
+            },
+            {
+              "name": "rimmat fläsk",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "flavour",
+              "label": "rimmat fläsk"
+            },
+            {
+              "name": "tomatillo",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomatillo"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "bönor"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "svartpeppar"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "koriander"
+            },
+            {
+              "name": "chiliflakes",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "chiliflakes"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "sojasås"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär nötinnanlår i mycket tunna skivor tvärs fibrerna och därefter i små rutor. Tärna det rimmade fläsket. Avlägsna tomatillohöljet, skölj och dela frukterna. Hacka lök och vitlök.",
+          "uses": [
+            "nötinnanlår",
+            "rimmat fläsk",
+            "tomatillo",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 13,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Lägg fläsket i kall gryta och värm långsamt tills fett smälter ut; stek krispigt och genomlagat. Lyft ur fläsket men behåll fettet. Lägg i nötkött och låt det mjukna på medelvärme så att det avger vätska. Bryn inte hårt och häll inte bort spadet.",
+          "uses": [
+            "rimmat fläsk",
+            "nötinnanlår"
+          ],
+          "minutes": 14,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Mixa tomatillo, gul lök, vitlök, limejuice, salt och svartpeppar med 650 ml vatten samt koriander, chiliflakes och soja. Häll i köttgrytan och koka upp.",
+          "uses": [
+            "tomatillo",
+            "gul lök",
+            "vitlök",
+            "limejuice",
+            "salt",
+            "svartpeppar",
+            "koriander",
+            "chiliflakes",
+            "sojasås"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sjud varsamt under lock cirka 25 minuter, tills köttet är mört. Förläng vid behov för den valda detaljen. Rätten ska vara en koncentrerad buljong, inte reduceras till stekt kött.",
+          "uses": [
+            "nötinnanlår",
+            "tomatillo"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj de redan kokta bönorna, låt rinna av och värm i grytan 5 minuter. Smaka av utan att lägga till olistade ingredienser; såväl fläsk som soja ger sälta.",
+          "uses": [
+            "bönor",
+            "nötinnanlår"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Fördela bönor, kött och spad i fyra djupa tallrikar. Lägg det genomstekta fläsket över så att det behåller sin textur.",
+          "uses": [
+            "bönor",
+            "nötinnanlår",
+            "rimmat fläsk"
+          ],
+          "minutes": 3,
+          "after": [
+            5
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Jalisco-anknuten rätt med tunt skuret nötkött som avger eget spad, grön tomatillosås och bönor. Rimmat fläsk ersätter bacon uttryckligen. Nötinnanlår används i stället för registrets generiska långkokskött."
+    },
+    {
+      "base_id": "smako-mexican-carne-en-su-jugo",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Carne en su jugo – nötkött i eget spad med bönor – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "carne en su jugo",
+      "primary": "nötinnanlår",
+      "method": "pot",
+      "side": "kokta bönor",
+      "flavor": [
+        "köttspad",
+        "tomatillo",
+        "rimmat fläsk"
+      ],
+      "equipment": [
+        "gryta",
+        "mixer",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "gryta",
+          "name": "Kött i eget spad",
+          "ingredients": [
+            {
+              "name": "nötinnanlår",
+              "form": "raw_edible",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "nötinnanlår"
+            },
+            {
+              "name": "rimmat fläsk",
+              "form": "raw_edible",
+              "quantity": 120,
+              "unit": "g",
+              "role": "flavour",
+              "label": "rimmat fläsk"
+            },
+            {
+              "name": "tomatillo",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomatillo"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "bönor",
+              "form": "cooked_drained",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "bönor"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "svartpeppar"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "koriander"
+            },
+            {
+              "name": "chiliflakes",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "chiliflakes"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "sojasås"
+            }
+          ]
+        },
+        {
+          "id": "servering",
+          "name": "Frisk servering",
+          "ingredients": [
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "avokado"
+            },
+            {
+              "name": "rädisa",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "rädisa"
+            },
+            {
+              "name": "salladslök",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "salladslök"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skär nötinnanlår i mycket tunna skivor tvärs fibrerna och därefter i små rutor. Tärna det rimmade fläsket. Avlägsna tomatillohöljet, skölj och dela frukterna. Hacka lök och vitlök.",
+          "uses": [
+            "nötinnanlår",
+            "rimmat fläsk",
+            "tomatillo",
+            "gul lök",
+            "vitlök"
+          ],
+          "minutes": 13,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Lägg fläsket i kall gryta och värm långsamt tills fett smälter ut; stek krispigt och genomlagat. Lyft ur fläsket men behåll fettet. Lägg i nötkött och låt det mjukna på medelvärme så att det avger vätska. Bryn inte hårt och häll inte bort spadet.",
+          "uses": [
+            "rimmat fläsk",
+            "nötinnanlår"
+          ],
+          "minutes": 14,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Mixa tomatillo, gul lök, vitlök, limejuice, salt och svartpeppar med 650 ml vatten samt koriander, chiliflakes och soja. Häll i köttgrytan och koka upp.",
+          "uses": [
+            "tomatillo",
+            "gul lök",
+            "vitlök",
+            "limejuice",
+            "salt",
+            "svartpeppar",
+            "koriander",
+            "chiliflakes",
+            "sojasås"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sjud varsamt under lock cirka 25 minuter, tills köttet är mört. Förläng vid behov för den valda detaljen. Rätten ska vara en koncentrerad buljong, inte reduceras till stekt kött.",
+          "uses": [
+            "nötinnanlår",
+            "tomatillo"
+          ],
+          "minutes": 25,
+          "after": [
+            3
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skölj de redan kokta bönorna, låt rinna av och värm i grytan 5 minuter. Smaka av utan att lägga till olistade ingredienser; såväl fläsk som soja ger sälta.",
+          "uses": [
+            "bönor",
+            "nötinnanlår"
+          ],
+          "minutes": 6,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Skiva avokado, rädisor och salladslök. Lägg på ett fat.",
+          "uses": [
+            "avokado",
+            "rädisa",
+            "salladslök"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Fördela bönor, kött och spad i fyra djupa tallrikar. Lägg det genomstekta fläsket över så att det behåller sin textur och servera avokado, rädisa och salladslök vid sidan.",
+          "uses": [
+            "bönor",
+            "nötinnanlår",
+            "rimmat fläsk",
+            "avokado",
+            "rädisa",
+            "salladslök"
+          ],
+          "minutes": 3,
+          "after": [
+            6
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Jalisco-anknuten rätt med tunt skuret nötkött som avger eget spad, grön tomatillosås och bönor. Rimmat fläsk ersätter bacon uttryckligen. Nötinnanlår används i stället för registrets generiska långkokskött."
+    },
+    {
+      "base_id": "smako-mexican-tortitas-camaron-nopales",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Tortitas de camarón med nopales – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tortitas de camarón",
+      "primary": "torkade räkor",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "torkad räka",
+        "guajillo",
+        "nopales"
+      ],
+      "equipment": [
+        "mixer",
+        "elvisp",
+        "stekpanna",
+        "kastrull",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "tortitas",
+          "name": "Luftiga räkbiffar",
+          "ingredients": [
+            {
+              "name": "torkade räkor",
+              "form": "dry",
+              "quantity": 65,
+              "unit": "g",
+              "role": "primary",
+              "label": "torkade räkor"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "primary",
+              "label": "ägg"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            }
+          ]
+        },
+        {
+          "id": "sas",
+          "name": "Röd sås med nopales",
+          "ingredients": [
+            {
+              "name": "guajillochili",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "guajillochili"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomat"
+            },
+            {
+              "name": "nopales",
+              "form": "preserved_drained",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "nopales"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "ris",
+          "name": "Kokt ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "ris"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 520 ml vatten; koka upp och sänk till låg värme.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 23,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg guajillochili och tärnad tomat i en kastrull med 400 ml vatten. Koka upp och sjud 10 minuter så att chilin mjuknar.",
+          "uses": [
+            "guajillochili",
+            "tomat"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Mixa tomat, chili och kokvätska till slät sås. Häll i en vid panna och låt sjuda 10 minuter. Skölj nopales, låt rinna av och vänd ner med såsens salt; håll varmt.",
+          "uses": [
+            "tomat",
+            "guajillochili",
+            "nopales",
+            "salt"
+          ],
+          "minutes": 14,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Mixa de rensade torkade räkorna till fint pulver. Separera de uppvägda äggen. Vispa vitorna till fast skum i ren skål, vänd först ner gulorna och sedan räkpulvret utan att slå ut luften.",
+          "uses": [
+            "torkade räkor",
+            "ägg"
+          ],
+          "minutes": 9,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm rapsoljan i en liten stekpanna på medelvärme. Klicka i små, cirka 1 cm tjocka biffar och stek i omgångar ungefär 3 minuter per sida tills de är gyllene, fasta genom mitten och når 75 °C. Använd hela angivna oljemängden för stekningen men servera inte överbliven fri olja; mängd som blir kvar är inte uppskattad.",
+          "uses": [
+            "rapsolja",
+            "ägg",
+            "torkade räkor"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg biffarna i den varma nopales-såsen precis före servering och låt dra 2 minuter, så att de suger upp lite sås men inte faller sönder. Fördela med ris på fyra tallrikar.",
+          "uses": [
+            "ägg",
+            "torkade räkor",
+            "nopales",
+            "tomat",
+            "ris"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Luftiga äggskumsbiffar med malda torkade räkor, inte vanliga fiskbiffar. Serveras i röd sås med nopales. Räkorna och kaktusformen behöver registergranskas. All listad stekolja är insatsmängd; absorberat fett är inte uppmätt."
+    },
+    {
+      "base_id": "smako-mexican-tortitas-camaron-nopales",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Tortitas de camarón med nopales – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tortitas de camarón",
+      "primary": "torkade räkor",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "torkad räka",
+        "guajillo",
+        "nopales"
+      ],
+      "equipment": [
+        "mixer",
+        "elvisp",
+        "stekpanna",
+        "kastrull",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "tortitas",
+          "name": "Luftiga räkbiffar",
+          "ingredients": [
+            {
+              "name": "torkade räkor",
+              "form": "dry",
+              "quantity": 65,
+              "unit": "g",
+              "role": "primary",
+              "label": "torkade räkor"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "primary",
+              "label": "ägg"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            }
+          ]
+        },
+        {
+          "id": "sas",
+          "name": "Röd sås med nopales",
+          "ingredients": [
+            {
+              "name": "guajillochili",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "guajillochili"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomat"
+            },
+            {
+              "name": "nopales",
+              "form": "preserved_drained",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "nopales"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "oregano"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "spiskummin"
+            }
+          ]
+        },
+        {
+          "id": "ris",
+          "name": "Kokt ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "ris"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 520 ml vatten; koka upp och sänk till låg värme.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 23,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg guajillochili och tärnad tomat i en kastrull med 400 ml vatten. Koka upp och sjud 10 minuter så att chilin mjuknar.",
+          "uses": [
+            "guajillochili",
+            "tomat"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Mixa tomat, chili och kokvätska med vitlök, oregano och spiskummin till slät sås. Häll i en vid panna och låt sjuda 10 minuter. Skölj nopales, låt rinna av och vänd ner med såsens salt; håll varmt.",
+          "uses": [
+            "tomat",
+            "guajillochili",
+            "nopales",
+            "salt",
+            "vitlök",
+            "oregano",
+            "spiskummin"
+          ],
+          "minutes": 14,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Mixa de rensade torkade räkorna till fint pulver. Separera de uppvägda äggen. Vispa vitorna till fast skum i ren skål, vänd först ner gulorna och sedan räkpulvret utan att slå ut luften.",
+          "uses": [
+            "torkade räkor",
+            "ägg"
+          ],
+          "minutes": 9,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm rapsoljan i en liten stekpanna på medelvärme. Klicka i små, cirka 1 cm tjocka biffar och stek i omgångar ungefär 3 minuter per sida tills de är gyllene, fasta genom mitten och når 75 °C. Använd hela angivna oljemängden för stekningen men servera inte överbliven fri olja; mängd som blir kvar är inte uppskattad.",
+          "uses": [
+            "rapsolja",
+            "ägg",
+            "torkade räkor"
+          ],
+          "minutes": 20,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg biffarna i den varma nopales-såsen precis före servering och låt dra 2 minuter, så att de suger upp lite sås men inte faller sönder. Fördela med ris på fyra tallrikar.",
+          "uses": [
+            "ägg",
+            "torkade räkor",
+            "nopales",
+            "tomat",
+            "ris"
+          ],
+          "minutes": 4,
+          "after": [
+            7
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Luftiga äggskumsbiffar med malda torkade räkor, inte vanliga fiskbiffar. Serveras i röd sås med nopales. Räkorna och kaktusformen behöver registergranskas. All listad stekolja är insatsmängd; absorberat fett är inte uppmätt."
+    },
+    {
+      "base_id": "smako-mexican-tortitas-camaron-nopales",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Tortitas de camarón med nopales – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "tortitas de camarón",
+      "primary": "torkade räkor",
+      "method": "pan",
+      "side": "ris",
+      "flavor": [
+        "torkad räka",
+        "guajillo",
+        "nopales"
+      ],
+      "equipment": [
+        "mixer",
+        "elvisp",
+        "stekpanna",
+        "kastrull",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "tortitas",
+          "name": "Luftiga räkbiffar",
+          "ingredients": [
+            {
+              "name": "torkade räkor",
+              "form": "dry",
+              "quantity": 65,
+              "unit": "g",
+              "role": "primary",
+              "label": "torkade räkor"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "primary",
+              "label": "ägg"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 90,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "rapsolja"
+            }
+          ]
+        },
+        {
+          "id": "sas",
+          "name": "Röd sås med nopales",
+          "ingredients": [
+            {
+              "name": "guajillochili",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "guajillochili"
+            },
+            {
+              "name": "tomat",
+              "form": "raw_edible",
+              "quantity": 550,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "tomat"
+            },
+            {
+              "name": "nopales",
+              "form": "preserved_drained",
+              "quantity": 400,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "nopales"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "oregano"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "spiskummin"
+            }
+          ]
+        },
+        {
+          "id": "sallad",
+          "name": "Kål- och morotssallad",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "vitkål"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "morot"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        },
+        {
+          "id": "ris",
+          "name": "Kokt ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 260,
+              "unit": "g",
+              "role": "side",
+              "label": "ris"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 520 ml vatten; koka upp och sänk till låg värme.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 3,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 23,
+          "after": [
+            1
+          ],
+          "passive": true
+        },
+        {
+          "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 1,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg guajillochili och tärnad tomat i en kastrull med 400 ml vatten. Koka upp och sjud 10 minuter så att chilin mjuknar.",
+          "uses": [
+            "guajillochili",
+            "tomat"
+          ],
+          "minutes": 12,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Mixa tomat, chili och kokvätska med vitlök, oregano och spiskummin till slät sås. Häll i en vid panna och låt sjuda 10 minuter. Skölj nopales, låt rinna av och vänd ner med såsens salt; håll varmt.",
+          "uses": [
+            "tomat",
+            "guajillochili",
+            "nopales",
+            "salt",
+            "vitlök",
+            "oregano",
+            "spiskummin"
+          ],
+          "minutes": 14,
+          "after": [
+            4
+          ],
+          "passive": false
+        },
+        {
+          "text": "Strimla vitkål tunt, riv morot och krama med limejuice och salladens salt.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "limejuice",
+            "salt"
+          ],
+          "minutes": 6,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Mixa de rensade torkade räkorna till fint pulver. Separera de uppvägda äggen. Vispa vitorna till fast skum i ren skål, vänd först ner gulorna och sedan räkpulvret utan att slå ut luften.",
+          "uses": [
+            "torkade räkor",
+            "ägg"
+          ],
+          "minutes": 9,
+          "after": [
+            6
+          ],
+          "passive": false
+        },
+        {
+          "text": "Värm rapsoljan i en liten stekpanna på medelvärme. Klicka i små, cirka 1 cm tjocka biffar och stek i omgångar ungefär 3 minuter per sida tills de är gyllene, fasta genom mitten och når 75 °C. Använd hela angivna oljemängden för stekningen men servera inte överbliven fri olja; mängd som blir kvar är inte uppskattad.",
+          "uses": [
+            "rapsolja",
+            "ägg",
+            "torkade räkor"
+          ],
+          "minutes": 20,
+          "after": [
+            7
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg biffarna i den varma nopales-såsen precis före servering och låt dra 2 minuter, så att de suger upp lite sås men inte faller sönder. Fördela med ris på fyra tallrikar och servera kålsalladen bredvid.",
+          "uses": [
+            "ägg",
+            "torkade räkor",
+            "nopales",
+            "tomat",
+            "ris",
+            "vitkål",
+            "morot"
+          ],
+          "minutes": 4,
+          "after": [
+            8
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Luftiga äggskumsbiffar med malda torkade räkor, inte vanliga fiskbiffar. Serveras i röd sås med nopales. Räkorna och kaktusformen behöver registergranskas. All listad stekolja är insatsmängd; absorberat fett är inte uppmätt."
+    },
+    {
+      "base_id": "smako-mexican-menudo-rojo",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Menudo rojo – långkokt komage i chilibuljong – enkel",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "menudo rojo",
+      "primary": "komage",
+      "method": "pot",
+      "side": "hominy",
+      "flavor": [
+        "guajillo",
+        "oregano",
+        "långkok"
+      ],
+      "equipment": [
+        "stor gryta",
+        "mixer",
+        "sil"
+      ],
+      "components": [
+        {
+          "id": "soppa",
+          "name": "Komage i röd buljong",
+          "ingredients": [
+            {
+              "name": "komage",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "primary",
+              "label": "komage"
+            },
+            {
+              "name": "hominy",
+              "form": "cooked_drained",
+              "quantity": 700,
+              "unit": "g",
+              "role": "side",
+              "label": "hominy"
+            },
+            {
+              "name": "guajillochili",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "flavour",
+              "label": "guajillochili"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "oregano"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att komagen är livsmedelsgodkänd, rengjord och rå enligt produktens märkning. Skölj, trimma kvarvarande hårt fett och skär i 2 cm stora bitar. Lägg i en stor gryta med 2500 ml vatten och koka upp. Koka 10 minuter, häll av och skölj; rengör redskap och diskho efter råvaruhantering.",
+          "uses": [
+            "komage"
+          ],
+          "minutes": 25,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Lägg komagen i ren gryta med grovt skuren gul lök, hälften av vitlöken, salt och 2200 ml vatten. Koka upp och skumma.",
+          "uses": [
+            "komage",
+            "gul lök",
+            "vitlök",
+            "salt"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sjud sakta under lock cirka 150 minuter, tills komagen är mör men har kvar lite tuggmotstånd. Kontrollera vätskenivån och tillsätt 300 ml vatten om den sjunkit så att komagen inte täcks. Förläng kokningen vid behov, inte bara tiden i texten.",
+          "uses": [
+            "komage"
+          ],
+          "minutes": 150,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg guajillochili i en liten kastrull med 400 ml vatten. Sjud 10 minuter och mixa chili och all kokvätska med resten av vitlöken. Pressa genom sil direkt ner i soppan för att avskilja sega skalbitar.",
+          "uses": [
+            "guajillochili",
+            "vitlök"
+          ],
+          "minutes": 17,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Skölj den kokta hominyn och låt rinna av. Tillsätt den och oregano till soppan. Sjud 25 minuter så att smakerna förenas.",
+          "uses": [
+            "hominy",
+            "oregano"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fördela komage, hominy och buljong i fyra stora skålar. Fördela limejuice och servera.",
+          "uses": [
+            "komage",
+            "hominy",
+            "limejuice"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Förenklat menudo med rå rengjord nötkomage och kokt hominy, utan separat kokning av nötfot. Det är inte pozole med vanligt kött. Tiden varierar med komagens förbehandling; den ska inte kapas för ett tidsfilter."
+    },
+    {
+      "base_id": "smako-mexican-menudo-rojo",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Menudo rojo – långkokt komage i chilibuljong – standard",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "menudo rojo",
+      "primary": "komage",
+      "method": "pot",
+      "side": "hominy",
+      "flavor": [
+        "guajillo",
+        "oregano",
+        "långkok"
+      ],
+      "equipment": [
+        "stor gryta",
+        "mixer",
+        "sil"
+      ],
+      "components": [
+        {
+          "id": "soppa",
+          "name": "Komage i röd buljong",
+          "ingredients": [
+            {
+              "name": "komage",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "primary",
+              "label": "komage"
+            },
+            {
+              "name": "hominy",
+              "form": "cooked_drained",
+              "quantity": 700,
+              "unit": "g",
+              "role": "side",
+              "label": "hominy"
+            },
+            {
+              "name": "guajillochili",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "flavour",
+              "label": "guajillochili"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "oregano"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "lagerblad",
+              "form": "dry",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "lagerblad"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "spiskummin"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att komagen är livsmedelsgodkänd, rengjord och rå enligt produktens märkning. Skölj, trimma kvarvarande hårt fett och skär i 2 cm stora bitar. Lägg i en stor gryta med 2500 ml vatten och koka upp. Koka 10 minuter, häll av och skölj; rengör redskap och diskho efter råvaruhantering.",
+          "uses": [
+            "komage"
+          ],
+          "minutes": 25,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Lägg komagen i ren gryta med grovt skuren gul lök, hälften av vitlöken, salt och 2200 ml vatten samt lagerblad. Koka upp och skumma.",
+          "uses": [
+            "komage",
+            "gul lök",
+            "vitlök",
+            "salt",
+            "lagerblad"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sjud sakta under lock cirka 150 minuter, tills komagen är mör men har kvar lite tuggmotstånd. Kontrollera vätskenivån och tillsätt 300 ml vatten om den sjunkit så att komagen inte täcks. Förläng kokningen vid behov, inte bara tiden i texten.",
+          "uses": [
+            "komage"
+          ],
+          "minutes": 150,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg guajillochili i en liten kastrull med 400 ml vatten. Sjud 10 minuter och mixa chili och all kokvätska med resten av vitlöken och spiskummin. Pressa genom sil direkt ner i soppan för att avskilja sega skalbitar.",
+          "uses": [
+            "guajillochili",
+            "vitlök",
+            "spiskummin"
+          ],
+          "minutes": 17,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Skölj den kokta hominyn och låt rinna av. Tillsätt den och oregano till soppan. Sjud 25 minuter så att smakerna förenas. Ta upp lagerblad före servering.",
+          "uses": [
+            "hominy",
+            "oregano",
+            "lagerblad"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Fördela komage, hominy och buljong i fyra stora skålar. Fördela limejuice och servera.",
+          "uses": [
+            "komage",
+            "hominy",
+            "limejuice"
+          ],
+          "minutes": 4,
+          "after": [
+            5
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Förenklat menudo med rå rengjord nötkomage och kokt hominy, utan separat kokning av nötfot. Det är inte pozole med vanligt kött. Tiden varierar med komagens förbehandling; den ska inte kapas för ett tidsfilter."
+    },
+    {
+      "base_id": "smako-mexican-menudo-rojo",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Menudo rojo – långkokt komage i chilibuljong – utökad",
+      "servings": 4,
+      "meal_type": "dinner",
+      "cuisine": "mexican",
+      "family": "menudo rojo",
+      "primary": "komage",
+      "method": "pot",
+      "side": "hominy",
+      "flavor": [
+        "guajillo",
+        "oregano",
+        "långkok"
+      ],
+      "equipment": [
+        "stor gryta",
+        "mixer",
+        "sil"
+      ],
+      "components": [
+        {
+          "id": "soppa",
+          "name": "Komage i röd buljong",
+          "ingredients": [
+            {
+              "name": "komage",
+              "form": "raw_edible",
+              "quantity": 900,
+              "unit": "g",
+              "role": "primary",
+              "label": "komage"
+            },
+            {
+              "name": "hominy",
+              "form": "cooked_drained",
+              "quantity": 700,
+              "unit": "g",
+              "role": "side",
+              "label": "hominy"
+            },
+            {
+              "name": "guajillochili",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "flavour",
+              "label": "guajillochili"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "gul lök"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "vitlök"
+            },
+            {
+              "name": "oregano",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "oregano"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "salt"
+            },
+            {
+              "name": "lagerblad",
+              "form": "dry",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "lagerblad"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "spiskummin"
+            }
+          ]
+        },
+        {
+          "id": "tillbehor",
+          "name": "Frisk servering",
+          "ingredients": [
+            {
+              "name": "rädisa",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "rädisa"
+            },
+            {
+              "name": "avokado",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "avokado"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 15,
+              "unit": "g",
+              "role": "flavour",
+              "label": "koriander"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att komagen är livsmedelsgodkänd, rengjord och rå enligt produktens märkning. Skölj, trimma kvarvarande hårt fett och skär i 2 cm stora bitar. Lägg i en stor gryta med 2500 ml vatten och koka upp. Koka 10 minuter, häll av och skölj; rengör redskap och diskho efter råvaruhantering.",
+          "uses": [
+            "komage"
+          ],
+          "minutes": 25,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Lägg komagen i ren gryta med grovt skuren gul lök, hälften av vitlöken, salt och 2200 ml vatten samt lagerblad. Koka upp och skumma.",
+          "uses": [
+            "komage",
+            "gul lök",
+            "vitlök",
+            "salt",
+            "lagerblad"
+          ],
+          "minutes": 8,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Sjud sakta under lock cirka 150 minuter, tills komagen är mör men har kvar lite tuggmotstånd. Kontrollera vätskenivån och tillsätt 300 ml vatten om den sjunkit så att komagen inte täcks. Förläng kokningen vid behov, inte bara tiden i texten.",
+          "uses": [
+            "komage"
+          ],
+          "minutes": 150,
+          "after": [
+            2
+          ],
+          "passive": true
+        },
+        {
+          "text": "Lägg guajillochili i en liten kastrull med 400 ml vatten. Sjud 10 minuter och mixa chili och all kokvätska med resten av vitlöken och spiskummin. Pressa genom sil direkt ner i soppan för att avskilja sega skalbitar.",
+          "uses": [
+            "guajillochili",
+            "vitlök",
+            "spiskummin"
+          ],
+          "minutes": 17,
+          "after": [
+            3
+          ],
+          "passive": false
+        },
+        {
+          "text": "Skölj den kokta hominyn och låt rinna av. Tillsätt den och oregano till soppan. Sjud 25 minuter så att smakerna förenas. Ta upp lagerblad före servering.",
+          "uses": [
+            "hominy",
+            "oregano",
+            "lagerblad"
+          ],
+          "minutes": 25,
+          "after": [
+            4
+          ],
+          "passive": true
+        },
+        {
+          "text": "Skiva rädisa och avokado. Hacka koriander.",
+          "uses": [
+            "rädisa",
+            "avokado",
+            "koriander"
+          ],
+          "minutes": 5,
+          "after": [
+            5
+          ],
+          "passive": false
+        },
+        {
+          "text": "Fördela komage, hominy och buljong i fyra stora skålar. Fördela limejuice och servera med rädisa, avokado och koriander vid sidan.",
+          "uses": [
+            "komage",
+            "hominy",
+            "limejuice",
+            "rädisa",
+            "avokado",
+            "koriander"
+          ],
+          "minutes": 4,
+          "after": [
+            6
+          ],
+          "passive": false
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Förenklat menudo med rå rengjord nötkomage och kokt hominy, utan separat kokning av nötfot. Det är inte pozole med vanligt kött. Tiden varierar med komagens förbehandling; den ska inte kapas för ett tidsfilter."
+    },
+    {
+      "base_id": "smako-mexican-capirotada",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Capirotada – brödpudding med ost och kryddsirap – enkel",
+      "servings": 1,
+      "meal_type": "snack",
+      "cuisine": "mexican",
+      "family": "capirotada",
+      "primary": "bröd",
+      "method": "bake",
+      "side": "ingen extra komponent",
+      "flavor": [
+        "mörk sirap",
+        "ost",
+        "kanel"
+      ],
+      "equipment": [
+        "ugn",
+        "liten kastrull",
+        "liten ugnsform",
+        "stekpanna"
+      ],
+      "components": [
+        {
+          "id": "pudding",
+          "name": "Bröd i kryddlag",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "g",
+              "role": "side",
+              "label": "bröd"
+            },
+            {
+              "name": "mörkt muscovadosocker",
+              "form": "dry",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "mörkt muscovadosocker"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "kanel"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "primary",
+              "label": "ost"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "russin"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 180 °C. Skär brödet i 1 cm tjocka skivor och rosta i torr panna så att båda sidor blir torra och gyllene. Smula eller riv osten.",
+          "uses": [
+            "bröd",
+            "ost"
+          ],
+          "minutes": 6,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Koka upp muscovadosocker, kanel och 100 ml vatten. Rör tills sockret löst sig och sjud ytterligare 3 minuter.",
+          "uses": [
+            "mörkt muscovadosocker",
+            "kanel"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg brödet i en liten ugnsform i lager med ost och russin. Skeda den varma lagen jämnt över brödet. Täck formen med lock eller folie.",
+          "uses": [
+            "bröd",
+            "ost",
+            "russin",
+            "mörkt muscovadosocker"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Baka 25 minuter, ta av locket och baka ytterligare 8 minuter tills den övre ytan torkat lätt och de undre lagren absorberat lagen. Låt svalna 10 minuter före servering.",
+          "uses": [
+            "bröd",
+            "ost"
+          ],
+          "minutes": 43,
+          "after": [
+            3
+          ],
+          "passive": true
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Brödpudding med sockerlag och ost, inte äggstanning. Mörkt muscovadosocker ersätter piloncillo uttryckligen och svensk ost ersätter lokal mexikansk ost. En liten mellanmålsportion; sötmat, inte näringsberäknad måltidsersättning."
+    },
+    {
+      "base_id": "smako-mexican-capirotada",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Capirotada – brödpudding med ost och kryddsirap – utökad",
+      "servings": 1,
+      "meal_type": "snack",
+      "cuisine": "mexican",
+      "family": "capirotada",
+      "primary": "bröd",
+      "method": "bake",
+      "side": "ingen extra komponent",
+      "flavor": [
+        "mörk sirap",
+        "ost",
+        "kanel"
+      ],
+      "equipment": [
+        "ugn",
+        "liten kastrull",
+        "liten ugnsform",
+        "stekpanna"
+      ],
+      "components": [
+        {
+          "id": "pudding",
+          "name": "Bröd i kryddlag",
+          "ingredients": [
+            {
+              "name": "bröd",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "g",
+              "role": "side",
+              "label": "bröd"
+            },
+            {
+              "name": "mörkt muscovadosocker",
+              "form": "dry",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "mörkt muscovadosocker"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "kanel"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "g",
+              "role": "primary",
+              "label": "ost"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "russin"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "cooking",
+              "label": "smör"
+            },
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "primary",
+              "label": "jordnötter"
+            },
+            {
+              "name": "banan",
+              "form": "raw_edible",
+              "quantity": 45,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "banan"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Sätt ugnen på 180 °C. Skär brödet i 1 cm tjocka skivor och rosta i torr panna med hälften av smöret så att båda sidor blir torra och gyllene. Smula eller riv osten.",
+          "uses": [
+            "bröd",
+            "ost",
+            "smör"
+          ],
+          "minutes": 6,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Koka upp muscovadosocker, kanel och 100 ml vatten. Rör tills sockret löst sig och sjud ytterligare 3 minuter.",
+          "uses": [
+            "mörkt muscovadosocker",
+            "kanel"
+          ],
+          "minutes": 5,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Lägg brödet i en liten ugnsform i lager med ost och russin samt grovhackade jordnötter och skivad banan. Skeda den varma lagen jämnt över brödet och klicka resten av smöret över. Täck formen med lock eller folie.",
+          "uses": [
+            "bröd",
+            "ost",
+            "russin",
+            "mörkt muscovadosocker",
+            "jordnötter",
+            "banan",
+            "smör"
+          ],
+          "minutes": 5,
+          "after": [
+            2
+          ],
+          "passive": false
+        },
+        {
+          "text": "Baka 25 minuter, ta av locket och baka ytterligare 8 minuter tills den övre ytan torkat lätt och de undre lagren absorberat lagen. Låt svalna 10 minuter före servering.",
+          "uses": [
+            "bröd",
+            "ost"
+          ],
+          "minutes": 43,
+          "after": [
+            3
+          ],
+          "passive": true
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Brödpudding med sockerlag och ost, inte äggstanning. Mörkt muscovadosocker ersätter piloncillo uttryckligen och svensk ost ersätter lokal mexikansk ost. En liten mellanmålsportion; sötmat, inte näringsberäknad måltidsersättning."
+    },
+    {
+      "base_id": "smako-mexican-carlota-limon",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Carlota de limón – kalla kexlager med limekräm – enkel",
+      "servings": 1,
+      "meal_type": "snack",
+      "cuisine": "mexican",
+      "family": "carlota de limón",
+      "primary": "kondenserad mjölk",
+      "method": "refrigerated_assembly",
+      "side": "mariekexlager",
+      "flavor": [
+        "lime",
+        "krämig mjölk"
+      ],
+      "equipment": [
+        "skål",
+        "visp",
+        "portionsglas",
+        "kylskåp"
+      ],
+      "components": [
+        {
+          "id": "kram",
+          "name": "Limekräm",
+          "ingredients": [
+            {
+              "name": "kondenserad mjölk",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "sauce",
+              "label": "kondenserad mjölk"
+            },
+            {
+              "name": "evaporerad mjölk",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "evaporerad mjölk"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            }
+          ]
+        },
+        {
+          "id": "lager",
+          "name": "Kexlager",
+          "ingredients": [
+            {
+              "name": "mariekex",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "mariekex"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa kondenserad och evaporerad mjölk med limejuice till jämn, lätt tjocknande kräm. Produkterna ska vara kylda och limejuicen ren juice, inte sötad dryck.",
+          "uses": [
+            "kondenserad mjölk",
+            "evaporerad mjölk",
+            "limejuice"
+          ],
+          "minutes": 3,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Bryt kex så att de passar portionsglaset. Varva med krämen i flera tunna lager. Avsluta med kräm och tryck lätt så att alla kex får kontakt med vätskan.",
+          "uses": [
+            "mariekex",
+            "kondenserad mjölk"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Täck och kyl minst 4 timmar vid 4 °C, tills kexen mjuknat och krämen satt sig. Servera direkt från kylen; mängden är en liten portion.",
+          "uses": [
+            "mariekex",
+            "evaporerad mjölk",
+            "kondenserad mjölk"
+          ],
+          "minutes": 240,
+          "after": [
+            2
+          ],
+          "passive": true
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Kall lagerdessert i liten mellanmålsportion. Kräver sötad kondenserad mjölk och osötad evaporerad mjölk som skilda produkter. Registerbindningen för kondenserad mjölk måste kontrolleras för sötad produkt. Utökad har färskost och mango som tydlig vardagsvariation; ingen gelatin eller bakning."
+    },
+    {
+      "base_id": "smako-mexican-carlota-limon",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Carlota de limón – kalla kexlager med limekräm – utökad",
+      "servings": 1,
+      "meal_type": "snack",
+      "cuisine": "mexican",
+      "family": "carlota de limón",
+      "primary": "kondenserad mjölk",
+      "method": "refrigerated_assembly",
+      "side": "mariekexlager",
+      "flavor": [
+        "lime",
+        "krämig mjölk"
+      ],
+      "equipment": [
+        "skål",
+        "visp",
+        "portionsglas",
+        "kylskåp"
+      ],
+      "components": [
+        {
+          "id": "kram",
+          "name": "Limekräm",
+          "ingredients": [
+            {
+              "name": "kondenserad mjölk",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "sauce",
+              "label": "kondenserad mjölk"
+            },
+            {
+              "name": "evaporerad mjölk",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "evaporerad mjölk"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "ml",
+              "role": "flavour",
+              "label": "limejuice"
+            },
+            {
+              "name": "färskost",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "sauce",
+              "label": "färskost"
+            }
+          ]
+        },
+        {
+          "id": "lager",
+          "name": "Kexlager",
+          "ingredients": [
+            {
+              "name": "mariekex",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "mariekex"
+            },
+            {
+              "name": "mango",
+              "form": "raw_edible",
+              "quantity": 60,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "mango"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa kondenserad och evaporerad mjölk med limejuice och färskost till jämn, lätt tjocknande kräm. Produkterna ska vara kylda och limejuicen ren juice, inte sötad dryck.",
+          "uses": [
+            "kondenserad mjölk",
+            "evaporerad mjölk",
+            "limejuice",
+            "färskost"
+          ],
+          "minutes": 3,
+          "after": [],
+          "passive": false
+        },
+        {
+          "text": "Bryt kex så att de passar portionsglaset. Varva med krämen i flera tunna lager och små mangotärningar mellan lagren. Avsluta med kräm och tryck lätt så att alla kex får kontakt med vätskan.",
+          "uses": [
+            "mariekex",
+            "kondenserad mjölk",
+            "mango"
+          ],
+          "minutes": 4,
+          "after": [
+            1
+          ],
+          "passive": false
+        },
+        {
+          "text": "Täck och kyl minst 4 timmar vid 4 °C, tills kexen mjuknat och krämen satt sig. Servera direkt från kylen; mängden är en liten portion.",
+          "uses": [
+            "mariekex",
+            "evaporerad mjölk",
+            "kondenserad mjölk"
+          ],
+          "minutes": 240,
+          "after": [
+            2
+          ],
+          "passive": true
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Kall lagerdessert i liten mellanmålsportion. Kräver sötad kondenserad mjölk och osötad evaporerad mjölk som skilda produkter. Registerbindningen för kondenserad mjölk måste kontrolleras för sötad produkt. Utökad har färskost och mango som tydlig vardagsvariation; ingen gelatin eller bakning."
+    }
+  ]
+}

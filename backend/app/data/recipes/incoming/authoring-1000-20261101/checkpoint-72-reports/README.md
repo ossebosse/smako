@@ -1,5 +1,10 @@
 # Mottagna rapporter för 72 grundrätter, 2026-11-01
 
+**Senare komplettering:** hela ZIP-filen har nu mottagits. Läs den
+[aktuella mottagningsjournalen](../checkpoint-72/README.md). Texten nedan och
+`RECEIPT.json` beskriver den tidigare mottagningen med enbart fyra rapporter.
+Originalrapporterna är oförändrade och identiska med dem i ZIP-filen.
+
 **Status: fyra rapportbilagor mottagna; receptpaketen saknas.** Ägaren beskriver
 delleveransen som 72 recept. Rapporterna avser 72 grundrätter med 199 varianter
 inom den pågående beställningen av 1 000 grundrätter. Inga nya recept har

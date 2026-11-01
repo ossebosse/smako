@@ -1,3 +1,32 @@
+# 2026-11-01: Hela receptcheckpointen mottagen och granskad inför import
+
+ZIP-filen kompletterar de tidigare fyra rapporterna: alla sex paket med
+72 grundrätter / 199 varianter och stödregister finns nu i
+[mottagningsjournalen](../backend/app/data/recipes/incoming/authoring-1000-20261101/checkpoint-72/README.md).
+Originalrapporter och pakethashar matchar. 12 källfiler är bytebevarade i Git;
+alla 42 ZIP-medlemmar har inventerade hashvärden. Stora härledda kontrollfiler
+ligger lokalt, och inga medföljande program har körts.
+
+[Importgranskningen](reviews/recipe-checkpoint-72-20261101/REPORT.md) redovisar
+199 schema-/metadata-/tidskontroller, inga aktuella/historiska ID-krockar,
+50 native-kompatibla varianter och 149 med okända ingredienser. De 50 klarar
+också diff, offline strukturförberedelse och strukturell skalning till 1/4/12
+portioner. Det är inte ett godkännande av innehåll, nyhet eller köpbarhet.
+
+Före import: bevara 63 föreslagna identiteter; vanlig mjölk får inte ersätta
+evaporerad mjölk och generiska bönor får inte ersätta bruna. 15 kompatibla
+varianter ärver frysta insatser med beredningsfrågor. Frityrolja behöver
+separat process-/konsumtionsmodell; panfortes skalform stämmer inte med det
+ärvda kravet på finrivet yttre skal. Fortsätt sakgranskning enligt rapporten.
+Inga nya recept är importerade/aktiverade; bibliotekets manifest och beta består.
+
+Beställningen fortsätter från **007**, med 928 baser / 2 551 varianter kvar
+mot mottagna utkast. Räkna inte checkpointen igen. Ta med den i nästa
+dubblettunderlag även före import. [Återkoppling till Chat](recipes/requests/20261101/ATGARDER-CHECKPOINT-72-TILL-CHAT.txt)
+är förberedd, inte skickad. Den föregående rapportmottagningen nedan är historik.
+
+---
+
 # 2026-11-01: Rapporter för 72 nya grundrätter mottagna; receptpaket saknas
 
 Fyra originalbilagor är bevarade i
