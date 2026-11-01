@@ -283,23 +283,24 @@ def pantry_checks(items, profile):
     return results
 
 
-FINFISH_INGREDIENTS = frozenset({"fisk", "lax", "torsk", "tonfisk", "makrill", "rökt makrill",
-                                "sardiner", "matjessill", "stenbitsrom", "rökt lax", "varmrökt lax"})
-SHELLFISH_INGREDIENTS = frozenset({"räkor", "råa räkor", "skaldjur", "musslor", "bläckfisk"})
-
-
 def protein_category(recipe):
+    from app.services.diet_policy import (
+        FINFISH_INGREDIENTS,
+        POULTRY_INGREDIENTS,
+        SHELLFISH_INGREDIENTS,
+    )
+
     # Each recipe receives ONE category. Mixed meat/fish recipes do not count twice.
     names = [canonicalize_ingredient_name(i.name) for i in recipe.ingredients]
     main = primary_ingredient(recipe)
-    if main in {"kyckling", "kalkon"}:
+    if main in POULTRY_INGREDIENTS:
         return "chicken"
     if main in FINFISH_INGREDIENTS:
         return "fish"
     if main in SHELLFISH_INGREDIENTS:
         return "shellfish"
     if not recipe_respects_diet(recipe, preference="vegetarian"):
-        if any(n in {"kyckling", "kalkon"} for n in names):
+        if any(n in POULTRY_INGREDIENTS for n in names):
             return "chicken"
         if any(n in FINFISH_INGREDIENTS for n in names):
             return "fish"

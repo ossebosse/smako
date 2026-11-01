@@ -74,6 +74,14 @@ _MEAT_OR_FISH = frozenset(
 _MEAT_OR_FISH_FAMILIES = frozenset(
     {"meat", "poultry", "fish", "seafood", "shellfish", "organ"}
 )
+# Culinary categories for request filtering, never aliases or product matches.
+FINFISH_INGREDIENTS = frozenset({"fisk", "lax", "torsk", "tonfisk", "makrill", "rökt makrill",
+    "sardiner", "matjessill", "stenbitsrom", "rökt lax", "varmrökt lax", "svensk ansjovis",
+    "svensk ansjovis med spad", "ätklar inläggningssill"})
+FISH_FLAVOURINGS = frozenset({"sardeller", "fisksås", "ostronsås", "worcestershiresås"})
+SHELLFISH_INGREDIENTS = frozenset({"räkor", "råa räkor", "skaldjur", "musslor", "bläckfisk",
+    "råa skalade vannameiräkor", "blåmusselkött utan skal"})
+POULTRY_INGREDIENTS = frozenset({"kyckling", "hel kyckling", "kalkon"})
 _OTHER_ANIMAL = frozenset(
     {
         "ägg",
@@ -124,6 +132,13 @@ def _excluded_by_diet(name: str, preference: DietPreference) -> bool:
     return False
 
 
+def recipe_contains_fish(recipe: Recipe) -> bool:
+    """Preserve sealed legacy flags and also check explicit culinary identities."""
+    return bool(recipe.design and recipe.design.fish) or any(
+        canonicalize_ingredient_name(i.canonical_name or i.name) in FINFISH_INGREDIENTS | FISH_FLAVOURINGS
+        for i in recipe.ingredients)
+
+
 def ingredient_is_excluded(name: str, exclusions: Iterable[str]) -> bool:
     """Explicit fish excludes the existing fish family, not only the generic name."""
     canonical = canonicalize_ingredient_name(name)
@@ -131,7 +146,8 @@ def ingredient_is_excluded(name: str, exclusions: Iterable[str]) -> bool:
     excluded = {canonicalize_ingredient_name(v) for v in exclusions if str(v).strip()}
     return canonical in excluded or (
         any(v.casefold().strip() == "fisk" for v in exclusions)
-        and semantic_requirement(canonical).food_family == "fish"
+        and (canonical in FINFISH_INGREDIENTS | FISH_FLAVOURINGS
+             or semantic_requirement(canonical).food_family == "fish")
     )
 
 

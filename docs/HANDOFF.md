@@ -31,6 +31,11 @@ samtliga importkvitton, gamla hashvärden och hela bibliotekets innehållskrav.
 Full CI måste vara grön före main-merge; täckningsbaslinjer ändras inte.
 Ingen ny varm tidsmätning har gjorts för dessa 157; äldre tidsprov har eget scope.
 
+Kostfiltren känner igen de nya fisk-/skaldjursnamnen och hel kyckling även
+vid äldre förseglade metadata. Fiskavstängning och menyfördelning är testade;
+skaldjur fyller fortfarande inte en fiskkvot. Författarexporten innehåller
+`unit_options` och okända processförluster för nästa leveransunderlag.
+
 ---
 
 # 2026-11-01: Första hinderomgången (historisk, före senaste 24/62-leveransen)

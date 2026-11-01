@@ -155,6 +155,12 @@ formatexemplet med `standardize` och native `validate_pack_bytes`. Resultatet
 är referensmaterial, inte nya recept eller bevis på produktstöd. På Linux används
 `.venv/bin/python` och `PYTHONPATH=backend:.`.
 
+Ingrediensregistrets `unit_options` visar separat granskade enheter med
+respektive produktkrav, exempelvis gram och ml filmjölk. Det är inga
+omräkningsfaktorer; välj en enhet och författa dess mängd uttryckligen.
+Receptdetaljerna inkluderar också beredningsversion och okända
+processförluster, så att dessa villkor följer med i författarunderlaget.
+
 ### 2. Hämta aktuell täckning
 
 Följ [COVERAGE-OVERVIEW](../COVERAGE-OVERVIEW.md). Hitta senaste lyckade main-CI

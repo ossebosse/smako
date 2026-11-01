@@ -99,8 +99,8 @@ def matches_preferences(recipe, preferences):
         return False
     if preferences.max_minutes is not None and d.estimated_minutes > preferences.max_minutes:
         return False
-    from app.services.personal_policy import protein_category
-    if not preferences.allow_fish and protein_category(recipe) == "fish":
+    from app.services.diet_policy import recipe_contains_fish
+    if not preferences.allow_fish and recipe_contains_fish(recipe):
         return False
     return not (preferences.adaptation == "products" and d.variant_id != "base")
 

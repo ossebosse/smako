@@ -30,11 +30,11 @@ import re
 from collections import Counter
 from pathlib import Path
 
+from app.services.diet_policy import FINFISH_INGREDIENTS, FISH_FLAVOURINGS
+
 SCHEMA = "smako-recipe-authoring-v1"
 MEAT = {"kyckling", "nötfärs", "fläskfärs", "blandfärs", "fläskkött", "kalkon"}
-FISH = {"fisk", "lax", "torsk", "tonfisk"}
-FISH.update({"makrill", "rökt makrill", "sardiner", "matjessill", "stenbitsrom", "rökt lax", "varmrökt lax"})
-FISH.update({"sardeller", "fisksås", "ostronsås", "worcestershiresås"})
+FISH = FINFISH_INGREDIENTS | FISH_FLAVOURINGS
 REVIEWED_VOCABULARY = Path(__file__).parents[1] / "data/ingredients/authoring-20261025.json"
 AUTHORING_REQUIREMENTS = {"aggnudlar": ("pack:egg_noodles",)}
 SAFETY = {
@@ -133,8 +133,10 @@ def standardize(source, vocabulary, *, reviewed_at):
                 unit, requirements = vocabulary[key]
                 # An explicit gram recipe may use a separately reviewed gram
                 # product. This never converts its amount or makes ml equal g.
-                unit, requirements = getattr(vocabulary, "by_unit", {}).get(
-                    (key, item.get("unit", unit)), (unit, requirements))
+                requested_unit = item.get("unit", unit)
+                if requested_unit != unit:
+                    unit, requirements = getattr(vocabulary, "by_unit", {}).get(
+                        (key, requested_unit), (unit, requirements))
                 reviewed_requirements = {r for r in requirements if r.startswith("pack:intake_")}
                 unit = item.get("unit", unit)
                 requirements = list(dict.fromkeys([*item.get("requirements", requirements),

@@ -441,6 +441,8 @@ def prepared_recipe_lookup(servings):
 
 def candidates(preferences: RecipePreferences, servings: int = 2, *, include_supplement: bool = True) -> list[Recipe]:
     """Return complete allowed candidates; nutrition targets are qualified downstream."""
+    from app.services.diet_policy import recipe_contains_fish
+
     if preferences.mode != "complete":
         return []
     return [r.model_copy(update={
@@ -452,12 +454,14 @@ def candidates(preferences: RecipePreferences, servings: int = 2, *, include_sup
             and (not preferences.cuisines or set(r.design.cuisines) & set(preferences.cuisines))
             and preferences.min_ingredients <= r.design.ingredient_count <= preferences.max_ingredients
             and (preferences.max_minutes is None or r.design.estimated_minutes <= preferences.max_minutes)
-            and (preferences.allow_fish or not r.design.fish)
+            and (preferences.allow_fish or not recipe_contains_fish(r))
             and (preferences.adaptation == "approved" or r.design.variant_id == "base")]
 
 
 def matches_meal(recipe, meal, preferences):
     """A cheap content filter applied before product and basket qualification."""
+    from app.services.diet_policy import recipe_contains_fish
+
     validate_recipe_design(recipe)
     d, choices = recipe.design, meal.recipe_choices
     if not d or meal.meal_type not in d.meal_types:
@@ -474,7 +478,7 @@ def matches_meal(recipe, meal, preferences):
             return False
         if preferences.cuisines and not set(preferences.cuisines).intersection(d.cuisines):
             return False
-        if not preferences.allow_fish and d.fish:
+        if not preferences.allow_fish and recipe_contains_fish(recipe):
             return False
     count = ingredient_count(recipe)
     active = d.active_minutes or (d.content_source.active_minutes if d.content_source else None)

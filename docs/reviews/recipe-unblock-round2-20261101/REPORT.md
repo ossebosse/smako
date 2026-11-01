@@ -74,6 +74,19 @@ Regressionerna använder både syntetiska processfall och verkligt utgivna
 Gulab jamun, Bohuslänsk äggost, blodpalt, Murgh musallam och Cacio e pepe.
 De kontrollerar bland annat min/max portionsvikt, protein och energi.
 
+Även kostfiltren kontrollerar de nya kulinariska namnen. Ätklar sill och svensk
+ansjovis omfattas av ”ingen fisk” även om en äldre förseglad innehållsflagga
+saknade namnet. Hel kyckling räknas som kyckling i menyfördelningen; råa
+vannameiräkor och musselkött räknas som skaldjur och kan inte fylla en fiskkvot.
+Detta är kategorisering för användarval, ingen produktidentitetsalias.
+Äldre innehållshashar skrivs inte om. Framtida författande använder samma
+fisknamn när metadata skapas.
+
+Exporten till nästa receptförfrågan tar nu med separat granskade
+enhetsalternativ och processförluster. Den nya gramfilen för filmjölk tappas
+alltså inte bort när ml fortfarande är standardenheten. En riktad kontroll
+av export, kostgränser och befintliga författarkontrakt gav 117 godkända tester.
+
 ## Källor och kvalificeringsscope
 
 Mängdbevis och korta källutdrag ligger vid respektive produktkoppling.
