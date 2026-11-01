@@ -1,5 +1,10 @@
 # Mindre uppvärmning och färre filkontroller
 
+> Uppföljning 2026-11-01: provet på 53,500 s överlappade ännu pågående
+> bakgrundsförberedelse. Se [varma jämförelseprov](../../reviews/warm-prewarm-20261101/REPORT.md)
+> och skälet till att uppvärmningen behålls på. Ursprungsobservationerna nedan
+> är bevarade; ingen ny runtimeaktivering gjordes i uppföljningen.
+
 Aktiverad 2026-10-31T21:41:47.238688+00:00 på https://beta.smako.nu.
 [PR 57](https://github.com/ossebosse/smako/pull/57) är på main
 `3eb21dc7feafcb071648d2ddfd9b0043a460f73b`. PR- och [main-CI](https://github.com/ossebosse/smako/actions/runs/41243602156) passerar:
