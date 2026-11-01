@@ -67,7 +67,7 @@ class RecipeUnmeasuredProcess(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
     step_id: str
     ingredient_keys: tuple[str, ...] = Field(min_length=1)
-    operation: Literal["drain_after_cooking", "remove_after_infusion", "deep_fry_and_drain", "strain_whey", "peel_after_cooking", "remove_bones_after_cooking"]
+    operation: Literal["drain_after_cooking", "remove_after_infusion", "deep_fry_and_drain", "strain_whey", "peel_after_cooking", "remove_bones_after_cooking", "trim_before_cooking", "drain_before_cooking"]
     description: str = Field(min_length=10, max_length=500)
 
 

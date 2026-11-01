@@ -102,7 +102,7 @@ _OTHER_ANIMAL = frozenset(
         "färskost",
         "kefir",
         "filmjölk",
-        "parmesan", "pecorino romano", "ghee", "mjölkpulver", "evaporerad mjölk",
+        "parmesan", "pecorino romano", "lagrad pecorino", "ghee", "mjölkpulver", "evaporerad mjölk",
     }
 )
 _OTHER_ANIMAL_FAMILIES = frozenset({"dairy", "egg"})

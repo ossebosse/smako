@@ -6,7 +6,11 @@ from pathlib import Path
 import pytest
 from app.models.plan import DietPreference
 from app.services.diet_policy import _excluded_by_diet
-from app.services.intake_product_links import compatible, project_reviewed_quantity
+from app.services.intake_product_links import (
+    compatible,
+    project_reviewed_quantity,
+    reviewed_drained_quantity,
+)
 from app.services.recipe_authoring import library_vocabulary, standardize
 from app.services.recipe_library import current_recipes
 
@@ -122,3 +126,29 @@ def test_gross_variable_mass_is_not_an_edible_weight_or_exact_purchase(name):
 def test_fish_based_worcestershire_keeps_vegetarian_and_vegan_exclusions():
     assert _excluded_by_diet('worcestershiresås', DietPreference.VEGETARIAN)
     assert _excluded_by_diet('worcestershiresås', DietPreference.VEGAN)
+
+
+def test_source_already_drained_quantity_is_not_reduced_again_or_used_as_gross(monkeypatch):
+    from app.services import intake_product_links
+
+    row = copy.deepcopy(next(r for r in ROWS if r['name'] == 'svensk ansjovis'))
+    p, f = source(row)
+    key = row['requirements'][0].removeprefix('pack:')
+    monkeypatch.setattr(intake_product_links, 'entries', lambda: {key: row})
+    def accepted(product=p, form='preserved_drained'):
+        return reviewed_drained_quantity(row['name'], form, row['requirements'], product, f)
+    assert accepted() and p.usable_quantity == p.package_quantity == 79
+    assert project_reviewed_quantity(p, f, required_unit='g') is p
+    assert not accepted(form='as_sold')
+    assert not accepted(p.model_copy(update={'usable_quantity': 125}))
+    assert not accepted(p.model_copy(update={'package_quantity': 125}))
+    assert not accepted(p.model_copy(update={'quantity_confidence': 'estimated'}))
+    proof = row['reviewed_links'][0]['quantity']
+    proof['source']['declared_drained_g'] = 125
+    assert not accepted()
+
+
+def test_new_pecorino_is_separate_from_romano_and_remains_nonvegan():
+    vocabulary = library_vocabulary(current_recipes())
+    assert vocabulary['lagrad pecorino|as_sold'][1] != vocabulary.get('pecorino romano|as_sold', (None, []))[1]
+    assert _excluded_by_diet('lagrad pecorino', DietPreference.VEGAN)

@@ -126,7 +126,8 @@ def test_metadata_and_version_are_part_of_the_content_seal(recipe):
 
 
 @pytest.mark.parametrize('name,unit', [('ägg', 'st'), ('hel kyckling', 'g'),
-                                     ('oxsvans med ben', 'g'), ('rimmat fläsklägg', 'g')])
+                                     ('oxsvans med ben', 'g'), ('rimmat fläsklägg', 'g'),
+                                     ('nötblod', 'ml')])
 @pytest.mark.parametrize('method', ['salad', 'cold_assembly', 'refrigerated_assembly'])
 def test_gross_raw_animal_inputs_still_require_a_hot_method(name, unit, method):
     document = source()

@@ -26,7 +26,7 @@ Per recept: `base_id`, `name`, `servings`, `meal_type` (dinner/breakfast/snack),
   `ingredients` (namn som används i det steget), `operation` och `description`.
   Tillåtna operationer är `drain_after_cooking`, `remove_after_infusion`,
   `deep_fry_and_drain`, `strain_whey`, `peel_after_cooking` och
-  `remove_bones_after_cooking`.
+  `remove_bones_after_cooking`, `trim_before_cooking` och `drain_before_cooking`.
   Ingen absorptionsprocent, densitet eller annan förlustfaktor accepteras.
 
 Ett sådant recept får det separata beredningskontraktet

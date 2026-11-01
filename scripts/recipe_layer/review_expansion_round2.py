@@ -9,6 +9,34 @@ from app.services.personal_policy import ProductFacts
 
 TARGET = Path('backend/app/data/ingredients/expansion-round2-20261101.json')
 REVIEWS = {
+    'rostade saltade pistaschkärnor|as_sold|g': (
+        [('Pistaschkärnor Utan Skal Rostade Och Saltade', 'Garant')],
+        'Garant 65 g rostade saltade pistaschkärnor utan skal. Tillverkarens specifika pistaschkärnor-sida bekräftar ätliga kärnor och salt 1,8 procent. Inte råa osaltade nötter eller den separata äldre pistaschnötter-sidan med motstridigt skalbesked. Explicit saltad garnityr i nya receptversioner; ingen skalandel antas.',
+        'https://www.garantskafferiet.se/vara-produkter/choklad--snacks/notter--torkad-frukt/pistaschkarnor/'),
+    'salsa verde av tomatillo|as_sold|g': (
+        [('Tomatillo Grön', 'Clementejaques')],
+        'Färdig Salsa Verde från Clemente Jacques, 370 g. Dabas/Yora GTIN 7501052473505 och samma artikel 101594296 i butikskällorna identifierar tomatillosåsen. Innehåller bland annat vatten, chili, lök, soja och salt; inte hela råa tomatillor. Endast uttrycklig ny såsdos och sänkt tillsatt salt i anpassat recept, ingen mängd tomatillokött antas.',
+        'https://www.dabas.com/productsheet/07501052473505'),
+    'nötblod|as_sold|ml': (
+        [('Nötblod Fryst/sverige', 'Scan')],
+        'Fryst rått nötblod för matlagning, Scan 500 ml i befintlig matbutik. Deklarerad volym, ingen densitet eller gramvikt antas. Kräver kylupptining och genomkokning i granskad varm receptversion; inte färdig blodpudding eller djurfoder.',
+        None),
+    'evaporerad mjölk|as_sold|g': (
+        [('Original Kondenserad Mjölk Osötad', 'Rainbow')],
+        'Rainbow Original osötad evaporerad komjölk i 410 g-burk. Inte sötad kondenserad mjölk, karamelliserad mjölk eller mjölkpulver. Receptet väger den osötade mjölken i gram; ingen ml-densitet antas.',
+        'https://www.rainbowmilk.com/en/products/original-evaporated-milk-15-g'),
+    'svensk ansjovis|preserved_drained|g': (
+        [('Ansjovis Original', 'Grebbestads')],
+        'Kryddade skarpsillsfiléer från Grebbestads, inte sardeller eller ansjoviskryddad sill. Granskad 125 g-burk med deklarerade 79 g avrunnen fisk. Butikskällans mängdfält är redan 79 g jämförmängd; ingen ytterligare avdragsfaktor. Recept väger avrunna filéer utan spad.',
+        'https://www.dabas.com/productsheet/07311170022116'),
+    'lagrad pecorino|as_sold|g': (
+        [('Pecorino 8mån', 'Garant')],
+        'Lagrad italiensk hårdost av fårmjölk, Garant 8 månader 150 g. Inte verifierad Pecorino Romano eller DOP. Gram avser inköpt bit före bortskärning av eventuell hård ytkant; ingen ätlig andel antas. Kräver uttrycklig receptanpassning med okänt utbyte.',
+        'https://www.garantskafferiet.se/vara-produkter/ost/lagrad-ost/pecorino/'),
+    'surdegsfralla|as_sold|g': (
+        [('Surdegsfralla Svenskt', 'Dafgårds')],
+        'Naturell svensk surdegsfralla från butikens lösbrödsavdelning, deklarerad 80 g. Inte fyllt bröd, surdegsknäcke eller verifierat mexikanskt birote. Receptet anger uttrycklig brödanpassning och uppfriskning av färdigbakad fralla före fyllning; rå deg får inte användas.',
+        'https://www.willys.se/produkt/Surdegsfralla-Svenskt-101676551_ST'),
     'hel kyckling|as_sold|g': (
         [('Kyckling Hel Färsk Sverige', 'Garant')],
         'Hel rå färsk kyckling som bruttovikt inklusive skinn och ben. Källans rörliga förpackningsvikt och kilopris behålls; endast uppskattat inköpsläge. Ingen ätlig andel eller tillagad portionsvikt antas.',
@@ -135,6 +163,8 @@ def main(args):
             p, fact = candidate['product'], candidate['facts']
             if (p['name'], p.get('brand')) not in labels:
                 continue
+            if name == 'svensk ansjovis' and p['package_quantity'] != 79:
+                continue
             if (not fact or fact['conflicts'] or p['package_unit'] != unit
                     or p['usable_unit'] != unit or not p['package_quantity']
                     or p['usable_quantity'] != p['package_quantity']
@@ -159,6 +189,18 @@ def main(args):
                                    'usable_quantity': p['usable_quantity']})
             if source_url:
                 proof['culinary_source_url'] = source_url
+            if name == 'svensk ansjovis':
+                excerpt = 'Grebbestads Ansjovisfilé 125 g x 20 (skarpsillvikt 79 g).'
+                source = {'url': source_url, 'reviewed_excerpt': excerpt,
+                          'sha256': hashlib.sha256(excerpt.encode()).hexdigest(),
+                          'sha256_scope': 'UTF-8 reviewed excerpt, not the HTML response',
+                          'evidence_kind': 'reviewed_manufacturer_drained_mass',
+                          'declared_net_g': 125, 'declared_drained_g': 79,
+                          'reviewed_at': '2026-11-01'}
+                proof['quantity'].update(method='reviewed_source_already_drained_mass_v1',
+                    form_evidence_location='review_registry', source_quantity_basis='declared_drained',
+                    declared_net_quantity=125, declared_drained_quantity=79,
+                    source=source, label_source=source)
             if name == 'filmjölk' and p['brand'] in {'Garant', 'Garant Eko'}:
                 proof['culinary_source_url'] = ('https://production.garantskafferiet.se/vara-produkter/mejeri/fil--yoghurt/ekologisk-fil-3-/'
                     if p['brand'] == 'Garant Eko' else 'https://production.garantskafferiet.se/vara-produkter/mejeri/laktosfritt/laktosfri-filmjolk-3-/')
@@ -179,7 +221,7 @@ def main(args):
                      'review_basis': 'Exact source/product/package bindings; culinary review only. ' + definition,
                      'evidence': [{'kind': 'reviewed_whole_label_and_form', 'source_url': source_url}],
                      'reviewed_links': links})
-        if gross_variable or key == 'ägg|as_sold|st':
+        if gross_variable or key in {'ägg|as_sold|st', 'lagrad pecorino|as_sold|g'}:
             rows[-1]['gross_inedible_mass'] = True
     TARGET.write_text(json.dumps({'schema_version': 'smako-authoring-vocabulary-v1',
         'reviewed_at': '2026-11-01', 'source_scope': reference['source_scope'],
