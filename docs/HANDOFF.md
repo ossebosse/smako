@@ -1,3 +1,20 @@
+# 2026-11-01: Rapporter för 72 nya grundrätter mottagna; receptpaket saknas
+
+Fyra originalbilagor är bevarade i
+[mottagningsjournalen](../backend/app/data/recipes/incoming/authoring-1000-20261101/checkpoint-72-reports/README.md).
+De redovisar 72 baser/199 varianter: 55 middagar, 3 frukostar, 14 mellanmål.
+112 lokala kontroller av rapportmetadata/ID:n passerar. Receptens sex paket
+001–006, källor och flera stödregister är inte bifogade; be om hela ZIP-filen.
+Inga recept från checkpointen är native-validerade, importerade eller aktiverade.
+
+63 redovisade namn/form-identiteter saknas i författarregistret och berör
+52 baser/149 varianter enligt rapporterna. Två paket med 20 baser/49 varianter
+uppges ha enbart kända identiteter; även deras fullständiga innehåll saknas.
+Paket 007 är nästa redovisade författarpaket, med 928 baser/2 551 varianter kvar.
+Fortsätt samma beställning och bevara ID:n. Aktiva bibliotekets manifest består.
+
+---
+
 # 2026-11-01: Återanvändbar arbetsgång för nya receptförfrågningar
 
 Ägaren har skickat uppdraget om 1 000 nya grundrätter till Chat: 750 middagar,

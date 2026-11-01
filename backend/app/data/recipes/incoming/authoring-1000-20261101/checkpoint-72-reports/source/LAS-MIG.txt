@@ -1,0 +1,148 @@
+SMAKO – DELCHECKPOINT 2026-11-01
+AI-FÖRFATTADE RECEPTUTKAST FÖR SEPARAT GRANSKNING OCH IMPORT
+
+VIKTIG STATUS
+Detta är INTE hela beställningen på 1 000 nya grundrätter / 2 750 varianter.
+Faktiskt levererat: 72 grundrätter med 199 fullständiga varianter i sex JSON-paket.
+Återstår: 928 grundrätter och 2 551 variantposter. Kvoter har inte flyttats.
+Varianterna inom de 72 författade baserna är kompletta: inga interna variantunderskott.
+Alla recept är skrivna på svenska, version 1.0.0, och är inte provlagade.
+Ingen Smako-import, produktbindning, köpbarhetskontroll eller betaaktivering har gjorts.
+Även registerkända recept behöver Smakos granskning och provlagning.
+
+INVENTERING OCH LIKHET
+Referensen är den bifogade exporten från lokala main, 1 november 2026.
+934 grundrätter, 2 462 varianter och 284 ingrediensidentiteter lästes med kod.
+Ett sökbart SQLite-/FTS-index över hela biblioteket ingår under kontroll/.
+Även 35 köksomärkta och fem flerköksmärkta baser ingick i jämförelsen.
+Krockkontroll omfattar 944 reserverade bas-ID:n och 3 517 variant/version-ID:n
+samt de återkallade ID:n som finns i reserverade-idn.json.
+
+84 kandidater inventerades och jämfördes mot hela biblioteket och varandra före
+fullständig författning. Beslut: 72 accept, 7 review, 5 reject. Accept avser
+AI-redaktionell basidentitet, inte ett native-Smako-godkännande.
+De 12 review/reject-kandidaterna har inga författade recept och räknas inte som nya.
+Efter författningen jämfördes de 72 faktiska baserna och 199 varianterna på nytt
+mot referensen och de nya recepten inbördes. Närmaste träffar och motiveringar
+finns i dubblettgranskning.json. Låg maskinlikhet är inte ett nyhetsbevis.
+
+Underskottet beror på att denna checkpoint stannar vid denna inventering och
+författning. Det bevisar INTE att fler tydligt skilda klassiska rätter saknas.
+Ingen serie kosmetiska protein-/tillbehörsbyten har använts för att fylla målet.
+
+UTFALL PER KÖK OCH MÅLTID (författat/mål)
+Kök          Middag      Frukost     Mellanmål     Baser   Varianter   Saknas baser
+Grekiskt       7/125       0/21        3/21         10        27       157
+Italienskt    11/125       0/21        2/20         13        37       153
+Mexikanskt     9/125       1/21        3/21         13        35       154
+Indiskt        7/125       0/21        2/21          9        25       158
+Thailändskt   10/125       1/21        3/21         14        38       153
+Svenskt       11/125       1/20        1/21         13        37       153
+TOTALT        55/750       3/125      14/125          72       199       928
+
+UNDERSKOTT PER CELL, ANTAL GRUNDRÄTTER
+Kök          Middag       Frukost     Mellanmål
+Grekiskt     118           21           18
+Italienskt   114           21           18
+Mexikanskt   116           20           18
+Indiskt      118           21           19
+Thailändskt  115           20           18
+Svenskt      114           19           20
+Middagar: fyra portioner och simple/standard/extended.
+Frukost/mellanmål: en portion och simple/extended.
+
+PAKET OCH LEVERANSORDNING
+paket/001-pilot-kanda-identiteter.json: 12 grundrätter, 30 varianter, 186986 byte.
+paket/002-registergranskning.json: 18 grundrätter, 52 varianter, 325396 byte.
+paket/003-registergranskning.json: 9 grundrätter, 25 varianter, 169085 byte.
+paket/004-registergranskning.json: 15 grundrätter, 44 varianter, 320788 byte.
+paket/005-registergranskning.json: 10 grundrätter, 29 varianter, 210220 byte.
+paket/006-kanda-identiteter.json: 8 grundrätter, 19 varianter, 123211 byte.
+Paket 001 är piloten: två baser per kök, en middag och ett mellanmål.
+Piloten ingår exakt en gång i slutantalet. Den är inte ett extra paket att lägga
+ovanpå siffrorna. Paketnumreringen är ordningen för denna leverans, inte separata
+runtimegenerationer eller en uppmaning att kringgå Smakos granskning.
+
+Paket 001 och 006: 20 hela grundrätter / 49 varianter använder enbart befintliga
+registeridentiteter. De är INTE importgodkända eller verifierat köpbara.
+Paket 002–005 hålls för registergranskning: 52 baser / 150 varianter i dessa paket.
+149 av varianterna använder direkt någon av de 63 föreslagna identiteterna.
+Den återstående varianten är pizzoccheri simple: den använder kända identiteter
+men hålls ihop med sina två registerblockerade syskonvarianter.
+Avslutande paket 006 har åtta baser, under riktmärket 10–20, för att hålla
+registerstatus åtskild utan utfyllnad eller delade basfamiljer.
+
+FILKARTA
+paket/*.json                    Enda receptfilerna avsedda för senare granskning/import.
+kandidatregister.json           Alla 84 kandidater, kulinarisk identitet, källor,
+                                beslut och exakta variantreferenser.
+leveransoversikt.json            Kvoter, faktiska antal, kostavsikt, mängd-/tidsöversikt,
+                                intervallundantag och blockerare.
+dubblettgranskning.json          Jämförelse före/efter författning, närmaste befintliga
+                                och nya rätter, avvisade och kvarstående gränsfall.
+registerforslag.json             63 saknade namn/form-identiteter och alla berörda varianter.
+befintliga-recept-forslag.json   91 förslag: fem överförda avvisade kandidater och
+                                86 namn-/variantgranskningar inom befintliga ID:n.
+                                Det är förslag, inte bevisade synonymer eller utförda ändringar.
+kallor.json                     81 faktiskt använda textkällor med stödclaim, bas-ID
+                                och läsbegränsningar. Inga källtexter eller bilder kopieras.
+kontrollrapport.json            Faktiskt körda kontroller, råvarningar, förklaringar
+                                och det som inte körts.
+checkpoint.json                 Fortsättningspunkt, frysta ID:n, restkvoter och nästa paket 007.
+LAS-MIG.txt                     Denna läsanvisning.
+kontroll/                       Läslogg, historiska checkpoints, fulltextindex,
+                                likhetspoäng och portabel fristående validator.
+kontroll/referens/              Schema, register, reserverade ID:n och referensmanifest
+                                för reproducerbar kontroll. Inte nya receptfiler.
+
+Det finns INGEN samlad duplicerad receptfil. Importera aldrig allt rekursivt:
+endast paket/*.json innehåller de nya receptpaketen. SQLite-indexet under kontroll/
+innehåller referensbibliotek för sökning, inte en ny leverans att importera.
+
+KONTROLLRESULTAT OCH VIKTIGA BEGRÄNSNINGAR
+199 variantposter har passerat bifogat JSON Schema och fristående författarkontroll.
+Noll strukturella fel och inga ID-krockar. Alla basfamiljer hålls i samma paket.
+31 avvikelser från ingrediensriktmärkena har uttrycklig kulinarisk motivering.
+Nävgröt saknar naturlig 10–15-variant och lämnas med 4/6/9 ingredienser.
+Tre råa textvarningar gäller tod man pla: regexen söker 63 °C, medan receptet
+anger minst 70 °C för fiskmassan. Förklaringen finns i kontrollrapporten;
+varningarna har inte raderats eller presenterats som Smako-godkännande.
+
+Tiderna är uppskattningar. Blötläggning, jäsning, marinering, långkok och kylning
+finns i stegen och ingår i beräkningen. Kritisk väg och aktiv tid beräknas separat.
+Den aktuella kodkontrollen klarar gränserna för aktiv/total/väntetid; det är inte
+ett intyg om att varje uppskattning stämmer i ett verkligt kök.
+
+Kostprofiler är avsikt, inte allergen- eller produktgodkännanden. Uttryckliga
+skaldjur/blötdjur redovisas separat. Currypastor kan dessutom ha sådant innehåll.
+Ostlöpe, sammansatta varor, mjöl, grädde, tapioka och fiskens funktion återstår
+att produktgranska. Befintliga pack:-krav ärvdes inte som nya behörigheter:
+requirements är utelämnat i recepten och måste hanteras av Smako.
+
+Processolja är tillförd mängd, inte antaget upptag. Ben, skal, bananblad, pandan,
+lagerblad och inkokningslag måste hanteras korrekt i framtida berednings-/näringsmodell.
+Inga densiteter, styckevikter, avrunna andelar, kostnader eller besparingar har hittats på.
+Färre ingredienser påstås inte innebära billigare veckokorg.
+
+REPRODUCERA STRUKTURKONTROLLEN
+Kräver Python 3 och paketet jsonschema. Från den uppackade leveransmappen:
+  python kontroll/validera_leverans.py
+Det skriver kontroll/omkord-kontroll.json och avslutar med felkod om strukturella
+fel hittas. Verktyget är fristående och ska inte förväxlas med Smakos egna kommandon.
+Kontrollen har också körts från den levererade filen med utfallet 72 baser,
+199 varianter, 0 fel och 34 råvarningar (31 intervall + 3 förklarade textträffar).
+
+FORTSÄTTNINGSREGLER
+Nästa paket-ID: smako-expansion-1000-20261101-007.
+Behåll de 72 levererade bas-ID:na och samtliga kandidatbeslut. Börja inte om.
+Jämför nya kandidater med både originalreferensen och denna leverans före författning.
+Kandidatlistan måste utökas: inga accepterade men oförfattade kandidater återstår.
+De sju review-kandidaterna kräver ett nytt uttryckligt beslut; de får inte räknas
+som färdiggranskade. De fem avvisade hör till befintliga receptfamiljer.
+Prioritera kvarstående måltids-/kökskvoter och vardagsbredd, särskilt frukostar,
+utan att ometikettera middag eller byta en enda råvara för att skapa ett nytt ID.
+
+REFERENS
+Git: 4a0c636cfe82cf654830cd1779238ba62acf876c
+Bibliotekssignatur: 68a142625914bdeae7d03d1d41d76f7a440ae2ab1239d2f31e2e4ebc435f3516
+Export: 2026-11-01T08:51:30.206035+00:00

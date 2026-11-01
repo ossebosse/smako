@@ -1,0 +1,672 @@
+{
+  "status": "Fristående maskinkontroll och AI-redaktionell genomgång av en delcheckpoint. Ingen native-Smako-validering.",
+  "checked_date": "2026-11-01",
+  "validator": "Python jsonschema Draft202012 + egna författarkontroller; inte Smakos native-validator",
+  "reference": {
+    "created_at": "2026-11-01T08:51:30.206035+00:00",
+    "git_sha": "4a0c636cfe82cf654830cd1779238ba62acf876c",
+    "library_signature": "68a142625914bdeae7d03d1d41d76f7a440ae2ab1239d2f31e2e4ebc435f3516",
+    "scope": "Current authored library in local main; not a live beta or purchasing coverage measurement.",
+    "base_count": 934,
+    "variant_count": 2462,
+    "ingredient_identity_count": 284,
+    "cuisine_base_counts": {
+      "unassigned": 35,
+      "indian": 140,
+      "greek": 139,
+      "italian": 141,
+      "mexican": 98,
+      "thai": 132,
+      "swedish": 244,
+      "mexican+swedish": 5
+    },
+    "meal_type_base_counts": {
+      "breakfast": 120,
+      "dinner": 696,
+      "snack": 118
+    },
+    "issued_base_count": 944,
+    "issued_variant_versions": 3517
+  },
+  "counts": {
+    "target_bases": 1000,
+    "target_variants": 2750,
+    "authored_bases": 72,
+    "authored_variants": 199,
+    "editorially_accepted_as_distinct_bases": 72,
+    "schema_checked_bases": 72,
+    "schema_checked_variants": 199,
+    "register_blocked_bases": 52,
+    "register_blocked_variants": 149,
+    "known_identity_variants_including_one_in_held_package": 50,
+    "whole_bases_with_known_identities_only": 20,
+    "variants_in_known_only_packages": 49,
+    "variants_held_in_register_packages": 150,
+    "unresolved_candidates_excluded": 7,
+    "rejected_candidates_excluded": 5,
+    "deficit_bases": 928,
+    "deficit_variants": 2551,
+    "variant_deficit_within_authored_bases": 0,
+    "native_smako_approved_variants": 0,
+    "provcooked_variants": 0
+  },
+  "checks_run": [
+    {
+      "id": "reference_readability",
+      "description": "Alla tolv text-/JSON-/JSONL-underlag lästes med kod; 934 baser, 2462 varianter och 284 identiteter indexerade.",
+      "executed": true
+    },
+    {
+      "id": "json_schema",
+      "description": "jsonschema Draft202012Validator mot bifogad leveransschema.json; dessutom alla av användaren obligatoriska fält, version och portionsmål.",
+      "executed": true
+    },
+    {
+      "id": "unique_ids",
+      "description": "Basfamilj inom en enda fil, unik base_id+version+variant_id, unika pack_id och ingen krock mot reserverade/historiska ID:n.",
+      "executed": true
+    },
+    {
+      "id": "variant_completeness",
+      "description": "Tre varianter per middag och två per frukost/mellanmål; samtliga självständiga listor/steg; strikt ökande faktiska ingrediensantal.",
+      "executed": true
+    },
+    {
+      "id": "ingredient_identity_form_unit",
+      "description": "Varje namn/form/enhet matchar registret eller ett uttryckligt registerförslag. Inga requirements-överstyrningar och inga två former för samma namn i en variant.",
+      "executed": true
+    },
+    {
+      "id": "ingredient_uses",
+      "description": "Varje listad ingrediens finns i uses och varje uses-namn finns i komponenterna. Detta är inte ett bevis att all fri text saknar semantiska oklarheter.",
+      "executed": true
+    },
+    {
+      "id": "amounts",
+      "description": "Numeriska positiva komponentmängder inom schema; ingen fast ingrediensmassa i stegtext. Processvatten använder ml; ingen gissad densitet eller benandel lagras.",
+      "executed": true
+    },
+    {
+      "id": "step_dependencies_and_times",
+      "description": "Alla after refererar till tidigare steg; aktiv tid/kritisk väg/väntan beräknade och jämförda med gränser 180/2880/1440 minuter.",
+      "executed": true
+    },
+    {
+      "id": "raw_animal_cold_chain",
+      "description": "Kalla sluträtter med rå animalisk insats flaggas maskinellt; inkokt lax har pot-metod med tillagning före kylning. Produkt- och livsmedelssäkerhetsgranskning återstår.",
+      "executed": true
+    },
+    {
+      "id": "full_scope_similarity",
+      "description": "Full maskinsökning över alla aktuella baser och varianter före författning, även utan/med flera köksmarkeringar, plus nya inbördes; efterkontroll med faktiska recept.",
+      "executed": true
+    },
+    {
+      "id": "source_mapping",
+      "description": "Samtliga 72 författade baser har minst en faktisk använd källa i kallor.json; varje hänvisning till befintligt base_id i förslagslistan finns i referensbiblioteket.",
+      "executed": true
+    },
+    {
+      "id": "package_size",
+      "description": "Alla JSON-receptpaket under 16 MiB; utfallet är rå filstorlek, inte Smakos senare standardiserade storlek.",
+      "executed": true
+    },
+    {
+      "id": "pilot_counted_once",
+      "description": "Pilotens 12 baser/30 varianter ingår exakt en gång i de kumulativa 72/199.",
+      "executed": true
+    },
+    {
+      "id": "quota_shortfall",
+      "description": "Samtliga 18 kök/måltidsceller redovisade utan kvotflytt; fullmålet är inte uppnått.",
+      "executed": true
+    },
+    {
+      "id": "portable_validator_replayed",
+      "description": "Den levererade kontroll/validera_leverans.py kördes från leveransmappen: 72 baser, 199 varianter, 0 fel, 34 råvarningar.",
+      "executed": true
+    },
+    {
+      "id": "diet_intent_dictionary_review",
+      "description": "Alla använda kanoniska råvarunamn jämfördes med kostavsiktsklassificeringen; blandfärs, komage, färskost och pecorino romano lades uttryckligen till. Produktklassificering är fortfarande inte verifierad.",
+      "executed": true
+    }
+  ],
+  "structural_errors": [],
+  "structural_error_count": 0,
+  "raw_machine_warnings": [
+    {
+      "variant": "smako-italian-panforte:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-italian-panforte:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "9 räknade; riktmärke 6–8; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-tub-tim-krob:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "5 räknade; riktmärke 6–8; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-swedish-kanelbullar:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-greek-revithada:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "11 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-italian-pasta-pesto-genovese:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "11 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-italian-pasta-amatriciana:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "7 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-italian-pasta-amatriciana:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-indian-sambar:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-indian-vada-pav:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-indian-undhiyu-vardagsversion:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-indian-undhiyu-vardagsversion:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "13 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-pad-prik-king-tofu:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-gaeng-liang:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-gaeng-liang:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "12 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-gaeng-pa:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-gaeng-pa:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "12 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-nam-prik-ong:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "9 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-yum-thua-plu:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-tod-man-pla:1.0.0:simple",
+      "code": "SAFETY_TEXT_REVIEW",
+      "message": "fisk: saknar explicit 63 °C"
+    },
+    {
+      "variant": "smako-thai-tod-man-pla:1.0.0:standard",
+      "code": "SAFETY_TEXT_REVIEW",
+      "message": "fisk: saknar explicit 63 °C"
+    },
+    {
+      "variant": "smako-thai-tod-man-pla:1.0.0:extended",
+      "code": "SAFETY_TEXT_REVIEW",
+      "message": "fisk: saknar explicit 63 °C"
+    },
+    {
+      "variant": "smako-swedish-janssons-frestelse:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "11 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-swedish-navgrot-flask:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "4 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-swedish-navgrot-flask:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-swedish-navgrot-flask:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "9 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-swedish-bruna-bonor-flask:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "4 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-swedish-bruna-bonor-flask:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "7 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-swedish-bruna-bonor-flask:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-swedish-polsa:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-greek-fanouropita:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "7 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-greek-fanouropita:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "9 räknade; riktmärke 6–8; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-mexican-conchas:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten"
+    },
+    {
+      "variant": "smako-thai-ma-hor:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten"
+    }
+  ],
+  "warning_dispositions": [
+    {
+      "variant": "smako-italian-panforte:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Egen kandering kräver både socker och honung i denna variant. 6 ingredienser behövs för nöt, mjölbindning, citrus, sirap och krydda; riktmärket 3–5 underskrider den valda kärnan."
+    },
+    {
+      "variant": "smako-italian-panforte:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "9 räknade; riktmärke 6–8; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Egen kandering kräver både socker och honung i denna variant. Hasselnöt ger ett andra nötslag och kakao/muskot en mörkare faktisk kryddprofil; 9 ingredienser accepteras hellre än att ta bort bärande moment."
+    },
+    {
+      "variant": "smako-thai-tub-tim-krob:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "5 räknade; riktmärke 6–8; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "4 respektive 5 räknade ingredienser. Mango ger en riktig fruktkomponent i utökad variant. Inga extra kryddor, färger eller dekorationer läggs till enbart för att nå sex ingredienser."
+    },
+    {
+      "variant": "smako-swedish-kanelbullar:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Sex räknade ingredienser i enkel variant behövs för jäst vetedeg och riktig smör-kanel-sockerfyllning. Ingen pensling eller garnering läggs till för antalsmålet."
+    },
+    {
+      "variant": "smako-greek-revithada:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "11 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Elva ingredienser med en hel tomat-/fetasallad. Ingen tolfte utfyllnadsingrediens behövs."
+    },
+    {
+      "variant": "smako-italian-pasta-pesto-genovese:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "11 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Elva ingredienser med en enkel riktig tomatsallad; ingen extra ost eller dekoration för att nå tolv."
+    },
+    {
+      "variant": "smako-italian-pasta-amatriciana:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "7 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Sju räknade ingredienser med en hel zucchinikomponent; inget utfyllnadstillägg för att nå åtta."
+    },
+    {
+      "variant": "smako-italian-pasta-amatriciana:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Tio ingredienser; bön-/persiljesalladen ger baljväxt och syra, men rätten behöver inte tolv–femton."
+    },
+    {
+      "variant": "smako-indian-sambar:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Åtta ingredienser behövs för dal, ris, grönsak, syra, sambarprofil och riktig senaps-/currybladstempering. Ingen kärnråvara tas bort för att nå sju."
+    },
+    {
+      "variant": "smako-indian-vada-pav:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Åtta ingredienser är ett avsiktligt undantag: själva vadan, mjukt bröd och torr kokos-vitlökschutney behövs samtidigt."
+    },
+    {
+      "variant": "smako-indian-undhiyu-vardagsversion:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Tio ingredienser är miniminivån för fyllda grönsaker, grov kokos-nötmasala och äkta methi-muthiya. Att förenkla till sju skulle ta bort rättens kärna."
+    },
+    {
+      "variant": "smako-indian-undhiyu-vardagsversion:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "13 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Sötpotatis och gröna bönor ger flera texturer i det lagerlagda grönsakskoket; ingefära hör till masalan."
+    },
+    {
+      "variant": "smako-thai-pad-prik-king-tofu:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Åtta ingredienser inklusive ris; socker, soja och makrut behövs för den söt-salta torra curryn och tas inte bort för ett lägre tal."
+    },
+    {
+      "variant": "smako-thai-gaeng-liang:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Tio ingredienser krävs för tre grönsaker, ris och den bärande räk-/krachai-/pepparbasen. Den görs inte till en generell squashsoppa för att nå sju."
+    },
+    {
+      "variant": "smako-thai-gaeng-liang:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "12 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Färska räkor ger en rejäl proteinkomponent och fisksås rundar buljongen; tolv ingredienser är ett motiverat standardundantag."
+    },
+    {
+      "variant": "smako-thai-gaeng-pa:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Tio ingredienser bevarar den örtpräglade vattenbaserade djungelcurryn och riset; ett lägre antal skulle ta bort bärande aromater."
+    },
+    {
+      "variant": "smako-thai-gaeng-pa:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "12 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Citrongräs och bambuskott ger en tydligare regional arom och en extra grönsakstextur; tolv är motiverat standardundantag."
+    },
+    {
+      "variant": "smako-thai-nam-prik-ong:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "9 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Nio ingredienser är ett avsiktligt undantag för hel middag: kokt nam prik-bas, grönsaker och ris ska vara kvar."
+    },
+    {
+      "variant": "smako-thai-yum-thua-plu:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Åtta ingredienser bevarar vingböna, räka, ägg, kokos-chilidressing och ris som hel måltid."
+    },
+    {
+      "variant": "smako-thai-tod-man-pla:1.0.0:simple",
+      "code": "SAFETY_TEXT_REVIEW",
+      "message": "fisk: saknar explicit 63 °C",
+      "disposition": "granskad_regex_falsk_träff",
+      "explanation": "Kontrollen söker bokstavligen 63 °C. Receptet anger minst 70 °C för finfördelad fisk och ett tillagat smakprov; temperaturen är inte lägre eller utelämnad. Fortfarande inte provlagat."
+    },
+    {
+      "variant": "smako-thai-tod-man-pla:1.0.0:standard",
+      "code": "SAFETY_TEXT_REVIEW",
+      "message": "fisk: saknar explicit 63 °C",
+      "disposition": "granskad_regex_falsk_träff",
+      "explanation": "Kontrollen söker bokstavligen 63 °C. Receptet anger minst 70 °C för finfördelad fisk och ett tillagat smakprov; temperaturen är inte lägre eller utelämnad. Fortfarande inte provlagat."
+    },
+    {
+      "variant": "smako-thai-tod-man-pla:1.0.0:extended",
+      "code": "SAFETY_TEXT_REVIEW",
+      "message": "fisk: saknar explicit 63 °C",
+      "disposition": "granskad_regex_falsk_träff",
+      "explanation": "Kontrollen söker bokstavligen 63 °C. Receptet anger minst 70 °C för finfördelad fisk och ett tillagat smakprov; temperaturen är inte lägre eller utelämnad. Fortfarande inte provlagat."
+    },
+    {
+      "variant": "smako-swedish-janssons-frestelse:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "11 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Elva ingredienser är ett medvetet undantag: råkostens rödbeta, äpple och syra ger kontrast men inget ytterligare tillsätts för att nå tolv."
+    },
+    {
+      "variant": "smako-swedish-navgrot-flask:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "4 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Fyra ingredienser är den kompletta kärnan. Extra fett eller kryddor läggs inte till enbart för att nå fem."
+    },
+    {
+      "variant": "smako-swedish-navgrot-flask:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Sex ingredienser: lök och äpple tillagas i det redan ingående fläskflottet."
+    },
+    {
+      "variant": "smako-swedish-navgrot-flask:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "9 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Nio ingredienser: varm syrlig kål/morot är ett ordentligt tillbehör; rätten lämnas utanför standardfiltret i stället för att fyllas med en tionde ingrediens."
+    },
+    {
+      "variant": "smako-swedish-bruna-bonor-flask:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "4 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Fyra ingredienser räcker för hela den klassiska sötsura bönstuvningen och fläsket. Ingen onödig redning läggs till för att nå fem."
+    },
+    {
+      "variant": "smako-swedish-bruna-bonor-flask:1.0.0:standard",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "7 räknade; riktmärke 8–11; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Sju ingredienser med potatis, lök och senap, ett komplett traditionellt serveringssätt."
+    },
+    {
+      "variant": "smako-swedish-bruna-bonor-flask:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "10 räknade; riktmärke 12–15; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Tio ingredienser med saftig kål-morot-äppelråkost; inget extra tillsätts för att nå tolv."
+    },
+    {
+      "variant": "smako-swedish-polsa:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "8 räknade; riktmärke 5–7; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Åtta ingredienser är ett motiverat undantag: korn, två vävnadstyper och båda angivna tillbehören behövs."
+    },
+    {
+      "variant": "smako-greek-fanouropita:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "7 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Kakans verkliga antal är sju; mjöl, jäsmedel, olja, socker, apelsin, kanel och russin hålls kvar i stället för att göra en ofullständig femingredienskaka. "
+    },
+    {
+      "variant": "smako-greek-fanouropita:1.0.0:extended",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "9 räknade; riktmärke 6–8; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Kakans verkliga antal är nio; mjöl, jäsmedel, olja, socker, apelsin, kanel och russin hålls kvar i stället för att göra en ofullständig femingredienskaka. Valnöt ger textur och mer mättnad, skalet en tydligare apelsinsmak."
+    },
+    {
+      "variant": "smako-mexican-conchas:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "En rik jästdeg kräver sex verkliga ingredienser redan i enkel version; inget tas bort för ett godtyckligt femtak. Samma mjöl, socker och smör används i topp och deg och räknas bara en gång."
+    },
+    {
+      "variant": "smako-thai-ma-hor:1.0.0:simple",
+      "code": "COUNT_GUIDELINE_EXCEPTION",
+      "message": "6 räknade; riktmärke 3–5; kräver kulinarisk motivering i översikten",
+      "disposition": "redovisat_riktmärkesundantag",
+      "explanation": "Sex respektive åtta räknade ingredienser. Enkelversionen går över riktmärket för att bevara frukt, kött, nöt, vitlök och den söt-salta bindningen; utökad lägger örtsyra i själva fyllningen."
+    }
+  ],
+  "warning_counts_by_code": {
+    "COUNT_GUIDELINE_EXCEPTION": 31,
+    "SAFETY_TEXT_REVIEW": 3
+  },
+  "culinary_interval_exception_count": 31,
+  "unresolved_human_or_product_review": [
+    {
+      "code": "NATIVE_PIPELINE_NOT_RUN",
+      "scope": "alla 199 varianter",
+      "detail": "Smakos author/validate/diff/import/prepare, produktbindning och betaaktivering har inte körts."
+    },
+    {
+      "code": "INGREDIENT_REGISTER_PROPOSALS",
+      "scope": "52 baser, 149 direkt berörda varianter; 150 varianter hålls i registerpaket",
+      "detail": "63 nya namn/form-identiteter behöver granskas. Pizzoccheri simple följer med sin basfamilj trots kända identiteter."
+    },
+    {
+      "code": "UNCERTAIN_NOVELTY_EXCLUDED",
+      "scope": "7 kandidater, inga författade varianter",
+      "detail": "Se review-poster i kandidatregister och dubblettgranskning. De räknas inte i utfallet."
+    },
+    {
+      "code": "PROCESS_YIELD",
+      "scope": "frityrolja, bladomslag, lagerblad/pandan, ben/skaldjursskal och inkokningslag",
+      "detail": "Inköpt insats och faktiskt konsumerad mängd är inte samma sak. Inga oljeupptag, ätliga ben-/skalandelar eller upptag ur lag har antagits. Näring måste beräknas efter granskad beredningsmodell."
+    },
+    {
+      "code": "PRODUCT_CONTENT_AND_FUNCTION",
+      "scope": "även kända identiteter",
+      "detail": "Ostlöpe, currypastors fisk/skaldjur, räkpastans innehåll, isterband/korv, gräddens fetthalt, mjöls styrka, tapiokapärlornas storlek, fiskens gelbildning, nötstyckning och lasagneplattors kokkrav behöver produktgranskas."
+    },
+    {
+      "code": "UNTESTED_COOKING",
+      "scope": "alla utkast",
+      "detail": "Ingen provlagning. Mängder, sälta, stegtider, avrinning, jäsning, kylförlopp och portionsrimlighet är författaruppskattningar och behöver provlagas."
+    },
+    {
+      "code": "QUOTA_SHORTFALL",
+      "scope": "928 baser / 2551 variantposter",
+      "detail": "Den här checkpointen innehåller endast 72 av målets 1000 baser. Inventeringen omfattar 84 kandidater, inte samtliga möjliga rätter. Underskottet är inte bevis för att kvoterna är kulinariskt omöjliga."
+    },
+    {
+      "code": "BREAKFAST_AND_PLANT_BASED_COVERAGE",
+      "scope": "utbudsfördelning",
+      "detail": "Frukostkvoterna är särskilt långt från målet. Fördelningen av kött och söta mellanmål är inte en färdig balans för hela beställningen; senare inventering behöver komplettera utan att byta etikett på befintliga rätter."
+    }
+  ],
+  "checks_not_run": [
+    "Smakos author/validate/diff/import/prepare",
+    "Produktbindning och butiksköpbarhet",
+    "Näring, allergener och ekonomisk optimering",
+    "Provlagning och sensorisk validering",
+    "Provlagning av nedkylningsförlopp eller exakta hållbarhetstider",
+    "Verifiering av varje intern pack:-bindning i författarregistret",
+    "Körning mot live beta eller externa butiker"
+  ],
+  "packages": [
+    {
+      "file": "paket/001-pilot-kanda-identiteter.json",
+      "pack_id": "smako-expansion-1000-20261101-001",
+      "bases": 12,
+      "variants": 30,
+      "bytes": 186986,
+      "sha256": "7281e7843e25e65dc3ce2d67351e3a551d2121a9dfccf32913676ecfc3d370a6"
+    },
+    {
+      "file": "paket/002-registergranskning.json",
+      "pack_id": "smako-expansion-1000-20261101-002",
+      "bases": 18,
+      "variants": 52,
+      "bytes": 325396,
+      "sha256": "91733bd3cff7e690574ff7164936ffda1aace4d3d47b8eed79114856783fb7dd"
+    },
+    {
+      "file": "paket/003-registergranskning.json",
+      "pack_id": "smako-expansion-1000-20261101-003",
+      "bases": 9,
+      "variants": 25,
+      "bytes": 169085,
+      "sha256": "c32d9b92a345186cf2be77f16ff207f3feba13b6da3ddcf2b34d1f5d11c9fa75"
+    },
+    {
+      "file": "paket/004-registergranskning.json",
+      "pack_id": "smako-expansion-1000-20261101-004",
+      "bases": 15,
+      "variants": 44,
+      "bytes": 320788,
+      "sha256": "152381884a40f71db1652d08a2bb54447d2b111b3afcad392c8aef46445193b1"
+    },
+    {
+      "file": "paket/005-registergranskning.json",
+      "pack_id": "smako-expansion-1000-20261101-005",
+      "bases": 10,
+      "variants": 29,
+      "bytes": 210220,
+      "sha256": "c051bb04bc9bfbaba85c4ae5f1a083a0604d386cb41495c09412461753a96693"
+    },
+    {
+      "file": "paket/006-kanda-identiteter.json",
+      "pack_id": "smako-expansion-1000-20261101-006",
+      "bases": 8,
+      "variants": 19,
+      "bytes": 123211,
+      "sha256": "9db4c6d8cb922f89206e1192ea65ecf221aa4662b6d7ba6e8a68a6c05971931e"
+    }
+  ],
+  "audit_files": [
+    "kontroll/inlasningskontroll.json",
+    "kontroll/arbetslogg.json",
+    "kontroll/kandidater-fore-forfattning.json",
+    "kontroll/likhet-efter-forfattning.json",
+    "kontroll/poang-fore-forfattning.npz",
+    "kontroll/poang-efter-forfattning.npz",
+    "kontroll/biblioteksindex.sqlite",
+    "kontroll/validera_leverans.py"
+  ],
+  "limitations": [
+    "Rimliga mängder, god smak och fungerande tider kan inte intygas enbart med JSON-kontroll.",
+    "Automatisk ingrediens-/namnlikhet ger inte ett fullständigt kulinariskt dubblettgodkännande.",
+    "Källa till en traditionell teknik bevisar inte att en förenklad variant är oförändrad klassiker.",
+    "Avsedd kostprofil är inte fastställd produktklassificering.",
+    "Inga priser, näringsvärden, oljeupptag, styckevikter eller ätliga andelar har beräknats eller godkänts."
+  ]
+}

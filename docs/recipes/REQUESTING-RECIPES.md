@@ -31,9 +31,16 @@ till grund för detta dokument. Läs också [produktmålet](../PRODUCT-GOAL.md),
 **2026-11-01: instruktioner skickade till Chat enligt ägaren.** Beställningen
 är 1 000 nya grundrätter: 750 middagar, 125 frukostar och 125 mellanmål.
 Tre varianter per middag och två per frukost/mellanmål ger 2 750 variantposter.
-Ingen ny leverans från denna beställning var mottagen eller importerad när
-denna journal skrevs. Ägaren bad därefter om ingrediensprioritering; tillägget
-är framtaget, men det är inte bekräftat att ägaren har skickat just det.
+**Mottagning senare 2026-11-01:** fyra rapportbilagor redovisar 72 grundrätter
+och 199 varianter (55 middagar, 3 frukostar, 14 mellanmål). De sex receptpaketen
+och flera stödregister saknas i uppladdningen. Endast rapporter är mottagna;
+inga recept från denna beställning är ännu importerade. Se
+[mottagningsjournal och saknade filer](../../backend/app/data/recipes/incoming/authoring-1000-20261101/checkpoint-72-reports/README.md).
+Rapporternas metadata/ID:n är kontrollerade, men recepten är inte native-
+eller innehållsvaliderade. Nästa redovisade författarpaket är 007; återstående
+mål är 928 grundrätter/2 551 varianter. Bevara checkpointens ID:n och räkna
+inte pilotpaketet en gång till. Ingrediensprioriteringens tillägg är framtaget;
+det är fortfarande inte uttryckligen bekräftat att ägaren skickat just det.
 
 Bevarade, skickbara texter finns i
 [ursprungligt uppdrag](requests/20261101/INSTRUKTIONER-TILL-CHAT.txt) och
