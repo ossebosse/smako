@@ -1,0 +1,5785 @@
+{
+  "schema_version": "smako-recipe-authoring-v1",
+  "pack_id": "smako-expansion-1000-20261101-021",
+  "recipes": [
+    {
+      "base_id": "smako-indian-pindi-chole",
+      "cuisine": "indian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Pindi chole – mörka syrliga kikärtor – enkel",
+      "servings": 4,
+      "family": "te-kokta torrkryddade kikärtor",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "tunnbröd",
+      "flavor": [
+        "amchur",
+        "cholemasala",
+        "svart te"
+      ],
+      "equipment": [
+        "gryta",
+        "sil",
+        "stekpanna",
+        "kavel",
+        "kylskåp"
+      ],
+      "components": [
+        {
+          "id": "kikartor",
+          "name": "Mörka syrliga kikärtor",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "primary",
+              "label": "Torra kikärtor före blötläggning"
+            },
+            {
+              "name": "svart te",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svart te"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära"
+            },
+            {
+              "name": "cholemasala",
+              "form": "dry",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Osaltad cholemasala, produktgranskning krävs"
+            },
+            {
+              "name": "amchur",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Amchur"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "brod",
+          "name": "Ojästa vetebröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj de torra kikärtorna och lägg i en stor skål med 1200 ml kallt vatten. Ställ i kylskåp.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Blötlägg i kyl cirka 8 timmar. Häll bort blötläggningsvattnet och skölj bönorna före kokning.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 480,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Koka upp 500 ml vatten och låt teet dra 5 minuter. Sila bort tebladen; de är processavfall. Häll teet över kikärtorna i en gryta och tillsätt 1000 ml vatten. Koka upp ordentligt och skumma.",
+          "uses": [
+            "svart te",
+            "kikärtor"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 90 minuter tills kikärtorna går att mosa mellan fingrarna. Äldre kikärtor kan behöva längre; fyll vid behov på med 250 ml vatten. Häll av före kryddningen.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 90,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda brödets mjöl, salt och olja med 145 ml vatten. Knåda 6 minuter till smidig deg.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt degen vila täckt i 20 minuter.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Finhacka ingefära. Värm kikärtskomponentens olja och fräs aromaterna på låg till medelhög värme. Rör ner cholemasala och amchur och direkt därefter de avrunna te-kokta kikärtorna och kikärtskomponentens salt. Tillsätt 120 ml vatten. Vänd under försiktig sjudning tills kryddorna klär bönorna och nästan ingen fri sås finns kvar.",
+          "uses": [
+            "kikärtor",
+            "svart te",
+            "rapsolja",
+            "ingefära",
+            "cholemasala",
+            "amchur",
+            "salt"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Dela degen i två små bröd per portion. Kavla tunt mellan papper och grädda i torr het panna cirka 1–2 minuter per sida. Degen ska få fläckar och ingen rå mjölkärna. Håll bröden i en handduk.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 14,
+          "passive": false,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Fördela de mörka, syrliga kikärtorna med all kryddbeläggning och bröden över fyra portioner och servera varmt.",
+          "uses": [
+            "kikärtor",
+            "svart te",
+            "rapsolja",
+            "ingefära",
+            "cholemasala",
+            "amchur",
+            "salt",
+            "vetemjöl"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Indisk köksmärkning avser bruket i indiskt-punjabiskt kök, inte påstående att rätten uppstod inom dagens Indien. Svart te är en aromatisk kokinsats som silas bort, inte serverade teblad. Den långa blötläggningen ingår i tidsredovisningen."
+    },
+    {
+      "base_id": "smako-indian-pindi-chole",
+      "cuisine": "indian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Pindi chole – mörka syrliga kikärtor – standard",
+      "servings": 4,
+      "family": "te-kokta torrkryddade kikärtor",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "tunnbröd",
+      "flavor": [
+        "amchur",
+        "cholemasala",
+        "svart te"
+      ],
+      "equipment": [
+        "gryta",
+        "sil",
+        "stekpanna",
+        "kavel",
+        "kylskåp"
+      ],
+      "components": [
+        {
+          "id": "kikartor",
+          "name": "Mörka syrliga kikärtor",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "primary",
+              "label": "Torra kikärtor före blötläggning"
+            },
+            {
+              "name": "svart te",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svart te"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära"
+            },
+            {
+              "name": "cholemasala",
+              "form": "dry",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Osaltad cholemasala, produktgranskning krävs"
+            },
+            {
+              "name": "amchur",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Amchur"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin"
+            }
+          ]
+        },
+        {
+          "id": "brod",
+          "name": "Ojästa vetebröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "gurka",
+          "name": "Gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj de torra kikärtorna och lägg i en stor skål med 1200 ml kallt vatten. Ställ i kylskåp.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Blötlägg i kyl cirka 8 timmar. Häll bort blötläggningsvattnet och skölj bönorna före kokning.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 480,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Koka upp 500 ml vatten och låt teet dra 5 minuter. Sila bort tebladen; de är processavfall. Häll teet över kikärtorna i en gryta och tillsätt 1000 ml vatten. Koka upp ordentligt och skumma.",
+          "uses": [
+            "svart te",
+            "kikärtor"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 90 minuter tills kikärtorna går att mosa mellan fingrarna. Äldre kikärtor kan behöva längre; fyll vid behov på med 250 ml vatten. Häll av före kryddningen.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 90,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda brödets mjöl, salt och olja med 145 ml vatten. Knåda 6 minuter till smidig deg.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt degen vila täckt i 20 minuter.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Finhacka ingefära och vitlök. Värm kikärtskomponentens olja och fräs aromaterna med spiskummin på låg till medelhög värme. Rör ner cholemasala och amchur och direkt därefter de avrunna te-kokta kikärtorna och kikärtskomponentens salt. Tillsätt 120 ml vatten. Vänd under försiktig sjudning tills kryddorna klär bönorna och nästan ingen fri sås finns kvar.",
+          "uses": [
+            "kikärtor",
+            "svart te",
+            "rapsolja",
+            "ingefära",
+            "cholemasala",
+            "amchur",
+            "salt",
+            "vitlök",
+            "spiskummin"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Dela degen i två små bröd per portion. Kavla tunt mellan papper och grädda i torr het panna cirka 1–2 minuter per sida. Degen ska få fläckar och ingen rå mjölkärna. Håll bröden i en handduk.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 14,
+          "passive": false,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Skär gurkan i stavar.",
+          "uses": [
+            "gurka"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fördela de mörka, syrliga kikärtorna med all kryddbeläggning och bröden, gurkan över fyra portioner och servera varmt.",
+          "uses": [
+            "kikärtor",
+            "svart te",
+            "rapsolja",
+            "ingefära",
+            "cholemasala",
+            "amchur",
+            "salt",
+            "vitlök",
+            "spiskummin",
+            "vetemjöl",
+            "gurka"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Indisk köksmärkning avser bruket i indiskt-punjabiskt kök, inte påstående att rätten uppstod inom dagens Indien. Svart te är en aromatisk kokinsats som silas bort, inte serverade teblad. Den långa blötläggningen ingår i tidsredovisningen."
+    },
+    {
+      "base_id": "smako-indian-pindi-chole",
+      "cuisine": "indian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Pindi chole – mörka syrliga kikärtor – utökad",
+      "servings": 4,
+      "family": "te-kokta torrkryddade kikärtor",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "tunnbröd",
+      "flavor": [
+        "amchur",
+        "cholemasala",
+        "svart te"
+      ],
+      "equipment": [
+        "gryta",
+        "sil",
+        "stekpanna",
+        "kavel",
+        "kylskåp"
+      ],
+      "components": [
+        {
+          "id": "kikartor",
+          "name": "Mörka syrliga kikärtor",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "primary",
+              "label": "Torra kikärtor före blötläggning"
+            },
+            {
+              "name": "svart te",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svart te"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära"
+            },
+            {
+              "name": "cholemasala",
+              "form": "dry",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Osaltad cholemasala, produktgranskning krävs"
+            },
+            {
+              "name": "amchur",
+              "form": "dry",
+              "quantity": 8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Amchur"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin"
+            }
+          ]
+        },
+        {
+          "id": "brod",
+          "name": "Ojästa vetebröd",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 240,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 10,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "gurka",
+          "name": "Gurka",
+          "ingredients": [
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka"
+            }
+          ]
+        },
+        {
+          "id": "servering",
+          "name": "Yoghurt och citronsyrad rödlök",
+          "ingredients": [
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 160,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell"
+            },
+            {
+              "name": "rödlök",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödlök"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj de torra kikärtorna och lägg i en stor skål med 1200 ml kallt vatten. Ställ i kylskåp.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Blötlägg i kyl cirka 8 timmar. Häll bort blötläggningsvattnet och skölj bönorna före kokning.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 480,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Koka upp 500 ml vatten och låt teet dra 5 minuter. Sila bort tebladen; de är processavfall. Häll teet över kikärtorna i en gryta och tillsätt 1000 ml vatten. Koka upp ordentligt och skumma.",
+          "uses": [
+            "svart te",
+            "kikärtor"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud under lock cirka 90 minuter tills kikärtorna går att mosa mellan fingrarna. Äldre kikärtor kan behöva längre; fyll vid behov på med 250 ml vatten. Häll av före kryddningen.",
+          "uses": [
+            "kikärtor"
+          ],
+          "minutes": 90,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Blanda brödets mjöl, salt och olja med 145 ml vatten. Knåda 6 minuter till smidig deg.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Låt degen vila täckt i 20 minuter.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Finhacka ingefära och vitlök. Värm kikärtskomponentens olja och fräs aromaterna med spiskummin på låg till medelhög värme. Rör ner cholemasala och amchur och direkt därefter de avrunna te-kokta kikärtorna och kikärtskomponentens salt. Tillsätt 120 ml vatten. Vänd under försiktig sjudning tills kryddorna klär bönorna och nästan ingen fri sås finns kvar.",
+          "uses": [
+            "kikärtor",
+            "svart te",
+            "rapsolja",
+            "ingefära",
+            "cholemasala",
+            "amchur",
+            "salt",
+            "vitlök",
+            "spiskummin"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Dela degen i två små bröd per portion. Kavla tunt mellan papper och grädda i torr het panna cirka 1–2 minuter per sida. Degen ska få fläckar och ingen rå mjölkärna. Håll bröden i en handduk.",
+          "uses": [
+            "vetemjöl",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 14,
+          "passive": false,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Skär gurkan i stavar. Strimla rödlöken och vänd med citronsaften; lägg yoghurten separat så att den inte blir en sås i den torra kikärtsrätten.",
+          "uses": [
+            "gurka",
+            "yoghurt naturell",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Fördela de mörka, syrliga kikärtorna med all kryddbeläggning och bröden, gurkan, yoghurten och citronlöken över fyra portioner och servera varmt.",
+          "uses": [
+            "kikärtor",
+            "svart te",
+            "rapsolja",
+            "ingefära",
+            "cholemasala",
+            "amchur",
+            "salt",
+            "vitlök",
+            "spiskummin",
+            "vetemjöl",
+            "gurka",
+            "yoghurt naturell",
+            "rödlök",
+            "citronjuice"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Indisk köksmärkning avser bruket i indiskt-punjabiskt kök, inte påstående att rätten uppstod inom dagens Indien. Svart te är en aromatisk kokinsats som silas bort, inte serverade teblad. Den långa blötläggningen ingår i tidsredovisningen."
+    },
+    {
+      "base_id": "smako-indian-chana-madra",
+      "cuisine": "indian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Chana madra – kikärtor i varm yoghurtsås – enkel",
+      "servings": 4,
+      "family": "kikärtor i reducerad yoghurt",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "yoghurt",
+        "ghee",
+        "varma kryddor"
+      ],
+      "equipment": [
+        "tjockbottnad gryta",
+        "visp",
+        "kastrull"
+      ],
+      "components": [
+        {
+          "id": "madra",
+          "name": "Yoghurtgryta",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtor"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 600,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Naturell yoghurt som tål varsam uppvärmning, inte smaksatt"
+            },
+            {
+              "name": "ghee",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Ghee"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin"
+            },
+            {
+              "name": "kardemumma",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kardemumma"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "ris",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj riset och koka upp med 560 ml vatten och riskomponentens salt. Sänk till lägsta värme och lägg på lock.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud cirka 18 minuter, eller enligt sortens förpackningsanvisning, tills riset är mjukt och vattnet absorberats. Låt vila av värmen 5 minuter under lock.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 23,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa yoghurten helt slät. Skölj kikärtorna och väg dem efter avrinning. Smält ghee i en tjockbottnad gryta och värm spiskummin, kardemumma och gurkmeja kort tills det doftar utan att kryddorna bränns.",
+          "uses": [
+            "kikärtor",
+            "yoghurt naturell",
+            "ghee",
+            "spiskummin",
+            "kardemumma",
+            "gurkmeja",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Dra grytan från plattan en minut. Tillsätt yoghurten lite i taget under vispning. Ställ på låg värme och rör hela tiden cirka 10 minuter tills basen är jämnt varm och lätt tjocknad. Undvik stormkokning, särskilt utan stärkelse; aktiv omrörning är nödvändig här.",
+          "uses": [
+            "yoghurt naturell"
+          ],
+          "minutes": 11,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor och madra-komponentens salt. Värm varsamt under täta omrörningar cirka 12 minuter så att bönorna blir genomheta och yoghurten lägger sig som en tjock sås runt dem. Späd vid behov med 50 ml vatten; den ska inte bli en tunn soppa.",
+          "uses": [
+            "kikärtor",
+            "salt",
+            "yoghurt naturell"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Luckra upp riset och servera med all madra. Fördela komponenterna jämnt över fyra portioner; ingen tomatsås eller extra raita förutsätts.",
+          "uses": [
+            "kikärtor",
+            "yoghurt naturell",
+            "ghee",
+            "spiskummin",
+            "kardemumma",
+            "gurkmeja",
+            "salt",
+            "ris"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad middag kompletteras med enkel råkost; rismjöl i standard stabiliserar syrad sås i hemmaköket. Yoghurtens fetthalt och värmestabilitet måste provlagas vid produktgranskning; grytans aktiva vispning är inte felmärkt som passiv väntan."
+    },
+    {
+      "base_id": "smako-indian-chana-madra",
+      "cuisine": "indian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Chana madra – kikärtor i varm yoghurtsås – standard",
+      "servings": 4,
+      "family": "kikärtor i reducerad yoghurt",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "yoghurt",
+        "ghee",
+        "varma kryddor"
+      ],
+      "equipment": [
+        "tjockbottnad gryta",
+        "visp",
+        "kastrull"
+      ],
+      "components": [
+        {
+          "id": "madra",
+          "name": "Yoghurtgryta",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtor"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 600,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Naturell yoghurt som tål varsam uppvärmning, inte smaksatt"
+            },
+            {
+              "name": "ghee",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Ghee"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin"
+            },
+            {
+              "name": "kardemumma",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kardemumma"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel"
+            },
+            {
+              "name": "nejlika",
+              "form": "dry",
+              "quantity": 0.25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Nejlika"
+            },
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 12,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Rismjöl"
+            }
+          ]
+        },
+        {
+          "id": "ris",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj riset och koka upp med 560 ml vatten och riskomponentens salt. Sänk till lägsta värme och lägg på lock.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud cirka 18 minuter, eller enligt sortens förpackningsanvisning, tills riset är mjukt och vattnet absorberats. Låt vila av värmen 5 minuter under lock.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 23,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa yoghurten helt slät med rismjölet. Skölj kikärtorna och väg dem efter avrinning. Smält ghee i en tjockbottnad gryta och värm spiskummin, kardemumma och gurkmeja, kanel och nejlika kort tills det doftar utan att kryddorna bränns.",
+          "uses": [
+            "kikärtor",
+            "yoghurt naturell",
+            "ghee",
+            "spiskummin",
+            "kardemumma",
+            "gurkmeja",
+            "salt",
+            "kanel",
+            "nejlika",
+            "rismjöl"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Dra grytan från plattan en minut. Tillsätt yoghurten lite i taget under vispning. Ställ på låg värme och rör hela tiden cirka 10 minuter tills basen är jämnt varm och lätt tjocknad. Undvik stormkokning, särskilt utan stärkelse; aktiv omrörning är nödvändig här.",
+          "uses": [
+            "yoghurt naturell",
+            "rismjöl"
+          ],
+          "minutes": 11,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor och madra-komponentens salt. Värm varsamt under täta omrörningar cirka 12 minuter så att bönorna blir genomheta och yoghurten lägger sig som en tjock sås runt dem. Späd vid behov med 50 ml vatten; den ska inte bli en tunn soppa.",
+          "uses": [
+            "kikärtor",
+            "salt",
+            "yoghurt naturell"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Luckra upp riset och servera med all madra. Fördela komponenterna jämnt över fyra portioner; ingen tomatsås eller extra raita förutsätts.",
+          "uses": [
+            "kikärtor",
+            "yoghurt naturell",
+            "ghee",
+            "spiskummin",
+            "kardemumma",
+            "gurkmeja",
+            "salt",
+            "kanel",
+            "nejlika",
+            "rismjöl",
+            "ris"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad middag kompletteras med enkel råkost; rismjöl i standard stabiliserar syrad sås i hemmaköket. Yoghurtens fetthalt och värmestabilitet måste provlagas vid produktgranskning; grytans aktiva vispning är inte felmärkt som passiv väntan."
+    },
+    {
+      "base_id": "smako-indian-chana-madra",
+      "cuisine": "indian",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Chana madra – kikärtor i varm yoghurtsås – utökad",
+      "servings": 4,
+      "family": "kikärtor i reducerad yoghurt",
+      "primary": "kikärtor",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "yoghurt",
+        "ghee",
+        "varma kryddor"
+      ],
+      "equipment": [
+        "tjockbottnad gryta",
+        "visp",
+        "kastrull"
+      ],
+      "components": [
+        {
+          "id": "madra",
+          "name": "Yoghurtgryta",
+          "ingredients": [
+            {
+              "name": "kikärtor",
+              "form": "cooked_drained",
+              "quantity": 800,
+              "unit": "g",
+              "role": "primary",
+              "label": "Kikärtor"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 600,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Naturell yoghurt som tål varsam uppvärmning, inte smaksatt"
+            },
+            {
+              "name": "ghee",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Ghee"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin"
+            },
+            {
+              "name": "kardemumma",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kardemumma"
+            },
+            {
+              "name": "gurkmeja",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Gurkmeja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel"
+            },
+            {
+              "name": "nejlika",
+              "form": "dry",
+              "quantity": 0.25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Nejlika"
+            },
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 12,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Rismjöl"
+            }
+          ]
+        },
+        {
+          "id": "ris",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "rakost",
+          "name": "Morots- och gurkråkost",
+          "ingredients": [
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 200,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot"
+            },
+            {
+              "name": "gurka",
+              "form": "raw_edible",
+              "quantity": 250,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gurka"
+            },
+            {
+              "name": "citronjuice",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Citronjuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj riset och koka upp med 560 ml vatten och riskomponentens salt. Sänk till lägsta värme och lägg på lock.",
+          "uses": [
+            "ris",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud cirka 18 minuter, eller enligt sortens förpackningsanvisning, tills riset är mjukt och vattnet absorberats. Låt vila av värmen 5 minuter under lock.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 23,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Vispa yoghurten helt slät med rismjölet. Skölj kikärtorna och väg dem efter avrinning. Smält ghee i en tjockbottnad gryta och värm spiskummin, kardemumma och gurkmeja, kanel och nejlika kort tills det doftar utan att kryddorna bränns.",
+          "uses": [
+            "kikärtor",
+            "yoghurt naturell",
+            "ghee",
+            "spiskummin",
+            "kardemumma",
+            "gurkmeja",
+            "salt",
+            "kanel",
+            "nejlika",
+            "rismjöl"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Dra grytan från plattan en minut. Tillsätt yoghurten lite i taget under vispning. Ställ på låg värme och rör hela tiden cirka 10 minuter tills basen är jämnt varm och lätt tjocknad. Undvik stormkokning, särskilt utan stärkelse; aktiv omrörning är nödvändig här.",
+          "uses": [
+            "yoghurt naturell",
+            "rismjöl"
+          ],
+          "minutes": 11,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Vänd ner kikärtor och madra-komponentens salt. Värm varsamt under täta omrörningar cirka 12 minuter så att bönorna blir genomheta och yoghurten lägger sig som en tjock sås runt dem. Späd vid behov med 50 ml vatten; den ska inte bli en tunn soppa.",
+          "uses": [
+            "kikärtor",
+            "salt",
+            "yoghurt naturell"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Skala moroten, strimla den och gurkan fint och vänd med citronjuicen. Servera råkosten separat från den varma yoghurten.",
+          "uses": [
+            "morot",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Luckra upp riset och servera med all madra och råkost. Fördela komponenterna jämnt över fyra portioner; ingen tomatsås eller extra raita förutsätts.",
+          "uses": [
+            "kikärtor",
+            "yoghurt naturell",
+            "ghee",
+            "spiskummin",
+            "kardemumma",
+            "gurkmeja",
+            "salt",
+            "kanel",
+            "nejlika",
+            "rismjöl",
+            "ris",
+            "morot",
+            "gurka",
+            "citronjuice"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad middag kompletteras med enkel råkost; rismjöl i standard stabiliserar syrad sås i hemmaköket. Yoghurtens fetthalt och värmestabilitet måste provlagas vid produktgranskning; grytans aktiva vispning är inte felmärkt som passiv väntan."
+    },
+    {
+      "base_id": "smako-indian-patishapta",
+      "cuisine": "indian",
+      "meal_type": "snack",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Patishapta – rispannkaka med kokosfyllning – enkel",
+      "servings": 1,
+      "family": "tunn fylld riscrêpe",
+      "primary": "rismjöl",
+      "method": "pan",
+      "side": "kokos-jaggeryfyllning",
+      "flavor": [
+        "kokos",
+        "gur"
+      ],
+      "equipment": [
+        "släpplätt stekpanna",
+        "kastrull",
+        "visp"
+      ],
+      "components": [
+        {
+          "id": "smet",
+          "name": "Rispannkakssmet",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rismjöl"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 15,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "ghee",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Ghee"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "fyllning",
+          "name": "Kokt kokos och gur",
+          "ingredients": [
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 14,
+              "unit": "g",
+              "role": "primary",
+              "label": "Torkade kokosflingor, inte färskt kokoskött"
+            },
+            {
+              "name": "jaggery",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Jaggery"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa ris- och vetemjölet med salt och 80 ml vatten. Spara ghee till pannan. Smeten ska vara tunn nog att rinna ut, inte en fast dosa-deg.",
+          "uses": [
+            "rismjöl",
+            "vetemjöl",
+            "ghee",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Låt smeten vila täckt 35 minuter så att mjölet hinner ta upp vätska.",
+          "uses": [
+            "rismjöl",
+            "vetemjöl",
+            "ghee",
+            "salt"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg de torkade kokosflingorna i en liten kastrull med 50 ml vatten. Värm och rör tills kokosflingorna mjuknar. Riv ner jaggery. Sjud under omrörning cirka 8 minuter till en saftig men sammanhållen fyllning; allt socker ska ha lösts.",
+          "uses": [
+            "kokosflingor",
+            "jaggery"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör om smeten. Värm en släpplätt panna på medelvärme och smörj med en del av gheen. Fördela smeten över två tunna pannkakor per portion, med återstående ghee mellan gräddningarna. Vrid pannan så smeten blir tunn. Grädda varje pannkaka tills ovansidan är satt och undersidan fått mycket lätt färg, cirka 2 minuter. Lägg en sträng av fyllningen på varje och rulla direkt i pannan.",
+          "uses": [
+            "rismjöl",
+            "vetemjöl",
+            "ghee",
+            "salt",
+            "kokosflingor",
+            "jaggery"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg rullarna på tallrik och låt svalna något. Servera båda som en mellanmålsportion; ingen ytterligare sås behövs.",
+          "uses": [
+            "rismjöl",
+            "vetemjöl",
+            "ghee",
+            "salt",
+            "kokosflingor",
+            "jaggery"
+          ],
+          "minutes": 2,
+          "passive": false,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Torkade kokosflingor återfuktas uttryckligt i stället för att felmärkas som färsk kokos. Utökad mjölkberikad fyllning. Utökad variant har mjölkberikad kokosfyllning, inte påstått långkokt kheer. Fyllningen är en dokumenterad typ inom patishapta, proportionerna är egna författaruppskattningar."
+    },
+    {
+      "base_id": "smako-indian-patishapta",
+      "cuisine": "indian",
+      "meal_type": "snack",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Patishapta – rispannkaka med kokosfyllning – utökad",
+      "servings": 1,
+      "family": "tunn fylld riscrêpe",
+      "primary": "rismjöl",
+      "method": "pan",
+      "side": "kokos-jaggeryfyllning",
+      "flavor": [
+        "kokos",
+        "gur"
+      ],
+      "equipment": [
+        "släpplätt stekpanna",
+        "kastrull",
+        "visp"
+      ],
+      "components": [
+        {
+          "id": "smet",
+          "name": "Rispannkakssmet",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rismjöl"
+            },
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 15,
+              "unit": "g",
+              "role": "side",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "ghee",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Ghee"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "mannagryn",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "side",
+              "label": "Mannagryn"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 60,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            }
+          ]
+        },
+        {
+          "id": "fyllning",
+          "name": "Kokt kokos och gur",
+          "ingredients": [
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 14,
+              "unit": "g",
+              "role": "primary",
+              "label": "Torkade kokosflingor, inte färskt kokoskött"
+            },
+            {
+              "name": "jaggery",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Jaggery"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 50,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            },
+            {
+              "name": "kardemumma",
+              "form": "dry",
+              "quantity": 0.3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kardemumma"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Vispa ris- och vetemjölet med salt, mannagryn och smetens mjölk samt 40 ml vatten. Spara ghee till pannan. Smeten ska vara tunn nog att rinna ut, inte en fast dosa-deg.",
+          "uses": [
+            "rismjöl",
+            "vetemjöl",
+            "ghee",
+            "salt",
+            "mannagryn",
+            "mjölk"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Låt smeten vila täckt 35 minuter så att mjölet hinner ta upp vätska.",
+          "uses": [
+            "rismjöl",
+            "vetemjöl",
+            "ghee",
+            "salt",
+            "mannagryn",
+            "mjölk"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg de torkade kokosflingorna i en liten kastrull med fyllningens mjölk. Värm och rör tills kokosflingorna mjuknar. Riv ner jaggery och tillsätt kardemumman. Sjud under omrörning cirka 8 minuter till en saftig men sammanhållen fyllning; allt socker ska ha lösts.",
+          "uses": [
+            "kokosflingor",
+            "jaggery",
+            "mjölk",
+            "kardemumma"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Rör om smeten. Värm en släpplätt panna på medelvärme och smörj med en del av gheen. Fördela smeten över två tunna pannkakor per portion, med återstående ghee mellan gräddningarna. Vrid pannan så smeten blir tunn. Grädda varje pannkaka tills ovansidan är satt och undersidan fått mycket lätt färg, cirka 2 minuter. Lägg en sträng av fyllningen på varje och rulla direkt i pannan.",
+          "uses": [
+            "rismjöl",
+            "vetemjöl",
+            "ghee",
+            "salt",
+            "mannagryn",
+            "mjölk",
+            "kokosflingor",
+            "jaggery",
+            "kardemumma"
+          ],
+          "minutes": 9,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lägg rullarna på tallrik och låt svalna något. Servera båda som en mellanmålsportion; ingen ytterligare sås behövs.",
+          "uses": [
+            "rismjöl",
+            "vetemjöl",
+            "ghee",
+            "salt",
+            "mannagryn",
+            "mjölk",
+            "kokosflingor",
+            "jaggery",
+            "kardemumma"
+          ],
+          "minutes": 2,
+          "passive": false,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Torkade kokosflingor återfuktas uttryckligt i stället för att felmärkas som färsk kokos. Utökad mjölkberikad fyllning. Utökad variant har mjölkberikad kokosfyllning, inte påstått långkokt kheer. Fyllningen är en dokumenterad typ inom patishapta, proportionerna är egna författaruppskattningar."
+    },
+    {
+      "base_id": "smako-indian-khichu",
+      "cuisine": "indian",
+      "meal_type": "breakfast",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Khichu – mjuk risdeg med kumminhetta – enkel",
+      "servings": 1,
+      "family": "ångad mjuk risdeg",
+      "primary": "rismjöl",
+      "method": "pot",
+      "side": "kryddolja och eventuell yoghurtsås",
+      "flavor": [
+        "spiskummin",
+        "grön chili"
+      ],
+      "equipment": [
+        "gryta med ånginsats",
+        "värmetålig skål",
+        "spatel"
+      ],
+      "components": [
+        {
+          "id": "deg",
+          "name": "Mjuk risdeg",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 65,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rismjöl"
+            },
+            {
+              "name": "grön chili",
+              "form": "raw_edible",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Grön chili"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin"
+            },
+            {
+              "name": "bikarbonat",
+              "form": "dry",
+              "quantity": 0.25,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bikarbonat"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hacka chilin fint. Koka upp 175 ml vatten med salt, spiskummin och chili. Sänk värmen, rör ner bikarbonaten och sedan allt rismjöl. Arbeta kraftigt med spatel cirka 3 minuter tills inga torra fickor finns och massan är mjuk men sammanhållen.",
+          "uses": [
+            "grön chili",
+            "salt",
+            "spiskummin",
+            "bikarbonat",
+            "rismjöl"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Smörj en värmetålig skål med en tredjedel av oljan. Lägg i risdegen utan att forma separata bullar. Häll 600 ml vatten i ånggrytan, ställ skålen i insatsen ovanför vattenytan och koka upp. Lägg på lock.",
+          "uses": [
+            "rapsolja",
+            "rismjöl"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ånga cirka 14 minuter. Rör om en gång mot slutet och kontrollera att hela massan är genomhet och inte smakar rått mjöl. Kontrollera vattennivån; tillsätt vid behov 150 ml hett vatten under insatsen, inte i degen.",
+          "uses": [
+            "rismjöl"
+          ],
+          "minutes": 14,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Lyft skålen försiktigt för ångan och gör en liten grop i den mjuka degen. Häll resten av oljan i gropen. Servera genast med sked. Fördela samtliga mängder till en frukostportion.",
+          "uses": [
+            "rismjöl",
+            "grön chili",
+            "spiskummin",
+            "bikarbonat",
+            "rapsolja",
+            "salt"
+          ],
+          "minutes": 2,
+          "passive": false,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad frukost får separat jordnöts-yoghurtsås; det är ett namngivet modernt tillägg."
+    },
+    {
+      "base_id": "smako-indian-khichu",
+      "cuisine": "indian",
+      "meal_type": "breakfast",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Khichu – mjuk risdeg med kumminhetta – utökad",
+      "servings": 1,
+      "family": "ångad mjuk risdeg",
+      "primary": "rismjöl",
+      "method": "pot",
+      "side": "kryddolja och eventuell yoghurtsås",
+      "flavor": [
+        "spiskummin",
+        "grön chili"
+      ],
+      "equipment": [
+        "gryta med ånginsats",
+        "värmetålig skål",
+        "spatel"
+      ],
+      "components": [
+        {
+          "id": "deg",
+          "name": "Mjuk risdeg",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 65,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rismjöl"
+            },
+            {
+              "name": "grön chili",
+              "form": "raw_edible",
+              "quantity": 3,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Grön chili"
+            },
+            {
+              "name": "spiskummin",
+              "form": "dry",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Spiskummin"
+            },
+            {
+              "name": "bikarbonat",
+              "form": "dry",
+              "quantity": 0.25,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bikarbonat"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "sas",
+          "name": "Jordnöts-yoghurtsås",
+          "ingredients": [
+            {
+              "name": "jordnötter",
+              "form": "as_sold",
+              "quantity": 12,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Jordnötter"
+            },
+            {
+              "name": "yoghurt naturell",
+              "form": "as_sold",
+              "quantity": 85,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Yoghurt naturell"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 5,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hacka chilin fint. Koka upp 175 ml vatten med salt, spiskummin och chili. Sänk värmen, rör ner bikarbonaten och sedan allt rismjöl. Arbeta kraftigt med spatel cirka 3 minuter tills inga torra fickor finns och massan är mjuk men sammanhållen.",
+          "uses": [
+            "grön chili",
+            "salt",
+            "spiskummin",
+            "bikarbonat",
+            "rismjöl"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Smörj en värmetålig skål med en tredjedel av oljan. Lägg i risdegen utan att forma separata bullar. Häll 600 ml vatten i ånggrytan, ställ skålen i insatsen ovanför vattenytan och koka upp. Lägg på lock.",
+          "uses": [
+            "rapsolja",
+            "rismjöl"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Ånga cirka 14 minuter. Rör om en gång mot slutet och kontrollera att hela massan är genomhet och inte smakar rått mjöl. Kontrollera vattennivån; tillsätt vid behov 150 ml hett vatten under insatsen, inte i degen.",
+          "uses": [
+            "rismjöl"
+          ],
+          "minutes": 14,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Hacka jordnötterna och rör ihop med yoghurt och limejuice. Såsen serveras separat och är en modern frukostkomplettering.",
+          "uses": [
+            "jordnötter",
+            "yoghurt naturell",
+            "limejuice"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lyft skålen försiktigt för ångan och gör en liten grop i den mjuka degen. Häll resten av oljan i gropen. Servera genast med sked och yoghurtsåsen. Fördela samtliga mängder till en frukostportion.",
+          "uses": [
+            "rismjöl",
+            "grön chili",
+            "spiskummin",
+            "bikarbonat",
+            "rapsolja",
+            "salt",
+            "jordnötter",
+            "yoghurt naturell",
+            "limejuice"
+          ],
+          "minutes": 2,
+          "passive": false,
+          "after": [
+            4
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad frukost får separat jordnöts-yoghurtsås; det är ett namngivet modernt tillägg."
+    },
+    {
+      "base_id": "smako-thai-khao-kha-mu",
+      "cuisine": "thai",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Khao kha mu – sojabräserad fläsklägg med ris – enkel",
+      "servings": 4,
+      "family": "långbräserad svålklädd lägg över ris",
+      "primary": "osaltad fläsklägg med ben och svål",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "soja",
+        "stjärnanis"
+      ],
+      "equipment": [
+        "gryta med lock",
+        "kastrull",
+        "termometer",
+        "skärbräda"
+      ],
+      "components": [
+        {
+          "id": "lagg",
+          "name": "Mör lägg och mörk sky",
+          "ingredients": [
+            {
+              "name": "osaltad fläsklägg med ben och svål",
+              "form": "as_sold",
+              "quantity": 1700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå orimmad fläsklägg; ben och svål ingår i inköpsvikten"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 75,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 32,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "stjärnanis",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen livsmedelsstjärnanis"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära"
+            }
+          ]
+        },
+        {
+          "id": "ris",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att läggen verkligen är orimmad. Lägg den i grytan med 2200 ml vatten. Koka upp och skumma. Krossa vitlöken och riv ingefäran så att de kan stanna i såsen. Tillsätt soja, socker, stjärnanis, vitlök och ingefära. Ingen brynolja eller extra buljong förutsätts.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål",
+            "sojasås",
+            "strösocker",
+            "stjärnanis",
+            "vitlök",
+            "ingefära"
+          ],
+          "minutes": 14,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud mycket lugnt under lock cirka 180 minuter. Vänd läggen ett par gånger och kontrollera vattennivån; tillsätt vid behov 300 ml vatten. Köttet ska lossna lätt från benet och svålen vara mjuk, inte seg. Förläng hellre än att servera en seg lägg.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål"
+          ],
+          "minutes": 180,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skölj riset och koka upp med 560 ml vatten. Sänk till låg värme och lägg på lock.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud cirka 18 minuter eller enligt rissortens förpackning tills vattnet absorberats. Låt vila under lock 5 minuter av värmen.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 23,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Lyft läggen ur skyn. Ta bort ben och brosk och skär det ätliga köttet och den mjuka svålen i skivor. Håll köttet täckt och varmt medan skyn får koka ihop utan lock cirka 8 minuter. Den ska vara smakrik men fortfarande hällbar; benvikten räknas inte som serverad mängd.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg riset i skålar och fördela kött och mjuk svål över det. Skeda lite av den heta koncentrerade skyn över. Allt ätligt kött ska fördelas, men kvarvarande stor mängd koksky är processrest, inte en extra portion.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål",
+            "sojasås",
+            "strösocker",
+            "stjärnanis",
+            "vitlök",
+            "ingefära",
+            "ris"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Förenklad kryddning, utan påhittad full femkryddsblandning; läggen måste vara orimmad. Standard får ägg och syrade senapsblad. Ben-/broskutbyte och skillnaden mellan inköpsvikt och serverad vikt kräver produktgranskning. Salt och energi får inte härledas genom att anta att allt kvarvarande kokspad äts."
+    },
+    {
+      "base_id": "smako-thai-khao-kha-mu",
+      "cuisine": "thai",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Khao kha mu – sojabräserad fläsklägg med ris – standard",
+      "servings": 4,
+      "family": "långbräserad svålklädd lägg över ris",
+      "primary": "osaltad fläsklägg med ben och svål",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "soja",
+        "stjärnanis"
+      ],
+      "equipment": [
+        "gryta med lock",
+        "kastrull",
+        "termometer",
+        "skärbräda"
+      ],
+      "components": [
+        {
+          "id": "lagg",
+          "name": "Mör lägg och mörk sky",
+          "ingredients": [
+            {
+              "name": "osaltad fläsklägg med ben och svål",
+              "form": "as_sold",
+              "quantity": 1700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå orimmad fläsklägg; ben och svål ingår i inköpsvikten"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 75,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 32,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "stjärnanis",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen livsmedelsstjärnanis"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel"
+            },
+            {
+              "name": "kokta ägg",
+              "form": "cooked_drained",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Inköpta färdigkokta skalade ägg"
+            },
+            {
+              "name": "inlagda senapsblad",
+              "form": "preserved_drained",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Inlagda senapsblad"
+            }
+          ]
+        },
+        {
+          "id": "ris",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att läggen verkligen är orimmad. Lägg den i grytan med 2200 ml vatten. Koka upp och skumma. Krossa vitlöken och riv ingefäran så att de kan stanna i såsen. Tillsätt soja, socker, stjärnanis, vitlök och ingefära samt kanel. Ingen brynolja eller extra buljong förutsätts.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål",
+            "sojasås",
+            "strösocker",
+            "stjärnanis",
+            "vitlök",
+            "ingefära",
+            "kanel"
+          ],
+          "minutes": 14,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud mycket lugnt under lock cirka 180 minuter. Vänd läggen ett par gånger och kontrollera vattennivån; tillsätt vid behov 300 ml vatten. Köttet ska lossna lätt från benet och svålen vara mjuk, inte seg. Förläng hellre än att servera en seg lägg.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål"
+          ],
+          "minutes": 180,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg de inköpta färdigkokta skalade äggen och de avrunna senapsbladen i grytan. Låt dem bli genomheta och dra åt sig skyn under cirka 15 minuters fortsatt sjudning. Äggen är uttryckligen en färdiglagad insatsvara, inte olistade råa ägg.",
+          "uses": [
+            "kokta ägg",
+            "inlagda senapsblad"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och koka upp med 560 ml vatten. Sänk till låg värme och lägg på lock.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sjud cirka 18 minuter eller enligt rissortens förpackning tills vattnet absorberats. Låt vila under lock 5 minuter av värmen.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 23,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lyft läggen ur skyn. Ta bort ben och brosk och skär det ätliga köttet och den mjuka svålen i skivor. Håll köttet täckt och varmt medan skyn får koka ihop utan lock cirka 8 minuter. Den ska vara smakrik men fortfarande hällbar; benvikten räknas inte som serverad mängd.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lägg riset i skålar och fördela kött och mjuk svål över det, tillsammans med halverade färdigkokta ägg och hackade senapsblad. Skeda lite av den heta koncentrerade skyn över. Allt ätligt kött ska fördelas, men kvarvarande stor mängd koksky är processrest, inte en extra portion.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål",
+            "sojasås",
+            "strösocker",
+            "stjärnanis",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "kokta ägg",
+            "inlagda senapsblad",
+            "ris"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Förenklad kryddning, utan påhittad full femkryddsblandning; läggen måste vara orimmad. Standard får ägg och syrade senapsblad. Ben-/broskutbyte och skillnaden mellan inköpsvikt och serverad vikt kräver produktgranskning. Salt och energi får inte härledas genom att anta att allt kvarvarande kokspad äts."
+    },
+    {
+      "base_id": "smako-thai-khao-kha-mu",
+      "cuisine": "thai",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Khao kha mu – sojabräserad fläsklägg med ris – utökad",
+      "servings": 4,
+      "family": "långbräserad svålklädd lägg över ris",
+      "primary": "osaltad fläsklägg med ben och svål",
+      "method": "pot",
+      "side": "ris",
+      "flavor": [
+        "soja",
+        "stjärnanis"
+      ],
+      "equipment": [
+        "gryta med lock",
+        "kastrull",
+        "termometer",
+        "skärbräda"
+      ],
+      "components": [
+        {
+          "id": "lagg",
+          "name": "Mör lägg och mörk sky",
+          "ingredients": [
+            {
+              "name": "osaltad fläsklägg med ben och svål",
+              "form": "as_sold",
+              "quantity": 1700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå orimmad fläsklägg; ben och svål ingår i inköpsvikten"
+            },
+            {
+              "name": "sojasås",
+              "form": "as_sold",
+              "quantity": 75,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Sojasås"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 32,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "stjärnanis",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Malen livsmedelsstjärnanis"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 25,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära"
+            },
+            {
+              "name": "kanel",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kanel"
+            },
+            {
+              "name": "kokta ägg",
+              "form": "cooked_drained",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Inköpta färdigkokta skalade ägg"
+            },
+            {
+              "name": "inlagda senapsblad",
+              "form": "preserved_drained",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Inlagda senapsblad"
+            }
+          ]
+        },
+        {
+          "id": "ris",
+          "name": "Ris",
+          "ingredients": [
+            {
+              "name": "ris",
+              "form": "dry",
+              "quantity": 280,
+              "unit": "g",
+              "role": "side",
+              "label": "Ris"
+            }
+          ]
+        },
+        {
+          "id": "vinager",
+          "name": "Chilivinäger",
+          "ingredients": [
+            {
+              "name": "risvinäger",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Risvinäger"
+            },
+            {
+              "name": "grön chili",
+              "form": "raw_edible",
+              "quantity": 12,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Grön chili"
+            }
+          ]
+        },
+        {
+          "id": "gront",
+          "name": "Blancherad pak choi",
+          "ingredients": [
+            {
+              "name": "pak choi",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Pak choi"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att läggen verkligen är orimmad. Lägg den i grytan med 2200 ml vatten. Koka upp och skumma. Krossa vitlöken och riv ingefäran så att de kan stanna i såsen. Tillsätt soja, socker, stjärnanis, vitlök och ingefära samt kanel. Ingen brynolja eller extra buljong förutsätts.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål",
+            "sojasås",
+            "strösocker",
+            "stjärnanis",
+            "vitlök",
+            "ingefära",
+            "kanel"
+          ],
+          "minutes": 14,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud mycket lugnt under lock cirka 180 minuter. Vänd läggen ett par gånger och kontrollera vattennivån; tillsätt vid behov 300 ml vatten. Köttet ska lossna lätt från benet och svålen vara mjuk, inte seg. Förläng hellre än att servera en seg lägg.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål"
+          ],
+          "minutes": 180,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Lägg de inköpta färdigkokta skalade äggen och de avrunna senapsbladen i grytan. Låt dem bli genomheta och dra åt sig skyn under cirka 15 minuters fortsatt sjudning. Äggen är uttryckligen en färdiglagad insatsvara, inte olistade råa ägg.",
+          "uses": [
+            "kokta ägg",
+            "inlagda senapsblad"
+          ],
+          "minutes": 15,
+          "passive": true,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Skölj riset och koka upp med 560 ml vatten. Sänk till låg värme och lägg på lock.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Sjud cirka 18 minuter eller enligt rissortens förpackning tills vattnet absorberats. Låt vila under lock 5 minuter av värmen.",
+          "uses": [
+            "ris"
+          ],
+          "minutes": 23,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Hacka chilin fint och blanda med risvinägern. Skär pak choi i stora bitar. Koka upp 800 ml vatten och blanchera pak choi cirka 3 minuter; låt rinna av.",
+          "uses": [
+            "risvinäger",
+            "grön chili",
+            "pak choi"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Lyft läggen ur skyn. Ta bort ben och brosk och skär det ätliga köttet och den mjuka svålen i skivor. Håll köttet täckt och varmt medan skyn får koka ihop utan lock cirka 8 minuter. Den ska vara smakrik men fortfarande hällbar; benvikten räknas inte som serverad mängd.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Lägg riset i skålar och fördela kött och mjuk svål över det, tillsammans med halverade färdigkokta ägg och hackade senapsblad. Skeda lite av den heta koncentrerade skyn över och servera pak choi samt chilivinäger vid sidan. Allt ätligt kött ska fördelas, men kvarvarande stor mängd koksky är processrest, inte en extra portion.",
+          "uses": [
+            "osaltad fläsklägg med ben och svål",
+            "sojasås",
+            "strösocker",
+            "stjärnanis",
+            "vitlök",
+            "ingefära",
+            "kanel",
+            "kokta ägg",
+            "inlagda senapsblad",
+            "ris",
+            "risvinäger",
+            "grön chili",
+            "pak choi"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Förenklad kryddning, utan påhittad full femkryddsblandning; läggen måste vara orimmad. Standard får ägg och syrade senapsblad. Ben-/broskutbyte och skillnaden mellan inköpsvikt och serverad vikt kräver produktgranskning. Salt och energi får inte härledas genom att anta att allt kvarvarande kokspad äts."
+    },
+    {
+      "base_id": "smako-thai-khao-piak-sen",
+      "cuisine": "thai",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Khao piak sen – handskurna risnudlar i kycklingbuljong – enkel",
+      "servings": 4,
+      "family": "soppa med direktkokta färska risnudlar",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "handskurna ris-tapiokanudlar",
+      "flavor": [
+        "ingefära",
+        "fisksås"
+      ],
+      "equipment": [
+        "gryta",
+        "värmetålig bunke",
+        "slev",
+        "kavel",
+        "kniv",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "nudlar",
+          "name": "Skållad ris-tapiokadeg",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vanligt rismjöl, inte klibbigt rismjöl"
+            },
+            {
+              "name": "tapiokastärkelse",
+              "form": "dry",
+              "quantity": 150,
+              "unit": "g",
+              "role": "side",
+              "label": "Tapiokastärkelse"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 8,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            }
+          ]
+        },
+        {
+          "id": "soppa",
+          "name": "Kycklingbuljong",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt rått kycklingkött"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 22,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "fisksås",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Fisksås"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hacka vitlök och ingefära. Värm soppans olja i grytan och fräs vitlök och ingefära tills vitlöken är svagt gyllene. Häll på 1800 ml vatten och fisksåsen. Lägg i kycklingen i stora bitar och koka upp.",
+          "uses": [
+            "kyckling",
+            "ingefära",
+            "vitlök",
+            "rapsolja",
+            "fisksås"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud under lock cirka 25 minuter tills kycklingens tjockaste bit håller minst 74 °C. Lyft sedan köttet till ett rent fat; behåll buljongen i grytan.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda rismjölet med fyra femtedelar av tapiokastärkelsen i en värmetålig bunke. Koka upp 285 ml vatten och häll det kokhett i mjölet under kraftig omrörning med slev. Rör ner nudlarnas olja. Rör tills massan håller ihop, låt svalna ett par minuter och knåda sedan när den går att hantera. Skydda händerna mot skållning. Om massan fortfarande spricker torrt, arbeta in 15 ml nykokt vatten; använd inte ljummet vatten från början.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja"
+          ],
+          "minutes": 11,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kavla degen till cirka 3 mm mellan papper med återstående tapiokastärkelse som utbakningsstärkelse. Skär i smala remsor och lossa dem. Överflödig angiven stärkelse följer med ner i buljongen, inte extra olistat mjöl. Dra isär den genomkokta kycklingen med rena gafflar.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja",
+            "kyckling"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka upp buljongen på nytt. Lägg ner samtliga färska nudlar och sjud cirka 6 minuter, rör varsamt så de inte fastnar. Nudlarna ska vara mjuka men sega, utan vit rå mjölkärna. Stärkelsen ska avsiktligt göra buljongen lätt simmig; späd vid behov med 200 ml vatten.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja",
+            "kyckling",
+            "ingefära",
+            "vitlök",
+            "fisksås"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg tillbaka kycklingen och värm 3 minuter så att köttet åter är genomhett.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela nudlar, kyckling och buljong omedelbart i fyra skålar. Låt inte de färska nudlarna stå länge i buljongen eftersom de fortsätter att svälla.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja",
+            "kyckling",
+            "ingefära",
+            "vitlök",
+            "fisksås"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Middag med thailändsk regional köksmärkning; rätten är även laotisk och ofta frukost där. Inte ett exklusivt thailändskt ursprungspåstående. Regional thailändsk–laotisk rätt. Nudeldegens vattenbehov är en författaruppskattning och kräver provlagning mot faktisk rismjölsprodukt."
+    },
+    {
+      "base_id": "smako-thai-khao-piak-sen",
+      "cuisine": "thai",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Khao piak sen – handskurna risnudlar i kycklingbuljong – standard",
+      "servings": 4,
+      "family": "soppa med direktkokta färska risnudlar",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "handskurna ris-tapiokanudlar",
+      "flavor": [
+        "ingefära",
+        "fisksås"
+      ],
+      "equipment": [
+        "gryta",
+        "värmetålig bunke",
+        "slev",
+        "kavel",
+        "kniv",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "nudlar",
+          "name": "Skållad ris-tapiokadeg",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vanligt rismjöl, inte klibbigt rismjöl"
+            },
+            {
+              "name": "tapiokastärkelse",
+              "form": "dry",
+              "quantity": 150,
+              "unit": "g",
+              "role": "side",
+              "label": "Tapiokastärkelse"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 8,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            }
+          ]
+        },
+        {
+          "id": "soppa",
+          "name": "Kycklingbuljong",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt rått kycklingkött"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 22,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "fisksås",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Fisksås"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Koriander"
+            },
+            {
+              "name": "salladslök",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Salladslök"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hacka vitlök och ingefära, skiva moroten, hacka korianderstjälkar och spara bladen samt skiva salladslöken. Värm soppans olja i grytan och fräs vitlök och ingefära tills vitlöken är svagt gyllene. Tillsätt morot och korianderstjälkar. Häll på 1800 ml vatten och fisksåsen. Lägg i kycklingen i stora bitar och koka upp.",
+          "uses": [
+            "kyckling",
+            "ingefära",
+            "vitlök",
+            "rapsolja",
+            "fisksås",
+            "koriander",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud under lock cirka 25 minuter tills kycklingens tjockaste bit håller minst 74 °C. Lyft sedan köttet till ett rent fat; behåll buljongen i grytan.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda rismjölet med fyra femtedelar av tapiokastärkelsen i en värmetålig bunke. Koka upp 285 ml vatten och häll det kokhett i mjölet under kraftig omrörning med slev. Rör ner nudlarnas olja. Rör tills massan håller ihop, låt svalna ett par minuter och knåda sedan när den går att hantera. Skydda händerna mot skållning. Om massan fortfarande spricker torrt, arbeta in 15 ml nykokt vatten; använd inte ljummet vatten från början.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja"
+          ],
+          "minutes": 11,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kavla degen till cirka 3 mm mellan papper med återstående tapiokastärkelse som utbakningsstärkelse. Skär i smala remsor och lossa dem. Överflödig angiven stärkelse följer med ner i buljongen, inte extra olistat mjöl. Dra isär den genomkokta kycklingen med rena gafflar.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja",
+            "kyckling"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka upp buljongen på nytt. Lägg ner samtliga färska nudlar och sjud cirka 6 minuter, rör varsamt så de inte fastnar. Nudlarna ska vara mjuka men sega, utan vit rå mjölkärna. Stärkelsen ska avsiktligt göra buljongen lätt simmig; späd vid behov med 200 ml vatten.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja",
+            "kyckling",
+            "ingefära",
+            "vitlök",
+            "fisksås",
+            "koriander",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg tillbaka kycklingen och värm 3 minuter så att köttet åter är genomhett.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela nudlar, kyckling och buljong omedelbart i fyra skålar. Lägg på sparade korianderblad och all salladslök. Låt inte de färska nudlarna stå länge i buljongen eftersom de fortsätter att svälla.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja",
+            "kyckling",
+            "ingefära",
+            "vitlök",
+            "fisksås",
+            "koriander",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Middag med thailändsk regional köksmärkning; rätten är även laotisk och ofta frukost där. Inte ett exklusivt thailändskt ursprungspåstående. Regional thailändsk–laotisk rätt. Nudeldegens vattenbehov är en författaruppskattning och kräver provlagning mot faktisk rismjölsprodukt."
+    },
+    {
+      "base_id": "smako-thai-khao-piak-sen",
+      "cuisine": "thai",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Khao piak sen – handskurna risnudlar i kycklingbuljong – utökad",
+      "servings": 4,
+      "family": "soppa med direktkokta färska risnudlar",
+      "primary": "kyckling",
+      "method": "pot",
+      "side": "handskurna ris-tapiokanudlar",
+      "flavor": [
+        "ingefära",
+        "fisksås"
+      ],
+      "equipment": [
+        "gryta",
+        "värmetålig bunke",
+        "slev",
+        "kavel",
+        "kniv",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "nudlar",
+          "name": "Skållad ris-tapiokadeg",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Vanligt rismjöl, inte klibbigt rismjöl"
+            },
+            {
+              "name": "tapiokastärkelse",
+              "form": "dry",
+              "quantity": 150,
+              "unit": "g",
+              "role": "side",
+              "label": "Tapiokastärkelse"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 8,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            }
+          ]
+        },
+        {
+          "id": "soppa",
+          "name": "Kycklingbuljong",
+          "ingredients": [
+            {
+              "name": "kyckling",
+              "form": "raw_edible",
+              "quantity": 650,
+              "unit": "g",
+              "role": "primary",
+              "label": "Benfritt rått kycklingkött"
+            },
+            {
+              "name": "ingefära",
+              "form": "raw_edible",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Ingefära"
+            },
+            {
+              "name": "vitlök",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Vitlök"
+            },
+            {
+              "name": "rapsolja",
+              "form": "as_sold",
+              "quantity": 22,
+              "unit": "ml",
+              "role": "cooking",
+              "label": "Rapsolja"
+            },
+            {
+              "name": "fisksås",
+              "form": "as_sold",
+              "quantity": 40,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Fisksås"
+            },
+            {
+              "name": "koriander",
+              "form": "raw_edible",
+              "quantity": 20,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Koriander"
+            },
+            {
+              "name": "salladslök",
+              "form": "raw_edible",
+              "quantity": 80,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Salladslök"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot"
+            }
+          ]
+        },
+        {
+          "id": "extra",
+          "name": "Ägg och syrlig chili",
+          "ingredients": [
+            {
+              "name": "kokta ägg",
+              "form": "cooked_drained",
+              "quantity": 180,
+              "unit": "g",
+              "role": "side",
+              "label": "Inköpta färdigkokta skalade ägg"
+            },
+            {
+              "name": "limejuice",
+              "form": "as_sold",
+              "quantity": 30,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Limejuice"
+            },
+            {
+              "name": "grön chili",
+              "form": "raw_edible",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Grön chili"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Hacka vitlök och ingefära, skiva moroten, hacka korianderstjälkar och spara bladen samt skiva salladslöken. Värm soppans olja i grytan och fräs vitlök och ingefära tills vitlöken är svagt gyllene. Tillsätt morot och korianderstjälkar. Häll på 1800 ml vatten och fisksåsen. Lägg i kycklingen i stora bitar och koka upp.",
+          "uses": [
+            "kyckling",
+            "ingefära",
+            "vitlök",
+            "rapsolja",
+            "fisksås",
+            "koriander",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud under lock cirka 25 minuter tills kycklingens tjockaste bit håller minst 74 °C. Lyft sedan köttet till ett rent fat; behåll buljongen i grytan.",
+          "uses": [
+            "kyckling"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Blanda rismjölet med fyra femtedelar av tapiokastärkelsen i en värmetålig bunke. Koka upp 285 ml vatten och häll det kokhett i mjölet under kraftig omrörning med slev. Rör ner nudlarnas olja. Rör tills massan håller ihop, låt svalna ett par minuter och knåda sedan när den går att hantera. Skydda händerna mot skållning. Om massan fortfarande spricker torrt, arbeta in 15 ml nykokt vatten; använd inte ljummet vatten från början.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja"
+          ],
+          "minutes": 11,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Kavla degen till cirka 3 mm mellan papper med återstående tapiokastärkelse som utbakningsstärkelse. Skär i smala remsor och lossa dem. Överflödig angiven stärkelse följer med ner i buljongen, inte extra olistat mjöl. Dra isär den genomkokta kycklingen med rena gafflar.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja",
+            "kyckling"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Koka upp buljongen på nytt. Lägg ner samtliga färska nudlar och sjud cirka 6 minuter, rör varsamt så de inte fastnar. Nudlarna ska vara mjuka men sega, utan vit rå mjölkärna. Stärkelsen ska avsiktligt göra buljongen lätt simmig; späd vid behov med 200 ml vatten.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja",
+            "kyckling",
+            "ingefära",
+            "vitlök",
+            "fisksås",
+            "koriander",
+            "salladslök",
+            "morot"
+          ],
+          "minutes": 7,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lägg tillbaka kycklingen och de inköpta färdigkokta äggen. Sjud 4 minuter tills allt är genomhett. Hacka chilin och blanda den med limejuicen i en liten skål.",
+          "uses": [
+            "kyckling",
+            "kokta ägg",
+            "grön chili",
+            "limejuice"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Fördela nudlar, kyckling och buljong omedelbart i fyra skålar. Lägg på sparade korianderblad och all salladslök. Dela äggen och fördela chililimen över skålarna. Låt inte de färska nudlarna stå länge i buljongen eftersom de fortsätter att svälla.",
+          "uses": [
+            "rismjöl",
+            "tapiokastärkelse",
+            "rapsolja",
+            "kyckling",
+            "ingefära",
+            "vitlök",
+            "fisksås",
+            "koriander",
+            "salladslök",
+            "morot",
+            "kokta ägg",
+            "limejuice",
+            "grön chili"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            6
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Middag med thailändsk regional köksmärkning; rätten är även laotisk och ofta frukost där. Inte ett exklusivt thailändskt ursprungspåstående. Regional thailändsk–laotisk rätt. Nudeldegens vattenbehov är en författaruppskattning och kräver provlagning mot faktisk rismjölsprodukt."
+    },
+    {
+      "base_id": "smako-thai-khanom-tan",
+      "cuisine": "thai",
+      "meal_type": "snack",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Khanom tan – jästa palmfruktskakor – enkel",
+      "servings": 1,
+      "family": "jäst ångad palmfruktskaka",
+      "primary": "palmyrafruktpuré",
+      "method": "pot",
+      "side": "liten ångkaka",
+      "flavor": [
+        "palmyrafrukt",
+        "kokos"
+      ],
+      "equipment": [
+        "bunke",
+        "ånggryta med lock",
+        "två små värmetåliga formar",
+        "bakpapper"
+      ],
+      "components": [
+        {
+          "id": "smet",
+          "name": "Palmfruktsmet",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rismjöl"
+            },
+            {
+              "name": "palmyrafruktpuré",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "primary",
+              "label": "Pastöriserad osötad puré av mogen palmyrafrukt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Torrjäst"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att purén är livsmedel av mogen palmyrafrukt, pastöriserad och osötad, inte palmsocker eller ung palmkärna. Blanda rismjöl, torrjäst, socker och salt. Arbeta ihop med fruktpurén. Rör sedan i kokosmjölken och 15 ml ljummet vatten till en tjock hällbar smet.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Täck och låt jäsa cirka 90 minuter i behaglig rumstemperatur, tills smeten har många små bubblor och har höjt sig lite. Den behöver inte bli dubbelt så stor som en vetedeg. Detta är en kontrollerad bagerijästanpassning, inte vildjäsning av rå frukt.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 90,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Koka upp 700 ml vatten under ånginsatsen. Klä de små formarna med papper. Rör smeten varsamt en gång och fördela den i formarna, högst till tre fjärdedelar. Sätt dem i insatsen och lägg på lock utan att vatten stänker i formarna.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Ånga på jämn god ånga i 18 minuter. Öppna inte locket under de första 12 minuterna. Kontrollera vattennivån vid behov och fyll på med 150 ml hett vatten under insatsen.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 18,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Kontrollera att en provsticka kommer upp utan rå mjölsmet och att kakorna håller sin luftiga struktur. Förläng ångningen om mitten fortfarande är kladdigt rå.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 1,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Ta ur formarna med grytlappar. Låt svalna 10 minuter och lossa försiktigt från papperet. Båda små kakorna utgör en mellanmålsportion.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Köpt pastöriserad fruktpuré med bagerijäst ersätter traditionell vildjäsning. Utökad variant får traditionell ångad kokostopp, inte nya dekorativa ingredienser. Kräver faktisk palmyrafruktpuré; ingen annan frukt får bindas som alias. Sex ingredienser i utökad variant är avsiktligt, inte ett ofullständigt åttaingrediensrecept."
+    },
+    {
+      "base_id": "smako-thai-khanom-tan",
+      "cuisine": "thai",
+      "meal_type": "snack",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Khanom tan – jästa palmfruktskakor – utökad",
+      "servings": 1,
+      "family": "jäst ångad palmfruktskaka",
+      "primary": "palmyrafruktpuré",
+      "method": "pot",
+      "side": "liten ångkaka",
+      "flavor": [
+        "palmyrafrukt",
+        "kokos"
+      ],
+      "equipment": [
+        "bunke",
+        "ånggryta med lock",
+        "två små värmetåliga formar",
+        "bakpapper"
+      ],
+      "components": [
+        {
+          "id": "smet",
+          "name": "Palmfruktsmet",
+          "ingredients": [
+            {
+              "name": "rismjöl",
+              "form": "dry",
+              "quantity": 35,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rismjöl"
+            },
+            {
+              "name": "palmyrafruktpuré",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "primary",
+              "label": "Pastöriserad osötad puré av mogen palmyrafrukt"
+            },
+            {
+              "name": "kokosmjölk",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Kokosmjölk"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 10,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "torrjäst",
+              "form": "dry",
+              "quantity": 0.5,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Torrjäst"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.2,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "topp",
+          "name": "Ångad kokostopp",
+          "ingredients": [
+            {
+              "name": "kokosflingor",
+              "form": "dry",
+              "quantity": 5,
+              "unit": "g",
+              "role": "side",
+              "label": "Kokosflingor"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.1,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Kontrollera att purén är livsmedel av mogen palmyrafrukt, pastöriserad och osötad, inte palmsocker eller ung palmkärna. Blanda rismjöl, torrjäst, socker och salt. Arbeta ihop med fruktpurén. Rör sedan i kokosmjölken och 15 ml ljummet vatten till en tjock hällbar smet.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Täck och låt jäsa cirka 90 minuter i behaglig rumstemperatur, tills smeten har många små bubblor och har höjt sig lite. Den behöver inte bli dubbelt så stor som en vetedeg. Detta är en kontrollerad bagerijästanpassning, inte vildjäsning av rå frukt.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 90,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Fukta kokosflingorna med 8 ml vatten och blanda med toppens salt. Låt stå medan ånggrytan värms.",
+          "uses": [
+            "kokosflingor",
+            "salt"
+          ],
+          "minutes": 2,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Koka upp 700 ml vatten under ånginsatsen. Klä de små formarna med papper. Rör smeten varsamt en gång och fördela den i formarna, högst till tre fjärdedelar. Sätt dem i insatsen och lägg på lock utan att vatten stänker i formarna.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Ånga på jämn god ånga i 18 minuter. Öppna inte locket under de första 12 minuterna. Kontrollera vattennivån vid behov och fyll på med 150 ml hett vatten under insatsen.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 18,
+          "passive": true,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Lyft locket bort från ansiktet, fördela den fuktade kokosblandningen över kakorna och lägg tillbaka locket.",
+          "uses": [
+            "kokosflingor",
+            "salt"
+          ],
+          "minutes": 1,
+          "passive": false,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Ånga ytterligare 4 minuter så kokostoppen blir genomhet. Kontrollera att en provsticka ur kakan inte har rå mjölsmet; ånga längre om det behövs.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt",
+            "kokosflingor"
+          ],
+          "minutes": 4,
+          "passive": true,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Ta ur formarna med grytlappar. Låt svalna 10 minuter och lossa försiktigt från papperet. Båda små kakorna utgör en mellanmålsportion.",
+          "uses": [
+            "rismjöl",
+            "palmyrafruktpuré",
+            "kokosmjölk",
+            "strösocker",
+            "torrjäst",
+            "salt"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Köpt pastöriserad fruktpuré med bagerijäst ersätter traditionell vildjäsning. Utökad variant får traditionell ångad kokostopp, inte nya dekorativa ingredienser. Kräver faktisk palmyrafruktpuré; ingen annan frukt får bindas som alias. Sex ingredienser i utökad variant är avsiktligt, inte ett ofullständigt åttaingrediensrecept."
+    },
+    {
+      "base_id": "smako-swedish-lapskojs",
+      "cuisine": "swedish",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Lapskojs – rimmad oxbringa i potatismos – enkel",
+      "servings": 4,
+      "family": "rivet kött inarbetat i potatismos",
+      "primary": "rimmad oxbringa",
+      "method": "pot",
+      "side": "rödbeta och eventuell kålsida",
+      "flavor": [
+        "rimmat nötkött",
+        "potatis"
+      ],
+      "equipment": [
+        "gryta",
+        "kastruller",
+        "potatisstöt",
+        "kniv"
+      ],
+      "components": [
+        {
+          "id": "kott",
+          "name": "Långkokt bringa",
+          "ingredients": [
+            {
+              "name": "rimmad oxbringa",
+              "form": "as_sold",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå rimmad benfri oxbringa"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            }
+          ]
+        },
+        {
+          "id": "mos",
+          "name": "Potatismos",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1100,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 170,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg den råa rimmade bringan i en gryta med 2300 ml vatten. Skala och klyfta löken och lägg ner den. Koka upp, skumma och sänk värmen. Tillsätt inte extra salt; köttet är redan rimmat.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud under lock cirka 150 minuter tills köttet lätt går att dra isär. Kontrollera vattennivån och tillsätt vid behov 300 ml vatten. Produktens styckning kan kräva längre kokning. Lyft sedan köttet och löken till ett fat och spara lite kokspad.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök"
+          ],
+          "minutes": 150,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och dela potatisen. Koka upp med 1600 ml vatten.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud cirka 20 minuter tills potatisen är helt mjuk. Häll av ordentligt och låt ånga av en minut.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Dra isär det kokta nötköttet med gafflar och finhacka trådarna och den kokta löken. Värm mjölken med mosets smör utan att koka. Stöt potatisen och arbeta ner mjölkblandningen och allt finfördelat kött. Späd med hett kokspad motsvarande halva den angivna mjölkmängden. Lapskojsen ska vara ett sammanhängande grovt mos, inte skivat kött på mos.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök",
+            "potatis",
+            "smör",
+            "mjölk"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Värm under omrörning ett par minuter om blandningen hunnit svalna. Servera lapskojsen. Fördela alla ätliga komponenter över fyra portioner; överblivet kokspad är processrest.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök",
+            "potatis",
+            "smör",
+            "mjölk"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            5
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Standard får snabbsyrad rödbeta; utökad lägger till en varm kålsida. Köttets vikt är rå rimmad insats, inte kokt färdig vikt. Rimmad bringas saltning och rå-/kokutbyte behöver produktkontroll. Enkel version har fem räknade ingredienser och bygger på själva mos-kött-rätten, inte en utökad tillbehörstallrik."
+    },
+    {
+      "base_id": "smako-swedish-lapskojs",
+      "cuisine": "swedish",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Lapskojs – rimmad oxbringa i potatismos – standard",
+      "servings": 4,
+      "family": "rivet kött inarbetat i potatismos",
+      "primary": "rimmad oxbringa",
+      "method": "pot",
+      "side": "rödbeta och eventuell kålsida",
+      "flavor": [
+        "rimmat nötkött",
+        "potatis"
+      ],
+      "equipment": [
+        "gryta",
+        "kastruller",
+        "potatisstöt",
+        "kniv"
+      ],
+      "components": [
+        {
+          "id": "kott",
+          "name": "Långkokt bringa",
+          "ingredients": [
+            {
+              "name": "rimmad oxbringa",
+              "form": "as_sold",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå rimmad benfri oxbringa"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            }
+          ]
+        },
+        {
+          "id": "mos",
+          "name": "Potatismos",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1100,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 170,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            }
+          ]
+        },
+        {
+          "id": "rodbetor",
+          "name": "Snabbsyrad rödbeta",
+          "ingredients": [
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Äppelcidervinäger"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Senap"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg den råa rimmade bringan i en gryta med 2300 ml vatten. Skala och klyfta löken och lägg ner den. Koka upp, skumma och sänk värmen. Tillsätt inte extra salt; köttet är redan rimmat.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud under lock cirka 150 minuter tills köttet lätt går att dra isär. Kontrollera vattennivån och tillsätt vid behov 300 ml vatten. Produktens styckning kan kräva längre kokning. Lyft sedan köttet och löken till ett fat och spara lite kokspad.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök"
+          ],
+          "minutes": 150,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och tärna rödbetan. Koka upp med 700 ml vatten i en separat kastrull.",
+          "uses": [
+            "rödbeta"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud rödbetan cirka 25 minuter tills den är mjuk och häll av. Vänd med vinäger, socker och senap och låt dra medan moset görs. Detta är inte en hållbarhetsvaliderad inläggning.",
+          "uses": [
+            "rödbeta",
+            "äppelcidervinäger",
+            "strösocker",
+            "senap"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skala och dela potatisen. Koka upp med 1600 ml vatten.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud cirka 20 minuter tills potatisen är helt mjuk. Häll av ordentligt och låt ånga av en minut.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Dra isär det kokta nötköttet med gafflar och finhacka trådarna och den kokta löken. Värm mjölken med mosets smör utan att koka. Stöt potatisen och arbeta ner mjölkblandningen och allt finfördelat kött. Späd med hett kokspad motsvarande halva den angivna mjölkmängden. Lapskojsen ska vara ett sammanhängande grovt mos, inte skivat kött på mos.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök",
+            "potatis",
+            "smör",
+            "mjölk"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Värm under omrörning ett par minuter om blandningen hunnit svalna. Servera lapskojsen med de snabbsyrade rödbetorna och deras lag. Fördela alla ätliga komponenter över fyra portioner; överblivet kokspad är processrest.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök",
+            "potatis",
+            "smör",
+            "mjölk",
+            "rödbeta",
+            "äppelcidervinäger",
+            "strösocker",
+            "senap"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Standard får snabbsyrad rödbeta; utökad lägger till en varm kålsida. Köttets vikt är rå rimmad insats, inte kokt färdig vikt. Rimmad bringas saltning och rå-/kokutbyte behöver produktkontroll. Enkel version har fem räknade ingredienser och bygger på själva mos-kött-rätten, inte en utökad tillbehörstallrik."
+    },
+    {
+      "base_id": "smako-swedish-lapskojs",
+      "cuisine": "swedish",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Lapskojs – rimmad oxbringa i potatismos – utökad",
+      "servings": 4,
+      "family": "rivet kött inarbetat i potatismos",
+      "primary": "rimmad oxbringa",
+      "method": "pot",
+      "side": "rödbeta och eventuell kålsida",
+      "flavor": [
+        "rimmat nötkött",
+        "potatis"
+      ],
+      "equipment": [
+        "gryta",
+        "kastruller",
+        "potatisstöt",
+        "kniv"
+      ],
+      "components": [
+        {
+          "id": "kott",
+          "name": "Långkokt bringa",
+          "ingredients": [
+            {
+              "name": "rimmad oxbringa",
+              "form": "as_sold",
+              "quantity": 700,
+              "unit": "g",
+              "role": "primary",
+              "label": "Rå rimmad benfri oxbringa"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            }
+          ]
+        },
+        {
+          "id": "mos",
+          "name": "Potatismos",
+          "ingredients": [
+            {
+              "name": "potatis",
+              "form": "raw_edible",
+              "quantity": 1100,
+              "unit": "g",
+              "role": "side",
+              "label": "Potatis"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 35,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 170,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            }
+          ]
+        },
+        {
+          "id": "rodbetor",
+          "name": "Snabbsyrad rödbeta",
+          "ingredients": [
+            {
+              "name": "rödbeta",
+              "form": "raw_edible",
+              "quantity": 350,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Rödbeta"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Äppelcidervinäger"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 18,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            },
+            {
+              "name": "senap",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Senap"
+            }
+          ]
+        },
+        {
+          "id": "kal",
+          "name": "Varm kål och purjo",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 300,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål"
+            },
+            {
+              "name": "morot",
+              "form": "raw_edible",
+              "quantity": 180,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Morot"
+            },
+            {
+              "name": "purjolök",
+              "form": "raw_edible",
+              "quantity": 140,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Purjolök"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 15,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Lägg den råa rimmade bringan i en gryta med 2300 ml vatten. Skala och klyfta löken och lägg ner den. Koka upp, skumma och sänk värmen. Tillsätt inte extra salt; köttet är redan rimmat.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök"
+          ],
+          "minutes": 10,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud under lock cirka 150 minuter tills köttet lätt går att dra isär. Kontrollera vattennivån och tillsätt vid behov 300 ml vatten. Produktens styckning kan kräva längre kokning. Lyft sedan köttet och löken till ett fat och spara lite kokspad.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök"
+          ],
+          "minutes": 150,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Skala och tärna rödbetan. Koka upp med 700 ml vatten i en separat kastrull.",
+          "uses": [
+            "rödbeta"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Sjud rödbetan cirka 25 minuter tills den är mjuk och häll av. Vänd med vinäger, socker och senap och låt dra medan moset görs. Detta är inte en hållbarhetsvaliderad inläggning.",
+          "uses": [
+            "rödbeta",
+            "äppelcidervinäger",
+            "strösocker",
+            "senap"
+          ],
+          "minutes": 25,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Skala och dela potatisen. Koka upp med 1600 ml vatten.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 6,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Sjud cirka 20 minuter tills potatisen är helt mjuk. Häll av ordentligt och låt ånga av en minut.",
+          "uses": [
+            "potatis"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Strimla vitkål och purjolök, riv moroten grovt. Fräs i kålkomponentens smör på medelvärme cirka 10 minuter tills allt mjuknat men inte kokat sönder. Tillsätt 40 ml vatten om pannan blir för torr.",
+          "uses": [
+            "vitkål",
+            "morot",
+            "purjolök",
+            "smör"
+          ],
+          "minutes": 15,
+          "passive": false,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Dra isär det kokta nötköttet med gafflar och finhacka trådarna och den kokta löken. Värm mjölken med mosets smör utan att koka. Stöt potatisen och arbeta ner mjölkblandningen och allt finfördelat kött. Späd med hett kokspad motsvarande halva den angivna mjölkmängden. Lapskojsen ska vara ett sammanhängande grovt mos, inte skivat kött på mos.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök",
+            "potatis",
+            "smör",
+            "mjölk"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Värm under omrörning ett par minuter om blandningen hunnit svalna. Servera lapskojsen med de snabbsyrade rödbetorna och deras lag samt den varma kålen. Fördela alla ätliga komponenter över fyra portioner; överblivet kokspad är processrest.",
+          "uses": [
+            "rimmad oxbringa",
+            "gul lök",
+            "potatis",
+            "smör",
+            "mjölk",
+            "rödbeta",
+            "äppelcidervinäger",
+            "strösocker",
+            "senap",
+            "vitkål",
+            "morot",
+            "purjolök"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Standard får snabbsyrad rödbeta; utökad lägger till en varm kålsida. Köttets vikt är rå rimmad insats, inte kokt färdig vikt. Rimmad bringas saltning och rå-/kokutbyte behöver produktkontroll. Enkel version har fem räknade ingredienser och bygger på själva mos-kött-rätten, inte en utökad tillbehörstallrik."
+    },
+    {
+      "base_id": "smako-swedish-korvkaka",
+      "cuisine": "swedish",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Korvkaka – lever- och korngrynskaka – enkel",
+      "servings": 4,
+      "family": "ugnsbakad lever-korngrynskaka",
+      "primary": "fläsklever",
+      "method": "oven",
+      "side": "lingon och eventuell råkost",
+      "flavor": [
+        "lever",
+        "russin"
+      ],
+      "equipment": [
+        "kastrull",
+        "stekpanna",
+        "matberedare",
+        "ugn",
+        "form cirka 1.8 liter",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "kaka",
+          "name": "Lever- och korngrynsmassa",
+          "ingredients": [
+            {
+              "name": "fläsklever",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläsklever"
+            },
+            {
+              "name": "korngryn",
+              "form": "dry",
+              "quantity": 140,
+              "unit": "g",
+              "role": "side",
+              "label": "Korngryn"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Ägg"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Russin"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svartpeppar"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj korngrynen. Koka upp dem i en kastrull med 420 ml vatten och hälften av saltet. Sänk värmen och lägg på lock.",
+          "uses": [
+            "korngryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud cirka 35 minuter tills grynen mjuknat och det mesta av vattnet sugits upp. Kontrollera att det inte kokar torrt och tillsätt vid behov 100 ml vatten.",
+          "uses": [
+            "korngryn"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner mjölken. Låt småkoka under regelbunden omrörning cirka 15 minuter till en lös gröt med mjuka gryn. Täta omrörningar behövs för att mjölken inte ska fastna; detta är aktiv tid.",
+          "uses": [
+            "korngryn",
+            "mjölk"
+          ],
+          "minutes": 15,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bred gröten i en skål och låt svalna 20 minuter tills den är ljummen, inte het nog att börja tillaga äggen vid blandningen. Värm ugnen till 190 °C.",
+          "uses": [
+            "korngryn",
+            "mjölk"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Hacka löken och mjukstek i smöret. Putsa levern från grova hinnor och finfördela den råa levern i matberedare med ägg, saltet som återstår, svartpeppar. Blanda ner lök, allt steksmör, russin och den ljumma gröten. Tvätta händer och rengör redskap noggrant efter rå lever.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Klä formen med bakplåtspapper och häll i hela massan. Baka mitt i ugnen cirka 50 minuter. Kontrollera med termometer att mitten når minst 75 °C och håll den temperaturen minst 3 minuter. Förläng vid behov. Ytan ska vara brun och kakan genomstannad, inte rå som leverfärs i mitten.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 50,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt kakan vila 10 minuter så att den går att skära utan att falla isär.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Skär den varma korvkakan i fyra portioner. All kaka och alla tillbehör ingår i fyra portioner.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            7
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel mild kryddning; utökad med äppel-kålsallad. Lever är uttrycklig huvudråvara och tillagas genom."
+    },
+    {
+      "base_id": "smako-swedish-korvkaka",
+      "cuisine": "swedish",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "standard",
+      "name": "Korvkaka – lever- och korngrynskaka – standard",
+      "servings": 4,
+      "family": "ugnsbakad lever-korngrynskaka",
+      "primary": "fläsklever",
+      "method": "oven",
+      "side": "lingon och eventuell råkost",
+      "flavor": [
+        "lever",
+        "russin"
+      ],
+      "equipment": [
+        "kastrull",
+        "stekpanna",
+        "matberedare",
+        "ugn",
+        "form cirka 1.8 liter",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "kaka",
+          "name": "Lever- och korngrynsmassa",
+          "ingredients": [
+            {
+              "name": "fläsklever",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläsklever"
+            },
+            {
+              "name": "korngryn",
+              "form": "dry",
+              "quantity": 140,
+              "unit": "g",
+              "role": "side",
+              "label": "Korngryn"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Ägg"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Russin"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svartpeppar"
+            },
+            {
+              "name": "mejram",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mejram"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kryddpeppar"
+            }
+          ]
+        },
+        {
+          "id": "lingon",
+          "name": "Rårörda lingon",
+          "ingredients": [
+            {
+              "name": "lingon",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Lingon"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj korngrynen. Koka upp dem i en kastrull med 420 ml vatten och hälften av saltet. Sänk värmen och lägg på lock.",
+          "uses": [
+            "korngryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud cirka 35 minuter tills grynen mjuknat och det mesta av vattnet sugits upp. Kontrollera att det inte kokar torrt och tillsätt vid behov 100 ml vatten.",
+          "uses": [
+            "korngryn"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner mjölken. Låt småkoka under regelbunden omrörning cirka 15 minuter till en lös gröt med mjuka gryn. Täta omrörningar behövs för att mjölken inte ska fastna; detta är aktiv tid.",
+          "uses": [
+            "korngryn",
+            "mjölk"
+          ],
+          "minutes": 15,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bred gröten i en skål och låt svalna 20 minuter tills den är ljummen, inte het nog att börja tillaga äggen vid blandningen. Värm ugnen till 190 °C.",
+          "uses": [
+            "korngryn",
+            "mjölk"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Hacka löken och mjukstek i smöret. Putsa levern från grova hinnor och finfördela den råa levern i matberedare med ägg, saltet som återstår, svartpeppar, mejram och kryddpeppar. Blanda ner lök, allt steksmör, russin och den ljumma gröten. Tvätta händer och rengör redskap noggrant efter rå lever.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar",
+            "mejram",
+            "kryddpeppar"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Klä formen med bakplåtspapper och häll i hela massan. Baka mitt i ugnen cirka 50 minuter. Kontrollera med termometer att mitten når minst 75 °C och håll den temperaturen minst 3 minuter. Förläng vid behov. Ytan ska vara brun och kakan genomstannad, inte rå som leverfärs i mitten.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar",
+            "mejram",
+            "kryddpeppar"
+          ],
+          "minutes": 50,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt kakan vila 10 minuter så att den går att skära utan att falla isär.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar",
+            "mejram",
+            "kryddpeppar"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Mosa lingonen lätt med sockret och rör tills sockret lösts; använd tinade lingon om de var frysta.",
+          "uses": [
+            "lingon",
+            "strösocker"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Skär den varma korvkakan i fyra portioner och fördela lingonen vid sidan. All kaka och alla tillbehör ingår i fyra portioner.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar",
+            "mejram",
+            "kryddpeppar",
+            "lingon",
+            "strösocker"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            8
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel mild kryddning; utökad med äppel-kålsallad. Lever är uttrycklig huvudråvara och tillagas genom."
+    },
+    {
+      "base_id": "smako-swedish-korvkaka",
+      "cuisine": "swedish",
+      "meal_type": "dinner",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Korvkaka – lever- och korngrynskaka – utökad",
+      "servings": 4,
+      "family": "ugnsbakad lever-korngrynskaka",
+      "primary": "fläsklever",
+      "method": "oven",
+      "side": "lingon och eventuell råkost",
+      "flavor": [
+        "lever",
+        "russin"
+      ],
+      "equipment": [
+        "kastrull",
+        "stekpanna",
+        "matberedare",
+        "ugn",
+        "form cirka 1.8 liter",
+        "termometer"
+      ],
+      "components": [
+        {
+          "id": "kaka",
+          "name": "Lever- och korngrynsmassa",
+          "ingredients": [
+            {
+              "name": "fläsklever",
+              "form": "raw_edible",
+              "quantity": 400,
+              "unit": "g",
+              "role": "primary",
+              "label": "Fläsklever"
+            },
+            {
+              "name": "korngryn",
+              "form": "dry",
+              "quantity": 140,
+              "unit": "g",
+              "role": "side",
+              "label": "Korngryn"
+            },
+            {
+              "name": "mjölk",
+              "form": "as_sold",
+              "quantity": 400,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Mjölk"
+            },
+            {
+              "name": "ägg",
+              "form": "raw_edible",
+              "quantity": 160,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Ägg"
+            },
+            {
+              "name": "gul lök",
+              "form": "raw_edible",
+              "quantity": 150,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Gul lök"
+            },
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Smör"
+            },
+            {
+              "name": "russin",
+              "form": "as_sold",
+              "quantity": 55,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Russin"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "svartpeppar",
+              "form": "dry",
+              "quantity": 0.7,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Svartpeppar"
+            },
+            {
+              "name": "mejram",
+              "form": "dry",
+              "quantity": 1.5,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Mejram"
+            },
+            {
+              "name": "kryddpeppar",
+              "form": "dry",
+              "quantity": 0.8,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Kryddpeppar"
+            }
+          ]
+        },
+        {
+          "id": "lingon",
+          "name": "Rårörda lingon",
+          "ingredients": [
+            {
+              "name": "lingon",
+              "form": "as_sold",
+              "quantity": 180,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Lingon"
+            },
+            {
+              "name": "strösocker",
+              "form": "dry",
+              "quantity": 30,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Strösocker"
+            }
+          ]
+        },
+        {
+          "id": "sallad",
+          "name": "Kål och äpple",
+          "ingredients": [
+            {
+              "name": "vitkål",
+              "form": "raw_edible",
+              "quantity": 260,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Vitkål"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 220,
+              "unit": "g",
+              "role": "vegetable",
+              "label": "Äpple"
+            },
+            {
+              "name": "äppelcidervinäger",
+              "form": "as_sold",
+              "quantity": 20,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Äppelcidervinäger"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Skölj korngrynen. Koka upp dem i en kastrull med 420 ml vatten och hälften av saltet. Sänk värmen och lägg på lock.",
+          "uses": [
+            "korngryn",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Sjud cirka 35 minuter tills grynen mjuknat och det mesta av vattnet sugits upp. Kontrollera att det inte kokar torrt och tillsätt vid behov 100 ml vatten.",
+          "uses": [
+            "korngryn"
+          ],
+          "minutes": 35,
+          "passive": true,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Rör ner mjölken. Låt småkoka under regelbunden omrörning cirka 15 minuter till en lös gröt med mjuka gryn. Täta omrörningar behövs för att mjölken inte ska fastna; detta är aktiv tid.",
+          "uses": [
+            "korngryn",
+            "mjölk"
+          ],
+          "minutes": 15,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Bred gröten i en skål och låt svalna 20 minuter tills den är ljummen, inte het nog att börja tillaga äggen vid blandningen. Värm ugnen till 190 °C.",
+          "uses": [
+            "korngryn",
+            "mjölk"
+          ],
+          "minutes": 20,
+          "passive": true,
+          "after": [
+            3
+          ]
+        },
+        {
+          "text": "Hacka löken och mjukstek i smöret. Putsa levern från grova hinnor och finfördela den råa levern i matberedare med ägg, saltet som återstår, svartpeppar, mejram och kryddpeppar. Blanda ner lök, allt steksmör, russin och den ljumma gröten. Tvätta händer och rengör redskap noggrant efter rå lever.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar",
+            "mejram",
+            "kryddpeppar"
+          ],
+          "minutes": 12,
+          "passive": false,
+          "after": [
+            4
+          ]
+        },
+        {
+          "text": "Klä formen med bakplåtspapper och häll i hela massan. Baka mitt i ugnen cirka 50 minuter. Kontrollera med termometer att mitten når minst 75 °C och håll den temperaturen minst 3 minuter. Förläng vid behov. Ytan ska vara brun och kakan genomstannad, inte rå som leverfärs i mitten.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar",
+            "mejram",
+            "kryddpeppar"
+          ],
+          "minutes": 50,
+          "passive": true,
+          "after": [
+            5
+          ]
+        },
+        {
+          "text": "Låt kakan vila 10 minuter så att den går att skära utan att falla isär.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar",
+            "mejram",
+            "kryddpeppar"
+          ],
+          "minutes": 10,
+          "passive": true,
+          "after": [
+            6
+          ]
+        },
+        {
+          "text": "Mosa lingonen lätt med sockret och rör tills sockret lösts; använd tinade lingon om de var frysta.",
+          "uses": [
+            "lingon",
+            "strösocker"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            7
+          ]
+        },
+        {
+          "text": "Strimla kålen, skär äpplet i tunna stavar och vänd med vinägern. Råkostens syra balanserar leverkakan.",
+          "uses": [
+            "vitkål",
+            "äpple",
+            "äppelcidervinäger"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": [
+            8
+          ]
+        },
+        {
+          "text": "Skär den varma korvkakan i fyra portioner och fördela lingonen vid sidan tillsammans med råkosten. All kaka och alla tillbehör ingår i fyra portioner.",
+          "uses": [
+            "fläsklever",
+            "korngryn",
+            "mjölk",
+            "ägg",
+            "gul lök",
+            "smör",
+            "russin",
+            "salt",
+            "svartpeppar",
+            "mejram",
+            "kryddpeppar",
+            "lingon",
+            "strösocker",
+            "vitkål",
+            "äpple",
+            "äppelcidervinäger"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            9
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel mild kryddning; utökad med äppel-kålsallad. Lever är uttrycklig huvudråvara och tillagas genom."
+    },
+    {
+      "base_id": "smako-swedish-stompa",
+      "cuisine": "swedish",
+      "meal_type": "breakfast",
+      "version": "1.0.0",
+      "variant_id": "simple",
+      "name": "Stompa – filmjölksbröd i stekpanna – enkel",
+      "servings": 1,
+      "family": "bikarbonathöjt stekpannetunnbröd",
+      "primary": "vetemjöl",
+      "method": "pan",
+      "side": "smör och eventuell ost/äpple",
+      "flavor": [
+        "filmjölk",
+        "råg"
+      ],
+      "equipment": [
+        "bunke",
+        "kavel",
+        "torr stekpanna",
+        "galler"
+      ],
+      "components": [
+        {
+          "id": "brod",
+          "name": "Tunn filmjölksdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "primary",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "rågmjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Rågmjöl"
+            },
+            {
+              "name": "filmjölk",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Filmjölk"
+            },
+            {
+              "name": "bikarbonat",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bikarbonat"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            }
+          ]
+        },
+        {
+          "id": "servering",
+          "name": "Till brödet",
+          "ingredients": [
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Smör"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda vete- och rågmjöl med bikarbonat och salt. Rör i filmjölken och arbeta snabbt ihop till en mjuk deg. Degen ska inte jäsa. Värm en torr stekpanna till medelvärme.",
+          "uses": [
+            "vetemjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "salt"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Dela degen i två små bröd per portion och kavla till cirka 3 mm mellan bakpapper, utan extra mjöl. Nagga med gaffel.",
+          "uses": [
+            "vetemjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "salt"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Grädda i den torra pannan cirka 2 minuter per sida, sammanlagt cirka 8 minuter för två bröd. Sänk värmen om ytan mörknar innan degen är gräddad. Bröden ska vara torra på ytan men mjuka, utan kladdig rå mitt.",
+          "uses": [
+            "vetemjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "salt"
+          ],
+          "minutes": 8,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt bröden svalna lätt på galler och fördela smöret över dem. Båda bröden och samtliga tillbehör utgör en frukostportion.",
+          "uses": [
+            "vetemjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "salt",
+            "smör"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel version serveras med smör. Utökad frukost smaksätter degen med fänkålsfrön och lägger till ost och äpple. Ingen ensamrätt till regionalt ursprung påstås. Ingen exklusiv Dalarna-härkomst hävdas. Enkel version är okryddad med smör; utökad får fänkål i degen och ost/äpple till frukosten."
+    },
+    {
+      "base_id": "smako-swedish-stompa",
+      "cuisine": "swedish",
+      "meal_type": "breakfast",
+      "version": "1.0.0",
+      "variant_id": "extended",
+      "name": "Stompa – filmjölksbröd i stekpanna – utökad",
+      "servings": 1,
+      "family": "bikarbonathöjt stekpannetunnbröd",
+      "primary": "vetemjöl",
+      "method": "pan",
+      "side": "smör och eventuell ost/äpple",
+      "flavor": [
+        "filmjölk",
+        "råg"
+      ],
+      "equipment": [
+        "bunke",
+        "kavel",
+        "torr stekpanna",
+        "galler"
+      ],
+      "components": [
+        {
+          "id": "brod",
+          "name": "Tunn filmjölksdeg",
+          "ingredients": [
+            {
+              "name": "vetemjöl",
+              "form": "dry",
+              "quantity": 40,
+              "unit": "g",
+              "role": "primary",
+              "label": "Vetemjöl"
+            },
+            {
+              "name": "rågmjöl",
+              "form": "dry",
+              "quantity": 25,
+              "unit": "g",
+              "role": "side",
+              "label": "Rågmjöl"
+            },
+            {
+              "name": "filmjölk",
+              "form": "as_sold",
+              "quantity": 45,
+              "unit": "ml",
+              "role": "sauce",
+              "label": "Filmjölk"
+            },
+            {
+              "name": "bikarbonat",
+              "form": "dry",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "cooking",
+              "label": "Bikarbonat"
+            },
+            {
+              "name": "salt",
+              "form": "as_sold",
+              "quantity": 0.6,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Salt"
+            },
+            {
+              "name": "fänkålsfrön",
+              "form": "dry",
+              "quantity": 0.4,
+              "unit": "g",
+              "role": "flavour",
+              "label": "Fänkålsfrön"
+            }
+          ]
+        },
+        {
+          "id": "servering",
+          "name": "Till brödet",
+          "ingredients": [
+            {
+              "name": "smör",
+              "form": "as_sold",
+              "quantity": 6,
+              "unit": "g",
+              "role": "sauce",
+              "label": "Smör"
+            },
+            {
+              "name": "ost",
+              "form": "as_sold",
+              "quantity": 25,
+              "unit": "g",
+              "role": "primary",
+              "label": "Ost"
+            },
+            {
+              "name": "äpple",
+              "form": "raw_edible",
+              "quantity": 110,
+              "unit": "g",
+              "role": "side",
+              "label": "Äpple"
+            }
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "text": "Blanda vete- och rågmjöl med bikarbonat och salt samt stötta fänkålsfrön. Rör i filmjölken och arbeta snabbt ihop till en mjuk deg. Degen ska inte jäsa. Värm en torr stekpanna till medelvärme.",
+          "uses": [
+            "vetemjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "salt",
+            "fänkålsfrön"
+          ],
+          "minutes": 5,
+          "passive": false,
+          "after": []
+        },
+        {
+          "text": "Dela degen i två små bröd per portion och kavla till cirka 3 mm mellan bakpapper, utan extra mjöl. Nagga med gaffel.",
+          "uses": [
+            "vetemjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "salt",
+            "fänkålsfrön"
+          ],
+          "minutes": 4,
+          "passive": false,
+          "after": [
+            1
+          ]
+        },
+        {
+          "text": "Grädda i den torra pannan cirka 2 minuter per sida, sammanlagt cirka 8 minuter för två bröd. Sänk värmen om ytan mörknar innan degen är gräddad. Bröden ska vara torra på ytan men mjuka, utan kladdig rå mitt.",
+          "uses": [
+            "vetemjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "salt",
+            "fänkålsfrön"
+          ],
+          "minutes": 8,
+          "passive": false,
+          "after": [
+            2
+          ]
+        },
+        {
+          "text": "Låt bröden svalna lätt på galler och fördela smöret över dem. Skiva osten och äpplet och servera till. Båda bröden och samtliga tillbehör utgör en frukostportion.",
+          "uses": [
+            "vetemjöl",
+            "rågmjöl",
+            "filmjölk",
+            "bikarbonat",
+            "salt",
+            "fänkålsfrön",
+            "smör",
+            "ost",
+            "äpple"
+          ],
+          "minutes": 3,
+          "passive": false,
+          "after": [
+            3
+          ]
+        }
+      ],
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel version serveras med smör. Utökad frukost smaksätter degen med fänkålsfrön och lägger till ost och äpple. Ingen ensamrätt till regionalt ursprung påstås. Ingen exklusiv Dalarna-härkomst hävdas. Enkel version är okryddad med smör; utökad får fänkål i degen och ost/äpple till frukosten."
+    }
+  ]
+}
