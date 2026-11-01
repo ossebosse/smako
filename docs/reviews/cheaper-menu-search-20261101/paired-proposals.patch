@@ -1,0 +1,198 @@
+--- a/backend/app/services/menu_optimizer.py
++++ b/backend/app/services/menu_optimizer.py
+@@ -12,6 +12,7 @@
+ from collections.abc import Callable, Mapping, Sequence
+ from dataclasses import dataclass, field
+ from decimal import Decimal
++from heapq import nsmallest
+ from itertools import combinations, combinations_with_replacement, product
+ from math import comb
+ from time import perf_counter
+@@ -1666,6 +1667,47 @@
+                 exchange_rank = 0
+                 exchange_revision = 0
+                 trace['exchange_restarts'] = 0
++                joint_revision = -1
++                joint_moves = iter(())
++                trace.update(joint_proposals=0, joint_evaluations=0, joint_improvements=0)
++
++                def paired_moves(chosen):
++                    # Bounded proposal queues, never price bounds: a simultaneous
++                    # change can cross a package or hard-distribution barrier that
++                    # rejects every single replacement. Keep the full anchor and
++                    # single-exchange streams; only ordinary checkout picks winners.
++                    shortlists = []
++                    for index, group in enumerate(ordered):
++                        checkpoint()
++                        other_packages = set().union(*(package_sets[id(slot)]
++                            for j, slot in enumerate(chosen) if j != index))
++                        available = [slot for slot in group if slot is not chosen[index]]
++                        shared = sorted(available, key=lambda slot:
++                            -len(package_sets[id(slot)] & other_packages))
++                        selected = {id(slot) for slot in [*available[:4], *shared[:4]]}
++                        shortlists.append([slot for slot in available if id(slot) in selected])
++
++                    def pairs():
++                        for left, right in combinations(range(len(groups)), 2):
++                            checkpoint()
++                            for a, first in enumerate(shortlists[left]):
++                                for b, second in enumerate(shortlists[right]):
++                                    overlap = len(package_sets[id(first)] & package_sets[id(second)])
++                                    tie = (a+b, max(a, b), left, right, a, b)
++                                    yield ((*tie, -overlap), (-overlap, *tie),
++                                           (left, right, first, second))
++
++                    cheap = nsmallest(128, pairs(), key=lambda row: row[0])
++                    shared = nsmallest(128, pairs(), key=lambda row: row[1])
++                    emitted = set()
++                    for cheap_row, shared_row in zip(cheap, shared, strict=True):
++                        for row in (cheap_row, shared_row):
++                            left, right, first, second = row[2]
++                            key = (left, right, id(first), id(second))
++                            if key not in emitted:
++                                emitted.add(key)
++                                yield row[2]
++
+                 for anchor in anchors:
+                     checkpoint()
+                     trace['anchors_considered'] += 1
+@@ -1702,6 +1744,26 @@
+                                 considered[index].add(id(group[rank]))
+                                 propose(menu)
+                     exchange_rank += 2
++                    if joint_revision != trace['improvements']:
++                        joint_moves = paired_moves(incumbent[1])
++                        joint_revision = trace['improvements']
++                    priced_before = trace['evaluations_executed']
++                    for _ in range(16):
++                        move = next(joint_moves, None)
++                        if move is None:
++                            break
++                        left, right, first, second = move
++                        menu = list(incumbent[1])
++                        menu[left], menu[right] = first, second
++                        considered[left].add(id(first)); considered[right].add(id(second))
++                        trace['joint_proposals'] += 1
++                        before = trace['improvements']
++                        evaluations_before = trace['evaluations_executed']
++                        propose(menu)
++                        trace['joint_evaluations'] += trace['evaluations_executed'] - evaluations_before
++                        trace['joint_improvements'] += trace['improvements'] - before
++                        if trace['improvements'] != before or trace['evaluations_executed'] - priced_before >= 2:
++                            break
+         except SearchWindowClosed:
+             soft_stopped = True
+             trace['stop_reason'] = 'reserved_current_checkout_audit_save_time'
+--- a/backend/tests/test_complete_first_slots.py
++++ b/backend/tests/test_complete_first_slots.py
+@@ -205,6 +205,110 @@
+     assert calls.index(('01', '00', '01')) < calls.index(('00', '00', '01'))
+     assert len(calls) <= 25 and trace[-1]['exchange_restarts'] >= 2
+     assert trace[-1]['anchors_deferred'] > 0
++
++
++@pytest.mark.parametrize('barrier', ['packages', 'distribution'])
++def test_broad_joint_moves_cross_a_single_replacement_barrier(monkeypatch, barrier):
++    from app.services import plan_jobs
++
++    groups = options([f'{i:02d}' for i in range(17)], days=3)
++    remaining = [30.0]
++    monkeypatch.setattr(plan_jobs, 'remaining_planning_seconds', lambda: remaining[0])
++    calls, trace = [], []
++    target = ('00', '01', '01')
++
++    def accepts(slots, final):
++        # Two meal categories must be changed together to retain distribution.
++        return (barrier != 'distribution' or not final
++                or slots[1].recipe.name == slots[2].recipe.name)
++
++    def evaluate(slots, final):
++        assert final and accepts(slots, final)
++        names = tuple(s.recipe.name for s in slots)
++        calls.append(names)
++        if len(calls) == 40:
++            remaining[0] = 11
++        # Sharing a package only pays off after BOTH replacements. A singleton
++        # price, or either single replacement's cost, cannot prove the saving.
++        return 50 if names == target else 100 if names == ('00', '00', '00') else 150
++
++    chosen, cost = MenuOptimizer().optimize_slots(groups, complete_first=True,
++        accepts=accepts, evaluate=evaluate, score=lambda slots, value: value,
++        candidate_priority=lambda slot: slot.recipe.name, search_trace=trace)
++    assert cost == 50 and tuple(s.recipe.name for s in chosen) == target
++    assert trace[-1]['joint_improvements'] >= 1
++    assert not trace[-1].get('proposal_space_enumerated')
++    assert trace[-1]['finalization_reserve_seconds'] == 12
++
++
++def test_joint_checkout_failure_preserves_the_verified_search_incumbent(monkeypatch):
++    from app.services import plan_jobs
++
++    remaining, calls, trace = [30.0], [], []
++    monkeypatch.setattr(plan_jobs, 'remaining_planning_seconds', lambda: remaining[0])
++
++    def evaluate(slots, final):
++        names = tuple(s.recipe.name for s in slots)
++        calls.append(names)
++        if len(calls) == 30:
++            remaining[0] = 11
++        if sum(n != '00' for n in names) >= 2:
++            raise ValueError('Joint quantity, nutrition or organic qualification failed')
++        return 100 if names == ('00', '00', '00') else 150
++
++    chosen, cost = MenuOptimizer().optimize_slots(
++        options([f'{i:02d}' for i in range(17)], days=3), complete_first=True,
++        accepts=lambda slots, final: True, evaluate=evaluate,
++        score=lambda slots, value: value, search_trace=trace)
++    assert cost == 100 and all(s.recipe.name == '00' for s in chosen)
++    assert trace[-1]['joint_evaluations'] > 0
++    assert trace[-1]['evaluation_rejected'] > 0
++    assert trace[-1]['joint_improvements'] == 0
++
++
++def test_broad_joint_move_finds_real_shared_package_saving_with_organic_audit():
++    from app.config import Settings
++    from app.models.personal import MealSettings, PersonalPlanning
++    from app.models.plan import PlanRequest
++    from app.services.personal_planner import PersonalPlanner
++    from app.services.reviewed_cold_meals import STEPS
++
++    from backend.tests.test_personal_planning_v2 import NOW, prepared, product, state
++    from backend.tests.test_personal_qualified_facts import facts
++
++    products = [product('Kvarg Naturell 0,2%', 100, 'g', 10, identity='r'),
++                product('Yoghurt Naturell', 500, 'g', 15, identity='s')]
++    evidence = {(p.store_id, p.product_id): facts(p, organic=True, animal=True,
++        ingredients=('Pastöriserad MJÖLK, mjölksyrakultur',)) for p in products}
++    request = PlanRequest(recipes=0, max_stores=1, personal=PersonalPlanning(
++        meals=[MealSettings(meal_type='breakfast', count=3, servings=1)],
++        organic_percent=100, use_pantry=False))
++    planner = PersonalPlanner(request, Settings(price_provider='mock'),
++        prepared(*products), state(), facts=evidence, now=NOW)
++
++    def slot(day, name, ingredient, amount):
++        return MealSlot(id=f'breakfast-{day}', day=day, meal_type='breakfast',
++            recipe=Recipe(name=name, servings=1, instructions=STEPS,
++                ingredients=[RecipeIngredient(name=ingredient, quantity=amount, unit='g')]))
++
++    groups = [[slot(1, 'Fixed', 'kvarg', 10)]]
++    for day in (2, 3):
++        groups.append([slot(day, 'A', 'kvarg', 100), slot(day, 'B', 'yoghurt', 100),
++                       *[slot(day, f'Z{i:02d}', 'kvarg', 10000+i) for i in range(63)]])
++    evaluate = lambda slots, final: planner.basket(slots, final=final)
++    costs = {tuple(s.recipe.name for s in menu): evaluate(list(menu), True)['basket'].total
++             for menu in product_menus(groups[0], groups[1][:2], groups[2][:2])}
++    assert costs[('Fixed', 'A', 'A')] == 30
++    assert costs[('Fixed', 'A', 'B')] == costs[('Fixed', 'B', 'A')] == 35
++    trace = []
++    chosen, result = MenuOptimizer().optimize_slots(groups, complete_first=True,
++        accepts=lambda slots, final: True, evaluate=evaluate,
++        score=lambda slots, result: result['basket'].total,
++        candidate_priority=lambda slot: slot.recipe.name, search_trace=trace)
++    assert result['basket'].total == min(costs.values()) == 25
++    assert tuple(s.recipe.name for s in chosen) == ('Fixed', 'B', 'B')
++    assert result['audit'].passed and result['checks']['organic_cost_percent'] == 100
++    assert trace[-1]['joint_improvements'] == 1
+ 
+ 
+ @pytest.mark.parametrize('amount,expected', [(200,10),(400,17)])

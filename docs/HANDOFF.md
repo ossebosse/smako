@@ -1,3 +1,16 @@
+# 2026-11-01: Två prövade sökförslag gav ingen godkänd prisvinst
+
+[Uppvärmda prisjämförelser](reviews/cheaper-menu-search-20261101/REPORT.md):
+parbyten och extra prisordnade hela menyförslag är avvisade och återställda.
+Samma pris i sex matchade fall; det utökade sjudagarsprovet godkänner inte
+prisordningsändringen. 75 s budget gav inga besparingar för tre/fem middagar.
+30 godkända, sparade/återlästa menyer; fyra äldre Malmöprov blockerade av
+saknade/underkända valda ICA-kontexter, utan lättade krav. Se mätgränserna.
+Endast dokumentation och arkiverade patchar; appkod och beta är oförändrade
+på **app-b7c8d0506e23-c18e4ba9**. Ingen tidsgräns eller inställning ändrad.
+
+---
+
 # 2026-11-01: Uppvärmda prov och samordnad faktaläsning/GC aktiverat
 
 [PR 59](https://github.com/ossebosse/smako/pull/59), main `b47e07febe6e`.
