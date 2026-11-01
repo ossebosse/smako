@@ -1,0 +1,2086 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage16",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 9,
+        "base_id": "smako-mexican-carlota-limon",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kondenserad mjölk|as_sold",
+                "name": "kondenserad mjölk",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "evaporerad mjölk|as_sold",
+                "name": "Osötad evaporerad mjölk, vägd i gram",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "kram",
+            "name": "Limekräm"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mariekex|as_sold",
+                "name": "mariekex",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lager",
+            "name": "Kexlager"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "skål",
+          "visp",
+          "portionsglas",
+          "kylskåp"
+        ],
+        "estimated_minutes": 249,
+        "family": "carlota de limón",
+        "fish": false,
+        "flavor_profile": [
+          "lime",
+          "krämig mjölk"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "refrigerated_assembly",
+        "primary_ingredient": "kondenserad mjölk",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Kall lagerdessert i liten mellanmålsportion. Kräver sötad kondenserad mjölk och osötad evaporerad mjölk som skilda produkter. Registerbindningen för kondenserad mjölk måste kontrolleras för sötad produkt. Utökad har färskost och mango som tydlig vardagsvariation; ingen gelatin eller bakning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "mariekexlager",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 3,
+            "id": "s1",
+            "ingredient_keys": [
+              "evaporerad mjölk|as_sold",
+              "kondenserad mjölk|as_sold",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den sötade kondenserade mjölken och den osötade evaporerade mjölken separat. Vispa båda med limejuice till jämn, lätt tjocknande kräm. Produkterna ska vara kylda och limejuicen ren juice, inte sötad dryck."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 4,
+            "id": "s2",
+            "ingredient_keys": [
+              "kondenserad mjölk|as_sold",
+              "mariekex|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Bryt kex så att de passar portionsglaset. Varva med krämen i flera tunna lager. Avsluta med kräm och tryck lätt så att alla kex får kontakt med vätskan."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "evaporerad mjölk|as_sold",
+              "kondenserad mjölk|as_sold",
+              "mariekex|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Täck portionsglaset och ställ direkt i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 240,
+            "id": "s4",
+            "ingredient_keys": [
+              "evaporerad mjölk|as_sold",
+              "kondenserad mjölk|as_sold",
+              "mariekex|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt portionsglaset stå i kylskåp minst fyra timmar vid cirka 4 °C så kexen mjuknar och krämen sätter sig."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "mariekex|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den lilla portionen direkt från kylen."
+          }
+        ],
+        "total_minutes": 249,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 240
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kondenserad mjölk",
+          "component": "kram",
+          "form": "as_sold",
+          "name": "kondenserad mjölk",
+          "product_requirements": [
+            "pack:intake_all_1a82e8073459"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "evaporerad mjölk",
+          "component": "kram",
+          "form": "as_sold",
+          "name": "evaporerad mjölk",
+          "product_requirements": [
+            "pack:intake_all_round2_3afe946be2f5"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "kram",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "mariekex",
+          "component": "lager",
+          "form": "as_sold",
+          "name": "mariekex",
+          "product_requirements": [
+            "pack:intake_all_expansion_49b8fbabad79"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg den sötade kondenserade mjölken och den osötade evaporerade mjölken separat. Vispa båda med limejuice till jämn, lätt tjocknande kräm. Produkterna ska vara kylda och limejuicen ren juice, inte sötad dryck.",
+        "Bryt kex så att de passar portionsglaset. Varva med krämen i flera tunna lager. Avsluta med kräm och tryck lätt så att alla kex får kontakt med vätskan.",
+        "Täck portionsglaset och ställ direkt i kylskåp.",
+        "Låt portionsglaset stå i kylskåp minst fyra timmar vid cirka 4 °C så kexen mjuknar och krämen sätter sig.",
+        "Servera hela den lilla portionen direkt från kylen."
+      ],
+      "name": "Carlota de limón – kalla kexlager med limekräm – enkel – med uppvägd osötad evaporerad mjölk",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 10,
+        "base_id": "smako-mexican-carlota-limon",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kondenserad mjölk|as_sold",
+                "name": "kondenserad mjölk",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "evaporerad mjölk|as_sold",
+                "name": "Osötad evaporerad mjölk, vägd i gram",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "färskost|as_sold",
+                "name": "färskost",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kram",
+            "name": "Limekräm"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mariekex|as_sold",
+                "name": "mariekex",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mango|raw_edible",
+                "name": "mango",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lager",
+            "name": "Kexlager"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "skål",
+          "visp",
+          "portionsglas",
+          "kylskåp"
+        ],
+        "estimated_minutes": 370,
+        "family": "carlota de limón",
+        "fish": false,
+        "flavor_profile": [
+          "lime",
+          "krämig mjölk"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "refrigerated_assembly",
+        "primary_ingredient": "kondenserad mjölk",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Kall lagerdessert i liten mellanmålsportion. Kräver sötad kondenserad mjölk och osötad evaporerad mjölk som skilda produkter. Registerbindningen för kondenserad mjölk måste kontrolleras för sötad produkt. Utökad har färskost och mango som tydlig vardagsvariation; ingen gelatin eller bakning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "mariekexlager",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "mango|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst mango i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "mango|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll alla bitar och all saft till desserten."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "evaporerad mjölk|as_sold",
+              "färskost|as_sold",
+              "kondenserad mjölk|as_sold",
+              "limejuice|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg den sötade kondenserade mjölken och den osötade evaporerade mjölken separat. Vispa båda med limejuice och färskost till jämn, lätt tjocknande kräm. Produkterna ska vara kylda och limejuicen ren juice, inte sötad dryck."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 4,
+            "id": "s4",
+            "ingredient_keys": [
+              "kondenserad mjölk|as_sold",
+              "mango|raw_edible",
+              "mariekex|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Bryt kex så att de passar portionsglaset. Varva med krämen i flera tunna lager och helt tinade mangobitar och all mangosaft mellan lagren. Avsluta med kräm och tryck lätt så att alla kex får kontakt med vätskan."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "evaporerad mjölk|as_sold",
+              "kondenserad mjölk|as_sold",
+              "mariekex|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Täck portionsglaset och ställ direkt i kylskåp."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 240,
+            "id": "s6",
+            "ingredient_keys": [
+              "evaporerad mjölk|as_sold",
+              "kondenserad mjölk|as_sold",
+              "mariekex|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt portionsglaset stå i kylskåp minst fyra timmar vid cirka 4 °C så kexen mjuknar och krämen sätter sig."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "mariekex|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den lilla portionen direkt från kylen."
+          }
+        ],
+        "total_minutes": 370,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 360
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kondenserad mjölk",
+          "component": "kram",
+          "form": "as_sold",
+          "name": "kondenserad mjölk",
+          "product_requirements": [
+            "pack:intake_all_1a82e8073459"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "evaporerad mjölk",
+          "component": "kram",
+          "form": "as_sold",
+          "name": "evaporerad mjölk",
+          "product_requirements": [
+            "pack:intake_all_round2_3afe946be2f5"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "kram",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "färskost",
+          "component": "kram",
+          "form": "as_sold",
+          "name": "färskost",
+          "product_requirements": [
+            "pack:intake_all_536538040095"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mariekex",
+          "component": "lager",
+          "form": "as_sold",
+          "name": "mariekex",
+          "product_requirements": [
+            "pack:intake_all_expansion_49b8fbabad79"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mango",
+          "component": "lager",
+          "form": "raw_edible",
+          "name": "mango",
+          "product_requirements": [
+            "pack:intake_all_d51e7b07e8a0"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst mango i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll alla bitar och all saft till desserten.",
+        "Väg den sötade kondenserade mjölken och den osötade evaporerade mjölken separat. Vispa båda med limejuice och färskost till jämn, lätt tjocknande kräm. Produkterna ska vara kylda och limejuicen ren juice, inte sötad dryck.",
+        "Bryt kex så att de passar portionsglaset. Varva med krämen i flera tunna lager och helt tinade mangobitar och all mangosaft mellan lagren. Avsluta med kräm och tryck lätt så att alla kex får kontakt med vätskan.",
+        "Täck portionsglaset och ställ direkt i kylskåp.",
+        "Låt portionsglaset stå i kylskåp minst fyra timmar vid cirka 4 °C så kexen mjuknar och krämen sätter sig.",
+        "Servera hela den lilla portionen direkt från kylen."
+      ],
+      "name": "Carlota de limón – kalla kexlager med limekräm – utökad – med uppvägd osötad evaporerad mjölk",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 44,
+        "base_id": "smako-swedish-blodpalt",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötblod|as_sold",
+                "name": "Nötblod",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rågmjöl|dry",
+                "name": "Rågmjöl",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rimmat fläsk|raw_edible",
+                "name": "Rimmat fläsk",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              }
+            ],
+            "id": "palt",
+            "name": "Blodpalt med fläskfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lingon|as_sold",
+                "name": "Lingon",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lingon",
+            "name": "Varma lingon"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "stor gryta",
+          "rivjärn",
+          "ren kökshandduk",
+          "termometer",
+          "hålslev"
+        ],
+        "estimated_minutes": 821,
+        "family": "Blodpalt",
+        "fish": false,
+        "flavor_profile": [
+          "blod",
+          "råg",
+          "rimmat fläsk"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "nötblod",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Potatisblodpalt som hemmaanpassning inom nordsvensk blodpalttradition; det finns även varianter utan potatis och med andra mjölslag. Blodets kvalitet, degens bindning och koktid måste provlagas. Inget blod från slakt utan livsmedelskontroll får användas. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "varma lingon",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "nötblod|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Flytta förpackningen med fryst nötblod till ett läckagesäkert kärl i kylskåpet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "nötblod|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tina nötblodet helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng vid behov. Håll det kallt och använd inom förpackningens anvisade tid; det ska inte användas rått."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mät upp det helt tinade kalla nötblodet i ml och ställ tillbaka det i kylen. Tärna det rimmade fläsket smått. Skala potatisen, väg den angivna råa ätliga mängden och finriv. Pressa ur lös vätska genom en ren handduk till en skål."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt potatisvätskan stå orörd två minuter så stärkelsen sjunker."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll försiktigt bort den fria potatisvätskan men skrapa tillbaka all sedimenterad stärkelse till potatisen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Spara en tiondel av vetemjölet till formning. Blanda blod, potatis, återvunnen stärkelse, rågmjöl, resten av vetemjölet och hälften av saltet till en fast kladdig deg. Smaka inte på rå deg."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rågmjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila kallt tio minuter så rågmjölet sväller."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 15,
+            "id": "s8",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rimmat fläsk|raw_edible",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "4000 ml",
+                4000.0
+              ]
+            ],
+            "text": "Koka upp 4000 ml vatten med resten av saltet i en stor gryta. Mjöla händer och arbetsyta med det sparade mjölet. Dela degen i tio delar, platta ut och lägg fläsk i mitten. Förslut väl och forma runda paltar högst cirka 7 cm stora."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg paltarna försiktigt i det sjudande vattnet och lossa dem från botten med hålslev."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 45,
+            "id": "s10",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rimmat fläsk|raw_edible",
+              "rågmjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud paltarna försiktigt cirka 45 minuter. De ska ligga fritt i en stor gryta eller två grytor utan att klämmas ihop."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rimmat fläsk|raw_edible",
+              "rågmjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera minst 75 °C mitt i en palt, även i fläskfyllningen. Degens mitt ska sakna rå mjölrand; fortsätt sjuda om det behövs."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 4,
+            "id": "s12",
+            "ingredient_keys": [
+              "lingon|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Värm de uppvägda frysta lingonen med 30 ml vatten och låt koka minst en minut eller längre enligt förpackningen. Mosa lätt; de serveras osötade i detta recept."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 2,
+            "id": "s13",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lyft upp paltarna, låt rinna av och fördela alla tio över fyra portioner. Servera med lingon och de angivna extra tillbehören. Allt eventuellt löksmör och all lingonvätska serveras. Kokvattnet används inte."
+          }
+        ],
+        "total_minutes": 821,
+        "unmeasured_processes": [
+          {
+            "description": "Rå potatis pressas och fri vätska hälls bort medan sedimenterad stärkelse återförs. Kvarhållen vätska/näring har inget uppmätt utbyte.",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s5"
+          },
+          {
+            "description": "Palt lyfts ur saltat kokvatten. Kvarhållen mängd salt och näring är okänd; inget kokutbyte antas.",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "nötblod|as_sold",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s13"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 777
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötblod",
+          "component": "palt",
+          "form": "as_sold",
+          "name": "nötblod",
+          "product_requirements": [
+            "pack:intake_all_round2_24501b8ebdf5"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "palt",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rågmjöl",
+          "component": "palt",
+          "form": "dry",
+          "name": "rågmjöl",
+          "product_requirements": [
+            "pack:intake_all_ba843df2ea2c"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "palt",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rimmat fläsk",
+          "component": "palt",
+          "form": "raw_edible",
+          "name": "rimmat fläsk",
+          "product_requirements": [
+            "pack:intake_all_9215891a1827"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "palt",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lingon",
+          "component": "lingon",
+          "form": "as_sold",
+          "name": "lingon",
+          "product_requirements": [
+            "pack:intake_all_af34ffffedcc"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Flytta förpackningen med fryst nötblod till ett läckagesäkert kärl i kylskåpet.",
+        "Tina nötblodet helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng vid behov. Håll det kallt och använd inom förpackningens anvisade tid; det ska inte användas rått.",
+        "Mät upp det helt tinade kalla nötblodet i ml och ställ tillbaka det i kylen. Tärna det rimmade fläsket smått. Skala potatisen, väg den angivna råa ätliga mängden och finriv. Pressa ur lös vätska genom en ren handduk till en skål.",
+        "Låt potatisvätskan stå orörd två minuter så stärkelsen sjunker.",
+        "Häll försiktigt bort den fria potatisvätskan men skrapa tillbaka all sedimenterad stärkelse till potatisen.",
+        "Spara en tiondel av vetemjölet till formning. Blanda blod, potatis, återvunnen stärkelse, rågmjöl, resten av vetemjölet och hälften av saltet till en fast kladdig deg. Smaka inte på rå deg.",
+        "Låt degen vila kallt tio minuter så rågmjölet sväller.",
+        "Koka upp 4000 ml vatten med resten av saltet i en stor gryta. Mjöla händer och arbetsyta med det sparade mjölet. Dela degen i tio delar, platta ut och lägg fläsk i mitten. Förslut väl och forma runda paltar högst cirka 7 cm stora.",
+        "Lägg paltarna försiktigt i det sjudande vattnet och lossa dem från botten med hålslev.",
+        "Sjud paltarna försiktigt cirka 45 minuter. De ska ligga fritt i en stor gryta eller två grytor utan att klämmas ihop.",
+        "Kontrollera minst 75 °C mitt i en palt, även i fläskfyllningen. Degens mitt ska sakna rå mjölrand; fortsätt sjuda om det behövs.",
+        "Värm de uppvägda frysta lingonen med 30 ml vatten och låt koka minst en minut eller längre enligt förpackningen. Mosa lätt; de serveras osötade i detta recept.",
+        "Lyft upp paltarna, låt rinna av och fördela alla tio över fyra portioner. Servera med lingon och de angivna extra tillbehören. Allt eventuellt löksmör och all lingonvätska serveras. Kokvattnet används inte."
+      ],
+      "name": "Blodpalt med fläsk och lingon – blod- och potatispalt med fläsk",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 56,
+        "base_id": "smako-swedish-blodpalt",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötblod|as_sold",
+                "name": "Nötblod",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rågmjöl|dry",
+                "name": "Rågmjöl",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rimmat fläsk|raw_edible",
+                "name": "Rimmat fläsk",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              }
+            ],
+            "id": "palt",
+            "name": "Blodpalt med fläskfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lingon|as_sold",
+                "name": "Lingon",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lingon",
+            "name": "Varma lingon"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "Kryddpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "loksmor",
+            "name": "Brynt löksmör"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "stor gryta",
+          "rivjärn",
+          "ren kökshandduk",
+          "termometer",
+          "hålslev"
+        ],
+        "estimated_minutes": 833,
+        "family": "Blodpalt",
+        "fish": false,
+        "flavor_profile": [
+          "blod",
+          "råg",
+          "rimmat fläsk"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "nötblod",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Potatisblodpalt som hemmaanpassning inom nordsvensk blodpalttradition; det finns även varianter utan potatis och med andra mjölslag. Blodets kvalitet, degens bindning och koktid måste provlagas. Inget blod från slakt utan livsmedelskontroll får användas. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "varma lingon",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "nötblod|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Flytta förpackningen med fryst nötblod till ett läckagesäkert kärl i kylskåpet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "nötblod|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tina nötblodet helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng vid behov. Håll det kallt och använd inom förpackningens anvisade tid; det ska inte användas rått."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mät upp det helt tinade kalla nötblodet i ml och ställ tillbaka det i kylen. Tärna det rimmade fläsket smått. Skala potatisen, väg den angivna råa ätliga mängden och finriv. Pressa ur lös vätska genom en ren handduk till en skål."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt potatisvätskan stå orörd två minuter så stärkelsen sjunker."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll försiktigt bort den fria potatisvätskan men skrapa tillbaka all sedimenterad stärkelse till potatisen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Spara en tiondel av vetemjölet till formning. Blanda blod, potatis, återvunnen stärkelse, rågmjöl, resten av vetemjölet och hälften av saltet till en fast kladdig deg. Smaka inte på rå deg."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rågmjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila kallt tio minuter så rågmjölet sväller."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 15,
+            "id": "s8",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rimmat fläsk|raw_edible",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "4000 ml",
+                4000.0
+              ]
+            ],
+            "text": "Koka upp 4000 ml vatten med resten av saltet i en stor gryta. Mjöla händer och arbetsyta med det sparade mjölet. Dela degen i tio delar, platta ut och lägg fläsk i mitten. Förslut väl och forma runda paltar högst cirka 7 cm stora."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg paltarna försiktigt i det sjudande vattnet och lossa dem från botten med hålslev."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 45,
+            "id": "s10",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rimmat fläsk|raw_edible",
+              "rågmjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud paltarna försiktigt cirka 45 minuter. De ska ligga fritt i en stor gryta eller två grytor utan att klämmas ihop."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rimmat fläsk|raw_edible",
+              "rågmjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera minst 75 °C mitt i en palt, även i fläskfyllningen. Degens mitt ska sakna rå mjölrand; fortsätt sjuda om det behövs."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 4,
+            "id": "s12",
+            "ingredient_keys": [
+              "lingon|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Värm de uppvägda frysta lingonen med 30 ml vatten och låt koka minst en minut eller längre enligt förpackningen. Mosa lätt; de serveras osötade i detta recept."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 12,
+            "id": "s13",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kryddpeppar|dry",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hacka löken och stek den långsamt i smöret cirka tio minuter tills lök och smör är gyllene men inte brända. Rör ner kryddpepparn."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 2,
+            "id": "s14",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lyft upp paltarna, låt rinna av och fördela alla tio över fyra portioner. Servera med lingon och de angivna extra tillbehören. Allt eventuellt löksmör och all lingonvätska serveras. Kokvattnet används inte."
+          }
+        ],
+        "total_minutes": 833,
+        "unmeasured_processes": [
+          {
+            "description": "Rå potatis pressas och fri vätska hälls bort medan sedimenterad stärkelse återförs. Kvarhållen vätska/näring har inget uppmätt utbyte.",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s5"
+          },
+          {
+            "description": "Palt lyfts ur saltat kokvatten. Kvarhållen mängd salt och näring är okänd; inget kokutbyte antas.",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "nötblod|as_sold",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s14"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 777
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötblod",
+          "component": "palt",
+          "form": "as_sold",
+          "name": "nötblod",
+          "product_requirements": [
+            "pack:intake_all_round2_24501b8ebdf5"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "palt",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rågmjöl",
+          "component": "palt",
+          "form": "dry",
+          "name": "rågmjöl",
+          "product_requirements": [
+            "pack:intake_all_ba843df2ea2c"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "palt",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rimmat fläsk",
+          "component": "palt",
+          "form": "raw_edible",
+          "name": "rimmat fläsk",
+          "product_requirements": [
+            "pack:intake_all_9215891a1827"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "palt",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lingon",
+          "component": "lingon",
+          "form": "as_sold",
+          "name": "lingon",
+          "product_requirements": [
+            "pack:intake_all_af34ffffedcc"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "loksmor",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "loksmor",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "loksmor",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Flytta förpackningen med fryst nötblod till ett läckagesäkert kärl i kylskåpet.",
+        "Tina nötblodet helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng vid behov. Håll det kallt och använd inom förpackningens anvisade tid; det ska inte användas rått.",
+        "Mät upp det helt tinade kalla nötblodet i ml och ställ tillbaka det i kylen. Tärna det rimmade fläsket smått. Skala potatisen, väg den angivna råa ätliga mängden och finriv. Pressa ur lös vätska genom en ren handduk till en skål.",
+        "Låt potatisvätskan stå orörd två minuter så stärkelsen sjunker.",
+        "Häll försiktigt bort den fria potatisvätskan men skrapa tillbaka all sedimenterad stärkelse till potatisen.",
+        "Spara en tiondel av vetemjölet till formning. Blanda blod, potatis, återvunnen stärkelse, rågmjöl, resten av vetemjölet och hälften av saltet till en fast kladdig deg. Smaka inte på rå deg.",
+        "Låt degen vila kallt tio minuter så rågmjölet sväller.",
+        "Koka upp 4000 ml vatten med resten av saltet i en stor gryta. Mjöla händer och arbetsyta med det sparade mjölet. Dela degen i tio delar, platta ut och lägg fläsk i mitten. Förslut väl och forma runda paltar högst cirka 7 cm stora.",
+        "Lägg paltarna försiktigt i det sjudande vattnet och lossa dem från botten med hålslev.",
+        "Sjud paltarna försiktigt cirka 45 minuter. De ska ligga fritt i en stor gryta eller två grytor utan att klämmas ihop.",
+        "Kontrollera minst 75 °C mitt i en palt, även i fläskfyllningen. Degens mitt ska sakna rå mjölrand; fortsätt sjuda om det behövs.",
+        "Värm de uppvägda frysta lingonen med 30 ml vatten och låt koka minst en minut eller längre enligt förpackningen. Mosa lätt; de serveras osötade i detta recept.",
+        "Hacka löken och stek den långsamt i smöret cirka tio minuter tills lök och smör är gyllene men inte brända. Rör ner kryddpepparn.",
+        "Lyft upp paltarna, låt rinna av och fördela alla tio över fyra portioner. Servera med lingon och de angivna extra tillbehören. Allt eventuellt löksmör och all lingonvätska serveras. Kokvattnet används inte."
+      ],
+      "name": "Blodpalt med fläsk och lingon – med brynt löksmör",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 62,
+        "base_id": "smako-swedish-blodpalt",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötblod|as_sold",
+                "name": "Nötblod",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rågmjöl|dry",
+                "name": "Rågmjöl",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rimmat fläsk|raw_edible",
+                "name": "Rimmat fläsk",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              }
+            ],
+            "id": "palt",
+            "name": "Blodpalt med fläskfyllning"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lingon|as_sold",
+                "name": "Lingon",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lingon",
+            "name": "Varma lingon"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "Kryddpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "loksmor",
+            "name": "Brynt löksmör"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "Vitkål",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "Äpple",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "Äppelcidervinäger",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Kål och äpple"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "stor gryta",
+          "rivjärn",
+          "ren kökshandduk",
+          "termometer",
+          "hålslev"
+        ],
+        "estimated_minutes": 839,
+        "family": "Blodpalt",
+        "fish": false,
+        "flavor_profile": [
+          "blod",
+          "råg",
+          "rimmat fläsk"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "nötblod",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Potatisblodpalt som hemmaanpassning inom nordsvensk blodpalttradition; det finns även varianter utan potatis och med andra mjölslag. Blodets kvalitet, degens bindning och koktid måste provlagas. Inget blod från slakt utan livsmedelskontroll får användas. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "varma lingon",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "nötblod|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Flytta förpackningen med fryst nötblod till ett läckagesäkert kärl i kylskåpet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 720,
+            "id": "s2",
+            "ingredient_keys": [
+              "nötblod|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tina nötblodet helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng vid behov. Håll det kallt och använd inom förpackningens anvisade tid; det ska inte användas rått."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 10,
+            "id": "s3",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mät upp det helt tinade kalla nötblodet i ml och ställ tillbaka det i kylen. Tärna det rimmade fläsket smått. Skala potatisen, väg den angivna råa ätliga mängden och finriv. Pressa ur lös vätska genom en ren handduk till en skål."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt potatisvätskan stå orörd två minuter så stärkelsen sjunker."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Häll försiktigt bort den fria potatisvätskan men skrapa tillbaka all sedimenterad stärkelse till potatisen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Spara en tiondel av vetemjölet till formning. Blanda blod, potatis, återvunnen stärkelse, rågmjöl, resten av vetemjölet och hälften av saltet till en fast kladdig deg. Smaka inte på rå deg."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rågmjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila kallt tio minuter så rågmjölet sväller."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 15,
+            "id": "s8",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rimmat fläsk|raw_edible",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "4000 ml",
+                4000.0
+              ]
+            ],
+            "text": "Koka upp 4000 ml vatten med resten av saltet i en stor gryta. Mjöla händer och arbetsyta med det sparade mjölet. Dela degen i tio delar, platta ut och lägg fläsk i mitten. Förslut väl och forma runda paltar högst cirka 7 cm stora."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg paltarna försiktigt i det sjudande vattnet och lossa dem från botten med hålslev."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 45,
+            "id": "s10",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rimmat fläsk|raw_edible",
+              "rågmjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud paltarna försiktigt cirka 45 minuter. De ska ligga fritt i en stor gryta eller två grytor utan att klämmas ihop."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "rimmat fläsk|raw_edible",
+              "rågmjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Kontrollera minst 75 °C mitt i en palt, även i fläskfyllningen. Degens mitt ska sakna rå mjölrand; fortsätt sjuda om det behövs."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 4,
+            "id": "s12",
+            "ingredient_keys": [
+              "lingon|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ]
+            ],
+            "text": "Värm de uppvägda frysta lingonen med 30 ml vatten och låt koka minst en minut eller längre enligt förpackningen. Mosa lätt; de serveras osötade i detta recept."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 12,
+            "id": "s13",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "kryddpeppar|dry",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hacka löken och stek den långsamt i smöret cirka tio minuter tills lök och smör är gyllene men inte brända. Rör ner kryddpepparn."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 6,
+            "id": "s14",
+            "ingredient_keys": [
+              "vitkål|raw_edible",
+              "äppelcidervinäger|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ansa kålen och kärna ur äpplet, väg sedan de råa ätliga mängderna. Strimla och vänd med all vinäger. Servera även saften."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 2,
+            "id": "s15",
+            "ingredient_keys": [
+              "nötblod|as_sold",
+              "potatis|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lyft upp paltarna, låt rinna av och fördela alla tio över fyra portioner. Servera med lingon och de angivna extra tillbehören. Allt eventuellt löksmör och all lingonvätska serveras. Kokvattnet används inte."
+          }
+        ],
+        "total_minutes": 839,
+        "unmeasured_processes": [
+          {
+            "description": "Rå potatis pressas och fri vätska hälls bort medan sedimenterad stärkelse återförs. Kvarhållen vätska/näring har inget uppmätt utbyte.",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "operation": "drain_before_cooking",
+            "step_id": "s5"
+          },
+          {
+            "description": "Palt lyfts ur saltat kokvatten. Kvarhållen mängd salt och näring är okänd; inget kokutbyte antas.",
+            "ingredient_keys": [
+              "potatis|raw_edible",
+              "nötblod|as_sold",
+              "salt|as_sold"
+            ],
+            "operation": "drain_after_cooking",
+            "step_id": "s15"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 777
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötblod",
+          "component": "palt",
+          "form": "as_sold",
+          "name": "nötblod",
+          "product_requirements": [
+            "pack:intake_all_round2_24501b8ebdf5"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "palt",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rågmjöl",
+          "component": "palt",
+          "form": "dry",
+          "name": "rågmjöl",
+          "product_requirements": [
+            "pack:intake_all_ba843df2ea2c"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "palt",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rimmat fläsk",
+          "component": "palt",
+          "form": "raw_edible",
+          "name": "rimmat fläsk",
+          "product_requirements": [
+            "pack:intake_all_9215891a1827"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "palt",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lingon",
+          "component": "lingon",
+          "form": "as_sold",
+          "name": "lingon",
+          "product_requirements": [
+            "pack:intake_all_af34ffffedcc"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "loksmor",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "loksmor",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "loksmor",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Flytta förpackningen med fryst nötblod till ett läckagesäkert kärl i kylskåpet.",
+        "Tina nötblodet helt i kylskåp enligt förpackningen. Planera tolv timmar och förläng vid behov. Håll det kallt och använd inom förpackningens anvisade tid; det ska inte användas rått.",
+        "Mät upp det helt tinade kalla nötblodet i ml och ställ tillbaka det i kylen. Tärna det rimmade fläsket smått. Skala potatisen, väg den angivna råa ätliga mängden och finriv. Pressa ur lös vätska genom en ren handduk till en skål.",
+        "Låt potatisvätskan stå orörd två minuter så stärkelsen sjunker.",
+        "Häll försiktigt bort den fria potatisvätskan men skrapa tillbaka all sedimenterad stärkelse till potatisen.",
+        "Spara en tiondel av vetemjölet till formning. Blanda blod, potatis, återvunnen stärkelse, rågmjöl, resten av vetemjölet och hälften av saltet till en fast kladdig deg. Smaka inte på rå deg.",
+        "Låt degen vila kallt tio minuter så rågmjölet sväller.",
+        "Koka upp 4000 ml vatten med resten av saltet i en stor gryta. Mjöla händer och arbetsyta med det sparade mjölet. Dela degen i tio delar, platta ut och lägg fläsk i mitten. Förslut väl och forma runda paltar högst cirka 7 cm stora.",
+        "Lägg paltarna försiktigt i det sjudande vattnet och lossa dem från botten med hålslev.",
+        "Sjud paltarna försiktigt cirka 45 minuter. De ska ligga fritt i en stor gryta eller två grytor utan att klämmas ihop.",
+        "Kontrollera minst 75 °C mitt i en palt, även i fläskfyllningen. Degens mitt ska sakna rå mjölrand; fortsätt sjuda om det behövs.",
+        "Värm de uppvägda frysta lingonen med 30 ml vatten och låt koka minst en minut eller längre enligt förpackningen. Mosa lätt; de serveras osötade i detta recept.",
+        "Hacka löken och stek den långsamt i smöret cirka tio minuter tills lök och smör är gyllene men inte brända. Rör ner kryddpepparn.",
+        "Ansa kålen och kärna ur äpplet, väg sedan de råa ätliga mängderna. Strimla och vänd med all vinäger. Servera även saften.",
+        "Lyft upp paltarna, låt rinna av och fördela alla tio över fyra portioner. Servera med lingon och de angivna extra tillbehören. Allt eventuellt löksmör och all lingonvätska serveras. Kokvattnet används inte."
+      ],
+      "name": "Blodpalt med fläsk och lingon – med äppel- och kålsallad",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

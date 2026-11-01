@@ -1,0 +1,3250 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage18",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 70,
+        "base_id": "smako-italian-fegato-veneziana-flasklever",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ungnötslever|as_sold",
+                "name": "Rå ungnötslever, vägd före putsning",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "rödvinsvinäger",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "persilja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "lever",
+            "name": "Lever med mjuk lök"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "polenta|dry",
+                "name": "polenta",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "polenta",
+            "name": "Mjuk polenta"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "stekpanna",
+          "gryta",
+          "visp",
+          "termometer"
+        ],
+        "estimated_minutes": 70,
+        "family": "fegato alla veneziana",
+        "fish": false,
+        "flavor_profile": [
+          "lök",
+          "vinägersyra",
+          "smör"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "ungnötslever",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Anpassning av den venetianska lök-leverrätten: ungnötslever i stället för kalvlever. Levern serveras genomlagad; säkerhetskedjan har därför längre slutvärmning än klassisk kalvlever. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "polenta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 22,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "salt|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala och skiva gul lök tunt. Låt mjukna med hälften av leverkomponentens smör och dess salt i en bred panna på medellåg värme, utan att bryna hårt. Rör ofta; löken ska bli mjuk och söt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "polenta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Koka upp 1000 ml vatten med polentans salt. Vispa ner polenta i en tunn stråle. Sänk till lägsta värme."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 25,
+            "id": "s3",
+            "ingredient_keys": [
+              "polenta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud polentan försiktigt i cirka 25 minuter eller längre enligt förpackningen. Rör regelbundet och skrapa bottnen; tiden räknas som aktiv tillsyn."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 9,
+            "id": "s4",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "smör|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg leverbiten före putsning. Putsa ungnötslevern och skär i tunna strimlor på separat skärbräda. För över den mjuka löken till en skål. Hetta upp resten av leverkomponentens smör och stek levern i två omgångar tills den fått färg runtom."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 8,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "persilja|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Lägg tillbaka lök och lever. Häll i rödvinsvinäger och 100 ml vatten. Sjud tills levern är genomlagad; kontrollera minst 75 °C i de tjockaste bitarna och håll dem vid minst den temperaturen ytterligare 3 minuter. Inga rosa eller blodiga kärnor ska återstå. Låt den frysta hackade persiljan koka med minst tre minuter eller längre enligt förpackningen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "persilja|raw_edible",
+              "polenta|dry",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner svartpeppar; persiljan är redan genomkokt i skyn. Kontrollera att polentan är mjuk och rör den slät. Fördela polenta, lever och all löksky mellan fyra tallrikar. Servera allt smör, all sky och eventuell salladsdressing."
+          }
+        ],
+        "total_minutes": 70,
+        "unmeasured_processes": [
+          {
+            "description": "Grova hinnor och kärl putsas bort från inköpt levervikt; den kvarvarande råa och färdiga vikten är inte uppmätt.",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ungnötslever",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "ungnötslever",
+          "product_requirements": [
+            "pack:intake_all_round2_20a3c4ecc9e6"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "lever",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "lever",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "lever",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "polenta",
+          "component": "polenta",
+          "form": "dry",
+          "name": "polenta",
+          "product_requirements": [
+            "pack:intake_all_42edb8fb8420"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala och skiva gul lök tunt. Låt mjukna med hälften av leverkomponentens smör och dess salt i en bred panna på medellåg värme, utan att bryna hårt. Rör ofta; löken ska bli mjuk och söt.",
+        "Koka upp 1000 ml vatten med polentans salt. Vispa ner polenta i en tunn stråle. Sänk till lägsta värme.",
+        "Sjud polentan försiktigt i cirka 25 minuter eller längre enligt förpackningen. Rör regelbundet och skrapa bottnen; tiden räknas som aktiv tillsyn.",
+        "Väg leverbiten före putsning. Putsa ungnötslevern och skär i tunna strimlor på separat skärbräda. För över den mjuka löken till en skål. Hetta upp resten av leverkomponentens smör och stek levern i två omgångar tills den fått färg runtom.",
+        "Lägg tillbaka lök och lever. Häll i rödvinsvinäger och 100 ml vatten. Sjud tills levern är genomlagad; kontrollera minst 75 °C i de tjockaste bitarna och håll dem vid minst den temperaturen ytterligare 3 minuter. Inga rosa eller blodiga kärnor ska återstå. Låt den frysta hackade persiljan koka med minst tre minuter eller längre enligt förpackningen.",
+        "Vänd ner svartpeppar; persiljan är redan genomkokt i skyn. Kontrollera att polentan är mjuk och rör den slät. Fördela polenta, lever och all löksky mellan fyra tallrikar. Servera allt smör, all sky och eventuell salladsdressing."
+      ],
+      "name": "Fegato alla veneziana med ungnötslever – enkel",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 80,
+        "base_id": "smako-italian-fegato-veneziana-flasklever",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ungnötslever|as_sold",
+                "name": "Rå ungnötslever, vägd före putsning",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "rödvinsvinäger",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "persilja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "lever",
+            "name": "Lever med mjuk lök"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "polenta|dry",
+                "name": "polenta",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "polenta",
+            "name": "Mjuk polenta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "spenat",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "spenat",
+            "name": "Vitlöksspenat"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "stekpanna",
+          "gryta",
+          "visp",
+          "termometer"
+        ],
+        "estimated_minutes": 80,
+        "family": "fegato alla veneziana",
+        "fish": false,
+        "flavor_profile": [
+          "lök",
+          "vinägersyra",
+          "smör"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "ungnötslever",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Anpassning av den venetianska lök-leverrätten: ungnötslever i stället för kalvlever. Levern serveras genomlagad; säkerhetskedjan har därför längre slutvärmning än klassisk kalvlever. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "polenta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 22,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "salt|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala och skiva gul lök tunt. Låt mjukna med hälften av leverkomponentens smör och dess salt i en bred panna på medellåg värme, utan att bryna hårt. Rör ofta; löken ska bli mjuk och söt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "polenta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Koka upp 700 ml vatten och mjölken med polentans salt. Vispa ner polenta i en tunn stråle. Sänk till lägsta värme."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 25,
+            "id": "s3",
+            "ingredient_keys": [
+              "polenta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud polentan försiktigt i cirka 25 minuter eller längre enligt förpackningen. Rör regelbundet och skrapa bottnen; tiden räknas som aktiv tillsyn."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "smör|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "60 ml",
+                60.0
+              ]
+            ],
+            "text": "Riv vitlök och fräs den i spenatkomponentens smör utan att bränna. Tillsätt fryst spenat och 60 ml vatten; rör tills spenaten är helt genomvarm enligt paketets anvisning och ingen lös vätska återstår. Rör i citronjuice och håll varmt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 9,
+            "id": "s5",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "smör|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg leverbiten före putsning. Putsa ungnötslevern och skär i tunna strimlor på separat skärbräda. För över den mjuka löken till en skål. Hetta upp resten av leverkomponentens smör och stek levern i två omgångar tills den fått färg runtom."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 8,
+            "id": "s6",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "persilja|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Lägg tillbaka lök och lever. Häll i rödvinsvinäger och 100 ml vatten. Sjud tills levern är genomlagad; kontrollera minst 75 °C i de tjockaste bitarna och håll dem vid minst den temperaturen ytterligare 3 minuter. Inga rosa eller blodiga kärnor ska återstå. Låt den frysta hackade persiljan koka med minst tre minuter eller längre enligt förpackningen."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 3,
+            "id": "s7",
+            "ingredient_keys": [
+              "persilja|raw_edible",
+              "polenta|dry",
+              "spenat|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner svartpeppar; persiljan är redan genomkokt i skyn. Kontrollera att polentan är mjuk och rör den slät. Fördela polenta, lever och all löksky mellan fyra tallrikar och lägg spenaten intill. Servera allt smör, all sky och eventuell salladsdressing."
+          }
+        ],
+        "total_minutes": 80,
+        "unmeasured_processes": [
+          {
+            "description": "Grova hinnor och kärl putsas bort från inköpt levervikt; den kvarvarande råa och färdiga vikten är inte uppmätt.",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ungnötslever",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "ungnötslever",
+          "product_requirements": [
+            "pack:intake_all_round2_20a3c4ecc9e6"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "lever",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "lever",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "lever",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "polenta",
+          "component": "polenta",
+          "form": "dry",
+          "name": "polenta",
+          "product_requirements": [
+            "pack:intake_all_42edb8fb8420"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "polenta",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "spenat",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "spenat",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "spenat",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Skala och skiva gul lök tunt. Låt mjukna med hälften av leverkomponentens smör och dess salt i en bred panna på medellåg värme, utan att bryna hårt. Rör ofta; löken ska bli mjuk och söt.",
+        "Koka upp 700 ml vatten och mjölken med polentans salt. Vispa ner polenta i en tunn stråle. Sänk till lägsta värme.",
+        "Sjud polentan försiktigt i cirka 25 minuter eller längre enligt förpackningen. Rör regelbundet och skrapa bottnen; tiden räknas som aktiv tillsyn.",
+        "Riv vitlök och fräs den i spenatkomponentens smör utan att bränna. Tillsätt fryst spenat och 60 ml vatten; rör tills spenaten är helt genomvarm enligt paketets anvisning och ingen lös vätska återstår. Rör i citronjuice och håll varmt.",
+        "Väg leverbiten före putsning. Putsa ungnötslevern och skär i tunna strimlor på separat skärbräda. För över den mjuka löken till en skål. Hetta upp resten av leverkomponentens smör och stek levern i två omgångar tills den fått färg runtom.",
+        "Lägg tillbaka lök och lever. Häll i rödvinsvinäger och 100 ml vatten. Sjud tills levern är genomlagad; kontrollera minst 75 °C i de tjockaste bitarna och håll dem vid minst den temperaturen ytterligare 3 minuter. Inga rosa eller blodiga kärnor ska återstå. Låt den frysta hackade persiljan koka med minst tre minuter eller längre enligt förpackningen.",
+        "Vänd ner svartpeppar; persiljan är redan genomkokt i skyn. Kontrollera att polentan är mjuk och rör den slät. Fördela polenta, lever och all löksky mellan fyra tallrikar och lägg spenaten intill. Servera allt smör, all sky och eventuell salladsdressing."
+      ],
+      "name": "Fegato alla veneziana med ungnötslever – standard",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 86,
+        "base_id": "smako-italian-fegato-veneziana-flasklever",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ungnötslever|as_sold",
+                "name": "Rå ungnötslever, vägd före putsning",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "rödvinsvinäger",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "persilja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "lever",
+            "name": "Lever med mjuk lök"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "polenta|dry",
+                "name": "polenta",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "polenta",
+            "name": "Mjuk polenta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "spenat",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              }
+            ],
+            "id": "spenat",
+            "name": "Vitlöksspenat"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fänkål|raw_edible",
+                "name": "fänkål",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "tomat",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "citronjuice",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Fänkåls- och tomatsallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "stekpanna",
+          "gryta",
+          "visp",
+          "termometer"
+        ],
+        "estimated_minutes": 86,
+        "family": "fegato alla veneziana",
+        "fish": false,
+        "flavor_profile": [
+          "lök",
+          "vinägersyra",
+          "smör"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "ungnötslever",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Anpassning av den venetianska lök-leverrätten: ungnötslever i stället för kalvlever. Levern serveras genomlagad; säkerhetskedjan har därför längre slutvärmning än klassisk kalvlever. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "polenta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 22,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "salt|as_sold",
+              "smör|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala och skiva gul lök tunt. Låt mjukna med hälften av leverkomponentens smör och dess salt i en bred panna på medellåg värme, utan att bryna hårt. Rör ofta; löken ska bli mjuk och söt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "polenta|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Koka upp 700 ml vatten och mjölken med polentans salt. Vispa ner polenta i en tunn stråle. Sänk till lägsta värme."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 25,
+            "id": "s3",
+            "ingredient_keys": [
+              "polenta|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud polentan försiktigt i cirka 25 minuter eller längre enligt förpackningen. Rör regelbundet och skrapa bottnen; tiden räknas som aktiv tillsyn."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 10,
+            "id": "s4",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "smör|as_sold",
+              "spenat|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "60 ml",
+                60.0
+              ]
+            ],
+            "text": "Riv vitlök och fräs den i spenatkomponentens smör utan att bränna. Tillsätt fryst spenat och 60 ml vatten; rör tills spenaten är helt genomvarm enligt paketets anvisning och ingen lös vätska återstår. Rör i citronjuice och håll varmt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "fänkål|raw_edible",
+              "rapsolja|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Strimla fänkål tunt och skär tomat i små klyftor. Vänd med salladens rapsolja och citronjuice. Ställ svalt medan levern steks."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 9,
+            "id": "s6",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "smör|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Väg leverbiten före putsning. Putsa ungnötslevern och skär i tunna strimlor på separat skärbräda. För över den mjuka löken till en skål. Hetta upp resten av leverkomponentens smör och stek levern i två omgångar tills den fått färg runtom."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 8,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "persilja|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Lägg tillbaka lök och lever. Häll i rödvinsvinäger och 100 ml vatten. Sjud tills levern är genomlagad; kontrollera minst 75 °C i de tjockaste bitarna och håll dem vid minst den temperaturen ytterligare 3 minuter. Inga rosa eller blodiga kärnor ska återstå. Låt den frysta hackade persiljan koka med minst tre minuter eller längre enligt förpackningen."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 3,
+            "id": "s8",
+            "ingredient_keys": [
+              "fänkål|raw_edible",
+              "persilja|raw_edible",
+              "polenta|dry",
+              "spenat|as_sold",
+              "svartpeppar|dry",
+              "tomat|raw_edible",
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd ner svartpeppar; persiljan är redan genomkokt i skyn. Kontrollera att polentan är mjuk och rör den slät. Fördela polenta, lever och all löksky mellan fyra tallrikar och lägg spenaten intill. Servera salladen vid sidan. Servera allt smör, all sky och eventuell salladsdressing."
+          }
+        ],
+        "total_minutes": 86,
+        "unmeasured_processes": [
+          {
+            "description": "Grova hinnor och kärl putsas bort från inköpt levervikt; den kvarvarande råa och färdiga vikten är inte uppmätt.",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ungnötslever",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "ungnötslever",
+          "product_requirements": [
+            "pack:intake_all_round2_20a3c4ecc9e6"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "lever",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "lever",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "lever",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "lever",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "polenta",
+          "component": "polenta",
+          "form": "dry",
+          "name": "polenta",
+          "product_requirements": [
+            "pack:intake_all_42edb8fb8420"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "polenta",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "spenat",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "spenat",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "spenat",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "fänkål",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "fänkål",
+          "product_requirements": [
+            "pack:intake_all_2503a71baee6"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Skala och skiva gul lök tunt. Låt mjukna med hälften av leverkomponentens smör och dess salt i en bred panna på medellåg värme, utan att bryna hårt. Rör ofta; löken ska bli mjuk och söt.",
+        "Koka upp 700 ml vatten och mjölken med polentans salt. Vispa ner polenta i en tunn stråle. Sänk till lägsta värme.",
+        "Sjud polentan försiktigt i cirka 25 minuter eller längre enligt förpackningen. Rör regelbundet och skrapa bottnen; tiden räknas som aktiv tillsyn.",
+        "Riv vitlök och fräs den i spenatkomponentens smör utan att bränna. Tillsätt fryst spenat och 60 ml vatten; rör tills spenaten är helt genomvarm enligt paketets anvisning och ingen lös vätska återstår. Rör i citronjuice och håll varmt.",
+        "Strimla fänkål tunt och skär tomat i små klyftor. Vänd med salladens rapsolja och citronjuice. Ställ svalt medan levern steks.",
+        "Väg leverbiten före putsning. Putsa ungnötslevern och skär i tunna strimlor på separat skärbräda. För över den mjuka löken till en skål. Hetta upp resten av leverkomponentens smör och stek levern i två omgångar tills den fått färg runtom.",
+        "Lägg tillbaka lök och lever. Häll i rödvinsvinäger och 100 ml vatten. Sjud tills levern är genomlagad; kontrollera minst 75 °C i de tjockaste bitarna och håll dem vid minst den temperaturen ytterligare 3 minuter. Inga rosa eller blodiga kärnor ska återstå. Låt den frysta hackade persiljan koka med minst tre minuter eller längre enligt förpackningen.",
+        "Vänd ner svartpeppar; persiljan är redan genomkokt i skyn. Kontrollera att polentan är mjuk och rör den slät. Fördela polenta, lever och all löksky mellan fyra tallrikar och lägg spenaten intill. Servera salladen vid sidan. Servera allt smör, all sky och eventuell salladsdressing."
+      ],
+      "name": "Fegato alla veneziana med ungnötslever – utökad",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-swedish-korvkaka",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ungnötslever|as_sold",
+                "name": "Rå ungnötslever, vägd före putsning",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "korngryn|dry",
+                "name": "Korngryn",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "Russin",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              }
+            ],
+            "id": "kaka",
+            "name": "Lever- och korngrynsmassa"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "kastrull",
+          "stekpanna",
+          "matberedare",
+          "ugn",
+          "form cirka 1.8 liter",
+          "termometer"
+        ],
+        "estimated_minutes": 160,
+        "family": "ugnsbakad lever-korngrynskaka",
+        "fish": false,
+        "flavor_profile": [
+          "lever",
+          "russin"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "ungnötslever",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel mild kryddning; utökad med äppel-kålsallad. Lever är uttrycklig huvudråvara och tillagas genom. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "lingon och eventuell råkost",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "420 ml",
+                420.0
+              ]
+            ],
+            "text": "Skölj korngrynen. Koka upp dem i en kastrull med 420 ml vatten och hälften av saltet. Sänk värmen och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 17,
+            "id": "s2",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud korngrynen under lock i 17 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör om och kontrollera vattnet. Tillsätt vid behov 100 ml så grynen inte bränner."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 18,
+            "id": "s4",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 18 minuter, eller längre tills korngrynen är mjuka. Allt kvarvarande vatten ska gå med i gröten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 15,
+            "id": "s5",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner mjölken. Låt småkoka under regelbunden omrörning cirka 15 minuter till en lös gröt med mjuka gryn. Täta omrörningar behövs för att mjölken inte ska fastna; detta är aktiv tid."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Bred gröten i en vid skål och sätt ugnen på 190 °C över-/undervärme."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 20,
+            "id": "s7",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt gröten svalna 20 minuter tills den är ljummen och inte börjar tillaga äggen när smeten blandas."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 12,
+            "id": "s8",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka löken och mjukstek i smöret. Väg ungnötslevern före putsning. Putsa levern från grova hinnor och finfördela den råa levern i matberedare med råa ägg knäckta och vägda utan skal, saltet som återstår, svartpeppar. Blanda ner lök, allt steksmör, russin och den ljumma gröten. Tvätta händer och rengör redskap noggrant efter rå lever."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Klä formen med bakplåtspapper, häll i hela massan och sätt in formen i ugnen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 50,
+            "id": "s10",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Baka kakan mitt i ugnen i cirka 50 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mät minst 75 °C i mitten. Om det är svalare, fortsätt grädda tills temperaturen nåtts. Kakan ska vara genomstannad utan rå levermassa."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 3,
+            "id": "s12",
+            "ingredient_keys": [
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan stå kvar i ugnen minst tre minuter efter att mitten nått 75 °C."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta ut formen och ställ på värmetåligt underlag."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 10,
+            "id": "s14",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan vila 10 minuter så att den går att skära utan att falla isär."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 3,
+            "id": "s15",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär den varma korvkakan i fyra portioner. All kaka och alla tillbehör ingår i fyra portioner."
+          }
+        ],
+        "total_minutes": 160,
+        "unmeasured_processes": [
+          {
+            "description": "Leverhinnor och kärl avlägsnas från bruttovikten. Kvarvarande ätlig vikt och näringsutbyte är inte uppmätta.",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s8"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 118
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ungnötslever",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "ungnötslever",
+          "product_requirements": [
+            "pack:intake_all_round2_20a3c4ecc9e6"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "korngryn",
+          "component": "kaka",
+          "form": "dry",
+          "name": "korngryn",
+          "product_requirements": [
+            "pack:intake_all_bf4fc44e6bb9"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "kaka",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "kaka",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "kaka",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj korngrynen. Koka upp dem i en kastrull med 420 ml vatten och hälften av saltet. Sänk värmen och lägg på lock.",
+        "Sjud korngrynen under lock i 17 minuter.",
+        "Rör om och kontrollera vattnet. Tillsätt vid behov 100 ml så grynen inte bränner.",
+        "Sjud ytterligare 18 minuter, eller längre tills korngrynen är mjuka. Allt kvarvarande vatten ska gå med i gröten.",
+        "Rör ner mjölken. Låt småkoka under regelbunden omrörning cirka 15 minuter till en lös gröt med mjuka gryn. Täta omrörningar behövs för att mjölken inte ska fastna; detta är aktiv tid.",
+        "Bred gröten i en vid skål och sätt ugnen på 190 °C över-/undervärme.",
+        "Låt gröten svalna 20 minuter tills den är ljummen och inte börjar tillaga äggen när smeten blandas.",
+        "Hacka löken och mjukstek i smöret. Väg ungnötslevern före putsning. Putsa levern från grova hinnor och finfördela den råa levern i matberedare med råa ägg knäckta och vägda utan skal, saltet som återstår, svartpeppar. Blanda ner lök, allt steksmör, russin och den ljumma gröten. Tvätta händer och rengör redskap noggrant efter rå lever.",
+        "Klä formen med bakplåtspapper, häll i hela massan och sätt in formen i ugnen.",
+        "Baka kakan mitt i ugnen i cirka 50 minuter.",
+        "Mät minst 75 °C i mitten. Om det är svalare, fortsätt grädda tills temperaturen nåtts. Kakan ska vara genomstannad utan rå levermassa.",
+        "Låt kakan stå kvar i ugnen minst tre minuter efter att mitten nått 75 °C.",
+        "Ta ut formen och ställ på värmetåligt underlag.",
+        "Låt kakan vila 10 minuter så att den går att skära utan att falla isär.",
+        "Skär den varma korvkakan i fyra portioner. All kaka och alla tillbehör ingår i fyra portioner."
+      ],
+      "name": "Korvkaka – lever- och korngrynskaka – enkel – med ungnötslever",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 47,
+        "base_id": "smako-swedish-korvkaka",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ungnötslever|as_sold",
+                "name": "Rå ungnötslever, vägd före putsning",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "korngryn|dry",
+                "name": "Korngryn",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "Russin",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mejram|dry",
+                "name": "Mejram",
+                "note": "",
+                "quantity": 1.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "Kryddpeppar",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              }
+            ],
+            "id": "kaka",
+            "name": "Lever- och korngrynsmassa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lingon|as_sold",
+                "name": "Lingon",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lingon",
+            "name": "Rårörda lingon"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "kastrull",
+          "stekpanna",
+          "matberedare",
+          "ugn",
+          "form cirka 1.8 liter",
+          "termometer"
+        ],
+        "estimated_minutes": 165,
+        "family": "ugnsbakad lever-korngrynskaka",
+        "fish": false,
+        "flavor_profile": [
+          "lever",
+          "russin"
+        ],
+        "ingredient_count": 11,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "ungnötslever",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel mild kryddning; utökad med äppel-kålsallad. Lever är uttrycklig huvudråvara och tillagas genom. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "lingon och eventuell råkost",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "420 ml",
+                420.0
+              ]
+            ],
+            "text": "Skölj korngrynen. Koka upp dem i en kastrull med 420 ml vatten och hälften av saltet. Sänk värmen och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 17,
+            "id": "s2",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud korngrynen under lock i 17 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör om och kontrollera vattnet. Tillsätt vid behov 100 ml så grynen inte bränner."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 18,
+            "id": "s4",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 18 minuter, eller längre tills korngrynen är mjuka. Allt kvarvarande vatten ska gå med i gröten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 15,
+            "id": "s5",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner mjölken. Låt småkoka under regelbunden omrörning cirka 15 minuter till en lös gröt med mjuka gryn. Täta omrörningar behövs för att mjölken inte ska fastna; detta är aktiv tid."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Bred gröten i en vid skål och sätt ugnen på 190 °C över-/undervärme."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 20,
+            "id": "s7",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt gröten svalna 20 minuter tills den är ljummen och inte börjar tillaga äggen när smeten blandas."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 12,
+            "id": "s8",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "kryddpeppar|dry",
+              "mejram|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka löken och mjukstek i smöret. Väg ungnötslevern före putsning. Putsa levern från grova hinnor och finfördela den råa levern i matberedare med råa ägg knäckta och vägda utan skal, saltet som återstår, svartpeppar, mejram och kryddpeppar. Blanda ner lök, allt steksmör, russin och den ljumma gröten. Tvätta händer och rengör redskap noggrant efter rå lever."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Klä formen med bakplåtspapper, häll i hela massan och sätt in formen i ugnen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 50,
+            "id": "s10",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "kryddpeppar|dry",
+              "mejram|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Baka kakan mitt i ugnen i cirka 50 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mät minst 75 °C i mitten. Om det är svalare, fortsätt grädda tills temperaturen nåtts. Kakan ska vara genomstannad utan rå levermassa."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 3,
+            "id": "s12",
+            "ingredient_keys": [
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan stå kvar i ugnen minst tre minuter efter att mitten nått 75 °C."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta ut formen och ställ på värmetåligt underlag."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 10,
+            "id": "s14",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "kryddpeppar|dry",
+              "mejram|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan vila 10 minuter så att den går att skära utan att falla isär."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 5,
+            "id": "s15",
+            "ingredient_keys": [
+              "lingon|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka de uppvägda frysta lingonen med sockret minst en minut eller längre enligt förpackningen, under omrörning. Mosa lätt; behåll all bärsaft och servera kompotten ljummen."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 3,
+            "id": "s16",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "kryddpeppar|dry",
+              "lingon|as_sold",
+              "mejram|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär den varma korvkakan i fyra portioner och fördela lingonen vid sidan. All kaka och alla tillbehör ingår i fyra portioner."
+          }
+        ],
+        "total_minutes": 165,
+        "unmeasured_processes": [
+          {
+            "description": "Leverhinnor och kärl avlägsnas från bruttovikten. Kvarvarande ätlig vikt och näringsutbyte är inte uppmätta.",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s8"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 118
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ungnötslever",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "ungnötslever",
+          "product_requirements": [
+            "pack:intake_all_round2_20a3c4ecc9e6"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "korngryn",
+          "component": "kaka",
+          "form": "dry",
+          "name": "korngryn",
+          "product_requirements": [
+            "pack:intake_all_bf4fc44e6bb9"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "kaka",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "kaka",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "kaka",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mejram",
+          "component": "kaka",
+          "form": "dry",
+          "name": "mejram",
+          "product_requirements": [
+            "pack:intake_all_round2_5b398ef6a541"
+          ],
+          "quantity": 1.5,
+          "quantity_max": 1.5,
+          "quantity_min": 1.5,
+          "quantity_step": 1.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "kaka",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lingon",
+          "component": "lingon",
+          "form": "as_sold",
+          "name": "lingon",
+          "product_requirements": [
+            "pack:intake_all_af34ffffedcc"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "lingon",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj korngrynen. Koka upp dem i en kastrull med 420 ml vatten och hälften av saltet. Sänk värmen och lägg på lock.",
+        "Sjud korngrynen under lock i 17 minuter.",
+        "Rör om och kontrollera vattnet. Tillsätt vid behov 100 ml så grynen inte bränner.",
+        "Sjud ytterligare 18 minuter, eller längre tills korngrynen är mjuka. Allt kvarvarande vatten ska gå med i gröten.",
+        "Rör ner mjölken. Låt småkoka under regelbunden omrörning cirka 15 minuter till en lös gröt med mjuka gryn. Täta omrörningar behövs för att mjölken inte ska fastna; detta är aktiv tid.",
+        "Bred gröten i en vid skål och sätt ugnen på 190 °C över-/undervärme.",
+        "Låt gröten svalna 20 minuter tills den är ljummen och inte börjar tillaga äggen när smeten blandas.",
+        "Hacka löken och mjukstek i smöret. Väg ungnötslevern före putsning. Putsa levern från grova hinnor och finfördela den råa levern i matberedare med råa ägg knäckta och vägda utan skal, saltet som återstår, svartpeppar, mejram och kryddpeppar. Blanda ner lök, allt steksmör, russin och den ljumma gröten. Tvätta händer och rengör redskap noggrant efter rå lever.",
+        "Klä formen med bakplåtspapper, häll i hela massan och sätt in formen i ugnen.",
+        "Baka kakan mitt i ugnen i cirka 50 minuter.",
+        "Mät minst 75 °C i mitten. Om det är svalare, fortsätt grädda tills temperaturen nåtts. Kakan ska vara genomstannad utan rå levermassa.",
+        "Låt kakan stå kvar i ugnen minst tre minuter efter att mitten nått 75 °C.",
+        "Ta ut formen och ställ på värmetåligt underlag.",
+        "Låt kakan vila 10 minuter så att den går att skära utan att falla isär.",
+        "Koka de uppvägda frysta lingonen med sockret minst en minut eller längre enligt förpackningen, under omrörning. Mosa lätt; behåll all bärsaft och servera kompotten ljummen.",
+        "Skär den varma korvkakan i fyra portioner och fördela lingonen vid sidan. All kaka och alla tillbehör ingår i fyra portioner."
+      ],
+      "name": "Korvkaka – lever- och korngrynskaka – standard – med ungnötslever",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 52,
+        "base_id": "smako-swedish-korvkaka",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ungnötslever|as_sold",
+                "name": "Rå ungnötslever, vägd före putsning",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "korngryn|dry",
+                "name": "Korngryn",
+                "note": "",
+                "quantity": 140.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "Russin",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mejram|dry",
+                "name": "Mejram",
+                "note": "",
+                "quantity": 1.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kryddpeppar|dry",
+                "name": "Kryddpeppar",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              }
+            ],
+            "id": "kaka",
+            "name": "Lever- och korngrynsmassa"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "lingon|as_sold",
+                "name": "Lingon",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              }
+            ],
+            "id": "lingon",
+            "name": "Rårörda lingon"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "Vitkål",
+                "note": "",
+                "quantity": 260.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "Äpple",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "Äppelcidervinäger",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Kål och äpple"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "kastrull",
+          "stekpanna",
+          "matberedare",
+          "ugn",
+          "form cirka 1.8 liter",
+          "termometer"
+        ],
+        "estimated_minutes": 170,
+        "family": "ugnsbakad lever-korngrynskaka",
+        "fish": false,
+        "flavor_profile": [
+          "lever",
+          "russin"
+        ],
+        "ingredient_count": 14,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "oven",
+        "primary_ingredient": "ungnötslever",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel mild kryddning; utökad med äppel-kålsallad. Lever är uttrycklig huvudråvara och tillagas genom. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "lingon och eventuell råkost",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "420 ml",
+                420.0
+              ]
+            ],
+            "text": "Skölj korngrynen. Koka upp dem i en kastrull med 420 ml vatten och hälften av saltet. Sänk värmen och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 17,
+            "id": "s2",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud korngrynen under lock i 17 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör om och kontrollera vattnet. Tillsätt vid behov 100 ml så grynen inte bränner."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 18,
+            "id": "s4",
+            "ingredient_keys": [
+              "korngryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 18 minuter, eller längre tills korngrynen är mjuka. Allt kvarvarande vatten ska gå med i gröten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 15,
+            "id": "s5",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner mjölken. Låt småkoka under regelbunden omrörning cirka 15 minuter till en lös gröt med mjuka gryn. Täta omrörningar behövs för att mjölken inte ska fastna; detta är aktiv tid."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Bred gröten i en vid skål och sätt ugnen på 190 °C över-/undervärme."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 20,
+            "id": "s7",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "mjölk|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt gröten svalna 20 minuter tills den är ljummen och inte börjar tillaga äggen när smeten blandas."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 12,
+            "id": "s8",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "kryddpeppar|dry",
+              "mejram|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Hacka löken och mjukstek i smöret. Väg ungnötslevern före putsning. Putsa levern från grova hinnor och finfördela den råa levern i matberedare med råa ägg knäckta och vägda utan skal, saltet som återstår, svartpeppar, mejram och kryddpeppar. Blanda ner lök, allt steksmör, russin och den ljumma gröten. Tvätta händer och rengör redskap noggrant efter rå lever."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "korngryn|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Klä formen med bakplåtspapper, häll i hela massan och sätt in formen i ugnen."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 50,
+            "id": "s10",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "kryddpeppar|dry",
+              "mejram|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Baka kakan mitt i ugnen i cirka 50 minuter."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 2,
+            "id": "s11",
+            "ingredient_keys": [
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Mät minst 75 °C i mitten. Om det är svalare, fortsätt grädda tills temperaturen nåtts. Kakan ska vara genomstannad utan rå levermassa."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 3,
+            "id": "s12",
+            "ingredient_keys": [
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan stå kvar i ugnen minst tre minuter efter att mitten nått 75 °C."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 1,
+            "id": "s13",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Ta ut formen och ställ på värmetåligt underlag."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 10,
+            "id": "s14",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "kryddpeppar|dry",
+              "mejram|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan vila 10 minuter så att den går att skära utan att falla isär."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 5,
+            "id": "s15",
+            "ingredient_keys": [
+              "lingon|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Koka de uppvägda frysta lingonen med sockret minst en minut eller längre enligt förpackningen, under omrörning. Mosa lätt; behåll all bärsaft och servera kompotten ljummen."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 5,
+            "id": "s16",
+            "ingredient_keys": [
+              "vitkål|raw_edible",
+              "äppelcidervinäger|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Ansa kålen och kärna ur äpplet. Väg de råa ätliga mängderna, strimla och vänd med all vinäger. Servera även råkostens saft."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 3,
+            "id": "s17",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "korngryn|dry",
+              "kryddpeppar|dry",
+              "lingon|as_sold",
+              "mejram|dry",
+              "mjölk|as_sold",
+              "russin|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "svartpeppar|dry",
+              "ungnötslever|as_sold",
+              "vitkål|raw_edible",
+              "ägg|raw_edible",
+              "äppelcidervinäger|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär den varma korvkakan i fyra portioner och fördela lingonen vid sidan tillsammans med råkosten. All kaka och alla tillbehör ingår i fyra portioner."
+          }
+        ],
+        "total_minutes": 170,
+        "unmeasured_processes": [
+          {
+            "description": "Leverhinnor och kärl avlägsnas från bruttovikten. Kvarvarande ätlig vikt och näringsutbyte är inte uppmätta.",
+            "ingredient_keys": [
+              "ungnötslever|as_sold"
+            ],
+            "operation": "trim_before_cooking",
+            "step_id": "s8"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 118
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ungnötslever",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "ungnötslever",
+          "product_requirements": [
+            "pack:intake_all_round2_20a3c4ecc9e6"
+          ],
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "korngryn",
+          "component": "kaka",
+          "form": "dry",
+          "name": "korngryn",
+          "product_requirements": [
+            "pack:intake_all_bf4fc44e6bb9"
+          ],
+          "quantity": 140.0,
+          "quantity_max": 140.0,
+          "quantity_min": 140.0,
+          "quantity_step": 140.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "kaka",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "kaka",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "kaka",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "kaka",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mejram",
+          "component": "kaka",
+          "form": "dry",
+          "name": "mejram",
+          "product_requirements": [
+            "pack:intake_all_round2_5b398ef6a541"
+          ],
+          "quantity": 1.5,
+          "quantity_max": 1.5,
+          "quantity_min": 1.5,
+          "quantity_step": 1.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kryddpeppar",
+          "component": "kaka",
+          "form": "dry",
+          "name": "kryddpeppar",
+          "product_requirements": [
+            "pack:intake_all_c412f28a0556"
+          ],
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "lingon",
+          "component": "lingon",
+          "form": "as_sold",
+          "name": "lingon",
+          "product_requirements": [
+            "pack:intake_all_af34ffffedcc"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "lingon",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 260.0,
+          "quantity_max": 260.0,
+          "quantity_min": 260.0,
+          "quantity_step": 260.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Skölj korngrynen. Koka upp dem i en kastrull med 420 ml vatten och hälften av saltet. Sänk värmen och lägg på lock.",
+        "Sjud korngrynen under lock i 17 minuter.",
+        "Rör om och kontrollera vattnet. Tillsätt vid behov 100 ml så grynen inte bränner.",
+        "Sjud ytterligare 18 minuter, eller längre tills korngrynen är mjuka. Allt kvarvarande vatten ska gå med i gröten.",
+        "Rör ner mjölken. Låt småkoka under regelbunden omrörning cirka 15 minuter till en lös gröt med mjuka gryn. Täta omrörningar behövs för att mjölken inte ska fastna; detta är aktiv tid.",
+        "Bred gröten i en vid skål och sätt ugnen på 190 °C över-/undervärme.",
+        "Låt gröten svalna 20 minuter tills den är ljummen och inte börjar tillaga äggen när smeten blandas.",
+        "Hacka löken och mjukstek i smöret. Väg ungnötslevern före putsning. Putsa levern från grova hinnor och finfördela den råa levern i matberedare med råa ägg knäckta och vägda utan skal, saltet som återstår, svartpeppar, mejram och kryddpeppar. Blanda ner lök, allt steksmör, russin och den ljumma gröten. Tvätta händer och rengör redskap noggrant efter rå lever.",
+        "Klä formen med bakplåtspapper, häll i hela massan och sätt in formen i ugnen.",
+        "Baka kakan mitt i ugnen i cirka 50 minuter.",
+        "Mät minst 75 °C i mitten. Om det är svalare, fortsätt grädda tills temperaturen nåtts. Kakan ska vara genomstannad utan rå levermassa.",
+        "Låt kakan stå kvar i ugnen minst tre minuter efter att mitten nått 75 °C.",
+        "Ta ut formen och ställ på värmetåligt underlag.",
+        "Låt kakan vila 10 minuter så att den går att skära utan att falla isär.",
+        "Koka de uppvägda frysta lingonen med sockret minst en minut eller längre enligt förpackningen, under omrörning. Mosa lätt; behåll all bärsaft och servera kompotten ljummen.",
+        "Ansa kålen och kärna ur äpplet. Väg de råa ätliga mängderna, strimla och vänd med all vinäger. Servera även råkostens saft.",
+        "Skär den varma korvkakan i fyra portioner och fördela lingonen vid sidan tillsammans med råkosten. All kaka och alla tillbehör ingår i fyra portioner."
+      ],
+      "name": "Korvkaka – lever- och korngrynskaka – utökad – med ungnötslever",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

@@ -1,0 +1,1928 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage11",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-thai-kai-palo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "fläskkarré",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Hela råa hönsägg med skal, räknade före kokning",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "femkryddor|dry",
+                "name": "femkryddor",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "sojasås",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "palo",
+            "name": "Kryddig ägg- och fläskgryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "gryta",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 197,
+        "family": "kai palo",
+        "fish": false,
+        "flavor_profile": [
+          "femkryddor",
+          "karamell",
+          "soja"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Thai-kinesiskt inspirerad palo-gryta med hela kokta ägg i söt-salt kryddspad. Benfri fläskkarré ersätter fetare fläsksida och strösocker ersätter palmsocker uttryckligen. Äggen är kokta och skalade i insatsformen; detta är inte rå äggvikt. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär fläskkarrén i jämna grytbitar och krossa vitlöken."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 9,
+            "id": "s2",
+            "ingredient_keys": [
+              "femkryddor|dry",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ],
+              [
+                "900 ml",
+                900.0
+              ]
+            ],
+            "text": "Smält sockret med 30 ml vatten i grytan och låt få bärnstensfärg. Häll försiktigt i 900 ml vatten i omgångar; skydda mot stänk. Rör tills karamellen lösts och tillsätt soja, femkryddor och vitlök."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg köttet i kryddspadet och koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 50,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under lock på låg värme i 50 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Rör om och kontrollera vätskan. Tillsätt vid behov 150 ml vatten så att köttet inte kokar torrt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 50,
+            "id": "s6",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 50 minuter, tills köttet är mycket mört och minst 72 °C i mitten."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Lägg de räknade hela råa äggen i en separat kastrull med 1000 ml vatten, eller ytterligare 500 ml om det behövs för att täcka. Koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 12,
+            "id": "s8",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter från uppkok så att både vita och gula blir helt fasta."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll försiktigt bort det heta kokvattnet och kyl äggen med 1000 ml kallt vatten."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 5,
+            "id": "s10",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt äggen svalna i det kalla vattnet fem minuter så att de går att skala."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 6,
+            "id": "s11",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala äggen och kassera skalen. Använd samtliga kokta ägg; ingen färdig gramvikt är förutsatt. Kontrollera att både vita och gula är fasta."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 2,
+            "id": "s12",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg ner de nykokta skalade äggen hela i grytan och värm till svag sjudning."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 5,
+            "id": "s13",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud mycket försiktigt i fem minuter."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 1,
+            "id": "s14",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd äggen varsamt så att kryddspadet kommer åt runtom."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 5,
+            "id": "s15",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare fem minuter."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 1,
+            "id": "s16",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd äggen försiktigt igen."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 5,
+            "id": "s17",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud de sista fem minuterna, totalt 15 minuter i kryddspadet."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 3,
+            "id": "s18",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s18"
+            ],
+            "duration_minutes": 23,
+            "id": "s19",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s19"
+            ],
+            "duration_minutes": 1,
+            "id": "s20",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s20"
+            ],
+            "duration_minutes": 3,
+            "id": "s21",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dela de kryddiga äggen och servera med det möra köttet, hela kryddspadet och ris. Grytan är avsiktligt söt-salt, inte en stekt äggrätt."
+          }
+        ],
+        "total_minutes": 197,
+        "unmeasured_processes": [
+          {
+            "description": "Hela ägg köps som deklarerat antal, kokas och skalas. Skalen serveras inte; ingen styckvikt eller kokt ätlig vikt har antagits.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s11"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 155
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "palo",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "femkryddor",
+          "component": "palo",
+          "form": "dry",
+          "name": "femkryddor",
+          "product_requirements": [
+            "pack:intake_all_round2_c516e1caac4a"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "palo",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "palo",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "ris",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skär fläskkarrén i jämna grytbitar och krossa vitlöken.",
+        "Smält sockret med 30 ml vatten i grytan och låt få bärnstensfärg. Häll försiktigt i 900 ml vatten i omgångar; skydda mot stänk. Rör tills karamellen lösts och tillsätt soja, femkryddor och vitlök.",
+        "Lägg köttet i kryddspadet och koka upp försiktigt.",
+        "Sjud under lock på låg värme i 50 minuter.",
+        "Rör om och kontrollera vätskan. Tillsätt vid behov 150 ml vatten så att köttet inte kokar torrt.",
+        "Sjud ytterligare 50 minuter, tills köttet är mycket mört och minst 72 °C i mitten.",
+        "Lägg de räknade hela råa äggen i en separat kastrull med 1000 ml vatten, eller ytterligare 500 ml om det behövs för att täcka. Koka upp försiktigt.",
+        "Sjud äggen tolv minuter från uppkok så att både vita och gula blir helt fasta.",
+        "Häll försiktigt bort det heta kokvattnet och kyl äggen med 1000 ml kallt vatten.",
+        "Låt äggen svalna i det kalla vattnet fem minuter så att de går att skala.",
+        "Skala äggen och kassera skalen. Använd samtliga kokta ägg; ingen färdig gramvikt är förutsatt. Kontrollera att både vita och gula är fasta.",
+        "Lägg ner de nykokta skalade äggen hela i grytan och värm till svag sjudning.",
+        "Sjud mycket försiktigt i fem minuter.",
+        "Vänd äggen varsamt så att kryddspadet kommer åt runtom.",
+        "Sjud ytterligare fem minuter.",
+        "Vänd äggen försiktigt igen.",
+        "Sjud de sista fem minuterna, totalt 15 minuter i kryddspadet.",
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Dela de kryddiga äggen och servera med det möra köttet, hela kryddspadet och ris. Grytan är avsiktligt söt-salt, inte en stekt äggrätt."
+      ],
+      "name": "Kai palo – ägg och fläsk i kryddig sojabuljong – enkel",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 52,
+        "base_id": "smako-thai-kai-palo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "fläskkarré",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Hela råa hönsägg med skal, räknade före kokning",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "femkryddor|dry",
+                "name": "femkryddor",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "sojasås",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "tofu",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "palo",
+            "name": "Kryddig ägg- och fläskgryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "gryta",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 207,
+        "family": "kai palo",
+        "fish": false,
+        "flavor_profile": [
+          "femkryddor",
+          "karamell",
+          "soja"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Thai-kinesiskt inspirerad palo-gryta med hela kokta ägg i söt-salt kryddspad. Benfri fläskkarré ersätter fetare fläsksida och strösocker ersätter palmsocker uttryckligen. Äggen är kokta och skalade i insatsformen; detta är inte rå äggvikt. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "koriander|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär fläskkarrén i jämna grytbitar och krossa vitlöken; väg upp fryst hackad koriander."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 9,
+            "id": "s2",
+            "ingredient_keys": [
+              "femkryddor|dry",
+              "koriander|raw_edible",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ],
+              [
+                "900 ml",
+                900.0
+              ]
+            ],
+            "text": "Smält sockret med 30 ml vatten i grytan och låt få bärnstensfärg. Häll försiktigt i 900 ml vatten i omgångar; skydda mot stänk. Rör tills karamellen lösts och tillsätt soja, femkryddor och vitlök samt koriander."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg köttet i kryddspadet och koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 50,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under lock på låg värme i 50 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Rör om och kontrollera vätskan. Tillsätt vid behov 150 ml vatten så att köttet inte kokar torrt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 50,
+            "id": "s6",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 50 minuter, tills köttet är mycket mört och minst 72 °C i mitten."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Torka och tärna tofun. Stek i rapsolja tills ytan fått färg. Lägg den stekta tofun i grytan tillsammans med all olja från pannan."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Lägg de räknade hela råa äggen i en separat kastrull med 1000 ml vatten, eller ytterligare 500 ml om det behövs för att täcka. Koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 12,
+            "id": "s9",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter från uppkok så att både vita och gula blir helt fasta."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 1,
+            "id": "s10",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll försiktigt bort det heta kokvattnet och kyl äggen med 1000 ml kallt vatten."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 5,
+            "id": "s11",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt äggen svalna i det kalla vattnet fem minuter så att de går att skala."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 6,
+            "id": "s12",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala äggen och kassera skalen. Använd samtliga kokta ägg; ingen färdig gramvikt är förutsatt. Kontrollera att både vita och gula är fasta."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 2,
+            "id": "s13",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg ner de nykokta skalade äggen hela i grytan och värm till svag sjudning."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 5,
+            "id": "s14",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud mycket försiktigt i fem minuter."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 1,
+            "id": "s15",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd äggen varsamt så att kryddspadet kommer åt runtom."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 5,
+            "id": "s16",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare fem minuter."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd äggen försiktigt igen."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 5,
+            "id": "s18",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud de sista fem minuterna, totalt 15 minuter i kryddspadet."
+          },
+          {
+            "depends_on": [
+              "s18"
+            ],
+            "duration_minutes": 3,
+            "id": "s19",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s19"
+            ],
+            "duration_minutes": 23,
+            "id": "s20",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s20"
+            ],
+            "duration_minutes": 1,
+            "id": "s21",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s21"
+            ],
+            "duration_minutes": 3,
+            "id": "s22",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dela de kryddiga äggen och servera med det möra köttet, hela kryddspadet och ris. Grytan är avsiktligt söt-salt, inte en stekt äggrätt."
+          }
+        ],
+        "total_minutes": 207,
+        "unmeasured_processes": [
+          {
+            "description": "Hela ägg köps som deklarerat antal, kokas och skalas. Skalen serveras inte; ingen styckvikt eller kokt ätlig vikt har antagits.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s12"
+          }
+        ],
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 155
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "palo",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "femkryddor",
+          "component": "palo",
+          "form": "dry",
+          "name": "femkryddor",
+          "product_requirements": [
+            "pack:intake_all_round2_c516e1caac4a"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "palo",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "palo",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "palo",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tofu",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "firm",
+            "plain"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "ris",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skär fläskkarrén i jämna grytbitar och krossa vitlöken; väg upp fryst hackad koriander.",
+        "Smält sockret med 30 ml vatten i grytan och låt få bärnstensfärg. Häll försiktigt i 900 ml vatten i omgångar; skydda mot stänk. Rör tills karamellen lösts och tillsätt soja, femkryddor och vitlök samt koriander.",
+        "Lägg köttet i kryddspadet och koka upp försiktigt.",
+        "Sjud under lock på låg värme i 50 minuter.",
+        "Rör om och kontrollera vätskan. Tillsätt vid behov 150 ml vatten så att köttet inte kokar torrt.",
+        "Sjud ytterligare 50 minuter, tills köttet är mycket mört och minst 72 °C i mitten.",
+        "Torka och tärna tofun. Stek i rapsolja tills ytan fått färg. Lägg den stekta tofun i grytan tillsammans med all olja från pannan.",
+        "Lägg de räknade hela råa äggen i en separat kastrull med 1000 ml vatten, eller ytterligare 500 ml om det behövs för att täcka. Koka upp försiktigt.",
+        "Sjud äggen tolv minuter från uppkok så att både vita och gula blir helt fasta.",
+        "Häll försiktigt bort det heta kokvattnet och kyl äggen med 1000 ml kallt vatten.",
+        "Låt äggen svalna i det kalla vattnet fem minuter så att de går att skala.",
+        "Skala äggen och kassera skalen. Använd samtliga kokta ägg; ingen färdig gramvikt är förutsatt. Kontrollera att både vita och gula är fasta.",
+        "Lägg ner de nykokta skalade äggen hela i grytan och värm till svag sjudning.",
+        "Sjud mycket försiktigt i fem minuter.",
+        "Vänd äggen varsamt så att kryddspadet kommer åt runtom.",
+        "Sjud ytterligare fem minuter.",
+        "Vänd äggen försiktigt igen.",
+        "Sjud de sista fem minuterna, totalt 15 minuter i kryddspadet.",
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Dela de kryddiga äggen och servera med det möra köttet, hela kryddspadet och ris. Grytan är avsiktligt söt-salt, inte en stekt äggrätt."
+      ],
+      "name": "Kai palo – ägg och fläsk i kryddig sojabuljong – standard",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 63,
+        "base_id": "smako-thai-kai-palo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "fläskkarré|raw_edible",
+                "name": "fläskkarré",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|as_sold",
+                "name": "Hela råa hönsägg med skal, räknade före kokning",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "st"
+              },
+              {
+                "ingredient_key": "femkryddor|dry",
+                "name": "femkryddor",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "sojasås",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "tofu|as_sold",
+                "name": "tofu",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "palo",
+            "name": "Kryddig ägg- och fläskgryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "pak choi|raw_edible",
+                "name": "pak choi",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "morot",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ingefära|raw_edible",
+                "name": "ingefära",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "gronsaker",
+            "name": "Snabbkokta grönsaker"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Kokt ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "gryta",
+          "kastrull",
+          "termometer"
+        ],
+        "estimated_minutes": 218,
+        "family": "kai palo",
+        "fish": false,
+        "flavor_profile": [
+          "femkryddor",
+          "karamell",
+          "soja"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "fläskkarré",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Thai-kinesiskt inspirerad palo-gryta med hela kokta ägg i söt-salt kryddspad. Benfri fläskkarré ersätter fetare fläsksida och strösocker ersätter palmsocker uttryckligen. Äggen är kokta och skalade i insatsformen; detta är inte rå äggvikt. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "koriander|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär fläskkarrén i jämna grytbitar och krossa vitlöken; väg upp fryst hackad koriander."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 9,
+            "id": "s2",
+            "ingredient_keys": [
+              "femkryddor|dry",
+              "koriander|raw_edible",
+              "sojasås|as_sold",
+              "strösocker|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "30 ml",
+                30.0
+              ],
+              [
+                "900 ml",
+                900.0
+              ]
+            ],
+            "text": "Smält sockret med 30 ml vatten i grytan och låt få bärnstensfärg. Häll försiktigt i 900 ml vatten i omgångar; skydda mot stänk. Rör tills karamellen lösts och tillsätt soja, femkryddor och vitlök samt koriander."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg köttet i kryddspadet och koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 50,
+            "id": "s4",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under lock på låg värme i 50 minuter."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Rör om och kontrollera vätskan. Tillsätt vid behov 150 ml vatten så att köttet inte kokar torrt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 50,
+            "id": "s6",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare 50 minuter, tills köttet är mycket mört och minst 72 °C i mitten."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 10,
+            "id": "s7",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "tofu|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Torka och tärna tofun. Stek i rapsolja tills ytan fått färg. Lägg den stekta tofun i grytan tillsammans med all olja från pannan."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1000 ml",
+                1000.0
+              ]
+            ],
+            "text": "Lägg de räknade hela råa äggen i en separat kastrull med 1000 ml vatten, eller ytterligare 500 ml om det behövs för att täcka. Koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 12,
+            "id": "s9",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud äggen tolv minuter från uppkok så att både vita och gula blir helt fasta."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 1,
+            "id": "s10",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll försiktigt bort det heta kokvattnet och kyl äggen med 1000 ml kallt vatten."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 5,
+            "id": "s11",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Låt äggen svalna i det kalla vattnet fem minuter så att de går att skala."
+          },
+          {
+            "depends_on": [
+              "s11"
+            ],
+            "duration_minutes": 6,
+            "id": "s12",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Skala äggen och kassera skalen. Använd samtliga kokta ägg; ingen färdig gramvikt är förutsatt. Kontrollera att både vita och gula är fasta."
+          },
+          {
+            "depends_on": [
+              "s12"
+            ],
+            "duration_minutes": 2,
+            "id": "s13",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lägg ner de nykokta skalade äggen hela i grytan och värm till svag sjudning."
+          },
+          {
+            "depends_on": [
+              "s13"
+            ],
+            "duration_minutes": 5,
+            "id": "s14",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud mycket försiktigt i fem minuter."
+          },
+          {
+            "depends_on": [
+              "s14"
+            ],
+            "duration_minutes": 1,
+            "id": "s15",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd äggen varsamt så att kryddspadet kommer åt runtom."
+          },
+          {
+            "depends_on": [
+              "s15"
+            ],
+            "duration_minutes": 5,
+            "id": "s16",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud ytterligare fem minuter."
+          },
+          {
+            "depends_on": [
+              "s16"
+            ],
+            "duration_minutes": 1,
+            "id": "s17",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vänd äggen försiktigt igen."
+          },
+          {
+            "depends_on": [
+              "s17"
+            ],
+            "duration_minutes": 5,
+            "id": "s18",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud de sista fem minuterna, totalt 15 minuter i kryddspadet."
+          },
+          {
+            "depends_on": [
+              "s18"
+            ],
+            "duration_minutes": 3,
+            "id": "s19",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme."
+          },
+          {
+            "depends_on": [
+              "s19"
+            ],
+            "duration_minutes": 23,
+            "id": "s20",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter."
+          },
+          {
+            "depends_on": [
+              "s20"
+            ],
+            "duration_minutes": 1,
+            "id": "s21",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras."
+          },
+          {
+            "depends_on": [
+              "s21"
+            ],
+            "duration_minutes": 11,
+            "id": "s22",
+            "ingredient_keys": [
+              "ingefära|raw_edible",
+              "morot|raw_edible",
+              "pak choi|raw_edible",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Skala morot och ingefära och väg de råa ätliga mängderna. Dela och skölj pak choi. Koka upp 150 ml vatten med grönsakernas salt och ingefära, lägg i morot och sjud under lock fem minuter. Tillsätt pak choi och sjud ytterligare minst tre minuter tills allt är genomhett och mjukt. Servera med hela grönsaksspadet."
+          },
+          {
+            "depends_on": [
+              "s22"
+            ],
+            "duration_minutes": 3,
+            "id": "s23",
+            "ingredient_keys": [
+              "fläskkarré|raw_edible",
+              "morot|raw_edible",
+              "pak choi|raw_edible",
+              "ris|dry",
+              "ägg|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dela de kryddiga äggen och servera med det möra köttet, hela kryddspadet och ris samt de snabbkokta grönsakerna. Grytan är avsiktligt söt-salt, inte en stekt äggrätt."
+          }
+        ],
+        "total_minutes": 218,
+        "unmeasured_processes": [
+          {
+            "description": "Hela ägg köps som deklarerat antal, kokas och skalas. Skalen serveras inte; ingen styckvikt eller kokt ätlig vikt har antagits.",
+            "ingredient_keys": [
+              "ägg|as_sold"
+            ],
+            "operation": "peel_after_cooking",
+            "step_id": "s12"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 155
+      },
+      "ingredients": [
+        {
+          "canonical_name": "fläskkarré",
+          "component": "palo",
+          "form": "raw_edible",
+          "name": "fläskkarré",
+          "product_requirements": [
+            "pack:intake_all_expansion_487e551f21df"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:intake_all_round2_eb585a9d4454"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "primary",
+          "unit": "st"
+        },
+        {
+          "canonical_name": "femkryddor",
+          "component": "palo",
+          "form": "dry",
+          "name": "femkryddor",
+          "product_requirements": [
+            "pack:intake_all_round2_c516e1caac4a"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "palo",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "palo",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "palo",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tofu",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "tofu",
+          "product_requirements": [
+            "firm",
+            "plain"
+          ],
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "palo",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "pak choi",
+          "component": "gronsaker",
+          "form": "raw_edible",
+          "name": "pak choi",
+          "product_requirements": [
+            "pack:intake_all_6097b55c099b"
+          ],
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "gronsaker",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ingefära",
+          "component": "gronsaker",
+          "form": "raw_edible",
+          "name": "ingefära",
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "gronsaker",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skär fläskkarrén i jämna grytbitar och krossa vitlöken; väg upp fryst hackad koriander.",
+        "Smält sockret med 30 ml vatten i grytan och låt få bärnstensfärg. Häll försiktigt i 900 ml vatten i omgångar; skydda mot stänk. Rör tills karamellen lösts och tillsätt soja, femkryddor och vitlök samt koriander.",
+        "Lägg köttet i kryddspadet och koka upp försiktigt.",
+        "Sjud under lock på låg värme i 50 minuter.",
+        "Rör om och kontrollera vätskan. Tillsätt vid behov 150 ml vatten så att köttet inte kokar torrt.",
+        "Sjud ytterligare 50 minuter, tills köttet är mycket mört och minst 72 °C i mitten.",
+        "Torka och tärna tofun. Stek i rapsolja tills ytan fått färg. Lägg den stekta tofun i grytan tillsammans med all olja från pannan.",
+        "Lägg de räknade hela råa äggen i en separat kastrull med 1000 ml vatten, eller ytterligare 500 ml om det behövs för att täcka. Koka upp försiktigt.",
+        "Sjud äggen tolv minuter från uppkok så att både vita och gula blir helt fasta.",
+        "Häll försiktigt bort det heta kokvattnet och kyl äggen med 1000 ml kallt vatten.",
+        "Låt äggen svalna i det kalla vattnet fem minuter så att de går att skala.",
+        "Skala äggen och kassera skalen. Använd samtliga kokta ägg; ingen färdig gramvikt är förutsatt. Kontrollera att både vita och gula är fasta.",
+        "Lägg ner de nykokta skalade äggen hela i grytan och värm till svag sjudning.",
+        "Sjud mycket försiktigt i fem minuter.",
+        "Vänd äggen varsamt så att kryddspadet kommer åt runtom.",
+        "Sjud ytterligare fem minuter.",
+        "Vänd äggen försiktigt igen.",
+        "Sjud de sista fem minuterna, totalt 15 minuter i kryddspadet.",
+        "Skölj riset i sil. Lägg det i en kastrull med risets salt och 560 ml vatten; koka upp och sänk till låg värme.",
+        "Sjud riset under lock cirka 18 minuter eller tills kornen är mjuka och vattnet absorberats. Följ längre koktid på förpackningen vid behov. Stäng av värmen och låt vila under lock 5 minuter.",
+        "Luckra upp riset och håll det varmt över 60 °C under lock tills huvudrätten serveras.",
+        "Skala morot och ingefära och väg de råa ätliga mängderna. Dela och skölj pak choi. Koka upp 150 ml vatten med grönsakernas salt och ingefära, lägg i morot och sjud under lock fem minuter. Tillsätt pak choi och sjud ytterligare minst tre minuter tills allt är genomhett och mjukt. Servera med hela grönsaksspadet.",
+        "Dela de kryddiga äggen och servera med det möra köttet, hela kryddspadet och ris samt de snabbkokta grönsakerna. Grytan är avsiktligt söt-salt, inte en stekt äggrätt."
+      ],
+      "name": "Kai palo – ägg och fläsk i kryddig sojabuljong – utökad",
+      "servings": 4
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

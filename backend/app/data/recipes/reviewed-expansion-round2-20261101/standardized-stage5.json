@@ -1,0 +1,2026 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage5",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 47,
+        "base_id": "smako-swedish-isterband-dillpotatis",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "isterband|as_sold",
+                "name": "isterband",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              }
+            ],
+            "id": "korv",
+            "name": "Stekta isterband"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 1000.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "dill|raw_edible",
+                "name": "dill",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "stuvning",
+            "name": "Dillstuvad potatis"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödbeta|raw_edible",
+                "name": "rödbeta",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rodbetor",
+            "name": "Rödbetstillbehör"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "två kastruller",
+          "stekpanna",
+          "visp",
+          "termometer"
+        ],
+        "estimated_minutes": 87,
+        "family": "isterband med stuvad potatis",
+        "fish": false,
+        "flavor_profile": [
+          "syrlig korv",
+          "dill",
+          "rödbeta"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "isterband",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Isterbandets syrade grynkorv är kärnan. Enkel serverar kokt rödbeta, standard har hemlagad ättikssötad rödbeta; utökad lägger till en riktig senapsdressad gurk-äppelsallad. Isterbandets råvaruinnehåll och tillagningsanvisning måste granskas. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "dillstuvad potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Skala rödbetorna, väg den angivna råa ätliga mängden och tärna smått. Koka upp med 700 ml vatten i en kastrull."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud rödbetorna cirka 25 minuter tills helt mjuka och häll av."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1400 ml",
+                1400.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den angivna råa ätliga mängden och tärna. Koka upp i 1400 ml vatten utan tillsatt salt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka 15 minuter tills potatisbitarna är mjuka men håller formen. Häll av och låt ånga torrt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 9,
+            "id": "s5",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Smält smöret i en kastrull och vispa i mjölet. Späd gradvis med mjölken och sjud under omrörning 5 minuter tills såsen är slät och mjölsmaken borta. Rör ner hela den angivna saltmängden och svartpeppar."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "mjölk|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner fryst hackad dill i såsen och sjud under omrörning minst två minuter eller längre enligt förpackningen. Vänd ner potatisen och låt allt bli genomvarmt. Håll på låg värme och rör varsamt så att botten inte bränns."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 18,
+            "id": "s7",
+            "ingredient_keys": [
+              "isterband|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Stek isterbanden i torr panna på låg till medelhög värme, vänd regelbundet och låt deras eget fett smälta ut. Räkna med cirka 18 minuter; följ även produktens anvisning och kontrollera minst 72 °C i mitten. De ska bli genomvarma utan sprucket, hårt bränt skinn."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 2,
+            "id": "s8",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "isterband|as_sold",
+              "potatis|raw_edible",
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera isterbanden med dillstuvad potatis och avrunna rödbetor. Fördela också allt genomhettat fett från korvpannan över potatisstuvningen."
+          }
+        ],
+        "total_minutes": 87,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 40
+      },
+      "ingredients": [
+        {
+          "canonical_name": "isterband",
+          "component": "korv",
+          "form": "as_sold",
+          "name": "isterband",
+          "product_requirements": [
+            "pack:intake_all_expansion_ecd11ff1413a"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "stuvning",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 1000.0,
+          "quantity_max": 1000.0,
+          "quantity_min": 1000.0,
+          "quantity_step": 1000.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "stuvning",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "stuvning",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "stuvning",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "dill",
+          "component": "stuvning",
+          "form": "raw_edible",
+          "name": "dill",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "stuvning",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "stuvning",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödbeta",
+          "component": "rodbetor",
+          "form": "raw_edible",
+          "name": "rödbeta",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala rödbetorna, väg den angivna råa ätliga mängden och tärna smått. Koka upp med 700 ml vatten i en kastrull.",
+        "Sjud rödbetorna cirka 25 minuter tills helt mjuka och häll av.",
+        "Skala potatisen, väg den angivna råa ätliga mängden och tärna. Koka upp i 1400 ml vatten utan tillsatt salt.",
+        "Sjud cirka 15 minuter tills potatisbitarna är mjuka men håller formen. Häll av och låt ånga torrt.",
+        "Smält smöret i en kastrull och vispa i mjölet. Späd gradvis med mjölken och sjud under omrörning 5 minuter tills såsen är slät och mjölsmaken borta. Rör ner hela den angivna saltmängden och svartpeppar.",
+        "Rör ner fryst hackad dill i såsen och sjud under omrörning minst två minuter eller längre enligt förpackningen. Vänd ner potatisen och låt allt bli genomvarmt. Håll på låg värme och rör varsamt så att botten inte bränns.",
+        "Stek isterbanden i torr panna på låg till medelhög värme, vänd regelbundet och låt deras eget fett smälta ut. Räkna med cirka 18 minuter; följ även produktens anvisning och kontrollera minst 72 °C i mitten. De ska bli genomvarma utan sprucket, hårt bränt skinn.",
+        "Servera isterbanden med dillstuvad potatis och avrunna rödbetor. Fördela också allt genomhettat fett från korvpannan över potatisstuvningen."
+      ],
+      "name": "Isterband med dillstuvad potatis – enkel",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 51,
+        "base_id": "smako-swedish-isterband-dillpotatis",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "isterband|as_sold",
+                "name": "isterband",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              }
+            ],
+            "id": "korv",
+            "name": "Stekta isterband"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 1000.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "dill|raw_edible",
+                "name": "dill",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "stuvning",
+            "name": "Dillstuvad potatis"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödbeta|raw_edible",
+                "name": "rödbeta",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ättiksprit 12 procent|as_sold",
+                "name": "ättiksprit 12 procent",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rodbetor",
+            "name": "Rödbetstillbehör"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "två kastruller",
+          "stekpanna",
+          "visp",
+          "termometer"
+        ],
+        "estimated_minutes": 91,
+        "family": "isterband med stuvad potatis",
+        "fish": false,
+        "flavor_profile": [
+          "syrlig korv",
+          "dill",
+          "rödbeta"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "isterband",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Isterbandets syrade grynkorv är kärnan. Enkel serverar kokt rödbeta, standard har hemlagad ättikssötad rödbeta; utökad lägger till en riktig senapsdressad gurk-äppelsallad. Isterbandets råvaruinnehåll och tillagningsanvisning måste granskas. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "dillstuvad potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Skala rödbetorna, väg den angivna råa ätliga mängden och tärna smått. Koka upp med 700 ml vatten i en kastrull."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud rödbetorna cirka 25 minuter tills helt mjuka och häll av."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 4,
+            "id": "s3",
+            "ingredient_keys": [
+              "rödbeta|raw_edible",
+              "strösocker|dry",
+              "ättiksprit 12 procent|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "70 ml",
+                70.0
+              ]
+            ],
+            "text": "Rör ihop ättiksprit, socker och 70 ml vatten i en skål och vänd ner den varma rödbetan. Låt dra medan resten tillagas; detta är ett tillbehör för direkt servering, inte en hållbarhetsverifierad inläggning."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1400 ml",
+                1400.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den angivna råa ätliga mängden och tärna. Koka upp i 1400 ml vatten utan tillsatt salt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 15,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka 15 minuter tills potatisbitarna är mjuka men håller formen. Häll av och låt ånga torrt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 9,
+            "id": "s6",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Smält smöret i en kastrull och vispa i mjölet. Späd gradvis med mjölken och sjud under omrörning 5 minuter tills såsen är slät och mjölsmaken borta. Rör ner hela den angivna saltmängden och svartpeppar."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "mjölk|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner fryst hackad dill i såsen och sjud under omrörning minst två minuter eller längre enligt förpackningen. Vänd ner potatisen och låt allt bli genomvarmt. Håll på låg värme och rör varsamt så att botten inte bränns."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 18,
+            "id": "s8",
+            "ingredient_keys": [
+              "isterband|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Stek isterbanden i torr panna på låg till medelhög värme, vänd regelbundet och låt deras eget fett smälta ut. Räkna med cirka 18 minuter; följ även produktens anvisning och kontrollera minst 72 °C i mitten. De ska bli genomvarma utan sprucket, hårt bränt skinn."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 2,
+            "id": "s9",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "isterband|as_sold",
+              "potatis|raw_edible",
+              "rödbeta|raw_edible",
+              "strösocker|dry",
+              "ättiksprit 12 procent|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera isterbanden med dillstuvad potatis och rödbetor med hela den sötsyrliga lagen i separata skålar. Fördela också allt genomhettat fett från korvpannan över potatisstuvningen."
+          }
+        ],
+        "total_minutes": 91,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 40
+      },
+      "ingredients": [
+        {
+          "canonical_name": "isterband",
+          "component": "korv",
+          "form": "as_sold",
+          "name": "isterband",
+          "product_requirements": [
+            "pack:intake_all_expansion_ecd11ff1413a"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "stuvning",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 1000.0,
+          "quantity_max": 1000.0,
+          "quantity_min": 1000.0,
+          "quantity_step": 1000.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "stuvning",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "stuvning",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "stuvning",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "dill",
+          "component": "stuvning",
+          "form": "raw_edible",
+          "name": "dill",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "stuvning",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "stuvning",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödbeta",
+          "component": "rodbetor",
+          "form": "raw_edible",
+          "name": "rödbeta",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ättiksprit 12 procent",
+          "component": "rodbetor",
+          "form": "as_sold",
+          "name": "ättiksprit 12 procent",
+          "product_requirements": [
+            "pack:intake_all_expansion_e196d1ebe95c"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "rodbetor",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala rödbetorna, väg den angivna råa ätliga mängden och tärna smått. Koka upp med 700 ml vatten i en kastrull.",
+        "Sjud rödbetorna cirka 25 minuter tills helt mjuka och häll av.",
+        "Rör ihop ättiksprit, socker och 70 ml vatten i en skål och vänd ner den varma rödbetan. Låt dra medan resten tillagas; detta är ett tillbehör för direkt servering, inte en hållbarhetsverifierad inläggning.",
+        "Skala potatisen, väg den angivna råa ätliga mängden och tärna. Koka upp i 1400 ml vatten utan tillsatt salt.",
+        "Sjud cirka 15 minuter tills potatisbitarna är mjuka men håller formen. Häll av och låt ånga torrt.",
+        "Smält smöret i en kastrull och vispa i mjölet. Späd gradvis med mjölken och sjud under omrörning 5 minuter tills såsen är slät och mjölsmaken borta. Rör ner hela den angivna saltmängden och svartpeppar.",
+        "Rör ner fryst hackad dill i såsen och sjud under omrörning minst två minuter eller längre enligt förpackningen. Vänd ner potatisen och låt allt bli genomvarmt. Håll på låg värme och rör varsamt så att botten inte bränns.",
+        "Stek isterbanden i torr panna på låg till medelhög värme, vänd regelbundet och låt deras eget fett smälta ut. Räkna med cirka 18 minuter; följ även produktens anvisning och kontrollera minst 72 °C i mitten. De ska bli genomvarma utan sprucket, hårt bränt skinn.",
+        "Servera isterbanden med dillstuvad potatis och rödbetor med hela den sötsyrliga lagen i separata skålar. Fördela också allt genomhettat fett från korvpannan över potatisstuvningen."
+      ],
+      "name": "Isterband med dillstuvad potatis – standard",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 57,
+        "base_id": "smako-swedish-isterband-dillpotatis",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "isterband|as_sold",
+                "name": "isterband",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              }
+            ],
+            "id": "korv",
+            "name": "Stekta isterband"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 1000.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "mjölk",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "dill|raw_edible",
+                "name": "dill",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "stuvning",
+            "name": "Dillstuvad potatis"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödbeta|raw_edible",
+                "name": "rödbeta",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ättiksprit 12 procent|as_sold",
+                "name": "ättiksprit 12 procent",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "rodbetor",
+            "name": "Rödbetstillbehör"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "gurka",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "senap|as_sold",
+                "name": "senap",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              }
+            ],
+            "id": "sallad",
+            "name": "Gurk-äppelsallad"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "två kastruller",
+          "stekpanna",
+          "visp",
+          "termometer"
+        ],
+        "estimated_minutes": 97,
+        "family": "isterband med stuvad potatis",
+        "fish": false,
+        "flavor_profile": [
+          "syrlig korv",
+          "dill",
+          "rödbeta"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pan",
+        "primary_ingredient": "isterband",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Isterbandets syrade grynkorv är kärnan. Enkel serverar kokt rödbeta, standard har hemlagad ättikssötad rödbeta; utökad lägger till en riktig senapsdressad gurk-äppelsallad. Isterbandets råvaruinnehåll och tillagningsanvisning måste granskas. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "dillstuvad potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Skala rödbetorna, väg den angivna råa ätliga mängden och tärna smått. Koka upp med 700 ml vatten i en kastrull."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "rödbeta|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud rödbetorna cirka 25 minuter tills helt mjuka och häll av."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 4,
+            "id": "s3",
+            "ingredient_keys": [
+              "rödbeta|raw_edible",
+              "strösocker|dry",
+              "ättiksprit 12 procent|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "70 ml",
+                70.0
+              ]
+            ],
+            "text": "Rör ihop ättiksprit, socker och 70 ml vatten i en skål och vänd ner den varma rödbetan. Låt dra medan resten tillagas; detta är ett tillbehör för direkt servering, inte en hållbarhetsverifierad inläggning."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1400 ml",
+                1400.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den angivna råa ätliga mängden och tärna. Koka upp i 1400 ml vatten utan tillsatt salt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 15,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka 15 minuter tills potatisbitarna är mjuka men håller formen. Häll av och låt ånga torrt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 9,
+            "id": "s6",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Smält smöret i en kastrull och vispa i mjölet. Späd gradvis med mjölken och sjud under omrörning 5 minuter tills såsen är slät och mjölsmaken borta. Rör ner hela den angivna saltmängden och svartpeppar."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "mjölk|as_sold",
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner fryst hackad dill i såsen och sjud under omrörning minst två minuter eller längre enligt förpackningen. Vänd ner potatisen och låt allt bli genomvarmt. Håll på låg värme och rör varsamt så att botten inte bränns."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 18,
+            "id": "s8",
+            "ingredient_keys": [
+              "isterband|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Stek isterbanden i torr panna på låg till medelhög värme, vänd regelbundet och låt deras eget fett smälta ut. Räkna med cirka 18 minuter; följ även produktens anvisning och kontrollera minst 72 °C i mitten. De ska bli genomvarma utan sprucket, hårt bränt skinn."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 6,
+            "id": "s9",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "senap|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Kärna ur äpplet och väg den ätliga mängden. Skär gurka och äpple i små bitar. Rör ut senapen med 20 ml vatten och vänd med grönsakerna till en separat sallad."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [
+              "dill|raw_edible",
+              "gurka|raw_edible",
+              "isterband|as_sold",
+              "potatis|raw_edible",
+              "rödbeta|raw_edible",
+              "senap|as_sold",
+              "strösocker|dry",
+              "äpple|raw_edible",
+              "ättiksprit 12 procent|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Servera isterbanden med dillstuvad potatis och rödbetor med hela den sötsyrliga lagen i separata skålar samt senapsdressad sallad. Fördela också allt genomhettat fett från korvpannan över potatisstuvningen."
+          }
+        ],
+        "total_minutes": 97,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 40
+      },
+      "ingredients": [
+        {
+          "canonical_name": "isterband",
+          "component": "korv",
+          "form": "as_sold",
+          "name": "isterband",
+          "product_requirements": [
+            "pack:intake_all_expansion_ecd11ff1413a"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "stuvning",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 1000.0,
+          "quantity_max": 1000.0,
+          "quantity_min": 1000.0,
+          "quantity_step": 1000.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "stuvning",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "stuvning",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "stuvning",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "dill",
+          "component": "stuvning",
+          "form": "raw_edible",
+          "name": "dill",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "stuvning",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "stuvning",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödbeta",
+          "component": "rodbetor",
+          "form": "raw_edible",
+          "name": "rödbeta",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ättiksprit 12 procent",
+          "component": "rodbetor",
+          "form": "as_sold",
+          "name": "ättiksprit 12 procent",
+          "product_requirements": [
+            "pack:intake_all_expansion_e196d1ebe95c"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "rodbetor",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "senap",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "senap",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala rödbetorna, väg den angivna råa ätliga mängden och tärna smått. Koka upp med 700 ml vatten i en kastrull.",
+        "Sjud rödbetorna cirka 25 minuter tills helt mjuka och häll av.",
+        "Rör ihop ättiksprit, socker och 70 ml vatten i en skål och vänd ner den varma rödbetan. Låt dra medan resten tillagas; detta är ett tillbehör för direkt servering, inte en hållbarhetsverifierad inläggning.",
+        "Skala potatisen, väg den angivna råa ätliga mängden och tärna. Koka upp i 1400 ml vatten utan tillsatt salt.",
+        "Sjud cirka 15 minuter tills potatisbitarna är mjuka men håller formen. Häll av och låt ånga torrt.",
+        "Smält smöret i en kastrull och vispa i mjölet. Späd gradvis med mjölken och sjud under omrörning 5 minuter tills såsen är slät och mjölsmaken borta. Rör ner hela den angivna saltmängden och svartpeppar.",
+        "Rör ner fryst hackad dill i såsen och sjud under omrörning minst två minuter eller längre enligt förpackningen. Vänd ner potatisen och låt allt bli genomvarmt. Håll på låg värme och rör varsamt så att botten inte bränns.",
+        "Stek isterbanden i torr panna på låg till medelhög värme, vänd regelbundet och låt deras eget fett smälta ut. Räkna med cirka 18 minuter; följ även produktens anvisning och kontrollera minst 72 °C i mitten. De ska bli genomvarma utan sprucket, hårt bränt skinn.",
+        "Kärna ur äpplet och väg den ätliga mängden. Skär gurka och äpple i små bitar. Rör ut senapen med 20 ml vatten och vänd med grönsakerna till en separat sallad.",
+        "Servera isterbanden med dillstuvad potatis och rödbetor med hela den sötsyrliga lagen i separata skålar samt senapsdressad sallad. Fördela också allt genomhettat fett från korvpannan över potatisstuvningen."
+      ],
+      "name": "Isterband med dillstuvad potatis – utökad",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 12,
+        "base_id": "smako-greek-kollyva-veteskal",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "matvete|dry",
+                "name": "Matvete, torr vikt",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "Russin",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "valnötter|as_sold",
+                "name": "Valnötter",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "florsocker|dry",
+                "name": "Florsocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Veteskål"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "kastrull",
+          "sil",
+          "tallrik"
+        ],
+        "estimated_minutes": 57,
+        "family": "sweet_wheat_bowl",
+        "fish": false,
+        "flavor_profile": [
+          "kanel",
+          "vete",
+          "nötter"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pot",
+        "primary_ingredient": "matvete",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Modern frukostanpassning av kollyva, inte en föreskrift för traditionell minnesmåltid. Snabbare matvete ersätter obehandlat helt vete; källan stödjer rättidentitet och modern frukostanvändning, inte dessa egna mängder. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "nötter och frukt",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Skölj matvetet. Koka upp 300 ml vatten utan tillsatt salt i en liten kastrull och tillsätt matvetet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 25,
+            "id": "s2",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under lock på låg värme tills kornen är mjuka med lite tuggmotstånd, cirka 25 minuter. Använd matvete, inte obehandlade hela vetekorn som kräver annan blötläggning."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "text": "Häll av överflödigt vatten från de färdigkokta kornen. Bred ut dem i tunt lager på en ren tallrik."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt de utbredda kornen svalna 20 minuter och ytan torka."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hacka valnötterna grovt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "florsocker|dry",
+              "kanel|dry",
+              "matvete|dry",
+              "russin|as_sold",
+              "salt|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Blanda de avsvalnade kornen med russin, kanel, florsocker, hela saltmängden och nötter. Ät som frukostskål."
+          }
+        ],
+        "total_minutes": 57,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 45
+      },
+      "ingredients": [
+        {
+          "canonical_name": "matvete",
+          "component": "c1",
+          "form": "dry",
+          "name": "matvete",
+          "product_requirements": [
+            "pack:intake_all_87a3434722f5"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "valnötter",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "valnötter",
+          "product_requirements": [
+            "pack:intake_walnuts"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "c1",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "florsocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "florsocker",
+          "product_requirements": [
+            "pack:intake_all_0064db2ce67f"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj matvetet. Koka upp 300 ml vatten utan tillsatt salt i en liten kastrull och tillsätt matvetet.",
+        "Sjud under lock på låg värme tills kornen är mjuka med lite tuggmotstånd, cirka 25 minuter. Använd matvete, inte obehandlade hela vetekorn som kräver annan blötläggning.",
+        "Häll av överflödigt vatten från de färdigkokta kornen. Bred ut dem i tunt lager på en ren tallrik.",
+        "Låt de utbredda kornen svalna 20 minuter och ytan torka.",
+        "Hacka valnötterna grovt.",
+        "Blanda de avsvalnade kornen med russin, kanel, florsocker, hela saltmängden och nötter. Ät som frukostskål."
+      ],
+      "name": "Kollyva-inspirerad veteskål – frukostanpassning med matvete",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 16,
+        "base_id": "smako-greek-kollyva-veteskal",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "matvete|dry",
+                "name": "Matvete, torr vikt",
+                "note": "",
+                "quantity": 50.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "russin|as_sold",
+                "name": "Russin",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "valnötter|as_sold",
+                "name": "Valnötter",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "florsocker|dry",
+                "name": "Florsocker",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "granatäppelkärnor|raw_edible",
+                "name": "Granatäppelkärnor",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sesamfrön|as_sold",
+                "name": "Sesamfrön",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mandel|as_sold",
+                "name": "Mandel",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "c1",
+            "name": "Veteskål"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "kastrull",
+          "sil",
+          "tallrik",
+          "stekpanna"
+        ],
+        "estimated_minutes": 181,
+        "family": "sweet_wheat_bowl",
+        "fish": false,
+        "flavor_profile": [
+          "kanel",
+          "vete",
+          "nötter"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pot",
+        "primary_ingredient": "matvete",
+        "provenance": {
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Modern frukostanpassning av kollyva, inte en föreskrift för traditionell minnesmåltid. Snabbare matvete ersätter obehandlat helt vete; källan stödjer rättidentitet och modern frukostanvändning, inte dessa egna mängder. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "nötter och frukt",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst granatäppelkärnor i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "granatäppelkärnor|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll alla kärnor och all saft till veteskålen."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "300 ml",
+                300.0
+              ]
+            ],
+            "text": "Skölj matvetet. Koka upp 300 ml vatten utan tillsatt salt i en liten kastrull och tillsätt matvetet."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 25,
+            "id": "s4",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under lock på låg värme tills kornen är mjuka med lite tuggmotstånd, cirka 25 minuter. Använd matvete, inte obehandlade hela vetekorn som kräver annan blötläggning."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "text": "Häll av överflödigt vatten från de färdigkokta kornen. Bred ut dem i tunt lager på en ren tallrik."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 20,
+            "id": "s6",
+            "ingredient_keys": [
+              "matvete|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt de utbredda kornen svalna 20 minuter och ytan torka."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "mandel|as_sold",
+              "sesamfrön|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hacka valnötterna grovt. Rosta mandel och sesam i torr panna på medellåg värme i cirka tre minuter och låt svalna; hacka mandeln."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 3,
+            "id": "s8",
+            "ingredient_keys": [
+              "florsocker|dry",
+              "granatäppelkärnor|raw_edible",
+              "kanel|dry",
+              "mandel|as_sold",
+              "matvete|dry",
+              "russin|as_sold",
+              "salt|as_sold",
+              "sesamfrön|as_sold",
+              "valnötter|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Blanda de avsvalnade kornen med russin, kanel, florsocker, hela saltmängden och nötter. Vänd ner helt tinade granatäppelkärnor med all saft och sesam. Ät som frukostskål."
+          }
+        ],
+        "total_minutes": 181,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 165
+      },
+      "ingredients": [
+        {
+          "canonical_name": "matvete",
+          "component": "c1",
+          "form": "dry",
+          "name": "matvete",
+          "product_requirements": [
+            "pack:intake_all_87a3434722f5"
+          ],
+          "quantity": 50.0,
+          "quantity_max": 50.0,
+          "quantity_min": 50.0,
+          "quantity_step": 50.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "russin",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "russin",
+          "product_requirements": [
+            "pack:intake_all_c84b87d5ba4a"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "valnötter",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "valnötter",
+          "product_requirements": [
+            "pack:intake_walnuts"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "c1",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "florsocker",
+          "component": "c1",
+          "form": "dry",
+          "name": "florsocker",
+          "product_requirements": [
+            "pack:intake_all_0064db2ce67f"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "granatäppelkärnor",
+          "component": "c1",
+          "form": "raw_edible",
+          "name": "granatäppelkärnor",
+          "product_requirements": [
+            "pack:intake_all_round2_a690909896ca"
+          ],
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sesamfrön",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "sesamfrön",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandel",
+          "component": "c1",
+          "form": "as_sold",
+          "name": "mandel",
+          "product_requirements": [
+            "pack:intake_almonds"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst granatäppelkärnor i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll alla kärnor och all saft till veteskålen.",
+        "Skölj matvetet. Koka upp 300 ml vatten utan tillsatt salt i en liten kastrull och tillsätt matvetet.",
+        "Sjud under lock på låg värme tills kornen är mjuka med lite tuggmotstånd, cirka 25 minuter. Använd matvete, inte obehandlade hela vetekorn som kräver annan blötläggning.",
+        "Häll av överflödigt vatten från de färdigkokta kornen. Bred ut dem i tunt lager på en ren tallrik.",
+        "Låt de utbredda kornen svalna 20 minuter och ytan torka.",
+        "Hacka valnötterna grovt. Rosta mandel och sesam i torr panna på medellåg värme i cirka tre minuter och låt svalna; hacka mandeln.",
+        "Blanda de avsvalnade kornen med russin, kanel, florsocker, hela saltmängden och nötter. Vänd ner helt tinade granatäppelkärnor med all saft och sesam. Ät som frukostskål."
+      ],
+      "name": "Kollyva-inspirerad veteskål – frukostanpassning med granatäpple och nötter",
+      "servings": 1
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

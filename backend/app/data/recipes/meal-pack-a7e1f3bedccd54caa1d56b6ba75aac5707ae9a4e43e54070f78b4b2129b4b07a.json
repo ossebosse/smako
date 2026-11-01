@@ -1,0 +1,2204 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 41,
+        "base_id": "smako-mexican-carne-en-su-jugo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötinnanlår|raw_edible",
+                "name": "nötinnanlår",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rimmat fläsk|raw_edible",
+                "name": "rimmat fläsk",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salsa verde av tomatillo|as_sold",
+                "name": "Färdig Salsa Verde av tomatillo, Clemente Jacques",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "bönor",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              }
+            ],
+            "id": "gryta",
+            "name": "Kött i eget spad"
+          }
+        ],
+        "content_sha256": "aa55ac360ef843358bab8503cd4c81e7e447f67aa25412adeb61e53b30f1e3d5",
+        "content_source": {
+          "active_minutes": 41,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage17",
+          "priority": 1,
+          "proposal_id": "smako-mexican-carne-en-su-jugo",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "68cd1ee195d992990bec68d9dc46094ea91e7015c7c6fdf407b8220791adf3b8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "gryta",
+          "mixer",
+          "termometer"
+        ],
+        "estimated_minutes": 66,
+        "family": "carne en su jugo",
+        "fish": false,
+        "flavor_profile": [
+          "köttspad",
+          "tomatillo",
+          "rimmat fläsk"
+        ],
+        "ingredient_count": 7,
+        "method": "pot",
+        "primary_ingredient": "nötinnanlår",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Jalisco-anknuten rätt med tunt skuret nötkött som avger eget spad, grön tomatillosås och bönor. Rimmat fläsk ersätter bacon uttryckligen. Nötinnanlår används i stället för registrets generiska långkokskött. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokta bönor",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 13,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "nötinnanlår|raw_edible",
+              "rimmat fläsk|raw_edible",
+              "salsa verde av tomatillo|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär nötinnanlår i mycket tunna skivor tvärs fibrerna och därefter i små rutor. Tärna det rimmade fläsket. Skala lök och vitlök, väg den råa ätliga mängden och hacka. Väg upp den färdiga tomatillosalsan; den innehåller redan kryddor, soja, syra och salt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 14,
+            "id": "s2",
+            "ingredient_keys": [
+              "nötinnanlår|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg fläsket i kall gryta och värm långsamt tills fett smälter ut; stek krispigt och genomlagat. Lyft ur fläsket men behåll fettet. Lägg i nötkött och låt det mjukna på medelvärme så att det avger vätska. Bryn inte hårt och häll inte bort spadet."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "limejuice|as_sold",
+              "salsa verde av tomatillo|as_sold",
+              "svartpeppar|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Mixa den uppvägda färdiga tomatillosalsan med gul lök, vitlök, limejuice, svartpeppar och 500 ml vatten. Häll i köttgrytan och koka upp. Tillsätt inget extra salt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 25,
+            "id": "s4",
+            "ingredient_keys": [
+              "nötinnanlår|raw_edible",
+              "salsa verde av tomatillo|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud varsamt under lock cirka 25 minuter, tills köttet är mört. Förläng vid behov för den valda detaljen. Rätten ska vara en koncentrerad buljong, inte reduceras till stekt kött."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "nötinnanlår|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skölj de redan kokta bönorna, låt rinna av och väg den angivna avrunna mängden. Värm i grytan fem minuter under omrörning. Kontrollera att köttet är mört och genomhettat; förläng kokningen vid behov. Såväl fläsk som färdig salsa och eventuell soja ger sälta; tillsätt inget extra salt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "nötinnanlår|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fördela bönor, kött och spad i fyra djupa tallrikar. Lägg det genomstekta fläsket över så att det behåller sin textur. Servera allt köttspad och allt utsmält fläskfett i grytan."
+          }
+        ],
+        "total_minutes": 66,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 25
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötinnanlår",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "nötinnanlår",
+          "product_requirements": [
+            "pack:intake_all_expansion_025eceb4118e"
+          ],
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rimmat fläsk",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "rimmat fläsk",
+          "product_requirements": [
+            "pack:intake_all_9215891a1827"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salsa verde av tomatillo",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "salsa verde av tomatillo",
+          "product_requirements": [
+            "pack:intake_all_round2_8e7a9dc5fbef"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bönor",
+          "component": "gryta",
+          "form": "cooked_drained",
+          "name": "bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "gryta",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skär nötinnanlår i mycket tunna skivor tvärs fibrerna och därefter i små rutor. Tärna det rimmade fläsket. Skala lök och vitlök, väg den råa ätliga mängden och hacka. Väg upp den färdiga tomatillosalsan; den innehåller redan kryddor, soja, syra och salt.",
+        "Lägg fläsket i kall gryta och värm långsamt tills fett smälter ut; stek krispigt och genomlagat. Lyft ur fläsket men behåll fettet. Lägg i nötkött och låt det mjukna på medelvärme så att det avger vätska. Bryn inte hårt och häll inte bort spadet.",
+        "Mixa den uppvägda färdiga tomatillosalsan med gul lök, vitlök, limejuice, svartpeppar och 500 ml vatten. Häll i köttgrytan och koka upp. Tillsätt inget extra salt.",
+        "Sjud varsamt under lock cirka 25 minuter, tills köttet är mört. Förläng vid behov för den valda detaljen. Rätten ska vara en koncentrerad buljong, inte reduceras till stekt kött.",
+        "Skölj de redan kokta bönorna, låt rinna av och väg den angivna avrunna mängden. Värm i grytan fem minuter under omrörning. Kontrollera att köttet är mört och genomhettat; förläng kokningen vid behov. Såväl fläsk som färdig salsa och eventuell soja ger sälta; tillsätt inget extra salt.",
+        "Fördela bönor, kött och spad i fyra djupa tallrikar. Lägg det genomstekta fläsket över så att det behåller sin textur. Servera allt köttspad och allt utsmält fläskfett i grytan."
+      ],
+      "name": "Carne en su jugo – nötkött i eget spad med bönor – enkel – med färdig tomatillosalsa",
+      "preparation": {
+        "family": "carne en su jugo",
+        "input_forms": {
+          "bönor": "cooked_drained",
+          "gul lök": "raw_edible",
+          "limejuice": "as_sold",
+          "nötinnanlår": "raw_edible",
+          "rimmat fläsk": "raw_edible",
+          "salsa verde av tomatillo": "as_sold",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "aa55ac360ef843358bab8503cd4c81e7e447f67aa25412adeb61e53b30f1e3d5",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 41,
+        "base_id": "smako-mexican-carne-en-su-jugo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötinnanlår|raw_edible",
+                "name": "nötinnanlår",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rimmat fläsk|raw_edible",
+                "name": "rimmat fläsk",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salsa verde av tomatillo|as_sold",
+                "name": "Färdig Salsa Verde av tomatillo, Clemente Jacques",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "bönor",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "sojasås",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "gryta",
+            "name": "Kött i eget spad"
+          }
+        ],
+        "content_sha256": "79ca2025162314f70fb2bb0601d11dd06fe9b02ca9a2c86a5ad7d6e3ea80f96e",
+        "content_source": {
+          "active_minutes": 41,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage17",
+          "priority": 1,
+          "proposal_id": "smako-mexican-carne-en-su-jugo",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "68cd1ee195d992990bec68d9dc46094ea91e7015c7c6fdf407b8220791adf3b8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "gryta",
+          "mixer",
+          "termometer"
+        ],
+        "estimated_minutes": 66,
+        "family": "carne en su jugo",
+        "fish": false,
+        "flavor_profile": [
+          "köttspad",
+          "tomatillo",
+          "rimmat fläsk"
+        ],
+        "ingredient_count": 10,
+        "method": "pot",
+        "primary_ingredient": "nötinnanlår",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Jalisco-anknuten rätt med tunt skuret nötkött som avger eget spad, grön tomatillosås och bönor. Rimmat fläsk ersätter bacon uttryckligen. Nötinnanlår används i stället för registrets generiska långkokskött. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokta bönor",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 13,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "nötinnanlår|raw_edible",
+              "rimmat fläsk|raw_edible",
+              "salsa verde av tomatillo|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär nötinnanlår i mycket tunna skivor tvärs fibrerna och därefter i små rutor. Tärna det rimmade fläsket. Skala lök och vitlök, väg den råa ätliga mängden och hacka. Väg upp den färdiga tomatillosalsan; den innehåller redan kryddor, soja, syra och salt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 14,
+            "id": "s2",
+            "ingredient_keys": [
+              "nötinnanlår|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg fläsket i kall gryta och värm långsamt tills fett smälter ut; stek krispigt och genomlagat. Lyft ur fläsket men behåll fettet. Lägg i nötkött och låt det mjukna på medelvärme så att det avger vätska. Bryn inte hårt och häll inte bort spadet."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "koriander|raw_edible",
+              "limejuice|as_sold",
+              "salsa verde av tomatillo|as_sold",
+              "sojasås|as_sold",
+              "svartpeppar|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Mixa den uppvägda färdiga tomatillosalsan med gul lök, vitlök, limejuice, svartpeppar och 500 ml vatten. Häll i köttgrytan och koka upp. Tillsätt inget extra salt. Mixa även ner den frysta hackade koriandern, chiliflakes och den lilla angivna mängden soja; koriandern genomkokas sedan med grytan."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 25,
+            "id": "s4",
+            "ingredient_keys": [
+              "nötinnanlår|raw_edible",
+              "salsa verde av tomatillo|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud varsamt under lock cirka 25 minuter, tills köttet är mört. Förläng vid behov för den valda detaljen. Rätten ska vara en koncentrerad buljong, inte reduceras till stekt kött."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "nötinnanlår|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skölj de redan kokta bönorna, låt rinna av och väg den angivna avrunna mängden. Värm i grytan fem minuter under omrörning. Kontrollera att köttet är mört och genomhettat; förläng kokningen vid behov. Såväl fläsk som färdig salsa och eventuell soja ger sälta; tillsätt inget extra salt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "nötinnanlår|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fördela bönor, kött och spad i fyra djupa tallrikar. Lägg det genomstekta fläsket över så att det behåller sin textur. Servera allt köttspad och allt utsmält fläskfett i grytan."
+          }
+        ],
+        "total_minutes": 66,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 25
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötinnanlår",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "nötinnanlår",
+          "product_requirements": [
+            "pack:intake_all_expansion_025eceb4118e"
+          ],
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rimmat fläsk",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "rimmat fläsk",
+          "product_requirements": [
+            "pack:intake_all_9215891a1827"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salsa verde av tomatillo",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "salsa verde av tomatillo",
+          "product_requirements": [
+            "pack:intake_all_round2_8e7a9dc5fbef"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bönor",
+          "component": "gryta",
+          "form": "cooked_drained",
+          "name": "bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "gryta",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "gryta",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Skär nötinnanlår i mycket tunna skivor tvärs fibrerna och därefter i små rutor. Tärna det rimmade fläsket. Skala lök och vitlök, väg den råa ätliga mängden och hacka. Väg upp den färdiga tomatillosalsan; den innehåller redan kryddor, soja, syra och salt.",
+        "Lägg fläsket i kall gryta och värm långsamt tills fett smälter ut; stek krispigt och genomlagat. Lyft ur fläsket men behåll fettet. Lägg i nötkött och låt det mjukna på medelvärme så att det avger vätska. Bryn inte hårt och häll inte bort spadet.",
+        "Mixa den uppvägda färdiga tomatillosalsan med gul lök, vitlök, limejuice, svartpeppar och 500 ml vatten. Häll i köttgrytan och koka upp. Tillsätt inget extra salt. Mixa även ner den frysta hackade koriandern, chiliflakes och den lilla angivna mängden soja; koriandern genomkokas sedan med grytan.",
+        "Sjud varsamt under lock cirka 25 minuter, tills köttet är mört. Förläng vid behov för den valda detaljen. Rätten ska vara en koncentrerad buljong, inte reduceras till stekt kött.",
+        "Skölj de redan kokta bönorna, låt rinna av och väg den angivna avrunna mängden. Värm i grytan fem minuter under omrörning. Kontrollera att köttet är mört och genomhettat; förläng kokningen vid behov. Såväl fläsk som färdig salsa och eventuell soja ger sälta; tillsätt inget extra salt.",
+        "Fördela bönor, kött och spad i fyra djupa tallrikar. Lägg det genomstekta fläsket över så att det behåller sin textur. Servera allt köttspad och allt utsmält fläskfett i grytan."
+      ],
+      "name": "Carne en su jugo – nötkött i eget spad med bönor – standard – med färdig tomatillosalsa",
+      "preparation": {
+        "family": "carne en su jugo",
+        "input_forms": {
+          "bönor": "cooked_drained",
+          "chiliflakes": "dry",
+          "gul lök": "raw_edible",
+          "koriander": "raw_edible",
+          "limejuice": "as_sold",
+          "nötinnanlår": "raw_edible",
+          "rimmat fläsk": "raw_edible",
+          "salsa verde av tomatillo": "as_sold",
+          "sojasås": "as_sold",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "79ca2025162314f70fb2bb0601d11dd06fe9b02ca9a2c86a5ad7d6e3ea80f96e",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 47,
+        "base_id": "smako-mexican-carne-en-su-jugo",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötinnanlår|raw_edible",
+                "name": "nötinnanlår",
+                "note": "",
+                "quantity": 700.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rimmat fläsk|raw_edible",
+                "name": "rimmat fläsk",
+                "note": "",
+                "quantity": 120.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salsa verde av tomatillo|as_sold",
+                "name": "Färdig Salsa Verde av tomatillo, Clemente Jacques",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "gul lök",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bönor|cooked_drained",
+                "name": "bönor",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "limejuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "koriander|raw_edible",
+                "name": "koriander",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "chiliflakes|dry",
+                "name": "chiliflakes",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "sojasås",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "gryta",
+            "name": "Kött i eget spad"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "avokado|raw_edible",
+                "name": "avokado",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rädisa|raw_edible",
+                "name": "rädisa",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salladslök|raw_edible",
+                "name": "salladslök",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              }
+            ],
+            "id": "servering",
+            "name": "Frisk servering"
+          }
+        ],
+        "content_sha256": "a117a93f6b9996a3cb547b81d121079e834afc38dcf07231126437bc7944f602",
+        "content_source": {
+          "active_minutes": 47,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage17",
+          "priority": 1,
+          "proposal_id": "smako-mexican-carne-en-su-jugo",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "68cd1ee195d992990bec68d9dc46094ea91e7015c7c6fdf407b8220791adf3b8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "gryta",
+          "mixer",
+          "termometer"
+        ],
+        "estimated_minutes": 192,
+        "family": "carne en su jugo",
+        "fish": false,
+        "flavor_profile": [
+          "köttspad",
+          "tomatillo",
+          "rimmat fläsk"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "nötinnanlår",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Jalisco-anknuten rätt med tunt skuret nötkött som avger eget spad, grön tomatillosås och bönor. Rimmat fläsk ersätter bacon uttryckligen. Nötinnanlår används i stället för registrets generiska långkokskött. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokta bönor",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 1,
+            "id": "s1",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "avokado|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all avokadosaft och servera med grytan."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 13,
+            "id": "s3",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "nötinnanlår|raw_edible",
+              "rimmat fläsk|raw_edible",
+              "salsa verde av tomatillo|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär nötinnanlår i mycket tunna skivor tvärs fibrerna och därefter i små rutor. Tärna det rimmade fläsket. Skala lök och vitlök, väg den råa ätliga mängden och hacka. Väg upp den färdiga tomatillosalsan; den innehåller redan kryddor, soja, syra och salt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 14,
+            "id": "s4",
+            "ingredient_keys": [
+              "nötinnanlår|raw_edible",
+              "rimmat fläsk|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lägg fläsket i kall gryta och värm långsamt tills fett smälter ut; stek krispigt och genomlagat. Lyft ur fläsket men behåll fettet. Lägg i nötkött och låt det mjukna på medelvärme så att det avger vätska. Bryn inte hårt och häll inte bort spadet."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "chiliflakes|dry",
+              "gul lök|raw_edible",
+              "koriander|raw_edible",
+              "limejuice|as_sold",
+              "salsa verde av tomatillo|as_sold",
+              "sojasås|as_sold",
+              "svartpeppar|dry",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Mixa den uppvägda färdiga tomatillosalsan med gul lök, vitlök, limejuice, svartpeppar och 500 ml vatten. Häll i köttgrytan och koka upp. Tillsätt inget extra salt. Mixa även ner den frysta hackade koriandern, chiliflakes och den lilla angivna mängden soja; koriandern genomkokas sedan med grytan."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 25,
+            "id": "s6",
+            "ingredient_keys": [
+              "nötinnanlår|raw_edible",
+              "salsa verde av tomatillo|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sjud varsamt under lock cirka 25 minuter, tills köttet är mört. Förläng vid behov för den valda detaljen. Rätten ska vara en koncentrerad buljong, inte reduceras till stekt kött."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 6,
+            "id": "s7",
+            "ingredient_keys": [
+              "bönor|cooked_drained",
+              "nötinnanlår|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skölj de redan kokta bönorna, låt rinna av och väg den angivna avrunna mängden. Värm i grytan fem minuter under omrörning. Kontrollera att köttet är mört och genomhettat; förläng kokningen vid behov. Såväl fläsk som färdig salsa och eventuell soja ger sälta; tillsätt inget extra salt."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "rädisa|raw_edible",
+              "salladslök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Använd de tinade avokadobitarna med all saft. Ansa rädisor och salladslök, väg de råa ätliga mängderna och skiva. Lägg på ett fat med avokadon."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 3,
+            "id": "s9",
+            "ingredient_keys": [
+              "avokado|raw_edible",
+              "bönor|cooked_drained",
+              "nötinnanlår|raw_edible",
+              "rimmat fläsk|raw_edible",
+              "rädisa|raw_edible",
+              "salladslök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Fördela bönor, kött och spad i fyra djupa tallrikar. Lägg det genomstekta fläsket över så att det behåller sin textur och servera avokado, rädisa och salladslök vid sidan. Servera allt köttspad och allt utsmält fläskfett i grytan."
+          }
+        ],
+        "total_minutes": 192,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 145
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötinnanlår",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "nötinnanlår",
+          "product_requirements": [
+            "pack:intake_all_expansion_025eceb4118e"
+          ],
+          "quantity": 700.0,
+          "quantity_max": 700.0,
+          "quantity_min": 700.0,
+          "quantity_step": 700.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rimmat fläsk",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "rimmat fläsk",
+          "product_requirements": [
+            "pack:intake_all_9215891a1827"
+          ],
+          "quantity": 120.0,
+          "quantity_max": 120.0,
+          "quantity_min": 120.0,
+          "quantity_step": 120.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salsa verde av tomatillo",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "salsa verde av tomatillo",
+          "product_requirements": [
+            "pack:intake_all_round2_8e7a9dc5fbef"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bönor",
+          "component": "gryta",
+          "form": "cooked_drained",
+          "name": "bönor",
+          "product_requirements": [
+            "white_beans"
+          ],
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "gryta",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "koriander",
+          "component": "gryta",
+          "form": "raw_edible",
+          "name": "koriander",
+          "product_requirements": [
+            "pack:intake_all_9b2370e0e926"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "chiliflakes",
+          "component": "gryta",
+          "form": "dry",
+          "name": "chiliflakes",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "gryta",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "avokado",
+          "component": "servering",
+          "form": "raw_edible",
+          "name": "avokado",
+          "product_requirements": [
+            "pack:intake_all_416f9df16b84"
+          ],
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rädisa",
+          "component": "servering",
+          "form": "raw_edible",
+          "name": "rädisa",
+          "product_requirements": [
+            "pack:intake_all_749fb6906885"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salladslök",
+          "component": "servering",
+          "form": "raw_edible",
+          "name": "salladslök",
+          "product_requirements": [
+            "pack:intake_all_ed5c6da604b5"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska.",
+        "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Behåll all avokadosaft och servera med grytan.",
+        "Skär nötinnanlår i mycket tunna skivor tvärs fibrerna och därefter i små rutor. Tärna det rimmade fläsket. Skala lök och vitlök, väg den råa ätliga mängden och hacka. Väg upp den färdiga tomatillosalsan; den innehåller redan kryddor, soja, syra och salt.",
+        "Lägg fläsket i kall gryta och värm långsamt tills fett smälter ut; stek krispigt och genomlagat. Lyft ur fläsket men behåll fettet. Lägg i nötkött och låt det mjukna på medelvärme så att det avger vätska. Bryn inte hårt och häll inte bort spadet.",
+        "Mixa den uppvägda färdiga tomatillosalsan med gul lök, vitlök, limejuice, svartpeppar och 500 ml vatten. Häll i köttgrytan och koka upp. Tillsätt inget extra salt. Mixa även ner den frysta hackade koriandern, chiliflakes och den lilla angivna mängden soja; koriandern genomkokas sedan med grytan.",
+        "Sjud varsamt under lock cirka 25 minuter, tills köttet är mört. Förläng vid behov för den valda detaljen. Rätten ska vara en koncentrerad buljong, inte reduceras till stekt kött.",
+        "Skölj de redan kokta bönorna, låt rinna av och väg den angivna avrunna mängden. Värm i grytan fem minuter under omrörning. Kontrollera att köttet är mört och genomhettat; förläng kokningen vid behov. Såväl fläsk som färdig salsa och eventuell soja ger sälta; tillsätt inget extra salt.",
+        "Använd de tinade avokadobitarna med all saft. Ansa rädisor och salladslök, väg de råa ätliga mängderna och skiva. Lägg på ett fat med avokadon.",
+        "Fördela bönor, kött och spad i fyra djupa tallrikar. Lägg det genomstekta fläsket över så att det behåller sin textur och servera avokado, rädisa och salladslök vid sidan. Servera allt köttspad och allt utsmält fläskfett i grytan."
+      ],
+      "name": "Carne en su jugo – nötkött i eget spad med bönor – utökad – med färdig tomatillosalsa",
+      "preparation": {
+        "family": "carne en su jugo",
+        "input_forms": {
+          "avokado": "raw_edible",
+          "bönor": "cooked_drained",
+          "chiliflakes": "dry",
+          "gul lök": "raw_edible",
+          "koriander": "raw_edible",
+          "limejuice": "as_sold",
+          "nötinnanlår": "raw_edible",
+          "rimmat fläsk": "raw_edible",
+          "rädisa": "raw_edible",
+          "salladslök": "raw_edible",
+          "salsa verde av tomatillo": "as_sold",
+          "sojasås": "as_sold",
+          "svartpeppar": "dry",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "a117a93f6b9996a3cb547b81d121079e834afc38dcf07231126437bc7944f602",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 34,
+        "base_id": "smako-indian-phirni",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 14.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "saffran|dry",
+                "name": "Saffran",
+                "note": "",
+                "quantity": 0.03,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rostade saltade pistaschkärnor|as_sold",
+                "name": "rostade saltade pistaschkärnor",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "pudding",
+            "name": "Malet ris i mjölk"
+          }
+        ],
+        "content_sha256": "51b16e3979ae194e5b1a48d6533fad2247a6db577c62bd47df3f5fd9b4c38b04",
+        "content_source": {
+          "active_minutes": 34,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage17",
+          "priority": 1,
+          "proposal_id": "smako-indian-phirni",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "68cd1ee195d992990bec68d9dc46094ea91e7015c7c6fdf407b8220791adf3b8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "liten mixer eller mortel",
+          "kastrull",
+          "grund portionsskål",
+          "precisionsvåg"
+        ],
+        "estimated_minutes": 169,
+        "family": "mjölkpudding av blötlagt finmalet ris",
+        "fish": false,
+        "flavor_profile": [
+          "mjölk",
+          "kardemumma"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "ris",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kyld portionspudding",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 2,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "150 ml",
+                150.0
+              ]
+            ],
+            "text": "Skölj det råa riset och täck med 150 ml vatten (kallt) i en liten skål."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 30,
+            "id": "s2",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blötlägg riset 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Häll bort blötläggningsvattnet. Mixa eller mortla det avrunna riset med en fjärdedel av mjölken till mycket fina gryn, nästan mjöl. Det är det råa blötlagda riset som mals, inte redan kokt gröt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry",
+              "saffran|dry"
+            ],
+            "parallel_group": null,
+            "text": "Värm resten av mjölken i en liten tjockbottnad kastrull. Vispa ner risblandningen i en tunn stråle och lägg i saffranet. Sänk värmen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 18,
+            "id": "s5",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Sjud mycket försiktigt cirka 18 minuter under nästan ständig omrörning tills rispartiklarna är genomkokta och mjölken blivit en tjock slät kräm. Tillsätt 20 ml vatten om den blir för tät innan riset är mjukt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "rostade saltade pistaschkärnor|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör ner socker och malen kardemumma och koka ytterligare 2 minuter. Hacka de uppvägda redan skalade, rostade och saltade pistaschkärnorna och vänd ner hälften i krämen; lägg resten ovanpå. Häll upp i en grund portionsskål."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Ställ skålen i ett kallt vattenbad med 500 ml vatten utan att vatten går i puddingen."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 15,
+            "id": "s8",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt skålen svalna 15 minuter i det kalla vattenbadet."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Flytta skålen till kylskåp; låt den inte stå kvar på köksbänken."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 90,
+            "id": "s10",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Kyl cirka 90 minuter tills puddingen är helt kall och har satt sig."
+          },
+          {
+            "depends_on": [
+              "s10"
+            ],
+            "duration_minutes": 1,
+            "id": "s11",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela den kalla portionsskålen."
+          }
+        ],
+        "total_minutes": 169,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 135
+      },
+      "ingredients": [
+        {
+          "canonical_name": "ris",
+          "component": "pudding",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "pudding",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "pudding",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 14.0,
+          "quantity_max": 14.0,
+          "quantity_min": 14.0,
+          "quantity_step": 14.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "pudding",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "saffran",
+          "component": "pudding",
+          "form": "dry",
+          "name": "saffran",
+          "product_requirements": [
+            "pack:intake_all_expansion_69b457a7583c"
+          ],
+          "quantity": 0.03,
+          "quantity_max": 0.03,
+          "quantity_min": 0.03,
+          "quantity_step": 0.03,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rostade saltade pistaschkärnor",
+          "component": "pudding",
+          "form": "as_sold",
+          "name": "rostade saltade pistaschkärnor",
+          "product_requirements": [
+            "pack:intake_all_round2_1d75b15e12e7"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj det råa riset och täck med 150 ml vatten (kallt) i en liten skål.",
+        "Blötlägg riset 30 minuter.",
+        "Häll bort blötläggningsvattnet. Mixa eller mortla det avrunna riset med en fjärdedel av mjölken till mycket fina gryn, nästan mjöl. Det är det råa blötlagda riset som mals, inte redan kokt gröt.",
+        "Värm resten av mjölken i en liten tjockbottnad kastrull. Vispa ner risblandningen i en tunn stråle och lägg i saffranet. Sänk värmen.",
+        "Sjud mycket försiktigt cirka 18 minuter under nästan ständig omrörning tills rispartiklarna är genomkokta och mjölken blivit en tjock slät kräm. Tillsätt 20 ml vatten om den blir för tät innan riset är mjukt.",
+        "Rör ner socker och malen kardemumma och koka ytterligare 2 minuter. Hacka de uppvägda redan skalade, rostade och saltade pistaschkärnorna och vänd ner hälften i krämen; lägg resten ovanpå. Häll upp i en grund portionsskål.",
+        "Ställ skålen i ett kallt vattenbad med 500 ml vatten utan att vatten går i puddingen.",
+        "Låt skålen svalna 15 minuter i det kalla vattenbadet.",
+        "Flytta skålen till kylskåp; låt den inte stå kvar på köksbänken.",
+        "Kyl cirka 90 minuter tills puddingen är helt kall och har satt sig.",
+        "Servera hela den kalla portionsskålen."
+      ],
+      "name": "Phirni – slät mjölkpudding av malet ris – utökad – med rostade saltade pistaschkärnor",
+      "preparation": {
+        "family": "mjölkpudding av blötlagt finmalet ris",
+        "input_forms": {
+          "kardemumma": "dry",
+          "mjölk": "as_sold",
+          "ris": "dry",
+          "rostade saltade pistaschkärnor": "as_sold",
+          "saffran": "dry",
+          "strösocker": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "51b16e3979ae194e5b1a48d6533fad2247a6db577c62bd47df3f5fd9b4c38b04",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 29,
+        "base_id": "smako-indian-gulab-jamun",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mjölkpulver|dry",
+                "name": "Mjölkpulver",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ghee|as_sold",
+                "name": "Ghee",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bakpulver|dry",
+                "name": "Bakpulver",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Processolja för fritering, merparten serveras inte",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "bollar",
+            "name": "Mjölkpulverdeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 28.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rosenvatten|as_sold",
+                "name": "Rosenvatten",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "rostade saltade pistaschkärnor|as_sold",
+                "name": "rostade saltade pistaschkärnor",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "sirap",
+            "name": "Kryddsirap"
+          }
+        ],
+        "content_sha256": "4a9a0691a4332c92e618f2c3e4ed64088dc45883ed3d637a0f1347285c7e39f0",
+        "content_source": {
+          "active_minutes": 29,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage17",
+          "priority": 1,
+          "proposal_id": "smako-indian-gulab-jamun",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "68cd1ee195d992990bec68d9dc46094ea91e7015c7c6fdf407b8220791adf3b8",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "liten kastrull cirka 12 cm",
+          "termometer",
+          "hålslev",
+          "lock för brandsäkerhet"
+        ],
+        "estimated_minutes": 94,
+        "family": "Gulab jamun",
+        "fish": false,
+        "flavor_profile": [
+          "mjölk",
+          "kardemumma"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "mjölkpulver",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Uttrycklig mjölkpulveranpassning, inte traditionell khoya. De många nödvändiga bak- och sirapsingredienserna motiverar undantag från mellanmålsriktmärket. Frityrolja är processmängd, inte antagen konsumerad mängd. Den lilla degmängdens fukt och genomfritering behöver provlagning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "sirap",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "rosenvatten|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "65 ml",
+                65.0
+              ]
+            ],
+            "text": "Koka upp socker, kardemumma och 65 ml vatten. Sjud tre minuter till en tunn sirap och håll ljummen. Rör ner rosenvattnet efter kokningen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 4,
+            "id": "s2",
+            "ingredient_keys": [
+              "bakpulver|dry",
+              "ghee|as_sold",
+              "mjölkpulver|dry",
+              "vetemjöl|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "5 ml",
+                5.0
+              ]
+            ],
+            "text": "Blanda mjölkpulver, vetemjöl och bakpulver. Arbeta försiktigt in ghee och yoghurt och tillsätt 5 ml vatten. Samla till en mjuk deg utan lång knådning; tillsätt ytterligare 5 ml vatten endast om degen spricker."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "mjölkpulver|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila fem minuter så mjölkpulvret hinner ta upp vätska."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Forma tre släta bollar utan sprickor. Värm frityroljan till 150–155 °C i en smal hög kastrull; fyll aldrig mer än till en tredjedel. Håll lock nära och lämna inte oljan obevakad."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 9,
+            "id": "s5",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sänk försiktigt ner bollarna och vänd dem ofta i det grunda oljebadet. Fritera cirka nio minuter till jämn kastanjebrun färg. Dela en kontrollboll: degen ska vara tillagad även mitt i, inte torrt pulver eller rå kladdig mjölkdeg."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "rapsolja|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lyft bollarna med hålslev, låt överskottsoljan rinna av på papper och lägg dem i den ljumma sirapen. Återstående frityrolja serveras inte."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 30,
+            "id": "s7",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt bollarna dra i den ljumma sirapen i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Vänd bollarna försiktigt i sirapen."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 30,
+            "id": "s9",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt dra ytterligare 30 minuter, totalt 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "rostade saltade pistaschkärnor|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera bollarna med den sirap som finns kvar. Hacka de uppvägda redan skalade, rostade och saltade pistaschkärnorna och fördela över."
+          }
+        ],
+        "total_minutes": 94,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 65
+      },
+      "ingredients": [
+        {
+          "canonical_name": "mjölkpulver",
+          "component": "bollar",
+          "form": "dry",
+          "name": "mjölkpulver",
+          "product_requirements": [
+            "pack:intake_all_expansion_9bcb38e362b3"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "bollar",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ghee",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "ghee",
+          "product_requirements": [
+            "pack:intake_all_expansion_94bffb8b7bee"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bakpulver",
+          "component": "bollar",
+          "form": "dry",
+          "name": "bakpulver",
+          "product_requirements": [
+            "pack:intake_baking_powder"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "sirap",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 28.0,
+          "quantity_max": 28.0,
+          "quantity_min": 28.0,
+          "quantity_step": 28.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "sirap",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rosenvatten",
+          "component": "sirap",
+          "form": "as_sold",
+          "name": "rosenvatten",
+          "product_requirements": [
+            "pack:intake_all_expansion_5fa60fb047fd"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "rostade saltade pistaschkärnor",
+          "component": "sirap",
+          "form": "as_sold",
+          "name": "rostade saltade pistaschkärnor",
+          "product_requirements": [
+            "pack:intake_all_round2_1d75b15e12e7"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka upp socker, kardemumma och 65 ml vatten. Sjud tre minuter till en tunn sirap och håll ljummen. Rör ner rosenvattnet efter kokningen.",
+        "Blanda mjölkpulver, vetemjöl och bakpulver. Arbeta försiktigt in ghee och yoghurt och tillsätt 5 ml vatten. Samla till en mjuk deg utan lång knådning; tillsätt ytterligare 5 ml vatten endast om degen spricker.",
+        "Låt degen vila fem minuter så mjölkpulvret hinner ta upp vätska.",
+        "Forma tre släta bollar utan sprickor. Värm frityroljan till 150–155 °C i en smal hög kastrull; fyll aldrig mer än till en tredjedel. Håll lock nära och lämna inte oljan obevakad.",
+        "Sänk försiktigt ner bollarna och vänd dem ofta i det grunda oljebadet. Fritera cirka nio minuter till jämn kastanjebrun färg. Dela en kontrollboll: degen ska vara tillagad även mitt i, inte torrt pulver eller rå kladdig mjölkdeg.",
+        "Lyft bollarna med hålslev, låt överskottsoljan rinna av på papper och lägg dem i den ljumma sirapen. Återstående frityrolja serveras inte.",
+        "Låt bollarna dra i den ljumma sirapen i 30 minuter.",
+        "Vänd bollarna försiktigt i sirapen.",
+        "Låt dra ytterligare 30 minuter, totalt 60 minuter.",
+        "Servera bollarna med den sirap som finns kvar. Hacka de uppvägda redan skalade, rostade och saltade pistaschkärnorna och fördela över."
+      ],
+      "name": "Gulab jamun – mjölkbollar i kardemummasirap – med rosenvatten och pistage – med rostade saltade pistaschkärnor",
+      "preparation": {
+        "family": "Gulab jamun",
+        "input_forms": {
+          "bakpulver": "dry",
+          "ghee": "as_sold",
+          "kardemumma": "dry",
+          "mjölkpulver": "dry",
+          "rapsolja": "as_sold",
+          "rosenvatten": "as_sold",
+          "rostade saltade pistaschkärnor": "as_sold",
+          "strösocker": "dry",
+          "vetemjöl": "dry",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "4a9a0691a4332c92e618f2c3e4ed64088dc45883ed3d637a0f1347285c7e39f0",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    }
+  ]
+}

@@ -1,0 +1,5801 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 23,
+        "base_id": "smako-italian-gnocchi-di-susine",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 28.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "plommon|raw_edible",
+                "name": "Urkärnad ätlig plommonmängd",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "knyten",
+            "name": "Potatisdeg och plommon"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ströbröd|dry",
+                "name": "Ströbröd",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "smulor",
+            "name": "Smörrostade smulor"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "två kastruller",
+          "potatispress",
+          "hålslev",
+          "stekpanna"
+        ],
+        "estimated_minutes": 68,
+        "family": "fruktfylld potatisklimp",
+        "fish": false,
+        "flavor_profile": [
+          "plommon"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "potatis",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel äggfri deg, utökad äggbunden deg med kanelsmulor; liten dessertlik mellanmålsportion. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "smörsmulor",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den angivna ätliga råa mängden och skär jämnt. Koka upp i 500 ml vatten utan tillsatt salt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 18,
+            "id": "s2",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka 18 minuter tills potatisen är mjuk. Häll av noga."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Pressa den avrunna potatisen och bred ut tunt på ett fat."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt den pressade potatisen ånga av och svalna 15 minuter; en blöt massa behöver längre avångning, inte obegränsat extra mjöl."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 9,
+            "id": "s5",
+            "ingredient_keys": [
+              "plommon|raw_edible",
+              "potatis|raw_edible",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blanda potatis, mjöl och salt till en mjuk formbar deg utan lång knådning. Kärna ur plommonen, väg den ätliga mängden och dela plommonköttet i två fyllningar. Dela degen i två delar, platta till med fuktade händer och slut varje del helt runt sin plommonfyllning."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "900 ml",
+                900.0
+              ]
+            ],
+            "text": "Koka upp 900 ml vatten i en vid kastrull och sänk till lugn sjudning. Sänk ner knytena med hålslev."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 12,
+            "id": "s7",
+            "ingredient_keys": [
+              "plommon|raw_edible",
+              "potatis|raw_edible",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt cirka 12 minuter. Att knytena flyter är inte ensamt färdighetsbevis: dela ett och kontrollera att potatisdegen är jämnt genomkokt utan mjölig kärna. Förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "plommon|raw_edible",
+              "potatis|raw_edible",
+              "salt|as_sold",
+              "smör|as_sold",
+              "ströbröd|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Smält smöret på medelvärme och rosta ströbrödet ljust gyllene under omrörning. Lyft upp knytena väl avrunna och vänd i samtliga smulor. Servera båda direkt som en liten söt mellanmålsportion."
+          }
+        ],
+        "total_minutes": 68,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 45
+      },
+      "ingredients": [
+        {
+          "canonical_name": "potatis",
+          "component": "knyten",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "knyten",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 28.0,
+          "quantity_max": 28.0,
+          "quantity_min": 28.0,
+          "quantity_step": 28.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "plommon",
+          "component": "knyten",
+          "form": "raw_edible",
+          "name": "plommon",
+          "product_requirements": [
+            "pack:intake_all_6dc73059b9f2"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "knyten",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "smulor",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ströbröd",
+          "component": "smulor",
+          "form": "dry",
+          "name": "ströbröd",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala potatisen, väg den angivna ätliga råa mängden och skär jämnt. Koka upp i 500 ml vatten utan tillsatt salt.",
+        "Sjud cirka 18 minuter tills potatisen är mjuk. Häll av noga.",
+        "Pressa den avrunna potatisen och bred ut tunt på ett fat.",
+        "Låt den pressade potatisen ånga av och svalna 15 minuter; en blöt massa behöver längre avångning, inte obegränsat extra mjöl.",
+        "Blanda potatis, mjöl och salt till en mjuk formbar deg utan lång knådning. Kärna ur plommonen, väg den ätliga mängden och dela plommonköttet i två fyllningar. Dela degen i två delar, platta till med fuktade händer och slut varje del helt runt sin plommonfyllning.",
+        "Koka upp 900 ml vatten i en vid kastrull och sänk till lugn sjudning. Sänk ner knytena med hålslev.",
+        "Sjud försiktigt cirka 12 minuter. Att knytena flyter är inte ensamt färdighetsbevis: dela ett och kontrollera att potatisdegen är jämnt genomkokt utan mjölig kärna. Förläng vid behov.",
+        "Smält smöret på medelvärme och rosta ströbrödet ljust gyllene under omrörning. Lyft upp knytena väl avrunna och vänd i samtliga smulor. Servera båda direkt som en liten söt mellanmålsportion."
+      ],
+      "name": "Gnocchi di susine – plommonfyllda potatisknyten – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 23,
+        "base_id": "smako-italian-gnocchi-di-susine",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 32.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "plommon|raw_edible",
+                "name": "Urkärnad ätlig plommonmängd",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "knyten",
+            "name": "Potatisdeg och plommon"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ströbröd|dry",
+                "name": "Ströbröd",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "smulor",
+            "name": "Smörrostade smulor"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "två kastruller",
+          "potatispress",
+          "hålslev",
+          "stekpanna"
+        ],
+        "estimated_minutes": 68,
+        "family": "fruktfylld potatisklimp",
+        "fish": false,
+        "flavor_profile": [
+          "plommon"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "potatis",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel äggfri deg, utökad äggbunden deg med kanelsmulor; liten dessertlik mellanmålsportion. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "smörsmulor",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "500 ml",
+                500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den angivna ätliga råa mängden och skär jämnt. Koka upp i 500 ml vatten utan tillsatt salt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 18,
+            "id": "s2",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka 18 minuter tills potatisen är mjuk. Häll av noga."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 2,
+            "id": "s3",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Pressa den avrunna potatisen och bred ut tunt på ett fat."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt den pressade potatisen ånga av och svalna 15 minuter; en blöt massa behöver längre avångning, inte obegränsat extra mjöl."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 9,
+            "id": "s5",
+            "ingredient_keys": [
+              "plommon|raw_edible",
+              "potatis|raw_edible",
+              "salt|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Blanda potatis, mjöl och salt med den uppvägda råa äggmängden till en mjuk formbar deg utan lång knådning. Kärna ur plommonen, väg den ätliga mängden och dela plommonköttet i två fyllningar. Dela degen i två delar, platta till med fuktade händer och slut varje del helt runt sin plommonfyllning."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "900 ml",
+                900.0
+              ]
+            ],
+            "text": "Koka upp 900 ml vatten i en vid kastrull och sänk till lugn sjudning. Sänk ner knytena med hålslev."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 12,
+            "id": "s7",
+            "ingredient_keys": [
+              "plommon|raw_edible",
+              "potatis|raw_edible",
+              "salt|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud försiktigt cirka 12 minuter. Att knytena flyter är inte ensamt färdighetsbevis: dela ett och kontrollera att potatisdegen är jämnt genomkokt utan mjölig kärna och minst 72 °C där ägget ingår. Förläng vid behov."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 5,
+            "id": "s8",
+            "ingredient_keys": [
+              "kanel|dry",
+              "plommon|raw_edible",
+              "potatis|raw_edible",
+              "salt|as_sold",
+              "smör|as_sold",
+              "ströbröd|dry",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Smält smöret på medelvärme och rosta ströbrödet ljust gyllene under omrörning. Ta av värmen och blanda i socker och kanel. Lyft upp knytena väl avrunna och vänd i samtliga smulor. Servera båda direkt som en liten söt mellanmålsportion."
+          }
+        ],
+        "total_minutes": 68,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 45
+      },
+      "ingredients": [
+        {
+          "canonical_name": "potatis",
+          "component": "knyten",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "knyten",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 32.0,
+          "quantity_max": 32.0,
+          "quantity_min": 32.0,
+          "quantity_step": 32.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "plommon",
+          "component": "knyten",
+          "form": "raw_edible",
+          "name": "plommon",
+          "product_requirements": [
+            "pack:intake_all_6dc73059b9f2"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "knyten",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "knyten",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "smulor",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ströbröd",
+          "component": "smulor",
+          "form": "dry",
+          "name": "ströbröd",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "smulor",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "smulor",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala potatisen, väg den angivna ätliga råa mängden och skär jämnt. Koka upp i 500 ml vatten utan tillsatt salt.",
+        "Sjud cirka 18 minuter tills potatisen är mjuk. Häll av noga.",
+        "Pressa den avrunna potatisen och bred ut tunt på ett fat.",
+        "Låt den pressade potatisen ånga av och svalna 15 minuter; en blöt massa behöver längre avångning, inte obegränsat extra mjöl.",
+        "Blanda potatis, mjöl och salt med den uppvägda råa äggmängden till en mjuk formbar deg utan lång knådning. Kärna ur plommonen, väg den ätliga mängden och dela plommonköttet i två fyllningar. Dela degen i två delar, platta till med fuktade händer och slut varje del helt runt sin plommonfyllning.",
+        "Koka upp 900 ml vatten i en vid kastrull och sänk till lugn sjudning. Sänk ner knytena med hålslev.",
+        "Sjud försiktigt cirka 12 minuter. Att knytena flyter är inte ensamt färdighetsbevis: dela ett och kontrollera att potatisdegen är jämnt genomkokt utan mjölig kärna och minst 72 °C där ägget ingår. Förläng vid behov.",
+        "Smält smöret på medelvärme och rosta ströbrödet ljust gyllene under omrörning. Ta av värmen och blanda i socker och kanel. Lyft upp knytena väl avrunna och vänd i samtliga smulor. Servera båda direkt som en liten söt mellanmålsportion."
+      ],
+      "name": "Gnocchi di susine – plommonfyllda potatisknyten – utökad",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 22,
+        "base_id": "smako-swedish-semla",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "Torrjäst",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "bulle",
+            "name": "Kardemummabulle"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mandelmjöl|dry",
+                "name": "Mandelmjöl",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "Vispbar grädde",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Mandel och vispad grädde"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "bunke",
+          "liten visp",
+          "ugn",
+          "galler",
+          "kylskåp"
+        ],
+        "estimated_minutes": 174,
+        "family": "fylld jästbulle med mandel och grädde",
+        "fish": false,
+        "flavor_profile": [
+          "kardemumma",
+          "mandel"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "mandelmjöl",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel vattenbaserad vetedeg utan ägg; utökad berikas med mjölk och ägg. Ingen extra ingrediens enbart som pudrad dekor. Sju respektive nio räknade ingredienser är ett motiverat undantag för ett helt hembakat jästbakverk med två nödvändiga fyllningar. Extra dekor har inte lagts till för att höja antalet. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "mellanmålsbakverk",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blanda mjöl, torrjäst, degens socker, kardemumma och salt. Tillsätt 25 ml ljummet vatten. Arbeta in mjukt smör och knåda 8 minuter tills degen blivit smidig. Den lilla degmängden kan knådas mot kanten av bunken."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck och låt jäsa cirka 60 minuter tills degen tydligt har vuxit. Sval rumstemperatur kan kräva längre tid."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rundriv en liten slät bulle per portion utan extra utbakningsmjöl och lägg på bakplåtspapper."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 50,
+            "id": "s4",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt jäsa täckt cirka 50 minuter tills bullen känns luftig. Värm ugnen till 210 °C under slutet av jäsningen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 12,
+            "id": "s5",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Baka cirka 12 minuter tills bullen har jämn gyllene färg och är genomgräddad utan rå deg i mitten. Anpassa efter ugn; en provsticka ska komma ut utan rå kladdig deg."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 30,
+            "id": "s6",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt bullen kallna på galler minst 30 minuter. Fyll den inte varm, då smälter grädden."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 8,
+            "id": "s7",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "kardemumma|dry",
+              "mandelmjöl|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "10 ml",
+                10.0
+              ]
+            ],
+            "text": "Skär av ett tunt lock och gröp ur lite inkråm. Rör mandelmjölet med fyllningens socker, inkråmet och 10 ml vatten till en mjuk mandelkräm. Lägg tillbaka krämen i hålet. Vispa den kalla vispgrädden med liten visp tills den håller mjuka toppar och lägg över fyllningen. Sätt på locket."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "kardemumma|dry",
+              "mandelmjöl|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera direkt som en semla per portion. Hela mandelkrämen och grädden ingår; florsocker eller annan dekor är inte en förutsättning."
+          }
+        ],
+        "total_minutes": 174,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 152
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "bulle",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "bulle",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "bulle",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "bulle",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 13.0,
+          "quantity_max": 13.0,
+          "quantity_min": 13.0,
+          "quantity_step": 13.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "bulle",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "bulle",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandelmjöl",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "mandelmjöl",
+          "product_requirements": [
+            "pack:intake_all_c4868b9a9e57"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Blanda mjöl, torrjäst, degens socker, kardemumma och salt. Tillsätt 25 ml ljummet vatten. Arbeta in mjukt smör och knåda 8 minuter tills degen blivit smidig. Den lilla degmängden kan knådas mot kanten av bunken.",
+        "Täck och låt jäsa cirka 60 minuter tills degen tydligt har vuxit. Sval rumstemperatur kan kräva längre tid.",
+        "Rundriv en liten slät bulle per portion utan extra utbakningsmjöl och lägg på bakplåtspapper.",
+        "Låt jäsa täckt cirka 50 minuter tills bullen känns luftig. Värm ugnen till 210 °C under slutet av jäsningen.",
+        "Baka cirka 12 minuter tills bullen har jämn gyllene färg och är genomgräddad utan rå deg i mitten. Anpassa efter ugn; en provsticka ska komma ut utan rå kladdig deg.",
+        "Låt bullen kallna på galler minst 30 minuter. Fyll den inte varm, då smälter grädden.",
+        "Skär av ett tunt lock och gröp ur lite inkråm. Rör mandelmjölet med fyllningens socker, inkråmet och 10 ml vatten till en mjuk mandelkräm. Lägg tillbaka krämen i hålet. Vispa den kalla vispgrädden med liten visp tills den håller mjuka toppar och lägg över fyllningen. Sätt på locket.",
+        "Servera direkt som en semla per portion. Hela mandelkrämen och grädden ingår; florsocker eller annan dekor är inte en förutsättning."
+      ],
+      "name": "Semla – kardemummabulle med mandel och grädde – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 23,
+        "base_id": "smako-swedish-semla",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "Torrjäst",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 23.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "bulle",
+            "name": "Kardemummabulle"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mandelmjöl|dry",
+                "name": "Mandelmjöl",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "Vispbar grädde",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Mandel och vispad grädde"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "bunke",
+          "liten visp",
+          "ugn",
+          "galler",
+          "kylskåp"
+        ],
+        "estimated_minutes": 175,
+        "family": "fylld jästbulle med mandel och grädde",
+        "fish": false,
+        "flavor_profile": [
+          "kardemumma",
+          "mandel"
+        ],
+        "ingredient_count": 9,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "bake",
+        "primary_ingredient": "mandelmjöl",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel vattenbaserad vetedeg utan ägg; utökad berikas med mjölk och ägg. Ingen extra ingrediens enbart som pudrad dekor. Sju respektive nio räknade ingredienser är ett motiverat undantag för ett helt hembakat jästbakverk med två nödvändiga fyllningar. Extra dekor har inte lagts till för att höja antalet. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "mellanmålsbakverk",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Blanda mjöl, torrjäst, degens socker, kardemumma och salt. Tillsätt ljummen mjölk och fyra femtedelar av den uppvägda råa äggmängden; spara resten kallt till pensling. Arbeta in mjukt smör och knåda 8 minuter tills degen blivit smidig. Den lilla degmängden kan knådas mot kanten av bunken."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Täck och låt jäsa cirka 60 minuter tills degen tydligt har vuxit. Sval rumstemperatur kan kräva längre tid."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Rundriv en liten slät bulle per portion utan extra utbakningsmjöl och lägg på bakplåtspapper."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 50,
+            "id": "s4",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt jäsa täckt cirka 50 minuter tills bullen känns luftig. Värm ugnen till 210 °C under slutet av jäsningen."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 1,
+            "id": "s5",
+            "ingredient_keys": [
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Pensla med den sparade uppvägda äggmängden. Ingen extra penslingsråvara används."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 12,
+            "id": "s6",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Baka cirka 12 minuter tills bullen har jämn gyllene färg och är genomgräddad utan rå deg i mitten. Anpassa efter ugn; en provsticka ska komma ut utan rå kladdig deg."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 30,
+            "id": "s7",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt bullen kallna på galler minst 30 minuter. Fyll den inte varm, då smälter grädden."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 8,
+            "id": "s8",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "kardemumma|dry",
+              "mandelmjöl|dry",
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "10 ml",
+                10.0
+              ]
+            ],
+            "text": "Skär av ett tunt lock och gröp ur lite inkråm. Rör mandelmjölet med fyllningens socker, inkråmet och 10 ml vatten till en mjuk mandelkräm. Lägg tillbaka krämen i hålet. Vispa den kalla vispgrädden med liten visp tills den håller mjuka toppar och lägg över fyllningen. Sätt på locket."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 1,
+            "id": "s9",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "kardemumma|dry",
+              "mandelmjöl|dry",
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "smör|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Servera direkt som en semla per portion. Hela mandelkrämen och grädden ingår; florsocker eller annan dekor är inte en förutsättning."
+          }
+        ],
+        "total_minutes": 175,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 152
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "bulle",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "bulle",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "bulle",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "bulle",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 13.0,
+          "quantity_max": 13.0,
+          "quantity_min": 13.0,
+          "quantity_step": 13.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "bulle",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "bulle",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "bulle",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 23.0,
+          "quantity_max": 23.0,
+          "quantity_min": 23.0,
+          "quantity_step": 23.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "bulle",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mandelmjöl",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "mandelmjöl",
+          "product_requirements": [
+            "pack:intake_all_c4868b9a9e57"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Blanda mjöl, torrjäst, degens socker, kardemumma och salt. Tillsätt ljummen mjölk och fyra femtedelar av den uppvägda råa äggmängden; spara resten kallt till pensling. Arbeta in mjukt smör och knåda 8 minuter tills degen blivit smidig. Den lilla degmängden kan knådas mot kanten av bunken.",
+        "Täck och låt jäsa cirka 60 minuter tills degen tydligt har vuxit. Sval rumstemperatur kan kräva längre tid.",
+        "Rundriv en liten slät bulle per portion utan extra utbakningsmjöl och lägg på bakplåtspapper.",
+        "Låt jäsa täckt cirka 50 minuter tills bullen känns luftig. Värm ugnen till 210 °C under slutet av jäsningen.",
+        "Pensla med den sparade uppvägda äggmängden. Ingen extra penslingsråvara används.",
+        "Baka cirka 12 minuter tills bullen har jämn gyllene färg och är genomgräddad utan rå deg i mitten. Anpassa efter ugn; en provsticka ska komma ut utan rå kladdig deg.",
+        "Låt bullen kallna på galler minst 30 minuter. Fyll den inte varm, då smälter grädden.",
+        "Skär av ett tunt lock och gröp ur lite inkråm. Rör mandelmjölet med fyllningens socker, inkråmet och 10 ml vatten till en mjuk mandelkräm. Lägg tillbaka krämen i hålet. Vispa den kalla vispgrädden med liten visp tills den håller mjuka toppar och lägg över fyllningen. Sätt på locket.",
+        "Servera direkt som en semla per portion. Hela mandelkrämen och grädden ingår; florsocker eller annan dekor är inte en förutsättning."
+      ],
+      "name": "Semla – kardemummabulle med mandel och grädde – utökad",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 15,
+        "base_id": "smako-greek-horiatiki",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "Fetaost",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oliver|preserved_drained",
+                "name": "Oliver",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "sallad",
+            "name": "Rå bondsallad"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd vid sidan"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "kniv",
+          "skärbräda",
+          "salladsskål"
+        ],
+        "estimated_minutes": 15,
+        "family": "rå grönsallad med feta",
+        "fish": false,
+        "flavor_profile": [
+          "oregano",
+          "olivolja"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "salad",
+        "primary_ingredient": "fetaost",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad variant tillför kikärtor för mättnad och kapris; den beskrivs som vardagsutökning, inte historisk standard. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "oliver|preserved_drained",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skölj grönsakerna. Skär tomat i klyftor och gurka i grova bitar; samla tomatsaften i skålen. Låt oliverna rinna av och väg utan fri lag."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "gurka|raw_edible",
+              "oliver|preserved_drained",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd grönsakerna med oliver, olivolja, oregano och den angivna saltmängden. Lägg fetaosten i stora skivor ovanpå. Låt brödet vara separat så det inte blir en blöt brödsallad."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "fetaost|as_sold",
+              "gurka|raw_edible",
+              "oliver|preserved_drained",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet och fördela hela salladen, all dressing och brödet mellan fyra portioner. Servera direkt; ingen kyld animalisk råvara ska tillagas i detta recept."
+          }
+        ],
+        "total_minutes": 15,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oliver",
+          "component": "sallad",
+          "form": "preserved_drained",
+          "name": "oliver",
+          "product_requirements": [
+            "pitted"
+          ],
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "sallad",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj grönsakerna. Skär tomat i klyftor och gurka i grova bitar; samla tomatsaften i skålen. Låt oliverna rinna av och väg utan fri lag.",
+        "Vänd grönsakerna med oliver, olivolja, oregano och den angivna saltmängden. Lägg fetaosten i stora skivor ovanpå. Låt brödet vara separat så det inte blir en blöt brödsallad.",
+        "Skär brödet och fördela hela salladen, all dressing och brödet mellan fyra portioner. Servera direkt; ingen kyld animalisk råvara ska tillagas i detta recept."
+      ],
+      "name": "Horiatiki – grekisk bondsallad med bröd – enkel",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 15,
+        "base_id": "smako-greek-horiatiki",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "Fetaost",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oliver|preserved_drained",
+                "name": "Oliver",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "Rödvinsvinäger",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Rå bondsallad"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 320.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd vid sidan"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "kniv",
+          "skärbräda",
+          "salladsskål"
+        ],
+        "estimated_minutes": 15,
+        "family": "rå grönsallad med feta",
+        "fish": false,
+        "flavor_profile": [
+          "oregano",
+          "olivolja"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "salad",
+        "primary_ingredient": "fetaost",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad variant tillför kikärtor för mättnad och kapris; den beskrivs som vardagsutökning, inte historisk standard. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "oliver|preserved_drained",
+              "paprika|raw_edible",
+              "rödlök|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skölj grönsakerna. Skär tomat i klyftor och gurka i grova bitar; samla tomatsaften i skålen. Skiva paprika och rödlök tunt. Låt oliverna rinna av och väg utan fri lag."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "gurka|raw_edible",
+              "oliver|preserved_drained",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "paprika|raw_edible",
+              "rödlök|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd grönsakerna med oliver, olivolja, oregano och den angivna saltmängden. Blanda i vinägern. Lägg fetaosten i stora skivor ovanpå. Låt brödet vara separat så det inte blir en blöt brödsallad."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "fetaost|as_sold",
+              "gurka|raw_edible",
+              "oliver|preserved_drained",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "paprika|raw_edible",
+              "rödlök|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet och fördela hela salladen, all dressing och brödet mellan fyra portioner. Servera direkt; ingen kyld animalisk råvara ska tillagas i detta recept."
+          }
+        ],
+        "total_minutes": 15,
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oliver",
+          "component": "sallad",
+          "form": "preserved_drained",
+          "name": "oliver",
+          "product_requirements": [
+            "pitted"
+          ],
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "sallad",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 320.0,
+          "quantity_max": 320.0,
+          "quantity_min": 320.0,
+          "quantity_step": 320.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj grönsakerna. Skär tomat i klyftor och gurka i grova bitar; samla tomatsaften i skålen. Skiva paprika och rödlök tunt. Låt oliverna rinna av och väg utan fri lag.",
+        "Vänd grönsakerna med oliver, olivolja, oregano och den angivna saltmängden. Blanda i vinägern. Lägg fetaosten i stora skivor ovanpå. Låt brödet vara separat så det inte blir en blöt brödsallad.",
+        "Skär brödet och fördela hela salladen, all dressing och brödet mellan fyra portioner. Servera direkt; ingen kyld animalisk råvara ska tillagas i detta recept."
+      ],
+      "name": "Horiatiki – grekisk bondsallad med bröd – standard",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 15,
+        "base_id": "smako-greek-horiatiki",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tomat|raw_edible",
+                "name": "Tomat",
+                "note": "",
+                "quantity": 650.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 400.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fetaost|as_sold",
+                "name": "Fetaost",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "oliver|preserved_drained",
+                "name": "Oliver",
+                "note": "",
+                "quantity": 90.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "oregano|dry",
+                "name": "Oregano",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "paprika|raw_edible",
+                "name": "Paprika",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödlök|raw_edible",
+                "name": "Rödlök",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rödvinsvinäger|as_sold",
+                "name": "Rödvinsvinäger",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "Kokta kikärtor, avrunnen vikt",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kapris|preserved_drained",
+                "name": "Kapris",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              }
+            ],
+            "id": "sallad",
+            "name": "Rå bondsallad"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bröd|as_sold",
+                "name": "Bröd",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Bröd vid sidan"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "kniv",
+          "skärbräda",
+          "salladsskål"
+        ],
+        "estimated_minutes": 15,
+        "family": "rå grönsallad med feta",
+        "fish": false,
+        "flavor_profile": [
+          "oregano",
+          "olivolja"
+        ],
+        "ingredient_count": 12,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "salad",
+        "primary_ingredient": "fetaost",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad variant tillför kikärtor för mättnad och kapris; den beskrivs som vardagsutökning, inte historisk standard. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bröd",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "gurka|raw_edible",
+              "kapris|preserved_drained",
+              "kikärtor|cooked_drained",
+              "oliver|preserved_drained",
+              "paprika|raw_edible",
+              "rödlök|raw_edible",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skölj grönsakerna. Skär tomat i klyftor och gurka i grova bitar; samla tomatsaften i skålen. Skiva paprika och rödlök tunt. Skölj kikärtorna och låt dem rinna av före vägning. Låt kaprisen rinna av. Låt oliverna rinna av och väg utan fri lag; även kapris vägs efter avrinning om den ingår."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "fetaost|as_sold",
+              "gurka|raw_edible",
+              "kapris|preserved_drained",
+              "kikärtor|cooked_drained",
+              "oliver|preserved_drained",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "paprika|raw_edible",
+              "rödlök|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd grönsakerna med oliver, olivolja, oregano och den angivna saltmängden. Blanda i vinägern. Vänd ner kikärtor och kapris; detta är en mättande vardagsutökning. Lägg fetaosten i stora skivor ovanpå. Låt brödet vara separat så det inte blir en blöt brödsallad."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 3,
+            "id": "s3",
+            "ingredient_keys": [
+              "bröd|as_sold",
+              "fetaost|as_sold",
+              "gurka|raw_edible",
+              "kapris|preserved_drained",
+              "kikärtor|cooked_drained",
+              "oliver|preserved_drained",
+              "olivolja|as_sold",
+              "oregano|dry",
+              "paprika|raw_edible",
+              "rödlök|raw_edible",
+              "rödvinsvinäger|as_sold",
+              "salt|as_sold",
+              "tomat|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär brödet och fördela hela salladen, all dressing och brödet mellan fyra portioner. Servera direkt; ingen kyld animalisk råvara ska tillagas i detta recept."
+          }
+        ],
+        "total_minutes": 15,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "tomat",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "tomat",
+          "quantity": 650.0,
+          "quantity_max": 650.0,
+          "quantity_min": 650.0,
+          "quantity_step": 650.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 400.0,
+          "quantity_max": 400.0,
+          "quantity_min": 400.0,
+          "quantity_step": 400.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fetaost",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "fetaost",
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "oliver",
+          "component": "sallad",
+          "form": "preserved_drained",
+          "name": "oliver",
+          "product_requirements": [
+            "pitted"
+          ],
+          "quantity": 90.0,
+          "quantity_max": 90.0,
+          "quantity_min": 90.0,
+          "quantity_step": 90.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "oregano",
+          "component": "sallad",
+          "form": "dry",
+          "name": "oregano",
+          "product_requirements": [
+            "dried_leaf"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "paprika",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "paprika",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödlök",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "rödlök",
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödvinsvinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "rödvinsvinäger",
+          "product_requirements": [
+            "pack:intake_all_d0351d1f36c1"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "kikärtor",
+          "component": "sallad",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kapris",
+          "component": "sallad",
+          "form": "preserved_drained",
+          "name": "kapris",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bröd",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "bröd",
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj grönsakerna. Skär tomat i klyftor och gurka i grova bitar; samla tomatsaften i skålen. Skiva paprika och rödlök tunt. Skölj kikärtorna och låt dem rinna av före vägning. Låt kaprisen rinna av. Låt oliverna rinna av och väg utan fri lag; även kapris vägs efter avrinning om den ingår.",
+        "Vänd grönsakerna med oliver, olivolja, oregano och den angivna saltmängden. Blanda i vinägern. Vänd ner kikärtor och kapris; detta är en mättande vardagsutökning. Lägg fetaosten i stora skivor ovanpå. Låt brödet vara separat så det inte blir en blöt brödsallad.",
+        "Skär brödet och fördela hela salladen, all dressing och brödet mellan fyra portioner. Servera direkt; ingen kyld animalisk råvara ska tillagas i detta recept."
+      ],
+      "name": "Horiatiki – grekisk bondsallad med bröd – utökad",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 18,
+        "base_id": "smako-greek-tahinopita",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "Torrjäst",
+                "note": "",
+                "quantity": 0.9,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              }
+            ],
+            "id": "deg",
+            "name": "Jäst deg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tahini|as_sold",
+                "name": "Tahini",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Tahini-kanelkräm"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "bunke",
+          "kavel",
+          "bakplåtspapper",
+          "ugn"
+        ],
+        "estimated_minutes": 155,
+        "family": "tahini-fylld jästspiral",
+        "fish": false,
+        "flavor_profile": [
+          "tahini",
+          "kanel"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "bake",
+        "primary_ingredient": "tahini",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel oljefri deg; utökad frukost med oljad deg och äpple/yoghurt. Kökstillhörigheten avser grekcypriotisk tradition, inte geografiskt ursprung på grekiska fastlandet. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "frukostbakverk",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "salt|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blanda degens mjöl, torrjäst, socker och salt. Tillsätt 33 ml ljummet vatten. Knåda till en smidig deg i cirka 7 minuter. Mjöla inte extra; kavla senare mellan papper."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 90,
+            "id": "s2",
+            "ingredient_keys": [
+              "salt|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck bunken. Låt jäsa cirka 90 minuter på dragfri plats tills degen har ökat tydligt i volym. Kall deg kan behöva längre tid."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 9,
+            "id": "s3",
+            "ingredient_keys": [
+              "kanel|dry",
+              "salt|as_sold",
+              "strösocker|dry",
+              "tahini|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör tahini, fyllningens socker och kanel till en tjock kräm. Kavla degen tunt mellan två bakplåtspapper. Bred krämen över arket. Rulla till en sträng, tvinna varsamt och snurra ihop till en spiral. Platta till med handen utan att pressa ut fyllningen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "salt|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt spiralen vila täckt 20 minuter. Värm under tiden ugnen till 190 °C över- och undervärme."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 17,
+            "id": "s5",
+            "ingredient_keys": [
+              "kanel|dry",
+              "salt|as_sold",
+              "strösocker|dry",
+              "tahini|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sätt plåten mitt i ugnen och baka cirka 17 minuter. Degen ska få gyllene färg och vara genombakad, inte rå mellan lagren."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 10,
+            "id": "s6",
+            "ingredient_keys": [
+              "kanel|dry",
+              "salt|as_sold",
+              "strösocker|dry",
+              "tahini|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt snurran svalna på galler cirka 10 minuter; tahinifyllningen är varm länge."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 1,
+            "id": "s7",
+            "ingredient_keys": [
+              "kanel|dry",
+              "salt|as_sold",
+              "strösocker|dry",
+              "tahini|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera hela snurran som en frukostportion. Ingen sirap eller annan topping förutsätts."
+          }
+        ],
+        "total_minutes": 155,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 137
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "deg",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 0.9,
+          "quantity_max": 0.9,
+          "quantity_min": 0.9,
+          "quantity_step": 0.9,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "deg",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 13.0,
+          "quantity_max": 13.0,
+          "quantity_min": 13.0,
+          "quantity_step": 13.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "tahini",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "tahini",
+          "product_requirements": [
+            "pack:intake_all_4aca388833d2"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda degens mjöl, torrjäst, socker och salt. Tillsätt 33 ml ljummet vatten. Knåda till en smidig deg i cirka 7 minuter. Mjöla inte extra; kavla senare mellan papper.",
+        "Täck bunken. Låt jäsa cirka 90 minuter på dragfri plats tills degen har ökat tydligt i volym. Kall deg kan behöva längre tid.",
+        "Rör tahini, fyllningens socker och kanel till en tjock kräm. Kavla degen tunt mellan två bakplåtspapper. Bred krämen över arket. Rulla till en sträng, tvinna varsamt och snurra ihop till en spiral. Platta till med handen utan att pressa ut fyllningen.",
+        "Låt spiralen vila täckt 20 minuter. Värm under tiden ugnen till 190 °C över- och undervärme.",
+        "Sätt plåten mitt i ugnen och baka cirka 17 minuter. Degen ska få gyllene färg och vara genombakad, inte rå mellan lagren.",
+        "Låt snurran svalna på galler cirka 10 minuter; tahinifyllningen är varm länge.",
+        "Servera hela snurran som en frukostportion. Ingen sirap eller annan topping förutsätts."
+      ],
+      "name": "Tahinopita – cypriotisk tahinisnurra – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-greek-tahinopita",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "Torrjäst",
+                "note": "",
+                "quantity": 0.9,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "olivolja|as_sold",
+                "name": "Olivolja",
+                "note": "",
+                "quantity": 4.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "deg",
+            "name": "Jäst deg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "tahini|as_sold",
+                "name": "Tahini",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              }
+            ],
+            "id": "fyllning",
+            "name": "Tahini-kanelkräm"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "Äpple",
+                "note": "",
+                "quantity": 110.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "servering",
+            "name": "Äpple och yoghurt"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "bunke",
+          "kavel",
+          "bakplåtspapper",
+          "ugn"
+        ],
+        "estimated_minutes": 157,
+        "family": "tahini-fylld jästspiral",
+        "fish": false,
+        "flavor_profile": [
+          "tahini",
+          "kanel"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "bake",
+        "primary_ingredient": "tahini",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel oljefri deg; utökad frukost med oljad deg och äpple/yoghurt. Kökstillhörigheten avser grekcypriotisk tradition, inte geografiskt ursprung på grekiska fastlandet. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "frukostbakverk",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 8,
+            "id": "s1",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blanda degens mjöl, torrjäst, socker och salt. Tillsätt 33 ml ljummet vatten och olivoljan. Knåda till en smidig deg i cirka 7 minuter. Mjöla inte extra; kavla senare mellan papper."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 90,
+            "id": "s2",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck bunken. Låt jäsa cirka 90 minuter på dragfri plats tills degen har ökat tydligt i volym. Kall deg kan behöva längre tid."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 9,
+            "id": "s3",
+            "ingredient_keys": [
+              "kanel|dry",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "strösocker|dry",
+              "tahini|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Rör tahini, fyllningens socker och kanel till en tjock kräm. Kavla degen tunt mellan två bakplåtspapper. Bred krämen över arket. Rulla till en sträng, tvinna varsamt och snurra ihop till en spiral. Platta till med handen utan att pressa ut fyllningen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "strösocker|dry",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt spiralen vila täckt 20 minuter. Värm under tiden ugnen till 190 °C över- och undervärme."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 17,
+            "id": "s5",
+            "ingredient_keys": [
+              "kanel|dry",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "strösocker|dry",
+              "tahini|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sätt plåten mitt i ugnen och baka cirka 17 minuter. Degen ska få gyllene färg och vara genombakad, inte rå mellan lagren."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 10,
+            "id": "s6",
+            "ingredient_keys": [
+              "kanel|dry",
+              "olivolja|as_sold",
+              "salt|as_sold",
+              "strösocker|dry",
+              "tahini|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt snurran svalna på galler cirka 10 minuter; tahinifyllningen är varm länge."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 3,
+            "id": "s7",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skölj äpplet och skär den angivna ätliga mängden i klyftor. Servera frukostsnurran med äpple och yoghurt."
+          }
+        ],
+        "total_minutes": 157,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 137
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "deg",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 0.9,
+          "quantity_max": 0.9,
+          "quantity_min": 0.9,
+          "quantity_step": 0.9,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "deg",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 13.0,
+          "quantity_max": 13.0,
+          "quantity_min": 13.0,
+          "quantity_step": 13.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "olivolja",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "olivolja",
+          "product_requirements": [
+            "pack:intake_all_expansion_86ac9b2c5ae6"
+          ],
+          "quantity": 4.0,
+          "quantity_max": 4.0,
+          "quantity_min": 4.0,
+          "quantity_step": 4.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "tahini",
+          "component": "fyllning",
+          "form": "as_sold",
+          "name": "tahini",
+          "product_requirements": [
+            "pack:intake_all_4aca388833d2"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "fyllning",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "servering",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 110.0,
+          "quantity_max": 110.0,
+          "quantity_min": 110.0,
+          "quantity_step": 110.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda degens mjöl, torrjäst, socker och salt. Tillsätt 33 ml ljummet vatten och olivoljan. Knåda till en smidig deg i cirka 7 minuter. Mjöla inte extra; kavla senare mellan papper.",
+        "Täck bunken. Låt jäsa cirka 90 minuter på dragfri plats tills degen har ökat tydligt i volym. Kall deg kan behöva längre tid.",
+        "Rör tahini, fyllningens socker och kanel till en tjock kräm. Kavla degen tunt mellan två bakplåtspapper. Bred krämen över arket. Rulla till en sträng, tvinna varsamt och snurra ihop till en spiral. Platta till med handen utan att pressa ut fyllningen.",
+        "Låt spiralen vila täckt 20 minuter. Värm under tiden ugnen till 190 °C över- och undervärme.",
+        "Sätt plåten mitt i ugnen och baka cirka 17 minuter. Degen ska få gyllene färg och vara genombakad, inte rå mellan lagren.",
+        "Låt snurran svalna på galler cirka 10 minuter; tahinifyllningen är varm länge.",
+        "Skölj äpplet och skär den angivna ätliga mängden i klyftor. Servera frukostsnurran med äpple och yoghurt."
+      ],
+      "name": "Tahinopita – cypriotisk tahinisnurra – utökad",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 36,
+        "base_id": "smako-indian-chana-madra",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "Kikärtor",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Naturell yoghurt som tål varsam uppvärmning, inte smaksatt",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ghee|as_sold",
+                "name": "Ghee",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Gurkmeja",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              }
+            ],
+            "id": "madra",
+            "name": "Yoghurtgryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "tjockbottnad gryta",
+          "visp",
+          "kastrull"
+        ],
+        "estimated_minutes": 59,
+        "family": "kikärtor i reducerad yoghurt",
+        "fish": false,
+        "flavor_profile": [
+          "yoghurt",
+          "ghee",
+          "varma kryddor"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad middag kompletteras med enkel råkost; rismjöl i standard stabiliserar syrad sås i hemmaköket. Yoghurtens fetthalt och värmestabilitet måste provlagas vid produktgranskning; grytans aktiva vispning är inte felmärkt som passiv väntan. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset och koka upp med 560 ml vatten och riskomponentens salt. Sänk till lägsta värme och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 23,
+            "id": "s2",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka 18 minuter, eller enligt sortens förpackningsanvisning, tills riset är mjukt och vattnet absorberats. Låt vila av värmen 5 minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "gurkmeja|dry",
+              "kardemumma|dry",
+              "kikärtor|cooked_drained",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vispa yoghurten helt slät. Skölj kikärtorna och väg dem efter avrinning. Smält ghee i en tjockbottnad gryta och värm spiskummin, kardemumma och gurkmeja kort tills det doftar utan att kryddorna bränns. Använd malda kryddor, inklusive malen kardemumma och eventuell malen nejlika; inga hela kapslar eller kryddor ska plockas bort."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 11,
+            "id": "s4",
+            "ingredient_keys": [
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dra grytan från plattan en minut. Tillsätt yoghurten lite i taget under vispning. Ställ på låg värme och rör hela tiden cirka 10 minuter tills basen är jämnt varm och lätt tjocknad. Undvik stormkokning, särskilt utan stärkelse; aktiv omrörning är nödvändig här."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 12,
+            "id": "s5",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "salt|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Vänd ner kikärtor och madra-komponentens salt. Värm varsamt under täta omrörningar cirka 12 minuter så att bönorna blir genomheta och yoghurten lägger sig som en tjock sås runt dem. Späd vid behov med 50 ml vatten; den ska inte bli en tunn soppa."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "gurkmeja|dry",
+              "kardemumma|dry",
+              "kikärtor|cooked_drained",
+              "ris|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och servera med all madra. Fördela komponenterna jämnt över fyra portioner; ingen tomatsås eller extra raita förutsätts."
+          }
+        ],
+        "total_minutes": 59,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 23
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "madra",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "madra",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ghee",
+          "component": "madra",
+          "form": "as_sold",
+          "name": "ghee",
+          "product_requirements": [
+            "pack:intake_all_expansion_94bffb8b7bee"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "madra",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "madra",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "madra",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "madra",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj riset och koka upp med 560 ml vatten och riskomponentens salt. Sänk till lägsta värme och lägg på lock.",
+        "Sjud cirka 18 minuter, eller enligt sortens förpackningsanvisning, tills riset är mjukt och vattnet absorberats. Låt vila av värmen 5 minuter under lock.",
+        "Vispa yoghurten helt slät. Skölj kikärtorna och väg dem efter avrinning. Smält ghee i en tjockbottnad gryta och värm spiskummin, kardemumma och gurkmeja kort tills det doftar utan att kryddorna bränns. Använd malda kryddor, inklusive malen kardemumma och eventuell malen nejlika; inga hela kapslar eller kryddor ska plockas bort.",
+        "Dra grytan från plattan en minut. Tillsätt yoghurten lite i taget under vispning. Ställ på låg värme och rör hela tiden cirka 10 minuter tills basen är jämnt varm och lätt tjocknad. Undvik stormkokning, särskilt utan stärkelse; aktiv omrörning är nödvändig här.",
+        "Vänd ner kikärtor och madra-komponentens salt. Värm varsamt under täta omrörningar cirka 12 minuter så att bönorna blir genomheta och yoghurten lägger sig som en tjock sås runt dem. Späd vid behov med 50 ml vatten; den ska inte bli en tunn soppa.",
+        "Luckra upp riset och servera med all madra. Fördela komponenterna jämnt över fyra portioner; ingen tomatsås eller extra raita förutsätts."
+      ],
+      "name": "Chana madra – kikärtor i varm yoghurtsås – enkel",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 36,
+        "base_id": "smako-indian-chana-madra",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "Kikärtor",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Naturell yoghurt som tål varsam uppvärmning, inte smaksatt",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ghee|as_sold",
+                "name": "Ghee",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Gurkmeja",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "nejlika|dry",
+                "name": "Nejlika",
+                "note": "",
+                "quantity": 0.25,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rismjöl|dry",
+                "name": "Rismjöl",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              }
+            ],
+            "id": "madra",
+            "name": "Yoghurtgryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Ris"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "tjockbottnad gryta",
+          "visp",
+          "kastrull"
+        ],
+        "estimated_minutes": 59,
+        "family": "kikärtor i reducerad yoghurt",
+        "fish": false,
+        "flavor_profile": [
+          "yoghurt",
+          "ghee",
+          "varma kryddor"
+        ],
+        "ingredient_count": 10,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad middag kompletteras med enkel råkost; rismjöl i standard stabiliserar syrad sås i hemmaköket. Yoghurtens fetthalt och värmestabilitet måste provlagas vid produktgranskning; grytans aktiva vispning är inte felmärkt som passiv väntan. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset och koka upp med 560 ml vatten och riskomponentens salt. Sänk till lägsta värme och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 23,
+            "id": "s2",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka 18 minuter, eller enligt sortens förpackningsanvisning, tills riset är mjukt och vattnet absorberats. Låt vila av värmen 5 minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "gurkmeja|dry",
+              "kanel|dry",
+              "kardemumma|dry",
+              "kikärtor|cooked_drained",
+              "nejlika|dry",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vispa yoghurten helt slät med rismjölet. Skölj kikärtorna och väg dem efter avrinning. Smält ghee i en tjockbottnad gryta och värm spiskummin, kardemumma och gurkmeja, kanel och nejlika kort tills det doftar utan att kryddorna bränns. Använd malda kryddor, inklusive malen kardemumma och eventuell malen nejlika; inga hela kapslar eller kryddor ska plockas bort."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 11,
+            "id": "s4",
+            "ingredient_keys": [
+              "rismjöl|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dra grytan från plattan en minut. Tillsätt yoghurten lite i taget under vispning. Ställ på låg värme och rör hela tiden cirka 10 minuter tills basen är jämnt varm och lätt tjocknad. Undvik stormkokning, särskilt utan stärkelse; aktiv omrörning är nödvändig här."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 12,
+            "id": "s5",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "salt|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Vänd ner kikärtor och madra-komponentens salt. Värm varsamt under täta omrörningar cirka 12 minuter så att bönorna blir genomheta och yoghurten lägger sig som en tjock sås runt dem. Späd vid behov med 50 ml vatten; den ska inte bli en tunn soppa."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "gurkmeja|dry",
+              "kanel|dry",
+              "kardemumma|dry",
+              "kikärtor|cooked_drained",
+              "nejlika|dry",
+              "rismjöl|dry",
+              "ris|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och servera med all madra. Fördela komponenterna jämnt över fyra portioner; ingen tomatsås eller extra raita förutsätts."
+          }
+        ],
+        "total_minutes": 59,
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 23
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "madra",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "madra",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ghee",
+          "component": "madra",
+          "form": "as_sold",
+          "name": "ghee",
+          "product_requirements": [
+            "pack:intake_all_expansion_94bffb8b7bee"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "madra",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "madra",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "madra",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "madra",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "madra",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "nejlika",
+          "component": "madra",
+          "form": "dry",
+          "name": "nejlika",
+          "product_requirements": [
+            "pack:intake_all_round2_4246e18e6aed"
+          ],
+          "quantity": 0.25,
+          "quantity_max": 0.25,
+          "quantity_min": 0.25,
+          "quantity_step": 0.25,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rismjöl",
+          "component": "madra",
+          "form": "dry",
+          "name": "rismjöl",
+          "product_requirements": [
+            "pack:intake_rice_flour"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skölj riset och koka upp med 560 ml vatten och riskomponentens salt. Sänk till lägsta värme och lägg på lock.",
+        "Sjud cirka 18 minuter, eller enligt sortens förpackningsanvisning, tills riset är mjukt och vattnet absorberats. Låt vila av värmen 5 minuter under lock.",
+        "Vispa yoghurten helt slät med rismjölet. Skölj kikärtorna och väg dem efter avrinning. Smält ghee i en tjockbottnad gryta och värm spiskummin, kardemumma och gurkmeja, kanel och nejlika kort tills det doftar utan att kryddorna bränns. Använd malda kryddor, inklusive malen kardemumma och eventuell malen nejlika; inga hela kapslar eller kryddor ska plockas bort.",
+        "Dra grytan från plattan en minut. Tillsätt yoghurten lite i taget under vispning. Ställ på låg värme och rör hela tiden cirka 10 minuter tills basen är jämnt varm och lätt tjocknad. Undvik stormkokning, särskilt utan stärkelse; aktiv omrörning är nödvändig här.",
+        "Vänd ner kikärtor och madra-komponentens salt. Värm varsamt under täta omrörningar cirka 12 minuter så att bönorna blir genomheta och yoghurten lägger sig som en tjock sås runt dem. Späd vid behov med 50 ml vatten; den ska inte bli en tunn soppa.",
+        "Luckra upp riset och servera med all madra. Fördela komponenterna jämnt över fyra portioner; ingen tomatsås eller extra raita förutsätts."
+      ],
+      "name": "Chana madra – kikärtor i varm yoghurtsås – standard",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-indian-chana-madra",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kikärtor|cooked_drained",
+                "name": "Kikärtor",
+                "note": "",
+                "quantity": 800.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Naturell yoghurt som tål varsam uppvärmning, inte smaksatt",
+                "note": "",
+                "quantity": 600.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ghee|as_sold",
+                "name": "Ghee",
+                "note": "",
+                "quantity": 30.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurkmeja|dry",
+                "name": "Gurkmeja",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "nejlika|dry",
+                "name": "Nejlika",
+                "note": "",
+                "quantity": 0.25,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rismjöl|dry",
+                "name": "Rismjöl",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              }
+            ],
+            "id": "madra",
+            "name": "Yoghurtgryta"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "ris|dry",
+                "name": "Ris",
+                "note": "",
+                "quantity": 280.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "ris",
+            "name": "Ris"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gurka|raw_edible",
+                "name": "Gurka",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "citronjuice|as_sold",
+                "name": "Citronjuice",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "rakost",
+            "name": "Morots- och gurkråkost"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "tjockbottnad gryta",
+          "visp",
+          "kastrull"
+        ],
+        "estimated_minutes": 65,
+        "family": "kikärtor i reducerad yoghurt",
+        "fish": false,
+        "flavor_profile": [
+          "yoghurt",
+          "ghee",
+          "varma kryddor"
+        ],
+        "ingredient_count": 13,
+        "meal_types": [
+          "dinner"
+        ],
+        "method": "pot",
+        "primary_ingredient": "kikärtor",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad middag kompletteras med enkel råkost; rismjöl i standard stabiliserar syrad sås i hemmaköket. Yoghurtens fetthalt och värmestabilitet måste provlagas vid produktgranskning; grytans aktiva vispning är inte felmärkt som passiv väntan. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "ris",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "ris|dry",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "560 ml",
+                560.0
+              ]
+            ],
+            "text": "Skölj riset och koka upp med 560 ml vatten och riskomponentens salt. Sänk till lägsta värme och lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 23,
+            "id": "s2",
+            "ingredient_keys": [
+              "ris|dry"
+            ],
+            "parallel_group": null,
+            "text": "Sjud cirka 18 minuter, eller enligt sortens förpackningsanvisning, tills riset är mjukt och vattnet absorberats. Låt vila av värmen 5 minuter under lock."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "ghee|as_sold",
+              "gurkmeja|dry",
+              "kanel|dry",
+              "kardemumma|dry",
+              "kikärtor|cooked_drained",
+              "nejlika|dry",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Vispa yoghurten helt slät med rismjölet. Skölj kikärtorna och väg dem efter avrinning. Smält ghee i en tjockbottnad gryta och värm spiskummin, kardemumma och gurkmeja, kanel och nejlika kort tills det doftar utan att kryddorna bränns. Använd malda kryddor, inklusive malen kardemumma och eventuell malen nejlika; inga hela kapslar eller kryddor ska plockas bort."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 11,
+            "id": "s4",
+            "ingredient_keys": [
+              "rismjöl|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Dra grytan från plattan en minut. Tillsätt yoghurten lite i taget under vispning. Ställ på låg värme och rör hela tiden cirka 10 minuter tills basen är jämnt varm och lätt tjocknad. Undvik stormkokning, särskilt utan stärkelse; aktiv omrörning är nödvändig här."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 12,
+            "id": "s5",
+            "ingredient_keys": [
+              "kikärtor|cooked_drained",
+              "salt|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Vänd ner kikärtor och madra-komponentens salt. Värm varsamt under täta omrörningar cirka 12 minuter så att bönorna blir genomheta och yoghurten lägger sig som en tjock sås runt dem. Späd vid behov med 50 ml vatten; den ska inte bli en tunn soppa."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 6,
+            "id": "s6",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "gurka|raw_edible",
+              "morot|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skala moroten, strimla den och gurkan fint och vänd med citronjuicen. Servera råkosten separat från den varma yoghurten."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 3,
+            "id": "s7",
+            "ingredient_keys": [
+              "citronjuice|as_sold",
+              "ghee|as_sold",
+              "gurka|raw_edible",
+              "gurkmeja|dry",
+              "kanel|dry",
+              "kardemumma|dry",
+              "kikärtor|cooked_drained",
+              "morot|raw_edible",
+              "nejlika|dry",
+              "rismjöl|dry",
+              "ris|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Luckra upp riset och servera med all madra och råkost. Fördela komponenterna jämnt över fyra portioner; ingen tomatsås eller extra raita förutsätts."
+          }
+        ],
+        "total_minutes": 65,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 23
+      },
+      "ingredients": [
+        {
+          "canonical_name": "kikärtor",
+          "component": "madra",
+          "form": "cooked_drained",
+          "name": "kikärtor",
+          "quantity": 800.0,
+          "quantity_max": 800.0,
+          "quantity_min": 800.0,
+          "quantity_step": 800.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "madra",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 600.0,
+          "quantity_max": 600.0,
+          "quantity_min": 600.0,
+          "quantity_step": 600.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ghee",
+          "component": "madra",
+          "form": "as_sold",
+          "name": "ghee",
+          "product_requirements": [
+            "pack:intake_all_expansion_94bffb8b7bee"
+          ],
+          "quantity": 30.0,
+          "quantity_max": 30.0,
+          "quantity_min": 30.0,
+          "quantity_step": 30.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "madra",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "madra",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurkmeja",
+          "component": "madra",
+          "form": "dry",
+          "name": "gurkmeja",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "madra",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "madra",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "nejlika",
+          "component": "madra",
+          "form": "dry",
+          "name": "nejlika",
+          "product_requirements": [
+            "pack:intake_all_round2_4246e18e6aed"
+          ],
+          "quantity": 0.25,
+          "quantity_max": 0.25,
+          "quantity_min": 0.25,
+          "quantity_step": 0.25,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rismjöl",
+          "component": "madra",
+          "form": "dry",
+          "name": "rismjöl",
+          "product_requirements": [
+            "pack:intake_rice_flour"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ris",
+          "component": "ris",
+          "form": "dry",
+          "name": "ris",
+          "product_requirements": [
+            "white_rice"
+          ],
+          "quantity": 280.0,
+          "quantity_max": 280.0,
+          "quantity_min": 280.0,
+          "quantity_step": 280.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "rakost",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gurka",
+          "component": "rakost",
+          "form": "raw_edible",
+          "name": "gurka",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "citronjuice",
+          "component": "rakost",
+          "form": "as_sold",
+          "name": "citronjuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Skölj riset och koka upp med 560 ml vatten och riskomponentens salt. Sänk till lägsta värme och lägg på lock.",
+        "Sjud cirka 18 minuter, eller enligt sortens förpackningsanvisning, tills riset är mjukt och vattnet absorberats. Låt vila av värmen 5 minuter under lock.",
+        "Vispa yoghurten helt slät med rismjölet. Skölj kikärtorna och väg dem efter avrinning. Smält ghee i en tjockbottnad gryta och värm spiskummin, kardemumma och gurkmeja, kanel och nejlika kort tills det doftar utan att kryddorna bränns. Använd malda kryddor, inklusive malen kardemumma och eventuell malen nejlika; inga hela kapslar eller kryddor ska plockas bort.",
+        "Dra grytan från plattan en minut. Tillsätt yoghurten lite i taget under vispning. Ställ på låg värme och rör hela tiden cirka 10 minuter tills basen är jämnt varm och lätt tjocknad. Undvik stormkokning, särskilt utan stärkelse; aktiv omrörning är nödvändig här.",
+        "Vänd ner kikärtor och madra-komponentens salt. Värm varsamt under täta omrörningar cirka 12 minuter så att bönorna blir genomheta och yoghurten lägger sig som en tjock sås runt dem. Späd vid behov med 50 ml vatten; den ska inte bli en tunn soppa.",
+        "Skala moroten, strimla den och gurkan fint och vänd med citronjuicen. Servera råkosten separat från den varma yoghurten.",
+        "Luckra upp riset och servera med all madra och råkost. Fördela komponenterna jämnt över fyra portioner; ingen tomatsås eller extra raita förutsätts."
+      ],
+      "name": "Chana madra – kikärtor i varm yoghurtsås – utökad",
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 11,
+        "base_id": "smako-indian-khichu",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rismjöl|dry",
+                "name": "Rismjöl",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grön chili|raw_edible",
+                "name": "Grön chili",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bikarbonat|dry",
+                "name": "Bikarbonat",
+                "note": "",
+                "quantity": 0.25,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              }
+            ],
+            "id": "deg",
+            "name": "Mjuk risdeg"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "gryta med ånginsats",
+          "värmetålig skål",
+          "spatel"
+        ],
+        "estimated_minutes": 25,
+        "family": "ångad mjuk risdeg",
+        "fish": false,
+        "flavor_profile": [
+          "spiskummin",
+          "grön chili"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pot",
+        "primary_ingredient": "rismjöl",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad frukost får separat jordnöts-yoghurtsås; det är ett namngivet modernt tillägg. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kryddolja och eventuell yoghurtsås",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "grön chili|raw_edible",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "spiskummin|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "175 ml",
+                175.0
+              ]
+            ],
+            "text": "Väg upp fryst hackad grön jalapeño och tillsätt direkt utan att tina eller hälla bort vätska. Koka upp 175 ml vatten med salt, spiskummin och chili. Sänk värmen, rör ner bikarbonaten och sedan allt rismjöl. Arbeta kraftigt med spatel cirka 3 minuter tills inga torra fickor finns och massan är mjuk men sammanhållen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "rismjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "600 ml",
+                600.0
+              ]
+            ],
+            "text": "Smörj en värmetålig skål med en tredjedel av oljan. Lägg i risdegen utan att forma separata bullar. Häll 600 ml vatten i ånggrytan, ställ skålen i insatsen ovanför vattenytan och koka upp. Lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 14,
+            "id": "s3",
+            "ingredient_keys": [
+              "rismjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Ånga cirka 14 minuter. Rör om en gång mot slutet och kontrollera att hela massan är genomhet och inte smakar rått mjöl. Kontrollera vattennivån; tillsätt vid behov 150 ml hett vatten under insatsen, inte i degen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 2,
+            "id": "s4",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "grön chili|raw_edible",
+              "rapsolja|as_sold",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "spiskummin|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lyft skålen försiktigt för ångan och gör en liten grop i den mjuka degen. Häll resten av oljan i gropen. Servera genast med sked. Fördela samtliga mängder till en frukostportion."
+          }
+        ],
+        "total_minutes": 25,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 14
+      },
+      "ingredients": [
+        {
+          "canonical_name": "rismjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "rismjöl",
+          "product_requirements": [
+            "pack:intake_rice_flour"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grön chili",
+          "component": "deg",
+          "form": "raw_edible",
+          "name": "grön chili",
+          "product_requirements": [
+            "pack:intake_all_round2_c8b0139e0c23"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "deg",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bikarbonat",
+          "component": "deg",
+          "form": "dry",
+          "name": "bikarbonat",
+          "product_requirements": [
+            "pack:intake_all_225317a708a6"
+          ],
+          "quantity": 0.25,
+          "quantity_max": 0.25,
+          "quantity_min": 0.25,
+          "quantity_step": 0.25,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst hackad grön jalapeño och tillsätt direkt utan att tina eller hälla bort vätska. Koka upp 175 ml vatten med salt, spiskummin och chili. Sänk värmen, rör ner bikarbonaten och sedan allt rismjöl. Arbeta kraftigt med spatel cirka 3 minuter tills inga torra fickor finns och massan är mjuk men sammanhållen.",
+        "Smörj en värmetålig skål med en tredjedel av oljan. Lägg i risdegen utan att forma separata bullar. Häll 600 ml vatten i ånggrytan, ställ skålen i insatsen ovanför vattenytan och koka upp. Lägg på lock.",
+        "Ånga cirka 14 minuter. Rör om en gång mot slutet och kontrollera att hela massan är genomhet och inte smakar rått mjöl. Kontrollera vattennivån; tillsätt vid behov 150 ml hett vatten under insatsen, inte i degen.",
+        "Lyft skålen försiktigt för ångan och gör en liten grop i den mjuka degen. Häll resten av oljan i gropen. Servera genast med sked. Fördela samtliga mängder till en frukostportion."
+      ],
+      "name": "Khichu – mjuk risdeg med spiskumminhetta – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 14,
+        "base_id": "smako-indian-khichu",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rismjöl|dry",
+                "name": "Rismjöl",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grön chili|raw_edible",
+                "name": "Grön chili",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bikarbonat|dry",
+                "name": "Bikarbonat",
+                "note": "",
+                "quantity": 0.25,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Rapsolja",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.8,
+                "unit": "g"
+              }
+            ],
+            "id": "deg",
+            "name": "Mjuk risdeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rostade jordnötter|as_sold",
+                "name": "Jordnötter",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 85.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sas",
+            "name": "Jordnöts-yoghurtsås"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "gryta med ånginsats",
+          "värmetålig skål",
+          "spatel"
+        ],
+        "estimated_minutes": 28,
+        "family": "ångad mjuk risdeg",
+        "fish": false,
+        "flavor_profile": [
+          "spiskummin",
+          "grön chili"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pot",
+        "primary_ingredient": "rismjöl",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad frukost får separat jordnöts-yoghurtsås; det är ett namngivet modernt tillägg. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kryddolja och eventuell yoghurtsås",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "grön chili|raw_edible",
+              "rismjöl|dry",
+              "salt|as_sold",
+              "spiskummin|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "175 ml",
+                175.0
+              ]
+            ],
+            "text": "Väg upp fryst hackad grön jalapeño och tillsätt direkt utan att tina eller hälla bort vätska. Koka upp 175 ml vatten med salt, spiskummin och chili. Sänk värmen, rör ner bikarbonaten och sedan allt rismjöl. Arbeta kraftigt med spatel cirka 3 minuter tills inga torra fickor finns och massan är mjuk men sammanhållen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 3,
+            "id": "s2",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "rismjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "600 ml",
+                600.0
+              ]
+            ],
+            "text": "Smörj en värmetålig skål med en tredjedel av oljan. Lägg i risdegen utan att forma separata bullar. Häll 600 ml vatten i ånggrytan, ställ skålen i insatsen ovanför vattenytan och koka upp. Lägg på lock."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 14,
+            "id": "s3",
+            "ingredient_keys": [
+              "rismjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Ånga cirka 14 minuter. Rör om en gång mot slutet och kontrollera att hela massan är genomhet och inte smakar rått mjöl. Kontrollera vattennivån; tillsätt vid behov 150 ml hett vatten under insatsen, inte i degen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "limejuice|as_sold",
+              "rostade jordnötter|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hacka de rostade osaltade jordnötterna och rör ihop med yoghurt och limejuice. Såsen serveras separat och är en modern frukostkomplettering."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "grön chili|raw_edible",
+              "limejuice|as_sold",
+              "rapsolja|as_sold",
+              "rismjöl|dry",
+              "rostade jordnötter|as_sold",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lyft skålen försiktigt för ångan och gör en liten grop i den mjuka degen. Häll resten av oljan i gropen. Servera genast med sked och yoghurtsåsen. Fördela samtliga mängder till en frukostportion."
+          }
+        ],
+        "total_minutes": 28,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 14
+      },
+      "ingredients": [
+        {
+          "canonical_name": "rismjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "rismjöl",
+          "product_requirements": [
+            "pack:intake_rice_flour"
+          ],
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grön chili",
+          "component": "deg",
+          "form": "raw_edible",
+          "name": "grön chili",
+          "product_requirements": [
+            "pack:intake_all_round2_c8b0139e0c23"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "deg",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bikarbonat",
+          "component": "deg",
+          "form": "dry",
+          "name": "bikarbonat",
+          "product_requirements": [
+            "pack:intake_all_225317a708a6"
+          ],
+          "quantity": 0.25,
+          "quantity_max": 0.25,
+          "quantity_min": 0.25,
+          "quantity_step": 0.25,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.8,
+          "quantity_max": 0.8,
+          "quantity_min": 0.8,
+          "quantity_step": 0.8,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rostade jordnötter",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "rostade jordnötter",
+          "product_requirements": [
+            "pack:intake_all_expansion_702b4f80c76a"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 85.0,
+          "quantity_max": 85.0,
+          "quantity_min": 85.0,
+          "quantity_step": 85.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "sas",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Väg upp fryst hackad grön jalapeño och tillsätt direkt utan att tina eller hälla bort vätska. Koka upp 175 ml vatten med salt, spiskummin och chili. Sänk värmen, rör ner bikarbonaten och sedan allt rismjöl. Arbeta kraftigt med spatel cirka 3 minuter tills inga torra fickor finns och massan är mjuk men sammanhållen.",
+        "Smörj en värmetålig skål med en tredjedel av oljan. Lägg i risdegen utan att forma separata bullar. Häll 600 ml vatten i ånggrytan, ställ skålen i insatsen ovanför vattenytan och koka upp. Lägg på lock.",
+        "Ånga cirka 14 minuter. Rör om en gång mot slutet och kontrollera att hela massan är genomhet och inte smakar rått mjöl. Kontrollera vattennivån; tillsätt vid behov 150 ml hett vatten under insatsen, inte i degen.",
+        "Hacka de rostade osaltade jordnötterna och rör ihop med yoghurt och limejuice. Såsen serveras separat och är en modern frukostkomplettering.",
+        "Lyft skålen försiktigt för ångan och gör en liten grop i den mjuka degen. Häll resten av oljan i gropen. Servera genast med sked och yoghurtsåsen. Fördela samtliga mängder till en frukostportion."
+      ],
+      "name": "Khichu – mjuk risdeg med spiskumminhetta – utökad",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-swedish-stompa",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rågmjöl|dry",
+                "name": "Rågmjöl",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "filmjölk|as_sold",
+                "name": "Filmjölk",
+                "note": "",
+                "quantity": 47.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bikarbonat|dry",
+                "name": "Bikarbonat",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Tunn filmjölksdeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              }
+            ],
+            "id": "servering",
+            "name": "Till brödet"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "bunke",
+          "kavel",
+          "torr stekpanna",
+          "galler"
+        ],
+        "estimated_minutes": 20,
+        "family": "bikarbonathöjt stekpannetunnbröd",
+        "fish": false,
+        "flavor_profile": [
+          "filmjölk",
+          "råg"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel version serveras med smör. Utökad frukost smaksätter degen med fänkålsfrön och lägger till ost och äpple. Ingen ensamrätt till regionalt ursprung påstås. Ingen exklusiv Dalarna-härkomst hävdas. Enkel version är okryddad med smör; utökad får fänkål i degen och ost/äpple till frukosten. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "smör och eventuell ost/äpple",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "filmjölk|as_sold",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blanda vete- och rågmjöl med bikarbonat och salt. Väg filmjölken i gram och rör i den och arbeta snabbt ihop till en mjuk deg. Degen ska inte jäsa. Värm en torr stekpanna till medelvärme."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 4,
+            "id": "s2",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "filmjölk|as_sold",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Dela degen i två små bröd per portion och kavla till cirka 3 mm mellan bakpapper, utan extra mjöl. Nagga med gaffel."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "filmjölk|as_sold",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Grädda i den torra pannan cirka 2 minuter per sida, sammanlagt cirka 8 minuter för två bröd. Sänk värmen om ytan mörknar innan degen är gräddad. Bröden ska vara torra på ytan men mjuka, utan kladdig rå mitt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "filmjölk|as_sold",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt bröden svalna lätt på galler och fördela smöret över dem. Båda bröden och samtliga tillbehör utgör en frukostportion."
+          }
+        ],
+        "total_minutes": 20,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "brod",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rågmjöl",
+          "component": "brod",
+          "form": "dry",
+          "name": "rågmjöl",
+          "product_requirements": [
+            "pack:intake_all_ba843df2ea2c"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "filmjölk",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "filmjölk",
+          "product_requirements": [
+            "pack:intake_all_round2_d88843b59afc"
+          ],
+          "quantity": 47.0,
+          "quantity_max": 47.0,
+          "quantity_min": 47.0,
+          "quantity_step": 47.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bikarbonat",
+          "component": "brod",
+          "form": "dry",
+          "name": "bikarbonat",
+          "product_requirements": [
+            "pack:intake_all_225317a708a6"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda vete- och rågmjöl med bikarbonat och salt. Väg filmjölken i gram och rör i den och arbeta snabbt ihop till en mjuk deg. Degen ska inte jäsa. Värm en torr stekpanna till medelvärme.",
+        "Dela degen i två små bröd per portion och kavla till cirka 3 mm mellan bakpapper, utan extra mjöl. Nagga med gaffel.",
+        "Grädda i den torra pannan cirka 2 minuter per sida, sammanlagt cirka 8 minuter för två bröd. Sänk värmen om ytan mörknar innan degen är gräddad. Bröden ska vara torra på ytan men mjuka, utan kladdig rå mitt.",
+        "Låt bröden svalna lätt på galler och fördela smöret över dem. Båda bröden och samtliga tillbehör utgör en frukostportion."
+      ],
+      "name": "Stompa – filmjölksbröd i stekpanna – enkel",
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-swedish-stompa",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 40.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rågmjöl|dry",
+                "name": "Rågmjöl",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "filmjölk|as_sold",
+                "name": "Filmjölk",
+                "note": "",
+                "quantity": 47.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bikarbonat|dry",
+                "name": "Bikarbonat",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.6,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "fänkålsfrön|dry",
+                "name": "Fänkålsfrön",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              }
+            ],
+            "id": "brod",
+            "name": "Tunn filmjölksdeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 6.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "Ost",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "Äpple",
+                "note": "",
+                "quantity": 110.0,
+                "unit": "g"
+              }
+            ],
+            "id": "servering",
+            "name": "Till brödet"
+          }
+        ],
+        "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "bunke",
+          "kavel",
+          "torr stekpanna",
+          "galler"
+        ],
+        "estimated_minutes": 20,
+        "family": "bikarbonathöjt stekpannetunnbröd",
+        "fish": false,
+        "flavor_profile": [
+          "filmjölk",
+          "råg"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Enkel version serveras med smör. Utökad frukost smaksätter degen med fänkålsfrön och lägger till ost och äpple. Ingen ensamrätt till regionalt ursprung påstås. Ingen exklusiv Dalarna-härkomst hävdas. Enkel version är okryddad med smör; utökad får fänkål i degen och ost/äpple till frukosten. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "smör och eventuell ost/äpple",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "filmjölk|as_sold",
+              "fänkålsfrön|dry",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Blanda vete- och rågmjöl med bikarbonat och salt samt stötta fänkålsfrön. Väg filmjölken i gram och rör i den och arbeta snabbt ihop till en mjuk deg. Degen ska inte jäsa. Värm en torr stekpanna till medelvärme."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 4,
+            "id": "s2",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "filmjölk|as_sold",
+              "fänkålsfrön|dry",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Dela degen i två små bröd per portion och kavla till cirka 3 mm mellan bakpapper, utan extra mjöl. Nagga med gaffel."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 8,
+            "id": "s3",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "filmjölk|as_sold",
+              "fänkålsfrön|dry",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Grädda i den torra pannan cirka 2 minuter per sida, sammanlagt cirka 8 minuter för två bröd. Sänk värmen om ytan mörknar innan degen är gräddad. Bröden ska vara torra på ytan men mjuka, utan kladdig rå mitt."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "bikarbonat|dry",
+              "filmjölk|as_sold",
+              "fänkålsfrön|dry",
+              "ost|as_sold",
+              "rågmjöl|dry",
+              "salt|as_sold",
+              "smör|as_sold",
+              "vetemjöl|dry",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt bröden svalna lätt på galler och fördela smöret över dem. Skiva osten och äpplet och servera till. Båda bröden och samtliga tillbehör utgör en frukostportion."
+          }
+        ],
+        "total_minutes": 20,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 0
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "brod",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 40.0,
+          "quantity_max": 40.0,
+          "quantity_min": 40.0,
+          "quantity_step": 40.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rågmjöl",
+          "component": "brod",
+          "form": "dry",
+          "name": "rågmjöl",
+          "product_requirements": [
+            "pack:intake_all_ba843df2ea2c"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "filmjölk",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "filmjölk",
+          "product_requirements": [
+            "pack:intake_all_round2_d88843b59afc"
+          ],
+          "quantity": 47.0,
+          "quantity_max": 47.0,
+          "quantity_min": 47.0,
+          "quantity_step": 47.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bikarbonat",
+          "component": "brod",
+          "form": "dry",
+          "name": "bikarbonat",
+          "product_requirements": [
+            "pack:intake_all_225317a708a6"
+          ],
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "brod",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.6,
+          "quantity_max": 0.6,
+          "quantity_min": 0.6,
+          "quantity_step": 0.6,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "fänkålsfrön",
+          "component": "brod",
+          "form": "dry",
+          "name": "fänkålsfrön",
+          "product_requirements": [
+            "pack:intake_all_expansion_24d1fa569388"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 6.0,
+          "quantity_max": 6.0,
+          "quantity_min": 6.0,
+          "quantity_step": 6.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "servering",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "servering",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 110.0,
+          "quantity_max": 110.0,
+          "quantity_min": 110.0,
+          "quantity_step": 110.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Blanda vete- och rågmjöl med bikarbonat och salt samt stötta fänkålsfrön. Väg filmjölken i gram och rör i den och arbeta snabbt ihop till en mjuk deg. Degen ska inte jäsa. Värm en torr stekpanna till medelvärme.",
+        "Dela degen i två små bröd per portion och kavla till cirka 3 mm mellan bakpapper, utan extra mjöl. Nagga med gaffel.",
+        "Grädda i den torra pannan cirka 2 minuter per sida, sammanlagt cirka 8 minuter för två bröd. Sänk värmen om ytan mörknar innan degen är gräddad. Bröden ska vara torra på ytan men mjuka, utan kladdig rå mitt.",
+        "Låt bröden svalna lätt på galler och fördela smöret över dem. Skiva osten och äpplet och servera till. Båda bröden och samtliga tillbehör utgör en frukostportion."
+      ],
+      "name": "Stompa – filmjölksbröd i stekpanna – utökad",
+      "servings": 1
+    }
+  ],
+  "schema_version": "smako-meal-pack-v1"
+}

@@ -21,6 +21,7 @@ MINT_LEAF_REVIEW = Path('docs/reviews/mint-leaf-preparation-20261028/recipe-revi
 CORN_REVIEW = Path('docs/reviews/whole-corn-20261028/recipe-review.json')
 TOP_FIVE_REVIEW = Path('docs/reviews/top-five-ingredients-20261028/recipe-review.json')
 EXPANSION_REVIEW = Path('docs/reviews/recipe-unblock-20261101/library-transition.json')
+ROUND2_REVIEW = Path('docs/reviews/recipe-unblock-round2-20261101/library-transition.json')
 
 
 def checked_additive_transition(review):
@@ -50,7 +51,7 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
     before = [r['current_id'] for r in variants]
     if digest(before) != scope['recipe_ids_sha256'] or len(set(before)) != len(before):
         raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
-    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW)
+    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW, ROUND2_REVIEW)
     reviews = [(path, json.loads(path.read_bytes())) for path in paths if path.exists()]
     pending = [(scope['manifest_sha256'], before)]
     visited = set()
@@ -66,7 +67,7 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
         for path, review in reviews:
             if manifest != review['before_manifest_file_sha256']:
                 continue
-            if path == EXPANSION_REVIEW:
+            if path in {EXPANSION_REVIEW, ROUND2_REVIEW}:
                 checked_additive_transition(review)
             replacements = {r['previous_id']: r['runtime_id'] for r in review['corrected']}
             after = [replacements.get(r, r) for r in ids]

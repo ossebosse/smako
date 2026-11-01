@@ -125,9 +125,37 @@ def test_metadata_and_version_are_part_of_the_content_seal(recipe):
         recipe_library._structural_check(changed)
 
 
+@pytest.mark.parametrize('base', ['smako-indian-gulab-jamun', 'smako-swedish-bohuslansk-aggost',
+                                 'smako-swedish-blodpalt', 'smako-indian-murgh-musallam',
+                                 'smako-italian-pasta-cacio-pepe'])
+def test_issued_food_with_unmeasured_losses_rejects_hard_limits(base):
+    # Exercise the real issued content seal, without the synthetic fixture's
+    # registry monkeypatch. Purchased input quantities still do not prove
+    # the mass or nutrients served after frying, straining, peeling or trimming.
+    r = next(r for r in recipe_library.current_recipes()
+             if r.design.base_id == base and r.design.variant_id == 'simple')
+    recipe_library.validate_recipe_design(r)
+    assert r.preparation.version == 'smako-authored-losses-v3'
+    assert r.design.unmeasured_processes
+    assert estimate_portion_weight(r, {}) is None
+    meal_type = r.design.meal_types[0]
+    slot = MealSlot(id='issued-loss', day=1, meal_type=meal_type, recipe=r)
+    planner = object.__new__(PersonalPlanner)
+    for limit in ({'min_weight_g': 1}, {'max_weight_g': 3000}, {'min_protein_g': 1}, {'max_kcal': 3000}):
+        planner.meals = {meal_type: MealSettings(meal_type=meal_type, count=1, servings=1,
+                                               limits=PortionLimits(**limit))}
+        with pytest.raises(PolicyConflict) as exc:
+            planner._check_nutrition_uncached([slot], {}, [], [])
+        assert exc.value.code == 'DATA_BLOCKED'
+    planner.meals[meal_type] = MealSettings(meal_type=meal_type, count=1, servings=1, limits=PortionLimits())
+    result = planner._check_nutrition_uncached([slot], {}, [], [])
+    assert result[0]['status'] == 'UNKNOWN' and result[0]['values'] == {}
+
+
 @pytest.mark.parametrize('name,unit', [('ägg', 'st'), ('hel kyckling', 'g'),
                                      ('oxsvans med ben', 'g'), ('rimmat fläsklägg', 'g'),
-                                     ('nötblod', 'ml')])
+                                     ('nötblod', 'ml'), ('ungnötslever', 'g'),
+                                     ('råa skalade vannameiräkor', 'g'), ('blåmusselkött utan skal', 'g')])
 @pytest.mark.parametrize('method', ['salad', 'cold_assembly', 'refrigerated_assembly'])
 def test_gross_raw_animal_inputs_still_require_a_hot_method(name, unit, method):
     document = source()

@@ -1,0 +1,3669 @@
+{
+  "pack_id": "reviewed-expansion-round2-stage2",
+  "recipes": [
+    {
+      "base_id": "smako-italian-spaghetti-aglio-olio",
+      "components": [
+        {
+          "id": "c1",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Torr spaghetti",
+              "name": "pasta",
+              "quantity": 360,
+              "requirements": [
+                "pack:spaghetti"
+              ],
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 50,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 20,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Chiliflakes",
+              "name": "chiliflakes",
+              "quantity": 1.5,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Persilja",
+              "name": "persilja",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 3,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Vitlöks- och chilipasta"
+        }
+      ],
+      "cuisine": "italian",
+      "equipment": [
+        "pastakastrull",
+        "stor stekpanna",
+        "durkslag"
+      ],
+      "family": "garlic_oil_emulsion_pasta",
+      "flavor": [
+        "vitlök",
+        "chili",
+        "persilja"
+      ],
+      "meal_type": "dinner",
+      "method": "pan",
+      "name": "Spaghetti aglio, olio e peperoncino – enkel vitlökspasta",
+      "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Kärnan är aglio, olio e peperoncino. Bön- och grönsakskomponenterna är egna måltidsutbyggnader, inte ett påstående om traditionella obligatoriska tillbehör. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "pasta",
+      "servings": 4,
+      "side": "ingen separat sida",
+      "steps": [
+        {
+          "minutes": 10,
+          "passive": false,
+          "text": "Skiva vitlöken tunt och hacka persiljan. Koka upp 3000 ml vatten utan tillsatt salt i en stor kastrull.",
+          "uses": [
+            "vitlök",
+            "persilja"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 9,
+          "passive": true,
+          "text": "Koka pastan två minuter kortare än förpackningens tid; planera ungefär nio minuter. Spara 300 ml kokvatten innan du häller av.",
+          "uses": [
+            "pasta"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Lägg pastans olivolja, vitlök och chiliflakes i en stor panna. Värm långsamt på medellåg värme tills vitlöken doftar och är ljust gyllene, inte brun.",
+          "uses": [
+            "olivolja",
+            "vitlök",
+            "chiliflakes"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Häll försiktigt 100 ml av det sparade kokvattnet i pannan. Rör ner pastakomponentens salt. Lägg i spaghettin och vänd över medelvärme så att olja och stärkelsevatten blir en tunn blank sås. Tillsätt ytterligare 50 ml av det sparade kokvattnet om pastan känns torr. Vänd ner persiljan och servera genast. Servera all sås och hela tillbehörens dressing om tillbehör ingår.",
+          "uses": [
+            "pasta",
+            "persilja",
+            "salt"
+          ]
+        }
+      ],
+      "variant_id": "simple",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-italian-spaghetti-aglio-olio",
+      "components": [
+        {
+          "id": "c1",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Torr spaghetti",
+              "name": "pasta",
+              "quantity": 360,
+              "requirements": [
+                "pack:spaghetti"
+              ],
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 50,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 20,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Chiliflakes",
+              "name": "chiliflakes",
+              "quantity": 1.5,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Persilja",
+              "name": "persilja",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 3,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Vitlöks- och chilipasta"
+        },
+        {
+          "id": "c2",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Broccoli",
+              "name": "broccoli",
+              "quantity": 400,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "cooked_drained",
+              "label": "Kokta och avrunna bönor",
+              "name": "bönor",
+              "quantity": 400,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Citronjuice",
+              "name": "citronjuice",
+              "quantity": 25,
+              "role": "flavour",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 15,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Broccoli och bönor"
+        }
+      ],
+      "cuisine": "italian",
+      "equipment": [
+        "pastakastrull",
+        "stor stekpanna",
+        "durkslag"
+      ],
+      "family": "garlic_oil_emulsion_pasta",
+      "flavor": [
+        "vitlök",
+        "chili",
+        "persilja"
+      ],
+      "meal_type": "dinner",
+      "method": "pan",
+      "name": "Spaghetti aglio, olio e peperoncino – med broccoli och bönor",
+      "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Kärnan är aglio, olio e peperoncino. Bön- och grönsakskomponenterna är egna måltidsutbyggnader, inte ett påstående om traditionella obligatoriska tillbehör. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "pasta",
+      "servings": 4,
+      "side": "broccoli och bönor",
+      "steps": [
+        {
+          "minutes": 12,
+          "passive": false,
+          "text": "Skär broccolin i små buketter och skiva den skalade stjälken. Koka upp 800 ml vatten, sjud broccolin i fyra minuter och lägg sedan i de kokta bönorna i två minuter. Häll av. Blanda med tillbehörets citronjuice, salt och olivolja och håll varmt.",
+          "uses": [
+            "broccoli",
+            "bönor",
+            "citronjuice",
+            "salt",
+            "olivolja"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Skiva vitlöken tunt och hacka persiljan. Koka upp 3000 ml vatten utan tillsatt salt i en stor kastrull.",
+          "uses": [
+            "vitlök",
+            "persilja"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 9,
+          "passive": true,
+          "text": "Koka pastan två minuter kortare än förpackningens tid; planera ungefär nio minuter. Spara 300 ml kokvatten innan du häller av.",
+          "uses": [
+            "pasta"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Lägg pastans olivolja, vitlök och chiliflakes i en stor panna. Värm långsamt på medellåg värme tills vitlöken doftar och är ljust gyllene, inte brun.",
+          "uses": [
+            "olivolja",
+            "vitlök",
+            "chiliflakes"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Häll försiktigt 100 ml av det sparade kokvattnet i pannan. Rör ner pastakomponentens salt. Lägg i spaghettin och vänd över medelvärme så att olja och stärkelsevatten blir en tunn blank sås. Tillsätt ytterligare 50 ml av det sparade kokvattnet om pastan känns torr. Vänd ner persiljan och servera genast med broccoli och bönor. Servera all sås och hela tillbehörens dressing om tillbehör ingår.",
+          "uses": [
+            "pasta",
+            "persilja",
+            "salt"
+          ]
+        }
+      ],
+      "variant_id": "standard",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-italian-spaghetti-aglio-olio",
+      "components": [
+        {
+          "id": "c1",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Torr spaghetti",
+              "name": "pasta",
+              "quantity": 360,
+              "requirements": [
+                "pack:spaghetti"
+              ],
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 50,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 20,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Chiliflakes",
+              "name": "chiliflakes",
+              "quantity": 1.5,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Persilja",
+              "name": "persilja",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 3,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Vitlöks- och chilipasta"
+        },
+        {
+          "id": "c2",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Broccoli",
+              "name": "broccoli",
+              "quantity": 400,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "cooked_drained",
+              "label": "Kokta och avrunna bönor",
+              "name": "bönor",
+              "quantity": 400,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Citronjuice",
+              "name": "citronjuice",
+              "quantity": 25,
+              "role": "flavour",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 15,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Broccoli och bönor"
+        },
+        {
+          "id": "c3",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 300,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Rödlök",
+              "name": "rödlök",
+              "quantity": 50,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Balsamvinäger",
+              "name": "balsamvinäger",
+              "quantity": 20,
+              "role": "flavour",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Sallad",
+              "name": "sallad",
+              "quantity": 80,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 10,
+              "role": "sauce",
+              "unit": "ml"
+            }
+          ],
+          "name": "Tomat- och bladsallad"
+        }
+      ],
+      "cuisine": "italian",
+      "equipment": [
+        "pastakastrull",
+        "stor stekpanna",
+        "durkslag"
+      ],
+      "family": "garlic_oil_emulsion_pasta",
+      "flavor": [
+        "vitlök",
+        "chili",
+        "persilja"
+      ],
+      "meal_type": "dinner",
+      "method": "pan",
+      "name": "Spaghetti aglio, olio e peperoncino – med broccoli, bönor och tomatsallad",
+      "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Kärnan är aglio, olio e peperoncino. Bön- och grönsakskomponenterna är egna måltidsutbyggnader, inte ett påstående om traditionella obligatoriska tillbehör. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "pasta",
+      "servings": 4,
+      "side": "broccoli och bönor samt sallad",
+      "steps": [
+        {
+          "minutes": 12,
+          "passive": false,
+          "text": "Skär broccolin i små buketter och skiva den skalade stjälken. Koka upp 800 ml vatten, sjud broccolin i fyra minuter och lägg sedan i de kokta bönorna i två minuter. Häll av. Blanda med tillbehörets citronjuice, salt och olivolja och håll varmt.",
+          "uses": [
+            "broccoli",
+            "bönor",
+            "citronjuice",
+            "salt",
+            "olivolja"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 6,
+          "passive": false,
+          "text": "Skölj salladen, tärna tomaterna och strimla rödlöken. Blanda med salladskomponentens olivolja och balsamvinäger.",
+          "uses": [
+            "tomat",
+            "rödlök",
+            "balsamvinäger",
+            "sallad",
+            "olivolja"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Skiva vitlöken tunt och hacka persiljan. Koka upp 3000 ml vatten utan tillsatt salt i en stor kastrull.",
+          "uses": [
+            "vitlök",
+            "persilja"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 9,
+          "passive": true,
+          "text": "Koka pastan två minuter kortare än förpackningens tid; planera ungefär nio minuter. Spara 300 ml kokvatten innan du häller av.",
+          "uses": [
+            "pasta"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Lägg pastans olivolja, vitlök och chiliflakes i en stor panna. Värm långsamt på medellåg värme tills vitlöken doftar och är ljust gyllene, inte brun.",
+          "uses": [
+            "olivolja",
+            "vitlök",
+            "chiliflakes"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Häll försiktigt 100 ml av det sparade kokvattnet i pannan. Rör ner pastakomponentens salt. Lägg i spaghettin och vänd över medelvärme så att olja och stärkelsevatten blir en tunn blank sås. Tillsätt ytterligare 50 ml av det sparade kokvattnet om pastan känns torr. Vänd ner persiljan och servera genast med broccoli och bönor samt tomatsallad. Servera all sås och hela tillbehörens dressing om tillbehör ingår.",
+          "uses": [
+            "pasta",
+            "persilja",
+            "salt"
+          ]
+        }
+      ],
+      "variant_id": "extended",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-mexican-chilorio",
+      "components": [
+        {
+          "id": "c1",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Benfri fläskkarré, rå ätlig vikt",
+              "name": "fläskkarré",
+              "quantity": 700,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Anchochili",
+              "name": "anchochili",
+              "quantity": 25,
+              "role": "sauce",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Äppelcidervinäger",
+              "name": "äppelcidervinäger",
+              "quantity": 35,
+              "role": "flavour",
+              "unit": "ml"
+            },
+            {
+              "form": "dry",
+              "label": "Oregano",
+              "name": "oregano",
+              "quantity": 1.5,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 25,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 3,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Chilorio"
+        },
+        {
+          "id": "c2",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Tortillas",
+              "name": "tortillas",
+              "quantity": 240,
+              "role": "side",
+              "unit": "g"
+            }
+          ],
+          "name": "Tortillas"
+        }
+      ],
+      "cuisine": "mexican",
+      "equipment": [
+        "gryta med lock",
+        "liten kastrull",
+        "mixer",
+        "stekpanna",
+        "kökstermometer"
+      ],
+      "family": "shredded_pork_fried_in_ancho_adobo",
+      "flavor": [
+        "ancho",
+        "vinäger",
+        "oregano"
+      ],
+      "meal_type": "dinner",
+      "method": "pot",
+      "name": "Chilorio – anchochili, långkokt fläsk och tortillas",
+      "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Sinaloa-rättens kärna bevaras: mörat fläsk dras isär och steks i en separat torkad-chilipasta. Rapsolja i stället för ister och tortilla-/bönservering är författade anpassningar. Extra mörning kan förlänga beräknad tid med 30–60 minuter. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fläskkött",
+      "servings": 4,
+      "side": "tortillas",
+      "steps": [
+        {
+          "minutes": 10,
+          "passive": false,
+          "text": "Skär fläskkarrén i bitar på cirka fyra centimeter. Lägg köttet i en gryta med salt. Häll i 600 ml vatten och koka upp.",
+          "uses": [
+            "fläskkarré",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 90,
+          "passive": true,
+          "text": "Sjud försiktigt under lock tills köttet går att dra isär, omkring 90 minuter. Kontrollera vätskan och vänd köttet ett par gånger. Tillsätt 100 ml vatten om det behövs för att undvika torrkokning. Segt kött behöver ytterligare 30–60 minuter; kontrollera också minst 72 °C i den tjockaste biten.",
+          "uses": [
+            "fläskkarré"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Väg upp mald Ancho Style-chili. Mixa hela mängden med vitlök, vinäger, oregano och 100 ml vatten till en tjock pasta.",
+          "uses": [
+            "anchochili",
+            "vitlök",
+            "äppelcidervinäger",
+            "oregano"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 35,
+          "passive": false,
+          "text": "Lyft köttet till ett fat och dra isär det med två gafflar. Behåll allt kokspad, fett och eventuell lök i grytan. Koka utan lock och rör regelbundet cirka 30 minuter tills spadet reducerats till en tjock bottensky; inget spad ska hällas bort. Tiden kan bli längre i en smal gryta.",
+          "uses": [
+            "fläskkarré"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Häll rapsoljan i den breda grytan med den reducerade skyn. Lägg tillbaka allt kött och eventuell saft från fatet. Stek under omrörning tills kanterna får lite färg och rör sedan ner hela chilipastan.",
+          "uses": [
+            "fläskkarré",
+            "rapsolja"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Stek och rör på medelvärme tills chilipastan klär köttet och rätten är ganska torr, cirka tio minuter. Om den fastnar, tillsätt 50 ml vatten och låt koka in. Servera hela mängden inklusive allt fett.",
+          "uses": []
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Värm tortillabröden kort i torr panna, ungefär en halv minut per sida. Servera chilorion i eller med tortillabröden.",
+          "uses": [
+            "tortillas"
+          ]
+        }
+      ],
+      "variant_id": "simple",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-mexican-chilorio",
+      "components": [
+        {
+          "id": "c1",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Benfri fläskkarré, rå ätlig vikt",
+              "name": "fläskkarré",
+              "quantity": 700,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Anchochili",
+              "name": "anchochili",
+              "quantity": 25,
+              "role": "sauce",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Äppelcidervinäger",
+              "name": "äppelcidervinäger",
+              "quantity": 35,
+              "role": "flavour",
+              "unit": "ml"
+            },
+            {
+              "form": "dry",
+              "label": "Oregano",
+              "name": "oregano",
+              "quantity": 1.5,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 25,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 3,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Apelsinjuice",
+              "name": "apelsinjuice",
+              "quantity": 150,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "dry",
+              "label": "Spiskummin",
+              "name": "spiskummin",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 150,
+              "role": "vegetable",
+              "unit": "g"
+            }
+          ],
+          "name": "Chilorio"
+        },
+        {
+          "id": "c2",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Tortillas",
+              "name": "tortillas",
+              "quantity": 240,
+              "role": "side",
+              "unit": "g"
+            }
+          ],
+          "name": "Tortillas"
+        }
+      ],
+      "cuisine": "mexican",
+      "equipment": [
+        "gryta med lock",
+        "liten kastrull",
+        "mixer",
+        "stekpanna",
+        "kökstermometer"
+      ],
+      "family": "shredded_pork_fried_in_ancho_adobo",
+      "flavor": [
+        "ancho",
+        "vinäger",
+        "oregano"
+      ],
+      "meal_type": "dinner",
+      "method": "pot",
+      "name": "Chilorio – med apelsin, lök och spiskummin",
+      "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Sinaloa-rättens kärna bevaras: mörat fläsk dras isär och steks i en separat torkad-chilipasta. Rapsolja i stället för ister och tortilla-/bönservering är författade anpassningar. Extra mörning kan förlänga beräknad tid med 30–60 minuter. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fläskkött",
+      "servings": 4,
+      "side": "tortillas",
+      "steps": [
+        {
+          "minutes": 10,
+          "passive": false,
+          "text": "Skär fläskkarrén i bitar på cirka fyra centimeter. Skiva löken. Lägg köttet i en gryta med salt och lök. Häll i 450 ml vatten och apelsinjuicen och koka upp.",
+          "uses": [
+            "fläskkarré",
+            "salt",
+            "gul lök",
+            "apelsinjuice"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 90,
+          "passive": true,
+          "text": "Sjud försiktigt under lock tills köttet går att dra isär, omkring 90 minuter. Kontrollera vätskan och vänd köttet ett par gånger. Tillsätt 100 ml vatten om det behövs för att undvika torrkokning. Segt kött behöver ytterligare 30–60 minuter; kontrollera också minst 72 °C i den tjockaste biten.",
+          "uses": [
+            "fläskkarré"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Väg upp mald Ancho Style-chili. Mixa hela mängden med vitlök, vinäger, oregano och 100 ml vatten till en tjock pasta. Tillsätt också spiskummin.",
+          "uses": [
+            "anchochili",
+            "vitlök",
+            "äppelcidervinäger",
+            "oregano",
+            "spiskummin"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 35,
+          "passive": false,
+          "text": "Lyft köttet till ett fat och dra isär det med två gafflar. Behåll allt kokspad, fett och eventuell lök i grytan. Koka utan lock och rör regelbundet cirka 30 minuter tills spadet reducerats till en tjock bottensky; inget spad ska hällas bort. Tiden kan bli längre i en smal gryta.",
+          "uses": [
+            "fläskkarré",
+            "gul lök",
+            "apelsinjuice"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Häll rapsoljan i den breda grytan med den reducerade skyn. Lägg tillbaka allt kött och eventuell saft från fatet. Stek under omrörning tills kanterna får lite färg och rör sedan ner hela chilipastan.",
+          "uses": [
+            "fläskkarré",
+            "rapsolja",
+            "gul lök"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Stek och rör på medelvärme tills chilipastan klär köttet och rätten är ganska torr, cirka tio minuter. Om den fastnar, tillsätt 50 ml vatten och låt koka in. Servera hela mängden inklusive allt fett.",
+          "uses": []
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Värm tortillabröden kort i torr panna, ungefär en halv minut per sida. Servera chilorion i eller med tortillabröden.",
+          "uses": [
+            "tortillas"
+          ]
+        }
+      ],
+      "variant_id": "standard",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-mexican-chilorio",
+      "components": [
+        {
+          "id": "c1",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Benfri fläskkarré, rå ätlig vikt",
+              "name": "fläskkarré",
+              "quantity": 700,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Anchochili",
+              "name": "anchochili",
+              "quantity": 25,
+              "role": "sauce",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Äppelcidervinäger",
+              "name": "äppelcidervinäger",
+              "quantity": 35,
+              "role": "flavour",
+              "unit": "ml"
+            },
+            {
+              "form": "dry",
+              "label": "Oregano",
+              "name": "oregano",
+              "quantity": 1.5,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 25,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 3,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Apelsinjuice",
+              "name": "apelsinjuice",
+              "quantity": 150,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "dry",
+              "label": "Spiskummin",
+              "name": "spiskummin",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 150,
+              "role": "vegetable",
+              "unit": "g"
+            }
+          ],
+          "name": "Chilorio"
+        },
+        {
+          "id": "c2",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Tortillas",
+              "name": "tortillas",
+              "quantity": 240,
+              "role": "side",
+              "unit": "g"
+            }
+          ],
+          "name": "Tortillas"
+        },
+        {
+          "id": "c3",
+          "ingredients": [
+            {
+              "form": "cooked_drained",
+              "label": "Kokta svarta bönor, avrunnen vikt",
+              "name": "svarta bönor",
+              "quantity": 400,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Limejuice",
+              "name": "limejuice",
+              "quantity": 20,
+              "role": "flavour",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Koriander",
+              "name": "koriander",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Rädisa",
+              "name": "rädisa",
+              "quantity": 150,
+              "role": "vegetable",
+              "unit": "g"
+            }
+          ],
+          "name": "Bönor och rädisor"
+        }
+      ],
+      "cuisine": "mexican",
+      "equipment": [
+        "gryta med lock",
+        "liten kastrull",
+        "mixer",
+        "stekpanna",
+        "kökstermometer"
+      ],
+      "family": "shredded_pork_fried_in_ancho_adobo",
+      "flavor": [
+        "ancho",
+        "vinäger",
+        "oregano"
+      ],
+      "meal_type": "dinner",
+      "method": "pot",
+      "name": "Chilorio – med apelsin, svarta bönor och rädisor",
+      "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar, inte uppmätt provlagning. Sinaloa-rättens kärna bevaras: mörat fläsk dras isär och steks i en separat torkad-chilipasta. Rapsolja i stället för ister och tortilla-/bönservering är författade anpassningar. Extra mörning kan förlänga beräknad tid med 30–60 minuter. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fläskkött",
+      "servings": 4,
+      "side": "tortillas och bönor",
+      "steps": [
+        {
+          "minutes": 10,
+          "passive": false,
+          "text": "Skär fläskkarrén i bitar på cirka fyra centimeter. Skiva löken. Lägg köttet i en gryta med salt och lök. Häll i 450 ml vatten och apelsinjuicen och koka upp.",
+          "uses": [
+            "fläskkarré",
+            "salt",
+            "gul lök",
+            "apelsinjuice"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 90,
+          "passive": true,
+          "text": "Sjud försiktigt under lock tills köttet går att dra isär, omkring 90 minuter. Kontrollera vätskan och vänd köttet ett par gånger. Tillsätt 100 ml vatten om det behövs för att undvika torrkokning. Segt kött behöver ytterligare 30–60 minuter; kontrollera också minst 72 °C i den tjockaste biten.",
+          "uses": [
+            "fläskkarré"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Väg upp mald Ancho Style-chili. Mixa hela mängden med vitlök, vinäger, oregano och 100 ml vatten till en tjock pasta. Tillsätt också spiskummin.",
+          "uses": [
+            "anchochili",
+            "vitlök",
+            "äppelcidervinäger",
+            "oregano",
+            "spiskummin"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 35,
+          "passive": false,
+          "text": "Lyft köttet till ett fat och dra isär det med två gafflar. Behåll allt kokspad, fett och eventuell lök i grytan. Koka utan lock och rör regelbundet cirka 30 minuter tills spadet reducerats till en tjock bottensky; inget spad ska hällas bort. Tiden kan bli längre i en smal gryta.",
+          "uses": [
+            "fläskkarré",
+            "gul lök",
+            "apelsinjuice"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Häll rapsoljan i den breda grytan med den reducerade skyn. Lägg tillbaka allt kött och eventuell saft från fatet. Stek under omrörning tills kanterna får lite färg och rör sedan ner hela chilipastan.",
+          "uses": [
+            "fläskkarré",
+            "rapsolja",
+            "gul lök"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Stek och rör på medelvärme tills chilipastan klär köttet och rätten är ganska torr, cirka tio minuter. Om den fastnar, tillsätt 50 ml vatten och låt koka in. Servera hela mängden inklusive allt fett.",
+          "uses": []
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 9,
+          "passive": false,
+          "text": "Väg de redan kokta svarta bönorna efter avrinning. Värm med fryst hackad koriander och 30 ml vatten i en liten kastrull minst tre minuter eller längre enligt förpackningen. Koka in allt fritt vatten. Skiva de ansade rädisorna och vänd med bönorna och limejuicen.",
+          "uses": [
+            "svarta bönor",
+            "rädisa",
+            "koriander",
+            "limejuice"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Värm tortillabröden kort i torr panna, ungefär en halv minut per sida. Servera chilorion i eller med tortillabröden och bön- och rädisblandningen.",
+          "uses": [
+            "tortillas"
+          ]
+        }
+      ],
+      "variant_id": "extended",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-mexican-tacos-de-canasta",
+      "components": [
+        {
+          "id": "fyllningar",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Potatis",
+              "name": "potatis",
+              "quantity": 550,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "cooked_drained",
+              "label": "Kokta bönor, avrunnen vikt",
+              "name": "bönor",
+              "quantity": 420,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 130,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 25,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 4,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Två torra fyllningar"
+        },
+        {
+          "id": "tacos",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Majstortillas",
+              "name": "majstortillas",
+              "quantity": 400,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Torkad ancho utan stjälk och frön",
+              "name": "anchochili",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 60,
+              "role": "cooking",
+              "unit": "ml"
+            }
+          ],
+          "name": "Tortillas och varm chiliolja"
+        }
+      ],
+      "cuisine": "mexican",
+      "equipment": [
+        "stekpanna",
+        "kastrull",
+        "mixer",
+        "värmetålig behållare",
+        "bakpapper",
+        "ren handduk",
+        "termometer"
+      ],
+      "family": "varmångade fyllda majstacos",
+      "flavor": [
+        "ancho",
+        "vitlök"
+      ],
+      "meal_type": "dinner",
+      "method": "pan",
+      "name": "Tacos de canasta – ångvilade korgtacos – enkel",
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Liten värmetålig, handduksisolerad behållare ersätter gatukökets korg. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "bönor",
+      "servings": 4,
+      "side": "salsa och eventuell snabbpickles",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 6,
+          "passive": false,
+          "text": "Skala potatisen, väg den angivna råa ätliga mängden och dela. Koka upp med 1000 ml vatten utan tillsatt salt. Väg upp den malda Ancho Style-chilin separat till chilioljan.",
+          "uses": [
+            "potatis",
+            "anchochili"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 18,
+          "passive": true,
+          "text": "Sjud potatisen cirka 18 minuter tills den är helt mjuk. Häll av potatisen noga. Chilipulvret ska inte blötläggas.",
+          "uses": [
+            "potatis"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 12,
+          "passive": false,
+          "text": "Skölj de kokta bönorna och väg efter avrinning. Hacka löken och fräs i fyllningarnas olja. Dela den stekta löken i två delar. Mosa bönorna med ena delen och hälften av fyllningarnas salt. Mosa potatisen med andra delen och återstående hälft av fyllningarnas salt. Stek varje fyllning kort i samma panna tills den är varm och ganska torr, inte såsig.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 7,
+          "passive": false,
+          "text": "Mixa hela mängden mald Ancho Style-chili med vitlöken och 25 ml vatten till slät pasta. Värm taco-komponentens olja försiktigt i en liten kastrull. Rör ner chilipastan från låg höjd; den kan stänka. Sjud under omrörning tills vattenbubblorna nästan upphört och oljan doftar rostad chili, utan att vitlöken bränns.",
+          "uses": [
+            "anchochili",
+            "vitlök",
+            "rapsolja"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 15,
+          "passive": false,
+          "text": "Klä en förvärmd värmetålig behållare med bakpapper. Värm majstortillorna i torr panna tills de är böjliga och heta, cirka en halv minut per sida. Fördela bönfyllning i hälften och potatisfyllning i resten. Vik och lägg tätt i lager; pensla varje lager med den varma chilioljan. Använd all tortilla, fyllning och olja. Förslut papperet och linda behållaren i handduken.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 25,
+          "passive": true,
+          "text": "Låt de inpackade tacosen ångvila 25 minuter. Behållaren ska behålla hettan; sikta på att fyllningen hålls över 60 °C. Detta är avsedd slutbehandling, inte passiv förvaring över flera timmar.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Öppna försiktigt för varm ånga. Fördela de mjuka, oljeglänsande tacosen över fyra portioner. Ät direkt; någon frasig yta eftersträvas inte. Skrapa ur all kvarvarande chiliolja från bakpapperet och fördela över tacosen.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ]
+        }
+      ],
+      "variant_id": "simple",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-mexican-tacos-de-canasta",
+      "components": [
+        {
+          "id": "fyllningar",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Potatis",
+              "name": "potatis",
+              "quantity": 550,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "cooked_drained",
+              "label": "Kokta bönor, avrunnen vikt",
+              "name": "bönor",
+              "quantity": 420,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 130,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 25,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 4,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Två torra fyllningar"
+        },
+        {
+          "id": "tacos",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Majstortillas",
+              "name": "majstortillas",
+              "quantity": 400,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Torkad ancho utan stjälk och frön",
+              "name": "anchochili",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 60,
+              "role": "cooking",
+              "unit": "ml"
+            }
+          ],
+          "name": "Tortillas och varm chiliolja"
+        },
+        {
+          "id": "salsa",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 400,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Limejuice",
+              "name": "limejuice",
+              "quantity": 30,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Koriander",
+              "name": "koriander",
+              "quantity": 16,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Tomatsalsa"
+        }
+      ],
+      "cuisine": "mexican",
+      "equipment": [
+        "stekpanna",
+        "kastrull",
+        "mixer",
+        "värmetålig behållare",
+        "bakpapper",
+        "ren handduk",
+        "termometer"
+      ],
+      "family": "varmångade fyllda majstacos",
+      "flavor": [
+        "ancho",
+        "vitlök"
+      ],
+      "meal_type": "dinner",
+      "method": "pan",
+      "name": "Tacos de canasta – ångvilade korgtacos – standard",
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Liten värmetålig, handduksisolerad behållare ersätter gatukökets korg. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "bönor",
+      "servings": 4,
+      "side": "salsa och eventuell snabbpickles",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 6,
+          "passive": false,
+          "text": "Skala potatisen, väg den angivna råa ätliga mängden och dela. Koka upp med 1000 ml vatten utan tillsatt salt. Väg upp den malda Ancho Style-chilin separat till chilioljan.",
+          "uses": [
+            "potatis",
+            "anchochili"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 18,
+          "passive": true,
+          "text": "Sjud potatisen cirka 18 minuter tills den är helt mjuk. Häll av potatisen noga. Chilipulvret ska inte blötläggas.",
+          "uses": [
+            "potatis"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 12,
+          "passive": false,
+          "text": "Skölj de kokta bönorna och väg efter avrinning. Hacka löken och fräs i fyllningarnas olja. Dela den stekta löken i två delar. Mosa bönorna med ena delen och hälften av fyllningarnas salt. Mosa potatisen med andra delen och återstående hälft av fyllningarnas salt. Stek varje fyllning kort i samma panna tills den är varm och ganska torr, inte såsig.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 7,
+          "passive": false,
+          "text": "Mixa hela mängden mald Ancho Style-chili med vitlöken och 25 ml vatten till slät pasta. Värm taco-komponentens olja försiktigt i en liten kastrull. Rör ner chilipastan från låg höjd; den kan stänka. Sjud under omrörning tills vattenbubblorna nästan upphört och oljan doftar rostad chili, utan att vitlöken bränns.",
+          "uses": [
+            "anchochili",
+            "vitlök",
+            "rapsolja"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 15,
+          "passive": false,
+          "text": "Klä en förvärmd värmetålig behållare med bakpapper. Värm majstortillorna i torr panna tills de är böjliga och heta, cirka en halv minut per sida. Fördela bönfyllning i hälften och potatisfyllning i resten. Vik och lägg tätt i lager; pensla varje lager med den varma chilioljan. Använd all tortilla, fyllning och olja. Förslut papperet och linda behållaren i handduken.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 25,
+          "passive": true,
+          "text": "Låt de inpackade tacosen ångvila 25 minuter. Behållaren ska behålla hettan; sikta på att fyllningen hålls över 60 °C. Detta är avsedd slutbehandling, inte passiv förvaring över flera timmar.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 9,
+          "passive": false,
+          "text": "Tärna tomaten. Koka hälften av tomaten med den frysta hackade koriandern under omrörning minst tre minuter eller längre enligt förpackningen. Vänd med resten av tomaten, salsans limejuice och salt. Behåll all saft; detta är en ljummen tomatsalsa.",
+          "uses": [
+            "tomat",
+            "limejuice",
+            "koriander",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Öppna försiktigt för varm ånga. Fördela de mjuka, oljeglänsande tacosen över fyra portioner och servera salsan vid sidan. Ät direkt; någon frasig yta eftersträvas inte. Skrapa ur all kvarvarande chiliolja från bakpapperet och fördela över tacosen.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök",
+            "tomat",
+            "limejuice",
+            "koriander"
+          ]
+        }
+      ],
+      "variant_id": "standard",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-mexican-tacos-de-canasta",
+      "components": [
+        {
+          "id": "fyllningar",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Potatis",
+              "name": "potatis",
+              "quantity": 550,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "cooked_drained",
+              "label": "Kokta bönor, avrunnen vikt",
+              "name": "bönor",
+              "quantity": 420,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 130,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 25,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 4,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Två torra fyllningar"
+        },
+        {
+          "id": "tacos",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Majstortillas",
+              "name": "majstortillas",
+              "quantity": 400,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Torkad ancho utan stjälk och frön",
+              "name": "anchochili",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 60,
+              "role": "cooking",
+              "unit": "ml"
+            }
+          ],
+          "name": "Tortillas och varm chiliolja"
+        },
+        {
+          "id": "salsa",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 400,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Limejuice",
+              "name": "limejuice",
+              "quantity": 30,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Koriander",
+              "name": "koriander",
+              "quantity": 16,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Tomatsalsa"
+        },
+        {
+          "id": "pickles",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Morot",
+              "name": "morot",
+              "quantity": 180,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Jalapeño",
+              "name": "jalapeño",
+              "quantity": 20,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Äppelcidervinäger",
+              "name": "äppelcidervinäger",
+              "quantity": 45,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Snabbsyrad morot och jalapeño"
+        }
+      ],
+      "cuisine": "mexican",
+      "equipment": [
+        "stekpanna",
+        "kastrull",
+        "mixer",
+        "värmetålig behållare",
+        "bakpapper",
+        "ren handduk",
+        "termometer"
+      ],
+      "family": "varmångade fyllda majstacos",
+      "flavor": [
+        "ancho",
+        "vitlök"
+      ],
+      "meal_type": "dinner",
+      "method": "pan",
+      "name": "Tacos de canasta – ångvilade korgtacos – utökad",
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Liten värmetålig, handduksisolerad behållare ersätter gatukökets korg. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "bönor",
+      "servings": 4,
+      "side": "salsa och eventuell snabbpickles",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 6,
+          "passive": false,
+          "text": "Skala potatisen, väg den angivna råa ätliga mängden och dela. Koka upp med 1000 ml vatten utan tillsatt salt. Väg upp den malda Ancho Style-chilin separat till chilioljan.",
+          "uses": [
+            "potatis",
+            "anchochili"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 18,
+          "passive": true,
+          "text": "Sjud potatisen cirka 18 minuter tills den är helt mjuk. Häll av potatisen noga. Chilipulvret ska inte blötläggas.",
+          "uses": [
+            "potatis"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 7,
+          "passive": false,
+          "text": "Skala moroten, väg den ätliga mängden och strimla tunt. Väg upp fryst hackad jalapeño och tillsätt direkt i lagen med all vätska. Koka upp vinägern med 100 ml vatten och pickleskomponentens salt. Lägg ner morot och chili och sjud 3 minuter. Ställ åt sidan att dra medan tacos görs; detta är ett tillbehör för direkt servering, inte konservering.",
+          "uses": [
+            "morot",
+            "jalapeño",
+            "äppelcidervinäger",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 12,
+          "passive": false,
+          "text": "Skölj de kokta bönorna och väg efter avrinning. Hacka löken och fräs i fyllningarnas olja. Dela den stekta löken i två delar. Mosa bönorna med ena delen och hälften av fyllningarnas salt. Mosa potatisen med andra delen och återstående hälft av fyllningarnas salt. Stek varje fyllning kort i samma panna tills den är varm och ganska torr, inte såsig.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 7,
+          "passive": false,
+          "text": "Mixa hela mängden mald Ancho Style-chili med vitlöken och 25 ml vatten till slät pasta. Värm taco-komponentens olja försiktigt i en liten kastrull. Rör ner chilipastan från låg höjd; den kan stänka. Sjud under omrörning tills vattenbubblorna nästan upphört och oljan doftar rostad chili, utan att vitlöken bränns.",
+          "uses": [
+            "anchochili",
+            "vitlök",
+            "rapsolja"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 15,
+          "passive": false,
+          "text": "Klä en förvärmd värmetålig behållare med bakpapper. Värm majstortillorna i torr panna tills de är böjliga och heta, cirka en halv minut per sida. Fördela bönfyllning i hälften och potatisfyllning i resten. Vik och lägg tätt i lager; pensla varje lager med den varma chilioljan. Använd all tortilla, fyllning och olja. Förslut papperet och linda behållaren i handduken.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 25,
+          "passive": true,
+          "text": "Låt de inpackade tacosen ångvila 25 minuter. Behållaren ska behålla hettan; sikta på att fyllningen hålls över 60 °C. Detta är avsedd slutbehandling, inte passiv förvaring över flera timmar.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 9,
+          "passive": false,
+          "text": "Tärna tomaten. Koka hälften av tomaten med den frysta hackade koriandern under omrörning minst tre minuter eller längre enligt förpackningen. Vänd med resten av tomaten, salsans limejuice och salt. Behåll all saft; detta är en ljummen tomatsalsa.",
+          "uses": [
+            "tomat",
+            "limejuice",
+            "koriander",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Öppna försiktigt för varm ånga. Fördela de mjuka, oljeglänsande tacosen över fyra portioner och servera salsan vid sidan tillsammans med de snabbsyrade grönsakerna och deras lag. Ät direkt; någon frasig yta eftersträvas inte. Skrapa ur all kvarvarande chiliolja från bakpapperet och fördela över tacosen.",
+          "uses": [
+            "potatis",
+            "bönor",
+            "gul lök",
+            "rapsolja",
+            "salt",
+            "majstortillas",
+            "anchochili",
+            "vitlök",
+            "tomat",
+            "limejuice",
+            "koriander",
+            "morot",
+            "jalapeño",
+            "äppelcidervinäger"
+          ]
+        }
+      ],
+      "variant_id": "extended",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-mexican-pescado-zarandeado",
+      "components": [
+        {
+          "id": "fisk",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Rå benfri vit fiskfilé",
+              "name": "fisk",
+              "quantity": 800,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Anchochili",
+              "name": "anchochili",
+              "quantity": 14,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 300,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Sojasås",
+              "name": "sojasås",
+              "quantity": 30,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 30,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 12,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Fisk och kokt adobopasta"
+        },
+        {
+          "id": "tortillas",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Majstortillas",
+              "name": "majstortillas",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            }
+          ],
+          "name": "Majstortillas"
+        }
+      ],
+      "cuisine": "mexican",
+      "equipment": [
+        "ugn med grillelement",
+        "ugnsform",
+        "kastrull",
+        "stekpanna",
+        "mixer",
+        "termometer"
+      ],
+      "family": "öppet brynt chilifisk",
+      "flavor": [
+        "ancho",
+        "tomat",
+        "umami"
+      ],
+      "meal_type": "dinner",
+      "method": "oven",
+      "name": "Pescado zarandeado – fisk i het hemmaugn – enkel",
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Öppen ugnsgrill och fiskfilé ersätter fläkt hel fisk i grillhalster. Namn och steg visar anpassningen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fisk",
+      "servings": 4,
+      "side": "varma majstortillas",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 1,
+          "text": "Väg upp fryst fisk i ett täckt kärl i kylskåp. Behåll all vätska.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 720,
+          "passive": true,
+          "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. All upptiningssaft kokas i adobopastan före ugnsbakningen.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Sätt ugnen på 220 °C. Väg upp mald Ancho Style-chili; ingen stjälk eller kärna ska tas bort och pulvret ska inte blötläggas eller rinna av.",
+          "uses": [
+            "anchochili"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 15,
+          "passive": true,
+          "text": "Låt ugnen bli helt varm, cirka 15 minuter.",
+          "uses": []
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Hacka tomat och vitlök. Fräs dem i hälften av oljan tills tomaten mjuknat. Mixa med hela mängden mald chili, sojan samt 50 ml vatten och all upptiningssaft från fisken.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "rapsolja",
+            "anchochili",
+            "sojasås",
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Häll tillbaka chilipastan i kastrullen och låt puttra under omrörning cirka 5 minuter tills den går att breda tunt utan att rinna av fisken. Koka pastan under omrörning hela tiden; upptiningssaften ingår och ska genomhettas.",
+          "uses": [
+            "anchochili",
+            "tomat"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Kontrollera den helt upptinade benfria fiskfilén efter ben. Smörj formen med återstående olja och lägg filéerna i ett lager. Bred all den kokta chilipastan över fisken. Ställ mitt i ugnen, utan lock eller täckande papper.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 16,
+          "passive": false,
+          "text": "Baka cirka 12 minuter. Sätt sedan på övre grillelementet för de sista 2–4 minuterna tills ytan fått tydligt brynta fläckar. Bevaka grillningen och kontrollera minst 63 °C i fiskens tjockaste del. Anpassa tiden efter filétjocklek; brynt yta ensam bevisar inte genomlagning.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 6,
+          "passive": false,
+          "text": "Värm majstortillorna i torr panna och lägg i en ren handduk. Servera fisken med all genomvarm adobopasta, tortillas. Fyra portioner. Grillhalster och vedeld används inte i denna hemanpassning. Servera också all genomhettad sky och olja från formen samt hela lökdressingen om lök ingår.",
+          "uses": [
+            "majstortillas"
+          ]
+        }
+      ],
+      "variant_id": "simple",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-mexican-pescado-zarandeado",
+      "components": [
+        {
+          "id": "fisk",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Rå benfri vit fiskfilé",
+              "name": "fisk",
+              "quantity": 800,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Anchochili",
+              "name": "anchochili",
+              "quantity": 14,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 300,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Sojasås",
+              "name": "sojasås",
+              "quantity": 30,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 30,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 12,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Worcestershiresås",
+              "name": "worcestershiresås",
+              "quantity": 15,
+              "role": "sauce",
+              "unit": "ml"
+            }
+          ],
+          "name": "Fisk och kokt adobopasta"
+        },
+        {
+          "id": "tortillas",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Majstortillas",
+              "name": "majstortillas",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            }
+          ],
+          "name": "Majstortillas"
+        },
+        {
+          "id": "lok",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Rödlök",
+              "name": "rödlök",
+              "quantity": 90,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Limejuice",
+              "name": "limejuice",
+              "quantity": 30,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Syrlig lök"
+        }
+      ],
+      "cuisine": "mexican",
+      "equipment": [
+        "ugn med grillelement",
+        "ugnsform",
+        "kastrull",
+        "stekpanna",
+        "mixer",
+        "termometer"
+      ],
+      "family": "öppet brynt chilifisk",
+      "flavor": [
+        "ancho",
+        "tomat",
+        "umami"
+      ],
+      "meal_type": "dinner",
+      "method": "oven",
+      "name": "Pescado zarandeado – fisk i het hemmaugn – standard",
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Öppen ugnsgrill och fiskfilé ersätter fläkt hel fisk i grillhalster. Namn och steg visar anpassningen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fisk",
+      "servings": 4,
+      "side": "varma majstortillas",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 1,
+          "text": "Väg upp fryst fisk i ett täckt kärl i kylskåp. Behåll all vätska.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 720,
+          "passive": true,
+          "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. All upptiningssaft kokas i adobopastan före ugnsbakningen.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Sätt ugnen på 220 °C. Väg upp mald Ancho Style-chili; ingen stjälk eller kärna ska tas bort och pulvret ska inte blötläggas eller rinna av.",
+          "uses": [
+            "anchochili"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 15,
+          "passive": true,
+          "text": "Låt ugnen bli helt varm, cirka 15 minuter.",
+          "uses": []
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Hacka tomat och vitlök. Fräs dem i hälften av oljan tills tomaten mjuknat. Mixa med hela mängden mald chili, sojan och Worcestershiresåsen samt 50 ml vatten och all upptiningssaft från fisken.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "rapsolja",
+            "anchochili",
+            "sojasås",
+            "worcestershiresås",
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Häll tillbaka chilipastan i kastrullen och låt puttra under omrörning cirka 5 minuter tills den går att breda tunt utan att rinna av fisken. Koka pastan under omrörning hela tiden; upptiningssaften ingår och ska genomhettas.",
+          "uses": [
+            "anchochili",
+            "tomat"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Kontrollera den helt upptinade benfria fiskfilén efter ben. Smörj formen med återstående olja och lägg filéerna i ett lager. Bred all den kokta chilipastan över fisken. Ställ mitt i ugnen, utan lock eller täckande papper.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök",
+            "worcestershiresås"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 16,
+          "passive": false,
+          "text": "Baka cirka 12 minuter. Sätt sedan på övre grillelementet för de sista 2–4 minuterna tills ytan fått tydligt brynta fläckar. Bevaka grillningen och kontrollera minst 63 °C i fiskens tjockaste del. Anpassa tiden efter filétjocklek; brynt yta ensam bevisar inte genomlagning.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök",
+            "worcestershiresås"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 4,
+          "passive": false,
+          "text": "Skiva rödlöken tunt och vänd med lökkomponentens limejuice och salt. Låt stå medan tortillorna värms.",
+          "uses": [
+            "rödlök",
+            "limejuice",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            9
+          ],
+          "minutes": 6,
+          "passive": false,
+          "text": "Värm majstortillorna i torr panna och lägg i en ren handduk. Servera fisken med all genomvarm adobopasta, tortillas, syrlig lök. Fyra portioner. Grillhalster och vedeld används inte i denna hemanpassning. Servera också all genomhettad sky och olja från formen samt hela lökdressingen om lök ingår.",
+          "uses": [
+            "majstortillas"
+          ]
+        }
+      ],
+      "variant_id": "standard",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-mexican-pescado-zarandeado",
+      "components": [
+        {
+          "id": "fisk",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Rå benfri vit fiskfilé",
+              "name": "fisk",
+              "quantity": 800,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Anchochili",
+              "name": "anchochili",
+              "quantity": 14,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 300,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Sojasås",
+              "name": "sojasås",
+              "quantity": 30,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 30,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Vitlök",
+              "name": "vitlök",
+              "quantity": 12,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Worcestershiresås",
+              "name": "worcestershiresås",
+              "quantity": 15,
+              "role": "sauce",
+              "unit": "ml"
+            }
+          ],
+          "name": "Fisk och kokt adobopasta"
+        },
+        {
+          "id": "tortillas",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Majstortillas",
+              "name": "majstortillas",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            }
+          ],
+          "name": "Majstortillas"
+        },
+        {
+          "id": "lok",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Rödlök",
+              "name": "rödlök",
+              "quantity": 90,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Limejuice",
+              "name": "limejuice",
+              "quantity": 30,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Syrlig lök"
+        },
+        {
+          "id": "kal",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Vitkål",
+              "name": "vitkål",
+              "quantity": 250,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Avokado",
+              "name": "avokado",
+              "quantity": 180,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Koriander",
+              "name": "koriander",
+              "quantity": 16,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Limejuice",
+              "name": "limejuice",
+              "quantity": 15,
+              "role": "sauce",
+              "unit": "ml"
+            }
+          ],
+          "name": "Kål och avokado"
+        }
+      ],
+      "cuisine": "mexican",
+      "equipment": [
+        "ugn med grillelement",
+        "ugnsform",
+        "kastrull",
+        "stekpanna",
+        "mixer",
+        "termometer"
+      ],
+      "family": "öppet brynt chilifisk",
+      "flavor": [
+        "ancho",
+        "tomat",
+        "umami"
+      ],
+      "meal_type": "dinner",
+      "method": "oven",
+      "name": "Pescado zarandeado – fisk i het hemmaugn – utökad",
+      "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Öppen ugnsgrill och fiskfilé ersätter fläkt hel fisk i grillhalster. Namn och steg visar anpassningen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fisk",
+      "servings": 4,
+      "side": "varma majstortillas",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 1,
+          "text": "Väg upp fryst fisk i ett täckt kärl i kylskåp. Behåll all vätska.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 720,
+          "passive": true,
+          "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. All upptiningssaft kokas i adobopastan före ugnsbakningen.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 1,
+          "text": "Väg upp fryst avokado i ett täckt kärl i kylskåp. Behåll all vätska.",
+          "uses": [
+            "avokado"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 120,
+          "passive": true,
+          "text": "Tina helt i kylskåp enligt förpackningen. Planera 120 minuter och förläng vid behov tills ingen iskärna återstår. Använd alla bitar och all avokadosaft i kålsalladen.",
+          "uses": [
+            "avokado"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Sätt ugnen på 220 °C. Väg upp mald Ancho Style-chili; ingen stjälk eller kärna ska tas bort och pulvret ska inte blötläggas eller rinna av.",
+          "uses": [
+            "anchochili"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 15,
+          "passive": true,
+          "text": "Låt ugnen bli helt varm, cirka 15 minuter.",
+          "uses": []
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 10,
+          "passive": false,
+          "text": "Hacka tomat och vitlök. Fräs dem i hälften av oljan tills tomaten mjuknat. Mixa med hela mängden mald chili, sojan och Worcestershiresåsen samt 50 ml vatten och all upptiningssaft från fisken. Tillsätt den frysta hackade koriandern i pastan så att den kokas med hela mängden.",
+          "uses": [
+            "tomat",
+            "vitlök",
+            "rapsolja",
+            "anchochili",
+            "sojasås",
+            "worcestershiresås",
+            "fisk",
+            "koriander"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Häll tillbaka chilipastan i kastrullen och låt puttra under omrörning cirka 5 minuter tills den går att breda tunt utan att rinna av fisken. Koka pastan under omrörning hela tiden; upptiningssaften ingår och ska genomhettas.",
+          "uses": [
+            "anchochili",
+            "tomat"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Kontrollera den helt upptinade benfria fiskfilén efter ben. Smörj formen med återstående olja och lägg filéerna i ett lager. Bred all den kokta chilipastan över fisken. Ställ mitt i ugnen, utan lock eller täckande papper.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök",
+            "worcestershiresås"
+          ]
+        },
+        {
+          "after": [
+            9
+          ],
+          "minutes": 16,
+          "passive": false,
+          "text": "Baka cirka 12 minuter. Sätt sedan på övre grillelementet för de sista 2–4 minuterna tills ytan fått tydligt brynta fläckar. Bevaka grillningen och kontrollera minst 63 °C i fiskens tjockaste del. Anpassa tiden efter filétjocklek; brynt yta ensam bevisar inte genomlagning.",
+          "uses": [
+            "fisk",
+            "anchochili",
+            "tomat",
+            "sojasås",
+            "rapsolja",
+            "vitlök",
+            "worcestershiresås"
+          ]
+        },
+        {
+          "after": [
+            10
+          ],
+          "minutes": 4,
+          "passive": false,
+          "text": "Skiva rödlöken tunt och vänd med lökkomponentens limejuice och salt. Låt stå medan tortillorna värms.",
+          "uses": [
+            "rödlök",
+            "limejuice",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            11
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Strimla kålen och krama lätt med sin limejuice. Vänd ner de helt tinade avokadobitarna med all avokadosaft. Koriandern ingår i den varma adobopastan.",
+          "uses": [
+            "vitkål",
+            "avokado",
+            "limejuice"
+          ]
+        },
+        {
+          "after": [
+            12
+          ],
+          "minutes": 6,
+          "passive": false,
+          "text": "Värm majstortillorna i torr panna och lägg i en ren handduk. Servera fisken med all genomvarm adobopasta, tortillas, syrlig lök och kålsallad. Fyra portioner. Grillhalster och vedeld används inte i denna hemanpassning. Servera också all genomhettad sky och olja från formen samt hela lökdressingen om lök ingår.",
+          "uses": [
+            "majstortillas"
+          ]
+        }
+      ],
+      "variant_id": "extended",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-indian-doi-maach",
+      "components": [
+        {
+          "id": "fisk",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Fast benfri vit fisk",
+              "name": "fisk",
+              "quantity": 700,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Yoghurt naturell",
+              "name": "yoghurt naturell",
+              "quantity": 250,
+              "role": "sauce",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 200,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Ingefära",
+              "name": "ingefära",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Gurkmeja",
+              "name": "gurkmeja",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 30,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 4,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Fisk i yoghurtsås"
+        },
+        {
+          "id": "ris",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Ris",
+              "name": "ris",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Kokt ris"
+        }
+      ],
+      "cuisine": "indian",
+      "equipment": [
+        "stekpanna med lock",
+        "kastrull",
+        "termometer"
+      ],
+      "family": "Doi maach",
+      "flavor": [
+        "yoghurt",
+        "ingefära",
+        "gurkmeja"
+      ],
+      "meal_type": "dinner",
+      "method": "pot",
+      "name": "Doi maach – fisk i mild yoghurtsås – fisk i mild yoghurtsås",
+      "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Hemmaanpassning av bengalisk doi maach med benfri vit fisk och rapsolja. Syrlig yoghurtsås och varsam temperatur är bärande; ingen tomatbas ersätter yoghurten. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fisk",
+      "servings": 4,
+      "side": "ris",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 1,
+          "text": "Väg upp fryst fisk i ett täckt kärl i kylskåp. Behåll all vätska.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 720,
+          "passive": true,
+          "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. All upptiningssaft kokas med löken före yoghurten.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Skölj riset. Koka upp ris och risdelens salt med 560 ml vatten i en kastrull. Lägg på lock och sänk till låg värme. Kontrollera även produktens angivna vattenbehov.",
+          "uses": [
+            "ris",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 18,
+          "passive": true,
+          "text": "Sjud riset under lock cirka 18 minuter tills det är mjukt och vätskan har sugits in.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 5,
+          "passive": true,
+          "text": "Ta av värmen och låt riset vila täckt fem minuter. Luckra upp före servering. Håll därefter riset varmt, över 60 °C, fram till servering; låt det inte stå och långsamt svalna.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 8,
+          "passive": false,
+          "text": "Använd upptinad benfri fiskfilé, spara all vätska i kylskåp och skär fisken i stora bitar. Riv löken och ingefäran. Vispa yoghurten slät i en skål med 100 ml vatten; låt stå medan övrigt förbereds. Gnid fisken med hälften av saltet och gurkmejan.",
+          "uses": [
+            "fisk",
+            "gul lök",
+            "ingefära",
+            "yoghurt naturell",
+            "salt",
+            "gurkmeja"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Värm två tredjedelar av oljan och ge fisken stekyta cirka en minut per sida; den ska tillagas klart senare. Lyft upp på en ren tallrik.",
+          "uses": [
+            "rapsolja",
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 9,
+          "passive": false,
+          "text": "Fräs löken och ingefäran i återstående olja på medellåg värme sex minuter. Tillsätt resten av saltet och gurkmejan. Sänk värmen. Använd samma panna med allt stekfett kvar. Häll i all upptiningssaft och saft från fiskfatet och koka upp innan yoghurten tillsätts. Eventuell kardemumma och kanel är malda.",
+          "uses": [
+            "gul lök",
+            "ingefära",
+            "rapsolja",
+            "salt",
+            "gurkmeja",
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 11,
+          "passive": false,
+          "text": "Rör några skedar av den varma lökblandningen i yoghurten. Häll sedan tillbaka yoghurten i pannan under omrörning. Lägg ner fisken och värm på mycket låg värme, utan stormkokning, cirka tio minuter tills fiskens mitt håller minst 63 °C.",
+          "uses": [
+            "yoghurt naturell",
+            "fisk",
+            "gul lök"
+          ]
+        },
+        {
+          "after": [
+            9
+          ],
+          "minutes": 2,
+          "passive": false,
+          "text": "Servera huvudrätten med samtliga tillbehör och fördela komponenterna jämnt över portionerna. Fördela hela yoghurtsåsen och allt stekfett mellan portionerna.",
+          "uses": []
+        }
+      ],
+      "variant_id": "simple",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-indian-doi-maach",
+      "components": [
+        {
+          "id": "fisk",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Fast benfri vit fisk",
+              "name": "fisk",
+              "quantity": 700,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Yoghurt naturell",
+              "name": "yoghurt naturell",
+              "quantity": 250,
+              "role": "sauce",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 200,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Ingefära",
+              "name": "ingefära",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Gurkmeja",
+              "name": "gurkmeja",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 30,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 4,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Spiskummin",
+              "name": "spiskummin",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Kardemumma",
+              "name": "kardemumma",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Kanel",
+              "name": "kanel",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Fisk i yoghurtsås"
+        },
+        {
+          "id": "ris",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Ris",
+              "name": "ris",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Kokt ris"
+        }
+      ],
+      "cuisine": "indian",
+      "equipment": [
+        "stekpanna med lock",
+        "kastrull",
+        "termometer"
+      ],
+      "family": "Doi maach",
+      "flavor": [
+        "yoghurt",
+        "ingefära",
+        "gurkmeja"
+      ],
+      "meal_type": "dinner",
+      "method": "pot",
+      "name": "Doi maach – fisk i mild yoghurtsås – med kardemumma och kanel",
+      "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Hemmaanpassning av bengalisk doi maach med benfri vit fisk och rapsolja. Syrlig yoghurtsås och varsam temperatur är bärande; ingen tomatbas ersätter yoghurten. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fisk",
+      "servings": 4,
+      "side": "ris",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 1,
+          "text": "Väg upp fryst fisk i ett täckt kärl i kylskåp. Behåll all vätska.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 720,
+          "passive": true,
+          "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. All upptiningssaft kokas med löken före yoghurten.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Skölj riset. Koka upp ris och risdelens salt med 560 ml vatten i en kastrull. Lägg på lock och sänk till låg värme. Kontrollera även produktens angivna vattenbehov.",
+          "uses": [
+            "ris",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 18,
+          "passive": true,
+          "text": "Sjud riset under lock cirka 18 minuter tills det är mjukt och vätskan har sugits in.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 5,
+          "passive": true,
+          "text": "Ta av värmen och låt riset vila täckt fem minuter. Luckra upp före servering. Håll därefter riset varmt, över 60 °C, fram till servering; låt det inte stå och långsamt svalna.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 8,
+          "passive": false,
+          "text": "Använd upptinad benfri fiskfilé, spara all vätska i kylskåp och skär fisken i stora bitar. Riv löken och ingefäran. Vispa yoghurten slät i en skål med 100 ml vatten; låt stå medan övrigt förbereds. Gnid fisken med hälften av saltet och gurkmejan.",
+          "uses": [
+            "fisk",
+            "gul lök",
+            "ingefära",
+            "yoghurt naturell",
+            "salt",
+            "gurkmeja"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Värm två tredjedelar av oljan och ge fisken stekyta cirka en minut per sida; den ska tillagas klart senare. Lyft upp på en ren tallrik.",
+          "uses": [
+            "rapsolja",
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 9,
+          "passive": false,
+          "text": "Fräs löken och ingefäran i återstående olja på medellåg värme sex minuter. Rör ner spiskummin, kardemumma och kanel. Tillsätt resten av saltet och gurkmejan. Sänk värmen. Använd samma panna med allt stekfett kvar. Häll i all upptiningssaft och saft från fiskfatet och koka upp innan yoghurten tillsätts. Eventuell kardemumma och kanel är malda.",
+          "uses": [
+            "gul lök",
+            "ingefära",
+            "rapsolja",
+            "salt",
+            "gurkmeja",
+            "spiskummin",
+            "kardemumma",
+            "kanel",
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 11,
+          "passive": false,
+          "text": "Rör några skedar av den varma lökblandningen i yoghurten. Häll sedan tillbaka yoghurten i pannan under omrörning. Lägg ner fisken och värm på mycket låg värme, utan stormkokning, cirka tio minuter tills fiskens mitt håller minst 63 °C.",
+          "uses": [
+            "yoghurt naturell",
+            "fisk",
+            "gul lök"
+          ]
+        },
+        {
+          "after": [
+            9
+          ],
+          "minutes": 2,
+          "passive": false,
+          "text": "Servera huvudrätten med samtliga tillbehör och fördela komponenterna jämnt över portionerna. Fördela hela yoghurtsåsen och allt stekfett mellan portionerna.",
+          "uses": []
+        }
+      ],
+      "variant_id": "standard",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-indian-doi-maach",
+      "components": [
+        {
+          "id": "fisk",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Fast benfri vit fisk",
+              "name": "fisk",
+              "quantity": 700,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Yoghurt naturell",
+              "name": "yoghurt naturell",
+              "quantity": 250,
+              "role": "sauce",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gul lök",
+              "name": "gul lök",
+              "quantity": 200,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Ingefära",
+              "name": "ingefära",
+              "quantity": 15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Gurkmeja",
+              "name": "gurkmeja",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Rapsolja",
+              "name": "rapsolja",
+              "quantity": 30,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 4,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Spiskummin",
+              "name": "spiskummin",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Kardemumma",
+              "name": "kardemumma",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Kanel",
+              "name": "kanel",
+              "quantity": 1,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Fisk i yoghurtsås"
+        },
+        {
+          "id": "ris",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Ris",
+              "name": "ris",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 2,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Kokt ris"
+        },
+        {
+          "id": "gront",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Blomkål",
+              "name": "blomkål",
+              "quantity": 400,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Ärtor",
+              "name": "ärtor",
+              "quantity": 200,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Grön chili",
+              "name": "grön chili",
+              "quantity": 8,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Koriander",
+              "name": "koriander",
+              "quantity": 10,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Blomkål och ärtor"
+        }
+      ],
+      "cuisine": "indian",
+      "equipment": [
+        "stekpanna med lock",
+        "kastrull",
+        "termometer"
+      ],
+      "family": "Doi maach",
+      "flavor": [
+        "yoghurt",
+        "ingefära",
+        "gurkmeja"
+      ],
+      "meal_type": "dinner",
+      "method": "pot",
+      "name": "Doi maach – fisk i mild yoghurtsås – med blomkål och ärtor",
+      "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Hemmaanpassning av bengalisk doi maach med benfri vit fisk och rapsolja. Syrlig yoghurtsås och varsam temperatur är bärande; ingen tomatbas ersätter yoghurten. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+      "primary": "fisk",
+      "servings": 4,
+      "side": "ris",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 1,
+          "text": "Väg upp fryst fisk i ett täckt kärl i kylskåp. Behåll all vätska.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 720,
+          "passive": true,
+          "text": "Tina helt i kylskåp enligt förpackningen. Planera 720 minuter och förläng vid behov tills ingen iskärna återstår. All upptiningssaft kokas med löken före yoghurten.",
+          "uses": [
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Skölj riset. Koka upp ris och risdelens salt med 560 ml vatten i en kastrull. Lägg på lock och sänk till låg värme. Kontrollera även produktens angivna vattenbehov.",
+          "uses": [
+            "ris",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 18,
+          "passive": true,
+          "text": "Sjud riset under lock cirka 18 minuter tills det är mjukt och vätskan har sugits in.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 5,
+          "passive": true,
+          "text": "Ta av värmen och låt riset vila täckt fem minuter. Luckra upp före servering. Håll därefter riset varmt, över 60 °C, fram till servering; låt det inte stå och långsamt svalna.",
+          "uses": [
+            "ris"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 8,
+          "passive": false,
+          "text": "Använd upptinad benfri fiskfilé, spara all vätska i kylskåp och skär fisken i stora bitar. Riv löken och ingefäran. Vispa yoghurten slät i en skål med 100 ml vatten; låt stå medan övrigt förbereds. Gnid fisken med hälften av saltet och gurkmejan.",
+          "uses": [
+            "fisk",
+            "gul lök",
+            "ingefära",
+            "yoghurt naturell",
+            "salt",
+            "gurkmeja"
+          ]
+        },
+        {
+          "after": [
+            6
+          ],
+          "minutes": 5,
+          "passive": false,
+          "text": "Värm två tredjedelar av oljan och ge fisken stekyta cirka en minut per sida; den ska tillagas klart senare. Lyft upp på en ren tallrik.",
+          "uses": [
+            "rapsolja",
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            7
+          ],
+          "minutes": 9,
+          "passive": false,
+          "text": "Fräs löken och ingefäran i återstående olja på medellåg värme sex minuter. Rör ner spiskummin, kardemumma och kanel. Tillsätt resten av saltet och gurkmejan. Sänk värmen. Använd samma panna med allt stekfett kvar. Häll i all upptiningssaft och saft från fiskfatet och koka upp innan yoghurten tillsätts. Eventuell kardemumma och kanel är malda.",
+          "uses": [
+            "gul lök",
+            "ingefära",
+            "rapsolja",
+            "salt",
+            "gurkmeja",
+            "spiskummin",
+            "kardemumma",
+            "kanel",
+            "fisk"
+          ]
+        },
+        {
+          "after": [
+            8
+          ],
+          "minutes": 11,
+          "passive": false,
+          "text": "Rör några skedar av den varma lökblandningen i yoghurten. Häll sedan tillbaka yoghurten i pannan under omrörning. Lägg ner fisken och värm på mycket låg värme, utan stormkokning, cirka tio minuter tills fiskens mitt håller minst 63 °C.",
+          "uses": [
+            "yoghurt naturell",
+            "fisk",
+            "gul lök"
+          ]
+        },
+        {
+          "after": [
+            9
+          ],
+          "minutes": 13,
+          "passive": false,
+          "text": "Dela blomkålen i små buketter och väg upp den frysta hackade gröna jalapeñon. Lägg i en kastrull med 100 ml vatten och sjud under lock åtta minuter. Tillsätt ärtor och fryst hackad koriander och värm ytterligare minst tre minuter, eller längre enligt förpackningen, tills allt är genomhett och grönsakerna mjuka. Servera grönsakerna med all kvarvarande vätska bredvid fisken.",
+          "uses": [
+            "blomkål",
+            "grön chili",
+            "ärtor",
+            "koriander"
+          ]
+        },
+        {
+          "after": [
+            10
+          ],
+          "minutes": 2,
+          "passive": false,
+          "text": "Servera huvudrätten med samtliga tillbehör och fördela komponenterna jämnt över portionerna. Fördela hela yoghurtsåsen och allt stekfett mellan portionerna.",
+          "uses": []
+        }
+      ],
+      "variant_id": "extended",
+      "version": "1.0.1"
+    }
+  ],
+  "schema_version": "smako-recipe-authoring-v1"
+}

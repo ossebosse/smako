@@ -1,4 +1,39 @@
-# 2026-11-01: Receptens största registerhinder lösta, granskade familjer importerade
+# 2026-11-01: Ytterligare 157 receptvarianter granskade och importerade
+
+Se [rapporten för andra hinderomgången](reviews/recipe-unblock-round2-20261101/REPORT.md),
+[variantkön](reviews/recipe-unblock-round2-20261101/queue.json) och
+[ingrediensliggaren](reviews/recipe-unblock-round2-20261101/ingredient-blockers.json).
+Biblioteket innehåller nu **1 041 grundrätter / 2 727 aktuella varianter**,
+en ökning med **66 grundrätter / 157 varianter**. Alla 157 har slutligt
+godkända korgar i referensens uppskattade inköpsläge, 90 även i exakt läge.
+Recepten är innehållsgranskade men inte provlagade. Ingen betaaktivering ingår.
+
+Fem mottagna ZIP innehåller **189 grundrätter / 501 varianter**. Totalt
+**265 varianter** har importerats: 100 hela familjer och sju delvis importerade.
+Senaste 24/62-leveransen är bytebevarad; 37 av dess varianter är importerade.
+**236 varianter återstår**, varav 24 med konkret saknat produktstöd och
+212 med register-/författarhinder. Fortsätt ta emot löpande mindre ZIP.
+Det finns inget separat 72/194-arkiv. Nästa författarpaket är **022**.
+
+37 ytterligare ingrediens/form/enhetsidentiteter och 222 produktkopplingar
+har granskats. Separat finns 17 nya butikskopplingar för redan granskade
+kardemumma-, koriander- och avokadoprodukter. Följ exakta käll-/mängdbevis;
+inga nya råvarualias, densiteter eller utbytesprocent får antas.
+
+Det nya `smako-authored-losses-v3` redovisar okända processförluster, exempelvis
+frityrolja, vassle och borttagna ben. Inköpsinsatsen kan användas, men serverad
+vikt/näring förblir okänd och hårda sådana användargränser ger `DATA_BLOCKED`.
+Äldre V2-recept är oförändrade. Alla 3 625 tidigare utgivna versioner och
+2 200 ursprungsreferenser bevaras genom en verifierad additiv manifestövergång.
+
+Riktade tester omfattar riktiga utgivna recept, mängd-/identitetsgränser,
+samtliga importkvitton, gamla hashvärden och hela bibliotekets innehållskrav.
+Full CI måste vara grön före main-merge; täckningsbaslinjer ändras inte.
+Ingen ny varm tidsmätning har gjorts för dessa 157; äldre tidsprov har eget scope.
+
+---
+
+# 2026-11-01: Första hinderomgången (historisk, före senaste 24/62-leveransen)
 
 Se [åtgärdsrapporten](reviews/recipe-unblock-20261101/REPORT.md) och dess
 maskinläsbara kö. 37 nya ingrediensidentiteter har granskade produktkopplingar;

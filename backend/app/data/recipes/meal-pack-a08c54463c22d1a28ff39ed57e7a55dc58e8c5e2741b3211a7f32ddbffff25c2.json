@@ -1,0 +1,4125 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 56,
+        "base_id": "smako-italian-pizzoccheri",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bovetemjöl|dry",
+                "name": "bovetemjöl",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 110.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "deg",
+            "name": "Bovetedeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kok",
+            "name": "Kål och potatis"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              }
+            ],
+            "id": "smor",
+            "name": "Vitlökssmör och ost"
+          }
+        ],
+        "content_sha256": "d822245858d244738c44ebe34fe7f70fc6e7785220951469b66443fcaf369495",
+        "content_source": {
+          "active_minutes": 56,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage6",
+          "priority": 1,
+          "proposal_id": "smako-italian-pizzoccheri",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "501daa2bee61d2816e1dfafa5de7352757e1369877786bf4605f3f881747566b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "skål",
+          "kavel",
+          "kniv",
+          "stor gryta",
+          "stekpanna"
+        ],
+        "estimated_minutes": 86,
+        "family": "pizzoccheri",
+        "fish": false,
+        "flavor_profile": [
+          "bovete",
+          "kål",
+          "vitlökssmör",
+          "ost"
+        ],
+        "ingredient_count": 7,
+        "method": "pot",
+        "primary_ingredient": "bovetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Valtellina-inspirerad handskuren bovetepasta med vitkål och svensk smältande ost i stället för savojkål och Casera. Dessa byten är uttryckliga anpassningar, inte nya råvarualias. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "potatis och bovetepasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "190 ml",
+                190.0
+              ],
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Spara en liten del av vetemjölet till utkavlingen. Blanda resten med bovetemjöl och degens salt. Arbeta in 190 ml vatten till en fast, smidig deg och knåda 7 minuter. Tillsätt högst 20 ml vatten till om degen är torr och spricker."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 30,
+            "id": "s2",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck degen och låt vila 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 15,
+            "id": "s3",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Mjöla bänken med det sparade vetemjölet. Kavla degen cirka 2 mm tunn och skär i korta band, cirka 1 cm breda och 6 cm långa. Lägg luftigt så att de inte klibbar."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 22,
+            "id": "s4",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "potatis|raw_edible",
+              "vetemjöl|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3500 ml",
+                3500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg angiven rå ätlig mängd och tärna cirka 1,5 cm; strimla vitkål. Koka upp 3500 ml vatten utan tillsatt salt. Lägg i potatis och koka 6 minuter, tillsätt kål och koka 3 minuter till. Lägg därefter i pastabanden och koka 5–7 minuter, här planerat till 6. Prova att potatisen är mjuk och pastan genomkokt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "ost|as_sold",
+              "smör|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skiva vitlök tunt och värm i smöret på medellåg värme tills det doftar och vitlöken är lätt gyllene. Riv eller skär den smältande osten i tunna flagor."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "ost|as_sold",
+              "potatis|raw_edible",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lyft pasta och grönsaker med hålslev till en varm skål. Varva med osten, häll över vitlökssmöret , hela kokkomponentens salt och svartpeppar och vänd försiktigt tills osten smälter. Fördela mellan fyra tallrikar och servera genast. Skrapa med allt smör och all ost till serveringen."
+          }
+        ],
+        "total_minutes": 86,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 30
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bovetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "bovetemjöl",
+          "product_requirements": [
+            "pack:intake_all_8e8394400668"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 110.0,
+          "quantity_max": 110.0,
+          "quantity_min": 110.0,
+          "quantity_step": 110.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "kok",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "kok",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "smor",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "smor",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "smor",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "smor",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Spara en liten del av vetemjölet till utkavlingen. Blanda resten med bovetemjöl och degens salt. Arbeta in 190 ml vatten till en fast, smidig deg och knåda 7 minuter. Tillsätt högst 20 ml vatten till om degen är torr och spricker.",
+        "Täck degen och låt vila 30 minuter.",
+        "Mjöla bänken med det sparade vetemjölet. Kavla degen cirka 2 mm tunn och skär i korta band, cirka 1 cm breda och 6 cm långa. Lägg luftigt så att de inte klibbar.",
+        "Skala potatisen, väg angiven rå ätlig mängd och tärna cirka 1,5 cm; strimla vitkål. Koka upp 3500 ml vatten utan tillsatt salt. Lägg i potatis och koka 6 minuter, tillsätt kål och koka 3 minuter till. Lägg därefter i pastabanden och koka 5–7 minuter, här planerat till 6. Prova att potatisen är mjuk och pastan genomkokt.",
+        "Skiva vitlök tunt och värm i smöret på medellåg värme tills det doftar och vitlöken är lätt gyllene. Riv eller skär den smältande osten i tunna flagor.",
+        "Lyft pasta och grönsaker med hålslev till en varm skål. Varva med osten, häll över vitlökssmöret , hela kokkomponentens salt och svartpeppar och vänd försiktigt tills osten smälter. Fördela mellan fyra tallrikar och servera genast. Skrapa med allt smör och all ost till serveringen."
+      ],
+      "name": "Pizzoccheri med kål, potatis och ost – enkel",
+      "preparation": {
+        "family": "pizzoccheri",
+        "input_forms": {
+          "bovetemjöl": "dry",
+          "ost": "as_sold",
+          "potatis": "raw_edible",
+          "salt": "as_sold",
+          "smör": "as_sold",
+          "svartpeppar": "dry",
+          "vetemjöl": "dry",
+          "vitkål": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "d822245858d244738c44ebe34fe7f70fc6e7785220951469b66443fcaf369495",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 56,
+        "base_id": "smako-italian-pizzoccheri",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bovetemjöl|dry",
+                "name": "bovetemjöl",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 110.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "deg",
+            "name": "Bovetedeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kok",
+            "name": "Kål och potatis"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salvia|dry",
+                "name": "Torkad smulad salvia",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "parmesan|as_sold",
+                "name": "parmesan",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              }
+            ],
+            "id": "smor",
+            "name": "Vitlökssmör och ost"
+          }
+        ],
+        "content_sha256": "da3d46268e759a01f0494050182ec82433b1d1ec6efb453042b9bf6c3ee95899",
+        "content_source": {
+          "active_minutes": 56,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage6",
+          "priority": 1,
+          "proposal_id": "smako-italian-pizzoccheri",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "501daa2bee61d2816e1dfafa5de7352757e1369877786bf4605f3f881747566b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "skål",
+          "kavel",
+          "kniv",
+          "stor gryta",
+          "stekpanna"
+        ],
+        "estimated_minutes": 86,
+        "family": "pizzoccheri",
+        "fish": false,
+        "flavor_profile": [
+          "bovete",
+          "kål",
+          "vitlökssmör",
+          "ost"
+        ],
+        "ingredient_count": 9,
+        "method": "pot",
+        "primary_ingredient": "bovetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Valtellina-inspirerad handskuren bovetepasta med vitkål och svensk smältande ost i stället för savojkål och Casera. Dessa byten är uttryckliga anpassningar, inte nya råvarualias. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "potatis och bovetepasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "190 ml",
+                190.0
+              ],
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Spara en liten del av vetemjölet till utkavlingen. Blanda resten med bovetemjöl och degens salt. Arbeta in 190 ml vatten till en fast, smidig deg och knåda 7 minuter. Tillsätt högst 20 ml vatten till om degen är torr och spricker."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 30,
+            "id": "s2",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck degen och låt vila 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 15,
+            "id": "s3",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Mjöla bänken med det sparade vetemjölet. Kavla degen cirka 2 mm tunn och skär i korta band, cirka 1 cm breda och 6 cm långa. Lägg luftigt så att de inte klibbar."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 22,
+            "id": "s4",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "potatis|raw_edible",
+              "vetemjöl|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3500 ml",
+                3500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg angiven rå ätlig mängd och tärna cirka 1,5 cm; strimla vitkål. Koka upp 3500 ml vatten utan tillsatt salt. Lägg i potatis och koka 6 minuter, tillsätt kål och koka 3 minuter till. Lägg därefter i pastabanden och koka 5–7 minuter, här planerat till 6. Prova att potatisen är mjuk och pastan genomkokt."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 5,
+            "id": "s5",
+            "ingredient_keys": [
+              "ost|as_sold",
+              "parmesan|as_sold",
+              "salvia|dry",
+              "smör|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skiva vitlök tunt och värm i smöret på medellåg värme tillsammans med torkad smulad salvia tills det doftar och vitlöken är lätt gyllene. Riv eller skär den smältande osten i tunna flagor och väg upp färdigriven parmesan."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "ost|as_sold",
+              "parmesan|as_sold",
+              "potatis|raw_edible",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lyft pasta och grönsaker med hålslev till en varm skål. Varva med osten och parmesan, häll över vitlökssmöret , hela kokkomponentens salt och svartpeppar och vänd försiktigt tills osten smälter. Fördela mellan fyra tallrikar och servera genast. Skrapa med allt smör och all ost till serveringen."
+          }
+        ],
+        "total_minutes": 86,
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 30
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bovetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "bovetemjöl",
+          "product_requirements": [
+            "pack:intake_all_8e8394400668"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 110.0,
+          "quantity_max": 110.0,
+          "quantity_min": 110.0,
+          "quantity_step": 110.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "kok",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "kok",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "smor",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "smor",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "smor",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "smor",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salvia",
+          "component": "smor",
+          "form": "dry",
+          "name": "salvia",
+          "product_requirements": [
+            "pack:intake_all_round2_1bd7a1ec1f4b"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "parmesan",
+          "component": "smor",
+          "form": "as_sold",
+          "name": "parmesan",
+          "product_requirements": [
+            "pack:intake_all_expansion_dc7ca154fb22"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Spara en liten del av vetemjölet till utkavlingen. Blanda resten med bovetemjöl och degens salt. Arbeta in 190 ml vatten till en fast, smidig deg och knåda 7 minuter. Tillsätt högst 20 ml vatten till om degen är torr och spricker.",
+        "Täck degen och låt vila 30 minuter.",
+        "Mjöla bänken med det sparade vetemjölet. Kavla degen cirka 2 mm tunn och skär i korta band, cirka 1 cm breda och 6 cm långa. Lägg luftigt så att de inte klibbar.",
+        "Skala potatisen, väg angiven rå ätlig mängd och tärna cirka 1,5 cm; strimla vitkål. Koka upp 3500 ml vatten utan tillsatt salt. Lägg i potatis och koka 6 minuter, tillsätt kål och koka 3 minuter till. Lägg därefter i pastabanden och koka 5–7 minuter, här planerat till 6. Prova att potatisen är mjuk och pastan genomkokt.",
+        "Skiva vitlök tunt och värm i smöret på medellåg värme tillsammans med torkad smulad salvia tills det doftar och vitlöken är lätt gyllene. Riv eller skär den smältande osten i tunna flagor och väg upp färdigriven parmesan.",
+        "Lyft pasta och grönsaker med hålslev till en varm skål. Varva med osten och parmesan, häll över vitlökssmöret , hela kokkomponentens salt och svartpeppar och vänd försiktigt tills osten smälter. Fördela mellan fyra tallrikar och servera genast. Skrapa med allt smör och all ost till serveringen."
+      ],
+      "name": "Pizzoccheri med kål, potatis och ost – standard – med torkad salvia",
+      "preparation": {
+        "family": "pizzoccheri",
+        "input_forms": {
+          "bovetemjöl": "dry",
+          "ost": "as_sold",
+          "parmesan": "as_sold",
+          "potatis": "raw_edible",
+          "salt": "as_sold",
+          "salvia": "dry",
+          "smör": "as_sold",
+          "svartpeppar": "dry",
+          "vetemjöl": "dry",
+          "vitkål": "raw_edible",
+          "vitlök": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "da3d46268e759a01f0494050182ec82433b1d1ec6efb453042b9bf6c3ee95899",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 63,
+        "base_id": "smako-italian-pizzoccheri",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "bovetemjöl|dry",
+                "name": "bovetemjöl",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 110.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "deg",
+            "name": "Bovetedeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "potatis",
+                "note": "",
+                "quantity": 500.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitkål|raw_edible",
+                "name": "vitkål",
+                "note": "",
+                "quantity": 450.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "kok",
+            "name": "Kål och potatis"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "smör",
+                "note": "",
+                "quantity": 70.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vitlök|raw_edible",
+                "name": "vitlök",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ost|as_sold",
+                "name": "ost",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "svartpeppar",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salvia|dry",
+                "name": "Torkad smulad salvia",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "parmesan|as_sold",
+                "name": "parmesan",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              }
+            ],
+            "id": "smor",
+            "name": "Vitlökssmör och ost"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rödbeta|raw_edible",
+                "name": "rödbeta",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äpple|raw_edible",
+                "name": "äpple",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "äppelcidervinäger|as_sold",
+                "name": "äppelcidervinäger",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "sallad",
+            "name": "Rödbets- och äppelsallad"
+          }
+        ],
+        "content_sha256": "6750f9df6de7cec4cdca0dc2cca3c265195312d66c887414784ef347d16a629f",
+        "content_source": {
+          "active_minutes": 63,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage6",
+          "priority": 1,
+          "proposal_id": "smako-italian-pizzoccheri",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "501daa2bee61d2816e1dfafa5de7352757e1369877786bf4605f3f881747566b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "skål",
+          "kavel",
+          "kniv",
+          "stor gryta",
+          "stekpanna"
+        ],
+        "estimated_minutes": 93,
+        "family": "pizzoccheri",
+        "fish": false,
+        "flavor_profile": [
+          "bovete",
+          "kål",
+          "vitlökssmör",
+          "ost"
+        ],
+        "ingredient_count": 12,
+        "method": "pot",
+        "primary_ingredient": "bovetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Valtellina-inspirerad handskuren bovetepasta med vitkål och svensk smältande ost i stället för savojkål och Casera. Dessa byten är uttryckliga anpassningar, inte nya råvarualias. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "potatis och bovetepasta",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "190 ml",
+                190.0
+              ],
+              [
+                "20 ml",
+                20.0
+              ]
+            ],
+            "text": "Spara en liten del av vetemjölet till utkavlingen. Blanda resten med bovetemjöl och degens salt. Arbeta in 190 ml vatten till en fast, smidig deg och knåda 7 minuter. Tillsätt högst 20 ml vatten till om degen är torr och spricker."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 30,
+            "id": "s2",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck degen och låt vila 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "rödbeta|raw_edible",
+              "äppelcidervinäger|as_sold",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skala rödbetan och kärna ur äpplet, väg de angivna ätliga mängderna och grovriv. Vänd med äppelcidervinäger och ställ svalt; hela salladen och dressingen serveras separat från pastan."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 15,
+            "id": "s4",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Mjöla bänken med det sparade vetemjölet. Kavla degen cirka 2 mm tunn och skär i korta band, cirka 1 cm breda och 6 cm långa. Lägg luftigt så att de inte klibbar."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 22,
+            "id": "s5",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "potatis|raw_edible",
+              "vetemjöl|dry",
+              "vitkål|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "3500 ml",
+                3500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg angiven rå ätlig mängd och tärna cirka 1,5 cm; strimla vitkål. Koka upp 3500 ml vatten utan tillsatt salt. Lägg i potatis och koka 6 minuter, tillsätt kål och koka 3 minuter till. Lägg därefter i pastabanden och koka 5–7 minuter, här planerat till 6. Prova att potatisen är mjuk och pastan genomkokt."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 5,
+            "id": "s6",
+            "ingredient_keys": [
+              "ost|as_sold",
+              "parmesan|as_sold",
+              "salvia|dry",
+              "smör|as_sold",
+              "vitlök|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skiva vitlök tunt och värm i smöret på medellåg värme tillsammans med torkad smulad salvia tills det doftar och vitlöken är lätt gyllene. Riv eller skär den smältande osten i tunna flagor och väg upp färdigriven parmesan."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 4,
+            "id": "s7",
+            "ingredient_keys": [
+              "bovetemjöl|dry",
+              "ost|as_sold",
+              "parmesan|as_sold",
+              "potatis|raw_edible",
+              "rödbeta|raw_edible",
+              "salt|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "vitkål|raw_edible",
+              "vitlök|raw_edible",
+              "äpple|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lyft pasta och grönsaker med hålslev till en varm skål. Varva med osten och parmesan, häll över vitlökssmöret , hela kokkomponentens salt och svartpeppar och vänd försiktigt tills osten smälter. Fördela mellan fyra tallrikar och servera genast med rödbets-/äppelsalladen. Skrapa med allt smör och all ost till serveringen."
+          }
+        ],
+        "total_minutes": 93,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 30
+      },
+      "ingredients": [
+        {
+          "canonical_name": "bovetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "bovetemjöl",
+          "product_requirements": [
+            "pack:intake_all_8e8394400668"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 110.0,
+          "quantity_max": 110.0,
+          "quantity_min": 110.0,
+          "quantity_step": 110.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "kok",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 500.0,
+          "quantity_max": 500.0,
+          "quantity_min": 500.0,
+          "quantity_step": 500.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitkål",
+          "component": "kok",
+          "form": "raw_edible",
+          "name": "vitkål",
+          "quantity": 450.0,
+          "quantity_max": 450.0,
+          "quantity_min": 450.0,
+          "quantity_step": 450.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "smor",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 70.0,
+          "quantity_max": 70.0,
+          "quantity_min": 70.0,
+          "quantity_step": 70.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vitlök",
+          "component": "smor",
+          "form": "raw_edible",
+          "name": "vitlök",
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ost",
+          "component": "smor",
+          "form": "as_sold",
+          "name": "ost",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "smor",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salvia",
+          "component": "smor",
+          "form": "dry",
+          "name": "salvia",
+          "product_requirements": [
+            "pack:intake_all_round2_1bd7a1ec1f4b"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "parmesan",
+          "component": "smor",
+          "form": "as_sold",
+          "name": "parmesan",
+          "product_requirements": [
+            "pack:intake_all_expansion_dc7ca154fb22"
+          ],
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rödbeta",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "rödbeta",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äpple",
+          "component": "sallad",
+          "form": "raw_edible",
+          "name": "äpple",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "äppelcidervinäger",
+          "component": "sallad",
+          "form": "as_sold",
+          "name": "äppelcidervinäger",
+          "product_requirements": [
+            "pack:intake_all_be24da3ca83d"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Spara en liten del av vetemjölet till utkavlingen. Blanda resten med bovetemjöl och degens salt. Arbeta in 190 ml vatten till en fast, smidig deg och knåda 7 minuter. Tillsätt högst 20 ml vatten till om degen är torr och spricker.",
+        "Täck degen och låt vila 30 minuter.",
+        "Skala rödbetan och kärna ur äpplet, väg de angivna ätliga mängderna och grovriv. Vänd med äppelcidervinäger och ställ svalt; hela salladen och dressingen serveras separat från pastan.",
+        "Mjöla bänken med det sparade vetemjölet. Kavla degen cirka 2 mm tunn och skär i korta band, cirka 1 cm breda och 6 cm långa. Lägg luftigt så att de inte klibbar.",
+        "Skala potatisen, väg angiven rå ätlig mängd och tärna cirka 1,5 cm; strimla vitkål. Koka upp 3500 ml vatten utan tillsatt salt. Lägg i potatis och koka 6 minuter, tillsätt kål och koka 3 minuter till. Lägg därefter i pastabanden och koka 5–7 minuter, här planerat till 6. Prova att potatisen är mjuk och pastan genomkokt.",
+        "Skiva vitlök tunt och värm i smöret på medellåg värme tillsammans med torkad smulad salvia tills det doftar och vitlöken är lätt gyllene. Riv eller skär den smältande osten i tunna flagor och väg upp färdigriven parmesan.",
+        "Lyft pasta och grönsaker med hålslev till en varm skål. Varva med osten och parmesan, häll över vitlökssmöret , hela kokkomponentens salt och svartpeppar och vänd försiktigt tills osten smälter. Fördela mellan fyra tallrikar och servera genast med rödbets-/äppelsalladen. Skrapa med allt smör och all ost till serveringen."
+      ],
+      "name": "Pizzoccheri med kål, potatis och ost – utökad – med torkad salvia",
+      "preparation": {
+        "family": "pizzoccheri",
+        "input_forms": {
+          "bovetemjöl": "dry",
+          "ost": "as_sold",
+          "parmesan": "as_sold",
+          "potatis": "raw_edible",
+          "rödbeta": "raw_edible",
+          "salt": "as_sold",
+          "salvia": "dry",
+          "smör": "as_sold",
+          "svartpeppar": "dry",
+          "vetemjöl": "dry",
+          "vitkål": "raw_edible",
+          "vitlök": "raw_edible",
+          "äppelcidervinäger": "as_sold",
+          "äpple": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "6750f9df6de7cec4cdca0dc2cca3c265195312d66c887414784ef347d16a629f",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 24,
+        "base_id": "smako-italian-zuppa-imperiale",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mannagryn|dry",
+                "name": "Mannagryn",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Rått ägg utan skal",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "parmesan|as_sold",
+                "name": "Parmesan",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "kuber",
+            "name": "Bakade grynkuber"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "grönsaksfond|as_sold",
+                "name": "Flytande koncentrerad grönsaksfond",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "buljong",
+            "name": "Buljong"
+          }
+        ],
+        "content_sha256": "52dc97bae6b13cd2f25a1bb105f4b36e9583c8e50125c93159ac9d6ec19570eb",
+        "content_source": {
+          "active_minutes": 24,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage6",
+          "priority": 1,
+          "proposal_id": "smako-italian-zuppa-imperiale",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "501daa2bee61d2816e1dfafa5de7352757e1369877786bf4605f3f881747566b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "form cirka 20 × 25 cm",
+          "kastrull",
+          "visp"
+        ],
+        "estimated_minutes": 44,
+        "family": "Zuppa imperiale",
+        "fish": false,
+        "flavor_profile": [
+          "parmesan",
+          "buljong"
+        ],
+        "ingredient_count": 5,
+        "method": "pot",
+        "primary_ingredient": "ägg",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Buljongpulver är en ny identitet. Produktdosering och salt måste granskas; generisk buljong är inte ett godkännande av en viss produkt. Osten kan innehålla animaliskt löpe. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bakade grynkuber i soppan",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "parmesan|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 180 °C. Smält smöret och låt det bli ljummet. Väg upp den färdigrivna parmesanen. Vispa äggen och rör ner gryn, ost, smör och peppar. Bred ut smeten i en pappersklädd form till cirka 1 cm tjocklek."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda cirka 20 minuter tills grynkakan har stannat, är lätt gyllene och når minst 72 °C i mitten utan rå äggsmet."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan svalna fem minuter och skär den sedan i små jämna kuber."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 5,
+            "id": "s4",
+            "ingredient_keys": [
+              "grönsaksfond|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1200 ml",
+                1200.0
+              ]
+            ],
+            "text": "Koka upp den flytande koncentrerade grönsaksfonden med 1200 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "grönsaksfond|as_sold",
+              "mannagryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lägg grynkuberna i den sjudande buljongen och värm försiktigt två minuter. Rör varsamt så kuberna förblir hela och servera direkt."
+          }
+        ],
+        "total_minutes": 44,
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 20
+      },
+      "ingredients": [
+        {
+          "canonical_name": "mannagryn",
+          "component": "kuber",
+          "form": "dry",
+          "name": "mannagryn",
+          "product_requirements": [
+            "pack:intake_all_fbd02229c232"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "kuber",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "parmesan",
+          "component": "kuber",
+          "form": "as_sold",
+          "name": "parmesan",
+          "product_requirements": [
+            "pack:intake_all_expansion_dc7ca154fb22"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "kuber",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "kuber",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grönsaksfond",
+          "component": "buljong",
+          "form": "as_sold",
+          "name": "grönsaksfond",
+          "product_requirements": [
+            "pack:intake_all_round2_5a0df72f98a3"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 180 °C. Smält smöret och låt det bli ljummet. Väg upp den färdigrivna parmesanen. Vispa äggen och rör ner gryn, ost, smör och peppar. Bred ut smeten i en pappersklädd form till cirka 1 cm tjocklek.",
+        "Grädda cirka 20 minuter tills grynkakan har stannat, är lätt gyllene och når minst 72 °C i mitten utan rå äggsmet.",
+        "Låt kakan svalna fem minuter och skär den sedan i små jämna kuber.",
+        "Koka upp den flytande koncentrerade grönsaksfonden med 1200 ml vatten.",
+        "Lägg grynkuberna i den sjudande buljongen och värm försiktigt två minuter. Rör varsamt så kuberna förblir hela och servera direkt."
+      ],
+      "name": "Zuppa imperiale – ost- och mannagrynsrutor i buljong – ost- och mannagrynskuber i buljong – med flytande grönsaksfond",
+      "preparation": {
+        "family": "Zuppa imperiale",
+        "input_forms": {
+          "grönsaksfond": "as_sold",
+          "mannagryn": "dry",
+          "parmesan": "as_sold",
+          "smör": "as_sold",
+          "svartpeppar": "dry",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "52dc97bae6b13cd2f25a1bb105f4b36e9583c8e50125c93159ac9d6ec19570eb",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 39,
+        "base_id": "smako-italian-zuppa-imperiale",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mannagryn|dry",
+                "name": "Mannagryn",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Rått ägg utan skal",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "parmesan|as_sold",
+                "name": "Parmesan",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "muskot|dry",
+                "name": "Muskot",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "kuber",
+            "name": "Bakade grynkuber"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "grönsaksfond|as_sold",
+                "name": "Flytande koncentrerad grönsaksfond",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              }
+            ],
+            "id": "buljong",
+            "name": "Buljong"
+          }
+        ],
+        "content_sha256": "0e9dfbe48fae3d021fa50724a04dd863ffe1776c56f3c82f4713f0fad4a52537",
+        "content_source": {
+          "active_minutes": 39,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage6",
+          "priority": 1,
+          "proposal_id": "smako-italian-zuppa-imperiale",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "501daa2bee61d2816e1dfafa5de7352757e1369877786bf4605f3f881747566b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "form cirka 20 × 25 cm",
+          "kastrull",
+          "visp"
+        ],
+        "estimated_minutes": 59,
+        "family": "Zuppa imperiale",
+        "fish": false,
+        "flavor_profile": [
+          "parmesan",
+          "buljong"
+        ],
+        "ingredient_count": 9,
+        "method": "pot",
+        "primary_ingredient": "ägg",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Buljongpulver är en ny identitet. Produktdosering och salt måste granskas; generisk buljong är inte ett godkännande av en viss produkt. Osten kan innehålla animaliskt löpe. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bakade grynkuber i soppan",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "muskot|dry",
+              "parmesan|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 180 °C. Smält smöret och låt det bli ljummet. Väg upp den färdigrivna parmesanen. Vispa äggen och rör ner gryn, ost, smör och peppar. Rör ner muskot. Bred ut smeten i en pappersklädd form till cirka 1 cm tjocklek."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda cirka 20 minuter tills grynkakan har stannat, är lätt gyllene och når minst 72 °C i mitten utan rå äggsmet."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan svalna fem minuter och skär den sedan i små jämna kuber."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "grönsaksfond|as_sold",
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1200 ml",
+                1200.0
+              ]
+            ],
+            "text": "Koka upp den flytande koncentrerade grönsaksfonden med 1200 ml vatten. Skala och tärna morot och lök, skiva sellerin och tillsätt allt. Sjud 15 minuter tills grönsakerna är mjuka."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "grönsaksfond|as_sold",
+              "mannagryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lägg grynkuberna i den sjudande buljongen och värm försiktigt två minuter. Rör varsamt så kuberna förblir hela och servera direkt."
+          }
+        ],
+        "total_minutes": 59,
+        "variant_id": "standard",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 20
+      },
+      "ingredients": [
+        {
+          "canonical_name": "mannagryn",
+          "component": "kuber",
+          "form": "dry",
+          "name": "mannagryn",
+          "product_requirements": [
+            "pack:intake_all_fbd02229c232"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "kuber",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "parmesan",
+          "component": "kuber",
+          "form": "as_sold",
+          "name": "parmesan",
+          "product_requirements": [
+            "pack:intake_all_expansion_dc7ca154fb22"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "kuber",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "kuber",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "muskot",
+          "component": "kuber",
+          "form": "dry",
+          "name": "muskot",
+          "product_requirements": [
+            "pack:intake_all_33f4eb9d910f"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grönsaksfond",
+          "component": "buljong",
+          "form": "as_sold",
+          "name": "grönsaksfond",
+          "product_requirements": [
+            "pack:intake_all_round2_5a0df72f98a3"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "buljong",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "buljong",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "buljong",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 180 °C. Smält smöret och låt det bli ljummet. Väg upp den färdigrivna parmesanen. Vispa äggen och rör ner gryn, ost, smör och peppar. Rör ner muskot. Bred ut smeten i en pappersklädd form till cirka 1 cm tjocklek.",
+        "Grädda cirka 20 minuter tills grynkakan har stannat, är lätt gyllene och når minst 72 °C i mitten utan rå äggsmet.",
+        "Låt kakan svalna fem minuter och skär den sedan i små jämna kuber.",
+        "Koka upp den flytande koncentrerade grönsaksfonden med 1200 ml vatten. Skala och tärna morot och lök, skiva sellerin och tillsätt allt. Sjud 15 minuter tills grönsakerna är mjuka.",
+        "Lägg grynkuberna i den sjudande buljongen och värm försiktigt två minuter. Rör varsamt så kuberna förblir hela och servera direkt."
+      ],
+      "name": "Zuppa imperiale – ost- och mannagrynsrutor i buljong – med grönsaksbuljong och muskot – med flytande grönsaksfond",
+      "preparation": {
+        "family": "Zuppa imperiale",
+        "input_forms": {
+          "grönsaksfond": "as_sold",
+          "gul lök": "raw_edible",
+          "mannagryn": "dry",
+          "morot": "raw_edible",
+          "muskot": "dry",
+          "parmesan": "as_sold",
+          "selleri": "raw_edible",
+          "smör": "as_sold",
+          "svartpeppar": "dry",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "0e9dfbe48fae3d021fa50724a04dd863ffe1776c56f3c82f4713f0fad4a52537",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 45,
+        "base_id": "smako-italian-zuppa-imperiale",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mannagryn|dry",
+                "name": "Mannagryn",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Rått ägg utan skal",
+                "note": "",
+                "quantity": 240.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "parmesan|as_sold",
+                "name": "Parmesan",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "smör|as_sold",
+                "name": "Smör",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "muskot|dry",
+                "name": "Muskot",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              }
+            ],
+            "id": "kuber",
+            "name": "Bakade grynkuber"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "grönsaksfond|as_sold",
+                "name": "Flytande koncentrerad grönsaksfond",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 200.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "selleri|raw_edible",
+                "name": "Selleri",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ärtor|as_sold",
+                "name": "Ärtor",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spenat|as_sold",
+                "name": "Spenat",
+                "note": "",
+                "quantity": 150.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "persilja|raw_edible",
+                "name": "Persilja",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              }
+            ],
+            "id": "buljong",
+            "name": "Buljong"
+          }
+        ],
+        "content_sha256": "ceaee6761ca0f80c061d4654746230f634e87610e2f57d222ffbd12a8ace09fe",
+        "content_source": {
+          "active_minutes": 45,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage6",
+          "priority": 1,
+          "proposal_id": "smako-italian-zuppa-imperiale",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "501daa2bee61d2816e1dfafa5de7352757e1369877786bf4605f3f881747566b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "italian"
+        ],
+        "equipment": [
+          "ugn",
+          "form cirka 20 × 25 cm",
+          "kastrull",
+          "visp"
+        ],
+        "estimated_minutes": 65,
+        "family": "Zuppa imperiale",
+        "fish": false,
+        "flavor_profile": [
+          "parmesan",
+          "buljong"
+        ],
+        "ingredient_count": 12,
+        "method": "pot",
+        "primary_ingredient": "ägg",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Buljongpulver är en ny identitet. Produktdosering och salt måste granskas; generisk buljong är inte ett godkännande av en viss produkt. Osten kan innehålla animaliskt löpe. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "bakade grynkuber i soppan",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 9,
+            "id": "s1",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "muskot|dry",
+              "parmesan|as_sold",
+              "smör|as_sold",
+              "svartpeppar|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sätt ugnen på 180 °C. Smält smöret och låt det bli ljummet. Väg upp den färdigrivna parmesanen. Vispa äggen och rör ner gryn, ost, smör och peppar. Rör ner muskot. Bred ut smeten i en pappersklädd form till cirka 1 cm tjocklek."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 20,
+            "id": "s2",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Grädda cirka 20 minuter tills grynkakan har stannat, är lätt gyllene och når minst 72 °C i mitten utan rå äggsmet."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "mannagryn|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakan svalna fem minuter och skär den sedan i små jämna kuber."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 20,
+            "id": "s4",
+            "ingredient_keys": [
+              "grönsaksfond|as_sold",
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "selleri|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1200 ml",
+                1200.0
+              ]
+            ],
+            "text": "Koka upp den flytande koncentrerade grönsaksfonden med 1200 ml vatten. Skala och tärna morot och lök, skiva sellerin och tillsätt allt. Sjud 15 minuter tills grönsakerna är mjuka."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "persilja|raw_edible",
+              "spenat|as_sold",
+              "ärtor|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Tillsätt ärtor och fryst spenat. Koka fem minuter tills allt är genomhett och spenaten har lösts upp. Rör ner fryst hackad persilja och låt koka med minst två minuter eller längre enligt förpackningen."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "grönsaksfond|as_sold",
+              "mannagryn|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lägg grynkuberna i den sjudande buljongen och värm försiktigt två minuter. Rör varsamt så kuberna förblir hela och servera direkt."
+          }
+        ],
+        "total_minutes": 65,
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 20
+      },
+      "ingredients": [
+        {
+          "canonical_name": "mannagryn",
+          "component": "kuber",
+          "form": "dry",
+          "name": "mannagryn",
+          "product_requirements": [
+            "pack:intake_all_fbd02229c232"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "kuber",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 240.0,
+          "quantity_max": 240.0,
+          "quantity_min": 240.0,
+          "quantity_step": 240.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "parmesan",
+          "component": "kuber",
+          "form": "as_sold",
+          "name": "parmesan",
+          "product_requirements": [
+            "pack:intake_all_expansion_dc7ca154fb22"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "smör",
+          "component": "kuber",
+          "form": "as_sold",
+          "name": "smör",
+          "product_requirements": [
+            "pack:intake_butter"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "kuber",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "muskot",
+          "component": "kuber",
+          "form": "dry",
+          "name": "muskot",
+          "product_requirements": [
+            "pack:intake_all_33f4eb9d910f"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grönsaksfond",
+          "component": "buljong",
+          "form": "as_sold",
+          "name": "grönsaksfond",
+          "product_requirements": [
+            "pack:intake_all_round2_5a0df72f98a3"
+          ],
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "buljong",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 200.0,
+          "quantity_max": 200.0,
+          "quantity_min": 200.0,
+          "quantity_step": 200.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "selleri",
+          "component": "buljong",
+          "form": "raw_edible",
+          "name": "selleri",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "buljong",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ärtor",
+          "component": "buljong",
+          "form": "as_sold",
+          "name": "ärtor",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spenat",
+          "component": "buljong",
+          "form": "as_sold",
+          "name": "spenat",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 150.0,
+          "quantity_max": 150.0,
+          "quantity_min": 150.0,
+          "quantity_step": 150.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "persilja",
+          "component": "buljong",
+          "form": "raw_edible",
+          "name": "persilja",
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Sätt ugnen på 180 °C. Smält smöret och låt det bli ljummet. Väg upp den färdigrivna parmesanen. Vispa äggen och rör ner gryn, ost, smör och peppar. Rör ner muskot. Bred ut smeten i en pappersklädd form till cirka 1 cm tjocklek.",
+        "Grädda cirka 20 minuter tills grynkakan har stannat, är lätt gyllene och når minst 72 °C i mitten utan rå äggsmet.",
+        "Låt kakan svalna fem minuter och skär den sedan i små jämna kuber.",
+        "Koka upp den flytande koncentrerade grönsaksfonden med 1200 ml vatten. Skala och tärna morot och lök, skiva sellerin och tillsätt allt. Sjud 15 minuter tills grönsakerna är mjuka.",
+        "Tillsätt ärtor och fryst spenat. Koka fem minuter tills allt är genomhett och spenaten har lösts upp. Rör ner fryst hackad persilja och låt koka med minst två minuter eller längre enligt förpackningen.",
+        "Lägg grynkuberna i den sjudande buljongen och värm försiktigt två minuter. Rör varsamt så kuberna förblir hela och servera direkt."
+      ],
+      "name": "Zuppa imperiale – ost- och mannagrynsrutor i buljong – med ärtor, spenat och persilja – med flytande grönsaksfond",
+      "preparation": {
+        "family": "Zuppa imperiale",
+        "input_forms": {
+          "grönsaksfond": "as_sold",
+          "gul lök": "raw_edible",
+          "mannagryn": "dry",
+          "morot": "raw_edible",
+          "muskot": "dry",
+          "parmesan": "as_sold",
+          "persilja": "raw_edible",
+          "selleri": "raw_edible",
+          "smör": "as_sold",
+          "spenat": "as_sold",
+          "svartpeppar": "dry",
+          "ägg": "raw_edible",
+          "ärtor": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "ceaee6761ca0f80c061d4654746230f634e87610e2f57d222ffbd12a8ace09fe",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 46,
+        "base_id": "smako-swedish-porterstek",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötstek|raw_edible",
+                "name": "Nötstek",
+                "note": "",
+                "quantity": 900.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "porteröl|as_sold",
+                "name": "Porteröl",
+                "note": "",
+                "quantity": 330.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "svartvinbärssaft|as_sold",
+                "name": "Koncentrerad svartvinbärssaft, inte drickfärdig",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "Grädde",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "stek",
+            "name": "Porterstek"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "potatis",
+            "name": "Kokt potatis"
+          }
+        ],
+        "content_sha256": "cb7027947f7757de017795e93248d0a8ddc80d8cb34af3909744511d5e43a2c3",
+        "content_source": {
+          "active_minutes": 46,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage6",
+          "priority": 1,
+          "proposal_id": "smako-swedish-porterstek",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "501daa2bee61d2816e1dfafa5de7352757e1369877786bf4605f3f881747566b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "gryta med tätt lock",
+          "kastrull",
+          "termometer",
+          "visp",
+          "stavmixer"
+        ],
+        "estimated_minutes": 186,
+        "family": "Porterstek",
+        "fish": false,
+        "flavor_profile": [
+          "porter",
+          "svartvinbär",
+          "soja"
+        ],
+        "ingredient_count": 7,
+        "method": "pot",
+        "primary_ingredient": "nötstek",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Steken behöver inte brynas: porter, koncentrerad svartvinbärssaft och soja är den särskilda kokvätskan. Alkoholens fullständiga bortkokning eller alkoholfri sluträtt garanteras inte. Mörhet avgör tid; temperaturintervallet är en konsistensuppskattning, inte ett löfte om exakt stekgrad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokt potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "nötstek|raw_edible",
+              "porteröl|as_sold",
+              "sojasås|as_sold",
+              "svartpeppar|dry",
+              "svartvinbärssaft|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "250 ml",
+                250.0
+              ]
+            ],
+            "text": "Skala och klyfta löken. Lägg i en trång gryta med porter, koncentrerad saft, soja och peppar. Lägg i hela steken och häll på 250 ml vatten. Koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under tätt lock på låg värme i en timme."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd steken varsamt vid halvtidskontrollen och lägg på locket igen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Sjud vidare under tätt lock cirka en timme till, totalt ungefär två timmar. Köttet ska vara mört när en sticka förs in; för ett bräseringsstycke kan innertemperaturen behöva nå ungefär 85–90 °C. Fortsätt sjuda om köttet ännu är hårt och tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den angivna råa ätliga mängden och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan tillsatt salt; koka upp."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 20,
+            "id": "s6",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "gul lök|raw_edible",
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lyft upp steken och täck löst. Låt vila medan såsen görs. Mixa den kokta löken i spadet."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 20,
+            "id": "s8",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "salt|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Koka ner spadet utan lock cirka 15 minuter till ungefär hälften av ursprungsvolymen. Rör ner hela saltmängden från potatiskomponenten och grädden och sjud ytterligare fem minuter till en lätt gräddig sky."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär steken tunt tvärs över köttfibrerna. Servera med sås, potatis och eventuella extra tillbehör. Fördela hela såsen och all köttsaft från skärbrädan mellan portionerna."
+          }
+        ],
+        "total_minutes": 186,
+        "variant_id": "simple",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 140
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötstek",
+          "component": "stek",
+          "form": "raw_edible",
+          "name": "nötstek",
+          "product_requirements": [
+            "pack:intake_all_expansion_976e5a8147bc"
+          ],
+          "quantity": 900.0,
+          "quantity_max": 900.0,
+          "quantity_min": 900.0,
+          "quantity_step": 900.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "porteröl",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "porteröl",
+          "product_requirements": [
+            "pack:intake_all_expansion_4a3e7ebf219d"
+          ],
+          "quantity": 330.0,
+          "quantity_max": 330.0,
+          "quantity_min": 330.0,
+          "quantity_step": 330.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "svartvinbärssaft",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "svartvinbärssaft",
+          "product_requirements": [
+            "pack:intake_all_round2_ce0581a465d9"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "stek",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "stek",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "potatis",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "potatis",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala och klyfta löken. Lägg i en trång gryta med porter, koncentrerad saft, soja och peppar. Lägg i hela steken och häll på 250 ml vatten. Koka upp försiktigt.",
+        "Sjud under tätt lock på låg värme i en timme.",
+        "Vänd steken varsamt vid halvtidskontrollen och lägg på locket igen.",
+        "Sjud vidare under tätt lock cirka en timme till, totalt ungefär två timmar. Köttet ska vara mört när en sticka förs in; för ett bräseringsstycke kan innertemperaturen behöva nå ungefär 85–90 °C. Fortsätt sjuda om köttet ännu är hårt och tillsätt vid behov 100 ml vatten.",
+        "Skala potatisen, väg den angivna råa ätliga mängden och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan tillsatt salt; koka upp.",
+        "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering.",
+        "Lyft upp steken och täck löst. Låt vila medan såsen görs. Mixa den kokta löken i spadet.",
+        "Koka ner spadet utan lock cirka 15 minuter till ungefär hälften av ursprungsvolymen. Rör ner hela saltmängden från potatiskomponenten och grädden och sjud ytterligare fem minuter till en lätt gräddig sky.",
+        "Skär steken tunt tvärs över köttfibrerna. Servera med sås, potatis och eventuella extra tillbehör. Fördela hela såsen och all köttsaft från skärbrädan mellan portionerna."
+      ],
+      "name": "Porterstek med gräddsås – porter- och svartvinbärsbräserad stek",
+      "preparation": {
+        "family": "Porterstek",
+        "input_forms": {
+          "grädde": "as_sold",
+          "gul lök": "raw_edible",
+          "nötstek": "raw_edible",
+          "porteröl": "as_sold",
+          "potatis": "raw_edible",
+          "salt": "as_sold",
+          "sojasås": "as_sold",
+          "svartpeppar": "dry",
+          "svartvinbärssaft": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "cb7027947f7757de017795e93248d0a8ddc80d8cb34af3909744511d5e43a2c3",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 35,
+        "base_id": "smako-swedish-porterstek",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötstek|raw_edible",
+                "name": "Nötstek",
+                "note": "",
+                "quantity": 900.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "porteröl|as_sold",
+                "name": "Porteröl",
+                "note": "",
+                "quantity": 330.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "svartvinbärssaft|as_sold",
+                "name": "Koncentrerad svartvinbärssaft, inte drickfärdig",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "Grädde",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "enbär|dry",
+                "name": "Enbär",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "timjan|dry",
+                "name": "Timjan",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              }
+            ],
+            "id": "stek",
+            "name": "Porterstek"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "potatis",
+            "name": "Kokt potatis"
+          }
+        ],
+        "content_sha256": "81419f537292a64b0c4b71a77ee352234f201b8e182da86c053bb5177be345d2",
+        "content_source": {
+          "active_minutes": 35,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage6",
+          "priority": 1,
+          "proposal_id": "smako-swedish-porterstek",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "501daa2bee61d2816e1dfafa5de7352757e1369877786bf4605f3f881747566b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "gryta med tätt lock",
+          "kastrull",
+          "termometer",
+          "visp",
+          "stavmixer",
+          "kryddkvarn"
+        ],
+        "estimated_minutes": 175,
+        "family": "Porterstek",
+        "fish": false,
+        "flavor_profile": [
+          "porter",
+          "svartvinbär",
+          "soja"
+        ],
+        "ingredient_count": 10,
+        "method": "pot",
+        "primary_ingredient": "nötstek",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Steken behöver inte brynas: porter, koncentrerad svartvinbärssaft och soja är den särskilda kokvätskan. Alkoholens fullständiga bortkokning eller alkoholfri sluträtt garanteras inte. Mörhet avgör tid; temperaturintervallet är en konsistensuppskattning, inte ett löfte om exakt stekgrad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokt potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "enbär|dry",
+              "gul lök|raw_edible",
+              "nötstek|raw_edible",
+              "porteröl|as_sold",
+              "sojasås|as_sold",
+              "svartpeppar|dry",
+              "svartvinbärssaft|as_sold",
+              "timjan|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "250 ml",
+                250.0
+              ]
+            ],
+            "text": "Skala och klyfta löken. Lägg i en trång gryta med porter, koncentrerad saft, soja och peppar. Mal enbären mycket fint i kryddkvarn och tillsätt dem och timjan. Lägg i hela steken och häll på 250 ml vatten. Koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under tätt lock på låg värme i en timme."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd steken varsamt vid halvtidskontrollen och lägg på locket igen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Sjud vidare under tätt lock cirka en timme till, totalt ungefär två timmar. Köttet ska vara mört när en sticka förs in; för ett bräseringsstycke kan innertemperaturen behöva nå ungefär 85–90 °C. Fortsätt sjuda om köttet ännu är hårt och tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den angivna råa ätliga mängden och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan tillsatt salt; koka upp."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 20,
+            "id": "s6",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "enbär|dry",
+              "gul lök|raw_edible",
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lyft upp steken och täck löst. Låt vila medan såsen görs. Behåll de finmalda enbären i såsen. Mixa den kokta löken i spadet."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 9,
+            "id": "s8",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Vispa mjölet slätt med grädden. Vispa ner i spadet tillsammans med hela saltmängden från potatiskomponenten och sjud under omrörning åtta minuter så mjölet blir genomkokt. Späd vid behov med 50 ml vatten om såsen blir för tjock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 4,
+            "id": "s9",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär steken tunt tvärs över köttfibrerna. Servera med sås, potatis och eventuella extra tillbehör. Fördela hela såsen och all köttsaft från skärbrädan mellan portionerna."
+          }
+        ],
+        "total_minutes": 175,
+        "variant_id": "standard",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 140
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötstek",
+          "component": "stek",
+          "form": "raw_edible",
+          "name": "nötstek",
+          "product_requirements": [
+            "pack:intake_all_expansion_976e5a8147bc"
+          ],
+          "quantity": 900.0,
+          "quantity_max": 900.0,
+          "quantity_min": 900.0,
+          "quantity_step": 900.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "porteröl",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "porteröl",
+          "product_requirements": [
+            "pack:intake_all_expansion_4a3e7ebf219d"
+          ],
+          "quantity": 330.0,
+          "quantity_max": 330.0,
+          "quantity_min": 330.0,
+          "quantity_step": 330.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "svartvinbärssaft",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "svartvinbärssaft",
+          "product_requirements": [
+            "pack:intake_all_round2_ce0581a465d9"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "stek",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "stek",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "stek",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "enbär",
+          "component": "stek",
+          "form": "dry",
+          "name": "enbär",
+          "product_requirements": [
+            "pack:intake_all_expansion_bd59c22ab0d0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "timjan",
+          "component": "stek",
+          "form": "dry",
+          "name": "timjan",
+          "product_requirements": [
+            "pack:intake_thyme"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "potatis",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "potatis",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala och klyfta löken. Lägg i en trång gryta med porter, koncentrerad saft, soja och peppar. Mal enbären mycket fint i kryddkvarn och tillsätt dem och timjan. Lägg i hela steken och häll på 250 ml vatten. Koka upp försiktigt.",
+        "Sjud under tätt lock på låg värme i en timme.",
+        "Vänd steken varsamt vid halvtidskontrollen och lägg på locket igen.",
+        "Sjud vidare under tätt lock cirka en timme till, totalt ungefär två timmar. Köttet ska vara mört när en sticka förs in; för ett bräseringsstycke kan innertemperaturen behöva nå ungefär 85–90 °C. Fortsätt sjuda om köttet ännu är hårt och tillsätt vid behov 100 ml vatten.",
+        "Skala potatisen, väg den angivna råa ätliga mängden och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan tillsatt salt; koka upp.",
+        "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering.",
+        "Lyft upp steken och täck löst. Låt vila medan såsen görs. Behåll de finmalda enbären i såsen. Mixa den kokta löken i spadet.",
+        "Vispa mjölet slätt med grädden. Vispa ner i spadet tillsammans med hela saltmängden från potatiskomponenten och sjud under omrörning åtta minuter så mjölet blir genomkokt. Späd vid behov med 50 ml vatten om såsen blir för tjock.",
+        "Skär steken tunt tvärs över köttfibrerna. Servera med sås, potatis och eventuella extra tillbehör. Fördela hela såsen och all köttsaft från skärbrädan mellan portionerna."
+      ],
+      "name": "Porterstek med gräddsås – med enbär och gräddsås",
+      "preparation": {
+        "family": "Porterstek",
+        "input_forms": {
+          "enbär": "dry",
+          "grädde": "as_sold",
+          "gul lök": "raw_edible",
+          "nötstek": "raw_edible",
+          "porteröl": "as_sold",
+          "potatis": "raw_edible",
+          "salt": "as_sold",
+          "sojasås": "as_sold",
+          "svartpeppar": "dry",
+          "svartvinbärssaft": "as_sold",
+          "timjan": "dry",
+          "vetemjöl": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "81419f537292a64b0c4b71a77ee352234f201b8e182da86c053bb5177be345d2",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    },
+    {
+      "design": {
+        "active_minutes": 42,
+        "base_id": "smako-swedish-porterstek",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "nötstek|raw_edible",
+                "name": "Nötstek",
+                "note": "",
+                "quantity": 900.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "porteröl|as_sold",
+                "name": "Porteröl",
+                "note": "",
+                "quantity": 330.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "svartvinbärssaft|as_sold",
+                "name": "Koncentrerad svartvinbärssaft, inte drickfärdig",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "sojasås|as_sold",
+                "name": "Sojasås",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "gul lök|raw_edible",
+                "name": "Gul lök",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "Grädde",
+                "note": "",
+                "quantity": 160.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "svartpeppar|dry",
+                "name": "Svartpeppar",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "enbär|dry",
+                "name": "Enbär",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "timjan|dry",
+                "name": "Timjan",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "morot|raw_edible",
+                "name": "Morot",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              }
+            ],
+            "id": "stek",
+            "name": "Porterstek"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "haricots verts|as_sold",
+                "name": "Haricots verts",
+                "note": "",
+                "quantity": 250.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "svartvinbärsgelé|as_sold",
+                "name": "Svartvinbärsgelé",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              }
+            ],
+            "id": "tillbehor",
+            "name": "Bönor och gelé"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "potatis|raw_edible",
+                "name": "Potatis",
+                "note": "",
+                "quantity": 850.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "potatis",
+            "name": "Kokt potatis"
+          }
+        ],
+        "content_sha256": "e826e93ec2f9ce3dbecfb741134bf4717f9d0e7c078515ad3ddf11ad7db4599b",
+        "content_source": {
+          "active_minutes": 42,
+          "method_note": "Summera använda ätbara insatsers deklarationer eller uttryckligt tillåtna referenser per portion. Ingen retention, densitet, avrunnen andel eller tillagad vikt antas.",
+          "pack_id": "reviewed-expansion-round2-stage6",
+          "priority": 1,
+          "proposal_id": "smako-swedish-porterstek",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "501daa2bee61d2816e1dfafa5de7352757e1369877786bf4605f3f881747566b",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "swedish"
+        ],
+        "equipment": [
+          "gryta med tätt lock",
+          "kastrull",
+          "termometer",
+          "visp",
+          "stavmixer",
+          "kryddkvarn"
+        ],
+        "estimated_minutes": 182,
+        "family": "Porterstek",
+        "fish": false,
+        "flavor_profile": [
+          "porter",
+          "svartvinbär",
+          "soja"
+        ],
+        "ingredient_count": 13,
+        "method": "pot",
+        "primary_ingredient": "nötstek",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Steken behöver inte brynas: porter, koncentrerad svartvinbärssaft och soja är den särskilda kokvätskan. Alkoholens fullständiga bortkokning eller alkoholfri sluträtt garanteras inte. Mörhet avgör tid; temperaturintervallet är en konsistensuppskattning, inte ett löfte om exakt stekgrad. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokt potatis",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 10,
+            "id": "s1",
+            "ingredient_keys": [
+              "enbär|dry",
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "nötstek|raw_edible",
+              "porteröl|as_sold",
+              "sojasås|as_sold",
+              "svartpeppar|dry",
+              "svartvinbärssaft|as_sold",
+              "timjan|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "250 ml",
+                250.0
+              ]
+            ],
+            "text": "Skala och klyfta löken. Skala och skär moroten grovt. Lägg i en trång gryta med porter, koncentrerad saft, soja och peppar. Mal enbären mycket fint i kryddkvarn och tillsätt dem och timjan. Lägg i hela steken och häll på 250 ml vatten. Koka upp försiktigt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud under tätt lock på låg värme i en timme."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 1,
+            "id": "s3",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Vänd steken varsamt vid halvtidskontrollen och lägg på locket igen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 60,
+            "id": "s4",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "100 ml",
+                100.0
+              ]
+            ],
+            "text": "Sjud vidare under tätt lock cirka en timme till, totalt ungefär två timmar. Köttet ska vara mört när en sticka förs in; för ett bräseringsstycke kan innertemperaturen behöva nå ungefär 85–90 °C. Fortsätt sjuda om köttet ännu är hårt och tillsätt vid behov 100 ml vatten."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "1500 ml",
+                1500.0
+              ]
+            ],
+            "text": "Skala potatisen, väg den angivna råa ätliga mängden och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan tillsatt salt; koka upp."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 20,
+            "id": "s6",
+            "ingredient_keys": [
+              "potatis|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 5,
+            "id": "s7",
+            "ingredient_keys": [
+              "enbär|dry",
+              "gul lök|raw_edible",
+              "morot|raw_edible",
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lyft upp steken och täck löst. Låt vila medan såsen görs. Lyft även upp morotsbitarna till servering. Behåll de finmalda enbären i såsen. Mixa den kokta löken i spadet."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 9,
+            "id": "s8",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "50 ml",
+                50.0
+              ]
+            ],
+            "text": "Vispa mjölet slätt med grädden. Vispa ner i spadet tillsammans med hela saltmängden från potatiskomponenten och sjud under omrörning åtta minuter så mjölet blir genomkokt. Späd vid behov med 50 ml vatten om såsen blir för tjock."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 7,
+            "id": "s9",
+            "ingredient_keys": [
+              "haricots verts|as_sold",
+              "morot|raw_edible",
+              "svartvinbärsgelé|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "700 ml",
+                700.0
+              ]
+            ],
+            "text": "Koka haricots verts i 700 ml vatten cirka fem minuter tills genomhetta och mjuka med lite spänst. Häll av. Lägg upp med den kokta moroten och svartvinbärsgelén."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 4,
+            "id": "s10",
+            "ingredient_keys": [
+              "nötstek|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Skär steken tunt tvärs över köttfibrerna. Servera med sås, potatis och eventuella extra tillbehör. Fördela hela såsen och all köttsaft från skärbrädan mellan portionerna."
+          }
+        ],
+        "total_minutes": 182,
+        "variant_id": "extended",
+        "vegetarian": false,
+        "version": "1.0.1",
+        "waiting_minutes": 140
+      },
+      "ingredients": [
+        {
+          "canonical_name": "nötstek",
+          "component": "stek",
+          "form": "raw_edible",
+          "name": "nötstek",
+          "product_requirements": [
+            "pack:intake_all_expansion_976e5a8147bc"
+          ],
+          "quantity": 900.0,
+          "quantity_max": 900.0,
+          "quantity_min": 900.0,
+          "quantity_step": 900.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "porteröl",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "porteröl",
+          "product_requirements": [
+            "pack:intake_all_expansion_4a3e7ebf219d"
+          ],
+          "quantity": 330.0,
+          "quantity_max": 330.0,
+          "quantity_min": 330.0,
+          "quantity_step": 330.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "svartvinbärssaft",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "svartvinbärssaft",
+          "product_requirements": [
+            "pack:intake_all_round2_ce0581a465d9"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "sojasås",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "sojasås",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "gul lök",
+          "component": "stek",
+          "form": "raw_edible",
+          "name": "gul lök",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "stek",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 160.0,
+          "quantity_max": 160.0,
+          "quantity_min": 160.0,
+          "quantity_step": 160.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "svartpeppar",
+          "component": "stek",
+          "form": "dry",
+          "name": "svartpeppar",
+          "product_requirements": [
+            "pack:black_pepper"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "stek",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "enbär",
+          "component": "stek",
+          "form": "dry",
+          "name": "enbär",
+          "product_requirements": [
+            "pack:intake_all_expansion_bd59c22ab0d0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "timjan",
+          "component": "stek",
+          "form": "dry",
+          "name": "timjan",
+          "product_requirements": [
+            "pack:intake_thyme"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "morot",
+          "component": "stek",
+          "form": "raw_edible",
+          "name": "morot",
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "haricots verts",
+          "component": "tillbehor",
+          "form": "as_sold",
+          "name": "haricots verts",
+          "product_requirements": [
+            "frozen",
+            "plain"
+          ],
+          "quantity": 250.0,
+          "quantity_max": 250.0,
+          "quantity_min": 250.0,
+          "quantity_step": 250.0,
+          "required": true,
+          "role": "vegetable",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "svartvinbärsgelé",
+          "component": "tillbehor",
+          "form": "as_sold",
+          "name": "svartvinbärsgelé",
+          "product_requirements": [
+            "pack:intake_all_round2_831caccde7b6"
+          ],
+          "quantity": 60.0,
+          "quantity_max": 60.0,
+          "quantity_min": 60.0,
+          "quantity_step": 60.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "potatis",
+          "component": "potatis",
+          "form": "raw_edible",
+          "name": "potatis",
+          "quantity": 850.0,
+          "quantity_max": 850.0,
+          "quantity_min": 850.0,
+          "quantity_step": 850.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "potatis",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Skala och klyfta löken. Skala och skär moroten grovt. Lägg i en trång gryta med porter, koncentrerad saft, soja och peppar. Mal enbären mycket fint i kryddkvarn och tillsätt dem och timjan. Lägg i hela steken och häll på 250 ml vatten. Koka upp försiktigt.",
+        "Sjud under tätt lock på låg värme i en timme.",
+        "Vänd steken varsamt vid halvtidskontrollen och lägg på locket igen.",
+        "Sjud vidare under tätt lock cirka en timme till, totalt ungefär två timmar. Köttet ska vara mört när en sticka förs in; för ett bräseringsstycke kan innertemperaturen behöva nå ungefär 85–90 °C. Fortsätt sjuda om köttet ännu är hårt och tillsätt vid behov 100 ml vatten.",
+        "Skala potatisen, väg den angivna råa ätliga mängden och dela stora exemplar jämnt. Lägg i kastrull med 1500 ml vatten utan tillsatt salt; koka upp.",
+        "Sjud potatisen cirka 20 minuter tills en sticka går lätt igenom. Häll av och håll täckt fram till servering.",
+        "Lyft upp steken och täck löst. Låt vila medan såsen görs. Lyft även upp morotsbitarna till servering. Behåll de finmalda enbären i såsen. Mixa den kokta löken i spadet.",
+        "Vispa mjölet slätt med grädden. Vispa ner i spadet tillsammans med hela saltmängden från potatiskomponenten och sjud under omrörning åtta minuter så mjölet blir genomkokt. Späd vid behov med 50 ml vatten om såsen blir för tjock.",
+        "Koka haricots verts i 700 ml vatten cirka fem minuter tills genomhetta och mjuka med lite spänst. Häll av. Lägg upp med den kokta moroten och svartvinbärsgelén.",
+        "Skär steken tunt tvärs över köttfibrerna. Servera med sås, potatis och eventuella extra tillbehör. Fördela hela såsen och all köttsaft från skärbrädan mellan portionerna."
+      ],
+      "name": "Porterstek med gräddsås – med morot, bönor och gelé",
+      "preparation": {
+        "family": "Porterstek",
+        "input_forms": {
+          "enbär": "dry",
+          "grädde": "as_sold",
+          "gul lök": "raw_edible",
+          "haricots verts": "as_sold",
+          "morot": "raw_edible",
+          "nötstek": "raw_edible",
+          "porteröl": "as_sold",
+          "potatis": "raw_edible",
+          "salt": "as_sold",
+          "sojasås": "as_sold",
+          "svartpeppar": "dry",
+          "svartvinbärsgelé": "as_sold",
+          "svartvinbärssaft": "as_sold",
+          "timjan": "dry",
+          "vetemjöl": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "e826e93ec2f9ce3dbecfb741134bf4717f9d0e7c078515ad3ddf11ad7db4599b",
+        "version": "smako-authored-input-v2"
+      },
+      "servings": 4
+    }
+  ]
+}

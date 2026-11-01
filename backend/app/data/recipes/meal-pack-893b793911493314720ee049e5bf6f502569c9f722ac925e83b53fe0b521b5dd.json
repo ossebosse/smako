@@ -1,0 +1,3271 @@
+{
+  "library_version": "smako-meal-pack-v1",
+  "recipes": [
+    {
+      "design": {
+        "active_minutes": 26,
+        "base_id": "smako-thai-pa-tong-ko",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "torrjäst",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bakpulver|dry",
+                "name": "bakpulver",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              }
+            ],
+            "id": "deg",
+            "name": "Dubbelbröd"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "sojadryck|as_sold",
+                "name": "sojadryck",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "dryck",
+            "name": "Varm sojadryck"
+          }
+        ],
+        "content_sha256": "252c4ebefb8ab073d07659c24fbe6c368a05d9dee9581d4dfbb01bcf78366e95",
+        "content_source": {
+          "active_minutes": 26,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage8",
+          "priority": 1,
+          "proposal_id": "smako-thai-pa-tong-ko",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8b35169693f8a90ba973e8720021743885ed171f385360484d45a7ab98307c82",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "skål",
+          "kastrull",
+          "termometer",
+          "galler"
+        ],
+        "estimated_minutes": 146,
+        "family": "pa tong ko",
+        "fish": false,
+        "flavor_profile": [
+          "friterat vete",
+          "soja"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Thai-kinesisk frukost med sammanfogade par av luftiga friterade bröd. Hemmaanpassning med torrjäst och bakpulver i stället för ammoniumbaserat jäsmedel; inte ett påstående om identisk gatuköksdeg. Den stora oljemängden är ett processbad, inte beräknat upptag. Satsen ger två små dubbelbröd för en frukost; provlagning av liten degsats behövs. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "sojadryck",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "bakpulver|dry",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "45 ml",
+                45.0
+              ]
+            ],
+            "text": "Ta undan en liten sked mjöl till utbakning och några droppar av oljan till skålen. Blanda resten av mjölet med torrjäst, bakpulver och salt. Rör ner 45 ml vatten (ljummet) till en mjuk kladdig deg utan hård knådning. Lägg i lätt oljad skål och täck."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt jäsa cirka 120 minuter tills degen är tydligt luftig med synliga bubblor. Anpassa tiden efter rumstemperaturen; kall deg kan behöva längre tid."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "5 ml",
+                5.0
+              ]
+            ],
+            "text": "Mjöla underlaget med det undanlagda mjölet. Tippa ut degen utan att slå ut all luft. Forma försiktigt till en rektangel och skär i fyra korta remsor. Fukta två remsor lätt med sammanlagt 5 ml vatten, lägg de andra ovanpå och pressa ihop mittlinjen med en ätpinne precis före stekning."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 9,
+            "id": "s4",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan till 175 °C i en liten hög kastrull, aldrig fylld mer än till en tredjedel. Sträck dubbelremsorna försiktigt och fritera en i taget, vänd ofta första halvminuten. Fortsätt 3–4 minuter tills luftig, gyllene och genomgräddad utan rå deg. Ha lock nära, använd torra redskap och aldrig vatten mot oljebrand."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 4,
+            "id": "s5",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "sojadryck|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt bröden rinna av på galler. Värm sojadrycken i kastrull och servera genast med bröden."
+          }
+        ],
+        "total_minutes": 146,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "deg",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bakpulver",
+          "component": "deg",
+          "form": "dry",
+          "name": "bakpulver",
+          "product_requirements": [
+            "pack:intake_baking_powder"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojadryck",
+          "component": "dryck",
+          "form": "as_sold",
+          "name": "sojadryck",
+          "product_requirements": [
+            "pack:intake_all_9dd3e8d14899"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "side",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Ta undan en liten sked mjöl till utbakning och några droppar av oljan till skålen. Blanda resten av mjölet med torrjäst, bakpulver och salt. Rör ner 45 ml vatten (ljummet) till en mjuk kladdig deg utan hård knådning. Lägg i lätt oljad skål och täck.",
+        "Låt jäsa cirka 120 minuter tills degen är tydligt luftig med synliga bubblor. Anpassa tiden efter rumstemperaturen; kall deg kan behöva längre tid.",
+        "Mjöla underlaget med det undanlagda mjölet. Tippa ut degen utan att slå ut all luft. Forma försiktigt till en rektangel och skär i fyra korta remsor. Fukta två remsor lätt med sammanlagt 5 ml vatten, lägg de andra ovanpå och pressa ihop mittlinjen med en ätpinne precis före stekning.",
+        "Värm oljan till 175 °C i en liten hög kastrull, aldrig fylld mer än till en tredjedel. Sträck dubbelremsorna försiktigt och fritera en i taget, vänd ofta första halvminuten. Fortsätt 3–4 minuter tills luftig, gyllene och genomgräddad utan rå deg. Ha lock nära, använd torra redskap och aldrig vatten mot oljebrand.",
+        "Låt bröden rinna av på galler. Värm sojadrycken i kastrull och servera genast med bröden."
+      ],
+      "name": "Pa tong ko – friterade frukostbröd med sojadryck – enkel",
+      "preparation": {
+        "family": "pa tong ko",
+        "input_forms": {
+          "bakpulver": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "sojadryck": "as_sold",
+          "torrjäst": "dry",
+          "vetemjöl": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "252c4ebefb8ab073d07659c24fbe6c368a05d9dee9581d4dfbb01bcf78366e95",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 31,
+        "base_id": "smako-thai-pa-tong-ko",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "vetemjöl",
+                "note": "",
+                "quantity": 65.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "torrjäst",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bakpulver|dry",
+                "name": "bakpulver",
+                "note": "",
+                "quantity": 0.5,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "rapsolja",
+                "note": "",
+                "quantity": 350.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "salt",
+                "note": "",
+                "quantity": 0.7,
+                "unit": "g"
+              }
+            ],
+            "id": "deg",
+            "name": "Dubbelbröd"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "sojadryck|as_sold",
+                "name": "sojadryck",
+                "note": "",
+                "quantity": 220.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "dryck",
+            "name": "Varm sojadryck"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "kokosmjölk|as_sold",
+                "name": "kokosmjölk",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "strösocker",
+                "note": "",
+                "quantity": 7.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "majsstärkelse|dry",
+                "name": "majsstärkelse",
+                "note": "",
+                "quantity": 2.0,
+                "unit": "g"
+              }
+            ],
+            "id": "dopp",
+            "name": "Kokosdopp"
+          }
+        ],
+        "content_sha256": "45140c1443f80d7a2d513f6911fd8078d584c0c5fd660de34c19798270b8e880",
+        "content_source": {
+          "active_minutes": 31,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage8",
+          "priority": 1,
+          "proposal_id": "smako-thai-pa-tong-ko",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8b35169693f8a90ba973e8720021743885ed171f385360484d45a7ab98307c82",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "thai"
+        ],
+        "equipment": [
+          "skål",
+          "kastrull",
+          "termometer",
+          "galler"
+        ],
+        "estimated_minutes": 151,
+        "family": "pa tong ko",
+        "fish": false,
+        "flavor_profile": [
+          "friterat vete",
+          "soja"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar, inte uppmätta. Thai-kinesisk frukost med sammanfogade par av luftiga friterade bröd. Hemmaanpassning med torrjäst och bakpulver i stället för ammoniumbaserat jäsmedel; inte ett påstående om identisk gatuköksdeg. Den stora oljemängden är ett processbad, inte beräknat upptag. Satsen ger två små dubbelbröd för en frukost; provlagning av liten degsats behövs. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "sojadryck",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 6,
+            "id": "s1",
+            "ingredient_keys": [
+              "bakpulver|dry",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "45 ml",
+                45.0
+              ]
+            ],
+            "text": "Ta undan en liten sked mjöl till utbakning och några droppar av oljan till skålen. Blanda resten av mjölet med torrjäst, bakpulver och salt. Rör ner 45 ml vatten (ljummet) till en mjuk kladdig deg utan hård knådning. Lägg i lätt oljad skål och täck."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 120,
+            "id": "s2",
+            "ingredient_keys": [
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt jäsa cirka 120 minuter tills degen är tydligt luftig med synliga bubblor. Anpassa tiden efter rumstemperaturen; kall deg kan behöva längre tid."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "kokosmjölk|as_sold",
+              "majsstärkelse|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Vispa majsstärkelse med kokosmjölk och socker i en liten kastrull. Värm under omrörning tills blandningen sjuder och tjocknar; sjud 1 minut. Häll i en doppskål."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 7,
+            "id": "s4",
+            "ingredient_keys": [
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "5 ml",
+                5.0
+              ]
+            ],
+            "text": "Mjöla underlaget med det undanlagda mjölet. Tippa ut degen utan att slå ut all luft. Forma försiktigt till en rektangel och skär i fyra korta remsor. Fukta två remsor lätt med sammanlagt 5 ml vatten, lägg de andra ovanpå och pressa ihop mittlinjen med en ätpinne precis före stekning."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 9,
+            "id": "s5",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan till 175 °C i en liten hög kastrull, aldrig fylld mer än till en tredjedel. Sträck dubbelremsorna försiktigt och fritera en i taget, vänd ofta första halvminuten. Fortsätt 3–4 minuter tills luftig, gyllene och genomgräddad utan rå deg. Ha lock nära, använd torra redskap och aldrig vatten mot oljebrand."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "kokosmjölk|as_sold",
+              "majsstärkelse|dry",
+              "rapsolja|as_sold",
+              "sojadryck|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt bröden rinna av på galler. Värm sojadrycken i kastrull och servera genast med bröden och kokosdoppet."
+          }
+        ],
+        "total_minutes": 151,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 120
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "deg",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 65.0,
+          "quantity_max": 65.0,
+          "quantity_min": 65.0,
+          "quantity_step": 65.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "deg",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bakpulver",
+          "component": "deg",
+          "form": "dry",
+          "name": "bakpulver",
+          "product_requirements": [
+            "pack:intake_baking_powder"
+          ],
+          "quantity": 0.5,
+          "quantity_max": 0.5,
+          "quantity_min": 0.5,
+          "quantity_step": 0.5,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 350.0,
+          "quantity_max": 350.0,
+          "quantity_min": 350.0,
+          "quantity_step": 350.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "deg",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.7,
+          "quantity_max": 0.7,
+          "quantity_min": 0.7,
+          "quantity_step": 0.7,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "sojadryck",
+          "component": "dryck",
+          "form": "as_sold",
+          "name": "sojadryck",
+          "product_requirements": [
+            "pack:intake_all_9dd3e8d14899"
+          ],
+          "quantity": 220.0,
+          "quantity_max": 220.0,
+          "quantity_min": 220.0,
+          "quantity_step": 220.0,
+          "required": true,
+          "role": "side",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "kokosmjölk",
+          "component": "dopp",
+          "form": "as_sold",
+          "name": "kokosmjölk",
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "dopp",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 7.0,
+          "quantity_max": 7.0,
+          "quantity_min": 7.0,
+          "quantity_step": 7.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "majsstärkelse",
+          "component": "dopp",
+          "form": "dry",
+          "name": "majsstärkelse",
+          "product_requirements": [
+            "pack:intake_corn_starch"
+          ],
+          "quantity": 2.0,
+          "quantity_max": 2.0,
+          "quantity_min": 2.0,
+          "quantity_step": 2.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Ta undan en liten sked mjöl till utbakning och några droppar av oljan till skålen. Blanda resten av mjölet med torrjäst, bakpulver och salt. Rör ner 45 ml vatten (ljummet) till en mjuk kladdig deg utan hård knådning. Lägg i lätt oljad skål och täck.",
+        "Låt jäsa cirka 120 minuter tills degen är tydligt luftig med synliga bubblor. Anpassa tiden efter rumstemperaturen; kall deg kan behöva längre tid.",
+        "Vispa majsstärkelse med kokosmjölk och socker i en liten kastrull. Värm under omrörning tills blandningen sjuder och tjocknar; sjud 1 minut. Häll i en doppskål.",
+        "Mjöla underlaget med det undanlagda mjölet. Tippa ut degen utan att slå ut all luft. Forma försiktigt till en rektangel och skär i fyra korta remsor. Fukta två remsor lätt med sammanlagt 5 ml vatten, lägg de andra ovanpå och pressa ihop mittlinjen med en ätpinne precis före stekning.",
+        "Värm oljan till 175 °C i en liten hög kastrull, aldrig fylld mer än till en tredjedel. Sträck dubbelremsorna försiktigt och fritera en i taget, vänd ofta första halvminuten. Fortsätt 3–4 minuter tills luftig, gyllene och genomgräddad utan rå deg. Ha lock nära, använd torra redskap och aldrig vatten mot oljebrand.",
+        "Låt bröden rinna av på galler. Värm sojadrycken i kastrull och servera genast med bröden och kokosdoppet."
+      ],
+      "name": "Pa tong ko – friterade frukostbröd med sojadryck – utökad",
+      "preparation": {
+        "family": "pa tong ko",
+        "input_forms": {
+          "bakpulver": "dry",
+          "kokosmjölk": "as_sold",
+          "majsstärkelse": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "sojadryck": "as_sold",
+          "strösocker": "dry",
+          "torrjäst": "dry",
+          "vetemjöl": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "45140c1443f80d7a2d513f6911fd8078d584c0c5fd660de34c19798270b8e880",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 26,
+        "base_id": "smako-mexican-bunuelos-de-viento",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "smet",
+            "name": "Tunn rosettsmet"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Verklig mängd i frityrbadet, inte antagen fettabsorption",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "frityr",
+            "name": "Frityrbad och socker"
+          }
+        ],
+        "content_sha256": "41f91b5070c74ff41e12de1e68ea2a1f5ac9c8a1c08b68d0a546ae0bdfd7a639",
+        "content_source": {
+          "active_minutes": 26,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage8",
+          "priority": 1,
+          "proposal_id": "smako-mexican-bunuelos-de-viento",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8b35169693f8a90ba973e8720021743885ed171f385360484d45a7ab98307c82",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "rosettjärn",
+          "liten stadig frityrkastrull",
+          "frityrtermometer",
+          "galler",
+          "tång"
+        ],
+        "estimated_minutes": 41,
+        "family": "friterad rosettjärnssmet",
+        "fish": false,
+        "flavor_profile": [
+          "frasig rosettsmet"
+        ],
+        "ingredient_count": 5,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad variant har varm kanelsmakande chokladdipp. Kräver rosettjärn och verklig friteringsolja, inte antaget absorberad mängd. Fritering kräver särskild metodgranskning: formatets pan är ett grovt kärl-/värmeval och saknar explicit deep_fry. Frityroljans insatsvolym är inte konsumtion eller näringsvärde. Kärl och badvolym måste anpassas säkert vid portionsskalning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "socker och eventuell chokladdipp",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Knäck ägg och väg den angivna råa ätliga mängden utan skal; oanvänt ägg är separat rest. Vispa mjöl, uppvägt ägg, mjölk och salt till en slät tunn smet. Häll i en smal skål där järnets mönster kan doppas men handtaget hålls torrt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 15,
+            "id": "s2",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt smeten vila 15 minuter så att mjölet hinner svälla."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 7,
+            "id": "s3",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll oljan i en liten stadig kastrull; välj kärl så att oljan täcker järnets mönster men aldrig fyller mer än en tredjedel av kastrullen. Värm till 170–175 °C. Värm det helt torra järnet i oljan. Ha ett torrt lock nära till hands. Lämna aldrig het olja utan uppsikt och häll aldrig vatten i frityrolja."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 12,
+            "id": "s4",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lyft järnet, låt oljan droppa av och doppa bara mönstrets undersida och sidor i smeten, aldrig hela överkanten. Sänk ner i oljan. Efter några sekunder lossas kakan försiktigt med en gaffel. Fritera gyllene cirka en minut per sida. Upprepa med all smet, värm järnet mellan gångerna och håll 170–175 °C. Små sista smetrester kan friteras som tunna strimlor med samma genomgräddning."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 3,
+            "id": "s5",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakorna rinna av på galler och vänd i hela sockermängden medan de är varma. Servera som en mellanmålsportion. Stäng av värmen och låt återstående frityrolja kallna helt innan den hanteras; den är processrest, inte serveringssås."
+          }
+        ],
+        "total_minutes": 41,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 15
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "smet",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "smet",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "smet",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "smet",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "frityr",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "frityr",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Knäck ägg och väg den angivna råa ätliga mängden utan skal; oanvänt ägg är separat rest. Vispa mjöl, uppvägt ägg, mjölk och salt till en slät tunn smet. Häll i en smal skål där järnets mönster kan doppas men handtaget hålls torrt.",
+        "Låt smeten vila 15 minuter så att mjölet hinner svälla.",
+        "Häll oljan i en liten stadig kastrull; välj kärl så att oljan täcker järnets mönster men aldrig fyller mer än en tredjedel av kastrullen. Värm till 170–175 °C. Värm det helt torra järnet i oljan. Ha ett torrt lock nära till hands. Lämna aldrig het olja utan uppsikt och häll aldrig vatten i frityrolja.",
+        "Lyft järnet, låt oljan droppa av och doppa bara mönstrets undersida och sidor i smeten, aldrig hela överkanten. Sänk ner i oljan. Efter några sekunder lossas kakan försiktigt med en gaffel. Fritera gyllene cirka en minut per sida. Upprepa med all smet, värm järnet mellan gångerna och håll 170–175 °C. Små sista smetrester kan friteras som tunna strimlor med samma genomgräddning.",
+        "Låt kakorna rinna av på galler och vänd i hela sockermängden medan de är varma. Servera som en mellanmålsportion. Stäng av värmen och låt återstående frityrolja kallna helt innan den hanteras; den är processrest, inte serveringssås."
+      ],
+      "name": "Buñuelos de viento – frasiga rosettjärnskakor – enkel",
+      "preparation": {
+        "family": "friterad rosettjärnssmet",
+        "input_forms": {
+          "mjölk": "as_sold",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "strösocker": "dry",
+          "vetemjöl": "dry",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "41f91b5070c74ff41e12de1e68ea2a1f5ac9c8a1c08b68d0a546ae0bdfd7a639",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 30,
+        "base_id": "smako-mexican-bunuelos-de-viento",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ägg|raw_edible",
+                "name": "Ägg",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "mjölk|as_sold",
+                "name": "Mjölk",
+                "note": "",
+                "quantity": 35.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "smet",
+            "name": "Tunn rosettsmet"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Verklig mängd i frityrbadet, inte antagen fettabsorption",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              }
+            ],
+            "id": "frityr",
+            "name": "Frityrbad och socker"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mörk choklad|as_sold",
+                "name": "Mörk choklad",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "grädde|as_sold",
+                "name": "Grädde",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "dipp",
+            "name": "Kanelschoklad"
+          }
+        ],
+        "content_sha256": "c018a22396231df080b69422771feb127ceafd315a57379e5a82802a95781192",
+        "content_source": {
+          "active_minutes": 30,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage8",
+          "priority": 1,
+          "proposal_id": "smako-mexican-bunuelos-de-viento",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8b35169693f8a90ba973e8720021743885ed171f385360484d45a7ab98307c82",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "mexican"
+        ],
+        "equipment": [
+          "rosettjärn",
+          "liten stadig frityrkastrull",
+          "frityrtermometer",
+          "galler",
+          "tång"
+        ],
+        "estimated_minutes": 45,
+        "family": "friterad rosettjärnssmet",
+        "fish": false,
+        "flavor_profile": [
+          "frasig rosettsmet"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pot",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Utökad variant har varm kanelsmakande chokladdipp. Kräver rosettjärn och verklig friteringsolja, inte antaget absorberad mängd. Fritering kräver särskild metodgranskning: formatets pan är ett grovt kärl-/värmeval och saknar explicit deep_fry. Frityroljans insatsvolym är inte konsumtion eller näringsvärde. Kärl och badvolym måste anpassas säkert vid portionsskalning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "socker och eventuell chokladdipp",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Knäck ägg och väg den angivna råa ätliga mängden utan skal; oanvänt ägg är separat rest. Vispa mjöl, uppvägt ägg, mjölk och salt till en slät tunn smet. Häll i en smal skål där järnets mönster kan doppas men handtaget hålls torrt."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 15,
+            "id": "s2",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "salt|as_sold",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Låt smeten vila 15 minuter så att mjölet hinner svälla."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 4,
+            "id": "s3",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "kanel|dry",
+              "mörk choklad|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hacka chokladen. Värm grädden försiktigt i en liten kastrull, ta av värmen och rör ner choklad och kanel tills dippen är slät. Håll den undan från frityren."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 7,
+            "id": "s4",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Häll oljan i en liten stadig kastrull; välj kärl så att oljan täcker järnets mönster men aldrig fyller mer än en tredjedel av kastrullen. Värm till 170–175 °C. Värm det helt torra järnet i oljan. Ha ett torrt lock nära till hands. Lämna aldrig het olja utan uppsikt och häll aldrig vatten i frityrolja."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 12,
+            "id": "s5",
+            "ingredient_keys": [
+              "mjölk|as_sold",
+              "rapsolja|as_sold",
+              "salt|as_sold",
+              "strösocker|dry",
+              "vetemjöl|dry",
+              "ägg|raw_edible"
+            ],
+            "parallel_group": null,
+            "text": "Lyft järnet, låt oljan droppa av och doppa bara mönstrets undersida och sidor i smeten, aldrig hela överkanten. Sänk ner i oljan. Efter några sekunder lossas kakan försiktigt med en gaffel. Fritera gyllene cirka en minut per sida. Upprepa med all smet, värm järnet mellan gångerna och håll 170–175 °C. Små sista smetrester kan friteras som tunna strimlor med samma genomgräddning."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 3,
+            "id": "s6",
+            "ingredient_keys": [
+              "grädde|as_sold",
+              "kanel|dry",
+              "mörk choklad|as_sold",
+              "rapsolja|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt kakorna rinna av på galler och vänd i hela sockermängden medan de är varma. Servera som en mellanmålsportion med kanelschokladen. Stäng av värmen och låt återstående frityrolja kallna helt innan den hanteras; den är processrest, inte serveringssås."
+          }
+        ],
+        "total_minutes": 45,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s5"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 15
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "smet",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ägg",
+          "component": "smet",
+          "form": "raw_edible",
+          "name": "ägg",
+          "product_requirements": [
+            "pack:egg"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mjölk",
+          "component": "smet",
+          "form": "as_sold",
+          "name": "mjölk",
+          "quantity": 35.0,
+          "quantity_max": 35.0,
+          "quantity_min": 35.0,
+          "quantity_step": 35.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "smet",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "frityr",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "frityr",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "mörk choklad",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "mörk choklad",
+          "product_requirements": [
+            "pack:intake_all_1045fffc8a75"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "grädde",
+          "component": "dipp",
+          "form": "as_sold",
+          "name": "grädde",
+          "product_requirements": [
+            "pack:intake_all_2ba6bda1d4b2"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "dipp",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Knäck ägg och väg den angivna råa ätliga mängden utan skal; oanvänt ägg är separat rest. Vispa mjöl, uppvägt ägg, mjölk och salt till en slät tunn smet. Häll i en smal skål där järnets mönster kan doppas men handtaget hålls torrt.",
+        "Låt smeten vila 15 minuter så att mjölet hinner svälla.",
+        "Hacka chokladen. Värm grädden försiktigt i en liten kastrull, ta av värmen och rör ner choklad och kanel tills dippen är slät. Håll den undan från frityren.",
+        "Häll oljan i en liten stadig kastrull; välj kärl så att oljan täcker järnets mönster men aldrig fyller mer än en tredjedel av kastrullen. Värm till 170–175 °C. Värm det helt torra järnet i oljan. Ha ett torrt lock nära till hands. Lämna aldrig het olja utan uppsikt och häll aldrig vatten i frityrolja.",
+        "Lyft järnet, låt oljan droppa av och doppa bara mönstrets undersida och sidor i smeten, aldrig hela överkanten. Sänk ner i oljan. Efter några sekunder lossas kakan försiktigt med en gaffel. Fritera gyllene cirka en minut per sida. Upprepa med all smet, värm järnet mellan gångerna och håll 170–175 °C. Små sista smetrester kan friteras som tunna strimlor med samma genomgräddning.",
+        "Låt kakorna rinna av på galler och vänd i hela sockermängden medan de är varma. Servera som en mellanmålsportion med kanelschokladen. Stäng av värmen och låt återstående frityrolja kallna helt innan den hanteras; den är processrest, inte serveringssås."
+      ],
+      "name": "Buñuelos de viento – frasiga rosettjärnskakor – utökad",
+      "preparation": {
+        "family": "friterad rosettjärnssmet",
+        "input_forms": {
+          "grädde": "as_sold",
+          "kanel": "dry",
+          "mjölk": "as_sold",
+          "mörk choklad": "as_sold",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "strösocker": "dry",
+          "vetemjöl": "dry",
+          "ägg": "raw_edible"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "c018a22396231df080b69422771feb127ceafd315a57379e5a82802a95781192",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 34,
+        "base_id": "smako-indian-mangalore-buns",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "banan|raw_edible",
+                "name": "Övermogen banan, skalad vikt",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bikarbonat|dry",
+                "name": "Bikarbonat",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "dough",
+            "name": "Bananbrödsdeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Fullt frityrbad, ej antaget upptag",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "oil",
+            "name": "Frityrolja"
+          }
+        ],
+        "content_sha256": "402832c86b7c093cbe79c9a33aee0d9f8a3c042a707fb7b1f540913856c20407",
+        "content_source": {
+          "active_minutes": 34,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage8",
+          "priority": 1,
+          "proposal_id": "smako-indian-mangalore-buns",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8b35169693f8a90ba973e8720021743885ed171f385360484d45a7ab98307c82",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "bunke",
+          "kavel",
+          "liten stadig kastrull",
+          "frityrtermometer",
+          "hålslev"
+        ],
+        "estimated_minutes": 544,
+        "family": "vilade friterade banan-yoghurtbröd utan jäst",
+        "fish": false,
+        "flavor_profile": [
+          "banan",
+          "spiskummin"
+        ],
+        "ingredient_count": 6,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Förenklad, osockrad version där övermogen banan ger sötman. Frityroljan är verklig processinsats, inte uppskattad absorberad mängd. Överskott återstår och måste hanteras i närings-/inköpsmodellen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokos-yoghurtdipp i utökad variant",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "bikarbonat|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "vetemjöl|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "5 ml",
+                5.0
+              ]
+            ],
+            "text": "Skala bananen, väg den angivna ätliga mängden och mosa helt slät. Rör i degens yoghurt, bikarbonat, spiskummin och salt. Arbeta i vetemjölet till en mjuk men formbar deg. Tillsätt vid behov 5 ml vatten om mjölet inte går in; använd inget extra mjöl utöver receptmängden."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 480,
+            "id": "s2",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Täck degen och låt vila i kylskåp 8 timmar. Receptet innehåller ingen jäst; vilan får inte hoppas över för att få en snabbare tidsangivelse."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 30,
+            "id": "s3",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt degen stå täckt i rumstemperatur 30 minuter innan utbakningen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Knåda degen lätt igen och dela i fyra små bitar. Kavla mellan bakplåtspapper till rundlar omkring 5 mm tjocka. Gör inte tunnare bröd; de ska kunna puffa."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 17,
+            "id": "s5",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan i en liten stadig kastrull till 170 °C. Oljan ska stå en bit upp på brödet och kärlet får inte vara mer än fyllt till en tredjedel. Lägg ner ett bröd i taget och tryck försiktigt under ytan med hålslev tills det puffar. Vänd och fritera tills båda sidor är gyllene och mitten genomtillagad, cirka 3 minuter per bröd. Håll 165–175 °C och ett lock till hands."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 4,
+            "id": "s6",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lyft bröden med hålslev och låt överskottsolja droppa av på galler. Servera ljumma. Kvarvarande frityrolja ingår inte i den mängd mat som äts."
+          }
+        ],
+        "total_minutes": 544,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 510
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "dough",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "banan",
+          "component": "dough",
+          "form": "raw_edible",
+          "name": "banan",
+          "product_requirements": [
+            "pack:intake_all_973660201bf8"
+          ],
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "dough",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 20.0,
+          "quantity_max": 20.0,
+          "quantity_min": 20.0,
+          "quantity_step": 20.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bikarbonat",
+          "component": "dough",
+          "form": "dry",
+          "name": "bikarbonat",
+          "product_requirements": [
+            "pack:intake_all_225317a708a6"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "dough",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "dough",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "oil",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Skala bananen, väg den angivna ätliga mängden och mosa helt slät. Rör i degens yoghurt, bikarbonat, spiskummin och salt. Arbeta i vetemjölet till en mjuk men formbar deg. Tillsätt vid behov 5 ml vatten om mjölet inte går in; använd inget extra mjöl utöver receptmängden.",
+        "Täck degen och låt vila i kylskåp 8 timmar. Receptet innehåller ingen jäst; vilan får inte hoppas över för att få en snabbare tidsangivelse.",
+        "Låt degen stå täckt i rumstemperatur 30 minuter innan utbakningen.",
+        "Knåda degen lätt igen och dela i fyra små bitar. Kavla mellan bakplåtspapper till rundlar omkring 5 mm tjocka. Gör inte tunnare bröd; de ska kunna puffa.",
+        "Värm oljan i en liten stadig kastrull till 170 °C. Oljan ska stå en bit upp på brödet och kärlet får inte vara mer än fyllt till en tredjedel. Lägg ner ett bröd i taget och tryck försiktigt under ytan med hålslev tills det puffar. Vänd och fritera tills båda sidor är gyllene och mitten genomtillagad, cirka 3 minuter per bröd. Håll 165–175 °C och ett lock till hands.",
+        "Lyft bröden med hålslev och låt överskottsolja droppa av på galler. Servera ljumma. Kvarvarande frityrolja ingår inte i den mängd mat som äts."
+      ],
+      "name": "Mangalore buns – bananbröd från frityr – enkel",
+      "preparation": {
+        "family": "vilade friterade banan-yoghurtbröd utan jäst",
+        "input_forms": {
+          "banan": "raw_edible",
+          "bikarbonat": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "spiskummin": "dry",
+          "vetemjöl": "dry",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "402832c86b7c093cbe79c9a33aee0d9f8a3c042a707fb7b1f540913856c20407",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 37,
+        "base_id": "smako-indian-mangalore-buns",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 80.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "banan|raw_edible",
+                "name": "Övermogen banan, skalad vikt",
+                "note": "",
+                "quantity": 55.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 20.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bikarbonat|dry",
+                "name": "Bikarbonat",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "spiskummin|dry",
+                "name": "Spiskummin",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "dough",
+            "name": "Bananbrödsdeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Fullt frityrbad, ej antaget upptag",
+                "note": "",
+                "quantity": 300.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "oil",
+            "name": "Frityrolja"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 60.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kokosflingor|as_sold",
+                "name": "Kokosflingor",
+                "note": "",
+                "quantity": 10.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "limejuice|as_sold",
+                "name": "Limejuice",
+                "note": "",
+                "quantity": 5.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "dip",
+            "name": "Kokos-yoghurtdipp"
+          }
+        ],
+        "content_sha256": "c484bc7e5875850bae97015702a6a36e2ed9de56c509495f8f1deff3dc0f832f",
+        "content_source": {
+          "active_minutes": 37,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage8",
+          "priority": 1,
+          "proposal_id": "smako-indian-mangalore-buns",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8b35169693f8a90ba973e8720021743885ed171f385360484d45a7ab98307c82",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "bunke",
+          "kavel",
+          "liten stadig kastrull",
+          "frityrtermometer",
+          "hålslev"
+        ],
+        "estimated_minutes": 547,
+        "family": "vilade friterade banan-yoghurtbröd utan jäst",
+        "fish": false,
+        "flavor_profile": [
+          "banan",
+          "spiskummin"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "breakfast"
+        ],
+        "method": "pan",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. Tider är författaruppskattningar. Kostavsikt är inte ett produkt- eller allergengodkännande. Förenklad, osockrad version där övermogen banan ger sötman. Frityroljan är verklig processinsats, inte uppskattad absorberad mängd. Överskott återstår och måste hanteras i närings-/inköpsmodellen. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "kokos-yoghurtdipp i utökad variant",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 7,
+            "id": "s1",
+            "ingredient_keys": [
+              "banan|raw_edible",
+              "bikarbonat|dry",
+              "salt|as_sold",
+              "spiskummin|dry",
+              "vetemjöl|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "5 ml",
+                5.0
+              ]
+            ],
+            "text": "Skala bananen, väg den angivna ätliga mängden och mosa helt slät. Rör i degens yoghurt, bikarbonat, spiskummin och salt. Arbeta i vetemjölet till en mjuk men formbar deg. Tillsätt vid behov 5 ml vatten om mjölet inte går in; använd inget extra mjöl utöver receptmängden."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 480,
+            "id": "s2",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Täck degen och låt vila i kylskåp 8 timmar. Receptet innehåller ingen jäst; vilan får inte hoppas över för att få en snabbare tidsangivelse."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 30,
+            "id": "s3",
+            "ingredient_keys": [],
+            "parallel_group": null,
+            "text": "Låt degen stå täckt i rumstemperatur 30 minuter innan utbakningen."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 3,
+            "id": "s4",
+            "ingredient_keys": [
+              "kokosflingor|as_sold",
+              "limejuice|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "15 ml",
+                15.0
+              ]
+            ],
+            "text": "Blöt kokosflingorna med 15 ml vatten och blanda med dippens yoghurt och limejuice. Ställ i kylskåp medan bröden friteras."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Knåda degen lätt igen och dela i fyra små bitar. Kavla mellan bakplåtspapper till rundlar omkring 5 mm tjocka. Gör inte tunnare bröd; de ska kunna puffa."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 17,
+            "id": "s6",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Värm oljan i en liten stadig kastrull till 170 °C. Oljan ska stå en bit upp på brödet och kärlet får inte vara mer än fyllt till en tredjedel. Lägg ner ett bröd i taget och tryck försiktigt under ytan med hålslev tills det puffar. Vänd och fritera tills båda sidor är gyllene och mitten genomtillagad, cirka 3 minuter per bröd. Håll 165–175 °C och ett lock till hands."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 4,
+            "id": "s7",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Lyft bröden med hålslev och låt överskottsolja droppa av på galler. Servera ljumma med kokos-yoghurtdippen. Kvarvarande frityrolja ingår inte i den mängd mat som äts."
+          }
+        ],
+        "total_minutes": 547,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s7"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 510
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "dough",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "banan",
+          "component": "dough",
+          "form": "raw_edible",
+          "name": "banan",
+          "product_requirements": [
+            "pack:intake_all_973660201bf8"
+          ],
+          "quantity": 55.0,
+          "quantity_max": 55.0,
+          "quantity_min": 55.0,
+          "quantity_step": 55.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "dough",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 80.0,
+          "quantity_max": 80.0,
+          "quantity_min": 80.0,
+          "quantity_step": 80.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bikarbonat",
+          "component": "dough",
+          "form": "dry",
+          "name": "bikarbonat",
+          "product_requirements": [
+            "pack:intake_all_225317a708a6"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "spiskummin",
+          "component": "dough",
+          "form": "dry",
+          "name": "spiskummin",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "dough",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "oil",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 300.0,
+          "quantity_max": 300.0,
+          "quantity_min": 300.0,
+          "quantity_step": 300.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "kokosflingor",
+          "component": "dip",
+          "form": "as_sold",
+          "name": "kokosflingor",
+          "product_requirements": [
+            "pack:intake_all_037db646fe8d"
+          ],
+          "quantity": 10.0,
+          "quantity_max": 10.0,
+          "quantity_min": 10.0,
+          "quantity_step": 10.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "limejuice",
+          "component": "dip",
+          "form": "as_sold",
+          "name": "limejuice",
+          "product_requirements": [
+            "pure_juice"
+          ],
+          "quantity": 5.0,
+          "quantity_max": 5.0,
+          "quantity_min": 5.0,
+          "quantity_step": 5.0,
+          "required": true,
+          "role": "flavour",
+          "unit": "ml"
+        }
+      ],
+      "instructions": [
+        "Skala bananen, väg den angivna ätliga mängden och mosa helt slät. Rör i degens yoghurt, bikarbonat, spiskummin och salt. Arbeta i vetemjölet till en mjuk men formbar deg. Tillsätt vid behov 5 ml vatten om mjölet inte går in; använd inget extra mjöl utöver receptmängden.",
+        "Täck degen och låt vila i kylskåp 8 timmar. Receptet innehåller ingen jäst; vilan får inte hoppas över för att få en snabbare tidsangivelse.",
+        "Låt degen stå täckt i rumstemperatur 30 minuter innan utbakningen.",
+        "Blöt kokosflingorna med 15 ml vatten och blanda med dippens yoghurt och limejuice. Ställ i kylskåp medan bröden friteras.",
+        "Knåda degen lätt igen och dela i fyra små bitar. Kavla mellan bakplåtspapper till rundlar omkring 5 mm tjocka. Gör inte tunnare bröd; de ska kunna puffa.",
+        "Värm oljan i en liten stadig kastrull till 170 °C. Oljan ska stå en bit upp på brödet och kärlet får inte vara mer än fyllt till en tredjedel. Lägg ner ett bröd i taget och tryck försiktigt under ytan med hålslev tills det puffar. Vänd och fritera tills båda sidor är gyllene och mitten genomtillagad, cirka 3 minuter per bröd. Håll 165–175 °C och ett lock till hands.",
+        "Lyft bröden med hålslev och låt överskottsolja droppa av på galler. Servera ljumma med kokos-yoghurtdippen. Kvarvarande frityrolja ingår inte i den mängd mat som äts."
+      ],
+      "name": "Mangalore buns – bananbröd från frityr – utökad",
+      "preparation": {
+        "family": "vilade friterade banan-yoghurtbröd utan jäst",
+        "input_forms": {
+          "banan": "raw_edible",
+          "bikarbonat": "dry",
+          "kokosflingor": "as_sold",
+          "limejuice": "as_sold",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "spiskummin": "dry",
+          "vetemjöl": "dry",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "c484bc7e5875850bae97015702a6a36e2ed9de56c509495f8f1deff3dc0f832f",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 20,
+        "base_id": "smako-greek-loukoumades",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "Torrjäst",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Frityrolja: processmängd, merparten serveras inte",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "honung|as_sold",
+                "name": "Honung",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "bollar",
+            "name": "Lösa jästbollar"
+          }
+        ],
+        "content_sha256": "791dc2e7ea94c776ec1d5814142e1f021f9fb854e5e8d125095120cccba3f8db",
+        "content_source": {
+          "active_minutes": 20,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage8",
+          "priority": 1,
+          "proposal_id": "smako-greek-loukoumades",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8b35169693f8a90ba973e8720021743885ed171f385360484d45a7ab98307c82",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "liten hög kastrull",
+          "termometer",
+          "hålslev",
+          "lock för brandsäkerhet"
+        ],
+        "estimated_minutes": 80,
+        "family": "Loukoumades",
+        "fish": false,
+        "flavor_profile": [
+          "honung",
+          "jäst"
+        ],
+        "ingredient_count": 4,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Frityroljan är en faktisk inköps-/processmängd, inte uppmätt konsumerad mängd. Närings- och kostnadsberäkning kräver separat hantering av återstående olja. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "honung",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "salt|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "55 ml",
+                55.0
+              ]
+            ],
+            "text": "Rör mjöl, torrjäst och salt med 55 ml vatten som är tempererat enligt torrjästens förpackningsanvisning, till en seg lös smet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck skålen och låt smeten jäsa 60 minuter tills den är tydligt bubblig och ungefär fördubblad."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Smörj två torra teskedar med några droppar av den uppmätta oljan innan den värms. Värm resten till 170 °C i en stadig kastrull där mängden bildar ett grunt bad. Välj kärl efter portionsmängden och fyll aldrig mer än till en tredjedel. Håll ett torrt lock nära och lämna inte oljan obevakad."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Forma små bollar, högst 2 cm stora, och skjut försiktigt ner dem nära oljeytan. Fritera i två omgångar, cirka fyra minuter per omgång, vänd ofta så alla sidor doppas och kontrollera att mitten är genomgräddad. Lyft upp och låt rinna av."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 2,
+            "id": "s5",
+            "ingredient_keys": [
+              "honung|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "5 ml",
+                5.0
+              ]
+            ],
+            "text": "Värm honungen med 5 ml vatten så den blir lättflytande. Vänd de varma bollarna i den och servera genast. Återstående frityrolja serveras inte."
+          }
+        ],
+        "total_minutes": 80,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 60
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "bollar",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "bollar",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "honung",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "honung",
+          "product_requirements": [
+            "pack:intake_all_2e70d2f3b24b"
+          ],
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Rör mjöl, torrjäst och salt med 55 ml vatten som är tempererat enligt torrjästens förpackningsanvisning, till en seg lös smet.",
+        "Täck skålen och låt smeten jäsa 60 minuter tills den är tydligt bubblig och ungefär fördubblad.",
+        "Smörj två torra teskedar med några droppar av den uppmätta oljan innan den värms. Värm resten till 170 °C i en stadig kastrull där mängden bildar ett grunt bad. Välj kärl efter portionsmängden och fyll aldrig mer än till en tredjedel. Håll ett torrt lock nära och lämna inte oljan obevakad.",
+        "Forma små bollar, högst 2 cm stora, och skjut försiktigt ner dem nära oljeytan. Fritera i två omgångar, cirka fyra minuter per omgång, vänd ofta så alla sidor doppas och kontrollera att mitten är genomgräddad. Lyft upp och låt rinna av.",
+        "Värm honungen med 5 ml vatten så den blir lättflytande. Vänd de varma bollarna i den och servera genast. Återstående frityrolja serveras inte."
+      ],
+      "name": "Loukoumades – jästa honungsbollar – honungsbollar",
+      "preparation": {
+        "family": "Loukoumades",
+        "input_forms": {
+          "honung": "as_sold",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "torrjäst": "dry",
+          "vetemjöl": "dry"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "791dc2e7ea94c776ec1d5814142e1f021f9fb854e5e8d125095120cccba3f8db",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 26,
+        "base_id": "smako-greek-loukoumades",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 45.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "torrjäst|dry",
+                "name": "Torrjäst",
+                "note": "",
+                "quantity": 1.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Frityrolja: processmängd, merparten serveras inte",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "ml"
+              },
+              {
+                "ingredient_key": "honung|as_sold",
+                "name": "Honung",
+                "note": "",
+                "quantity": 18.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "salt|as_sold",
+                "name": "Salt",
+                "note": "",
+                "quantity": 0.3,
+                "unit": "g"
+              }
+            ],
+            "id": "bollar",
+            "name": "Lösa jästbollar"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 100.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "valnötter|as_sold",
+                "name": "Valnötter",
+                "note": "",
+                "quantity": 15.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kanel|dry",
+                "name": "Kanel",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              }
+            ],
+            "id": "yoghurt",
+            "name": "Valnöts- och kanel-yoghurt"
+          }
+        ],
+        "content_sha256": "8221dc03d46338590eb5cb07e851866c32764a341bbab01dd8eae55d62e47be7",
+        "content_source": {
+          "active_minutes": 26,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage8",
+          "priority": 1,
+          "proposal_id": "smako-greek-loukoumades",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8b35169693f8a90ba973e8720021743885ed171f385360484d45a7ab98307c82",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "greek"
+        ],
+        "equipment": [
+          "liten hög kastrull",
+          "termometer",
+          "hålslev",
+          "lock för brandsäkerhet"
+        ],
+        "estimated_minutes": 86,
+        "family": "Loukoumades",
+        "fish": false,
+        "flavor_profile": [
+          "honung",
+          "jäst"
+        ],
+        "ingredient_count": 7,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "vetemjöl",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Frityroljan är en faktisk inköps-/processmängd, inte uppmätt konsumerad mängd. Närings- och kostnadsberäkning kräver separat hantering av återstående olja. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "honung",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 4,
+            "id": "s1",
+            "ingredient_keys": [
+              "salt|as_sold",
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "55 ml",
+                55.0
+              ]
+            ],
+            "text": "Rör mjöl, torrjäst och salt med 55 ml vatten som är tempererat enligt torrjästens förpackningsanvisning, till en seg lös smet."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 60,
+            "id": "s2",
+            "ingredient_keys": [
+              "torrjäst|dry",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Täck skålen och låt smeten jäsa 60 minuter tills den är tydligt bubblig och ungefär fördubblad."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 6,
+            "id": "s3",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Smörj två torra teskedar med några droppar av den uppmätta oljan innan den värms. Värm resten till 170 °C i en stadig kastrull där mängden bildar ett grunt bad. Välj kärl efter portionsmängden och fyll aldrig mer än till en tredjedel. Håll ett torrt lock nära och lämna inte oljan obevakad."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 8,
+            "id": "s4",
+            "ingredient_keys": [
+              "rapsolja|as_sold",
+              "vetemjöl|dry"
+            ],
+            "parallel_group": null,
+            "text": "Forma små bollar, högst 2 cm stora, och skjut försiktigt ner dem nära oljeytan. Fritera i två omgångar, cirka fyra minuter per omgång, vänd ofta så alla sidor doppas och kontrollera att mitten är genomgräddad. Lyft upp och låt rinna av."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 6,
+            "id": "s5",
+            "ingredient_keys": [
+              "kanel|dry",
+              "valnötter|as_sold",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Hacka valnötterna och rör ihop med yoghurt och kanel till en fyllig sås som serveras bredvid."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "honung|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "5 ml",
+                5.0
+              ]
+            ],
+            "text": "Värm honungen med 5 ml vatten så den blir lättflytande. Vänd de varma bollarna i den och servera genast. Återstående frityrolja serveras inte."
+          }
+        ],
+        "total_minutes": 86,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s4"
+          }
+        ],
+        "variant_id": "extended",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 60
+      },
+      "ingredients": [
+        {
+          "canonical_name": "vetemjöl",
+          "component": "bollar",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 45.0,
+          "quantity_max": 45.0,
+          "quantity_min": 45.0,
+          "quantity_step": 45.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "torrjäst",
+          "component": "bollar",
+          "form": "dry",
+          "name": "torrjäst",
+          "product_requirements": [
+            "pack:intake_all_aaf63645a6f0"
+          ],
+          "quantity": 1.0,
+          "quantity_max": 1.0,
+          "quantity_min": 1.0,
+          "quantity_step": 1.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "honung",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "honung",
+          "product_requirements": [
+            "pack:intake_all_2e70d2f3b24b"
+          ],
+          "quantity": 18.0,
+          "quantity_max": 18.0,
+          "quantity_min": 18.0,
+          "quantity_step": 18.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "salt",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "salt",
+          "quantity": 0.3,
+          "quantity_max": 0.3,
+          "quantity_min": 0.3,
+          "quantity_step": 0.3,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "yoghurt",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 100.0,
+          "quantity_max": 100.0,
+          "quantity_min": 100.0,
+          "quantity_step": 100.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "valnötter",
+          "component": "yoghurt",
+          "form": "as_sold",
+          "name": "valnötter",
+          "product_requirements": [
+            "pack:intake_walnuts"
+          ],
+          "quantity": 15.0,
+          "quantity_max": 15.0,
+          "quantity_min": 15.0,
+          "quantity_step": 15.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kanel",
+          "component": "yoghurt",
+          "form": "dry",
+          "name": "kanel",
+          "product_requirements": [
+            "ground"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Rör mjöl, torrjäst och salt med 55 ml vatten som är tempererat enligt torrjästens förpackningsanvisning, till en seg lös smet.",
+        "Täck skålen och låt smeten jäsa 60 minuter tills den är tydligt bubblig och ungefär fördubblad.",
+        "Smörj två torra teskedar med några droppar av den uppmätta oljan innan den värms. Värm resten till 170 °C i en stadig kastrull där mängden bildar ett grunt bad. Välj kärl efter portionsmängden och fyll aldrig mer än till en tredjedel. Håll ett torrt lock nära och lämna inte oljan obevakad.",
+        "Forma små bollar, högst 2 cm stora, och skjut försiktigt ner dem nära oljeytan. Fritera i två omgångar, cirka fyra minuter per omgång, vänd ofta så alla sidor doppas och kontrollera att mitten är genomgräddad. Lyft upp och låt rinna av.",
+        "Hacka valnötterna och rör ihop med yoghurt och kanel till en fyllig sås som serveras bredvid.",
+        "Värm honungen med 5 ml vatten så den blir lättflytande. Vänd de varma bollarna i den och servera genast. Återstående frityrolja serveras inte."
+      ],
+      "name": "Loukoumades – jästa honungsbollar – med valnötter och kanel-yoghurt",
+      "preparation": {
+        "family": "Loukoumades",
+        "input_forms": {
+          "honung": "as_sold",
+          "kanel": "dry",
+          "rapsolja": "as_sold",
+          "salt": "as_sold",
+          "torrjäst": "dry",
+          "valnötter": "as_sold",
+          "vetemjöl": "dry",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "8221dc03d46338590eb5cb07e851866c32764a341bbab01dd8eae55d62e47be7",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    },
+    {
+      "design": {
+        "active_minutes": 29,
+        "base_id": "smako-indian-gulab-jamun",
+        "components": [
+          {
+            "amounts": [
+              {
+                "ingredient_key": "mjölkpulver|dry",
+                "name": "Mjölkpulver",
+                "note": "",
+                "quantity": 25.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "vetemjöl|dry",
+                "name": "Vetemjöl",
+                "note": "",
+                "quantity": 8.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "yoghurt naturell|as_sold",
+                "name": "Yoghurt naturell",
+                "note": "",
+                "quantity": 12.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "ghee|as_sold",
+                "name": "Ghee",
+                "note": "",
+                "quantity": 3.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "bakpulver|dry",
+                "name": "Bakpulver",
+                "note": "",
+                "quantity": 0.4,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "rapsolja|as_sold",
+                "name": "Processolja för fritering, merparten serveras inte",
+                "note": "",
+                "quantity": 180.0,
+                "unit": "ml"
+              }
+            ],
+            "id": "bollar",
+            "name": "Mjölkpulverdeg"
+          },
+          {
+            "amounts": [
+              {
+                "ingredient_key": "strösocker|dry",
+                "name": "Strösocker",
+                "note": "",
+                "quantity": 28.0,
+                "unit": "g"
+              },
+              {
+                "ingredient_key": "kardemumma|dry",
+                "name": "Kardemumma",
+                "note": "",
+                "quantity": 0.2,
+                "unit": "g"
+              }
+            ],
+            "id": "sirap",
+            "name": "Kryddsirap"
+          }
+        ],
+        "content_sha256": "4e22dfb0e1af38e41140f2f2bdf1f82d03fefb3b7f543a9396e0e816f37144c1",
+        "content_source": {
+          "active_minutes": 29,
+          "method_note": "Ingredienslistan anger hela insatsen, även den del som senare hälls eller silas bort. Förlusten är inte uppmätt. Näring och färdig portionsvikt är okända; receptet kan inte styrka valda närings- eller viktgränser. Inköp och personliga kostkrav kontrolleras för samtliga insatser.",
+          "pack_id": "reviewed-expansion-round2-stage8",
+          "priority": 1,
+          "proposal_id": "smako-indian-gulab-jamun",
+          "safety_sources": [],
+          "scaling_note": "Mängder skalas med portionsantal; extra beredningstid och eventuella omgångar visas separat.",
+          "sha256": "8b35169693f8a90ba973e8720021743885ed171f385360484d45a7ab98307c82",
+          "storage_note": "Följ förpackningens hanterings- och hållbarhetsanvisning. Ingen veckohållbarhet för tillagad mat eller öppnade produkter har verifierats.",
+          "timing_basis": "authored_estimate_coarse_dependencies"
+        },
+        "cuisines": [
+          "indian"
+        ],
+        "equipment": [
+          "liten kastrull cirka 12 cm",
+          "termometer",
+          "hålslev",
+          "lock för brandsäkerhet"
+        ],
+        "estimated_minutes": 94,
+        "family": "Gulab jamun",
+        "fish": false,
+        "flavor_profile": [
+          "mjölk",
+          "kardemumma"
+        ],
+        "ingredient_count": 8,
+        "meal_types": [
+          "snack"
+        ],
+        "method": "pan",
+        "primary_ingredient": "mjölkpulver",
+        "provenance": {
+          "authoring": "model_assisted_original",
+          "content_review": "reviewed",
+          "cooking_test": "not_cooked",
+          "machine_validation": "passed",
+          "notes": "AI-författat receptutkast, inte provlagat och ännu inte import- eller produktgranskat av Smako. Tiderna är författaruppskattningar. Uttrycklig mjölkpulveranpassning, inte traditionell khoya. De många nödvändiga bak- och sirapsingredienserna motiverar undantag från mellanmålsriktmärket. Frityrolja är processmängd, inte antagen konsumerad mängd. Den lilla degmängdens fukt och genomfritering behöver provlagning. Innehållsgranskad 2026-11-01 med angiven produktform och mängdenhet; inte provlagad. Mängdändringar redovisas i granskningsrapporten.",
+          "reviewed_at": "2026-11-01"
+        },
+        "side": "sirap",
+        "steps": [
+          {
+            "depends_on": [],
+            "duration_minutes": 5,
+            "id": "s1",
+            "ingredient_keys": [
+              "kardemumma|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "65 ml",
+                65.0
+              ]
+            ],
+            "text": "Koka upp socker, kardemumma och 65 ml vatten. Sjud tre minuter till en tunn sirap och håll ljummen."
+          },
+          {
+            "depends_on": [
+              "s1"
+            ],
+            "duration_minutes": 4,
+            "id": "s2",
+            "ingredient_keys": [
+              "bakpulver|dry",
+              "ghee|as_sold",
+              "mjölkpulver|dry",
+              "vetemjöl|dry",
+              "yoghurt naturell|as_sold"
+            ],
+            "parallel_group": null,
+            "scalable_amounts": [
+              [
+                "5 ml",
+                5.0
+              ]
+            ],
+            "text": "Blanda mjölkpulver, vetemjöl och bakpulver. Arbeta försiktigt in ghee och yoghurt och tillsätt 5 ml vatten. Samla till en mjuk deg utan lång knådning; tillsätt ytterligare 5 ml vatten endast om degen spricker."
+          },
+          {
+            "depends_on": [
+              "s2"
+            ],
+            "duration_minutes": 5,
+            "id": "s3",
+            "ingredient_keys": [
+              "mjölkpulver|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt degen vila fem minuter så mjölkpulvret hinner ta upp vätska."
+          },
+          {
+            "depends_on": [
+              "s3"
+            ],
+            "duration_minutes": 6,
+            "id": "s4",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Forma tre släta bollar utan sprickor. Värm frityroljan till 150–155 °C i en smal hög kastrull; fyll aldrig mer än till en tredjedel. Håll lock nära och lämna inte oljan obevakad."
+          },
+          {
+            "depends_on": [
+              "s4"
+            ],
+            "duration_minutes": 9,
+            "id": "s5",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "rapsolja|as_sold"
+            ],
+            "parallel_group": null,
+            "text": "Sänk försiktigt ner bollarna och vänd dem ofta i det grunda oljebadet. Fritera cirka nio minuter till jämn kastanjebrun färg. Dela en kontrollboll: degen ska vara tillagad även mitt i, inte torrt pulver eller rå kladdig mjölkdeg."
+          },
+          {
+            "depends_on": [
+              "s5"
+            ],
+            "duration_minutes": 2,
+            "id": "s6",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "rapsolja|as_sold",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Lyft bollarna med hålslev, låt överskottsoljan rinna av på papper och lägg dem i den ljumma sirapen. Återstående frityrolja serveras inte."
+          },
+          {
+            "depends_on": [
+              "s6"
+            ],
+            "duration_minutes": 30,
+            "id": "s7",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt bollarna dra i den ljumma sirapen i 30 minuter."
+          },
+          {
+            "depends_on": [
+              "s7"
+            ],
+            "duration_minutes": 1,
+            "id": "s8",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Vänd bollarna försiktigt i sirapen."
+          },
+          {
+            "depends_on": [
+              "s8"
+            ],
+            "duration_minutes": 30,
+            "id": "s9",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Låt dra ytterligare 30 minuter, totalt 60 minuter."
+          },
+          {
+            "depends_on": [
+              "s9"
+            ],
+            "duration_minutes": 2,
+            "id": "s10",
+            "ingredient_keys": [
+              "mjölkpulver|dry",
+              "strösocker|dry"
+            ],
+            "parallel_group": null,
+            "text": "Servera bollarna med den sirap som finns kvar."
+          }
+        ],
+        "total_minutes": 94,
+        "unmeasured_processes": [
+          {
+            "description": "Hela uppmätta oljemängden är en inköpt processinsats. Överskottsolja rinner av och serveras inte. Oljans upptag och slutlig näring är okända.",
+            "ingredient_keys": [
+              "rapsolja|as_sold"
+            ],
+            "operation": "deep_fry_and_drain",
+            "step_id": "s6"
+          }
+        ],
+        "variant_id": "simple",
+        "vegetarian": true,
+        "version": "1.0.1",
+        "waiting_minutes": 65
+      },
+      "ingredients": [
+        {
+          "canonical_name": "mjölkpulver",
+          "component": "bollar",
+          "form": "dry",
+          "name": "mjölkpulver",
+          "product_requirements": [
+            "pack:intake_all_expansion_9bcb38e362b3"
+          ],
+          "quantity": 25.0,
+          "quantity_max": 25.0,
+          "quantity_min": 25.0,
+          "quantity_step": 25.0,
+          "required": true,
+          "role": "primary",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "vetemjöl",
+          "component": "bollar",
+          "form": "dry",
+          "name": "vetemjöl",
+          "quantity": 8.0,
+          "quantity_max": 8.0,
+          "quantity_min": 8.0,
+          "quantity_step": 8.0,
+          "required": true,
+          "role": "side",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "yoghurt naturell",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "yoghurt naturell",
+          "product_requirements": [
+            "plain",
+            "thick"
+          ],
+          "quantity": 12.0,
+          "quantity_max": 12.0,
+          "quantity_min": 12.0,
+          "quantity_step": 12.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "ghee",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "ghee",
+          "product_requirements": [
+            "pack:intake_all_expansion_94bffb8b7bee"
+          ],
+          "quantity": 3.0,
+          "quantity_max": 3.0,
+          "quantity_min": 3.0,
+          "quantity_step": 3.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "bakpulver",
+          "component": "bollar",
+          "form": "dry",
+          "name": "bakpulver",
+          "product_requirements": [
+            "pack:intake_baking_powder"
+          ],
+          "quantity": 0.4,
+          "quantity_max": 0.4,
+          "quantity_min": 0.4,
+          "quantity_step": 0.4,
+          "required": true,
+          "role": "cooking",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "rapsolja",
+          "component": "bollar",
+          "form": "as_sold",
+          "name": "rapsolja",
+          "quantity": 180.0,
+          "quantity_max": 180.0,
+          "quantity_min": 180.0,
+          "quantity_step": 180.0,
+          "required": true,
+          "role": "cooking",
+          "unit": "ml"
+        },
+        {
+          "canonical_name": "strösocker",
+          "component": "sirap",
+          "form": "dry",
+          "name": "strösocker",
+          "product_requirements": [
+            "pack:sugar"
+          ],
+          "quantity": 28.0,
+          "quantity_max": 28.0,
+          "quantity_min": 28.0,
+          "quantity_step": 28.0,
+          "required": true,
+          "role": "sauce",
+          "unit": "g"
+        },
+        {
+          "canonical_name": "kardemumma",
+          "component": "sirap",
+          "form": "dry",
+          "name": "kardemumma",
+          "product_requirements": [
+            "pack:intake_all_930d08a8d175"
+          ],
+          "quantity": 0.2,
+          "quantity_max": 0.2,
+          "quantity_min": 0.2,
+          "quantity_step": 0.2,
+          "required": true,
+          "role": "flavour",
+          "unit": "g"
+        }
+      ],
+      "instructions": [
+        "Koka upp socker, kardemumma och 65 ml vatten. Sjud tre minuter till en tunn sirap och håll ljummen.",
+        "Blanda mjölkpulver, vetemjöl och bakpulver. Arbeta försiktigt in ghee och yoghurt och tillsätt 5 ml vatten. Samla till en mjuk deg utan lång knådning; tillsätt ytterligare 5 ml vatten endast om degen spricker.",
+        "Låt degen vila fem minuter så mjölkpulvret hinner ta upp vätska.",
+        "Forma tre släta bollar utan sprickor. Värm frityroljan till 150–155 °C i en smal hög kastrull; fyll aldrig mer än till en tredjedel. Håll lock nära och lämna inte oljan obevakad.",
+        "Sänk försiktigt ner bollarna och vänd dem ofta i det grunda oljebadet. Fritera cirka nio minuter till jämn kastanjebrun färg. Dela en kontrollboll: degen ska vara tillagad även mitt i, inte torrt pulver eller rå kladdig mjölkdeg.",
+        "Lyft bollarna med hålslev, låt överskottsoljan rinna av på papper och lägg dem i den ljumma sirapen. Återstående frityrolja serveras inte.",
+        "Låt bollarna dra i den ljumma sirapen i 30 minuter.",
+        "Vänd bollarna försiktigt i sirapen.",
+        "Låt dra ytterligare 30 minuter, totalt 60 minuter.",
+        "Servera bollarna med den sirap som finns kvar."
+      ],
+      "name": "Gulab jamun – mjölkbollar i kardemummasirap – mjölkpulverbollar i kardemummasirap",
+      "preparation": {
+        "family": "Gulab jamun",
+        "input_forms": {
+          "bakpulver": "dry",
+          "ghee": "as_sold",
+          "kardemumma": "dry",
+          "mjölkpulver": "dry",
+          "rapsolja": "as_sold",
+          "strösocker": "dry",
+          "vetemjöl": "dry",
+          "yoghurt naturell": "as_sold"
+        },
+        "origin": "smako_recipe_design",
+        "parent_sha256": "4e22dfb0e1af38e41140f2f2bdf1f82d03fefb3b7f543a9396e0e816f37144c1",
+        "version": "smako-authored-losses-v3"
+      },
+      "servings": 1
+    }
+  ]
+}
