@@ -1,3 +1,24 @@
+# 2026-11-01: Uppvärmda prov och samordnad faktaläsning/GC aktiverat
+
+[PR 59](https://github.com/ossebosse/smako/pull/59), main `b47e07febe6e`.
+App **app-b7c8d0506e23-c18e4ba9**, scheduler source-ops-8a53beb80e43.
+[Mätning](reviews/warm-facts-gc-20261101/REPORT.md) och
+[aktiveringsjournal](releases/warm-facts-gc-20261101/ACTIVATED.md).
+
+Varma prov kräver nu `/ready/preparation`: färdigt bibliotek och båda aktuella
+kommunerna, rätt bygge och pris-ID:n. Gemensam uppvärmning är fortsatt på.
+Normaljobb efter primning: median 24,226 → 21,694 s; faktaladdning
+7,112 → 6,682 s; planerarens städning 4,722 → 2,401 s. Tre fulla GC blir två
+plus generation 1. Minnestoppar i praktiken oförändrade; alla 20 menyprov godkända,
+med identiska motsvarande korgar och samtliga 150 513 fakta över Lund/Malmö.
+Det större fallet kvar på 51,3 s; uppvärmningen tog 85,0 → 92,6 s, ingen starttidsvinst.
+Publikt efter uttrycklig uppvärmningsgrind: **28.469 och 25.203 s**,
+båda verifierade/sparade, 110,55 kr. PR-/main-CI gröna (4 442 pass, 63 skip).
+Full backup `/srv/smako/backups/20261101T064110Z`; tidigare användarrader, miljö, mountar och
+prismanifest bevarade. Retention complete. Se rapportens omfattning och begränsningar.
+
+---
+
 # 2026-11-01: Varma menyprov kontrollerade; uppvärmning kvar på
 
 Betan ligger kvar på `app-327fa573eb3f-0541cf49`. Ingen runtimeaktivering.
@@ -30,11 +51,11 @@ på `main` inte ändrar en pågående release.
   `smako-app-1`, `smako-scheduler-1`, `smako-caddy-1`, data i `/srv/smako/data`
   och det gemensamma driftlåset. Detta flöde installerar inte en ny server.
 - Läs aktuell [HANDOFF.md](HANDOFF.md), [OPERATIONS.md](OPERATIONS.md) och
-  senaste aktiveringsrapport. Appens BUILD_ID är `app-327fa573eb3f-0541cf49`;
+  senaste aktiveringsrapport. Appens BUILD_ID är `app-b7c8d0506e23-c18e4ba9`;
   schedulern är `source-ops-8a53beb80e43`.
-  [Mindre uppvärmning och färre filkontroller](releases/prewarm-detail-reads-20261031/ACTIVATED.md)
-  är senaste appaktiveringen. Två Pythonfiler från kod `327fa573eb3f`;
-  fem isolerade menyer snabbare med identiska korgar. Se journalens publika prov.
+  [Uppvärmda prov och samordnad faktaläsning/GC](releases/warm-facts-gc-20261101/ACTIVATED.md)
+  är senaste appaktiveringen. Sex Pythonfiler från kod `b7c8d0506e23`;
+  verifierade varma jämförelser och minnesmaxima. Se journalens publika prov.
   [Föregående faktarättning](releases/menu-work-reduction-20261031/ACTIVATED.md)
   och övrig runtime består.
   [Stora Coop-kopplingen](releases/stora-coop-syd-base-20261029/ACTIVATED.md)
@@ -78,7 +99,7 @@ git status --short
 .venv/Scripts/python.exe -X utf8 scripts/smako_ops.py status
 
 # Använd den granskade Git-bas som motsvarar faktiskt aktiva filer enligt senaste journalen.
-.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit 2d2181aabfb4 --commit main --workdir .local/beta-release
+.venv/Scripts/python.exe scripts/beta_release.py prepare --from-commit b7c8d0506e23 --commit main --workdir .local/beta-release
 ```
 
 Arbetskopian ska vara ren; paketet läser enbart committade Git-blobbar.
@@ -166,6 +187,14 @@ Aktiveringssteget kontrollerar också detta och att tidigare plan-/profilrader
 är bevarade. Kontrollera publicerat/laddat prismanifest och gör ett relevant
 publikt användarprov: skapa meny, granska köp-/kravkontroller, återläs sparad
 meny. Mät första anropet separat från uppvärmda anrop.
+
+För uppvärmt prov krävs HTTP 200 från `/ready/preparation` med färdigt bibliotek,
+rätt BUILD_ID och samtliga aktuella pris-ID:n. Väntan ligger utanför menyklockan.
+Webbläsarverktyget `scripts/release_verification/complete_recipe_browser.py`
+stöder `--warm-build-id <BUILD_ID>` och en `--warm-universe-id <ID>` per aktiv
+kommun; båda krävs tillsammans. Hämta förväntade ID:n från den granskade
+driftstatusen. Partiell/saknad rapport eller avvikande bygge får inte räknas som varmt.
+Den första menyn efter gemensam förberedelse särredovisas från upprepade och nya val.
 
 Spara en sanerad rapport under `docs/releases/<release>/`, uppdatera
 `docs/HANDOFF.md` och committa/pusha till `main`. Ange kodcommit, image,

@@ -1,0 +1,605 @@
+{
+  "source_commit": "b7c8d0506e23f434abdc5a5fecc53639c2de2f1d",
+  "main_merge": "b47e07febe6e95173a9375eee5e3b323aa02972c",
+  "source_tree": "920dd5a79ae4e80a01064ceed2307ac89b101848",
+  "main_ci": {
+    "conclusion": "success",
+    "databaseId": 41281654418,
+    "headSha": "b47e07febe6e95173a9375eee5e3b323aa02972c",
+    "status": "completed",
+    "url": "https://github.com/ossebosse/smako/actions/runs/41281654418"
+  },
+  "build": {
+    "image": "sha256:a396c7774515c738a6b3909fb2b776d897bc48b29ddfc2d1064264f2ff97b8ad",
+    "base_image": "sha256:0c0f1720e9dd38555980ac1fc0e4c0f9402c242379570fa08fe69c5f87be73a6",
+    "build_id": "app-b7c8d0506e23-c18e4ba9",
+    "tag": "smako-app:app-b7c8d0506e23-c18e4ba9",
+    "commit": "b7c8d0506e23f434abdc5a5fecc53639c2de2f1d",
+    "files": {
+      "backend/app/main.py": {
+        "before": "89cfe99ed0472993da074baa837ecb81d7219c32c3a6a6448521ba518ee44ddf",
+        "after": "689414cbddb306c45dcb7a81ed50b244970fa62d888c6d53ebae3107d6ceb535"
+      },
+      "backend/app/services/axfood_product_details.py": {
+        "before": "e83db9d8063e2f0abf631f68a83473fabfcc7c3fc40c050fd40388711bb8906f",
+        "after": "026d0d182f34fa24be4f07e8698626acd8657b3fcf39e06cc08e15ca2f3eee32"
+      },
+      "backend/app/services/personal_planner.py": {
+        "before": "33e84c224b220bc2ed377c88038bcb121f950ad7e686d9660a67eb48ed1a9aa7",
+        "after": "2260d1d0d382f9d161f1386e90b2aac590dda223d91adb0b0e44f407fe73e63c"
+      },
+      "backend/app/services/planner_admission.py": {
+        "before": "087a38b3eff23d3d9f5f9c18a75a28e669d5520a8a7f3720d0168e53642f4256",
+        "after": "036798df314be503cff610dabd9e6bc89f87ea6294b0ce1e01c0d802f2663b83"
+      },
+      "backend/app/services/planner_memory.py": {
+        "before": "8dd169788c2463aa2528a8da628d3f922a8729551d46b0a69ae6a882d6e41bc6",
+        "after": "dad9837233b58e612e8756c099adf24ec84176f9be530a1943bcab10ed9fd93f"
+      },
+      "backend/app/services/source_facts_prewarm.py": {
+        "before": "c71810f73dd59d8a28c1da95189fb8a3aa2399e9f3785775526edc618023a468",
+        "after": "9681ca679fd30b791717ecf3da9d97448dc0cf21f6a8f7d2e760cf9c50ace0e4"
+      }
+    },
+    "package_sha256": "c18e4ba99c32e8d343137db286dfc2ca771e7d030ff78bbdb0532052c4f7600d",
+    "only_reviewed_files_changed": true,
+    "unchanged_runtime_files": 1005,
+    "flattened_runtime_configuration_verified": true
+  },
+  "activation": {
+    "status": "activated",
+    "at": "2026-11-01T06:55:41.384281+00:00",
+    "runtimes": {
+      "app": {
+        "image": "sha256:a396c7774515c738a6b3909fb2b776d897bc48b29ddfc2d1064264f2ff97b8ad",
+        "base_image": "sha256:0c0f1720e9dd38555980ac1fc0e4c0f9402c242379570fa08fe69c5f87be73a6",
+        "build_id": "app-b7c8d0506e23-c18e4ba9"
+      }
+    },
+    "readiness": {
+      "Lund": {
+        "status": "ready",
+        "database": "ok",
+        "plan_store": "ok",
+        "price_universe": {
+          "active": true,
+          "required_contexts_usable": true,
+          "missing_required_context_ids": [],
+          "usable_context_ids": [
+            "context:coop:23eaae11c9661e68",
+            "context:coop:698f7b6528879df2",
+            "context:coop:709f87b60ef8c210",
+            "context:coop:95aeb1242c92bd40",
+            "context:coop:a35d1de8aaaf5b41",
+            "context:coop:a5a6ee957014972a",
+            "context:coop:db7c87478187339f",
+            "context:coop:e6ab1bde1aaf6609",
+            "context:coop:e9ccea03a65e7252",
+            "context:coop:f0f14586a4a5abfa",
+            "context:coop:fee53e0e0c90eab3",
+            "context:hemkop:3288e04edd97e349",
+            "context:hemkop:756955d0e6e05f23",
+            "context:ica:0edf5d52980ffcd7",
+            "context:ica:1a19476898da3fb0",
+            "context:ica:24c415e3af6438b4",
+            "context:ica:2d734344abd8c685",
+            "context:ica:46850f1523580803",
+            "context:ica:602d84df14d47e3d",
+            "context:ica:7b8c7bd0161c50dc",
+            "context:ica:7f1f6e52c3152f98",
+            "context:ica:979e70ce1f577bc4",
+            "context:ica:b7a8ac31980d0bd7",
+            "context:ica:b7ad17cc0a7001fd",
+            "context:ica:cb840c0edbf56816",
+            "context:lidl:05f1cb3d9fc89bc3",
+            "context:lidl:46dd1e85257757e0",
+            "context:willys:383650ec6ff5a636",
+            "context:willys:4a671428fc484e43",
+            "context:willys:f3f63d6851275fcc"
+          ],
+          "requires_attention": true,
+          "warning_age_hours": 36.0,
+          "stale_age_hours": 48.0,
+          "status": "degraded",
+          "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "built_at": "2026-10-31 23:36:45.900277+00:00",
+          "oldest_price_age_hours": 941.117,
+          "oldest_usable_price_age_hours": 941.117,
+          "hours_until_oldest_usable_stale": null,
+          "usable_context_count": 30,
+          "excluded_stale_context_count": 0,
+          "excluded_stale_context_ids": [],
+          "retained_older_base_context_ids": [
+            "context:coop:23eaae11c9661e68",
+            "context:coop:a35d1de8aaaf5b41",
+            "context:hemkop:3288e04edd97e349",
+            "context:hemkop:756955d0e6e05f23",
+            "context:ica:46850f1523580803",
+            "context:ica:979e70ce1f577bc4",
+            "context:willys:383650ec6ff5a636",
+            "context:willys:4a671428fc484e43"
+          ],
+          "base_price_policy": "retain-until-replaced",
+          "product_count": 2503
+        },
+        "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+        "build_id": "app-b7c8d0506e23-c18e4ba9",
+        "features": {
+          "complete_recipes_enabled": true,
+          "variation_intent_enabled": true
+        }
+      },
+      "Malmo": {
+        "status": "ready",
+        "database": "ok",
+        "plan_store": "ok",
+        "price_universe": {
+          "active": true,
+          "required_contexts_usable": true,
+          "missing_required_context_ids": [],
+          "usable_context_ids": [
+            "context:citygross:33b01007b20e8988",
+            "context:coop:00d3c70860d97cae",
+            "context:coop:0af1a8138f910d90",
+            "context:coop:20e4633ad51e8d1f",
+            "context:coop:55469b5a21f9b46e",
+            "context:coop:6ccb60b8518dcfba",
+            "context:coop:7249b37ed1aa3b58",
+            "context:coop:788d290977d9807c",
+            "context:coop:80003f1b518a562e",
+            "context:coop:91472761912c55cf",
+            "context:coop:a06d1b2d64d5a880",
+            "context:coop:c964acbfeb697ff3",
+            "context:coop:cd18dbdf6f755166",
+            "context:coop:df2cb6829ff429e8",
+            "context:coop:f4e6dfa3fada9ab1",
+            "context:hemkop:363b00fb95065cf0",
+            "context:hemkop:559cb3b5b4885cdf",
+            "context:hemkop:7c2684c2238e291f",
+            "context:hemkop:ac1b35fa13bf792f",
+            "context:ica:07cdc317da3830a1",
+            "context:ica:094e21ba74aa33a2",
+            "context:ica:0a956c41111c4892",
+            "context:ica:0b4e04c736b28d7f",
+            "context:ica:0f3dfa38926580b4",
+            "context:ica:225fe3aad581eb30",
+            "context:ica:2ebe48fc8b94954d",
+            "context:ica:39388ccbeef44cc9",
+            "context:ica:3dea560861dd40c3",
+            "context:ica:40cf35f5cc4291d2",
+            "context:ica:5e27ad28cca298dd",
+            "context:ica:687e279d959c4fd5",
+            "context:ica:6a256df3bd824770",
+            "context:ica:7510f4e03751e496",
+            "context:ica:9298d28d85680b25",
+            "context:ica:93d67e8c62b80044",
+            "context:ica:a8b6a86d31e92f9a",
+            "context:ica:b6344d523dff467d",
+            "context:ica:b7da1e7d4e75ddec",
+            "context:ica:c7d64306e198b5c0",
+            "context:ica:d39e9477fc04e9cd",
+            "context:ica:d4f389e027dfd2aa",
+            "context:ica:e97cb5c51269702d",
+            "context:ica:ec2fb2e2de118f35",
+            "context:lidl:02003cfd003cb278",
+            "context:lidl:0ae4f1f209de4e0f",
+            "context:lidl:311b7dff422ef34e",
+            "context:lidl:32e1429a0ee8d968",
+            "context:lidl:94c92b23e9747b89",
+            "context:lidl:df8c739c183feea8",
+            "context:lidl:ef2d86773be8fad3",
+            "context:lidl:f9b1e1c4921e9aa1",
+            "context:willys:4c7406e2a0cbcdf4",
+            "context:willys:5adaf178f6561faa",
+            "context:willys:6e2de1b8bdc14801",
+            "context:willys:91fc2ae693ecdec6",
+            "context:willys:9e19db13968fa0c6",
+            "context:willys:aa4f80feaf2b85d5",
+            "context:willys:b69aa27a99e005be",
+            "context:willys:bbd37ea3cd468706",
+            "context:willys:f34dc63a3595b2c9",
+            "context:willys:fc5fbe8cd6399ad8"
+          ],
+          "requires_attention": true,
+          "warning_age_hours": 36.0,
+          "stale_age_hours": 48.0,
+          "status": "degraded",
+          "price_universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+          "built_at": "2026-10-31 23:08:23.236154+00:00",
+          "oldest_price_age_hours": 96.411,
+          "oldest_usable_price_age_hours": 96.411,
+          "hours_until_oldest_usable_stale": null,
+          "usable_context_count": 61,
+          "excluded_stale_context_count": 0,
+          "excluded_stale_context_ids": [],
+          "retained_older_base_context_ids": [
+            "context:citygross:33b01007b20e8988",
+            "context:coop:20e4633ad51e8d1f",
+            "context:coop:c964acbfeb697ff3",
+            "context:hemkop:363b00fb95065cf0",
+            "context:hemkop:559cb3b5b4885cdf",
+            "context:hemkop:7c2684c2238e291f",
+            "context:hemkop:ac1b35fa13bf792f",
+            "context:ica:07cdc317da3830a1",
+            "context:ica:a8b6a86d31e92f9a",
+            "context:willys:5adaf178f6561faa",
+            "context:willys:91fc2ae693ecdec6",
+            "context:willys:bbd37ea3cd468706",
+            "context:willys:fc5fbe8cd6399ad8"
+          ],
+          "base_price_policy": "retain-until-replaced",
+          "product_count": 2745
+        },
+        "app_version": "0.1.0-smako-price-recovery-lund-20260914a",
+        "build_id": "app-b7c8d0506e23-c18e4ba9",
+        "features": {
+          "complete_recipes_enabled": true,
+          "variation_intent_enabled": true
+        }
+      }
+    },
+    "only_app_replaced": true,
+    "existing_state_preserved": {
+      "consumer_plan_revisions": 331,
+      "personal_private_state": 144,
+      "member_accounts": 2,
+      "member_sessions": 1,
+      "member_auth_attempts": 4,
+      "planner_owned_artifacts": 0
+    },
+    "price_manifests_preserved": true,
+    "mounts_preserved": true,
+    "only_environment_change": "BUILD_ID",
+    "cpu_quiet_samples": [
+      0.03,
+      0.03
+    ],
+    "backup": "/srv/smako/backups/20261101T064110Z",
+    "operation_lock": true
+  },
+  "preparation_after_activation": {
+    "observed_at": "2026-11-01T06:56:18.955709+00:00",
+    "http": 202,
+    "body": {
+      "status": "not_ready",
+      "preparation_status": "running",
+      "library_status": "ready",
+      "universes": [
+        {
+          "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+          "status": "unknown"
+        },
+        {
+          "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+          "status": "unknown"
+        }
+      ],
+      "build_id": "app-b7c8d0506e23-c18e4ba9"
+    }
+  },
+  "public_ready": {
+    "22350": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-b7c8d0506e23-c18e4ba9",
+      "price_universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b"
+    },
+    "21120": {
+      "http": 200,
+      "status": "ready",
+      "build_id": "app-b7c8d0506e23-c18e4ba9",
+      "price_universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02"
+    }
+  },
+  "public_warm_smokes": [
+    {
+      "status": "passed",
+      "started_at": "2026-11-01T06:56:58.359721+00:00",
+      "expected_build_id": "app-b7c8d0506e23-c18e4ba9",
+      "scope": "New guest, one Italian dinner for two plus milk, max one store, 3 km; actual plan information colors in all themes and saved checkout",
+      "attempts": [
+        {
+          "attempt": 1,
+          "seconds": 28.469,
+          "status": "rendered",
+          "request_sha256": "63f5c85c209a54227b1a693ef91b927170e74730f5ad55542db772a2aaea38f8"
+        }
+      ],
+      "stages": [
+        {
+          "seconds": 4.812,
+          "body": {
+            "status": "pending",
+            "stage": "product_facts",
+            "progress": null
+          }
+        },
+        {
+          "seconds": 15.562,
+          "body": {
+            "status": "pending",
+            "stage": "candidate_qualification",
+            "progress": null
+          }
+        },
+        {
+          "seconds": 17.641,
+          "body": {
+            "status": "pending",
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 0,
+              "total": 339,
+              "unit": "recipes"
+            }
+          }
+        },
+        {
+          "seconds": 19.766,
+          "body": {
+            "status": "pending",
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 25,
+              "total": 339,
+              "unit": "recipes"
+            }
+          }
+        },
+        {
+          "seconds": 21.906,
+          "body": {
+            "status": "pending",
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 300,
+              "total": 339,
+              "unit": "recipes"
+            }
+          }
+        },
+        {
+          "seconds": 24.469,
+          "body": {
+            "status": "pending",
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 339,
+              "total": 339,
+              "unit": "recipes"
+            }
+          }
+        }
+      ],
+      "warm_preparation": {
+        "evidence": {
+          "status": "ready",
+          "preparation_status": "ready",
+          "library_status": "ready",
+          "universes": [
+            {
+              "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+              "status": "ready"
+            },
+            {
+              "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+              "status": "ready"
+            }
+          ],
+          "build_id": "app-b7c8d0506e23-c18e4ba9"
+        },
+        "observations": 9,
+        "wait_seconds": 16.953
+      },
+      "engine_timings": {
+        "product_facts": 6.893507933244109,
+        "memory_reclamation": 2.4947096118703485,
+        "package_calculation": 0.9491220153868198,
+        "nutrition": 0.013288741931319237,
+        "candidate_generation_and_qualification": 7.211253344081342,
+        "week_search": 0.36417245492339134,
+        "audit": 0.0014396291226148605,
+        "total": 10.176478219218552
+      },
+      "checkout_audit": true,
+      "total": 110.55,
+      "verification_status": "VERIFIED",
+      "identical_saved_reload": true,
+      "public_attempts": 1,
+      "contrast": [
+        {
+          "layout": "bild",
+          "paragraph_colors": [
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)"
+          ]
+        },
+        {
+          "layout": "kompakt",
+          "paragraph_colors": [
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)"
+          ]
+        },
+        {
+          "layout": "oversikt",
+          "paragraph_colors": [
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)"
+          ]
+        },
+        {
+          "layout": "desktop",
+          "paragraph_colors": [
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)"
+          ]
+        }
+      ],
+      "errors": [],
+      "latency_target_seconds": 60,
+      "latency_target_met": true,
+      "finished_at": "2026-11-01T06:57:55.452801+00:00"
+    },
+    {
+      "status": "passed",
+      "started_at": "2026-11-01T06:58:24.493714+00:00",
+      "expected_build_id": "app-b7c8d0506e23-c18e4ba9",
+      "scope": "New guest, one Italian dinner for two plus milk, max one store, 3 km; actual plan information colors in all themes and saved checkout",
+      "attempts": [
+        {
+          "attempt": 1,
+          "seconds": 25.203,
+          "status": "rendered",
+          "request_sha256": "9da3ff9897856afcb70efc0032960353d2e1a63878c68108c5cc70d6d16745d5"
+        }
+      ],
+      "stages": [
+        {
+          "seconds": 2.547,
+          "body": {
+            "status": "pending",
+            "stage": "queued",
+            "progress": null
+          }
+        },
+        {
+          "seconds": 4.688,
+          "body": {
+            "status": "pending",
+            "stage": "product_facts",
+            "progress": null
+          }
+        },
+        {
+          "seconds": 16.344,
+          "body": {
+            "status": "pending",
+            "stage": "candidate_qualification",
+            "progress": null
+          }
+        },
+        {
+          "seconds": 18.484,
+          "body": {
+            "status": "pending",
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 250,
+              "total": 339,
+              "unit": "recipes"
+            }
+          }
+        },
+        {
+          "seconds": 21.172,
+          "body": {
+            "status": "pending",
+            "stage": "candidate_qualification",
+            "progress": {
+              "completed": 339,
+              "total": 339,
+              "unit": "recipes"
+            }
+          }
+        }
+      ],
+      "warm_preparation": {
+        "evidence": {
+          "status": "ready",
+          "preparation_status": "ready",
+          "library_status": "ready",
+          "universes": [
+            {
+              "universe_id": "price-universe:1557275410a993563d7f095725c949ee25a050dd7090110371425a79a4e90c02",
+              "status": "ready"
+            },
+            {
+              "universe_id": "price-universe:91e1e624c0139abdbc7a2dc1004e7a389d20a502d0cf9c303e73bf9274c8db3b",
+              "status": "ready"
+            }
+          ],
+          "build_id": "app-b7c8d0506e23-c18e4ba9"
+        },
+        "observations": 1,
+        "wait_seconds": 0.047
+      },
+      "engine_timings": {
+        "product_facts": 6.803933479823172,
+        "memory_reclamation": 2.460403989069164,
+        "package_calculation": 0.9235835988074541,
+        "nutrition": 0.013431375846266747,
+        "candidate_generation_and_qualification": 4.32510797586292,
+        "week_search": 0.32972143590450287,
+        "audit": 0.0013187704607844353,
+        "total": 7.221403910778463
+      },
+      "checkout_audit": true,
+      "total": 110.55,
+      "verification_status": "VERIFIED",
+      "identical_saved_reload": true,
+      "public_attempts": 1,
+      "contrast": [
+        {
+          "layout": "bild",
+          "paragraph_colors": [
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)"
+          ]
+        },
+        {
+          "layout": "kompakt",
+          "paragraph_colors": [
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)"
+          ]
+        },
+        {
+          "layout": "oversikt",
+          "paragraph_colors": [
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)"
+          ]
+        },
+        {
+          "layout": "desktop",
+          "paragraph_colors": [
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)",
+            "rgb(105, 79, 22)"
+          ]
+        }
+      ],
+      "errors": [],
+      "latency_target_seconds": 60,
+      "latency_target_met": true,
+      "finished_at": "2026-11-01T06:58:58.037124+00:00"
+    }
+  ],
+  "storage_after_status": "complete",
+  "scheduler_runtime": "source-ops-8a53beb80e43",
+  "local_measurement_note": {
+    "candidate_functional_attempt_1": "Failed only at stale mojibake literal for O-versikt in copied local test script; new readiness route already passed. Copied UTF-8 explicitly and reran the unchanged candidate."
+  },
+  "post_activation_error_check": {
+    "observed_at": "2026-11-01T06:59:53.425314+00:00",
+    "status": "observed",
+    "http_metrics_count": 0,
+    "current_build_incidents": 0
+  }
+}
