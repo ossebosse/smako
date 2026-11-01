@@ -34,7 +34,7 @@ SCHEMA = "smako-recipe-authoring-v1"
 MEAT = {"kyckling", "nötfärs", "fläskfärs", "blandfärs", "fläskkött", "kalkon"}
 FISH = {"fisk", "lax", "torsk", "tonfisk"}
 FISH.update({"makrill", "rökt makrill", "sardiner", "matjessill", "stenbitsrom", "rökt lax", "varmrökt lax"})
-FISH.update({"sardeller", "fisksås", "ostronsås"})
+FISH.update({"sardeller", "fisksås", "ostronsås", "worcestershiresås"})
 REVIEWED_VOCABULARY = Path(__file__).parents[1] / "data/ingredients/authoring-20261025.json"
 AUTHORING_REQUIREMENTS = {"aggnudlar": ("pack:egg_noodles",)}
 SAFETY = {
@@ -44,6 +44,14 @@ SAFETY = {
 }
 
 
+class IngredientVocabulary(dict):
+    """Keep the public default vocabulary and explicitly reviewed unit choices."""
+
+    def __init__(self):
+        super().__init__()
+        self.by_unit = {}
+
+
 def library_vocabulary(recipes, *, reviewed_path=REVIEWED_VOCABULARY):
     """Most common unit and product requirements per ``canonical|form``."""
     counts = Counter()
@@ -51,9 +59,10 @@ def library_vocabulary(recipes, *, reviewed_path=REVIEWED_VOCABULARY):
         for ingredient in recipe.ingredients:
             counts[(ingredient.canonical_name, ingredient.form, ingredient.unit,
                     tuple(ingredient.product_requirements or ()))] += 1
-    vocabulary = {}
+    vocabulary = IngredientVocabulary()
     for (canonical, form, unit, requirements), _ in counts.most_common():
         vocabulary.setdefault(f"{canonical}|{form}", (unit, list(requirements)))
+        vocabulary.by_unit.setdefault((f"{canonical}|{form}", unit), (unit, list(requirements)))
     # Explicit reviewed additions bootstrap authoring without dummy recipes.
     # Existing issued defaults cannot be silently replaced by this overlay.
     from app.services.content_pack_requirements import PACK_KEYS
@@ -61,7 +70,7 @@ def library_vocabulary(recipes, *, reviewed_path=REVIEWED_VOCABULARY):
 
     document = json.loads(reviewed_path.read_bytes())
     if reviewed_path == REVIEWED_VOCABULARY:
-        for name in ("intake-all-20261026.json", "expansion-20261101.json"):
+        for name in ("intake-all-20261026.json", "expansion-20261101.json", "expansion-round2-20261101.json"):
             document["ingredients"].extend(json.loads(reviewed_path.with_name(name).read_bytes())["ingredients"])
     if document["schema_version"] != "smako-authoring-vocabulary-v1":
         raise ValueError("Okänd schema för granskat ingrediensvokabulär")
@@ -69,15 +78,17 @@ def library_vocabulary(recipes, *, reviewed_path=REVIEWED_VOCABULARY):
     for row in document["ingredients"]:
         key = f"{row['name']}|{row['form']}"
         requirements = row["requirements"]
-        if (key in seen or canonicalize_ingredient_name(row["name"]) != row["name"]
+        unit_key = (key, row["unit"])
+        if (unit_key in seen or canonicalize_ingredient_name(row["name"]) != row["name"]
                 or row["unit"] not in {"g", "ml", "st"}
                 or row["form"] not in {"dry", "raw_edible", "as_sold", "preserved_drained", "cooked_drained"}
                 or (row["form"] != "as_sold" and row["unit"] != "g")
                 or not requirements or not row["review_basis"] or not row["evidence"]
                 or any(not r.startswith("pack:") or r[5:] not in PACK_KEYS for r in requirements)):
             raise ValueError(f"Ogiltig granskad ingrediens: {key}")
-        seen.add(key)
+        seen.add(unit_key)
         vocabulary.setdefault(key, (row["unit"], list(requirements)))
+        vocabulary.by_unit.setdefault(unit_key, (row["unit"], list(requirements)))
     return vocabulary
 
 
@@ -120,6 +131,10 @@ def standardize(source, vocabulary, *, reviewed_at):
                     near = difflib.get_close_matches(key, vocabulary, n=3)
                     raise ValueError(f"{where}: okänd identitet {key}; närmaste kända: {near}")
                 unit, requirements = vocabulary[key]
+                # An explicit gram recipe may use a separately reviewed gram
+                # product. This never converts its amount or makes ml equal g.
+                unit, requirements = getattr(vocabulary, "by_unit", {}).get(
+                    (key, item.get("unit", unit)), (unit, requirements))
                 reviewed_requirements = {r for r in requirements if r.startswith("pack:intake_")}
                 unit = item.get("unit", unit)
                 requirements = list(dict.fromkeys([*item.get("requirements", requirements),

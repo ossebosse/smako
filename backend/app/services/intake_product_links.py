@@ -17,6 +17,7 @@ def entries():
     rows = json.loads(PATH.read_bytes())["ingredients"]
     rows.extend(json.loads(PATH.with_name("recipe-shapes-20261026.json").read_bytes())["ingredients"])
     rows.extend(json.loads(PATH.with_name("expansion-20261101.json").read_bytes())["ingredients"])
+    rows.extend(json.loads(PATH.with_name("expansion-round2-20261101.json").read_bytes())["ingredients"])
     return {row["requirements"][0].removeprefix("pack:"): row for row in rows}
 
 

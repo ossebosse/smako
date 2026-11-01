@@ -66,7 +66,7 @@ _MEAT_OR_FISH = frozenset(
         "hel kyckling", "nötinnanlår", "högrev", "nötstek", "getkött",
         "nöthjärta", "oxtunga", "nötblod", "räkpasta", "torkade räkor",
         "svensk ansjovis", "svensk ansjovis med spad", "isterband", "ister",
-        "nötkött för snabbstekning", "ostronsås",
+        "nötkött för snabbstekning", "ostronsås", "worcestershiresås",
     }
 )
 _MEAT_OR_FISH_FAMILIES = frozenset(
