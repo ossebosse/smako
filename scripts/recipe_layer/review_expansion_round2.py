@@ -9,6 +9,12 @@ from app.services.personal_policy import ProductFacts
 
 TARGET = Path('backend/app/data/ingredients/expansion-round2-20261101.json')
 REVIEWS = {
+    'ägg|as_sold|st': (
+        [('Ägg 6p Frigående Inomhus Medium/large', 'Garant'),
+         ('Ägg 10p Frigående Inomhus Large', 'Garant'),
+         ('Ägg 18p Frigående Inomhus Medium / Large', 'Garant')],
+        'Hela råa hönsägg med skal, köpta och doserade som deklarerat antal. Inte gram rå äggmassa eller gram färdigkokt ägg. Kokning och skalning måste beskrivas i receptet med okänd färdig vikt; ingen styckvikt, skalprocent eller kokförlust antas.',
+        None),
     'svartvinbärssaft|as_sold|ml': (
         [('Svart Vinbärs Extra Koncentrerad Saft Glas', 'Brunneby')],
         'Koncentrerad sötad svartvinbärssaft i 500 ml-flaska. Inte drickfärdig saft, blanddryck, sockerfri smaksatt dryck eller utspädd volym. Tillverkarens näringsvärde för utspädd dryck används inte som koncentratets.',

@@ -84,6 +84,24 @@ def test_reviewed_unit_choice_does_not_supply_a_density():
     assert not compatible(old_key, p, f)
 
 
+def test_whole_shell_eggs_are_counted_without_claiming_raw_or_boiled_weight():
+    row = next(r for r in ROWS if r['name'] == 'ägg')
+    assert row['form'] == 'as_sold' and row['unit'] == 'st'
+    p, f = source(row)
+    key = row['requirements'][0].removeprefix('pack:')
+    assert compatible(key, p, f)
+    assert not compatible(key, p.model_copy(update={'usable_unit': 'g'}), f)
+    assert all(link['quantity']['basis'] == 'as_sold'
+               and link['quantity']['unit'] == 'st'
+               and link['quantity']['usable_quantity'] == link['package_quantity']
+               and not link['quantity'].get('edible_fraction')
+               for link in row['reviewed_links'])
+    vocabulary = library_vocabulary(current_recipes())
+    assert vocabulary['ägg|raw_edible'][0] == 'g'
+    assert vocabulary['kokta ägg|cooked_drained'][0] == 'g'
+    assert vocabulary['ägg|as_sold'] == ('st', row['requirements'])
+
+
 def test_fish_based_worcestershire_keeps_vegetarian_and_vegan_exclusions():
     assert _excluded_by_diet('worcestershiresås', DietPreference.VEGETARIAN)
     assert _excluded_by_diet('worcestershiresås', DietPreference.VEGAN)
