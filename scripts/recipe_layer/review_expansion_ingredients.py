@@ -142,6 +142,7 @@ def main(args):
             if name == 'sardeller':
                 assert p['sale_model'] == 'fixed_package' and p['package_quantity'] == 80
                 proof['quantity'].update(method='reviewed_declared_drained_mass_v1', confidence='exact',
+                                         form_evidence_location='review_registry',
                                          usable_quantity=43.0, declared_net_quantity=80.0,
                                          source=source['sardeller'], label_source=source['sardeller'])
             links.append(proof)

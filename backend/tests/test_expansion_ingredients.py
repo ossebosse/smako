@@ -56,7 +56,11 @@ def test_reviewed_inputs_reject_changed_food_package_context_or_composition(row)
     assert not ingredient_product('unreviewed input', row['form'], row['requirements'], p, f)
 
 
-def test_sardell_drained_mass_is_declared_not_gross_or_composition_percentage():
+def test_sardell_drained_mass_is_declared_not_gross_or_composition_percentage(monkeypatch):
+    import copy
+
+    from app.services import intake_product_links
+
     row = next(r for r in ROWS if r['name'] == 'sardeller')
     p, f = source(row)
     recipe = SimpleNamespace(design=True, preparation=SimpleNamespace(input_forms={'sardeller':'preserved_drained'}),
@@ -68,6 +72,11 @@ def test_sardell_drained_mass_is_declared_not_gross_or_composition_percentage():
     assert product_form_compatible(recipe,'sardeller',q,f)
     assert not product_form_compatible(recipe,'sardeller',q,replace(f,source_snapshot_id='changed'))
     assert not product_form_compatible(recipe,'sardeller',q.model_copy(update={'usable_quantity':43.2}),f)
+    old_style = copy.deepcopy(intake_product_links.entries())
+    for proof in old_style[row['requirements'][0].removeprefix('pack:')]['reviewed_links']:
+        proof['quantity'].pop('form_evidence_location', None)
+    monkeypatch.setattr(intake_product_links, 'entries', lambda: old_style)
+    assert not product_form_compatible(recipe, 'sardeller', q, f)
 
 
 def test_whole_shallot_package_is_not_edible_mass_and_estimates_are_explicit():

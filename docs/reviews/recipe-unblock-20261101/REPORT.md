@@ -50,6 +50,12 @@ Två mängdunderlag är uttryckliga:
 - Zeta sardeller: tillverkarens deklarerade 43 g avrunnen fisk per 80 g
   förpackning. Det är inte en uppskattning från fiskprocenten i ingredienslistan.
 
+Det nya registerbeviset måste uttryckligen ange
+`form_evidence_location=review_registry`. Äldre kopplingar, exempelvis
+vattenkastanjer, behåller kravet på mängdbevis i källfaktans `field_sources`.
+Full CI upptäckte en för bred första regel; den begränsades före merge och
+både den äldre negativa kontrollen och den nya positiva vägen testas.
+
 Se [källor och exakta utdrag](quantity-sources.json). Utdragens hashvärden avser
 de angivna textutdragen, inte HTML-filer. Nya synonymregler bevarar också
 skillnaden mellan exempelvis evaporerad och vanlig mjölk samt mellan bruna,

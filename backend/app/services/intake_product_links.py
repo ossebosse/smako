@@ -126,6 +126,7 @@ def reviewed_drained_quantity(canonical, form, requirements, product, fact):
         for proof in row.get('reviewed_links', ()):
             quantity = proof['quantity']
             if (quantity.get('method') == 'reviewed_declared_drained_mass_v1'
+                    and quantity.get('form_evidence_location') == 'review_registry'
                     and _review_identity(proof, product, fact)
                     and product.sale_model == 'fixed_package' and product.purchase_terms is None
                     and product.package_unit == product.usable_unit == quantity['unit'] == 'g'
