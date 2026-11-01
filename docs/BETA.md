@@ -1,3 +1,18 @@
+# 2026-11-01: Varma menyprov kontrollerade; uppvärmning kvar på
+
+Betan ligger kvar på `app-327fa573eb3f-0541cf49`. Ingen runtimeaktivering.
+`SOURCE_FACTS_PREWARM_ENABLED=true` och V2:s begränsade uppvärmning behålls:
+varm upprepning 22,358 → 21,648 s; första efter färdig uppvärmning
+27,334 → 24,629 s. Tre nya val hade 0,145–1,016 s högre medeltid;
+ingen generell tidsvinst påstås. 20/20 audit/sparning/ägd återläsning godkända,
+identiska motsvarande recept, varukorgar och faktaversioner.
+Det tidigare publika 53,500 s-provet överlappade förberedelsen; vanlig
+`/ready` intygar inte att denna är färdig. Dagens publika prov: 32,391 och 28,359 s,
+båda verifierade, 110,55 kr. Skäl till på/av, mätgränser och alla observationer:
+[uppföljning](reviews/warm-prewarm-20261101/REPORT.md).
+
+---
+
 # Aktivera från main på den befintliga betan
 
 Källa: `main` i `https://github.com/ossebosse/smako.git`.

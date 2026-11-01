@@ -39,6 +39,13 @@ HTTP, admission/kö och UI ingår inte här. Ett prov per fall/version bevisar
 inte p95, samtidighet eller hela valkatalogen. Ett första mätverktygsfel före
 planeringen rättades och räknas inte som ett menyprov.
 
+Förtydligande 2026-11-01: menyproven ovan kördes med
+`SOURCE_FACTS_PREWARM_ENABLED=false`. De mätte därför främst ändringen av
+produktläsningen; de jämförde inte menyberäkning efter gammal respektive ny
+avslutad uppvärmning. Det publika provets 53,500 s är inte heller ett
+kontrollerat varmt jämförelseprov. Se
+[uppföljningen](../warm-prewarm-20261101/REPORT.md) för den separata undersökningen.
+
 ## Separat receptuppvärmning
 
 Två kalla isolerade processer med tom härledd cache: **31,946 → 17,203 s**.
