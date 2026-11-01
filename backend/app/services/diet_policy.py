@@ -68,7 +68,7 @@ _MEAT_OR_FISH = frozenset(
         "nöthjärta", "oxtunga", "nötblod", "räkpasta", "torkade räkor",
         "svensk ansjovis", "svensk ansjovis med spad", "isterband", "ister",
         "nötkött för snabbstekning", "ostronsås", "worcestershiresås",
-        "oxsvans med ben", "rimmat fläsklägg", "ätklar inläggningssill", "corned beef på burk",
+        "oxsvans med ben", "rimmat fläsklägg", "ätklar inläggningssill", "corned beef på burk", "färsk chorizokorv", "benfri lammstek",
     }
 )
 _MEAT_OR_FISH_FAMILIES = frozenset(
@@ -82,6 +82,10 @@ FISH_FLAVOURINGS = frozenset({"sardeller", "fisksås", "ostronsås", "worcesters
 SHELLFISH_INGREDIENTS = frozenset({"räkor", "råa räkor", "skaldjur", "musslor", "bläckfisk",
     "råa skalade vannameiräkor", "blåmusselkött utan skal"})
 POULTRY_INGREDIENTS = frozenset({"kyckling", "hel kyckling", "kalkon"})
+# This reviewed sausage is explicitly pork + beef. This only narrows user
+# exclusions; it never aliases product identity or supplies nutrition facts.
+_REVIEWED_MEAT_COMPONENTS = {"färsk chorizokorv": frozenset({"fläskkött", "nötkött"}),
+                             "benfri lammstek": frozenset({"lamm", "lammkött"})}
 _OTHER_ANIMAL = frozenset(
     {
         "ägg",
@@ -144,7 +148,7 @@ def ingredient_is_excluded(name: str, exclusions: Iterable[str]) -> bool:
     canonical = canonicalize_ingredient_name(name)
     exclusions = tuple(exclusions)
     excluded = {canonicalize_ingredient_name(v) for v in exclusions if str(v).strip()}
-    return canonical in excluded or (
+    return canonical in excluded or bool(_REVIEWED_MEAT_COMPONENTS.get(canonical, frozenset()) & excluded) or (
         any(v.casefold().strip() == "fisk" for v in exclusions)
         and (canonical in FINFISH_INGREDIENTS | FISH_FLAVOURINGS
              or semantic_requirement(canonical).food_family == "fish")

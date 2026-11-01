@@ -127,7 +127,8 @@ def test_metadata_and_version_are_part_of_the_content_seal(recipe):
 
 @pytest.mark.parametrize('base', ['smako-indian-gulab-jamun', 'smako-swedish-bohuslansk-aggost',
                                  'smako-swedish-blodpalt', 'smako-indian-murgh-musallam',
-                                 'smako-italian-pasta-cacio-pepe'])
+                                 'smako-italian-pasta-cacio-pepe', 'smako-mexican-frijoles-puercos',
+                                 'smako-indian-rogan-josh'])
 def test_issued_food_with_unmeasured_losses_rejects_hard_limits(base):
     # Exercise the real issued content seal, without the synthetic fixture's
     # registry monkeypatch. Purchased input quantities still do not prove
@@ -155,7 +156,8 @@ def test_issued_food_with_unmeasured_losses_rejects_hard_limits(base):
 @pytest.mark.parametrize('name,unit', [('ägg', 'st'), ('hel kyckling', 'g'),
                                      ('oxsvans med ben', 'g'), ('rimmat fläsklägg', 'g'),
                                      ('nötblod', 'ml'), ('ungnötslever', 'g'),
-                                     ('råa skalade vannameiräkor', 'g'), ('blåmusselkött utan skal', 'g')])
+                                     ('råa skalade vannameiräkor', 'g'), ('blåmusselkött utan skal', 'g'),
+                                     ('färsk chorizokorv', 'g'), ('benfri lammstek', 'g')])
 @pytest.mark.parametrize('method', ['salad', 'cold_assembly', 'refrigerated_assembly'])
 def test_gross_raw_animal_inputs_still_require_a_hot_method(name, unit, method):
     document = source()

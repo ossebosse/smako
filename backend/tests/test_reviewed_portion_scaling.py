@@ -32,11 +32,16 @@ def test_successors_keep_food_inputs_and_original_bytes_and_have_complete_basket
     assert {r['id'] for r in proof['modes']['estimated']['recipes']} == expected
     assert all(r['status'] == 'verified' and r['audit']['passed'] for r in proof['modes']['estimated']['recipes'])
     for record in review['recipes']:
-        old, new = issued[record['previous_id']], active[record['runtime_id']]
+        old, new = issued[record['previous_id']], issued[record['runtime_id']]
         assert old.design.content_sha256 == record['previous_content_sha256']
         assert new.design.content_sha256 == record['content_sha256']
         assert old.ingredients == new.ingredients
         assert record['previous_id'] in manifest['revocations'] and record['previous_id'] not in active
+        # Later source-form review may supersede this already proven version.
+        if record['runtime_id'] not in active:
+            assert record['runtime_id'] in manifest['revocations']
+            new = next(r for r in active.values() if r.design.base_id == new.design.base_id
+                       and r.design.variant_id == new.design.variant_id)
         for servings in (1, 2, 4, 8, 12):
             if not supports_servings(new, servings):
                 with pytest.raises(ValueError, match='satser'):

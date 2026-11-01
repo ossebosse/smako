@@ -68,3 +68,14 @@ def test_future_authoring_records_fish_flag_from_the_same_culinary_names():
         row['version'] = '1.0.2'
     pack, _ = standardize(document, library_vocabulary(current_recipes()), reviewed_at='2026-11-01')
     assert all(r['design']['fish'] and not r['design']['vegetarian'] for r in pack['recipes'])
+
+
+def test_fresh_chorizo_keeps_both_reviewed_meat_exclusions_and_meat_category():
+    from app.services.diet_policy import recipe_respects_diet
+
+    recipe = next(r for r in current_recipes() if r.design.base_id == 'smako-mexican-frijoles-puercos')
+    assert protein_category(recipe) == 'meat' and not recipe.design.vegetarian
+    for meat in ('fläskkött', 'nötkött', 'färsk chorizokorv'):
+        assert ingredient_is_excluded('färsk chorizokorv', [meat])
+        assert not recipe_respects_diet(recipe, preference='mixed', avoid_ingredients=[meat])
+    assert not ingredient_is_excluded('färsk chorizokorv', ['kyckling', 'fisk'])

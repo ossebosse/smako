@@ -46,8 +46,7 @@ def checked_additive_transition(review):
     correction_ids = [r['previous_id'] for r in corrections]
     successors = [r['runtime_id'] for r in corrections]
     if (set(revoked) != set(correction_ids) or len(set(correction_ids)) != len(correction_ids)
-            or len(set(successors)) != len(successors) or set(revoked).intersection(old)
-            or set(successors).intersection(revoked)):
+            or len(set(successors)) != len(successors) or set(revoked).intersection(old)):
         raise ValueError('Changed coverage comparison scope: unreviewed new-version revocations')
     for row in corrections:
         previous_id, successor_id = row['previous_id'], row['runtime_id']
@@ -58,6 +57,20 @@ def checked_additive_transition(review):
                 or len(previous_parts) != 3 or len(successor_parts) != 3
                 or previous_parts[::2] != successor_parts[::2]
                 or tuple(map(int, successor_parts[1].split('.'))) <= tuple(map(int, previous_parts[1].split('.')))):
+            raise ValueError('Changed coverage comparison scope: unreviewed new-version revocations')
+    # Successive corrections may retire an intermediate newly issued version.
+    # Same-base/variant, strictly increasing versions above preclude cycles;
+    # every retired node must have exactly one hash-bound reviewed successor.
+    edges = {r['previous_id']: r['runtime_id'] for r in corrections}
+    for origin in edges:
+        latest = origin
+        visited = set()
+        while latest in edges:
+            if latest in visited:
+                raise ValueError('Changed coverage comparison scope: unreviewed new-version revocations')
+            visited.add(latest)
+            latest = edges[latest]
+        if latest in revoked or latest not in added:
             raise ValueError('Changed coverage comparison scope: unreviewed new-version revocations')
     return review
 

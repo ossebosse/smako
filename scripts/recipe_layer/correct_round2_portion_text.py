@@ -107,9 +107,10 @@ def build():
            'fish_metadata_corrected': sum(r['fish_metadata_corrected'] for r in records)})
 
 
-def admit(probe_path=None):
-    raw = PACK.read_bytes()
-    review = json.loads(REVIEW.read_bytes())
+def admit(probe_path=None, *, pack=PACK, review_path=REVIEW, receipt_path=RECEIPT,
+          reason=REASON, qualification_path=REPORT / 'qualification-portion-corrections.json'):
+    raw = pack.read_bytes()
+    review = json.loads(review_path.read_bytes())
     assert sha(raw) == review['pack_sha256']
     checked = validate_pack_bytes(raw)
     assert not checked['rejections']
@@ -121,28 +122,28 @@ def admit(probe_path=None):
         rows = probe['modes']['estimated']['recipes']
         assert {r['id'] for r in rows} == expected.keys() and len(rows) == len(expected)
         assert all(r['status'] == 'verified' and r['audit']['passed'] for r in rows)
-        receipt = json.loads(RECEIPT.read_bytes())
+        receipt = json.loads(receipt_path.read_bytes())
         receipt.update(basket_status='verified_estimated', qualification_sha256=sha(probe_path.read_bytes()))
-        RECEIPT.write_bytes(encoded(receipt))
-        (REPORT / 'qualification-portion-corrections.json').write_bytes(probe_path.read_bytes())
+        receipt_path.write_bytes(encoded(receipt))
+        qualification_path.write_bytes(probe_path.read_bytes())
         print({'qualified': len(rows)})
         return
-    if RECEIPT.exists():
+    if receipt_path.exists():
         raise ValueError('Correction stage is already issued')
     assert {r['status'] for r in pack_diff(checked)} == {'new_version'}
     manifest = manifest_entries()
     old = {identity(r): r.design.content_sha256 for r in load_entries(manifest['current'] + manifest['history'])}
     assert all(old[r['previous_id']] == r['previous_content_sha256'] for r in review['recipes'])
     before = (ROOT / 'library-manifest.json').read_bytes()
-    result = import_pack(PACK, accepted_ids=set(expected))
+    result = import_pack(pack, accepted_ids=set(expected))
     for record in review['recipes']:
-        revoke_recipe(record['previous_id'], REASON)
+        revoke_recipe(record['previous_id'], reason)
     after = (ROOT / 'library-manifest.json').read_bytes()
-    assert import_pack(PACK, accepted_ids=set(expected))['published_file'] == result['published_file']
+    assert import_pack(pack, accepted_ids=set(expected))['published_file'] == result['published_file']
     assert (ROOT / 'library-manifest.json').read_bytes() == after
-    RECEIPT.write_bytes(encoded({'before_manifest_sha256': sha(before), 'after_manifest_sha256': sha(after),
+    receipt_path.write_bytes(encoded({'before_manifest_sha256': sha(before), 'after_manifest_sha256': sha(after),
         'pack_sha256': sha(raw), 'basket_status': 'pending_local_qualification', 'idempotent_reimport': True,
-        'new_revocations': {r['previous_id']: REASON for r in review['recipes']}, 'result': result}))
+        'new_revocations': {r['previous_id']: reason for r in review['recipes']}, 'result': result}))
     print({'issued_successors': len(expected), 'withdrawn_previous_versions': len(review['recipes'])})
 
 

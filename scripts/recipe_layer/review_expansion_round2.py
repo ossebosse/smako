@@ -9,6 +9,15 @@ from app.services.personal_policy import ProductFacts
 
 TARGET = Path('backend/app/data/ingredients/expansion-round2-20261101.json')
 REVIEWS = {
+    'benfri lammstek|as_sold|g': (
+        [('Lammstek Benfri Sverige', 'Scan'), ('Lammstek Benfri Nya Zeeland', 'Farmers'),
+         ('Lammstek Benfri Fryst Nya Zeeland', 'Affco')],
+        'Rå benfri lammstek som inköpt vikt före eventuell putsning, färsk eller fryst enligt exakt produktetikett. Inte lammytterfilé, rostbiff, benbärande stek eller get. Källans varierande förpackningsmassa behålls; uppskattat inköpsläge krävs. Recepten beskriver kylupptining, genomkokning av all upptiningsvätska och okänd förlust av eventuella grova senor. Ingen ätlig slutvikt eller näringsretention antas.',
+        None),
+    'färsk chorizokorv|as_sold|g': (
+        [('Chorizokorv Färsk Sverige', 'Garant')],
+        'Rå svensk färsk chorizokorv från Garant, 350 g, artikel 101236339_ST och GTIN 7340045507557. Tillverkaren anger fläsk och nöt med bland annat chili, spiskummin, vitlök, oregano och vinäger. Inte mexikansk ursprungsidentitet, färdig grillkorv eller lufttorkad salami. Inköpt hel produkt före borttagning av fjälster; egen granskad receptdos och okänd förlust, ingen ren köttandel eller näring överförs.',
+        'https://www.garantskafferiet.se/vara-produkter/chark/korv/chorizo/'),
     'ätklar inläggningssill|preserved_drained|g': (
         [('5minuters Sill Hela Filéer', 'Abba')],
         'Abba 5-minuterssill hela filéer, färdigbehandlad och ätklar direkt enligt tillverkaren. Inte rå salt sill som måste vattnas ur eller läggas in. Förpackning 430 g med 210 g deklarerad avrunnen sill; butikens 210 g är redan avrunnen jämförmängd. Ingen ytterligare avdragsfaktor eller näringsöverföring från lagen.',
@@ -185,7 +194,7 @@ def main(args):
         name, form, unit = key.split('|')
         gross_variable = key in {'hel kyckling|as_sold|g', 'oxsvans med ben|as_sold|g',
                                  'rimmat fläsklägg|as_sold|g', 'ungnötslever|as_sold|g',
-                                 'kokbanan med skal|as_sold|g'}
+                                 'kokbanan med skal|as_sold|g', 'benfri lammstek|as_sold|g'}
         requirement = 'intake_all_round2_' + hashlib.sha256(key.encode()).hexdigest()[:12]
         links = []
         for candidate in candidates.values():
@@ -255,7 +264,7 @@ def main(args):
                      'review_basis': 'Exact source/product/package bindings; culinary review only. ' + definition,
                      'evidence': [{'kind': 'reviewed_whole_label_and_form', 'source_url': source_url}],
                      'reviewed_links': links})
-        if gross_variable or key in {'ägg|as_sold|st', 'lagrad pecorino|as_sold|g'}:
+        if gross_variable or key in {'ägg|as_sold|st', 'lagrad pecorino|as_sold|g', 'färsk chorizokorv|as_sold|g'}:
             rows[-1]['gross_inedible_mass'] = True
     TARGET.write_text(json.dumps({'schema_version': 'smako-authoring-vocabulary-v1',
         'reviewed_at': '2026-11-01', 'source_scope': reference['source_scope'],

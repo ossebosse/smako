@@ -106,7 +106,7 @@ def test_whole_shell_eggs_are_counted_without_claiming_raw_or_boiled_weight():
     assert vocabulary['ägg|as_sold'] == ('st', row['requirements'])
 
 
-@pytest.mark.parametrize('name', ['hel kyckling', 'oxsvans med ben', 'rimmat fläsklägg', 'ungnötslever'])
+@pytest.mark.parametrize('name', ['hel kyckling', 'oxsvans med ben', 'rimmat fläsklägg', 'ungnötslever', 'benfri lammstek'])
 def test_gross_variable_mass_is_not_an_edible_weight_or_exact_purchase(name):
     row = next(r for r in ROWS if r['name'] == name)
     assert row['gross_inedible_mass'] and row['form'] == 'as_sold'
@@ -171,3 +171,17 @@ def test_plantain_peel_never_becomes_edible_raw_mass():
     assert compatible(key, p, f)
     assert not compatible(key, p.model_copy(update={'quantity_confidence': 'exact'}), f)
     assert row['requirements'] != library_vocabulary([])['matbanan|raw_edible'][1]
+
+
+def test_raw_fresh_chorizo_keeps_gross_mass_and_cannot_become_other_sausage():
+    row = next(r for r in ROWS if r['name'] == 'färsk chorizokorv')
+    assert row['gross_inedible_mass'] and row['form'] == 'as_sold'
+    assert len(row['reviewed_links']) == 3
+    p, f = source(row)
+    key = row['requirements'][0].removeprefix('pack:')
+    assert compatible(key, p, f)
+    for name in ('Chorizo', 'Chorizofärs', 'Chorizo BBQ Hot', 'Chorizo lufttorkad'):
+        assert not compatible(key, p.model_copy(update={'name': name}), f)
+    assert 'mexikansk färsk chorizo|raw_edible' not in library_vocabulary(current_recipes())
+    assert _excluded_by_diet('färsk chorizokorv', DietPreference.VEGETARIAN)
+    assert _excluded_by_diet('färsk chorizokorv', DietPreference.VEGAN)

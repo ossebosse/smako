@@ -107,7 +107,9 @@ class RecipeDesign(BaseModel):
         default="crafted", exclude_if=lambda v: v == "crafted")
     active_minutes: int | None = Field(default=None, ge=1, le=2880,
                                       exclude_if=lambda v: v is None)
-    waiting_minutes: int = Field(default=0, ge=0, le=1440, exclude_if=lambda v: v == 0)
+    # Aggregate waiting may include 24 h thawing plus passive cooking. Keep the
+    # existing 48 h total ceiling; a single step is still capped at 24 h.
+    waiting_minutes: int = Field(default=0, ge=0, le=2880, exclude_if=lambda v: v == 0)
     total_minutes: int | None = Field(default=None, ge=1, le=2880,
                                      exclude_if=lambda v: v is None)
     unmeasured_processes: tuple[RecipeUnmeasuredProcess, ...] | None = Field(

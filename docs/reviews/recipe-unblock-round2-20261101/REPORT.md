@@ -1,29 +1,30 @@
 # Fortsatt hinderarbete och receptimport 2026-11-01
 
-**157 ytterligare varianter och 66 nya grundrätter är innehållsgranskade och
-importerade.** Biblioteket växer från **975/2 570 till 1 041/2 727**. Alla
-157 har klarat ordinarie slutlig inköpskontroll med tillåtna uppskattningar
-i den frysta referensen. **90 klarar även exakt inköp**; 67 är datablockerade
+**170 ytterligare varianter och 70 nya grundrätter är innehållsgranskade och
+importerade.** Biblioteket växer från **975/2 570 till 1 045/2 740**. Alla
+170 har klarat ordinarie slutlig inköpskontroll med tillåtna uppskattningar
+i den frysta referensen. **94 klarar även exakt inköp**; 76 är datablockerade
 i det läget. Inget av dessa korgprov nådde tidsgränsen.
 
 De fem faktiskt mottagna leveranserna innehåller **189 grundrätter / 501
-varianter**. Totalt har **265 varianter i 107 grundrätter** importerats:
-100 hela familjer och sju delvis importerade. **236 varianter återstår**.
-Den senast mottagna ZIP-filen med 24 grundrätter / 62 varianter har 37
-importerade varianter och 25 kvar i kön. Ett godkänt syskon gör inte hela
+varianter**. Totalt har **278 varianter i 111 grundrätter** importerats:
+105 hela familjer och sex delvis importerade. **223 varianter återstår**.
+Den senast mottagna ZIP-filen med 24 grundrätter / 62 varianter har 39
+importerade varianter och 23 kvar i kön. Ett godkänt syskon gör inte hela
 familjen godkänd.
 
-Originalfilerna är bytebevarade. Först utfärdades 157 versioner 1.0.1;
-50 fick därefter granskade efterföljare 1.0.2 för portionsinstruktioner,
-satsstorlek eller fiskmetadata. De 50 ersatta versionerna är återkallade
-men bytebevarade. Samtliga recept är **inte provlagade**. Tider och nya kulinariska doser är granskade
+Originalfilerna är bytebevarade. Först utfärdades 170 versioner 1.0.1.
+Därefter utfärdades 67 efterföljare för 64 av varianterna: 50 för portionsinstruktioner,
+satsstorlek eller fiskmetadata, nio för lammstek/upptining och åtta efter kontroll
+av faktiskt valda frysta produkter. Tre pastavarianter har kedjan 1.0.1 → 1.0.2 → 1.0.3.
+Alla 67 ersatta versioner är återkallade men bytebevarade. Samtliga recept är **inte provlagade**. Tider och nya kulinariska doser är granskade
 författaruppskattningar. De 3 625 tidigare utgivna versionerna, samtliga
 2 570 tidigare aktuella varianter och de 2 200 ursprungsreferenserna bevaras.
 Ingen betaaktivering, insamling eller ändring av användarprofiler ingår.
 
 ## Åtgärder som öppnade recepten
 
-37 ytterligare namn/form/enhetsidentiteter har **222 individuellt granskade
+39 ytterligare namn/form/enhetsidentiteter har **232 individuellt granskade
 produktkopplingar** i befintliga butikskontexter. Registret finns i
 [`expansion-round2-20261101.json`](../../../backend/app/data/ingredients/expansion-round2-20261101.json).
 Varje koppling behåller artikel/GTIN, butik, hela produktnamnet, märke,
@@ -40,7 +41,7 @@ Ingen ny närings-, allergen- eller ekologisk deklaration har lagts till.
 | Kulinariska alternativ | Bland annat svensk surdegsfralla, lagrad pecorino, ungnötslever, färdig tomatillosalsa, musselkött utan skal och corned beef. Nytt namn, ny uttrycklig dos/metod där det behövs; inga falska råvarualias. |
 
 Varje steg har separat `recipe-review-stageN.json`, `import-stageN.json`
-och `qualification-stageN.json` (N = 1–22). Granskningarna binder
+och `qualification-stageN.json` (N = 1–27). Granskningarna binder
 original-ID, originalfilens hash, nytt versions-ID, innehållshash, samtliga
 mängdändringar och kulinarisk jämförelse. Receptens ingrediensantal,
 arbetssteg och synliga instruktioner följer samma innehåll.
@@ -57,6 +58,50 @@ Frysta råvaror får uttrycklig upptining/genomhettning där det behövs;
 upptiningssaft, stekfett och dressing behålls när den granskade metoden säger det.
 Aktiv tillsyn, avrinning, temperaturkontroller och kylöverföring skiljs från
 passiv kokning, ugnstid och väntan.
+
+## Senare granskning av fem ytterligare hinder
+
+Steg 23–27 gav ytterligare 13 av totalens 170 varianter: två pasqualina
+med uttryckligen 600 g spenat och kvarvarande mejram/muskot, två frijoles
+puercos med svensk färsk chorizo, tre rogan josh med paprika/cayenne samt
+sex patatato/tsigariasto med lamm. Tillbehör och kryddskillnader bevarar
+meningsfulla variantnivåer. Get, mangold, mexikansk chorizo och kashmirichili
+har inte fått falska identitetsalias.
+
+[Garants färska chorizo](https://www.garantskafferiet.se/vara-produkter/chark/korv/chorizo/)
+är en rå fläsk-/nötkorv, inte färdig grillkorv. Ny dos är 35 g med fjälster,
+vars borttagning förblir en okänd förlust. Fläsk- och nötköttsundantag samt
+vegetarisk/vegansk kost spärrar den. Paprika/cayenne är en separat
+författad dos, 8/0,6 g, med stöd för själva kombinationen i
+[Ainsley Harriotts rogan josh](https://www.ainsley-harriott.com/recipe/lamb-rogan-josh/).
+Ingen likvärdig hetta påstås. Lammalternativen har stöd i
+[Visit Greece om patatato](https://www.visitgreece.gr/el/experiences/architecture/local-architecture/amorgos-gastronomy)
+och [restaurangens tsigariasto hos Gastronomos](https://www.gastronomos.gr/syntagh/tsigariasto/50594/).
+Receptens egna mängder och tillbehör är fortfarande separat granskade.
+
+Korgarna visade fryst lammstek. Därför fick de nio lammvarianterna nya
+1.0.2-versioner med sju specifika produktkopplingar för **benfri lammstek**,
+planerad kylupptining i 24 timmar och okänd putsförlust. Lammytterfilé,
+rostbiff och benbärande stek får inte fylla denna insats. Gramdosen avser nu
+hela uppvägda produkten före putsning, med tillhörande upptiningsvätska;
+ingen likvärdig ätlig mängd antas. All sådan vätska genomkokas i grytan.
+[Granskning](lamb-corrections.json) och [korgprov](qualification-lamb-corrections.json)
+binder nio av nio godkända korgar i uppskattat läge.
+
+Ytterligare åtta efterföljare beskriver de valda produktformerna:
+Sopa de lima har planerad kycklingupptining och aktiv temperaturkontroll;
+melitzanosalata har uttryckligen genomhettad vitlök; aglio e olio har
+hackad färsk/fryst vitlök, persilja genomhettad före pastan och okända
+förluster vid avrinning. Ingrediensmängderna är oförändrade. Se
+[granskningen](selected-product-corrections.json) och
+[korgprovet](qualification-selected-product-corrections.json).
+
+Summerad väntetid kan nu vara upp till samma 48-timmarsgräns som total tid,
+så 24 timmars upptining plus passiv kokning ryms i innehållsmodellen.
+Ett enskilt steg är fortfarande högst 24 timmar. Användarens tidsfilter
+respekteras: exempelvis högst 24 timmars väntan utesluter dessa längre recept.
+Redan kylförvarat kött behöver ingen upptining; beräknad total tid är försiktigt
+planerad för det frysta alternativet. Inget av detta är en uppmätt provlagning.
 
 ## Okända processförluster förblir okända
 
@@ -128,8 +173,9 @@ enskilda fullständiga korgprov, **ingen ny mätning av varm menyplaneringstid**
 
 [Sammanställningen](summary.json) och [manifestövergången](library-transition.json)
 är maskinläsbara. Övergången tillåter nya disjunkta, hashbundna paket och
-uttryckliga återkallelser av just de 50 nyutgivna föregångarna, bundna till
-efterföljare av samma bas/variant. Inga versioner som fanns före denna
+uttryckliga återkallelser av just de 67 nyutgivna föregångarna, bundna till
+efterföljare av samma bas/variant med strikt stigande versionsnummer.
+Varje mellanversion och dess kvalificeringskvitto bevaras. Inga versioner som fanns före denna
 omgång får återkallas eller ändras. Tidigare återkallelser och referens-ID:n
 bevaras. Ingen
 täckningsbaslinje regenereras för att göra testresultat gröna.
@@ -140,10 +186,16 @@ Den samlade riktade verifieringen gav **679 godkända tester** i två körningar
 Ruff på samtliga ändrade Pythonfiler, compileall och `git diff --check` passerade.
 Full CI och täckningsöverblicken krävs därutöver före merge till main.
 
+Efter de sista innehållsrättningarna passerade ytterligare **610 riktade tester**:
+591 för importkvitton, ingrediens-/processgränser, gamla hashvärden och
+bibliotekets kvalitetskrav samt 19 för portions-/versionskedjor, frysta
+produktformer och kostkategorier. Alla slutliga nya versioner har egna
+godkända korgprov; inget gammalt prov har skrivits om för att få ett godkännande.
+
 ## Kvarvarande kö och nästa leverans
 
-[Variantkön](queue.json) redovisar samtliga 501 käll-ID:n. De 236 kvarvarande
-består av **212 med register-/författarhinder** och **24 strukturellt giltiga
+[Variantkön](queue.json) redovisar samtliga 501 käll-ID:n. De 223 kvarvarande
+består av **201 med register-/författarhinder** och **22 strukturellt giltiga
 utkast med konkret saknat produktstöd**. De senare har omprovats i båda
 inköpslägena, se [ingrediensprovet](remaining-native-inputs.json).
 
@@ -173,6 +225,6 @@ alla mottagna utkast i nästa dubblettunderlag.
 Efter ny leverans: kör `audit_expansion_queue.py` till en ny lokal katalog.
 För att återskapa denna avslutade rapports beslut används
 `finalize_expansion_round2_review.py --universe .local/coverage-inputs/universe.json
---native-probe .local/recipe-unblock-round2/pending37-inputs.json` med dess
+--native-probe .local/recipe-unblock-round2/pending-latest-inputs.json` med dess
 hashbundna underlag. Ändra inte redan utgivna steg; skapa en ny version för
 senare korrigeringar och en ny rapport för nästa granskningsomgång.

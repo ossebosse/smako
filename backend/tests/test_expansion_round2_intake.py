@@ -35,7 +35,7 @@ def test_each_issued_stage_matches_reviewed_source_changes_and_complete_basket_p
     manifest = manifest_entries()
     issued = {identity(r): r for r in load_entries(manifest['current'] + manifest['history'])}
     accepted = set()
-    for stage in range(1, 23):
+    for stage in range(1, 28):
         authors = json.loads((AUTHORED / f'authoring-stage{stage}.json').read_bytes())['recipes']
         raw = (AUTHORED / f'standardized-stage{stage}.json').read_bytes()
         review = json.loads((REPORT / f'recipe-review-stage{stage}.json').read_bytes())
@@ -65,7 +65,7 @@ def test_each_issued_stage_matches_reviewed_source_changes_and_complete_basket_p
         baskets = proof['modes']['estimated']['recipes']
         assert {r['id'] for r in baskets} == ids and len(baskets) == len(ids)
         assert all(r['status'] == 'verified' and r['audit']['passed'] for r in baskets)
-    assert len(accepted) == 157
+    assert len(accepted) == 170
 
 
 def test_every_received_identity_has_one_final_decision_and_old_imports_are_retained():
@@ -74,14 +74,15 @@ def test_every_received_identity_has_one_final_decision_and_old_imports_are_reta
     rows = queue['variants']
     assert len(rows) == len({r['source_id'] for r in rows}) == 501
     assert len({r['base_id'] for r in rows}) == 189
-    assert sum(r['status'] == 'imported_reviewed_version' for r in rows) == 265
-    assert sum(r['status'] == 'pending_qualified_input' for r in rows) == 24
-    assert summary['newly_imported_variants'] == 157
-    assert summary['newly_imported_bases'] == 66
-    assert summary['current_variants'] == 2727 and summary['current_bases'] == 1041
+    assert sum(r['status'] == 'imported_reviewed_version' for r in rows) == 278
+    assert sum(r['status'] == 'pending_qualified_input' for r in rows) == 22
+    assert summary['newly_imported_variants'] == 170
+    assert summary['newly_imported_bases'] == 70
+    assert summary['current_variants'] == 2740 and summary['current_bases'] == 1045
     assert summary['preserved_issued_variants'] == 3625
     assert summary['original_reference_ids'] == 2200
-    assert summary['corrected_new_versions'] == 50 and summary['batch_limited_variants'] == 6
+    assert summary['corrected_new_versions'] == 67 and summary['corrected_current_variants'] == 64
+    assert summary['batch_limited_variants'] == 6
     assert not summary['beta_activation'] and summary['cooking_test'] == 'not_cooked'
     active = {identity(r): r for r in current_recipes()}
     for row in rows:
@@ -152,6 +153,15 @@ def test_second_additive_transition_preserves_old_content_and_original_compariso
         mutated['after_manifest_file_sha256'] = sha(encoded(mutated['after_manifest']))
         with pytest.raises(ValueError, match='unreviewed new-version revocations'):
             checked_additive_transition(mutated)
+    corrections = {r['previous_id']: r for r in review['superseded_new_versions']}
+    chained = [r for r in corrections.values() if r['runtime_id'] in corrections]
+    assert len(chained) == 3  # 1.0.1 -> 1.0.2 -> 1.0.3, all bytes retained.
+    mutated = copy.deepcopy(review)
+    first = chained[0]
+    second = next(r for r in mutated['superseded_new_versions'] if r['previous_id'] == first['runtime_id'])
+    second.update(runtime_id=first['previous_id'], content_sha256=first['previous_content_sha256'])
+    with pytest.raises(ValueError, match='unreviewed new-version revocations'):
+        checked_additive_transition(mutated)
 
 
 def test_unqualified_stage_cannot_be_finalized(scripts, tmp_path, monkeypatch):

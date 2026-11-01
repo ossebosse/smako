@@ -21,6 +21,10 @@ Per recept: `base_id`, `name`, `servings`, `meal_type` (dinner/breakfast/snack),
   ska avvika från bibliotekets standard för samma `namn|form`.
 - `steps`: `text`, `uses` (ingrediensnamn), `minutes`, valfritt `after`
   (stegnummer från 1) och `passive: true` för väntetid (ugn, sjudning, jäsning).
+  Ett steg får ta högst 24 timmar. Summerad väntetid och total tid får vara
+  högst 48 timmar, så kylupptining följd av långkok kan redovisas korrekt.
+  Aktiv kontroll, omrörning och överföring ska vara egna aktiva steg.
+  Kortare tidsgränser som användaren väljer respekteras fortfarande.
 - Valfritt `unmeasured_processes`: granskad avrinning eller borttagning där
   slutligt utbyte saknas. Varje post har exakt `step` (stegnummer från 1),
   `ingredients` (namn som används i det steget), `operation` och `description`.

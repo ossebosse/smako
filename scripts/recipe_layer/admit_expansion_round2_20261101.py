@@ -143,6 +143,20 @@ STAGES[21] = {
 STAGES[22] = {
     'smako-swedish-lapskojs': 'Finfördelat saltat nötkött arbetas in i grovt potatismos; uttrycklig konservversion, skild från skivat kött med mos, stekt biffpanna och rimmad lägg med rotmos.',
 }
+STAGES[23] = {'smako-italian-torta-pasqualina': STAGES[9]['smako-italian-torta-pasqualina']}
+SELECTED_VARIANTS[23] = {'smako-italian-torta-pasqualina': {'standard', 'extended'}}
+STAGES[24] = {
+    'smako-mexican-frijoles-puercos': 'Kokta bönor mosas och steks med rå kryddad korvfärs, hela dess fett och smält ost till tjock röra med tortilla. Svensk färsk chorizo anges öppet; skild från frijol con puerco med hela bönor i buljong och enfrijoladas släta bönsås runt vikta tortillas.',
+}
+STAGES[25] = {
+    'smako-indian-rogan-josh': 'Lamm bräseras i yoghurt med fänkålsfrö och torkad ingefära utan tomat. Öppet namngiven paprika-cayenneanpassning; skild från tomatmasala, palak och sötsyrlig vinägerbaserad vindaloo. Ainsley Harriotts egen rogan josh visar paprika/cayenne som kulinarisk väg: https://www.ainsley-harriott.com/recipe/lamb-rogan-josh/ . Dos och övrigt innehåll är separat granskade, inte hämtade som en kopia av det receptet.',
+}
+STAGES[26] = {
+    'smako-greek-patatato-amorgos': 'Tomat-kanelbräserat lamm där potatisen tillsätts senare och binder själva spadet. Skild från tätt paketbakat kleftiko, lökdominerad stifado med separat korn och italiensk ragu med separat polenta. Lammversionen stöds av grekiska turistmyndighetens beskrivning: https://www.visitgreece.gr/el/experiences/architecture/local-architecture/amorgos-gastronomy . Det ursprungliga getutkastet bevaras.',
+}
+STAGES[27] = {
+    'smako-greek-tsigariasto-get': 'Brynning följd av mycket låg tillagning i köttets eget lilla spad, med bröd till. Ingen tomat- eller potatisgryta och inget paketbakat kleftiko. Den kreten­siska restaurangens lammversion dokumenteras i https://www.gastronomos.gr/syntagh/tsigariasto/50594/ ; här är benfritt lamm och vin/lök/citron i tilläggsvarianterna uttryckliga anpassningar, inte en kopia av deras recept.',
+}
 
 
 def sha(raw):
@@ -187,6 +201,125 @@ def mark_process(row, index, ingredients, operation, description):
 
 def correct(row, vocabulary):
     base, changes = row['base_id'], []
+    if base.endswith(('patatato-amorgos', 'tsigariasto-get')):
+        rename_ingredient(row, 'getkött', 'lammkött')
+        row['primary'] = 'lammkött'
+        row['name'] = row['name'].replace('getkött', 'lammkött')
+        row['notes'] = 'Granskad version med benfritt lamm i stället för get. Rå ätlig köttmängd anges efter eventuell putsning; ingen benandel eller kokförlust har antagits. Inte provlagad; tider är författaruppskattningar och mörheten avgör faktisk koktid.'
+        for component in row['components']:
+            for item in component['ingredients']:
+                if item['name'] == 'lammkött':
+                    item['label'] = 'Benfritt lammkött för långkok, rå ätlig vikt'
+        for step in row['steps']:
+            step['text'] = step['text'].replace('getköttet', 'lammköttet')
+        first = row['steps'][0]
+        first['text'] = first['text'].replace('Putsa lammköttet vid behov och skär', 'Putsa bort grova senor vid behov, väg därefter angiven rå ätlig mängd benfritt lamm och skär')
+        if base.endswith('patatato-amorgos'):
+            first['text'] = first['text'].replace('Skär lammköttet', 'Väg benfritt lamm efter eventuell putsning. Skär lammköttet').replace('Hacka löken.', 'Skala och väg löken, hacka den.').replace('Tärna morot och selleri grovt.', 'Ansa och väg rå ätlig morot och selleri, tärna grovt.')
+            if row['variant_id'] == 'extended':
+                rename_ingredient(row, 'rödvin', 'rött matlagningsvin')
+                row['name'] += ' – med rött matlagningsvin'
+                row['steps'][2]['text'] = row['steps'][2]['text'].replace('rödvinet', 'det röda matlagningsvinet')
+                row['steps'][6]['text'] = 'Ta upp lagerbladen. Rör ner den uppvägda frysta hackade persiljan och låt den koka med minst tre minuter eller längre enligt förpackningen.'
+                row['steps'][6]['minutes'] = 4
+            old = copy.deepcopy(row['steps'])
+            row['steps'] = old[:3]
+            for turn in range(5):
+                row['steps'].append({'text': 'Sjud försiktigt under tätt lock 20 minuter.', 'uses': ['lammkött'], 'minutes': 20, 'passive': True})
+                row['steps'].append({'text': 'Rör om från botten och kontrollera att grytan inte kokar torr. Tillsätt vid behov 100 ml vatten. Efter sista omgången ska köttet börja bli mört; fortsätt annars sjuda med regelbundna kontroller innan potatisen tillsätts.', 'uses': ['lammkött'], 'minutes': 1})
+            potato = old[4]
+            potato['text'] = potato['text'].replace('Skala potatisen och skär', 'Skala potatisen, väg den råa ätliga mängden och skär')
+            row['steps'].extend([potato,
+                {'text': 'Sjud försiktigt med locket på glänt 15 minuter.', 'uses': ['potatis', 'lammkött'], 'minutes': 15, 'passive': True},
+                {'text': 'Vänd försiktigt från botten utan att mosa potatisen. Kontrollera vätskan och tillsätt vid behov 50 ml vatten.', 'uses': ['potatis', 'lammkött'], 'minutes': 1},
+                {'text': 'Sjud ytterligare cirka 15 minuter.', 'uses': ['potatis', 'lammkött'], 'minutes': 15, 'passive': True},
+                {'text': 'Kontrollera att potatisen är helt mjuk och köttet delar sig med gaffel. Förläng vid behov. Behåll all olja och allt spad som tjocknat av potatisens stärkelse.', 'uses': ['potatis', 'lammkött', 'olivolja'], 'minutes': 2}])
+            if row['variant_id'] != 'simple':
+                row['steps'].append(old[6])
+                mark_process(row, len(row['steps']), ['lagerblad'], 'remove_after_infusion', 'Lagerblad kokar med och tas bort före servering. Kvarvarande näring i såsen och bladens avgivning är inte uppmätta.')
+            row['steps'].extend([
+                {'text': 'Ta grytan från värmen och lägg på lock.', 'uses': ['potatis', 'lammkött'], 'minutes': 1},
+                {'text': 'Låt grytan vila fem minuter av värmen.', 'uses': ['potatis', 'lammkött'], 'minutes': 5, 'passive': True},
+                {'text': 'Fördela kött, potatis och hela såsen mellan portionerna.', 'uses': ['potatis', 'lammkött'], 'minutes': 2}])
+        else:
+            if row['variant_id'] != 'simple':
+                rename_ingredient(row, 'vitt vin', 'vitt matlagningsvin')
+                row['name'] += ' – med vitt matlagningsvin'
+                row['notes'] += ' Lök, vin, oregano och citron är uttryckliga tillägg till fåingredienstekniken.'
+                row['steps'][1]['text'] = row['steps'][1]['text'].replace('Skiva löken och hacka vitlöken.', 'Skala och väg lök och vitlök, skiva löken och hacka vitlöken.').replace('vinet', 'det vita matlagningsvinet')
+            index = next(n for n, s in enumerate(row['steps']) if s.get('passive'))
+            periods = []
+            for turn in range(6):
+                periods.extend([
+                    {'text': 'Låt köttet tillagas under tätt lock på mycket låg värme i 20 minuter.', 'uses': ['lammkött'], 'minutes': 20, 'passive': True},
+                    {'text': 'Vänd köttet och kontrollera bottnen. Sänk värmen om det steker torrt; tillsätt endast vid behov 30 ml vatten så det inte bränner. Köttet ska tillagas i lite eget spad, inte täckas av vatten.', 'uses': ['lammkött'], 'minutes': 1}])
+            periods.append({'text': 'Kontrollera att köttet är genomlagat och mycket mört. Förläng tillagningen vid behov med fortsatt tillsyn. Servera allt fett och det koncentrerade spadet.', 'uses': ['lammkött', 'olivolja'], 'minutes': 2})
+            row['steps'][index:index + 1] = periods
+            row['steps'][-1]['text'] += ' Väg den angivna brödmängden och behåll hela salladens saft om sallad ingår.'
+        for n, step in enumerate(row['steps']):
+            step['after'] = [n] if n else []
+        changes.append('Explicit boneless lamb version at the original edible gram dose, with meat named in the title and weighed after trimming. It is not a goat identity alias or a bone/cooking-yield conversion. Preserve the distinct patatato potato-in-tomato method or tsigariasto low-liquid method. Separate periodic checks and serving from passive time; retain all meat fat/gravy. Any wine becomes explicitly named reviewed cooking wine; no claim of complete alcohol evaporation.')
+    if base.endswith('rogan-josh'):
+        rename_ingredient(row, 'kashmirichilipulver', 'paprikapulver')
+        row['name'] += ' – med paprika och cayenne'
+        row['flavor'] = ['paprika', 'cayenne', 'fänkålsfrö', 'torkad ingefära']
+        row['notes'] = 'Granskad vardagsanpassning av rogan josh med lamm, yoghurt, fänkålsfrö och torkad ingefära, utan tomat. Ny dos 8 g paprikapulver och 0,6 g cayenne ersätter 10 g kashmirichili utan påstående om samma hetta, smak eller färg. Rapsolja används i stället för senapsolja/ghee och ratanjot utelämnas. Inte provlagad; tiderna är uppskattningar.'
+        for component in row['components']:
+            for item in component['ingredients']:
+                if item['name'] == 'paprikapulver':
+                    item.update(quantity=8, label='Malt paprikapulver, inte rökt paprika')
+                elif item['name'] == 'lammkött':
+                    item.update(label='Benfritt lammkött för gryta, rå ätlig vikt')
+                elif item['name'] in {'kardemumma', 'kryddnejlika', 'kanel'}:
+                    item['label'] = 'Mald ' + item['name']
+            if component['id'] == 'lamm':
+                component['ingredients'].append({'name': 'cayennepeppar', 'form': 'dry', 'quantity': 0.6, 'unit': 'g', 'role': 'flavour', 'label': 'Malen cayennepeppar'})
+        for step in row['steps']:
+            if 'paprikapulver' in step['uses']:
+                step['uses'].append('cayennepeppar')
+            step['text'] = step['text'].replace('kashmirichili', 'paprikapulver och cayennepeppar')
+        row['steps'][0]['text'] = row['steps'][0]['text'].replace('Skär lammköttet', 'Väg benfritt lammkött utan grova senor och skär det')
+        row['steps'][0]['text'] += ' De eventuella övriga kryddorna används malda och stannar i såsen.'
+        original = copy.deepcopy(row['steps'])
+        row['steps'] = original[:2] + [
+            {'text': 'Häll i 500 ml vatten och koka upp under omrörning. Sänk till svag sjudning och lägg på lock.', 'uses': ['lammkött', 'yoghurt naturell'], 'minutes': 3},
+            {'text': 'Sjud försiktigt under lock 30 minuter.', 'uses': ['lammkött'], 'minutes': 30, 'passive': True},
+            {'text': 'Rör i grytan och kontrollera att bottnen inte bränner. Tillsätt vid behov 100 ml vatten.', 'uses': ['lammkött', 'yoghurt naturell'], 'minutes': 1},
+            {'text': 'Sjud ytterligare 30 minuter under lock.', 'uses': ['lammkött'], 'minutes': 30, 'passive': True},
+            {'text': 'Rör igen och kontrollera vätskan. Tillsätt vid behov 100 ml vatten.', 'uses': ['lammkött', 'yoghurt naturell'], 'minutes': 1},
+            {'text': 'Sjud ytterligare cirka 40 minuter under lock.', 'uses': ['lammkött'], 'minutes': 40, 'passive': True},
+            {'text': 'Kontrollera att lammet är helt genomlagat och så mört att det delar sig lätt med gaffel. Förläng sjudningen vid behov och kontrollera regelbundet vätskan. Behåll allt fett och all sås.', 'uses': ['lammkött'], 'minutes': 2},
+            {**original[3], 'text': original[3]['text'].replace('Skölj riset i sil. ', '')},
+            {'text': 'Sjud riset under lock cirka 18 minuter eller längre enligt förpackningen, tills kornen är mjuka och vattnet absorberats.', 'uses': ['ris'], 'minutes': 18, 'passive': True},
+            {'text': 'Kontrollera riset och ta från värmen. Om det fortfarande är hårt, tillsätt 50 ml vatten och fortsätt sjuda före vilan.', 'uses': ['ris'], 'minutes': 1},
+            {'text': 'Låt riset vila fem minuter under lock.', 'uses': ['ris'], 'minutes': 5, 'passive': True},
+            *original[5:]]
+        for step in row['steps']:
+            if step['text'].startswith('Riv gurkan'):
+                step['text'] = 'Riv den uppvägda gurkan grovt och behåll all vätska. Hacka de uppvägda färska myntabladen och blanda gurka, all gurksaft och mynta med raitans yoghurt, citronjuice och salt. Raitan blir lösare än med pressad gurka. Ställ i kylskåp vid 4 °C till servering och servera hela mängden.'
+        for n, step in enumerate(row['steps']):
+            step['after'] = [n] if n else []
+        changes.append('New visible paprika/cayenne recipe: 8 g paprika and 0.6 g cayenne replace 10 g Kashmiri chili without sensory equivalence. Keep boneless edible lamb, yoghurt, fennel and dried ginger; no tomato is added. Separate active liquid/softness/rice checks from 100-minute simmering and rice rest. All fat, ground spices and cucumber juice are retained; no invented cooking yield.')
+    if base.endswith('frijoles-puercos'):
+        rename_ingredient(row, 'mexikansk färsk chorizo', 'färsk chorizokorv')
+        row['name'] += ' – med svensk färsk chorizo'
+        row['primary'] = 'bönor och färsk chorizokorv'
+        row['notes'] = row.get('notes', '').replace('AI-författat receptutkast, inte provlagat och ännu inte import-/produktgranskat av Smako. ', 'Granskad receptanpassning, inte provlagad. ')
+        row['notes'] = row.get('notes', '').replace('Rå mexikansk chorizo är nödvändig identitet, inte spansk lufttorkad korv.',
+            'Denna granskade version använder uttryckligen svensk rå färsk chorizo med fläsk och nöt; den är inte märkt som mexikansk korv.')
+        for component in row['components']:
+            for item in component['ingredients']:
+                if item['name'] == 'färsk chorizokorv':
+                    item.update(form='as_sold', quantity=35, label='Svensk rå färsk chorizokorv, vägd med fjälster')
+        index = next(n for n, s in enumerate(row['steps'], 1) if 'färsk chorizokorv' in s['uses'])
+        insert_step(row, index, {'text': 'Väg den råa färska chorizokorven före borttagning av fjälstret. Skär upp fjälstret, skrapa ur all korvfärs och kasta fjälstret. Använd separat skärbräda; tvätta händer och redskap efter rå korv.',
+            'uses': ['färsk chorizokorv'], 'minutes': 3, 'after': [index - 1] if index > 1 else []})
+        row['steps'][index]['after'] = [index]
+        mark_process(row, index, ['färsk chorizokorv'], 'trim_before_cooking',
+            'Fjälstret tas bort efter att hela råa korven vägts. Mängden och näringsförlusten är inte uppmätta; ingen ren köttandel antas.')
+        row['steps'][index + 1]['text'] += ' Häll inte bort något stekfett; hela korvfärsen och allt fett blandas med bönorna.'
+        row['steps'][-1]['text'] += ' Följ även tortillaförpackningens uppvärmningsanvisning.'
+        changes.append('Explicit Swedish raw fresh chorizo alternative with pork and beef, not a Mexican identity alias. New gross dose 35 g before casing removal replaces 30 g raw casing-free mince without yield equivalence. Casing loss is unknown; all cooking fat enters the beans. Keep raw handling, 72 C centre check and separate salsa utensils.')
     if base.endswith('sillsallad'):
         rename_ingredient(row, 'inläggningssill', 'ätklar inläggningssill')
         rename_ingredient(row, 'ättiksgurka', 'saltgurka')
@@ -807,7 +940,18 @@ def correct(row, vocabulary):
         mark_process(row, 3, ['mjölk', 'citronjuice'], 'strain_whey', 'Mjölk och citron delas i ostmassa och vassle. Bara angiven liten del vassle får återföras; kvarvarande processrest och näringsfördelning är inte uppmätta.')
         changes.append('Keep actual milk curdling and whey separation with unknown yield. Separate active pouring, oven/form preparation, butter melting, filling and unmoulding from passive draining, cooling and baking.')
     if base.endswith('torta-pasqualina'):
-        inputs = ['spenat'] + (['mangold'] if row['variant_id'] != 'simple' else [])
+        if row['variant_id'] != 'simple':
+            for component in row['components']:
+                component['ingredients'] = [i for i in component['ingredients'] if i['name'] != 'mangold']
+                for item in component['ingredients']:
+                    if item['name'] == 'spenat':
+                        item['quantity'] = 600
+            for step in row['steps']:
+                step['uses'] = list(dict.fromkeys('spenat' if n == 'mangold' else n for n in step['uses']))
+                step['text'] = step['text'].replace(' Skär mangolden och tillsätt den, stjälkar först och blad sist.', '')
+            row['name'] += ' – med spenat, mejram och muskot'
+            changes.append('Explicit spinach-only pasqualina: 600 g frozen spinach replaces the mixed 400 g spinach/200 g chard proposal, as a new culinary input dose, not a fresh/frozen or drained-yield conversion. Standard retains marjoram/nutmeg and extended retains its tomato-basil side; neither duplicates the simpler variant.')
+        inputs = ['spenat']
         mark_process(row, 3, inputs, 'drain_after_cooking', 'Uppvärmda bladgrönsaker pressas ur före fyllningen. Vätskemängd och näringsförlust är inte uppmätta; hela inköpta insatsen bevaras.')
         row['steps'][4]['text'] = 'Låt grönsaksblandningen svalna på ett fat cirka 15 minuter.'
         row['steps'][5]['text'] = 'Värm ugnen till 185 °C. ' + row['steps'][5]['text'].replace('finriven parmesan', 'den färdigrivna parmesanen')
@@ -816,6 +960,12 @@ def correct(row, vocabulary):
             row['name'] += ' – med ljummen tomat-basilikasallad'
             row['steps'][-1]['text'] = 'Tärna tomaterna. Koka hälften med den frysta hackade basilikan under omrörning minst tre minuter eller längre enligt förpackningen. Blanda med resten av tomaterna, salladens vinäger och olja. Skär pajen i fyra delar och servera hela den ljumma salladen med all saft till.'
             row['steps'][-1]['minutes'] = 9
+        if row['variant_id'] != 'simple':
+            row['notes'] = row.get('notes', '').replace('AI-författat receptutkast. Inte provlagat och ännu inte import- eller produktgranskat av Smako.', 'Granskad spenatversion, inte provlagad.')
+            row['steps'][3]['text'] += ' Bred ut blandningen på ett fat inför avsvalningen.'
+            row['steps'][7]['text'] = 'Baka på nedre falsen cirka 45 minuter.'
+            insert_step(row, 9, {'text': 'Kontrollera att skalet är gyllene, botten gräddad och ägghålen har stelnad vita och minst 72 °C i mitten. Förläng gräddningen vid behov; ta därefter ut formen.', 'uses': ['ägg', 'vetemjöl', 'spenat'], 'minutes': 2})
+            changes.append('Count the oven doneness/temperature check and pan removal as active work before the passive twelve-minute rest.')
         changes.append('Retain real spinach/chard draining as unmeasured loss. Use weighed raw shell-free eggs and already grated parmesan. Separate oven preparation; extended frozen basil cooks in a visibly warm salad.')
     if base.endswith('nicuatole-majspudding'):
         row['steps'][0].update(text='Vispa masa harina med mjölk, socker, vanilj och salt i en liten tjockbottnad kastrull tills inga torra klumpar finns.', minutes=1)

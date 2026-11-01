@@ -21,6 +21,7 @@ from coverage_reference import checked_additive_transition, imported_recipes
 
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 BASE = '545dad2a1b78566e0bff0c4ff616c053c038cc58'
+STAGE_NUMBERS = range(1, 28)
 EXTRA_QUERIES = {
     'makrutlimeblad': ['makrut', 'kaffir', 'limeblad', 'lime leaves', 'limblad', 'lime leaf'],
     'räkpasta': ['räkpasta', 'räk pasta', 'shrimp paste', 'gapi', 'kapi', 'belacan', 'trassi', 'terasi'],
@@ -75,7 +76,7 @@ def main(args):
     previous = json.loads(Path('docs/reviews/recipe-unblock-20261101/recipe-review.json').read_bytes())['recipes']
     records, proofs, modes = [], [], {m: Counter() for m in ('exact', 'estimated')}
     common_scope = None
-    for stage in range(1, 23):
+    for stage in STAGE_NUMBERS:
         review = json.loads((REPORT / f'recipe-review-stage{stage}.json').read_bytes())
         receipt = json.loads((REPORT / f'import-stage{stage}.json').read_bytes())
         raw = (REPORT / f'qualification-stage{stage}.json').read_bytes()
@@ -103,41 +104,63 @@ def main(args):
         proofs.append({'stage': stage, 'variants': len(expected), 'qualification_sha256': sha(raw),
                        'pack_sha256': sha(pack_raw), 'scope': probe['scope'],
                        'modes': {m: dict(Counter(r['status'] for r in probe['modes'][m]['recipes'])) for m in modes}})
-    correction_review = json.loads((REPORT / 'portion-corrections.json').read_bytes())
-    correction_receipt = json.loads((REPORT / 'import-portion-corrections.json').read_bytes())
-    correction_raw = (REPORT / 'qualification-portion-corrections.json').read_bytes()
-    correction_probe = json.loads(correction_raw)
-    correction_pack = (ROOT / 'reviewed-expansion-round2-20261101/standardized-portion-corrections.json').read_bytes()
-    assert sha(correction_raw) == correction_receipt['qualification_sha256']
-    assert correction_receipt['basket_status'] == 'verified_estimated'
-    assert correction_probe['scope']['manifest_sha256'] == correction_receipt['after_manifest_sha256']
-    assert correction_probe['pack_sha256'] == correction_receipt['pack_sha256'] == correction_review['pack_sha256'] == sha(correction_pack)
-    assert not correction_probe['input_only'] and correction_probe['deadline_seconds'] == 20
-    assert {k: correction_probe['scope'][k] for k in common_scope} == common_scope
-    corrections = {r['previous_id']: r for r in correction_review['recipes']}
-    assert len(corrections) == len(correction_review['recipes'])
-    assert corrections.keys() <= {r['runtime_id'] for r in records}
+    corrections, new_revocations, correction_proofs = {}, {}, []
+    corrected_results = {mode: [] for mode in modes}
+    for correction_name in ('portion-corrections', 'lamb-corrections', 'selected-product-corrections'):
+        review = json.loads((REPORT / f'{correction_name}.json').read_bytes())
+        receipt = json.loads((REPORT / f'import-{correction_name}.json').read_bytes())
+        raw = (REPORT / f'qualification-{correction_name}.json').read_bytes()
+        probe = json.loads(raw)
+        pack = (ROOT / f'reviewed-expansion-round2-20261101/standardized-{correction_name}.json').read_bytes()
+        assert sha(raw) == receipt['qualification_sha256']
+        assert receipt['basket_status'] == 'verified_estimated'
+        assert probe['scope']['manifest_sha256'] == receipt['after_manifest_sha256']
+        assert probe['pack_sha256'] == receipt['pack_sha256'] == review['pack_sha256'] == sha(pack)
+        assert not probe['input_only'] and probe['deadline_seconds'] == 20
+        assert {k: probe['scope'][k] for k in common_scope} == common_scope
+        batch = {r['previous_id']: r for r in review['recipes']}
+        assert len(batch) == len(review['recipes']) and not batch.keys() & corrections.keys()
+        assert receipt['new_revocations'].keys() == batch.keys()
+        corrections.update(batch)
+        new_revocations.update(receipt['new_revocations'])
+        expected = {r['runtime_id'] for r in batch.values()}
+        for mode in modes:
+            rows = probe['modes'][mode]['recipes']
+            assert {r['id'] for r in rows} == expected and len(rows) == len(expected)
+            corrected_results[mode].extend(rows)
+        correction_proofs.append({'name': correction_name, 'variants': len(batch),
+                                  'qualification_sha256': sha(raw), 'pack_sha256': sha(pack)})
     corrected_ids = {r['runtime_id'] for r in corrections.values()}
+    assert corrections.keys() <= {r['runtime_id'] for r in records} | corrected_ids
     for mode, counts in modes.items():
-        rows = correction_probe['modes'][mode]['recipes']
+        rows = corrected_results[mode]
         assert {r['id'] for r in rows} == corrected_ids and len(rows) == len(corrected_ids)
-        # Count only the latest 157 recipe variants, not the 50 superseded versions twice.
-        for stage in range(1, 23):
+        # Count each latest recipe variant once, excluding superseded versions.
+        for stage in STAGE_NUMBERS:
             old_probe = json.loads((REPORT / f'qualification-stage{stage}.json').read_bytes())
             for row in old_probe['modes'][mode]['recipes']:
                 if row['id'] in corrections:
                     counts[row['status']] -= 1
         for row in rows:
-            counts[row['status']] += 1
+            if row['id'] not in corrections:
+                counts[row['status']] += 1
             if mode == 'estimated':
                 assert row['status'] == 'verified' and row['audit']['passed']
     manifest = manifest_entries()
     issued = {identity(r): r for r in load_entries(manifest['current'] + manifest['history'])}
     for row in records:
         assert issued[row['runtime_id']].design.content_sha256 == row['content_sha256']
-    accepted = {r['source_id']: {**r, **({k: corrections[r['runtime_id']][k]
-        for k in ('runtime_id', 'content_sha256')} if r['runtime_id'] in corrections else {})}
-        for r in previous + records}
+    accepted = {}
+    for row in previous + records:
+        row = dict(row)
+        followed = set()
+        while row['runtime_id'] in corrections:
+            assert row['runtime_id'] not in followed
+            followed.add(row['runtime_id'])
+            correction = corrections[row['runtime_id']]
+            assert row['content_sha256'] == correction['previous_content_sha256']
+            row.update({k: correction[k] for k in ('runtime_id', 'content_sha256')})
+        accepted[row['source_id']] = row
     assert len(accepted) == len(previous) + len(records) and accepted.keys() <= original.keys()
     active = {identity(r): r for r in current}
     for r in accepted.values():
@@ -215,8 +238,8 @@ def main(args):
     transition = {'base_commit': BASE, 'before_manifest_file_sha256': sha(raw),
         'after_manifest_file_sha256': sha(after_raw), 'before_manifest': before, 'after_manifest': after,
         'added_entries': added_entries, 'corrected': [],
-        'new_revocations': correction_receipt['new_revocations'],
-        'superseded_new_versions': correction_review['recipes'],
+        'new_revocations': new_revocations,
+        'superseded_new_versions': list(corrections.values()),
         'added': [{'runtime_id': k, 'content_sha256': v} for k, v in new.items() if k not in old],
         'preserved_issued_variants': len(old), 'preserved_active_variants': len(previous_active)}
     checked_additive_transition(transition)
@@ -234,8 +257,10 @@ def main(args):
     summary = {'received_bases': len(received_by_base), 'received_variants': len(original),
         'newly_imported_variants': len(records), 'newly_imported_bases': len({r.design.base_id for r in current}) - len({r.design.base_id for r in previous_active}),
         'corrected_new_versions': len(corrections),
+        'corrected_current_variants': len(corrected_ids - corrections.keys()),
         'batch_limited_variants': sum(bool(r['servings_multiple']) for r in corrections.values()),
-        'correction_qualification_sha256': sha(correction_raw),
+        'correction_qualification_sha256': correction_proofs[0]['qualification_sha256'],
+        'correction_qualifications': correction_proofs,
         'total_incoming_imported_variants': len(accepted), 'total_incoming_bases_with_import': len(admitted_by_base),
         'whole_incoming_families_imported': sum(ids == admitted_by_base.get(base) for base, ids in received_by_base.items()),
         'partly_imported_incoming_families': sum(ids != received_by_base[base] for base, ids in admitted_by_base.items()),
