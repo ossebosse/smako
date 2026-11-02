@@ -13,7 +13,7 @@
   function sync() {
     const row = rows.find(row => row.postal_code === postal.value.replace(/\s/g, ""));
     select.value = row?.municipality_code || "";
-    status.textContent = row ? (row.available ? "Välj de butiker och priskanaler du vill jämföra nedan." : "Prisunderlaget för kommunen är ännu inte tillgängligt.") : "Välj en kommun med tillgängliga priser.";
+    status.textContent = row ? (row.available ? "Välj de butiker och nätbutiker du vill jämföra nedan." : "Prisunderlaget för kommunen är ännu inte tillgängligt.") : "Välj en kommun med tillgängliga priser.";
   }
   select.addEventListener("change", () => {
     const row = rows.find(row => row.municipality_code === select.value);

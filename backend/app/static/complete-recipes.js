@@ -354,7 +354,8 @@
     const count=design.ingredient_count??ingredientCount(recipe);
     const timing=design.total_minutes!=null?`uppskattad total tid ${duration(design.total_minutes)} · aktiv ${duration(design.active_minutes)}${design.waiting_minutes?` · väntan ${duration(design.waiting_minutes)}`:""}`:`uppskattad tid ${duration(design.estimated_minutes)}`;
     intro.append(el("p",`${recipe.servings} portioner · ${count} ingredienser · ${timing}`,"complete-recipe-facts"));
-    if(design.unmeasured_processes?.length)intro.append(el("p","Ingredienslistan anger mängden före tillagning, även det som senare hälls, silas eller putsas bort. Näringsvärden och färdig portionsvikt är okända.","recipe-method-note"));
+    const unmeasured=Boolean(design.unmeasured_processes?.length);
+    if(unmeasured)intro.append(el("p","Ingredienslistan anger mängden före tillagning, även det som senare hälls, silas eller putsas bort. Färdig portionsvikt är okänd.","recipe-method-note"));
     const demands=(personal?.remaining_demands||[]).filter(row=>row.source===slotId&&!['salt','peppar','svartpeppar','vitpeppar','vatten'].includes(row.name));
     if(demands.length===count&&demands.every(row=>row.original_quantity==null||Math.abs(row.original_quantity-row.quantity)<0.000001)){
       let home=0,partial=0;
@@ -366,9 +367,10 @@
     if(nutrition){
       const values=nutrition.values||nutrition;const parts=[];
       for(const [key,alt,label] of [["protein_g","protein_g_per_serving","g protein"],["kcal","kcal_per_serving","kcal"],["carbs_g","carbs_g_per_serving","g kolhydrater"],["fat_g","fat_g_per_serving","g fett"]]){const value=values[key]??values[alt];if(value!=null&&value!==""&&Number.isFinite(Number(value)))parts.push(`${nutritionNumber(value,nutrition.status)} ${label}`);}
-      intro.append(el("p",`${parts.length?`${parts.join(" · ")} per portion. `:""}Näring: ${{VERIFIED:"produktdeklarationer",ESTIMATED:"spårbar uppskattning",NOT_REQUESTED:"inte beräknad – inget näringsmål valt",UNKNOWN:"okänd",FAILED:"ej kvalificerad"}[nutrition.status]||"okänd"}.${parts.length<4?" Alla näringsvärden finns inte tillgängliga.":""}`));
+      const status={VERIFIED:"Värdena kommer från produkternas näringsdeklarationer.",ESTIMATED:"Värdena är uppskattade; källorna finns under Om näringsberäkningen.",NOT_REQUESTED:"Näringen har inte beräknats eftersom inget näringsmål valts.",UNKNOWN:parts.length?"Näringsvärdena är ofullständiga.":"Näringsvärden saknas för det här receptet.",FAILED:"Näringsberäkningen kunde inte slutföras."}[nutrition.status]||"Näringsuppgifterna kunde inte kontrolleras.";
+      intro.append(el("p",`${parts.length?`${parts.join(" · ")} per portion. `:""}${status}${parts.length>0&&parts.length<4&&nutrition.status!=="UNKNOWN"?" Vissa näringsvärden saknas.":""}`));
       intro.append(nutritionInformation(nutrition,presentation));
-    } else {intro.append(el("p","Näringsvärden saknas för det här receptet."));if(presentation.methodNotes.length)intro.append(nutritionInformation(null,presentation));}
+    } else {intro.append(el("p",unmeasured?"Näringsvärden saknas eftersom vi inte vet hur mycket näring som följer med det som hälls, silas eller putsas bort.":"Näringsvärden saknas för det här receptet."));if(presentation.methodNotes.length)intro.append(nutritionInformation(null,presentation));}
     if(personal)intro.append(el("p",personal.checks?.allergy==="VERIFIED"?"Dina allergival har kontrollerats mot produkternas deklarationer. Kontrollera även märkningen på förpackningen.":personal.checks?.allergy==="NOT_REQUESTED"?"Du har inte begärt någon allergikontroll för den här planen.":"Allergikontrollen kunde inte bekräftas. Kontrollera produkternas innehåll och märkning.","small"));
     const provenance=design.provenance||{};
     intro.append(el("p",provenance.cooking_test==="not_cooked"?"Receptet är inte provlagat. Tiderna är uppskattade.":"Uppgift om provlagning saknas. Tiderna är uppskattade.","recipe-quality-note"));
@@ -481,7 +483,7 @@
     statistics.append(el("p",`${data.raw_recipe_pool??"Okänt antal"} recept ingick i sökningen. ${data.singleton_passed??"Okänt antal"} klarade kontrollen var för sig; ${data.not_singleton_evaluated??"okänt antal"} kontrollerades inte enskilt. Recept som fungerar var för sig behöver inte fungera tillsammans i samma meny.`));
     const counts=el("ul");for(const row of data.candidate_rejections||[])if(row.rejected)counts.append(el("li",`${row.label}: ${row.rejected} recept valdes bort.`));statistics.append(counts);
     const examples=el("ul");const seen=new Set();for(const row of data.candidate_details||[]){
-      const reason=String(row.reason||"").startsWith("Befintlig strukturell måltidskontroll")?"Rättens grundkontroll saknar tillräckligt näringsunderlag. Detta är inte i sig ett avslag på ditt valda proteinmål.":String(row.reason||"").replace(/\bprotein_g\b/g,"protein").replace(/\bas_sold\b/g,"som såld").replace(/\braw_edible\b/g,"rå ätbar mängd").replace(/\bcooked_drained\b/g,"kokt och avrunnen");
+      const reason=String(row.reason||"").startsWith("Befintlig strukturell måltidskontroll")?"Vi saknar näringsuppgifter för att kontrollera receptet. Det betyder inte att receptet har för lite protein för ditt mål.":String(row.reason||"").replace(/\bprotein_g\b/g,"protein").replace(/\bas_sold\b/g,"som såld").replace(/\braw_edible\b/g,"rå ätbar mängd").replace(/\bcooked_drained\b/g,"kokt och avrunnen");
       const text=reason.startsWith(`${row.recipe}:`)?reason:`${row.recipe}: ${reason}`;if(seen.has(text))continue;seen.add(text);if(examples.children.length<8)examples.append(el("li",text));
     }if(examples.children.length){out.append(el("h3","Exempel på vad som stoppade recepten"),examples);if(seen.size>8)out.append(el("p",`Visar 8 av ${seen.size} skilda exempel.`));}
     if((data.search||[]).some(row=>row.rejections?.variation))out.append(el("p","Veckans variationskrav stoppade kombinationer av de kvarvarande rätterna. Ett alternativ är att välja fler matkök eller längre tillagningstid för att ge fler rätter möjlighet att prövas."));

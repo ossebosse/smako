@@ -34,8 +34,8 @@ def test_online_price_context_is_not_presented_as_verified_physical_store() -> N
     page = (STATIC / "index.html").read_text(encoding="utf-8")
     script = (STATIC / "app.js").read_text(encoding="utf-8")
 
-    assert "Samma meny i billigaste giltiga priskontext" in script
-    assert "Samma meny i en giltig priskontext" in script
+    assert "Samma meny från det billigaste inköpsstället som uppfyller dina krav" in script
+    assert "Samma meny från ett inköpsställe som uppfyller dina krav" in script
     assert "verifierad butik" not in page.casefold()
     assert "verifierad butik" not in script.casefold()
     assert "inköpsställen" in page
@@ -85,7 +85,7 @@ def test_saved_plan_product_reports_do_not_trust_client_provenance() -> None:
 def test_consumer_ui_never_silently_applies_community_price() -> None:
     page = (STATIC / "index.html").read_text(encoding="utf-8")
 
-    assert "ändrar aldrig prisdatakällan direkt" in page
+    assert "Din rapport sparas för granskning. Den ändrar inte priserna automatiskt." in page
     assert "inte att den säkert är slut" in (STATIC / "app.js").read_text(
         encoding="utf-8"
     )

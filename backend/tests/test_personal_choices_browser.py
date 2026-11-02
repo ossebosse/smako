@@ -153,16 +153,16 @@ def _measured_preparation(choices, tmp_path, method, mint):
     page.goto(url.split("#")[0] + "#plan=" + saved.plan_id)
     page.locator('.personal-nav [data-open="shopping"]').click()
     if mint:
-        expect(page.locator('#shopping-content')).to_contain_text('begränsat studieexempel')
+        expect(page.locator('#shopping-content')).to_contain_text('begränsat studieunderlag')
         expect(page.locator('#shopping-content')).to_contain_text('alla stjälkar')
-    page.get_by_role("button", name="Bokför uppmätt bladplockning" if mint else "Bokför uppmätt äggberedning").click()
+    page.get_by_role("button", name="Registrera vikter för mynta" if mint else "Registrera vikter för ägg").click()
     dialog = page.get_by_role("dialog")
     fields = dialog.locator('input[type="number"]')
     fields.nth(0).fill(str(quantity))
     fields.nth(1).fill("25" if mint else "30")
     if not mint:
         fields.nth(2).fill("60")
-    dialog.get_by_role("button", name="Bokför insats och myntablad" if mint else "Bokför insats och båda utfall").click()
+    dialog.get_by_role("button", name="Spara myntans vikter" if mint else "Spara äggens vikter").click()
     expect(dialog).not_to_be_attached()
     assert captured[-1]["preparation"] == {'method': method, 'inputs': {lot: quantity},
         **({'leaf_g': 25} if mint else {'yolk_g': 30, 'white_g': 60})}

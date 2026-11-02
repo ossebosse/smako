@@ -49,9 +49,9 @@ def test_comparisons_scenarios_and_tradeoff_preserve_verification_semantics() ->
 
     # The backend prices the selected menu in one grocery price context; that
     # context may be online and is not proof of a verified physical store.
-    assert "samma meny i en enda giltig priskontext" in html
-    assert "Samma meny i billigaste giltiga priskontext" in javascript
-    assert "Samma meny i en giltig priskontext" in javascript
+    assert "samma meny från ett enda inköpsställe" in html
+    assert "Samma meny från det billigaste inköpsstället som uppfyller dina krav" in javascript
+    assert "Samma meny från ett inköpsställe som uppfyller dina krav" in javascript
     assert "verifierad butik" not in html.casefold()
     assert "verifierad butik" not in javascript.casefold()
     assert "Bästa kvalitetsgodkända enbutiksmeny" not in javascript
@@ -170,9 +170,9 @@ def test_verification_and_purchase_state_have_visible_styles() -> None:
 def test_result_transparency_explains_universe_freshness_and_price_context() -> None:
     javascript = _read("app.js")
 
-    assert "förbyggt federerat prisuniversum" in javascript
-    assert "online- eller butikskopplade" in javascript
+    assert 'sourceKey.includes("federat") || sourceKey.includes("price-universe")' in javascript
+    assert "Priserna gäller de butiker och nätbutiker som anges" in javascript
     assert '"oldest_price_age_hours"' in javascript
     assert "Priser uppdaterade idag" in javascript
-    assert "närmar sig stale-gränsen" in javascript
-    assert "garanterade hyllpriser" in javascript
+    assert 'freshness === "aging"' in javascript
+    assert "Pris och lager i en fysisk butik kan skilja sig" in javascript

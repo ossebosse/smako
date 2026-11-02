@@ -947,7 +947,7 @@
       varied_budget_percent: { node: dom.variedBudget, label: "Kostnadstak för Varierad" },
       avoid_ingredients: { node: dom.excludedIngredients, label: "Undvik ingredienser" },
       recipe_preferences: { node: document.getElementById("recipe-style"), label: "Receptval" },
-      allowed_store_ids: { node: document.getElementById("recipe-price-contexts"), label: "Butiker och priskanaler" },
+      allowed_store_ids: { node: document.getElementById("recipe-price-contexts"), label: "Butiker och nätbutiker" },
     };
   }
 
@@ -1356,7 +1356,7 @@
     article.append(heading);
 
     if (!items.length) {
-      article.append(emptyMessage("Ingen inköpsrad returnerades för priskontexten."));
+      article.append(emptyMessage("Det finns ingen inköpslista för det här inköpsstället."));
       return article;
     }
 
@@ -1602,7 +1602,7 @@
     const optimizedLabel = isPresent(maxStores) ? `Optimerat med max ${maxStores} inköpsställen` : "Optimerad matkasse";
 
     dom.comparisonCards.append(comparisonCard(
-      "Samma meny i billigaste giltiga priskontext",
+      "Samma meny från det billigaste inköpsstället som uppfyller dina krav",
       singleTotal,
       single ? singleName : "Ingen komplett korg för ett inköpsställe returnerades",
     ));
@@ -2046,7 +2046,7 @@
 
     appendTradeoffCard(
       dom.storeTradeoffCards,
-      "Samma meny i en giltig priskontext",
+      "Samma meny från ett inköpsställe som uppfyller dina krav",
       oneStoreTotal || "Ingen komplett korg för ett inköpsställe",
       storeNames(first(tradeoff, ["one_store_names"])),
     );
@@ -2180,7 +2180,7 @@
       dom.sourceDescription.textContent = `${updated ? `Priser uppdaterade ${updated}. ` : ""}Priserna gäller de butiker och nätbutiker som anges. Pris och lager i en fysisk butik kan skilja sig.`;
       dom.footerSource.textContent = "Aktuella digitala prisdata. Pris och tillgänglighet kan förändras i butik.";
     } else if (sourceKey.includes("primat")) {
-      dom.sourceDescription.append(document.createTextNode("Produkt-, pris- och priskontextdata i resultatet kommer via "));
+      dom.sourceDescription.append(document.createTextNode("Uppgifterna om varor, priser och inköpsställen kommer via "));
       const link = createElement("a", null, "Primat");
       link.href = "https://primat.nu/";
       link.target = "_blank";
@@ -2577,7 +2577,7 @@
       warnings.push("Prisunderlaget har uppdaterats sedan planen skapades. Den sparade planen visas fortfarande med sitt ursprungliga prisunderlag.");
     }
     if (payload.price_contexts_changed_since_creation) {
-      warnings.push("En priskontext som planen använde är inte längre aktuell. Det sparade beloppet är priset från när planen skapades, inte ett nytt aktuellt pris.");
+      warnings.push("Prisuppgifterna för ett inköpsställe i planen har ändrats. Det sparade beloppet är priset från när planen skapades, inte ett nytt aktuellt pris.");
     }
     return {
       ...payload.plan,
