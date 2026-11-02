@@ -105,4 +105,8 @@ efter upptining och hela kedjan av manifestövergångar. Efter rättning av två
 fel i de nya testernas modellåtkomst passerar samtliga **108 unika riktade
 tester** (99 befintliga och nio nya). Ruff, compileall och diffkontroll passerar.
 Alla 20 utgivna versioner återskapas byteidentiskt av granskningsskriptet.
+Första CI-körningen hittade sex äldre tester med föregående aktiva totalantal.
+De uppdateras till 2 842 varianter och 1 080 baser enligt den kontrollerade
+additiva importen. Historiska antal och innehållskontroller behålls.
+Samtliga 546 tester i de sex berörda filerna passerar därefter lokalt.
 Full CI krävs före merge; körningslänk och resultat redovisas i PR.
