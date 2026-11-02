@@ -1,0 +1,796 @@
+{
+  "pack_id": "reviewed-expansion-round4-stage3",
+  "recipes": [
+    {
+      "base_id": "smako-greek-bouyiourdi-feta-paprika",
+      "components": [
+        {
+          "id": "bake",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Fetaost",
+              "name": "fetaost",
+              "quantity": 65,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 120,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Paprika",
+              "name": "paprika",
+              "quantity": 55,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 5,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "dry",
+              "label": "Chiliflakes",
+              "name": "chiliflakes",
+              "quantity": 0.15,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "dry",
+              "label": "Oregano",
+              "name": "oregano",
+              "quantity": 0.3,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "gruyère",
+              "name": "gruyère",
+              "quantity": 20,
+              "role": "primary",
+              "unit": "g"
+            }
+          ],
+          "name": "Varm fetameze"
+        },
+        {
+          "id": "bread",
+          "ingredients": [
+            {
+              "form": "as_sold",
+              "label": "Bröd",
+              "name": "bröd",
+              "quantity": 55,
+              "role": "side",
+              "unit": "g"
+            }
+          ],
+          "name": "Bröd"
+        }
+      ],
+      "cuisine": "greek",
+      "equipment": [
+        "Ugn",
+        "Liten ugnsform"
+      ],
+      "family": "Bouyiourdi",
+      "flavor": [
+        "chili",
+        "paprika"
+      ],
+      "meal_type": "snack",
+      "method": "oven",
+      "name": "Bouyiourdi – ugnsbakad feta med paprika – med gruyère och bröd",
+      "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+      "primary": "fetaost",
+      "servings": 1,
+      "side": "bröd",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 10,
+          "passive": false,
+          "text": "Väg gruyèren som inköpt bit före putsning. Skär bort eventuell oätlig kant och riv resten; inget bestämt utbyte antas. Sätt ugnen på 210 °C över-/undervärme. Skiva tomat och paprika tunt. Lägg hälften av grönsakerna i en liten ugnsform, fetaosten ovanpå och resten av grönsakerna runtom. Fördela olivolja och chiliflakes, oregano och den rivna gruyèren över formen. Väg tomat och paprika efter ansning. Anpassa formens yta till portionerna och behåll samma låga lager.",
+          "uses": [
+            "fetaost",
+            "tomat",
+            "paprika",
+            "olivolja",
+            "chiliflakes",
+            "oregano",
+            "gruyère"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 20,
+          "passive": true,
+          "text": "Baka cirka 20 minuter tills grönsakerna mjuknat och osten är genomvarm, mjuk och lätt gyllene. Feta behåller lite struktur; den behöver inte bli en slät sås.",
+          "uses": [
+            "fetaost",
+            "tomat",
+            "paprika",
+            "olivolja",
+            "chiliflakes",
+            "oregano",
+            "gruyère"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 4,
+          "passive": false,
+          "text": "Kontrollera att grönsakerna är mjuka och förläng gräddningen vid behov. Skär allt uppvägt bröd inklusive ätlig skorpa i bitar. Fördela hela formen och brödet jämnt mellan valt antal mellanmålsportioner.",
+          "uses": [
+            "bröd",
+            "fetaost"
+          ]
+        }
+      ],
+      "unmeasured_processes": [
+        {
+          "description": "Inköpt ostvikt före eventuell oätlig kant; ingen andel eller serverad näring antas.",
+          "ingredients": [
+            "gruyère"
+          ],
+          "operation": "trim_before_cooking",
+          "step": 1
+        }
+      ],
+      "variant_id": "extended",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-italian-focaccia-formaggio-recco-stil",
+      "components": [
+        {
+          "id": "brod",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Vetemjöl",
+              "name": "vetemjöl",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 35,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Ricotta",
+              "name": "ricotta",
+              "quantity": 140,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Naturell färskost",
+              "name": "färskost",
+              "quantity": 130,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "preserved_drained",
+              "label": "Mozzarella, vägd avrunnen",
+              "name": "mozzarella",
+              "quantity": 130,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 3,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Två tunna degark med tre ostar"
+        },
+        {
+          "id": "sallad",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 450,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Balsamvinäger",
+              "name": "balsamvinäger",
+              "quantity": 20,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 15,
+              "role": "sauce",
+              "unit": "ml"
+            }
+          ],
+          "name": "Sallad"
+        }
+      ],
+      "cuisine": "italian",
+      "equipment": [
+        "ugn med 250 °C",
+        "kavel",
+        "bakplåtspapper godkänt för vald temperatur",
+        "plåt"
+      ],
+      "family": "ojäst tunn ostfylld deg",
+      "flavor": [
+        "tre ostar",
+        "olivolja"
+      ],
+      "meal_type": "dinner",
+      "method": "bake",
+      "name": "Focaccia col formaggio – Recco-inspirerad med ricotta, färskost och mozzarella – enkel",
+      "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+      "primary": "ricotta, färskost och mozzarella",
+      "servings": 4,
+      "side": "tomatsallad",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 9,
+          "passive": false,
+          "text": "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "olivolja"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 45,
+          "passive": true,
+          "text": "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt.",
+          "uses": [
+            "vetemjöl"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 23,
+          "passive": false,
+          "text": "Värm ugnen till 250 °C med plåten i. Låt mozzarellan rinna av och väg den angivna avrunna mängden. Riv eller finfördela den och blanda med hela ricottan och färskosten; ingen ostvätska från dessa två produkter hälls bort. Dela degen i två lika delar. Kavla mellan bakpapper och dra till mycket tunna ark, cirka en millimeter. Använd motsvarande plåtyta vid större sats, eventuellt flera plåtar. Fördela ostblandningen på det undre arket, täck med det andra och förslut kanterna. Gör små ångöppningar och pensla med återstående brödolja. Använd allt degmaterial. Välj bakpapper godkänt för 250 °C eller lätt oljad metallplåt med olja från receptets mängd.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "ricotta",
+            "färskost",
+            "mozzarella"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 14,
+          "passive": true,
+          "text": "Grädda på het plåt cirka fjorton minuter tills degen fått bruna blåsor och osten bubblar. Håll samma tunna deg och fyllningsdjup i större satser; grädda i flera omgångar vid behov.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Lyft försiktigt ett hörn och kontrollera att botten är gräddad; förläng vid behov. Ta ut plåten.",
+          "uses": [
+            "vetemjöl",
+            "ricotta",
+            "färskost",
+            "mozzarella"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 7,
+          "passive": false,
+          "text": "Väg tomaten efter ansning och skär den. Blanda salladens råvaror med dess olja och balsamvinäger. Skär brödet i portionsbitar och servera hela brödet och salladen jämnt fördelat mellan valt antal portioner.",
+          "uses": [
+            "tomat",
+            "balsamvinäger",
+            "olivolja"
+          ]
+        }
+      ],
+      "variant_id": "simple",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-italian-focaccia-formaggio-recco-stil",
+      "components": [
+        {
+          "id": "brod",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Vetemjöl",
+              "name": "vetemjöl",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 35,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Ricotta",
+              "name": "ricotta",
+              "quantity": 140,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Naturell färskost",
+              "name": "färskost",
+              "quantity": 130,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "preserved_drained",
+              "label": "Mozzarella, vägd avrunnen",
+              "name": "mozzarella",
+              "quantity": 130,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 3,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Två tunna degark med tre ostar"
+        },
+        {
+          "id": "sallad",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 450,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Balsamvinäger",
+              "name": "balsamvinäger",
+              "quantity": 20,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 15,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Rucola",
+              "name": "rucola",
+              "quantity": 70,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gurka",
+              "name": "gurka",
+              "quantity": 250,
+              "role": "vegetable",
+              "unit": "g"
+            }
+          ],
+          "name": "Sallad"
+        }
+      ],
+      "cuisine": "italian",
+      "equipment": [
+        "ugn med 250 °C",
+        "kavel",
+        "bakplåtspapper godkänt för vald temperatur",
+        "plåt"
+      ],
+      "family": "ojäst tunn ostfylld deg",
+      "flavor": [
+        "tre ostar",
+        "olivolja"
+      ],
+      "meal_type": "dinner",
+      "method": "bake",
+      "name": "Focaccia col formaggio – Recco-inspirerad med ricotta, färskost och mozzarella – standard",
+      "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+      "primary": "ricotta, färskost och mozzarella",
+      "servings": 4,
+      "side": "tomatsallad",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 9,
+          "passive": false,
+          "text": "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "olivolja"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 45,
+          "passive": true,
+          "text": "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt.",
+          "uses": [
+            "vetemjöl"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 23,
+          "passive": false,
+          "text": "Värm ugnen till 250 °C med plåten i. Låt mozzarellan rinna av och väg den angivna avrunna mängden. Riv eller finfördela den och blanda med hela ricottan och färskosten; ingen ostvätska från dessa två produkter hälls bort. Dela degen i två lika delar. Kavla mellan bakpapper och dra till mycket tunna ark, cirka en millimeter. Använd motsvarande plåtyta vid större sats, eventuellt flera plåtar. Fördela ostblandningen på det undre arket, täck med det andra och förslut kanterna. Gör små ångöppningar och pensla med återstående brödolja. Använd allt degmaterial. Välj bakpapper godkänt för 250 °C eller lätt oljad metallplåt med olja från receptets mängd.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "ricotta",
+            "färskost",
+            "mozzarella"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 14,
+          "passive": true,
+          "text": "Grädda på het plåt cirka fjorton minuter tills degen fått bruna blåsor och osten bubblar. Håll samma tunna deg och fyllningsdjup i större satser; grädda i flera omgångar vid behov.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Lyft försiktigt ett hörn och kontrollera att botten är gräddad; förläng vid behov. Ta ut plåten.",
+          "uses": [
+            "vetemjöl",
+            "ricotta",
+            "färskost",
+            "mozzarella"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 7,
+          "passive": false,
+          "text": "Väg tomaten efter ansning och skär den. Blanda salladens råvaror med dess olja och balsamvinäger. Skär brödet i portionsbitar och servera hela brödet och salladen jämnt fördelat mellan valt antal portioner. Skölj rucolan enligt förpackningen, låt ytvatten rinna av och använd hela uppvägda blad inklusive ätliga stjälkar. Väg gurkan efter ansning och skär den.",
+          "uses": [
+            "tomat",
+            "balsamvinäger",
+            "olivolja",
+            "rucola",
+            "gurka"
+          ]
+        }
+      ],
+      "variant_id": "standard",
+      "version": "1.0.1"
+    },
+    {
+      "base_id": "smako-italian-focaccia-formaggio-recco-stil",
+      "components": [
+        {
+          "id": "brod",
+          "ingredients": [
+            {
+              "form": "dry",
+              "label": "Vetemjöl",
+              "name": "vetemjöl",
+              "quantity": 280,
+              "role": "side",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 35,
+              "role": "cooking",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Ricotta",
+              "name": "ricotta",
+              "quantity": 140,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Naturell färskost",
+              "name": "färskost",
+              "quantity": 130,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "preserved_drained",
+              "label": "Mozzarella, vägd avrunnen",
+              "name": "mozzarella",
+              "quantity": 130,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Salt",
+              "name": "salt",
+              "quantity": 3,
+              "role": "flavour",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Basilika",
+              "name": "basilika",
+              "quantity": 12,
+              "role": "flavour",
+              "unit": "g"
+            }
+          ],
+          "name": "Två tunna degark med tre ostar"
+        },
+        {
+          "id": "sallad",
+          "ingredients": [
+            {
+              "form": "raw_edible",
+              "label": "Tomat",
+              "name": "tomat",
+              "quantity": 450,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "as_sold",
+              "label": "Balsamvinäger",
+              "name": "balsamvinäger",
+              "quantity": 20,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "as_sold",
+              "label": "Olivolja",
+              "name": "olivolja",
+              "quantity": 15,
+              "role": "sauce",
+              "unit": "ml"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Rucola",
+              "name": "rucola",
+              "quantity": 70,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Gurka",
+              "name": "gurka",
+              "quantity": 250,
+              "role": "vegetable",
+              "unit": "g"
+            },
+            {
+              "form": "cooked_drained",
+              "label": "Kokta vita bönor, avrunnen vikt",
+              "name": "bönor",
+              "quantity": 300,
+              "role": "primary",
+              "unit": "g"
+            },
+            {
+              "form": "raw_edible",
+              "label": "Rödlök",
+              "name": "rödlök",
+              "quantity": 60,
+              "role": "vegetable",
+              "unit": "g"
+            }
+          ],
+          "name": "Sallad"
+        }
+      ],
+      "cuisine": "italian",
+      "equipment": [
+        "ugn med 250 °C",
+        "kavel",
+        "bakplåtspapper godkänt för vald temperatur",
+        "plåt"
+      ],
+      "family": "ojäst tunn ostfylld deg",
+      "flavor": [
+        "tre ostar",
+        "olivolja"
+      ],
+      "meal_type": "dinner",
+      "method": "bake",
+      "name": "Focaccia col formaggio – Recco-inspirerad med ricotta, färskost och mozzarella – utökad",
+      "notes": "Innehållsgranskad 2026-11-02; inte provlagad. Egen receptanpassning med råvaruformer, inköpsmängder, portionsskalning och okända processförluster enligt granskningsrapporten. Ägg anges utan skal; grönsaker vägs ansade där formen är raw_edible.",
+      "primary": "ricotta, färskost och mozzarella",
+      "servings": 4,
+      "side": "tomatsallad",
+      "steps": [
+        {
+          "after": [],
+          "minutes": 9,
+          "passive": false,
+          "text": "Blanda mjöl och salt med 145 ml vatten och två tredjedelar av brödets olja. Knåda 8 minuter till elastisk deg. Ingen jäst används.",
+          "uses": [
+            "vetemjöl",
+            "salt",
+            "olivolja"
+          ]
+        },
+        {
+          "after": [
+            1
+          ],
+          "minutes": 45,
+          "passive": true,
+          "text": "Täck degen och låt vila i 45 minuter så att den kan sträckas riktigt tunt.",
+          "uses": [
+            "vetemjöl"
+          ]
+        },
+        {
+          "after": [
+            2
+          ],
+          "minutes": 23,
+          "passive": false,
+          "text": "Värm ugnen till 250 °C med plåten i. Låt mozzarellan rinna av och väg den angivna avrunna mängden. Riv eller finfördela den och blanda med hela ricottan och färskosten; ingen ostvätska från dessa två produkter hälls bort. Dela degen i två lika delar. Kavla mellan bakpapper och dra till mycket tunna ark, cirka en millimeter. Använd motsvarande plåtyta vid större sats, eventuellt flera plåtar. Fördela ostblandningen på det undre arket, täck med det andra och förslut kanterna. Gör små ångöppningar och pensla med återstående brödolja. Använd allt degmaterial. Välj bakpapper godkänt för 250 °C eller lätt oljad metallplåt med olja från receptets mängd. Blanda all färsk eller fryst hackad basilika i ostfyllningen före gräddningen; behåll dess vätska.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt",
+            "ricotta",
+            "färskost",
+            "mozzarella",
+            "basilika"
+          ]
+        },
+        {
+          "after": [
+            3
+          ],
+          "minutes": 14,
+          "passive": true,
+          "text": "Grädda på het plåt cirka fjorton minuter tills degen fått bruna blåsor och osten bubblar. Håll samma tunna deg och fyllningsdjup i större satser; grädda i flera omgångar vid behov.",
+          "uses": [
+            "vetemjöl",
+            "olivolja",
+            "salt"
+          ]
+        },
+        {
+          "after": [
+            4
+          ],
+          "minutes": 3,
+          "passive": false,
+          "text": "Lyft försiktigt ett hörn och kontrollera att botten är gräddad; förläng vid behov. Ta ut plåten. Kontrollera att hela ostfyllningen med basilikan är genomhet och når minst 75 °C, samt följ örtproduktens anvisning.",
+          "uses": [
+            "vetemjöl",
+            "ricotta",
+            "färskost",
+            "mozzarella",
+            "basilika"
+          ]
+        },
+        {
+          "after": [
+            5
+          ],
+          "minutes": 7,
+          "passive": false,
+          "text": "Väg tomaten efter ansning och skär den. Blanda salladens råvaror med dess olja och balsamvinäger. Skär brödet i portionsbitar och servera hela brödet och salladen jämnt fördelat mellan valt antal portioner. Skölj rucolan enligt förpackningen, låt ytvatten rinna av och använd hela uppvägda blad inklusive ätliga stjälkar. Väg gurkan efter ansning och skär den. Väg bönorna avrunna och rödlöken skalad. Skiva löken tunt och vänd ner båda i salladen.",
+          "uses": [
+            "tomat",
+            "balsamvinäger",
+            "olivolja",
+            "rucola",
+            "gurka",
+            "bönor",
+            "rödlök"
+          ]
+        }
+      ],
+      "variant_id": "extended",
+      "version": "1.0.1"
+    }
+  ],
+  "schema_version": "smako-recipe-authoring-v1"
+}

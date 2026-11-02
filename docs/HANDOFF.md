@@ -1,3 +1,39 @@
+# 2026-11-02: Ytterligare nio varianter och löst paketgräns
+
+Se [fjärde hinderomgångens rapport](reviews/recipe-unblock-round4-20261102/REPORT.md),
+[variantkö](reviews/recipe-unblock-round4-20261102/queue.json) och
+[ingredienskontroll](reviews/recipe-unblock-round4-20261102/pending-known-inputs.json).
+Ingen ny ZIP tillkom. Nio varianter i fyra familjer är importerade:
+magiritsa med ungnötslever, pastiera, Recco-inspirerat treostbröd och utökad
+bouyiourdi med gruyère. Tre grundrätter är nya. Alla nio klarar full korg i
+uppskattat läge och sex även i exakt läge i den oförändrade frysta referensen.
+
+Biblioteket är **1 083 grundrätter / 2 851 varianter**. Av sex ZIP med
+210 baser / 556 varianter är nu **389 importerade och 167 väntande**:
+146 hela familjer och tre delvis importerade. Senaste 21/55-leveransen har
+26 importerade och 29 väntande. Nästa författarpaket är fortfarande **025**;
+790 grundrätter / 2 194 varianter återstår av beställningen.
+
+Apelsinblomsvatten i ml och rucolablad 125 g har 15 nya exakta källkopplingar.
+Råvarubyten är namngivna receptversioner, inga falska identitetsalias.
+Leverputs/spad, vetekokvatten och eventuell ostkant har okända V3-förluster;
+hårda gränser för serverad näring/vikt förblir blockerade. Frysta örter
+genomhettas och äggtemperaturer kontrolleras aktivt. Recepten är inte provlagade.
+
+Importen nådde den tekniska gränsen 128 paket. `MAX_PACKS` är nu 1 024,
+fortfarande ändlig och testad både vid import 129 och vid den nya gränsen.
+Alla 3 975 tidigare utgivna versioner, 2 842 tidigare aktiva varianter och
+2 200 ursprungsreferenser bevaras. CI-baslinjer är oförändrade.
+
+Nästa arbete utgår från `ranked_combined_blocks`. Produktsökningen dokumenterar
+varför panerade bläckfiskringar, vattenkastanjer, rabarbersmak och örtkrukvikter
+inte löser rena råvaruinsatser. Kokossocker har kandidater men ingen ny
+registrering i denna omgång. Räkpasta/curryblad/masa kvarstår, liksom det
+tidigare mängdproblemet i sex dadelvarianter. Ingen betaaktivering eller
+ny varm tidsmätning ingår.
+
+---
+
 # 2026-11-02: Leverans 21/55 och ytterligare 20 importerade varianter
 
 Se [rapporten](reviews/recipe-unblock-round3-20261102/REPORT.md),

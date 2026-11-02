@@ -12,12 +12,12 @@ ZIP med 21/55. Fördelningen är 136 middagar, 18 frukostar och 56 mellanmål.
 Nästa nyskrivna paket är **025**. Mot beställningen återstår **790
 grundrätter / 2 194 varianter**: 614 middagar, 107 frukostar och 69 mellanmål.
 
-Biblioteket är nu **1 080 baser / 2 842 varianter**. Från denna beställning
-är 380 varianter importerade i 146 baser (142 hela familjer, fyra delvis).
-176 varianter återstår med dokumenterade hinder, varav 35 från senaste ZIP.
+Biblioteket är nu **1 083 baser / 2 851 varianter**. Från denna beställning
+är 389 varianter importerade i 149 baser (146 hela familjer, tre delvis).
+167 varianter återstår med dokumenterade hinder, varav 29 från senaste ZIP.
 Både importerade och alla
 kvarvarande mottagna utkast ska ingå i nästa dubblettunderlag. Se
-[senaste rapporten och kön](../reviews/recipe-unblock-round3-20261102/REPORT.md).
+[senaste rapporten och kön](../reviews/recipe-unblock-round4-20261102/REPORT.md).
 Den nya mängd-/processhanteringen gör inte okänd näring eller saknat
 produktstöd godkänt. Fortsätt enligt ägarens preferenser nedan.
 
