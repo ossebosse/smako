@@ -18,6 +18,8 @@ from app.services.purchase_quantity_resolver import PurchaseQuantityResolver
 from app.services.recipe_library import _scaled, current_recipes, validate_recipe_design
 from app.services.recipe_preparation import input_evidence
 
+from backend.tests.recipe_language_history import after_language_id, assert_current_language_version
+
 REPORT = ROOT.parents[3] / 'docs/reviews/top-five-ingredients-20261028'
 SOURCES = json.loads((REPORT / 'source-declarations.json').read_bytes())['sources']
 
@@ -62,7 +64,7 @@ def test_every_exact_existing_context_qualifies_without_any_new_price():
         key = 'intake_all_shape_top5_' + slug
         row = links.entries()[key]
         transition = next(t for t in review['corrected'] if source['group'] in t['groups'])
-        new, old = active[transition['runtime_id']], issued[transition['previous_id']]
+        new, old = active[after_language_id(transition['runtime_id'])], issued[transition['previous_id']]
         for proof in row['reviewed_links']:
             p, fact = source_fixture(slug, proof)
             assert links.compatible(key, p, fact)
@@ -115,10 +117,10 @@ def test_successors_preserve_all_originals_other_ingredients_safety_and_scaling(
     assert Counter(g for t in review['corrected'] for g in t['groups']) == {
         'tamarindpasta': 93, 'masa harina': 31, 'pärlkorn': 27, 'citrongräs': 27, 'klibbigt ris': 20}
     for t in review['corrected']:
-        old, new = issued[t['previous_id']], active[t['runtime_id']]
+        old, new = issued[t['previous_id']], active[after_language_id(t['runtime_id'])]
         assert t['previous_id'] not in active
         assert old.design.content_sha256 == t['before_content_sha256']
-        assert new.design.content_sha256 == t['content_sha256']
+        assert_current_language_version(t['runtime_id'], t['content_sha256'])
         assert new.design.provenance.cooking_test == 'not_cooked'
         assert new.servings == old.servings and new.design.ingredient_count == old.design.ingredient_count
         assert (new.design.vegetarian, new.design.fish) == (old.design.vegetarian, old.design.fish)
@@ -149,7 +151,7 @@ def test_successors_preserve_all_originals_other_ingredients_safety_and_scaling(
 def test_rice_and_grain_methods_are_actual_cooking_changes():
     review, _issued, active = recipes()
     for t in review['corrected']:
-        new = active[t['runtime_id']]
+        new = active[after_language_id(t['runtime_id'])]
         text = ' '.join(new.instructions)
         if 'klibbigt ris' in t['groups']:
             assert 'TORRA risvolymen' in text and '15 minuter' in text

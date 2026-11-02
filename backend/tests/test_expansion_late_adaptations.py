@@ -15,6 +15,12 @@ from app.services.recipe_library import (
     validate_recipe_design,
 )
 
+from backend.tests.recipe_language_history import (
+    after_language_id,
+    assert_current_language_version,
+    before_language_id,
+)
+
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 
 
@@ -154,7 +160,7 @@ def test_vada_extended_uses_existing_volume_concentrate_without_mass_conversion(
     assert names['tamarindkoncentrat'].quantity == 20 and names['tamarindkoncentrat'].unit == 'ml'
     assert names['tamarindkoncentrat'].product_requirements == ('pack:intake_all_shape_top5_tamarind_concentrate',)
     assert names['dadlar'].quantity == 60 and names['koriander'].quantity == 15
-    assert recipe.design.version == '1.0.2'
+    assert before_language_id(identity(recipe)).split(':')[1] == '1.0.2'
     date_process = next(p for p in recipe.design.unmeasured_processes if p.ingredient_keys == ('dadlar|as_sold',))
     assert date_process.operation == 'trim_before_cooking'
     date_step = next(s for s in recipe.design.steps if s.id == date_process.step_id)
@@ -526,7 +532,7 @@ def test_mozzarella_pasta_keeps_drained_basis_and_distinct_baked_filling():
         names = {i.canonical_name: i for i in recipe.ingredients}
         assert 'caciocavallo' not in names
         assert names['mozzarella'].form == 'preserved_drained' and names['mozzarella'].quantity == 200
-        assert names['pasta'].product_requirements == ('pack:pasta',) and recipe.design.version == '1.0.2'
+        assert names['pasta'].product_requirements == ('pack:pasta',) and before_language_id(identity(recipe)).split(':')[1] == '1.0.2'
         assert {'ägg', 'nötfärs', 'aubergine'} <= names.keys()
         assert any(p.operation == 'drain_after_cooking' for p in recipe.design.unmeasured_processes)
         doubled = _scaled(recipe, 8)
@@ -561,7 +567,7 @@ def test_cheese_alternatives_preserve_unknown_losses_and_scale_actual_water():
         text = ' '.join(doubled.instructions)
         if base.endswith('pasta-alla-norma'):
             assert 'drain_after_cooking' in operations
-            assert recipe.design.version == '1.0.2'
+            assert before_language_id(identity(recipe)).split(':')[1] == '1.0.2'
             assert '300 ml vatten från pastakoket' in text
             assert '100 ml vatten från pastakoket' in text
             assert 'minst tre minuter' in text
@@ -601,9 +607,9 @@ def test_lamb_successors_change_only_the_reviewed_cut_and_gross_basis_and_keep_h
     assert {r['id'] for r in proof['modes']['estimated']['recipes']} == {r['runtime_id'] for r in review['recipes']}
     assert all(r['status'] == 'verified' and r['audit']['passed'] for r in proof['modes']['estimated']['recipes'])
     for row in review['recipes']:
-        before, after = issued[row['previous_id']], current[row['runtime_id']]
+        before, after = issued[row['previous_id']], current[after_language_id(row['runtime_id'])]
         assert before.design.content_sha256 == row['previous_content_sha256']
-        assert after.design.content_sha256 == row['content_sha256']
+        assert_current_language_version(row['runtime_id'], row['content_sha256'])
         assert row['previous_id'] in manifest['revocations'] and row['previous_id'] not in current
         old = {i.canonical_name: i for i in before.ingredients}
         new = {i.canonical_name: i for i in after.ingredients}
@@ -671,14 +677,14 @@ def test_selected_frozen_products_receive_reviewed_preparation_without_food_dose
     assert {r['id'] for r in proof['modes']['estimated']['recipes']} == {r['runtime_id'] for r in review['recipes']}
     assert all(r['status'] == 'verified' and r['audit']['passed'] for r in proof['modes']['estimated']['recipes'])
     for row in review['recipes']:
-        old, new = issued[row['previous_id']], current[row['runtime_id']]
+        old, new = issued[row['previous_id']], current[after_language_id(row['runtime_id'])]
         assert old.design.content_sha256 == row['previous_content_sha256']
-        assert new.design.content_sha256 == row['content_sha256']
+        assert_current_language_version(row['runtime_id'], row['content_sha256'])
         assert old.ingredients == new.ingredients
         assert row['previous_id'] in manifest['revocations'] and row['previous_id'] not in current
         text = ' '.join(new.instructions)
         if new.design.base_id.endswith('spaghetti-aglio-olio'):
-            assert new.design.version == '1.0.3' and new.preparation.version == 'smako-authored-losses-v3'
+            assert before_language_id(identity(new)).split(':')[1] == '1.0.3' and new.preparation.version == 'smako-authored-losses-v3'
             assert any(p.ingredient_keys == ('pasta|dry',) and p.operation == 'drain_after_cooking'
                        for p in new.design.unmeasured_processes)
             assert 'all uppvägd persilja. Sjud' in text

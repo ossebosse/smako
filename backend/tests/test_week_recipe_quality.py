@@ -9,6 +9,8 @@ from app.services.meal_library_content import ROOT, identity, load_entries, mani
 from app.services.personal_policy import PolicyConflict, ProductFacts, check_product
 from app.services.recipe_library import current_recipes
 
+from backend.tests.recipe_language_history import after_language_id, assert_current_language_version
+
 REPORT=ROOT.parents[3]/'docs/reviews/week-search-and-cache-20261026/recipe-review.json'
 REVIEW=json.loads(REPORT.read_bytes())
 MINT=json.loads((ROOT.parents[3]/'docs/reviews/recipe-four-staples-20261027/recipe-review.json').read_bytes())
@@ -21,7 +23,7 @@ for directory in ('egg-preparation-20261028', 'mint-leaf-preparation-20261028',
 
 
 def current(rid):
-    rid=SUCCESSORS.get(rid,{}).get('runtime_id',rid)
+    rid=after_language_id(SUCCESSORS.get(rid,{}).get('runtime_id',rid))
     return next(r for r in current_recipes() if identity(r)==rid)
 
 
@@ -48,9 +50,9 @@ def test_real_direct_heat_pan_recipes_are_preserved(row):
     amendment=SUCCESSORS.get(row['runtime_id'])
     if amendment:
         assert amendment['before_content_sha256']==row['content_sha256']
-        assert r.design.content_sha256==amendment['content_sha256']
+        assert_current_language_version(amendment['runtime_id'], amendment['content_sha256'])
     else:
-        assert r.design.content_sha256==row['content_sha256']
+        assert_current_language_version(row['runtime_id'], row['content_sha256'])
     assert any('frysta skalade' in s.text and 'direkt i den varma pannan' in s.text for s in r.design.steps)
     assert not any('tina helt' in s.text for s in r.design.steps)
 
@@ -84,4 +86,4 @@ def test_superseded_versions_keep_exact_content_and_new_versions_are_current():
     for row in REVIEW['corrected']:
         assert row['previous_id'] in m['revocations'] and row['previous_id'] not in active
         assert issued[row['previous_id']].design.content_sha256==row['before_content_sha256']
-        assert SUCCESSORS.get(row['runtime_id'],{}).get('runtime_id',row['runtime_id']) in active
+        assert after_language_id(SUCCESSORS.get(row['runtime_id'],{}).get('runtime_id',row['runtime_id'])) in active

@@ -1,0 +1,50 @@
+"""Keep older qualification receipts tied to their exact issued recipe bytes."""
+import json
+from functools import lru_cache
+
+from app.services.meal_library_content import ROOT, identity, load_entries, manifest_entries
+from app.services.recipe_library import current_recipes
+
+
+@lru_cache(maxsize=1)
+def language_review():
+    return json.loads((ROOT.parents[3] / "docs/reviews/recipe-language-20261102/library-transition.json").read_bytes())
+
+
+@lru_cache(maxsize=1)
+def language_successors():
+    return {r["previous_id"]: r for r in language_review()["corrected"]}
+
+
+def after_language_id(recipe_id):
+    return language_successors().get(recipe_id, {}).get("runtime_id", recipe_id)
+
+
+def before_language_id(recipe_id):
+    return next((r["previous_id"] for r in language_successors().values()
+                 if r["runtime_id"] == recipe_id), recipe_id)
+
+
+def current_language_cohort(pack_prefix):
+    before = current_recipes(len(language_review()["before_manifest"]["current"]))
+    keys = {(r.design.base_id, r.design.variant_id) for r in before
+            if r.design.content_source and r.design.content_source.pack_id.startswith(pack_prefix)}
+    return [r for r in current_recipes() if (r.design.base_id, r.design.variant_id) in keys]
+
+
+@lru_cache(maxsize=1)
+def _issued():
+    manifest = manifest_entries()
+    return {identity(r): r for r in load_entries(manifest["current"] + manifest["history"])}
+
+
+def assert_current_language_version(recipe_id, content_sha256):
+    # The previous qualification still certifies exactly its original bytes.
+    assert _issued()[recipe_id].design.content_sha256 == content_sha256
+    active = {identity(r): r for r in current_recipes()}
+    successor = language_successors().get(recipe_id)
+    if successor:
+        assert successor["previous_content_sha256"] == content_sha256
+        assert active[successor["runtime_id"]].design.content_sha256 == successor["content_sha256"]
+    else:
+        assert active[recipe_id].design.content_sha256 == content_sha256

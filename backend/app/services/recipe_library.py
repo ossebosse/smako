@@ -107,6 +107,8 @@ def _structural_check(recipe: Recipe) -> None:
     if recipe.instructions != [s.text for s in d.steps]:
         raise ValueError("Visade instruktioner skiljer sig från den granskade tillagningsplanen.")
     step_keys = {s.id: set(s.ingredient_keys) for s in d.steps}
+    if d.batch_scaling and d.batch_scaling.step_id not in step_keys:
+        raise ValueError("Omgångstiden hänvisar till ett okänt tillagningssteg.")
     process_pairs = set()
     for process in d.unmeasured_processes or ():
         pair = (process.step_id, process.operation)
@@ -294,8 +296,16 @@ def _scaled(recipe: Recipe, servings: int) -> Recipe:
                      and (recipe.servings == 2 or re.search(r"grädda|stek|baka|sjud|koka", step.text.casefold()))
                      and not (result.design.version in {"1.3.0", "1.4.0"}
                               and step.id in {"rice", "prebake"})), 0)
+        if result.design.batch_scaling is not None:
+            heat = next(index for index, step in enumerate(steps)
+                        if step.id == result.design.batch_scaling.step_id)
         original = steps[heat]
-        extra = original.duration_minutes * (batches - (recipe.servings + 3) // 4)
+        batch_minutes = original.duration_minutes
+        if result.design.batch_scaling is not None:
+            batch_minutes = result.design.batch_scaling.duration_minutes
+            if heat == 0:
+                batch_minutes += extra_prep
+        extra = batch_minutes * (batches - (recipe.servings + 3) // 4)
         steps[heat] = original.model_copy(update={
             "duration_minutes": original.duration_minutes + extra,
             "text": original.text + f" För {servings} portioner: tillaga i {batches} omgångar "

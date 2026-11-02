@@ -17,7 +17,7 @@ def recipe(base, variant="simple"):
 
 def test_cold_mango_topping_is_not_boiled_with_tapioca_and_has_real_thaw_time():
     r = recipe("smako-thai-snack-tapioca-pearl-pudding")
-    assert r.design.version == "1.0.2"
+    assert tuple(map(int, r.design.version.split("."))) >= (1, 0, 2)
     assert r.design.waiting_minutes >= 120
     assert all("mango|raw_edible" not in s.ingredient_keys for s in r.design.steps if s.text.startswith(("Skölj tapiokapärlorna", "Sjud på låg värme", "Rör ner sockret")))
     assert not any("Skala" in s.text and "mango" in s.text for s in r.design.steps)
@@ -80,6 +80,9 @@ def test_all_amended_versions_keep_history_and_original_library_and_source_bytes
     successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     top_five = json.loads((ROOT.parents[3] / "docs/reviews/top-five-ingredients-20261028/recipe-review.json").read_bytes())
     latest = {r["previous_id"]: r["runtime_id"] for r in top_five["corrected"]}
+    successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
+    language = json.loads((ROOT.parents[3] / "docs/reviews/recipe-language-20261102/library-transition.json").read_bytes())
+    latest = {r["previous_id"]: r["runtime_id"] for r in language["corrected"]}
     successors = {k: latest.get(v, v) for k, v in successors.items()} | latest
     assert report["affected_variants"] == 337
     assert len(current) == 2851

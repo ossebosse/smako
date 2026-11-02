@@ -104,3 +104,37 @@ under `backend/app/data/recipes/reviewed-800-20261025`. Kör vanlig
 Importera den sparade standardiserade filen igen för idempotenskontroll;
 författarkommandots granskningsdatum är kördagens datum. Källoriginalen
 under `incoming` ska aldrig skrivas över.
+
+
+## Språk som går att laga efter
+
+- Skriv ett kort namn på rätten, helst högst 80 tecken. Beskriv en faktisk
+  skillnad mellan varianter, till exempel ”med gurka och dill”. Använd inte
+  suffix som ”enkel”, ”vardag”, ”standard” eller ”utökad”. Lägg upptining,
+  produktkrav och granskningshistorik i rätt steg eller i metadata.
+- Ange råvaran och handlingen: ”Smula fetaosten och finhacka dillen”, inte
+  ”finhacka fasta bitar och färska örter”. Ge inga instruktioner om ingredienser
+  som saknas. Yoghurt och salt ska röras ihop, inte hackas.
+- Ett väntesteg ska säga vad som väntar, hur länge och hur man ser att det är
+  klart. Exempel: ”Sjud linserna i 15 minuter tills de är mjuka.” Använd aldrig
+  ”Låt momentet fortsätta tills den angivna tiden …” eller ett inledande
+  ”Förbered och påbörja momentet”. Dela bara aktivt arbete och väntan när
+  båda stegen har en egen konkret instruktion och granskad tidsuppskattning.
+- Skriv ”rätten”, ”såsen” eller det faktiska tillbehöret i stället för
+  ”huvudkomponenten” och ”komponentmängder”. Håll beräkningsantaganden i
+  metodinformationen. Behåll praktiska anvisningar om vad som ska användas,
+  hällas bort, kylas eller genomhettas i själva steget.
+- Skriv naturlig svenska utan reklamfraser, superlativ eller påståenden om
+  provlagning och autenticitet som saknar stöd. Ange anpassningar som ändrar
+  rättens identitet tydligt. ”Grekiskt” kan vara en kategorietikett; receptets
+  faktiska ursprung och anpassning hör hemma i innehållsgranskningen.
+- Språkändringar får inte ändra mängder, råvaruformer, temperaturer,
+  allergenkrav, kylkedja, processvatten eller portionsskalning. Publicera en
+  ny version och bevara tidigare paket. Att en strukturkontroll går igenom
+  är inte samma sak som att rätten är provlagad.
+
+Författarverktyget varnar för vanliga mallfraser och överlånga namn.
+Den tidigare automatiska uppdelningen i förberedelse och ett tomt väntesteg
+är avvecklad. Den granskade språkändringen 2026-11-02 låser äldre recepts
+underlag för omgångstider i `batch_scaling`, så att andra verb eller förenade
+steg inte ändrar beräkningen för fler portioner.

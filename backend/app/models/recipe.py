@@ -71,6 +71,14 @@ class RecipeUnmeasuredProcess(BaseModel):
     description: str = Field(min_length=10, max_length=500)
 
 
+class RecipeBatchScaling(BaseModel):
+    """Reviewed timing basis, independent of the wording of cooking steps."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+    step_id: str
+    duration_minutes: int = Field(ge=1, le=1440)
+
+
 class RecipeDesign(BaseModel):
     """Immutable authored identity, cooking structure and review provenance.
 
@@ -115,6 +123,7 @@ class RecipeDesign(BaseModel):
     unmeasured_processes: tuple[RecipeUnmeasuredProcess, ...] | None = Field(
         default=None, min_length=1, exclude_if=lambda v: v is None)
     servings_multiple: int | None = Field(default=None, ge=1, le=12, exclude_if=lambda v: v is None)
+    batch_scaling: RecipeBatchScaling | None = Field(default=None, exclude_if=lambda v: v is None)
 
 
 class RecipePreparation(BaseModel):

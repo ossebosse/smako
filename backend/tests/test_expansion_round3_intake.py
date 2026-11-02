@@ -9,6 +9,11 @@ import pytest
 from app.services.meal_library_content import ROOT, identity, validate_pack_bytes
 from app.services.recipe_library import _scaled, current_recipes, validate_recipe_design
 
+from backend.tests.recipe_language_history import (
+    assert_current_language_version,
+    current_language_cohort,
+)
+
 REPORT = Path('docs/reviews/recipe-unblock-round3-20261102')
 AUTHORED = ROOT / 'reviewed-expansion-round3-20261102'
 SOURCE = ROOT / 'incoming/authoring-1000-20261101'
@@ -44,7 +49,6 @@ def test_sixth_delivery_and_decisions_preserve_actual_bytes_counts_and_old_accep
 
 
 def test_every_new_version_has_exact_source_review_and_full_estimated_basket():
-    active = {identity(r): r for r in current_recipes()}
     accepted = set()
     for stage in (1, 2, 3):
         raw = (AUTHORED / f'standardized-stage{stage}.json').read_bytes()
@@ -67,15 +71,14 @@ def test_every_new_version_has_exact_source_review_and_full_estimated_basket():
         assert all(r['status'] == 'verified' and r['audit']['passed'] for r in results)
         for row in review['recipes']:
             assert sha((SOURCE / row['source_file']).read_bytes()) == row['source_sha256']
-            assert active[row['runtime_id']].design.content_sha256 == row['content_sha256']
+            assert_current_language_version(row['runtime_id'], row['content_sha256'])
             assert row['cooking_test'] == 'not_cooked'
     assert len(accepted) == 20
 
 
 @pytest.mark.parametrize('servings', [1, 4, 12])
 def test_all_new_recipes_scale_food_process_water_and_keep_temperatures(servings):
-    new = [r for r in current_recipes() if r.design.content_source
-           and r.design.content_source.pack_id.startswith('reviewed-expansion-round3-')]
+    new = current_language_cohort('reviewed-expansion-round3-')
     assert len(new) == 20
     for recipe in new:
         scaled = _scaled(recipe, servings)

@@ -8,8 +8,8 @@ from playwright.sync_api import expect, sync_playwright
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'backend'), str(ROOT)]
-from app.models.recipe_preferences import RecipePreferences
-from app.services.recipe_library import candidates
+from app.services.meal_library_content import identity
+from app.services.recipe_library import current_recipes
 
 
 def main():
@@ -17,14 +17,22 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     args.output.mkdir(parents=True, exist_ok=True)
-    recipes = [r.model_dump(mode='json') for r in candidates(RecipePreferences(mode='complete'), 4)]
+    active = current_recipes()
+    recipes = [r.model_dump(mode='json') for r in active if r.preparation.version == 'smako-edible-input-v1']
+    receipt = json.loads((ROOT / 'docs/reviews/recipe-language-20261102/library-transition.json').read_bytes())
+    merged_id = next(r['runtime_id'] for r in receipt['corrected'] if r['merged_wait_steps'])
+    samples = [next(r for r in active if identity(r) == merged_id),
+               next(r for r in active if r.preparation.version == 'smako-authored-losses-v3' and r.design.batch_scaling)]
     reports = []
     with sync_playwright() as pw:
         for engine in ('chromium', 'webkit'):
             browser = getattr(pw, engine).launch()
             for width in (390, 1280):
                 page = browser.new_page(viewport={'width': width, 'height': 900})
-                page.set_content('<html lang="sv"><head><meta charset="utf-8"></head><body><main class="recipe-card"><div class="recipe-content" id="recipe"></div></main></body></html>')
+                errors = []
+                page.on('pageerror', lambda error, errors=errors: errors.append(str(error)))
+                page.route('http://127.0.0.1/recipe-test', lambda route: route.fulfill(content_type='text/html', body='<html lang="sv"><head><meta charset="utf-8"></head><body><main class="recipe-card"><div class="recipe-content" id="recipe"></div></main></body></html>'))
+                page.goto('http://127.0.0.1/recipe-test')
                 for name in ('styles.css', 'complete-recipes.css'):
                     path = ROOT / 'backend/app/static' / name
                     if path.exists():
@@ -45,7 +53,7 @@ def main():
                   }
                   const recipe=recipes.find(r=>r.design.base_id==='smako-indian-palak-tofu'&&r.design.variant_id==='base');
                   document.querySelector('#recipe').replaceChildren(SmakoRecipes.renderRecipe(recipe,{nutrition:{status:'ESTIMATED',values}}));
-                  const title=document.createElement('h1');title.textContent=recipe.name;document.querySelector('#recipe').prepend(title);
+                  const title=document.createElement('p');title.className='recipe-name';title.textContent=recipe.name;document.querySelector('#recipe').prepend(title);
                   if(SmakoRecipes.mealDescription(recipe,'vegetarian').includes('Vegetariska'))throw new Error('Plural category');
                   return {count:recipes.length,protein:SmakoRecipes.nutritionNumber(values.protein_g,'ESTIMATED'),raw:values.protein_g};
                 }''', recipes)
@@ -59,6 +67,24 @@ def main():
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
                 card.screenshot(path=str(args.output / f'{engine}-{width}-recipe.png'))
                 reports.append({'engine': engine, 'width': width, **result, 'physical_device': False})
+                for index, sample in enumerate(samples):
+                    page.evaluate("""recipe => {
+                      const before=JSON.stringify(recipe);
+                      const node=SmakoRecipes.renderRecipe(recipe);
+                      const title=document.createElement('p');title.className='recipe-name';title.textContent=recipe.name;
+                      document.querySelector('#recipe').replaceChildren(title,node);
+                      if(JSON.stringify(recipe)!==before)throw new Error('Recipe mutated by presentation');
+                    }""", sample.model_dump(mode='json'))
+                    expect(card.locator('.recipe-about summary')).to_have_text('Om receptet')
+                    expect(card.get_by_text('Recept-ID:', exact=False)).to_be_hidden()
+                    expect(card.locator('.complete-recipe-method')).not_to_contain_text('Förbered och påbörja')
+                    expect(card.locator('.complete-recipe-method')).not_to_contain_text('Låt momentet fortsätta')
+                    expect(card.locator('.recipe-quality-note')).to_contain_text('inte provlagat')
+                    assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
+                    card.screenshot(path=str(args.output / f'{engine}-{width}-language-{index}.png'))
+                    card.locator('.recipe-about summary').click()
+                    expect(card.get_by_text('Recept-ID:', exact=False)).to_be_visible()
+                assert not errors, errors
                 page.close()
             browser.close()
     (args.output / 'results.json').write_text(json.dumps(reports, indent=2), encoding='utf-8')

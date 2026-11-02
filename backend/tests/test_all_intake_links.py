@@ -99,7 +99,7 @@ def test_registry_data_change_invalidates_method_after_restart(tmp_path, monkeyp
         prepared.method_signature.cache_clear()
 
 
-def test_passive_hours_and_original_dependencies_are_preserved(monkeypatch):
+def test_retired_passive_adapter_preserves_source_hours_and_dependencies(monkeypatch):
     import runpy
 
     directory = Path(__file__).resolve().parents[2] / "scripts/recipe_layer"
@@ -110,11 +110,12 @@ def test_passive_hours_and_original_dependencies_are_preserved(monkeypatch):
          "minutes": 260, "passive": True, "uses": ["lax"]},
         {"text": "Servera kall.", "minutes": 2, "uses": ["lax"], "after": [1]},
     ]}
-    module["phases"](row, [])
-    assert row["steps"][0]["minutes"] == 1
-    assert row["steps"][1]["minutes"] == 260
-    assert row["steps"][1]["passive"] is True
-    assert row["steps"][2]["after"] == [2]
+    with pytest.raises(RuntimeError, match="retired"):
+        module["phases"](row, [])
+    assert len(row["steps"]) == 2
+    assert row["steps"][0]["minutes"] == 260
+    assert row["steps"][0]["passive"] is True
+    assert row["steps"][1]["after"] == [1]
 
 
 def declaration_case():
@@ -204,6 +205,10 @@ def test_entire_intake_is_imported_and_scales_without_changing_original_library(
     successors = {r["previous_id"]: r["runtime_id"] for r in top_five["corrected"]}
     replacements = {k: successors.get(v, v) for k, v in replacements.items()}
     replacements.update(successors)
+    from backend.tests.recipe_language_history import after_language_id
+    replacements = {key: after_language_id(value) for key, value in replacements.items()}
+    replacements.update({row["runtime_id"]: after_language_id(row["runtime_id"]) for row in report["recipes"]
+                         if row["runtime_id"] not in replacements})
     assert len(report["recipes"]) == 2200
     assert len({r["source_id"] for r in report["recipes"]}) == 2200
     assert report["status"] == {"accepted": 2155, "already_imported": 45}

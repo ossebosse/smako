@@ -15,6 +15,10 @@ from app.services.meal_library_content import (
 )
 from app.services.recipe_library import current_recipes
 
+from backend.tests.recipe_language_history import (
+    assert_current_language_version,
+)
+
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 AUTHORED = ROOT / 'reviewed-expansion-round2-20261101'
 SOURCE = ROOT / 'incoming/authoring-1000-20261101'
@@ -113,10 +117,9 @@ def test_every_received_identity_has_one_final_decision_and_old_imports_are_reta
     assert summary['rejected_local_versions'] == 1
     assert summary['batch_limited_variants'] == 6
     assert not summary['beta_activation'] and summary['cooking_test'] == 'not_cooked'
-    active = {identity(r): r for r in current_recipes()}
     for row in rows:
         if row['status'] == 'imported_reviewed_version':
-            assert active[row['runtime_id']].design.content_sha256 == row['content_sha256']
+            assert_current_language_version(row['runtime_id'], row['content_sha256'])
         if row['status'] == 'pending_qualified_input':
             assert row['input_blocks'] and all(b['code'] == 'DATA_BLOCKED' for b in row['input_blocks'])
         if row['status'] == 'pending_register_or_authoring':

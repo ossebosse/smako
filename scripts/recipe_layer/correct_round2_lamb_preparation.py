@@ -31,7 +31,7 @@ def build():
             row = copy.deepcopy(original)
             rename_ingredient(row, 'lammkött', 'benfri lammstek')
             row['primary'] = 'benfri lammstek'
-            row['name'] += ' – med benfri lammstek och planerad kylupptining'
+            row['name'] = row['name'].replace('lammkött', 'benfri lammstek')
             for component in row['components']:
                 for item in component['ingredients']:
                     if item['name'] == 'benfri lammstek':

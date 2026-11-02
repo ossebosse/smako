@@ -196,7 +196,7 @@ def revise(original):
             purpose = "före skärning och trädning på spett" if mode == "thaw_before_threading" else "före skärning" if mode == "thaw_before_cutting" else "före kall användning"
             prefix.append({"text": f"Låt {name} tina helt {purpose}. Planera cirka {minutes // 60} timmar i kylskåp i ett tunt lager; kontrollera att ingen hård fryst kärna finns kvar och förläng vid behov. Följ också förpackningens anvisningar. Använd hela mängden och all saft.", "uses": [name], "minutes": minutes, "passive": True})
         else:
-            action = "Använd direkt från frysen i mixer avsedd för frysta livsmedel." if mode == "frozen_blender" else "Tillsätt direkt från frysen när ingrediensen används i instruktionen; den ska inte skalas, ansas eller hackas på nytt."
+            action = "Använd direkt från frysen i mixer avsedd för frysta livsmedel." if mode == "frozen_blender" else "Tillsätt direkt från frysen i det steg där råvaran används. Du behöver inte ansa eller hacka den."
             prefix.append({"text": f"Väg upp fryst {name}. {action} Behåll hela den uppvägda ätliga mängden.", "uses": [name], "minutes": 1})
         decisions.append({"ingredient": name, "process": mode, "frozen_grams": amount, "passive_preparation_minutes": minutes})
     # Conservative serial dependencies: never imply an unreviewed overlap.

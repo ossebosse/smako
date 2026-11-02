@@ -17,6 +17,8 @@ from app.services.recipe_library import (
     validate_recipe_design,
 )
 
+from backend.tests.recipe_language_history import after_language_id, assert_current_language_version
+
 REPORT = Path('docs/reviews/recipe-unblock-round2-20261101')
 
 
@@ -39,7 +41,10 @@ def test_successors_keep_food_inputs_and_original_bytes_and_have_complete_basket
         assert record['previous_id'] in manifest['revocations'] and record['previous_id'] not in active
         # Later source-form review may supersede this already proven version.
         if record['runtime_id'] not in active:
-            assert record['runtime_id'] in manifest['revocations']
+            if after_language_id(record['runtime_id']) != record['runtime_id']:
+                assert_current_language_version(record['runtime_id'], record['content_sha256'])
+            else:
+                assert record['runtime_id'] in manifest['revocations']
             new = next(r for r in active.values() if r.design.base_id == new.design.base_id
                        and r.design.variant_id == new.design.variant_id)
         for servings in (1, 2, 4, 8, 12):

@@ -1,3 +1,62 @@
+# 2026-11-02: Språkgranskning av UI och recept
+
+Ägarens ”Genomför alla förslag” omfattar granskningens språkändringar.
+UI har konkreta statusmeddelanden, tydligare skafferi-/inköpstexter och
+begripliga felmeddelanden. Statistik och recept-ID/version ligger i detaljer.
+AI-ursprung, avsaknad av provlagning och okända näringsvärden är fortfarande
+synliga. Långa tider visas i timmar/minuter, och dubblerade generiska
+råvaruetiketter visas bara en gång. Uppgifter om prisernas omfattning behålls.
+
+**2 523 receptversioner** har fått ny text, inklusive **2 513 kortare namn**.
+**1 075 tomma väntesteg i 886 varianter** har slagits ihop med det föregående
+konkreta steget. Granskade omskrivningar anger verkliga råvaror, tar bort
+ovidkommande rotfruktsinstruktioner och behåller mängder, temperaturer,
+beredningskrav och säkerhetsanvisningar. Se [före/efter-underlaget](reviews/recipe-language-20261102/recipe-review.json)
+och [versionsövergången](reviews/recipe-language-20261102/library-transition.json).
+Alla **3 984 tidigare utgivna versioner** är bytebevarade. Biblioteket har
+fortfarande **1 083 grundrätter / 2 851 aktuella varianter** och exakt samma
+**2 200 ursprungsreferenser**; CI-baslinjer är oförändrade.
+
+Portionsberäkningen valde tidigare omgångstid genom ord i instruktionen.
+Nya `batch_scaling` bevarar föregående versions steg och omgångstid när
+texten ändras eller steg förenas. Ingredienser, komponentmängder, aktiva tider,
+väntetider, totaltider, beroendenas sammanlagda tid och skalbart processvatten
+har jämförts för samtliga stödda portionstal 1–12 för alla 2 523 efterföljare.
+Detta är ingen ny provlagning, prisinsamling eller fullständig korgkvalificering.
+Tidigare kvalificeringskvitton är fortsatt bundna till sina exakta original;
+tester följer endast den uttryckliga granskade språkversionen till aktuellt recept.
+
+Författarverktyget varnar nu för mallfraser och långa namn. Den automatiska
+uppdelningen i förberedelse och tom väntan är avvecklad. Språkregler har lagts
+till i [författarinstruktionen](recipes/AUTHORING.md), beställningsmallen och
+den pågående beställningen 20261101. Äldre utgivna källfiler skrivs inte om.
+
+Ägaren anger **Smako tills vidare**, ännu inget företag, och önskar uttryckligen
+platshållare eftersom kontaktuppgift saknas. Integritetssidan anger detta och
+betavillkoren länkar dit. Internt återstår verklig ansvarig/kontaktuppgift,
+beslut om automatisk lagringstid och automatisering av tidigare raderingar
+vid återställning. Offentlig text beskriver nuvarande beteende, inklusive
+manuell tillämpning av raderingar innan en återställd tjänst öppnas.
+
+Recept- och presentationstester körs offline. Webbläsarprov täcker Chromium
+och WebKit i 390/1280 px; skärmbilder finns i `.local/recipe-language-presentation`.
+Det äldre fristående `test_complete_recipes_browser.py` har ett reproducerat
+fel även med oförändrad main: dess legacy-lägesprov förväntar att valda butiker
+ska försvinna ur begäran (rad 170), men nuvarande UI behåller dem. Det felet
+har inte ändrats för att få grönt. Aktuella formulär-/plan-/inköpsflöden provas
+separat i `test_personal_choices_browser.py`.
+
+Slutkontroll: samtliga språkversioner godkända i `--verify`; riktade tester
+för receptbibliotek, historik, råvarukrav, författarverktyg, täckningsreferenser,
+nya/äldre importomgångar och portionsskalning är godkända efter uppdatering
+av testernas versionskedjor. Formulär-/planprov inklusive avbrytning är godkända;
+två sedan tidigare xfail-markerade UI-prov kvarstår. Start-/kö-/releasekontroll:
+34 godkända. Ruff, compileall och JavaScript-syntaxkontroll godkända.
+
+Ingen betaaktivering eller ändring av driftinställningar ingår.
+
+---
+
 # 2026-11-02: Ytterligare nio varianter och löst paketgräns
 
 Se [fjärde hinderomgångens rapport](reviews/recipe-unblock-round4-20261102/REPORT.md),

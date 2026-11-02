@@ -273,9 +273,14 @@ def test_long_issued_recipe_keeps_total_waiting_and_scaled_amounts_under_explici
 def test_every_imported_variant_roundtrips_at_native_and_supported_portions():
     from app.services.recipe_library import _scaled, validate_recipe_design
 
-    issued = [r for r in current_recipes() if r.design.content_source
-              and r.design.content_source.pack_id.startswith("recipe-intake-reviewed-20261025")]
-    assert len(issued) == 45
+    manifest = content.manifest_entries()
+    cohort = {(r.design.base_id, r.design.variant_id)
+              for r in content.load_entries(manifest["current"] + manifest["history"])
+              if r.design.content_source and content.identity(r) not in manifest["revocations"]
+              and r.design.content_source.pack_id.startswith("recipe-intake-reviewed-20261025")}
+    # Follow the same original intake cohort through reviewed language versions.
+    issued = [r for r in current_recipes() if (r.design.base_id, r.design.variant_id) in cohort]
+    assert len(issued) == len(cohort) == 45
     for recipe in issued:
         for servings in {1, 2, 4, 12, recipe.servings}:
             scaled = Recipe.model_validate_json(_scaled(recipe, servings).model_dump_json())

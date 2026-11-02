@@ -55,33 +55,10 @@ def sha(value):
 
 
 def phases(row, changes):
-    steps, ends = [], {}
-    active_words = r"\b(?:blanda|skar|skolj|skala|vispa|lagg|hall|satt|forma|knada|riv|ansa|pensla|fordela)\b"
-    for n, original in enumerate(row["steps"], 1):
-        step = copy.deepcopy(original)
-        step["after"] = [ends[d] for d in step.get("after", [])]
-        text = _search_text(step["text"])
-        if step.get("passive") and re.search(active_words, text) and step["minutes"] >= 5:
-            numbers = {"en": 1, "ett": 1, "tva": 2, "tre": 3, "fyra": 4, "fem": 5,
-                       "sex": 6, "atta": 8, "tio": 10, "tolv": 12, "femton": 15,
-                       "tjugo": 20, "trettio": 30}
-            stated = []
-            for value, unit in re.findall(r"\b(\d+|en|ett|tva|tre|fyra|fem|sex|atta|tio|tolv|femton|tjugo|trettio) (minuter|timme|timmar)\b", text):
-                value = int(value) if value.isdigit() else numbers[value]
-                stated.append(value * (60 if unit.startswith("timm") else 1))
-            passive = sum(stated) if stated else max(1, step["minutes"] - 3)
-            active = max(1, step["minutes"] - passive)
-            step.update(minutes=active, passive=False,
-                        text="Förbered och påbörja momentet: " + step["text"])
-            steps.append(step)
-            steps.append({"text": "Låt momentet fortsätta tills den angivna tiden och färdighetskontrollen är uppnådda.",
-                          "uses": list(step["uses"]), "minutes": passive, "passive": True, "after": [len(steps)]})
-            changes.append({"code": "separate_active_setup_and_passive_phase", "source_step": n,
-                            "active_minutes": active, "passive_minutes": passive})
-        else:
-            steps.append(step)
-        ends[n] = len(steps)
-    row["steps"] = steps
+    raise RuntimeError(
+        "Automatic active/passive splitting is retired after the 2026-11-02 language review; "
+        "author separate concrete actions and waiting steps with their own times and doneness checks."
+    )
 
 
 def frozen_preparation(row, ingredients, changes):

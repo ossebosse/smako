@@ -24,6 +24,7 @@ EXPANSION_REVIEW = Path('docs/reviews/recipe-unblock-20261101/library-transition
 ROUND2_REVIEW = Path('docs/reviews/recipe-unblock-round2-20261101/library-transition.json')
 ROUND3_REVIEW = Path('docs/reviews/recipe-unblock-round3-20261102/library-transition.json')
 ROUND4_REVIEW = Path('docs/reviews/recipe-unblock-round4-20261102/library-transition.json')
+LANGUAGE_REVIEW = Path('docs/reviews/recipe-language-20261102/library-transition.json')
 
 
 def checked_additive_transition(review):
@@ -123,7 +124,7 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
     before = [r['current_id'] for r in variants]
     if digest(before) != scope['recipe_ids_sha256'] or len(set(before)) != len(before):
         raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
-    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW)
+    paths = (MINT_REVIEW, EGG_REVIEW, MINT_LEAF_REVIEW, CORN_REVIEW, TOP_FIVE_REVIEW, EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW, LANGUAGE_REVIEW)
     reviews = [(path, json.loads(path.read_bytes())) for path in paths if path.exists()]
     pending = [(scope['manifest_sha256'], before)]
     visited = set()
@@ -141,9 +142,14 @@ def reviewed_recipe_transition(scope, compared_scope, variants):
                 continue
             if path in {EXPANSION_REVIEW, ROUND2_REVIEW, ROUND3_REVIEW, ROUND4_REVIEW}:
                 checked_additive_transition(review)
+            if path == LANGUAGE_REVIEW:
+                from rewrite_recipe_language import checked_transition
+                checked_transition(review)
             replacements = {r['previous_id']: r['runtime_id'] for r in review['corrected']}
             after = [replacements.get(r, r) for r in ids]
-            if not set(replacements) <= set(ids) or len(set(after)) != len(after):
+            # Language review covers the whole library. Its complete immutable
+            # transition is checked above; the original 2,200-ID scope stays fixed.
+            if (path != LANGUAGE_REVIEW and not set(replacements) <= set(ids)) or len(set(after)) != len(after):
                 raise ValueError('Changed coverage comparison scope: unreviewed recipe transition')
             pending.append((review['after_manifest_file_sha256'], after))
     raise ValueError('Changed coverage comparison scope: unreviewed manifest transition')
@@ -202,7 +208,8 @@ def imported_recipes():
                       ('egg-preparation-20261028/recipe-review.json', 'corrected'),
                       ('mint-leaf-preparation-20261028/recipe-review.json', 'corrected'),
                       ('whole-corn-20261028/recipe-review.json', 'corrected'),
-                      ('top-five-ingredients-20261028/recipe-review.json', 'corrected')]:
+                      ('top-five-ingredients-20261028/recipe-review.json', 'corrected'),
+                      ('recipe-language-20261102/library-transition.json', 'corrected')]:
         for row in json.loads((Path('docs/reviews') / file).read_bytes())[key]:
             replacements[row['previous_id']] = row['runtime_id']
     active = {identity(r): r for r in current_recipes()}

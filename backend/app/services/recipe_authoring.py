@@ -110,6 +110,23 @@ def _times(steps):
     return max(1, active), total - max(1, active), total
 
 
+def language_warnings(row):
+    """Review prompts only: never silently rewrite cooking facts or old packs."""
+    warnings = []
+    if len(row["name"]) > 80:
+        warnings.append("Språk: korta namnet; flytta beredning och granskningshistorik till steg/anteckningar")
+    if re.search(r" – (?:enkel|utökad|vardag|standard)(?: – |$)", row["name"]):
+        warnings.append("Språk: namnge rättens faktiska skillnad i stället för ett generiskt variantsuffix")
+    for number, step in enumerate(row["steps"], 1):
+        if any(phrase in step["text"] for phrase in (
+            "Låt momentet fortsätta tills den angivna tiden", "Förbered och påbörja momentet:",
+            "Finhacka fasta bitar", "huvudkomponent", "komponentmängder", "ingen förlustandel antas",
+            "skala rotfrukter före vägning",
+        )):
+            warnings.append(f"Språk: steg {number} har malltext; ange råvaran, handlingen och hur man ser att det är klart")
+    return warnings
+
+
 def standardize(source, vocabulary, *, reviewed_at):
     """Return ``(pack, report)``; raise ValueError on content Smako cannot use."""
     from app.models import Recipe
@@ -121,7 +138,7 @@ def standardize(source, vocabulary, *, reviewed_at):
     out, report = [], []
     for index, row in enumerate(source["recipes"]):
         where = f"recipes[{index}] {row.get('name', '?')}"
-        warnings = []
+        warnings = language_warnings(row)
         lines, components = {}, []
         for component in row["components"]:
             amounts = []

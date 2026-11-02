@@ -11,6 +11,11 @@ from app.services.meal_library_content import ROOT, identity, validate_pack_byte
 from app.services.recipe_authoring import library_vocabulary
 from app.services.recipe_library import _scaled, current_recipes, validate_recipe_design
 
+from backend.tests.recipe_language_history import (
+    assert_current_language_version,
+    before_language_id,
+    current_language_cohort,
+)
 from backend.tests.test_expansion_ingredients import source
 
 REPORT = Path('docs/reviews/recipe-unblock-round4-20261102')
@@ -23,8 +28,7 @@ def sha(raw):
 
 
 def new_recipes():
-    return [r for r in current_recipes() if r.design.content_source
-            and r.design.content_source.pack_id.startswith('reviewed-expansion-round4-')]
+    return current_language_cohort('reviewed-expansion-round4-')
 
 
 def authoring_rows():
@@ -58,7 +62,6 @@ def test_only_separately_reviewed_leaf_bag_and_flower_water_are_registered():
 
 
 def test_every_new_recipe_has_unchanged_source_and_hash_bound_basket_receipt():
-    active = {identity(r): r for r in current_recipes()}
     accepted = set()
     for stage, count in ((1, 3), (2, 2), (3, 4)):
         raw = (AUTHORED / f'standardized-stage{stage}.json').read_bytes()
@@ -81,7 +84,7 @@ def test_every_new_recipe_has_unchanged_source_and_hash_bound_basket_receipt():
         assert all(r['status'] == 'verified' and r['audit']['passed'] for r in results)
         for r in review['recipes']:
             assert sha((ROOT / 'incoming/authoring-1000-20261101' / r['source_file']).read_bytes()) == r['source_sha256']
-            assert active[r['runtime_id']].design.content_sha256 == r['content_sha256']
+            assert_current_language_version(r['runtime_id'], r['content_sha256'])
     assert len(accepted) == 9
 
 
@@ -107,7 +110,7 @@ def test_liver_and_wheat_losses_stay_unknown_and_checks_remain_active():
     authors = authoring_rows()
     for r in new_recipes():
         steps = {s.id: s for s in r.design.steps}
-        authored_steps = authors[identity(r)]['steps']
+        authored_steps = authors[before_language_id(identity(r))]['steps']
         assert r.design.active_minutes == sum(s['minutes'] for s in authored_steps if not s.get('passive'))
         if 'magiritsa' in r.design.base_id:
             assert r.preparation.version == 'smako-authored-losses-v3'
